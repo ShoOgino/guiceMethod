@@ -1,0 +1,13 @@
+  public void testSuperclassInjection() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.factory(Foo.class);
+    Container container = builder.create(false);
+    Sub sub = container.inject(Sub.class);
+    sub = container.inject(Sub.class);
+    sub = container.inject(Sub.class);
+    sub = container.inject(Sub.class);
+    sub = container.inject(Sub.class);
+    assertNotNull(sub.field);
+    assertNotNull(sub.fromMethod);
+  }
+

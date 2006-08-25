@@ -1,0 +1,4 @@
+    @Inject("fooBar") Foo(Bar bar) {
+      this.bar = bar;
+    }
+

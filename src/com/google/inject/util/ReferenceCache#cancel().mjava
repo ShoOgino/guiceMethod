@@ -1,0 +1,13 @@
+  /**
+   * Cancels the current {@link #create(Object)}. Throws {@link
+   * java.util.concurrent.CancellationException} to all clients currently
+   * blocked on {@link #get(Object)}.
+   */
+  protected void cancel() {
+    Future<V> future = localFuture.get();
+    if (future == null) {
+      throw new IllegalStateException("Not in create().");
+    }
+    future.cancel(false);
+  }
+

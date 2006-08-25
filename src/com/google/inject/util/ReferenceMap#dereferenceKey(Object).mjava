@@ -1,0 +1,7 @@
+  /**
+   * Converts a reference to a key.
+   */
+  K dereferenceKey(Object o) {
+    return (K) dereference(keyReferenceType, o);
+  }
+

@@ -1,0 +1,13 @@
+  <T> ParameterInjector<T> createParameterInjector(
+      Key<T> key, Member member) throws MissingDependencyException {
+    InternalFactory<? extends T> factory = getFactory(key);
+    if (factory == null) {
+      throw new MissingDependencyException(
+          "No mapping found for dependency " + key + " in " + member + ".");
+    }
+
+    ExternalContext<T> externalContext =
+        ExternalContext.newInstance(member, key, this);
+    return new ParameterInjector<T>(externalContext, factory);
+  }
+

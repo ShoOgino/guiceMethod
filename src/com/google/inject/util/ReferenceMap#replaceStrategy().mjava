@@ -1,0 +1,4 @@
+  protected Strategy replaceStrategy() {
+    return PutStrategy.REPLACE;
+  }
+

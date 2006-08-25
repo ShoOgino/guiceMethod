@@ -1,0 +1,5 @@
+    @Inject
+    TeeImpl(@Inject("s") String s) {
+      this.s = s;
+    }
+

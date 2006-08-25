@@ -1,0 +1,9 @@
+  public void inject(final Object o) {
+    callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) {
+        inject(o, context);
+        return null;
+      }
+    });
+  }
+

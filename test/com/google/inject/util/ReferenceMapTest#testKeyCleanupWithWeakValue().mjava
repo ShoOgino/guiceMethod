@@ -1,0 +1,6 @@
+  public void testKeyCleanupWithWeakValue() {
+    ReferenceMap map = new ReferenceMap(STRONG, WEAK);
+    map.put(new Object(), new Object());
+    assertCleanup(map, CleanupMode.GC);
+  }
+

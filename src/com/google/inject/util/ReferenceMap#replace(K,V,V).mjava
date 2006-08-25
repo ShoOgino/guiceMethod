@@ -1,0 +1,12 @@
+  public boolean replace(K key, V oldValue, V newValue) {
+    ensureNotNull(key, oldValue, newValue);
+    Object keyReference = referenceKey(key);
+
+    Object referenceAwareOldValue = makeValueReferenceAware(oldValue);
+    return delegate.replace(
+      keyReference,
+      referenceAwareOldValue,
+      referenceValue(keyReference, newValue)
+    );
+  }
+

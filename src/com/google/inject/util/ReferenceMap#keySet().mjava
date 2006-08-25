@@ -1,0 +1,9 @@
+  /**
+   * Returns an unmodifiable set view of the keys in this map. As this method
+   * creates a defensive copy, the performance is O(n).
+   */
+  public Set<K> keySet() {
+    return Collections.unmodifiableSet(
+        dereferenceKeySet(delegate.keySet()));
+  }
+

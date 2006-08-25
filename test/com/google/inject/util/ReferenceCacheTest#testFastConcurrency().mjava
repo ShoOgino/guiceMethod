@@ -1,0 +1,6 @@
+  public void testFastConcurrency() throws InterruptedException {
+    ReferenceMap<String, Integer> cache = ReferenceCache.of(
+        WEAK, WEAK, new SomeFunction());
+    assertConcurrency(cache, false);
+  }
+

@@ -1,0 +1,3 @@
+    public Object execute(ReferenceMap map, Object keyReference,
+        Object valueReference);
+

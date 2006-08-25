@@ -1,0 +1,11 @@
+  public void testInjectStatics() {
+    Container c = new ContainerBuilder()
+        .constant("s", "test")
+        .constant("i", 5)
+        .injectStatics(Static.class)
+        .create(false);
+
+    assertEquals("test", Static.s);
+    assertEquals(5, Static.i);
+  }
+

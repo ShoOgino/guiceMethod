@@ -1,0 +1,7 @@
+  /**
+   * Converts a reference to a value.
+   */
+  V dereferenceValue(Object o) {
+    return (V) dereference(valueReferenceType, o);
+  }
+

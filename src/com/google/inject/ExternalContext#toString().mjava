@@ -1,0 +1,9 @@
+  public String toString() {
+    return "Context" + new LinkedHashMap<String, Object>() {{
+      put("member", member);
+      put("type", getType());
+      put("name", getName());
+      put("container", container);
+    }}.toString();
+  }
+

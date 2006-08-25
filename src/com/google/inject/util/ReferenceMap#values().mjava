@@ -1,0 +1,9 @@
+  /**
+   * Returns an unmodifiable set view of the values in this map. As this
+   * method creates a defensive copy, the performance is O(n).
+   */
+  public Collection<V> values() {
+    return Collections.unmodifiableCollection(
+        dereferenceValues(delegate.values()));
+  }
+

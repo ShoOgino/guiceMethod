@@ -1,0 +1,11 @@
+  /**
+   * Upon creation, the {@link Container} will inject static fields and methods
+   * into the given classes.
+   *
+   * @param types for which static members will be injected
+   */
+  public ContainerBuilder injectStatics(Class<?>... types) {
+    staticInjections.addAll(Arrays.asList(types));
+    return this;
+  }
+

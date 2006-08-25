@@ -1,0 +1,7 @@
+    /**
+     * Finds an object for the given type and name in the session scope.
+     * Creates a new object if necessary using the given factory.
+     */
+    <T> T findInSession(Class<T> type, String name,
+        Callable<? extends T> factory) throws Exception;
+

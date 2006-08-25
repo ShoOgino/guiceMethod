@@ -1,0 +1,21 @@
+    public void testCreate() {
+      final Object k = new Object();
+      final Object v = new Object();
+      ReferenceMap map = new ReferenceCache(
+          keyType, valueType) {
+        @Override protected Object create(Object key) {
+          return key == k ? v : null;
+        }
+      };
+      assertEquals(0, map.size());
+      assertSame(v, map.get(k));
+      assertSame(v, map.get(k));
+      assertEquals(1, map.size());
+
+      try {
+        // create can't return null.
+        map.get(new Object());
+        fail();
+      } catch (NullPointerException e) {}
+    }
+

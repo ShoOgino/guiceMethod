@@ -1,0 +1,11 @@
+    public void testEntrySet() {
+      final ReferenceMap map = newInstance();
+      map.put("a", "1");
+      map.put("b", "2");
+      Set expected = new HashSet(Arrays.asList(
+        map.new Entry("a", "1"),
+        map.new Entry("b", "2")
+      ));
+      assertEquals(expected, map.entrySet());
+    }
+

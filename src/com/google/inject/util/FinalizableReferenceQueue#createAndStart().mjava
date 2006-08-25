@@ -1,0 +1,6 @@
+  static FinalizableReferenceQueue createAndStart() {
+    FinalizableReferenceQueue queue = new FinalizableReferenceQueue();
+    queue.start();
+    return queue;
+  }
+

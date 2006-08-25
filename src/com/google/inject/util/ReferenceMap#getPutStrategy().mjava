@@ -1,0 +1,4 @@
+  protected PutStrategy getPutStrategy() {
+    return defaultPutStrategy;
+  }
+

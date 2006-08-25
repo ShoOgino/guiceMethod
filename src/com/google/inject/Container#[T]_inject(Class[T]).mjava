@@ -1,0 +1,5 @@
+  /**
+   * Creates and injects a new instance of type {@code implementation}.
+   */
+  <T> T inject(Class<T> implementation);
+

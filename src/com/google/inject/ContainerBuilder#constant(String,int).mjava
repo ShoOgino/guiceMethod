@@ -1,0 +1,7 @@
+  /**
+   * Maps a constant value to the given name.
+   */
+  public ContainerBuilder constant(String name, int value) {
+    return constant(int.class, name, value);
+  }
+

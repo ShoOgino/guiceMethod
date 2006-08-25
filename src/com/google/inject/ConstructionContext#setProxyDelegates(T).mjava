@@ -1,0 +1,9 @@
+  void setProxyDelegates(T delegate) {
+    if (invocationHandlers != null) {
+      for (DelegatingInvocationHandler<T> invocationHandler
+          : invocationHandlers) {
+        invocationHandler.setDelegate(delegate);
+      }
+    }
+  }
+

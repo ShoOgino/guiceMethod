@@ -1,0 +1,12 @@
+  <T> Factory<T> createFactory(final Class<T> type, final String name,
+      final Member expectedMember) {
+    return new Factory<T>() {
+      public T create(Context context) throws Exception {
+        assertEquals(expectedMember, context.getMember());
+        assertEquals(name, context.getName());
+        assertEquals(type, context.getType());
+        return context.getContainer().inject(type);
+      }
+    };
+  }
+

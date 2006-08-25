@@ -1,0 +1,5 @@
+    public SoftValueReference(Object keyReference, Object value) {
+      super(value);
+      this.keyReference = keyReference;
+    }
+

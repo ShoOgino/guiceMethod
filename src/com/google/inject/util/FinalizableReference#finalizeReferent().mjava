@@ -1,0 +1,6 @@
+  /**
+   * Invoked on a background thread after the referent has been garbage
+   * collected.
+   */
+  void finalizeReferent();
+

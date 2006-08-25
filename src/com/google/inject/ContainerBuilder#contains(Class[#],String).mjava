@@ -1,0 +1,8 @@
+  /**
+   * Returns true if this builder contains a mapping for the given type and
+   * name.
+   */
+  public boolean contains(Class<?> type, String name) {
+    return factories.containsKey(Key.newInstance(type, name));
+  }
+

@@ -1,0 +1,9 @@
+    public boolean equals(Object o) {
+      if (!(o instanceof ReferenceMap.Entry)) {
+        return false;
+      }
+
+      Entry entry = (Entry) o;
+      return key.equals(entry.key) && value.equals(entry.value);
+    }
+

@@ -1,0 +1,11 @@
+  void addInjectorsForMethods(Method[] methods, boolean statics,
+      List<Injector> injectors) {
+    addInjectorsForMembers(Arrays.asList(methods), statics, injectors,
+        new InjectorFactory<Method>() {
+          public Injector create(ContainerImpl container, Method method,
+              String name) throws MissingDependencyException {
+            return new MethodInjector(container, method, name);
+          }
+        });
+  }
+

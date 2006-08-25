@@ -1,0 +1,10 @@
+  public void testApply() {
+    ReferenceMap<String, Integer> cache = ReferenceCache.of(
+        WEAK, WEAK, new SomeFunction());
+    assertEquals(Integer.valueOf(1), cache.get("foo"));
+    assertEquals(Integer.valueOf(1), cache.get("foo"));
+    assertEquals(Integer.valueOf(2), cache.get("bar"));
+    assertEquals(Integer.valueOf(1), cache.get("foo"));
+    assertEquals(Integer.valueOf(3), cache.get("baz"));
+  }
+

@@ -1,0 +1,4 @@
+    @Inject("tee1") Bar(Tee tee1) {
+      this.tee1 = tee1;
+    }
+

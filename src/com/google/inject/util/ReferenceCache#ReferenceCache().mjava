@@ -1,0 +1,7 @@
+  /**
+   * Equivalent to {@code new ReferenceCache(STRONG, STRONG)}.
+   */
+  public ReferenceCache() {
+    super(STRONG, STRONG);
+  }
+

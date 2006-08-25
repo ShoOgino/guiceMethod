@@ -1,0 +1,4 @@
+    ReferenceAwareWrapper(Object wrapped) {
+      this.wrapped = wrapped;
+    }
+

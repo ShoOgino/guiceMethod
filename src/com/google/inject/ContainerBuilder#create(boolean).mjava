@@ -1,0 +1,29 @@
+  /**
+   * Creates a {@link Container} instance. Injects static members for classes
+   * which were registered using {@link #injectStatics(Class...)}.
+   *
+   * @param loadSingletons If true, the container will load all singletons
+   *  now. If false, the container will lazily load singletons. Eager loading
+   *  is appropriate for production use while lazy loading can speed
+   *  development.
+   * @throws IllegalStateException if called more than once
+   */
+  public Container create(boolean loadSingletons) {
+    ensureNotCreated();
+    created = true;
+    final ContainerImpl container = new ContainerImpl(
+        new HashMap<Key<?>, InternalFactory<?>>(factories));
+    if (loadSingletons) {
+      container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
+        public Void call(InternalContext context) {
+          for (InternalFactory<?> factory : singletonFactories) {
+            factory.create(context);
+          }
+          return null;
+        }
+      });
+    }
+    container.injectStatics(staticInjections);
+    return container;
+  }
+

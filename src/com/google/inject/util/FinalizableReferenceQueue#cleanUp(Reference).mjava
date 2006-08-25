@@ -1,0 +1,8 @@
+  void cleanUp(Reference reference) {
+    try {
+      ((FinalizableReference) reference).finalizeReferent();
+    } catch (Throwable t) {
+      deliverBadNews(t);
+    }
+  }
+

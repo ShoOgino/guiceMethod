@@ -1,0 +1,11 @@
+  private Container createFooContainer() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder
+      .factory(Bar.class, BarImpl.class)
+      .factory(Tee.class, TeeImpl.class)
+      .constant("s", "test")
+      .constant("i", 5);
+
+    return builder.create(false);
+  }
+

@@ -1,0 +1,8 @@
+    public void inject(InternalContext context, Object o) {
+      try {
+        method.invoke(o, getParameters(method, context, parameterInjectors));
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+

@@ -1,0 +1,5 @@
+  /**
+   * Sets the scope strategy for the current thread.
+   */
+  void setScopeStrategy(Scope.Strategy scopeStrategy);
+

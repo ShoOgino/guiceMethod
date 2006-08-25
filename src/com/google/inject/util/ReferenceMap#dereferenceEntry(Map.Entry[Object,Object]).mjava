@@ -1,0 +1,11 @@
+  /**
+   * Dereferences an entry. Returns null if the key or value has been gc'ed.
+   */
+  Entry dereferenceEntry(Map.Entry<Object, Object> entry) {
+    K key = dereferenceKey(entry.getKey()); 
+    V value = dereferenceValue(entry.getValue());
+    return (key == null || value == null)
+        ? null
+        : new Entry(key, value);
+  }
+

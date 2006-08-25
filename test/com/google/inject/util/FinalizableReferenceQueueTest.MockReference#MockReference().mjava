@@ -1,0 +1,4 @@
+    MockReference() {
+      super(new Object());
+    }
+

@@ -1,0 +1,4 @@
+    public void finalizeReferent() {
+      delegate.remove(this);
+    }
+

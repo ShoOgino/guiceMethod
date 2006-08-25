@@ -1,0 +1,4 @@
+  protected FinalizablePhantomReference(T referent) {
+    super(referent, FinalizableReferenceQueue.getInstance());
+  }
+

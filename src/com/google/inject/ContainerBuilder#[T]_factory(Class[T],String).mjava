@@ -1,0 +1,9 @@
+  /**
+   * Convenience method.&nbsp;Equivalent to {@code factory(type, name, type)}.
+   *
+   * @see #factory(Class, String, Class)
+   */
+  public <T> ContainerBuilder factory(Class<T> type, String name) {
+    return factory(type, name, type);
+  }
+

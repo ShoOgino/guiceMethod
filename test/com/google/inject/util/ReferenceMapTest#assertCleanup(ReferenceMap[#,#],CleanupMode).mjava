@@ -1,0 +1,36 @@
+  private static void assertCleanup(ReferenceMap<?, ?> map,
+      CleanupMode mode) {
+    assertEquals(1, map.delegate.size());
+
+    switch (mode) {
+      case ENQUEUE_KEY: {
+        ConcurrentMap delegate = map.delegate;
+        Iterator keyIterator = delegate.keySet().iterator();
+        Reference reference = ((Reference) keyIterator.next());
+        reference.enqueue();
+        break;
+      }
+      case ENQUEUE_VALUE: {
+        ConcurrentMap delegate = map.delegate;
+        Iterator valueIterator = delegate.values().iterator();
+        Reference reference = ((Reference) valueIterator.next());
+        reference.enqueue();
+        break;
+      }
+    }
+
+    // wait up to 5s
+    for (int i = 0; i < 500; i++) {
+      if (mode == CleanupMode.GC) {
+        System.gc();
+      }
+      if (map.size() == 0) {
+        return;
+      }
+      try {
+        Thread.sleep(10);
+      } catch (InterruptedException e) { /* ignore */ }
+    }
+    fail();
+  }
+

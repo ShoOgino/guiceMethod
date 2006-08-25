@@ -1,0 +1,7 @@
+  void inject(Object o, InternalContext context) {
+    List<Injector> injectors = this.injectors.get(o.getClass());
+    for (Injector injector : injectors) {
+      injector.inject(context, o);
+    }
+  }
+

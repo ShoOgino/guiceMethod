@@ -1,0 +1,38 @@
+  public void testInjection() throws Exception {
+    ContainerBuilder cb = new ContainerBuilder();
+
+    // Called from getInstance().
+    cb.factory(Foo.class, createFactory(Foo.class, "default", null));
+
+    // Called during singleton loading.
+    cb.factory(Bar.class, "fooBar",
+        createFactory(Bar.class, "fooBar", null), Scope.SINGLETON);
+
+    cb.factory(Tee.class, "tee1",
+        createFactory(Tee.class, "tee1",
+            Bar.class.getDeclaredConstructor(Tee.class)));
+
+    cb.factory(Tee.class, "tee2",
+        createFactory(Tee.class, "tee2",
+            Bar.class.getDeclaredField("tee2")));
+
+    final Method execute = Tee.class.getDeclaredMethod(
+        "execute", Bob.class, Bob.class);
+    cb.factory(Bob.class, "bob1",
+        createFactory(Bob.class, "bob1", execute));
+    cb.factory(Bob.class, "bob2",
+        createFactory(Bob.class, "bob2", execute));
+
+    Container c = cb.create(true);
+
+    Foo foo = c.getInstance(Foo.class);
+
+    assertNotNull(foo.bar);
+    assertNotNull(foo.bar.tee1);
+    assertNotNull(foo.bar.tee2);
+    assertNotNull(foo.bar.tee1.bob1);
+    assertNotNull(foo.bar.tee1.bob2);
+    assertNotNull(foo.bar.tee2.bob1);
+    assertNotNull(foo.bar.tee2.bob2);
+  }
+

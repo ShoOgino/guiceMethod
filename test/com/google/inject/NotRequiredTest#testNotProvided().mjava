@@ -1,0 +1,8 @@
+  public void testNotProvided() {
+    Container c = new ContainerBuilder()
+        .create(false);
+    Foo foo = c.inject(Foo.class);
+    assertNull(foo.bar);
+    assertNull(foo.fromMethod);
+  }
+

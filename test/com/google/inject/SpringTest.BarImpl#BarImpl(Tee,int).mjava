@@ -1,0 +1,6 @@
+    @Inject
+    public BarImpl(Tee tee, @Inject("i") int i) {
+      this.tee = tee;
+      this.i = i;
+    }
+

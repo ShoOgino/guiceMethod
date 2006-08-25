@@ -1,0 +1,4 @@
+    public KeyReferenceAwareWrapper(Object wrapped) {
+      super(wrapped);
+    }
+

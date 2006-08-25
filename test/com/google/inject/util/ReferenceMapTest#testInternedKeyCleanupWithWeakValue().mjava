@@ -1,0 +1,6 @@
+  public void testInternedKeyCleanupWithWeakValue() {
+    ReferenceMap map = new ReferenceMap(STRONG, WEAK);
+    map.put(5, "foo");
+    assertCleanup(map, CleanupMode.ENQUEUE_VALUE);
+  }
+

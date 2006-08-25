@@ -1,0 +1,4 @@
+  protected Strategy putStrategy() {
+    return PutStrategy.PUT;
+  }
+

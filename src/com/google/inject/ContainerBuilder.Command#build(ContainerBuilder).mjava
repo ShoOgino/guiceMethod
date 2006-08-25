@@ -1,0 +1,7 @@
+    /**
+     * Contributes factories to the given builder.
+     *
+     * @param builder
+     */
+    void build(ContainerBuilder builder);
+

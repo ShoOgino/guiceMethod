@@ -1,0 +1,7 @@
+  /**
+   * Gets instance.
+   */
+  public static ReferenceQueue<Object> getInstance() {
+    return instance;
+  }
+

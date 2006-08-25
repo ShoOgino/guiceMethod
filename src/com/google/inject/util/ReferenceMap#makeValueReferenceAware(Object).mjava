@@ -1,0 +1,7 @@
+  /**
+   * Wraps value so it can be compared to a referenced value for equality.
+   */
+  Object makeValueReferenceAware(Object o) {
+    return valueReferenceType == STRONG ? o : new ReferenceAwareWrapper(o);
+  }
+

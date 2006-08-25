@@ -1,0 +1,8 @@
+  /**
+   * Gets a constructor function for a given implementation class.
+   */
+  @SuppressWarnings("unchecked")
+  <T> ConstructorInjector<T> getConstructor(Class<T> implementation) {
+    return constructors.get(implementation);
+  }
+

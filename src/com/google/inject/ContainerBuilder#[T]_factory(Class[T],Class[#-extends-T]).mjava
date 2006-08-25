@@ -1,0 +1,11 @@
+  /**
+   * Convenience method.&nbsp;Equivalent to {@code factory(type,
+   * Container.DEFAULT_NAME, implementation)}.
+   *
+   * @see #factory(Class, String, Class)
+   */
+  public <T> ContainerBuilder factory(Class<T> type,
+      Class<? extends T> implementation) {
+    return factory(type, Container.DEFAULT_NAME, implementation);
+  }
+

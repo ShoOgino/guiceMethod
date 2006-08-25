@@ -1,0 +1,6 @@
+  public void testInternedValueCleanupWithSoftKey() {
+    ReferenceMap map = new ReferenceMap(SOFT, STRONG);
+    map.put(5, "foo");
+    assertCleanup(map, CleanupMode.ENQUEUE_KEY);
+  }
+

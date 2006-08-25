@@ -1,0 +1,15 @@
+  /**
+   * Returns an unmodifiable set view of the entries in this map. As this
+   * method creates a defensive copy, the performance is O(n).
+   */
+  public Set<Map.Entry<K, V>> entrySet() {
+    Set<Map.Entry<K, V>> entrySet = new HashSet<Map.Entry<K, V>>();
+    for (Map.Entry<Object, Object> entry : delegate.entrySet()) {
+      Map.Entry<K, V> dereferenced = dereferenceEntry(entry);
+      if (dereferenced != null) {
+        entrySet.add(dereferenced);
+      }
+    }
+    return Collections.unmodifiableSet(entrySet);
+  }
+

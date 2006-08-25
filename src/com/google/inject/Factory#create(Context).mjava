@@ -1,0 +1,9 @@
+  /**
+   * Creates an object to be injected.
+   *
+   * @param context of this injection
+   * @return instance to be injected
+   * @throws Exception if unable to create object
+   */
+  T create(Context context) throws Exception;
+

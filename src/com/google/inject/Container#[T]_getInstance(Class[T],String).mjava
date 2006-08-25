@@ -1,0 +1,6 @@
+  /**
+   * Gets an instance of the given dependency which was declared in
+   * {@link com.google.inject.ContainerBuilder}.
+   */
+  <T> T getInstance(Class<T> type, String name);
+

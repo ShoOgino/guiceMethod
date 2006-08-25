@@ -1,0 +1,5 @@
+  void finishConstruction() {
+    this.constructing = false;
+    invocationHandlers = null;
+  }
+

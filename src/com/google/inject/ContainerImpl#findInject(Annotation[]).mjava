@@ -1,0 +1,12 @@
+  /**
+   * Finds the {@link Inject} annotation in an array of annotations.
+   */
+  Inject findInject(Annotation[] annotations) {
+    for (Annotation annotation : annotations) {
+      if (annotation.annotationType() == Inject.class) {
+        return Inject.class.cast(annotation);
+      }
+    }
+    return null;
+  }
+

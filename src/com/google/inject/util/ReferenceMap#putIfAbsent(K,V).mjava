@@ -1,0 +1,6 @@
+  public V putIfAbsent(K key, V value) {
+    // TODO (crazybob) if the value has been gc'ed but the entry hasn't been
+    // cleaned up yet, this put will fail.
+    return execute(putIfAbsentStrategy(), key, value);
+  }
+

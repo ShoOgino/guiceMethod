@@ -1,0 +1,20 @@
+  public static Test suite() {
+    TestSuite suite = new TestSuite();
+
+    suite.addTestSuite(ContainerTest.class);
+    suite.addTestSuite(CircularDependencyTest.class);
+    suite.addTestSuite(StaticInjectionTest.class);
+    suite.addTestSuite(NotRequiredTest.class);
+    suite.addTestSuite(FactoryTest.class);
+    suite.addTestSuite(SuperclassTest.class);
+
+    // util.
+    suite.addTestSuite(FinalizableReferenceQueueTest.class);
+    suite.addTestSuite(ReferenceMapTest.class);
+    suite.addTestSuite(ReferenceCacheTest.class);
+
+    suite.addTest(ReferenceMapTestSuite.suite());
+
+    return suite;
+  }
+

@@ -1,0 +1,8 @@
+    public Object serializeAndDeserialize(Object o) throws IOException,
+        ClassNotFoundException {
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      new ObjectOutputStream(out).writeObject(o);
+      return new ObjectInputStream(new ByteArrayInputStream(out.toByteArray()))
+          .readObject();
+    }
+

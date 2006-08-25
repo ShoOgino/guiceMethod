@@ -1,0 +1,4 @@
+    public Tee getTee() {
+      return tee;
+    }
+

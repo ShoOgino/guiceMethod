@@ -1,0 +1,10 @@
+  /**
+   * Dereferences a collection of value references.
+   */
+  Collection<V> dereferenceValues(Collection valueReferences) {
+    return valueReferenceType == STRONG
+        ? valueReferences
+        : dereferenceCollection(valueReferenceType, valueReferences,
+            new ArrayList(valueReferences.size()));
+  }
+

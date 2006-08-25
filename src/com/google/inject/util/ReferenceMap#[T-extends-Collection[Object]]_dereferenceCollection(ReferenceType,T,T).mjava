@@ -1,0 +1,13 @@
+  /**
+   * Dereferences elements in {@code in} using
+   * {@code referenceType} and puts them in {@code out}. Returns
+   * {@code out}.
+   */
+  <T extends Collection<Object>> T dereferenceCollection(
+      ReferenceType referenceType, T in, T out) {
+    for (Object reference : in) {
+      out.add(dereference(referenceType, reference));
+    }
+    return out;
+  }
+

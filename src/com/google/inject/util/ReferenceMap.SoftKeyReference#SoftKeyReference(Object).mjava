@@ -1,0 +1,5 @@
+    public SoftKeyReference(Object key) {
+      super(key);
+      this.hashCode = keyHashCode(key);
+    }
+

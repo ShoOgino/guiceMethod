@@ -1,0 +1,10 @@
+  /**
+   * Applies the function to an object of type {@code F}, resulting in an object
+   * of type {@code T}.  Note that types {@code F} and {@code T} may or may not
+   * be the same.
+   *
+   * @param from The source object.
+   * @return The resulting object.
+   */
+  T apply(F from);
+

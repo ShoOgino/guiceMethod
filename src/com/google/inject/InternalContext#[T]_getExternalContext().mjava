@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked")
+  <T> ExternalContext<T> getExternalContext() {
+    return (ExternalContext<T>) externalContext;
+  }
+

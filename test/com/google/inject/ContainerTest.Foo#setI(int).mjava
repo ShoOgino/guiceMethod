@@ -1,0 +1,5 @@
+    @Inject("i")
+    void setI(int i) {
+      this.i = i;
+    }
+

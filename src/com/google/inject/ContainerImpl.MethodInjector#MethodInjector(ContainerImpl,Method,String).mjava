@@ -1,0 +1,14 @@
+    public MethodInjector(ContainerImpl container, Method method, String name)
+        throws MissingDependencyException {
+      this.method = method;
+      method.setAccessible(true);
+
+      Class<?>[] parameterTypes = method.getParameterTypes();
+      if (parameterTypes.length == 0) {
+        throw new DependencyException(
+            method + " has no parameters to inject.");
+      }
+      parameterInjectors = container.getParametersInjectors(
+          method, method.getParameterAnnotations(), parameterTypes, name);
+    }
+

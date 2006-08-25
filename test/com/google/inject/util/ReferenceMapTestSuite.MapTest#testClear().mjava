@@ -1,0 +1,10 @@
+    public void testClear() {
+      ReferenceMap map = newInstance();
+      String k = "key";
+      map.put(k, "value");
+      assertFalse(map.isEmpty());
+      map.clear();
+      assertTrue(map.isEmpty());
+      assertNull(map.get(k));
+    }
+

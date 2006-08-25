@@ -1,0 +1,10 @@
+    T inject(Member member, InternalContext context) {
+      ExternalContext<?> previous = context.getExternalContext();
+      context.setExternalContext(externalContext);
+      try {
+        return factory.create(context);
+      } finally {
+        context.setExternalContext(previous);
+      }
+    }
+

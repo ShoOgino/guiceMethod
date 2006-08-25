@@ -1,0 +1,6 @@
+  public void testSleepCanonical() throws InterruptedException {
+    ReferenceMap<String, Integer> cache = ReferenceCache.of(
+        STRONG, SOFT, new SleepFunction());
+    assertConcurrency(cache, true);
+  }
+

@@ -1,0 +1,22 @@
+    ConstructorInjector(ContainerImpl container, Class<T> implementation) {
+      this.implementation = implementation;
+
+      constructor = findConstructorIn(implementation);
+      constructor.setAccessible(true);
+
+      try {
+        Inject inject = constructor.getAnnotation(Inject.class);
+        parameterInjectors = inject == null
+            ? null // default constructor.
+            : container.getParametersInjectors(
+                constructor,
+                constructor.getParameterAnnotations(),
+                constructor.getParameterTypes(),
+                inject.value()
+              );
+      } catch (MissingDependencyException e) {
+        throw new DependencyException(e);
+      }
+      injectors = container.injectors.get(implementation);
+    }
+

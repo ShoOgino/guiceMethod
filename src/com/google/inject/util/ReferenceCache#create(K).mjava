@@ -1,0 +1,8 @@
+  /**
+   * Override to lazy load values. Use as an alternative to {@link
+   * #put(Object,Object)}. Invoked by getter if value isn't already cached.
+   * Must not return {@code null}. This method will not be called again until
+   * the garbage collector reclaims the returned value.
+   */
+  protected abstract V create(K key);
+

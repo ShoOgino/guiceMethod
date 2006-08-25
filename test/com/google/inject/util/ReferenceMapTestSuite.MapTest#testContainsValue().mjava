@@ -1,0 +1,7 @@
+    public void testContainsValue() {
+      ReferenceMap map = newInstance();
+      Object v = "value";
+      map.put("key", v);
+      assertTrue(map.containsValue(v));
+    }
+

@@ -1,0 +1,4 @@
+    @Inject("s") static void setS(String s) {
+      Static.s = s;
+    }
+

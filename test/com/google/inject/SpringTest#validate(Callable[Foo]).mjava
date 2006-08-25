@@ -1,0 +1,9 @@
+  static void validate(Callable<Foo> t) throws Exception {
+    Foo foo = t.call();
+    assertEquals(5, foo.i);
+    assertEquals("test", foo.s);
+    assertSame(foo.bar.getTee(), foo.copy.getTee());
+    assertEquals(5, foo.bar.getI());
+    assertEquals("test", foo.bar.getTee().getS());
+  }
+

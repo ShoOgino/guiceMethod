@@ -1,0 +1,4 @@
+  void setExternalContext(ExternalContext<?> externalContext) {
+    this.externalContext = externalContext;
+  }
+

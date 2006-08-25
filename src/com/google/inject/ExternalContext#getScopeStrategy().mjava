@@ -1,0 +1,4 @@
+  public Scope.Strategy getScopeStrategy() {
+    return container.localScopeStrategy.get();
+  }
+

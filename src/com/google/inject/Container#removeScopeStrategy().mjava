@@ -1,0 +1,5 @@
+  /**
+   * Removes the scope strategy for the current thread.
+   */
+  void removeScopeStrategy();
+

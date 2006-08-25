@@ -1,0 +1,5 @@
+    @Inject
+    public void setCopy(Bar copy) {
+      this.copy = copy;
+    }
+

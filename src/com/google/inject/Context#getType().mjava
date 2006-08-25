@@ -1,0 +1,5 @@
+  /**
+   * Gets the type of the field or parameter which is being injected.
+   */
+  Class<?> getType();
+

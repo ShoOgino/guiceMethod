@@ -1,0 +1,11 @@
+    public void testReferenceMapSerialization() throws IOException,
+        ClassNotFoundException {
+      Map map = newInstance();
+      map.put(Key.FOO, Value.FOO);
+      map = (Map) serializeAndDeserialize(map);
+      map.put(Key.BAR, Value.BAR);
+      assertSame(Value.FOO, map.get(Key.FOO));
+      assertSame(Value.BAR, map.get(Key.BAR));
+      assertNull(map.get(Key.TEE));
+    }
+

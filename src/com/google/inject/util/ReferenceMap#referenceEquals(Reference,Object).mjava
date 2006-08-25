@@ -1,0 +1,24 @@
+  /**
+   * Tests weak and soft references for identity equality. Compares references
+   * to other references and wrappers. If o is a reference, this returns true
+   * if r == o or if r and o reference the same non null object. If o is a
+   * wrapper, this returns true if r's referent is identical to the wrapped
+   * object.
+   */
+  static boolean referenceEquals(Reference r, Object o) {
+    // compare reference to reference.
+    if (o instanceof InternalReference) {
+      // are they the same reference? used in cleanup.
+      if (o == r) {
+        return true;
+      }
+
+      // do they reference identical values? used in conditional puts.
+      Object referent = ((Reference) o).get();
+      return referent != null && referent == r.get();
+    }
+
+    // is the wrapped object identical to the referent? used in lookups.
+    return ((ReferenceAwareWrapper) o).unwrap() == r.get();
+  }
+
