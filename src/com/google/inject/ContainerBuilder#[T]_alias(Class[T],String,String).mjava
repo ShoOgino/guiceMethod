@@ -1,0 +1,12 @@
+  /**
+   * Maps an existing factory to a new name. 
+   * 
+   * @param type of dependency
+   * @param name of dependency
+   * @param alias of to the dependency
+   * @return this builder
+   */
+  public <T> ContainerBuilder alias(Class<T> type, String name, String alias) {
+    return alias(Key.newInstance(type, name), Key.newInstance(type, alias));
+  }
+

@@ -1,0 +1,10 @@
+  /**
+   * Convenience method.&nbsp;Equivalent to {@code alias(type, Container.DEFAULT_NAME,
+   * type)}.
+   *
+   * @see #alias(Class, String, String)
+   */
+  public <T> ContainerBuilder alias(Class<T> type, String alias) {
+    return alias(type, Container.DEFAULT_NAME, alias);
+  }
+
