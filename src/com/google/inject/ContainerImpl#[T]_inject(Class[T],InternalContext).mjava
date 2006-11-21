@@ -3,6 +3,8 @@
       ConstructorInjector<T> constructor = getConstructor(implementation);
       return implementation.cast(
           constructor.construct(context, implementation));
+    } catch (RuntimeException e) {
+      throw e;
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

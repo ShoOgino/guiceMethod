@@ -3,22 +3,7 @@
    */
   private <T> ContainerBuilder constant(final Class<T> type, final String name,
       final T value) {
-    InternalFactory<T> factory = new InternalFactory<T>() {
-      public T create(InternalContext ignored) {
-        return value;
-      }
-
-      public String toString() {
-        return new LinkedHashMap<String, Object>() {
-          {
-            put("type", type);
-            put("name", name);
-            put("value", value);
-          }
-        }.toString();
-      }
-    };
-
+    InternalFactory<T> factory = new ConstantFactory<T>(value);
     return factory(Key.newInstance(type, name), factory, Scope.DEFAULT);
   }
 

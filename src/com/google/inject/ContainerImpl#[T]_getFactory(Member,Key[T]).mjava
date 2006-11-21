@@ -1,0 +1,53 @@
+  @SuppressWarnings("unchecked")
+  <T> InternalFactory<? extends T> getFactory(Member member, Key<T> key) {
+    // Do we have a factory for the specified type and name?
+    InternalFactory<T> internalFactory =
+        (InternalFactory<T>) factories.get(key);
+    if (internalFactory != null) {
+      return internalFactory;
+    }
+
+    // Do we have a constant String factory of the same name?
+    InternalFactory<String> stringFactory =
+        (InternalFactory<String>) factories.get(
+            Key.newInstance(String.class, key.getName()));
+    if (stringFactory == null
+        || !(stringFactory instanceof ConstantFactory)) {
+      return null;
+    }
+
+    Class<T> type = key.getType();
+
+    // We don't need do pass in an InternalContext because we know this is
+    // a ConstantFactory which will not use it.
+    String value = stringFactory.create(null);
+
+    // Do we need a primitive?
+    Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(type);
+    if (converter != null) {
+      return new ConstantFactory<T>(converter.convert(member, key, value));
+    }
+
+    // Do we need an enum?
+    if (Enum.class.isAssignableFrom(type)) {
+      T t = null;
+      try {
+        t = (T) Enum.valueOf((Class) type, value);
+      } catch (IllegalArgumentException e) {
+        throw new ConstantConversionException(member, key, value, e);
+      }
+      return new ConstantFactory<T>(t);
+    }
+
+    // Do we need a class?
+    if (type == Class.class) {
+      try {
+        return new ConstantFactory<T>((T) Class.forName(value));
+      } catch (ClassNotFoundException e) {
+        throw new ConstantConversionException(member, key, value, e);
+      }
+    }
+
+    return null;
+  }
+

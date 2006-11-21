@@ -4,12 +4,11 @@
     Key<T> key = Key.newInstance(type, name);
     context.setExternalContext(ExternalContext.newInstance(null, key, this));
     try {
-      InternalFactory o = getFactory(key);
-      if (o != null) {
-          return getFactory(key).create(context);
-      } else {
-          return null;
+      InternalFactory<? extends T> factory = getFactory(null, key);
+      if (factory == null) {
+        throw new DependencyException("Missing binding for " + key + ".");
       }
+      return factory.create(context);
     } finally {
       context.setExternalContext(previous);
     }

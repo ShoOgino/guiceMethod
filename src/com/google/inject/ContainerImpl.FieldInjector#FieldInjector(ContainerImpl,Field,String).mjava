@@ -4,7 +4,7 @@
       field.setAccessible(true);
 
       Key<?> key = Key.newInstance(field.getType(), name);
-      factory = container.getFactory(key);
+      factory = container.getFactory(field, key);
       if (factory == null) {
         throw new MissingDependencyException(
             "No mapping found for dependency " + key + " in " + field + ".");

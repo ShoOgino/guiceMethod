@@ -1,0 +1,32 @@
+  public void testConstantInjection() {
+    Map<String, String> properties = new HashMap<String, String>() {{
+      put("#", "5");
+      put("boolean", "true");
+      put("enum", "TEE");
+      put("class", Foo.class.getName());
+    }};
+
+    ContainerBuilder b = new ContainerBuilder();
+    b.properties(properties);
+    Container c = b.create(false);
+    Foo foo = c.inject(Foo.class);
+
+    checkNumbers(
+      foo.integerField,
+      foo.primitiveIntField,
+      foo.longField,
+      foo.primitiveLongField,
+      foo.byteField,
+      foo.primitiveByteField,
+      foo.shortField,
+      foo.primitiveShortField,
+      foo.floatField,
+      foo.primitiveFloatField,
+      foo.doubleField,
+      foo.primitiveDoubleField
+    );
+
+    assertEquals(Bar.TEE, foo.enumField);
+    assertEquals(Foo.class, foo.classField);
+  }
+

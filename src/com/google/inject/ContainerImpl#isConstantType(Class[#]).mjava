@@ -1,0 +1,6 @@
+  boolean isConstantType(Class<?> type) {
+    return PRIMITIVE_CONVERTERS.containsKey(type)
+        || Enum.class.isAssignableFrom(type)
+        || type == Class.class;
+  }
+

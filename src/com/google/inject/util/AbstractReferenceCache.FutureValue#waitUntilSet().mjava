@@ -1,0 +1,17 @@
+    /**
+     * Waits until a value is set.
+     *
+     * @return {@code true} if the thread was interrupted while waiting
+     */
+    private synchronized boolean waitUntilSet() {
+      boolean interrupted = false;
+      while (!set) {
+        try {
+          wait();
+        } catch (InterruptedException e) {
+          interrupted = true;
+        }
+      }
+      return interrupted;
+    }
+

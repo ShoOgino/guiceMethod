@@ -1,0 +1,25 @@
+    PrimitiveConverters() {
+      putParser(Integer.class, int.class);
+      putParser(Long.class, long.class);
+      putParser(Boolean.class, boolean.class);
+      putParser(Byte.class, byte.class);
+      putParser(Short.class, short.class);
+      putParser(Float.class, float.class);
+      putParser(Double.class, double.class);
+
+      // Character doesn't follow the same pattern.
+      Converter<Character> characterConverter = new Converter<Character>() {
+        public Character convert(Member member, Key<Character> key,
+            String value) {
+          value = value.trim();
+          if (value.length() != 1) {
+            throw new ConstantConversionException(member, key, value,
+                "Length != 1.");
+          }
+          return value.charAt(0);
+        }
+      };
+      put(char.class, characterConverter);
+      put(Character.class, characterConverter);
+    }
+

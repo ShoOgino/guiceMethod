@@ -1,0 +1,10 @@
+  /**
+   * Maps constant names to values.
+   */
+  public ContainerBuilder properties(Properties properties) {
+    for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+      constant((String) entry.getKey(), (String) entry.getValue());
+    }
+    return this;
+  }
+

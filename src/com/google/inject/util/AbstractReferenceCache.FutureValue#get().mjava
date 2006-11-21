@@ -1,0 +1,15 @@
+    V get() {
+      if (!set) {
+        boolean interrupted = waitUntilSet();
+
+        if (interrupted) {
+          Thread.currentThread().interrupt();
+        }
+      }
+
+      if (t != null) {
+        rethrow(t);
+      }
+      return value;
+    }
+

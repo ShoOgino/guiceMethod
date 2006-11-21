@@ -1,0 +1,8 @@
+    private void set() {
+      if (set) {
+        throw new IllegalStateException("Value is already set.");
+      }
+      set = true;
+      notifyAll();
+    }
+

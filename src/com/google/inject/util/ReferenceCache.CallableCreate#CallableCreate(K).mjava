@@ -1,4 +1,0 @@
-    public CallableCreate(K key) {
-      this.key = key;
-    }
-

@@ -1,5 +1,0 @@
-  @SuppressWarnings("unchecked")
-  <T> InternalFactory<? extends T> getFactory(Key<T> key) {
-    return (InternalFactory<T>) factories.get(key);
-  }
-

@@ -12,23 +12,23 @@
     InternalFactory<T> internalFactory =
         new InternalFactory<T>() {
 
-      public T create(InternalContext context) {
-        try {
-          Context externalContext = context.getExternalContext();
-          return factory.create(externalContext);
-        } catch (Exception e) {
-          throw new RuntimeException(e);
-        }
-      }
+          public T create(InternalContext context) {
+            try {
+              Context externalContext = context.getExternalContext();
+              return factory.create(externalContext);
+            } catch (Exception e) {
+              throw new RuntimeException(e);
+            }
+          }
 
-      public String toString() {
-        return new LinkedHashMap<String, Object>() {{
-          put("type", type);
-          put("name", name);
-          put("factory", factory);
-        }}.toString();
-      }
-    };
+          public String toString() {
+            return new LinkedHashMap<String, Object>() {{
+              put("type", type);
+              put("name", name);
+              put("factory", factory);
+            }}.toString();
+          }
+        };
 
     return factory(Key.newInstance(type, name), internalFactory, scope);
   }

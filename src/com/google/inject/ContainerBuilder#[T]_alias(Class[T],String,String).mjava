@@ -1,6 +1,6 @@
   /**
-   * Maps an existing factory to a new name. 
-   * 
+   * Maps an existing factory to a new name.
+   *
    * @param type of dependency
    * @param name of dependency
    * @param alias of to the dependency

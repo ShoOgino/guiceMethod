@@ -1,3 +1,4 @@
+    @SuppressWarnings({"unchecked"})
     private Constructor<T> findConstructorIn(Class<T> implementation) {
       Constructor<T> found = null;
       for (Constructor<T> constructor
@@ -5,7 +6,7 @@
         if (constructor.getAnnotation(Inject.class) != null) {
           if (found != null) {
             throw new DependencyException("More than one constructor annotated"
-              + " with @Inject found in " + implementation + ".");
+                + " with @Inject found in " + implementation + ".");
           }
           found = constructor;
         }

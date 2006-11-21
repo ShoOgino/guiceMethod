@@ -1,0 +1,14 @@
+  public void testInvalidInteger() {
+    ContainerBuilder b = new ContainerBuilder();
+    b.constant("#", "invalid");
+    Container c = b.create(false);
+    try {
+      c.inject(InvalidInteger.class);
+      fail();
+    } catch (ConstantConversionException e) {
+      assertTrue(e.getMessage().startsWith(
+          "Error converting 'invalid' to Integer while injecting integerField "
+              + "with dependency named '#' in InvalidInteger. Reason:"));
+    }
+  }
+

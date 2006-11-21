@@ -1,6 +1,6 @@
   <T> ParameterInjector<T> createParameterInjector(
       Key<T> key, Member member) throws MissingDependencyException {
-    InternalFactory<? extends T> factory = getFactory(key);
+    InternalFactory<? extends T> factory = getFactory(member, key);
     if (factory == null) {
       throw new MissingDependencyException(
           "No mapping found for dependency " + key + " in " + member + ".");

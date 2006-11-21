@@ -5,7 +5,7 @@
   <T> T callInContext(ContextualCallable<T> callable) {
     InternalContext[] reference = localContext.get();
     if (reference[0] == null) {
-      reference[0] = new InternalContext(this);
+      reference[0] = new InternalContext(this, localScopeStrategy.get());
       try {
         return callable.call(reference[0]);
       } finally {

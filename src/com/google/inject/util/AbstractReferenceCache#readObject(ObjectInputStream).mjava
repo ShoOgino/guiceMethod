@@ -1,7 +1,6 @@
   private void readObject(ObjectInputStream in) throws IOException,
       ClassNotFoundException {
     in.defaultReadObject();
-    this.futures = new ConcurrentHashMap<Object, Future<V>>();
-    this.localFuture = new ThreadLocal<Future<V>>();
+    this.futures = new ConcurrentHashMap<Object, FutureValue<V>>();
   }
 

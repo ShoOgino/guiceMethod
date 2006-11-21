@@ -1,6 +1,6 @@
   /**
-   * Convenience method.&nbsp;Equivalent to {@code alias(type, Container.DEFAULT_NAME,
-   * type)}.
+   * Convenience method.&nbsp;Equivalent to {@code alias(type,
+   * Container.DEFAULT_NAME, type)}.
    *
    * @see #alias(Class, String, String)
    */

@@ -1,0 +1,5 @@
+  InternalContext(ContainerImpl container, Scope.Strategy scopeStrategy) {
+    this.container = container;
+    this.scopeStrategy = scopeStrategy;
+  }
+

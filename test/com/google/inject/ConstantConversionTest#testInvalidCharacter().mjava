@@ -1,0 +1,14 @@
+  public void testInvalidCharacter() {
+    ContainerBuilder b = new ContainerBuilder();
+    b.constant("foo", "invalid");
+    Container c = b.create(false);
+    try {
+      c.inject(InvalidCharacter.class);
+      fail();
+    } catch (ConstantConversionException e) {
+      assertTrue(e.getMessage().startsWith(
+          "Error converting 'invalid' to char while injecting foo "
+              + "with dependency named 'foo' in InvalidCharacter. Reason:"));
+    }
+  }
+

@@ -1,4 +1,4 @@
-  static <T> Key<T> newInstance(Class<T> type, String name) {
+  public static <T> Key<T> newInstance(Class<T> type, String name) {
     return new Key<T>(type, name);
   }
 

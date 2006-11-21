@@ -1,0 +1,4 @@
+  V create(FutureValue<V> futureValue, K key) {
+    return create(key);
+  }
+

@@ -1,0 +1,12 @@
+  public void testRuntimeException() {
+    class CreationException extends RuntimeException {}
+    try {
+      new ReferenceCache() {
+        protected Object create(Object key) {
+          throw new CreationException();
+        }
+      }.get(new Object());
+      fail();
+    } catch (CreationException e) { /* expected */ }
+  }
+

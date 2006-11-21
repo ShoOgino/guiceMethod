@@ -13,7 +13,7 @@
                 constructor.getParameterAnnotations(),
                 constructor.getParameterTypes(),
                 inject.value()
-              );
+            );
       } catch (MissingDependencyException e) {
         throw new DependencyException(e);
       }
