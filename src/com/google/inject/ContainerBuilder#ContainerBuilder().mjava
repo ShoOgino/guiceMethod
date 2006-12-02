@@ -3,11 +3,11 @@
    */
   public ContainerBuilder() {
     // In the current container as the default Container implementation.
-    factories.put(Key.newInstance(Container.class, Container.DEFAULT_NAME),
+    factories.put(Key.newInstance(Container.class, Key.DEFAULT_NAME),
         CONTAINER_FACTORY);
 
     // Inject the logger for the injected member's declaring class.
-    factories.put(Key.newInstance(Logger.class, Container.DEFAULT_NAME),
+    factories.put(Key.newInstance(Logger.class, Key.DEFAULT_NAME),
         LOGGER_FACTORY);
   }
 

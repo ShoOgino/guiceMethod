@@ -1,0 +1,4 @@
+  private int computeHashCode() {
+    return type.hashCode() * 31 + name.hashCode();
+  }
+

@@ -1,0 +1,7 @@
+  /**
+   * Constructs a key from a raw type.
+   */
+  public static <T> Key<T> newInstance(Class<T> type) {
+    return new Key<T>(type, DEFAULT_NAME) {};
+  }
+

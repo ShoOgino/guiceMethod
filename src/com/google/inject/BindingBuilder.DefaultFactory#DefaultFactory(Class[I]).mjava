@@ -1,0 +1,4 @@
+    public DefaultFactory(Class<I> implementation) {
+      this.implementation = implementation;
+    }
+

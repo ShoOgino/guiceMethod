@@ -1,0 +1,4 @@
+  protected Key() {
+    this(DEFAULT_NAME);
+  }
+

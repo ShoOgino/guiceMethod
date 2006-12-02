@@ -1,0 +1,7 @@
+  /**
+   * Creates a new binding for the given key.
+   */
+  public BindingBuilder(Key<T> key) {
+    this.key = key;
+  }
+

@@ -1,0 +1,2 @@
+  <T> Factory<T> scope(Binding<T> binding);
+

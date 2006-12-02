@@ -6,6 +6,6 @@
    */
   public <T> ContainerBuilder factory(Class<T> type,
       Class<? extends T> implementation) {
-    return factory(type, Container.DEFAULT_NAME, implementation);
+    return factory(type, Key.DEFAULT_NAME, implementation);
   }
 

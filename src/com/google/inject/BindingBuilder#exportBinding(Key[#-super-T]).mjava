@@ -1,0 +1,8 @@
+  /**
+   * Exports this binding with the given key.
+   */
+  public BindingBuilder exportBinding(Key<? super T> exportKey) {
+    this.exportKeys.add(exportKey);
+    return this;
+  }
+

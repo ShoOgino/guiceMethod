@@ -6,6 +6,6 @@
    */
   public <T> ContainerBuilder factory(Class<T> type,
       Factory<? extends T> factory, Scope scope) {
-    return factory(type, Container.DEFAULT_NAME, factory, scope);
+    return factory(type, Key.DEFAULT_NAME, factory, scope);
   }
 

@@ -1,0 +1,11 @@
+  /**
+   * Specifies the scope.
+   */
+  public BindingBuilder scope(Scope scope) {
+    if (scope != null) {
+      throw new IllegalStateException("Scope is already set.");
+    }
+
+    return this;
+  }
+

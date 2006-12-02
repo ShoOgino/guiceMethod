@@ -1,0 +1,26 @@
+  /**
+   * Uses the given factory to create instances of the implementation.
+   */
+  public BindingBuilder factory(final Factory<? extends T> factory) {
+    ensureImplementationIsNotSet();
+
+    this.externalFactory = factory;
+
+    this.factory = new InternalFactory<T>() {
+      public T create(InternalContext context) {
+        try {
+          Context externalContext = context.getExternalContext();
+          return factory.create(externalContext);
+        } catch (Exception e) {
+          throw new RuntimeException(e);
+        }
+      }
+
+      public String toString() {
+        return factory.toString();
+      }
+    };
+
+    return this;
+  }
+

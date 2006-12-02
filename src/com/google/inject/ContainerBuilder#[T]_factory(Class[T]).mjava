@@ -5,6 +5,6 @@
    * @see #factory(Class, String, Class)
    */
   public <T> ContainerBuilder factory(Class<T> type) {
-    return factory(type, Container.DEFAULT_NAME, type);
+    return factory(type, Key.DEFAULT_NAME, type);
   }
 
