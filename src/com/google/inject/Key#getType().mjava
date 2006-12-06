@@ -1,4 +1,7 @@
-  Class<T> getType() {
+  /**
+   * Gets the type of this binding.
+   */
+  public Type getType() {
     return type;
   }
 

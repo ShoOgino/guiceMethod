@@ -1,8 +1,0 @@
-  private Key(Class<T> type, String name) {
-    this.type = nonNull(type, "type");
-    this.name = nonNull(name, "name");
-    this.typeArguments = null;
-
-    this.hashCode = computeHashCode();
-  }
-

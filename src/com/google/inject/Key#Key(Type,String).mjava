@@ -1,0 +1,7 @@
+  private Key(Type type, String name) {
+    this.name = nonNull(name, "name");
+    this.type = nonNull(type, "type");
+    this.rawType = getRawType(nonNull(type, "type"));
+    this.typeString = toString(type);
+  }
+

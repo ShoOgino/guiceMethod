@@ -1,2 +1,2 @@
-  void foo(List<String> a, List<String> b) {}
+  public void foo(List<String> a, List<String> b) {}
 

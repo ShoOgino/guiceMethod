@@ -1,4 +1,7 @@
-  String getName() {
+  /**
+   * Gets the binding name.
+   */
+  public String getName() {
     return name;
   }
 

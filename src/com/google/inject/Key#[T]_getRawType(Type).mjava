@@ -1,0 +1,23 @@
+  @SuppressWarnings({"unchecked"})
+  private static <T> Class<T> getRawType(Type type) {
+    if (type instanceof Class<?>) {
+      // type is a normal class.
+      return (Class<T>) type;
+    } else {
+      // type is a parameterized type.
+      if (!(type instanceof ParameterizedType)) {
+        unexpectedType(type, ParameterizedType.class);
+      }
+      ParameterizedType parameterizedType = (ParameterizedType) type;
+
+      // I'm not exactly sure why getRawType() returns Type instead of Class.
+      // Neal isn't either but suspects some pathological case related
+      // to nested classes exists.
+      Type rawType = parameterizedType.getRawType();
+      if (!(rawType instanceof Class<?>)) {
+        unexpectedType(rawType, Class.class);
+      }
+      return (Class<T>) rawType;
+    }
+  }
+

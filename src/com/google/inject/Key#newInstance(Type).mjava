@@ -1,0 +1,7 @@
+  /**
+   * Constructs a key from a type.
+   */
+  public static Key<?> newInstance(Type type) {
+    return new Key<Object>(type, DEFAULT_NAME) {};
+  }
+

@@ -1,20 +1,21 @@
+  /**
+   * Constructs a new key. Derives the type from this class's type parameter.
+   * Requires client to create an empty anonymous class.
+   *
+   * <p>Example usage for a binding of type {@code Foo} named "bar":
+   * {@code new Key<Foo>("bar") {}}.
+   *
+   * <p>The curly braces in the example serve to create an empty anonymous
+   * class.
+   */
   protected Key(String name) {
     this.name = nonNull(name, "name");
-
     Type superclass = getClass().getGenericSuperclass();
     if (superclass instanceof Class) {
       throw new RuntimeException("Missing type parameter.");
     }
-    Type type = ((ParameterizedType) superclass).getActualTypeArguments()[0];
-    if (type instanceof Class<?>) {
-      this.type = (Class<T>) type;
-      this.typeArguments = null;
-    } else {
-      ParameterizedType parameterizedType = (ParameterizedType) type;
-      this.type = (Class<T>) parameterizedType.getRawType();
-      this.typeArguments = parameterizedType.getActualTypeArguments();
-    }
-
-    this.hashCode = computeHashCode();
+    this.type = ((ParameterizedType) superclass).getActualTypeArguments()[0];
+    this.rawType = getRawType(type);
+    this.typeString = toString(type);
   }
 

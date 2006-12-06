@@ -1,4 +1,4 @@
   public Class<T> getType() {
-    return key.getType();
+    return key.getRawType();
   }
 

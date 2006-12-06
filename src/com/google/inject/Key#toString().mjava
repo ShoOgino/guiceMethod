@@ -1,4 +1,4 @@
   public String toString() {
-    return "[type=" + type.getName() + ", name='" + name + "']";
+    return "Key[type=" + typeString + ", name='" + name + "']";
   }
 

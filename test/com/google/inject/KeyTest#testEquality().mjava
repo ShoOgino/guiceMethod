@@ -1,0 +1,7 @@
+  public void testEquality() throws Exception {
+    Method m = getClass().getMethod("foo", List.class, List.class);
+    Type[] types = m.getGenericParameterTypes();
+    assertEquals(types[0], types[1]);
+    System.err.println(types[0]);
+  }
+

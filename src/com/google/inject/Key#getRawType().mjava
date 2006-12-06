@@ -1,0 +1,7 @@
+  /**
+   * Gets the raw type of this binding.
+   */
+  public Class<T> getRawType() {
+    return rawType;
+  }
+

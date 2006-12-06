@@ -1,3 +1,7 @@
+  /**
+   * Convenience method. Delegates to {@link #Key(String)} with
+   * {@link #DEFAULT_NAME}.
+   */
   protected Key() {
     this(DEFAULT_NAME);
   }
