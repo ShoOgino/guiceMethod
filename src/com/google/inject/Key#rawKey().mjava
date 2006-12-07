@@ -1,0 +1,7 @@
+  /**
+   * Gets the key corresponding the raw type.
+   */
+  public Key<?> rawKey() {
+    return Key.newInstance(rawType, name);
+  }
+
