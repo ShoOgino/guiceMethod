@@ -1,0 +1,11 @@
+  /**
+   * Gets type from super class's type parameter.
+   */
+  static Type getSuperclassTypeParameter(Class<?> subclass) {
+    Type superclass = subclass.getGenericSuperclass();
+    if (superclass instanceof Class) {
+      throw new RuntimeException("Missing type parameter.");
+    }
+    return ((ParameterizedType) superclass).getActualTypeArguments()[0];
+  }
+

@@ -30,6 +30,6 @@
           }
         };
 
-    return factory(Key.newInstance(type, name), internalFactory, scope);
+    return factory(Key.get(type, name), internalFactory, scope);
   }
 

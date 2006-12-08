@@ -1,0 +1,9 @@
+  /**
+   * Constructs a key from a manually specified type token.
+   */
+  private Key(TypeToken<T> typeToken, String name) {
+    this.name = nonNull(name, "name");
+    this.typeToken = typeToken;
+    this.hashCode = computeHashCode();
+  }
+

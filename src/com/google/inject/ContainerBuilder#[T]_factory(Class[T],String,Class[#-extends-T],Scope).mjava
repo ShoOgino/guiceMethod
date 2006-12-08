@@ -36,6 +36,6 @@
       }
     };
 
-    return factory(Key.newInstance(type, name), factory, scope);
+    return factory(Key.get(type, name), factory, scope);
   }
 

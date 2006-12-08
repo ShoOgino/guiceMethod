@@ -1,0 +1,7 @@
+  /**
+   * Gets token representing the type to be injected.
+   */
+  public TypeToken<T> getTypeToken() {
+    return typeToken;
+  }
+

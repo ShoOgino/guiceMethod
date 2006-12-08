@@ -1,18 +1,11 @@
-  /**
-   * Compares the binding name and type. Uses {@code String} representations
-   * to compare types as the reflection API doesn't give us a lot of options
-   * when it comes to comparing parameterized types.
-   *
-   * @inheritDoc
-   */
   public boolean equals(Object o) {
     if (o == this) {
       return true;
     }
-    if (!(o instanceof Key)) {
+    if (!(o instanceof Key<?>)) {
       return false;
     }
-    Key other = (Key) o;
-    return name.equals(other.name) && typeString.equals(other.typeString);
+    Key<?> other = (Key<?>) o;
+    return name.equals(other.name) && typeToken.equals(other.typeToken);
   }
 

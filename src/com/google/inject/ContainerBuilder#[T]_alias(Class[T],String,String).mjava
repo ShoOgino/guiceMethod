@@ -7,6 +7,6 @@
    * @return this builder
    */
   public <T> ContainerBuilder alias(Class<T> type, String name, String alias) {
-    return alias(Key.newInstance(type, name), Key.newInstance(type, alias));
+    return alias(Key.get(type, name), Key.get(type, alias));
   }
 

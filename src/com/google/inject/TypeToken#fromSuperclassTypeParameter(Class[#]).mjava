@@ -1,0 +1,7 @@
+  /**
+   * Gets type token from super class's type parameter.
+   */
+  static TypeToken<?> fromSuperclassTypeParameter(Class<?> subclass) {
+    return new ManualTypeToken<Object>(getSuperclassTypeParameter(subclass));
+  }
+

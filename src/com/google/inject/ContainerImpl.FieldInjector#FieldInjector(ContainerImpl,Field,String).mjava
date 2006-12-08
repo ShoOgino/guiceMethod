@@ -3,7 +3,7 @@
       this.field = field;
       field.setAccessible(true);
 
-      Key<?> key = Key.newInstance(field.getType(), name);
+      Key<?> key = Key.get(field.getType(), name);
       factory = container.getFactory(field, key);
       if (factory == null) {
         throw new MissingDependencyException(

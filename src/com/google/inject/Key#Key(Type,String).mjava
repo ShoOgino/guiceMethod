@@ -1,7 +1,10 @@
+  /**
+   * Unsafe. Constructs a key from a manually specified type.
+   */
+  @SuppressWarnings({"unchecked"})
   private Key(Type type, String name) {
     this.name = nonNull(name, "name");
-    this.type = nonNull(type, "type");
-    this.rawType = getRawType(nonNull(type, "type"));
-    this.typeString = toString(type);
+    this.typeToken = (TypeToken<T>) TypeToken.get(type);
+    this.hashCode = computeHashCode();
   }
 

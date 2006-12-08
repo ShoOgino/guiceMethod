@@ -1,0 +1,7 @@
+  /**
+   * Gets a key for a {@code Class} and a name.
+   */
+  public static <T> Key<T> get(Class<T> type, String name) {
+    return new ManualKey<T>(type, name);
+  }
+

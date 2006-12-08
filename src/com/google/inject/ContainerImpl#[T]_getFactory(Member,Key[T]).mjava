@@ -10,7 +10,7 @@
     // Do we have a constant String factory of the same name?
     InternalFactory<String> stringFactory =
         (InternalFactory<String>) factories.get(
-            Key.newInstance(String.class, key.getName()));
+            Key.get(String.class, key.getName()));
     if (stringFactory == null
         || !(stringFactory instanceof ConstantFactory)) {
       return null;

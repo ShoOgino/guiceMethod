@@ -1,0 +1,4 @@
+    private ManualKey(Type type, String name) {
+      super(type, name);
+    }
+

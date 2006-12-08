@@ -1,5 +1,5 @@
   /**
-   * Gets the type of this binding.
+   * Gets underlying {@code Type} instance.
    */
   public Type getType() {
     return type;

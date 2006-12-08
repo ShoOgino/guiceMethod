@@ -1,0 +1,7 @@
+  /**
+   * Gets type token for the given {@code Type} instance.
+   */
+  public static TypeToken<?> get(Type type) {
+    return new ManualTypeToken<Object>(type);
+  }
+

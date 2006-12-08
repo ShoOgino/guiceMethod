@@ -1,4 +1,5 @@
   public String toString() {
-    return "Key[type=" + typeString + ", name='" + name + "']";
+    return Key.class.getSimpleName()
+        + "[type=" + typeToken + ", name='" + name + "']";
   }
 

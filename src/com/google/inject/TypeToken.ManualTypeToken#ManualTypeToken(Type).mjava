@@ -1,0 +1,4 @@
+    public ManualTypeToken(Type type) {
+      super(type);
+    }
+

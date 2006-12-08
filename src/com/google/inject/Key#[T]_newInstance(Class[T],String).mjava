@@ -1,7 +1,0 @@
-  /**
-   * Constructs a key from a raw type and a name.
-   */
-  public static <T> Key<T> newInstance(Class<T> type, String name) {
-    return new Key<T>(type, name) {};
-  }
-

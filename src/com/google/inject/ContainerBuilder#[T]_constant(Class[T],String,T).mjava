@@ -4,6 +4,6 @@
   public <T> ContainerBuilder constant(final Class<T> type, final String name,
       final T value) {
     InternalFactory<T> factory = new ConstantFactory<T>(value);
-    return factory(Key.newInstance(type, name), factory, Scope.DEFAULT);
+    return factory(Key.get(type, name), factory, Scope.DEFAULT);
   }
 

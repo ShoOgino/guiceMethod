@@ -1,0 +1,7 @@
+  /**
+   * Gets a key for a {@code Class}. Defaults name to {@link #DEFAULT_NAME}.
+   */
+  public static <T> Key<T> get(Class<T> type) {
+    return new ManualKey<T>(type, DEFAULT_NAME);
+  }
+

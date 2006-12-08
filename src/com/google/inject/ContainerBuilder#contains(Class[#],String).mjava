@@ -3,6 +3,6 @@
    * name.
    */
   public boolean contains(Class<?> type, String name) {
-    return factories.containsKey(Key.newInstance(type, name));
+    return factories.containsKey(Key.get(type, name));
   }
 

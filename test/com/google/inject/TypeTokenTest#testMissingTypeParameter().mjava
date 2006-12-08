@@ -1,0 +1,7 @@
+  public void testMissingTypeParameter() {
+    try {
+      new TypeToken() {};
+      fail();
+    } catch (RuntimeException e) { /* expected */ }
+  }
+

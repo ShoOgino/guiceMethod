@@ -1,8 +1,8 @@
   @SuppressWarnings({"unchecked"})
-  private static <T> Class<T> getRawType(Type type) {
+  private static Class<?> getRawType(Type type) {
     if (type instanceof Class<?>) {
       // type is a normal class.
-      return (Class<T>) type;
+      return (Class<?>) type;
     } else {
       // type is a parameterized type.
       if (!(type instanceof ParameterizedType)) {
@@ -17,7 +17,7 @@
       if (!(rawType instanceof Class<?>)) {
         unexpectedType(rawType, Class.class);
       }
-      return (Class<T>) rawType;
+      return (Class<?>) rawType;
     }
   }
 

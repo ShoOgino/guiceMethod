@@ -1,7 +1,7 @@
   @SuppressWarnings("unchecked")
   <T> T getInstance(Class<T> type, String name, InternalContext context) {
     ExternalContext<?> previous = context.getExternalContext();
-    Key<T> key = Key.newInstance(type, name);
+    Key<T> key = Key.get(type, name);
     context.setExternalContext(ExternalContext.newInstance(null, key, this));
     try {
       InternalFactory<? extends T> factory = getFactory(null, key);

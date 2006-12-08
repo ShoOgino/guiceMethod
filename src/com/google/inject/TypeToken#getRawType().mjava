@@ -1,0 +1,7 @@
+  /**
+   * Gets the raw type.
+   */
+  Class<? super T> getRawType() {
+    return rawType;
+  }
+
