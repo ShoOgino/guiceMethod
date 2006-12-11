@@ -1,0 +1,8 @@
+  public boolean equals(Object o) {
+    if (!(o instanceof ErrorMessage)) {
+      return false;
+    }
+    ErrorMessage e = (ErrorMessage) o;
+    return source.equals(e.source) && message.equals(e.message);
+  }
+

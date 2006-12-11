@@ -1,8 +1,7 @@
   /**
    * Sets the implementation to the given class.
    */
-  public <I extends T> BindingBuilder implementation(
-      final Class<I> implementation) {
+  public <I extends T> BindingBuilder<T> to(Class<I> implementation) {
     ensureImplementationIsNotSet();
     this.factory = new DefaultFactory<I>(implementation);
     return this;

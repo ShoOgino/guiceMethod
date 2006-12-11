@@ -1,6 +1,0 @@
-  private <I extends T> void ensureImplementationIsNotSet() {
-    if (factory != null) {
-      throw new IllegalStateException("An implementation is already set.");
-    }
-  }
-

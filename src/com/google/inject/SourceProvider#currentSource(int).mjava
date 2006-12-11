@@ -1,0 +1,7 @@
+  /**
+   * Gets the current source.
+   *
+   * @param depth in call stack
+   */
+  Object currentSource(int depth);
+

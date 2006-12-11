@@ -1,0 +1,4 @@
+    private SimpleKey(Type type, String name) {
+      super(type, name);
+    }
+

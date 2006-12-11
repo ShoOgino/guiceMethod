@@ -1,0 +1,4 @@
+  public int hashCode() {
+    return source.hashCode() * 31 + message.hashCode();
+  }
+

@@ -1,0 +1,13 @@
+  /**
+   * Sets the name of this dependency.
+   */
+  public BindingBuilder<T> named(String name) {
+    if (!this.key.hasDefaultName()) {
+      errorMessages.add(
+          new ErrorMessage(source, "Name set more than once."));
+    }
+
+    this.key = this.key.rename(name);
+    return this;
+  }
+

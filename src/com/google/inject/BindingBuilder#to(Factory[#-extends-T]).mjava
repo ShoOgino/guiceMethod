@@ -1,10 +1,8 @@
   /**
    * Uses the given factory to create instances of the implementation.
    */
-  public BindingBuilder factory(final Factory<? extends T> factory) {
+  public BindingBuilder<T> to(final Factory<? extends T> factory) {
     ensureImplementationIsNotSet();
-
-    this.externalFactory = factory;
 
     this.factory = new InternalFactory<T>() {
       public T create(InternalContext context) {

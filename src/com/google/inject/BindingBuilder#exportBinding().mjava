@@ -1,7 +1,0 @@
-  /**
-   * Exports this binding.
-   */
-  public BindingBuilder exportBinding() {
-    return exportBinding(this.key);
-  }
-

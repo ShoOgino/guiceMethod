@@ -1,0 +1,4 @@
+  public void testStackTraceElement() {
+    System.err.println(new Throwable().getStackTrace()[0]);
+  }
+

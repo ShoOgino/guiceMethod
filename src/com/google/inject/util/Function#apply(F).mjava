@@ -3,7 +3,7 @@
    * of type {@code T}.  Note that types {@code F} and {@code T} may or may not
    * be the same.
    *
-   * @param from The source object.
+   * @param from The from object.
    * @return The resulting object.
    */
   T apply(F from);

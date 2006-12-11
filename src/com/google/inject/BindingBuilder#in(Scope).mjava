@@ -1,0 +1,12 @@
+  /**
+   * Specifies the scope.
+   */
+  public BindingBuilder<T> in(Scope scope) {
+    if (scope != null) {
+      errorMessages.add(
+          new ErrorMessage(source, "Scope set more than once."));
+    }
+
+    return this;
+  }
+

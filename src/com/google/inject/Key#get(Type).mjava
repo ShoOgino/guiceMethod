@@ -2,6 +2,6 @@
    * Gets a key for a type. Defaults name to {@link #DEFAULT_NAME}.
    */
   public static Key<?> get(Type type) {
-    return new ManualKey<Object>(type, DEFAULT_NAME);
+    return new SimpleKey<Object>(type, DEFAULT_NAME);
   }
 

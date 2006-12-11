@@ -1,4 +1,0 @@
-    private ManualKey(TypeToken<T> typeToken, String name) {
-      super(typeToken, name);
-    }
-
