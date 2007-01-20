@@ -1,0 +1,4 @@
+    Key<? extends T> getDestination() {
+      return destination;
+    }
+

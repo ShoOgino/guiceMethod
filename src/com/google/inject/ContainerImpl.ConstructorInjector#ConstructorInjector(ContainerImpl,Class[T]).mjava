@@ -11,7 +11,7 @@
             : container.getParametersInjectors(
                 constructor,
                 constructor.getParameterAnnotations(),
-                constructor.getParameterTypes(),
+                constructor.getGenericParameterTypes(),
                 inject.value()
             );
       } catch (MissingDependencyException e) {

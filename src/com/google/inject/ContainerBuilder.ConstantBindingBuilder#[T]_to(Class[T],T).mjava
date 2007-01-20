@@ -1,0 +1,9 @@
+    /**
+     * Maps a constant value to the given type and name.
+     */
+    <T> ConstantBindingBuilder to(final Class<T> type, final T value) {
+      this.type = type;
+      this.value = value;
+      return this;
+    }
+

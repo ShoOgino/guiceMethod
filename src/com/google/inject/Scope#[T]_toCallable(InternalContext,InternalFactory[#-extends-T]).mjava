@@ -2,7 +2,7 @@
       final InternalFactory<? extends T> factory) {
     return new Callable<T>() {
       public T call() throws Exception {
-        return factory.create(context);
+        return factory.get(context);
       }
     };
   }

@@ -3,7 +3,7 @@
       this.method = method;
       method.setAccessible(true);
 
-      Class<?>[] parameterTypes = method.getParameterTypes();
+      Type[] parameterTypes = method.getGenericParameterTypes();
       if (parameterTypes.length == 0) {
         throw new DependencyException(
             method + " has no parameters to inject.");

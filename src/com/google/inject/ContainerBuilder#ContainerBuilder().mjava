@@ -2,12 +2,7 @@
    * Constructs a new builder.
    */
   public ContainerBuilder() {
-    // In the current container as the default Container implementation.
-    factories.put(Key.get(Container.class, Key.DEFAULT_NAME),
-        CONTAINER_FACTORY);
-
-    // Inject the logger for the injected member's declaring class.
-    factories.put(Key.get(Logger.class, Key.DEFAULT_NAME),
-        LOGGER_FACTORY);
+    bind(Container.class).to(CONTAINER_FACTORY);
+    bind(Logger.class).to(LOGGER_FACTORY);
   }
 

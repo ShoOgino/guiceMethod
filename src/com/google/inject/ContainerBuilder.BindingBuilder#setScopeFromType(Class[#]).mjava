@@ -1,0 +1,7 @@
+    private void setScopeFromType(Class<?> implementation) {
+      Scoped scoped = implementation.getAnnotation(Scoped.class);
+      if (scoped != null) {
+        in(scoped.value());
+      }
+    }
+

@@ -2,7 +2,7 @@
       ExternalContext<?> previous = context.getExternalContext();
       context.setExternalContext(externalContext);
       try {
-        field.set(o, factory.create(context));
+        field.set(o, factory.get(context));
       } catch (IllegalAccessException e) {
         throw new AssertionError(e);
       } finally {

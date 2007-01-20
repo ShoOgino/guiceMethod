@@ -1,0 +1,12 @@
+    /**
+     * Sets the name of this binding.
+     */
+    public BindingBuilder<T> named(String name) {
+      if (!this.key.hasDefaultName()) {
+        add(new ErrorMessage(source, "Name set more than once."));
+      }
+
+      this.key = this.key.named(name);
+      return this;
+    }
+

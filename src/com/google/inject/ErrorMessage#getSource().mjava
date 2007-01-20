@@ -1,0 +1,7 @@
+  /**
+   * Gets the source of the configuration which resulted in this error message.
+   */
+  public Object getSource() {
+    return source;
+  }
+

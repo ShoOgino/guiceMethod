@@ -2,7 +2,7 @@
       ExternalContext<?> previous = context.getExternalContext();
       context.setExternalContext(externalContext);
       try {
-        return factory.create(context);
+        return factory.get(context);
       } finally {
         context.setExternalContext(previous);
       }

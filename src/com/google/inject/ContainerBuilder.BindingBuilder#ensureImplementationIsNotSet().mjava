@@ -1,0 +1,9 @@
+    /**
+     * Adds an error message if the implementation has already been bound.
+     */
+    private void ensureImplementationIsNotSet() {
+      if (factory != null) {
+        add(new ErrorMessage(source, "Implementation set more than once."));
+      }
+    }
+

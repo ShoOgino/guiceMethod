@@ -1,9 +1,0 @@
-  /**
-   * Specifies that this binding should load as soon as its scope loads. For
-   * example, a singleton will load at startup.
-   */
-  public BindingBuilder<T> eagerlyLoad() {
-    this.eagerlyLoad = true;
-    return this;
-  }
-

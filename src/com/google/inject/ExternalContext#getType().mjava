@@ -1,4 +1,0 @@
-  public Class<T> getType() {
-    return key.getRawType();
-  }
-

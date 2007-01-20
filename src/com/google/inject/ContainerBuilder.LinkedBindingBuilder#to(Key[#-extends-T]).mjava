@@ -1,0 +1,8 @@
+    /**
+     * Links to another binding with the given key.
+     */
+    public LinkedBindingBuilder<T> to(Key<? extends T> destination) {
+      this.destination = destination;
+      return this;
+    }
+

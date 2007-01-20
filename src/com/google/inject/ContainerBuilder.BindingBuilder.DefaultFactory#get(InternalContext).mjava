@@ -1,0 +1,9 @@
+      @SuppressWarnings("unchecked")
+      public I get(InternalContext context) {
+        if (constructor == null) {
+          this.constructor =
+              context.getContainerImpl().getConstructor(implementation);
+        }
+        return (I) constructor.construct(context, key.getRawType());
+      }
+

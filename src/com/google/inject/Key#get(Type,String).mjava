@@ -1,7 +1,7 @@
   /**
    * Gets a key for a type and a name.
    */
-  public static Key<?> get(Type type, String name) {
+  static Key<?> get(Type type, String name) {
     return new SimpleKey<Object>(type, name);
   }
 

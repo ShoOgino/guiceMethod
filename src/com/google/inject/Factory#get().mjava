@@ -1,0 +1,5 @@
+  /**
+   * Gets an instance of {@code T}.
+   */
+  T get();
+

@@ -1,9 +1,9 @@
   public void testInjectStatics() {
-    new ContainerBuilder()
-        .constant("s", "test")
-        .constant("i", 5)
-        .injectStatics(Static.class)
-        .create(false);
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind("s").to("test");
+    builder.bind("i").to(5);
+    builder.injectStatics(Static.class);
+    builder.create(false);
 
     assertEquals("test", Static.s);
     assertEquals(5, Static.i);

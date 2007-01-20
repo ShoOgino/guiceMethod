@@ -1,0 +1,7 @@
+    /**
+     * Binds constant to the given value.
+     */
+    public ConstantBindingBuilder to(boolean value) {
+      return to(boolean.class, value);
+    }
+

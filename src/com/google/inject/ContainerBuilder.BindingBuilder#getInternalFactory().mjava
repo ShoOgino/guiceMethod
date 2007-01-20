@@ -1,0 +1,13 @@
+    InternalFactory<? extends T> getInternalFactory() {
+      // If an implementation wasn't specified, use the injection type.
+      if (this.factory == null) {
+        to(key.getTypeToken());
+      }
+
+      if (scope == null) {
+        return this.factory;
+      }
+
+      return scope.scopeFactory(key, this.factory);
+    }
+

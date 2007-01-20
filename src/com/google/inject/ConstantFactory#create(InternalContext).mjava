@@ -1,4 +1,0 @@
-  public T create(InternalContext ignored) {
-    return value;
-  }
-

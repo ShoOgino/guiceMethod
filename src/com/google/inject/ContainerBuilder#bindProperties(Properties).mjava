@@ -1,0 +1,14 @@
+  /**
+   * Binds string constants based on the given properties.
+   */
+  public ContainerBuilder bindProperties(Properties properties) {
+    ensureNotCreated();
+    Object source = source();
+    for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+      String key = (String) entry.getKey();
+      String value = (String) entry.getValue();
+      bind(key, source).to(value);
+    }
+    return this;
+  }
+

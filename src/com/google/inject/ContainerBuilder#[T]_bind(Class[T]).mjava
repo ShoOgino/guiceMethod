@@ -1,0 +1,7 @@
+  /**
+   * Binds the given type.
+   */
+  public <T> BindingBuilder<T> bind(Class<T> clazz) {
+    return bind(Key.get(clazz));
+  }
+

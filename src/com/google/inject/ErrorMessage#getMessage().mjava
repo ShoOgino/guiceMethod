@@ -1,0 +1,7 @@
+  /**
+   * Gets the error message text.
+   */
+  public String getMessage() {
+    return message;
+  }
+

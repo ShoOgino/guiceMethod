@@ -1,8 +1,0 @@
-  /**
-   * Convenience method.&nbsp;Equivalent to {@code contains(type,
-   * Container.DEFAULT_NAME)}.
-   */
-  public boolean contains(Class<?> type) {
-    return contains(type, Key.DEFAULT_NAME);
-  }
-

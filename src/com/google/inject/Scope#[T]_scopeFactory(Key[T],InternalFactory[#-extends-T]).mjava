@@ -1,0 +1,6 @@
+  /**
+   * Wraps factory with scoping logic.
+   */
+  abstract <T> InternalFactory<? extends T> scopeFactory(
+      Key<T> key, InternalFactory<? extends T> factory);
+

@@ -1,0 +1,13 @@
+    /**
+     * Binds to instances of the given implementation type. The {@link
+     * Container} will inject the implementation instances as well. Sets the
+     * scope based on the @{@link Scoped} annotation on the implementation
+     * class if present.
+     */
+    public <I extends T> BindingBuilder<T> to(TypeToken<I> implementation) {
+      ensureImplementationIsNotSet();
+      this.factory = new DefaultFactory<I>(implementation);
+      setScopeFromType(implementation.getRawType());
+      return this;
+    }
+

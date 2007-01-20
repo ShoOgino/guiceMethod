@@ -1,6 +1,6 @@
   /**
    * Upon creation, the {@link Container} will inject static fields and methods
-   * into the given classes.
+   * in the given classes.
    *
    * @param types for which static members will be injected
    */

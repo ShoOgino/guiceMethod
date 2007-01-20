@@ -1,7 +1,0 @@
-  private void ensureImplementationIsNotSet() {
-    if (factory != null) {
-      errorMessages.add(
-          new ErrorMessage(source, "Implementation set more than once."));
-    }
-  }
-

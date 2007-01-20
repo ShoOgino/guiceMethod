@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked")
+  <T> ConstructorInjector<T> getConstructor(TypeToken<T> implementation) {
+    return constructors.get(implementation.getRawType());
+  }
+

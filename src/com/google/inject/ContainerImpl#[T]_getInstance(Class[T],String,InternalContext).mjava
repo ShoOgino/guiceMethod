@@ -8,7 +8,7 @@
       if (factory == null) {
         throw new DependencyException("Missing binding for " + key + ".");
       }
-      return factory.create(context);
+      return factory.get(context);
     } finally {
       context.setExternalContext(previous);
     }

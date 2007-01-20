@@ -1,0 +1,9 @@
+    /**
+     * Binds to the given instance.
+     */
+    BindingBuilder<T> to(T instance) {
+      ensureImplementationIsNotSet();
+      this.factory = new ConstantFactory<T>(instance);
+      return this;
+    }
+

@@ -1,7 +1,0 @@
-  /**
-   * Maps an enum to the given name.
-   */
-  public <E extends Enum<E>> ContainerBuilder constant(String name, E value) {
-    return constant(value.getDeclaringClass(), name, value);
-  }
-

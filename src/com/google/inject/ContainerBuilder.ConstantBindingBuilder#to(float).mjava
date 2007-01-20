@@ -1,0 +1,7 @@
+    /**
+     * Binds constant to the given value.
+     */
+    public ConstantBindingBuilder to(float value) {
+      return to(float.class, value);
+    }
+

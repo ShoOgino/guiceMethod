@@ -1,0 +1,5 @@
+      public DefaultFactory(TypeToken<I> implementation) {
+        // TODO: Ensure this is a concrete implementation.
+        this.implementation = implementation;
+      }
+

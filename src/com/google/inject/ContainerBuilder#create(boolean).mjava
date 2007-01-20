@@ -11,19 +11,87 @@
   public Container create(boolean loadSingletons) {
     ensureNotCreated();
     created = true;
-    final ContainerImpl container = new ContainerImpl(
-        new HashMap<Key<?>, InternalFactory<?>>(factories));
+
+    HashMap<Key<?>, InternalFactory<?>> factories =
+        new HashMap<Key<?>, InternalFactory<?>>();
+
+    for (ConstantBindingBuilder builder : constantBindingBuilders) {
+      if (builder.hasValue()) {
+        factories.put(builder.getKey(), builder.getInternalFactory());
+      } else {
+        add(new ErrorMessage(builder.getSource(),
+            "Constant value isn't set."));
+      }
+    }
+
+    final List<ContainerImpl.ContextualCallable<Void>> singletonLoaders =
+        new ArrayList<ContainerImpl.ContextualCallable<Void>>();
+
+    for (BindingBuilder<?> builder : bindingBuilders) {
+      final Key<?> key = builder.getKey();
+      final InternalFactory<?> factory = builder.getInternalFactory();
+      factories.put(key, factory);
+
+      if (builder.isSingleton()) {
+        singletonLoaders.add(new ContainerImpl.ContextualCallable<Void>() {
+          public Void call(InternalContext context) {
+            context.setExternalContext(
+                ExternalContext.newInstance(null, key,
+                    context.getContainerImpl()));
+            try {
+              factory.get(context);
+              return null;
+            } finally {
+              context.setExternalContext(null);
+            }
+          }
+        });
+      }
+    }
+
+    for (LinkedBindingBuilder<?> builder : linkedBindingBuilders) {
+      // TODO: Support alias to a later-declared alias.
+      Key<?> destination = builder.getDestination();
+      if (destination == null) {
+        add(new ErrorMessage(builder.getSource(),
+            "Link destination isn't set."));
+        continue;
+      }
+
+      InternalFactory<?> factory = factories.get(destination);
+      if (factory == null) {
+        add(new ErrorMessage(builder.getSource(),
+            "Destination of link binding not found: " + destination));
+        continue;
+      }
+
+      factories.put(builder.getKey(), factory);
+    }
+
+    // TODO: Handle this better.
+    if (!errorMessages.isEmpty()) {
+      for (ErrorMessage errorMessage : errorMessages) {
+        System.err.println(errorMessage);
+        throw new DependencyException("Configuration errors.");
+      }
+    }
+
+    final ContainerImpl container = new ContainerImpl(factories);
+
+    container.injectStatics(staticInjections);
+
     if (loadSingletons) {
       container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
         public Void call(InternalContext context) {
-          for (InternalFactory<?> factory : singletonFactories) {
-            factory.create(context);
+          for (ContainerImpl.ContextualCallable<Void> singletonLoader
+              : singletonLoaders) {
+            singletonLoader.call(context);
           }
           return null;
         }
       });
     }
-    container.injectStatics(staticInjections);
+
     return container;
   }
 

@@ -1,0 +1,8 @@
+  /**
+   * Binds a constant to the given name.
+   */
+  public ConstantBindingBuilder bind(String name) {
+    ensureNotCreated();
+    return bind(name, source());
+  }
+

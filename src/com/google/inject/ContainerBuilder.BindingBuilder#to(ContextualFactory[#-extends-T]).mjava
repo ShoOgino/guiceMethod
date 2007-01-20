@@ -1,0 +1,20 @@
+    /**
+     * Binds to instances from the given factory.
+     */
+    public BindingBuilder<T> to(
+        final ContextualFactory<? extends T> factory) {
+      ensureImplementationIsNotSet();
+
+      this.factory = new InternalFactory<T>() {
+        public T get(InternalContext context) {
+          return factory.get(context.getExternalContext());
+        }
+
+        public String toString() {
+          return factory.toString();
+        }
+      };
+
+      return this;
+    }
+

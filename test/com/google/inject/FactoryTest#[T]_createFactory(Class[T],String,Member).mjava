@@ -1,7 +1,7 @@
-  <T> Factory<T> createFactory(final Class<T> type, final String name,
-      final Member expectedMember) {
-    return new Factory<T>() {
-      public T create(Context context) throws Exception {
+  <T> ContextualFactory<T> createFactory(
+      final Class<T> type, final String name, final Member expectedMember) {
+    return new ContextualFactory<T>() {
+      public T get(Context context) {
         assertEquals(expectedMember, context.getMember());
         assertEquals(name, context.getName());
         assertEquals(type, context.getType());

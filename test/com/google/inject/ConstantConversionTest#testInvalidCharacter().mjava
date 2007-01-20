@@ -1,6 +1,6 @@
   public void testInvalidCharacter() {
     ContainerBuilder b = new ContainerBuilder();
-    b.constant("foo", "invalid");
+    b.bind("foo").to("invalid");
     Container c = b.create(false);
     try {
       c.inject(InvalidCharacter.class);

@@ -1,0 +1,4 @@
+    LinkedBindingBuilder(Key<T> key) {
+      this.key = key;
+    }
+

@@ -1,0 +1,4 @@
+    InternalFactory<?> getInternalFactory() {
+      return new ConstantFactory<Object>(value);
+    }
+
