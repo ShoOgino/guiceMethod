@@ -1,4 +1,0 @@
-  public void setScopeStrategy(Scope.Strategy scopeStrategy) {
-    this.localScopeStrategy.set(scopeStrategy);
-  }
-

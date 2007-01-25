@@ -9,7 +9,7 @@
     ContainerBuilder b = new ContainerBuilder();
     b.bindProperties(properties);
     Container c = b.create(false);
-    Foo foo = c.inject(Foo.class);
+    Foo foo = c.newInstance(Foo.class);
 
     checkNumbers(
       foo.integerField,

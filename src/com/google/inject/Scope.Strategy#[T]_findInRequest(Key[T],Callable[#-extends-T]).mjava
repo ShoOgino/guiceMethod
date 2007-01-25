@@ -1,7 +1,0 @@
-    /**
-     * Finds an object for the given type and name in the request scope.
-     * Creates a new object if necessary using the given factory.
-     */
-    <T> T findInRequest(Key<T> key,
-        Callable<? extends T> factory) throws Exception;
-

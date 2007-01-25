@@ -2,11 +2,9 @@
      * Specifies the scope.
      */
     public BindingBuilder<T> in(Scope scope) {
-      if (this.scope != null) {
-        add(new ErrorMessage(source, "Scope set more than once."));
-      }
+      ensureScopeNotSet();
 
-      this.scope = scope;
+      this.scope = nonNull(scope, "scope");
       return this;
     }
 

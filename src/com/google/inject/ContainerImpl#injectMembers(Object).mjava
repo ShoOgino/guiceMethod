@@ -1,7 +1,7 @@
-  public void inject(final Object o) {
+  public void injectMembers(final Object o) {
     callInContext(new ContextualCallable<Void>() {
       public Void call(InternalContext context) {
-        inject(o, context);
+        injectMembers(o, context);
         return null;
       }
     });

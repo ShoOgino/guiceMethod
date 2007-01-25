@@ -1,0 +1,13 @@
+  /**
+   * Maps a {@link Scope} instance to a given name. Scopes should be mapped
+   * before used in bindings. @{@link Scoped#value()} references this name.
+   */
+  public void put(String name, Scope scope) {
+    if (scopes.containsKey(nonNull(name, "name"))) {
+      add(new ErrorMessage(source(), "Scope named '" + name
+          + "' is already defined."));
+    } else {
+        scopes.put(nonNull(name, "name"), nonNull(scope, "scope"));
+    }
+  }
+

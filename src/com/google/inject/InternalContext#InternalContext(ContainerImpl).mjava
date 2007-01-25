@@ -1,0 +1,4 @@
+  InternalContext(ContainerImpl container) {
+    this.container = container;
+  }
+

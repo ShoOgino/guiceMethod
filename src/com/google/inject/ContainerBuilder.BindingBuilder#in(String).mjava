@@ -1,0 +1,17 @@
+    /**
+     * Specifies the scope. References the name passed to {@link
+     * ContainerBuilder#put(String, Scope)}.
+     */
+    public BindingBuilder<T> in(String scopeName) {
+      ensureScopeNotSet();
+
+      // We could defer this lookup to when we create the container, but this
+      // is fine for now.
+      this.scope = scopes.get(scopeName);
+      if (this.scope == null) {
+        add(new ErrorMessage(source, "Scope named '" + scopeName
+            + "' not found."));
+      }
+      return this;
+    }
+

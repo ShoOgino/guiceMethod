@@ -1,9 +1,0 @@
-  Scope.Strategy getScopeStrategy() {
-    if (scopeStrategy == null) {
-      throw new IllegalStateException("Scope strategy not set. "
-          + "Please call Container.setScopeStrategy().");
-    }
-
-    return scopeStrategy;
-  }
-

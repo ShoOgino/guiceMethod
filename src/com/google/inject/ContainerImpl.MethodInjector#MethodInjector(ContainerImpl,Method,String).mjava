@@ -5,7 +5,7 @@
 
       Type[] parameterTypes = method.getGenericParameterTypes();
       if (parameterTypes.length == 0) {
-        throw new DependencyException(
+        throw new ConfigurationException(
             method + " has no parameters to inject.");
       }
       parameterInjectors = container.getParametersInjectors(

@@ -1,4 +1,4 @@
-  <T> T inject(Class<T> implementation, InternalContext context) {
+  <T> T newInstance(Class<T> implementation, InternalContext context) {
     try {
       ConstructorInjector<T> constructor = getConstructor(implementation);
       return implementation.cast(

@@ -1,8 +1,0 @@
-  /**
-   * Gets the current scope strategy. See {@link
-   * Container#setScopeStrategy(Scope.Strategy)}.
-   *
-   * @throws IllegalStateException if no strategy has been set
-   */
-  Scope.Strategy getScopeStrategy();
-

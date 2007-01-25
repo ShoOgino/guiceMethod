@@ -1,0 +1,4 @@
+  public ConfigurationException(Throwable cause) {
+    super(cause);
+  }
+

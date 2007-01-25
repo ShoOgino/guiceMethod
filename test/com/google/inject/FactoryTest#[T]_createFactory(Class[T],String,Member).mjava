@@ -3,9 +3,9 @@
     return new ContextualFactory<T>() {
       public T get(Context context) {
         assertEquals(expectedMember, context.getMember());
-        assertEquals(name, context.getName());
-        assertEquals(type, context.getType());
-        return context.getContainer().inject(type);
+        assertEquals(name, context.getKey().getName());
+        assertEquals(type, context.getKey().getTypeToken().getType());
+        return context.getContainer().newInstance(type);
       }
     };
   }

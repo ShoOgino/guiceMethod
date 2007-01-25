@@ -8,7 +8,7 @@
     cb.bind(Bar.class)
         .named("fooBar")
         .to(createFactory(Bar.class, "fooBar", null))
-        .in(Scope.SINGLETON);
+        .in(Scopes.SINGLETON);
 
     cb.bind(Tee.class).named("tee1")
         .to(createFactory(Tee.class, "tee1",
@@ -26,7 +26,7 @@
 
     Container c = cb.create(true);
 
-    Foo foo = c.getInstance(Foo.class);
+    Foo foo = c.getFactory(Key.get(Foo.class)).get();
 
     assertNotNull(foo.bar);
     assertNotNull(foo.bar.tee1);

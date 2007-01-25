@@ -1,4 +1,0 @@
-  <T> T getInstance(Class<T> type, InternalContext context) {
-    return getInstance(type, Key.DEFAULT_NAME, context);
-  }
-

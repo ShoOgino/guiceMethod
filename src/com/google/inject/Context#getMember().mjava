@@ -1,7 +1,7 @@
   /**
    * Gets the field, method or constructor which is being injected. Returns
-   * {@code null} if the object currently being constructed is pre-loaded as
-   * a singleton or requested from {@link Container#getInstance(Class)}.
+   * {@code null} if the object isn't being directly injected (i.e. it's
+   * a preloaded singleton, returned from {@link Factory#get()}, etc.
    */
   Member getMember();
 

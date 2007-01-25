@@ -1,6 +1,6 @@
   public void testInjection() {
     Container container = createFooContainer();
-    Foo foo = container.inject(Foo.class);
+    Foo foo = container.newInstance(Foo.class);
 
     assertEquals("test", foo.s);
     assertEquals("test", foo.bar.getTee().getS());

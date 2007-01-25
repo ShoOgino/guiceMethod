@@ -1,0 +1,6 @@
+    private void ensureScopeNotSet() {
+      if (this.scope != null) {
+        add(new ErrorMessage(source, "Scope set more than once."));
+      }
+    }
+

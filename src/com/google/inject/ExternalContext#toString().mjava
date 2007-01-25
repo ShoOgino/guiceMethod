@@ -1,8 +1,7 @@
   public String toString() {
     return "Context" + new LinkedHashMap<String, Object>() {{
       put("member", member);
-      put("type", getType());
-      put("name", getName());
+      put("key", getKey());
       put("container", container);
     }}.toString();
   }

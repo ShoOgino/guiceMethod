@@ -3,7 +3,7 @@
     b.bind("#").to("invalid");
     Container c = b.create(false);
     try {
-      c.inject(InvalidInteger.class);
+      c.newInstance(InvalidInteger.class);
       fail();
     } catch (ConstantConversionException e) {
       assertTrue(e.getMessage().startsWith(

@@ -5,7 +5,7 @@
           : implementation.getDeclaredConstructors()) {
         if (constructor.getAnnotation(Inject.class) != null) {
           if (found != null) {
-            throw new DependencyException("More than one constructor annotated"
+            throw new ConfigurationException("More than one constructor annotated"
                 + " with @Inject found in " + implementation + ".");
           }
           found = constructor;
@@ -20,7 +20,7 @@
       try {
         return implementation.getDeclaredConstructor();
       } catch (NoSuchMethodException e) {
-        throw new DependencyException("Could not find a suitable constructor"
+        throw new ConfigurationException("Could not find a suitable constructor"
             + " in " + implementation.getName() + ".");
       }
     }

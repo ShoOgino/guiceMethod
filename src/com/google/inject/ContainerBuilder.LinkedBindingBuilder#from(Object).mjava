@@ -1,4 +1,4 @@
-    public LinkedBindingBuilder<T> from(Object source) {
+    LinkedBindingBuilder<T> from(Object source) {
       this.source = source;
       return this;
     }

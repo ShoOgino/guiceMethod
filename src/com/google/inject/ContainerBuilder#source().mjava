@@ -1,7 +1,7 @@
   /**
-   * Creates a source object to be associated with a binding. Called by
-   * default for each binding. The default implementation returns {@code
-   * ContainerBuilder}'s caller's {@code StackTraceElement}.
+   * Creates a source object to be associated with a binding. Useful for
+   * debugging. Called by default for each binding. The default implementation
+   * returns {@code ContainerBuilder}'s caller's {@code StackTraceElement}.
    *
    * <p>If you plan on manually setting the source (say for example you've
    * implemented an XML configuration), you might override this method and

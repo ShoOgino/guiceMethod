@@ -9,7 +9,7 @@
             injectors.add(injectorFactory.create(this, member, inject.value()));
           } catch (MissingDependencyException e) {
             if (inject.required()) {
-              throw new DependencyException(e);
+              throw new ConfigurationException(e);
             }
           }
         }

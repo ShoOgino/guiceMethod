@@ -7,6 +7,25 @@
       return internalFactory;
     }
 
+    // Handle cases where T is a Factory<?>.
+    if (key.getTypeToken().getRawType().equals(Factory.class)) {
+      Type factoryType = key.getTypeToken().getType();
+      if (!(factoryType instanceof ParameterizedType)) {
+        return null;
+      }
+      Type entryType =
+          ((ParameterizedType) factoryType).getActualTypeArguments()[0];
+
+      // This can throw ConfigurationException.
+      final Factory<?> factory = getFactory(Key.get(entryType, key.getName()));
+      return new InternalFactory<T>() {
+        @SuppressWarnings({"unchecked"})
+        public T get(InternalContext context) {
+          return (T) factory;
+        }
+      };
+    }
+
     // Do we have a constant String factory of the same name?
     InternalFactory<String> stringFactory =
         (InternalFactory<String>) factories.get(

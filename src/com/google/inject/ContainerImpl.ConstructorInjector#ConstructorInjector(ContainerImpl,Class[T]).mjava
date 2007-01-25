@@ -15,7 +15,7 @@
                 inject.value()
             );
       } catch (MissingDependencyException e) {
-        throw new DependencyException(e);
+        throw new ConfigurationException(e);
       }
       injectors = container.injectors.get(implementation);
     }

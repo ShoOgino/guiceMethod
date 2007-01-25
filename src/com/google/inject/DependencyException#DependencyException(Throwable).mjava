@@ -1,4 +1,0 @@
-  public DependencyException(Throwable cause) {
-    super(cause);
-  }
-

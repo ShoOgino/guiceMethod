@@ -1,4 +1,4 @@
-    public ConstantBindingBuilder from(Object source) {
+    ConstantBindingBuilder from(Object source) {
       this.source = source;
       return this;
     }

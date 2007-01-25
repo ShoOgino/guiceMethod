@@ -1,0 +1,2 @@
+    void setContainer(ContainerImpl container);
+

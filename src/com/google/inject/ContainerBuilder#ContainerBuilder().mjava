@@ -2,6 +2,9 @@
    * Constructs a new builder.
    */
   public ContainerBuilder() {
+    put(Scopes.DEFAULT, DEFAULT_SCOPE);
+    put(Scopes.SINGLETON, SingletonScope.INSTANCE);
+
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);
   }

@@ -1,5 +1,0 @@
-  /**
-   * Gets the name of the injection specified by {@link @Inject#name()}.
-   */
-  String getName();
-

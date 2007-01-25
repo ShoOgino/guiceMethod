@@ -1,0 +1,5 @@
+  /**
+   * Configures the given builder.
+   */
+  void configure(ContainerBuilder builder);
+

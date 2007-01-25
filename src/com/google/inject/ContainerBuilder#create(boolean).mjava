@@ -14,6 +14,7 @@
 
     HashMap<Key<?>, InternalFactory<?>> factories =
         new HashMap<Key<?>, InternalFactory<?>>();
+    ContainerImpl container = new ContainerImpl(factories);
 
     for (ConstantBindingBuilder builder : constantBindingBuilders) {
       if (builder.hasValue()) {
@@ -29,7 +30,7 @@
 
     for (BindingBuilder<?> builder : bindingBuilders) {
       final Key<?> key = builder.getKey();
-      final InternalFactory<?> factory = builder.getInternalFactory();
+      final InternalFactory<?> factory = builder.getInternalFactory(container);
       factories.put(key, factory);
 
       if (builder.isSingleton()) {
@@ -71,12 +72,11 @@
     // TODO: Handle this better.
     if (!errorMessages.isEmpty()) {
       for (ErrorMessage errorMessage : errorMessages) {
-        System.err.println(errorMessage);
-        throw new DependencyException("Configuration errors.");
+        logger.severe(errorMessage.toString());
       }
+      throw new ConfigurationException("We encountered configuration errors."
+        + " See the log for details.");
     }
-
-    final ContainerImpl container = new ContainerImpl(factories);
 
     container.injectStatics(staticInjections);
 

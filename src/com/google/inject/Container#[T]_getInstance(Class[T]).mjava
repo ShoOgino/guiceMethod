@@ -1,6 +1,0 @@
-  /**
-   * Convenience method.&nbsp;Equivalent to {@code get(type,
-   * DEFAULT_NAME)}.
-   */
-  <T> T getInstance(Class<T> type);
-

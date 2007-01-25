@@ -1,5 +1,5 @@
   /**
-   * Binds string constants based on the given properties.
+   * Binds a string constant for each property.
    */
   public ContainerBuilder bindProperties(Map<String, String> properties) {
     ensureNotCreated();

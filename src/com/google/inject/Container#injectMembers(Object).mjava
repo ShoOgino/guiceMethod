@@ -1,5 +1,5 @@
   /**
    * Injects dependencies into the fields and methods of an existing object.
    */
-  void inject(Object o);
+  void injectMembers(Object o);
 

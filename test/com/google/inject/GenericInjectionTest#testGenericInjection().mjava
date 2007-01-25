@@ -1,0 +1,9 @@
+  public void testGenericInjection() {
+    List<String> names = Arrays.asList("foo", "bar", "bob");
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind(new TypeToken<List<String>>() {}).to(names);
+    Container container = builder.create(false);
+    Foo foo = container.newInstance(Foo.class);
+    assertEquals(names, foo.names);
+  }
+
