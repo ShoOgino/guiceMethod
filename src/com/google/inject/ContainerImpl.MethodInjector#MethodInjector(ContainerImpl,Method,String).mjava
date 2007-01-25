@@ -1,6 +1,8 @@
     public MethodInjector(ContainerImpl container, Method method, String name)
         throws MissingDependencyException {
-      this.method = method;
+      this.fastMethod =
+          FastClass.create(method.getDeclaringClass()).getMethod(method);
+
       method.setAccessible(true);
 
       Type[] parameterTypes = method.getGenericParameterTypes();

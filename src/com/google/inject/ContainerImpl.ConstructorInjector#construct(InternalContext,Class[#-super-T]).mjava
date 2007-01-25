@@ -24,9 +24,8 @@
         // First time through...
         constructionContext.startConstruction();
         try {
-          Object[] parameters =
-              getParameters(constructor, context, parameterInjectors);
-          t = constructor.newInstance(parameters);
+          Object[] parameters = getParameters(context, parameterInjectors);
+          t = newInstance(parameters);
           constructionContext.setProxyDelegates(t);
         } finally {
           constructionContext.finishConstruction();
@@ -44,10 +43,6 @@
         }
 
         return t;
-      } catch (InstantiationException e) {
-        throw new RuntimeException(e);
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
       } catch (InvocationTargetException e) {
         throw new RuntimeException(e);
       } finally {

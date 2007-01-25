@@ -1,7 +1,7 @@
     ConstructorInjector(ContainerImpl container, Class<T> implementation) {
       this.implementation = implementation;
 
-      constructor = findConstructorIn(implementation);
+      Constructor<T> constructor = findConstructorIn(implementation);
       constructor.setAccessible(true);
 
       try {
@@ -18,5 +18,8 @@
         throw new ConfigurationException(e);
       }
       injectors = container.injectors.get(implementation);
+
+      fastConstructor = FastClass.create(constructor.getDeclaringClass())
+          .getConstructor(constructor);
     }
 

@@ -41,6 +41,9 @@
     // a ConstantFactory which will not use it.
     String value = stringFactory.get(null);
 
+    // TODO: Generalize everything below here and enable users to plug in
+    // their own converters.
+
     // Do we need a primitive?
     Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(type);
     if (converter != null) {

@@ -1,4 +1,4 @@
-    T inject(Member member, InternalContext context) {
+    T inject(InternalContext context) {
       ExternalContext<?> previous = context.getExternalContext();
       context.setExternalContext(externalContext);
       try {
