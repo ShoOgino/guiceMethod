@@ -1,7 +1,7 @@
   /**
    * Gets a key for a {@code Class} and a name.
    */
-  static <T> Key<T> get(Class<T> type, String name) {
+  public static <T> Key<T> get(Class<T> type, String name) {
     return new SimpleKey<T>(type, name);
   }
 

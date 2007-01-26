@@ -1,7 +1,7 @@
   /**
    * Returns a new key with the same type as this key and the given name,
    */
-  public Key<T> named(String name) {
+  Key<T> named(String name) {
     return new SimpleKey<T>(this.typeToken, name);    
   }
 
