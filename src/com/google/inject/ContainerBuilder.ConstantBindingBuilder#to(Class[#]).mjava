@@ -1,7 +1,7 @@
     /**
      * Binds constant to the given value.
      */
-    public ConstantBindingBuilder to(Class<?> value) {
-      return to(Class.class, value);
+    public void to(Class<?> value) {
+      to(Class.class, value);
     }
 

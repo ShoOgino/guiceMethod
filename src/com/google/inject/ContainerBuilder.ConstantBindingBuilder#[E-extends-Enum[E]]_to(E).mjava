@@ -1,7 +1,7 @@
     /**
      * Binds constant to the given value.
      */
-    public <E extends Enum<E>> ConstantBindingBuilder to(E value) {
-      return to(value.getDeclaringClass(), value);
+    public <E extends Enum<E>> void to(E value) {
+      to(value.getDeclaringClass(), value);
     }
 
