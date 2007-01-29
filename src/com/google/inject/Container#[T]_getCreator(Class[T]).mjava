@@ -1,0 +1,6 @@
+  /**
+   * Gets a factory which injects the given class's constructor creating new
+   * instances.
+   */
+  <T> Factory<T> getCreator(Class<T> implementation);
+

@@ -1,0 +1,4 @@
+  public <T> Factory<T> getCreator(final Class<T> implementation) {
+    return getConstructor(implementation);
+  }
+

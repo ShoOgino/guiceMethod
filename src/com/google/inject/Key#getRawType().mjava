@@ -1,5 +1,4 @@
-  @Deprecated
-  Class<T> getRawType() {
-    return (Class<T>) typeToken.getRawType();
+  Class<? super T> getRawType() {
+    return typeToken.getRawType();
   }
 

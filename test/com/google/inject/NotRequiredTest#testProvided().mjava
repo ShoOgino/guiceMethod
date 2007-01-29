@@ -2,7 +2,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(Bar.class);
     Container c = builder.create(false);
-    Foo foo = c.newInstance(Foo.class);
+    Foo foo = c.getCreator(Foo.class).get();
     assertNotNull(foo.bar);
     assertNotNull(foo.fromMethod);
   }
