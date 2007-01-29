@@ -1,6 +1,6 @@
   /**
    * Creates a {@link Container} instance. Injects static members for classes
-   * which were registered using {@link #injectStatics(Class...)}.
+   * which were registered using {@link #requestStaticInjection(Class...)}.
    *
    * @param loadSingletons If true, the container will load all singletons
    *  now. If false, the container will lazily load singletons. Eager loading

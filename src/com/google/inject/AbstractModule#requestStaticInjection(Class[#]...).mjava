@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#requestStaticInjection(Class[])
+   */
+  protected void requestStaticInjection(Class<?>... types) {
+    builder.requestStaticInjection(types);
+  }
+

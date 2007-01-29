@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#injectStatics(Class[])
-   */
-  protected void injectStatics(Class<?>... types) {
-    builder.injectStatics(types);
-  }
-
