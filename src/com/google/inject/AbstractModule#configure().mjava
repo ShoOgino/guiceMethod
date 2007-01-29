@@ -1,0 +1,5 @@
+  /**
+   * Configures a {@link ContainerBuilder} via the exposed methods.
+   */
+  protected abstract void configure();
+

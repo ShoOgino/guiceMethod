@@ -1,0 +1,7 @@
+  /**
+   * Applies the given module to this builder.
+   */
+  public void apply(Module module) {
+    module.configure(this);    
+  }
+

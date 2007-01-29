@@ -1,0 +1,16 @@
+  public static void main(String[] args) throws Exception {
+    // Once warm up. Takes lazy loading out of the equation and ensures we
+    // created the graphs properly.
+    validate(springFactory);
+    validate(juiceFactory);
+    validate(byHandFactory);
+
+    for (int i2 = 0; i2 < 10; i2++) {
+      iterate(springFactory, "Spring:  ");
+      iterate(juiceFactory,  "Guice:   ");
+      iterate(byHandFactory, "By Hand: ");
+
+      System.err.println();
+    }
+  }
+

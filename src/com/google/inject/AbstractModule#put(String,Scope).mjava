@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#put(String, Scope)
+   */
+  protected void put(String name, Scope scope) {
+    builder.put(name, scope);
+  }
+

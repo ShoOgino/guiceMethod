@@ -1,7 +1,7 @@
   /**
    * Binds a string constant for each property.
    */
-  public ContainerBuilder bindProperties(Map<String, String> properties) {
+  public void bindProperties(Map<String, String> properties) {
     ensureNotCreated();
     Object source = source();
     for (Map.Entry<String, String> entry : properties.entrySet()) {
@@ -9,6 +9,5 @@
       String value = entry.getValue();
       bind(key, source).to(value);
     }
-    return this;
   }
 

@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#add(ErrorMessage)
+   */
+  protected void add(ErrorMessage errorMessage) {
+    builder.add(errorMessage);
+  }
+

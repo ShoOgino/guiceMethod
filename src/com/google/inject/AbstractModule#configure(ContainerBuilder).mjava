@@ -1,0 +1,14 @@
+  public final synchronized void configure(ContainerBuilder builder) {
+    try {
+      if (this.builder != null) {
+        throw new IllegalStateException("Re-entry is not allowed.");
+      }
+      this.builder = Objects.nonNull(builder, "builder");
+
+      configure();
+
+    } finally {
+      this.builder = null;
+    }
+  }
+

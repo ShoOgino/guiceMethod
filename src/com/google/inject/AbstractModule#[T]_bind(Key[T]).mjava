@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#bind(Key)
+   */
+  protected <T> ContainerBuilder.BindingBuilder<T> bind(Key<T> key) {
+    return builder.bind(key);
+  }
+

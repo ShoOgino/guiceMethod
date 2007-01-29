@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#apply(Module)
+   */
+  protected void apply(Module module) {
+    builder.apply(module);
+  }
+

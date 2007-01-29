@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#link(Key)
+   */
+  protected <T> ContainerBuilder.LinkedBindingBuilder<T> link(Key<T> key) {
+    return builder.link(key);
+  }
+
