@@ -1,6 +1,7 @@
   /**
-   * Maps a {@link Scope} instance to a given name. Scopes should be mapped
-   * before used in bindings. @{@link Scoped#value()} references this name.
+   * Maps a {@link Scope} instance to a given scope name. Scopes should be
+   * mapped before used in bindings. @{@link Scoped#value()} references this
+   * name.
    */
   public void put(String name, Scope scope) {
     if (scopes.containsKey(nonNull(name, "name"))) {

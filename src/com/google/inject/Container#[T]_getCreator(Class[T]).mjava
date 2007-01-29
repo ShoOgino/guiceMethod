@@ -1,6 +1,6 @@
   /**
    * Gets a factory which injects the given class's constructor and creates
-   * a new instance.
+   * new instances of {@code T}.
    */
   <T> Factory<T> getCreator(Class<T> implementation);
 
