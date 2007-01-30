@@ -1,0 +1,5 @@
+  @SuppressWarnings({"unchecked"})
+  static <T> InternalFactory<T> invalidFactory() {
+    return (InternalFactory<T>) INVALID_FACTORY;
+  }
+

@@ -1,5 +1,5 @@
   /**
-   * @see ContainerBuilder#add(ErrorMessage)
+   * @see ContainerBuilder#add(com.google.inject.spi.ErrorMessage)
    */
   protected void add(ErrorMessage errorMessage) {
     builder.add(errorMessage);

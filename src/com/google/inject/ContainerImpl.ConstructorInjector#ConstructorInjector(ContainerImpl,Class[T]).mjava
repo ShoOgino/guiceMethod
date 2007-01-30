@@ -1,24 +1,8 @@
     ConstructorInjector(ContainerImpl container, Class<T> implementation) {
       this.implementation = implementation;
-
       Constructor<T> constructor = findConstructorIn(implementation);
-      constructor.setAccessible(true);
-
-      try {
-        Inject inject = constructor.getAnnotation(Inject.class);
-        parameterInjectors = inject == null
-            ? null // default constructor.
-            : container.getParametersInjectors(
-                constructor,
-                constructor.getParameterAnnotations(),
-                constructor.getGenericParameterTypes(),
-                inject.value()
-            );
-      } catch (MissingDependencyException e) {
-        throw new ConfigurationException(e);
-      }
+      parameterInjectors = createParameterInjector(container, constructor);
       injectors = container.injectors.get(implementation);
-
       fastConstructor = FastClass.create(constructor.getDeclaringClass())
           .getConstructor(constructor);
     }

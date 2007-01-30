@@ -1,0 +1,3 @@
+    // Invalid constructor.
+    Bar(String s) {}
+

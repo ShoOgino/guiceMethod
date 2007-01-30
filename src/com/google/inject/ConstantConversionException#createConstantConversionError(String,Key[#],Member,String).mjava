@@ -1,5 +1,5 @@
-  static String createMessage(String value, Key<?> key, Member member,
-      String reason) {
+  static String createConstantConversionError(
+      String value, Key<?> key, Member member, String reason) {
     return member == null
         ? "Error converting '" + value + "' to "
             + key.getRawType().getSimpleName()

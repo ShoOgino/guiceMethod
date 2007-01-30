@@ -1,14 +1,15 @@
     public FieldInjector(ContainerImpl container, Field field, String name)
         throws MissingDependencyException {
       this.field = field;
+
+      // Ewwwww...
       field.setAccessible(true);
 
       Key<?> key = Key.get(field.getGenericType(), name);
       factory = container.getFactory(field, key);
       if (factory == null) {
         throw new MissingDependencyException(
-            "No mapping found for dependency " + key + " for field: "
-                + field);
+            "Missing binding to " + key + " required by '" + field + "'.");
       }
 
       this.externalContext = ExternalContext.newInstance(field, key, container);

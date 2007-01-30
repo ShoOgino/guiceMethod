@@ -1,0 +1,6 @@
+    protected void configure() {
+      bind(Foo.class);
+      bind(Bar.class);
+      bind(Tee.class);
+    }
+

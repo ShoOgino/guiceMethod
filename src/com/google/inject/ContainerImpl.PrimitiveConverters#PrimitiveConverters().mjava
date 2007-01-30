@@ -10,7 +10,7 @@
       // Character doesn't follow the same pattern.
       Converter<Character> characterConverter = new Converter<Character>() {
         public Character convert(Member member, Key<Character> key,
-            String value) {
+            String value) throws ConstantConversionException {
           value = value.trim();
           if (value.length() != 1) {
             throw new ConstantConversionException(member, key, value,

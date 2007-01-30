@@ -5,8 +5,8 @@
     try {
       c.getCreator(InvalidInteger.class).get();
       fail();
-    } catch (ConstantConversionException e) {
-      assertTrue(e.getMessage().startsWith(
+    } catch (ConfigurationException e) {
+      assertTrue(e.getMessage().contains(
           "Error converting 'invalid' to Integer while injecting integerField "
               + "with dependency named '#' in InvalidInteger. Reason:"));
     }

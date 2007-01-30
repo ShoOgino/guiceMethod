@@ -1,0 +1,5 @@
+  /**
+   * Handles an error.
+   */
+  void handle(Throwable t);
+

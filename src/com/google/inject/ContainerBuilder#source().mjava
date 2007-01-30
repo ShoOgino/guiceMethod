@@ -7,9 +7,12 @@
    */
   protected Object source() {
     // Search up the stack until we find a class outside of this one.
-    for (StackTraceElement element : new Throwable().getStackTrace()) {
-      if (!element.getClassName().equals(ContainerBuilder.class.getName()))
-        return element;
+    for (final StackTraceElement element : new Throwable().getStackTrace()) {
+      String className = element.getClassName();
+      if (!className.equals(ContainerBuilder.class.getName())
+          && !className.equals(AbstractModule.class.getName()))
+        return element.getFileName() + ":" 
+            + element.getLineNumber() + ":";
     }
     throw new AssertionError();
   }

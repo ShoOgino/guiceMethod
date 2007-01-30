@@ -1,7 +1,7 @@
   public boolean hasBindingFor(Key<?> key) {
     try {
       return getFactory(null, key) != null;
-    } catch (ConstantConversionException e) {
+    } catch (ConfigurationException e) {
       return false;
     }
   }

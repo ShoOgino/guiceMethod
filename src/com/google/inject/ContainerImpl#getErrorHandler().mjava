@@ -1,0 +1,4 @@
+  ErrorHandler getErrorHandler() {
+    return errorHandler;
+  }
+

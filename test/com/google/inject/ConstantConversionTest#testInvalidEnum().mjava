@@ -5,7 +5,7 @@
     try {
       c.getCreator(InvalidEnum.class).get();
       fail();
-    } catch (ConstantConversionException e) {
+    } catch (ConfigurationException e) {
       assertTrue(e.getMessage().startsWith(
           "Error converting 'invalid' to Bar while injecting foo "
               + "with dependency named 'foo' in InvalidEnum. Reason:"));

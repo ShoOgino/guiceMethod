@@ -6,6 +6,7 @@
      */
     public <I extends T> BindingBuilder<T> to(TypeToken<I> implementation) {
       ensureImplementationIsNotSet();
+      validate(source, implementation.getRawType());
       this.factory = new DefaultFactory<I>(implementation);
       setScopeFromType(implementation.getRawType());
       return this;

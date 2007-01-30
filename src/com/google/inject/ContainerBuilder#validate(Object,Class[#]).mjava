@@ -1,0 +1,18 @@
+  /**
+   * Registers a type to be validated for injection when we create the
+   * container.
+   */
+  void validate(final Object source, final Class<?> type) {
+    validations.add(new Validation() {
+      public void run(ContainerImpl container) {
+        ErrorHandler previous = container.getErrorHandler();
+        try {
+          container.setErrorHandler(new ConfigurationErrorHandler(source));
+          container.getConstructor(type);
+        } finally {
+          container.setErrorHandler(previous);
+        }
+      }
+    });
+  }
+

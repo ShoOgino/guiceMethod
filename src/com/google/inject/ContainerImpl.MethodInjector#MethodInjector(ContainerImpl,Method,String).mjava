@@ -2,15 +2,10 @@
         throws MissingDependencyException {
       this.fastMethod =
           FastClass.create(method.getDeclaringClass()).getMethod(method);
-
-      method.setAccessible(true);
-
       Type[] parameterTypes = method.getGenericParameterTypes();
-      if (parameterTypes.length == 0) {
-        throw new ConfigurationException(
-            method + " has no parameters to inject.");
-      }
-      parameterInjectors = container.getParametersInjectors(
-          method, method.getParameterAnnotations(), parameterTypes, name);
+      parameterInjectors = parameterTypes.length > 0
+          ? container.getParametersInjectors(
+              method, method.getParameterAnnotations(), parameterTypes, name)
+          : null;
     }
 

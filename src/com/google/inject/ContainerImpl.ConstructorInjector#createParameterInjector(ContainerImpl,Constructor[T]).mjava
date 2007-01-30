@@ -1,0 +1,18 @@
+    ParameterInjector<?>[] createParameterInjector(ContainerImpl container,
+        Constructor<T> constructor) {
+      try {
+        Inject inject = constructor.getAnnotation(Inject.class);
+        return inject == null
+            ? null // default constructor.
+            : container.getParametersInjectors(
+                constructor,
+                constructor.getParameterAnnotations(),
+                constructor.getGenericParameterTypes(),
+                inject.value()
+            );
+      } catch (MissingDependencyException e) {
+        errorHandler.handle(e);
+        return null;
+      }
+    }
+

@@ -3,8 +3,7 @@
     InternalFactory<? extends T> factory = getFactory(member, key);
     if (factory == null) {
       throw new MissingDependencyException(
-          "No mapping found for dependency " + key + " for member: "
-              + member + "");
+          "Missing binding to " + key + " required by '" + member + "'.");
     }
 
     ExternalContext<T> externalContext =
