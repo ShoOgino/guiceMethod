@@ -1,6 +1,9 @@
     protected void configure() {
+      bind(Runnable.class);
       bind(Foo.class);
       bind(Bar.class);
       bind(Tee.class);
+      bind(String.class).named("foo").in("foo");
+      link(Key.get(Runnable.class)).to(Key.get(Runnable.class));
     }
 

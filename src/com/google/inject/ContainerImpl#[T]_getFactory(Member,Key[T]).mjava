@@ -26,8 +26,7 @@
           }
         };
       } catch (ConfigurationException e) {
-        errorHandler.handle(
-            "Missing binding to " + key + " required by '" + member + "'.");
+        errorHandler.handle(ErrorMessage.MISSING_BINDING, member, key);
         return invalidFactory();
       }
     }
@@ -80,7 +79,8 @@
         t = (T) Enum.valueOf((Class) type, value);
       } catch (IllegalArgumentException e) {
         errorHandler.handle(
-            ConstantConversionException.createConstantConversionError(value, key, member, e.toString()));
+            ConstantConversionException.createMessage(
+                value, key, member, e.toString()));
         return invalidFactory();
       }
       return new ConstantFactory<T>(t);
@@ -92,7 +92,8 @@
         return new ConstantFactory<T>((T) Class.forName(value));
       } catch (ClassNotFoundException e) {
         errorHandler.handle(
-            ConstantConversionException.createConstantConversionError(value, key, member, e.toString()));
+            ConstantConversionException.createMessage(
+                value, key, member, e.toString()));
         return invalidFactory();
       }
     }

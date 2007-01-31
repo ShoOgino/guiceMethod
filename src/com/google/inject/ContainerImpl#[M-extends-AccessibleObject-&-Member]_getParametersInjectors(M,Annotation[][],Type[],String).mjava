@@ -10,6 +10,15 @@
       getParametersInjectors(M member,
       Annotation[][] annotations, Type[] parameterTypes, String defaultName)
       throws MissingDependencyException {
+    boolean defaultNameOverridden = !defaultName.equals(Key.DEFAULT_NAME);
+
+    // We only carry over the name from the member level annotation to the
+    // parameters if there's only one parameter.
+    if (parameterTypes.length != 1 && defaultNameOverridden) {
+      errorHandler.handle(
+          ErrorMessage.NAME_ON_MEMBER_WITH_MULTIPLE_PARAMS, member);
+    }
+
     List<ParameterInjector<?>> parameterInjectors =
         new ArrayList<ParameterInjector<?>>();
 
@@ -17,7 +26,18 @@
         Arrays.asList(annotations).iterator();
     for (Type parameterType : parameterTypes) {
       Inject annotation = findInject(annotationsIterator.next());
-      String name = annotation == null ? defaultName : annotation.value();
+
+      String name;
+      if (defaultNameOverridden) {
+        name = defaultName;
+        if (annotation != null) {
+          errorHandler.handle(
+              ErrorMessage.NAME_ON_MEMBER_AND_PARAMETER, member);
+        }
+      } else {
+        name = annotation == null ? defaultName : annotation.value();
+      }
+
       Key<?> key = Key.get(parameterType, name);
       parameterInjectors.add(createParameterInjector(key, member));
     }

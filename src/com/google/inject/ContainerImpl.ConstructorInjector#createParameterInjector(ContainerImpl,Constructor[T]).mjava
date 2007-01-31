@@ -11,7 +11,7 @@
                 inject.value()
             );
       } catch (MissingDependencyException e) {
-        errorHandler.handle(e);
+        e.handle(errorHandler);
         return null;
       }
     }

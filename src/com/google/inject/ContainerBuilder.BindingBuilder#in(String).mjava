@@ -7,10 +7,10 @@
 
       // We could defer this lookup to when we create the container, but this
       // is fine for now.
-      this.scope = scopes.get(scopeName);
+      this.scope = scopes.get(nonNull(scopeName, "scope name"));
       if (this.scope == null) {
-        add(new ErrorMessage(source, "Scope named '" + scopeName
-            + "' not found."));
+        addError(source, ErrorMessage.SCOPE_NOT_FOUND, scopeName,
+            scopes.keySet());
       }
       return this;
     }

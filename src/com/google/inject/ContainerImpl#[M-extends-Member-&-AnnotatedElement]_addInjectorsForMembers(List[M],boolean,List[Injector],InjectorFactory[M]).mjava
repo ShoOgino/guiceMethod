@@ -10,7 +10,7 @@
           } catch (MissingDependencyException e) {
             if (inject.required()) {
               // TODO: Report errors for more than one parameter per member.
-              errorHandler.handle(e);
+              e.handle(errorHandler);
             }
           }
         }

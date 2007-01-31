@@ -1,4 +1,0 @@
-    MissingDependencyException(String message) {
-      super(message);
-    }
-

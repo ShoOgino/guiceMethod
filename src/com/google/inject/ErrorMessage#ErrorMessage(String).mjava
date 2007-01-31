@@ -1,0 +1,4 @@
+  public ErrorMessage(String message) {
+    this(ContainerBuilder.UNKNOWN_SOURCE, message);
+  }
+

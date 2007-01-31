@@ -2,8 +2,7 @@
       Key<T> key, Member member) throws MissingDependencyException {
     InternalFactory<? extends T> factory = getFactory(member, key);
     if (factory == null) {
-      throw new MissingDependencyException(
-          "Missing binding to " + key + " required by '" + member + "'.");
+      throw new MissingDependencyException(key, member);
     }
 
     ExternalContext<T> externalContext =

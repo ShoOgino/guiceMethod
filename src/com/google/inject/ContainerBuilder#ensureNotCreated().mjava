@@ -3,8 +3,8 @@
    * If we want to support creating more than one container per builder,
    * we should move to a "factory factory" model where we create a factory
    * instance per Container. Right now, one factory instance would be
-   * shared across all the containers, singletons synchronize on the
-   * container when lazy loading, etc.
+   * shared across all the containers, which means container-scoped objects
+   * would be shared, etc.
    */
   private void ensureNotCreated() {
     if (created) {

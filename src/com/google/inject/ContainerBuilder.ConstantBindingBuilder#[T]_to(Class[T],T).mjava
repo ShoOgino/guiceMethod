@@ -2,7 +2,11 @@
      * Maps a constant value to the given type and name.
      */
     <T> void to(final Class<T> type, final T value) {
-      this.type = type;
-      this.value = value;
+      if (this.value != null) {
+        addError(source, ErrorMessage.CONSTANT_VALUE_ALREADY_SET);
+      } else {
+        this.type = type;
+        this.value = value;
+      }
     }
 

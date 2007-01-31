@@ -1,0 +1,5 @@
+    MissingDependencyException(Key<?> key, Member member) {
+      this.key = key;
+      this.member = member;
+    }
+

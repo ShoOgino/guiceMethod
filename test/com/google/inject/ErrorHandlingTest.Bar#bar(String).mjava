@@ -1,0 +1,2 @@
+    @Inject("foo") void bar(@Inject String s) {}
+

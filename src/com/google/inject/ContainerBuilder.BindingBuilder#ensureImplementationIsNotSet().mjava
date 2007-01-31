@@ -3,7 +3,7 @@
      */
     private void ensureImplementationIsNotSet() {
       if (factory != null) {
-        add(new ErrorMessage(source, "Implementation set more than once."));
+        addError(source, ErrorMessage.IMPLEMENTATION_ALREADY_SET);
       }
     }
 

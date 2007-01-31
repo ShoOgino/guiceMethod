@@ -2,6 +2,10 @@
      * Links to another binding with the given key.
      */
     public void to(Key<? extends T> destination) {
-      this.destination = destination;
+      if (this.destination != null) {
+        addError(source, ErrorMessage.LINK_DESTINATION_ALREADY_SET);
+      } else {
+        this.destination = destination;
+      }
     }
 

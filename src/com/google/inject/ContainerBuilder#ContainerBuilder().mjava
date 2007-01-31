@@ -3,7 +3,7 @@
    */
   public ContainerBuilder() {
     put(Scopes.DEFAULT, DEFAULT_SCOPE);
-    put(Scopes.SINGLETON, SingletonScope.INSTANCE);
+    put(Scopes.CONTAINER, ContainerScope.INSTANCE);
 
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);

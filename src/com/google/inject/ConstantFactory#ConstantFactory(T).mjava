@@ -1,4 +1,4 @@
   public ConstantFactory(T value) {
-    this.value = value;
+    this.value = Objects.nonNull(value, "value");
   }
 

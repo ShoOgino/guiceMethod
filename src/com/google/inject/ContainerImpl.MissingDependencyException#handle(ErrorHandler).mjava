@@ -1,0 +1,4 @@
+    void handle(ErrorHandler errorHandler) {
+      errorHandler.handle(ErrorMessage.MISSING_BINDING, member, key);
+    }
+

@@ -5,15 +5,13 @@
    * implementation returns {@code ContainerBuilder}'s caller's {@code
    * StackTraceElement}.
    */
-  protected Object source() {
+  Object source() {
     // Search up the stack until we find a class outside of this one.
     for (final StackTraceElement element : new Throwable().getStackTrace()) {
       String className = element.getClassName();
-      if (!className.equals(ContainerBuilder.class.getName())
-          && !className.equals(AbstractModule.class.getName()))
+      if (!skippedClassNames.contains(className)) {
         return element;
-//        return element.getFileName() + ":"
-//            + element.getLineNumber() + ":";
+      }
     }
     throw new AssertionError();
   }

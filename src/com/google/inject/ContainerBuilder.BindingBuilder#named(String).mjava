@@ -3,7 +3,7 @@
      */
     public BindingBuilder<T> named(String name) {
       if (!this.key.hasDefaultName()) {
-        add(new ErrorMessage(source, "Name set more than once."));
+        addError(source, ErrorMessage.NAME_ALREADY_SET);
       }
 
       this.key = this.key.named(name);

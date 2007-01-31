@@ -8,8 +8,7 @@
       Key<?> key = Key.get(field.getGenericType(), name);
       factory = container.getFactory(field, key);
       if (factory == null) {
-        throw new MissingDependencyException(
-            "Missing binding to " + key + " required by '" + field + "'.");
+        throw new MissingDependencyException(key, field);
       }
 
       this.externalContext = ExternalContext.newInstance(field, key, container);
