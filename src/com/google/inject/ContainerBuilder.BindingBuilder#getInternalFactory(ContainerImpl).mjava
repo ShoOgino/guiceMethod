@@ -2,7 +2,7 @@
         final ContainerImpl container) {
       // If an implementation wasn't specified, use the injection type.
       if (this.factory == null) {
-        to(key.getTypeToken());
+        to(key.getType());
       }
 
       if (scope == null || scope == DEFAULT_SCOPE) {

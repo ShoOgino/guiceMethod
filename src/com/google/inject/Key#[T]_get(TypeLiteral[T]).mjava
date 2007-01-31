@@ -1,0 +1,7 @@
+  /**
+   * Gets a key for a type. Defaults name to {@link #DEFAULT_NAME}.
+   */
+  public static <T> Key<T> get(TypeLiteral<T> typeLiteral) {
+    return new SimpleKey<T>(typeLiteral, DEFAULT_NAME);
+  }
+

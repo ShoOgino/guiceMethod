@@ -1,7 +1,0 @@
-  /**
-   * Gets a key for a type token. Defaults name to {@link #DEFAULT_NAME}.
-   */
-  public static <T> Key<T> get(TypeToken<T> typeToken) {
-    return new SimpleKey<T>(typeToken, DEFAULT_NAME);
-  }
-

@@ -5,6 +5,6 @@
      * class if present.
      */
     public <I extends T> BindingBuilder<T> to(Class<I> implementation) {
-      return to(TypeToken.get(implementation));
+      return to(TypeLiteral.get(implementation));
     }
 

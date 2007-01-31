@@ -1,7 +1,0 @@
-  static void unexpectedType(Type token, Class<?> expected) {
-    throw new AssertionError(
-        "Unexpected type. Expected: " + expected.getName()
-        + ", got: " + token.getClass().getName()
-        + ", for type token: " + token.toString() + ".");
-  }
-

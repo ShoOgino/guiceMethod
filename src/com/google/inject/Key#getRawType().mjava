@@ -1,4 +1,4 @@
   Class<? super T> getRawType() {
-    return typeToken.getRawType();
+    return typeLiteral.getRawType();
   }
 

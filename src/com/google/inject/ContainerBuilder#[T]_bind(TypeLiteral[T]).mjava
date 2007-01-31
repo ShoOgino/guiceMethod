@@ -1,0 +1,7 @@
+  /**
+   * Binds the given type.
+   */
+  public <T> BindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
+    return bind(Key.get(typeLiteral));
+  }
+

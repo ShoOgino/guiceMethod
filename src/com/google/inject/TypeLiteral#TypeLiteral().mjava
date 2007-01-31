@@ -1,16 +1,16 @@
   /**
-   * Constructs a new type token. Derives represented class from type
+   * Constructs a new type literal. Derives represented class from type
    * parameter.
    *
    * <p>Clients create an empty anonymous subclass. Doing so embeds the type
    * parameter in the anonymous class's type hierarchy so we can reconstitute
    * it at runtime despite erasure.
    *
-   * <p>For example: {@code TypeToken<List<String>> t = new
-   * TypeToken<List<String>>() {};}
+   * <p>For example: {@code TypeLiteral<List<String>> t = new
+   * TypeLiteral<List<String>>() {};}
    */
   @SuppressWarnings({"unchecked"})
-  protected TypeToken() {
+  protected TypeLiteral() {
     this.type = getSuperclassTypeParameter(getClass());
     this.rawType = (Class<? super T>) getRawType(type);
   }

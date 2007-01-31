@@ -1,4 +1,4 @@
-  public ConfigurationException(String message, Throwable cause) {
+  ConfigurationException(String message, Throwable cause) {
     super(message, cause);
   }
 

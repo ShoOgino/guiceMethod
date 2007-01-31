@@ -4,7 +4,7 @@
   @SuppressWarnings({"unchecked"})
   private Key(Type type, String name) {
     this.name = nonNull(name, "name");
-    this.typeToken = (TypeToken<T>) TypeToken.get(type);
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.get(type);
     this.hashCode = computeHashCode();
   }
 

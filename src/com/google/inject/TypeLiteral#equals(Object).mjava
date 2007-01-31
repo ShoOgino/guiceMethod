@@ -2,10 +2,10 @@
     if (o == this) {
       return true;
     }
-    if (!(o instanceof TypeToken<?>)) {
+    if (!(o instanceof TypeLiteral<?>)) {
       return false;
     }
-    TypeToken<?> t = (TypeToken<?>) o;
+    TypeLiteral<?> t = (TypeLiteral<?>) o;
     return type.equals(t.type);
   }
 

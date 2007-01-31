@@ -11,8 +11,8 @@
   @SuppressWarnings({"unchecked"})
   protected Key(String name) {
     this.name = nonNull(name, "name");
-    this.typeToken =
-        (TypeToken<T>) TypeToken.fromSuperclassTypeParameter(getClass());
+    this.typeLiteral =
+        (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();
   }
 

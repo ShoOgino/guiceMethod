@@ -1,4 +1,0 @@
-    public SimpleTypeToken(Type type) {
-      super(type);
-    }
-

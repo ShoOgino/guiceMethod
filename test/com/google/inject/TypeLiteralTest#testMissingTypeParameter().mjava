@@ -1,6 +1,6 @@
   public void testMissingTypeParameter() {
     try {
-      new TypeToken() {};
+      new TypeLiteral() {};
       fail();
     } catch (RuntimeException e) { /* expected */ }
   }

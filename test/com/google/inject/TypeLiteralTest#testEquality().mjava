@@ -1,0 +1,19 @@
+  public void testEquality() {
+    TypeLiteral<List<String>> t1 = new TypeLiteral<List<String>>() {};
+    TypeLiteral<List<String>> t2 = new TypeLiteral<List<String>>() {};
+    TypeLiteral<List<Integer>> t3 = new TypeLiteral<List<Integer>>() {};
+    TypeLiteral<String> t4 = new TypeLiteral<String>() {};
+
+    assertEquals(t1, t2);
+    assertEquals(t2, t1);
+
+    assertFalse(t2.equals(t3));
+    assertFalse(t3.equals(t2));
+
+    assertFalse(t2.equals(t4));
+    assertFalse(t4.equals(t2));
+
+    TypeLiteral<String> t5 = TypeLiteral.get(String.class);
+    assertEquals(t4, t5);
+  }
+

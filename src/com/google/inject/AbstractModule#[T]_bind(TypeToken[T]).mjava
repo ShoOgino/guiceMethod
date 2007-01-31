@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#bind(TypeToken)
-   */
-  protected <T> ContainerBuilder.BindingBuilder<T> bind(TypeToken<T> typeToken) {
-    return builder.bind(typeToken);
-  }
-

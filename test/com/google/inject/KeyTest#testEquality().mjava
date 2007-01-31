@@ -1,7 +1,7 @@
   public void testEquality() {
     assertEquals(
       new Key<List<String>>("foo") {},
-      Key.get(new TypeToken<List<String>>() {}, "foo")
+      Key.get(new TypeLiteral<List<String>>() {}, "foo")
     );
   }
 

@@ -1,4 +1,0 @@
-    private SimpleKey(TypeToken<T> typeToken, String name) {
-      super(typeToken, name);
-    }
-

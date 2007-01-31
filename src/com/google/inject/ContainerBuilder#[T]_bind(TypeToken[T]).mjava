@@ -1,7 +1,0 @@
-  /**
-   * Binds the given type.
-   */
-  public <T> BindingBuilder<T> bind(TypeToken<T> typeToken) {
-    return bind(Key.get(typeToken));
-  }
-

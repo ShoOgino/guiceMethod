@@ -6,6 +6,6 @@
       return false;
     }
     Key<?> other = (Key<?>) o;
-    return name.equals(other.name) && typeToken.equals(other.typeToken);
+    return name.equals(other.name) && typeLiteral.equals(other.typeLiteral);
   }
 

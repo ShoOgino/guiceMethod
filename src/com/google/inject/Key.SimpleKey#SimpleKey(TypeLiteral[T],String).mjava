@@ -1,0 +1,4 @@
+    private SimpleKey(TypeLiteral<T> typeLiteral, String name) {
+      super(typeLiteral, name);
+    }
+
