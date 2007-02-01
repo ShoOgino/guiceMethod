@@ -1,4 +1,5 @@
-  private void createConstantBindings(HashMap<Key<?>, InternalFactory<?>> factories) {
+  private void createConstantBindings(
+      HashMap<Key<?>, InternalFactory<?>> factories) {
     for (ConstantBindingBuilder builder : constantBindingBuilders) {
       if (builder.hasValue()) {
         Key<?> key = builder.getKey();

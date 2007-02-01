@@ -1,0 +1,5 @@
+  public InternalToContextualFactoryAdapter(
+      ContextualFactory<? extends T> factory) {
+    this.factory = factory;
+  }
+

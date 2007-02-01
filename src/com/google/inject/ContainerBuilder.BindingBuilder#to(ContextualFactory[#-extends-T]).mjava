@@ -5,15 +5,7 @@
         final ContextualFactory<? extends T> factory) {
       ensureImplementationIsNotSet();
 
-      this.factory = new InternalFactory<T>() {
-        public T get(InternalContext context) {
-          return factory.get(context.getExternalContext());
-        }
-
-        public String toString() {
-          return factory.toString();
-        }
-      };
+      this.factory = new InternalToContextualFactoryAdapter<T>(factory);
 
       return this;
     }

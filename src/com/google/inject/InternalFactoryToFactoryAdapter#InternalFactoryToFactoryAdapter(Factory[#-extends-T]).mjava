@@ -1,0 +1,4 @@
+  public InternalFactoryToFactoryAdapter(Factory<? extends T> factory) {
+    this.factory = factory;
+  }
+

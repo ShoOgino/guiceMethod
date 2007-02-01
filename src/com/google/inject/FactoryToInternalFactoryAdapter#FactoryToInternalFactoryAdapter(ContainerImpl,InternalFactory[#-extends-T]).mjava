@@ -1,0 +1,6 @@
+  public FactoryToInternalFactoryAdapter(ContainerImpl container,
+      InternalFactory<? extends T> internalFactory) {
+    this.container = container;
+    this.internalFactory = internalFactory;
+  }
+

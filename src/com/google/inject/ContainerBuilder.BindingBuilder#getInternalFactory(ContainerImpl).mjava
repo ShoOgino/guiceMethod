@@ -9,31 +9,8 @@
         return this.factory;
       }
 
-      // TODO: This is a little hairy.
-      final InternalFactory<? extends T> internalFactory = this.factory;
-      final Factory<T> factory = scope.scope(this.key, new Factory<T>() {
-        public T get() {
-          return container.callInContext(
-              new ContainerImpl.ContextualCallable<T>() {
-            public T call(InternalContext context) {
-              return internalFactory.get(context);
-            }
-          });
-        }
-
-        public String toString() {
-          return internalFactory.toString();
-        }
-      });
-
-      return new InternalFactory<T>() {
-        public T get(InternalContext context) {
-          return factory.get();
-        }
-
-        public String toString() {
-          return factory.toString();
-        }
-      };
+      Factory<T> scoped = scope.scope(this.key,
+          new FactoryToInternalFactoryAdapter<T>(container, this.factory));
+      return new InternalFactoryToFactoryAdapter<T>(scoped);
     }
 

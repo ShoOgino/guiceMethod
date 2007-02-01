@@ -1,0 +1,5 @@
+    public DefaultFactory(Key<? super T> key, TypeLiteral<T> implementation) {
+      this.key = key;
+      this.implementation = implementation;
+    }
+
