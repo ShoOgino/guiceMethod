@@ -1,6 +1,0 @@
-  public ExternalContext(Member member, Key<T> key, ContainerImpl container) {
-    this.member = member;
-    this.key = key;
-    this.container = container;
-  }
-

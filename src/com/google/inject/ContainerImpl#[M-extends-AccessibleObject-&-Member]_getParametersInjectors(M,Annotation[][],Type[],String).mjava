@@ -24,6 +24,7 @@
 
     Iterator<Annotation[]> annotationsIterator =
         Arrays.asList(annotations).iterator();
+    int index = 0;
     for (Type parameterType : parameterTypes) {
       Inject annotation = findInject(annotationsIterator.next());
 
@@ -39,7 +40,7 @@
       }
 
       Key<?> key = Key.get(parameterType, name);
-      parameterInjectors.add(createParameterInjector(key, member));
+      parameterInjectors.add(createParameterInjector(key, member, index++));
     }
 
     return toArray(parameterInjectors);

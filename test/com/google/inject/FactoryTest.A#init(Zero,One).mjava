@@ -1,0 +1,6 @@
+    @Inject void init(Zero zero, One one) {
+      assertNotNull(zero);
+      assertNotNull(one);
+      initCalled = true;
+    }
+
