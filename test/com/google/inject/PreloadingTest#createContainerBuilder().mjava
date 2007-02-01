@@ -1,0 +1,7 @@
+  private ContainerBuilder createContainerBuilder() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind(Foo.class).in(CONTAINER).preload();
+    builder.bind(Bar.class);
+    return builder;
+  }
+

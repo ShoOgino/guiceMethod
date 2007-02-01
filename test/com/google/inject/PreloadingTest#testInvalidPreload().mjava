@@ -1,0 +1,9 @@
+  public void testInvalidPreload() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind(Foo.class).preload();
+    try {
+      builder.create(false);
+      fail();
+    } catch (ContainerCreationException e) { /* expected */ }
+  }
+

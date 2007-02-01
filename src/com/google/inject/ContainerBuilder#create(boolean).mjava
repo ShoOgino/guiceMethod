@@ -48,7 +48,7 @@
 
     stopwatch.resetAndLog(logger, "Static validation");
 
-    // Blow up.
+    // Blow up if we encountered errors.
     if (!errorMessages.isEmpty()) {
       throw new ContainerCreationException(createErrorMessage());
     }
@@ -64,17 +64,7 @@
     stopwatch.resetAndLog(logger, "Static member injection");
 
     // Run preloading commands.
-    if (preload) {
-      container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
-        public Void call(InternalContext context) {
-          for (ContainerImpl.ContextualCallable<Void> preloader
-              : preloaders) {
-            preloader.call(context);
-          }
-          return null;
-        }
-      });
-    }
+    runPreloaders(container, preloaders);
 
     stopwatch.resetAndLog(logger, "Preloading");
 

@@ -1,0 +1,12 @@
+  private void runPreloaders(ContainerImpl container,
+      final List<ContainerImpl.ContextualCallable<Void>> preloaders) {
+    container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
+      public Void call(InternalContext context) {
+        for (ContainerImpl.ContextualCallable<Void> preloader : preloaders) {
+          preloader.call(context);
+        }
+        return null;
+      }
+    });
+  }
+

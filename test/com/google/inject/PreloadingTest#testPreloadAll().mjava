@@ -1,0 +1,7 @@
+  public void testPreloadAll() throws ContainerCreationException {
+    ContainerBuilder builder = createContainerBuilder();
+    builder.create(true);
+    assertEquals(1, Foo.count);
+    assertEquals(1, Bar.count);
+  }
+
