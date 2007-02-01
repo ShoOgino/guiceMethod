@@ -1,0 +1,26 @@
+  private void createBindings(ContainerImpl container,
+      HashMap<Key<?>, InternalFactory<?>> factories, boolean preload,
+      List<ContainerImpl.ContextualCallable<Void>> preloaders) {
+    for (BindingBuilder<?> builder : bindingBuilders) {
+      final Key<?> key = builder.getKey();
+      final InternalFactory<?> factory = builder.getInternalFactory(container);
+      putFactory(builder.getSource(), factories, key, factory);
+
+      if (preload && builder.isInContainerScope()) {
+        preloaders.add(new ContainerImpl.ContextualCallable<Void>() {
+          public Void call(InternalContext context) {
+            context.setExternalContext(
+                ExternalContext.newInstance(null, key,
+                    context.getContainerImpl()));
+            try {
+              factory.get(context);
+              return null;
+            } finally {
+              context.setExternalContext(null);
+            }
+          }
+        });
+      }
+    }
+  }
+

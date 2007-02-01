@@ -1,0 +1,12 @@
+  private void createConstantBindings(HashMap<Key<?>, InternalFactory<?>> factories) {
+    for (ConstantBindingBuilder builder : constantBindingBuilders) {
+      if (builder.hasValue()) {
+        Key<?> key = builder.getKey();
+        InternalFactory<?> factory = builder.getInternalFactory();
+        putFactory(builder.getSource(), factories, key, factory);
+      } else {
+        addError(builder.getSource(), ErrorMessage.MISSING_CONSTANT_VALUE);
+      }
+    }
+  }
+

@@ -1,4 +1,4 @@
-  public void testInvalidInteger() {
+  public void testInvalidInteger() throws ContainerCreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bind("#").to("invalid");
     Container c = b.create(false);

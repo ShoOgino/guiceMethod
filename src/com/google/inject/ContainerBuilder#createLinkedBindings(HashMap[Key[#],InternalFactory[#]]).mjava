@@ -1,0 +1,21 @@
+  private void createLinkedBindings(
+      HashMap<Key<?>, InternalFactory<?>> factories) {
+    for (LinkedBindingBuilder<?> builder : linkedBindingBuilders) {
+      // TODO: Support alias to a later-declared alias.
+      Key<?> destination = builder.getDestination();
+      if (destination == null) {
+        addError(builder.getSource(), ErrorMessage.MISSING_LINK_DESTINATION);
+        continue;
+      }
+
+      InternalFactory<?> factory = factories.get(destination);
+      if (factory == null) {
+        addError(builder.getSource(), ErrorMessage.LINK_DESTINATION_NOT_FOUND,
+            destination);
+        continue;
+      }
+
+      putFactory(builder.getSource(), factories, builder.getKey(), factory);
+    }
+  }
+

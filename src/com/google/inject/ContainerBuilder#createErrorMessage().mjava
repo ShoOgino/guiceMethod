@@ -1,0 +1,19 @@
+  private String createErrorMessage() {
+    StringBuilder error = new StringBuilder();
+    error.append("Guice configuration errors:\n\n");
+    int index = 1;
+    for (ErrorMessage errorMessage : errorMessages) {
+      error.append(index++)
+          .append(") ")
+          .append("Error at ")
+          .append(errorMessage.getSource())
+          .append(':')
+          .append('\n')
+          .append("  ")
+          .append(errorMessage.getMessage())
+          .append("\n\n");
+    }
+    error.append(errorMessages.size()).append(" error[s]\n");
+    return error.toString();
+  }
+

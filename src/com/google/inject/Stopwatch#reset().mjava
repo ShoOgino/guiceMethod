@@ -1,0 +1,12 @@
+  /**
+   * Resets and returns ellapsed time.
+   */
+  long reset() {
+    long now = System.currentTimeMillis();
+    try {
+      return now - start;
+    } finally {
+      start = now;
+    }
+  }
+

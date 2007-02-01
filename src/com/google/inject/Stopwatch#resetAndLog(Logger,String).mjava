@@ -1,0 +1,7 @@
+  /**
+   * Resets and logs ellapsed time.
+   */
+  void resetAndLog(Logger logger, String label) {
+    logger.info(label + ": " + reset() + "ms");
+  }
+

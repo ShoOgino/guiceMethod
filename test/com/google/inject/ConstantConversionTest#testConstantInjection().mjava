@@ -1,4 +1,4 @@
-  public void testConstantInjection() {
+  public void testConstantInjection() throws ContainerCreationException {
     Map<String, String> properties = new HashMap<String, String>() {{
       put("#", "5");
       put("boolean", "true");

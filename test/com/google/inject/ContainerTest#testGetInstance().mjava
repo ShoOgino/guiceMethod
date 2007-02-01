@@ -1,4 +1,4 @@
-  public void testGetInstance() {
+  public void testGetInstance() throws ContainerCreationException {
     Container container = createFooContainer();
 
     Bar bar = container.getFactory(Key.get(Bar.class)).get();

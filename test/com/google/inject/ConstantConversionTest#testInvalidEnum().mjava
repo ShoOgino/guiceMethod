@@ -1,4 +1,4 @@
-  public void testInvalidEnum() {
+  public void testInvalidEnum() throws ContainerCreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bind("foo").to("invalid");
     Container c = b.create(false);

@@ -1,4 +1,4 @@
-  public void testInjection() {
+  public void testInjection() throws ContainerCreationException {
     Container container = createFooContainer();
     Foo foo = container.getCreator(Foo.class).get();
 

@@ -1,0 +1,5 @@
+  public synchronized Throwable fillInStackTrace() {
+    // We don't care about this stack trace.
+    return null;
+  }
+
