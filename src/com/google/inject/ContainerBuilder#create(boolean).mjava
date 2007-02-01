@@ -42,6 +42,12 @@
 
     stopwatch.resetAndLog(logger, "Validation");
 
+    for (StaticInjection staticInjection : staticInjections) {
+      staticInjection.createInjectors(container);
+    }
+
+    stopwatch.resetAndLog(logger, "Static validation");
+
     // Blow up.
     if (!errorMessages.isEmpty()) {
       throw new ContainerCreationException(createErrorMessage());
@@ -51,7 +57,9 @@
     container.setErrorHandler(new RuntimeErrorHandler());
 
     // Inject static members.
-    container.injectStatics(staticInjections);
+    for (StaticInjection staticInjection : staticInjections) {
+      staticInjection.runInjectors(container);
+    }
 
     stopwatch.resetAndLog(logger, "Static member injection");
 

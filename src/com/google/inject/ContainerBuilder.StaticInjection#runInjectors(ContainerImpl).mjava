@@ -1,0 +1,11 @@
+    void runInjectors(ContainerImpl container) {
+      container.callInContext(new ContainerImpl.ContextualCallable<Void>() {
+        public Void call(InternalContext context) {
+          for (ContainerImpl.Injector injector : injectors) {
+            injector.inject(context, null);
+          }
+          return null;
+        }
+      });
+    }
+

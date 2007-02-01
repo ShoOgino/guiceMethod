@@ -1,0 +1,14 @@
+    void createInjectors(final ContainerImpl container) {
+      container.withErrorHandler(new ConfigurationErrorHandler(source),
+          new Runnable() {
+            public void run() {
+              for (Class<?> clazz : types) {
+                container.addInjectorsForFields(
+                    clazz.getDeclaredFields(), true, injectors);
+                container.addInjectorsForMethods(
+                    clazz.getDeclaredMethods(), true, injectors);
+              }
+            }
+          });
+    }
+

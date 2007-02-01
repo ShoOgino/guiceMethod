@@ -4,14 +4,13 @@
    */
   void validate(final Object source, final Class<?> type) {
     validations.add(new Validation() {
-      public void run(ContainerImpl container) {
-        ErrorHandler previous = container.getErrorHandler();
-        try {
-          container.setErrorHandler(new ConfigurationErrorHandler(source));
-          container.getConstructor(type);
-        } finally {
-          container.setErrorHandler(previous);
-        }
+      public void run(final ContainerImpl container) {
+        container.withErrorHandler(new ConfigurationErrorHandler(source),
+            new Runnable() {
+              public void run() {
+                container.getConstructor(type);
+              }
+            });
       }
     });
   }

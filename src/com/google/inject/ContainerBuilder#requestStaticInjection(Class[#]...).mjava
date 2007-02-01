@@ -5,6 +5,6 @@
    * @param types for which static members will be injected
    */
   public void requestStaticInjection(Class<?>... types) {
-    staticInjections.addAll(Arrays.asList(types));
+    staticInjections.add(new StaticInjection(source(), types));
   }
 

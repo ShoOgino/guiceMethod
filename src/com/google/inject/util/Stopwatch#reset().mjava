@@ -1,7 +1,7 @@
   /**
    * Resets and returns ellapsed time.
    */
-  long reset() {
+  public long reset() {
     long now = System.currentTimeMillis();
     try {
       return now - start;
