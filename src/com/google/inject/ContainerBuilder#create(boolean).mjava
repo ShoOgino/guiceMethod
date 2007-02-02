@@ -13,25 +13,22 @@
    */
   public synchronized Container create(boolean preload)
       throws ContainerCreationException {
-    // Only one Container per builder.
-    ensureNotCreated();
-    created = true;
-
     stopwatch.resetAndLog(logger, "Configuration");
 
     // Create the container.
-    HashMap<Key<?>, InternalFactory<?>> factories =
-        new HashMap<Key<?>, InternalFactory<?>>();
-    ContainerImpl container = new ContainerImpl(factories);
+    ensureNotCreated();
+    Map<Key<?>, Binding<?>> bindings =
+        new HashMap<Key<?>, Binding<?>>();
+    container = new ContainerImpl(bindings);
 
-    createConstantBindings(factories);
+    createConstantBindings();
 
     // Commands to execute before returning the Container instance.
-    final List<ContainerImpl.ContextualCallable<Void>> preloaders =
-        new ArrayList<ContainerImpl.ContextualCallable<Void>>();
+    final List<ContextualCallable<Void>> preloaders =
+        new ArrayList<ContextualCallable<Void>>();
 
-    createBindings(container, factories, preload, preloaders);
-    createLinkedBindings(factories);
+    createBindings(preload, preloaders);
+    createLinkedBindings();
 
     stopwatch.resetAndLog(logger, "Binding creation");
 

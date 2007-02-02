@@ -1,0 +1,5 @@
+  @SuppressWarnings({"unchecked"})
+  public <T> Binding<T> getBinding(Key<T> key) {
+    return (Binding<T>) bindings.get(key);
+  }
+

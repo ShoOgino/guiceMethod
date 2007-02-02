@@ -7,7 +7,7 @@
    * would be shared, etc.
    */
   private void ensureNotCreated() {
-    if (created) {
+    if (container != null) {
       throw new IllegalStateException("Container already created.");
     }
   }

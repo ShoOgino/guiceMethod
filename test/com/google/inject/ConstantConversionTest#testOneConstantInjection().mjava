@@ -1,0 +1,8 @@
+  public void testOneConstantInjection() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind("#").to("5");
+    Container container = builder.create(false);
+    Simple simple = container.getCreator(Simple.class).get();
+    assertEquals(5, simple.i);
+  }
+

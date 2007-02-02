@@ -1,0 +1,12 @@
+  public void testNormalBinding() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    Foo foo = new Foo();
+    builder.bind(Foo.class).to(foo);
+    Container container = builder.create(false);
+    Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
+    assertSame(foo, fooBinding.getFactory().get());
+    assertNotNull(fooBinding.getSource());
+    assertEquals(Key.get(Foo.class), fooBinding.getKey());
+    assertFalse(fooBinding.isConstant());
+  }
+

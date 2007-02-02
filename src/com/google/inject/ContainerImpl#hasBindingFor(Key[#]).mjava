@@ -1,8 +1,0 @@
-  public boolean hasBindingFor(Key<?> key) {
-    try {
-      return getFactory(null, key) != null;
-    } catch (ConfigurationException e) {
-      return false;
-    }
-  }
-

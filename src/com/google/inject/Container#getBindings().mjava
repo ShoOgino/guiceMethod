@@ -1,0 +1,5 @@
+  /**
+   * Gets all bindings.
+   */
+  Map<Key<?>, Binding<?>> getBindings();
+

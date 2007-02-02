@@ -1,0 +1,5 @@
+  /**
+   * Gets a binding for the given key.
+   */
+  <T> Binding<T> getBinding(Key<T> key);
+

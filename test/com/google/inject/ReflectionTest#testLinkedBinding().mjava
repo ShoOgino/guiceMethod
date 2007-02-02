@@ -1,0 +1,13 @@
+  public void testLinkedBinding() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    Bar bar = new Bar();
+    builder.bind(Bar.class).to(bar);
+    builder.link(Key.get(Foo.class)).to(Key.get(Bar.class));
+    Container container = builder.create(false);
+    Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
+    assertSame(bar, fooBinding.getFactory().get());
+    assertNotNull(fooBinding.getSource());
+    assertEquals(Key.get(Foo.class), fooBinding.getKey());
+    assertFalse(fooBinding.isConstant());
+  }
+

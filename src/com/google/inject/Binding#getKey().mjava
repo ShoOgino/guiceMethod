@@ -1,0 +1,7 @@
+  /**
+   * Gets the key for this binding.
+   */
+  public Key<T> getKey() {
+    return key;
+  }
+

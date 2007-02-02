@@ -1,0 +1,7 @@
+  /**
+   * Is this a constant binding?
+   */
+  public boolean isConstant() {
+    return internalFactory instanceof ConstantFactory<?>;
+  }
+

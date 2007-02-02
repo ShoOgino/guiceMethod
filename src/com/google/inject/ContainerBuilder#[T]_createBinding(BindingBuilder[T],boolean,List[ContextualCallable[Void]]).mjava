@@ -1,0 +1,22 @@
+  private <T> void createBinding(BindingBuilder<T> builder,
+      boolean preload, List<ContextualCallable<Void>> preloaders) {
+    final Key<T> key = builder.getKey();
+    final InternalFactory<? extends T> factory =
+        builder.getInternalFactory(container);
+    Binding<?> binding = Binding.newInstance(
+        container, key, builder.getSource(), factory);
+
+    putBinding(binding);
+
+    // Register to preload if necessary.
+    if (builder.isInContainerScope()) {
+      if (preload || builder.shouldPreload()) {
+        preloaders.add(new BindingPreloader(key, factory));
+      }
+    } else {
+      if (builder.shouldPreload()) {
+        addError(builder.getSource(), ErrorMessage.PRELOAD_NOT_ALLOWED);
+      }
+    }
+  }
+

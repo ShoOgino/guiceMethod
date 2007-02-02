@@ -1,0 +1,8 @@
+  /**
+   * Gets the source object, an arbitrary object which points back to the
+   * configuration which resulted in this binding.
+   */
+  public Object getSource() {
+    return source;
+  }
+

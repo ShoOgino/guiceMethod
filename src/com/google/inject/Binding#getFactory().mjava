@@ -1,0 +1,10 @@
+  /**
+   * Gets the factory which returns instances for this binding.
+   */
+  public Factory<T> getFactory() {
+    if (factory == null) {
+      factory = container.getFactory(key);
+    }
+    return factory;
+  }
+

@@ -1,4 +1,0 @@
-  ContainerImpl(Map<Key<?>, InternalFactory<?>> factories) {
-    this.factories = factories;
-  }
-

@@ -1,0 +1,4 @@
+  InternalFactory<? extends T> getInternalFactory() {
+    return internalFactory;
+  }
+

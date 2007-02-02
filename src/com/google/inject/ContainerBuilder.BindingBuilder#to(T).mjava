@@ -4,6 +4,7 @@
     BindingBuilder<T> to(T instance) {
       ensureImplementationIsNotSet();
       this.factory = new ConstantFactory<T>(instance);
+      in(Scopes.CONTAINER_SCOPE);
       return this;
     }
 
