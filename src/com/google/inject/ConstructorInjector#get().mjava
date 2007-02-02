@@ -1,0 +1,15 @@
+  public T get() {
+    try {
+      return container.callInContext(new ContextualCallable<T>() {
+        @SuppressWarnings({"unchecked"})
+        public T call(InternalContext context) {
+          return (T) construct(context, implementation);
+        }
+      });
+    } catch (RuntimeException e) {
+      throw e;
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+

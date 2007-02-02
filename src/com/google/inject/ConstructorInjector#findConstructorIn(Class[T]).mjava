@@ -1,0 +1,28 @@
+  @SuppressWarnings({"unchecked"})
+  private Constructor<T> findConstructorIn(Class<T> implementation) {
+    Constructor<T> found = null;
+    for (Constructor<T> constructor
+        : implementation.getDeclaredConstructors()) {
+      if (constructor.getAnnotation(Inject.class) != null) {
+        if (found != null) {
+          container.errorHandler.handle(
+              ErrorMessage.TOO_MANY_CONSTRUCTORS, implementation);
+          return ContainerImpl.invalidConstructor();
+        }
+        found = constructor;
+      }
+    }
+    if (found != null) {
+      return found;
+    }
+
+    // If no annotated constructor is found, look for a no-arg constructor
+    // instead.
+    try {
+      return implementation.getDeclaredConstructor();
+    } catch (NoSuchMethodException e) {
+      container.errorHandler.handle(ErrorMessage.MISSING_CONSTRUCTOR, implementation);
+      return ContainerImpl.invalidConstructor();
+    }
+  }
+

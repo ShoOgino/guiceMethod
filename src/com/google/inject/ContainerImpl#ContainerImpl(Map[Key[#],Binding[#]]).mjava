@@ -1,4 +1,0 @@
-  ContainerImpl(Map<Key<?>, Binding<?>> bindings) {
-    this.bindings = bindings;
-  }
-

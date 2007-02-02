@@ -5,6 +5,7 @@
       callable.call();
     }
     time = System.currentTimeMillis() - time;
-    System.err.println(label + count * 1000 / time + " creations/s");
+    System.err.println(label
+        + format.format(count * 1000 / time) + " creations/s");
   }
 

@@ -1,9 +1,0 @@
-    ConstructorInjector(ContainerImpl container, Class<T> implementation) {
-      this.implementation = implementation;
-      Constructor<T> constructor = findConstructorIn(implementation);
-      parameterInjectors = createParameterInjector(container, constructor);
-      injectors = container.injectors.get(implementation);
-      fastConstructor = FastClass.create(constructor.getDeclaringClass())
-          .getConstructor(constructor);
-    }
-

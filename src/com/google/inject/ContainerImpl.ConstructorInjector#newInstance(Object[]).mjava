@@ -1,6 +1,0 @@
-    @SuppressWarnings({"unchecked"})
-    private T newInstance(Object[] parameters)
-        throws InvocationTargetException {
-      return (T) fastConstructor.newInstance(parameters);
-    }
-

@@ -2,10 +2,6 @@
    * Constructs a new builder.
    */
   public ContainerBuilder() {
-    put(Scopes.DEFAULT_SCOPE, DEFAULT_SCOPE);
-    put(Scopes.CONTAINER_SCOPE, ContainerScope.INSTANCE);
-
-    bind(Container.class).to(CONTAINER_FACTORY);
-    bind(Logger.class).to(LOGGER_FACTORY);
+    this(new DefaultConstructionProxyFactory());
   }
 

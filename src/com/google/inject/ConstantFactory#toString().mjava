@@ -1,4 +1,6 @@
   public String toString() {
-    return "ConstantFactory[" + value + "]";
+    return new ToStringBuilder(ConstantFactory.class)
+        .add("value", value)
+        .toString();
   }
 

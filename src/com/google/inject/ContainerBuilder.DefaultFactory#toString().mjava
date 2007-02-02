@@ -1,4 +1,6 @@
     public String toString() {
-      return implementation.toString();
+      return new ToStringBuilder(Factory.class)
+          .add("implementation", implementation)
+          .toString();
     }
 

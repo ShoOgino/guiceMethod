@@ -1,0 +1,4 @@
+  public ToStringBuilder(String name) {
+    this.name = name;
+  }
+

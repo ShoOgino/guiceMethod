@@ -1,0 +1,13 @@
+  public <T> ConstructionProxy<T> get(Constructor<T> constructor) {
+    FastClass fastClass = FastClass.create(constructor.getDeclaringClass());
+    final FastConstructor fastConstructor =
+        fastClass.getConstructor(constructor);
+    return new ConstructionProxy<T>() {
+      @SuppressWarnings({"unchecked"})
+      public T newInstance(Object... arguments)
+          throws InvocationTargetException {
+        return (T) fastConstructor.newInstance(arguments);
+      }
+    };
+  }
+

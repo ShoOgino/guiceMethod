@@ -1,4 +1,8 @@
-  private static Object[] getParameters(InternalContext context,
+  /**
+   * Iterates over parameter injectors and creates an array of parameter
+   * values.
+   */
+  static Object[] getParameters(InternalContext context,
       ParameterInjector[] parameterInjectors) {
     if (parameterInjectors == null) {
       return null;

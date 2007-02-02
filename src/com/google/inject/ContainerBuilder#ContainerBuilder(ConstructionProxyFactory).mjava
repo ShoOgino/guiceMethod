@@ -1,0 +1,16 @@
+  /**
+   * Constructs a new builder.
+   *
+   * @param constructionProxyFactory to use when constructing objects
+   */
+  public ContainerBuilder(ConstructionProxyFactory constructionProxyFactory) {
+    put(Scopes.DEFAULT_SCOPE, DEFAULT_SCOPE);
+    put(Scopes.CONTAINER_SCOPE, ContainerScope.INSTANCE);
+
+    bind(Container.class).to(CONTAINER_FACTORY);
+    bind(Logger.class).to(LOGGER_FACTORY);
+
+    this.constructionProxyFactory = nonNull(constructionProxyFactory,
+        "construction proxy factory");
+  }
+

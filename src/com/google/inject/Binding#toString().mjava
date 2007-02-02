@@ -1,0 +1,8 @@
+  public String toString() {
+    return new ToStringBuilder(Binding.class)
+        .add("key", key)
+        .add("source", source)
+        .add("factory", internalFactory)
+        .toString();
+  }
+
