@@ -5,7 +5,7 @@
    */
   public void put(String name, Scope scope) {
     if (scopes.containsKey(nonNull(name, "name"))) {
-      addError(source(), ErrorMessage.DUPLICATE_SCOPES, name);
+      addError(source(), ErrorMessages.DUPLICATE_SCOPES, name);
     } else {
       scopes.put(nonNull(name, "name"), nonNull(scope, "scope"));
     }

@@ -8,7 +8,7 @@
           Binding.newInstance(container, key, builder.getSource(), factory);
       putBinding(binding);
     } else {
-      addError(builder.getSource(), ErrorMessage.MISSING_CONSTANT_VALUE);
+      addError(builder.getSource(), ErrorMessages.MISSING_CONSTANT_VALUE);
     }
   }
 

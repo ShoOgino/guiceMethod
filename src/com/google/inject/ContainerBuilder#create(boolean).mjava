@@ -47,7 +47,7 @@
 
     // Blow up if we encountered errors.
     if (!errorMessages.isEmpty()) {
-      throw new ContainerCreationException(createErrorMessage());
+      throw new ContainerCreationException(errorMessages);
     }
 
     // Switch to runtime error handling.

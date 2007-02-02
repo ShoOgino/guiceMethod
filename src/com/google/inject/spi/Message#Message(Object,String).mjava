@@ -1,4 +1,4 @@
-  public ErrorMessage(Object source, String message) {
+  public Message(Object source, String message) {
     this.source = nonNull(source, "source");
     this.message = nonNull(message, "message");
   }

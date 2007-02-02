@@ -16,7 +16,7 @@
     // parameters if there's only one parameter.
     if (parameterTypes.length != 1 && defaultNameOverridden) {
       errorHandler.handle(
-          ErrorMessage.NAME_ON_MEMBER_WITH_MULTIPLE_PARAMS, member);
+          ErrorMessages.NAME_ON_MEMBER_WITH_MULTIPLE_PARAMS, member);
     }
 
     List<ParameterInjector<?>> parameterInjectors =
@@ -33,7 +33,7 @@
         name = defaultName;
         if (annotation != null) {
           errorHandler.handle(
-              ErrorMessage.NAME_ON_MEMBER_AND_PARAMETER, member);
+              ErrorMessages.NAME_ON_MEMBER_AND_PARAMETER, member);
         }
       } else {
         name = annotation == null ? defaultName : annotation.value();

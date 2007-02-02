@@ -15,7 +15,7 @@
       }
     } else {
       if (builder.shouldPreload()) {
-        addError(builder.getSource(), ErrorMessage.PRELOAD_NOT_ALLOWED);
+        addError(builder.getSource(), ErrorMessages.PRELOAD_NOT_ALLOWED);
       }
     }
   }

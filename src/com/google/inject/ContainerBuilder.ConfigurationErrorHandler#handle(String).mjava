@@ -1,4 +1,4 @@
     public void handle(String message) {
-      add(new ErrorMessage(source, message));
+      add(new Message(source, message));
     }
 

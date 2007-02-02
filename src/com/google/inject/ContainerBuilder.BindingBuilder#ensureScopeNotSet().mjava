@@ -1,6 +1,6 @@
     private void ensureScopeNotSet() {
       if (this.scope != null) {
-        addError(source, ErrorMessage.SCOPE_ALREADY_SET);
+        addError(source, ErrorMessages.SCOPE_ALREADY_SET);
       }
     }
 

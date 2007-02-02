@@ -26,7 +26,7 @@
           }
         };
       } catch (ConfigurationException e) {
-        errorHandler.handle(ErrorMessage.MISSING_BINDING, member, key);
+        errorHandler.handle(ErrorMessages.MISSING_BINDING, member, key);
         return invalidFactory();
       }
     }

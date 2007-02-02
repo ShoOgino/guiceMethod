@@ -1,7 +1,7 @@
   /**
    * Adds an error message to be reported at creation time.
    */
-  void add(ErrorMessage errorMessage) {
+  void add(Message errorMessage) {
     errorMessages.add(errorMessage);
   }
 

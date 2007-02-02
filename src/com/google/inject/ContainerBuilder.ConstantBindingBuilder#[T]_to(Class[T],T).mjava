@@ -3,7 +3,7 @@
      */
     <T> void to(final Class<T> type, final T value) {
       if (this.value != null) {
-        addError(source, ErrorMessage.CONSTANT_VALUE_ALREADY_SET);
+        addError(source, ErrorMessages.CONSTANT_VALUE_ALREADY_SET);
       } else {
         this.type = type;
         this.value = value;

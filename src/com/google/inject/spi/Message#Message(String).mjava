@@ -1,0 +1,4 @@
+  public Message(String message) {
+    this("[unknown source]", message);
+  }
+

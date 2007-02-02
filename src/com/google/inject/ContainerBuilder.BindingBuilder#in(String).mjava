@@ -9,7 +9,7 @@
       // is fine for now.
       this.scope = scopes.get(nonNull(scopeName, "scope name"));
       if (this.scope == null) {
-        addError(source, ErrorMessage.SCOPE_NOT_FOUND, scopeName,
+        addError(source, ErrorMessages.SCOPE_NOT_FOUND, scopeName,
             scopes.keySet());
       }
       return this;

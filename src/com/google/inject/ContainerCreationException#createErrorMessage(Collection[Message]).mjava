@@ -1,8 +1,8 @@
-  private String createErrorMessage() {
+  private static String createErrorMessage(Collection<Message> errorMessages) {
     StringBuilder error = new StringBuilder();
     error.append("Guice configuration errors:\n\n");
     int index = 1;
-    for (ErrorMessage errorMessage : errorMessages) {
+    for (Message errorMessage : errorMessages) {
       error.append(index++)
           .append(") ")
           .append("Error at ")
