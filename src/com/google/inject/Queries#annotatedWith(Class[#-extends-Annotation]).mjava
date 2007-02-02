@@ -1,0 +1,15 @@
+  /**
+   * Returns a query which matches elements (methods, classes, etc.)
+   * with a given annotation.
+   */
+  public static Query<AnnotatedElement> annotatedWith(
+      final Class<? extends Annotation> annotationType) {
+    Objects.nonNull(annotationType, "annotation type");
+    return new AbstractQuery<AnnotatedElement>() {
+      public boolean matches(AnnotatedElement element) {
+        Annotation annotation = element.getAnnotation(annotationType);
+        return annotation != null;
+      }
+    };
+  }
+

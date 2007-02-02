@@ -1,0 +1,12 @@
+  /**
+   * Returns a query which matches classes in the given package.
+   */
+  public static Query<Class> inPackage(final Package p) {
+    Objects.nonNull(p, "package");
+    return new AbstractQuery<Class>() {
+      public boolean matches(Class c) {
+        return c.getPackage().equals(p);
+      }
+    };
+  }
+

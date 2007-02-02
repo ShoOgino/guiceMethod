@@ -1,0 +1,5 @@
+  public void testAnd() {
+    assertTrue(any().and(any()).matches(null));
+    assertFalse(any().and(not(any())).matches(null));
+  }
+

@@ -1,0 +1,4 @@
+  public Query<T> and(final Query<? super T> other) {
+    return new AndQuery<T>(this, other);
+  }
+

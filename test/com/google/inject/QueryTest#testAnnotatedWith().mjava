@@ -1,0 +1,6 @@
+  public void testAnnotatedWith() {
+    assertTrue(annotatedWith(Foo.class).matches(Bar.class));
+    assertFalse(annotatedWith(Foo.class).matches(
+        QueryTest.class.getMethods()[0]));
+  }
+

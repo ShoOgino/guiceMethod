@@ -1,0 +1,6 @@
+  /**
+   * Returns a query which returns {@code true} if both this and the given
+   * query return {@code true}.
+   */
+  Query<T> and(Query<? super T> other);
+

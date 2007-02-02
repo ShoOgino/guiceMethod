@@ -1,0 +1,7 @@
+  public void testInPackage() {
+    assertTrue(inPackage(Queries.class.getPackage())
+        .matches(QueryTest.class));
+    assertFalse(inPackage(Queries.class.getPackage())
+        .matches(Object.class));
+  }
+

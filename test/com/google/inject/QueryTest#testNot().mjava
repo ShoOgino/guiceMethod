@@ -1,0 +1,4 @@
+  public void testNot() {
+    assertFalse(not(any()).matches(null));
+  }
+

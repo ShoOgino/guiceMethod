@@ -1,0 +1,4 @@
+  public void testAny() {
+    assertTrue(any().matches(null));
+  }
+

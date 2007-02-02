@@ -1,0 +1,4 @@
+  public Query<T> or(Query<? super T> other) {
+    return new OrQuery<T>(this, other);
+  }
+

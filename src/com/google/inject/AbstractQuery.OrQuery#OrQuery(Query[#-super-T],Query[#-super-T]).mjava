@@ -1,0 +1,5 @@
+    public OrQuery(Query<? super T> a, Query<? super T> b) {
+      this.a = a;
+      this.b = b;
+    }
+

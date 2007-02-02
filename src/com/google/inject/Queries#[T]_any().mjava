@@ -1,0 +1,8 @@
+  /**
+   * Returns a query which matches any input.
+   */
+  @SuppressWarnings({"unchecked"})
+  public static <T> Query<T> any() {
+    return (Query<T>) ANY;
+  }
+

@@ -1,0 +1,6 @@
+  public void testSubclassesOf() {
+    assertTrue(subclassesOf(Runnable.class).matches(Runnable.class));
+    assertTrue(subclassesOf(Runnable.class).matches(MyRunnable.class));
+    assertFalse(subclassesOf(Runnable.class).matches(Object.class));
+  }
+

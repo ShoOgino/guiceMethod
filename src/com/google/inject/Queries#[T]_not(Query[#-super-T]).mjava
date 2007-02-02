@@ -1,0 +1,12 @@
+  /**
+   * Inverts the given query.
+   */
+  public static <T> Query<T> not(final Query<? super T> p) {
+    Objects.nonNull(p, "p");
+    return new AbstractQuery<T>() {
+      public boolean matches(T t) {
+        return !p.matches(t);
+      }
+    };
+  }
+

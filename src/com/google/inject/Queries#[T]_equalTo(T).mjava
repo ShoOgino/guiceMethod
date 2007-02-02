@@ -1,0 +1,12 @@
+  /**
+   * Returns a query which matches objects equal to the given object.
+   */
+  public static <T> Query<T> equalTo(final T t) {
+    Objects.nonNull(t, "t");
+    return new AbstractQuery<T>() {
+      public boolean matches(T other) {
+        return t.equals(other);
+      }
+    };
+  }
+
