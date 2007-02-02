@@ -1,0 +1,4 @@
+  boolean matches(Class<?> clazz) {
+    return classQuery.matches(clazz);
+  }
+

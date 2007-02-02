@@ -1,0 +1,17 @@
+  /**
+   * Creates a construction proxy given a class and parameter types.
+   */
+  <T> ConstructionProxy<T> createConstructionProxy(Class<?> clazz,
+      Class[] parameterTypes) {
+    FastClass fastClass = FastClass.create(clazz);
+    final FastConstructor fastConstructor =
+        fastClass.getConstructor(parameterTypes);
+    return new ConstructionProxy<T>() {
+      @SuppressWarnings({"unchecked"})
+      public T newInstance(Object... arguments)
+          throws InvocationTargetException {
+        return (T) fastConstructor.newInstance(arguments);
+      }
+    };
+  }
+

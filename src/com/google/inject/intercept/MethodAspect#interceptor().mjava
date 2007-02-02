@@ -1,0 +1,4 @@
+  MethodInterceptor interceptor() {
+    return interceptor;
+  }
+

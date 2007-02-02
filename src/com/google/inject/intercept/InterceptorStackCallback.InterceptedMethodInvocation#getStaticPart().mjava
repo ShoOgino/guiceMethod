@@ -1,0 +1,4 @@
+    public AccessibleObject getStaticPart() {
+      return getMethod();
+    }
+

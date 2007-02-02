@@ -1,0 +1,10 @@
+  /**
+   * Applies the given method interceptor to the methods matched by the class
+   * and method queries.
+   */
+  public ProxyFactoryBuilder intercept(Query<? super Class> classQuery,
+      Query<? super Method> methodQuery, MethodInterceptor interceptor) {
+    methodAspects.add(new MethodAspect(classQuery, methodQuery, interceptor));
+    return this;
+  }
+

@@ -1,0 +1,80 @@
+  <T> ConstructionProxy<T> createConstructionProxy(Constructor<T> constructor) {
+    Class<T> declaringClass = constructor.getDeclaringClass();
+
+    // Find applicable aspects. Bow out if none are applicable to this class.
+    List<MethodAspect> applicableAspects = new ArrayList<MethodAspect>();
+    for (MethodAspect methodAspect : methodAspects) {
+      if (methodAspect.matches(declaringClass)) {
+        applicableAspects.add(methodAspect);
+      }
+    }
+    if (applicableAspects.isEmpty()) {
+      return defaultFactory.get(constructor);
+    }
+
+    // Get list of methods from cglib.
+    List<Method> methods = new ArrayList<Method>();
+    Enhancer.getMethods(declaringClass, null, methods);
+    final Map<Method, Integer> indices = new HashMap<Method, Integer>();
+
+    // Create method/interceptor holders and record indices.
+    List<MethodInterceptorsPair> methodInterceptorsPairs =
+        new ArrayList<MethodInterceptorsPair>();
+    for (int i = 0; i < methods.size(); i++) {
+      Method method = methods.get(i);
+      methodInterceptorsPairs.add(new MethodInterceptorsPair(method));
+      indices.put(method, i);
+    }
+
+    // Iterate over aspects and add interceptors for the methods they apply
+    // to.
+    boolean anyMatched = false;
+    for (MethodAspect methodAspect : applicableAspects) {
+      for (MethodInterceptorsPair methodInterceptorsPair
+          : methodInterceptorsPairs) {
+        if (methodAspect.matches(methodInterceptorsPair.method)) {
+          methodInterceptorsPair.add(methodAspect.interceptor());
+          anyMatched = true;
+        }
+      }
+    }
+    if (!anyMatched) {
+      return defaultFactory.get(constructor);
+    }
+
+    // Create callbacks.
+    Callback[] callbacks = new Callback[methods.size()];
+    Class<? extends Callback>[] callbackTypes = new Class[methods.size()];
+    for (int i = 0; i < methods.size(); i++) {
+      MethodInterceptorsPair methodInterceptorsPair =
+          methodInterceptorsPairs.get(i);
+      if (!methodInterceptorsPair.hasInterceptors()) {
+        callbacks[i] = NoOp.INSTANCE;
+        callbackTypes[i] = NoOp.class;
+      } else {
+        callbacks[i] = new InterceptorStackCallback(
+            methodInterceptorsPair.method, methodInterceptorsPair.interceptors);
+        callbackTypes[i] = net.sf.cglib.proxy.MethodInterceptor.class;
+      }
+    }
+
+    // Create the proxied class.
+    Enhancer enhancer = new Enhancer();
+    enhancer.setSuperclass(declaringClass);
+    enhancer.setUseCache(false); // We do enough caching.
+    enhancer.setCallbackFilter(new CallbackFilter() {
+      public int accept(Method method) {
+        return indices.get(method);
+      }
+    });
+    enhancer.setCallbackTypes(callbackTypes);
+    enhancer.setUseFactory(false);
+
+    Class<?> proxied = enhancer.createClass();
+
+    // Store callbacks.
+    Enhancer.registerStaticCallbacks(proxied, callbacks);
+
+    return createConstructionProxy(proxied, constructor.getParameterTypes());
+  }
+

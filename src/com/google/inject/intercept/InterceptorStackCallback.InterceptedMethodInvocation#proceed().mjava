@@ -1,0 +1,11 @@
+    public Object proceed() throws Throwable {
+      try {
+        index++;
+        return index == interceptors.length
+          ? methodProxy.invokeSuper(proxy, arguments)
+          : interceptors[index].invoke(this);
+      } finally {
+        index--;
+      }
+    }
+
