@@ -1,0 +1,7 @@
+  /**
+   * @see ContainerBuilder#install(Module)
+   */
+  protected void install(Module module) {
+    builder.install(module);
+  }
+
