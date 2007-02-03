@@ -1,5 +1,5 @@
   /**
-   * Gets factory bound to the given type.
+   * Gets the factory bound to the given type.
    */
   <T> Factory<T> getFactory(Class<T> type);
 

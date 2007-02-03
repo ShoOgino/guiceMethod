@@ -2,7 +2,8 @@
     final InternalFactory<? extends T> factory = getFactory(null, key);
 
     if (factory == null) {
-      throw new ConfigurationException("Missing binding for " + key + ".");
+      throw new ConfigurationException("Missing binding to " +
+          AbstractErrorHandler.convert(key) + ".");
     }
 
     return new Factory<T>() {
