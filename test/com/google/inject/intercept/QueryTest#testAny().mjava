@@ -1,4 +1,4 @@
   public void testAny() {
-    assertTrue(all().matches(null));
+    assertTrue(any().matches(null));
   }
 

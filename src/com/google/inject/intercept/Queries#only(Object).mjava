@@ -7,6 +7,10 @@
       public boolean matches(Object other) {
         return o.equals(other);
       }
+
+      public String toString() {
+        return "only(" + o + ")";
+      }
     };
   }
 

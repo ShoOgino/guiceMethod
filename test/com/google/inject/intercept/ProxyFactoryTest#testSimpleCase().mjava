@@ -3,7 +3,7 @@
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
-    builder.intercept(all(), all(), interceptor);
+    builder.intercept(any(), any(), interceptor);
     ProxyFactory factory = builder.create();
 
     Factory<Simple> creator = factory.getFactory(Simple.class);

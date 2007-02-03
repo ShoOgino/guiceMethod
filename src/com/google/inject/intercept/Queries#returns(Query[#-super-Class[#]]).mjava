@@ -1,0 +1,17 @@
+  /**
+   * Returns a predicate which matches methods with matching return types.
+   */
+  public static Query<Method> returns(
+      final Query<? super Class<?>> returnType) {
+    Objects.nonNull(returnType, "return type query");
+    return new AbstractQuery<Method>() {
+      public boolean matches(Method m) {
+        return returnType.matches(m.getReturnType());
+      }
+
+      public String toString() {
+        return "returns(" + returnType + ")";
+      }
+    };
+  }
+

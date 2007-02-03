@@ -10,6 +10,10 @@
         Annotation annotation = element.getAnnotation(annotationType);
         return annotation != null;
       }
+
+      public String toString() {
+        return "annotatedWith(" + annotationType.getSimpleName() + ".class)";
+      }
     };
   }
 

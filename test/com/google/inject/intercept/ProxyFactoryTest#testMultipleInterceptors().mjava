@@ -4,7 +4,7 @@
     CountingInterceptor countingInterceptor = new CountingInterceptor();
 
     ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
-    builder.intercept(all(), all(), doubleInterceptor, countingInterceptor);
+    builder.intercept(any(), any(), doubleInterceptor, countingInterceptor);
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<Counter> constructor =

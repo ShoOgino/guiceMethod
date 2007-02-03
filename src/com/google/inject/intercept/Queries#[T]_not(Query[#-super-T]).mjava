@@ -7,6 +7,10 @@
       public boolean matches(T t) {
         return !p.matches(t);
       }
+
+      public String toString() {
+        return "not(" + p + ")";
+      }
     };
   }
 
