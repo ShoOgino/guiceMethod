@@ -1,0 +1,5 @@
+  /**
+   * Gets factory bound to the given type.
+   */
+  <T> Factory<T> getFactory(TypeLiteral<T> type);
+
