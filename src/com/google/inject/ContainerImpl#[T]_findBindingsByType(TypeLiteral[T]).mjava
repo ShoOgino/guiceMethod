@@ -1,0 +1,9 @@
+  @SuppressWarnings({"unchecked"})
+  public <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type) {
+    List bindings = bindingsByType.get(type);
+    if (bindings == null) {
+      return Collections.emptyList();
+    }
+    return (List<Binding<T>>) bindings;
+  }
+

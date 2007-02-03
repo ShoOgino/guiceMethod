@@ -1,4 +1,0 @@
-  MethodInterceptor interceptor() {
-    return interceptor;
-  }
-

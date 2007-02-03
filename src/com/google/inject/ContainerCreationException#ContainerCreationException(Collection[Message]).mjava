@@ -2,7 +2,7 @@
    * Constructs a new exception for the given errors.
    */
   public ContainerCreationException(Collection<Message> errorMessages) {
-    super(createErrorMessage(errorMessages));
+    super();
     this.errorMessages = errorMessages;
   }
 

@@ -1,0 +1,9 @@
+  /**
+   * Indexes bindings by type.
+   */
+  void index() {
+    for (Binding<?> binding : bindings.values()) {
+      index(binding);
+    }
+  }
+

@@ -1,0 +1,16 @@
+  public void testWithConstructorArguments()
+      throws InvocationTargetException, NoSuchMethodException {
+    SimpleInterceptor interceptor = new SimpleInterceptor();
+
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
+    builder.intercept(all(), all(), interceptor);
+    ProxyFactory factory = builder.create();
+
+    ConstructionProxy<A> constructor =
+        factory.get(A.class.getDeclaredConstructor(int.class));
+
+    A a = constructor.newInstance(5);
+    a.a();
+    assertEquals(5, a.i);
+  }
+

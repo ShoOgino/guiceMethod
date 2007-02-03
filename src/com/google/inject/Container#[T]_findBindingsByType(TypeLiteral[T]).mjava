@@ -1,0 +1,5 @@
+  /**
+   * Finds all bindings to the given type.
+   */
+  <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type);
+

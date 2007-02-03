@@ -1,0 +1,31 @@
+  public void testInterceptOneMethod()
+      throws NoSuchMethodException, InvocationTargetException {
+    SimpleInterceptor interceptor = new SimpleInterceptor();
+
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
+
+    builder.intercept(
+        only(Bar.class), annotatedWith(Intercept.class), interceptor);
+    ProxyFactory factory = builder.create();
+
+    ConstructionProxy<Foo> fooFactory =
+        factory.get(Foo.class.getDeclaredConstructor());
+    ConstructionProxy<Bar> barFactory =
+        factory.get(Bar.class.getDeclaredConstructor());
+
+    Foo foo = fooFactory.newInstance();
+    Bar bar = barFactory.newInstance();
+
+    foo.foo();
+    assertTrue(foo.fooCalled);
+    assertFalse(interceptor.invoked);
+
+    bar.bar();
+    assertTrue(bar.barCalled);
+    assertFalse(interceptor.invoked);
+
+    bar.intercepted();
+    assertTrue(bar.interceptedCalled);
+    assertTrue(interceptor.invoked);
+  }
+

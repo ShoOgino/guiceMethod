@@ -1,0 +1,5 @@
+    @Intercept
+    void intercepted() {
+      interceptedCalled = true;
+    }
+

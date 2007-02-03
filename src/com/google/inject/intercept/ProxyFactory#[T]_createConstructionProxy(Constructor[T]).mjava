@@ -33,7 +33,7 @@
       for (MethodInterceptorsPair methodInterceptorsPair
           : methodInterceptorsPairs) {
         if (methodAspect.matches(methodInterceptorsPair.method)) {
-          methodInterceptorsPair.add(methodAspect.interceptor());
+          methodInterceptorsPair.addAll(methodAspect.interceptors());
           anyMatched = true;
         }
       }
@@ -44,6 +44,7 @@
 
     // Create callbacks.
     Callback[] callbacks = new Callback[methods.size()];
+    // noinspection unchecked
     Class<? extends Callback>[] callbackTypes = new Class[methods.size()];
     for (int i = 0; i < methods.size(); i++) {
       MethodInterceptorsPair methodInterceptorsPair =

@@ -1,0 +1,15 @@
+  public void testNotProxied()
+      throws NoSuchMethodException, InvocationTargetException {
+    SimpleInterceptor interceptor = new SimpleInterceptor();
+
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
+    builder.intercept(not(all()), not(all()), interceptor);
+    ProxyFactory factory = builder.create();
+
+    ConstructionProxy<A> constructor =
+        factory.get(A.class.getDeclaredConstructor(int.class));
+
+    A a = constructor.newInstance(5);
+    assertEquals(A.class, a.getClass());
+  }
+

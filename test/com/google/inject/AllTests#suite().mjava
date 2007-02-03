@@ -15,6 +15,9 @@
     suite.addTestSuite(ReflectionTest.class);
     suite.addTestSuite(QueryTest.class);
 
+    suite.addTestSuite(ProxyFactoryTest.class);
+    suite.addTestSuite(IntegrationTest.class);
+
     suite.addTestSuite(FinalizableReferenceQueueTest.class);
     suite.addTestSuite(ReferenceMapTest.class);
     suite.addTest(ReferenceMapTestSuite.suite());

@@ -1,5 +1,0 @@
-  public void testEqualTo() {
-    assertTrue(equalTo(1000).matches(new Integer(1000)));
-    assertFalse(equalTo(1).matches(new Integer(1000)));
-  }
-

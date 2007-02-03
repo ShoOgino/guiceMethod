@@ -1,0 +1,5 @@
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+      methodInvocation.proceed();
+      return methodInvocation.proceed();
+    }
+

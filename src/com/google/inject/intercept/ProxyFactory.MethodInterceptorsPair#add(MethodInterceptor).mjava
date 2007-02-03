@@ -1,7 +1,0 @@
-    void add(MethodInterceptor interceptor) {
-      if (interceptors == null) {
-        interceptors = new ArrayList<MethodInterceptor>();
-      }
-      interceptors.add(interceptor);
-    }
-

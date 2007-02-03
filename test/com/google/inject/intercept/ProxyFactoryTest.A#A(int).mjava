@@ -1,0 +1,4 @@
+    public A(int i) {
+      this.i = i;
+    }
+

@@ -26,7 +26,8 @@
           }
         };
       } catch (ConfigurationException e) {
-        errorHandler.handle(ErrorMessages.MISSING_BINDING, member, key);
+        ErrorMessages.handleMissingBinding(errorHandler, member, key,
+            getNamesOfBindingsTo(key.getType()));
         return invalidFactory();
       }
     }
