@@ -1,0 +1,7 @@
+  public void testFactoryMethods() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind(Widget.class).in(Scopes.CONTAINER_SCOPE);
+
+
+  }
+

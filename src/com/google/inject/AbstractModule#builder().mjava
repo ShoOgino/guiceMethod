@@ -1,0 +1,7 @@
+  /**
+   * Gets the builder.
+   */
+  protected ContainerBuilder builder() {
+    return builder;
+  }
+
