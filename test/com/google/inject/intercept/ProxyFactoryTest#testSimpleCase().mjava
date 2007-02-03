@@ -6,10 +6,9 @@
     builder.intercept(all(), all(), interceptor);
     ProxyFactory factory = builder.create();
 
-    ConstructionProxy<Simple> constructor =
-        factory.get(Simple.class.getDeclaredConstructor());
+    Factory<Simple> creator = factory.getFactory(Simple.class);
 
-    Simple simple = constructor.newInstance();
+    Simple simple = creator.get();
     simple.invoke();
     assertTrue(simple.invoked);
     assertTrue(interceptor.invoked);

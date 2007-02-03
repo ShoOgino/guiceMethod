@@ -1,0 +1,19 @@
+  /**
+   * Gets a factory for the given type. Uses the default constructor. Wraps
+   * exceptions in {@code RuntimeException} including
+   * {@code InvocationTargetException}.
+   */
+  public <T> Factory<T> getFactory(Class<T> type) throws NoSuchMethodException {
+    final ConstructionProxy<T> constructionProxy =
+        createConstructionProxy(type.getDeclaredConstructor());
+    return new Factory<T>() {
+      public T get() {
+        try {
+          return constructionProxy.newInstance();
+        } catch (InvocationTargetException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    };
+  }
+
