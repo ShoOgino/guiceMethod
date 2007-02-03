@@ -1,0 +1,7 @@
+  /**
+   * Returns the current source.
+   */
+  protected Object source() {
+    return sourceProvider.source();
+  }
+

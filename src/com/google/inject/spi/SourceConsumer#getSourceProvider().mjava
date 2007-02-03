@@ -1,0 +1,7 @@
+  /**
+   * Gets the current source provider.
+   */
+  public SourceProvider getSourceProvider() {
+    return sourceProvider;
+  }
+

@@ -1,0 +1,7 @@
+  /**
+   * Sets the current source provider.
+   */
+  public void setSourceProvider(SourceProvider sourceProvider) {
+    this.sourceProvider = sourceProvider;
+  }
+

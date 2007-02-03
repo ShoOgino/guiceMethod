@@ -1,0 +1,12 @@
+  /**
+   * Instructs the provider to skip the given class in the stack trace when
+   * determining the source. Use this to keep the container builder from
+   * logging utility methods as the sources of bindings (i.e. it will skip to
+   * the utility methods' callers instead).
+   *
+   * <p>Skipping only takes place after this method is called.
+   */
+  public void skipSource(Class<?> clazz) {
+    skippedClassNames.add(clazz.getName());
+  }
+

@@ -1,0 +1,7 @@
+  /**
+   * Creates an object pointing to the current location within the
+   * configuration. If we run into a problem later, we'll be able to trace it
+   * back to the original source. Useful for debugging.
+   */
+  Object source();
+

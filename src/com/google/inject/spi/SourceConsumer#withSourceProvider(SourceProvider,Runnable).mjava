@@ -1,0 +1,14 @@
+  /**
+   * Sets the source provider, runs the given command, and restores the
+   * previous source provider.
+   */
+  public void withSourceProvider(SourceProvider sourceProvider, Runnable r) {
+    SourceProvider previous = this.sourceProvider;
+    try {
+      this.sourceProvider = sourceProvider;
+      r.run();
+    } finally {
+      this.sourceProvider = previous;
+    }
+  }
+
