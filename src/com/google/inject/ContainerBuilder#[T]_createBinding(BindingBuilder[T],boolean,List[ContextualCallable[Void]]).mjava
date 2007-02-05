@@ -9,7 +9,7 @@
     putBinding(binding);
 
     // Register to preload if necessary.
-    if (builder.isInContainerScope()) {
+    if (builder.isContainerScoped()) {
       if (preload || builder.shouldPreload()) {
         preloaders.add(new BindingPreloader(key, factory));
       }

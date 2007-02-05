@@ -5,7 +5,8 @@
         to(key.getType());
       }
 
-      if (scope == null || scope == DEFAULT_SCOPE) {
+      // Default scope does nothing.
+      if (scope == null || scope == DEFAULT) {
         return this.factory;
       }
 

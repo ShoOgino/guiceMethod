@@ -1,8 +1,10 @@
   public void testFactoryMethods() throws ContainerCreationException {
     Singleton singleton = new Singleton();
+    Singleton other = new Singleton();
 
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(Singleton.class).to(singleton);
+    builder.bind(Singleton.class).named("other").to(other);
     Container container = builder.create(true);
 
     assertSame(singleton,
@@ -14,5 +16,15 @@
     assertSame(singleton, container.getInstance(Singleton.class));
     assertSame(singleton,
         container.getInstance(new TypeLiteral<Singleton>() {}));
+
+    assertSame(other,
+        container.getFactory(Key.get(Singleton.class, "other")).get());
+    assertSame(other, container.getFactory(Singleton.class, "other").get());
+    assertSame(other,
+        container.getFactory(new TypeLiteral<Singleton>() {}, "other").get());
+    assertSame(other, container.getInstance(Key.get(Singleton.class, "other")));
+    assertSame(other, container.getInstance(Singleton.class, "other"));
+    assertSame(other,
+        container.getInstance(new TypeLiteral<Singleton>() {}, "other"));
   }
 

@@ -1,6 +1,6 @@
     /**
      * Specifies the scope. References the name passed to {@link
-     * ContainerBuilder#put(String, Scope)}.
+     * ContainerBuilder#scope(String, Scope)}.
      */
     public BindingBuilder<T> in(String scopeName) {
       ensureScopeNotSet();

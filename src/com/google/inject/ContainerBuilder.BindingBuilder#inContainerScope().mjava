@@ -2,6 +2,6 @@
      * Specifies container scope (i.e.&nbsp;one instance per container).
      */
     public BindingBuilder<T> inContainerScope() {
-      return in(Scopes.CONTAINER_SCOPE);
+      return in(CONTAINER);
     }
 

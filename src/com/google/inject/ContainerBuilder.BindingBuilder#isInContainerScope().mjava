@@ -1,4 +1,0 @@
-    boolean isInContainerScope() {
-      return this.scope == ContainerScope.INSTANCE;
-    }
-

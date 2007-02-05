@@ -1,0 +1,4 @@
+  public <T> Factory<T> getFactory(TypeLiteral<T> type, String name) {
+    return getFactory(Key.get(type, name));
+  }
+

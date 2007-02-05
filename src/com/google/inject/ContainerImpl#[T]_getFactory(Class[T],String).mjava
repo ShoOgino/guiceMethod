@@ -1,0 +1,4 @@
+  public <T> Factory<T> getFactory(Class<T> type, String name) {
+    return getFactory(Key.get(type, name));
+  }
+
