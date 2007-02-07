@@ -4,8 +4,8 @@
    * @param constructionProxyFactory to use when constructing objects
    */
   public ContainerBuilder(ConstructionProxyFactory constructionProxyFactory) {
-    scope(DEFAULT);
-    scope(CONTAINER);
+    scope(DEFAULT_NAME, DEFAULT);
+    scope(CONTAINER_NAME, CONTAINER);
 
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);
