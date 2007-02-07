@@ -1,7 +1,7 @@
     public MethodInjector(ContainerImpl container, Method method, String name)
         throws MissingDependencyException {
       this.fastMethod =
-          FastClass.create(method.getDeclaringClass()).getMethod(method);
+          GuiceFastClass.create(method.getDeclaringClass()).getMethod(method);
       Type[] parameterTypes = method.getGenericParameterTypes();
       parameterInjectors = parameterTypes.length > 0
           ? container.getParametersInjectors(

@@ -3,7 +3,7 @@
    */
   <T> ConstructionProxy<T> createConstructionProxy(Class<?> clazz,
       Class[] parameterTypes) {
-    FastClass fastClass = FastClass.create(clazz);
+    FastClass fastClass = GuiceFastClass.create(clazz);
     final FastConstructor fastConstructor =
         fastClass.getConstructor(parameterTypes);
     return new ConstructionProxy<T>() {

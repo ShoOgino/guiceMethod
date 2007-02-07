@@ -70,6 +70,7 @@
     });
     enhancer.setCallbackTypes(callbackTypes);
     enhancer.setUseFactory(false);
+    enhancer.setNamingPolicy(new GuiceNamingPolicy());
 
     Class<?> proxied = enhancer.createClass();
 

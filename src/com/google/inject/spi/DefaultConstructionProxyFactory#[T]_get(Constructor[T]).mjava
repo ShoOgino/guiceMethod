@@ -1,5 +1,6 @@
   public <T> ConstructionProxy<T> get(Constructor<T> constructor) {
-    FastClass fastClass = FastClass.create(constructor.getDeclaringClass());
+    FastClass fastClass =
+        GuiceFastClass.create(constructor.getDeclaringClass());
     final FastConstructor fastConstructor =
         fastClass.getConstructor(constructor);
     return new ConstructionProxy<T>() {
