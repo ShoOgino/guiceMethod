@@ -18,6 +18,8 @@
     suite.addTestSuite(ProxyFactoryTest.class);
     suite.addTestSuite(IntegrationTest.class);
 
+    suite.addTestSuite(ServletTest.class);
+
     suite.addTestSuite(FinalizableReferenceQueueTest.class);
     suite.addTestSuite(ReferenceMapTest.class);
     suite.addTest(ReferenceMapTestSuite.suite());

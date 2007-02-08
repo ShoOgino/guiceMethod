@@ -1,0 +1,5 @@
+  protected void configure() {
+    scope(REQUEST_NAME, REQUEST);
+    scope(SESSION_NAME, SESSION);
+  }
+

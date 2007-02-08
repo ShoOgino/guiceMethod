@@ -1,0 +1,34 @@
+  public void testNewRequestObject()
+      throws ContainerCreationException, IOException, ServletException {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.install(new ServletModule());
+    builder.bind(InSession.class);
+    builder.bind(InRequest.class);
+    final Container container = builder.create(false);
+
+    GuiceFilter filter = new GuiceFilter();
+
+    final HttpServletRequest request = createMock(HttpServletRequest.class);
+
+    String requestName = Key.get(InRequest.class).toString();
+    expect(request.getAttribute(requestName)).andReturn(null);
+    request.setAttribute(eq(requestName), isA(InRequest.class));
+
+    final boolean[] invoked = new boolean[1];
+    FilterChain filterChain = new FilterChain() {
+      public void doFilter(ServletRequest servletRequest,
+          ServletResponse servletResponse) {
+        invoked[0] = true;
+        assertSame(request, servletRequest);
+        assertTrue(container.getInstance(InRequest.class) instanceof InRequest);
+      }
+    };
+
+    replay(request);
+
+    filter.doFilter(request, null, filterChain);
+
+    verify(request);
+    assertTrue(invoked[0]);
+  }
+
