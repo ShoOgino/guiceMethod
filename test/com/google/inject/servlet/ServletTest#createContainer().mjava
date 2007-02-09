@@ -1,0 +1,9 @@
+  private Container createContainer() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.install(new ServletModule());
+    builder.bind(InSession.class);
+    builder.bind(InRequest.class);
+    final Container container = builder.create(false);
+    return container;
+  }
+

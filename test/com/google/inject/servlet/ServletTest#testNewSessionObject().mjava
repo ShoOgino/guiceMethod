@@ -1,14 +1,17 @@
-  public void testNewRequestObject()
+  public void testNewSessionObject()
       throws ContainerCreationException, IOException, ServletException {
     final Container container = createContainer();
 
     GuiceFilter filter = new GuiceFilter();
 
     final HttpServletRequest request = createMock(HttpServletRequest.class);
+    final HttpSession session = createMock(HttpSession.class);
 
-    String name = Key.get(InRequest.class).toString();
-    expect(request.getAttribute(name)).andReturn(null);
-    request.setAttribute(eq(name), isA(InRequest.class));
+    String name = Key.get(InSession.class).toString();
+
+    expect(request.getSession()).andReturn(session);
+    expect(session.getAttribute(name)).andReturn(null);
+    session.setAttribute(eq(name), isA(InSession.class));
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
@@ -16,15 +19,15 @@
           ServletResponse servletResponse) {
         invoked[0] = true;
         assertSame(request, servletRequest);
-        assertTrue(container.getInstance(InRequest.class) instanceof InRequest);
+        assertTrue(container.getInstance(InSession.class) instanceof InSession);
       }
     };
 
-    replay(request);
+    replay(request, session);
 
     filter.doFilter(request, null, filterChain);
 
-    verify(request);
+    verify(request, session);
     assertTrue(invoked[0]);
   }
 

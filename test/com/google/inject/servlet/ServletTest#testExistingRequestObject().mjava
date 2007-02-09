@@ -1,4 +1,4 @@
-  public void testNewRequestObject()
+  public void testExistingRequestObject()
       throws ContainerCreationException, IOException, ServletException {
     final Container container = createContainer();
 
@@ -6,9 +6,9 @@
 
     final HttpServletRequest request = createMock(HttpServletRequest.class);
 
+    final InRequest inRequest = new InRequest();
     String name = Key.get(InRequest.class).toString();
-    expect(request.getAttribute(name)).andReturn(null);
-    request.setAttribute(eq(name), isA(InRequest.class));
+    expect(request.getAttribute(name)).andReturn(inRequest).times(2);
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
@@ -16,7 +16,8 @@
           ServletResponse servletResponse) {
         invoked[0] = true;
         assertSame(request, servletRequest);
-        assertTrue(container.getInstance(InRequest.class) instanceof InRequest);
+        assertSame(inRequest, container.getInstance(InRequest.class));
+        assertSame(inRequest, container.getInstance(InRequest.class));
       }
     };
 
