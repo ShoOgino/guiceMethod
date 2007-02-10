@@ -19,7 +19,8 @@
     ensureNotCreated();
     Map<Key<?>, Binding<?>> bindings =
         new HashMap<Key<?>, Binding<?>>();
-    container = new ContainerImpl(constructionProxyFactory, bindings);
+    container = new ContainerImpl(
+        proxyFactoryBuilder.create(), bindings);
 
     createConstantBindings();
 

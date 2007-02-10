@@ -1,0 +1,9 @@
+  static Context getContext() {
+    Context context = localContext.get();
+    if (context == null) {
+      throw new RuntimeException("Please apply " + GuiceFilter.class.getName()
+          + " to any request which uses servlet scopes.");
+    }
+    return context;
+  }
+

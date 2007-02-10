@@ -1,11 +1,9 @@
   public void testIntegration() throws ContainerCreationException {
     CountingInterceptor counter = new CountingInterceptor();
-    ProxyFactoryBuilder proxyFactoryBuilder = new ProxyFactoryBuilder();
-    proxyFactoryBuilder.intercept(any(), any(), counter);
-    ProxyFactory proxyFactory = proxyFactoryBuilder.create();
 
-    ContainerBuilder containerBuilder = new ContainerBuilder(proxyFactory);
+    ContainerBuilder containerBuilder = new ContainerBuilder();
     containerBuilder.bind(Foo.class);
+    containerBuilder.intercept(any(), any(), counter);
     Container container = containerBuilder.create(false);
 
     Foo foo = container.getFactory(Key.get(Foo.class)).get();

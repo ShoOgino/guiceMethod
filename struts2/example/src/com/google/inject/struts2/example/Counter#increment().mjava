@@ -1,0 +1,5 @@
+  /** Increments the count and returns the new value. */
+  public int increment() {
+    return count++;
+  }
+

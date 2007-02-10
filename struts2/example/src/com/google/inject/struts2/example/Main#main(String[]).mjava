@@ -1,0 +1,14 @@
+  public static void main(String[] args) throws Exception {
+    Server server = new Server();
+
+    Connector connector = new SelectChannelConnector();
+    connector.setPort(8080);
+    server.setConnectors(new Connector[] { connector });
+
+    WebAppContext webapp = new WebAppContext("./root", "/example");
+    server.addHandler(webapp);
+
+    server.start();
+    server.join();
+  }
+

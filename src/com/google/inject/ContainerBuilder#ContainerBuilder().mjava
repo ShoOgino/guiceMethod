@@ -2,6 +2,12 @@
    * Constructs a new builder.
    */
   public ContainerBuilder() {
-    this(new DefaultConstructionProxyFactory());
+    scope(DEFAULT_NAME, DEFAULT);
+    scope(CONTAINER_NAME, CONTAINER);
+
+    bind(Container.class).to(CONTAINER_FACTORY);
+    bind(Logger.class).to(LOGGER_FACTORY);
+
+    this.proxyFactoryBuilder = new ProxyFactoryBuilder();
   }
 

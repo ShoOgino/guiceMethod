@@ -1,0 +1,32 @@
+  @Inject
+  public GuiceObjectFactory(
+      @Inject("guice.module") String moduleName,
+      @Inject("struts.devMode") String developmentMode) {
+    ContainerBuilder builder = new ContainerBuilder();
+
+    // Configure default servlet bindings.
+    builder.install(new ServletModule());
+
+    try {
+      // Instantiate user's module and install it.
+      @SuppressWarnings({"unchecked"})
+      Class<? extends Module> moduleClass =
+          (Class<? extends Module>) Class.forName(moduleName);
+
+      Module module = moduleClass.newInstance();
+
+      module.configure(builder);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
+    System.err.println("devMode: " + developmentMode);
+
+    try {
+      container = builder.create(false);
+    } catch (ContainerCreationException e) {
+      System.err.println(e.getMessage());
+      System.exit(1);
+    }
+  }
+

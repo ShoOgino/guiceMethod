@@ -1,9 +1,4 @@
   static HttpServletRequest getRequest() {
-    HttpServletRequest request = localRequest.get();
-    if (request == null) {
-      throw new RuntimeException("Please apply " + GuiceFilter.class.getName()
-        + " to any request which uses servlet scopes.");
-    }
-    return request;
+    return getContext().getRequest();
   }
 

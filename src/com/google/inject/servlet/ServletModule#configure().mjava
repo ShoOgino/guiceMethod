@@ -1,5 +1,43 @@
   protected void configure() {
+    // Scopes.
     scope(REQUEST_NAME, REQUEST);
     scope(SESSION_NAME, SESSION);
+
+    // Bind request.
+    Factory<HttpServletRequest> requestFactory =
+        new Factory<HttpServletRequest>() {
+      public HttpServletRequest get() {
+        return GuiceFilter.getRequest();
+      }
+    };
+    bind(HttpServletRequest.class).to(requestFactory);
+    bind(ServletRequest.class).to(requestFactory);
+
+    // Bind response.
+    Factory<HttpServletResponse> responseFactory =
+        new Factory<HttpServletResponse>() {
+          public HttpServletResponse get() {
+            return GuiceFilter.getResponse();
+          }
+        };
+    bind(HttpServletResponse.class).to(responseFactory);
+    bind(ServletResponse.class).to(responseFactory);
+
+    // Bind session.
+    bind(HttpSession.class).to(new Factory<HttpSession>() {
+      public HttpSession get() {
+        return GuiceFilter.getRequest().getSession();
+      }
+    });
+
+    // Bind request parameters.
+    bind(new TypeLiteral<Map<String, String[]>>() {})
+        .named(REQUEST_PARAMETERS)
+        .to(new Factory<Map<String, String[]>>() {
+          @SuppressWarnings({"unchecked"})
+          public Map<String, String[]> get() {
+            return GuiceFilter.getRequest().getParameterMap();
+          }
+        });
   }
 

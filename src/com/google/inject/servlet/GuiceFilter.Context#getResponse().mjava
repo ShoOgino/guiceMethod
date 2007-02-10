@@ -1,0 +1,4 @@
+    HttpServletResponse getResponse() {
+      return response;
+    }
+

@@ -1,12 +1,13 @@
   public void doFilter(ServletRequest servletRequest,
       ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
-    HttpServletRequest previous = localRequest.get();
+    Context previous = localContext.get();
     try {
-      localRequest.set((HttpServletRequest) servletRequest);
+      localContext.set(new Context((HttpServletRequest) servletRequest,
+          (HttpServletResponse) servletResponse));
       filterChain.doFilter(servletRequest, servletResponse);
     } finally {
-      localRequest.set(previous);
+      localContext.set(previous);
     }
   }
 
