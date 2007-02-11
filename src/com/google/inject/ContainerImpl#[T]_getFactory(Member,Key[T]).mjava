@@ -39,7 +39,8 @@
       Binding<?> counterpartBinding =
           getBinding(Key.get(primitiveCounterpart, key.getName()));
       if (counterpartBinding != null) {
-        return (InternalFactory<T>) counterpartBinding.getInternalFactory();
+        return (InternalFactory<? extends T>)
+            counterpartBinding.getInternalFactory();
       }
     }
 

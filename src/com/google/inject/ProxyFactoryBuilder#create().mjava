@@ -2,8 +2,6 @@
    * Creates a {@code ProxyFactory}.
    */
   public ProxyFactory create() {
-    List<MethodAspect> methodAspects = new ArrayList<MethodAspect>();
-    methodAspects.addAll(this.methodAspects);
-    return new ProxyFactory(methodAspects);
+    return new ProxyFactory(new ArrayList<MethodAspect>(methodAspects));
   }
 

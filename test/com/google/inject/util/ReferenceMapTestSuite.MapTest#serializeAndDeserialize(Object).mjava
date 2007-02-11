@@ -1,3 +1,4 @@
+    @SuppressWarnings("IOResourceOpenedButNotSafelyClosed")
     public Object serializeAndDeserialize(Object o) throws IOException,
         ClassNotFoundException {
       ByteArrayOutputStream out = new ByteArrayOutputStream();

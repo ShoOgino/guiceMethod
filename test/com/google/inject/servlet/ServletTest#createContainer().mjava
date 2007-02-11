@@ -3,7 +3,6 @@
     builder.install(new ServletModule());
     builder.bind(InSession.class);
     builder.bind(InRequest.class);
-    final Container container = builder.create(false);
-    return container;
+    return builder.create(false);
   }
 

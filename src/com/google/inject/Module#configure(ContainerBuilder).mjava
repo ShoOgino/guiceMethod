@@ -1,5 +1,7 @@
   /**
-   * Configures the given builder.
+   * Contributes bindings and other configurations to a container builder, so
+   * that the resulting {@link Container} will include this module properly set
+   * up.
    */
   void configure(ContainerBuilder builder);
 
