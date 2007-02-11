@@ -8,11 +8,13 @@
       reference[0] = new InternalContext(this);
       try {
         return callable.call(reference[0]);
-      } finally {
+      }
+      finally {
         // Only remove the context if this call created it.
         reference[0] = null;
       }
-    } else {
+    }
+    else {
       // Someone else will clean up this context.
       return callable.call(reference[0]);
     }

@@ -1,8 +1,9 @@
-  @SuppressWarnings({"unchecked"})
+  @SuppressWarnings("unchecked")
   static <T> Constructor<T> invalidConstructor() {
     try {
       return (Constructor<T>) InvalidConstructor.class.getDeclaredConstructor();
-    } catch (NoSuchMethodException e) {
+    }
+    catch (NoSuchMethodException e) {
       throw new AssertionError(e);
     }
   }

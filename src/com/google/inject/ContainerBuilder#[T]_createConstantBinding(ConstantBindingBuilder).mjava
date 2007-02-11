@@ -1,13 +1,14 @@
-  @SuppressWarnings({"unchecked"})
+  @SuppressWarnings("unchecked")
   private <T> void createConstantBinding(ConstantBindingBuilder builder) {
     if (builder.hasValue()) {
       Key<T> key = (Key<T>) builder.getKey();
-      InternalFactory<? extends T> factory =
-          (InternalFactory<? extends T>) builder.getInternalFactory();
-      Binding<?> binding =
-          Binding.newInstance(container, key, builder.getSource(), factory);
+      InternalFactory<? extends T> factory
+          = (InternalFactory<? extends T>) builder.getInternalFactory();
+      Binding<?> binding
+          = Binding.newInstance(container, key, builder.getSource(), factory);
       putBinding(binding);
-    } else {
+    }
+    else {
       addError(builder.getSource(), ErrorMessages.MISSING_CONSTANT_VALUE);
     }
   }

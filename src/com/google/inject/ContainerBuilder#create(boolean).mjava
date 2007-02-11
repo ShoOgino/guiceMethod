@@ -3,12 +3,11 @@
    * which were registered using {@link #requestStaticInjection(Class...)}.
    *
    * @param preload If true, the container will load all container-scoped
-   *  bindings now. If false, the container will lazily load them. Eager
-   *  loading is appropriate for production use (catch errors early and take
-   *  any performance hit up front) while lazy loading can speed development.
-   *
+   *     bindings now. If false, the container will lazily load them. Eager
+   *     loading is appropriate for production use (catch errors early and take
+   *     any performance hit up front) while lazy loading can speed development.
    * @throws ContainerCreationException if configuration errors are found. The
-   *  expectation is that the application will log this exception and exit.
+   *     expectation is that the application will log this exception and exit.
    * @throws IllegalStateException if called more than once
    */
   public synchronized Container create(boolean preload)
@@ -17,16 +16,14 @@
 
     // Create the container.
     ensureNotCreated();
-    Map<Key<?>, Binding<?>> bindings =
-        new HashMap<Key<?>, Binding<?>>();
-    container = new ContainerImpl(
-        proxyFactoryBuilder.create(), bindings);
+    Map<Key<?>, Binding<?>> bindings = new HashMap<Key<?>, Binding<?>>();
+    container = new ContainerImpl(proxyFactoryBuilder.create(), bindings);
 
     createConstantBindings();
 
     // Commands to execute before returning the Container instance.
-    final List<ContextualCallable<Void>> preloaders =
-        new ArrayList<ContextualCallable<Void>>();
+    final List<ContextualCallable<Void>> preloaders
+        = new ArrayList<ContextualCallable<Void>>();
 
     createBindings(preload, preloaders);
     createLinkedBindings();

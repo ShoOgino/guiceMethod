@@ -2,9 +2,10 @@
       try {
         index++;
         return index == interceptors.length
-          ? methodProxy.invokeSuper(proxy, arguments)
-          : interceptors[index].invoke(this);
-      } finally {
+            ? methodProxy.invokeSuper(proxy, arguments)
+            : interceptors[index].invoke(this);
+      }
+      finally {
         index--;
       }
     }

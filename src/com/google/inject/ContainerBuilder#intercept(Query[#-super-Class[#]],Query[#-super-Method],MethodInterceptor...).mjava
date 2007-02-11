@@ -3,9 +3,9 @@
    * and method queries.
    *
    * @param classQuery matches classes the interceptor should apply to. For
-   *  example: {@code only(Runnable.class)}.
+   *     example: {@code only(Runnable.class)}.
    * @param methodQuery matches methods the interceptor should apply to. For
-   *  example: {@code annotatedWith(Transactional.class)}.
+   *     example: {@code annotatedWith(Transactional.class)}.
    * @param interceptors to apply
    */
   public void intercept(Query<? super Class<?>> classQuery,

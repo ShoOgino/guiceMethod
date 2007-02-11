@@ -1,7 +1,7 @@
     void runInjectors(ContainerImpl container) {
       container.callInContext(new ContextualCallable<Void>() {
         public Void call(InternalContext context) {
-          for (ContainerImpl.Injector injector : injectors) {
+          for (Injector injector : injectors) {
             injector.inject(context, null);
           }
           return null;

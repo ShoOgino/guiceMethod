@@ -1,9 +1,10 @@
-  @SuppressWarnings({"unchecked"})
+  @SuppressWarnings({ "unchecked" })
   private static Class<?> getRawType(Type type) {
     if (type instanceof Class<?>) {
       // type is a normal class.
       return (Class<?>) type;
-    } else {
+    }
+    else {
       // type is a parameterized type.
       if (!(type instanceof ParameterizedType)) {
         unexpectedType(type, ParameterizedType.class);

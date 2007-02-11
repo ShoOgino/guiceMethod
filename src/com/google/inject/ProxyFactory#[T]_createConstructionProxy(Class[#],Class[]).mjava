@@ -4,10 +4,10 @@
   <T> ConstructionProxy<T> createConstructionProxy(Class<?> clazz,
       Class[] parameterTypes) {
     FastClass fastClass = GuiceFastClass.create(clazz);
-    final FastConstructor fastConstructor =
-        fastClass.getConstructor(parameterTypes);
+    final FastConstructor fastConstructor
+        = fastClass.getConstructor(parameterTypes);
     return new ConstructionProxy<T>() {
-      @SuppressWarnings({"unchecked"})
+      @SuppressWarnings("unchecked")
       public T newInstance(Object... arguments)
           throws InvocationTargetException {
         return (T) fastConstructor.newInstance(arguments);

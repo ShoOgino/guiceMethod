@@ -13,14 +13,11 @@
       invocationHandlers = new ArrayList<DelegatingInvocationHandler<T>>();
     }
 
-    DelegatingInvocationHandler<T> invocationHandler =
-        new DelegatingInvocationHandler<T>();
+    DelegatingInvocationHandler<T> invocationHandler
+        = new DelegatingInvocationHandler<T>();
     invocationHandlers.add(invocationHandler);
 
-    return Proxy.newProxyInstance(
-      expectedType.getClassLoader(),
-      new Class[] { expectedType },
-      invocationHandler
-    );
+    return Proxy.newProxyInstance(expectedType.getClassLoader(),
+        new Class[] { expectedType }, invocationHandler);
   }
 

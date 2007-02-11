@@ -18,22 +18,20 @@
     final Map<Method, Integer> indices = new HashMap<Method, Integer>();
 
     // Create method/interceptor holders and record indices.
-    List<MethodInterceptorsPair> methodInterceptorsPairs =
-        new ArrayList<MethodInterceptorsPair>();
+    List<MethodInterceptorsPair> methodInterceptorsPairs
+        = new ArrayList<MethodInterceptorsPair>();
     for (int i = 0; i < methods.size(); i++) {
       Method method = methods.get(i);
       methodInterceptorsPairs.add(new MethodInterceptorsPair(method));
       indices.put(method, i);
     }
 
-    // Iterate over aspects and add interceptors for the methods they apply
-    // to.
+    // Iterate over aspects and add interceptors for the methods they apply to
     boolean anyMatched = false;
     for (MethodAspect methodAspect : applicableAspects) {
-      for (MethodInterceptorsPair methodInterceptorsPair
-          : methodInterceptorsPairs) {
-        if (methodAspect.matches(methodInterceptorsPair.method)) {
-          methodInterceptorsPair.addAll(methodAspect.interceptors());
+      for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
+        if (methodAspect.matches(pair.method)) {
+          pair.addAll(methodAspect.interceptors());
           anyMatched = true;
         }
       }
@@ -47,14 +45,14 @@
     // noinspection unchecked
     Class<? extends Callback>[] callbackTypes = new Class[methods.size()];
     for (int i = 0; i < methods.size(); i++) {
-      MethodInterceptorsPair methodInterceptorsPair =
-          methodInterceptorsPairs.get(i);
-      if (!methodInterceptorsPair.hasInterceptors()) {
+      MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
+      if (!pair.hasInterceptors()) {
         callbacks[i] = NoOp.INSTANCE;
         callbackTypes[i] = NoOp.class;
-      } else {
+      }
+      else {
         callbacks[i] = new InterceptorStackCallback(
-            methodInterceptorsPair.method, methodInterceptorsPair.interceptors);
+            pair.method, pair.interceptors);
         callbackTypes[i] = net.sf.cglib.proxy.MethodInterceptor.class;
       }
     }

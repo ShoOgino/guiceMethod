@@ -1,7 +1,7 @@
   /**
    * Unsafe. Constructs a key from a manually specified type.
    */
-  @SuppressWarnings({"unchecked"})
+  @SuppressWarnings("unchecked")
   private Key(Type type, String name) {
     this.name = nonNull(name, "name");
     this.typeLiteral = (TypeLiteral<T>) TypeLiteral.get(type);

@@ -5,7 +5,8 @@
     if (bindings.containsKey(key)) {
       addError(binding.getSource(), ErrorMessages.BINDING_ALREADY_SET, key,
           original.getSource());
-    } else {
+    }
+    else {
       bindings.put(key, binding);
     }
   }

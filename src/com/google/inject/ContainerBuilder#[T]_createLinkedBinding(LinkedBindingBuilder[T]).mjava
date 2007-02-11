@@ -1,5 +1,4 @@
-  private <T> void createLinkedBinding(
-      LinkedBindingBuilder<T> builder) {
+  private <T> void createLinkedBinding(LinkedBindingBuilder<T> builder) {
     // TODO: Support linking to a later-declared link?
     Key<? extends T> destinationKey = builder.getDestination();
     if (destinationKey == null) {
@@ -14,9 +13,8 @@
       return;
     }
 
-    Binding<?> binding =
-        Binding.newInstance(container, builder.getKey(), builder.getSource(),
-            destination.getInternalFactory());
+    Binding<?> binding = Binding.newInstance(container, builder.getKey(),
+        builder.getSource(), destination.getInternalFactory());
 
     putBinding(binding);
   }

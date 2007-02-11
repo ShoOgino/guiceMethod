@@ -5,7 +5,6 @@
       if (!this.key.hasDefaultName()) {
         addError(source, ErrorMessages.NAME_ALREADY_SET);
       }
-
       this.key = this.key.named(name);
       return this;
     }

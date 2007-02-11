@@ -13,19 +13,20 @@
       if (!(factoryType instanceof ParameterizedType)) {
         return null;
       }
-      Type entryType =
-          ((ParameterizedType) factoryType).getActualTypeArguments()[0];
+      Type entryType
+          = ((ParameterizedType) factoryType).getActualTypeArguments()[0];
 
       try {
-        final Factory<?> factory =
-            getFactory(Key.get(entryType, key.getName()));
+        final Factory<?> factory
+            = getFactory(Key.get(entryType, key.getName()));
         return new InternalFactory<T>() {
-          @SuppressWarnings({"unchecked"})
+          @SuppressWarnings("unchecked")
           public T get(InternalContext context) {
             return (T) factory;
           }
         };
-      } catch (ConfigurationException e) {
+      }
+      catch (ConfigurationException e) {
         ErrorMessages.handleMissingBinding(errorHandler, member, key,
             getNamesOfBindingsTo(key.getType()));
         return invalidFactory();
@@ -33,11 +34,11 @@
     }
 
     // Auto[un]box primitives.
-    Class<?> primitiveCounterpart =
-        PRIMITIVE_COUNTERPARTS.get(key.getType().getRawType());
+    Class<?> primitiveCounterpart
+        = PRIMITIVE_COUNTERPARTS.get(key.getType().getRawType());
     if (primitiveCounterpart != null) {
-      Binding<?> counterpartBinding =
-          getBinding(Key.get(primitiveCounterpart, key.getName()));
+      Binding<?> counterpartBinding
+          = getBinding(Key.get(primitiveCounterpart, key.getName()));
       if (counterpartBinding != null) {
         return (InternalFactory<? extends T>)
             counterpartBinding.getInternalFactory();
@@ -45,8 +46,8 @@
     }
 
     // Do we have a constant String factory of the same name?
-    Binding<String> stringBinding =
-        getBinding(Key.get(String.class, key.getName()));
+    Binding<String> stringBinding
+        = getBinding(Key.get(String.class, key.getName()));
     if (stringBinding == null || !stringBinding.isConstant()) {
       return null;
     }
@@ -66,7 +67,8 @@
       try {
         T t = converter.convert(member, key, value);
         return new ConstantFactory<T>(t);
-      } catch (ConstantConversionException e) {
+      }
+      catch (ConstantConversionException e) {
         errorHandler.handle(e);
         return null;
       }
@@ -74,13 +76,12 @@
 
     // Do we need an enum?
     if (Enum.class.isAssignableFrom(type)) {
-      T t = null;
+      T t;
       try {
         t = (T) Enum.valueOf((Class) type, value);
-      } catch (IllegalArgumentException e) {
-        errorHandler.handle(
-            ConstantConversionException.createMessage(
-                value, key, member, e.toString()));
+      }
+      catch (IllegalArgumentException e) {
+        errorHandler.handle(createMessage(value, key, member, e.toString()));
         return invalidFactory();
       }
       return new ConstantFactory<T>(t);
@@ -90,10 +91,9 @@
     if (type == Class.class) {
       try {
         return new ConstantFactory<T>((T) Class.forName(value));
-      } catch (ClassNotFoundException e) {
-        errorHandler.handle(
-            ConstantConversionException.createMessage(
-                value, key, member, e.toString()));
+      }
+      catch (ClassNotFoundException e) {
+        errorHandler.handle(createMessage(value, key, member, e.toString()));
         return invalidFactory();
       }
     }

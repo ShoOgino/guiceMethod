@@ -1,11 +1,12 @@
     public Void call(InternalContext context) {
-      ExternalContext<?> externalContext =
-          ExternalContext.newInstance(null, key, context.getContainerImpl());
+      ExternalContext<?> externalContext
+          = ExternalContext.newInstance(null, key, context.getContainerImpl());
       context.setExternalContext(externalContext);
       try {
         factory.get(context);
         return null;
-      } finally {
+      }
+      finally {
         context.setExternalContext(null);
       }
     }

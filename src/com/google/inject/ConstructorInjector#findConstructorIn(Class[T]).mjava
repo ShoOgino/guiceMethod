@@ -1,8 +1,8 @@
-  @SuppressWarnings({"unchecked"})
+  @SuppressWarnings("unchecked")
   private Constructor<T> findConstructorIn(Class<T> implementation) {
     Constructor<T> found = null;
-    for (Constructor<T> constructor
-        : implementation.getDeclaredConstructors()) {
+    for (Constructor<T> constructor : implementation.getDeclaredConstructors())
+    {
       if (constructor.getAnnotation(Inject.class) != null) {
         if (found != null) {
           container.errorHandler.handle(
@@ -20,8 +20,10 @@
     // instead.
     try {
       return implementation.getDeclaredConstructor();
-    } catch (NoSuchMethodException e) {
-      container.errorHandler.handle(ErrorMessages.MISSING_CONSTRUCTOR, implementation);
+    }
+    catch (NoSuchMethodException e) {
+      container.errorHandler.handle(
+          ErrorMessages.MISSING_CONSTRUCTOR, implementation);
       return ContainerImpl.invalidConstructor();
     }
   }

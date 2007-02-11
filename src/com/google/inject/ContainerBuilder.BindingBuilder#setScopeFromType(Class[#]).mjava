@@ -1,10 +1,11 @@
     private void setScopeFromType(Class<?> implementation) {
       for (Annotation annotation : implementation.getAnnotations()) {
-        Class<? extends Annotation> annotationType =
-            annotation.annotationType();
+        Class<? extends Annotation> annotationType
+            = annotation.annotationType();
         if (annotationType == Scoped.class) {
           in(((Scoped) annotation).value());
-        } else {
+        }
+        else {
           Scoped scoped = annotationType.getAnnotation(Scoped.class);
           if (scoped != null) {
             in(scoped.value());

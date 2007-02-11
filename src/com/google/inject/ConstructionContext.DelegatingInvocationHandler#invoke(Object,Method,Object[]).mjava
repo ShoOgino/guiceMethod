@@ -8,11 +8,14 @@
 
       try {
         return method.invoke(delegate, args);
-      } catch (IllegalAccessException e) {
+      }
+      catch (IllegalAccessException e) {
         throw new RuntimeException(e);
-      } catch (IllegalArgumentException e) {
+      }
+      catch (IllegalArgumentException e) {
         throw new RuntimeException(e);
-      } catch (InvocationTargetException e) {
+      }
+      catch (InvocationTargetException e) {
         throw e.getTargetException();
       }
     }

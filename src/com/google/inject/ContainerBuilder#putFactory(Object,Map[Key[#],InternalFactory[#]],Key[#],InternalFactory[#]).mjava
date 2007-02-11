@@ -2,7 +2,8 @@
       Key<?> key, InternalFactory<?> factory) {
     if (factories.containsKey(key)) {
       addError(source, ErrorMessages.BINDING_ALREADY_SET, key);
-    } else {
+    }
+    else {
       factories.put(key, factory);
     }
   }

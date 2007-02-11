@@ -1,17 +1,19 @@
     <T> void putParser(final Class<T> primitive) {
       try {
         Class<?> wrapper = PRIMITIVE_COUNTERPARTS.get(primitive);
-        final Method parser = wrapper.getMethod("parse" +
-            Strings.capitalize(primitive.getName()), String.class);
+        final Method parser = wrapper.getMethod(
+            "parse" + Strings.capitalize(primitive.getName()), String.class);
         Converter<T> converter = new Converter<T>() {
-          @SuppressWarnings({"unchecked"})
+          @SuppressWarnings("unchecked")
           public T convert(Member member, Key<T> key, String value)
               throws ConstantConversionException {
             try {
               return (T) parser.invoke(null, value);
-            } catch (IllegalAccessException e) {
+            }
+            catch (IllegalAccessException e) {
               throw new AssertionError(e);
-            } catch (InvocationTargetException e) {
+            }
+            catch (InvocationTargetException e) {
               throw new ConstantConversionException(member, key, value,
                   e.getTargetException());
             }
@@ -19,7 +21,8 @@
         };
         put(wrapper, converter);
         put(primitive, converter);
-      } catch (NoSuchMethodException e) {
+      }
+      catch (NoSuchMethodException e) {
         throw new AssertionError(e);
       }
     }

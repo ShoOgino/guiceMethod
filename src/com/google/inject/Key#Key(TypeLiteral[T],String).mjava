@@ -1,6 +1,4 @@
-  /**
-   * Constructs a key from a manually specified type.
-   */
+  /** Constructs a key from a manually specified type. */
   private Key(TypeLiteral<T> typeLiteral, String name) {
     this.name = nonNull(name, "name");
     this.typeLiteral = typeLiteral;

@@ -3,9 +3,11 @@
       context.setExternalContext(externalContext);
       try {
         field.set(o, factory.get(context));
-      } catch (IllegalAccessException e) {
+      }
+      catch (IllegalAccessException e) {
         throw new AssertionError(e);
-      } finally {
+      }
+      finally {
         context.setExternalContext(previous);
       }
     }

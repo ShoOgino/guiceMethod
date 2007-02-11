@@ -3,7 +3,8 @@
     this.errorHandler = errorHandler;
     try {
       runnable.run();
-    } finally {
+    }
+    finally {
       this.errorHandler = previous;
     }
   }

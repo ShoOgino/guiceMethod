@@ -10,7 +10,8 @@
               constructor.getGenericParameterTypes(),
               inject.value()
           );
-    } catch (ContainerImpl.MissingDependencyException e) {
+    }
+    catch (ContainerImpl.MissingDependencyException e) {
       e.handle(container.errorHandler);
       return null;
     }

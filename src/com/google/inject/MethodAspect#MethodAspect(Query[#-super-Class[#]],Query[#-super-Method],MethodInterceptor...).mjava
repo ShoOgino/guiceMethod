@@ -1,8 +1,8 @@
-  MethodAspect(Query<? super Class<?>> classQuery, Query<? super Method> methodQuery,
-      MethodInterceptor... interceptors) {
+  MethodAspect(Query<? super Class<?>> classQuery,
+      Query<? super Method> methodQuery, MethodInterceptor... interceptors) {
     this.classQuery = Objects.nonNull(classQuery, "class query");
     this.methodQuery = Objects.nonNull(methodQuery, "method query");
-    this.interceptors =
-        Arrays.asList(Objects.nonNull(interceptors, "interceptors"));
+    this.interceptors
+        = Arrays.asList(Objects.nonNull(interceptors, "interceptors"));
   }
 

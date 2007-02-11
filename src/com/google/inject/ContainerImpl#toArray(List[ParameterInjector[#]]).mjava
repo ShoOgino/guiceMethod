@@ -1,7 +1,0 @@
-  @SuppressWarnings("unchecked")
-  private ParameterInjector<?>[] toArray(
-      List<ParameterInjector<?>> parameterInjections) {
-    return parameterInjections.toArray(
-        new ParameterInjector[parameterInjections.size()]);
-  }
-

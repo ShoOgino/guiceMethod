@@ -2,8 +2,8 @@
     final InternalFactory<? extends T> factory = getFactory(null, key);
 
     if (factory == null) {
-      throw new ConfigurationException("Missing binding to " +
-          AbstractErrorHandler.convert(key) + ".");
+      throw new ConfigurationException(
+          "Missing binding to " + AbstractErrorHandler.convert(key) + ".");
     }
 
     return new Factory<T>() {
@@ -15,7 +15,8 @@
                 ExternalContext.newInstance(null, key, ContainerImpl.this));
             try {
               return factory.get(context);
-            } finally {
+            }
+            finally {
               context.setExternalContext(previous);
             }
           }

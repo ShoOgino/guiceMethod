@@ -6,8 +6,8 @@
    * @param parameterTypes parameter types
    * @return injections
    */
-  <M extends AccessibleObject & Member> ParameterInjector<?>[]
-      getParametersInjectors(M member,
+  <M extends AccessibleObject & Member>
+  ParameterInjector<?>[] getParametersInjectors(M member,
       Annotation[][] annotations, Type[] parameterTypes, String defaultName)
       throws MissingDependencyException {
     boolean defaultNameOverridden = !defaultName.equals(Key.DEFAULT_NAME);
@@ -19,11 +19,10 @@
           ErrorMessages.NAME_ON_MEMBER_WITH_MULTIPLE_PARAMS, member);
     }
 
-    List<ParameterInjector<?>> parameterInjectors =
-        new ArrayList<ParameterInjector<?>>();
-
-    Iterator<Annotation[]> annotationsIterator =
-        Arrays.asList(annotations).iterator();
+    ParameterInjector<?>[] parameterInjectors
+        = new ParameterInjector<?>[parameterTypes.length];
+    Iterator<Annotation[]> annotationsIterator
+        = Arrays.asList(annotations).iterator();
     int index = 0;
     for (Type parameterType : parameterTypes) {
       Inject annotation = findInject(annotationsIterator.next());
@@ -35,14 +34,16 @@
           errorHandler.handle(
               ErrorMessages.NAME_ON_MEMBER_AND_PARAMETER, member);
         }
-      } else {
+      }
+      else {
         name = annotation == null ? defaultName : annotation.value();
       }
 
       Key<?> key = Key.get(parameterType, name);
-      parameterInjectors.add(createParameterInjector(key, member, index++));
+      parameterInjectors[index] = createParameterInjector(key, member, index);
+      index++;
     }
 
-    return toArray(parameterInjectors);
+    return parameterInjectors;
   }
 

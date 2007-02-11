@@ -3,7 +3,8 @@
       context.setExternalContext(externalContext);
       try {
         return factory.get(context);
-      } finally {
+      }
+      finally {
         context.setExternalContext(previous);
       }
     }
