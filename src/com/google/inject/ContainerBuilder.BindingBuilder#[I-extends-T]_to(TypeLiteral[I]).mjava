@@ -4,11 +4,19 @@
      * the scope based on the @{@link Scoped} annotation on the implementation
      * class if present.
      */
-    public <I extends T> BindingBuilder<T> to(TypeLiteral<I> implementation) {
+    public <I extends T> BindingBuilder<T> to(
+        final TypeLiteral<I> implementation) {
       ensureImplementationIsNotSet();
-      requestValidation(errorHandler, implementation.getRawType());
       this.implementation = implementation;
-      this.factory = new DefaultFactory<I>(key, implementation);
+      final DefaultFactory<I> defaultFactory
+          = new DefaultFactory<I>(key, implementation);
+      this.factory = defaultFactory;
+      creationListeners.add(new CreationListener() {
+        public void notify(ContainerImpl container) {
+          defaultFactory.setConstructor(
+              container.getConstructor(implementation));
+        }
+      });
       return this;
     }
 

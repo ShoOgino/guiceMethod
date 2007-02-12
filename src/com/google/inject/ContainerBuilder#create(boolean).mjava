@@ -35,9 +35,8 @@
 
     stopwatch.resetAndLog(logger, "Binding indexing");
 
-    // Run validations.
-    for (Validation validation : validations) {
-      validation.run(container);
+    for (CreationListener creationListener : creationListeners) {
+      creationListener.notify(container);
     }
 
     stopwatch.resetAndLog(logger, "Validation");
