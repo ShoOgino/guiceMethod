@@ -1,0 +1,9 @@
+  public void testOverriddingAnnotation()
+      throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    ContainerBuilder.BindingBuilder<Singleton> bindingBuilder
+        = builder.bind(Singleton.class).in(Scopes.DEFAULT);
+    builder.create(false);
+    assertSame(Scopes.DEFAULT, bindingBuilder.scope);
+  }
+

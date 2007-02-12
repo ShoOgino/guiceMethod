@@ -1,0 +1,18 @@
+  /**
+   * Gets the scope for a type based on its annotations. Returns {@code null}
+   * if none specified.
+   *
+   * @param implementation type
+   * @param scopes map of scope names to scopes
+   * @param errorHandler handles errors
+   */
+  static Scope getScopeForType(Class<?> implementation,
+      Map<String, Scope> scopes, ErrorHandler errorHandler) {
+    return getScopeForName(
+        getScopeNameForType(implementation, errorHandler),
+        scopes,
+        errorHandler
+    );
+
+  }
+

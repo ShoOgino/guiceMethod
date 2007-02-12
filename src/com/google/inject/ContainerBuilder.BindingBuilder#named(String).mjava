@@ -3,7 +3,7 @@
      */
     public BindingBuilder<T> named(String name) {
       if (!this.key.hasDefaultName()) {
-        addError(source, ErrorMessages.NAME_ALREADY_SET);
+        errorHandler.handle(ErrorMessages.NAME_ALREADY_SET);
       }
       this.key = this.key.named(name);
       return this;

@@ -10,6 +10,7 @@
    */
   public void intercept(Query<? super Class<?>> classQuery,
       Query<? super Method> methodQuery, MethodInterceptor... interceptors) {
+    ensureNotCreated();
     proxyFactoryBuilder.intercept(classQuery, methodQuery, interceptors);
   }
 

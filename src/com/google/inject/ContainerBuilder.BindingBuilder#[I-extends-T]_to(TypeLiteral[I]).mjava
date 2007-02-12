@@ -6,9 +6,9 @@
      */
     public <I extends T> BindingBuilder<T> to(TypeLiteral<I> implementation) {
       ensureImplementationIsNotSet();
-      validate(source, implementation.getRawType());
+      requestValidation(errorHandler, implementation.getRawType());
+      this.implementation = implementation;
       this.factory = new DefaultFactory<I>(key, implementation);
-      setScopeFromType(implementation.getRawType());
       return this;
     }
 

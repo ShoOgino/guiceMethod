@@ -1,4 +1,0 @@
-    public void handle(Throwable t) {
-      throw new AssertionError();
-    }
-

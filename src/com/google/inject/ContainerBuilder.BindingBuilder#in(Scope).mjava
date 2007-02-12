@@ -3,7 +3,6 @@
      */
     public BindingBuilder<T> in(Scope scope) {
       ensureScopeNotSet();
-
       this.scope = nonNull(scope, "scope");
       return this;
     }

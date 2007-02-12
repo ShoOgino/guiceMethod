@@ -5,13 +5,20 @@
         to(key.getType());
       }
 
-      // Default scope does nothing.
-      if (scope == null || scope == DEFAULT) {
-        return this.factory;
+      // Look for @Scoped on the implementation type.
+      if (implementation != null) {
+        Scope fromAnnotation = Scopes.getScopeForType(
+            implementation.getRawType(), scopes, errorHandler);
+        if (fromAnnotation != null) {
+          if (this.scope == null) {
+            this.scope = fromAnnotation;
+          } else {
+            logger.info("Overriding scope specified by annotation at "
+                + source + ".");
+          }
+        }
       }
 
-      Factory<T> scoped = scope.scope(this.key,
-          new FactoryToInternalFactoryAdapter<T>(container, this.factory));
-      return new InternalFactoryToFactoryAdapter<T>(scoped);
+      return Scopes.scope(this.key, container, this.factory, scope);
     }
 

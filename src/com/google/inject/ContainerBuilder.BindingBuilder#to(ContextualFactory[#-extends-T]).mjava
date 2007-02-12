@@ -4,9 +4,7 @@
     public BindingBuilder<T> to(
         final ContextualFactory<? extends T> factory) {
       ensureImplementationIsNotSet();
-
       this.factory = new InternalToContextualFactoryAdapter<T>(factory);
-
       return this;
     }
 

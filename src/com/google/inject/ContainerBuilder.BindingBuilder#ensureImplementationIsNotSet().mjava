@@ -3,7 +3,7 @@
      */
     private void ensureImplementationIsNotSet() {
       if (factory != null) {
-        addError(source, ErrorMessages.IMPLEMENTATION_ALREADY_SET);
+        errorHandler.handle(ErrorMessages.IMPLEMENTATION_ALREADY_SET);
       }
     }
 

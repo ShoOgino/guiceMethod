@@ -1,0 +1,9 @@
+  public void testBindingToInstanceWithScope() {
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.bind(Singleton.class).to(new Singleton()).in(Scopes.DEFAULT);
+    try {
+      builder.create(false);
+      fail();
+    } catch (ContainerCreationException e) { /* expected */ }
+  }
+

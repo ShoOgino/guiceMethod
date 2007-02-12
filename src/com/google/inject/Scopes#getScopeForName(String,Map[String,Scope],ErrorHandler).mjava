@@ -1,0 +1,20 @@
+  /**
+   * Finds scope for the given name. Returns {@code null} if the name is
+   * {@code null}. Otherwise, records an error if a scope isn't found.
+   */
+  static Scope getScopeForName(String name, Map<String, Scope> scopes,
+      ErrorHandler errorHandler) {
+    // None found.
+    if (name == null) {
+      return null;
+    }
+
+    // Look up scope for name.
+    Scope scope = scopes.get(name);
+    if (scope == null) {
+      errorHandler.handle(
+          ErrorMessages.SCOPE_NOT_FOUND, name, scopes.keySet());
+    }
+    return scope;
+  }
+

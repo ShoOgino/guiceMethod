@@ -8,7 +8,7 @@
       // is fine for now.
       this.scope = scopes.get(nonNull(scopeName, "scope name"));
       if (this.scope == null) {
-        addError(source, ErrorMessages.SCOPE_NOT_FOUND, scopeName,
+        errorHandler.handle(ErrorMessages.SCOPE_NOT_FOUND, scopeName,
             scopes.keySet());
       }
       return this;

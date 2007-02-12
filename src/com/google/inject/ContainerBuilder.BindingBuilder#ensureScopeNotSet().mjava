@@ -1,6 +1,12 @@
     private void ensureScopeNotSet() {
+      // Scoping isn't allowed when we have only one instance.
+      if (this.instance != null) {
+        errorHandler.handle(ErrorMessages.SINGLE_INSTANCE_AND_SCOPE);
+        return;
+      }
+
       if (this.scope != null) {
-        addError(source, ErrorMessages.SCOPE_ALREADY_SET);
+        errorHandler.handle(ErrorMessages.SCOPE_ALREADY_SET);
       }
     }
 

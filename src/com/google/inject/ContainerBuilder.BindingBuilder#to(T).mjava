@@ -3,8 +3,12 @@
      */
     public BindingBuilder<T> to(T instance) {
       ensureImplementationIsNotSet();
+      this.instance = nonNull(instance, "instance");
       this.factory = new ConstantFactory<T>(instance);
-      in(CONTAINER);
+      if (this.scope != null) {
+        errorHandler.handle(ErrorMessages.SINGLE_INSTANCE_AND_SCOPE);
+      }
+      this.scope = CONTAINER;
       return this;
     }
 
