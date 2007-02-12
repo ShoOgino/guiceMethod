@@ -1,8 +1,9 @@
-  @SuppressWarnings("unchecked")
   private Constructor<T> findConstructorIn(Class<T> implementation) {
     Constructor<T> found = null;
-    for (Constructor<T> constructor : implementation.getDeclaredConstructors())
-    {
+    @SuppressWarnings("unchecked") // why doesn't it return the right thing?
+    Constructor<T>[] constructors
+        = (Constructor<T>[]) implementation.getDeclaredConstructors();
+    for (Constructor<T> constructor : constructors) {
       if (constructor.getAnnotation(Inject.class) != null) {
         if (found != null) {
           container.errorHandler.handle(

@@ -1,0 +1,4 @@
+    public Binding<?> createBinding(ContainerImpl container) {
+      return bindingInfo.createBinding(container);
+    }
+

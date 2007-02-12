@@ -6,7 +6,7 @@
       return;
     }
 
-    Binding<? extends T> destination = getBinding(destinationKey);
+    Binding<? extends T> destination = container.getBinding(destinationKey);
     if (destination == null) {
       addError(builder.getSource(), ErrorMessages.LINK_DESTINATION_NOT_FOUND,
           destinationKey);

@@ -1,0 +1,6 @@
+    Binding<T> createBinding(ContainerImpl container) {
+      Key<T> key = Key.get(type, name);
+      ConstantFactory<T> factory = new ConstantFactory<T>(value);
+      return Binding.newInstance(container, key, source, factory);
+    }
+

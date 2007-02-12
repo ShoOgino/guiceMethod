@@ -1,11 +1,4 @@
   public <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type) {
-    // IntelliJ doesn't understand that the below is "correct"
-    //noinspection RedundantCast,RawUseOfParameterizedType
-    @SuppressWarnings("unchecked")
-    List<Binding<T>> bindingsForThisType = (List) bindingsByType.get(type);
-    if (bindingsForThisType == null) {
-      return Collections.emptyList();
-    }
-    return bindingsForThisType;
+    return bindingsMultimap.getAll(type);
   }
 

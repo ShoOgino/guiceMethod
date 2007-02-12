@@ -1,10 +1,4 @@
   <T> void index(Binding<T> binding) {
-    TypeLiteral<T> type = binding.getKey().getType();
-    List<Binding<?>> bindingsForThisType = bindingsByType.get(type);
-    if (bindingsForThisType == null) {
-      bindingsForThisType = new ArrayList<Binding<?>>();
-      bindingsByType.put(type, bindingsForThisType);
-    }
-    bindingsForThisType.add(binding);
+    bindingsMultimap.put(binding.getKey().getType(), binding);
   }
 

@@ -1,0 +1,5 @@
+    public <T> List<Binding<T>> getAll(TypeLiteral<T> type) {
+      List<Binding<T>> list = getFromMap(type);
+      return list == null ? Collections.<Binding<T>>emptyList() : list;
+    }
+

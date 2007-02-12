@@ -1,4 +1,4 @@
     boolean hasValue() {
-      return type != null;
+      return bindingInfo != null;
     }
 

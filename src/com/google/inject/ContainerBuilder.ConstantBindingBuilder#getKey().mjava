@@ -1,4 +1,0 @@
-    Key<?> getKey() {
-      return Key.get(type, name);
-    }
-

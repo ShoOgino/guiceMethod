@@ -2,11 +2,11 @@
      * Maps a constant value to the given type and name.
      */
     <T> void to(final Class<T> type, final T value) {
-      if (this.value != null) {
+      if (this.bindingInfo != null) {
         addError(source, ErrorMessages.CONSTANT_VALUE_ALREADY_SET);
       } else {
-        this.type = type;
-        this.value = value;
+        // TODO: we're sure name and source will have been set already, right?
+        this.bindingInfo = new BindingInfo<T>(type, value, name, source);
       }
     }
 

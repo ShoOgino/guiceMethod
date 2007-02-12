@@ -1,0 +1,9 @@
+  private void createConstantBinding(ConstantBindingBuilder builder) {
+    if (builder.hasValue()) {
+      putBinding(builder.createBinding(container));
+    }
+    else {
+      addError(builder.getSource(), ErrorMessages.MISSING_CONSTANT_VALUE);
+    }
+  }
+

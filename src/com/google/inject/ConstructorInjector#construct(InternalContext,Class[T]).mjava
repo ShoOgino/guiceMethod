@@ -2,7 +2,7 @@
    * Construct an instance. Returns {@code Object} instead of {@code T} because
    * it may return a proxy.
    */
-  Object construct(InternalContext context, Class<? super T> expectedType) {
+  T construct(InternalContext context, Class<T> expectedType) {
     ConstructionContext<T> constructionContext
         = context.getConstructionContext(this);
 
@@ -26,7 +26,7 @@
       try {
         Object[] parameters
             = ContainerImpl.getParameters(context, parameterInjectors);
-        t = newInstance(parameters);
+        t = constructionProxy.newInstance(parameters);
         constructionContext.setProxyDelegates(t);
       }
       finally {

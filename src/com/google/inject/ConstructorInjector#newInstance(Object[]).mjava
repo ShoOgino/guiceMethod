@@ -1,5 +1,0 @@
-  @SuppressWarnings("unchecked")
-  private T newInstance(Object[] parameters) throws InvocationTargetException {
-    return constructionProxy.newInstance(parameters);
-  }
-

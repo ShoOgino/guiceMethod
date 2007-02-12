@@ -1,5 +1,0 @@
-  @SuppressWarnings("unchecked")
-  private <T> Binding<T> getBinding(Key<T> destinationKey) {
-    return (Binding<T>) container.internalBindings().get(destinationKey);
-  }
-
