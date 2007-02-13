@@ -1,7 +1,7 @@
   /**
-   * Finds an annotation of the given type on the given element. Looks for
-   * the annotation directly on the element as well as on annotations on the
-   * element non-recursively.
+   * Finds an annotation of the given type on the given element. Looks for the
+   * annotation directly on the element as well as on other annotations on the
+   * element.
    *
    * @returns an instance of the annotation or {@code null} if none is found
    * @throws DuplicateAnnotationException if more than one annotation is found
@@ -9,21 +9,6 @@
   public static <A extends Annotation> A findAnnotation(
       Class<A> annotationType, AnnotatedElement element)
       throws DuplicateAnnotationException {
-    Annotation firstAnnotation = null;
-    A firstFound = null;
-
-    for (Annotation annotation : element.getAnnotations()) {
-      A found = findAnnotation(annotationType, annotation);
-      if (found != null) {
-        if (firstFound == null) {
-          firstAnnotation = annotation;
-          firstFound = found;
-        } else {
-          throw new DuplicateAnnotationException(firstAnnotation, annotation);
-        }
-      }
-    }
-
-    return firstFound;
+    return findAnnotation(annotationType, element.getAnnotations());
   }
 

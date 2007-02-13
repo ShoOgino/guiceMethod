@@ -1,0 +1,12 @@
+  public void testSurrogateInjection() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    Bar bar = new Bar(null);
+    builder.bind(Bar.class).named("bar").to(bar);
+    Container container = builder.create(false);
+    Foo foo = container.getInstance(Foo.class);
+    assertSame(bar, foo.field);
+    assertSame(bar, foo.fromConstructor);
+    assertSame(bar, foo.fromMethod);
+    assertSame(bar, foo.fromParameter);
+  }
+

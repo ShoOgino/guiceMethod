@@ -1,0 +1,5 @@
+    @Inject
+    void setBar2(@InjectBar Bar bar) {
+      fromParameter= bar;
+    }
+

@@ -5,13 +5,23 @@
     Constructor<T>[] constructors
         = (Constructor<T>[]) implementation.getDeclaredConstructors();
     for (Constructor<T> constructor : constructors) {
-      if (constructor.getAnnotation(Inject.class) != null) {
+      Inject inject = null;
+      try {
+        inject = SurrogateAnnotations.findAnnotation(Inject.class, constructor);
+      } catch (DuplicateAnnotationException e) {
+        container.errorHandler.handle(ErrorMessages.DUPLICATE_ANNOTATIONS,
+            Inject.class.getSimpleName(), constructor, e.getFirst(),
+            e.getSecond());
+      }
+
+      if (inject != null) {
         if (found != null) {
           container.errorHandler.handle(
               ErrorMessages.TOO_MANY_CONSTRUCTORS, implementation);
           return ContainerImpl.invalidConstructor();
         }
         found = constructor;
+        this.inject = inject;
       }
     }
     if (found != null) {

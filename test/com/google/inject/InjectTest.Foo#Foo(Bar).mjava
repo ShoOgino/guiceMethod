@@ -1,0 +1,5 @@
+    @InjectBar
+    public Foo(Bar fromConstructor) {
+      this.fromConstructor = fromConstructor;
+    }
+
