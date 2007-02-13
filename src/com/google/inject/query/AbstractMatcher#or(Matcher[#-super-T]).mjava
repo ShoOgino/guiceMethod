@@ -1,0 +1,4 @@
+  public Matcher<T> or(Matcher<? super T> other) {
+    return new OrMatcher<T>(this, other);
+  }
+

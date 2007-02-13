@@ -1,0 +1,7 @@
+  public void testInPackage() {
+    assertTrue(inPackage(Matchers.class.getPackage())
+        .matches(MatcherTest.class));
+    assertFalse(inPackage(Matchers.class.getPackage())
+        .matches(Object.class));
+  }
+

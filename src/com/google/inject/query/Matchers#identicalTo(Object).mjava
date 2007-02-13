@@ -1,9 +1,9 @@
   /**
-   * Returns a query which matches only the given object.
+   * Returns a matcher which matches only the given object.
    */
-  public static Query<Object> identicalTo(final Object o) {
+  public static Matcher<Object> identicalTo(final Object o) {
     Objects.nonNull(o, "o");
-    return new AbstractQuery<Object>() {
+    return new AbstractMatcher<Object>() {
       public boolean matches(Object other) {
         return o == other;
       }

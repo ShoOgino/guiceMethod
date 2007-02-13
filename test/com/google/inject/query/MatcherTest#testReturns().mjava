@@ -1,5 +1,5 @@
   public void testReturns() throws NoSuchMethodException {
-    Query<Method> predicate = returns(only(String.class));
+    Matcher<Method> predicate = returns(only(String.class));
     assertTrue(predicate.matches(
         Object.class.getMethod("toString")));
     assertFalse(predicate.matches(

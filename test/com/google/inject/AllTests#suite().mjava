@@ -17,7 +17,7 @@
     suite.addTestSuite(ImplicitBindingTest.class);
     suite.addTestSuite(InjectTest.class);
 
-    suite.addTestSuite(QueryTest.class);
+    suite.addTestSuite(MatcherTest.class);
     suite.addTestSuite(ProxyFactoryTest.class);
     suite.addTestSuite(IntegrationTest.class);
 

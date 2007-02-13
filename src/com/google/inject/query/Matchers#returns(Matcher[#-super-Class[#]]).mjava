@@ -1,0 +1,17 @@
+  /**
+   * Returns a matcher which matches methods with matching return types.
+   */
+  public static Matcher<Method> returns(
+      final Matcher<? super Class<?>> returnType) {
+    Objects.nonNull(returnType, "return type matcher");
+    return new AbstractMatcher<Method>() {
+      public boolean matches(Method m) {
+        return returnType.matches(m.getReturnType());
+      }
+
+      public String toString() {
+        return "returns(" + returnType + ")";
+      }
+    };
+  }
+

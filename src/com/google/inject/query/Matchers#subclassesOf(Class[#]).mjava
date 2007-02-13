@@ -1,10 +1,10 @@
   /**
-   * Returns a query which matches subclasses of the given type (as well as
+   * Returns a matcher which matches subclasses of the given type (as well as
    * the given type).
    */
-  public static Query<Class> subclassesOf(final Class<?> superclass) {
+  public static Matcher<Class> subclassesOf(final Class<?> superclass) {
     Objects.nonNull(superclass, "superclass");
-    return new AbstractQuery<Class>() {
+    return new AbstractMatcher<Class>() {
       public boolean matches(Class subclass) {
         return superclass.isAssignableFrom(subclass);
       }

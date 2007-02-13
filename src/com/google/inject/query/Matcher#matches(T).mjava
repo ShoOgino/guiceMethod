@@ -1,0 +1,5 @@
+  /**
+   * Returns {@code true} if this matches {@code t}, {@code false} otherwise.
+   */
+  boolean matches(T t);
+

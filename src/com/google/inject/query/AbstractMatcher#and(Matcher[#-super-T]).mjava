@@ -1,0 +1,4 @@
+  public Matcher<T> and(final Matcher<? super T> other) {
+    return new AndMatcher<T>(this, other);
+  }
+

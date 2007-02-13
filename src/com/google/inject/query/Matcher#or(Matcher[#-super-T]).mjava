@@ -1,0 +1,6 @@
+  /**
+   * Returns a new matcher which returns {@code true} if either this or the
+   * given matcher return {@code true}.
+   */
+  Matcher<T> or(Matcher<? super T> other);
+

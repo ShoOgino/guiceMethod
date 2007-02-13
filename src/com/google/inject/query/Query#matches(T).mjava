@@ -1,6 +1,0 @@
-  /**
-   * Returns {@code true} if this query matches {@code t}, {@code false}
-   * otherwise.
-   */
-  boolean matches(T t);
-

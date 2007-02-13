@@ -1,7 +1,0 @@
-  /**
-   * Returns a query which matches any input.
-   */
-  public static Query<Object> any() {
-    return ANY;
-  }
-

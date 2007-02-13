@@ -1,9 +1,9 @@
   /**
-   * Inverts the given query.
+   * Inverts the given matcher.
    */
-  public static <T> Query<T> not(final Query<? super T> p) {
+  public static <T> Matcher<T> not(final Matcher<? super T> p) {
     Objects.nonNull(p, "p");
-    return new AbstractQuery<T>() {
+    return new AbstractMatcher<T>() {
       public boolean matches(T t) {
         return !p.matches(t);
       }

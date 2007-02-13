@@ -1,0 +1,5 @@
+    public AndMatcher(Matcher<? super T> a, Matcher<? super T> b) {
+      this.a = a;
+      this.b = b;
+    }
+
