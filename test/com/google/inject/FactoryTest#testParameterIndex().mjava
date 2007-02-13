@@ -24,7 +24,7 @@
 
     Container c = cb.create(false);
 
-    A a = c.getCreator(A.class).get();
+    A a = c.getFactory(A.class).get();
 
     assertNotNull(a.negativeOne);
     assertTrue(a.initCalled);

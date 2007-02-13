@@ -3,6 +3,13 @@
    */
   public ContainerCreationException(Collection<Message> errorMessages) {
     super();
-    this.errorMessages = errorMessages;
+
+    // Sort the messages by source. 
+    this.errorMessages = new ArrayList<Message>(errorMessages);
+    Collections.sort(this.errorMessages, new Comparator<Message>() {
+      public int compare(Message a, Message b) {
+        return a.getSourceString().compareTo(b.getSourceString());
+      }
+    });
   }
 

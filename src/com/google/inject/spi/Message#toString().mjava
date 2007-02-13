@@ -1,4 +1,4 @@
   public String toString() {
-    return source + " " + message;
+    return getSourceString() + " " + message;
   }
 

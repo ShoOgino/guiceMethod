@@ -1,5 +1,5 @@
   /** Increments the count and returns the new value. */
-  public int increment() {
+  public synchronized int increment() {
     return count++;
   }
 

@@ -1,0 +1,16 @@
+  @Inject(value = "guice.module", required = false)
+  void setModule(String moduleClassName) {
+    try {
+      // Instantiate user's module and install it.
+      @SuppressWarnings({"unchecked"})
+      Class<? extends Module> moduleClass =
+          (Class<? extends Module>) Class.forName(moduleClassName);
+
+      Module module = moduleClass.newInstance();
+
+      module.configure(builder);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+

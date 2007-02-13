@@ -3,7 +3,7 @@
     b.bind("foo").to("invalid");
     Container c = b.create(false);
     try {
-      c.getCreator(InvalidEnum.class).get();
+      c.getFactory(InvalidEnum.class).get();
       fail();
     } catch (ConfigurationException e) {
       assertTrue(e.getMessage().startsWith(

@@ -3,7 +3,7 @@
 
     if (factory == null) {
       throw new ConfigurationException(
-          "Missing binding to " + AbstractErrorHandler.convert(key) + ".");
+          "Missing binding to " + ErrorMessages.convert(key) + ".");
     }
 
     return new Factory<T>() {

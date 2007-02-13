@@ -1,6 +1,6 @@
   public void testInjection() throws ContainerCreationException {
     Container container = createFooContainer();
-    Foo foo = container.getCreator(Foo.class).get();
+    Foo foo = container.getFactory(Foo.class).get();
 
     assertEquals("test", foo.s);
     assertEquals("test", foo.bar.getTee().getS());

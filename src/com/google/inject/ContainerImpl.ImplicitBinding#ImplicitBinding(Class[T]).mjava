@@ -1,0 +1,4 @@
+    ImplicitBinding(Class<T> type) {
+      this.type = type;
+    }
+

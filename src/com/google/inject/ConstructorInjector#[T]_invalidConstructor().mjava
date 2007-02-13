@@ -1,0 +1,15 @@
+  /**
+   * Returns an invalid constructor. This enables us to keep running and
+   * reporting legitimate errors.
+   */
+  static <T> ConstructorInjector<T> invalidConstructor() {
+    return new ConstructorInjector<T>() {
+      T construct(InternalContext context, Class<T> expectedType) {
+        throw new UnsupportedOperationException();
+      }
+      public T get() {
+        throw new UnsupportedOperationException();
+      }
+    };
+  }
+

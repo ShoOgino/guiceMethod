@@ -1,5 +1,5 @@
   ContainerImpl.ParameterInjector<?>[] createParameterInjector(
-      Constructor<T> constructor) {
+      ContainerImpl container, Constructor<T> constructor) {
     try {
       Inject inject = constructor.getAnnotation(Inject.class);
       return inject == null

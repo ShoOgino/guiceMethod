@@ -1,4 +1,3 @@
   protected void configure() {
-    bind(Counter.class);
   }
 

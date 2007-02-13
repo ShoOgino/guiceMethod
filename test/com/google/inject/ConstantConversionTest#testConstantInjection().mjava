@@ -9,7 +9,7 @@
     ContainerBuilder b = new ContainerBuilder();
     b.bindProperties(properties);
     Container c = b.create(false);
-    Foo foo = c.getCreator(Foo.class).get();
+    Foo foo = c.getFactory(Foo.class).get();
 
     checkNumbers(
       foo.integerField,

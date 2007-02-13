@@ -1,4 +1,4 @@
-  <T> InternalFactory<? extends T> getFactory(Member member, Key<T> key) {
+  <T> InternalFactory<? extends T> getFactory(final Member member, Key<T> key) {
     // TODO: Clean up unchecked type warnings.
 
     // Do we have a factory for the specified type and name?
@@ -8,8 +8,6 @@
     }
 
     Class<? super T> rawType = key.getType().getRawType();
-
-    // TODO: Can we use the type itself as an implementation?
 
     // Handle cases where T is a Factory<?>.
     if (rawType.equals(Factory.class)) {
@@ -49,57 +47,84 @@
       }
     }
 
-    // Do we have a constant String factory of the same name?
+    // Can we convert from a String constant?
     Binding<String> stringBinding
         = getBinding(Key.get(String.class, key.getName()));
-    if (stringBinding == null || !stringBinding.isConstant()) {
+    if (stringBinding != null && stringBinding.isConstant()) {
+      // We don't need do pass in an InternalContext because we know this is
+      // a ConstantFactory which will not use it.
+      String value = stringBinding.getInternalFactory().get(null);
+
+      // TODO: Generalize everything below here and enable users to plug in
+      // their own converters.
+
+      // Do we need a primitive?
+      Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(rawType);
+      if (converter != null) {
+        try {
+          T t = converter.convert(member, key, value);
+          return new ConstantFactory<T>(t);
+        }
+        catch (ConstantConversionException e) {
+          errorHandler.handle(e);
+          return invalidFactory();
+        }
+      }
+
+      // Do we need an enum?
+      if (Enum.class.isAssignableFrom(rawType)) {
+        T t;
+        try {
+          t = (T) Enum.valueOf((Class) rawType, value);
+        }
+        catch (IllegalArgumentException e) {
+          errorHandler.handle(createMessage(value, key, member, e.toString()));
+          return invalidFactory();
+        }
+        return new ConstantFactory<T>(t);
+      }
+
+      // Do we need a class?
+      if (rawType == Class.class) {
+        try {
+          // TODO: Make sure we use the right classloader.
+          return new ConstantFactory<T>((T) Class.forName(value));
+        }
+        catch (ClassNotFoundException e) {
+          errorHandler.handle(createMessage(value, key, member, e.toString()));
+          return invalidFactory();
+        }
+      }
+    }
+
+    // Don't try to inject primitives, arrays, enums, interfaces or abstract
+    // classes.
+    int modifiers = rawType.getModifiers();
+    if (rawType.isArray() || rawType.isEnum()
+        || Modifier.isAbstract(modifiers) || rawType.isPrimitive()) {
       return null;
     }
 
-    // We don't need do pass in an InternalContext because we know this is
-    // a ConstantFactory which will not use it.
-    String value = stringBinding.getInternalFactory().get(null);
-
-    // TODO: Generalize everything below here and enable users to plug in
-    // their own converters.
-
-    // Do we need a primitive?
-    Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(rawType);
-    if (converter != null) {
+    // Last resort: inject the type itself.
+    if (member != null) {
+      // If we're injecting into a member, include it in the error messages.
+      final ErrorHandler previous = this.errorHandler;
+      this.errorHandler = new AbstractErrorHandler() {
+        public void handle(String message) {
+          previous.handle("Error while injecting "
+              + ErrorMessages.convert(member) + ": " + message);
+        }
+        public void handle(Throwable t) {
+          previous.handle(t);
+        }
+      };
       try {
-        T t = converter.convert(member, key, value);
-        return new ConstantFactory<T>(t);
+        return (InternalFactory<? extends T>) getImplicitBinding(rawType);
       }
-      catch (ConstantConversionException e) {
-        errorHandler.handle(e);
-        return null;
+      finally {
+        this.errorHandler = previous;
       }
     }
-
-    // Do we need an enum?
-    if (Enum.class.isAssignableFrom(rawType)) {
-      T t;
-      try {
-        t = (T) Enum.valueOf((Class) rawType, value);
-      }
-      catch (IllegalArgumentException e) {
-        errorHandler.handle(createMessage(value, key, member, e.toString()));
-        return invalidFactory();
-      }
-      return new ConstantFactory<T>(t);
-    }
-
-    // Do we need a class?
-    if (rawType == Class.class) {
-      try {
-        return new ConstantFactory<T>((T) Class.forName(value));
-      }
-      catch (ClassNotFoundException e) {
-        errorHandler.handle(createMessage(value, key, member, e.toString()));
-        return invalidFactory();
-      }
-    }
-
-    return null;
+    return (InternalFactory<? extends T>) getImplicitBinding(rawType);
   }
 

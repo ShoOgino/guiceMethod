@@ -1,5 +1,5 @@
   @Inject
-  public CounterAction(Counter counter) {
+  public Count(Counter counter) {
     this.counter = counter;
   }
 

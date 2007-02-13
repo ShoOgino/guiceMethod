@@ -3,7 +3,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind("i").to(5);
     Container container = builder.create(false);
-    IntegerWrapper iw = container.getCreator(IntegerWrapper.class).get();
+    IntegerWrapper iw = container.getFactory(IntegerWrapper.class).get();
     assertEquals(5, (int) iw.i);
   }
 

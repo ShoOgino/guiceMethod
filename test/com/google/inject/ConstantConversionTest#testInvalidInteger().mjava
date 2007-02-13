@@ -3,7 +3,7 @@
     b.bind("#").to("invalid");
     Container c = b.create(false);
     try {
-      c.getCreator(InvalidInteger.class).get();
+      c.getFactory(InvalidInteger.class).get();
       fail();
     } catch (ConfigurationException e) {
       assertTrue(e.getMessage().contains(

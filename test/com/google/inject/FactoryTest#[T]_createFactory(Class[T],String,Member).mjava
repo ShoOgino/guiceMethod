@@ -5,7 +5,7 @@
         assertEquals(expectedMember, context.getMember());
         assertEquals(name, context.getKey().getName());
         assertEquals(type, context.getKey().getType().getType());
-        return context.getContainer().getCreator(type).get();
+        return context.getContainer().getFactory(type).get();
       }
     };
   }

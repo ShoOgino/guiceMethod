@@ -1,4 +1,0 @@
-  public Object buildBean(String clazz, Map map) throws Exception {
-    return container.getCreator(Class.forName(clazz)).get();
-  }
-

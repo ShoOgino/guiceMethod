@@ -1,0 +1,17 @@
+  public Object buildBean(Class clazz, Map extraContext) {
+    synchronized (this) {
+      if (container == null) {
+        try {
+          logger.info("Creating container...");
+          container = builder.create(!developmentMode);
+        } catch (Throwable t) {
+          t.printStackTrace();
+          System.exit(1);
+        }
+        logger.info("Container created successfully.");
+      }
+    }
+
+    return container.getInstance(clazz);
+  }
+

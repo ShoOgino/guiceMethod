@@ -5,8 +5,9 @@
 
     if (!expectedType.isInterface()) {
       // TODO: Report better error.
-      throw new ConfigurationException(
-          expectedType.getName() + " is not an interface.");
+      throw new ConfigurationException("Tried proxying "
+          + expectedType.getName() + " to support a circular dependency, but"
+          + " it is not an interface.");
     }
 
     if (invocationHandlers == null) {

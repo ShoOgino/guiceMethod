@@ -1,4 +1,5 @@
-  private Constructor<T> findConstructorIn(Class<T> implementation) {
+  private Constructor<T> findConstructorIn(ContainerImpl container,
+      Class<T> implementation) {
     Constructor<T> found = null;
     @SuppressWarnings("unchecked") // why doesn't it return the right thing?
     Constructor<T>[] constructors

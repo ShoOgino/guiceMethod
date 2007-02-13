@@ -1,0 +1,10 @@
+  /**
+   * Used to create an invalid injector.
+   */
+  private ConstructorInjector() {
+    implementation = null;
+    injectors = null;
+    parameterInjectors = null;
+    constructionProxy = null;
+  }
+

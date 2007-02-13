@@ -1,0 +1,7 @@
+  public void testCircularDependency() throws ContainerCreationException {
+    ContainerBuilder builder = new ContainerBuilder();
+    Container container = builder.create(true);
+    Foo foo = container.getInstance(Foo.class);
+    assertSame(foo, foo.bar.foo);
+  }
+

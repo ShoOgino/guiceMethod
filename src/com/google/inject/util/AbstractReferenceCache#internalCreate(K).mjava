@@ -35,6 +35,10 @@
         futures.remove(keyReference);
       }
     } else {
+      if (previous.winningThread() == Thread.currentThread()) {
+        throw new RuntimeException("Circular reference: " + key);
+      }
+
       // wait for winning thread.
       return previous.get();
     }

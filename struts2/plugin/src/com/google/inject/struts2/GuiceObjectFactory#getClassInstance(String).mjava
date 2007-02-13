@@ -1,0 +1,25 @@
+  public Class getClassInstance(String name) throws ClassNotFoundException {
+    Class<?> clazz = super.getClassInstance(name);
+
+    synchronized (this) {
+      if (container == null) {
+        // We can only bind each class once.
+        if (boundClasses.add(clazz)) {
+          try {
+            clazz.getDeclaredFields();
+            clazz.getDeclaredMethods();
+          } catch (Throwable t) {
+            // Struts should still work even though some classes aren't in the
+            // classpath. It appears we always get the exception here when
+            // this is the case.
+            return clazz;
+          }
+
+          builder.bind(clazz);
+        }
+      }
+    }
+
+    return clazz;
+  }
+

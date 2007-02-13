@@ -1,0 +1,4 @@
+    public String intercept(ActionInvocation invocation) throws Exception {
+      return getDelegate().intercept(invocation);
+    }
+

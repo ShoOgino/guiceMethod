@@ -1,0 +1,5 @@
+    LazyLoadedInterceptor(InterceptorConfig config, Map params) {
+      this.config = config;
+      this.params = params;
+    }
+

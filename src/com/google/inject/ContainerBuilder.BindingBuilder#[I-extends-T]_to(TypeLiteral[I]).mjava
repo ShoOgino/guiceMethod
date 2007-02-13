@@ -12,9 +12,13 @@
           = new DefaultFactory<I>(key, implementation);
       this.factory = defaultFactory;
       creationListeners.add(new CreationListener() {
-        public void notify(ContainerImpl container) {
-          defaultFactory.setConstructor(
-              container.getConstructor(implementation));
+        public void notify(final ContainerImpl container) {
+          container.withErrorHandler(errorHandler, new Runnable() {
+            public void run() {
+              defaultFactory.setConstructor(
+                  container.getConstructor(implementation));
+            }
+          });
         }
       });
       return this;
