@@ -1,6 +1,8 @@
     /**
      * Reads line number information from the given class, if available.
+     * @param cls the class to read line number information from
      * @throws IllegalArgumentException if the bytecode for the class cannot be found
+     * @throws IOException if an error occurs while reading bytecode
      */
     public LineNumbers(Class cls) throws IOException {
         this.cls = cls;
