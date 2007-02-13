@@ -1,0 +1,8 @@
+        public void visitLineNumber(int line, Label start) {
+            this.line = line;
+            if (pendingMethod != null) {
+                lines.put(pendingMethod, line);
+                pendingMethod = null;
+            }
+        }
+

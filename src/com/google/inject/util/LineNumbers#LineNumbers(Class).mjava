@@ -1,0 +1,9 @@
+    /**
+     * Reads line number information from the given class, if available.
+     */
+    public LineNumbers(Class cls) throws IOException {
+        this.cls = cls;
+        InputStream in = cls.getResourceAsStream("/" + cls.getName().replace('.', '/') + ".class");
+        new ClassReader(in).accept(new LineNumberReader(), 0);
+    }
+
