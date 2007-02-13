@@ -1,0 +1,11 @@
+  /**
+   * Constructs a new exception.
+   *
+   * @param first encountered annotation
+   * @param second encountered annotation
+   */
+  public DuplicateAnnotationException(Annotation first, Annotation second) {
+    this.first = first;
+    this.second = second;
+  }
+

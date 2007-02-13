@@ -26,6 +26,7 @@
     suite.addTestSuite(ReferenceMapTest.class);
     suite.addTest(ReferenceMapTestSuite.suite());
     suite.addTestSuite(ReferenceCacheTest.class);
+    suite.addTestSuite(SurrogateAnnotationsTest.class);
 
     return suite;
   }
