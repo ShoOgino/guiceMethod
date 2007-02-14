@@ -1,8 +1,10 @@
-        public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
-            if ((access & Opcodes.ACC_PRIVATE) != 0)
-                return null;
-            pendingMethod = name + desc;
-            line = -1;
-            return this;
-        }
+    public MethodVisitor visitMethod(int access, String name, String desc,
+        String signature, String[] exceptions) {
+      if ((access & Opcodes.ACC_PRIVATE) != 0) {
+        return null;
+      }
+      pendingMethod = name + desc;
+      line = -1;
+      return this;
+    }
 

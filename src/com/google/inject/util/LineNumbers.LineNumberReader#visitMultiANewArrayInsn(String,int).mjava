@@ -1,2 +1,3 @@
-        public void visitMultiANewArrayInsn(String desc, int dims) { }
+    public void visitMultiANewArrayInsn(String desc, int dims) {
+    }
 

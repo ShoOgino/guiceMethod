@@ -1,2 +1,3 @@
-        public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) { }
+    public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
+    }
 

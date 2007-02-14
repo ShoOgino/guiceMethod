@@ -1,2 +1,4 @@
-        public AnnotationVisitor visitAnnotationDefault() { return null; }
+    public AnnotationVisitor visitAnnotationDefault() {
+      return null;
+    }
 

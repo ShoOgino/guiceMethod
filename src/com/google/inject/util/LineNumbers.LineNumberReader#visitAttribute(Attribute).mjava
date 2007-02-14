@@ -1,2 +1,3 @@
-        public void visitAttribute(Attribute attr) { }
+    public void visitAttribute(Attribute attr) {
+    }
 

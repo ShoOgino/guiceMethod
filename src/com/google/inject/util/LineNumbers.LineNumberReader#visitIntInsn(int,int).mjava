@@ -1,2 +1,3 @@
-        public void visitIntInsn(int opcode, int operand) { }
+    public void visitIntInsn(int opcode, int operand) {
+    }
 

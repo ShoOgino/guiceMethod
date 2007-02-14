@@ -1,10 +1,12 @@
-    private static String getKey(Member member) {
-        if (member instanceof Field) {
-            return member.getName();
-        } else if (member instanceof Method) {
-            return member.getName() + Type.getMethodDescriptor((Method)member);
-        } else {
-            return "<init>" + Type.getConstructorDescriptor((Constructor)member);
-        }
+  private static String getKey(Member member) {
+    if (member instanceof Field) {
+      return member.getName();
     }
+    else if (member instanceof Method) {
+      return member.getName() + Type.getMethodDescriptor((Method) member);
+    }
+    else {
+      return "<init>" + Type.getConstructorDescriptor((Constructor) member);
+    }
+  }
 

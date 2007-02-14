@@ -1,2 +1,3 @@
-        public void visitLdcInsn(Object cst) { }
+    public void visitLdcInsn(Object cst) {
+    }
 

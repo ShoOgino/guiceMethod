@@ -1,2 +1,3 @@
-        public void visitTypeInsn(int opcode, String desc) { }
+    public void visitTypeInsn(int opcode, String desc) {
+    }
 

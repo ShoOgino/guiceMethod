@@ -1,2 +1,3 @@
-        public void visitIincInsn(int var, int increment) { }
+    public void visitIincInsn(int var, int increment) {
+    }
 

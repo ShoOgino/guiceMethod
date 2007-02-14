@@ -1,5 +1,8 @@
-        public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-            if (opcode == Opcodes.PUTFIELD && this.name.equals(owner) && !lines.containsKey(name) && line != -1)
-                lines.put(name, line);
-        }
+    public void visitFieldInsn(int opcode, String owner, String name,
+        String desc) {
+      if (opcode == Opcodes.PUTFIELD && this.name.equals(owner)
+          && !lines.containsKey(name) && line != -1) {
+        lines.put(name, line);
+      }
+    }
 

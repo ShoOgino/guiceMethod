@@ -1,2 +1,4 @@
-        public AnnotationVisitor visitAnnotation(String desc, boolean visible) { return null; }
+    public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+      return null;
+    }
 

@@ -1,4 +1,4 @@
-        public void visitSource(String source, String debug) {
-            LineNumbers.this.source = source;
-        }
+    public void visitSource(String source, String debug) {
+      LineNumbers.this.source = source;
+    }
 

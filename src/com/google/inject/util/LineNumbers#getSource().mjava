@@ -1,8 +1,9 @@
-    /**
-     * Get the source file name as read from the bytecode.
-     * @return the source file name if available, or null
-     */
-    public String getSource() {
-        return source;
-    }
+  /**
+   * Get the source file name as read from the bytecode.
+   *
+   * @return the source file name if available, or null
+   */
+  public String getSource() {
+    return source;
+  }
 
