@@ -1,4 +1,4 @@
-  private <T> void createBinding(BindingBuilder<T> builder, boolean preload,
+  private <T> void createBinding(BindingBuilder<T> builder,
       List<ContextualCallable<Void>> preloaders) {
     final Key<T> key = builder.getKey();
     final InternalFactory<? extends T> factory
@@ -9,6 +9,7 @@
     putBinding(binding);
 
     // Register to preload if necessary.
+    boolean preload = stage == Stage.PRODUCTION;
     if (builder.isContainerScoped()) {
       if (preload || builder.shouldPreload()) {
         preloaders.add(new BindingPreloader(key, factory));

@@ -4,7 +4,7 @@
     b.bindConstant(BooleanValue.class).to("true");
     b.bindConstant(EnumValue.class).to("TEE");
     b.bindConstant(ClassName.class).to(Foo.class.getName());
-    Container c = b.create(false);
+    Container c = b.create();
     Foo foo = c.getFactory(Foo.class).get();
 
     checkNumbers(

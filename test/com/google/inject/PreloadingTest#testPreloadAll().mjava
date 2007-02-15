@@ -1,6 +1,6 @@
   public void testPreloadAll() throws ContainerCreationException {
-    ContainerBuilder builder = createContainerBuilder();
-    builder.create(true);
+    ContainerBuilder builder = createContainerBuilder(Stage.PRODUCTION);
+    builder.create();
     assertEquals(1, Foo.count);
     assertEquals(1, Bar.count);
   }

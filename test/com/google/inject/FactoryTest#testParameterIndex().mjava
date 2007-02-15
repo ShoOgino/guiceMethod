@@ -22,7 +22,7 @@
       }
     });
 
-    Container c = cb.create(false);
+    Container c = cb.create();
 
     A a = c.getFactory(A.class).get();
 

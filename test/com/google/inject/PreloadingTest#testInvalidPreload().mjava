@@ -2,7 +2,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(Foo.class).preload();
     try {
-      builder.create(false);
+      builder.create();
       fail();
     } catch (ContainerCreationException e) { /* expected */ }
   }

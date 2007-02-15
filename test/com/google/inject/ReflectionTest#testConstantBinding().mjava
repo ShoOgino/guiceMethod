@@ -1,7 +1,7 @@
   public void testConstantBinding() throws ContainerCreationException {
     ContainerBuilder builder = new ContainerBuilder();
     builder.bindConstant(I.class).to(5);
-    Container container = builder.create(false);
+    Container container = builder.create();
     Binding<?> i = container.getBinding(Key.get(int.class, I.class));
     assertEquals(5, i.getFactory().get());
     assertNotNull(i.getSource());

@@ -2,7 +2,7 @@
     List<String> names = Arrays.asList("foo", "bar", "bob");
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(new TypeLiteral<List<String>>() {}).to(names);
-    Container container = builder.create(false);
+    Container container = builder.create();
     Foo foo = container.getFactory(Foo.class).get();
     assertEquals(names, foo.names);
   }

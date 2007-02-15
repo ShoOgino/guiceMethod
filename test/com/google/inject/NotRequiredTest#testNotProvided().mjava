@@ -1,5 +1,5 @@
   public void testNotProvided() throws ContainerCreationException {
-    Container c = new ContainerBuilder().create(false);
+    Container c = new ContainerBuilder().create();
     Foo foo = c.getFactory(Foo.class).get();
     assertNull(foo.bar);
     assertNull(foo.fromMethod);

@@ -2,15 +2,11 @@
    * Creates a {@link Container} instance. Injects static members for classes
    * which were registered using {@link #requestStaticInjection(Class...)}.
    *
-   * @param preload If true, the container will load all container-scoped
-   *     bindings now. If false, the container will lazily load them. Eager
-   *     loading is appropriate for production use (catch errors early and take
-   *     any performance hit up front) while lazy loading can speed development.
    * @throws ContainerCreationException if configuration errors are found. The
    *     expectation is that the application will log this exception and exit.
    * @throws IllegalStateException if called more than once
    */
-  public synchronized Container create(boolean preload)
+  public synchronized Container create()
       throws ContainerCreationException {
     stopwatch.resetAndLog(logger, "Configuration");
 
@@ -26,7 +22,7 @@
     final List<ContextualCallable<Void>> preloaders
         = new ArrayList<ContextualCallable<Void>>();
 
-    createBindings(preload, preloaders);
+    createBindings(preloaders);
     createLinkedBindings();
 
     stopwatch.resetAndLog(logger, "Binding creation");

@@ -3,7 +3,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     Object bindingBuilder
         = builder.bind(Singleton.class).in(Scopes.DEFAULT);
-    builder.create(false);
+    builder.create();
     assertSame(Scopes.DEFAULT,
         ((ContainerBuilder.BindingBuilder<?>) bindingBuilder).scope);
   }

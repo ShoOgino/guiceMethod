@@ -2,7 +2,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     Foo foo = new Foo();
     builder.bind(Foo.class).to(foo);
-    Container container = builder.create(false);
+    Container container = builder.create();
     Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
     assertSame(foo, fooBinding.getFactory().get());
     assertNotNull(fooBinding.getSource());

@@ -3,7 +3,7 @@
     builder.bindConstant(S.class).to("test");
     builder.bindConstant(I.class).to(5);
     builder.requestStaticInjection(Static.class);
-    builder.create(false);
+    builder.create();
 
     assertEquals("test", Static.s);
     assertEquals(5, Static.i);

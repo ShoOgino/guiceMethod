@@ -2,7 +2,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(Singleton.class).to(new Singleton()).in(Scopes.DEFAULT);
     try {
-      builder.create(false);
+      builder.create();
       fail();
     } catch (ContainerCreationException e) { /* expected */ }
   }

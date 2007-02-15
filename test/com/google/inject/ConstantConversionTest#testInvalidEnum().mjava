@@ -1,7 +1,7 @@
   public void testInvalidEnum() throws ContainerCreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bindConstant(NumericValue.class).to("invalid");
-    Container c = b.create(false);
+    Container c = b.create();
     try {
       c.getFactory(InvalidEnum.class).get();
       fail();

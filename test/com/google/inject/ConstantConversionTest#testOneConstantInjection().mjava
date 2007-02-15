@@ -2,7 +2,7 @@
     ContainerBuilder builder = new ContainerBuilder();
     builder.bindConstant(NumericValue.class).to("5");
     builder.bind(Simple.class);
-    Container container = builder.create(false);
+    Container container = builder.create();
     Simple simple = container.getFactory(Simple.class).get();
     assertEquals(5, simple.i);
   }

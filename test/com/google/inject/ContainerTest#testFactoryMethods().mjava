@@ -7,7 +7,7 @@
     builder.bind(Singleton.class)
         .annotatedWith(Other.class)
         .to(other);
-    Container container = builder.create(true);
+    Container container = builder.create();
 
     assertSame(singleton,
         container.getFactory(Key.get(Singleton.class)).get());

@@ -1,12 +1,8 @@
   /**
-   * Constructs a new builder.
+   * Constructs a new builder for a development environment (see
+   * {@link Stage#DEVELOPMENT}).
    */
   public ContainerBuilder() {
-    scope(ContainerScoped.class, CONTAINER);
-
-    bind(Container.class).to(CONTAINER_FACTORY);
-    bind(Logger.class).to(LOGGER_FACTORY);
-
-    this.proxyFactoryBuilder = new ProxyFactoryBuilder();
+    this(Stage.DEVELOPMENT);
   }
 

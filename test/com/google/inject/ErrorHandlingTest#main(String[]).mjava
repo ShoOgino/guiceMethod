@@ -1,6 +1,6 @@
   public static void main(String[] args) throws ContainerCreationException {
     ContainerBuilder builder = new ContainerBuilder();
     builder.install(new MyModule());
-    builder.create(true);
+    builder.create();
   }
 

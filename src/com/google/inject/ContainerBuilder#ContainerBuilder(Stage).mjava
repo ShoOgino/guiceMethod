@@ -1,0 +1,18 @@
+  /**
+   * Constructs a new builder.
+   *
+   * @param stage we're running in. If the stage is {@link Stage#PRODUCTION},
+   *  we will eagerly load container-scoped objects.
+   */
+  public ContainerBuilder(Stage stage) {
+    scope(ContainerScoped.class, CONTAINER);
+
+    bind(Container.class).to(CONTAINER_FACTORY);
+    bind(Logger.class).to(LOGGER_FACTORY);
+    bind(Stage.class).to(stage);
+
+    this.proxyFactoryBuilder = new ProxyFactoryBuilder();
+
+    this.stage = stage;
+  }
+
