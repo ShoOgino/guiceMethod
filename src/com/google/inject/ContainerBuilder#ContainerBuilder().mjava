@@ -2,8 +2,7 @@
    * Constructs a new builder.
    */
   public ContainerBuilder() {
-    scope(DEFAULT_NAME, DEFAULT);
-    scope(CONTAINER_NAME, CONTAINER);
+    scope(ContainerScoped.class, CONTAINER);
 
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);

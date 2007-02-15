@@ -1,5 +1,0 @@
-  public void testScopedAnnotation() {
-    assertEquals("foo", Scopes.getScopeNameForType(AnnotatedWithScoped.class,
-        InvalidErrorHandler.INSTANCE));
-  }
-

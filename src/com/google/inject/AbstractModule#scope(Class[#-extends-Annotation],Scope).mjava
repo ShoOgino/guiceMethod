@@ -1,0 +1,8 @@
+  /**
+   * @see ContainerBuilder#scope(Class, Scope)
+   */
+  protected void scope(Class<? extends Annotation> scopeAnnotation,
+      Scope scope) {
+    builder.scope(scopeAnnotation, scope);
+  }
+

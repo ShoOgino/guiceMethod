@@ -1,5 +1,0 @@
-  public void testCustomAnnotation() {
-    assertEquals("custom", Scopes.getScopeNameForType(CustomAnnotated.class,
-        InvalidErrorHandler.INSTANCE));
-  }
-

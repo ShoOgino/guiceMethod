@@ -1,0 +1,26 @@
+  /**
+   * Gets the scope for a type based on its annotations. Returns {@code null}
+   * if none specified.
+   *
+   * @param implementation type
+   * @param scopes map of scope names to scopes
+   * @param errorHandler handles errors
+   */
+  static Scope getScopeForType(Class<?> implementation,
+      Map<Class<? extends Annotation>, Scope> scopes,
+      ErrorHandler errorHandler) {
+    Scope found = null;
+    for (Annotation annotation : implementation.getAnnotations()) {
+      Scope scope = scopes.get(annotation.annotationType());
+      if (scope != null) {
+        if (found != null) {
+          errorHandler.handle(ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS,
+              implementation, found, scope);
+        } else {
+          found = scope;
+        }
+      }
+    }
+    return found;
+  }
+

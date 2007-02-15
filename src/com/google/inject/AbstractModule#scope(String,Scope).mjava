@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#scope(String, Scope)
-   */
-  protected void scope(String name, Scope scope) {
-    builder.scope(name, scope);
-  }
-

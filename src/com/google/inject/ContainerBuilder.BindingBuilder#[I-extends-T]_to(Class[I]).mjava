@@ -1,8 +1,7 @@
     /**
      * Binds to instances of the given implementation class. The
      * {@link Container} will inject the implementation instances as well. Sets
-     * the scope based on the @{@link Scoped} annotation on the implementation
-     * class if present.
+     * the scope based on an annotation on the implementation class if present.
      */
     public <I extends T> BindingBuilder<T> to(Class<I> implementation) {
       return to(TypeLiteral.get(implementation));
