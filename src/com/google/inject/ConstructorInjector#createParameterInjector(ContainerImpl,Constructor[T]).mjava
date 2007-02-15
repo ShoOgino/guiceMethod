@@ -1,13 +1,12 @@
   ContainerImpl.ParameterInjector<?>[] createParameterInjector(
       ContainerImpl container, Constructor<T> constructor) {
     try {
-      return inject == null
+      return constructor.getParameterTypes().length == 0
           ? null // default constructor.
           : container.getParametersInjectors(
               constructor,
               constructor.getParameterAnnotations(),
-              constructor.getGenericParameterTypes(),
-              inject.value()
+              constructor.getGenericParameterTypes()
           );
     }
     catch (ContainerImpl.MissingDependencyException e) {

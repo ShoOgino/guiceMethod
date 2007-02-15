@@ -4,7 +4,9 @@
 
     ContainerBuilder builder = new ContainerBuilder();
     builder.bind(Singleton.class).to(singleton);
-    builder.bind(Singleton.class).named("other").to(other);
+    builder.bind(Singleton.class)
+        .annotatedWith(Other.class)
+        .to(other);
     Container container = builder.create(true);
 
     assertSame(singleton,
@@ -18,13 +20,13 @@
         container.getInstance(new TypeLiteral<Singleton>() {}));
 
     assertSame(other,
-        container.getFactory(Key.get(Singleton.class, "other")).get());
-    assertSame(other, container.getFactory(Singleton.class, "other").get());
+        container.getFactory(Key.get(Singleton.class, Other.class)).get());
+    assertSame(other, container.getFactory(Singleton.class, Other.class).get());
     assertSame(other,
-        container.getFactory(new TypeLiteral<Singleton>() {}, "other").get());
-    assertSame(other, container.getInstance(Key.get(Singleton.class, "other")));
-    assertSame(other, container.getInstance(Singleton.class, "other"));
+        container.getFactory(new TypeLiteral<Singleton>() {}, Other.class).get());
+    assertSame(other, container.getInstance(Key.get(Singleton.class, Other.class)));
+    assertSame(other, container.getInstance(Singleton.class, Other.class));
     assertSame(other,
-        container.getInstance(new TypeLiteral<Singleton>() {}, "other"));
+        container.getInstance(new TypeLiteral<Singleton>() {}, Other.class));
   }
 

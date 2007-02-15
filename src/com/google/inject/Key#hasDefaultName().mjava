@@ -1,7 +1,0 @@
-  /**
-   * Returns {@code true} if this key has the default name.
-   */
-  public boolean hasDefaultName() {
-    return DEFAULT_NAME.equals(this.name);
-  }
-

@@ -1,3 +1,0 @@
-    Injector create(ContainerImpl container, M member, String name)
-        throws MissingDependencyException;
-

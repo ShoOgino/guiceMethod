@@ -6,6 +6,7 @@
       return false;
     }
     Key<?> other = (Key<?>) o;
-    return name.equals(other.name) && typeLiteral.equals(other.typeLiteral);
+    return annotationStrategy.equals(other.annotationStrategy)
+        && typeLiteral.equals(other.typeLiteral);
   }
 

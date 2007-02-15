@@ -5,12 +5,14 @@
    * parameter in the anonymous class's type hierarchy so we can reconstitute it
    * at runtime despite erasure.
    *
-   * <p>Example usage for a binding of type {@code Foo} named "bar":
-   * {@code new Key<Foo>("bar") {}}.
+   * <p>Example usage for a binding of type {@code Foo} annotated with
+   * {@code @Named("bar")}:
+   *
+   * <p>{@code new Key<Foo>("bar") {}}.
    */
   @SuppressWarnings("unchecked")
   protected Key(String name) {
-    this.name = nonNull(name, "name");
+    this.annotationStrategy = strategyFor(new NamedImpl(name));
     this.typeLiteral
         = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();

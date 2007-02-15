@@ -5,8 +5,8 @@
       if (this.bindingInfo != null) {
         addError(source, ErrorMessages.CONSTANT_VALUE_ALREADY_SET);
       } else {
-        // TODO: we're sure name and source will have been set already, right?
-        this.bindingInfo = new BindingInfo<T>(type, value, name, source);
+        this.bindingInfo
+            = new BindingInfo<T>(type, value, annotationStrategy, source);
       }
     }
 

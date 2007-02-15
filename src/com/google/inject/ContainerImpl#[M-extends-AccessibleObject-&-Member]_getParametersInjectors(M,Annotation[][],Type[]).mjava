@@ -1,0 +1,28 @@
+  /**
+   * Gets parameter injectors.
+   *
+   * @param member to which the parameters belong
+   * @param annotations on the parameters
+   * @param parameterTypes parameter types
+   * @return injections
+   */
+  <M extends AccessibleObject & Member>
+  ParameterInjector<?>[] getParametersInjectors(M member,
+      Annotation[][] annotations, Type[] parameterTypes)
+      throws MissingDependencyException {
+    ParameterInjector<?>[] parameterInjectors
+        = new ParameterInjector<?>[parameterTypes.length];
+    Iterator<Annotation[]> annotationsIterator
+        = Arrays.asList(annotations).iterator();
+    int index = 0;
+    for (Type parameterType : parameterTypes) {
+      Annotation[] parameterAnnotations = annotationsIterator.next();
+      Key<?> key = Key.get(
+          parameterType, member, parameterAnnotations, errorHandler);
+      parameterInjectors[index] = createParameterInjector(key, member, index);
+      index++;
+    }
+
+    return parameterInjectors;
+  }
+

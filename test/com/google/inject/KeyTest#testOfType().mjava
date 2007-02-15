@@ -1,0 +1,7 @@
+  public void testOfType() {
+    Key<Object> k = Key.get(Object.class, Foo.class);
+    Key<Integer> ki = k.ofType(int.class);
+    assertEquals(int.class, ki.getRawType());
+    assertEquals(Foo.class, ki.getAnnotationType());
+  }
+

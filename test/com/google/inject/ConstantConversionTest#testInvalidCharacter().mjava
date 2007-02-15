@@ -5,10 +5,6 @@
     try {
       c.getFactory(InvalidCharacter.class).get();
       fail();
-    } catch (ConfigurationException e) {
-      assertTrue(e.getMessage().contains(
-          "Error converting 'invalid' to char while injecting foo "
-              + "with dependency named 'foo' in InvalidCharacter. Reason:"));
-    }
+    } catch (ConfigurationException e) { /* expected */ }
   }
 

@@ -1,0 +1,10 @@
+  /**
+   * Unsafe. Constructs a key from a manually specified type.
+   */
+  @SuppressWarnings("unchecked")
+  private Key(Type type, AnnotationStrategy annotationStrategy) {
+    this.annotationStrategy = annotationStrategy;
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.get(type);
+    this.hashCode = computeHashCode();
+  }
+

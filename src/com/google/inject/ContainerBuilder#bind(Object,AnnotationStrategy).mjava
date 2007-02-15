@@ -1,0 +1,11 @@
+  /**
+   * Binds a constant to the given name from the given source.
+   */
+  private ConstantBindingBuilder bind(Object source,
+      AnnotationStrategy annotationStrategy) {
+    ConstantBindingBuilder builder =
+        new ConstantBindingBuilder(annotationStrategy).from(source);
+    constantBindingBuilders.add(builder);
+    return builder;
+  }
+

@@ -1,5 +1,5 @@
     void handle(ErrorHandler errorHandler) {
       ErrorMessages.handleMissingBinding(errorHandler, member, key,
-          getNamesOfBindingsTo(key.getType()));
+          getNamesOfBindingAnnotations(key.getType()));
     }
 

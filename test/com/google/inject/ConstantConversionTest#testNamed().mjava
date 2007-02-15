@@ -1,0 +1,10 @@
+  @Named("foo")
+  public void testNamed() throws NoSuchMethodException {
+    Named named = getClass().getMethod("testNamed").getAnnotation(Named.class);
+    assertEquals(named, new NamedImpl("foo"));
+    assertEquals(new NamedImpl("foo"), named);
+
+    assertEquals(Key.get(String.class, new NamedImpl("foo")),
+        Key.get(String.class, named));
+  }
+

@@ -1,0 +1,9 @@
+    public boolean equals(Object o) {
+      if (!(o instanceof AnnotationInstanceStrategy)) {
+        return false;
+      }
+
+      AnnotationInstanceStrategy other = (AnnotationInstanceStrategy) o;
+      return annotation.equals(other.annotation);
+    }
+

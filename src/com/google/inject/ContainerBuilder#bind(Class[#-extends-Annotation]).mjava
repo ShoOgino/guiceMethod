@@ -1,0 +1,9 @@
+  /**
+   * Binds a constant to the given annotation type.
+   */
+  public ConstantBindingBuilder bind(
+      Class<? extends Annotation> annotationType) {
+    ensureNotCreated();
+    return bind(source(), Key.strategyFor(annotationType));
+  }
+

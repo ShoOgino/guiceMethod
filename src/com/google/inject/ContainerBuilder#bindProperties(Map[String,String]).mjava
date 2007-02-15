@@ -7,7 +7,7 @@
     for (Map.Entry<String, String> entry : properties.entrySet()) {
       String key = entry.getKey();
       String value = entry.getValue();
-      bind(key, source).to(value);
+      bind(source, Key.strategyFor(new NamedImpl(key))).to(value);
     }
   }
 

@@ -1,5 +1,0 @@
-  /**
-   * Gets an instance from the factory bound to the given type and name.
-   */
-  <T> T getInstance(Class<T> type, String name);
-

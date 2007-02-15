@@ -5,10 +5,6 @@
     try {
       c.getFactory(InvalidEnum.class).get();
       fail();
-    } catch (ConfigurationException e) {
-      assertTrue(e.getMessage().startsWith(
-          "Error converting 'invalid' to Bar while injecting foo "
-              + "with dependency named 'foo' in InvalidEnum. Reason:"));
-    }
+    } catch (ConfigurationException e) { /* expected */ }
   }
 

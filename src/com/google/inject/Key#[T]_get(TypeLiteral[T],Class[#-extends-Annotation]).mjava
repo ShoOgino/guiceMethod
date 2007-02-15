@@ -1,0 +1,8 @@
+  /**
+   * Gets a key for an injection type and an annotation type.
+   */
+  public static <T> Key<T> get(TypeLiteral<T> typeLiteral,
+      Class<? extends Annotation> annotationType) {
+    return new SimpleKey<T>(typeLiteral, strategyFor(annotationType));
+  }
+

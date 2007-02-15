@@ -19,8 +19,7 @@
           = ((ParameterizedType) factoryType).getActualTypeArguments()[0];
 
       try {
-        final Factory<?> factory
-            = getFactory(Key.get(entryType, key.getName()));
+        final Factory<?> factory = getFactory(key.ofType(entryType));
         return new InternalFactory<T>() {
           @SuppressWarnings("unchecked")
           public T get(InternalContext context) {
@@ -30,7 +29,7 @@
       }
       catch (ConfigurationException e) {
         ErrorMessages.handleMissingBinding(errorHandler, member, key,
-            getNamesOfBindingsTo(key.getType()));
+            getNamesOfBindingAnnotations(key.getType()));
         return invalidFactory();
       }
     }
@@ -40,7 +39,7 @@
         = PRIMITIVE_COUNTERPARTS.get(rawType);
     if (primitiveCounterpart != null) {
       Binding<?> counterpartBinding
-          = getBinding(Key.get(primitiveCounterpart, key.getName()));
+          = getBinding(key.ofType(primitiveCounterpart));
       if (counterpartBinding != null) {
         return (InternalFactory<? extends T>)
             counterpartBinding.getInternalFactory();
@@ -48,8 +47,8 @@
     }
 
     // Can we convert from a String constant?
-    Binding<String> stringBinding
-        = getBinding(Key.get(String.class, key.getName()));
+    Key<String> stringKey = key.ofType(String.class);
+    Binding<String> stringBinding = getBinding(stringKey);
     if (stringBinding != null && stringBinding.isConstant()) {
       // We don't need do pass in an InternalContext because we know this is
       // a ConstantFactory which will not use it.

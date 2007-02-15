@@ -1,5 +1,5 @@
     @Inject
-    public TeeImpl(@Inject("s") String s) {
+    public TeeImpl(@Named("s") String s) {
       this.s = s;
     }
 

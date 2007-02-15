@@ -1,5 +1,5 @@
-    @Inject("i")
-    public void setI(int i) {
+    @Inject
+    public void setI(@Named("i") int i) {
       this.i = i;
     }
 

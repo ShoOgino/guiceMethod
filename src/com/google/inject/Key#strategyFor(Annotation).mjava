@@ -1,0 +1,10 @@
+  /**
+   * Gets the strategy for an annotation.
+   */
+  static AnnotationStrategy strategyFor(Annotation annotation) {
+    nonNull(annotation, "annotation");
+    return isMarker(annotation.annotationType())
+        ? new AnnotationTypeStrategy(annotation.annotationType(), annotation)
+        : new AnnotationInstanceStrategy(annotation);
+  }
+

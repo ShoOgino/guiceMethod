@@ -1,0 +1,4 @@
+    public Class<? extends Annotation> getAnnotationType() {
+      return annotation.annotationType();
+    }
+

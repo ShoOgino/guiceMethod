@@ -1,5 +1,7 @@
   public String toString() {
-    return Key.class.getSimpleName()
-        + "[type=" + typeLiteral + ", name='" + name + "']";
+    return new ToStringBuilder(Key.class)
+        .add("type", typeLiteral)
+        .add("annotation", annotationStrategy)
+        .toString();
   }
 

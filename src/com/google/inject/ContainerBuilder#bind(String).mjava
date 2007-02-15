@@ -3,6 +3,6 @@
    */
   public ConstantBindingBuilder bind(String name) {
     ensureNotCreated();
-    return bind(name, source());
+    return bind(source(), Key.strategyFor(new NamedImpl(name)));
   }
 

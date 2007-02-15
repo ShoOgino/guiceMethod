@@ -1,5 +1,5 @@
-    @Inject("s")
-    public void setS(String s) {
+    @Inject
+    public void setS(@Named("s") String s) {
       this.s = s;
     }
 

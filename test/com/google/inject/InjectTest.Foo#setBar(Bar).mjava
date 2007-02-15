@@ -1,5 +1,0 @@
-    @InjectBar
-    void setBar(Bar bar) {
-      fromMethod = bar;
-    }
-

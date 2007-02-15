@@ -1,0 +1,17 @@
+    public FieldInjector(ContainerImpl container, Field field)
+        throws MissingDependencyException {
+      this.field = field;
+
+      // Ewwwww...
+      field.setAccessible(true);
+
+      Key<?> key = Key.get(
+          field.getGenericType(), field, field.getAnnotations(), errorHandler);
+      factory = container.getFactory(field, key);
+      if (factory == null) {
+        throw new MissingDependencyException(key, field);
+      }
+
+      this.externalContext = ExternalContext.newInstance(field, key, container);
+    }
+

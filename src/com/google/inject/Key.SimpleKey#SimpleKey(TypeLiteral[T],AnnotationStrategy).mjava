@@ -1,0 +1,5 @@
+    private SimpleKey(TypeLiteral<T> typeLiteral,
+        AnnotationStrategy annotationStrategy) {
+      super(typeLiteral, annotationStrategy);
+    }
+

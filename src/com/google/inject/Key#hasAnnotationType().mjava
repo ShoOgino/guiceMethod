@@ -1,0 +1,4 @@
+  boolean hasAnnotationType() {
+    return annotationStrategy.getAnnotationType() != null;
+  }
+

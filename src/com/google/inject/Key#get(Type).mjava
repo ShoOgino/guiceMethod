@@ -1,7 +1,7 @@
   /**
-   * Gets a key for a type. Defaults name to {@link #DEFAULT_NAME}.
+   * Gets a key for an injection type.
    */
   public static Key<?> get(Type type) {
-    return new SimpleKey<Object>(type, DEFAULT_NAME);
+    return new SimpleKey<Object>(type, NULL_STRATEGY);
   }
 

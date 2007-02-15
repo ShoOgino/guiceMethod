@@ -1,0 +1,5 @@
+  public <T> Factory<T> getFactory(TypeLiteral<T> type,
+      Annotation annotation) {
+    return getFactory(Key.get(type, annotation));
+  }
+

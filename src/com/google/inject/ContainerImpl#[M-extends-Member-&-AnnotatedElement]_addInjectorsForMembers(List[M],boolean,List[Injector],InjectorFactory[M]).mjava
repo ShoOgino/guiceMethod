@@ -14,10 +14,10 @@
 
         if (inject != null) {
           try {
-            injectors.add(injectorFactory.create(this, member, inject.value()));
+            injectors.add(injectorFactory.create(this, member));
           }
           catch (MissingDependencyException e) {
-            if (inject.required()) {
+            if (!inject.optional()) {
               // TODO: Report errors for more than one parameter per member.
               e.handle(errorHandler);
             }

@@ -1,2 +1,2 @@
-    @Inject("numbers") void setNumbers(List<Integer> numbers) {}
+    @Inject @Named("numbers") void setNumbers(List<Integer> numbers) {}
 

@@ -1,7 +1,7 @@
   /**
-   * Gets a key for a {@code Class}. Defaults name to {@link #DEFAULT_NAME}.
+   * Gets a key for an injection type.
    */
   public static <T> Key<T> get(Class<T> type) {
-    return new SimpleKey<T>(type, DEFAULT_NAME);
+    return new SimpleKey<T>(type, NULL_STRATEGY);
   }
 

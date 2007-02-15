@@ -1,2 +1,2 @@
-    @Inject("foo") void tee(String s, int i) {}
+    @Inject @Named("foo") void tee(String s, int i) {}
 

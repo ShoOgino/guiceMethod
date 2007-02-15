@@ -1,0 +1,6 @@
+  /**
+   * Gets the factory bound to the given type and annotation.
+   */
+  <T> Factory<T> getFactory(Class<T> type,
+      Class<? extends Annotation> annotationType);
+

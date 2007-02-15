@@ -1,11 +1,7 @@
     /**
-     * Sets the name of this binding.
+     * Binds to injection points annotated with {@code @Named(name)}.
      */
     public BindingBuilder<T> named(String name) {
-      if (!this.key.hasDefaultName()) {
-        errorHandler.handle(ErrorMessages.NAME_ALREADY_SET);
-      }
-      this.key = this.key.named(name);
-      return this;
+      return annotatedWith(new NamedImpl(nonNull(name, "name")));
     }
 

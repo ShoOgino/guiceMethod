@@ -1,2 +1,2 @@
-    @Inject("foo") void bar(@Inject String s) {}
+    @Inject void bar(@Named("foo") String s) {}
 

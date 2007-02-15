@@ -1,0 +1,8 @@
+  /**
+   * Returns a new key of the specified type with the same annotation as this
+   * key.
+   */
+  public <T> Key<T> ofType(TypeLiteral<T> type) {
+    return new SimpleKey<T>(type, annotationStrategy);
+  }
+

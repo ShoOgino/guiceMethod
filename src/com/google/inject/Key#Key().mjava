@@ -1,8 +1,19 @@
   /**
-   * Convenience method. Delegates to {@link #Key(String)} with
-   * {@link #DEFAULT_NAME}.
+   * Constructs a new key. Derives the type from this class's type parameter.
+   *
+   * <p>Clients create an empty anonymous subclass. Doing so embeds the type
+   * parameter in the anonymous class's type hierarchy so we can reconstitute it
+   * at runtime despite erasure.
+   *
+   * <p>Example usage for a binding of type {@code Foo}:
+   *
+   * <p>{@code new Key<Foo>() {}}.
    */
+  @SuppressWarnings("unchecked")
   protected Key() {
-    this(DEFAULT_NAME);
+    this.annotationStrategy = NULL_STRATEGY;
+    this.typeLiteral
+        = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
+    this.hashCode = computeHashCode();
   }
 

@@ -1,3 +1,0 @@
-    // Not injectable.
-    Bar(String s) {}
-

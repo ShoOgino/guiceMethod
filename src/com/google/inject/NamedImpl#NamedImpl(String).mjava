@@ -1,0 +1,4 @@
+  public NamedImpl(String value) {
+    this.value = Objects.nonNull(value, "name");
+  }
+

@@ -1,0 +1,8 @@
+  /**
+   * Returns a new key of the specified type with the same annotation as this
+   * key.
+   */
+  public Key<?> ofType(Type type) {
+    return new SimpleKey<Object>(type, annotationStrategy);
+  }
+

@@ -1,0 +1,13 @@
+    /**
+     * Specifies the annotation type for this binding.
+     */
+    public BindingBuilder<T> annotatedWith(
+        Class<? extends Annotation> annotationType) {
+      if (this.key.hasAnnotationType()) {
+        errorHandler.handle(ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
+      } else {
+        this.key = Key.get(this.key.getType(), annotationType);
+      }
+      return this;
+    }
+

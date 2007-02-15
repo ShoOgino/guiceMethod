@@ -1,0 +1,6 @@
+    AnnotationTypeStrategy(Class<? extends Annotation> annotationType,
+        Annotation annotation) {
+      this.annotationType = nonNull(annotationType, "annotation type");
+      this.annotation = annotation;
+    }
+

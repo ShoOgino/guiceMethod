@@ -1,7 +1,0 @@
-  /**
-   * Returns a new key with the same type as this key and the given name,
-   */
-  Key<T> named(String name) {
-    return new SimpleKey<T>(this.typeLiteral, name);
-  }
-

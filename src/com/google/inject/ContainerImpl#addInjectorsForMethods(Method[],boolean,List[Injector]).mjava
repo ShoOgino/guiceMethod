@@ -2,9 +2,9 @@
       List<Injector> injectors) {
     addInjectorsForMembers(Arrays.asList(methods), statics, injectors,
         new InjectorFactory<Method>() {
-          public Injector create(ContainerImpl container, Method method,
-              String name) throws MissingDependencyException {
-            return new MethodInjector(container, method, name);
+          public Injector create(ContainerImpl container, Method method)
+              throws MissingDependencyException {
+            return new MethodInjector(container, method);
           }
         });
   }

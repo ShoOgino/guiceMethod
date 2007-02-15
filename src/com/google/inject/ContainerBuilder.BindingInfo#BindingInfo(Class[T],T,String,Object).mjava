@@ -1,7 +1,0 @@
-    BindingInfo(Class<T> type, T value, String name, Object source) {
-      this.type = type;
-      this.value = value;
-      this.name = name;
-      this.source = source;
-    }
-
