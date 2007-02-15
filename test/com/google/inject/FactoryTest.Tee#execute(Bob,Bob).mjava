@@ -1,6 +1,6 @@
     @Inject void execute(
-        @Named("bob1") Bob bob1,
-        @Named("bob2") Bob bob2) {
+        @BobAnnotation1 Bob bob1,
+        @BobAnnotation2 Bob bob2) {
       this.bob1 = bob1;
       this.bob2 = bob2;
     }

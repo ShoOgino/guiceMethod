@@ -1,8 +1,0 @@
-  /**
-   * Binds a constant to the given name.
-   */
-  public ConstantBindingBuilder bind(String name) {
-    ensureNotCreated();
-    return bind(source(), Key.strategyFor(new NamedImpl(name)));
-  }
-

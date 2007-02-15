@@ -1,6 +1,6 @@
   public void testInvalidCharacter() throws ContainerCreationException {
     ContainerBuilder b = new ContainerBuilder();
-    b.bind("foo").to("invalid");
+    b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.create(false);
     try {
       c.getFactory(InvalidCharacter.class).get();

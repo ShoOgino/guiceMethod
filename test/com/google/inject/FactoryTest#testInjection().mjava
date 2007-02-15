@@ -3,35 +3,35 @@
 
     // Called from getInstance().
     cb.bind(Foo.class)
-        .named("foo")
-        .to(createFactory(Foo.class, "foo", null));
+        .annotatedWith(FooAnnotation.class)
+        .to(createFactory(Foo.class, FooAnnotation.class, null));
 
     // Called during preloading.
     cb.bind(Bar.class)
-        .named("fooBar")
-        .to(createFactory(Bar.class, "fooBar", null))
+        .annotatedWith(BarAnnotation.class)
+        .to(createFactory(Bar.class, BarAnnotation.class, null))
         .in(Scopes.CONTAINER);
 
     cb.bind(Tee.class)
-        .named("tee1")
-        .to(createFactory(Tee.class, "tee1",
+        .annotatedWith(TeeAnnotation1.class)
+        .to(createFactory(Tee.class, TeeAnnotation1.class,
             Bar.class.getDeclaredConstructor(Tee.class)));
 
     cb.bind(Tee.class)
-        .named("tee2")
-        .to(createFactory(Tee.class, "tee2",
+        .annotatedWith(TeeAnnotation2.class)
+        .to(createFactory(Tee.class, TeeAnnotation2.class,
             Bar.class.getDeclaredField("tee2")));
 
     final Method execute = Tee.class.getDeclaredMethod(
         "execute", Bob.class, Bob.class);
-    cb.bind(Bob.class).named("bob1").to(
-        createFactory(Bob.class, "bob1", execute));
-    cb.bind(Bob.class).named("bob2").to(
-        createFactory(Bob.class, "bob2", execute));
+    cb.bind(Bob.class).annotatedWith(BobAnnotation1.class).to(
+        createFactory(Bob.class, BobAnnotation1.class, execute));
+    cb.bind(Bob.class).annotatedWith(BobAnnotation2.class).to(
+        createFactory(Bob.class, BobAnnotation2.class, execute));
 
     Container c = cb.create(true);
 
-    Foo foo = c.getFactory(Key.get(Foo.class, "foo")).get();
+    Foo foo = c.getFactory(Key.get(Foo.class, FooAnnotation.class)).get();
 
     assertNotNull(foo.bar);
     assertNotNull(foo.bar.tee1);

@@ -1,4 +1,4 @@
-    @Inject static void setS(@Named("s") String s) {
+    @Inject static void setS(@S String s) {
       StaticInjectionTest.Static.s = s;
     }
 

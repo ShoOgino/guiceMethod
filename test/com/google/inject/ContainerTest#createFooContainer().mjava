@@ -5,8 +5,8 @@
       protected void configure() {
         bind(Bar.class).to(BarImpl.class);
         bind(Tee.class).to(TeeImpl.class);
-        bind("s").to("test");
-        bind("i").to(5);
+        bindConstant(S.class).to("test");
+        bindConstant(I.class).to(5);
       }
     });
 

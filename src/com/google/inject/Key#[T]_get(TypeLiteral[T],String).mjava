@@ -1,7 +1,0 @@
-  /**
-   * Gets a key for an injection type and the annotation {@code Named(name)}.
-   */
-  public static <T> Key<T> get(TypeLiteral<T> typeLiteral, String name) {
-    return new SimpleKey<T>(typeLiteral, strategyFor(new NamedImpl(name)));
-  }
-

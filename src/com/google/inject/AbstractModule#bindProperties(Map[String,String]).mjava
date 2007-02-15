@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#bindProperties(java.util.Map)
-   */
-  protected void bindProperties(Map<String, String> properties) {
-    builder.bindProperties(properties);
-  }
-

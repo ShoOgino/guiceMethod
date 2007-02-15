@@ -1,13 +1,13 @@
   /**
    * Binds a string constant for each property.
    */
-  public void bindProperties(Map<String, String> properties) {
-    ensureNotCreated();
-    Object source = source();
+  public static void bindProperties(ContainerBuilder builder,
+      Map<String, String> properties) {
+    skipNames(builder);
     for (Map.Entry<String, String> entry : properties.entrySet()) {
       String key = entry.getKey();
       String value = entry.getValue();
-      bind(source, Key.strategyFor(new NamedImpl(key))).to(value);
+      builder.bind(Key.get(String.class, new NamedImpl(key))).to(value);
     }
   }
 

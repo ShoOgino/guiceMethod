@@ -1,7 +1,8 @@
   /**
    * @see ContainerBuilder#bind(TypeLiteral)
    */
-  protected <T> ContainerBuilder.BindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
+  protected <T> ContainerBuilder.BindingBuilder<T> bind(
+      TypeLiteral<T> typeLiteral) {
     return builder.bind(typeLiteral);
   }
 

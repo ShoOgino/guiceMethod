@@ -1,7 +1,7 @@
   public void testIntAndIntegerAreInterchangeable()
       throws ContainerCreationException {
     ContainerBuilder builder = new ContainerBuilder();
-    builder.bind("i").to(5);
+    builder.bindConstant(I.class).to(5);
     Container container = builder.create(false);
     IntegerWrapper iw = container.getFactory(IntegerWrapper.class).get();
     assertEquals(5, (int) iw.i);

@@ -1,4 +1,4 @@
-    @Inject Foo(@Named("fooBar") Bar bar) {
+    @Inject Foo(@BarAnnotation Bar bar) {
       this.bar = bar;
     }
 

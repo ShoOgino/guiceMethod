@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#bind(String)
-   */
-  protected ContainerBuilder.ConstantBindingBuilder bind(String name) {
-    return builder.bind(name);
-  }
-

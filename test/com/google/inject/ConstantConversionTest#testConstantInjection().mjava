@@ -1,13 +1,9 @@
   public void testConstantInjection() throws ContainerCreationException {
-    Map<String, String> properties = new HashMap<String, String>() {{
-      put("#", "5");
-      put("boolean", "true");
-      put("enum", "TEE");
-      put("class", Foo.class.getName());
-    }};
-
     ContainerBuilder b = new ContainerBuilder();
-    b.bindProperties(properties);
+    b.bindConstant(NumericValue.class).to("5");
+    b.bindConstant(BooleanValue.class).to("true");
+    b.bindConstant(EnumValue.class).to("TEE");
+    b.bindConstant(ClassName.class).to(Foo.class.getName());
     Container c = b.create(false);
     Foo foo = c.getFactory(Foo.class).get();
 

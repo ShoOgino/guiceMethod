@@ -1,6 +1,6 @@
   public void testOneConstantInjection() throws ContainerCreationException {
     ContainerBuilder builder = new ContainerBuilder();
-    builder.bind("#").to("5");
+    builder.bindConstant(NumericValue.class).to("5");
     builder.bind(Simple.class);
     Container container = builder.create(false);
     Simple simple = container.getFactory(Simple.class).get();

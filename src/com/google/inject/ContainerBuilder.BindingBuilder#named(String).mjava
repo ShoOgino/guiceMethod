@@ -1,7 +1,0 @@
-    /**
-     * Binds to injection points annotated with {@code @Named(name)}.
-     */
-    public BindingBuilder<T> named(String name) {
-      return annotatedWith(new NamedImpl(nonNull(name, "name")));
-    }
-

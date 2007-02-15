@@ -1,6 +1,6 @@
   public void testInvalidInteger() throws ContainerCreationException {
     ContainerBuilder b = new ContainerBuilder();
-    b.bind("#").to("invalid");
+    b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.create(false);
     try {
       c.getFactory(InvalidInteger.class).get();

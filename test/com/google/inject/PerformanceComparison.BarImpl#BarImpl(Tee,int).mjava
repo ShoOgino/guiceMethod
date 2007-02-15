@@ -1,5 +1,5 @@
     @Inject
-    public BarImpl(Tee tee, @Named("i") int i) {
+    public BarImpl(Tee tee, @I int i) {
       this.tee = tee;
       this.i = i;
     }

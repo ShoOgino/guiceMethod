@@ -1,0 +1,8 @@
+  /**
+   * @see ContainerBuilder#bindConstant(Class)
+   */
+  protected ContainerBuilder.ConstantBindingBuilder bindConstant(
+      Class<? extends Annotation> annotationType) {
+    return builder.bindConstant(annotationType);
+  }
+

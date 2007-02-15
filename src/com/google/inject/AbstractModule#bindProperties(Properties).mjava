@@ -1,7 +1,0 @@
-  /**
-   * @see ContainerBuilder#bindProperties(java.util.Properties)
-   */
-  protected void bindProperties(Properties properties) {
-    builder.bindProperties(properties);
-  }
-

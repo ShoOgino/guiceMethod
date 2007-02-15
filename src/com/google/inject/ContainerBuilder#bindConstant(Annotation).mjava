@@ -1,7 +1,7 @@
   /**
    * Binds a constant to the given annotation.
    */
-  public ConstantBindingBuilder bind(Annotation annotation) {
+  public ConstantBindingBuilder bindConstant(Annotation annotation) {
     ensureNotCreated();
     return bind(source(), Key.strategyFor(annotation));
   }
