@@ -1,6 +1,6 @@
   public void testInvalidPreload() {
     ContainerBuilder builder = new ContainerBuilder();
-    builder.bind(Foo.class).preload();
+    builder.bind(Foo.class).eagerly();
     try {
       builder.create();
       fail();
