@@ -1,0 +1,5 @@
+  /**
+   * Gets the factory to which this binding is bound.
+   */
+  String getFactory();
+

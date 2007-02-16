@@ -1,0 +1,5 @@
+  /**
+   * Gets the source of this binding.
+   */
+  String getSource();
+

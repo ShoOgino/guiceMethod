@@ -1,4 +1,4 @@
   public String toString() {
-    return "@Named(\"" + value + "\")";
+    return "@" + Named.class.getName() + "(value=" + value + ")";
   }
 

@@ -6,10 +6,14 @@
     // Bind request.
     Factory<HttpServletRequest> requestFactory =
         new Factory<HttpServletRequest>() {
-      public HttpServletRequest get() {
-        return GuiceFilter.getRequest();
-      }
-    };
+          public HttpServletRequest get() {
+            return GuiceFilter.getRequest();
+          }
+
+          public String toString() {
+            return "RequestFactory";
+          }
+        };
     bind(HttpServletRequest.class).to(requestFactory);
     bind(ServletRequest.class).to(requestFactory);
 
@@ -18,6 +22,10 @@
         new Factory<HttpServletResponse>() {
           public HttpServletResponse get() {
             return GuiceFilter.getResponse();
+          }
+
+          public String toString() {
+            return "ResponseFactory";
           }
         };
     bind(HttpServletResponse.class).to(responseFactory);
@@ -28,6 +36,10 @@
       public HttpSession get() {
         return GuiceFilter.getRequest().getSession();
       }
+
+      public String toString() {
+        return "SessionFactory";
+      }
     });
 
     // Bind request parameters.
@@ -37,6 +49,10 @@
           @SuppressWarnings({"unchecked"})
           public Map<String, String[]> get() {
             return GuiceFilter.getRequest().getParameterMap();
+          }
+
+          public String toString() {
+            return "RequestParametersFactory";
           }
         });
   }

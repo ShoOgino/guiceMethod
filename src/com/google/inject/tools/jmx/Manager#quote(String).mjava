@@ -1,0 +1,5 @@
+  static String quote(String value) {
+    // JMX seems to have a comma bug.
+    return ObjectName.quote(value).replace(',', ';');
+  }
+

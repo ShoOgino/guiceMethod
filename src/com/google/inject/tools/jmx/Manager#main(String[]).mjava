@@ -1,0 +1,25 @@
+  /**
+   * Run with no arguments for usage instructions.
+   */
+  public static void main(String[] args) throws Exception {
+    if (args.length != 1) {
+      System.err.println("Usage: java -Dcom.sun.management.jmxremote "
+          + Manager.class.getName() + " [module class name]");
+      System.err.println("Then run 'jconsole' to connect.");
+      System.exit(1);
+    }
+
+    Module module = (Module) Class.forName(args[0]).newInstance();
+
+    ContainerBuilder builder = new ContainerBuilder();
+    builder.install(module);
+    Container container = builder.create();
+
+    manage(args[0], container);
+
+    System.out.println("Press Ctrl+C to exit...");
+
+    // Sleep forever.
+    Thread.sleep(Long.MAX_VALUE);
+  }
+

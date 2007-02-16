@@ -22,6 +22,10 @@
           }
         });
       }
+
+      public String toString() {
+        return factory.toString();
+      }
     };
   }
 
