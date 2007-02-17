@@ -1,0 +1,5 @@
+  TypeWithArgument(Type rawType, Type typeArgument) {
+    this.rawType = rawType;
+    this.typeArgument = typeArgument;
+  }
+

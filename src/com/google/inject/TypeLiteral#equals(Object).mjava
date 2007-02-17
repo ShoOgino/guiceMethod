@@ -5,7 +5,8 @@
     if (!(o instanceof TypeLiteral<?>)) {
       return false;
     }
-    TypeLiteral<?> t = (TypeLiteral<?>) o;
-    return type.equals(t.type);
+    TypeLiteral<?> other = (TypeLiteral<?>) o;
+
+    return equals(type, other.type);
   }
 

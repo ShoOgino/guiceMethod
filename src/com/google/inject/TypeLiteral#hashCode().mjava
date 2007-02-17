@@ -1,4 +1,4 @@
   public int hashCode() {
-    return type.hashCode();
+    return this.hashCode;
   }
 

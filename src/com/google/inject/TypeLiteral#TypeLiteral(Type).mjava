@@ -2,8 +2,9 @@
    * Unsafe. Constructs a type literal manually.
    */
   @SuppressWarnings("unchecked")
-  private TypeLiteral(Type type) {
+  TypeLiteral(Type type) {
     this.rawType = (Class<? super T>) getRawType(nonNull(type, "type"));
     this.type = type;
+    this.hashCode = hashCode(type);
   }
 

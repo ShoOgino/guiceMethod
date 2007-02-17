@@ -10,5 +10,6 @@
   protected TypeLiteral() {
     this.type = getSuperclassTypeParameter(getClass());
     this.rawType = (Class<? super T>) getRawType(type);
+    this.hashCode = hashCode(type);
   }
 
