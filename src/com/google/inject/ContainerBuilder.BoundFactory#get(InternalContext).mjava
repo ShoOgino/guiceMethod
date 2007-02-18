@@ -1,6 +1,6 @@
     public T get(InternalContext context) {
       return factoryFactory
           .get(context)
-          .generate(context.getExternalContext());
+          .get(context.getExternalContext());
     }
 

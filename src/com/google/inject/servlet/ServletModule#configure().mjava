@@ -6,7 +6,7 @@
     // Bind request.
     Factory<HttpServletRequest> requestFactory =
         new Factory<HttpServletRequest>() {
-          public HttpServletRequest generate(Context context) {
+          public HttpServletRequest get(Context context) {
             return GuiceFilter.getRequest();
           }
 
@@ -20,7 +20,7 @@
     // Bind response.
     Factory<HttpServletResponse> responseFactory =
         new Factory<HttpServletResponse>() {
-          public HttpServletResponse generate(Context context) {
+          public HttpServletResponse get(Context context) {
             return GuiceFilter.getResponse();
           }
 
@@ -33,7 +33,7 @@
 
     // Bind session.
     bind(HttpSession.class).to(new Factory<HttpSession>() {
-      public HttpSession generate(Context context) {
+      public HttpSession get(Context context) {
         return GuiceFilter.getRequest().getSession();
       }
 
@@ -47,7 +47,7 @@
         .annotatedWith(RequestParameters.class)
         .to(new Factory<Map<String, String[]>>() {
               @SuppressWarnings({"unchecked"})
-              public Map<String, String[]> generate(Context context) {
+              public Map<String, String[]> get(Context context) {
                 return GuiceFilter.getRequest().getParameterMap();
               }
 
