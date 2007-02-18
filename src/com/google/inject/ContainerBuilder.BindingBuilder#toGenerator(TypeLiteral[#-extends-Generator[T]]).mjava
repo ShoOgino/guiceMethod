@@ -1,0 +1,8 @@
+    /**
+     * Binds to instances from the generator bound to the given type.
+     */
+    public BindingBuilder<T> toGenerator(
+        final TypeLiteral<? extends Generator<T>> generatorType) {
+      return toGenerator(Key.get(generatorType));
+    }
+

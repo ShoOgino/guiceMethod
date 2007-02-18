@@ -1,7 +1,0 @@
-  /**
-   * Gets an instance of {@code T}.
-   *
-   * @param context of this call
-   */
-  T get(Context context);
-

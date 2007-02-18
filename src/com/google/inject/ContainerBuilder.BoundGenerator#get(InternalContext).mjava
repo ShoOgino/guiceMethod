@@ -1,0 +1,6 @@
+    public T get(InternalContext context) {
+      return generatorFactory
+          .get(context)
+          .generate(context.getExternalContext());
+    }
+

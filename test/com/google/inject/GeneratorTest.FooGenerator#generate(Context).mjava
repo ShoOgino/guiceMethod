@@ -1,4 +1,4 @@
-    public Foo get(Context context) {
+    public Foo generate(Context context) {
       assertNull(context.getMember());
       assertEquals(-1, context.getParameterIndex());
       assertEquals(Foo.class, context.getKey().getRawType());

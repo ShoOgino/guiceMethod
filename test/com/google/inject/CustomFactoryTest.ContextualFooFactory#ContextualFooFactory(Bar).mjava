@@ -1,5 +1,0 @@
-    @Inject
-    public ContextualFooFactory(Bar bar) {
-      this.bar = bar;
-    }
-

@@ -1,9 +1,0 @@
-    /**
-     * Binds to instances from the given factory.
-     */
-    public BindingBuilder<T> to(final Factory<? extends T> factory) {
-      ensureImplementationIsNotSet();
-      this.factory = new InternalFactoryToFactoryAdapter<T>(factory);
-      return this;
-    }
-

@@ -1,7 +1,7 @@
-  public void testContextualContainerScopedFooFactory()
+  public void testContainerScopedFooGenerator()
       throws ContainerCreationException {
     ContainerBuilder cb = new ContainerBuilder();
-    cb.bind(Foo.class).toContextualFactory(ContainerScopedContextualFooFactory.class);
+    cb.bind(Foo.class).toGenerator(ContainerScopedFooGenerator.class);
     Container c = cb.create();
 
     Foo a = c.getInstance(Foo.class);

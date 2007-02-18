@@ -1,8 +1,8 @@
-  <T> ContextualFactory<T> createFactory(
+  <T> Generator<T> createFactory(
       final Class<T> type, final Class<? extends Annotation> annotationType,
       final Member expectedMember) {
-    return new ContextualFactory<T>() {
-      public T get(Context context) {
+    return new Generator<T>() {
+      public T generate(Context context) {
         assertEquals(expectedMember, context.getMember());
         assertEquals(type, context.getKey().getType().getType());
         return context.getContainer().getFactory(type).get();

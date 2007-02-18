@@ -1,0 +1,5 @@
+    @Inject
+    public ContainerScopedFooGenerator(Bar bar) {
+      this.bar = bar;
+    }
+

@@ -1,0 +1,15 @@
+    /**
+     * Binds to instances from the given generator bound to the given key.
+     */
+    public BindingBuilder<T> toGenerator(
+        final Key<? extends Generator<T>> generatorKey) {
+      ensureImplementationIsNotSet();
+
+      final BoundGenerator<T> delegatingFactory =
+          new BoundGenerator<T>(generatorKey, errorHandler);
+      creationListeners.add(delegatingFactory);
+      this.factory = delegatingFactory;
+
+      return this;
+    }
+
