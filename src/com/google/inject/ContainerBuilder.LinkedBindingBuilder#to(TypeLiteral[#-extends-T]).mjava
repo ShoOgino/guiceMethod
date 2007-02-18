@@ -1,0 +1,7 @@
+    /**
+     * Links to another binding with the given type.
+     */
+    public void to(TypeLiteral<? extends T> destination) {
+      to(Key.get(destination));
+    }
+

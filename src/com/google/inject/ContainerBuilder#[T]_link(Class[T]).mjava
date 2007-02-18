@@ -1,0 +1,8 @@
+  /**
+   * Links the given type to another key effectively creating an alias for a
+   * binding.
+   */
+  public <T> LinkedBindingBuilder<T> link(Class<T> type) {
+    return link(Key.get(type));
+  }
+
