@@ -1,4 +1,4 @@
     public String toString() {
-      return generatorKey.toString();
+      return factoryKey.toString();
     }
 

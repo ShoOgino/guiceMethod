@@ -1,6 +1,6 @@
-  public void testFooGenerator() throws CreationException {
+  public void testFooFactory() throws CreationException {
     ContainerBuilder cb = new ContainerBuilder();
-    cb.bind(Foo.class).toGenerator(FooGenerator.class);
+    cb.bind(Foo.class).toFactory(FooFactory.class);
     Container c = cb.create();
 
     Foo a = c.getInstance(Foo.class);

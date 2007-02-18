@@ -1,7 +1,7 @@
-  public void testContainerScopedFooGenerator()
+  public void testContainerScopedFooFactory()
       throws CreationException {
     ContainerBuilder cb = new ContainerBuilder();
-    cb.bind(Foo.class).toGenerator(ContainerScopedFooGenerator.class);
+    cb.bind(Foo.class).toFactory(ContainerScopedFooFactory.class);
     Container c = cb.create();
 
     Foo a = c.getInstance(Foo.class);

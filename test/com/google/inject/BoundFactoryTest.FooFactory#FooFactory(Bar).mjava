@@ -1,5 +1,5 @@
     @Inject
-    public FooGenerator(Bar bar) {
+    public FooFactory(Bar bar) {
       this.bar = bar;
     }
 

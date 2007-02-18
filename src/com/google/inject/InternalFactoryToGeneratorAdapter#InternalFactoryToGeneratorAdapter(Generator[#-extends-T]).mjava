@@ -1,5 +1,0 @@
-  public InternalFactoryToGeneratorAdapter(
-      Generator<? extends T> factory) {
-    this.factory = factory;
-  }
-

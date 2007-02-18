@@ -1,7 +1,0 @@
-    public BoundGenerator(
-        Key<? extends Generator<? extends T>> generatorKey,
-        ErrorHandler errorHandler) {
-      this.generatorKey = generatorKey;
-      this.errorHandler = errorHandler;
-    }
-
