@@ -1,7 +1,7 @@
     /**
      * Binds to instances from the given factory.
      */
-    BindingBuilder<T> to(final InternalFactory<? extends T> factory) {
+    BindingBuilder<T> to(InternalFactory<? extends T> factory) {
       ensureImplementationIsNotSet();
       this.factory = factory;
       return this;

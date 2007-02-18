@@ -1,0 +1,5 @@
+    Foo(Bar bar, int i) {
+      this.bar = bar;
+      this.i = i;
+    }
+

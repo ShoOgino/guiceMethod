@@ -1,0 +1,15 @@
+  public void testFooFactory() throws ContainerCreationException {
+    ContainerBuilder cb = new ContainerBuilder();
+    cb.bind(Foo.class).toFactory(FooFactory.class);
+    Container c = cb.create();
+
+    Foo a = c.getInstance(Foo.class);
+    Foo b = c.getInstance(Foo.class);
+
+    assertEquals(0, a.i);
+    assertEquals(0, b.i);
+    assertNotNull(a.bar);
+    assertNotNull(b.bar);
+    assertNotSame(a.bar, b.bar);
+  }
+

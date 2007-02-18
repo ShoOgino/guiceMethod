@@ -1,5 +1,5 @@
   public <T> Factory<T> getFactory(final Key<T> key) {
-    final InternalFactory<? extends T> factory = getFactory(null, key);
+    final InternalFactory<? extends T> factory = getInternalFactory(null, key);
 
     if (factory == null) {
       throw new ConfigurationException(

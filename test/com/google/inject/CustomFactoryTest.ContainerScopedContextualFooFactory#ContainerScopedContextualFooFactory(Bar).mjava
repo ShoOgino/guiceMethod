@@ -1,0 +1,5 @@
+    @Inject
+    public ContainerScopedContextualFooFactory(Bar bar) {
+      this.bar = bar;
+    }
+

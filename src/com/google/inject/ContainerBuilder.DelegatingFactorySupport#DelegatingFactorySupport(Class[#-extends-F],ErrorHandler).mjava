@@ -1,0 +1,6 @@
+    public DelegatingFactorySupport(Class<? extends F> factoryClass,
+        ErrorHandler errorHandler) {
+      this.factoryClass = factoryClass;
+      this.errorHandler = errorHandler;
+    }
+

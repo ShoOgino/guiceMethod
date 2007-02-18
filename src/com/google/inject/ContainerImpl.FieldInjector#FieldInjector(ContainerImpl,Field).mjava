@@ -7,7 +7,7 @@
 
       Key<?> key = Key.get(
           field.getGenericType(), field, field.getAnnotations(), errorHandler);
-      factory = container.getFactory(field, key);
+      factory = container.getInternalFactory(field, key);
       if (factory == null) {
         throw new MissingDependencyException(key, field);
       }

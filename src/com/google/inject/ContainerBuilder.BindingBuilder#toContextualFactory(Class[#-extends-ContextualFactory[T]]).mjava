@@ -1,0 +1,15 @@
+    /**
+     * Binds to instances from the given factory.
+     */
+    public BindingBuilder<T> toContextualFactory(
+        final Class<? extends ContextualFactory<T>> factoryClass) {
+      ensureImplementationIsNotSet();
+
+      final ContextualDelegatingFactory<T> delegatingFactory =
+          new ContextualDelegatingFactory<T>(factoryClass, errorHandler);
+      creationListeners.add(delegatingFactory);
+      this.factory = delegatingFactory;
+
+      return this;
+    }
+

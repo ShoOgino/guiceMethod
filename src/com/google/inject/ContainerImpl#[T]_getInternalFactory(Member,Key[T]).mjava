@@ -1,4 +1,5 @@
-  <T> InternalFactory<? extends T> getFactory(final Member member, Key<T> key) {
+  <T> InternalFactory<? extends T> getInternalFactory(
+      final Member member, Key<T> key) {
     // TODO: Clean up unchecked type warnings.
 
     // Do we have a factory for the specified type and name?

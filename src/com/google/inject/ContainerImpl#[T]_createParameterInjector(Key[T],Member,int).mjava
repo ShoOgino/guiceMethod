@@ -1,6 +1,6 @@
   <T> ParameterInjector<T> createParameterInjector(Key<T> key, Member member,
       int index) throws MissingDependencyException {
-    InternalFactory<? extends T> factory = getFactory(member, key);
+    InternalFactory<? extends T> factory = getInternalFactory(member, key);
     if (factory == null) {
       throw new MissingDependencyException(key, member);
     }

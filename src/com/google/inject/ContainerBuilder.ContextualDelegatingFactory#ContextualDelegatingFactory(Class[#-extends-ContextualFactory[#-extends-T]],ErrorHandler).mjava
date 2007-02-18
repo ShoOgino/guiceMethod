@@ -1,0 +1,6 @@
+    public ContextualDelegatingFactory(
+        Class<? extends ContextualFactory<? extends T>> factoryClass,
+        ErrorHandler errorHandler) {
+      super(factoryClass, errorHandler);
+    }
+

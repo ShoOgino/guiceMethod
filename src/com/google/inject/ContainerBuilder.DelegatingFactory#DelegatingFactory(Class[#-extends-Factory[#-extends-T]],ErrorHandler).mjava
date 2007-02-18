@@ -1,0 +1,6 @@
+    public DelegatingFactory(
+        Class<? extends Factory<? extends T>> factoryClass,
+        ErrorHandler errorHandler) {
+      super(factoryClass, errorHandler);
+    }
+

@@ -1,0 +1,4 @@
+    protected InternalFactory<? extends F> getFactoryFactory() {
+      return factoryFactory;
+    }
+

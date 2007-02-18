@@ -1,0 +1,5 @@
+    @Inject
+    public FooFactory(Bar bar) {
+      this.bar = bar;
+    }
+

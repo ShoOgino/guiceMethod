@@ -1,0 +1,15 @@
+    /**
+     * Binds to instances from the given factory.
+     */
+    public BindingBuilder<T> toFactory(
+        final Class<? extends Factory<T>> factoryClass) {
+      ensureImplementationIsNotSet();
+
+      final DelegatingFactory<T> delegatingFactory =
+          new DelegatingFactory<T>(factoryClass, errorHandler);
+      creationListeners.add(delegatingFactory);
+      this.factory = delegatingFactory;
+
+      return this;
+    }
+

@@ -1,0 +1,7 @@
+    public Foo get(Context context) {
+      assertNull(context.getMember());
+      assertEquals(-1, context.getParameterIndex());
+      assertEquals(Foo.class, context.getKey().getRawType());
+      return new Foo(this.bar, count++);
+    }
+
