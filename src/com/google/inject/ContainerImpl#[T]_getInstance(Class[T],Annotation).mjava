@@ -1,5 +1,5 @@
   public <T> T getInstance(Class<T> type,
       Annotation annotation) {
-    return getFactory(Key.get(type, annotation)).get();
+    return getLocator(Key.get(type, annotation)).get();
   }
 

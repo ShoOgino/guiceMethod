@@ -1,0 +1,10 @@
+  /**
+   * Gets the locator which returns instances of {@code T}.
+   */
+  public Locator<T> getLocator() {
+    if (locator == null) {
+      locator = container.getLocator(key);
+    }
+    return locator;
+  }
+

@@ -1,0 +1,5 @@
+  /**
+   * Gets the locator bound to the given type.
+   */
+  <T> Locator<T> getLocator(TypeLiteral<T> type);
+

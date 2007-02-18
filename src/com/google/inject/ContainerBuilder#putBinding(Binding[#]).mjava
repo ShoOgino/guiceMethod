@@ -3,9 +3,9 @@
     Map<Key<?>, Binding<?>> bindings = container.internalBindings();
     Binding<?> original = bindings.get(key);
 
-    // Binding to Factory<?> is not allowed.
-    if (key.getRawType().equals(Factory.class)) {
-      addError(binding.getSource(), ErrorMessages.CANNOT_BIND_TO_FACTORY);
+    // Binding to Locator<?> is not allowed.
+    if (key.getRawType().equals(Locator.class)) {
+      addError(binding.getSource(), ErrorMessages.CANNOT_BIND_TO_LOCATOR);
       return;
     }
 

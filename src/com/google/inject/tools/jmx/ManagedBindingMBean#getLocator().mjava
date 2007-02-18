@@ -1,0 +1,5 @@
+  /**
+   * Gets the locator to which this binding is bound.
+   */
+  String getLocator();
+

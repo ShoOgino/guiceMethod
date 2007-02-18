@@ -1,4 +1,4 @@
-  private Container createFooContainer() throws ContainerCreationException {
+  private Container createFooContainer() throws CreationException {
     ContainerBuilder builder = new ContainerBuilder();
 
     builder.install(new AbstractModule() {

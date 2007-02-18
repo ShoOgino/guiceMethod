@@ -2,12 +2,12 @@
    * Creates a {@link Container} instance. Injects static members for classes
    * which were registered using {@link #requestStaticInjection(Class...)}.
    *
-   * @throws ContainerCreationException if configuration errors are found. The
+   * @throws CreationException if configuration errors are found. The
    *     expectation is that the application will log this exception and exit.
    * @throws IllegalStateException if called more than once
    */
   public synchronized Container create()
-      throws ContainerCreationException {
+      throws CreationException {
     stopwatch.resetAndLog(logger, "Configuration");
 
     // Create the container.
@@ -45,7 +45,7 @@
 
     // Blow up if we encountered errors.
     if (!errorMessages.isEmpty()) {
-      throw new ContainerCreationException(errorMessages);
+      throw new CreationException(errorMessages);
     }
 
     // Switch to runtime error handling.

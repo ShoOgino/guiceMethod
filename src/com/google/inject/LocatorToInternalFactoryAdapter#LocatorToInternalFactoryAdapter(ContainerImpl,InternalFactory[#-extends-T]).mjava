@@ -1,4 +1,4 @@
-  public FactoryToInternalFactoryAdapter(ContainerImpl container,
+  public LocatorToInternalFactoryAdapter(ContainerImpl container,
       InternalFactory<? extends T> internalFactory) {
     this.container = container;
     this.internalFactory = internalFactory;

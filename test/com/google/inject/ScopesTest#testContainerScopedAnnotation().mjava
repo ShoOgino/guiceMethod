@@ -1,5 +1,5 @@
   public void testContainerScopedAnnotation()
-      throws ContainerCreationException {
+      throws CreationException {
     ContainerBuilder builder = new ContainerBuilder();
     Object bindingBuilder
         = builder.bind(Singleton.class);

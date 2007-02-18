@@ -1,5 +1,5 @@
   public void testExistingRequestObject()
-      throws ContainerCreationException, IOException, ServletException {
+      throws CreationException, IOException, ServletException {
     final Container container = createContainer();
 
     GuiceFilter filter = new GuiceFilter();

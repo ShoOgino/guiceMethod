@@ -1,0 +1,5 @@
+  /**
+   * Gets the locator bound to the given key.
+   */
+  <T> Locator<T> getLocator(Key<T> key);
+

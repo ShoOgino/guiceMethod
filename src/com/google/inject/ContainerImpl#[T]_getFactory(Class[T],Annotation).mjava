@@ -1,5 +1,0 @@
-  public <T> Factory<T> getFactory(Class<T> type,
-      Annotation annotation) {
-    return getFactory(Key.get(type, annotation));
-  }
-

@@ -1,5 +1,5 @@
   /**
-   * Gets an instance from the factory bound to the given type and annotation.
+   * Gets an instance from the locator bound to the given type and annotation.
    */
   <T> T getInstance(TypeLiteral<T> type,
       Class<? extends Annotation> annotationType);

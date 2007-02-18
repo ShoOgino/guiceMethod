@@ -1,9 +1,9 @@
-  public void testInvalidEnum() throws ContainerCreationException {
+  public void testInvalidEnum() throws CreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.create();
     try {
-      c.getFactory(InvalidEnum.class).get();
+      c.getLocator(InvalidEnum.class).get();
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }

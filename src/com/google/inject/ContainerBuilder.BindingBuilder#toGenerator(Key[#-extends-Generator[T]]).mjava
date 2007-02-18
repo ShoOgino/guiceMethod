@@ -5,10 +5,10 @@
         final Key<? extends Generator<T>> generatorKey) {
       ensureImplementationIsNotSet();
 
-      final BoundGenerator<T> delegatingFactory =
+      final BoundGenerator<T> boundGenerator =
           new BoundGenerator<T>(generatorKey, errorHandler);
-      creationListeners.add(delegatingFactory);
-      this.factory = delegatingFactory;
+      creationListeners.add(boundGenerator);
+      this.factory = boundGenerator;
 
       return this;
     }

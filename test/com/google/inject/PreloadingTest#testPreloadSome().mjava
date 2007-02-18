@@ -1,4 +1,4 @@
-  public void testPreloadSome() throws ContainerCreationException {
+  public void testPreloadSome() throws CreationException {
     ContainerBuilder builder = createContainerBuilder(Stage.DEVELOPMENT);
     builder.create();
     assertEquals(1, Foo.count);

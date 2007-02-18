@@ -4,6 +4,6 @@
     try {
       builder.create();
       fail();
-    } catch (ContainerCreationException e) { /* expected */ }
+    } catch (CreationException e) { /* expected */ }
   }
 

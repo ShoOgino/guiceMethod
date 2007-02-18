@@ -1,15 +1,16 @@
-  public void testFooGenerator() throws ContainerCreationException {
+  public void testContainerScopedFooGenerator()
+      throws CreationException {
     ContainerBuilder cb = new ContainerBuilder();
-    cb.bind(Foo.class).toGenerator(FooGenerator.class);
+    cb.bind(Foo.class).toGenerator(ContainerScopedFooGenerator.class);
     Container c = cb.create();
 
     Foo a = c.getInstance(Foo.class);
     Foo b = c.getInstance(Foo.class);
 
     assertEquals(0, a.i);
-    assertEquals(0, b.i);
+    assertEquals(1, b.i);
     assertNotNull(a.bar);
     assertNotNull(b.bar);
-    assertNotSame(a.bar, b.bar);
+    assertSame(a.bar, b.bar);
   }
 

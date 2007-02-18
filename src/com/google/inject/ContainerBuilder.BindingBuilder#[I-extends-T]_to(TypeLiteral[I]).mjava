@@ -8,18 +8,9 @@
       ensureImplementationIsNotSet();
       this.implementation = implementation;
       final DefaultFactory<I> defaultFactory
-          = new DefaultFactory<I>(key, implementation);
+          = new DefaultFactory<I>(key, implementation, errorHandler);
       this.factory = defaultFactory;
-      creationListeners.add(new CreationListener() {
-        public void notify(final ContainerImpl container) {
-          container.withErrorHandler(errorHandler, new Runnable() {
-            public void run() {
-              defaultFactory.setConstructor(
-                  container.getConstructor(implementation));
-            }
-          });
-        }
-      });
+      creationListeners.add(defaultFactory);
       return this;
     }
 

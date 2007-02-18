@@ -1,0 +1,8 @@
+    public void notify(final ContainerImpl container) {
+      container.withErrorHandler(errorHandler, new Runnable() {
+        public void run() {
+          constructor = container.getConstructor(implementation);
+        }
+      });
+    }
+

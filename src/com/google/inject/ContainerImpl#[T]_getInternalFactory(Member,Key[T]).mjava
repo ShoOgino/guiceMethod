@@ -11,20 +11,20 @@
     Class<? super T> rawType = key.getType().getRawType();
 
     // Handle cases where T is a Factory<?>.
-    if (rawType.equals(Factory.class)) {
-      Type factoryType = key.getType().getType();
-      if (!(factoryType instanceof ParameterizedType)) {
+    if (rawType.equals(Locator.class)) {
+      Type locatorType = key.getType().getType();
+      if (!(locatorType instanceof ParameterizedType)) {
         return null;
       }
       Type entryType
-          = ((ParameterizedType) factoryType).getActualTypeArguments()[0];
+          = ((ParameterizedType) locatorType).getActualTypeArguments()[0];
 
       try {
-        final Factory<?> factory = getFactory(key.ofType(entryType));
+        final Locator<?> locator = getLocator(key.ofType(entryType));
         return new InternalFactory<T>() {
           @SuppressWarnings("unchecked")
           public T get(InternalContext context) {
-            return (T) factory;
+            return (T) locator;
           }
         };
       }

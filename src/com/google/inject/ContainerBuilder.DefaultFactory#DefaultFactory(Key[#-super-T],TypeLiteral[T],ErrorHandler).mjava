@@ -1,0 +1,7 @@
+    DefaultFactory(Key<? super T> key, TypeLiteral<T> implementation,
+        ErrorHandler errorHandler) {
+      this.key = key;
+      this.implementation = implementation;
+      this.errorHandler = errorHandler;
+    }
+

@@ -1,0 +1,14 @@
+  /**
+   * Scopes a locator. The returned locator returns objects from this scope. If
+   * an object does not exist in this scope, the locator can use the given
+   * unscoped locator to retrieve one.
+   *
+   * @param key binding key
+   * @param unscoped locates an instance when one doesn't already exist in this
+   *  scope.
+   * @return a new locator which only delegates to the given unscoped locator
+   *  when an instance of the requested object doesn't already exist in this
+   *  scope
+   */
+  public <T> Locator<T> scope(Key<T> key, Locator<T> unscoped);
+

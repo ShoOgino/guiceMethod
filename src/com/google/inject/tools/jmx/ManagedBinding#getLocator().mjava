@@ -1,0 +1,4 @@
+  public String getLocator() {
+    return binding.getLocator().toString();
+  }
+

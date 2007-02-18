@@ -1,0 +1,4 @@
+  public InternalFactoryToLocatorAdapter(Locator<? extends T> locator) {
+    this.locator = locator;
+  }
+

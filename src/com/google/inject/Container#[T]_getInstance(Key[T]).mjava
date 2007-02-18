@@ -1,5 +1,5 @@
   /**
-   * Gets an instance from the factory bound to the given key.
+   * Gets an instance from the locator bound to the given key.
    */
   <T> T getInstance(Key<T> key);
 

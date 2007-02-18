@@ -1,6 +1,6 @@
-  public void testNotProvided() throws ContainerCreationException {
+  public void testNotProvided() throws CreationException {
     Container c = new ContainerBuilder().create();
-    Foo foo = c.getFactory(Foo.class).get();
+    Foo foo = c.getLocator(Foo.class).get();
     assertNull(foo.bar);
     assertNull(foo.fromMethod);
   }

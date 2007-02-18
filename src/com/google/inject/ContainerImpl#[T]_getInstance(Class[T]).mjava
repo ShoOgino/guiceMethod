@@ -1,4 +1,4 @@
   public <T> T getInstance(Class<T> type) {
-    return getFactory(Key.get(type)).get();
+    return getLocator(Key.get(type)).get();
   }
 

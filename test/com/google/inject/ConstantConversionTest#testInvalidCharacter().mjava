@@ -1,9 +1,9 @@
-  public void testInvalidCharacter() throws ContainerCreationException {
+  public void testInvalidCharacter() throws CreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.create();
     try {
-      c.getFactory(InvalidCharacter.class).get();
+      c.getLocator(InvalidCharacter.class).get();
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }

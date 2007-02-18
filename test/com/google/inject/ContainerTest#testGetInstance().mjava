@@ -1,7 +1,7 @@
-  public void testGetInstance() throws ContainerCreationException {
+  public void testGetInstance() throws CreationException {
     Container container = createFooContainer();
 
-    Bar bar = container.getFactory(Key.get(Bar.class)).get();
+    Bar bar = container.getLocator(Key.get(Bar.class)).get();
     assertEquals("test", bar.getTee().getS());
     assertEquals(5, bar.getI());
   }

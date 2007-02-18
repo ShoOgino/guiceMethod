@@ -1,4 +1,4 @@
-  public void testFactoryMethods() throws ContainerCreationException {
+  public void testLocatorMethods() throws CreationException {
     Singleton singleton = new Singleton();
     Singleton other = new Singleton();
 
@@ -10,20 +10,20 @@
     Container container = builder.create();
 
     assertSame(singleton,
-        container.getFactory(Key.get(Singleton.class)).get());
-    assertSame(singleton, container.getFactory(Singleton.class).get());
+        container.getLocator(Key.get(Singleton.class)).get());
+    assertSame(singleton, container.getLocator(Singleton.class).get());
     assertSame(singleton,
-        container.getFactory(new TypeLiteral<Singleton>() {}).get());
+        container.getLocator(new TypeLiteral<Singleton>() {}).get());
     assertSame(singleton, container.getInstance(Key.get(Singleton.class)));
     assertSame(singleton, container.getInstance(Singleton.class));
     assertSame(singleton,
         container.getInstance(new TypeLiteral<Singleton>() {}));
 
     assertSame(other,
-        container.getFactory(Key.get(Singleton.class, Other.class)).get());
-    assertSame(other, container.getFactory(Singleton.class, Other.class).get());
+        container.getLocator(Key.get(Singleton.class, Other.class)).get());
+    assertSame(other, container.getLocator(Singleton.class, Other.class).get());
     assertSame(other,
-        container.getFactory(new TypeLiteral<Singleton>() {}, Other.class).get());
+        container.getLocator(new TypeLiteral<Singleton>() {}, Other.class).get());
     assertSame(other, container.getInstance(Key.get(Singleton.class, Other.class)));
     assertSame(other, container.getInstance(Singleton.class, Other.class));
     assertSame(other,

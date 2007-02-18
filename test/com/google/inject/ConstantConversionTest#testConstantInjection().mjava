@@ -1,11 +1,11 @@
-  public void testConstantInjection() throws ContainerCreationException {
+  public void testConstantInjection() throws CreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bindConstant(NumericValue.class).to("5");
     b.bindConstant(BooleanValue.class).to("true");
     b.bindConstant(EnumValue.class).to("TEE");
     b.bindConstant(ClassName.class).to(Foo.class.getName());
     Container c = b.create();
-    Foo foo = c.getFactory(Foo.class).get();
+    Foo foo = c.getLocator(Foo.class).get();
 
     checkNumbers(
       foo.integerField,

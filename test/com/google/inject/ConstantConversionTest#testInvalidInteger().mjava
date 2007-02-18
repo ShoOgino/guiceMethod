@@ -1,9 +1,9 @@
-  public void testInvalidInteger() throws ContainerCreationException {
+  public void testInvalidInteger() throws CreationException {
     ContainerBuilder b = new ContainerBuilder();
     b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.create();
     try {
-      c.getFactory(InvalidInteger.class).get();
+      c.getLocator(InvalidInteger.class).get();
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }
