@@ -14,7 +14,7 @@
     if (rawType.equals(Locator.class)) {
       Type locatorType = key.getType().getType();
       if (!(locatorType instanceof ParameterizedType)) {
-        return null;
+        return null; // is this right? not test-covered
       }
       Type entryType
           = ((ParameterizedType) locatorType).getActualTypeArguments()[0];
@@ -116,12 +116,14 @@
         }
       };
       try {
+        // note: intelliJ thinks this cast is superfluous, but is it?
         return (InternalFactory<? extends T>) getImplicitBinding(rawType);
       }
       finally {
         this.errorHandler = previous;
       }
     }
+    // note: intelliJ thinks this cast is superfluous, but is it?
     return (InternalFactory<? extends T>) getImplicitBinding(rawType);
   }
 

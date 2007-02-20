@@ -37,6 +37,7 @@
       }
     }
     if (!anyMatched) {
+      // not test-covered
       return defaultFactory.get(constructor);
     }
 

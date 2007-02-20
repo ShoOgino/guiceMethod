@@ -12,6 +12,7 @@
    */
   @SuppressWarnings("unchecked")
   protected Key(Annotation annotation) {
+    // no usages, not test-covered
     this.annotationStrategy = strategyFor(annotation);
     this.typeLiteral
         = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());

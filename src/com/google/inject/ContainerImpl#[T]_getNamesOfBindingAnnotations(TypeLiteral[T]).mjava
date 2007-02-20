@@ -1,3 +1,4 @@
+  // not test-covered
   <T> List<String> getNamesOfBindingAnnotations(TypeLiteral<T> type) {
     List<String> names = new ArrayList<String>();
     for (Binding<T> binding : findBindingsByType(type)) {

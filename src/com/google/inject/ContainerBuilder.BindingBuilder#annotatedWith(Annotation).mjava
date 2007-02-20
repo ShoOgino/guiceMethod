@@ -5,6 +5,7 @@
       if (this.key.hasAnnotationType()) {
         addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
       } else {
+        // not test-covered?
         this.key = Key.get(this.key.getType(), annotation);
       }
       return this;

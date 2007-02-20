@@ -1,3 +1,4 @@
+  // Not test-covered
   public void injectMembers(final Object o) {
     callInContext(new ContextualCallable<Void>() {
       public Void call(InternalContext context) {

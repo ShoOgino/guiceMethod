@@ -3,6 +3,8 @@
      * ContainerBuilder#bindScope(Class, Scope)}.
      */
     public BindingBuilder<T> in(Class<? extends Annotation> scopeAnnotation) {
+      // this method not test-covered
+
       ensureScopeNotSet();
 
       // We could defer this lookup to when we create the container, but this

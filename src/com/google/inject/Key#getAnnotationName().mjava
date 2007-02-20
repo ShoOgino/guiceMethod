@@ -4,6 +4,7 @@
       return annotation.toString();
     }
 
+    // not test-covered
     return annotationStrategy.getAnnotationType().toString();
   }
 
