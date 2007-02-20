@@ -1,4 +1,4 @@
-  public BindingBuilder<T> eagerly() {
+  public BindingBuilderImpl<T> eagerly() {
     this.preload = true;
     return this;
   }

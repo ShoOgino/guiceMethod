@@ -1,4 +1,4 @@
-  public <T> LinkedBindingBuilder<T> link(Key<T> key) {
+  public <T> LinkedBindingBuilderImpl<T> link(Key<T> key) {
     ensureNotCreated();
     LinkedBindingBuilderImpl<T> builder =
         new LinkedBindingBuilderImpl<T>(this, key).from(source());

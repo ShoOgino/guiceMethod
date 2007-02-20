@@ -1,4 +1,4 @@
-  public BindingBuilder<T> in(Class<? extends Annotation> scopeAnnotation) {
+  public BindingBuilderImpl<T> in(Class<? extends Annotation> scopeAnnotation) {
     // this method not test-covered
 
     ensureScopeNotSet();

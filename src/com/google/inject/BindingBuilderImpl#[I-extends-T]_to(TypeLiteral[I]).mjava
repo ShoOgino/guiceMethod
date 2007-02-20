@@ -1,4 +1,4 @@
-  public <I extends T> BindingBuilder<T> to(
+  public <I extends T> BindingBuilderImpl<T> to(
       final TypeLiteral<I> implementation) {
     ensureImplementationIsNotSet();
     this.implementation = implementation;

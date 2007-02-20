@@ -1,4 +1,4 @@
-  public ConstantBindingBuilder bindConstant(
+  public ConstantBindingBuilderImpl bindConstant(
       Class<? extends Annotation> annotationType) {
     ensureNotCreated();
     return bind(source(), Key.strategyFor(annotationType));

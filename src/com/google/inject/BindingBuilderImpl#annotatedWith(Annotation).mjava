@@ -1,4 +1,4 @@
-  public BindingBuilder<T> annotatedWith(Annotation annotation) {
+  public BindingBuilderImpl<T> annotatedWith(Annotation annotation) {
     if (this.key.hasAnnotationType()) {
       binder.addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
     } else {

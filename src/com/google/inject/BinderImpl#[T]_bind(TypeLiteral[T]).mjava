@@ -1,4 +1,4 @@
-  public <T> BindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
+  public <T> BindingBuilderImpl<T> bind(TypeLiteral<T> typeLiteral) {
     return bind(Key.get(typeLiteral));
   }
 

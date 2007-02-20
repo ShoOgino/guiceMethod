@@ -1,5 +1,5 @@
   /**
    * Binds the given key.
    */
-  <T> BindingBuilderImpl<T> bind(Key<T> key);
+  <T> BindingBuilder<T> bind(Key<T> key);
 

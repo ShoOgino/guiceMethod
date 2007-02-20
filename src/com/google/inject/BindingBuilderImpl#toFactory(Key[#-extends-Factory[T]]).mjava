@@ -1,4 +1,4 @@
-  public BindingBuilder<T> toFactory(
+  public BindingBuilderImpl<T> toFactory(
       final Key<? extends Factory<T>> factoryKey) {
     ensureImplementationIsNotSet();
 
