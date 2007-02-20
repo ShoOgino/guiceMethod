@@ -6,12 +6,10 @@
    *     expectation is that the application will log this exception and exit.
    * @throws IllegalStateException if called more than once
    */
-  public synchronized Container createContainer()
-      throws CreationException {
+  Container createContainer() throws CreationException {
     stopwatch.resetAndLog(logger, "Configuration");
 
     // Create the container.
-    ensureNotCreated();
     Map<Key<?>, Binding<?>> bindings = new HashMap<Key<?>, Binding<?>>();
     container = new ContainerImpl(
         proxyFactoryBuilder.create(), bindings, scopes);

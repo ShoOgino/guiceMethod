@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bind(TypeLiteral)
+   * @see Binder#bind(TypeLiteral)
    */
   protected <T> BindingBuilder<T> bind(
       TypeLiteral<T> typeLiteral) {

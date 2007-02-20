@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bindConstant(java.lang.annotation.Annotation)
+   * @see Binder#bindConstant(java.lang.annotation.Annotation)
    */
   protected ConstantBindingBuilder bindConstant(
       Annotation annotation) {

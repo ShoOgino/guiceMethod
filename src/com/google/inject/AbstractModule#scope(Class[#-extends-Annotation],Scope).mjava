@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bindScope(Class, Scope)
+   * @see Binder#bindScope(Class, Scope)
    */
   protected void scope(Class<? extends Annotation> scopeAnnotation,
       Scope scope) {

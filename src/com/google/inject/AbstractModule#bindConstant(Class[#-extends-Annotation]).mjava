@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bindConstant(Class)
+   * @see Binder#bindConstant(Class)
    */
   protected ConstantBindingBuilder bindConstant(
       Class<? extends Annotation> annotationType) {

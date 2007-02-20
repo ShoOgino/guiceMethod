@@ -1,0 +1,4 @@
+    SimpleSourceProvider(Object source) {
+      this.source = source;
+    }
+

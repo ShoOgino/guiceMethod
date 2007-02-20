@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#link(Key)
+   * @see Binder#link(Key)
    */
   protected <T> LinkedBindingBuilder<T> link(Key<T> key) {
     return builder.link(key);

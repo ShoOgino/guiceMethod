@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bindInterceptor(com.google.inject.matcher.Matcher,
+   * @see Binder#bindInterceptor(com.google.inject.matcher.Matcher,
    *  com.google.inject.matcher.Matcher,
    *  org.aopalliance.intercept.MethodInterceptor[])
    */

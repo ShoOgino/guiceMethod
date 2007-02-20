@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bind(Class)
+   * @see Binder#bind(Class)
    */
   protected <T> BindingBuilder<T> bind(Class<T> clazz) {
     return builder.bind(clazz);

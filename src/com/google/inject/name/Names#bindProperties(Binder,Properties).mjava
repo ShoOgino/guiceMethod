@@ -1,0 +1,18 @@
+  /**
+   * Creates a constant binding to {@code @Named(key)} for each property.
+   */
+  public static void bindProperties(final Binder binder,
+      final Properties properties) {
+    SourceProviders.withDefault(
+        new SimpleSourceProvider(SourceProviders.defaultSource()),
+        new Runnable() {
+          public void run() {
+            for (Map.Entry<Object, Object> entry : properties.entrySet()) {
+              String key = (String) entry.getKey();
+              String value = (String) entry.getValue();
+              binder.bind(Key.get(String.class, new NamedImpl(key))).to(value);
+            }
+          }
+        });
+  }
+

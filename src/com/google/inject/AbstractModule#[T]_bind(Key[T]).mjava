@@ -1,5 +1,5 @@
   /**
-   * @see BinderImpl#bind(Key)
+   * @see Binder#bind(Key)
    */
   protected <T> BindingBuilder<T> bind(Key<T> key) {
     return builder.bind(key);

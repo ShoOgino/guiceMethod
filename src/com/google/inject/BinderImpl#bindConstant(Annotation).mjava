@@ -1,5 +1,4 @@
   public ConstantBindingBuilderImpl bindConstant(Annotation annotation) {
-    ensureNotCreated();
     return bind(source(), Key.strategyFor(annotation));
   }
 

@@ -3,5 +3,5 @@
    * that the resulting {@link Container} will include this module properly set
    * up.
    */
-  void configure(BinderImpl builder);
+  void configure(Binder binder);
 

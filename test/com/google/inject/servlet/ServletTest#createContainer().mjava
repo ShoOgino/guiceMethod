@@ -1,8 +1,10 @@
   private Container createContainer() throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    builder.install(new ServletModule());
-    builder.bind(InSession.class);
-    builder.bind(InRequest.class);
-    return builder.createContainer();
+    return Guice.createContainer(new AbstractModule() {
+      protected void configure() {
+        install(new ServletModule());
+        bind(InSession.class);
+        bind(InRequest.class);
+      }
+    });
   }
 
