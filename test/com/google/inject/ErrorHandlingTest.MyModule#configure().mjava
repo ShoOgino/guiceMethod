@@ -1,4 +1,5 @@
     protected void configure() {
+      install(new ServletModule());
       bind(Runnable.class);
       bind(Foo.class);
       bind(Bar.class);
@@ -7,6 +8,7 @@
       bind(String.class).annotatedWith(Names.named("foo")).in(
           Named.class);
       link(Key.get(Runnable.class)).to(Key.get(Runnable.class));
+      bind(TooManyScopes.class);
       requestStaticInjection(ErrorHandlingTest.class);
     }
 

@@ -1,0 +1,7 @@
+  /**
+   * Gets the first line number.
+   */
+  public int getFirstLine() {
+    return firstLine;
+  }
+
