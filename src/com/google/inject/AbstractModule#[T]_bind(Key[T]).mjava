@@ -1,7 +1,7 @@
   /**
-   * @see ContainerBuilder#bind(Key)
+   * @see BinderImpl#bind(Key)
    */
-  protected <T> ContainerBuilder.BindingBuilder<T> bind(Key<T> key) {
+  protected <T> BinderImpl.BindingBuilder<T> bind(Key<T> key) {
     return builder.bind(key);
   }
 

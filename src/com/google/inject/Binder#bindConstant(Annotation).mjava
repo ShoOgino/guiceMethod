@@ -1,0 +1,2 @@
+  ConstantBindingBuilder bindConstant(Annotation annotation);
+

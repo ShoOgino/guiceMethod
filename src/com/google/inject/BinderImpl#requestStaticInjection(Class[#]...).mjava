@@ -1,0 +1,4 @@
+  public void requestStaticInjection(Class<?>... types) {
+    staticInjections.add(new StaticInjection(source(), types));
+  }
+

@@ -4,7 +4,5 @@
    *
    * @param types for which static members will be injected
    */
-  public void requestStaticInjection(Class<?>... types) {
-    staticInjections.add(new StaticInjection(source(), types));
-  }
+  void requestStaticInjection(Class<?>... types);
 

@@ -2,12 +2,12 @@
     Singleton singleton = new Singleton();
     Singleton other = new Singleton();
 
-    ContainerBuilder builder = new ContainerBuilder();
+    BinderImpl builder = new BinderImpl();
     builder.bind(Singleton.class).to(singleton);
     builder.bind(Singleton.class)
         .annotatedWith(Other.class)
         .to(other);
-    Container container = builder.create();
+    Container container = builder.createContainer();
 
     assertSame(singleton,
         container.getLocator(Key.get(Singleton.class)).get());

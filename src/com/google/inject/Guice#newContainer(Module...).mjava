@@ -1,0 +1,5 @@
+  public static Container newContainer(Module... modules)
+      throws CreationException {
+    return newContainer(Arrays.asList(modules));
+  }
+

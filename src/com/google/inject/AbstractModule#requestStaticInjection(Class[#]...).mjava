@@ -1,5 +1,5 @@
   /**
-   * @see ContainerBuilder#requestStaticInjection(Class[])
+   * @see BinderImpl#requestStaticInjection(Class[])
    */
   protected void requestStaticInjection(Class<?>... types) {
     builder.requestStaticInjection(types);

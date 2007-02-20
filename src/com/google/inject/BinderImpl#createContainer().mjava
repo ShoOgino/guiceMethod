@@ -6,7 +6,7 @@
    *     expectation is that the application will log this exception and exit.
    * @throws IllegalStateException if called more than once
    */
-  public synchronized Container create()
+  public synchronized Container createContainer()
       throws CreationException {
     stopwatch.resetAndLog(logger, "Configuration");
 

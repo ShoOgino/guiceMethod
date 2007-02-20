@@ -1,0 +1,7 @@
+  private BinderImpl createBinder(Stage stage) {
+    BinderImpl builder = new BinderImpl(stage);
+    builder.bind(Foo.class).in(CONTAINER).eagerly();
+    builder.bind(Bar.class);
+    return builder;
+  }
+

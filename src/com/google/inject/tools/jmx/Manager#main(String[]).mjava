@@ -10,10 +10,7 @@
     }
 
     Module module = (Module) Class.forName(args[0]).newInstance();
-
-    ContainerBuilder builder = new ContainerBuilder();
-    builder.install(module);
-    Container container = builder.create();
+    Container container = Guice.newContainer(module);
 
     manage(args[0], container);
 

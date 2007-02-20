@@ -1,10 +1,10 @@
   public void testOverriddingAnnotation()
       throws CreationException {
-    ContainerBuilder builder = new ContainerBuilder();
+    BinderImpl builder = new BinderImpl();
     Object bindingBuilder
         = builder.bind(Singleton.class).in(Scopes.DEFAULT);
-    builder.create();
+    builder.createContainer();
     assertSame(Scopes.DEFAULT,
-        ((ContainerBuilder.BindingBuilder<?>) bindingBuilder).scope);
+        ((BinderImpl.BindingBuilder<?>) bindingBuilder).scope);
   }
 

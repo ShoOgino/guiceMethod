@@ -1,0 +1,4 @@
+  public <T> LinkedBindingBuilder<T> link(TypeLiteral<T> type) {
+    return link(Key.get(type));
+  }
+

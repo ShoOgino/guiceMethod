@@ -1,5 +1,5 @@
   public void testNotProvided() throws CreationException {
-    Container c = new ContainerBuilder().create();
+    Container c = Guice.newContainer();
     Foo foo = c.getLocator(Foo.class).get();
     assertNull(foo.bar);
     assertNull(foo.fromMethod);

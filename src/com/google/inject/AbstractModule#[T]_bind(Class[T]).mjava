@@ -1,7 +1,7 @@
   /**
-   * @see ContainerBuilder#bind(Class)
+   * @see BinderImpl#bind(Class)
    */
-  protected <T> ContainerBuilder.BindingBuilder<T> bind(Class<T> clazz) {
+  protected <T> BinderImpl.BindingBuilder<T> bind(Class<T> clazz) {
     return builder.bind(clazz);
   }
 

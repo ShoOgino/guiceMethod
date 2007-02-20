@@ -1,0 +1,2 @@
+  <T> LinkedBindingBuilder<T> link(TypeLiteral<T> type);
+

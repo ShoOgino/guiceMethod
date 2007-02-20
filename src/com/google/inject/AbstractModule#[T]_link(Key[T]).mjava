@@ -1,7 +1,7 @@
   /**
-   * @see ContainerBuilder#link(Key)
+   * @see BinderImpl#link(Key)
    */
-  protected <T> ContainerBuilder.LinkedBindingBuilder<T> link(Key<T> key) {
+  protected <T> BinderImpl.LinkedBindingBuilder<T> link(Key<T> key) {
     return builder.link(key);
   }
 

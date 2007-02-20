@@ -4,7 +4,7 @@
    * @param stage we're running in. If the stage is {@link Stage#PRODUCTION},
    *  we will eagerly load container-scoped objects.
    */
-  public ContainerBuilder(Stage stage) {
+  public BinderImpl(Stage stage) {
     bindScope(ContainerScoped.class, CONTAINER);
 
     bind(Container.class).to(CONTAINER_FACTORY);

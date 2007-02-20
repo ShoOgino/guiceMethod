@@ -1,7 +1,7 @@
   public void testInvalidCharacter() throws CreationException {
-    ContainerBuilder b = new ContainerBuilder();
+    BinderImpl b = new BinderImpl();
     b.bindConstant(NumericValue.class).to("invalid");
-    Container c = b.create();
+    Container c = b.createContainer();
     try {
       c.getLocator(InvalidCharacter.class).get();
       fail();

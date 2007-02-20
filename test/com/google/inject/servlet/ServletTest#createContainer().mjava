@@ -1,8 +1,8 @@
   private Container createContainer() throws CreationException {
-    ContainerBuilder builder = new ContainerBuilder();
+    BinderImpl builder = new BinderImpl();
     builder.install(new ServletModule());
     builder.bind(InSession.class);
     builder.bind(InRequest.class);
-    return builder.create();
+    return builder.createContainer();
   }
 

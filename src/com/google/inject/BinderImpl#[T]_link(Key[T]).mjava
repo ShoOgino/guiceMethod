@@ -1,7 +1,3 @@
-  /**
-   * Links the given key to another key effectively creating an alias for a
-   * binding.
-   */
   public <T> LinkedBindingBuilder<T> link(Key<T> key) {
     ensureNotCreated();
     LinkedBindingBuilder<T> builder =

@@ -2,7 +2,7 @@
    * Constructs a new builder for a development environment (see
    * {@link Stage#DEVELOPMENT}).
    */
-  public ContainerBuilder() {
+  public BinderImpl() {
     this(Stage.DEVELOPMENT);
   }
 

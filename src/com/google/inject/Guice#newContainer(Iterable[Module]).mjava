@@ -1,0 +1,9 @@
+  public static Container newContainer(Iterable<Module> modules)
+      throws CreationException {
+    BinderImpl binder = new BinderImpl();
+    for (Module module : modules) {
+      binder.install(module);
+    }
+    return binder.createContainer();
+  }
+

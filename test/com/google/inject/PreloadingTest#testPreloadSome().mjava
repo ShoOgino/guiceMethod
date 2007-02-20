@@ -1,6 +1,6 @@
   public void testPreloadSome() throws CreationException {
-    ContainerBuilder builder = createContainerBuilder(Stage.DEVELOPMENT);
-    builder.create();
+    BinderImpl builder = createBinder(Stage.DEVELOPMENT);
+    builder.createContainer();
     assertEquals(1, Foo.count);
     assertEquals(0, Bar.count);
   }

@@ -1,5 +1,5 @@
   public void testParameterIndex() throws CreationException {
-    ContainerBuilder cb = new ContainerBuilder();
+    BinderImpl cb = new BinderImpl();
 
     cb.bind(Zero.class).to(new Factory<Zero>() {
       public Zero get(Context context) {
@@ -22,7 +22,7 @@
       }
     });
 
-    Container c = cb.create();
+    Container c = cb.createContainer();
 
     A a = c.getLocator(A.class).get();
 

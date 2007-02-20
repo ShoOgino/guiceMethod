@@ -1,6 +1,3 @@
-  /**
-   * Binds the given key.
-   */
   public <T> BindingBuilder<T> bind(Key<T> key) {
     ensureNotCreated();
     BindingBuilder<T> builder = new BindingBuilder<T>(key, source());

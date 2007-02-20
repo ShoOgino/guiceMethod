@@ -1,6 +1,3 @@
-  /**
-   * Binds a scope to an annotation.
-   */
   public void bindScope(Class<? extends Annotation> annotationType,
       Scope scope) {
     ensureNotCreated();

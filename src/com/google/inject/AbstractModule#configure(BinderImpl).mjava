@@ -1,4 +1,4 @@
-  public final synchronized void configure(ContainerBuilder builder) {
+  public final synchronized void configure(BinderImpl builder) {
     try {
       if (this.builder != null) {
         throw new IllegalStateException("Re-entry is not allowed.");

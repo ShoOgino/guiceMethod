@@ -1,7 +1,7 @@
   /**
    * Gets the builder.
    */
-  protected ContainerBuilder builder() {
+  protected Binder builder() {
     return builder;
   }
 

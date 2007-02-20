@@ -1,5 +1,5 @@
   /**
-   * @see ContainerBuilder#install(Module)
+   * @see BinderImpl#install(Module)
    */
   protected void install(Module module) {
     builder.install(module);

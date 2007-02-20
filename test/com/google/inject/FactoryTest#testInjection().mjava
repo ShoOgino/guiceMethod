@@ -1,5 +1,5 @@
   public void testInjection() throws Exception {
-    ContainerBuilder cb = new ContainerBuilder(Stage.PRODUCTION);
+    BinderImpl cb = new BinderImpl(Stage.PRODUCTION);
 
     // Called from getInstance().
     cb.bind(Foo.class)
@@ -29,7 +29,7 @@
     cb.bind(Bob.class).annotatedWith(BobAnnotation2.class).to(
         createFactory(Bob.class, BobAnnotation2.class, execute));
 
-    Container c = cb.create();
+    Container c = cb.createContainer();
 
     Foo foo = c.getLocator(Key.get(Foo.class, FooAnnotation.class)).get();
 

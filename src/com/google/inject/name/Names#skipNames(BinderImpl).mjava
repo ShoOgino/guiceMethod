@@ -1,4 +1,4 @@
-  private static void skipNames(ContainerBuilder builder) {
+  private static void skipNames(BinderImpl builder) {
     SourceProvider sourceProvider = builder.getSourceProvider();
     if (sourceProvider instanceof DefaultSourceProvider) {
       ((DefaultSourceProvider) sourceProvider).skip(Names.class);

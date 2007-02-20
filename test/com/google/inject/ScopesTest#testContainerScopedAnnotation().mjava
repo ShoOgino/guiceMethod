@@ -1,10 +1,10 @@
   public void testContainerScopedAnnotation()
       throws CreationException {
-    ContainerBuilder builder = new ContainerBuilder();
+    BinderImpl builder = new BinderImpl();
     Object bindingBuilder
         = builder.bind(Singleton.class);
-    builder.create();
+    builder.createContainer();
     assertSame(Scopes.CONTAINER,
-        ((ContainerBuilder.BindingBuilder<?>) bindingBuilder).scope);
+        ((BinderImpl.BindingBuilder<?>) bindingBuilder).scope);
   }
 

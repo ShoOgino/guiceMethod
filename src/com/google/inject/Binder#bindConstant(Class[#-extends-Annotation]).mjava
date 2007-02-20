@@ -1,0 +1,3 @@
+  ConstantBindingBuilder bindConstant(
+      Class<? extends Annotation> annotationType);
+

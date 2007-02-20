@@ -8,9 +8,6 @@
    *     example: {@code annotatedWith(Transactional.class)}.
    * @param interceptors to apply
    */
-  public void intercept(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
-    ensureNotCreated();
-    proxyFactoryBuilder.intercept(classMatcher, methodMatcher, interceptors);
-  }
+  void bindInterceptor(Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors);
 

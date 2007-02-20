@@ -1,7 +1,7 @@
   /**
    * Creates a constant binding to {@code @Named(key)} for each property.
    */
-  public static void bindProperties(ContainerBuilder builder,
+  public static void bindProperties(BinderImpl builder,
       Properties properties) {
     skipNames(builder);
     for (Map.Entry<Object, Object> entry : properties.entrySet()) {

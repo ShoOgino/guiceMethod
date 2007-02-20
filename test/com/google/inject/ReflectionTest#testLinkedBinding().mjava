@@ -1,9 +1,9 @@
   public void testLinkedBinding() throws CreationException {
-    ContainerBuilder builder = new ContainerBuilder();
+    BinderImpl builder = new BinderImpl();
     Bar bar = new Bar();
     builder.bind(Bar.class).to(bar);
     builder.link(Key.get(Foo.class)).to(Key.get(Bar.class));
-    Container container = builder.create();
+    Container container = builder.createContainer();
     Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
     assertSame(bar, fooBinding.getLocator().get());
     assertNotNull(fooBinding.getSource());

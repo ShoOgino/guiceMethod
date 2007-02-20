@@ -1,6 +1,3 @@
-  /**
-   * Applies the given module to this builder.
-   */
   public void install(Module module) {
     module.configure(this);
   }
