@@ -1,11 +1,11 @@
-  <T> Generator<T> createFactory(
+  <T> Factory<T> createFactory(
       final Class<T> type, final Class<? extends Annotation> annotationType,
       final Member expectedMember) {
-    return new Generator<T>() {
-      public T generate(Context context) {
+    return new Factory<T>() {
+      public T get(Context context) {
         assertEquals(expectedMember, context.getMember());
         assertEquals(type, context.getKey().getType().getType());
-        return context.getContainer().getFactory(type).get();
+        return context.getContainer().getLocator(type).get();
       }
     };
   }

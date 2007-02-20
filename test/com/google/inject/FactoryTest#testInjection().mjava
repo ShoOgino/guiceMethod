@@ -31,7 +31,7 @@
 
     Container c = cb.create();
 
-    Foo foo = c.getFactory(Key.get(Foo.class, FooAnnotation.class)).get();
+    Foo foo = c.getLocator(Key.get(Foo.class, FooAnnotation.class)).get();
 
     assertNotNull(foo.bar);
     assertNotNull(foo.bar.tee1);
