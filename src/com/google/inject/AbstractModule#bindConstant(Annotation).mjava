@@ -1,7 +1,7 @@
   /**
    * @see BinderImpl#bindConstant(java.lang.annotation.Annotation)
    */
-  protected BinderImpl.ConstantBindingBuilder bindConstant(
+  protected ConstantBindingBuilder bindConstant(
       Annotation annotation) {
     return builder.bindConstant(annotation);
   }

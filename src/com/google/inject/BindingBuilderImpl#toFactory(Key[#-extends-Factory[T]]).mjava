@@ -1,0 +1,12 @@
+  public BindingBuilder<T> toFactory(
+      final Key<? extends Factory<T>> factoryKey) {
+    ensureImplementationIsNotSet();
+
+    final BoundFactory<T> boundFactory =
+        new BoundFactory<T>(factoryKey, source);
+    binder.creationListeners.add(boundFactory);
+    this.factory = boundFactory;
+
+    return this;
+  }
+

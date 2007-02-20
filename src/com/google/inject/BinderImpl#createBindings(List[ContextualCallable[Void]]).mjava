@@ -1,5 +1,5 @@
   private void createBindings(List<ContextualCallable<Void>> preloaders) {
-    for (BindingBuilder<?> builder : bindingBuilders) {
+    for (BindingBuilderImpl<?> builder : bindingBuilders) {
       createBinding(builder, preloaders);
     }
   }

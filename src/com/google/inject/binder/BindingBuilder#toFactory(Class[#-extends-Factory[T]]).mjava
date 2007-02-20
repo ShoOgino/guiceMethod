@@ -1,0 +1,6 @@
+  /**
+   * Binds to instances from the factory bound to the given type.
+   */
+  BindingBuilder<T> toFactory(
+      Class<? extends Factory<T>> factoryType);
+

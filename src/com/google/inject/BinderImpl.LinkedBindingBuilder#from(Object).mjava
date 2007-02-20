@@ -1,5 +1,0 @@
-    LinkedBindingBuilder<T> from(Object source) {
-      this.source = source;
-      return this;
-    }
-

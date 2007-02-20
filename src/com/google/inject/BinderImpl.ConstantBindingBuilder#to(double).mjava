@@ -1,7 +1,0 @@
-    /**
-     * Binds constant to the given value.
-     */
-    public void to(double value) {
-      to(double.class, value);
-    }
-

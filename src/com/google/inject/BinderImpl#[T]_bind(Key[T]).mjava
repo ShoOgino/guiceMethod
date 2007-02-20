@@ -1,6 +1,6 @@
-  public <T> BindingBuilder<T> bind(Key<T> key) {
+  public <T> BindingBuilderImpl<T> bind(Key<T> key) {
     ensureNotCreated();
-    BindingBuilder<T> builder = new BindingBuilder<T>(key, source());
+    BindingBuilderImpl<T> builder = new BindingBuilderImpl<T>(this, key, source());
     bindingBuilders.add(builder);
     return builder;
   }

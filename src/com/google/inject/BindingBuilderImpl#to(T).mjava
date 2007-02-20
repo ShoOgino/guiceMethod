@@ -1,0 +1,11 @@
+  public BindingBuilder<T> to(T instance) {
+    ensureImplementationIsNotSet();
+    this.instance = Objects.nonNull(instance, "instance");
+    this.factory = new ConstantFactory<T>(instance);
+    if (this.scope != null) {
+      binder.addError(source, ErrorMessages.SINGLE_INSTANCE_AND_SCOPE);
+    }
+    this.scope = Scopes.CONTAINER;
+    return this;
+  }
+

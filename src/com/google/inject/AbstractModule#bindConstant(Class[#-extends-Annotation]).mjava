@@ -1,7 +1,7 @@
   /**
    * @see BinderImpl#bindConstant(Class)
    */
-  protected BinderImpl.ConstantBindingBuilder bindConstant(
+  protected ConstantBindingBuilder bindConstant(
       Class<? extends Annotation> annotationType) {
     return builder.bindConstant(annotationType);
   }

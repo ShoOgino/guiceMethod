@@ -1,0 +1,5 @@
+  ConstantBindingBuilderImpl(BinderImpl binder, AnnotationStrategy annotationStrategy) {
+    this.binder = binder;
+    this.annotationStrategy = annotationStrategy;
+  }
+

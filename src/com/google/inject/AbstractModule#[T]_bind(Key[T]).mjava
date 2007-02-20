@@ -1,7 +1,7 @@
   /**
    * @see BinderImpl#bind(Key)
    */
-  protected <T> BinderImpl.BindingBuilder<T> bind(Key<T> key) {
+  protected <T> BindingBuilder<T> bind(Key<T> key) {
     return builder.bind(key);
   }
 

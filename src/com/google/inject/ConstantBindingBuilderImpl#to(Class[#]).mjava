@@ -1,0 +1,4 @@
+  public void to(Class<?> value) {
+    to(Class.class, value);
+  }
+

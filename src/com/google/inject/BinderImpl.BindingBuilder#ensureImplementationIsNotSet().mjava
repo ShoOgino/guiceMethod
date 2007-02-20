@@ -1,9 +1,0 @@
-    /**
-     * Adds an error message if the implementation has already been bound.
-     */
-    private void ensureImplementationIsNotSet() {
-      if (factory != null) {
-        addError(source, ErrorMessages.IMPLEMENTATION_ALREADY_SET);
-      }
-    }
-

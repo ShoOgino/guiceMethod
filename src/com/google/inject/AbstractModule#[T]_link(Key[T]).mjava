@@ -1,7 +1,7 @@
   /**
    * @see BinderImpl#link(Key)
    */
-  protected <T> BinderImpl.LinkedBindingBuilder<T> link(Key<T> key) {
+  protected <T> LinkedBindingBuilder<T> link(Key<T> key) {
     return builder.link(key);
   }
 

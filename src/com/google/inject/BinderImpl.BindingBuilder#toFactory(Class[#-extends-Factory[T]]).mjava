@@ -1,8 +1,0 @@
-    /**
-     * Binds to instances from the factory bound to the given type.
-     */
-    public BindingBuilder<T> toFactory(
-        final Class<? extends Factory<T>> factoryType) {
-      return toFactory(Key.get(factoryType));
-    }
-

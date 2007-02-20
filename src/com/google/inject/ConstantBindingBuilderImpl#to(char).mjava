@@ -1,0 +1,4 @@
+  public void to(char value) {
+    to(char.class, value);
+  }
+

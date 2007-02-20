@@ -1,2 +1,2 @@
-  <T> BindingBuilder<T> bind(Class<T> clazz);
+  <T> BindingBuilderImpl<T> bind(Class<T> clazz);
 

@@ -5,6 +5,6 @@
         = builder.bind(Singleton.class).in(Scopes.DEFAULT);
     builder.createContainer();
     assertSame(Scopes.DEFAULT,
-        ((BinderImpl.BindingBuilder<?>) bindingBuilder).scope);
+        ((BindingBuilderImpl<?>) bindingBuilder).scope);
   }
 

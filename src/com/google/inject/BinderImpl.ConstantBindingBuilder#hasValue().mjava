@@ -1,4 +1,0 @@
-    boolean hasValue() {
-      return bindingInfo != null;
-    }
-

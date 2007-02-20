@@ -1,0 +1,5 @@
+  /**
+   * Binds constant to the given value.
+   */
+  <E extends Enum<E>> void to(E value);
+

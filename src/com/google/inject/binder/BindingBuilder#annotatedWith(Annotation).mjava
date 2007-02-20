@@ -1,0 +1,5 @@
+  /**
+   * Specifies an annotation for this binding.
+   */
+  BindingBuilder<T> annotatedWith(Annotation annotation);
+

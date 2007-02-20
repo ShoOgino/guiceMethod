@@ -1,4 +1,0 @@
-    ConstantBindingBuilder(AnnotationStrategy annotationStrategy) {
-      this.annotationStrategy = annotationStrategy;
-    }
-

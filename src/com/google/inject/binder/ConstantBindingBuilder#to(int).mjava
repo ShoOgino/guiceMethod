@@ -1,0 +1,5 @@
+  /**
+   * Binds constant to the given value.
+   */
+  void to(int value);
+

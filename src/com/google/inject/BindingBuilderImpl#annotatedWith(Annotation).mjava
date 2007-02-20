@@ -1,0 +1,10 @@
+  public BindingBuilder<T> annotatedWith(Annotation annotation) {
+    if (this.key.hasAnnotationType()) {
+      binder.addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
+    } else {
+      // not test-covered?
+      this.key = Key.get(this.key.getType(), annotation);
+    }
+    return this;
+  }
+

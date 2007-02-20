@@ -1,0 +1,5 @@
+  /**
+   * Links to another binding with the given type.
+   */
+  void to(TypeLiteral<? extends T> destination);
+

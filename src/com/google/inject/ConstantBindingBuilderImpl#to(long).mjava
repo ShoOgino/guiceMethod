@@ -1,0 +1,4 @@
+  public void to(long value) {
+    to(long.class, value);
+  }
+

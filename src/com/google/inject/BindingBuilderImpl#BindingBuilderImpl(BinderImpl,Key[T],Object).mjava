@@ -1,0 +1,6 @@
+  BindingBuilderImpl(BinderImpl binder, Key<T> key, Object source) {
+    this.binder = binder;
+    this.key = Objects.nonNull(key, "key");
+    this.source = source;
+  }
+

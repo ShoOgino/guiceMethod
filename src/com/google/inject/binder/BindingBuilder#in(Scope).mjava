@@ -1,0 +1,5 @@
+  /**
+   * Specifies the scope.
+   */
+  BindingBuilder<T> in(Scope scope);
+

@@ -1,0 +1,12 @@
+  /**
+   * Maps a constant value to the given type and name.
+   */
+  <T> void to(final Class<T> type, final T value) {
+    if (this.bindingInfo != null) {
+      binder.addError(source, ErrorMessages.CONSTANT_VALUE_ALREADY_SET);
+    } else {
+      this.bindingInfo
+          = new BindingInfo<T>(type, value, annotationStrategy, source);
+    }
+  }
+

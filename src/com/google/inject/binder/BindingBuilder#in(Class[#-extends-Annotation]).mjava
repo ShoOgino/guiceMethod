@@ -1,0 +1,6 @@
+  /**
+   * Specifies the scope. References the annotation passed to {@link
+   * com.google.inject.BinderImpl#bindScope(Class, com.google.inject.Scope)}.
+   */
+  BindingBuilder<T> in(Class<? extends Annotation> scopeAnnotation);
+

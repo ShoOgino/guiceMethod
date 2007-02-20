@@ -1,0 +1,5 @@
+  ConstantBindingBuilderImpl from(Object source) {
+    this.source = source;
+    return this;
+  }
+

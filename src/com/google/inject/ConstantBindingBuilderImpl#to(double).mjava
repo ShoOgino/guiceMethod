@@ -1,0 +1,4 @@
+  public void to(double value) {
+    to(double.class, value);
+  }
+

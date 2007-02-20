@@ -1,0 +1,5 @@
+  /**
+   * Binds to the given instance.
+   */
+  BindingBuilder<T> to(T instance);
+

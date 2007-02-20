@@ -1,5 +1,5 @@
   private void createLinkedBindings() {
-    for (LinkedBindingBuilder<?> builder : linkedBindingBuilders) {
+    for (LinkedBindingBuilderImpl<?> builder : linkedBindingBuilders) {
       createLinkedBinding(builder);
     }
   }

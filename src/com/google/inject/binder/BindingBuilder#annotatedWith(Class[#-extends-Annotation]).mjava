@@ -1,0 +1,6 @@
+  /**
+   * Specifies the annotation type for this binding.
+   */
+  BindingBuilder<T> annotatedWith(
+      Class<? extends Annotation> annotationType);
+
