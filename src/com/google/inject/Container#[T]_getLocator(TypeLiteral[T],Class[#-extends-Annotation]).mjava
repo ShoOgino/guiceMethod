@@ -1,6 +1,0 @@
-  /**
-   * Gets the locator bound to the given type and annotation.
-   */
-  <T> Locator<T> getLocator(TypeLiteral<T> type,
-      Class<? extends Annotation> annotationType);
-

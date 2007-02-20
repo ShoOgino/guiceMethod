@@ -1,7 +1,7 @@
   /**
    * @see Binder#bindScope(Class, Scope)
    */
-  protected void scope(Class<? extends Annotation> scopeAnnotation,
+  protected void bindScope(Class<? extends Annotation> scopeAnnotation,
       Scope scope) {
     builder.bindScope(scopeAnnotation, scope);
   }

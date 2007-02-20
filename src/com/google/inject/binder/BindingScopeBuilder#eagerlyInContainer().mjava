@@ -1,0 +1,7 @@
+  /**
+   * Instructs the {@link com.google.inject.Container} to eagerly load this
+   * container-scoped binding upon creation. Useful for application
+   * initialization logic.
+   */
+  void eagerlyInContainer();
+

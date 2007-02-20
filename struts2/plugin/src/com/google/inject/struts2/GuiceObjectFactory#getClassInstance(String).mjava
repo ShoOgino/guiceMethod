@@ -4,18 +4,20 @@
     synchronized (this) {
       if (container == null) {
         // We can only bind each class once.
-        if (boundClasses.add(clazz)) {
+        if (!boundClasses.contains(clazz)) {
           try {
+            // Calling these methods now helps us detect ClassNotFoundErrors
+            // early.
             clazz.getDeclaredFields();
             clazz.getDeclaredMethods();
+
+            boundClasses.add(clazz);
           } catch (Throwable t) {
             // Struts should still work even though some classes aren't in the
             // classpath. It appears we always get the exception here when
             // this is the case.
             return clazz;
           }
-
-          builder.bind(clazz);
         }
       }
     }

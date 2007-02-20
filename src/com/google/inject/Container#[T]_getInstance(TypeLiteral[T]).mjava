@@ -1,5 +1,0 @@
-  /**
-   * Gets an instance from the locator bound to the given type.
-   */
-  <T> T getInstance(TypeLiteral<T> type);
-

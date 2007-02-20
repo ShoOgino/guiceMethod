@@ -1,4 +1,4 @@
-  public BindingBuilderImpl<T> to(Factory<? extends T> factory) {
+  public BindingScopeBuilder toFactory(Factory<? extends T> factory) {
     ensureImplementationIsNotSet();
     this.factory = new InternalFactoryToFactoryAdapter<T>(factory);
     return this;

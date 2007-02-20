@@ -1,0 +1,7 @@
+  /**
+   * Gets direct access to the underlying {@code Binder}.
+   */
+  protected Binder binder() {
+    return builder;
+  }
+

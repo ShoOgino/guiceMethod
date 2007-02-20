@@ -1,7 +1,0 @@
-  /**
-   * Gets the builder.
-   */
-  protected Binder builder() {
-    return builder;
-  }
-

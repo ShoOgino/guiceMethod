@@ -1,0 +1,10 @@
+  public BindingScopeBuilder to(TypeLiteral<? extends T> implementation) {
+    ensureImplementationIsNotSet();
+    this.implementation = implementation;
+    final DefaultFactory<? extends T> defaultFactory
+        = new DefaultFactory<T>(key, implementation, source);
+    this.factory = defaultFactory;
+    binder.creationListeners.add(defaultFactory);
+    return this;
+  }
+

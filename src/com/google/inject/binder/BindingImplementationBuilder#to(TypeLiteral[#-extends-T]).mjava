@@ -1,0 +1,8 @@
+  /**
+   * Binds to instances of the given implementation class. The {@link
+   * com.google.inject.Container} will inject {@code implementation} as
+   * well. Sets the scope based on an annotation on the implementation
+   * class if present.
+   */
+  BindingScopeBuilder to(TypeLiteral<? extends T> implementation);
+

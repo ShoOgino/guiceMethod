@@ -1,7 +1,0 @@
-  /**
-   * Instructs the builder to eagerly load this binding when it creates the
-   * container. Useful for application initialization logic. Currently only
-   * supported for container-scoped bindings.
-   */
-  BindingBuilder<T> eagerly();
-

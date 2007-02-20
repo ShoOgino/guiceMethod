@@ -1,3 +1,7 @@
+  /**
+   * Creates a {@code Container} from {@code Module}s in a given development
+   * {@link Stage}.
+   */
   public static Container createContainer(Stage stage, Iterable<Module> modules)
       throws CreationException {
     BinderImpl binder = new BinderImpl(stage);
@@ -5,6 +9,5 @@
       binder.install(module);
     }
     return binder.createContainer();
-
   }
 

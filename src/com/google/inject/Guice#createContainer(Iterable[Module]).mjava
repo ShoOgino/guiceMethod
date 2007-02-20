@@ -1,3 +1,6 @@
+  /**
+   * Creates a {@code Container} from {@code Module}s.
+   */
   public static Container createContainer(Iterable<Module> modules)
       throws CreationException {
     return createContainer(Stage.DEVELOPMENT, modules);

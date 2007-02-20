@@ -3,7 +3,17 @@
       if (container == null) {
         try {
           logger.info("Creating container...");
-          container = builder.create(!developmentMode);
+          this.container = Guice.createContainer(new AbstractModule() {
+            protected void configure() {
+              install(new ServletModule());
+
+              // Tell the container about all the action classes, etc., so it
+              // can validate them at startup.
+              for (Class<?> boundClass : boundClasses) {
+                bind(boundClass);
+              }
+            }
+          });
         } catch (Throwable t) {
           t.printStackTrace();
           System.exit(1);
@@ -12,6 +22,6 @@
       }
     }
 
-    return container.getInstance(clazz);
+    return container.getLocator(clazz).get();
   }
 

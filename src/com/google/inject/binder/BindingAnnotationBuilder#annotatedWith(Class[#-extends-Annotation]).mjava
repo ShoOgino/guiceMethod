@@ -1,0 +1,5 @@
+  /**
+   * Specifies the marker annotation type for this binding.
+   */
+  BindingBuilder<T> annotatedWith(Class<? extends Annotation> annotationType);
+

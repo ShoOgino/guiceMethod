@@ -1,7 +1,7 @@
   public void testLinkedBinding() throws CreationException {
     BinderImpl builder = new BinderImpl();
     Bar bar = new Bar();
-    builder.bind(Bar.class).to(bar);
+    builder.bind(Bar.class).toInstance(bar);
     builder.link(Key.get(Foo.class)).to(Key.get(Bar.class));
     Container container = builder.createContainer();
     Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));

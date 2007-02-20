@@ -1,12 +1,12 @@
   /**
-   * Applies the given method interceptor to the methods matched by the class
-   * and method matchers.
+   * Binds a method interceptor to methods matched by class and method
+   * matchers.
    *
    * @param classMatcher matches classes the interceptor should apply to. For
    *     example: {@code only(Runnable.class)}.
    * @param methodMatcher matches methods the interceptor should apply to. For
    *     example: {@code annotatedWith(Transactional.class)}.
-   * @param interceptors to apply
+   * @param interceptors to bind
    */
   void bindInterceptor(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors);

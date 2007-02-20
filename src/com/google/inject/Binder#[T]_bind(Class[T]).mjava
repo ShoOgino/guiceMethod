@@ -1,2 +1,5 @@
-  <T> BindingBuilder<T> bind(Class<T> clazz);
+  /**
+   * Creates a binding to a type.
+   */
+  <T> BindingBuilder<T> bind(Class<T> type);
 

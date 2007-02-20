@@ -1,5 +1,6 @@
   /**
    * Injects dependencies into the fields and methods of an existing object.
+   * Does not inject the constructor.
    */
   void injectMembers(Object o);
 

@@ -1,9 +1,0 @@
-  public void testBindingToInstanceWithScope() {
-    BinderImpl builder = new BinderImpl();
-    builder.bind(Singleton.class).to(new Singleton()).in(Scopes.DEFAULT);
-    try {
-      builder.createContainer();
-      fail();
-    } catch (CreationException e) { /* expected */ }
-  }
-

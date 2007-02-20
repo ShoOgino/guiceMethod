@@ -1,5 +1,5 @@
   public BindingBuilderImpl<T> toFactory(
-      final Key<? extends Factory<T>> factoryKey) {
+      Key<? extends Factory<? extends T>> factoryKey) {
     ensureImplementationIsNotSet();
 
     final BoundFactory<T> boundFactory =

@@ -1,6 +1,0 @@
-  /**
-   * Binds to instances from the factory bound to the given type.
-   */
-  BindingBuilder<T> toFactory(
-      TypeLiteral<? extends Factory<T>> factoryType);
-

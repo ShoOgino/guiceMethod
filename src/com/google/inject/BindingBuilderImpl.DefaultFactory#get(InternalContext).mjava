@@ -1,5 +1,4 @@
     public T get(InternalContext context) {
-      // TODO: figure out if we can suppress this warning
-      return constructor.construct(context, (Class<T>) key.getRawType());
+      return constructor.construct(context, (Class) key.getRawType());
     }
 

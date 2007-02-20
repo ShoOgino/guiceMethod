@@ -1,6 +1,5 @@
-  public BindingBuilderImpl<T> in(Scope scope) {
+  public void in(Scope scope) {
     ensureScopeNotSet();
     this.scope = Objects.nonNull(scope, "scope");
-    return this;
   }
 

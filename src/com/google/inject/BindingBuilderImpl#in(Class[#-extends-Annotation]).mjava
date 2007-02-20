@@ -1,15 +1,14 @@
-  public BindingBuilderImpl<T> in(Class<? extends Annotation> scopeAnnotation) {
+  public void in(Class<? extends Annotation> scopeAnnotation) {
     // this method not test-covered
-
     ensureScopeNotSet();
 
     // We could defer this lookup to when we create the container, but this
     // is fine for now.
-    this.scope = binder.scopes.get(Objects.nonNull(scopeAnnotation, "scope annotation"));
+    this.scope = binder.scopes.get(
+        Objects.nonNull(scopeAnnotation, "scope annotation"));
     if (this.scope == null) {
       binder.addError(source, ErrorMessages.SCOPE_NOT_FOUND,
           "@" + scopeAnnotation.getSimpleName());
     }
-    return this;
   }
 

@@ -1,0 +1,6 @@
+  /**
+   * Binds to instances from the factory bound to the given factory type.
+   */
+  BindingScopeBuilder toFactory(
+      Class<? extends Factory<? extends T>> factoryType);
+

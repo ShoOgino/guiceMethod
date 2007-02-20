@@ -1,7 +1,7 @@
   public void testNormalBinding() throws CreationException {
     BinderImpl builder = new BinderImpl();
     Foo foo = new Foo();
-    builder.bind(Foo.class).to(foo);
+    builder.bind(Foo.class).toInstance(foo);
     Container container = builder.createContainer();
     Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
     assertSame(foo, fooBinding.getLocator().get());

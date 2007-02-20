@@ -1,6 +1,0 @@
-  /**
-   * Binds to instances from the given generator bound to the given key.
-   */
-  BindingBuilder<T> toFactory(
-      Key<? extends Factory<T>> factoryKey);
-

@@ -1,4 +1,0 @@
-  public <I extends T> BindingBuilderImpl<T> to(Class<I> implementation) {
-    return to(TypeLiteral.get(implementation));
-  }
-

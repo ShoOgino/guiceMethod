@@ -9,7 +9,7 @@
 
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);
-    bind(Stage.class).to(stage);
+    bind(Stage.class).toInstance(stage);
 
     this.proxyFactoryBuilder = new ProxyFactoryBuilder();
 

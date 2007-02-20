@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#link(Class)
+   */
+  public <T> LinkedBindingBuilder<T> link(Class<T> type) {
+    return builder.link(type);
+  }
+

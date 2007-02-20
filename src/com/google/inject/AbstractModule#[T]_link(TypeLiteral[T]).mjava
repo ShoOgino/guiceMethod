@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#link(TypeLiteral)
+   */
+  public <T> LinkedBindingBuilder<T> link(TypeLiteral<T> type) {
+    return builder.link(type);
+  }
+

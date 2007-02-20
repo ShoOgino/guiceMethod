@@ -1,3 +1,7 @@
+  /**
+   * Creates a {@code Container} from {@code Module}s in a given development
+   * {@link Stage}.
+   */
   public static Container createContainer(Stage stage, Module... modules)
       throws CreationException {
     return createContainer(stage, Arrays.asList(modules));

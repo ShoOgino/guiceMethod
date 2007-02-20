@@ -1,0 +1,5 @@
+  public void eagerlyInContainer() {
+    in(Scopes.CONTAINER);
+    this.preload = true;
+  }
+

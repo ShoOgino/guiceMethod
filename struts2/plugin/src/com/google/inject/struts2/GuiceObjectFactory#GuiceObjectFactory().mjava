@@ -1,5 +1,0 @@
-  public GuiceObjectFactory() {
-    // Configure default servlet bindings.
-    builder.install(new ServletModule());
-  }
-

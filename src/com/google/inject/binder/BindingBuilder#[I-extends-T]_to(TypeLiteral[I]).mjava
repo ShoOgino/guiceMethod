@@ -1,8 +1,0 @@
-  /**
-   * Binds to instances of the given implementation type. The
-   * {@link com.google.inject.Container} will inject the implementation instances as well. Sets
-   * the scope based on an annotation on the implementation class if present.
-   */
-  <I extends T> BindingBuilder<T> to(
-      TypeLiteral<I> implementation);
-

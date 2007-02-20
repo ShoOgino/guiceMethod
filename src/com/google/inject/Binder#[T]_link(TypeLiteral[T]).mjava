@@ -1,2 +1,5 @@
+  /**
+   * Links a type to another binding.
+   */
   <T> LinkedBindingBuilder<T> link(TypeLiteral<T> type);
 

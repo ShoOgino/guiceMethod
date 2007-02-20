@@ -1,9 +1,0 @@
-  public void testInvalidPreload() {
-    BinderImpl builder = new BinderImpl();
-    builder.bind(Foo.class).eagerly();
-    try {
-      builder.createContainer();
-      fail();
-    } catch (CreationException e) { /* expected */ }
-  }
-

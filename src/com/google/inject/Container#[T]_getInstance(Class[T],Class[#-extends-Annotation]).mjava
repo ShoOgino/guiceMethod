@@ -1,6 +1,0 @@
-  /**
-   * Gets an instance from the locator bound to the given type and annotation.
-   */
-  <T> T getInstance(Class<T> type,
-      Class<? extends Annotation> annotationType);
-

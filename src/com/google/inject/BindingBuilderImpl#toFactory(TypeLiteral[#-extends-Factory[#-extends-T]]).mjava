@@ -1,5 +1,5 @@
   public BindingBuilderImpl<T> toFactory(
-      final Class<? extends Factory<T>> factoryType) {
+      TypeLiteral<? extends Factory<? extends T>> factoryType) {
     return toFactory(Key.get(factoryType));
   }
 

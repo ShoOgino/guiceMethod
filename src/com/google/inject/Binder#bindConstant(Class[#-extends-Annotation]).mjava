@@ -1,3 +1,6 @@
+  /**
+   * Binds a constant value to an annotation.
+   */
   ConstantBindingBuilder bindConstant(
       Class<? extends Annotation> annotationType);
 
