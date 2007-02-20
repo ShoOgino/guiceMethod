@@ -1,0 +1,5 @@
+  public static Container createContainer(Stage stage, Module... modules)
+      throws CreationException {
+    return createContainer(stage, Arrays.asList(modules));
+  }
+
