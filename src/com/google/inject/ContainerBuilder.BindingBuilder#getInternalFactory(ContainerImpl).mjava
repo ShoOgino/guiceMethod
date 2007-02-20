@@ -8,7 +8,7 @@
       // Look for @Scoped on the implementation type.
       if (implementation != null) {
         Scope fromAnnotation = Scopes.getScopeForType(
-            implementation.getRawType(), scopes, errorHandler);
+            implementation.getRawType(), scopes, configurationErrorHandler);
         if (fromAnnotation != null) {
           if (this.scope == null) {
             this.scope = fromAnnotation;

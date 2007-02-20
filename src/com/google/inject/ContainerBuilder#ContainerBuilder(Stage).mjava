@@ -5,7 +5,7 @@
    *  we will eagerly load container-scoped objects.
    */
   public ContainerBuilder(Stage stage) {
-    scope(ContainerScoped.class, CONTAINER);
+    bindScope(ContainerScoped.class, CONTAINER);
 
     bind(Container.class).to(CONTAINER_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);

@@ -14,8 +14,8 @@
       Scope scope = scopes.get(annotation.annotationType());
       if (scope != null) {
         if (found != null) {
-          errorHandler.handle(ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS,
-              implementation, found, scope);
+          errorHandler.handle(StackTraceElements.forType(implementation),
+              ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS, found, scope);
         } else {
           found = scope;
         }

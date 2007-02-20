@@ -3,7 +3,7 @@
      */
     public BindingBuilder<T> annotatedWith(Annotation annotation) {
       if (this.key.hasAnnotationType()) {
-        errorHandler.handle(ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
+        addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
       } else {
         this.key = Key.get(this.key.getType(), annotation);
       }

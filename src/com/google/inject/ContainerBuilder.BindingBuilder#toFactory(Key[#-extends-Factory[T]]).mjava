@@ -6,7 +6,7 @@
       ensureImplementationIsNotSet();
 
       final BoundFactory<T> boundFactory =
-          new BoundFactory<T>(factoryKey, errorHandler);
+          new BoundFactory<T>(factoryKey, source);
       creationListeners.add(boundFactory);
       this.factory = boundFactory;
 

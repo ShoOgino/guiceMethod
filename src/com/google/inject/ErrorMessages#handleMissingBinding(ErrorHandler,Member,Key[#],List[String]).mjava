@@ -1,11 +1,12 @@
   static void handleMissingBinding(ErrorHandler errorHandler, Member member,
       Key<?> key, List<String> otherNames) {
     if (otherNames.isEmpty()) {
-      errorHandler.handle(MISSING_BINDING, key, member);
+      errorHandler.handle(StackTraceElements.forMember(member),
+          MISSING_BINDING, key);
     }
     else {
-      errorHandler.handle(
-          MISSING_BINDING_BUT_OTHERS_EXIST, key, member, otherNames);
+      errorHandler.handle(StackTraceElements.forMember(member),
+          MISSING_BINDING_BUT_OTHERS_EXIST, key, otherNames);
     }
   }
 

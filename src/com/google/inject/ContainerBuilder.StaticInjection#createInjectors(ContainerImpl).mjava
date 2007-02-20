@@ -1,5 +1,5 @@
     void createInjectors(final ContainerImpl container) {
-      container.withErrorHandler(new ConfigurationErrorHandler(source),
+      container.withDefaultSource(source,
           new Runnable() {
             public void run() {
               for (Class<?> clazz : types) {

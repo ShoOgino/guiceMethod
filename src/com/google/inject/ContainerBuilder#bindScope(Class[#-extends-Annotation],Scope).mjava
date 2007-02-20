@@ -1,7 +1,8 @@
   /**
-   * Adds a new scope. Maps a {@link Scope} instance to a given annotation.
+   * Binds a scope to an annotation.
    */
-  public void scope(Class<? extends Annotation> annotationType, Scope scope) {
+  public void bindScope(Class<? extends Annotation> annotationType,
+      Scope scope) {
     ensureNotCreated();
     Scope existing = scopes.get(nonNull(annotationType, "annotation type"));
     if (existing != null) {

@@ -1,0 +1,12 @@
+  private <T> InternalFactory<T> handleConstantConversionError(
+      Member member, Binding<String> stringBinding, Class<?> rawType,
+      Exception e) {
+    errorHandler.handle(
+        StackTraceElements.forMember(member),
+        ErrorMessages.CONSTANT_CONVERSION_ERROR,
+        stringBinding.getSource(),
+        rawType,
+        e.getMessage());
+    return invalidFactory();
+  }
+

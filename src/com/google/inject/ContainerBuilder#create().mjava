@@ -15,6 +15,7 @@
     Map<Key<?>, Binding<?>> bindings = new HashMap<Key<?>, Binding<?>>();
     container = new ContainerImpl(
         proxyFactoryBuilder.create(), bindings, scopes);
+    container.setErrorHandler(configurationErrorHandler);
 
     createConstantBindings();
 

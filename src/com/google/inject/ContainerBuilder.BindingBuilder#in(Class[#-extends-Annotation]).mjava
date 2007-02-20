@@ -1,6 +1,6 @@
     /**
      * Specifies the scope. References the annotation passed to {@link
-     * ContainerBuilder#scope(Class, Scope)}.
+     * ContainerBuilder#bindScope(Class, Scope)}.
      */
     public BindingBuilder<T> in(Class<? extends Annotation> scopeAnnotation) {
       ensureScopeNotSet();
@@ -9,7 +9,7 @@
       // is fine for now.
       this.scope = scopes.get(nonNull(scopeAnnotation, "scope annotation"));
       if (this.scope == null) {
-        errorHandler.handle(ErrorMessages.SCOPE_NOT_FOUND,
+        addError(source, ErrorMessages.SCOPE_NOT_FOUND,
             "@" + scopeAnnotation.getSimpleName());
       }
       return this;

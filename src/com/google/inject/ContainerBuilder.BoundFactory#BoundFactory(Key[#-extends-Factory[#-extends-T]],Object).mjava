@@ -1,7 +1,7 @@
     public BoundFactory(
         Key<? extends Factory<? extends T>> factoryKey,
-        ErrorHandler errorHandler) {
+        Object source) {
       this.factoryKey = factoryKey;
-      this.errorHandler = errorHandler;
+      this.source = source;
     }
 

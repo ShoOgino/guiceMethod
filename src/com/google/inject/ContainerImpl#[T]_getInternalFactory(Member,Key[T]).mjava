@@ -66,8 +66,8 @@
           return new ConstantFactory<T>(t);
         }
         catch (ConstantConversionException e) {
-          errorHandler.handle(e);
-          return invalidFactory();
+          return handleConstantConversionError(
+              member, stringBinding, rawType, e);
         }
       }
 
@@ -78,8 +78,8 @@
           t = (T) Enum.valueOf((Class) rawType, value);
         }
         catch (IllegalArgumentException e) {
-          errorHandler.handle(createMessage(value, key, member, e.toString()));
-          return invalidFactory();
+          return handleConstantConversionError(
+              member, stringBinding, rawType, e);
         }
         return new ConstantFactory<T>(t);
       }
@@ -91,8 +91,8 @@
           return new ConstantFactory<T>((T) Class.forName(value));
         }
         catch (ClassNotFoundException e) {
-          errorHandler.handle(createMessage(value, key, member, e.toString()));
-          return invalidFactory();
+          return handleConstantConversionError(
+              member, stringBinding, rawType, e);
         }
       }
     }
@@ -110,12 +110,9 @@
       // If we're injecting into a member, include it in the error messages.
       final ErrorHandler previous = this.errorHandler;
       this.errorHandler = new AbstractErrorHandler() {
-        public void handle(String message) {
-          previous.handle("Error while injecting "
-              + ErrorMessages.convert(member) + ": " + message);
-        }
-        public void handle(Throwable t) {
-          previous.handle(t);
+        public void handle(Object source, String message) {
+          previous.handle(source, "Error while injecting at "
+              + StackTraceElements.forMember(member) + ": " + message);
         }
       };
       try {

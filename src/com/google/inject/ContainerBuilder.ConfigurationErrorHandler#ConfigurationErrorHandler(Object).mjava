@@ -1,4 +1,0 @@
-    ConfigurationErrorHandler(Object source) {
-      this.source = source;
-    }
-

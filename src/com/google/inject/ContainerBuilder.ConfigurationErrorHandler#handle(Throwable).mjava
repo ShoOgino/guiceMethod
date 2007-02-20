@@ -1,4 +1,0 @@
-    public void handle(Throwable t) {
-      add(new Message(source, t.getMessage()));
-    }
-

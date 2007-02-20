@@ -1,0 +1,5 @@
+    BindingBuilder(Key<T> key, Object source) {
+      this.key = nonNull(key, "key");
+      this.source = source;
+    }
+

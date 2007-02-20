@@ -1,6 +1,0 @@
-    BindingBuilder<T> from(Object source) {
-      this.source = source;
-      this.errorHandler = new ConfigurationErrorHandler(source);
-      return this;
-    }
-

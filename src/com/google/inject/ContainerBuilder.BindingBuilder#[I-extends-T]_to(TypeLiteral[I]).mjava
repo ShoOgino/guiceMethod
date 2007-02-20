@@ -8,7 +8,7 @@
       ensureImplementationIsNotSet();
       this.implementation = implementation;
       final DefaultFactory<I> defaultFactory
-          = new DefaultFactory<I>(key, implementation, errorHandler);
+          = new DefaultFactory<I>(key, implementation, source);
       this.factory = defaultFactory;
       creationListeners.add(defaultFactory);
       return this;

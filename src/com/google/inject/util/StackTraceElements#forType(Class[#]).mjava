@@ -1,0 +1,6 @@
+  public static Object forType(Class<?> implementation) {
+    LineNumbers lineNumbers = lineNumbersCache.get(implementation);
+    return new StackTraceElement(
+        implementation.getName(), "<init>", lineNumbers.getSource(), 0);
+  }
+

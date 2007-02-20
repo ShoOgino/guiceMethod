@@ -1,0 +1,14 @@
+  public static Object forMember(Member member) {
+    if (member == null) {
+      return "[unknown source]";  
+    }
+
+    Class declaringClass = member.getDeclaringClass();
+    LineNumbers lineNumbers = lineNumbersCache.get(declaringClass);
+    Integer lineNumber = lineNumbers.getLineNumber(member);
+    StackTraceElement element = new StackTraceElement(
+      declaringClass.getName(), member.getName(), lineNumbers.getSource(),
+        lineNumber == null ? 0 : lineNumber);
+    return element;
+  }
+
