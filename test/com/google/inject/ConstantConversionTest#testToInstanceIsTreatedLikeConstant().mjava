@@ -1,0 +1,7 @@
+  public void testToInstanceIsTreatedLikeConstant() throws CreationException {
+    BinderImpl b = new BinderImpl();
+    b.bind(String.class).toInstance("5");
+    b.bind(LongHolder.class);
+    Container c = b.createContainer();
+  }
+
