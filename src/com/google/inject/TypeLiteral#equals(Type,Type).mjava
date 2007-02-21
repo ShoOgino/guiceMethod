@@ -31,6 +31,17 @@
       return true;
     }
 
+    if (a instanceof GenericArrayType) {
+      if (!(b instanceof GenericArrayType)) {
+        return false;
+      }
+
+      return equals(
+          ((GenericArrayType) a).getGenericComponentType(),
+          ((GenericArrayType) b).getGenericComponentType()
+      );
+    }
+
     // This isn't a type we support. Could be a generic array type, wildcard
     // type, etc.
     return false;

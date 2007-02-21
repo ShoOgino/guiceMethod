@@ -1,5 +1,5 @@
-  static void unexpectedType(Type type, Class<?> expected) {
-    throw new AssertionError(
+  static AssertionError unexpectedType(Type type, Class<?> expected) {
+    return new AssertionError(
         "Unexpected type. Expected: " + expected.getName()
         + ", got: " + type.getClass().getName()
         + ", for type literal: " + type.toString() + ".");

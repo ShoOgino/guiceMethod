@@ -5,20 +5,26 @@
       return (Class<?>) type;
     }
     else {
-      // type is a parameterized type.
-      if (!(type instanceof ParameterizedType)) {
-        unexpectedType(type, ParameterizedType.class);
-      }
-      ParameterizedType parameterizedType = (ParameterizedType) type;
+      if (type instanceof ParameterizedType) {
+        ParameterizedType parameterizedType = (ParameterizedType) type;
 
-      // I'm not exactly sure why getRawType() returns Type instead of Class.
-      // Neal isn't either but suspects some pathological case related
-      // to nested classes exists.
-      Type rawType = parameterizedType.getRawType();
-      if (!(rawType instanceof Class<?>)) {
-        unexpectedType(rawType, Class.class);
+        // I'm not exactly sure why getRawType() returns Type instead of Class.
+        // Neal isn't either but suspects some pathological case related
+        // to nested classes exists.
+        Type rawType = parameterizedType.getRawType();
+        if (!(rawType instanceof Class<?>)) {
+          throw unexpectedType(rawType, Class.class);
+        }
+        return (Class<?>) rawType;
       }
-      return (Class<?>) rawType;
+
+      if (type instanceof GenericArrayType) {
+        // TODO: Is this sufficient?
+        return Object[].class;
+      }
+
+      // type is a parameterized type.
+      throw unexpectedType(type, ParameterizedType.class);
     }
   }
 
