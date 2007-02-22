@@ -6,8 +6,10 @@
     Class declaringClass = member.getDeclaringClass();
     LineNumbers lineNumbers = lineNumbersCache.get(declaringClass);
     Integer lineNumber = lineNumbers.getLineNumber(member);
+    String memberName
+        = member instanceof Constructor ? "<init>" : member.getName();
     StackTraceElement element = new StackTraceElement(
-      declaringClass.getName(), member.getName(), lineNumbers.getSource(),
+      declaringClass.getName(), memberName, lineNumbers.getSource(),
         lineNumber == null ? lineNumbers.getFirstLine() : lineNumber);
     return element;
   }

@@ -1,0 +1,5 @@
+  public LocationException(ExternalContext<?> externalContext,
+      Throwable cause) {
+    super(createMessage(externalContext), cause);
+  }
+
