@@ -4,11 +4,15 @@
   static AnnotationStrategy strategyFor(
       Class<? extends Annotation> annotationType) {
     nonNull(annotationType, "annotation type");
+
     if (!isMarker(annotationType)) {
       throw new IllegalArgumentException(annotationType.getName()
         + " is not a marker annotation, i.e. it has attributes. Please"
         + " use an Annotation instance or a marker annotation instead.");
     }
+
+    ensureRetainedAtRuntime(annotationType);
+
     return new AnnotationTypeStrategy(annotationType, null);
   }
 

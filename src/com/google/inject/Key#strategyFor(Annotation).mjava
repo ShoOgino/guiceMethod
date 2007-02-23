@@ -3,8 +3,10 @@
    */
   static AnnotationStrategy strategyFor(Annotation annotation) {
     nonNull(annotation, "annotation");
-    return isMarker(annotation.annotationType())
-        ? new AnnotationTypeStrategy(annotation.annotationType(), annotation)
+    Class<? extends Annotation> annotationType = annotation.annotationType();
+    ensureRetainedAtRuntime(annotationType);
+    return isMarker(annotationType)
+        ? new AnnotationTypeStrategy(annotationType, annotation)
         : new AnnotationInstanceStrategy(annotation);
   }
 

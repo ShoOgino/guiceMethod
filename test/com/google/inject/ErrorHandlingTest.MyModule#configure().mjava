@@ -5,10 +5,10 @@
       bind(Bar.class);
       bind(Tee.class);
       bind(new TypeLiteral<List<String>>() {});
-      bind(String.class).annotatedWith(Names.named("foo")).in(
-          Named.class);
+      bind(String.class).annotatedWith(Names.named("foo")).in(Named.class);
       link(Key.get(Runnable.class)).to(Key.get(Runnable.class));
       bind(TooManyScopes.class);
+      bindScope(BadScope.class, Scopes.CONTAINER);
       requestStaticInjection(ErrorHandlingTest.class);
     }
 

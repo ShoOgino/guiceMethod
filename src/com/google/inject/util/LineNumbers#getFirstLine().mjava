@@ -2,6 +2,6 @@
    * Gets the first line number.
    */
   public int getFirstLine() {
-    return firstLine;
+    return firstLine == Integer.MAX_VALUE ? 1 : firstLine;
   }
 

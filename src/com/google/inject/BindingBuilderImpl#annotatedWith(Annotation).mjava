@@ -2,8 +2,14 @@
     if (this.key.hasAnnotationType()) {
       binder.addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
     } else {
-      // not test-covered?
-      this.key = Key.get(this.key.getType(), annotation);
+      if (!Annotations.isRetainedAtRuntime(annotation.annotationType())) {
+        binder.addError(StackTraceElements.forType(annotation.annotationType()),
+            ErrorMessages.MISSING_RUNTIME_RETENTION, binder.source());
+      }
+      else {
+        // not test-covered?
+        this.key = Key.get(this.key.getType(), annotation);
+      }
     }
     return this;
   }

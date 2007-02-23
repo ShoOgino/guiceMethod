@@ -3,7 +3,13 @@
     if (this.key.hasAnnotationType()) {
       binder.addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
     } else {
-      this.key = Key.get(this.key.getType(), annotationType);
+      if (!Annotations.isRetainedAtRuntime(annotationType)) {
+        binder.addError(StackTraceElements.forType(annotationType),
+            ErrorMessages.MISSING_RUNTIME_RETENTION, binder.source());
+      }
+      else {
+        this.key = Key.get(this.key.getType(), annotationType);
+      }
     }
     return this;
   }

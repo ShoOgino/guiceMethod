@@ -1,5 +1,5 @@
     public void visitLineNumber(int line, Label start) {
-      if (firstLine == 0) {
+      if (line < firstLine) {
         firstLine = line;
       }
 

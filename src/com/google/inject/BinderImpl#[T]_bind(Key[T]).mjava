@@ -1,5 +1,6 @@
   public <T> BindingBuilderImpl<T> bind(Key<T> key) {
-    BindingBuilderImpl<T> builder = new BindingBuilderImpl<T>(this, key, source());
+    BindingBuilderImpl<T> builder =
+        new BindingBuilderImpl<T>(this, key, source());
     bindingBuilders.add(builder);
     return builder;
   }
