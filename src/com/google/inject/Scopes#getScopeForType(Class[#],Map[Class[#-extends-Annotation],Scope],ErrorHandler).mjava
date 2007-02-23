@@ -9,18 +9,22 @@
   static Scope getScopeForType(Class<?> implementation,
       Map<Class<? extends Annotation>, Scope> scopes,
       ErrorHandler errorHandler) {
-    Scope found = null;
+    Class<? extends Annotation> found = null;
     for (Annotation annotation : implementation.getAnnotations()) {
-      Scope scope = scopes.get(annotation.annotationType());
-      if (scope != null) {
+      if (isScopeAnnotation(annotation)) {
         if (found != null) {
-          errorHandler.handle(StackTraceElements.forType(implementation),
-              ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS, found, scope);
+          errorHandler.handle(
+              StackTraceElements.forType(implementation),
+              ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS,
+              "@" + found.getSimpleName(),
+              "@" + annotation.annotationType().getSimpleName()
+          );
         } else {
-          found = scope;
+          found = annotation.annotationType();
         }
       }
     }
-    return found;
+
+    return scopes.get(found);
   }
 

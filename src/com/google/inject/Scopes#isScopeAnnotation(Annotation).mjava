@@ -1,0 +1,4 @@
+  static boolean isScopeAnnotation(Annotation annotation) {
+    return isScopeAnnotation(annotation.annotationType());
+  }
+

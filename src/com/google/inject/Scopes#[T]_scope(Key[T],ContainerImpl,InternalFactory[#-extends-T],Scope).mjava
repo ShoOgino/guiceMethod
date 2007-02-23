@@ -4,8 +4,8 @@
   static <T> InternalFactory<? extends T> scope(Key<T> key,
       ContainerImpl container, InternalFactory<? extends T> creator,
       Scope scope) {
-    // Default scope does nothing.
-    if (scope == null || scope == DEFAULT) {
+    // No scope does nothing.
+    if (scope == null) {
       return creator;
     }
     Locator<T> scoped = scope.scope(key,
