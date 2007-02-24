@@ -1,4 +1,23 @@
-  public <T> ConstructionProxy<T> get(Constructor<T> constructor) {
+  public <T> ConstructionProxy<T> get(final Constructor<T> constructor) {
+    // We can't use FastConstructor if the constructor is private.
+    if (Modifier.isPrivate(constructor.getModifiers())) {
+      constructor.setAccessible(true);
+      return new ConstructionProxy<T>() {
+        public T newInstance(Object... arguments) throws
+            InvocationTargetException {
+          try {
+            return constructor.newInstance(arguments);
+          }
+          catch (InstantiationException e) {
+            throw new RuntimeException(e);
+          }
+          catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+          }
+        }
+      };
+    }
+
     Class<T> classToConstruct = constructor.getDeclaringClass();
     FastClass fastClass = GuiceFastClass.create(classToConstruct);
     final FastConstructor fastConstructor

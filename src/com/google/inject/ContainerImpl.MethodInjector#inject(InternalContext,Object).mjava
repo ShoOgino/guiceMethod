@@ -1,6 +1,6 @@
     public void inject(InternalContext context, Object o) {
       try {
-        fastMethod.invoke(o, getParameters(context, parameterInjectors));
+        methodInvoker.invoke(o, getParameters(context, parameterInjectors));
       }
       catch (Exception e) {
         throw new RuntimeException(e);

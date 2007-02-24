@@ -1,0 +1,5 @@
+    @Inject
+    private Private(String fromConstructor) {
+      this.fromConstructor = fromConstructor;
+    }
+
