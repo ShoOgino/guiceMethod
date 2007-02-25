@@ -1,0 +1,18 @@
+  public void testProvidersAreInjected() throws CreationException {
+    Container container = Guice.createContainer(new AbstractModule() {
+      protected void configure() {
+        bind(O.class).toProvider(new Provider<O>() {
+          @Inject int i;
+          public O get() {
+            O o = new O();
+            o.setInt(i);
+            return o;
+          }
+        });
+        bind(int.class).toInstance(5);
+      }
+    });
+
+    assertEquals(5, container.getProvider(O.class).get().fromMethod);
+  }
+

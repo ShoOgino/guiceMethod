@@ -1,0 +1,5 @@
+    @Inject
+    protected void setInt(int i) {
+      this.fromMethod = i;
+    }
+

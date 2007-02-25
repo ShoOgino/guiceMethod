@@ -1,5 +1,7 @@
   /**
-   * Binds to the given instance.
+   * Binds to the given instance. Guice will inject the members of this
+   * instance when it creates the container. See {@link
+   * com.google.inject.Container#injectMembers(Object)}.
    */
   void toInstance(T instance);
 

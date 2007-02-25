@@ -1,0 +1,13 @@
+  public void testInstancesAreInjected() throws CreationException {
+    final O o = new O();
+
+    Container container = Guice.createContainer(new AbstractModule() {
+      protected void configure() {
+        bind(O.class).toInstance(o);
+        bind(int.class).toInstance(5);
+      }
+    });
+
+    assertEquals(5, o.fromMethod);
+  }
+
