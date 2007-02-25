@@ -3,8 +3,8 @@
     final Key<T> key = builder.getKey();
     final InternalFactory<? extends T> factory
         = builder.getInternalFactory(container);
-    Binding<?> binding
-        = Binding.newInstance(container, key, builder.getSource(), factory);
+    BindingImpl<?> binding
+        = BindingImpl.newInstance(container, key, builder.getSource(), factory);
 
     putBinding(binding);
 

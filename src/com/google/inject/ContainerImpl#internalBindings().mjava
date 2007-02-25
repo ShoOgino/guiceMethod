@@ -1,4 +1,4 @@
-  Map<Key<?>, Binding<?>> internalBindings() {
+  Map<Key<?>, BindingImpl<?>> internalBindings() {
     return bindings;
   }
 

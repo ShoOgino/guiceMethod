@@ -1,5 +1,5 @@
   public String toString() {
-    return new ToStringBuilder(Binding.class)
+    return new ToStringBuilder(BindingImpl.class)
         .add("key", key)
         .add("source", source)
         .add("provider", internalFactory)

@@ -1,0 +1,7 @@
+  public Provider<T> getProvider() {
+    if (provider == null) {
+      provider = container.getProvider(key);
+    }
+    return provider;
+  }
+

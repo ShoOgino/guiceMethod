@@ -6,6 +6,5 @@
     assertEquals(5, i.getProvider().get());
     assertNotNull(i.getSource());
     assertEquals(Key.get(int.class, I.class), i.getKey());
-    assertTrue(i.isConstant());
   }
 

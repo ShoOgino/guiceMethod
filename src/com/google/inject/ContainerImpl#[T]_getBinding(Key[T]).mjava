@@ -1,6 +1,5 @@
-  // TODO: try to get rid of the warning
   @SuppressWarnings("unchecked")
-  public <T> Binding<T> getBinding(Key<T> key) {
-    return (Binding<T>) bindings.get(key);
+  public <T> BindingImpl<T> getBinding(Key<T> key) {
+    return (BindingImpl<T>) bindings.get(key);
   }
 

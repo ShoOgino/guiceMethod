@@ -1,5 +1,6 @@
   // not test-covered
   public <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type) {
-    return bindingsMultimap.getAll(type);
+    return Collections.<Binding<T>>unmodifiableList(
+        bindingsMultimap.getAll(type));
   }
 

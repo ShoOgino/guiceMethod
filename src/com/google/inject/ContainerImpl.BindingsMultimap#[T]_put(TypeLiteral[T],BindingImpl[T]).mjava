@@ -1,0 +1,10 @@
+    public <T> void put(TypeLiteral<T> type, BindingImpl<T> binding) {
+      List<BindingImpl<T>> bindingsForThisType = getFromMap(type);
+      if (bindingsForThisType == null) {
+        bindingsForThisType = new ArrayList<BindingImpl<T>>();
+        // We only put matching entries into the map
+        map.put(type, bindingsForThisType);
+      }
+      bindingsForThisType.add(binding);
+    }
+

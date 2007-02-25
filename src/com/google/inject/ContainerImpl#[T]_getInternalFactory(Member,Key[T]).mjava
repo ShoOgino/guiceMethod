@@ -3,7 +3,7 @@
     // TODO: Clean up unchecked type warnings.
 
     // Do we have a factory for the specified type and name?
-    Binding<T> binding = getBinding(key);
+    BindingImpl<T> binding = getBinding(key);
     if (binding != null) {
       return binding.getInternalFactory();
     }
@@ -39,7 +39,7 @@
     Class<?> primitiveCounterpart
         = PRIMITIVE_COUNTERPARTS.get(rawType);
     if (primitiveCounterpart != null) {
-      Binding<?> counterpartBinding
+      BindingImpl<?> counterpartBinding
           = getBinding(key.ofType(primitiveCounterpart));
       if (counterpartBinding != null) {
         return (InternalFactory<? extends T>)
@@ -49,7 +49,7 @@
 
     // Can we convert from a String constant?
     Key<String> stringKey = key.ofType(String.class);
-    Binding<String> stringBinding = getBinding(stringKey);
+    BindingImpl<String> stringBinding = getBinding(stringKey);
     if (stringBinding != null && stringBinding.isConstant()) {
       // We don't need do pass in an InternalContext because we know this is
       // a ConstantFactory which will not use it.

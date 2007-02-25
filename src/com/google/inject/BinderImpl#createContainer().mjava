@@ -10,7 +10,7 @@
     stopwatch.resetAndLog(logger, "Configuration");
 
     // Create the container.
-    Map<Key<?>, Binding<?>> bindings = new HashMap<Key<?>, Binding<?>>();
+    Map<Key<?>, BindingImpl<?>> bindings = new HashMap<Key<?>, BindingImpl<?>>();
     container = new ContainerImpl(
         proxyFactoryBuilder.create(), bindings, scopes);
     container.setErrorHandler(configurationErrorHandler);

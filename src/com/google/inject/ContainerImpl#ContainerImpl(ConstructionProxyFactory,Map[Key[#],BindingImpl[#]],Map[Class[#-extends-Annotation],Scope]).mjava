@@ -1,5 +1,5 @@
   ContainerImpl(ConstructionProxyFactory constructionProxyFactory,
-      Map<Key<?>, Binding<?>> bindings,
+      Map<Key<?>, BindingImpl<?>> bindings,
       Map<Class<? extends Annotation>, Scope> scopes) {
     this.constructionProxyFactory = constructionProxyFactory;
     this.bindings = bindings;

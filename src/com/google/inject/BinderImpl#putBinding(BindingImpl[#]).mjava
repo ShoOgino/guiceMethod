@@ -1,6 +1,6 @@
-  void putBinding(Binding<?> binding) {
+  void putBinding(BindingImpl<?> binding) {
     Key<?> key = binding.getKey();
-    Map<Key<?>, Binding<?>> bindings = container.internalBindings();
+    Map<Key<?>, BindingImpl<?>> bindings = container.internalBindings();
     Binding<?> original = bindings.get(key);
 
     // Binding to Provider<?> is not allowed.

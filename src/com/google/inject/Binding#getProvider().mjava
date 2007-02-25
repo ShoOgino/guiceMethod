@@ -1,10 +1,5 @@
   /**
    * Gets the provider which returns instances of {@code T}.
    */
-  public Provider<T> getProvider() {
-    if (provider == null) {
-      provider = container.getProvider(key);
-    }
-    return provider;
-  }
+  Provider<T> getProvider();
 

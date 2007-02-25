@@ -8,6 +8,5 @@
     assertSame(bar, fooBinding.getProvider().get());
     assertNotNull(fooBinding.getSource());
     assertEquals(Key.get(Foo.class), fooBinding.getKey());
-    assertTrue(fooBinding.isConstant());
   }
 

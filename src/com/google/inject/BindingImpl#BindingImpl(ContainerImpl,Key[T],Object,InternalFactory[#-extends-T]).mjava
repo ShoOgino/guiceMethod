@@ -1,4 +1,4 @@
-  Binding(ContainerImpl container, Key<T> key, Object source,
+  BindingImpl(ContainerImpl container, Key<T> key, Object source,
       InternalFactory<? extends T> internalFactory) {
     this.container = container;
     this.key = key;

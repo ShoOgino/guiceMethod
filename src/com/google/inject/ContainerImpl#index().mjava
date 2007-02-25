@@ -2,7 +2,7 @@
    * Indexes bindings by type.
    */
   void index() {
-    for (Binding<?> binding : bindings.values()) {
+    for (BindingImpl<?> binding : bindings.values()) {
       index(binding);
     }
   }
