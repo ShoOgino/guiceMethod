@@ -1,5 +1,4 @@
     protected void configure() {
-      install(new ServletModule());
       bind(Runnable.class);
       bind(Foo.class);
       bind(Bar.class);

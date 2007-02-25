@@ -22,8 +22,6 @@
 
     suite.addTestSuite(MatcherTest.class);
 
-    suite.addTestSuite(ServletTest.class);
-
     suite.addTestSuite(FinalizableReferenceQueueTest.class);
     suite.addTestSuite(ReferenceCacheTest.class);
     suite.addTestSuite(ReferenceMapTest.class);
