@@ -1,0 +1,12 @@
+  public BindingBuilderImpl<T> toProvider(
+      Key<? extends Provider<? extends T>> providerKey) {
+    ensureImplementationIsNotSet();
+
+    final BoundProviderFactory<T> boundProviderFactory =
+        new BoundProviderFactory<T>(providerKey, source);
+    binder.creationListeners.add(boundProviderFactory);
+    this.factory = boundProviderFactory;
+
+    return this;
+  }
+

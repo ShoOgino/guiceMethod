@@ -1,0 +1,6 @@
+  /**
+   * Binds to instances from the provider bound to the given key.
+   */
+  BindingScopeBuilder toProvider(
+      Key<? extends Provider<? extends T>> providerKey);
+

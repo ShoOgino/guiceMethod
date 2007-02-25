@@ -1,4 +1,0 @@
-    @Inject Bar(@TeeAnnotation1 Tee tee1) {
-      this.tee1 = tee1;
-    }
-

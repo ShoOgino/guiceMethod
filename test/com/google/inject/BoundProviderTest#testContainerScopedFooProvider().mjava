@@ -1,7 +1,7 @@
-  public void testContainerScopedFooFactory()
+  public void testContainerScopedFooProvider()
       throws CreationException {
     BinderImpl cb = new BinderImpl();
-    cb.bind(Foo.class).toFactory(ContainerScopedFooFactory.class);
+    cb.bind(Foo.class).toProvider(ContainerScopedFooProvider.class);
     Container c = cb.createContainer();
 
     Foo a = c.getProvider(Foo.class).get();

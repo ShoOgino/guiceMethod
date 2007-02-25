@@ -1,7 +1,7 @@
     public void notify(final ContainerImpl container) {
       container.withDefaultSource(source, new Runnable() {
         public void run() {
-          factoryFactory = container.getInternalFactory(null, factoryKey);
+          providerFactory = container.getInternalFactory(null, providerKey);
         }
       });
     }

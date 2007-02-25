@@ -1,0 +1,6 @@
+  public BindingScopeBuilder toProvider(Provider<? extends T> provider) {
+    ensureImplementationIsNotSet();
+    this.factory = new InternalFactoryToProviderAdapter<T>(provider);
+    return this;
+  }
+

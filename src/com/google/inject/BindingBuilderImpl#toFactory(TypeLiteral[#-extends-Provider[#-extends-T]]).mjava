@@ -1,0 +1,5 @@
+  public BindingBuilderImpl<T> toFactory(
+      TypeLiteral<? extends Provider<? extends T>> providerType) {
+    return toProvider(Key.get(providerType));
+  }
+

@@ -1,7 +1,0 @@
-  /**
-   * Generates an instance of {@code T} given the context of the injection.
-   *
-   * @param context of this injection
-   */
-  T get(Context context);
-

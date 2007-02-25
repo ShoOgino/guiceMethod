@@ -1,5 +1,0 @@
-  /**
-   * Binds to instances from the factory bound to the given key.
-   */
-  BindingScopeBuilder toFactory(Key<? extends Factory<? extends T>> factoryKey);
-
