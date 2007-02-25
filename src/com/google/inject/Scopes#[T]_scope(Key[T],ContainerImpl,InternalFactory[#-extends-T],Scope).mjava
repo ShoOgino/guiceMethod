@@ -8,8 +8,8 @@
     if (scope == null) {
       return creator;
     }
-    Locator<T> scoped = scope.scope(key,
-        new LocatorToInternalFactoryAdapter<T>(container, creator));
-    return new InternalFactoryToLocatorAdapter<T>(scoped);
+    Provider<T> scoped = scope.scope(key,
+        new ProviderToInternalFactoryAdapter<T>(container, creator));
+    return new InternalFactoryToProviderAdapter<T>(scoped);
   }
 

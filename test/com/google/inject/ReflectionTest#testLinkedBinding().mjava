@@ -5,7 +5,7 @@
     builder.link(Key.get(Foo.class)).to(Key.get(Bar.class));
     Container container = builder.createContainer();
     Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
-    assertSame(bar, fooBinding.getLocator().get());
+    assertSame(bar, fooBinding.getProvider().get());
     assertNotNull(fooBinding.getSource());
     assertEquals(Key.get(Foo.class), fooBinding.getKey());
     assertTrue(fooBinding.isConstant());

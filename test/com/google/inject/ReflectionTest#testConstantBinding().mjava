@@ -3,7 +3,7 @@
     builder.bindConstant(I.class).to(5);
     Container container = builder.createContainer();
     Binding<?> i = container.getBinding(Key.get(int.class, I.class));
-    assertEquals(5, i.getLocator().get());
+    assertEquals(5, i.getProvider().get());
     assertNotNull(i.getSource());
     assertEquals(Key.get(int.class, I.class), i.getKey());
     assertTrue(i.isConstant());

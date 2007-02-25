@@ -1,4 +1,0 @@
-  public <T> Locator<T> getLocator(Class<T> type) {
-    return getLocator(Key.get(type));
-  }
-

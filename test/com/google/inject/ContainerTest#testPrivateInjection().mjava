@@ -6,7 +6,7 @@
       }
     });
 
-    Private p = container.getLocator(Private.class).get();
+    Private p = container.getProvider(Private.class).get();
     assertEquals("foo", p.fromConstructor);
     assertEquals(5, p.fromMethod);
   }

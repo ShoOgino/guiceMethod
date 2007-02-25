@@ -24,7 +24,7 @@
 
     Container c = cb.createContainer();
 
-    A a = c.getLocator(A.class).get();
+    A a = c.getProvider(A.class).get();
 
     assertNotNull(a.negativeOne);
     assertTrue(a.initCalled);

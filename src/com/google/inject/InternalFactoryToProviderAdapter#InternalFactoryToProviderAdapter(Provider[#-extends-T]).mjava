@@ -1,0 +1,4 @@
+  public InternalFactoryToProviderAdapter(Provider<? extends T> provider) {
+    this.provider = provider;
+  }
+

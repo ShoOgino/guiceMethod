@@ -3,7 +3,7 @@
     builder.bindConstant(NumericValue.class).to("5");
     builder.bind(Simple.class);
     Container container = builder.createContainer();
-    Simple simple = container.getLocator(Simple.class).get();
+    Simple simple = container.getProvider(Simple.class).get();
     assertEquals(5, simple.i);
   }
 

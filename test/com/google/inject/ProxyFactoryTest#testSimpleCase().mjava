@@ -6,7 +6,7 @@
     builder.intercept(any(), any(), interceptor);
     ProxyFactory factory = builder.create();
 
-    Locator<Simple> creator = factory.getFactory(Simple.class);
+    Provider<Simple> creator = factory.getFactory(Simple.class);
 
     Simple simple = creator.get();
     simple.invoke();

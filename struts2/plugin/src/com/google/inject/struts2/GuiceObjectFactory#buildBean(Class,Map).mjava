@@ -22,6 +22,6 @@
       }
     }
 
-    return container.getLocator(clazz).get();
+    return container.getProvider(clazz).get();
   }
 

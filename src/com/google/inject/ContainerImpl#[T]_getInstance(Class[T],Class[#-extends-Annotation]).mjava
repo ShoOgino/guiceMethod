@@ -1,5 +1,0 @@
-  public <T> T getInstance(Class<T> type,
-      Class<? extends Annotation> annotationType) {
-    return getLocator(Key.get(type, annotationType)).get();
-  }
-

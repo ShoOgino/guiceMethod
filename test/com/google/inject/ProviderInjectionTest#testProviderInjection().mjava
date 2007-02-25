@@ -1,0 +1,19 @@
+  public void testProviderInjection() throws CreationException {
+    BinderImpl builder = new BinderImpl();
+
+    builder.bind(Bar.class);
+    builder.bind(ContainerScoped.class).in(Scopes.CONTAINER);
+
+    Container container = builder.createContainer();
+
+    Foo foo = container.getProvider(Foo.class).get();
+
+    Bar bar = foo.barProvider.get();
+    assertNotNull(bar);
+    assertNotSame(bar, foo.barProvider.get());
+
+    ContainerScoped containerScoped = foo.containerScopedProvider.get();
+    assertNotNull(containerScoped);
+    assertSame(containerScoped, foo.containerScopedProvider.get());
+  }
+

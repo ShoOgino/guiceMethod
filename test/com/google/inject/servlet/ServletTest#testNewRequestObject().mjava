@@ -16,7 +16,7 @@
           ServletResponse servletResponse) {
         invoked[0] = true;
         assertSame(request, servletRequest);
-        assertNotNull(container.getLocator(InRequest.class).get());
+        assertNotNull(container.getProvider(InRequest.class).get());
       }
     };
 

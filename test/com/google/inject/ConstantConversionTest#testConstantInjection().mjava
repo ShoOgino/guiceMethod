@@ -5,7 +5,7 @@
     b.bindConstant(EnumValue.class).to("TEE");
     b.bindConstant(ClassName.class).to(Foo.class.getName());
     Container c = b.createContainer();
-    Foo foo = c.getLocator(Foo.class).get();
+    Foo foo = c.getProvider(Foo.class).get();
 
     checkNumbers(
       foo.integerField,

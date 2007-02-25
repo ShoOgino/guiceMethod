@@ -2,7 +2,7 @@
     return new ToStringBuilder(Binding.class)
         .add("key", key)
         .add("source", source)
-        .add("locator", internalFactory)
+        .add("provider", internalFactory)
         .toString();
   }
 

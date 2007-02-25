@@ -1,5 +1,0 @@
-  public <T> Locator<T> getLocator(TypeLiteral<T> type,
-      Class<? extends Annotation> annotationType) {
-    return getLocator(Key.get(type, annotationType));
-  }
-

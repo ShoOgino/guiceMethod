@@ -1,0 +1,5 @@
+  /**
+   * Gets the provider bound to the given type.
+   */
+  <T> Provider<T> getProvider(Class<T> type);
+

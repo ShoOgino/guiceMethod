@@ -1,4 +1,0 @@
-  public <T> T getInstance(Key<T> key) {
-    return getLocator(key).get();
-  }
-

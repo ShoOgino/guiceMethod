@@ -1,0 +1,14 @@
+  /**
+   * Scopes a provider. The returned locator returns objects from this scope. If
+   * an object does not exist in this scope, the provider can use the given
+   * unscoped provider to retrieve one.
+   *
+   * @param key binding key
+   * @param unscoped locates an instance when one doesn't already exist in this
+   *  scope.
+   * @return a new provider which only delegates to the given unscoped provider
+   *  when an instance of the requested object doesn't already exist in this
+   *  scope
+   */
+  public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped);
+

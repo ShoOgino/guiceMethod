@@ -1,4 +1,0 @@
-  public <T> T getInstance(TypeLiteral<T> type) {
-    return getLocator(Key.get(type)).get();
-  }
-

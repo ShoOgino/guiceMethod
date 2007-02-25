@@ -3,7 +3,7 @@
     b.bindConstant(NumericValue.class).to("invalid");
     Container c = b.createContainer();
     try {
-      c.getLocator(InvalidInteger.class).get();
+      c.getProvider(InvalidInteger.class).get();
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }

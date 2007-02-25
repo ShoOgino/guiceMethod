@@ -5,7 +5,7 @@
       public T get(Context context) {
         assertEquals(expectedMember, context.getMember());
         assertEquals(type, context.getKey().getType().getType());
-        return context.getContainer().getLocator(type).get();
+        return context.getContainer().getProvider(type).get();
       }
     };
   }

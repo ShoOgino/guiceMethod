@@ -1,0 +1,5 @@
+  /**
+   * Gets the provider bound to the given key.
+   */
+  <T> Provider<T> getProvider(Key<T> key);
+
