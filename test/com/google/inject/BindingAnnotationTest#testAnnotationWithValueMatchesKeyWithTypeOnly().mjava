@@ -1,0 +1,14 @@
+  public void testAnnotationWithValueMatchesKeyWithTypeOnly() throws
+      CreationException {
+    Container c = Guice.createContainer(new AbstractModule() {
+      protected void configure() {
+        bindConstant(Blue.class).to("foo");
+        bind(Foo.class);
+      }
+    });
+
+    Foo foo = c.getProvider(Foo.class).get();
+
+    assertEquals("foo", foo.s);
+  }
+

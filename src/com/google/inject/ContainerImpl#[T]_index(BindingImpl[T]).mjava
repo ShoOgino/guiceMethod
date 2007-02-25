@@ -1,4 +1,4 @@
   <T> void index(BindingImpl<T> binding) {
-    bindingsMultimap.put(binding.getKey().getType(), binding);
+    bindingsMultimap.put(binding.getKey().getTypeLiteral(), binding);
   }
 

@@ -1,0 +1,9 @@
+  private static void ensureIsBindingAnnotation(
+      Class<? extends Annotation> annotationType) {
+    if (!isBindingAnnotation(annotationType)) {
+      throw new IllegalArgumentException(annotationType.getName()
+          + " is not a binding annotation."
+          + " Please annotate it with @BindingAnnotation.");
+    }
+  }
+

@@ -1,0 +1,4 @@
+    public boolean hasAttributes() {
+      return true;
+    }
+

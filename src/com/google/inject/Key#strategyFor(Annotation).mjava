@@ -5,8 +5,7 @@
     nonNull(annotation, "annotation");
     Class<? extends Annotation> annotationType = annotation.annotationType();
     ensureRetainedAtRuntime(annotationType);
-    return isMarker(annotationType)
-        ? new AnnotationTypeStrategy(annotationType, annotation)
-        : new AnnotationInstanceStrategy(annotation);
+    ensureIsBindingAnnotation(annotationType);
+    return new AnnotationInstanceStrategy(annotation);
   }
 

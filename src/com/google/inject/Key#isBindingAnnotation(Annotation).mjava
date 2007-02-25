@@ -1,0 +1,4 @@
+  static boolean isBindingAnnotation(Annotation annotation) {
+    return isBindingAnnotation(annotation.annotationType());
+  }
+

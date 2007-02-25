@@ -1,0 +1,4 @@
+    public AnnotationStrategy withoutAttributes() {
+      return new AnnotationTypeStrategy(getAnnotationType(), annotation);
+    }
+
