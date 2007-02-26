@@ -1,0 +1,5 @@
+  JndiProvider(Class<T> type, String name) {
+    this.name = name;
+    this.type = type;
+  }
+

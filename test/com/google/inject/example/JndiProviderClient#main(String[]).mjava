@@ -1,0 +1,13 @@
+  public static void main(String[] args) throws CreationException {
+    Container container = Guice.createContainer(new AbstractModule() {
+      protected void configure() {
+// Bind Context to the default InitialContext.
+bind(Context.class).to(InitialContext.class);
+
+// Bind to DataSource from JNDI.
+bind(DataSource.class)
+    .toProvider(fromJndi(DataSource.class, "..."));
+      }
+    });
+  }
+
