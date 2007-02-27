@@ -1,5 +1,5 @@
   /**
-   * Gets the key for this binding.
+   * Returns the key for this binding.
    */
   Key<T> getKey();
 

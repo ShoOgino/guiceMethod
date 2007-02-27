@@ -1,6 +1,7 @@
   /**
-   * Gets the source object, an arbitrary object which points back to the
-   * configuration which resulted in this binding.
+   * Returns an arbitrary object containing information about the "place" where
+   * this binding was configured. Used by guice in the production of descriptive
+   * error messages.
    */
   Object getSource();
 

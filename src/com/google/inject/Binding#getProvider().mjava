@@ -1,5 +1,5 @@
   /**
-   * Gets the provider which returns instances of {@code T}.
+   * Returns the provider guice uses to fulfill requests for this binding.
    */
   Provider<T> getProvider();
 
