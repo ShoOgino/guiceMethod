@@ -1,0 +1,14 @@
+public void testClient() {
+  ServiceFactory previous = ServiceFactory.getInstance();
+  try {
+    MockService mock = new MockService();
+    ServiceFactory.setInstance(new SingletonServiceFactory(mock));
+    Client client = new Client();
+    client.go();
+    assertTrue(mock.isGone());
+  }
+  finally {
+    ServiceFactory.setInstance(previous);
+  }
+}
+

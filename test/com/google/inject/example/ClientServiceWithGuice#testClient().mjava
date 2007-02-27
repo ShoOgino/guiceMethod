@@ -1,0 +1,6 @@
+public void testClient() {
+  MockService mock = new MockService();
+  Client client = new Client(mock);
+  assertTrue(mock.isGone());
+}
+

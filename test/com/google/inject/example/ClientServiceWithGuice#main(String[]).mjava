@@ -1,0 +1,7 @@
+public static void main(String[] args) throws CreationException {
+  new ClientServiceWithGuice().testClient();
+
+  Container container = Guice.createContainer(new ServiceModule());
+  Client client = container.getProvider(Client.class).get();
+}
+

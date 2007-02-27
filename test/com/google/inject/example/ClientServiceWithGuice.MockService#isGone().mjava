@@ -1,0 +1,4 @@
+  public boolean isGone() {
+    return gone;
+  }
+

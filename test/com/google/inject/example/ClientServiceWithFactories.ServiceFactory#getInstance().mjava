@@ -1,0 +1,4 @@
+  public static ServiceFactory getInstance() {
+    return instance;
+  }
+
