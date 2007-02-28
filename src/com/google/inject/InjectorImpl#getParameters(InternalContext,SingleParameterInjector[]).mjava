@@ -1,0 +1,17 @@
+  /**
+   * Iterates over parameter injectors and creates an array of parameter
+   * values.
+   */
+  static Object[] getParameters(InternalContext context,
+      SingleParameterInjector[] parameterInjectors) {
+    if (parameterInjectors == null) {
+      return null;
+    }
+
+    Object[] parameters = new Object[parameterInjectors.length];
+    for (int i = 0; i < parameters.length; i++) {
+      parameters[i] = parameterInjectors[i].inject(context);
+    }
+    return parameters;
+  }
+

@@ -2,7 +2,7 @@
     return "Context" + new LinkedHashMap<String, Object>() {{
       put("member", member);
       put("key", getKey());
-      put("container", container);
+      put("injector", injector);
     }}.toString();
   }
 

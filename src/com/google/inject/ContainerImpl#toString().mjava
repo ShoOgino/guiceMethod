@@ -1,6 +1,0 @@
-  public String toString() {
-    return new ToStringBuilder(Container.class)
-        .add("bindings", bindings)
-        .toString();
-  }
-

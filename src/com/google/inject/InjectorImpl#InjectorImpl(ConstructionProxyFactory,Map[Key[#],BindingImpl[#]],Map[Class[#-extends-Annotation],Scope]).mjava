@@ -1,0 +1,8 @@
+  InjectorImpl(ConstructionProxyFactory constructionProxyFactory,
+      Map<Key<?>, BindingImpl<?>> bindings,
+      Map<Class<? extends Annotation>, Scope> scopes) {
+    this.constructionProxyFactory = constructionProxyFactory;
+    this.bindings = bindings;
+    this.scopes = scopes;
+  }
+

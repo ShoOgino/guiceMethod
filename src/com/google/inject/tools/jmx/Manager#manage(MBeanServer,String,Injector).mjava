@@ -1,0 +1,40 @@
+  /**
+   * Registers all the bindings of an Injector with the given MBean server.
+   * Consider using the name of your root {@link Module} class as the domain.
+   */
+  public static void manage(MBeanServer server, String domain,
+      Injector injector) {
+    // Register each binding independently.
+    for (Binding<?> binding : injector.getBindings().values()) {
+      // Construct the name manually so we can ensure proper ordering of the
+      // key/value pairs.
+      StringBuilder name = new StringBuilder();
+      name.append(domain).append(":");
+      Key<?> key = binding.getKey();
+      name.append("type=").append(quote(key.getTypeLiteral().toString()));
+      Annotation annotation = key.getAnnotation();
+      if (annotation != null) {
+        name.append(",annotation=").append(quote(annotation.toString()));
+      }
+      else {
+        Class<? extends Annotation> annotationType = key.getAnnotationType();
+        if (annotationType != null) {
+          name.append(",annotation=")
+              .append(quote("@" + annotationType.getName()));
+        }
+      }
+
+      try {
+        server.registerMBean(new ManagedBinding(binding),
+            new ObjectName(name.toString()));
+      }
+      catch (MalformedObjectNameException e) {
+        throw new RuntimeException("Bad object name: "
+            + name.toString(), e);
+      }
+      catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    }
+  }
+

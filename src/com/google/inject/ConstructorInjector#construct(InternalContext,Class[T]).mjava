@@ -25,7 +25,7 @@
       constructionContext.startConstruction();
       try {
         Object[] parameters
-            = ContainerImpl.getParameters(context, parameterInjectors);
+            = InjectorImpl.getParameters(context, parameterInjectors);
         t = constructionProxy.newInstance(parameters);
         constructionContext.setProxyDelegates(t);
       }
@@ -38,7 +38,7 @@
       constructionContext.setCurrentReference(t);
 
       // Inject fields and methods.
-      for (ContainerImpl.Injector injector : injectors) {
+      for (InjectorImpl.SingleMemberInjector injector : memberInjectors) {
         injector.inject(context, t);
       }
 

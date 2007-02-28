@@ -1,7 +1,7 @@
   public void testInvalidEnum() throws CreationException {
     BinderImpl b = new BinderImpl();
     b.bindConstant(NumericValue.class).to("invalid");
-    Container c = b.createContainer();
+    Injector c = b.createInjector();
     try {
       c.getProvider(InvalidEnum.class).get();
       fail();

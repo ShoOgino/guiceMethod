@@ -1,5 +1,0 @@
-  static <T> ExternalContext<T> newInstance(Member member, int parameterIndex,
-      Key<T> key, ContainerImpl container) {
-    return new ExternalContext<T>(member, parameterIndex, key, container);
-  }
-

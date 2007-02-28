@@ -1,0 +1,13 @@
+  /**
+   * Creates an injector for the given set of modules, in a given development
+   * stage.
+   */
+  public static Injector createInjector(Stage stage, Iterable<Module> modules)
+      throws CreationException {
+    BinderImpl binder = new BinderImpl(stage);
+    for (Module module : modules) {
+      binder.install(module);
+    }
+    return binder.createInjector();
+  }
+

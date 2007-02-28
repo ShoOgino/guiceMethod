@@ -1,0 +1,66 @@
+  /**
+   * Creates a {@link Injector} instance. Injects static members for classes
+   * which were registered using {@link #requestStaticInjection(Class...)}.
+   *
+   * @throws CreationException if configuration errors are found. The
+   *     expectation is that the application will log this exception and exit.
+   * @throws IllegalStateException if called more than once
+   */
+  Injector createInjector() throws CreationException {
+    stopwatch.resetAndLog(logger, "Configuration");
+
+    Map<Key<?>, BindingImpl<?>> bindings = new HashMap<Key<?>, BindingImpl<?>>();
+    injector = new InjectorImpl(
+        proxyFactoryBuilder.create(), bindings, scopes);
+    injector.setErrorHandler(configurationErrorHandler);
+
+    createConstantBindings();
+
+    // Commands to execute before returning the Injector instance.
+    final List<ContextualCallable<Void>> preloaders
+        = new ArrayList<ContextualCallable<Void>>();
+
+    createBindings(preloaders);
+    createLinkedBindings();
+
+    stopwatch.resetAndLog(logger, "Binding creation");
+
+    injector.index();
+
+    stopwatch.resetAndLog(logger, "Binding indexing");
+
+    for (CreationListener creationListener : creationListeners) {
+      creationListener.notify(injector);
+    }
+
+    stopwatch.resetAndLog(logger, "Validation");
+
+    for (StaticInjection staticInjection : staticInjections) {
+      staticInjection.createMemberInjectors(injector);
+    }
+
+    stopwatch.resetAndLog(logger, "Static validation");
+
+    // Blow up if we encountered errors.
+    if (!errorMessages.isEmpty()) {
+      throw new CreationException(errorMessages);
+    }
+
+    // Switch to runtime error handling.
+    injector.setErrorHandler(new RuntimeErrorHandler());
+
+    // Inject static members.
+    for (StaticInjection staticInjection : staticInjections) {
+      staticInjection.runMemberInjectors(injector);
+    }
+
+    stopwatch.resetAndLog(logger, "Static member injection");
+
+    // Run preloading commands.
+    runPreloaders(injector, preloaders);
+
+    stopwatch.resetAndLog(logger, "Preloading");
+
+    return injector;
+  }
+

@@ -1,0 +1,19 @@
+  public void testProviderMethods() throws CreationException {
+    SampleSingleton singleton = new SampleSingleton();
+    SampleSingleton other = new SampleSingleton();
+
+    BinderImpl builder = new BinderImpl();
+    builder.bind(SampleSingleton.class).toInstance(singleton);
+    builder.bind(SampleSingleton.class)
+        .annotatedWith(Other.class)
+        .toInstance(other);
+    Injector injector = builder.createInjector();
+
+    assertSame(singleton,
+        injector.getProvider(Key.get(SampleSingleton.class)).get());
+    assertSame(singleton, injector.getProvider(SampleSingleton.class).get());
+
+    assertSame(other,
+        injector.getProvider(Key.get(SampleSingleton.class, Other.class)).get());
+  }
+

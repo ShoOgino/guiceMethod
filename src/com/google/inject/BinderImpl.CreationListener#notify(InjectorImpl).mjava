@@ -1,0 +1,2 @@
+    void notify(InjectorImpl injector);
+

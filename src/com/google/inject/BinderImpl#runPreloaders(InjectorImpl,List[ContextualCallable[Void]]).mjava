@@ -1,0 +1,12 @@
+  private void runPreloaders(InjectorImpl injector,
+      final List<ContextualCallable<Void>> preloaders) {
+    injector.callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) {
+        for (ContextualCallable<Void> preloader : preloaders) {
+          preloader.call(context);
+        }
+        return null;
+      }
+    });
+  }
+

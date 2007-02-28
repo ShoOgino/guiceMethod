@@ -3,7 +3,7 @@
    */
   private ConstructorInjector() {
     implementation = null;
-    injectors = null;
+    memberInjectors = null;
     parameterInjectors = null;
     constructionProxy = null;
   }

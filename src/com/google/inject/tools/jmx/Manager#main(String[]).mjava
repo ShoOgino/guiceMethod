@@ -10,9 +10,9 @@
     }
 
     Module module = (Module) Class.forName(args[0]).newInstance();
-    Container container = Guice.createContainer(module);
+    Injector injector = Guice.createInjector(module);
 
-    manage(args[0], container);
+    manage(args[0], injector);
 
     System.out.println("Press Ctrl+C to exit...");
 

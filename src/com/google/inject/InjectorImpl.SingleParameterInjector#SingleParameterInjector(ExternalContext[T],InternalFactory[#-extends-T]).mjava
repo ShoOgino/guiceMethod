@@ -1,0 +1,6 @@
+    public SingleParameterInjector(ExternalContext<T> externalContext,
+        InternalFactory<? extends T> factory) {
+      this.externalContext = externalContext;
+      this.factory = factory;
+    }
+

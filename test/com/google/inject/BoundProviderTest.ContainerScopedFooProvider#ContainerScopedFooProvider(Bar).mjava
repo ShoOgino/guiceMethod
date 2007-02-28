@@ -1,5 +1,0 @@
-    @Inject
-    public ContainerScopedFooProvider(Bar bar) {
-      this.bar = bar;
-    }
-

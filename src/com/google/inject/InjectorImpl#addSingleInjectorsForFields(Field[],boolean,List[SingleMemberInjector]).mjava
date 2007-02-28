@@ -1,0 +1,11 @@
+  void addSingleInjectorsForFields(Field[] fields, boolean statics,
+      List<SingleMemberInjector> injectors) {
+    addInjectorsForMembers(Arrays.asList(fields), statics, injectors,
+        new SingleInjectorFactory<Field>() {
+          public SingleMemberInjector create(InjectorImpl injector,
+              Field field) throws MissingDependencyException {
+            return new SingleFieldInjector(injector, field);
+          }
+        });
+  }
+

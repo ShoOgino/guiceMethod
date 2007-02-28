@@ -1,4 +1,0 @@
-  ContainerImpl getContainerImpl() {
-    return container;
-  }
-

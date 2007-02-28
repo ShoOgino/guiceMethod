@@ -1,5 +1,5 @@
   public void testNotProvided() throws CreationException {
-    Container c = Guice.createContainer();
+    Injector c = Guice.createInjector();
     Foo foo = c.getProvider(Foo.class).get();
     assertNull(foo.bar);
     assertNull(foo.fromMethod);

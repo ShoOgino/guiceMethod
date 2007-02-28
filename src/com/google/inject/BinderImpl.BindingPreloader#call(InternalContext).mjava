@@ -1,6 +1,6 @@
     public Void call(InternalContext context) {
       ExternalContext<?> externalContext
-          = ExternalContext.newInstance(null, key, context.getContainerImpl());
+          = ExternalContext.newInstance(null, key, context.getInjectorImpl());
       context.setExternalContext(externalContext);
       try {
         factory.get(context);

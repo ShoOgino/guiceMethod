@@ -2,8 +2,8 @@
     BinderImpl builder = new BinderImpl();
     Foo foo = new Foo();
     builder.bind(Foo.class).toInstance(foo);
-    Container container = builder.createContainer();
-    Binding<Foo> fooBinding = container.getBinding(Key.get(Foo.class));
+    Injector injector = builder.createInjector();
+    Binding<Foo> fooBinding = injector.getBinding(Key.get(Foo.class));
     assertSame(foo, fooBinding.getProvider().get());
     assertNotNull(fooBinding.getSource());
     assertEquals(Key.get(Foo.class), fooBinding.getKey());

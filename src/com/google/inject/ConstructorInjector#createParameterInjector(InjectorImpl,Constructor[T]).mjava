@@ -1,0 +1,17 @@
+  InjectorImpl.SingleParameterInjector<?>[] createParameterInjector(
+      InjectorImpl injector, Constructor<T> constructor) {
+    try {
+      return constructor.getParameterTypes().length == 0
+          ? null // default constructor.
+          : injector.getParametersInjectors(
+              constructor,
+              constructor.getParameterAnnotations(),
+              constructor.getGenericParameterTypes()
+          );
+    }
+    catch (InjectorImpl.MissingDependencyException e) {
+      e.handle(injector.errorHandler);
+      return null;
+    }
+  }
+

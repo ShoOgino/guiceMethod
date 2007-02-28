@@ -1,6 +1,6 @@
   public void testNewRequestObject()
       throws CreationException, IOException, ServletException {
-    final Container container = createContainer();
+    final Injector injector = createInjector();
 
     GuiceFilter filter = new GuiceFilter();
 
@@ -16,7 +16,7 @@
           ServletResponse servletResponse) {
         invoked[0] = true;
         assertSame(request, servletRequest);
-        assertNotNull(container.getProvider(InRequest.class).get());
+        assertNotNull(injector.getProvider(InRequest.class).get());
       }
     };
 

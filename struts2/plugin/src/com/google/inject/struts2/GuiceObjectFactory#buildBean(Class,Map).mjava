@@ -1,13 +1,13 @@
   public Object buildBean(Class clazz, Map extraContext) {
     synchronized (this) {
-      if (container == null) {
+      if (injector == null) {
         try {
-          logger.info("Creating container...");
-          this.container = Guice.createContainer(new AbstractModule() {
+          logger.info("Creating injector...");
+          this.injector = Guice.createInjector(new AbstractModule() {
             protected void configure() {
               install(new ServletModule());
 
-              // Tell the container about all the action classes, etc., so it
+              // Tell the injector about all the action classes, etc., so it
               // can validate them at startup.
               for (Class<?> boundClass : boundClasses) {
                 bind(boundClass);
@@ -18,10 +18,10 @@
           t.printStackTrace();
           System.exit(1);
         }
-        logger.info("Container created successfully.");
+        logger.info("Injector created successfully.");
       }
     }
 
-    return container.getProvider(clazz).get();
+    return injector.getProvider(clazz).get();
   }
 

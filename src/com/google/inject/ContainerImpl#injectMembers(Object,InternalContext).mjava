@@ -1,7 +1,0 @@
-  void injectMembers(Object o, InternalContext context) {
-    List<Injector> injectorsForClass = injectors.get(o.getClass());
-    for (Injector injector : injectorsForClass) {
-      injector.inject(context, o);
-    }
-  }
-

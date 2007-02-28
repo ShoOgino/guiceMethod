@@ -6,14 +6,14 @@
       return;
     }
 
-    BindingImpl<? extends T> destination = container.getBinding(destinationKey);
+    BindingImpl<? extends T> destination = injector.getBinding(destinationKey);
     if (destination == null) {
       addError(builder.getSource(), ErrorMessages.LINK_DESTINATION_NOT_FOUND,
           destinationKey);
       return;
     }
 
-    BindingImpl<?> binding = BindingImpl.newInstance(container, builder.getKey(),
+    BindingImpl<?> binding = BindingImpl.newInstance(injector, builder.getKey(),
         builder.getSource(), destination.getInternalFactory());
 
     putBinding(binding);

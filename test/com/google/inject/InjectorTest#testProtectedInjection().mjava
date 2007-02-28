@@ -1,0 +1,13 @@
+  public void testProtectedInjection() throws CreationException {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("foo");
+        bind(int.class).toInstance(5);
+      }
+    });
+
+    Protected p = injector.getProvider(Protected.class).get();
+    assertEquals("foo", p.fromConstructor);
+    assertEquals(5, p.fromMethod);
+  }
+

@@ -1,0 +1,5 @@
+  public void eagerly() {
+    in(Scopes.SINGLETON);
+    this.preload = true;
+  }
+

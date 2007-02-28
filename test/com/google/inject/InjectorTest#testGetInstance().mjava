@@ -1,0 +1,8 @@
+  public void testGetInstance() throws CreationException {
+    Injector injector = createFooInjector();
+
+    Bar bar = injector.getProvider(Key.get(Bar.class)).get();
+    assertEquals("test", bar.getTee().getS());
+    assertEquals(5, bar.getI());
+  }
+

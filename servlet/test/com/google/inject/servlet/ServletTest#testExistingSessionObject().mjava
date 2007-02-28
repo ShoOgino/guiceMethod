@@ -1,6 +1,6 @@
   public void testExistingSessionObject()
       throws CreationException, IOException, ServletException {
-    final Container container = createContainer();
+    final Injector injector = createInjector();
 
     GuiceFilter filter = new GuiceFilter();
 
@@ -20,8 +20,8 @@
         invoked[0] = true;
         assertSame(request, servletRequest);
 
-        assertSame(inSession, container.getProvider(InSession.class).get());
-        assertSame(inSession, container.getProvider(InSession.class).get());
+        assertSame(inSession, injector.getProvider(InSession.class).get());
+        assertSame(inSession, injector.getProvider(InSession.class).get());
       }
     };
 

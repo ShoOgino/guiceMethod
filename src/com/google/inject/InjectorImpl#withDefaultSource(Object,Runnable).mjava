@@ -1,0 +1,14 @@
+  /**
+   * This is only used during Injector building.
+   */
+  void withDefaultSource(Object defaultSource, Runnable runnable) {
+    Object previous = this.defaultSource;
+    this.defaultSource = defaultSource;
+    try {
+      runnable.run();
+    }
+    finally {
+      this.defaultSource = previous;
+    }
+  }
+

@@ -1,9 +1,0 @@
-  public void testContainerScopedAnnotation()
-      throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    BindingBuilderImpl<Singleton> bindingBuilder
-        = builder.bind(Singleton.class);
-    builder.createContainer();
-    assertSame(Scopes.CONTAINER, bindingBuilder.scope);
-  }
-

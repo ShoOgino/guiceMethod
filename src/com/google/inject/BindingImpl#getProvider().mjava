@@ -1,6 +1,6 @@
   public Provider<T> getProvider() {
     if (provider == null) {
-      provider = container.getProvider(key);
+      provider = injector.getProvider(key);
     }
     return provider;
   }

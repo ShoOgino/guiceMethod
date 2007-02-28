@@ -1,12 +1,12 @@
   void registerInstanceForInjection(final Object o) {
     binder.creationListeners.add(new CreationListener() {
-      public void notify(ContainerImpl container) {
+      public void notify(InjectorImpl injector) {
         try {
-          container.injectMembers(o);
+          injector.injectMembers(o);
         }
         catch (Exception e) {
           logger.log(Level.SEVERE, "An error occurred while injecting"
-              + " members of an object during container creation.", e);
+              + " members of an object during Injector creation.", e);
           binder.addError(
               source, ErrorMessages.ERROR_INJECTING_MEMBERS, o, e.getMessage());
         }

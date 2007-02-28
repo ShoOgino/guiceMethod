@@ -1,7 +1,7 @@
   public void testFooProvider() throws CreationException {
     BinderImpl cb = new BinderImpl();
     cb.bind(Foo.class).toProvider(FooProvider.class);
-    Container c = cb.createContainer();
+    Injector c = cb.createInjector();
 
     Foo a = c.getProvider(Foo.class).get();
     Foo b = c.getProvider(Foo.class).get();

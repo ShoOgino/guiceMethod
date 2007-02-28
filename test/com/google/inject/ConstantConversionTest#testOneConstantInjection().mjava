@@ -2,8 +2,8 @@
     BinderImpl builder = new BinderImpl();
     builder.bindConstant(NumericValue.class).to("5");
     builder.bind(Simple.class);
-    Container container = builder.createContainer();
-    Simple simple = container.getProvider(Simple.class).get();
+    Injector injector = builder.createInjector();
+    Simple simple = injector.getProvider(Simple.class).get();
     assertEquals(5, simple.i);
   }
 

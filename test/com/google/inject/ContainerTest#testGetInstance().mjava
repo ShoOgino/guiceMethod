@@ -1,8 +1,0 @@
-  public void testGetInstance() throws CreationException {
-    Container container = createFooContainer();
-
-    Bar bar = container.getProvider(Key.get(Bar.class)).get();
-    assertEquals("test", bar.getTee().getS());
-    assertEquals(5, bar.getI());
-  }
-

@@ -1,0 +1,17 @@
+  /**
+   * Recursively adds injectors for fields and methods from the given class to
+   * the given list. Injects parent classes before sub classes.
+   */
+  void addInjectors(Class clazz, List<SingleMemberInjector> injectors) {
+    if (clazz == Object.class) {
+      return;
+    }
+
+    // Add injectors for superclass first.
+    addInjectors(clazz.getSuperclass(), injectors);
+
+    // TODO (crazybob): Filter out overridden members.
+    addSingleInjectorsForFields(clazz.getDeclaredFields(), false, injectors);
+    addSingleInjectorsForMethods(clazz.getDeclaredMethods(), false, injectors);
+  }
+

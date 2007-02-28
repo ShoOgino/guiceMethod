@@ -1,0 +1,8 @@
+  public void testSingletonAnnotation() throws CreationException {
+    BinderImpl builder = new BinderImpl();
+    BindingBuilderImpl<SampleSingleton> bindingBuilder
+        = builder.bind(SampleSingleton.class);
+    builder.createInjector();
+    assertSame(Scopes.SINGLETON, bindingBuilder.scope);
+  }
+

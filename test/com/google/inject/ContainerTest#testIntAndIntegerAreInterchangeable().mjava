@@ -1,9 +1,0 @@
-  public void testIntAndIntegerAreInterchangeable()
-      throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    builder.bindConstant(I.class).to(5);
-    Container container = builder.createContainer();
-    IntegerWrapper iw = container.getProvider(IntegerWrapper.class).get();
-    assertEquals(5, (int) iw.i);
-  }
-

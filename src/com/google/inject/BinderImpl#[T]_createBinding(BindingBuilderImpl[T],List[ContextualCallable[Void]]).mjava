@@ -2,15 +2,15 @@
       List<ContextualCallable<Void>> preloaders) {
     final Key<T> key = builder.getKey();
     final InternalFactory<? extends T> factory
-        = builder.getInternalFactory(container);
+        = builder.getInternalFactory(injector);
     BindingImpl<?> binding
-        = BindingImpl.newInstance(container, key, builder.getSource(), factory);
+        = BindingImpl.newInstance(injector, key, builder.getSource(), factory);
 
     putBinding(binding);
 
     // Register to preload if necessary.
     boolean preload = stage == Stage.PRODUCTION;
-    if (builder.isContainerScoped()) {
+    if (builder.isSingletonScoped()) {
       if (preload || builder.shouldPreload()) {
         preloaders.add(new BindingPreloader(key, factory));
       }

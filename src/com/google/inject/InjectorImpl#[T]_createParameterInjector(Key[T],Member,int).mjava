@@ -1,0 +1,12 @@
+  <T> SingleParameterInjector<T> createParameterInjector(
+      Key<T> key, Member member, int index) throws MissingDependencyException {
+    InternalFactory<? extends T> factory = getInternalFactory(member, key);
+    if (factory == null) {
+      throw new MissingDependencyException(key, member);
+    }
+
+    ExternalContext<T> externalContext
+        = ExternalContext.newInstance(member, index, key, this);
+    return new SingleParameterInjector<T>(externalContext, factory);
+  }
+

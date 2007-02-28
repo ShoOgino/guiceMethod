@@ -1,9 +1,0 @@
-  ConstructorInjector(ContainerImpl container, Class<T> implementation) {
-    this.implementation = implementation;
-    Constructor<T> constructor = findConstructorIn(container, implementation);
-    parameterInjectors = createParameterInjector(container, constructor);
-    injectors = container.injectors.get(implementation)
-        .toArray(new ContainerImpl.Injector[0]);
-    constructionProxy = container.constructionProxyFactory.get(constructor);
-  }
-

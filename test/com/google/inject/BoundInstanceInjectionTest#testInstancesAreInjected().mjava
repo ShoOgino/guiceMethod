@@ -1,7 +1,7 @@
   public void testInstancesAreInjected() throws CreationException {
     final O o = new O();
 
-    Container container = Guice.createContainer(new AbstractModule() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bind(O.class).toInstance(o);
         bind(int.class).toInstance(5);

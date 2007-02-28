@@ -1,0 +1,5 @@
+    @Inject
+    public SingletonFooProvider(Bar bar) {
+      this.bar = bar;
+    }
+

@@ -1,5 +1,0 @@
-  /**
-   * Gets the {@link Container}.
-   */
-  Container getContainer();
-

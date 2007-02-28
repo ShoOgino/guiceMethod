@@ -1,5 +1,0 @@
-  static <T> BindingImpl<T> newInstance(ContainerImpl container, Key<T> key,
-      Object source, InternalFactory<? extends T> internalFactory) {
-    return new BindingImpl<T>(container, key, source, internalFactory);
-  }
-

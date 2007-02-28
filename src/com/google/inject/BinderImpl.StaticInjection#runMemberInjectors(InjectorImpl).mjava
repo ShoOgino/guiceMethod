@@ -1,0 +1,11 @@
+    void runMemberInjectors(InjectorImpl injector) {
+      injector.callInContext(new ContextualCallable<Void>() {
+        public Void call(InternalContext context) {
+          for (SingleMemberInjector injector : memberInjectors) {
+            injector.inject(context, null);
+          }
+          return null;
+        }
+      });
+    }
+

@@ -1,0 +1,15 @@
+  /**
+   * Scopes an internal factory.
+   */
+  static <T> InternalFactory<? extends T> scope(Key<T> key,
+      InjectorImpl injector, InternalFactory<? extends T> creator,
+      Scope scope) {
+    // No scope does nothing.
+    if (scope == null) {
+      return creator;
+    }
+    Provider<T> scoped = scope.scope(key,
+        new ProviderToInternalFactoryAdapter<T>(injector, creator));
+    return new InternalFactoryToProviderAdapter<T>(scoped);
+  }
+

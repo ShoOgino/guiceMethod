@@ -2,7 +2,7 @@
     Class<?> clazz = super.getClassInstance(name);
 
     synchronized (this) {
-      if (container == null) {
+      if (injector == null) {
         // We can only bind each class once.
         if (!boundClasses.contains(clazz)) {
           try {

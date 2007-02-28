@@ -2,7 +2,7 @@
     // this method not test-covered
     ensureScopeNotSet();
 
-    // We could defer this lookup to when we create the container, but this
+    // We could defer this lookup to when we create the Injector, but this
     // is fine for now.
     this.scope = binder.scopes.get(
         Objects.nonNull(scopeAnnotation, "scope annotation"));

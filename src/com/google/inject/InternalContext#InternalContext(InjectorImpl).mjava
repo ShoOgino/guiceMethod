@@ -1,0 +1,4 @@
+  InternalContext(InjectorImpl injector) {
+    this.injector = injector;
+  }
+

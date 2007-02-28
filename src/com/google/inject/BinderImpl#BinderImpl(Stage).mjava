@@ -2,12 +2,12 @@
    * Constructs a new builder.
    *
    * @param stage we're running in. If the stage is {@link Stage#PRODUCTION},
-   *  we will eagerly load container-scoped objects.
+   *  we will eagerly load singletons.
    */
   public BinderImpl(Stage stage) {
-    bindScope(ContainerScoped.class, CONTAINER);
+    bindScope(Singleton.class, SINGLETON);
 
-    bind(Container.class).to(CONTAINER_FACTORY);
+    bind(Injector.class).to(INJECTOR_FACTORY);
     bind(Logger.class).to(LOGGER_FACTORY);
     bind(Stage.class).toInstance(stage);
 

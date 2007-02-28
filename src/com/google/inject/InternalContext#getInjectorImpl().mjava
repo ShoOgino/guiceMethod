@@ -1,0 +1,4 @@
+  InjectorImpl getInjectorImpl() {
+    return injector;
+  }
+

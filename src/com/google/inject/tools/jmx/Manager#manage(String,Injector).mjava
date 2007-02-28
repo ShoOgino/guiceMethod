@@ -1,0 +1,10 @@
+  /**
+   * Registers all the bindings of an Injector with the platform MBean server.
+   * Consider using the name of your root {@link Module} class as the domain.
+   */
+  public static void manage(
+      String domain,
+      Injector injector) {
+    manage(ManagementFactory.getPlatformMBeanServer(), domain, injector);
+  }
+

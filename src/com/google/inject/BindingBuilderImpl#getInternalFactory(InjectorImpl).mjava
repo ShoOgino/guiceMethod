@@ -1,0 +1,24 @@
+  InternalFactory<? extends T> getInternalFactory(InjectorImpl injector) {
+    // If an implementation wasn't specified, use the injection type.
+    if (this.factory == null) {
+      to(key.getTypeLiteral());
+    }
+
+    // Look for @Scoped on the implementation type.
+    if (implementation != null) {
+      Scope fromAnnotation = Scopes.getScopeForType(
+          implementation.getRawType(), binder.scopes,
+          binder.configurationErrorHandler);
+      if (fromAnnotation != null) {
+        if (this.scope == null) {
+          this.scope = fromAnnotation;
+        } else {
+          logger.info("Overriding scope specified by annotation at "
+              + source + ".");
+        }
+      }
+    }
+
+    return Scopes.scope(this.key, injector, this.factory, scope);
+  }
+

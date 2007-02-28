@@ -1,6 +1,6 @@
   public void testAnnotationWithValueMatchesKeyWithTypeOnly() throws
       CreationException {
-    Container c = Guice.createContainer(new AbstractModule() {
+    Injector c = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bindConstant(Blue.class).to("foo");
         bind(Foo.class);

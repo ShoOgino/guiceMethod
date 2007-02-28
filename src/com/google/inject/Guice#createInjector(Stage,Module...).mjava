@@ -1,0 +1,9 @@
+  /**
+   * Creates an injector for the given set of modules, in a given development
+   * stage.
+   */
+  public static Injector createInjector(Stage stage, Module... modules)
+      throws CreationException {
+    return createInjector(stage, Arrays.asList(modules));
+  }
+

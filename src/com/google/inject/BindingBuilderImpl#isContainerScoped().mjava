@@ -1,4 +1,0 @@
-  boolean isContainerScoped() {
-    return this.scope == Scopes.CONTAINER;
-  }
-
