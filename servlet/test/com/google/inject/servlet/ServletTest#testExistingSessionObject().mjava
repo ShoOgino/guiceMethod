@@ -20,8 +20,8 @@
         invoked[0] = true;
         assertSame(request, servletRequest);
 
-        assertSame(inSession, injector.getProvider(InSession.class).get());
-        assertSame(inSession, injector.getProvider(InSession.class).get());
+        assertSame(inSession, injector.getInstance(InSession.class));
+        assertSame(inSession, injector.getInstance(InSession.class));
       }
     };
 

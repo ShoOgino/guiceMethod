@@ -5,7 +5,7 @@
     b.bindConstant(EnumValue.class).to("TEE");
     b.bindConstant(ClassName.class).to(Foo.class.getName());
     Injector c = b.createInjector();
-    Foo foo = c.getProvider(Foo.class).get();
+    Foo foo = c.getInstance(Foo.class);
 
     checkNumbers(
       foo.integerField,

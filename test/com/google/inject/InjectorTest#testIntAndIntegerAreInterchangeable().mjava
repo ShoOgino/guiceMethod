@@ -3,7 +3,7 @@
     BinderImpl builder = new BinderImpl();
     builder.bindConstant(I.class).to(5);
     Injector injector = builder.createInjector();
-    IntegerWrapper iw = injector.getProvider(IntegerWrapper.class).get();
+    IntegerWrapper iw = injector.getInstance(IntegerWrapper.class);
     assertEquals(5, (int) iw.i);
   }
 

@@ -3,7 +3,7 @@
     b.bindConstant(NumericValue.class).to("invalid");
     Injector c = b.createInjector();
     try {
-      c.getProvider(InvalidCharacter.class).get();
+      c.getInstance(InvalidCharacter.class);
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }

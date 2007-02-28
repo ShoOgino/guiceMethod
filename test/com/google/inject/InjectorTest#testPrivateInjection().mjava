@@ -6,7 +6,7 @@
       }
     });
 
-    Private p = injector.getProvider(Private.class).get();
+    Private p = injector.getInstance(Private.class);
     assertEquals("foo", p.fromConstructor);
     assertEquals(5, p.fromMethod);
   }

@@ -3,7 +3,7 @@
     builder.bindConstant(NumericValue.class).to("5");
     builder.bind(Simple.class);
     Injector injector = builder.createInjector();
-    Simple simple = injector.getProvider(Simple.class).get();
+    Simple simple = injector.getInstance(Simple.class);
     assertEquals(5, simple.i);
   }
 

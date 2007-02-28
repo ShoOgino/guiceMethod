@@ -1,0 +1,6 @@
+  /**
+   * Gets an instance bound to the given type; equivalent to
+   * {@code getProvider(type).get()}.
+   */
+  <T> T getInstance(Class<T> type);
+

@@ -22,6 +22,6 @@
       }
     }
 
-    return injector.getProvider(clazz).get();
+    return injector.getInstance(clazz);
   }
 

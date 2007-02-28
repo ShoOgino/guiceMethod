@@ -1,6 +1,6 @@
   public void testNotProvided() throws CreationException {
     Injector c = Guice.createInjector();
-    Foo foo = c.getProvider(Foo.class).get();
+    Foo foo = c.getInstance(Foo.class);
     assertNull(foo.bar);
     assertNull(foo.fromMethod);
   }

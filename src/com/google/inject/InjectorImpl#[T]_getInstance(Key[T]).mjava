@@ -1,0 +1,4 @@
+  public <T> T getInstance(Key<T> key) {
+    return getProvider(key).get();
+  }
+

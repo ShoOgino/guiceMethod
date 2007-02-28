@@ -1,0 +1,4 @@
+  public <T> T getInstance(Class<T> type) {
+    return getProvider(type).get();
+  }
+

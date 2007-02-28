@@ -6,7 +6,7 @@
       }
     });
 
-    Protected p = injector.getProvider(Protected.class).get();
+    Protected p = injector.getInstance(Protected.class);
     assertEquals("foo", p.fromConstructor);
     assertEquals(5, p.fromMethod);
   }

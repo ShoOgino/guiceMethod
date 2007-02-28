@@ -10,10 +10,10 @@
     Injector injector = builder.createInjector();
 
     assertSame(singleton,
-        injector.getProvider(Key.get(SampleSingleton.class)).get());
-    assertSame(singleton, injector.getProvider(SampleSingleton.class).get());
+        injector.getInstance(Key.get(SampleSingleton.class)));
+    assertSame(singleton, injector.getInstance(SampleSingleton.class));
 
     assertSame(other,
-        injector.getProvider(Key.get(SampleSingleton.class, Other.class)).get());
+        injector.getInstance(Key.get(SampleSingleton.class, Other.class)));
   }
 
