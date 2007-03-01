@@ -3,9 +3,10 @@
     Map<Key<?>, BindingImpl<?>> bindings = injector.internalBindings();
     Binding<?> original = bindings.get(key);
 
-    // Binding to Provider<?> is not allowed.
-    if (key.getRawType().equals(Provider.class)) {
-      addError(binding.getSource(), ErrorMessages.CANNOT_BIND_TO_PROVIDER);
+    Class<?> rawType = key.getRawType();
+    if (FORBIDDEN_TYPES.contains(rawType)) {
+      addError(binding.getSource(), ErrorMessages.CANNOT_BIND_TO_GUICE_TYPE,
+          rawType.getSimpleName());
       return;
     }
 

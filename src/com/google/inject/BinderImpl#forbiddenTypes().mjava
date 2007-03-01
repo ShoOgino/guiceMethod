@@ -1,0 +1,19 @@
+  private static Set<Class<?>> forbiddenTypes() {
+    Set<Class<?>> set = new HashSet<Class<?>>();
+    Collections.addAll(set,
+
+        // It's unfortunate that we have to maintain a blacklist of specific
+        // classes, but we can't easily block the whole package because of
+        // all our unit tests.
+
+        AbstractModule.class,
+        Binder.class,
+        Binding.class,
+        Key.class,
+        Module.class,
+        Provider.class,
+        Scope.class,
+        TypeLiteral.class);
+    return Collections.unmodifiableSet(set);
+  }
+
