@@ -1,6 +1,6 @@
   public static Object forMember(Member member) {
     if (member == null) {
-      return "[unknown source]";  
+      return SourceProviders.UNKNOWN_SOURCE;
     }
 
     Class declaringClass = member.getDeclaringClass();

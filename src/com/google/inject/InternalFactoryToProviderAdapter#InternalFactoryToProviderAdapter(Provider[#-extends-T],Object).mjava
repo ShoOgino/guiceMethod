@@ -1,0 +1,6 @@
+  public InternalFactoryToProviderAdapter(
+      Provider<? extends T> provider, Object source) {
+    this.provider = Objects.nonNull(provider, "provider");
+    this.source = Objects.nonNull(source, "source");
+  }
+

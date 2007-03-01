@@ -3,6 +3,9 @@
       context.setExternalContext(externalContext);
       try {
         Object value = factory.get(context);
+        if (value == null) {
+          throw new AssertionError(); // we should have prevented this
+        }
         field.set(o, value);
       }
       catch (IllegalAccessException e) {

@@ -1,4 +1,10 @@
   public T get(InternalContext context) {
-    return provider.get();
+    T provided = provider.get();
+    if (provided != null) {
+      return provided;
+    }
+    String message = String.format(ErrorMessages.NULL_PROVIDED, source);
+    throw new ProvisionException(context.getExternalContext(),
+        new NullPointerException(message));
   }
 
