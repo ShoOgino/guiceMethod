@@ -1,0 +1,4 @@
+  public void go() {
+    service.go();
+  }
+

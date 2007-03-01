@@ -1,0 +1,4 @@
+  protected void configure() {
+    bind(Service.class).to(ServiceImpl.class).in(Scopes.SINGLETON);
+  }
+

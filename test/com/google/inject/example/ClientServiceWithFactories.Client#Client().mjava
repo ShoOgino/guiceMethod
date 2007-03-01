@@ -1,4 +1,0 @@
-  Client() {
-    this.service = ServiceFactory.getInstance().getService();
-  }
-

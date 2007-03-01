@@ -1,8 +1,12 @@
 public void testClient() {
-  ServiceFactory previous = ServiceFactory.getInstance();
+  Factory<Service> previous = ServiceFactory.getInstance();
   try {
-    MockService mock = new MockService();
-    ServiceFactory.setInstance(new SingletonServiceFactory(mock));
+    final MockService mock = new MockService();
+    ServiceFactory.setInstance(new Factory<Service>() {
+      public Service get() {
+        return mock;
+      }
+    });
     Client client = new Client();
     client.go();
     assertTrue(mock.isGone());

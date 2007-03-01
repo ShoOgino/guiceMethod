@@ -1,0 +1,5 @@
+  public static Client getInstance() {
+    Service service = ServiceFactory.getInstance();
+    return new Client(service);
+  }
+

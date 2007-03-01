@@ -1,0 +1,4 @@
+  public static Service getInstance() {
+    return service;
+  }
+

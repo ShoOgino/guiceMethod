@@ -1,0 +1,4 @@
+  public Client(Service service) {
+    this.service = service;
+  }
+

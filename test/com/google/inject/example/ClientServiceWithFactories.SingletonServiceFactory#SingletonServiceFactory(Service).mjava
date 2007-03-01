@@ -1,4 +1,0 @@
-  public SingletonServiceFactory(Service service) {
-    this.service = service;
-  }
-

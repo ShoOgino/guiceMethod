@@ -2,6 +2,6 @@ public void testClient() {
   MockService mock = new MockService();
   Client client = new Client(mock);
   client.go();
-  assertTrue(mock.isGone());
+  Assert.assertTrue(mock.isGone());
 }
 
