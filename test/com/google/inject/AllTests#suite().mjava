@@ -26,7 +26,6 @@
     suite.addTestSuite(ReferenceCacheTest.class);
     suite.addTestSuite(ReferenceMapTest.class);
     suite.addTest(ReferenceMapTestSuite.suite());
-    suite.addTestSuite(SurrogateAnnotationsTest.class);
 
     suite.addTestSuite(IntegrationTest.class);
 

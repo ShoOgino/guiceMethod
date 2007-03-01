@@ -1,7 +1,0 @@
-  public void testException() {
-    try {
-      SurrogateAnnotations.findAnnotation(Foo.class, Broken.class).value();
-      fail();
-    } catch (DuplicateAnnotationException e) { /* expected */ }
-  }
-

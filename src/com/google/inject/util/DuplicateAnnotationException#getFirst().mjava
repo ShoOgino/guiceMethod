@@ -1,7 +1,0 @@
-  /**
-   * Gets first encountered annotation.
-   */
-  public Annotation getFirst() {
-    return first;
-  }
-

@@ -1,7 +1,0 @@
-  /**
-   * Gets second encountered annotation.
-   */
-  public Annotation getSecond() {
-    return second;
-  }
-

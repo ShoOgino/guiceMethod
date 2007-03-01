@@ -1,5 +1,0 @@
-  public void testIndirect() throws DuplicateAnnotationException {
-    assertEquals(5,
-        SurrogateAnnotations.findAnnotation(Foo.class, Indirect.class).value());
-  }
-
