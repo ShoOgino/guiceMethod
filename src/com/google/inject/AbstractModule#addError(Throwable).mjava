@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#addError(Throwable) 
+   */
+  protected void addError(Throwable t) {
+    builder.addError(t);
+  }
+
