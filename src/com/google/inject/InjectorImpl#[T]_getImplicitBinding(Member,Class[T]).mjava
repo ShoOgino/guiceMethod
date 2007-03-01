@@ -1,0 +1,114 @@
+  /**
+   * Gets a factory for the specified type. Used when an explicit binding
+   * was not made. Uses synchronization here so it's not necessary in the
+   * factory itself. Returns {@code null} if the type isn't injectable.
+   */
+  <T> InternalFactory<? extends T> getImplicitBinding(Member member,
+      final Class<T> type) {
+    // Look for @DefaultImplementation.
+    DefaultImplementation defaultImplementation =
+        type.getAnnotation(DefaultImplementation.class);
+    if (defaultImplementation != null) {
+      Class<?> implementationType = defaultImplementation.value();
+
+      // Make sure it's not the same type. TODO: Can we check for deeper loops?
+      if (implementationType == type) {
+        errorHandler.handle(StackTraceElements.forType(type),
+            ErrorMessages.RECURSIVE_IMPLEMENTATION_TYPE, type);
+        return invalidFactory();
+      }
+
+      // Make sure implementationType extends type.
+      if (!type.isAssignableFrom(implementationType)) {
+        errorHandler.handle(StackTraceElements.forType(type),
+            ErrorMessages.NOT_A_SUBTYPE, implementationType, type);
+        return invalidFactory();
+      }
+
+      return (InternalFactory<T>) getInternalFactory(
+          member, Key.get(implementationType));      
+    }
+
+    // Look for @DefaultProvider.
+    DefaultProvider defaultProvider = type.getAnnotation(DefaultProvider.class);
+    if (defaultProvider != null) {
+      final Class<? extends Provider<?>> providerType = defaultProvider.value();
+
+      // Make sure it's not the same type. TODO: Can we check for deeper loops?
+      if (providerType == type) {
+        errorHandler.handle(StackTraceElements.forType(type),
+            ErrorMessages.RECURSIVE_PROVIDER_TYPE, type);
+        return invalidFactory();
+      }
+
+      // TODO: Make sure the provided type extends type. We at least check
+      // the type at runtime below.
+
+      InternalFactory<? extends Provider<?>> providerFactory
+          = getInternalFactory(member, Key.get(providerType));
+      Key<? extends Provider<?>> providerKey = Key.get(providerType);
+      return (InternalFactory<T>) new BoundProviderFactory(
+          providerKey, providerFactory, StackTraceElements.forType(type)) {
+        public Object get(InternalContext context) {
+          Object o = super.get(context);
+          try {
+            return type.cast(o);
+          } catch (ClassCastException e) {
+            errorHandler.handle(StackTraceElements.forType(type),
+                ErrorMessages.SUBTYPE_NOT_PROVIDED, providerType, type);
+            throw new AssertionError();
+          }
+        }
+      };
+    }
+
+    // TODO: Method interceptors could actually enable us to implement
+    // abstract types. Should we remove this restriction?
+    if (Modifier.isAbstract(type.getModifiers())) {
+      return null;
+    }
+
+    // Inject the class itself.
+    synchronized (implicitBindings) {
+      @SuppressWarnings("unchecked")
+      InternalFactory<T> factory =
+          (InternalFactory<T>) implicitBindings.get(type);
+      if (factory != null) {
+        return factory;
+      }
+
+      // Create the factory.
+      ImplicitBinding<T> implicitBinding = new ImplicitBinding<T>(type);
+
+      // Scope the factory if necessary.
+      Scope scope = Scopes.getScopeForType(type, scopes, errorHandler);
+      InternalFactory<? extends T> scoped;
+      if (scope != null) {
+        scoped = Scopes.scope(Key.get(type), this, implicitBinding, scope);
+      } else {
+        scoped = implicitBinding;
+      }
+
+      implicitBindings.put(type, scoped);
+
+      try {
+        // Look up the constructor. We do this separately from constructions to
+        // support circular dependencies.
+        ConstructorInjector<T> constructor = getConstructor(type);
+        implicitBinding.setConstructorInjector(constructor);
+      }
+      catch (RuntimeException e) {
+        // Clean up state.
+        implicitBindings.remove(type);
+        throw e;
+      }
+      catch (Throwable t) {
+        // Clean up state.
+        implicitBindings.remove(type);
+        throw new AssertionError(t);
+      }
+      
+      return scoped;
+    }
+  }
+

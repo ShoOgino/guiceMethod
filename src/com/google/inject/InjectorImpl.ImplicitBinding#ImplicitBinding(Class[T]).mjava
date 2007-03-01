@@ -1,4 +1,4 @@
-    ImplicitBinding(Class<T> type) {
-      this.type = type;
+    ImplicitBinding(Class<T> implementation) {
+      this.implementation = implementation;
     }
 

@@ -109,11 +109,9 @@
       }
     }
 
-    // Don't try to inject primitives, arrays, enums, interfaces or abstract
-    // classes.
+    // Don't try to inject primitives, arrays, or enums.
     int modifiers = rawType.getModifiers();
-    if (rawType.isArray() || rawType.isEnum()
-        || Modifier.isAbstract(modifiers) || rawType.isPrimitive()) {
+    if (rawType.isArray() || rawType.isEnum() || rawType.isPrimitive()) {
       // Look for a factory bound to a key without annotation attributes if
       // necessary.
       if (key.hasAttributes()) {
@@ -147,13 +145,14 @@
       };
       try {
         // note: intelliJ thinks this cast is superfluous, but is it?
-        return (InternalFactory<? extends T>) getImplicitBinding(rawType);
+        return (InternalFactory<? extends T>) getImplicitBinding(member,
+            rawType);
       }
       finally {
         this.errorHandler = previous;
       }
     }
     // note: intelliJ thinks this cast is superfluous, but is it?
-    return (InternalFactory<? extends T>) getImplicitBinding(rawType);
+    return (InternalFactory<? extends T>) getImplicitBinding(member, rawType);
   }
 
