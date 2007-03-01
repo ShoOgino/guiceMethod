@@ -1,0 +1,6 @@
+    public Provided get() {
+      return new Provided() {
+        public void go() {}
+      };
+    }
+
