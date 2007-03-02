@@ -1,7 +1,0 @@
-  /**
-   * Binds to the given instance. The Injector will automatically inject the
-   * members of this instance when it is first created. See {@link
-   * com.google.inject.Injector#injectMembers(Object)}.
-   */
-  void toInstance(T instance);
-

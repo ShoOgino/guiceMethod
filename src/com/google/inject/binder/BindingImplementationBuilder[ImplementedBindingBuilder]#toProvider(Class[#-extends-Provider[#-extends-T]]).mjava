@@ -1,6 +1,0 @@
-  /**
-   * Binds to instances from the provider bound to the given provider type.
-   */
-  BindingScopeBuilder toProvider(
-      Class<? extends Provider<? extends T>> providerType);
-

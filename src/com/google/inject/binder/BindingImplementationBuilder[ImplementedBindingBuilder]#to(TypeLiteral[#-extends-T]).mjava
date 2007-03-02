@@ -1,5 +1,0 @@
-  /**
-   * Binds to another binding with the specified type.
-   */
-  BindingScopeBuilder to(TypeLiteral<? extends T> implementation);
-
