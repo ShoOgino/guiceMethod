@@ -1,0 +1,5 @@
+  /**
+   * Binds to another binding with the specified key. 
+   */
+  ScopedBindingBuilder to(Key<? extends T> targetKey);
+

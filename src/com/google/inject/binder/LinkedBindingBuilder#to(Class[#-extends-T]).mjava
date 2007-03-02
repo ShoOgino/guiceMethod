@@ -1,0 +1,5 @@
+  /**
+   * Binds to another binding with the specified type.
+   */
+  ScopedBindingBuilder to(Class<? extends T> implementation);
+
