@@ -1,4 +1,0 @@
-    @Inject public AImpl(B b) {
-      this.b = b;
-    }
-

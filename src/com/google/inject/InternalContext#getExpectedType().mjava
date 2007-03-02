@@ -1,0 +1,4 @@
+  Class<?> getExpectedType() {
+    return externalContext.getKey().getRawType();
+  }
+

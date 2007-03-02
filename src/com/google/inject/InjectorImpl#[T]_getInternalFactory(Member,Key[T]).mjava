@@ -146,13 +146,14 @@
       try {
         // note: intelliJ thinks this cast is superfluous, but is it?
         return (InternalFactory<? extends T>) getImplicitBinding(member,
-            rawType);
+            rawType, null);
       }
       finally {
         this.errorHandler = previous;
       }
     }
     // note: intelliJ thinks this cast is superfluous, but is it?
-    return (InternalFactory<? extends T>) getImplicitBinding(member, rawType);
+    return (InternalFactory<? extends T>) getImplicitBinding(member, rawType,
+        null);
   }
 

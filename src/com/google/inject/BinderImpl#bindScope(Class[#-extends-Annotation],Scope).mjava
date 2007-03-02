@@ -9,6 +9,7 @@
     if (!Annotations.isRetainedAtRuntime(annotationType)) {
       addError(StackTraceElements.forType(annotationType),
           ErrorMessages.MISSING_RUNTIME_RETENTION, source());
+      // Go ahead and bind anyway so we don't get collateral errors.
     }
 
     Scope existing = scopes.get(nonNull(annotationType, "annotation type"));

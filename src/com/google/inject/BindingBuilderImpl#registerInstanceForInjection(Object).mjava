@@ -6,9 +6,9 @@
         }
         catch (Exception e) {
           String className = e.getClass().getSimpleName();
-          String message = e.getMessage();
+          String message = ErrorMessages.getRootMessage(e);
           String logMessage = String.format(
-              ErrorMessages.ERROR_INJECTING_MEMBERS, className, o, message);
+              ErrorMessages.ERROR_INJECTING_MEMBERS, o, message);
           logger.log(Level.INFO, logMessage, e);
           binder.addError(source, ErrorMessages.ERROR_INJECTING_MEMBERS_SEE_LOG,
               className, o, message);

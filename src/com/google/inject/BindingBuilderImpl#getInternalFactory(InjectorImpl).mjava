@@ -1,22 +1,19 @@
   InternalFactory<? extends T> getInternalFactory(InjectorImpl injector) {
-    // If an implementation wasn't specified, use the injection type.
-    if (this.factory == null) {
-      to(key.getTypeLiteral());
-    }
+    if (this.factory == null && !key.hasAnnotationType()) {
+      // Try an implicit binding.
+      final ImplicitImplementation<T> implicitImplementation =
+          new ImplicitImplementation<T>(key, scope, source);
+      binder.creationListeners.add(implicitImplementation);
 
-    // Look for @Scoped on the implementation type.
-    if (implementation != null) {
-      Scope fromAnnotation = Scopes.getScopeForType(
-          implementation.getRawType(), binder.scopes,
-          binder.configurationErrorHandler);
-      if (fromAnnotation != null) {
-        if (this.scope == null) {
-          this.scope = fromAnnotation;
-        } else {
-          logger.info("Overriding scope specified by annotation at "
-              + source + ".");
-        }
+      // We need to record the scope. If it's singleton, we'll preload in prod.
+      if (this.scope == null) {
+        // We can ignore errors because the error will already have been
+        // recorded.
+        this.scope = Scopes.getScopeForType(
+            key.getTypeLiteral().getRawType(), binder.scopes, IGNORE_ERRORS);
       }
+
+      return implicitImplementation;
     }
 
     return Scopes.scope(this.key, injector, this.factory, scope);

@@ -4,7 +4,7 @@
    * factory itself. Returns {@code null} if the type isn't injectable.
    */
   <T> InternalFactory<? extends T> getImplicitBinding(Member member,
-      final Class<T> type) {
+      final Class<T> type, Scope scope) {
     // Look for @DefaultImplementation.
     ImplementedBy implementedBy =
         type.getAnnotation(ImplementedBy.class);
@@ -81,7 +81,13 @@
       ImplicitBinding<T> implicitBinding = new ImplicitBinding<T>(type);
 
       // Scope the factory if necessary.
-      Scope scope = Scopes.getScopeForType(type, scopes, errorHandler);
+
+      // If we don't have a scope from the configuration, look for one on
+      // the type.
+      if (scope == null) {
+        scope = Scopes.getScopeForType(type, scopes, errorHandler);
+      }
+
       InternalFactory<? extends T> scoped;
       if (scope != null) {
         scoped = Scopes.scope(Key.get(type), this, implicitBinding, scope);

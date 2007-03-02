@@ -1,0 +1,14 @@
+  public BindingScopeBuilder to(Key<? extends T> targetKey) {
+    ensureImplementationIsNotSet();
+
+    if (key.equals(targetKey)) {
+      binder.addError(source, ErrorMessages.RECURSIVE_BINDING);
+    }
+
+    final FactoryProxy<? extends T> factoryProxy =
+        new FactoryProxy<T>(key, targetKey, source);
+    this.factory = factoryProxy;
+    binder.creationListeners.add(factoryProxy);
+    return this;
+  }
+

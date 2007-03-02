@@ -1,7 +1,0 @@
-    DefaultFactory(Key<T> key, TypeLiteral<? extends T> implementation,
-        Object source) {
-      this.key = key;
-      this.implementation = implementation;
-      this.source = source;
-    }
-

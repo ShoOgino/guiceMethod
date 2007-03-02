@@ -4,7 +4,7 @@
    */
   static <T> ConstructorInjector<T> invalidConstructor() {
     return new ConstructorInjector<T>() {
-      T construct(InternalContext context, Class<T> expectedType) {
+      Object construct(InternalContext context, Class<?> expectedType) {
         throw new UnsupportedOperationException();
       }
       public T get() {

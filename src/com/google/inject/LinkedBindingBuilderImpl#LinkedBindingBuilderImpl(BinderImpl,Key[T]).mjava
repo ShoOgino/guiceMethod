@@ -1,5 +1,0 @@
-  LinkedBindingBuilderImpl(BinderImpl binder, Key<T> key) {
-    this.binder = binder;
-    this.key = key;
-  }
-

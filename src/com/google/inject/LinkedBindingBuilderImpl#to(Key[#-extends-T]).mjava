@@ -1,8 +1,0 @@
-  public void to(Key<? extends T> destination) {
-    if (this.destination != null) {
-      binder.addError(source, ErrorMessages.LINK_DESTINATION_ALREADY_SET);
-    } else {
-      this.destination = destination;
-    }
-  }
-

@@ -1,5 +1,0 @@
-  /**
-   * Links a key to another binding.
-   */
-  <T> LinkedBindingBuilder<T> link(Key<T> key);
-

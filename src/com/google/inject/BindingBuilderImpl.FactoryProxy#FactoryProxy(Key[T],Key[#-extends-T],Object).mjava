@@ -1,0 +1,6 @@
+    FactoryProxy(Key<T> key, Key<? extends T> targetKey, Object source) {
+      this.key = key;
+      this.targetKey = targetKey;
+      this.source = source;
+    }
+

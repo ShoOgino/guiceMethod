@@ -21,7 +21,6 @@
         = new ArrayList<ContextualCallable<Void>>();
 
     createBindings(preloaders);
-    createLinkedBindings();
 
     stopwatch.resetAndLog(logger, "Binding creation");
 

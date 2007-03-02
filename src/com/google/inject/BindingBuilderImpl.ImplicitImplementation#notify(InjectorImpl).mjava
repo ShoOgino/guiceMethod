@@ -1,7 +1,8 @@
     public void notify(final InjectorImpl injector) {
       injector.withDefaultSource(source, new Runnable() {
         public void run() {
-          constructor = injector.getConstructor(implementation);
+          implicitFactory = injector.getImplicitBinding(null,
+              (Class) key.getTypeLiteral().getRawType(), scope);
         }
       });
     }

@@ -1,4 +1,0 @@
-  public void to(Class<? extends T> destination) {
-    to(Key.get(destination));
-  }
-

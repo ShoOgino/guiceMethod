@@ -1,4 +1,5 @@
     public T get(InternalContext context) {
-      return constructorInjector.construct(context, implementation);
+      return (T) constructorInjector.construct(context,
+          context.getExpectedType());
     }
 

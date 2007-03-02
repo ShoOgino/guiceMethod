@@ -1,4 +1,0 @@
-    public T get(InternalContext context) {
-      return constructor.construct(context, (Class) key.getRawType());
-    }
-
