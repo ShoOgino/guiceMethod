@@ -1,0 +1,7 @@
+    private T getSingleton() {
+      if (instance == null) {
+        instance = type.cast(beanFactory.getBean(name));
+      }
+      return instance;
+    }
+

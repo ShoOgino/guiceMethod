@@ -1,0 +1,4 @@
+    public T get() {
+      return singleton ? getSingleton() : type.cast(beanFactory.getBean(name));
+    }
+

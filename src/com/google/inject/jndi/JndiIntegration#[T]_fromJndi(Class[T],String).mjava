@@ -1,0 +1,12 @@
+  /**
+   * Creates a provider which looks up objects in JNDI using the given name.
+   * Example usage:
+   *
+   * <pre>
+   * bind(DataSource.class).toProvider(fromJndi(DataSource.class, "java:..."));
+   * </pre>
+   */
+  public static <T> Provider<T> fromJndi(Class<T> type, String name) {
+    return new JndiProvider<T>(type, name);
+  }
+

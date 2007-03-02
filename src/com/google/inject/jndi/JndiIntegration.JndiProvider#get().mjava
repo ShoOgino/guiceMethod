@@ -1,0 +1,9 @@
+    public T get() {
+      try {
+        return type.cast(context.lookup(name));
+      }
+      catch (NamingException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
