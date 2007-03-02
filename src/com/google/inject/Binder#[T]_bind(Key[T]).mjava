@@ -1,5 +1,5 @@
   /**
    * Creates a binding to a key.
    */
-  <T> BindingBuilder<T> bind(Key<T> key);
+  <T> LinkedBindingBuilder<T> bind(Key<T> key);
 

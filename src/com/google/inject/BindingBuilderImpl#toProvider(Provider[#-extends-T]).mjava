@@ -1,4 +1,4 @@
-  public BindingScopeBuilder toProvider(Provider<? extends T> provider) {
+  public ScopedBindingBuilder toProvider(Provider<? extends T> provider) {
     ensureImplementationIsNotSet();
     this.factory = new InternalFactoryToProviderAdapter<T>(provider, source);
     registerInstanceForInjection(provider);

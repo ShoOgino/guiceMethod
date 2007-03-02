@@ -1,7 +1,7 @@
   /**
    * @see Binder#bind(Class)
    */
-  protected <T> BindingBuilder<T> bind(Class<T> clazz) {
+  protected <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
     return builder.bind(clazz);
   }
 

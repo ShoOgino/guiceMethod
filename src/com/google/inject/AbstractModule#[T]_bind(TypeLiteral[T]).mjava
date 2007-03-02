@@ -1,7 +1,7 @@
   /**
    * @see Binder#bind(TypeLiteral)
    */
-  protected <T> BindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
+  protected <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
     return builder.bind(typeLiteral);
   }
 

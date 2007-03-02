@@ -1,4 +1,4 @@
-  public BindingScopeBuilder to(Class<? extends T> implementation) {
+  public ScopedBindingBuilder to(Class<? extends T> implementation) {
     return to(TypeLiteral.get(implementation));
   }
 

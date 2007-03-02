@@ -1,4 +1,4 @@
-  public BindingScopeBuilder to(Key<? extends T> targetKey) {
+  public ScopedBindingBuilder to(Key<? extends T> targetKey) {
     ensureImplementationIsNotSet();
 
     if (key.equals(targetKey)) {

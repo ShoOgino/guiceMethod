@@ -1,5 +1,5 @@
   /**
    * Creates a binding to a type.
    */
-  <T> BindingBuilder<T> bind(TypeLiteral<T> typeLiteral);
+  <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral);
 
