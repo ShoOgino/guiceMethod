@@ -1,5 +1,5 @@
   public void testDefaultImplementation() {
-    Injector injector = Guice.createInjector();
+    Injector injector = Guice.createEmptyInjector();
     I i = injector.getInstance(I.class);
     i.go();
   }

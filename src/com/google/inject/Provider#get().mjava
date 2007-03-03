@@ -1,5 +1,5 @@
   /**
-   * Provides an instance of {@code T}.  Must never return null.
+   * Provides an instance of {@code T}. Must never return {@code null}.
    */
   T get();
 
