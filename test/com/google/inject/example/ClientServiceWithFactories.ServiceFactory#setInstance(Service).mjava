@@ -1,0 +1,4 @@
+  public static void setInstance(Service service) {
+    instance = service;
+  }
+

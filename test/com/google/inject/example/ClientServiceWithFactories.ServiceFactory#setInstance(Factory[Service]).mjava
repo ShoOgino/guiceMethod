@@ -1,4 +1,0 @@
-  public static void setInstance(Factory<Service> serviceFactory) {
-    instance = serviceFactory;
-  }
-

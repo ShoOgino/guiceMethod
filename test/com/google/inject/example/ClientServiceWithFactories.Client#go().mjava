@@ -1,6 +1,5 @@
   public void go() {
-    Factory<Service> factory = ServiceFactory.getInstance();
-    Service service = factory.get();
+    Service service = ServiceFactory.getInstance();
     service.go();
   }
 

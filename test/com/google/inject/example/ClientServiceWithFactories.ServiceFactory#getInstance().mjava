@@ -1,4 +1,4 @@
-  public static Factory<Service> getInstance() {
+  public static Service getInstance() {
     return instance;
   }
 
