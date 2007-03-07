@@ -1,12 +1,7 @@
   /**
    * Creates an injector with no explicit bindings.
    */
-  public static Injector createEmptyInjector() {
-    try {
-      return createInjector();
-    }
-    catch (CreationException e) {
-      throw new AssertionError(e);
-    }
+  static Injector createEmptyInjector() {
+    return createInjector();
   }
 
