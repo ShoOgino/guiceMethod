@@ -1,7 +1,7 @@
   /**
-   * Resets and logs ellapsed time.
+   * Resets and logs elapsed time in milliseconds.
    */
   public void resetAndLog(Logger logger, String label) {
-    logger.info(label + ": " + reset() + "ms");
+    logger.fine(label + ": " + reset() + "ms");
   }
 

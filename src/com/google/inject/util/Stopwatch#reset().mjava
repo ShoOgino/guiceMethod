@@ -1,5 +1,5 @@
   /**
-   * Resets and returns ellapsed time.
+   * Resets and returns elapsed time in milliseconds.
    */
   public long reset() {
     long now = System.currentTimeMillis();
