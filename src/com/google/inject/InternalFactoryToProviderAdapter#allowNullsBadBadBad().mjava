@@ -1,0 +1,6 @@
+  // TODO(kevinb): gee, ya think we might want to remove this?
+  private static boolean allowNullsBadBadBad() {
+    return "I'm a bad hack".equals(
+          System.getProperty("guice.allow.nulls.bad.bad.bad"));
+  }
+

@@ -1,6 +1,6 @@
   public T get(InternalContext context) {
     T provided = provider.get();
-    if (provided != null || allowNullsBadBadBad) {
+    if (provided != null || allowNullsBadBadBad()) {
       return provided;
     }
     String message = String.format(ErrorMessages.NULL_PROVIDED, source);
