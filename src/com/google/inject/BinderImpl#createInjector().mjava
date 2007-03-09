@@ -55,6 +55,13 @@
 
     stopwatch.resetAndLog(logger, "Static member injection");
 
+    // Inject pre-existing instances.
+    for (CreationListener instanceInjector : instanceInjectors) {
+      instanceInjector.notify(injector);
+    }
+
+    stopwatch.resetAndLog(logger, "Instance injection");
+
     // Run preloading commands.
     runPreloaders(injector, preloaders);
 
