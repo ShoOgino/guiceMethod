@@ -1,8 +1,0 @@
-  /**
-   * @see Binder#bindConstant(java.lang.annotation.Annotation)
-   */
-  protected ConstantBindingBuilder bindConstant(
-      Annotation annotation) {
-    return builder.bindConstant(annotation);
-  }
-

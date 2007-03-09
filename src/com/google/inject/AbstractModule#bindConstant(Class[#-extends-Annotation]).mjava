@@ -1,8 +1,0 @@
-  /**
-   * @see Binder#bindConstant(Class)
-   */
-  protected ConstantBindingBuilder bindConstant(
-      Class<? extends Annotation> annotationType) {
-    return builder.bindConstant(annotationType);
-  }
-

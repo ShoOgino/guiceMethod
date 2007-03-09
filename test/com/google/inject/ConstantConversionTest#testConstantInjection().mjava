@@ -1,9 +1,9 @@
   public void testConstantInjection() throws CreationException {
     BinderImpl b = new BinderImpl();
-    b.bindConstant(NumericValue.class).to("5");
-    b.bindConstant(BooleanValue.class).to("true");
-    b.bindConstant(EnumValue.class).to("TEE");
-    b.bindConstant(ClassName.class).to(Foo.class.getName());
+    b.bindConstant().annotatedWith(NumericValue.class).to("5");
+    b.bindConstant().annotatedWith(BooleanValue.class).to("true");
+    b.bindConstant().annotatedWith(EnumValue.class).to("TEE");
+    b.bindConstant().annotatedWith(ClassName.class).to(Foo.class.getName());
     Injector c = b.createInjector();
     Foo foo = c.getInstance(Foo.class);
 

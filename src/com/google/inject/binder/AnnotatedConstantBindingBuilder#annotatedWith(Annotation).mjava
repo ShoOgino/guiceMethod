@@ -1,0 +1,5 @@
+  /**
+   * Specifies an annotation value for this binding.
+   */
+  ConstantBindingBuilder annotatedWith(Annotation annotation);
+

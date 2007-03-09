@@ -1,0 +1,21 @@
+  void validateAnnotation(Class<? extends Annotation> annotationType) {
+    if (annotationStrategy != null) {
+      binder.addError(source, ErrorMessages.ANNOTATION_ALREADY_SPECIFIED);
+      return;
+    }
+
+    boolean retainedAtRuntime =
+        Annotations.isRetainedAtRuntime(annotationType);
+    boolean bindingAnnotation = Key.isBindingAnnotation(annotationType);
+
+    if (!retainedAtRuntime) {
+      binder.addError(StackTraceElements.forType(annotationType),
+          ErrorMessages.MISSING_RUNTIME_RETENTION, source);
+    }
+
+    if (!bindingAnnotation) {
+      binder.addError(StackTraceElements.forType(annotationType),
+          ErrorMessages.MISSING_BINDING_ANNOTATION, source);
+    }
+  }
+

@@ -1,6 +1,6 @@
   public void testInvalidCharacter() throws CreationException {
     BinderImpl b = new BinderImpl();
-    b.bindConstant(NumericValue.class).to("invalid");
+    b.bindConstant().annotatedWith(NumericValue.class).to("invalid");
     Injector c = b.createInjector();
     try {
       c.getInstance(InvalidCharacter.class);

@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#bindConstant()
+   */
+  protected AnnotatedConstantBindingBuilder bindConstant() {
+    return builder.bindConstant();
+  }
+

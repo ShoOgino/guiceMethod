@@ -1,8 +1,0 @@
-  private ConstantBindingBuilderImpl bind(Object source,
-      AnnotationStrategy annotationStrategy) {
-    ConstantBindingBuilderImpl builder =
-        new ConstantBindingBuilderImpl(this, annotationStrategy).from(source);
-    constantBindingBuilders.add(builder);
-    return builder;
-  }
-

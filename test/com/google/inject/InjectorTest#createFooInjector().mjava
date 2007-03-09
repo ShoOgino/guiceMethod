@@ -3,8 +3,8 @@
       protected void configure() {
         bind(Bar.class).to(BarImpl.class);
         bind(Tee.class).to(TeeImpl.class);
-        bindConstant(S.class).to("test");
-        bindConstant(I.class).to(5);
+        bindConstant().annotatedWith(S.class).to("test");
+        bindConstant().annotatedWith(I.class).to(5);
       }
     });
   }
