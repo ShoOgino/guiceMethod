@@ -1,0 +1,15 @@
+  /**
+   * Binds all Spring beans from the given factory by name. For a Spring bean
+   * named "foo", this method creates a binding to the bean's type and
+   * {@code @Named("foo")}.
+   *
+   * @see com.google.inject.name.Named
+   * @see com.google.inject.name.Names#named(String) 
+   */
+  public static void bindAll(Binder binder, ListableBeanFactory beanFactory) {
+    for (String name : beanFactory.getBeanDefinitionNames()) {
+      Class<?> type = beanFactory.getType(name);
+      bindBean(binder, beanFactory, name, type);
+    }
+  }
+

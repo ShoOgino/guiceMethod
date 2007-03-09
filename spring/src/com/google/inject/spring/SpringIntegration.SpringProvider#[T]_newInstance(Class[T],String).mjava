@@ -1,0 +1,4 @@
+    static <T> SpringProvider<T> newInstance(Class<T> type, String name) {
+      return new SpringProvider<T>(type, name);
+    }
+

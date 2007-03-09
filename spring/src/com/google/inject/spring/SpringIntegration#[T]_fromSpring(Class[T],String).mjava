@@ -1,12 +1,14 @@
   /**
    * Creates a provider which looks up objects from Spring using the given name.
-   * Example usage:
+   * Expects a binding to {@link
+   * org.springframework.beans.factory.BeanFactory}. Example usage:
    *
    * <pre>
-   * bind(DataSource.class).toProvider(fromSpring(DataSource.class, "dataSource"));
+   * bind(DataSource.class)
+   *   .toProvider(fromSpring(DataSource.class, "dataSource"));
    * </pre>
    */
   public static <T> Provider<T> fromSpring(Class<T> type, String name) {
-    return new SpringProvider<T>(type, name);
+    return new InjectableSpringProvider<T>(type, name);
   }
 

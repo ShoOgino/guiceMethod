@@ -1,0 +1,4 @@
+    InjectableSpringProvider(Class<T> type, String name) {
+      super(type, name);
+    }
+

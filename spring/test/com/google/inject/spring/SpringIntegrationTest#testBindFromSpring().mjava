@@ -1,4 +1,4 @@
-  public void testSpringIntegration() throws CreationException {
+  public void testBindFromSpring() throws CreationException {
     final DefaultListableBeanFactory beanFactory
         = new DefaultListableBeanFactory();
 

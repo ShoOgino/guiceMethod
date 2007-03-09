@@ -1,0 +1,6 @@
+    @Inject
+    @Override
+    void initialize(BeanFactory beanFactory) {
+      super.initialize(beanFactory);
+    }
+
