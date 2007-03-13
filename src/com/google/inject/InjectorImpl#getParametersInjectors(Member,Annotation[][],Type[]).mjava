@@ -6,8 +6,7 @@
    * @param parameterTypes parameter types
    * @return injections
    */
-  <M extends AccessibleObject & Member>
-  SingleParameterInjector<?>[] getParametersInjectors(M member,
+  SingleParameterInjector<?>[] getParametersInjectors(Member member,
       Annotation[][] annotations, Type[] parameterTypes)
       throws MissingDependencyException {
     SingleParameterInjector<?>[] parameterInjectors
