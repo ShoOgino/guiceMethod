@@ -1,5 +1,5 @@
   /**
-   * Binds a constant value to an annotation.
+   * See the EDSL examples at {@link Binder}.
    */
   AnnotatedConstantBindingBuilder bindConstant();
 

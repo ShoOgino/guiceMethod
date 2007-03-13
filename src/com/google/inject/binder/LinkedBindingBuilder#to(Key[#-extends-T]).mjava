@@ -1,5 +1,5 @@
   /**
-   * Binds to another binding with the specified key. 
+   * See the EDSL examples at {@link com.google.inject.Binder}.
    */
   ScopedBindingBuilder to(Key<? extends T> targetKey);
 

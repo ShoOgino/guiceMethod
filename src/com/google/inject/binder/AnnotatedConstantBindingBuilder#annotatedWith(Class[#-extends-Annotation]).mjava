@@ -1,5 +1,5 @@
   /**
-   * Specifies an annotation type for this binding.
+   * See the EDSL examples at {@link com.google.inject.Binder}.
    */
   ConstantBindingBuilder annotatedWith(
       Class<? extends Annotation> annotationType);

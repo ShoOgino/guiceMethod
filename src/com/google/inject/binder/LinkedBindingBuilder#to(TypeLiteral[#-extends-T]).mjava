@@ -1,5 +1,5 @@
   /**
-   * Binds to another binding with the specified type.
+   * See the EDSL examples at {@link com.google.inject.Binder}.
    */
   ScopedBindingBuilder to(TypeLiteral<? extends T> implementation);
 

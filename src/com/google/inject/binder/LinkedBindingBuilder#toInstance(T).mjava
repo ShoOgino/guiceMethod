@@ -1,7 +1,7 @@
   /**
-   * Binds to the given instance. The Injector will automatically inject the
-   * members of this instance when it is first created. See {@link
-   * com.google.inject.Injector#injectMembers(Object)}.
+   * See the EDSL examples at {@link com.google.inject.Binder}.
+   *
+   * @see com.google.inject.Injector#injectMembers
    */
   void toInstance(T instance);
 

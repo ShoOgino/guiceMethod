@@ -1,6 +1,5 @@
   /**
-   * Specifies the scope. References the annotation passed to {@link
-   * com.google.inject.Binder#bindScope(Class, com.google.inject.Scope)}.
+   * See the EDSL examples at {@link com.google.inject.Binder}.
    */
   void in(Class<? extends Annotation> scopeAnnotation);
 
