@@ -1,5 +1,6 @@
   /**
-   * Contributes bindings and other configurations to a {@code Binder}.
+   * Contributes bindings and other configurations for this module to a
+   * {@code Binder}.
    */
   void configure(Binder binder);
 

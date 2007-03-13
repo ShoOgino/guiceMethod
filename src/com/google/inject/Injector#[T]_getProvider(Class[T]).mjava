@@ -1,5 +1,8 @@
   /**
-   * Gets the provider bound to the given type.
+   * Returns the provider used to obtain instances for the given type.
+   * The process of determining this result is known as "injection resolution".
+   * When feasible, it's generally preferable to avoid using this method, in
+   * favor of having Guice inject your dependencies ahead of time.
    */
   <T> Provider<T> getProvider(Class<T> type);
 

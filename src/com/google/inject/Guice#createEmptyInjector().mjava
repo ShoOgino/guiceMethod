@@ -1,7 +1,0 @@
-  /**
-   * Creates an injector with no explicit bindings.
-   */
-  static Injector createEmptyInjector() {
-    return createInjector();
-  }
-

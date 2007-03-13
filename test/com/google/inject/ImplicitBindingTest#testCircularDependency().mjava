@@ -1,5 +1,5 @@
   public void testCircularDependency() throws CreationException {
-    Injector injector = Guice.createEmptyInjector();
+    Injector injector = Guice.createInjector();
     Foo foo = injector.getInstance(Foo.class);
     assertSame(foo, foo.bar.foo);
   }

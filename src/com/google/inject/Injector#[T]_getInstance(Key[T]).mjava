@@ -1,6 +1,8 @@
   /**
-   * Gets an instance bound to the given key; equivalent to
-   * {@code getProvider(key).get()}.
+   * Returns the appropriate instance for the given injection key; equivalent to
+   * {@code getProvider(key).get()}. When feasible, it's generally preferable to
+   * avoid using this method, in favor of having Guice inject your dependencies
+   * ahead of time.
    */
   <T> T getInstance(Key<T> key);
 

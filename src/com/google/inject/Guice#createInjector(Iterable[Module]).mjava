@@ -1,8 +1,8 @@
   /**
    * Creates an injector for the given set of modules.
    *
-   * @throws CreationException from which you can retrieve the individual error
-   *  messages
+   * @throws CreationException if one or more errors occur during Injector
+   *     construction
    */
   public static Injector createInjector(Iterable<Module> modules) {
     return createInjector(Stage.DEVELOPMENT, modules);

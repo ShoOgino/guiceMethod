@@ -1,6 +1,8 @@
   /**
-   * Gets an instance bound to the given type; equivalent to
-   * {@code getProvider(type).get()}.
+   * Returns the appropriate instance for the given type; equivalent to
+   * {@code getProvider(type).get()}. When feasible, it's generally preferable
+   * to avoid using this method, in favor of having Guice inject your
+   * dependencies ahead of time.
    */
   <T> T getInstance(Class<T> type);
 

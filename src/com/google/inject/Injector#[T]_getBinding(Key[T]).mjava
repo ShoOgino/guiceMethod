@@ -1,5 +1,6 @@
   /**
-   * Gets a binding for the given key.
+   * Gets a binding for the given key.  This method is part of the Injector
+   * Introspection API and is primarily intended for use by tools.
    */
   <T> Binding<T> getBinding(Key<T> key);
 

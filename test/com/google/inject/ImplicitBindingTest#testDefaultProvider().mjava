@@ -1,5 +1,5 @@
   public void testDefaultProvider() {
-    Injector injector = Guice.createEmptyInjector();
+    Injector injector = Guice.createInjector();
     Provided provided = injector.getInstance(Provided.class);
     provided.go();
   }
