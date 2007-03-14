@@ -1,8 +1,0 @@
-    synchronized Interceptor getDelegate() {
-      if (delegate == null) {
-        delegate = superBuildInterceptor(config, params);
-        delegate.init();
-      }
-      return delegate;
-    }
-

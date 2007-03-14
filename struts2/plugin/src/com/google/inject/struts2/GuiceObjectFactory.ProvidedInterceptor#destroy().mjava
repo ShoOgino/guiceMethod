@@ -1,4 +1,4 @@
     public void destroy() {
-      getDelegate().destroy();
+      delegate.destroy();
     }
 

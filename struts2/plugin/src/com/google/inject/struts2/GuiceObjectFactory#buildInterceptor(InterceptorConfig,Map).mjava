@@ -1,14 +1,16 @@
   public Interceptor buildInterceptor(InterceptorConfig interceptorConfig,
       Map interceptorRefParams) throws ConfigurationException {
+    // Ensure the interceptor class is present.
+    Class<? extends Interceptor> interceptorClass;
     try {
-      getClassInstance(interceptorConfig.getClassName());
+      interceptorClass = getClassInstance(interceptorConfig.getClassName());
     } catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
 
-    // Defer the creation of interceptors so that we don't have to create the
-    // injector until we've bound all the actions. This enables us to
-    // validate all the dependencies at once.
-    return new LazyLoadedInterceptor(interceptorConfig, interceptorRefParams);
+    ProvidedInterceptor providedInterceptor = new ProvidedInterceptor(
+        interceptorConfig, interceptorRefParams, interceptorClass);
+    interceptors.add(providedInterceptor);
+    return providedInterceptor;
   }
 

@@ -1,5 +1,0 @@
-  @Inject
-  public Count(Counter counter) {
-    this.counter = counter;
-  }
-
