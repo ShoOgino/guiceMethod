@@ -1,0 +1,4 @@
+  public OutOfScopeException(String message) {
+    super(message);
+  }
+

@@ -2,6 +2,9 @@
     BinderImpl binder = new BinderImpl();
     BindingBuilderImpl<SampleSingleton> bindingBuilder
         = binder.bind(SampleSingleton.class);
-    binder.createInjector();
+    Injector injector = binder.createInjector();
+    assertSame(
+        injector.getInstance(SampleSingleton.class),
+        injector.getInstance(SampleSingleton.class));
   }
 

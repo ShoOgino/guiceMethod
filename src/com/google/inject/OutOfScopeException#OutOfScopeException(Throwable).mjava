@@ -1,0 +1,4 @@
+  public OutOfScopeException(Throwable cause) {
+    super(cause);
+  }
+
