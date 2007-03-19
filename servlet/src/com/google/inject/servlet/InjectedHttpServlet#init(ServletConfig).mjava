@@ -1,0 +1,13 @@
+  @Override public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+    ServletContext servletContext = config.getServletContext();
+    Injector injector = (Injector)
+        servletContext.getAttribute(GuiceServletContextListener.INJECTOR_NAME);
+    if (injector == null) {
+      throw new UnavailableException(
+          "Guice Injector not found (did you forget to register a "
+          + GuiceServletContextListener.class.getSimpleName() + "?)");
+    }
+    injector.injectMembers(this);
+  }
+

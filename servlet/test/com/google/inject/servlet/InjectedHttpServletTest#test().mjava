@@ -1,0 +1,22 @@
+  public void test() throws ServletException {
+
+    Map<String,Object> attributes = new HashMap<String,Object>();
+    ServletContext context = createFakeServletContext(attributes);
+
+    ServletConfig config = createMock(ServletConfig.class);
+    expect(config.getServletContext()).andReturn(context).atLeastOnce();
+    replay(config);
+
+    GuiceServletContextListener listener = new MyListener();
+    listener.contextInitialized(new ServletContextEvent(context));
+    assertEquals(1, attributes.size());
+
+    MyServlet servlet = new MyServlet();
+    servlet.init(config);
+    verify(config);
+    assertNotNull(servlet.myDependency);
+
+    listener.contextDestroyed(new ServletContextEvent(context));
+    assertTrue(attributes.isEmpty());
+  }
+

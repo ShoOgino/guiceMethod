@@ -1,0 +1,5 @@
+  public void contextInitialized(ServletContextEvent servletContextEvent) {
+    ServletContext servletContext = servletContextEvent.getServletContext();
+    servletContext.setAttribute(INJECTOR_NAME, getInjector());
+  }
+
