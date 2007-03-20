@@ -1,4 +1,4 @@
     public AnnotationVisitor visitAnnotationDefault() {
-      return null;
+      return this;
     }
 

@@ -1,5 +1,5 @@
     public AnnotationVisitor visitParameterAnnotation(int parameter,
         String desc, boolean visible) {
-      return null;
+      return this;
     }
 

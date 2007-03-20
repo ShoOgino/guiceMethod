@@ -1,0 +1,8 @@
+  public static String getConstructorDescriptor(Constructor c) {
+    StringBuilder sb = new StringBuilder();
+    sb.append('(');
+    for (Class param : c.getParameterTypes())
+        sb.append(Type.getDescriptor(param));
+    return sb.append(")V").toString();
+  }
+

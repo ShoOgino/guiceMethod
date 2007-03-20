@@ -6,7 +6,7 @@
       return member.getName() + Type.getMethodDescriptor((Method) member);
     }
     else {
-      return "<init>" + Type.getConstructorDescriptor((Constructor) member);
+      return "<init>" + getConstructorDescriptor((Constructor) member);
     }
   }
 

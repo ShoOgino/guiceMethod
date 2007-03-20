@@ -13,6 +13,6 @@
     if (in == null) {
       throw new IllegalArgumentException("Cannot find bytecode for " + cls);
     }
-    new ClassReader(in).accept(new LineNumberReader(), 0);
+    new ClassReader(in).accept(new LineNumberReader(), false);
   }
 
