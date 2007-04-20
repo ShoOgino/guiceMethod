@@ -1,0 +1,5 @@
+  private static boolean isInnerClass(Class<?> c) {
+    return c.getEnclosingClass() != null
+        && !Modifier.isStatic(c.getModifiers());
+  }
+

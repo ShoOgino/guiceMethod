@@ -1,0 +1,12 @@
+  public void testInjectInnerClass() throws Exception {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(InnerClass.class);
+      fail();
+    } catch (Exception e) {
+      // TODO(kevinb): why does the source come out as unknown??
+      assertTrue(e.getMessage().contains(
+          "Injecting into inner classes is not supported."));
+    }
+  }
+
