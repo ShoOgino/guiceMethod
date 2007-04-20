@@ -1,7 +1,6 @@
   /**
-   * Finds all bindings to the given type.  This method is part of the Injector
+   * Finds all bindings to the given type. This method is part of the Injector
    * Introspection API and is primarily intended for use by tools.
-
    */
   <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type);
 
