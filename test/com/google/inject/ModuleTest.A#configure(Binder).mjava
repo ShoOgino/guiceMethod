@@ -1,0 +1,6 @@
+    public void configure(Binder binder) {
+      binder.bind(X.class);
+      binder.install(new B());
+      binder.install(new C());
+    }
+

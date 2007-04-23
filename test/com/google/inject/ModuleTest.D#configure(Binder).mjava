@@ -1,0 +1,4 @@
+    public void configure(Binder binder) {
+      binder.bind(W.class);
+    }
+

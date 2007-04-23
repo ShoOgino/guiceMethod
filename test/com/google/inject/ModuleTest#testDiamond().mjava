@@ -1,0 +1,4 @@
+  public void testDiamond() throws Exception {
+    Guice.createInjector(new A());
+  }
+

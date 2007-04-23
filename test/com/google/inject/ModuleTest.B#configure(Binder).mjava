@@ -1,0 +1,5 @@
+    public void configure(Binder binder) {
+      binder.bind(Y.class);
+      binder.install(new D());
+    }
+
