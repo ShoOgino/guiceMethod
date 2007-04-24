@@ -5,6 +5,7 @@
   public static Matcher<AnnotatedElement> annotatedWith(
       final Annotation annotation) {
     Objects.nonNull(annotation, "annotation");
+    checkForRuntimeRetention(annotation.annotationType());
     return new AbstractMatcher<AnnotatedElement>() {
       public boolean matches(AnnotatedElement element) {
         Annotation fromElement

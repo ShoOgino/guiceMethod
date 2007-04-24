@@ -2,5 +2,11 @@
     assertTrue(annotatedWith(Foo.class).matches(Bar.class));
     assertFalse(annotatedWith(Foo.class).matches(
         MatcherTest.class.getMethods()[0]));
+
+    try {
+      annotatedWith(Baz.class).matches(Car.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+    }
   }
 
