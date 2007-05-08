@@ -1,0 +1,13 @@
+    public void notify(final InjectorImpl injector) {
+      injector.withDefaultSource(source, new Runnable() {
+        public void run() {
+          try {
+            delegate = injector.getProvider(key);
+          }
+          catch (ConfigurationException e) {
+            ErrorMessages.handleMissingBinding(injector, source, key);
+          }
+        }
+      });
+    }
+

@@ -1,5 +1,4 @@
     void handle(ErrorHandler errorHandler) {
-      ErrorMessages.handleMissingBinding(errorHandler, member, key,
-          getNamesOfBindingAnnotations(key.getTypeLiteral()));
+      ErrorMessages.handleMissingBinding(InjectorImpl.this, member, key);
     }
 

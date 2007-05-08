@@ -1,0 +1,6 @@
+  public <T> Provider<T> getProvider(Key<T> key) {
+    ProviderProxy<T> providerProxy = new ProviderProxy<T>(source(), key);
+    creationListeners.add(providerProxy);
+    return providerProxy;
+  }
+

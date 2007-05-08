@@ -1,0 +1,9 @@
+  /**
+   * {@inheritDoc}
+   *
+   * The returned will not be valid until the {@link Injector} has been
+   * created. The provider will throw an {@code IllegalStateException} if you
+   * try to use it beforehand.
+   */
+  <T> Provider<T> getProvider(Class<T> type);
+

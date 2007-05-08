@@ -37,8 +37,7 @@
         }
 
         // End of the road.
-        ErrorMessages.handleMissingBinding(errorHandler, member, key,
-            getNamesOfBindingAnnotations(key.getTypeLiteral()));
+        ErrorMessages.handleMissingBinding(this, member, key);
         return invalidFactory();
       }
     }

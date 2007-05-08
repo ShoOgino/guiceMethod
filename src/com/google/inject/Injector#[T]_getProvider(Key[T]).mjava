@@ -1,6 +1,6 @@
   /**
-   * Returns the provider used to obtain instances for the given injection key.
-   * The process of determining this result is known as "injection resolution".
+   * {@inheritDoc}
+   *
    * When feasible, it's generally preferable to avoid using this method, in
    * favor of having Guice inject your dependencies ahead of time.
    */

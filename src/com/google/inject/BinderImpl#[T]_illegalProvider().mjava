@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked")
+  static <T> Provider<T> illegalProvider() {
+    return (Provider<T>) ILLEGAL_PROVIDER;
+  }
+
