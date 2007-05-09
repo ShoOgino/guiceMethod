@@ -1,0 +1,20 @@
+    Class<? extends Annotation> findScopeAnnotation(Annotation[] annotations) {
+      Class<? extends Annotation> found = null;
+
+      for (Annotation annotation : annotations) {
+        if (annotation.annotationType()
+            .isAnnotationPresent(ScopeAnnotation.class)) {
+          if (found != null) {
+            addError(ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS,
+                "@" + found.getSimpleName(),
+                "@" + annotation.annotationType().getSimpleName()
+            );
+          } else {
+            found = annotation.annotationType();
+          }
+        }
+      }
+
+      return found;
+    }
+

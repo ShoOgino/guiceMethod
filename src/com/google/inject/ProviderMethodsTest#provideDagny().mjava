@@ -1,0 +1,10 @@
+  @Provides
+  @Singleton
+  Dagny provideDagny() {
+    return new Dagny() {
+      public int getAge() {
+        return 1;
+      }
+    };
+  }
+

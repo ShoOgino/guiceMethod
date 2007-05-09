@@ -1,15 +1,15 @@
   public final synchronized void configure(Binder builder) {
     try {
-      if (this.builder != null) {
+      if (this.binder != null) {
         throw new IllegalStateException("Re-entry is not allowed.");
       }
-      this.builder = Objects.nonNull(builder, "builder");
+      this.binder = Objects.nonNull(builder, "builder");
 
       configure();
 
     }
     finally {
-      this.builder = null;
+      this.binder = null;
     }
   }
 

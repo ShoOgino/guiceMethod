@@ -1,7 +1,0 @@
-  /**
-   * Returns the provider used to obtain instances for the given injection key.
-   *
-   * @param key which identifies the desired provider
-   */
-  <T> Provider<T> getProvider(Key<T> key);
-

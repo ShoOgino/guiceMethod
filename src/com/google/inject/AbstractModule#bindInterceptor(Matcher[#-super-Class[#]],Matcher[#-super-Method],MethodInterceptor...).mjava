@@ -6,6 +6,6 @@
   protected void bindInterceptor(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
       MethodInterceptor... interceptors) {
-    builder.bindInterceptor(classMatcher, methodMatcher, interceptors);
+    binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
   }
 

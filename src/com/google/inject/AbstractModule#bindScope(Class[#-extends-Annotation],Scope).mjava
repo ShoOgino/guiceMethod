@@ -3,6 +3,6 @@
    */
   protected void bindScope(Class<? extends Annotation> scopeAnnotation,
       Scope scope) {
-    builder.bindScope(scopeAnnotation, scope);
+    binder.bindScope(scopeAnnotation, scope);
   }
 

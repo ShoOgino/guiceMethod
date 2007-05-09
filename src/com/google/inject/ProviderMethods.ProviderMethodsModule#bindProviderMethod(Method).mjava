@@ -1,0 +1,48 @@
+    void bindProviderMethod(final Method method) {
+      this.source = StackTraceElements.forMember(method);
+
+      method.setAccessible(true);
+
+      Class<? extends Annotation> scopeAnnotation
+          = findScopeAnnotation(method.getAnnotations());
+      Annotation bindingAnnotation = findBindingAnnotation(
+          method.getAnnotations());
+
+      final List<Provider<?>> parameterProviders
+          = findParameterProviders(method);
+
+      Provider<Object> provider = new Provider<Object>() {
+        public Object get() {
+          Object[] parameters = new Object[parameterProviders.size()];
+          for (int i = 0; i < parameters.length; i++) {
+            parameters[i] = parameterProviders.get(i).get();
+          }
+
+          try {
+            return method.invoke(providers, parameters);
+          }
+          catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+          }
+          catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+          }
+        }
+      };
+
+      // TODO: Fix type warnings.
+      Class type = method.getReturnType();
+      if (scopeAnnotation == null && bindingAnnotation == null) {
+        bind(type).toProvider(provider);
+      } else if (scopeAnnotation == null) {
+        bind(type).annotatedWith(bindingAnnotation).toProvider(provider);
+      } else if (bindingAnnotation == null) {
+        bind(type).toProvider(provider).in(scopeAnnotation);
+      } else {
+        bind(type)
+            .annotatedWith(bindingAnnotation)
+            .toProvider(provider)
+            .in(scopeAnnotation);
+      }
+    }
+

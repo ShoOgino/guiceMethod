@@ -2,6 +2,6 @@
    * @see Binder#bind(Key)
    */
   protected <T> LinkedBindingBuilder<T> bind(Key<T> key) {
-    return builder.bind(key);
+    return binder.bind(key);
   }
 

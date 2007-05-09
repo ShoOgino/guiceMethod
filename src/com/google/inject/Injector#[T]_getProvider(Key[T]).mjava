@@ -1,6 +1,5 @@
   /**
-   * {@inheritDoc}
-   *
+   * Returns the provider used to obtain instances for the given injection key.
    * When feasible, it's generally preferable to avoid using this method, in
    * favor of having Guice inject your dependencies ahead of time.
    */

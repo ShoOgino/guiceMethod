@@ -1,0 +1,4 @@
+    ProviderMethodsModule(Object providers) {
+      this.providers = providers;
+    }
+
