@@ -1,0 +1,7 @@
+  public void testOfInstance() {
+    String foo = "foo";
+    Provider<String> p = Providers.of(foo);
+    assertSame(foo, p.get());
+    assertSame(foo, p.get());
+  }
+

@@ -32,6 +32,8 @@
 
     suite.addTestSuite(IntegrationTest.class);
 
+    suite.addTestSuite(ProvidersTest.class);
+
     return suite;
   }
 
