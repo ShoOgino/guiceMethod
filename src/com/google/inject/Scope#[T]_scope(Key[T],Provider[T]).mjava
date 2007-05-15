@@ -1,6 +1,6 @@
   /**
-   * Scopes a provider. The returned locator returns objects from this scope. If
-   * an object does not exist in this scope, the provider can use the given
+   * Scopes a provider. The returned provider returns objects from this scope.
+   * If an object does not exist in this scope, the provider can use the given
    * unscoped provider to retrieve one.
    *
    * <p>Scope implementations are strongly encouraged to override
