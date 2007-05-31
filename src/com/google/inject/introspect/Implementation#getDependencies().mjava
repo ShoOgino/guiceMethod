@@ -1,0 +1,6 @@
+  /**
+   * Returns a Dependency instance for each dependency this implementation has;
+   * that is, "everyone we depend on."
+   */
+  Set<Dependency<?>> getDependencies();
+

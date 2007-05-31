@@ -1,0 +1,5 @@
+  /**
+   * Returns all the keys that can be resolved by this injector.
+   */
+  Set<Key<?>> allKeys();
+

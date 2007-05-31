@@ -1,0 +1,5 @@
+  /**
+   * Returns all keys which resolve to this implementation.
+   */
+  Set<Key<? super T>> getKeys();
+

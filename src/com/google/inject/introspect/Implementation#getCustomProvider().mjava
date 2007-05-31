@@ -1,0 +1,9 @@
+  /**
+   * Returns the provider Guice will use to obtain instances for this
+   * implementation.  TODO: what about @Provides methods?
+   *
+   * @throws IllegalStateException if {@link #getProvisionStrategy()} is not
+   *     {@link ProvisionStrategy#PROVIDER}.
+   */
+  Implementation<? extends Provider<? extends T>> getCustomProvider();
+

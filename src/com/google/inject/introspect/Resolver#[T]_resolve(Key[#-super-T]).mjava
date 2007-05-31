@@ -1,0 +1,6 @@
+  /**
+   * Returns the Implementation that the given key resolves to
+   * @throws IllegalArgumentException if the key cannot be resolved
+   */
+  <T> Implementation<T> resolve(Key<? super T> key);
+

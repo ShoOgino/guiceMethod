@@ -1,0 +1,7 @@
+  /**
+   * Returns the resolver used by this injector to resolve injection requests.
+   * This method is part of the Injector Introspection API and is primarily
+   * intended for use by tools.
+   */
+  Resolver getResolver();
+
