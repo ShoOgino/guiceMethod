@@ -5,5 +5,5 @@
    * @throws IllegalStateException if {@link #getProvisionStrategy()} is not
    *     {@link ProvisionStrategy#PROVIDER}.
    */
-  Implementation<? extends Provider<? extends T>> getCustomProvider();
+  Implementation<? extends Provider<? extends T>> getProvider();
 
