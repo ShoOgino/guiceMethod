@@ -12,5 +12,15 @@
 
       System.err.println();
     }
+
+    System.err.println("Concurrent:");
+
+    for (int i2 = 0; i2 < 10; i2++) {
+      concurrentlyIterate(springFactory, "Spring:  ");
+      concurrentlyIterate(juiceFactory,  "Guice:   ");
+      concurrentlyIterate(byHandFactory, "By Hand: ");
+
+      System.err.println();
+    }
   }
 
