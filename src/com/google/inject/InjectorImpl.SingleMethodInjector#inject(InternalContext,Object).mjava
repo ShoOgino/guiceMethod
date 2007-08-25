@@ -2,14 +2,17 @@
       try {
         methodInvoker.invoke(o, getParameters(context, parameterInjectors));
       }
+      catch (IllegalAccessException e) {
+        throw new AssertionError(e);
+      }
       catch (ProvisionException e) {
+        e.addContext(context.getExternalContext());
         throw e;
       }
-      catch (IllegalAccessException e) {
-        throw new ProvisionException(context.getExternalContext(), e);
-      }
       catch (InvocationTargetException e) {
-        throw new ProvisionException(context.getExternalContext(), e);
+        Throwable cause = e.getCause() != null ? e.getCause() : e;
+        throw new ProvisionException(context.getExternalContext(), cause,
+            ErrorMessages.ERROR_INJECTING_METHOD);
       }
     }
 

@@ -7,8 +7,13 @@
       catch (ConfigurationException e) {
         throw e;
       }
-      catch (Throwable throwable) {
-        throw new ProvisionException(externalContext, throwable);
+      catch (ProvisionException provisionException) {
+        provisionException.addContext(externalContext);
+        throw provisionException;
+      }
+      catch (RuntimeException runtimeException) {
+        throw new ProvisionException(externalContext, runtimeException,
+            ErrorMessages.ERROR_INJECTING_METHOD);
       }
       finally {
         context.setExternalContext(previous);

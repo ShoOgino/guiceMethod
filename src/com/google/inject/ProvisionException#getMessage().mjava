@@ -1,0 +1,17 @@
+  @Override
+  public String getMessage() {
+    StringBuilder result = new StringBuilder();
+    result.append(errorMessage)
+        .append(NEWLINE);
+
+    for (Iterator<ExternalContext> e = contexts.iterator(); e.hasNext(); ) {
+      ExternalContext externalContext = e.next();
+      result.append(contextToSnippet(externalContext));
+      if (e.hasNext()) {
+        result.append(NEWLINE);
+      }
+    }
+
+    return result.toString();
+  }
+

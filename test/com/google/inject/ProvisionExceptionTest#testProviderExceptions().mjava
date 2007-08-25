@@ -1,0 +1,17 @@
+  public void testProviderExceptions() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(D.class).toProvider(DProvider.class);
+        }
+      }).getInstance(D.class);
+      fail();
+    }
+    catch (ProvisionException e) {
+      assertTrue(e.getCause() instanceof UnsupportedOperationException);
+      assertContains(e.getMessage(), "Error in custom provider");
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$D");
+    }
+  }
+

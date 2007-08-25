@@ -4,10 +4,10 @@
       fail("Injecting null should fail with an error");
     }
     catch (ProvisionException expected) {
-      Throwable rootCause = getRootCause(expected);
-      assertContains(rootCause.getMessage(), "Null value returned by binding");
-      assertContains(rootCause.getMessage(), "FooConstructor");
-      assertContains(rootCause.getMessage(), "is not @Nullable");
+      NullPointerException cause = (NullPointerException)expected.getCause();
+      assertContains(cause.getMessage(), "null returned by binding at");
+      assertContains(cause.getMessage(), "FooConstructor");
+      assertContains(cause.getMessage(), "is not @Nullable");
     }
   }
 

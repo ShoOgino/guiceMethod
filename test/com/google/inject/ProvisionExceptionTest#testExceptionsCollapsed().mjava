@@ -1,0 +1,23 @@
+  public void testExceptionsCollapsed() {
+    try {
+      Guice.createInjector().getInstance(A.class);
+      fail(); 
+    }
+    catch (ProvisionException e) {
+      assertTrue(e.getCause() instanceof UnsupportedOperationException);
+      assertContains(e.getMessage(), "Error injecting constructor");
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$D");
+      assertContains(e.getMessage(), "for parameter 0 at "
+          + "com.google.inject.ProvisionExceptionTest$C.setD");
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$C");
+      assertContains(e.getMessage(), "for field at "
+          + "com.google.inject.ProvisionExceptionTest$B.c");
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$B");
+      assertContains(e.getMessage(), "for parameter 0 at "
+          + "com.google.inject.ProvisionExceptionTest$A");
+    }
+  }
+

@@ -14,8 +14,8 @@
       injector.getInstance(FooField.class);
     }
     catch(ProvisionException expected) {
-      Throwable rootCause = getRootCause(expected);
-      assertContains(rootCause.getMessage(), "Null value returned by binding "
+      NullPointerException cause = (NullPointerException)expected.getCause();
+      assertContains(cause.getMessage(), "null returned by binding "
           + "at com.google.inject.NullableInjectionPointTest");
     }
   }

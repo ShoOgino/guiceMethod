@@ -1,0 +1,23 @@
+  /**
+   * Returns a snippet to include in the stacktrace message that describes the
+   * specified context.
+   */
+  private String contextToSnippet(ExternalContext externalContext) {
+    Key<?> key = externalContext.getKey();
+    Object keyDescription = ErrorMessages.convert(key);
+    Member member = externalContext.getMember();
+
+    if (member instanceof Field) {
+      return String.format(ERROR_WHILE_LOCATING_FIELD,
+          keyDescription, StackTraceElements.forMember(member));
+
+    } else if (member instanceof Method || member instanceof Constructor) {
+      return String.format(ERROR_WHILE_LOCATING_PARAMETER,
+          keyDescription, externalContext.getParameterIndex(),
+          StackTraceElements.forMember(member));
+
+    } else {
+      return String.format(ERROR_WHILE_LOCATING_VALUE, keyDescription);
+    }
+  }
+

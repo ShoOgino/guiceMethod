@@ -1,0 +1,14 @@
+  public void testMethodInjectionExceptions() {
+    try {
+      Guice.createInjector().getInstance(E.class);
+      fail();
+    }
+    catch (ProvisionException e) {
+      e.printStackTrace();
+      assertTrue(e.getCause() instanceof UnsupportedOperationException);
+      assertContains(e.getMessage(), "Error injecting method");
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$E");
+    }
+  }
+

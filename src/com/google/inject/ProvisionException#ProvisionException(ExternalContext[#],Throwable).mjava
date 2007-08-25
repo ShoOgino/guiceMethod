@@ -1,5 +1,0 @@
-  public ProvisionException(ExternalContext<?> externalContext,
-      Throwable cause) {
-    super(createMessage(externalContext), cause);
-  }
-
