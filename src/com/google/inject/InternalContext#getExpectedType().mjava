@@ -1,4 +1,4 @@
   Class<?> getExpectedType() {
-    return externalContext.getKey().getRawType();
+    return getExternalContext().getKey().getRawType();
   }
 

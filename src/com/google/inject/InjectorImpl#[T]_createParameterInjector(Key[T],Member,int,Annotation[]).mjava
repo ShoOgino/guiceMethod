@@ -6,9 +6,8 @@
       throw new MissingDependencyException(key, member);
     }
 
-    ExternalContext<T> externalContext
-        = ExternalContext.newInstance(member, index,
-        Nullability.forAnnotations(annotations), key, this);
+    ExternalContext<T> externalContext = ExternalContext.newInstance(
+        member, index, Nullability.forAnnotations(annotations), key, this);
     return new SingleParameterInjector<T>(externalContext, factory);
   }
 

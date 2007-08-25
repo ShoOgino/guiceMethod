@@ -1,6 +1,5 @@
     public void inject(InternalContext context, Object o) {
-      ExternalContext<?> previous = context.getExternalContext();
-      context.setExternalContext(externalContext);
+      context.pushExternalContext(externalContext);
       try {
         Object value = factory.get(context);
         field.set(o, value);
@@ -12,15 +11,14 @@
         throw e;
       }
       catch (ProvisionException provisionException) {
-        provisionException.addContext(externalContext);
         throw provisionException;
       }
       catch (RuntimeException runtimeException) {
-        throw new ProvisionException(externalContext, runtimeException,
-            ErrorMessages.ERROR_INJECTING_FIELD);
+        throw new ProvisionException(context.getExternalContextStack(),
+            runtimeException, ErrorMessages.ERROR_INJECTING_FIELD);
       }
       finally {
-        context.setExternalContext(previous);
+        context.popExternalContext();
       }
     }
 

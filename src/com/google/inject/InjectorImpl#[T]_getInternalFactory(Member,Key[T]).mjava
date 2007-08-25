@@ -63,9 +63,14 @@
     BindingImpl<String> stringBinding = getBinding(stringKey);
     if (stringBinding != null && stringBinding.isConstant()) {
       InternalContext context = new InternalContext(this);
-      context.setExternalContext(ExternalContext.newInstance(
+      String value;
+      context.pushExternalContext(ExternalContext.newInstance(
           member, Nullability.NOT_NULLABLE, key, this));
-      String value = stringBinding.getInternalFactory().get(context);
+      try {
+        value = stringBinding.getInternalFactory().get(context);
+      } finally {
+        context.popExternalContext();
+      }
 
       // TODO: Generalize everything below here and enable users to plug in
       // their own converters.

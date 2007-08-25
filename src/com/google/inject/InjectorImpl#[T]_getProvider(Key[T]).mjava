@@ -10,15 +10,13 @@
       public T get() {
         return callInContext(new ContextualCallable<T>() {
           public T call(InternalContext context) {
-            ExternalContext<?> previous = context.getExternalContext();
-            context.setExternalContext(
-                ExternalContext.newInstance(null, Nullability.NOT_NULLABLE,
-                    key, InjectorImpl.this));
+            context.pushExternalContext(ExternalContext.newInstance(
+                null, Nullability.NOT_NULLABLE, key, InjectorImpl.this));
             try {
               return factory.get(context);
             }
             finally {
-              context.setExternalContext(previous);
+              context.popExternalContext();
             }
           }
         });

@@ -1,7 +1,0 @@
-  ProvisionException(ExternalContext<?> externalContext,
-      Throwable cause, String errorMessage) {
-    super(errorMessage, cause);
-    this.errorMessage = errorMessage;
-    contexts.add(externalContext);
-  }
-

@@ -6,13 +6,12 @@
         throw new AssertionError(e);
       }
       catch (ProvisionException e) {
-        e.addContext(context.getExternalContext());
         throw e;
       }
       catch (InvocationTargetException e) {
         Throwable cause = e.getCause() != null ? e.getCause() : e;
-        throw new ProvisionException(context.getExternalContext(), cause,
-            ErrorMessages.ERROR_INJECTING_METHOD);
+        throw new ProvisionException(context.getExternalContextStack(),
+            cause, ErrorMessages.ERROR_INJECTING_METHOD);
       }
     }
 
