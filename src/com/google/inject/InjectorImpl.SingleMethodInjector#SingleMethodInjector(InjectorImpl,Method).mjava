@@ -7,7 +7,6 @@
         this.methodInvoker = new MethodInvoker() {
           public Object invoke(Object target, Object... parameters) throws
               IllegalAccessException, InvocationTargetException {
-            Objects.assertNoNulls(parameters);
             return method.invoke(target, parameters);
           }
         };
@@ -19,7 +18,6 @@
         this.methodInvoker = new MethodInvoker() {
           public Object invoke(Object target, Object... parameters)
           throws IllegalAccessException, InvocationTargetException {
-            Objects.assertNoNulls(parameters);
             return fastMethod.invoke(target, parameters);
           }
         };
