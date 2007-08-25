@@ -12,6 +12,7 @@
         throw new MissingDependencyException(key, field);
       }
 
-      this.externalContext = ExternalContext.newInstance(field, key, injector);
+      this.externalContext = ExternalContext.newInstance(field,
+          Nullability.forAnnotations(field.getAnnotations()), key, injector);
     }
 

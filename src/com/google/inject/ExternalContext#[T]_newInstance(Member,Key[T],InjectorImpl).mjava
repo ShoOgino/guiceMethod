@@ -1,5 +1,0 @@
-  static <T> ExternalContext<T> newInstance(
-      Member member, Key<T> key, InjectorImpl injector) {
-    return new ExternalContext<T>(member, -1, key, injector);
-  }
-

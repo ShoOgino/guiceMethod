@@ -1,0 +1,22 @@
+  public void testBindNullAsEagerSingleton() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Foo.class).toProvider(new Provider<Foo>() {
+          public Foo get() {
+            return null;
+          }
+        }).asEagerSingleton();
+      }
+    });
+    assertNull(injector.getInstance(NullableFooField.class).foo);
+
+    try {
+      injector.getInstance(FooField.class);
+    }
+    catch(ProvisionException expected) {
+      Throwable rootCause = getRootCause(expected);
+      assertContains(rootCause.getMessage(), "Null value returned by binding "
+          + "at com.google.inject.NullableInjectionPointTest");
+    }
+  }
+

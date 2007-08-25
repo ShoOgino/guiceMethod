@@ -62,9 +62,10 @@
     Key<String> stringKey = key.ofType(String.class);
     BindingImpl<String> stringBinding = getBinding(stringKey);
     if (stringBinding != null && stringBinding.isConstant()) {
-      // We don't need do pass in an InternalContext because we know this is
-      // a ConstantFactory which will not use it.
-      String value = stringBinding.getInternalFactory().get(null);
+      InternalContext context = new InternalContext(this);
+      context.setExternalContext(ExternalContext.newInstance(
+          member, Nullability.NOT_NULLABLE, key, this));
+      String value = stringBinding.getInternalFactory().get(context);
 
       // TODO: Generalize everything below here and enable users to plug in
       // their own converters.
@@ -74,7 +75,7 @@
       if (converter != null) {
         try {
           T t = converter.convert(member, key, value);
-          return new ConstantFactory<T>(t);
+          return new ConstantFactory<T>(t, defaultSource);
         }
         catch (ConstantConversionException e) {
           return handleConstantConversionError(
@@ -92,14 +93,14 @@
           return handleConstantConversionError(
               member, stringBinding, rawType, e);
         }
-        return new ConstantFactory<T>(t);
+        return new ConstantFactory<T>(t, defaultSource);
       }
 
       // Do we need a class?
       if (rawType == Class.class) {
         try {
           // TODO: Make sure we use the right classloader.
-          return new ConstantFactory<T>((T) Class.forName(value));
+          return new ConstantFactory<T>((T) Class.forName(value), defaultSource);
         }
         catch (ClassNotFoundException e) {
           return handleConstantConversionError(
@@ -133,26 +134,23 @@
     }
 
     // Last resort: inject the type itself.
-    if (member != null) {
-      // If we're injecting into a member, include it in the error messages.
-      final ErrorHandler previous = this.errorHandler;
-      this.errorHandler = new AbstractErrorHandler() {
-        public void handle(Object source, String message) {
-          previous.handle(source, "Error while injecting at "
-              + StackTraceElements.forMember(member) + ": " + message);
-        }
-      };
-      try {
-        // note: intelliJ thinks this cast is superfluous, but is it?
-        return (InternalFactory<? extends T>) getImplicitBinding(member,
-            rawType, null);
+    final ErrorHandler previous = this.errorHandler;
+    try {
+      if (member != null) {
+        // If we're injecting into a member, include it in the error messages.
+        this.errorHandler = new AbstractErrorHandler() {
+          public void handle(Object source, String message) {
+            previous.handle(source, "Error while injecting at "
+                + StackTraceElements.forMember(member) + ": " + message);
+          }
+        };
       }
-      finally {
-        this.errorHandler = previous;
-      }
+      // note: intelliJ thinks this cast is superfluous, but is it?
+      return (InternalFactory<? extends T>) getImplicitBinding(member, rawType,
+          null);
     }
-    // note: intelliJ thinks this cast is superfluous, but is it?
-    return (InternalFactory<? extends T>) getImplicitBinding(member, rawType,
-        null);
+    finally {
+      this.errorHandler = previous;
+    }
   }
 

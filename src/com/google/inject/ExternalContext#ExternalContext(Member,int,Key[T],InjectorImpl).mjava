@@ -1,8 +1,0 @@
-  public ExternalContext(Member member, int paramterIndex, Key<T> key,
-      InjectorImpl injector) {
-    this.member = member;
-    this.key = key;
-    this.injector = injector;
-    this.parameterIndex = paramterIndex;
-  }
-

@@ -1,0 +1,4 @@
+    @Inject void setFoo(@Nullable Foo foo) {
+      this.foo = foo;
+    }
+

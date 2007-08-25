@@ -1,0 +1,4 @@
+    @Inject NullableFooConstructor(@Nullable Foo foo) {
+      this.foo = foo;
+    }
+

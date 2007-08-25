@@ -1,0 +1,6 @@
+  public void testInjectNullIntoNullableConstructor() {
+    NullableFooConstructor nfc
+        = createInjector().getInstance(NullableFooConstructor.class);
+    assertNull(nfc.foo);
+  }
+

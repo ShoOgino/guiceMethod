@@ -12,7 +12,8 @@
           public T call(InternalContext context) {
             ExternalContext<?> previous = context.getExternalContext();
             context.setExternalContext(
-                ExternalContext.newInstance(null, key, InjectorImpl.this));
+                ExternalContext.newInstance(null, Nullability.NOT_NULLABLE,
+                    key, InjectorImpl.this));
             try {
               return factory.get(context);
             }

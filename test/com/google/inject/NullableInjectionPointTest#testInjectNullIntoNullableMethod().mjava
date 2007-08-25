@@ -1,0 +1,6 @@
+  public void testInjectNullIntoNullableMethod() {
+    NullableFooMethod nfm
+        = createInjector().getInstance(NullableFooMethod.class);
+    assertNull(nfm.foo);
+  }
+

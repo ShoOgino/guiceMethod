@@ -1,0 +1,13 @@
+  public void testInjectNullIntoNotNullableConstructor() {
+    try {
+      createInjector().getInstance(FooConstructor.class);
+      fail("Injecting null should fail with an error");
+    }
+    catch (ProvisionException expected) {
+      Throwable rootCause = getRootCause(expected);
+      assertContains(rootCause.getMessage(), "Null value returned by binding");
+      assertContains(rootCause.getMessage(), "FooConstructor");
+      assertContains(rootCause.getMessage(), "is not @Nullable");
+    }
+  }
+

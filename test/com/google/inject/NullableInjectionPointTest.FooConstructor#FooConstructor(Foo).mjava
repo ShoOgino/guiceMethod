@@ -1,0 +1,2 @@
+    @Inject FooConstructor(Foo foo) { }
+

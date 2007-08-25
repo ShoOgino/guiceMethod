@@ -1,0 +1,17 @@
+  public void testBindNullToInstance() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Foo.class).toInstance(null);
+      }
+    });
+    assertNull(injector.getInstance(NullableFooField.class).foo);
+
+    try {
+      injector.getInstance(FooField.class);
+    }
+    catch(ProvisionException expected) {
+      Throwable rootCause = getRootCause(expected);
+      assertContains(rootCause.getMessage(), "Null value returned by binding");
+    }
+  }
+

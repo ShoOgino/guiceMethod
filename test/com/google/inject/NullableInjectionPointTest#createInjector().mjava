@@ -1,0 +1,9 @@
+  private Injector createInjector() {
+    return Guice.createInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(Foo.class).toInstance(null);
+          }
+        });
+  }
+

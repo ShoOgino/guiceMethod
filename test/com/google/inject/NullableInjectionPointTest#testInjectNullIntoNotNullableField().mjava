@@ -1,0 +1,13 @@
+  public void testInjectNullIntoNotNullableField() {
+    try {
+      createInjector().getInstance(FooField.class);
+      fail("Injecting null should fail with an error");
+    }
+    catch (ProvisionException expected) {
+      Throwable rootCause = getRootCause(expected);
+      assertContains(rootCause.getMessage(), "Null value returned by binding");
+      assertContains(rootCause.getMessage(), "FooField.foo");
+      assertContains(rootCause.getMessage(), "is not @Nullable");
+    }
+  }
+

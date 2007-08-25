@@ -1,4 +1,4 @@
-  public T get(InternalContext ignored) {
-    return value;
+  public T get(InternalContext context) {
+    return context.sanitize(value, source);
   }
 

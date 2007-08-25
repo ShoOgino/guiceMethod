@@ -1,0 +1,9 @@
+  static Nullability forAnnotations(Annotation[] annotations) {
+    for(Annotation a : annotations) {
+      if ("Nullable".equals(a.annotationType().getSimpleName())) {
+        return NULLABLE;
+      }
+    }
+    return NOT_NULLABLE;
+  }
+

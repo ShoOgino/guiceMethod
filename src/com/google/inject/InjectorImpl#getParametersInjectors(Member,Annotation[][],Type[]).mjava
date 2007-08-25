@@ -18,7 +18,8 @@
       Annotation[] parameterAnnotations = annotationsIterator.next();
       Key<?> key = Key.get(
           parameterType, member, parameterAnnotations, errorHandler);
-      parameterInjectors[index] = createParameterInjector(key, member, index);
+      parameterInjectors[index] = createParameterInjector(key, member, index,
+          annotations[index]);
       index++;
     }
 

@@ -1,0 +1,5 @@
+  public ConstantFactory(T value, Object source) {
+    this.value = value;
+    this.source = source;
+  }
+
