@@ -1,9 +1,0 @@
-  /**
-   * Dereferences a set of key references.
-   */
-  Set<K> dereferenceKeySet(Set keyReferences) {
-    return keyReferenceType == STRONG
-        ? keyReferences
-        : dereferenceCollection(keyReferenceType, keyReferences, new HashSet());
-  }
-

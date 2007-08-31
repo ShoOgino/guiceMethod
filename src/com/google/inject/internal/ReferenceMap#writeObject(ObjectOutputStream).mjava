@@ -1,4 +1,4 @@
-  private void writeObject(ObjectOutputStream out) throws IOException  {
+  private void writeObject(ObjectOutputStream out) throws IOException {
     out.defaultWriteObject();
     out.writeInt(size());
     for (Map.Entry<Object, Object> entry : delegate.entrySet()) {

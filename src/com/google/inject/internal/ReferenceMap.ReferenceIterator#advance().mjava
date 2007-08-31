@@ -1,0 +1,13 @@
+    private void advance() {
+      while (i.hasNext()) {
+        Map.Entry<K, V> entry = dereferenceEntry(i.next());
+        if (entry != null) {
+          nextEntry = entry;
+          return;
+        }
+      }
+
+      // nothing left
+      nextEntry = null;
+    }
+

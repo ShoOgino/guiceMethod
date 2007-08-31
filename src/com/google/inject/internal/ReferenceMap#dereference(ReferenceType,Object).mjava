@@ -1,7 +1,5 @@
-  /**
-   * Returns the refererent for reference given its reference type.
-   */
-  Object dereference(ReferenceType referenceType, Object reference) {
+  /** Returns the refererent for reference given its reference type. */
+  private Object dereference(ReferenceType referenceType, Object reference) {
     return referenceType == STRONG ? reference : ((Reference) reference).get();
   }
 

@@ -1,7 +1,5 @@
   V internalGet(K key) {
     Object valueReference = delegate.get(makeKeyReferenceAware(key));
-    return valueReference == null
-        ? null
-        : (V) dereferenceValue(valueReference);
+    return dereferenceValue(valueReference);
   }
 

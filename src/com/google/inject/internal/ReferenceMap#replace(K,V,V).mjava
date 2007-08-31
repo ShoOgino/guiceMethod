@@ -3,10 +3,8 @@
     Object keyReference = referenceKey(key);
 
     Object referenceAwareOldValue = makeValueReferenceAware(oldValue);
-    return delegate.replace(
-      keyReference,
-      referenceAwareOldValue,
-      referenceValue(keyReference, newValue)
+    return delegate.replace(keyReference, referenceAwareOldValue,
+        referenceValue(keyReference, newValue)
     );
   }
 

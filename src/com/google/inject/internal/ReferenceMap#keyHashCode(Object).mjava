@@ -1,4 +1,4 @@
-  static int keyHashCode(Object key) {
+  private static int keyHashCode(Object key) {
     return System.identityHashCode(key);
   }
 

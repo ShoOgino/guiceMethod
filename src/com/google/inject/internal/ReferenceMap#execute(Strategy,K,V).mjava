@@ -1,12 +1,8 @@
-  V execute(Strategy strategy, K key, V value) {
+  private V execute(Strategy strategy, K key, V value) {
     ensureNotNull(key, value);
     Object keyReference = referenceKey(key);
-    Object valueReference = strategy.execute(
-      this,
-      keyReference,
-      referenceValue(keyReference, value)
+    return (V) strategy.execute(
+        this, keyReference, referenceValue(keyReference, value)
     );
-    return valueReference == null ? null
-        : (V) dereferenceValue(valueReference);
   }
 

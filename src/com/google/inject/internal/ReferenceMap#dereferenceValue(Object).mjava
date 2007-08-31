@@ -1,7 +1,16 @@
-  /**
-   * Converts a reference to a value.
-   */
+  /** Converts a reference to a value. */
   V dereferenceValue(Object o) {
-    return (V) dereference(valueReferenceType, o);
+    if (o == null) {
+      return null;
+    }
+    Object value = dereference(valueReferenceType, o);
+    if (o instanceof InternalReference) {
+      InternalReference ref = (InternalReference) o;
+      if (value == null) {
+        // old value was garbage collected
+        ref.finalizeReferent();
+      }
+    }
+    return (V) value;
   }
 

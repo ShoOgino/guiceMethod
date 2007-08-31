@@ -1,0 +1,4 @@
+    public void remove() {
+      ReferenceMap.this.remove(lastReturned.getKey());
+    }
+

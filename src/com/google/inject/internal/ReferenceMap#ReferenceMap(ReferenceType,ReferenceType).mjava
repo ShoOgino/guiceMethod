@@ -5,8 +5,8 @@
    * @param keyReferenceType key reference type
    * @param valueReferenceType value reference type
    */
-  public ReferenceMap(ReferenceType keyReferenceType,
-      ReferenceType valueReferenceType) {
+  public ReferenceMap(
+      ReferenceType keyReferenceType, ReferenceType valueReferenceType) {
     ensureNotNull(keyReferenceType, valueReferenceType);
 
     if (keyReferenceType == ReferenceType.PHANTOM

@@ -1,4 +1,5 @@
-    public V setValue(V value) {
-      return put(key, value);
+    public V setValue(V newValue) {
+      value = newValue;
+      return put(key, newValue);
     }
 

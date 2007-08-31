@@ -1,0 +1,17 @@
+  /**
+   * Returns {@code true} if the specified value reference has been garbage
+   * collected. The value behind the reference is also passed in, rather than
+   * queried inside this method, to ensure that the return statement of this
+   * method will still hold true after it has returned (that is, a value
+   * reference exists outside of this method which will prevent that value from
+   * being garbage collected).
+   *
+   * @param valueReference the value reference to be tested
+   * @param value the object referenced by {@code valueReference}
+   * @return {@code true} if {@code valueReference} is non-null and {@code
+   *     value} is null
+   */
+  private static boolean isExpired(Object valueReference, Object value) {
+    return (valueReference != null) && (value == null);
+  }
+
