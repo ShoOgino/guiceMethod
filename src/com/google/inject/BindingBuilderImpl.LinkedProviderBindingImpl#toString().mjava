@@ -1,6 +1,6 @@
     @Override
     public String toString() {
-      return new ToStringBuilder(ProviderBinding.class)
+      return new ToStringBuilder(LinkedProviderBinding.class)
           .add("key", key)
           .add("provider", providerKey)
           .add("scope", scope)

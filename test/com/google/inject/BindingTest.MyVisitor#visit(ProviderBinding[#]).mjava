@@ -1,6 +1,0 @@
-    public void visit(ProviderBinding<?> providerBinding) {
-      providerVisited = true;
-      assertEquals(FooProvider.class,
-          providerBinding.getProviderBinding().getKey().getRawType());
-    }
-

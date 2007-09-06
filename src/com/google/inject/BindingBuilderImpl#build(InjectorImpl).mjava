@@ -25,7 +25,7 @@
 
       // Provider binding.
       if (this.providerKey != null) {
-        return new ProviderBindingImpl<T>(
+        return new LinkedProviderBindingImpl<T>(
             injector, key, source, scopedFactory, scope, providerKey);
       }
 
