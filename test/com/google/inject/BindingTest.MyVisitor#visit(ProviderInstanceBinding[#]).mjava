@@ -1,0 +1,6 @@
+    public void visit(ProviderInstanceBinding<?> providerInstanceBinding) {
+      providerInstanceVisited = true;
+      assertTrue(providerInstanceBinding.getProvider().get() instanceof Foo);
+      assertEquals(Scopes.SINGLETON, providerInstanceBinding.getScope());
+    }
+

@@ -1,0 +1,8 @@
+    InvalidBinding(InjectorImpl injector, Key<T> key, Object source) {
+      super(injector, key, source, new InternalFactory<T>() {
+        public T get(InternalContext context) {
+          throw new AssertionError();
+        }
+      }, Scopes.NO_SCOPE);
+    }
+

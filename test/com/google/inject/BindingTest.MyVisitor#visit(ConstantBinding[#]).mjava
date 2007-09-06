@@ -1,0 +1,7 @@
+    public void visit(ConstantBinding<?> constantBinding) {
+      constantVisited = true;
+      assertEquals(Key.get(String.class, Names.named("name")),
+          constantBinding.getKey());
+      assertEquals("Bob", constantBinding.getValue());
+    }
+

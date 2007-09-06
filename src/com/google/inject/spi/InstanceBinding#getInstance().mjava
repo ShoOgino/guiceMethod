@@ -1,0 +1,5 @@
+  /**
+   * Gets the instance associated with this binding.
+   */
+  T getInstance();
+

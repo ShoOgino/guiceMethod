@@ -1,0 +1,5 @@
+  /**
+   * Visits a constant binding.
+   */
+  void visit(ConstantBinding<? extends T> binding);
+

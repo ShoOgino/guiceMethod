@@ -1,8 +1,9 @@
   public String toString() {
-    return new ToStringBuilder(BindingImpl.class)
+    return new ToStringBuilder(Binding.class)
         .add("key", key)
-        .add("source", source)
         .add("provider", internalFactory)
+        .add("scope", scope)
+        .add("source", source)
         .toString();
   }
 

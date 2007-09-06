@@ -1,5 +1,0 @@
-  /**
-   * Returns all the implementations known to this injector.
-   */
-  Set<Implementation<?>> resolveAll();
-

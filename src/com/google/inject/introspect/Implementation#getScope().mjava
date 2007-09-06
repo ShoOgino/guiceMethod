@@ -1,5 +1,0 @@
-  /**
-   * Returns the scope applied to this implementation, or null if there is none.
-   */
-  Scope getScope();
-

@@ -1,0 +1,7 @@
+  /**
+   * Visits a binding of unknown type. This method will be called for internal
+   * bindings and for future binding types which your visitor doesn't know
+   * about.
+   */
+  void visitUnknown(Binding<? extends T> binding);
+

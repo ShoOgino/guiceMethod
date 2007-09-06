@@ -1,6 +1,0 @@
-  /**
-   * Returns the strategy Guice will use to provide instances for this
-   * implementation.
-   */
-  ProvisionStrategy getProvisionStrategy();
-

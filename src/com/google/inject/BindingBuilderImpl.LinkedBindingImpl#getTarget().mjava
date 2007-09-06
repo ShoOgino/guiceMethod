@@ -1,0 +1,4 @@
+    public Binding<? extends T> getTarget() {
+      return injector.getBinding(targetKey);
+    }
+

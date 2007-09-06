@@ -1,0 +1,4 @@
+    public Binding<? extends Provider<? extends T>> getProviderBinding() {
+      return injector.getBinding(providerKey);
+    }
+

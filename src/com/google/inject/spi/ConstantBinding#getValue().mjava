@@ -1,0 +1,5 @@
+  /**
+   * Gets the constant value associated with this binding.
+   */
+  T getValue();
+

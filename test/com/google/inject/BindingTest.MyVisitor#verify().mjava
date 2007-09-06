@@ -1,0 +1,10 @@
+    void verify() {
+      assertTrue(linkedVisited);
+      assertTrue(sawRunnable);
+      assertTrue(providerInstanceVisited);
+      assertTrue(providerVisited);
+      assertTrue(classVisitied);
+      assertTrue(constantVisited);
+      assertTrue(unknownVisited);
+    }
+

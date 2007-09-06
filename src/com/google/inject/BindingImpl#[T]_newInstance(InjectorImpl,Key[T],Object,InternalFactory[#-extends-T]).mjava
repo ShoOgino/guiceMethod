@@ -1,5 +1,0 @@
-  static <T> BindingImpl<T> newInstance(InjectorImpl injector, Key<T> key,
-      Object source, InternalFactory<? extends T> internalFactory) {
-    return new BindingImpl<T>(injector, key, source, internalFactory);
-  }
-

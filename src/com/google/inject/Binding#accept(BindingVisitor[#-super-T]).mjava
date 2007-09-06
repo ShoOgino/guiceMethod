@@ -1,0 +1,8 @@
+  /**
+   * Accepts a binding visitor. Invokes the visitor method specific to this
+   * binding's type.
+   *
+   * @param visitor to call back on
+   */
+  void accept(BindingVisitor<? super T> visitor);
+

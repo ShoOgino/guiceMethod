@@ -1,9 +1,0 @@
-  /**
-   * Returns the constructor Guice will use to obtain instances for this
-   * implementation.
-   *
-   * @throws IllegalStateException if {@link #getProvisionStrategy()} is not
-   *     {@link ProvisionStrategy#CONSTRUCTOR}.
-   */
-  Constructor<? extends T> getInjectableConstructor();
-

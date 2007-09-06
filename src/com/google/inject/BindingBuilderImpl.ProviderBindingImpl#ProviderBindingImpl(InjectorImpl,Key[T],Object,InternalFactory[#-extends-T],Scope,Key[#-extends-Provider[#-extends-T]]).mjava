@@ -1,0 +1,7 @@
+    ProviderBindingImpl(InjectorImpl injector, Key<T> key, Object source,
+        InternalFactory<? extends T> internalFactory, Scope scope,
+        Key<? extends Provider<? extends T>> providerKey) {
+      super(injector, key, source, internalFactory, scope);
+      this.providerKey = providerKey;
+    }
+

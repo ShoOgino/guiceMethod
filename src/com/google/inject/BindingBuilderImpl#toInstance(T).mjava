@@ -3,6 +3,8 @@
     this.instance = instance;
     this.factory = new ConstantFactory<T>(instance, source);
     registerInstanceForInjection(instance);
+
+    // TODO: I don't think this can happen anymore.
     if (this.scope != null) {
       binder.addError(source, ErrorMessages.SINGLE_INSTANCE_AND_SCOPE);
     }

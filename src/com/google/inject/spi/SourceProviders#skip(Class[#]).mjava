@@ -7,6 +7,7 @@
    * <p>Skipping only takes place after this method is called.
    */
   public synchronized static void skip(Class<?> clazz) {
+    // Poor man's copy-on-write hash set.
     Set<String> copy = new HashSet<String>();
     copy.addAll(skippedClassNames);
     copy.add(clazz.getName());

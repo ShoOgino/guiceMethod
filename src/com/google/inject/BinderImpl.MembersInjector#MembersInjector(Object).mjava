@@ -1,0 +1,4 @@
+    MembersInjector(Object o) {
+      this.o = o;
+    }
+

@@ -1,0 +1,29 @@
+    protected void configure() {
+      // Linked.
+      bind(Object.class).to(Runnable.class).in(Scopes.SINGLETON);
+
+      // Instance.
+      bind(Runnable.class).toInstance(new Runnable() {
+        public void run() {}
+      });
+
+      // Provider instance.
+      bind(Foo.class).toProvider(new Provider<Foo>() {
+        public Foo get() {
+          return new Foo();
+        }
+      }).in(Scopes.SINGLETON);
+
+      // Provider.
+      bind(Foo.class)
+          .annotatedWith(Names.named("provider"))
+          .toProvider(FooProvider.class);
+      bind(FooProvider.class);
+
+      // Class.
+      bind(Bar.class).in(Scopes.SINGLETON);
+
+      // Constant.
+      bindConstant().annotatedWith(Names.named("name")).to("Bob");
+    }
+

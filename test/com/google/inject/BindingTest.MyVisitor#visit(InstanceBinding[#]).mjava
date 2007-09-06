@@ -1,0 +1,7 @@
+    public void visit(InstanceBinding<?> instanceBinding) {
+      if (instanceBinding.getInstance() instanceof Runnable) {
+        sawRunnable = true;
+      }
+      assertEquals(Scopes.NO_SCOPE, instanceBinding.getScope());
+    }
+

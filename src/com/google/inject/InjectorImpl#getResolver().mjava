@@ -1,4 +1,0 @@
-  public Resolver getResolver() {
-    throw new UnsupportedOperationException();
-  }
-

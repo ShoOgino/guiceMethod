@@ -1,0 +1,9 @@
+    @Override
+    public String toString() {
+      return new ToStringBuilder(InstanceBinding.class)
+          .add("key", key)
+          .add("instance", instance)
+          .add("source", source)
+          .toString();
+    }
+

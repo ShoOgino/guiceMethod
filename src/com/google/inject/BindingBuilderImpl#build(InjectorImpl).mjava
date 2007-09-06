@@ -1,0 +1,78 @@
+  BindingImpl<T> build(InjectorImpl injector) {
+    if (this.factory != null) {
+      Scope scope = this.scope == null ? Scopes.NO_SCOPE : this.scope;
+
+      InternalFactory<? extends T> scopedFactory
+          = Scopes.scope(this.key, injector, this.factory, scope);
+
+      // Instance binding.
+      if (instance != null) {
+        return new InstanceBindingImpl<T>(
+            injector, key, source, scopedFactory, instance);
+      }
+
+      // Linked binding.
+      if (this.targetKey != null) {
+        return new LinkedBindingImpl<T>(
+            injector, key, source, scopedFactory, scope, targetKey);
+      }
+
+      // Provider instance binding.
+      if (this.providerInstance != null) {
+        return new ProviderInstanceBindingImpl<T>(
+            injector, key, source, scopedFactory, scope, providerInstance);
+      }
+
+      // Provider binding.
+      if (this.providerKey != null) {
+        return new ProviderBindingImpl<T>(
+            injector, key, source, scopedFactory, scope, providerKey);
+      }
+
+      // Unknown binding type. We just have a raw internal factory.
+      // This happens with the Injector binding, for example.
+      return new UnknownBindingImpl<T>(injector, key, source, scopedFactory);
+
+    } else {
+      // If we're here, the type we bound to is also the implementation.
+      // Example: bind(FooImpl.class).in(Scopes.SINGLETON);
+
+      Class<?> rawType = key.getRawType();
+
+      // Error: Inner class.
+      if (Classes.isInnerClass(rawType)) {
+        injector.errorHandler.handle(source,
+            ErrorMessages.CANNOT_INJECT_INNER_CLASS, rawType);
+        return invalidBinding(injector);
+      }
+
+      // Error: Missing implementation.
+      // Example: bind(Runnable.class);
+      // Example: bind(Date.class).annotatedWith(Red.class);
+      if (key.hasAnnotationType() || !Classes.isConcrete(rawType)) {
+        injector.errorHandler.handle(source,
+            ErrorMessages.MISSING_IMPLEMENTATION);
+        return invalidBinding(injector);
+      }
+
+      final ImplicitImplementation<T> implicitImplementation =
+          new ImplicitImplementation<T>(key, scope, source);
+      binder.creationListeners.add(implicitImplementation);
+
+      // We need to record the scope. If it's singleton, we'll preload in prod.
+      if (this.scope == null) {
+        // We can ignore errors because the error will already have been
+        // recorded.
+        this.scope = Scopes.getScopeForType(
+            key.getTypeLiteral().getRawType(), binder.scopes, IGNORE_ERRORS);
+
+        if (this.scope == null) {
+          this.scope = Scopes.NO_SCOPE;
+        }
+      }
+
+      return new ClassBindingImpl<T>(injector, key, source,
+          implicitImplementation, scope);
+    }
+  }
+

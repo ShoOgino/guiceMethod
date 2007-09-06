@@ -1,5 +1,8 @@
   @SuppressWarnings("unchecked")
   public <T> BindingImpl<T> getBinding(Key<T> key) {
+    // TODO: Create binding objects for implicit bindings on the fly. This
+    // includes classes, Provider<X>, converted constants, etc.
+    
     return (BindingImpl<T>) bindings.get(key);
   }
 

@@ -1,10 +1,6 @@
   private <T> void createBinding(BindingBuilderImpl<T> builder,
       List<ContextualCallable<Void>> preloaders) {
-    final Key<T> key = builder.getKey();
-    final InternalFactory<? extends T> factory
-        = builder.getInternalFactory(injector);
-    BindingImpl<?> binding
-        = BindingImpl.newInstance(injector, key, builder.getSource(), factory);
+    BindingImpl<T> binding = builder.build(injector);
 
     putBinding(binding);
 
@@ -12,7 +8,8 @@
     boolean preload = stage == Stage.PRODUCTION;
     if (builder.isSingletonScoped()) {
       if (preload || builder.shouldPreload()) {
-        preloaders.add(new BindingPreloader(key, factory));
+        preloaders.add(
+            new BindingPreloader(binding.key, binding.internalFactory));
       }
     }
     else {

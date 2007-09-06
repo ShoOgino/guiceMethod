@@ -1,0 +1,4 @@
+    void injectMembers(InjectorImpl injector) {
+      injector.injectMembers(o);
+    }    
+

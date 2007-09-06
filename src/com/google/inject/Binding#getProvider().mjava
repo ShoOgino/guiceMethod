@@ -1,5 +1,6 @@
   /**
-   * Returns the provider guice uses to fulfill requests for this binding.
+   * Returns the scoped provider guice uses to fulfill requests for this
+   * binding.
    */
   Provider<T> getProvider();
 

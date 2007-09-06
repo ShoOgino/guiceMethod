@@ -1,0 +1,6 @@
+    InstanceBindingImpl(InjectorImpl injector, Key<T> key, Object source,
+        InternalFactory<? extends T> internalFactory, T instance) {
+      super(injector, key, source, internalFactory, Scopes.NO_SCOPE);
+      this.instance = instance;
+    }
+

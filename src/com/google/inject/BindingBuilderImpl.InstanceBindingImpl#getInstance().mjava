@@ -1,0 +1,4 @@
+    public T getInstance() {
+      return this.instance;
+    }
+

@@ -7,9 +7,10 @@
    * @throws IllegalStateException if called more than once
    */
   Injector createInjector() throws CreationException {
-    stopwatch.resetAndLog(logger, "Configuration");
+    stopwatch.resetAndLog(logger, "Configuration (running the modules)");
 
-    Map<Key<?>, BindingImpl<?>> bindings = new HashMap<Key<?>, BindingImpl<?>>();
+    Map<Key<?>, BindingImpl<?>> bindings
+        = new HashMap<Key<?>, BindingImpl<?>>();
     injector = new InjectorImpl(
         proxyFactoryBuilder.create(), bindings, scopes);
     injector.setErrorHandler(configurationErrorHandler);
@@ -40,6 +41,12 @@
 
     stopwatch.resetAndLog(logger, "Static validation");
 
+    for (MembersInjector membersInjector : membersInjectors) {
+      membersInjector.checkDependencies(injector);
+    }
+
+    stopwatch.resetAndLog(logger, "Instance member validation");
+
     // Blow up if we encountered errors.
     if (!errorMessages.isEmpty()) {
       throw new CreationException(errorMessages);
@@ -47,6 +54,13 @@
 
     // Switch to runtime error handling.
     injector.setErrorHandler(new RuntimeErrorHandler());
+
+    // If we're in the tool stage, stop here. Don't eagerly inject or load
+    // anything.
+    if (stage == Stage.TOOL) {
+      // TODO: Wrap this and prevent usage of anything besides getBindings().
+      return injector;
+    }
 
     // Inject static members.
     for (StaticInjection staticInjection : staticInjections) {
@@ -56,8 +70,8 @@
     stopwatch.resetAndLog(logger, "Static member injection");
 
     // Inject pre-existing instances.
-    for (CreationListener instanceInjector : instanceInjectors) {
-      instanceInjector.notify(injector);
+    for (MembersInjector membersInjector : membersInjectors) {
+      membersInjector.injectMembers(injector);
     }
 
     stopwatch.resetAndLog(logger, "Instance injection");

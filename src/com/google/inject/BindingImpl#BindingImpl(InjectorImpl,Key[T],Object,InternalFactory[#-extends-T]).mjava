@@ -1,8 +1,0 @@
-  BindingImpl(InjectorImpl injector, Key<T> key, Object source,
-      InternalFactory<? extends T> internalFactory) {
-    this.injector = injector;
-    this.key = key;
-    this.source = source;
-    this.internalFactory = internalFactory;
-  }
-

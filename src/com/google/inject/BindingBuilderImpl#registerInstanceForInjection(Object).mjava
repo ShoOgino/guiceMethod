@@ -1,19 +1,4 @@
   void registerInstanceForInjection(final Object o) {
-    binder.instanceInjectors.add(new CreationListener() {
-      public void notify(InjectorImpl injector) {
-        try {
-          injector.injectMembers(o);
-        }
-        catch (Exception e) {
-          String className = e.getClass().getSimpleName();
-          String message = ErrorMessages.getRootMessage(e);
-          String logMessage = String.format(
-              ErrorMessages.ERROR_INJECTING_MEMBERS, o, message);
-          logger.log(Level.INFO, logMessage, e);
-          binder.addError(source, ErrorMessages.ERROR_INJECTING_MEMBERS_SEE_LOG,
-              className, o, message);
-        }
-      }
-    });
+    binder.membersInjectors.add(new MembersInjector(o));
   }
 

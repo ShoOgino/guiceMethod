@@ -1,0 +1,5 @@
+  /**
+   * Gets the raw (unscoped) provider instance associated with this binding.
+   */
+  Provider<? extends T> getProviderInstance();
+

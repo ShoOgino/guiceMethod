@@ -1,0 +1,5 @@
+    UnknownBindingImpl(InjectorImpl injector, Key<T> key, Object source,
+        InternalFactory<? extends T> internalFactory) {
+      super(injector, key, source, internalFactory, Scopes.NO_SCOPE);
+    }
+

@@ -1,0 +1,6 @@
+    @SuppressWarnings("unchecked")
+    public Class<T> getBoundClass() {
+      // T should always be the class itself.
+      return (Class<T>) key.getRawType();
+    }
+

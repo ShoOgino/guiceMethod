@@ -9,6 +9,7 @@
         new FactoryProxy<T>(key, targetKey, source);
     this.factory = factoryProxy;
     binder.creationListeners.add(factoryProxy);
+    this.targetKey = targetKey;
     return this;
   }
 
