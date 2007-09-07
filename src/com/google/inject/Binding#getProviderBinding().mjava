@@ -1,0 +1,5 @@
+  /**
+   * Gets the synthetic binding to this binding's Provider.
+   */
+  ProviderBinding<T> getProviderBinding();
+

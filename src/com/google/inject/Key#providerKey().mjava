@@ -1,0 +1,7 @@
+  /**
+   * Gets the key of this key's provider.
+   */
+  Key<Provider<T>> providerKey() {
+    return ofType(typeLiteral.providerType());
+  }
+

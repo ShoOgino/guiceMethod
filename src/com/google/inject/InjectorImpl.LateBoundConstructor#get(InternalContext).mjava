@@ -1,6 +1,8 @@
     @SuppressWarnings("unchecked")
     public T get(InternalContext context) {
-      // We know this cast is safe (assuming getConstructor() is safe).
+      // This may not actually be safe because it could return a super type
+      // of T (if that's all the client needs), but it should be OK in
+      // practice thanks to the wonders of erasure.
       return (T) constructorInjector.construct(
           context, context.getExpectedType());
     }

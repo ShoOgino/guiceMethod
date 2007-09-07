@@ -1,0 +1,4 @@
+  public <T> Binding<T> getBinding(Class<T> type) {
+    return getBinding(Key.get(type));
+  }
+

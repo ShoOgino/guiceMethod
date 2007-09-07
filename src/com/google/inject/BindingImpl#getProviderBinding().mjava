@@ -1,0 +1,7 @@
+  @SuppressWarnings("unchecked")
+  public ProviderBinding<T> getProviderBinding() {
+    // ProviderBinding is the only type of binding that can be generated for
+    // a Provider<T>.
+    return (ProviderBinding<T>) injector.getBinding(key.providerKey());
+  }
+
