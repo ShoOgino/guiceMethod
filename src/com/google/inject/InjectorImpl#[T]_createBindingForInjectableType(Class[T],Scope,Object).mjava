@@ -3,7 +3,7 @@
    * a scope on the type if none is specified.
    */
   <T> BindingImpl<T> createBindingForInjectableType(Class<T> type,
-      Scope scope, Object source, boolean isJit) {
+      Scope scope, Object source) {
     // We can't inject abstract classes.
     // TODO: Method interceptors could actually enable us to implement
     // abstract types. Should we remove this restriction?
@@ -32,12 +32,12 @@
     BindingImpl<T> binding
         = new ClassBindingImpl<T>(this, key, source, scopedFactory, scope);
 
-    if (isJit) {
-      // Put the partially constructed binding in the map a little early. This
-      // enables us to handle circular dependencies.
-      // Example: FooImpl -> BarImpl -> FooImpl.
-      jitBindings.put(key, binding);
-    }
+    // Put the partially constructed binding in the map a little early. This
+    // enables us to handle circular dependencies.
+    // Example: FooImpl -> BarImpl -> FooImpl.
+    // Note: We don't need to synchronize on jitBindings during injector
+    // creation.
+    jitBindings.put(key, binding);
 
     try {
       lateBoundConstructor.bind(this, type);
@@ -45,16 +45,12 @@
     }
     catch (RuntimeException e) {
       // Clean up state.
-      if (isJit) {
-        jitBindings.remove(key);
-      }
+      jitBindings.remove(key);
       throw e;
     }
     catch (Throwable t) {
       // Clean up state.
-      if (isJit) {
-        jitBindings.remove(key);
-      }
+      jitBindings.remove(key);
       throw new AssertionError(t);
     }
   }

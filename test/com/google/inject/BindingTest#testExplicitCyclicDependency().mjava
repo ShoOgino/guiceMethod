@@ -1,0 +1,9 @@
+  public void testExplicitCyclicDependency() {
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(A.class);
+        bind(B.class);
+      }
+    }).getInstance(A.class);
+  }
+

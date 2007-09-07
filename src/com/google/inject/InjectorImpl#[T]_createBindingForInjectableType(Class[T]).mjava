@@ -4,6 +4,6 @@
    */
   <T> BindingImpl<T> createBindingForInjectableType(Class<T> type) {
     return createBindingForInjectableType(type, null,
-        SourceProviders.defaultSource(), true);
+        SourceProviders.defaultSource());
   }
 
