@@ -1,5 +1,7 @@
   /**
-   * Gets all explicit bindings.  This method is part of the Injector
+   * Gets all explicit bindings.
+   *
+   * <p>This method is part of the Injector
    * Introspection API and is primarily intended for use by tools.
    */
   Map<Key<?>, Binding<?>> getBindings();

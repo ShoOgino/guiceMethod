@@ -1,4 +1,0 @@
-    public void accept(BindingVisitor<? super T> visitor) {
-      visitor.visit(this);
-    }
-

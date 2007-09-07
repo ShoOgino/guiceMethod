@@ -1,5 +1,0 @@
-  ConstantConversionException(Member member, Key<?> key, String value,
-      String reason) {
-    super(createMessage(value, key, member, reason));
-  }
-

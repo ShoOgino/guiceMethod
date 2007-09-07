@@ -6,7 +6,7 @@
 
     // Register to preload if necessary.
     boolean preload = stage == Stage.PRODUCTION;
-    if (builder.isSingletonScoped()) {
+    if (binding.getScope() == Scopes.SINGLETON) {
       if (preload || builder.shouldPreload()) {
         preloaders.add(
             new BindingPreloader(binding.key, binding.internalFactory));

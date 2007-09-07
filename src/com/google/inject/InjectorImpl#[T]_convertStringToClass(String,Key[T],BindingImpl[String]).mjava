@@ -1,0 +1,15 @@
+  private <T> BindingImpl<T> convertStringToClass(String stringValue, Key<T> key,
+      BindingImpl<String> stringBinding) {
+    try {
+      // TODO: Make sure we use the right classloader.
+      // This cast is safe. We know T is Class.
+      @SuppressWarnings("unchecked")
+      T clazz = (T) Class.forName(stringValue);
+      return new ConvertedConstantBindingImpl<T>(
+          this, key, clazz, stringBinding);
+    }
+    catch (ClassNotFoundException e) {
+      return handleConstantConversionError(stringBinding, key, e);
+    }
+  }
+

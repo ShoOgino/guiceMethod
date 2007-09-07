@@ -9,12 +9,11 @@
 
       // Character doesn't follow the same pattern.
       Converter<Character> characterConverter = new Converter<Character>() {
-        public Character convert(Member member, Key<Character> key,
+        public Character convert(Key<Character> key,
             String value) throws ConstantConversionException {
           value = value.trim();
           if (value.length() != 1) {
-            throw new ConstantConversionException(member, key, value,
-                "Length != 1.");
+            throw new ConstantConversionException(key, value, "Length != 1.");
           }
           return value.charAt(0);
         }

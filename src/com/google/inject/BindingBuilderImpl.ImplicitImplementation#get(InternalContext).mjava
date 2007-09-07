@@ -1,4 +1,0 @@
-    public T get(InternalContext context) {
-      return implicitFactory.get(context);
-    }
-

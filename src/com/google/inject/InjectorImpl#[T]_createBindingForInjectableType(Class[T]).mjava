@@ -1,0 +1,9 @@
+  /**
+   * Creates a binding for an injectable type. Gets the scope from an
+   * annotation on the type.
+   */
+  <T> BindingImpl<T> createBindingForInjectableType(Class<T> type) {
+    return createBindingForInjectableType(type, null,
+        SourceProviders.defaultSource(), true);
+  }
+

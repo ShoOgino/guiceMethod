@@ -1,0 +1,8 @@
+  /**
+   * Gets context for the current thread. Returns null if no context has been
+   * set up.
+   */
+  InternalContext getContext() {
+    return localContext.get()[0];
+  }
+

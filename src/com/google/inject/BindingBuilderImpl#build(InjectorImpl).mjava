@@ -29,50 +29,37 @@
             injector, key, source, scopedFactory, scope, providerKey);
       }
 
-      // Unknown binding type. We just have a raw internal factory.
-      // This happens with the Injector binding, for example.
-      return new UnknownBindingImpl<T>(injector, key, source, scopedFactory);
-
+      throw new AssertionError();
     } else {
       // If we're here, the type we bound to is also the implementation.
       // Example: bind(FooImpl.class).in(Scopes.SINGLETON);
 
-      Class<?> rawType = key.getRawType();
-
-      // Error: Inner class.
-      if (Classes.isInnerClass(rawType)) {
-        injector.errorHandler.handle(source,
-            ErrorMessages.CANNOT_INJECT_INNER_CLASS, rawType);
-        return invalidBinding(injector);
-      }
+      Type type = key.getTypeLiteral().getType();
 
       // Error: Missing implementation.
-      // Example: bind(Runnable.class);
       // Example: bind(Date.class).annotatedWith(Red.class);
-      if (key.hasAnnotationType() || !Classes.isConcrete(rawType)) {
+      // We can't assume abstract types aren't injectable. They may have an
+      // @ImplementedBy annotation or something.
+      if (key.hasAnnotationType() || !(type instanceof Class<?>)) {
         injector.errorHandler.handle(source,
             ErrorMessages.MISSING_IMPLEMENTATION);
         return invalidBinding(injector);
       }
 
-      final ImplicitImplementation<T> implicitImplementation =
-          new ImplicitImplementation<T>(key, scope, source);
-      binder.creationListeners.add(implicitImplementation);
+      // This cast is safe after the preceeding check.
+      // noinspection unchecked
+      Class<T> clazz = (Class<T>) type;
 
-      // We need to record the scope. If it's singleton, we'll preload in prod.
-      if (this.scope == null) {
-        // We can ignore errors because the error will already have been
-        // recorded.
-        this.scope = Scopes.getScopeForType(
-            key.getTypeLiteral().getRawType(), binder.scopes, IGNORE_ERRORS);
+      BindingImpl<T> binding = injector.createBindingForInjectableType(
+          clazz, scope, source, false);
 
-        if (this.scope == null) {
-          this.scope = Scopes.NO_SCOPE;
-        }
+      if (binding == null) {
+        injector.errorHandler.handle(source,
+            ErrorMessages.CANNOT_INJECT_ABSTRACT_TYPE, clazz);
+        return invalidBinding(injector);
       }
 
-      return new ClassBindingImpl<T>(injector, key, source,
-          implicitImplementation, scope);
+      return binding;
     }
   }
 

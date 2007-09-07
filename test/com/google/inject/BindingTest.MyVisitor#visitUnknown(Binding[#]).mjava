@@ -1,4 +1,0 @@
-    public void visitUnknown(Binding<?> binding) {
-      unknownVisited = true;
-    }
-

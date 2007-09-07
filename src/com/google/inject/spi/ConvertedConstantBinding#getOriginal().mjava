@@ -1,0 +1,5 @@
+  /**
+   * Gets the binding that we converted to create this binding.
+   */
+  Binding<String> getOriginal();
+

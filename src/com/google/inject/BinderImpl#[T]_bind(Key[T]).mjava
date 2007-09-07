@@ -1,7 +1,19 @@
   public <T> BindingBuilderImpl<T> bind(Key<T> key) {
+    Object source = source();
+
     BindingBuilderImpl<T> builder =
-        new BindingBuilderImpl<T>(this, key, source());
-    bindingBuilders.add(builder);
+        new BindingBuilderImpl<T>(this, key, source);
+
+    Class<? super T> rawType = key.getTypeLiteral().getRawType();
+
+    if (inGuiceNamespace(rawType)) {
+      addError(source, ErrorMessages.BINDING_TO_GUICE_TYPE);
+    } else if (Logger.class == rawType) {
+      addError(source, ErrorMessages.LOGGER_ALREADY_BOUND);
+    } else {
+      bindingBuilders.add(builder);
+    }
+
     return builder;
   }
 

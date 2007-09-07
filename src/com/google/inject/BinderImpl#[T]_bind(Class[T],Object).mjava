@@ -1,0 +1,11 @@
+  /**
+   * Internal use only.
+   */
+  <T> BindingBuilderImpl<T> bind(Class<T> clazz, Object source) {
+    Key<T> key = Key.get(clazz);
+    BindingBuilderImpl<T> builder =
+        new BindingBuilderImpl<T>(this, key, source);
+    bindingBuilders.add(builder);
+    return builder;
+  }
+

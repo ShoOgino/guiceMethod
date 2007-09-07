@@ -13,6 +13,10 @@
         = new HashMap<Key<?>, BindingImpl<?>>();
     injector = new InjectorImpl(
         proxyFactoryBuilder.create(), bindings, scopes);
+
+    // Create default bindings.
+    bind(Injector.class, SourceProviders.UNKNOWN_SOURCE).toInstance(injector);
+
     injector.setErrorHandler(configurationErrorHandler);
 
     createConstantBindings();

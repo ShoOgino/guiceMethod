@@ -1,0 +1,5 @@
+  ConstantConversionException(Key<?> key, String value,
+      String reason) {
+    super(createMessage(value, key, reason));
+  }
+

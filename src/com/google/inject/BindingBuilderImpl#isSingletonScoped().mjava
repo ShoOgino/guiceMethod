@@ -1,4 +1,0 @@
-  boolean isSingletonScoped() {
-    return this.scope == Scopes.SINGLETON;
-  }
-

@@ -1,0 +1,9 @@
+    @Override
+    public String toString() {
+      return new ToStringBuilder(ConvertedConstantBinding.class)
+          .add("key", key)
+          .add("value", value)
+          .add("original", originalBinding)
+          .toString();
+    }
+

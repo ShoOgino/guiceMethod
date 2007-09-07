@@ -1,5 +1,0 @@
-    public T get(InternalContext context) {
-      return context.sanitize((T) constructorInjector.construct(
-          context, context.getExpectedType()), SourceProviders.UNKNOWN_SOURCE);
-    }
-

@@ -1,8 +1,15 @@
-  @SuppressWarnings("unchecked")
+  /**
+   * Gets a binding implementation. First, this checks for an explicit binding.
+   * If no explicit binding is found, it looks for a just-in-time binding.
+   */
   public <T> BindingImpl<T> getBinding(Key<T> key) {
-    // TODO: Create binding objects for implicit bindings on the fly. This
-    // includes classes, Provider<X>, converted constants, etc.
-    
-    return (BindingImpl<T>) bindings.get(key);
+    // Check explicit bindings, i.e. bindings created by modules.
+    BindingImpl<T> binding = getExplicitBindingImpl(key);
+    if (binding != null) {
+      return binding;
+    }
+
+    // Look for an on-demand binding.
+    return getJitBindingImpl(key);
   }
 

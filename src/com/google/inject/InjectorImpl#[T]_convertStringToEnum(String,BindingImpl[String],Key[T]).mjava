@@ -1,0 +1,13 @@
+  private <T> BindingImpl<T> convertStringToEnum(String stringValue,
+      BindingImpl<String> stringBinding, Key<T> key) {
+    try {
+      // Raw types: this is safe. We know T is an Enum.
+      @SuppressWarnings("unchecked")
+      T t = (T) Enum.valueOf((Class) key.getRawType(), stringValue);
+      return new ConvertedConstantBindingImpl<T>(this, key, t, stringBinding);
+    }
+    catch (IllegalArgumentException e) {
+      return handleConstantConversionError(stringBinding, key, e);
+    }
+  }
+

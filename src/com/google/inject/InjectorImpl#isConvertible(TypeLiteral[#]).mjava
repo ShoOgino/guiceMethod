@@ -1,0 +1,10 @@
+  /**
+   * Returns true if we can convert from a string to the given type.
+   */
+  static boolean isConvertible(TypeLiteral<?> type) {
+    Class<?> rawType = type.getRawType();
+    return PRIMITIVE_CONVERTERS.get(rawType) != null
+        || Enum.class.isAssignableFrom(rawType)
+        || Class.class == rawType;
+  }
+

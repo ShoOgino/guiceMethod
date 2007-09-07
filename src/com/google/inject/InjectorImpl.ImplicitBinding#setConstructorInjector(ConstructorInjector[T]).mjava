@@ -1,5 +1,0 @@
-    void setConstructorInjector(
-        ConstructorInjector<T> constructorInjector) {
-      this.constructorInjector = constructorInjector;
-    }
-

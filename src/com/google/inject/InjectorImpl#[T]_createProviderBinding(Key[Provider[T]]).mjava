@@ -1,0 +1,31 @@
+  /**
+   * Creates a synthetic binding to Provider<T>, i.e. a binding to the provider
+   * from Binding<T>.
+   */
+  private <T> BindingImpl<Provider<T>> createProviderBinding(
+      Key<Provider<T>> key) {
+    Type providerType = key.getTypeLiteral().getType();
+
+    // If the Provider has no type parameter (raw Provider)...
+    if (!(providerType instanceof ParameterizedType)) {
+      return null;
+    }
+
+    Type entryType
+        = ((ParameterizedType) providerType).getActualTypeArguments()[0];
+
+    // This cast is safe. 
+    @SuppressWarnings("unchecked")
+    Key<T> providedKey = (Key<T>) key.ofType(entryType);
+
+    BindingImpl<T> providedBinding = getBinding(providedKey);
+
+    // If binding isn't found...
+    if (providedBinding == null) {
+      ErrorMessages.handleMissingBinding(this, key);
+      return invalidBinding(key);
+    }
+
+    return new ProviderBindingImpl<T>(this, key, providedBinding);
+  }
+

@@ -1,0 +1,61 @@
+  /**
+   * Creates a binding for an injectable type with the given scope. Looks for
+   * a scope on the type if none is specified.
+   */
+  <T> BindingImpl<T> createBindingForInjectableType(Class<T> type,
+      Scope scope, Object source, boolean isJit) {
+    // We can't inject abstract classes.
+    // TODO: Method interceptors could actually enable us to implement
+    // abstract types. Should we remove this restriction?
+    if (Modifier.isAbstract(type.getModifiers())) {
+      return null;
+    }
+
+    // Error: Inner class.
+    if (Classes.isInnerClass(type)) {
+      errorHandler.handle(SourceProviders.defaultSource(),
+          ErrorMessages.CANNOT_INJECT_INNER_CLASS, type);
+      return invalidBinding(Key.get(type));
+    }
+
+    if (scope == null) {
+      scope = Scopes.getScopeForType(type, scopes, errorHandler);
+    }
+
+    Key<T> key = Key.get(type);
+
+    LateBoundConstructor<T> lateBoundConstructor
+        = new LateBoundConstructor<T>();
+    InternalFactory<? extends T> scopedFactory
+        = Scopes.scope(key, this, lateBoundConstructor, scope);
+
+    BindingImpl<T> binding
+        = new ClassBindingImpl<T>(this, key, source, scopedFactory, scope);
+
+    if (isJit) {
+      // Put the partially constructed binding in the map a little early. This
+      // enables us to handle circular dependencies.
+      // Example: FooImpl -> BarImpl -> FooImpl.
+      jitBindings.put(key, binding);
+    }
+
+    try {
+      lateBoundConstructor.bind(this, type);
+      return binding;
+    }
+    catch (RuntimeException e) {
+      // Clean up state.
+      if (isJit) {
+        jitBindings.remove(key);
+      }
+      throw e;
+    }
+    catch (Throwable t) {
+      // Clean up state.
+      if (isJit) {
+        jitBindings.remove(key);
+      }
+      throw new AssertionError(t);
+    }
+  }
+

@@ -1,0 +1,21 @@
+  <T> BindingImpl<T> createBindingFromType(Class<T> type) {
+    // Don't try to inject primitives, arrays, or enums.
+    if (type.isArray() || type.isEnum() || type.isPrimitive()) {
+      return null;
+    }
+
+    // Handle @ImplementedBy
+    ImplementedBy implementedBy = type.getAnnotation(ImplementedBy.class);
+    if (implementedBy != null) {
+      return createImplementedByBinding(type, implementedBy);
+    }
+
+    // Handle @ProvidedBy.
+    ProvidedBy providedBy = type.getAnnotation(ProvidedBy.class);
+    if (providedBy != null) {
+      return createProvidedByBinding(type, providedBy);
+    }
+
+    return createBindingForInjectableType(type);
+  }
+

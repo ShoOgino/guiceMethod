@@ -1,0 +1,10 @@
+  @Override
+  public String toString() {
+    return new ToStringBuilder(LinkedBinding.class)
+        .add("key", key)
+        .add("target", targetKey)
+        .add("scope", scope)
+        .add("source", source)
+        .toString();
+  }
+

@@ -1,0 +1,50 @@
+  /**
+   * Converts a constant string binding to the required type.
+   *
+   * <p>If the required type is elligible for conversion and a constant string
+   * binding is found but the actual conversion fails, an error is generated.
+   *
+   * <p>If the type is not elligible for conversion or a constant string
+   * binding is not found, this method returns null.
+   */
+  private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key) {
+    // TODO: Support custom type converters from the user.
+
+    if (!isConvertible(key.getTypeLiteral())) {
+      // We can't convert from string to the required type.
+      return null;
+    }
+
+    // Find a constant string binding.
+    Key<String> stringKey = key.ofType(String.class);
+    BindingImpl<String> stringBinding = getExplicitBindingImpl(stringKey);
+    if (stringBinding == null || !stringBinding.isConstant()) {
+      // No constant string binding found.
+      return null;
+    }
+
+    String stringValue = stringBinding.getProvider().get();    
+    Class<? super T> rawType = key.getRawType();
+
+    // Convert to a primitive type. This cast is safe.
+    @SuppressWarnings("unchecked")
+    Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(rawType);
+    if (converter != null) {
+      return convertStringToPrimitive(
+          converter, key, stringValue, stringBinding);
+    }
+
+    // Convert to enum.
+    if (Enum.class.isAssignableFrom(rawType)) {
+      return convertStringToEnum(stringValue, stringBinding, key);
+    }
+
+    // Convert to Class.
+    if (rawType == Class.class) {
+      return convertStringToClass(stringValue, key, stringBinding);
+    }
+
+    // Unreachable.
+    throw new AssertionError();
+  }
+

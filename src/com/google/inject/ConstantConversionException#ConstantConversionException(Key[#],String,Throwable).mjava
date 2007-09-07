@@ -1,0 +1,5 @@
+  ConstantConversionException(Key<?> key, String value,
+      Throwable reason) {
+    this(key, value, reason.toString());
+  }
+

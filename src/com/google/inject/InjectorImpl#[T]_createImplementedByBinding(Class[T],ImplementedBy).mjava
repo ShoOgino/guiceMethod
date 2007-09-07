@@ -1,0 +1,49 @@
+  /**
+   * Creates a binding for a type annotated with @ImplementedBy.
+   */
+  <T> BindingImpl<T> createImplementedByBinding(Class<T> type,
+      ImplementedBy implementedBy) {
+    // TODO: Use scope annotation on type if present. Right now, we always
+    // use NO_SCOPE.
+
+    Class<?> implementationType = implementedBy.value();
+
+    // Make sure it's not the same type. TODO: Can we check for deeper cycles?
+    if (implementationType == type) {
+      errorHandler.handle(StackTraceElements.forType(type),
+          ErrorMessages.RECURSIVE_IMPLEMENTATION_TYPE, type);
+      return invalidBinding(type);
+    }
+
+    // Make sure implementationType extends type.
+    if (!type.isAssignableFrom(implementationType)) {
+      errorHandler.handle(StackTraceElements.forType(type),
+          ErrorMessages.NOT_A_SUBTYPE, implementationType, type);
+      return invalidBinding(type);
+    }
+
+    // After the preceding check, this cast is safe.
+    @SuppressWarnings("unchecked")
+    Class<? extends T> subclass = (Class<? extends T>) implementationType;
+
+    // Look up the target binding.
+    final BindingImpl<? extends T> targetBinding
+        = getBinding(Key.get(subclass));
+
+    if (targetBinding == null) {
+      errorHandler.handle(StackTraceElements.forType(type),
+          ErrorMessages.BINDING_NOT_FOUND, type);
+      return invalidBinding(type);
+    }
+
+    InternalFactory<T> internalFactory = new InternalFactory<T>() {
+      public T get(InternalContext context) {
+        return targetBinding.internalFactory.get(context);
+      }
+    };
+
+    return new LinkedBindingImpl<T>(this, Key.get(type), 
+        StackTraceElements.forType(type), internalFactory, Scopes.NO_SCOPE,
+        Key.get(subclass));
+  }
+

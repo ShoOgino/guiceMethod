@@ -1,6 +1,0 @@
-    ImplicitImplementation(Key<T> key, Scope scope, Object source) {
-      this.key = key;
-      this.scope = scope;
-      this.source = source;
-    }
-

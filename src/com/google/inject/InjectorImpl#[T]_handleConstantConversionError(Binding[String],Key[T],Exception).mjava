@@ -1,0 +1,11 @@
+  private <T> BindingImpl<T> handleConstantConversionError(
+      Binding<String> stringBinding, Key<T> key, Exception e) {
+    errorHandler.handle(
+        SourceProviders.defaultSource(),
+        ErrorMessages.CONSTANT_CONVERSION_ERROR,
+        stringBinding.getSource(),
+        key.getRawType(),
+        e.getMessage());
+    return invalidBinding(key);
+  }
+

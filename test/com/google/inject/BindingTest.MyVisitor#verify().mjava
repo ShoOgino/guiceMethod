@@ -5,6 +5,5 @@
       assertTrue(providerVisited);
       assertTrue(classVisitied);
       assertTrue(constantVisited);
-      assertTrue(unknownVisited);
     }
 

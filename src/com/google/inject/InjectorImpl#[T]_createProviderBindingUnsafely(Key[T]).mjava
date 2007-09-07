@@ -1,0 +1,9 @@
+  @SuppressWarnings("unchecked")
+  private <T> BindingImpl<T> createProviderBindingUnsafely(Key<T> key) {
+    // These casts are safe. We know T extends Provider<X> and that given
+    // Key<Provider<X>>, createProviderBinding() will return
+    // BindingImpl<Provider<X>>.
+    // noinspection unchecked
+    return (BindingImpl<T>) createProviderBinding((Key) key);
+  }
+

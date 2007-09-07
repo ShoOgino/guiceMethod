@@ -1,4 +1,4 @@
-  InvalidBinding<T> invalidBinding(InjectorImpl injector) {
-    return new InvalidBinding<T>(injector, key, source);
+  InvalidBindingImpl<T> invalidBinding(InjectorImpl injector) {
+    return new InvalidBindingImpl<T>(injector, key, source);
   }
 

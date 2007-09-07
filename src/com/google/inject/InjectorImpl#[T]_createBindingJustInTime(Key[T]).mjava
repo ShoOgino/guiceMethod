@@ -1,0 +1,40 @@
+  <T> BindingImpl<T> createBindingJustInTime(Key<T> key) {
+    // Handle cases where T is a Provider<?>.
+    if (isProvider(key)) {
+      return createProviderBindingUnsafely(key);
+    }
+
+    // Treat primitive types and their wrappers interchangeably.
+    BindingImpl<T> boxedOrUnboxed = getBoxedOrUnboxedBinding(key);
+    if (boxedOrUnboxed != null) {
+      return boxedOrUnboxed;
+    }
+
+    // Try to convert a constant string binding to the requested type.
+    BindingImpl<T> convertedBinding = convertConstantStringBinding(key);
+    if (convertedBinding != null) {
+      return convertedBinding;
+    }
+
+    // If the key has an annotation...
+    if (key.hasAnnotationType()) {
+      // Look for a binding without annotation attributes or return null.
+      return key.hasAttributes()
+          ? getBinding(key.withoutAttributes()) : null;
+    }
+
+    Type type = key.getTypeLiteral().getType();
+
+    // If the keys type isn't a Class, bail out.
+    if (!(type instanceof Class)) {
+      return null;
+    }
+
+    // This is safe after the preceding check.
+    @SuppressWarnings("unchecked")
+    Class<T> clazz = (Class<T>) type;
+
+    // Create a binding based on the type.
+    return createBindingFromType(clazz);
+  }
+

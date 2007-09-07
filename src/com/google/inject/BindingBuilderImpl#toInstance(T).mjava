@@ -1,7 +1,7 @@
   public void toInstance(T instance) {
     ensureImplementationIsNotSet();
     this.instance = instance;
-    this.factory = new ConstantFactory<T>(instance, source);
+    this.factory = new ConstantFactory<T>(instance);
     registerInstanceForInjection(instance);
 
     // TODO: I don't think this can happen anymore.

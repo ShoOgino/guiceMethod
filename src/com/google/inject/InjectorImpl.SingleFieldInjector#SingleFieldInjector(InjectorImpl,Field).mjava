@@ -1,13 +1,20 @@
-    public SingleFieldInjector(InjectorImpl injector, Field field)
+    public SingleFieldInjector(final InjectorImpl injector, Field field)
         throws MissingDependencyException {
       this.field = field;
 
       // Ewwwww...
       field.setAccessible(true);
 
-      Key<?> key = Key.get(
+      final Key<?> key = Key.get(
           field.getGenericType(), field, field.getAnnotations(), errorHandler);
-      factory = injector.getInternalFactory(field, key);
+      factory = SourceProviders.withDefault(StackTraceElements.forMember(field),
+        new Callable<InternalFactory<?>>() {
+          public InternalFactory<?> call() throws Exception {
+            return injector.getInternalFactory(key);
+          }
+        }
+      );
+
       if (factory == null) {
         throw new MissingDependencyException(key, field);
       }

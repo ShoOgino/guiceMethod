@@ -7,9 +7,9 @@
   public BinderImpl(Stage stage) {
     bindScope(Singleton.class, SINGLETON);
 
-    bind(Injector.class).to(INJECTOR_FACTORY);
-    bind(Logger.class).to(LOGGER_FACTORY);
-    bind(Stage.class).toInstance(stage);
+    bind(Logger.class, SourceProviders.UNKNOWN_SOURCE)
+        .toProvider(new LoggerProvider());
+    bind(Stage.class, SourceProviders.UNKNOWN_SOURCE).toInstance(stage);
 
     this.proxyFactoryBuilder = new ProxyFactoryBuilder();
 

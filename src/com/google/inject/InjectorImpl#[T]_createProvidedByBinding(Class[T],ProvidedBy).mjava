@@ -1,0 +1,50 @@
+  /**
+   * Creates a binding for a type annotated with @ImplementedBy.
+   */
+  <T> BindingImpl<T> createProvidedByBinding(final Class<T> type,
+      ProvidedBy providedBy) {
+    final Class<? extends Provider<?>> providerType = providedBy.value();
+
+    // Make sure it's not the same type. TODO: Can we check for deeper loops?
+    if (providerType == type) {
+      errorHandler.handle(StackTraceElements.forType(type),
+          ErrorMessages.RECURSIVE_PROVIDER_TYPE, type);
+      return invalidBinding(type);
+    }
+
+    // TODO: Make sure the provided type extends type. We at least check
+    // the type at runtime below.
+
+    // Assume the provider provides an appropriate type. We double check at
+    // runtime.
+    @SuppressWarnings("unchecked")
+    Key<? extends Provider<T>> providerKey
+        = (Key<? extends Provider<T>>) Key.get(providerType);
+    final BindingImpl<? extends Provider<?>> providerBinding
+        = getBinding(providerKey);
+
+    if (providerBinding == null) {
+      errorHandler.handle(StackTraceElements.forType(type),
+          ErrorMessages.BINDING_NOT_FOUND, type);
+      return invalidBinding(type);
+    }
+
+    InternalFactory<T> internalFactory = new InternalFactory<T>() {
+      public T get(InternalContext context) {
+        Provider<?> provider = providerBinding.internalFactory.get(context);
+        Object o = provider.get();
+        try {
+          return type.cast(o);
+        } catch (ClassCastException e) {
+          errorHandler.handle(StackTraceElements.forType(type),
+              ErrorMessages.SUBTYPE_NOT_PROVIDED, providerType, type);
+          throw new AssertionError();
+        }
+      }
+    };
+
+    return new LinkedProviderBindingImpl<T>(this, Key.get(type),
+        StackTraceElements.forType(type), internalFactory, Scopes.NO_SCOPE,
+        providerKey);
+  }
+

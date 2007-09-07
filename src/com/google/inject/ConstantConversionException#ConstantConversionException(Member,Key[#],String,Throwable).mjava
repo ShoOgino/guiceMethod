@@ -1,5 +1,0 @@
-  ConstantConversionException(Member member, Key<?> key, String value,
-      Throwable reason) {
-    this(member, key, value, reason.toString());
-  }
-

@@ -1,4 +1,0 @@
-    ImplicitBinding(Class<T> implementation) {
-      this.implementation = implementation;
-    }
-

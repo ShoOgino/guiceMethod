@@ -5,7 +5,7 @@
             "parse" + Strings.capitalize(primitive.getName()), String.class);
         Converter<T> converter = new Converter<T>() {
           @SuppressWarnings("unchecked")
-          public T convert(Member member, Key<T> key, String value)
+          public T convert(Key<T> key, String value)
               throws ConstantConversionException {
             try {
               return (T) parser.invoke(null, value);
@@ -14,8 +14,8 @@
               throw new AssertionError(e);
             }
             catch (InvocationTargetException e) {
-              throw new ConstantConversionException(member, key, value,
-                  e.getTargetException());
+              throw new ConstantConversionException(
+                  key, value, e.getTargetException());
             }
           }
         };

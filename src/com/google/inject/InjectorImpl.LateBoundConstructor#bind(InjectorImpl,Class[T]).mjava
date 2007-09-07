@@ -1,0 +1,5 @@
+    void bind(
+        InjectorImpl injector, Class<T> implementation) {
+      this.constructorInjector = injector.getConstructor(implementation);
+    }
+

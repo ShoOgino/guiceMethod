@@ -1,0 +1,4 @@
+    public Binding<String> getOriginal() {
+      return this.originalBinding;
+    }
+
