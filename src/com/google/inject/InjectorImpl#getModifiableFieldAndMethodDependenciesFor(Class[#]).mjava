@@ -1,0 +1,10 @@
+  List<Dependency<?>> getModifiableFieldAndMethodDependenciesFor(
+      Class<?> clazz) {
+    List<SingleMemberInjector> injectors = this.injectors.get(clazz);
+    List<Dependency<?>> dependencies = new ArrayList<Dependency<?>>();
+    for (SingleMemberInjector singleMemberInjector : injectors) {
+      dependencies.addAll(singleMemberInjector.getDependencies());
+    }
+    return dependencies;
+  }
+

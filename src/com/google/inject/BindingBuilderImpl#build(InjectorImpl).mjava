@@ -50,7 +50,7 @@
       // noinspection unchecked
       Class<T> clazz = (Class<T>) type;
 
-      BindingImpl<T> binding = injector.createBindingForInjectableType(
+      BindingImpl<T> binding = injector.createBindingFromType(
           clazz, scope, source);
       // TODO: Should we clean up the binding left behind in jitBindings? 
 

@@ -1,0 +1,4 @@
+  public Binding<T> getBinding() {
+    return injector.getBinding(key);
+  }
+

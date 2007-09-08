@@ -1,0 +1,4 @@
+    public Collection<Dependency<?>> getDependencies() {
+      return Collections.<Dependency<?>>singleton(externalContext);
+    }
+

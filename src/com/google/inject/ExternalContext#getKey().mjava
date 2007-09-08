@@ -1,4 +1,4 @@
-  public Key<?> getKey() {
+  public Key<T> getKey() {
     return this.key;
   }
 

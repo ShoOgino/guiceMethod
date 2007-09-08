@@ -1,5 +1,0 @@
-  @SuppressWarnings("unchecked")
-  <T> ConstructorInjector<T> getConstructor(TypeLiteral<T> implementation) {
-    return constructors.get(implementation.getRawType());
-  }
-

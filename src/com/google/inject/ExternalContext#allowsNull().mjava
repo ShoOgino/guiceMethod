@@ -1,0 +1,4 @@
+  public boolean allowsNull() {
+    return getNullability() == Nullability.NULLABLE;
+  }
+

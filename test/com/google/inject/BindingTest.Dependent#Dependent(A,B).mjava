@@ -1,0 +1,2 @@
+    @Inject Dependent(A a, B b) {}
+

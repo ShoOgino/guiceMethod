@@ -1,5 +1,0 @@
-  /**
-   * Gets the binding key for the object currently being retrieved.
-   */
-  Key<?> getKey();
-

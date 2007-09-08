@@ -1,0 +1,8 @@
+  /**
+   * If the member is a constructor or method, you'll have one Dependency per
+   * parameter, and this method returns the index of the parameter represented
+   * by this Dependency. If the member is a field, this method returns
+   * {@code -1}.
+   */
+  int getParameterIndex();
+

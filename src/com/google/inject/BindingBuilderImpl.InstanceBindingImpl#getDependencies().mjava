@@ -1,0 +1,4 @@
+    public Collection<Dependency<?>> getDependencies() {
+      return injector.getFieldAndMethodDependenciesFor(instance.getClass());
+    }
+

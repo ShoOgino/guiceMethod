@@ -1,0 +1,6 @@
+  /**
+   * Gets the key used to resolve this dependency. Equivalent to
+   * {@code getBinding().getKey()}.
+   */
+  Key<T> getKey();
+

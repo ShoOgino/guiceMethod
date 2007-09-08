@@ -1,0 +1,5 @@
+  /**
+   * Gets the binding which fulfills this dependency.
+   */
+  Binding<T> getBinding();
+

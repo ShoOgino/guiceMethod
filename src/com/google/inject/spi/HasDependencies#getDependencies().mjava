@@ -1,0 +1,5 @@
+  /**
+   * Gets dependencies.
+   */
+  Collection<Dependency<?>> getDependencies();
+
