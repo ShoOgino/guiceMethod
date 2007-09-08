@@ -1,0 +1,4 @@
+  public void testToStringDoesNotInfinitelyRecurse() {
+    Guice.createInjector().toString();
+  }
+
