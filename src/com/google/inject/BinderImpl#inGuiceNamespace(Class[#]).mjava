@@ -1,6 +1,4 @@
   static boolean inGuiceNamespace(Class<?> clazz) {
-    return clazz == Provider.class
-        || clazz == Injector.class
-        || clazz == Stage.class;
+    return clazz == Provider.class;
   }
 

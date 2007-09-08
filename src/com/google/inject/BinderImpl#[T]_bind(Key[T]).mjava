@@ -6,8 +6,8 @@
 
     Class<? super T> rawType = key.getTypeLiteral().getRawType();
 
-    if (inGuiceNamespace(rawType)) {
-      addError(source, ErrorMessages.BINDING_TO_GUICE_TYPE);
+    if (rawType == Provider.class) {
+      addError(source, ErrorMessages.BINDING_TO_PROVIDER);
     } else if (Logger.class == rawType) {
       addError(source, ErrorMessages.LOGGER_ALREADY_BOUND);
     } else {
