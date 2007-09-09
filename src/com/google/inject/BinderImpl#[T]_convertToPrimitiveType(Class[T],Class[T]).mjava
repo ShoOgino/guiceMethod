@@ -8,7 +8,7 @@
         @SuppressWarnings("unchecked")
         public Object convert(String value, TypeLiteral<?> toType) {
           try {
-            return (T) parser.invoke(null, value);
+            return parser.invoke(null, value);
           }
           catch (IllegalAccessException e) {
             throw new AssertionError(e);

@@ -1,0 +1,40 @@
+  @SuppressWarnings("unchecked") // for generic array creation.
+  private static Collection<Converter<?>> createConverters() {
+    return Arrays.asList(
+      new Converter<MatcherAndConverter>(MatcherAndConverter.class) {
+        public String toString(MatcherAndConverter m) {
+          return m.typeConverter + " which matches " + m.typeMatcher
+            + " (bound at " + m.source + ")";
+        }
+      },
+      new Converter<Method>(Method.class) {
+        public String toString(Method m) {
+          return "method " + m.getDeclaringClass().getName() + "."
+              + m.getName() + "()";
+        }
+      },
+      new Converter<Constructor>(Constructor.class) {
+        public String toString(Constructor c) {
+          return "constructor " + c.getDeclaringClass().getName() + "()";
+        }
+      },
+      new Converter<Field>(Field.class) {
+        public String toString(Field f) {
+          return "field " + f.getDeclaringClass().getName() + "." + f.getName();
+        }
+      },
+      new Converter<Class>(Class.class) {
+        public String toString(Class c) {
+          return c.getName();
+        }
+      },
+      new Converter<Key>(Key.class) {
+        public String toString(Key k) {
+          return k.hasAnnotationType()
+              ? k.getTypeLiteral() + " annotated with " + k.getAnnotationName()
+              : k.getTypeLiteral().toString();
+        }
+      }
+    );
+  }
+

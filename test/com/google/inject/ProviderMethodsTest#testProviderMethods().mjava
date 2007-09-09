@@ -1,3 +1,4 @@
+  @SuppressWarnings("unchecked")
   public void testProviderMethods() {
     Injector injector = Guice.createInjector(new Module() {
       public void configure(Binder binder) {
