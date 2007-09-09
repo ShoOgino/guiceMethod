@@ -54,7 +54,7 @@
       }
     });
 
-    convertToTypes(
+    internalConvertToTypes(
       new AbstractMatcher<TypeLiteral<?>>() {
         public boolean matches(TypeLiteral<?> typeLiteral) {
           return typeLiteral.getRawType() == Class.class;
