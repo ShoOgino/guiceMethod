@@ -1,5 +1,5 @@
   /**
    * Converts a string value. Throws an exception if a conversion error occurs.
    */
-  Object convert(TypeLiteral<?> requiredType, String value);
+  Object convert(String value, TypeLiteral<?> toType);
 
