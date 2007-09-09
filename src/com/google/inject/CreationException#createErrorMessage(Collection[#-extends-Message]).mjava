@@ -1,4 +1,5 @@
-  private static String createErrorMessage(Collection<Message> errorMessages) {
+  private static String createErrorMessage(
+      Collection<? extends Message> errorMessages) {
     Formatter fmt = new Formatter().format("Guice configuration errors:%n%n");
     int index = 1;
     for (Message errorMessage : errorMessages) {

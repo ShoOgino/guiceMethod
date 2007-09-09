@@ -4,7 +4,7 @@
    * @throws CreationException if one or more errors occur during Injector
    *     construction
    */
-  public static Injector createInjector(Iterable<Module> modules) {
+  public static Injector createInjector(Iterable<? extends Module> modules) {
     return createInjector(Stage.DEVELOPMENT, modules);
   }
 

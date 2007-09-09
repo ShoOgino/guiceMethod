@@ -1,7 +1,7 @@
   /**
    * Constructs a new exception for the given errors.
    */
-  public CreationException(Collection<Message> errorMessages) {
+  public CreationException(Collection<? extends Message> errorMessages) {
     super();
 
     // Sort the messages by source. 
