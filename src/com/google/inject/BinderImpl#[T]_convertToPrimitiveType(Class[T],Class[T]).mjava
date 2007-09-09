@@ -6,7 +6,7 @@
 
       TypeConverter typeConverter = new TypeConverter() {
         @SuppressWarnings("unchecked")
-        public Object convert(Key<?> key, String value) {
+        public Object convert(TypeLiteral<?> requiredType, String value) {
           try {
             return (T) parser.invoke(null, value);
           }
