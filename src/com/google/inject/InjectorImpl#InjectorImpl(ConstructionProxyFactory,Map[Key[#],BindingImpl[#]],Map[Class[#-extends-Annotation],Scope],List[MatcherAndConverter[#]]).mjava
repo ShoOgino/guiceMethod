@@ -1,8 +1,10 @@
   InjectorImpl(ConstructionProxyFactory constructionProxyFactory,
       Map<Key<?>, BindingImpl<?>> bindings,
-      Map<Class<? extends Annotation>, Scope> scopes) {
+      Map<Class<? extends Annotation>, Scope> scopes,
+      List<MatcherAndConverter<?>> converters) {
     this.constructionProxyFactory = constructionProxyFactory;
     this.explicitBindings = bindings;
     this.scopes = scopes;
+    this.converters = converters;
   }
 

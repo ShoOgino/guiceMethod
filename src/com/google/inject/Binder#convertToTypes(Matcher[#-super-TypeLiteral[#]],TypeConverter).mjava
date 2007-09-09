@@ -1,0 +1,10 @@
+  /**
+   * Binds a type converter. The injector will use the given converter to
+   * convert string constants to matching types as needed.
+   *
+   * @param typeMatcher matches types the converter can handle
+   * @param converter converts values
+   */
+  void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter converter);
+

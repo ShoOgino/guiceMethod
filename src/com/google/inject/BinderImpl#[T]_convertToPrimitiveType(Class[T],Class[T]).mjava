@@ -1,0 +1,34 @@
+  <T> void convertToPrimitiveType(Class<T> primitiveType,
+      final Class<T> wrapperType) {
+    try {
+      final Method parser = wrapperType.getMethod(
+        "parse" + Strings.capitalize(primitiveType.getName()), String.class);
+
+      TypeConverter typeConverter = new TypeConverter() {
+        @SuppressWarnings("unchecked")
+        public Object convert(Key<?> key, String value) {
+          try {
+            return (T) parser.invoke(null, value);
+          }
+          catch (IllegalAccessException e) {
+            throw new AssertionError(e);
+          }
+          catch (InvocationTargetException e) {
+            throw new RuntimeException(e.getTargetException().getMessage());
+          }
+        }
+
+        @Override
+        public String toString() {
+          return "TypeConverter<" + wrapperType.getSimpleName() + ">";
+        }
+      };
+
+      convertToClass(primitiveType, typeConverter);
+      convertToClass(wrapperType, typeConverter);
+    }
+    catch (NoSuchMethodException e) {
+      throw new AssertionError(e);
+    }
+  }
+

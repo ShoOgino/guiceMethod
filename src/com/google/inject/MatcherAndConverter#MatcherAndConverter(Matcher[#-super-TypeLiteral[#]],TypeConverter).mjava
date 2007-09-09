@@ -1,0 +1,7 @@
+  MatcherAndConverter(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter typeConverter) {
+    this.typeMatcher = Objects.nonNull(typeMatcher, "type matcher");
+    this.typeConverter = Objects.nonNull(typeConverter, "converter");
+    this.source = SourceProviders.defaultSource();
+  }
+

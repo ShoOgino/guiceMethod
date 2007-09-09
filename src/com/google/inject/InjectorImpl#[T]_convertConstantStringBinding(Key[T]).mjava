@@ -8,13 +8,6 @@
    * binding is not found, this method returns null.
    */
   private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key) {
-    // TODO: Support custom type converters from the user.
-
-    if (!isConvertible(key.getTypeLiteral())) {
-      // We can't convert from string to the required type.
-      return null;
-    }
-
     // Find a constant string binding.
     Key<String> stringKey = key.ofType(String.class);
     BindingImpl<String> stringBinding = getExplicitBindingImpl(stringKey);
@@ -23,28 +16,58 @@
       return null;
     }
 
-    String stringValue = stringBinding.getProvider().get();    
-    Class<? super T> rawType = key.getRawType();
+    String stringValue = stringBinding.getProvider().get();
 
-    // Convert to a primitive type. This cast is safe.
-    @SuppressWarnings("unchecked")
-    Converter<T> converter = (Converter<T>) PRIMITIVE_CONVERTERS.get(rawType);
-    if (converter != null) {
-      return convertStringToPrimitive(
-          converter, key, stringValue, stringBinding);
+    // Find a matching type converter.
+    TypeLiteral<T> type = key.getTypeLiteral();
+    MatcherAndConverter<?> matchingConverter = null;
+    for (MatcherAndConverter<?> converter : converters) {
+      if (converter.typeMatcher.matches(type)) {
+        if (matchingConverter != null) {
+          // More than one matching converter!
+          errorHandler.handle(SourceProviders.defaultSource(),
+              ErrorMessages.AMBIGUOUS_TYPE_CONVERSION, stringValue, type,
+              matchingConverter, converter);
+          return invalidBinding(key);
+        }
+
+        matchingConverter = converter;
+      }
     }
 
-    // Convert to enum.
-    if (Enum.class.isAssignableFrom(rawType)) {
-      return convertStringToEnum(stringValue, stringBinding, key);
+    if (matchingConverter == null) {
+      // No converter can handle the given type.
+      return null;
     }
 
-    // Convert to Class.
-    if (rawType == Class.class) {
-      return convertStringToClass(stringValue, key, stringBinding);
-    }
+    // Try to convert the string. A failed conversion results in an error.
+    try {
+      // This cast is safe because we double check below.
+      @SuppressWarnings("unchecked")
+      T converted
+          = (T) matchingConverter.typeConverter.convert(key, stringValue);
 
-    // Unreachable.
-    throw new AssertionError();
+      if (converted == null) {
+        throw new RuntimeException("Converter returned null.");
+      }
+
+      // We have to filter out primitive types because an Integer is not an
+      // instance of int, and we provide converters for all the primitive types
+      // and know that they work anyway.
+      if (!type.rawType.isPrimitive()
+          && !type.getRawType().isInstance(converted)) {
+        throw new RuntimeException("Converter returned " + converted
+            + " but we expected a[n] " + type + ".");
+      }
+
+      return new ConvertedConstantBindingImpl<T>(
+          this, key, converted, stringBinding);
+    } catch (Exception e) {
+      // Conversion error.
+      errorHandler.handle(SourceProviders.defaultSource(),
+          ErrorMessages.CONVERSION_ERROR, stringValue,
+          stringBinding.getSource(), type, matchingConverter, e.getMessage());
+      return invalidBinding(key);
+    }
   }
 

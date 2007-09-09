@@ -1,0 +1,8 @@
+  /**
+   * @see Binder#convertToTypes
+   */
+  protected void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter converter) {
+    binder.convertToTypes(typeMatcher, converter);
+  }
+

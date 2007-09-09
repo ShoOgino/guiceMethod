@@ -1,6 +1,0 @@
-    /**
-     * Converts {@code String} value.
-     */
-    T convert(Key<T> key, String value)
-        throws ConstantConversionException;
-

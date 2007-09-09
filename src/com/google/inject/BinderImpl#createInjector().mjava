@@ -12,7 +12,7 @@
     Map<Key<?>, BindingImpl<?>> bindings
         = new HashMap<Key<?>, BindingImpl<?>>();
     injector = new InjectorImpl(
-        proxyFactoryBuilder.create(), bindings, scopes);
+        proxyFactoryBuilder.create(), bindings, scopes, converters);
 
     // Create default bindings.
     // We use toProvider() instead of toInstance() to avoid infinite recursion
