@@ -1,4 +1,4 @@
-    V get() {
+    synchronized V get() {
       if (!set) {
         boolean interrupted = waitUntilSet();
 
