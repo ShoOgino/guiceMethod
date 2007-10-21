@@ -2,7 +2,8 @@
         Binding<T> providedBinding) {
       final Provider<T> provider = providedBinding.getProvider();
       return new InternalFactory<Provider<T>>() {
-        public Provider<T> get(InternalContext context) {
+        public Provider<T> get(InternalContext context,
+            InjectionPoint injectionPoint) {
           return provider;
         }
       };

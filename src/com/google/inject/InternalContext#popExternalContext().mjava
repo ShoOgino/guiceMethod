@@ -1,7 +1,0 @@
-  /**
-   * Pop the external context off the stack.
-   */
-  void popExternalContext() {
-    externalContextStack.remove(externalContextStack.size() - 1);
-  }
-

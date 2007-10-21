@@ -1,0 +1,6 @@
+  public void testLoggerWithoutMember() {
+    Injector injector = Guice.createInjector();
+    Logger loggerWithoutMember = injector.getInstance(Logger.class);
+    assertNull(loggerWithoutMember.getName());
+  }
+

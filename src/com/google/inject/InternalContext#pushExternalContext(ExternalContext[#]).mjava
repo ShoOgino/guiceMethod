@@ -1,9 +1,0 @@
-  /**
-   * Push a new external context onto the stack. Each call to {@code #push()}
-   * requires a matching call to {@code #pop()} so that the contexts are
-   * balanced.
-   */
-  void pushExternalContext(ExternalContext<?> externalContext) {
-    externalContextStack.add(externalContext);
-  }
-

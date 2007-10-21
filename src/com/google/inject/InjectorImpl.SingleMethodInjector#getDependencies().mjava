@@ -1,7 +1,7 @@
     public Collection<Dependency<?>> getDependencies() {
       List<Dependency<?>> dependencies = new ArrayList<Dependency<?>>();
       for (SingleParameterInjector<?> parameterInjector : parameterInjectors) {
-        dependencies.add(parameterInjector.externalContext);
+        dependencies.add(parameterInjector.injectionPoint);
       }
       return Collections.unmodifiableList(dependencies);
     }

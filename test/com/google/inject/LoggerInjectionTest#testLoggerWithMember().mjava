@@ -1,0 +1,6 @@
+  public void testLoggerWithMember() {
+    Injector injector = Guice.createInjector();
+    injector.injectMembers(this);
+    assertEquals("com.google.inject.LoggerInjectionTest", logger.getName());
+  }
+

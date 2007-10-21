@@ -1,12 +1,17 @@
     public Void call(InternalContext context) {
-      context.pushExternalContext(ExternalContext.newInstance(
-          null, NULLABLE, key, context.getInjectorImpl()));
+      InjectionPoint<?> injectionPoint
+          = InjectionPoint.newInstance(key, context.getInjectorImpl());
+      context.setInjectionPoint(injectionPoint);
       try {
-        factory.get(context);
+        factory.get(context, injectionPoint);
         return null;
       }
+      catch(ProvisionException provisionException) {
+        provisionException.addContext(injectionPoint);
+        throw provisionException;
+      }
       finally {
-        context.popExternalContext();
+        context.setInjectionPoint(null);
       }
     }
 

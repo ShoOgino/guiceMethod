@@ -1,0 +1,11 @@
+  public BindingBuilderImpl<T> toInternalFactory(InternalFactory<T> internalFactory) {
+    ensureImplementationIsNotSet();
+    this.factory = internalFactory;
+    this.providerInstance = new Provider<T>() {
+      public T get() {
+        throw new UnsupportedOperationException("?");
+      }
+    };
+    return this;
+  }
+

@@ -1,9 +1,0 @@
-  @SuppressWarnings("unchecked")
-  <T> ExternalContext<T> getExternalContext() {
-    if (externalContextStack.isEmpty()) {
-      throw new IllegalStateException("No external context on stack");
-    }
-    return (ExternalContext<T>) externalContextStack.get(
-        externalContextStack.size() - 1);
-  }
-

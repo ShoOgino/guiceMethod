@@ -1,5 +1,0 @@
-  public List<ExternalContext<?>> getExternalContextStack() {
-    return Collections.unmodifiableList(
-        new ArrayList<ExternalContext<?>>(externalContextStack));
-  }
-

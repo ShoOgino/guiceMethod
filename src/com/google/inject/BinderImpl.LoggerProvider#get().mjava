@@ -1,8 +1,0 @@
-    public Logger get() {
-      InternalContext context = ((InjectorImpl) injector).getContext();
-      Member member = context.getExternalContext().getMember();
-      return member == null
-          ? Logger.getAnonymousLogger()
-          : Logger.getLogger(member.getDeclaringClass().getName());
-    }
-

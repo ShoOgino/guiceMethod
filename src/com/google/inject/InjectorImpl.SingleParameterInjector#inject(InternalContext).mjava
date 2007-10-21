@@ -1,20 +1,21 @@
     T inject(InternalContext context) {
-      context.pushExternalContext(externalContext);
+      context.setInjectionPoint(injectionPoint);
       try {
-        return factory.get(context);
+        return factory.get(context, injectionPoint);
       }
       catch (ConfigurationException e) {
         throw e;
       }
-      catch (ProvisionException e) {
-        throw e;
+      catch (ProvisionException provisionException) {
+        provisionException.addContext(injectionPoint);
+        throw provisionException;
       }
       catch (RuntimeException runtimeException) {
-        throw new ProvisionException(context.getExternalContextStack(),
-            runtimeException, ErrorMessages.ERROR_INJECTING_METHOD);
+        throw new ProvisionException(runtimeException,
+            ErrorMessages.ERROR_INJECTING_METHOD);
       }
       finally {
-        context.popExternalContext();
+        context.setInjectionPoint(injectionPoint);
       }
     }
 

@@ -1,4 +1,4 @@
     public Collection<Dependency<?>> getDependencies() {
-      return Collections.<Dependency<?>>singleton(externalContext);
+      return Collections.<Dependency<?>>singleton(injectionPoint);
     }
 

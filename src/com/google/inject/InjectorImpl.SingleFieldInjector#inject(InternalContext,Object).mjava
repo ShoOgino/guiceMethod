@@ -1,7 +1,7 @@
     public void inject(InternalContext context, Object o) {
-      context.pushExternalContext(externalContext);
+      context.setInjectionPoint(injectionPoint);
       try {
-        Object value = factory.get(context);
+        Object value = factory.get(context, injectionPoint);
         field.set(o, value);
       }
       catch (IllegalAccessException e) {
@@ -11,14 +11,15 @@
         throw e;
       }
       catch (ProvisionException provisionException) {
+        provisionException.addContext(injectionPoint);
         throw provisionException;
       }
       catch (RuntimeException runtimeException) {
-        throw new ProvisionException(context.getExternalContextStack(),
-            runtimeException, ErrorMessages.ERROR_INJECTING_FIELD);
+        throw new ProvisionException(runtimeException,
+            ErrorMessages.ERROR_INJECTING_FIELD);
       }
       finally {
-        context.popExternalContext();
+        context.setInjectionPoint(null);
       }
     }
 

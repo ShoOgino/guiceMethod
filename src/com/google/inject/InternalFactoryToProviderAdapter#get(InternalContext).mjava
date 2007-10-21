@@ -1,5 +1,0 @@
-  public T get(InternalContext context) {
-    T provided = provider.get();
-    return context.checkForNull(provided, source);
-  }
-

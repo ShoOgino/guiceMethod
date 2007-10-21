@@ -1,0 +1,4 @@
+  public T get(InternalContext context, InjectionPoint injectionPoint) {
+    return value;
+  }
+

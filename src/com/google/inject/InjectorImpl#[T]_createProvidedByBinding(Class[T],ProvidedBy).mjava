@@ -30,8 +30,9 @@
     }
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(InternalContext context) {
-        Provider<?> provider = providerBinding.internalFactory.get(context);
+      public T get(InternalContext context, InjectionPoint injectionPoint) {
+        Provider<?> provider
+            = providerBinding.internalFactory.get(context, injectionPoint);
         Object o = provider.get();
         try {
           return type.cast(o);

@@ -1,17 +1,16 @@
   <T> T checkForNull(T value, Object source) {
     if (value != null
-        || getExternalContext().getNullability() == Nullability.NULLABLE
+        || getNullability() == Nullability.NULLABLE
         || allowNullsBadBadBad()) {
       return value;
     }
 
-    String message = getExternalContext().getMember() != null
+    String message = getMember() != null
         ? String.format(ErrorMessages.CANNOT_INJECT_NULL_INTO_MEMBER, source,
-            getExternalContext().getMember())
+            getMember())
         : String.format(ErrorMessages.CANNOT_INJECT_NULL, source);
 
-    throw new ProvisionException(getExternalContextStack(),
-        new NullPointerException(message),
+    throw new ProvisionException(new NullPointerException(message),
         String.format(ErrorMessages.CANNOT_INJECT_NULL, source));
   }
 

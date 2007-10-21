@@ -8,7 +8,7 @@
     bindScope(Singleton.class, SINGLETON);
 
     bind(Logger.class, SourceProviders.UNKNOWN_SOURCE)
-        .toProvider(new LoggerProvider());
+        .toInternalFactory(new LoggerFactory());
     bind(Stage.class, SourceProviders.UNKNOWN_SOURCE).toInstance(stage);
 
     this.proxyFactoryBuilder = new ProxyFactoryBuilder();

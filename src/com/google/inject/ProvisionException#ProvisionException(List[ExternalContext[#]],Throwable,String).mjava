@@ -1,8 +1,0 @@
-  ProvisionException(List<ExternalContext<?>> externalContextStack,
-      Throwable cause, String errorMessage) {
-    super(errorMessage, cause);
-    this.errorMessage = errorMessage;
-    this.contexts = Collections.unmodifiableList(
-        new ArrayList<ExternalContext<?>>(externalContextStack));
-  }
-

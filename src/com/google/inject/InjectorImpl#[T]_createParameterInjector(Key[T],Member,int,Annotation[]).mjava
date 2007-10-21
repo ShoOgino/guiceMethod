@@ -14,8 +14,8 @@
       throw new MissingDependencyException(key, member);
     }
 
-    ExternalContext<T> externalContext = ExternalContext.newInstance(
+    InjectionPoint<T> injectionPoint = InjectionPoint.newInstance(
         member, index, Nullability.forAnnotations(annotations), key, this);
-    return new SingleParameterInjector<T>(externalContext, factory);
+    return new SingleParameterInjector<T>(injectionPoint, factory);
   }
 
