@@ -1,3 +1,6 @@
+  /**
+   * We haven't decided on what the desired behaviour of this test should be...
+   */
   public void testBindNullToInstance() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
