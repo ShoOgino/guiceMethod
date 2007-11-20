@@ -2,6 +2,7 @@
     TestSuite suite = new TestSuite();
 
     suite.addTestSuite(BinderTest.class);
+    suite.addTestSuite(BindingOrderTest.class);
     suite.addTestSuite(BindingTest.class);
     suite.addTestSuite(BoundProviderTest.class);
     suite.addTestSuite(CircularDependencyTest.class);

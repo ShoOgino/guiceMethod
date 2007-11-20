@@ -1,0 +1,9 @@
+  public void testBindingOutOfOrder() {
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(BoundFirst.class);
+        bind(BoundSecond.class).to(BoundSecondImpl.class);
+      }
+    });
+  }
+

@@ -1,0 +1,2 @@
+    @Inject public BoundFirst(BoundSecond boundSecond) { }
+
