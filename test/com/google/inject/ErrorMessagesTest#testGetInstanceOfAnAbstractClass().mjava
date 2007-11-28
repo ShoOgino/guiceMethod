@@ -1,0 +1,11 @@
+  public void testGetInstanceOfAnAbstractClass() {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(AbstractClass.class);
+      fail();
+    } catch(ConfigurationException e) {
+      assertTrue(e.getMessage().contains(
+          "Injecting into abstract types is not supported."));
+    }
+  }
+
