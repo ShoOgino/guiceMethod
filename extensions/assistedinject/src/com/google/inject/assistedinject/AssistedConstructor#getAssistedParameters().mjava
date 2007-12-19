@@ -1,0 +1,9 @@
+  /**
+   * Returns the {@link ParameterListKey} for this constructor.  The
+   * {@link ParameterListKey} is created from the ordered list of {@link Assisted}
+   * constructor parameters.
+   */
+  public ParameterListKey getAssistedParameters() {
+    return assistedParameters;
+  }
+

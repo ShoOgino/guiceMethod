@@ -1,0 +1,4 @@
+  public ParameterListKey(List<Type> paramList) {
+    this.paramList = new ArrayList<Type>(paramList);
+  }
+

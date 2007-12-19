@@ -1,0 +1,4 @@
+    public ScopedBindingBuilder to(Class<? extends P> targetType) {
+      return to(Key.get(targetType));
+    }
+

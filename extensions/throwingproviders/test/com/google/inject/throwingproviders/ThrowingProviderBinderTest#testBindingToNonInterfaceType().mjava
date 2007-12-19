@@ -1,0 +1,14 @@
+  public void testBindingToNonInterfaceType() throws RemoteException {
+    try {
+      injector = Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(MockRemoteProvider.class, String.class)
+              .to(mockRemoteProvider);
+        }
+      });
+    } catch (IllegalArgumentException e) {
+      assertTrue(e.getMessage().contains("is not a compliant interface"));
+    }
+  }
+

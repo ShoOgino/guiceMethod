@@ -1,0 +1,33 @@
+    @SuppressWarnings({"unchecked"})
+    private Key<P> createKey() {
+      TypeLiteral<P> typeLiteral;
+      if (interfaceType.getTypeParameters().length == 1) {
+        typeLiteral = (TypeLiteral<P>) TypeLiteral.get(new ParameterizedType() {
+
+          public Type[] getActualTypeArguments() {
+            return new Type[]{valueType};
+          }
+
+          public Type getRawType() {
+            return interfaceType;
+          }
+
+          public Type getOwnerType() {
+            throw new UnsupportedOperationException();
+          }
+        });
+      } else {
+        typeLiteral = TypeLiteral.get(interfaceType);
+      }
+
+      if (annotation != null) {
+        return Key.get(typeLiteral, annotation);
+        
+      } else if (annotationType != null) {
+        return Key.get(typeLiteral, annotationType);
+        
+      } else {
+        return Key.get(typeLiteral);
+      }
+    }
+

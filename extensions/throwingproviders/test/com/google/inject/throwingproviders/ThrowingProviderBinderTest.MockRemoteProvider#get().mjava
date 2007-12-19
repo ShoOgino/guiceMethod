@@ -1,0 +1,12 @@
+    public T get() throws RemoteException {
+      if (nextToThrow instanceof RemoteException) {
+        throw (RemoteException) nextToThrow;
+      } else if (nextToThrow instanceof RuntimeException) {
+        throw (RuntimeException) nextToThrow;
+      } else if (nextToThrow == null) {
+        return nextToReturn;
+      } else {
+        throw new AssertionError("nextToThrow must be a runtime or remote exception");
+      }
+    }
+

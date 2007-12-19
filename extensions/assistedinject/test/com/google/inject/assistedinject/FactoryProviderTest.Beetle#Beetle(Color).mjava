@@ -1,0 +1,5 @@
+    @AssistedInject
+    public Beetle(@Assisted Color color) {
+      throw new IllegalStateException("Conflicting constructors");
+    }
+

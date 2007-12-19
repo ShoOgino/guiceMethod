@@ -1,0 +1,11 @@
+    /**
+     * Returns the exception type declared to be thrown by the get method of
+     * {@code interfaceType}.
+     */
+    @SuppressWarnings({"unchecked"})
+    private <P extends ThrowingProvider> Class<?> getExceptionType(Class<P> interfaceType) {
+      ParameterizedType genericUnreliableProvider
+          = (ParameterizedType) interfaceType.getGenericInterfaces()[0];
+      return (Class<? extends Exception>) genericUnreliableProvider.getActualTypeArguments()[1];
+    }
+

@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked")
+  private boolean paramCanBeInjected(Parameter parameter, Injector injector) {
+    return parameter.isBound(injector);
+  }
+

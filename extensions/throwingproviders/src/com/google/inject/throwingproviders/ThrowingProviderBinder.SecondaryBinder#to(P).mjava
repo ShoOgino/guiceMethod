@@ -1,0 +1,6 @@
+    public ScopedBindingBuilder to(P target) {
+      Key<P> targetKey = Key.get(interfaceType, uniqueAnnotation());
+      binder.bind(targetKey).toInstance(target);
+      return to(targetKey);
+    }
+

@@ -1,0 +1,5 @@
+    @AssistedInject
+    private Prius(@Assisted Color color) {
+      this.color = color;
+    }
+

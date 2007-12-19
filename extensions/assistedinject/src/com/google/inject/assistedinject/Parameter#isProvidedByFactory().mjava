@@ -1,0 +1,4 @@
+  public boolean isProvidedByFactory() {
+    return isAssisted;
+  }
+

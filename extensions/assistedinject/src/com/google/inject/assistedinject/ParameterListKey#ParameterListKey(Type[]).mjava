@@ -1,0 +1,4 @@
+  public ParameterListKey(Type[] types) {
+    this(Arrays.asList(types));
+  }
+

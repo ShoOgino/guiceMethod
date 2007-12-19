@@ -1,0 +1,4 @@
+  private Type getProvidedType(Type type) {
+    return ((ParameterizedType)type).getActualTypeArguments()[0];
+  }
+

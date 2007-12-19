@@ -1,0 +1,16 @@
+  public void testBindingToInterfaceWithBoundValueType() throws RemoteException {
+    injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        ThrowingProviderBinder.create(binder())
+            .bind(StringRemoteProvider.class, String.class)
+            .to(new StringRemoteProvider() {
+              public String get() throws RemoteException {
+                return "A";
+              }
+            });
+      }
+    });
+    
+    assertEquals("A", injector.getInstance(StringRemoteProvider.class).get());
+  }
+

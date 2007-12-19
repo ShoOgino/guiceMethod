@@ -1,0 +1,9 @@
+  private Key<?> getAlternateGuiceBindingKey() {
+    Type counterpart = (PRIMITIVE_COUNTERPARTS.containsKey(type))
+      ? PRIMITIVE_COUNTERPARTS.get(type)
+      : type;
+    return isProvider
+        ? getBindingForType(getProvidedType(counterpart))
+        : getBindingForType(counterpart);
+  }
+

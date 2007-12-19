@@ -1,0 +1,5 @@
+  public static <X,Y> FactoryProvider<X,Y> newFactory(
+      Class<X> factoryType, Class<Y> implementationType){
+    return new FactoryProvider<X, Y>(factoryType,implementationType);
+  }
+

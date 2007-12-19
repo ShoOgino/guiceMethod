@@ -1,0 +1,4 @@
+  public void beginNewScope() {
+    inScopeObjectsMap = new HashMap<Key, Object>();
+  }
+

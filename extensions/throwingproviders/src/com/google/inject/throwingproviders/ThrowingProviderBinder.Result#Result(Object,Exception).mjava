@@ -1,0 +1,5 @@
+    private Result(Object value, Exception exception) {
+      this.value = value;
+      this.exception = exception;
+    }
+

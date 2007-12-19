@@ -1,0 +1,4 @@
+    public static Result forValue(Object value) {
+      return new Result(value, null);
+    }
+

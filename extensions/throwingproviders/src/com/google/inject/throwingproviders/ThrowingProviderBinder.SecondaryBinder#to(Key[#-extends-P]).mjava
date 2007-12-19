@@ -1,0 +1,48 @@
+    public ScopedBindingBuilder to(final Key<? extends P> targetKey) {
+      Objects.nonNull(targetKey, "targetKey");
+      final Key<Result> resultKey = Key.get(Result.class, uniqueAnnotation());
+      final Key<P> key = createKey();
+
+      binder.bind(key).toProvider(new Provider<P>() {
+        private P instance;
+
+        @Inject void initialize(final Injector injector) {
+          instance = interfaceType.cast(Proxy.newProxyInstance(
+              interfaceType.getClassLoader(), new Class<?>[] { interfaceType },
+              new InvocationHandler() {
+                public Object invoke(Object proxy, Method method, Object[] args)
+                    throws Throwable {
+                  return injector.getInstance(resultKey).getOrThrow();
+                }
+              }));
+          }
+
+          public P get() {
+            return instance;
+          }
+        });
+
+      return binder.bind(resultKey).toProvider(new Provider<Result>() {
+        private Injector injector;
+
+        @Inject void initialize(Injector injector) {
+          this.injector = injector;
+        }
+
+        public Result get() {
+          try {
+            return Result.forValue(injector.getInstance(targetKey).get());
+          } catch (Exception e) {
+            if (exceptionType.isInstance(e)) {
+              return Result.forException(e);
+            } else if (e instanceof RuntimeException) {
+              throw (RuntimeException) e;
+            } else {
+              // this should never happen
+              throw new RuntimeException(e);
+            }
+          }
+        }
+      });
+    }
+

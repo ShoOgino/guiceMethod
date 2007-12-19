@@ -1,0 +1,8 @@
+    public Object getOrThrow() throws Exception {
+      if (exception != null) {
+        throw exception;
+      } else {
+        return value;
+      }
+    }
+

@@ -1,0 +1,8 @@
+    public SecondaryBinder<P> annotatedWith(Annotation annotation) {
+      if (!(this.annotationType == null && this.annotation == null)) {
+        throw new IllegalStateException();
+      }
+      this.annotation = annotation;
+      return this;
+    }
+

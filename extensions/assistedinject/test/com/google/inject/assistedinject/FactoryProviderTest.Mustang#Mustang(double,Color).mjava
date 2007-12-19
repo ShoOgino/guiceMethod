@@ -1,0 +1,6 @@
+    @AssistedInject
+    public Mustang(double engineSize, @Assisted Color color) {
+      this.engineSize = engineSize;
+      this.color = color;
+    }
+

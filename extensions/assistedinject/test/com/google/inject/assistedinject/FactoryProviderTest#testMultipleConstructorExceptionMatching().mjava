@@ -1,0 +1,25 @@
+  public void testMultipleConstructorExceptionMatching() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(MultipleConstructorDefectiveCarFactory.class).toProvider(
+            FactoryProvider.newFactory(
+                MultipleConstructorDefectiveCarFactory.class,
+                MultipleConstructorDefectiveCar.class));
+      }
+    });
+    MultipleConstructorDefectiveCarFactory factory
+        = injector.getInstance(MultipleConstructorDefectiveCarFactory.class);
+    try {
+      factory.createCar();
+      fail();
+    } catch (ExplosionException expected) {
+    }
+
+    try {
+      factory.createCar(Color.RED);
+      fail();
+    } catch (FireException expected) {
+    }
+  }
+

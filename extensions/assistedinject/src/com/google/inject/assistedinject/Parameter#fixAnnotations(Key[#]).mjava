@@ -1,0 +1,13 @@
+  /**
+   * Replace annotation instances with annotation types, this is only
+   * appropriate for testing if a key is bound and not for injecting.
+   *
+   * See Guice bug 125,
+   * http://code.google.com/p/google-guice/issues/detail?id=125
+   */
+  public Key<?> fixAnnotations(Key<?> key) {
+    return key.getAnnotation() == null
+        ? key
+        : Key.get(key.getTypeLiteral(), key.getAnnotation().annotationType());
+  }
+

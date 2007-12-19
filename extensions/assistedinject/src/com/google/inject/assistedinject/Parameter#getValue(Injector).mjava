@@ -1,0 +1,9 @@
+  /**
+   * Returns the Guice {@link Key} for this parameter.
+   */
+  public Object getValue(Injector injector) {
+    return isProvider
+        ? injector.getProvider(getBindingForType(getProvidedType(type)))
+        : injector.getInstance(getPrimaryBindingKey());
+  }
+

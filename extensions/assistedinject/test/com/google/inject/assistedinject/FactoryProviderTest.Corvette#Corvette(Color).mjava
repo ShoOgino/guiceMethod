@@ -1,0 +1,5 @@
+    @AssistedInject
+    public Corvette(@Assisted Color color) {
+      this(color, 100f, true);
+    }
+

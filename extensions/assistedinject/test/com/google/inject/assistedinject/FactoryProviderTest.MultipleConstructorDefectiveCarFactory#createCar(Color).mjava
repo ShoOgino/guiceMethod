@@ -1,0 +1,2 @@
+    Car createCar(Color r) throws FireException;
+

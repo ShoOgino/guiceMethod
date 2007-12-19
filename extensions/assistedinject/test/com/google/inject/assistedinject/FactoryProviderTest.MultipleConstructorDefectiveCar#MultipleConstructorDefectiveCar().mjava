@@ -1,0 +1,5 @@
+    @AssistedInject
+    public MultipleConstructorDefectiveCar() throws ExplosionException {
+      throw new ExplosionException();
+    }
+

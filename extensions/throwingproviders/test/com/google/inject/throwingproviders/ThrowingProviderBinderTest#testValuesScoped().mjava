@@ -1,0 +1,14 @@
+  public void testValuesScoped() throws RemoteException {
+    RemoteProvider<String> remoteProvider = 
+        injector.getInstance(Key.get(remoteProviderOfString));
+
+    mockRemoteProvider.setNextToReturn("A");
+    assertEquals("A", remoteProvider.get());
+
+    mockRemoteProvider.setNextToReturn("B");
+    assertEquals("A", remoteProvider.get());
+
+    testScope.beginNewScope();
+    assertEquals("B", remoteProvider.get());
+  }
+

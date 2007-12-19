@@ -1,0 +1,13 @@
+  public void testBindingToSubSubInterface() throws RemoteException {
+    try {
+      injector = Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(SubRemoteProvider.class, String.class);
+        }
+      });
+    } catch (IllegalArgumentException e) {
+      assertTrue(e.getMessage().contains("is not a compliant interface"));
+    }
+  }
+

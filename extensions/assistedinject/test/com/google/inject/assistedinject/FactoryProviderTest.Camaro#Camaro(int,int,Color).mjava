@@ -1,0 +1,10 @@
+    @AssistedInject
+    public Camaro(
+        @Named("horsePower")int horsePower,
+        @Named("modelYear")int modelYear,
+        @Assisted Color color) {
+      this.horsePower = horsePower;
+      this.modelYear = modelYear;
+      this.color = color;
+    }
+

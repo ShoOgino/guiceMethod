@@ -1,0 +1,6 @@
+  private Key<?> getBindingForType(Type type) {
+    return bindingAnnotation != null
+        ? Key.get(type, bindingAnnotation)
+        : Key.get(type);
+  }
+

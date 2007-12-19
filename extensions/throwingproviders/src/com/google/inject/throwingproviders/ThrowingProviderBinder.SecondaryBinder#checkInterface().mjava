@@ -1,0 +1,42 @@
+    private void checkInterface() {
+      String errorMessage = "%s is not a compliant interface "
+          + "- see the Javadoc for ThrowingProvider";
+
+      checkArgument(interfaceType.isInterface(), errorMessage, interfaceType.getName());
+      checkArgument(interfaceType.getGenericInterfaces().length == 1, errorMessage,
+          interfaceType.getName());
+      checkArgument(interfaceType.getInterfaces()[0] == ThrowingProvider.class,
+          errorMessage, interfaceType.getName());
+
+      // Ensure that T is parameterized and unconstrained.
+      ParameterizedType genericThrowingProvider
+          = (ParameterizedType) interfaceType.getGenericInterfaces()[0];
+      if (interfaceType.getTypeParameters().length == 1) {
+        checkArgument(interfaceType.getTypeParameters().length == 1, errorMessage,
+            interfaceType.getName());
+        String returnTypeName = interfaceType.getTypeParameters()[0].getName();
+        Type returnType = genericThrowingProvider.getActualTypeArguments()[0];
+        checkArgument(returnType instanceof TypeVariable, errorMessage, interfaceType.getName());
+        checkArgument(returnTypeName.equals(((TypeVariable) returnType).getName()),
+            errorMessage, interfaceType.getName());
+      } else {
+        checkArgument(interfaceType.getTypeParameters().length == 0,
+            errorMessage, interfaceType.getName());
+        checkArgument(genericThrowingProvider.getActualTypeArguments()[0].equals(valueType),
+            errorMessage, interfaceType.getName());
+      }
+
+      Type exceptionType = genericThrowingProvider.getActualTypeArguments()[1];
+      checkArgument(exceptionType instanceof Class, errorMessage, interfaceType.getName());
+      
+      if (interfaceType.getDeclaredMethods().length == 1) {
+        Method method = interfaceType.getDeclaredMethods()[0];
+        checkArgument(method.getName().equals("get"), errorMessage, interfaceType.getName());
+        checkArgument(method.getParameterTypes().length == 0,
+            errorMessage, interfaceType.getName());
+      } else {
+        checkArgument(interfaceType.getDeclaredMethods().length == 0,
+            errorMessage, interfaceType.getName());
+      }
+    }
+

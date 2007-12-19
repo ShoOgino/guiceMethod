@@ -1,0 +1,4 @@
+    public void throwOnNextGet(String message) {
+      throwOnNextGet(new RemoteException(message));
+    }
+

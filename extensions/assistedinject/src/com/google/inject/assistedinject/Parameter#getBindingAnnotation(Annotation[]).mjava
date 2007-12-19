@@ -1,0 +1,20 @@
+  /**
+   * Returns the unique binding annotation from the specified list, or
+   * {@code null} if there are none.
+   *
+   * @throws IllegalStateException if multiple binding annotations exist.
+   */
+  private Annotation getBindingAnnotation(Annotation[] annotations) {
+    Annotation bindingAnnotation = null;
+    for (Annotation a : annotations) {
+      if (a.annotationType().getAnnotation(BindingAnnotation.class) != null) {
+        if (bindingAnnotation != null) {
+          throw new IllegalArgumentException(String.format("Parameter has " +
+              "multiple binding annotations: %s and %s", bindingAnnotation, a));
+        }
+        bindingAnnotation = a;
+      }
+    }
+    return bindingAnnotation;
+  }
+

@@ -1,0 +1,16 @@
+  @Inject
+  @SuppressWarnings({"unchecked", "unused"})
+  private void setInjectorAndCheckUnboundParametersAreInjectable(
+      Injector injector) {
+    this.injector = injector;
+    for (AssistedConstructor<?> c : factoryMethodToConstructor.values()) {
+      for (Parameter p : c.getAllParameters()) {
+        if(!p.isProvidedByFactory() && !paramCanBeInjected(p, injector)) {
+          throw new IllegalStateException(String.format(
+              "Parameter of type '%s' is not injectable or annotated "
+                + "with @Assisted for Constructor '%s'", p, c));
+        }
+      }
+    }
+  }
+

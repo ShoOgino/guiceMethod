@@ -1,0 +1,4 @@
+  public Set<Class<?>> getDeclaredExceptions() {
+    return new HashSet<Class<?>>(Arrays.asList(constructor.getExceptionTypes()));
+  }
+

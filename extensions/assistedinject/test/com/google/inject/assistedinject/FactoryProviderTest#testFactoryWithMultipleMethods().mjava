@@ -1,0 +1,23 @@
+  public void testFactoryWithMultipleMethods() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(float.class).toInstance(140f);
+        bind(SummerCarFactory.class).toProvider(
+            FactoryProvider.newFactory(SummerCarFactory.class, Corvette.class));
+      }
+    });
+
+    SummerCarFactory carFactory = injector.getInstance(SummerCarFactory.class);
+
+    Corvette blueCorvette = (Corvette) carFactory.createConvertible(Color.BLUE);
+    assertEquals(Color.BLUE, blueCorvette.color);
+    assertEquals(100f, blueCorvette.maxMph);
+    assertTrue(blueCorvette.isConvertable);
+
+    Corvette redCorvette = (Corvette) carFactory.create(Color.RED, false);
+    assertEquals(Color.RED, redCorvette.color);
+    assertEquals(140f, redCorvette.maxMph);
+    assertFalse(redCorvette.isConvertable);
+  }
+

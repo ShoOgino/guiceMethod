@@ -1,0 +1,21 @@
+  @SuppressWarnings("unchecked")
+  public AssistedConstructor(Constructor<T> constructor) {
+    this.constructor = constructor;
+
+    Type[] parameterTypes = constructor.getGenericParameterTypes();
+    Annotation[][] annotations = constructor.getParameterAnnotations();
+
+    List<Type> typeList = new ArrayList<Type>();
+    allParameters = new ArrayList<Parameter>();
+
+    // categorize params as @Assisted or @Injected
+    for (int i = 0; i < parameterTypes.length; i++) {
+      Parameter parameter = new Parameter(parameterTypes[i], annotations[i]);
+      allParameters.add(parameter);
+      if (parameter.isProvidedByFactory()) {
+        typeList.add(parameter.getType());
+      }
+    }
+    this.assistedParameters = new ParameterListKey(typeList);
+  }
+

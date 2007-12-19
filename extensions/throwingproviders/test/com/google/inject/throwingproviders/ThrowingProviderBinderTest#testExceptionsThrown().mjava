@@ -1,0 +1,13 @@
+  public void testExceptionsThrown() {
+    RemoteProvider<String> remoteProvider = 
+        injector.getInstance(Key.get(remoteProviderOfString));
+
+    mockRemoteProvider.throwOnNextGet("kaboom!");
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertEquals("kaboom!", expected.getMessage());
+    }
+  }
+

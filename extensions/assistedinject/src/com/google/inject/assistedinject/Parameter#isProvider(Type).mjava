@@ -1,0 +1,5 @@
+  private boolean isProvider(Type type) {
+    return type instanceof ParameterizedType
+        && ((ParameterizedType)type).getRawType() == Provider.class;
+  }
+

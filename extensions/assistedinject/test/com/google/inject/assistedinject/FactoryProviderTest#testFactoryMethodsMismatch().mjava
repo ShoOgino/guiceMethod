@@ -1,0 +1,9 @@
+  public void testFactoryMethodsMismatch() {
+    try {
+      FactoryProvider.newFactory(SummerCarFactory.class, Beetle.class);
+      fail();
+    } catch(IllegalArgumentException e) {
+      assertTrue(e.getMessage().startsWith("Constructor mismatch"));
+    }
+  }
+
