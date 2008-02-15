@@ -1,0 +1,6 @@
+    private void assertNoScope() {
+      if (bindingScope != null) {
+        throw new IllegalStateException("Already scoped by " + bindingScope);
+      }
+    }
+

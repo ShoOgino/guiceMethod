@@ -1,0 +1,17 @@
+  public void testBareBindingFails() throws Exception {
+    InterceptingInjectorBuilder builder = new InterceptingInjectorBuilder()
+        .bindModules(injectionController.getModule(),
+            new AbstractModule() {
+              protected void configure() {
+                bind(ArrayList.class);
+              }
+            })
+        .intercept(ArrayList.class);
+
+    try {
+      builder.build();
+      fail();
+    } catch (UnsupportedOperationException expected) {
+    }
+  }
+

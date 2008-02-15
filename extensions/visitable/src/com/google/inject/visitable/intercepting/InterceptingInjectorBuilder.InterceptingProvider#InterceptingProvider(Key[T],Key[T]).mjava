@@ -1,0 +1,5 @@
+    public InterceptingProvider(Key<T> key, Key<T> anonymousKey) {
+      this.key = key;
+      this.anonymousKey = anonymousKey;
+    }
+

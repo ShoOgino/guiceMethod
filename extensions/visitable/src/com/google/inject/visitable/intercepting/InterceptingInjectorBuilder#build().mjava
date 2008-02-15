@@ -1,0 +1,60 @@
+  public Injector build() {
+    if (interceptedKeys.contains(INJECTION_INTERCEPTOR_KEY)) {
+      throw new IllegalArgumentException("Cannot intercept the interceptor!");
+    }
+
+    FutureInjector futureInjector = new FutureInjector();
+
+    // record everything that's being done to a fake binder
+    final VisitableBinder visitableBinder = new VisitableBinder(futureInjector);
+    for (Module module : modules) {
+      module.configure(visitableBinder);
+    }
+
+    // replay against a real binder, substituting interceptable wherever appropriate
+    Module interceptingModule = new Module() {
+      public void configure(final Binder binder) {
+        for (Command command : visitableBinder.getCommands()) {
+          command.acceptVisitor(new ExecutingVisitor() {
+
+            @Override public Binder binder() {
+              return binder;
+            }
+            
+            @Override public <T> Void visitBinding(BindCommand<T> command) {
+              Key<T> key = command.getKey();
+
+              if (!interceptedKeys.contains(key)) {
+                return super.visitBinding(command);
+              }
+
+              if (command.getTarget() == null) {
+                throw new UnsupportedOperationException(
+                    String.format("Cannot intercept bare binding of %s.", key));
+              }
+
+              Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
+              binder().bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
+
+              LinkedBindingBuilder<T> linkedBindingBuilder = binder().bind(anonymousKey);
+              ScopedBindingBuilder scopedBindingBuilder = command.getTarget().execute(linkedBindingBuilder);
+
+              if (command.getScoping() != null) {
+                command.getScoping().execute(scopedBindingBuilder);
+              }
+
+              return null;
+            }
+          });
+        }
+      }
+    };
+
+    Injector injector = Guice.createInjector(interceptingModule);
+
+    // make the injector available for callbacks from early providers
+    futureInjector.initialize(injector);
+
+    return injector;
+  }
+

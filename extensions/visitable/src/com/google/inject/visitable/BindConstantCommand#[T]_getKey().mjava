@@ -1,0 +1,4 @@
+  public <T> Key<T> getKey() {
+    return bindingAnnotation.getKey();
+  }
+

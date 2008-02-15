@@ -1,0 +1,4 @@
+  RequestStaticInjectionCommand(Class[] types) {
+    this.types = types.clone();
+  }
+

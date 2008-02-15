@@ -1,0 +1,6 @@
+  /**
+   * Returns the bound instance, if it exists, or {@code defaultValue}
+   * if no bound value exists.
+   */
+  T get(T defaultValue);
+

@@ -1,0 +1,16 @@
+    public void in(final Scope scope) {
+      nonNull(scope, "scope");
+      assertNoScope();
+      bindingScope = new AbstractScoping() {
+        public void execute(ScopedBindingBuilder scopedBindingBuilder) {
+          scopedBindingBuilder.in(scope);
+        }
+        @Override public Scope getScope(Scope defaultValue) {
+          return scope;
+        }
+        @Override public String toString() {
+          return String.valueOf(scope);
+        }
+      };
+    }
+

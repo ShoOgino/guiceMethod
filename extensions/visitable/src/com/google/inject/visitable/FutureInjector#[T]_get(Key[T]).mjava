@@ -1,0 +1,8 @@
+  public <T> T get(Key<T> key) {
+    if (injector == null) {
+      throw new IllegalStateException("Not yet initialized");
+    }
+
+    return injector.getInstance(key);
+  }
+

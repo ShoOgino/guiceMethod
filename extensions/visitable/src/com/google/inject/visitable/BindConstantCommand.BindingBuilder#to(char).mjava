@@ -1,0 +1,19 @@
+    public void to(final char value) {
+      assertNoTarget();
+
+      BindConstantCommand.this.target = new ConstantTarget() {
+        public void execute(ConstantBindingBuilder builder) {
+          builder.to(value);
+        }
+        public Object get(Object defaultValue) {
+          return value;
+        }
+        public Class getType() {
+          return Character.class;
+        }
+        @Override public String toString() {
+          return String.valueOf(value);
+        }
+      };
+    }
+

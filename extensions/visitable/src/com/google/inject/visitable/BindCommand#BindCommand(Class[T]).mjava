@@ -1,0 +1,4 @@
+  BindCommand(Class<T> type) {
+    this(Key.get(type));
+  }
+

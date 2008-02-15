@@ -1,0 +1,16 @@
+    public void toInstance(final T instance) {
+      assertNoTarget();
+      target = new AbstractTarget<T>() {
+        public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
+          linkedBindingBuilder.toInstance(instance);
+          return null;
+        }
+        @Override public T get(T defaultValue) {
+          return instance;
+        }
+        @Override public String toString() {
+          return "instance " + instance;
+        }
+      };
+    }
+

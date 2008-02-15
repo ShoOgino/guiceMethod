@@ -1,0 +1,17 @@
+    public ScopedBindingBuilder toProvider(final Class<? extends Provider<? extends T>> providerType) {
+      nonNull(providerType, "providerType");
+      assertNoTarget();
+      target = new AbstractTarget<T>() {
+        public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
+          return linkedBindingBuilder.toProvider(providerType);
+        }
+        @Override public Key<? extends Provider<? extends T>> getProviderKey(Key<Provider<? extends T>> defaultValue) {
+          return Key.get(providerType);
+        }
+        @Override public String toString() {
+          return "provider " + providerType;
+        }
+      };
+      return this;
+    }
+

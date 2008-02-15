@@ -1,0 +1,4 @@
+    public ScopedBindingBuilder execute(LinkedBindingBuilder linkedBindingBuilder) {
+      throw new UnsupportedOperationException();
+    }
+

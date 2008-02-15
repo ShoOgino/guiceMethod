@@ -1,0 +1,9 @@
+  public InterceptingInjectorBuilder intercept(Class<?>... classes) {
+    List<Key<?>> keysAsList = new ArrayList<Key<?>>(classes.length);
+    for (Class<?> clas : classes) {
+      keysAsList.add(Key.get(clas));
+    }
+
+    return intercept(keysAsList);
+  }
+

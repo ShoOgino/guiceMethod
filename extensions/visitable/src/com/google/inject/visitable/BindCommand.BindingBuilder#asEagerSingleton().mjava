@@ -1,0 +1,15 @@
+    public void asEagerSingleton() {
+      assertNoScope();
+      bindingScope = new AbstractScoping() {
+        public void execute(ScopedBindingBuilder scopedBindingBuilder) {
+          scopedBindingBuilder.asEagerSingleton();
+        }
+        @Override public boolean isEagerSingleton() {
+          return true;
+        }
+        @Override public String toString() {
+          return "eager singleton";
+        }
+      };
+    }
+

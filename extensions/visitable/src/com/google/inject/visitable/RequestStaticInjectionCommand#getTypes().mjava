@@ -1,0 +1,4 @@
+  public Class[] getTypes() {
+    return types.clone();
+  }
+

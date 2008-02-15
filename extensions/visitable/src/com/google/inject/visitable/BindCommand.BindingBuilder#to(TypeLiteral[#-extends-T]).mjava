@@ -1,0 +1,19 @@
+    public ScopedBindingBuilder to(
+        final TypeLiteral<? extends T> implementation) {
+      nonNull(implementation, "implementation");
+      assertNoTarget();
+      target = new AbstractTarget<T>() {
+        public ScopedBindingBuilder execute(
+            LinkedBindingBuilder<T> linkedBindingBuilder) {
+          return linkedBindingBuilder.to(implementation);
+        }
+        @Override public Key<? extends T> getKey(Key<? extends T> defaultValue) {
+          return Key.get(implementation);
+        }
+        @Override public String toString() {
+          return String.valueOf(implementation);
+        }
+      };
+      return this;
+    }
+

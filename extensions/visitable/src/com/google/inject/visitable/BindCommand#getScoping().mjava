@@ -1,0 +1,4 @@
+  public BindingScope getScoping() {
+    return bindingScope;
+  }
+

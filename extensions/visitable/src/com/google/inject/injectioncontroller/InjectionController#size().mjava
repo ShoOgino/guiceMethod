@@ -1,0 +1,7 @@
+  /**
+   * @VisibleForTesting
+   */
+  int size() {
+    return map.size();
+  }
+

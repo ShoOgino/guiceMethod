@@ -1,0 +1,20 @@
+    public <E extends Enum<E>> void to(final E value) {
+      Objects.nonNull(value, "value");
+      assertNoTarget();
+
+      BindConstantCommand.this.target = new ConstantTarget() {
+        public void execute(ConstantBindingBuilder builder) {
+          builder.to(value);
+        }
+        public Object get(Object defaultValue) {
+          return value;
+        }
+        public Class getType() {
+          return value.getDeclaringClass();
+        }
+        @Override public String toString() {
+          return String.valueOf(value);
+        }
+      };
+    }
+

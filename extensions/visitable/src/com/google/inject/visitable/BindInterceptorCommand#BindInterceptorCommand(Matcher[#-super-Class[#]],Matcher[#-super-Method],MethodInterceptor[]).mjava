@@ -1,0 +1,9 @@
+  BindInterceptorCommand(
+      Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher,
+      MethodInterceptor[] interceptors) {
+    this.classMatcher = classMatcher;
+    this.methodMatcher = methodMatcher;
+    this.interceptors = interceptors;
+  }
+

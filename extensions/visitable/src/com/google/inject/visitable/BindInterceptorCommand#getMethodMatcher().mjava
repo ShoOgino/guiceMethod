@@ -1,0 +1,4 @@
+  public Matcher<? super Method> getMethodMatcher() {
+    return methodMatcher;
+  }
+

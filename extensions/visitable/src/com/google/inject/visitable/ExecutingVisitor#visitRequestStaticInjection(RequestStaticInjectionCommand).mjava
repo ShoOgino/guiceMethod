@@ -1,0 +1,5 @@
+  public Void visitRequestStaticInjection(RequestStaticInjectionCommand command) {
+    command.execute(binder());
+    return null;
+  }
+

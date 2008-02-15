@@ -1,0 +1,13 @@
+  /**
+   * Visits each binding with a different visitor.
+   */
+  private void visitBindings(BinderVisitor<?>... visitors) {
+    assertEquals(binder.getCommands().size(), visitors.length);
+
+    for (int i = 0; i < visitors.length; i++) {
+      BinderVisitor<?> visitor = visitors[i];
+      Command command = binder.getCommands().get(i);
+      command.acceptVisitor(visitor);
+    }
+  }
+

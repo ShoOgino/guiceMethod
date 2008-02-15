@@ -1,0 +1,4 @@
+  public void install(Module module) {
+    module.configure(this);
+  }
+

@@ -1,0 +1,4 @@
+  public MethodInterceptor[] getInterceptors() {
+    return interceptors;
+  }
+

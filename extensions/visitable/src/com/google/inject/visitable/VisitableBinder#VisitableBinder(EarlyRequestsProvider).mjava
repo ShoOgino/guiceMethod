@@ -1,0 +1,4 @@
+  public VisitableBinder(EarlyRequestsProvider earlyRequestsProvider) {
+    this.earlyRequestsProvider = earlyRequestsProvider;
+  }
+

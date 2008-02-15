@@ -1,0 +1,4 @@
+  BindConstantCommand() {
+    // hide the public constructor
+  }
+

@@ -1,0 +1,4 @@
+  BindCommand(TypeLiteral<T> typeLiteral) {
+    this(Key.get(typeLiteral));
+  }
+

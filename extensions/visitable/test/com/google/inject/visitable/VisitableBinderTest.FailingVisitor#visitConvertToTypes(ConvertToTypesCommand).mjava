@@ -1,0 +1,4 @@
+    public Void visitConvertToTypes(ConvertToTypesCommand command) {
+      throw new AssertionFailedError();
+    }
+

@@ -1,0 +1,4 @@
+  public void addError(String message, Object... arguments) {
+    commands.add(new AddMessageErrorCommand(message, arguments));
+  }
+

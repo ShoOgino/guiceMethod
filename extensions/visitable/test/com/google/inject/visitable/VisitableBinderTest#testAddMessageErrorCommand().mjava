@@ -1,0 +1,22 @@
+  public void testAddMessageErrorCommand() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        addError("Message", "A", "B", "C");
+      }
+    };
+
+    module.configure(binder);
+
+    visitBindings(
+        new FailingVisitor() {
+          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+            assertEquals("A", command.getArguments()[0]);
+            assertEquals("B", command.getArguments()[1]);
+            assertEquals("C", command.getArguments()[2]);
+            assertEquals("Message", command.getMessage());
+            return null;
+          }
+        }
+    );
+  }
+

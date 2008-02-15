@@ -1,0 +1,5 @@
+  public Void visitBindInterceptor(BindInterceptorCommand command) {
+    command.execute(binder());
+    return null;
+  }
+

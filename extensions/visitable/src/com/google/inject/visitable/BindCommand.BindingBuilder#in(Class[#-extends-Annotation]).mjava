@@ -1,0 +1,17 @@
+    public void in(final Class<? extends Annotation> scopeAnnotation) {
+      nonNull(scopeAnnotation, "scopeAnnotation");
+      assertNoScope();
+
+      bindingScope = new AbstractScoping() {
+        public void execute(ScopedBindingBuilder scopedBindingBuilder) {
+          scopedBindingBuilder.in(scopeAnnotation);
+        }
+        @Override public Class<? extends Annotation> getScopeAnnotation(Class<? extends Annotation> defaultValue) {
+          return scopeAnnotation;
+        }
+        @Override public String toString() {
+          return scopeAnnotation.getName();
+        }
+      };
+    }
+

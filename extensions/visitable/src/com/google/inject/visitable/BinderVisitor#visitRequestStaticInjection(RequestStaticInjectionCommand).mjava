@@ -1,0 +1,2 @@
+  V visitRequestStaticInjection(RequestStaticInjectionCommand command);
+

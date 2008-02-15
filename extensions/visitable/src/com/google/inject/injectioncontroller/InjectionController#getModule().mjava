@@ -1,0 +1,12 @@
+  /**
+   * Returns a module that binds the injection interceptor.
+   */
+  public final Module getModule() {
+    return new AbstractModule() {
+      protected void configure() {
+        bind(InjectionInterceptor.class)
+            .toInstance(injectionInterceptor);
+      }
+    };
+  }
+

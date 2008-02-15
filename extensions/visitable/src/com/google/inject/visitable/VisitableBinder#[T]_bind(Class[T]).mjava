@@ -1,0 +1,6 @@
+  public <T> AnnotatedBindingBuilder<T> bind(Class<T> type) {
+    BindCommand<T> bindCommand = new BindCommand<T>(type);
+    commands.add(bindCommand);
+    return bindCommand.bindingBuilder();
+  }
+

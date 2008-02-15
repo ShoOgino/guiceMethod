@@ -1,0 +1,8 @@
+  public <T> Provider<T> getProvider(final Key<T> key) {
+    return new Provider<T>() {
+      public T get() {
+        return earlyRequestsProvider.get(key);
+      }
+    };
+  }
+
