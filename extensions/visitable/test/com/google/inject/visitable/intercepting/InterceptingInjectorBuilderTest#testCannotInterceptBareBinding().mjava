@@ -1,0 +1,18 @@
+  public void testCannotInterceptBareBinding() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(ArrayList.class);
+      }
+    };
+
+    InterceptingInjectorBuilder builder = new InterceptingInjectorBuilder()
+        .intercept(ArrayList.class)
+        .bindModules(module);
+
+    try {
+      builder.build();
+      fail();
+    } catch(UnsupportedOperationException expected) {
+    }
+  }
+

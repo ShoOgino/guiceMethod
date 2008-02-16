@@ -1,4 +1,4 @@
   public <T> T acceptVisitor(Visitor<T> visitor) {
-    return visitor.visitConstantBinding(this);
+    return visitor.visitBindConstant(this);
   }
 

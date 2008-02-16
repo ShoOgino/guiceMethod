@@ -9,7 +9,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
             assertEquals(Scopes.SINGLETON, command.getScoping().getScope(null));
             assertNull(command.getScoping().getScopeAnnotation(null));
@@ -19,7 +19,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Map.class), command.getKey());
             assertEquals(Singleton.class, command.getScoping().getScopeAnnotation(null));
             assertNull(command.getScoping().getScope(null));
@@ -29,7 +29,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
             assertNull(command.getScoping().getScopeAnnotation(null));
             assertNull(command.getScoping().getScope(null));

@@ -26,7 +26,7 @@
         },
 
         new FailingVisitor() {
-          @Override public Void visitGetProviderCommand(GetProviderCommand command) {
+          @Override public Void visitGetProvider(GetProviderCommand command) {
             assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
             assertEquals(earlyRequestProvider, command.getEarlyRequestsProvider());
             return null;
@@ -34,7 +34,7 @@
         },
 
         new FailingVisitor() {
-          @Override public Void visitGetProviderCommand(GetProviderCommand command) {
+          @Override public Void visitGetProvider(GetProviderCommand command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertEquals(earlyRequestProvider, command.getEarlyRequestsProvider());
             return null;

@@ -13,7 +13,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertEquals("A", command.getTarget().getProvider(null).get());
             return null;
@@ -21,7 +21,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
             assertNull(command.getTarget().get(null));
             assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey(null));
@@ -30,7 +30,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Collection.class), command.getKey());
             assertNull(command.getTarget().get(null));
             assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey(null));

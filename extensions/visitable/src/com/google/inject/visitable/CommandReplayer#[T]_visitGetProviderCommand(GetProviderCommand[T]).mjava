@@ -1,5 +1,0 @@
-  public <T> Void visitGetProviderCommand(GetProviderCommand<T> command) {
-    binder().getProvider(command.getKey());
-    return null;
-  }
-

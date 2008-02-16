@@ -1,18 +1,24 @@
   public Injector build() {
-    if (interceptedKeys.contains(INJECTION_INTERCEPTOR_KEY)) {
-      throw new IllegalArgumentException("Cannot intercept the interceptor!");
-    }
-
     FutureInjector futureInjector = new FutureInjector();
 
     // record commands from the modules
     List<Command> commands = new CommandRecorder(futureInjector).recordCommands(modules);
 
     // rewrite the commands to insert interception
-    Module module = new CommandRewriter().createModule(commands);
+    CommandRewriter rewriter = new CommandRewriter();
+    Module module = rewriter.createModule(commands);
 
     // create and injector with the rewritten commands
     Injector injector = Guice.createInjector(module);
+
+    // fail if any interceptions were missing
+    if (!tolerateUnmatchedInterceptions 
+        && !rewriter.keysIntercepted.equals(keysToIntercept)) {
+      Set<Key> keysNotIntercepted = new HashSet<Key>(keysToIntercept);
+      keysNotIntercepted.removeAll(rewriter.keysIntercepted);
+      throw new IllegalArgumentException("An explicit binding is required for "
+          + "all intercepted keys, but was not found for " + keysNotIntercepted);
+    }
 
     // make the injector available for callbacks from early providers
     futureInjector.initialize(injector);

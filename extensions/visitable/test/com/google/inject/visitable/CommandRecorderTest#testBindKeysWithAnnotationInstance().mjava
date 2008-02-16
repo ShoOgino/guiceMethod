@@ -1,6 +1,6 @@
   public void testBindKeysWithAnnotationInstance() {
     FailingVisitor annotationChecker = new FailingVisitor() {
-      @Override public Void visitBinding(BindCommand command) {
+      @Override public Void visitBind(BindCommand command) {
         assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
         return null;
       }

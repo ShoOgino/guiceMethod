@@ -1,4 +1,0 @@
-    public <T> Void visitBinding(BindCommand<T> command) {
-      throw new AssertionFailedError();
-    }
-

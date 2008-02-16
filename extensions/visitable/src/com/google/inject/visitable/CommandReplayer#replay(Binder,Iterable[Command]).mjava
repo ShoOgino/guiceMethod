@@ -4,15 +4,17 @@
   public void replay(Binder binder, Iterable<Command> commands) {
     Objects.nonNull(binder, "binder");
     Objects.nonNull(commands, "commands");
+    if (this.binder != null) {
+      throw new ConcurrentModificationException("CommandReplayer does not support concurrent use");
+    }
 
-    Binder oldBinder = this.binder;
     this.binder = binder;
     try {
       for (Command command : commands) {
         command.acceptVisitor(this);
       }
     } finally {
-      this.binder = oldBinder;
+      this.binder = null;
     }
   }
 

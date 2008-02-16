@@ -1,8 +1,8 @@
-    @Override public <T> Void visitBinding(BindCommand<T> command) {
+    @Override public <T> Void visitBind(BindCommand<T> command) {
       Key<T> key = command.getKey();
 
-      if (!interceptedKeys.contains(key)) {
-        return super.visitBinding(command);
+      if (!keysToIntercept.contains(key)) {
+        return super.visitBind(command);
       }
 
       if (command.getTarget() == null) {
@@ -16,10 +16,15 @@
       LinkedBindingBuilder<T> linkedBindingBuilder = binder().bind(anonymousKey);
       ScopedBindingBuilder scopedBindingBuilder = command.getTarget().execute(linkedBindingBuilder);
 
+      // we scope the user's provider, not the interceptor. This is dangerous,
+      // but convenient. It means that although the user's provider will live
+      // in its proper scope, the intereptor gets invoked without a scope
       BindScoping scoping = command.getScoping();
       if (scoping != null) {
         scoping.execute(scopedBindingBuilder);
       }
+
+      keysIntercepted.add(key);
 
       return null;
     }

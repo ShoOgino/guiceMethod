@@ -4,8 +4,8 @@
   public final Module getModule() {
     return new AbstractModule() {
       protected void configure() {
-        bind(InjectionInterceptor.class)
-            .toInstance(injectionInterceptor);
+        bind(ProvisionInterceptor.class)
+            .toInstance(provisionInterceptor);
       }
     };
   }

@@ -1,4 +1,4 @@
-  public <T> Void visitBinding(BindCommand<T> command) {
+  public <T> Void visitBind(BindCommand<T> command) {
     LinkedBindingBuilder<T> lbb = binder().bind(command.getKey());
 
     BindTarget<T> bindTarget = command.getTarget();

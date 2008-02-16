@@ -1,0 +1,10 @@
+  public void testInterceptProvisionInterceptor() {
+    InterceptingInjectorBuilder builder = new InterceptingInjectorBuilder();
+
+    try {
+      builder.intercept(ProvisionInterceptor.class);
+      fail();
+    } catch(IllegalArgumentException expected) {
+    }
+  }
+

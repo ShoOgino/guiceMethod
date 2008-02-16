@@ -1,0 +1,38 @@
+  /**
+   * The user's provider is scoped but the interceptor is not. As this testcase
+   * demonstrates, the user's provider gets called only once (in singleton
+   * scope) but the interceptor gets called for each provision.
+   */
+  public void testInterceptionIsNotScoped() {
+    final Provider<Integer> sequenceProvider = new Provider<Integer>() {
+      private int next = 100;
+      public Integer get() {
+        return next++;
+      }
+    };
+
+    final ProvisionInterceptor interceptor = new ProvisionInterceptor() {
+      private int next = 1;
+      @SuppressWarnings({"unchecked"})
+      public <T> T intercept(Key<T> key, Provider<? extends T> delegate) {
+        assertEquals(100, delegate.get());
+        return (T) new Integer(next++);
+      }
+    };
+
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(Integer.class).toProvider(sequenceProvider).in(Scopes.SINGLETON);
+        bind(ProvisionInterceptor.class).toInstance(interceptor);
+      }
+    };
+
+    Injector injector = new InterceptingInjectorBuilder()
+        .intercept(Integer.class)
+        .bindModules(module)
+        .build();
+
+    assertEquals(1, (int) injector.getInstance(Integer.class));
+    assertEquals(2, (int) injector.getInstance(Integer.class));
+  }
+

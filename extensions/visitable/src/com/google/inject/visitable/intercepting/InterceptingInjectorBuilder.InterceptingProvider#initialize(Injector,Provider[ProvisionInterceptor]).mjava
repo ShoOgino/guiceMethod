@@ -1,4 +1,4 @@
-    @Inject void initialize(Injector injector, Provider<InjectionInterceptor> injectionInterceptorProvider) {
+    @Inject void initialize(Injector injector, Provider<ProvisionInterceptor> injectionInterceptorProvider) {
       this.injectionInterceptorProvider = nonNull(
           injectionInterceptorProvider, "injectionInterceptorProvider");
       this.delegateProvider = nonNull(

@@ -7,7 +7,7 @@
         },
 
         new FailingVisitor() {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertEquals("A", command.getTarget().get(null));
             return null;
