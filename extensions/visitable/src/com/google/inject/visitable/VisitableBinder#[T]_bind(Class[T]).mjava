@@ -1,4 +1,0 @@
-  public <T> AnnotatedBindingBuilder<T> bind(Class<T> type) {
-    return internalBind(Key.get(type));
-  }
-

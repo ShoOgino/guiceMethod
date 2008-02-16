@@ -1,0 +1,18 @@
+  /**
+   * Replays {@code commands} against {@code binder}.
+   */
+  public void replay(Binder binder, Iterable<Command> commands) {
+    Objects.nonNull(binder, "binder");
+    Objects.nonNull(commands, "commands");
+
+    Binder oldBinder = this.binder;
+    this.binder = binder;
+    try {
+      for (Command command : commands) {
+        command.acceptVisitor(this);
+      }
+    } finally {
+      this.binder = oldBinder;
+    }
+  }
+

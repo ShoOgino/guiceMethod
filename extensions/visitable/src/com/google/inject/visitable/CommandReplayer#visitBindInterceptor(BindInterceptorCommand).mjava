@@ -1,0 +1,7 @@
+  public Void visitBindInterceptor(BindInterceptorCommand command) {
+    List<MethodInterceptor> interceptors = command.getInterceptors();
+    getBinder().bindInterceptor(command.getClassMatcher(), command.getMethodMatcher(),
+        interceptors.toArray(new MethodInterceptor[interceptors.size()]));
+    return null;
+  }
+

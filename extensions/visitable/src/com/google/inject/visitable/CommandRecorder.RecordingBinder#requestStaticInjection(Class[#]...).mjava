@@ -1,0 +1,4 @@
+    public void requestStaticInjection(Class<?>... types) {
+      writableCommands.add(new RequestStaticInjectionCommand(types));
+    }
+

@@ -1,0 +1,18 @@
+  public void testBindToInstance() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("A");
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public <T> Void visitBinding(BindCommand<T> command) {
+            assertEquals(Key.get(String.class), command.getKey());
+            assertEquals("A", command.getTarget().get(null));
+            return null;
+          }
+        }
+    );
+  }
+

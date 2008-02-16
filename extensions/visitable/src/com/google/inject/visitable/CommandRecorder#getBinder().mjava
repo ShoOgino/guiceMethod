@@ -1,0 +1,7 @@
+  /**
+   * Returns the binder used to record commands.
+   */
+  public Binder getBinder() {
+    return binder;
+  }
+

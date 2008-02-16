@@ -1,7 +1,7 @@
     public ScopedBindingBuilder toProvider(final Provider<? extends T> provider) {
       nonNull(provider, "provider");
       assertNoTarget();
-      target = new AbstractTarget<T>() {
+      bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           return linkedBindingBuilder.toProvider(provider);
         }

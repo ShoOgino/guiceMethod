@@ -1,0 +1,5 @@
+    public void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+                               TypeConverter converter) {
+      writableCommands.add(new ConvertToTypesCommand(typeMatcher, converter));
+    }
+

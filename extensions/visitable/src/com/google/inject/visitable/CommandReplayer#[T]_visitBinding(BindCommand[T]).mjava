@@ -1,0 +1,16 @@
+  public <T> Void visitBinding(BindCommand<T> command) {
+    LinkedBindingBuilder<T> lbb = getBinder().bind(command.getKey());
+
+    BindTarget<T> bindTarget = command.getTarget();
+    ScopedBindingBuilder sbb = bindTarget != null
+        ? bindTarget.execute(lbb)
+        : lbb;
+
+    BindScoping scoping = command.getScoping();
+    if (scoping != null) {
+      scoping.execute(sbb);
+    }
+
+    return null;
+  }
+

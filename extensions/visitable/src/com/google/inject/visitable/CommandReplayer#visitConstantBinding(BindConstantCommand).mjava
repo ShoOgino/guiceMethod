@@ -1,0 +1,12 @@
+  public Void visitConstantBinding(BindConstantCommand command) {
+    AnnotatedConstantBindingBuilder constantBindingBuilder = getBinder().bindConstant();
+
+    Key<Object> key = command.getKey();
+    ConstantBindingBuilder builder = key.getAnnotation() != null
+        ? constantBindingBuilder.annotatedWith(key.getAnnotation())
+        : constantBindingBuilder.annotatedWith(key.getAnnotationType());
+
+    command.getTarget().execute(builder);
+    return null;
+  }
+

@@ -1,0 +1,6 @@
+  public Void visitRequestStaticInjection(RequestStaticInjectionCommand command) {
+    List<Class> types = command.getTypes();
+    getBinder().requestStaticInjection(types.toArray(new Class[types.size()]));
+    return null;
+  }
+

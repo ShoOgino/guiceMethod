@@ -1,0 +1,5 @@
+  public Void visitConvertToTypes(ConvertToTypesCommand command) {
+    getBinder().convertToTypes(command.getTypeMatcher(), command.getTypeConverter());
+    return null;
+  }
+

@@ -1,0 +1,7 @@
+  /**
+   * Returns a mutable list of all commands recorded thus far.
+   */
+  public List<Command> getCommands() {
+    return commands;
+  }
+

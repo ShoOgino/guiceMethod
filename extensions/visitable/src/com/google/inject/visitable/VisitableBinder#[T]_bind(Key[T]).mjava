@@ -1,4 +1,0 @@
-  public <T> LinkedBindingBuilder<T> bind(Key<T> key) {
-    return internalBind(key);
-  }
-

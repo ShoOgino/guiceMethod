@@ -5,50 +5,17 @@
 
     FutureInjector futureInjector = new FutureInjector();
 
-    // record everything that's being done to a fake binder
-    final VisitableBinder visitableBinder = new VisitableBinder(futureInjector);
-    for (Module module : modules) {
-      module.configure(visitableBinder);
-    }
+    // record commands from the modules
+    CommandRecorder commandRecorder = new CommandRecorder(futureInjector);
+    commandRecorder.recordCommands(modules);
+    List<Command> commands = commandRecorder.getCommands();
 
-    // replay against a real binder, substituting interceptable wherever appropriate
-    Module interceptingModule = new Module() {
-      public void configure(final Binder binder) {
-        Command.Visitor<Void> visitor = new ExecutingVisitor(binder) {
-          @Override public <T> Void visitBinding(BindCommand<T> command) {
-            Key<T> key = command.getKey();
+    // rewrite the commands to insert interception
+    CommandReplayer replayer = new CommandRewriter();
+    Module module = replayer.createModule(commands);
 
-            if (!interceptedKeys.contains(key)) {
-              return super.visitBinding(command);
-            }
-
-            if (command.getTarget() == null) {
-              throw new UnsupportedOperationException(
-                  String.format("Cannot intercept bare binding of %s.", key));
-            }
-
-            Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
-            binder().bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
-
-            LinkedBindingBuilder<T> linkedBindingBuilder = binder().bind(anonymousKey);
-            ScopedBindingBuilder scopedBindingBuilder = command.getTarget().execute(linkedBindingBuilder);
-
-            BindScoping scoping = command.getScoping();
-            if (scoping != null) {
-              scoping.execute(scopedBindingBuilder);
-            }
-
-            return null;
-          }
-        };
-
-        for (Command command : visitableBinder.getCommands()) {
-          command.acceptVisitor(visitor);
-        }
-      }
-    };
-
-    Injector injector = Guice.createInjector(interceptingModule);
+    // create and injector with the rewritten commands
+    Injector injector = Guice.createInjector(module);
 
     // make the injector available for callbacks from early providers
     futureInjector.initialize(injector);

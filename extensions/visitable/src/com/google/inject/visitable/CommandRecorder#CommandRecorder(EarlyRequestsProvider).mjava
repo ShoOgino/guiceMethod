@@ -1,0 +1,4 @@
+  public CommandRecorder(EarlyRequestsProvider earlyRequestsProvider) {
+    this.earlyRequestsProvider = earlyRequestsProvider;
+  }
+

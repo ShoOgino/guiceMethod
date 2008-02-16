@@ -1,0 +1,26 @@
+    @Override public <T> Void visitBinding(BindCommand<T> command) {
+      Key<T> key = command.getKey();
+
+      if (!interceptedKeys.contains(key)) {
+        return super.visitBinding(command);
+      }
+
+      if (command.getTarget() == null) {
+        throw new UnsupportedOperationException(
+            String.format("Cannot intercept bare binding of %s.", key));
+      }
+
+      Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
+      getBinder().bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
+
+      LinkedBindingBuilder<T> linkedBindingBuilder = getBinder().bind(anonymousKey);
+      ScopedBindingBuilder scopedBindingBuilder = command.getTarget().execute(linkedBindingBuilder);
+
+      BindScoping scoping = command.getScoping();
+      if (scoping != null) {
+        scoping.execute(scopedBindingBuilder);
+      }
+
+      return null;
+    }
+

@@ -1,0 +1,7 @@
+  /**
+   * Records the commands executed by {@code modules}.
+   */
+  public void recordCommands(Module... modules) {
+    recordCommands(Arrays.asList(modules));
+  }
+

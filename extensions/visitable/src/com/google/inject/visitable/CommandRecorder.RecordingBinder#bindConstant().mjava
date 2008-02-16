@@ -1,0 +1,6 @@
+    public AnnotatedConstantBindingBuilder bindConstant() {
+      BindConstantCommand bindConstantCommand = new BindConstantCommand();
+      writableCommands.add(bindConstantCommand);
+      return bindConstantCommand.bindingBuilder();
+    }
+

@@ -1,4 +1,0 @@
-  public <T> Provider<T> getProvider(Class<T> type) {
-    return getProvider(Key.get(type));
-  }
-

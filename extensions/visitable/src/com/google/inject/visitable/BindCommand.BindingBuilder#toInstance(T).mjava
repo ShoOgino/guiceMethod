@@ -1,7 +1,7 @@
     public void toInstance(final T instance) {
       nonNull(instance, "instance"); // might someday want to tolerate null here
       assertNoTarget();
-      target = new AbstractTarget<T>() {
+      bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           linkedBindingBuilder.toInstance(instance);
           return null;

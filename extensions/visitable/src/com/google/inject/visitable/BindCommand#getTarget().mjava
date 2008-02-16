@@ -1,4 +1,4 @@
-  public Target<T> getTarget() {
-    return target;
+  public BindTarget<T> getTarget() {
+    return bindTarget;
   }
 

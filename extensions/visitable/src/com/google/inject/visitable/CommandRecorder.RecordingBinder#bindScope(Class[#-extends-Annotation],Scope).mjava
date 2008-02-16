@@ -1,0 +1,4 @@
+    public void bindScope(Class<? extends Annotation> annotationType, Scope scope) {
+      writableCommands.add(new BindScopeCommand(annotationType, scope));
+    }
+
