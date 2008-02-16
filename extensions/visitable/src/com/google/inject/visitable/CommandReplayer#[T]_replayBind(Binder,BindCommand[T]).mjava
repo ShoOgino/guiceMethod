@@ -1,5 +1,5 @@
-  public <T> Void visitBind(BindCommand<T> command) {
-    LinkedBindingBuilder<T> lbb = binder().bind(command.getKey());
+  public <T> void replayBind(Binder binder, BindCommand<T> command) {
+    LinkedBindingBuilder<T> lbb = binder.bind(command.getKey());
 
     BindTarget<T> bindTarget = command.getTarget();
     ScopedBindingBuilder sbb = bindTarget != null
@@ -10,7 +10,5 @@
     if (scoping != null) {
       scoping.execute(sbb);
     }
-
-    return null;
   }
 

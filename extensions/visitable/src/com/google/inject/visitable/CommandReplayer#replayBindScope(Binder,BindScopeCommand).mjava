@@ -1,0 +1,4 @@
+  public void replayBindScope(Binder binder, BindScopeCommand command) {
+    binder.bindScope(command.getAnnotationType(), command.getScope());
+  }
+

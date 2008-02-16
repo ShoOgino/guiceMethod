@@ -1,5 +1,0 @@
-  public Void visitAddError(AddThrowableErrorCommand command) {
-    binder().addError(command.getThrowable());
-    return null;
-  }
-

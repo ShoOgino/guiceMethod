@@ -1,0 +1,4 @@
+  public void replayConvertToTypes(Binder binder, ConvertToTypesCommand command) {
+    binder.convertToTypes(command.getTypeMatcher(), command.getTypeConverter());
+  }
+

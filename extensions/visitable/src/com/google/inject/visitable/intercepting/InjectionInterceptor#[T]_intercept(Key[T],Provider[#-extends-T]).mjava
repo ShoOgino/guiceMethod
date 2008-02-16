@@ -1,2 +1,0 @@
-  <T> T intercept(Key<T> key, Provider<? extends T> delegate);
-

@@ -1,20 +1,59 @@
   /**
    * Replays {@code commands} against {@code binder}.
    */
-  public void replay(Binder binder, Iterable<Command> commands) {
+  public void replay(final Binder binder, Iterable<Command> commands) {
     Objects.nonNull(binder, "binder");
     Objects.nonNull(commands, "commands");
-    if (this.binder != null) {
-      throw new ConcurrentModificationException("CommandReplayer does not support concurrent use");
-    }
 
-    this.binder = binder;
-    try {
-      for (Command command : commands) {
-        command.acceptVisitor(this);
+    Command.Visitor<Void> visitor = new Command.Visitor<Void>() {
+      public Void visitAddMessageError(AddMessageErrorCommand command) {
+        replayAddMessageError(binder, command);
+        return null;
       }
-    } finally {
-      this.binder = null;
+
+      public Void visitAddError(AddThrowableErrorCommand command) {
+        replayAddError(binder, command);
+        return null;
+      }
+
+      public Void visitBindInterceptor(BindInterceptorCommand command) {
+        replayBindInterceptor(binder, command);
+        return null;
+      }
+
+      public Void visitBindScope(BindScopeCommand command) {
+        replayBindScope(binder, command);
+        return null;
+      }
+
+      public Void visitRequestStaticInjection(RequestStaticInjectionCommand command) {
+        replayRequestStaticInjection(binder, command);
+        return null;
+      }
+
+      public Void visitBindConstant(BindConstantCommand command) {
+        replayBindConstant(binder, command);
+        return null;
+      }
+
+      public Void visitConvertToTypes(ConvertToTypesCommand command) {
+        replayConvertToTypes(binder, command);
+        return null;
+      }
+
+      public <T> Void visitBind(BindCommand<T> command) {
+        replayBind(binder, command);
+        return null;
+      }
+
+      public <T> Void visitGetProvider(GetProviderCommand<T> command) {
+        replayGetProvider(binder, command);
+        return null;
+      }
+    };
+
+    for (Command command : commands) {
+      command.acceptVisitor(visitor);
     }
   }
 
