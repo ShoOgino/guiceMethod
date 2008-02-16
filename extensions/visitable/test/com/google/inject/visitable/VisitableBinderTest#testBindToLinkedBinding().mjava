@@ -1,15 +1,13 @@
   public void testBindToLinkedBinding() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bind(List.class).to(ArrayList.class);
-        bind(Map.class).to(new TypeLiteral<HashMap<Integer, String>>() {});
-        bind(Set.class).to(Key.get(TreeSet.class, TaggingAnnotation.class));
-      }
-    };
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(List.class).to(ArrayList.class);
+            bind(Map.class).to(new TypeLiteral<HashMap<Integer, String>>() { });
+            bind(Set.class).to(Key.get(TreeSet.class, SampleAnnotation.class));
+          }
+        },
 
-    module.configure(binder);
-
-    visitBindings(
         new FailingVisitor() {
           @Override public <T> Void visitBinding(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
@@ -29,7 +27,7 @@
         new FailingVisitor() {
           @Override public <T> Void visitBinding(BindCommand<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
-            assertEquals(Key.get(TreeSet.class, TaggingAnnotation.class), command.getTarget().getKey(null));
+            assertEquals(Key.get(TreeSet.class, SampleAnnotation.class), command.getTarget().getKey(null));
             return null;
           }
         }

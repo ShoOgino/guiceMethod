@@ -1,12 +1,11 @@
   public void testAddThrowableErrorCommand() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        addError(new Exception("A"));
-      }
-    };
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            addError(new Exception("A"));
+          }
+        },
 
-    module.configure(binder);
-    visitBindings(
         new FailingVisitor() {
           @Override public Void visitAddError(AddThrowableErrorCommand command) {
             assertEquals("A", command.getThrowable().getMessage());

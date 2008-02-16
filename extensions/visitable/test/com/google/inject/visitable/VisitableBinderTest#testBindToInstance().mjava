@@ -1,13 +1,11 @@
   public void testBindToInstance() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("A");
-      }
-    };
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("A");
+          }
+        },
 
-    module.configure(binder);
-
-    visitBindings(
         new FailingVisitor() {
           @Override public <T> Void visitBinding(BindCommand<T> command) {
             assertEquals(Key.get(String.class), command.getKey());

@@ -1,5 +1,5 @@
   public Void visitConvertToTypes(ConvertToTypesCommand command) {
-    command.execute(binder());
+    binder().convertToTypes(command.getTypeMatcher(), command.getTypeConverter());
     return null;
   }
 

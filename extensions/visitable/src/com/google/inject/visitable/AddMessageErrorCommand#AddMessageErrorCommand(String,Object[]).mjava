@@ -1,5 +1,5 @@
   AddMessageErrorCommand(String message, Object[] arguments) {
     this.message = message;
-    this.arguments = arguments.clone();
+    this.arguments = unmodifiableList(Arrays.asList(arguments.clone()));
   }
 

@@ -4,6 +4,6 @@
       MethodInterceptor[] interceptors) {
     this.classMatcher = classMatcher;
     this.methodMatcher = methodMatcher;
-    this.interceptors = interceptors;
+    this.interceptors = unmodifiableList(Arrays.asList(interceptors.clone()));
   }
 

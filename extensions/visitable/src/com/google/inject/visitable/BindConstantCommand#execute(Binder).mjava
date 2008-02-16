@@ -1,4 +1,0 @@
-  public void execute(Binder binder) {
-    target.execute(bindingAnnotation.execute(binder.bindConstant()));
-  }
-

@@ -1,15 +1,13 @@
   public void testBindInScopes() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bind(List.class).to(ArrayList.class).in(Scopes.SINGLETON);
-        bind(Map.class).to(HashMap.class).in(Singleton.class);
-        bind(Set.class).to(TreeSet.class).asEagerSingleton();
-      }
-    };
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(List.class).to(ArrayList.class).in(Scopes.SINGLETON);
+            bind(Map.class).to(HashMap.class).in(Singleton.class);
+            bind(Set.class).to(TreeSet.class).asEagerSingleton();
+          }
+        },
 
-    module.configure(binder);
-
-    visitBindings(
         new FailingVisitor() {
           @Override public <T> Void visitBinding(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());

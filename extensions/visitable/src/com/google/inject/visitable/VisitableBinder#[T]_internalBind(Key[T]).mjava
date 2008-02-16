@@ -1,0 +1,6 @@
+  private <T> BindCommand<T>.BindingBuilder internalBind(Key<T> key) {
+    BindCommand<T> bindCommand = new BindCommand<T>(key);
+    commands.add(bindCommand);
+    return bindCommand.bindingBuilder();
+  }
+

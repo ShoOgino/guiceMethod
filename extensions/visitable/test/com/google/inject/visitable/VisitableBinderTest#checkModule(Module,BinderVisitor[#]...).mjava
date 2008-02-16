@@ -1,7 +1,9 @@
   /**
-   * Visits each binding with a different visitor.
+   * Ensures the module performs the commands consistent with {@code visitors}.
    */
-  private void visitBindings(BinderVisitor<?>... visitors) {
+  protected void checkModule(Module module, BinderVisitor<?>... visitors) {
+    module.configure(binder);
+
     assertEquals(binder.getCommands().size(), visitors.length);
 
     for (int i = 0; i < visitors.length; i++) {

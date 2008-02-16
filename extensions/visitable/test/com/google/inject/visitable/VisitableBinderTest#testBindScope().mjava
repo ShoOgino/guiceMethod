@@ -1,0 +1,18 @@
+  public void testBindScope() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bindScope(SampleAnnotation.class, Scopes.NO_SCOPE);
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitBindScope(BindScopeCommand command) {
+            assertSame(SampleAnnotation.class, command.getAnnotationType());
+            assertSame(Scopes.NO_SCOPE, command.getScope());
+            return null;
+          }
+        }
+    );
+  }
+

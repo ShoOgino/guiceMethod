@@ -1,6 +1,4 @@
   public <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
-    BindCommand<T> bindCommand = new BindCommand<T>(typeLiteral);
-    commands.add(bindCommand);
-    return bindCommand.bindingBuilder();
+    return internalBind(Key.get(typeLiteral));
   }
 

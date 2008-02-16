@@ -1,0 +1,27 @@
+  public void testBindIntercepor() {
+    final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
+    final Matcher<Object> methodMatcher = Matchers.any();
+    final MethodInterceptor methodInterceptor = new MethodInterceptor() {
+      public Object invoke(MethodInvocation methodInvocation) {
+        return null;
+      }
+    };
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bindInterceptor(classMatcher, methodMatcher, methodInterceptor);
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitBindInterceptor(BindInterceptorCommand command) {
+            assertSame(classMatcher, command.getClassMatcher());
+            assertSame(methodMatcher, command.getMethodMatcher());
+            assertEquals(Arrays.asList(methodInterceptor), command.getInterceptors());
+            return null;
+          }
+        }
+    );
+  }
+

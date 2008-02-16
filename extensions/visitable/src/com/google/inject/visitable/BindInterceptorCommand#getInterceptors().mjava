@@ -1,4 +1,4 @@
-  public MethodInterceptor[] getInterceptors() {
+  public List<MethodInterceptor> getInterceptors() {
     return interceptors;
   }
 

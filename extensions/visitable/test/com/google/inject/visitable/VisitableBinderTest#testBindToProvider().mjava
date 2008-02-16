@@ -1,19 +1,17 @@
   public void testBindToProvider() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toProvider(new Provider<String>() {
-          public String get() {
-            return "A";
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toProvider(new Provider<String>() {
+              public String get() {
+                return "A";
+              }
+            });
+            bind(List.class).toProvider(ListProvider.class);
+            bind(Collection.class).toProvider(Key.get(ListProvider.class));
           }
-        });
-        bind(List.class).toProvider(ListProvider.class);
-        bind(Collection.class).toProvider(Key.get(ListProvider.class));
-      }
-    };
+        },
 
-    module.configure(binder);
-
-    visitBindings(
         new FailingVisitor() {
           @Override public <T> Void visitBinding(BindCommand<T> command) {
             assertEquals(Key.get(String.class), command.getKey());

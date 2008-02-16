@@ -1,22 +1,20 @@
   public void testBindConstantTypes() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bindConstant().annotatedWith(Names.named("String")).to("A");
-        bindConstant().annotatedWith(Names.named("int")).to(2);
-        bindConstant().annotatedWith(Names.named("long")).to(3L);
-        bindConstant().annotatedWith(Names.named("boolean")).to(false);
-        bindConstant().annotatedWith(Names.named("double")).to(5.0d);
-        bindConstant().annotatedWith(Names.named("float")).to(6.0f);
-        bindConstant().annotatedWith(Names.named("short")).to((short) 7);
-        bindConstant().annotatedWith(Names.named("char")).to('h');
-        bindConstant().annotatedWith(Names.named("Class")).to(Iterator.class);
-        bindConstant().annotatedWith(Names.named("Enum")).to(CoinSide.TAILS);
-      }
-    };
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bindConstant().annotatedWith(Names.named("String")).to("A");
+            bindConstant().annotatedWith(Names.named("int")).to(2);
+            bindConstant().annotatedWith(Names.named("long")).to(3L);
+            bindConstant().annotatedWith(Names.named("boolean")).to(false);
+            bindConstant().annotatedWith(Names.named("double")).to(5.0d);
+            bindConstant().annotatedWith(Names.named("float")).to(6.0f);
+            bindConstant().annotatedWith(Names.named("short")).to((short) 7);
+            bindConstant().annotatedWith(Names.named("char")).to('h');
+            bindConstant().annotatedWith(Names.named("Class")).to(Iterator.class);
+            bindConstant().annotatedWith(Names.named("Enum")).to(CoinSide.TAILS);
+          }
+        },
 
-    module.configure(binder);
-
-    visitBindings(
         new FailingVisitor() {
           @Override public Void visitConstantBinding(BindConstantCommand command) {
             assertEquals(Key.get(String.class, Names.named("String")), command.getKey());

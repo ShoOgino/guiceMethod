@@ -1,23 +1,23 @@
   public void testBindKeysNoAnnotations() {
-    Module module = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("A");
-        bind(new TypeLiteral<String>() {}).toInstance("B");
-        bind(Key.get(String.class)).toInstance("C");
+    FailingVisitor keyChecker = new FailingVisitor() {
+      @Override public Void visitBinding(BindCommand command) {
+        assertEquals(Key.get(String.class), command.getKey());
+        return null;
       }
     };
 
-    module.configure(binder);
-
-    for (Command command : binder.getCommands()) {
-      command.acceptVisitor(
-          new FailingVisitor() {
-            @Override public Void visitBinding(BindCommand command) {
-              assertEquals(Key.get(String.class), command.getKey());
-              return null;
-            }
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("A");
+            bind(new TypeLiteral<String>() {
+            }).toInstance("B");
+            bind(Key.get(String.class)).toInstance("C");
           }
-      );
-    }
+        },
+        keyChecker,
+        keyChecker,
+        keyChecker
+    );
   }
 
