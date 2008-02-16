@@ -1,6 +1,6 @@
     public <T> BindCommand<T>.BindingBuilder bind(Key<T> key) {
       BindCommand<T> bindCommand = new BindCommand<T>(key);
-      writableCommands.add(bindCommand);
+      commands.add(bindCommand);
       return bindCommand.bindingBuilder();
     }
 

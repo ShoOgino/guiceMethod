@@ -1,4 +1,0 @@
-    public Void visitRequestStaticInjection(RequestStaticInjectionCommand command) {
-      throw new AssertionFailedError();
-    }
-

@@ -1,4 +1,0 @@
-  protected ExecutingVisitor(Binder binder) {
-    this.binder = binder;
-  }
-

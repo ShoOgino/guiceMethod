@@ -1,9 +1,11 @@
   /**
    * Records the commands executed by {@code modules}.
    */
-  public void recordCommands(Iterable<Module> modules) {
+  public List<Command> recordCommands(Iterable<Module> modules) {
+    RecordingBinder binder = new RecordingBinder();
     for (Module module : modules) {
       module.configure(binder);
     }
+    return Collections.unmodifiableList(binder.commands);
   }
 

@@ -1,4 +1,0 @@
-    public Void visitBindScope(BindScopeCommand command) {
-      throw new AssertionFailedError();
-    }
-

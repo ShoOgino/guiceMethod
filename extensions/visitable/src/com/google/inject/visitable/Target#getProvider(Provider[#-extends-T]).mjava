@@ -1,2 +1,0 @@
-  Provider<? extends T> getProvider(Provider<? extends T> defaultValue);
-

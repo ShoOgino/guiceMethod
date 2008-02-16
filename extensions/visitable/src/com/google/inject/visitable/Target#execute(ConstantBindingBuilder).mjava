@@ -1,5 +1,0 @@
-  /**
-   * Execute this target against the constant binding builder.
-   */
-  void execute(ConstantBindingBuilder builder);
-

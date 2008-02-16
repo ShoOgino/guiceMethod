@@ -2,6 +2,6 @@
         Matcher<? super Class<?>> classMatcher,
         Matcher<? super Method> methodMatcher,
         MethodInterceptor... interceptors) {
-      writableCommands.add(new BindInterceptorCommand(classMatcher, methodMatcher, interceptors));
+      commands.add(new BindInterceptorCommand(classMatcher, methodMatcher, interceptors));
     }
 

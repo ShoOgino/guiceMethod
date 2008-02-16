@@ -1,2 +1,0 @@
-  Key<? extends Provider<? extends T>> getProviderKey(Key<Provider<? extends T>> defaultValue);
-
