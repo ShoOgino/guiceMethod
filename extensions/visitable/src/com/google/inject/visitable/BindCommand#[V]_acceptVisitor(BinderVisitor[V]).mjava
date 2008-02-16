@@ -1,4 +1,0 @@
-  public <V> V acceptVisitor(BinderVisitor<V> visitor) {
-    return visitor.visitBinding(this);
-  }
-

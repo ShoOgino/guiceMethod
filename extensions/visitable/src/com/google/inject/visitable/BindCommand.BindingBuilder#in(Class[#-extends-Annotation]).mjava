@@ -2,7 +2,7 @@
       nonNull(scopeAnnotation, "scopeAnnotation");
       assertNoScope();
 
-      bindingScope = new AbstractScoping() {
+      bindScoping = new AbstractScoping() {
         public void execute(ScopedBindingBuilder scopedBindingBuilder) {
           scopedBindingBuilder.in(scopeAnnotation);
         }

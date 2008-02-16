@@ -6,7 +6,7 @@
         ? target.execute(lbb)
         : lbb;
 
-    BindingScope scoping = command.getScoping();
+    BindScoping scoping = command.getScoping();
     if (scoping != null) {
       scoping.execute(sbb);
     }

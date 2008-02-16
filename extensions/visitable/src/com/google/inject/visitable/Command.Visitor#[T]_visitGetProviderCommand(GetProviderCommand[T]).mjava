@@ -1,0 +1,2 @@
+    <T> V visitGetProviderCommand(GetProviderCommand<T> command);
+

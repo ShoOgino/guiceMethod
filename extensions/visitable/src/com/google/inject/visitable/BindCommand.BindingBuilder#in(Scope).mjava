@@ -1,7 +1,7 @@
     public void in(final Scope scope) {
       nonNull(scope, "scope");
       assertNoScope();
-      bindingScope = new AbstractScoping() {
+      bindScoping = new AbstractScoping() {
         public void execute(ScopedBindingBuilder scopedBindingBuilder) {
           scopedBindingBuilder.in(scope);
         }

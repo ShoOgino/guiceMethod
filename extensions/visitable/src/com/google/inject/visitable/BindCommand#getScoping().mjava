@@ -1,4 +1,4 @@
-  public BindingScope getScoping() {
-    return bindingScope;
+  public BindScoping getScoping() {
+    return bindScoping;
   }
 

@@ -1,2 +1,4 @@
-  public abstract Binder binder();
+  protected Binder binder() {
+    return binder;
+  }
 

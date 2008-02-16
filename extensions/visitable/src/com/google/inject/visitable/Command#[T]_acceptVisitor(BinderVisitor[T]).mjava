@@ -1,2 +1,0 @@
-  <T> T acceptVisitor(BinderVisitor<T> visitor);
-
