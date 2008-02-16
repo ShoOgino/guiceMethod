@@ -1,7 +1,7 @@
   /**
    * Returns the current binder in use.
    */
-  protected Binder getBinder() {
+  protected Binder binder() {
     if (binder == null) {
       throw new IllegalStateException("No binder exists at this time!");
     }

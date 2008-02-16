@@ -1,5 +1,5 @@
   public Void visitBindScope(BindScopeCommand command) {
-    getBinder().bindScope(command.getAnnotationType(), command.getScope());
+    binder().bindScope(command.getAnnotationType(), command.getScope());
     return null;
   }
 

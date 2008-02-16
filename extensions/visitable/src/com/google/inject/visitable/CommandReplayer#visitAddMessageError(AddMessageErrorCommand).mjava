@@ -1,5 +1,5 @@
   public Void visitAddMessageError(AddMessageErrorCommand command) {
-    getBinder().addError(command.getMessage(), command.getArguments().toArray());
+    binder().addError(command.getMessage(), command.getArguments().toArray());
     return null;
   }
 
