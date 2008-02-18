@@ -1,0 +1,6 @@
+    private void assertNoTarget() {
+      if (bindTarget != null) {
+        throw new IllegalStateException("Already targetted to " + bindTarget);
+      }
+    }
+

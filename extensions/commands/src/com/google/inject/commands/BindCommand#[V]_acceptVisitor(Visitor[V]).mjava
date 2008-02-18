@@ -1,0 +1,4 @@
+  public <V> V acceptVisitor(Visitor<V> visitor) {
+    return visitor.visitBind(this);
+  }
+

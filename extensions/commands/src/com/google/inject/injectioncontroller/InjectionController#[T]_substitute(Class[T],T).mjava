@@ -1,0 +1,8 @@
+  /**
+   * Substitutes the injector's existing binding for {@code type} with
+   * {@code instance}.
+   */
+  public <T> InjectionController substitute(Class<T> type, T instance) {
+    return substitute(Key.get(type), instance);
+  }
+

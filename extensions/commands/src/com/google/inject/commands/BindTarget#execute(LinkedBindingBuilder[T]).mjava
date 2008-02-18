@@ -1,0 +1,5 @@
+  /**
+   * Execute this target against the linked binding builder.
+   */
+  ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder);
+

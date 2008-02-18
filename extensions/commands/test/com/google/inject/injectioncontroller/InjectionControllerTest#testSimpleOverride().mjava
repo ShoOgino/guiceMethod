@@ -1,0 +1,16 @@
+  public void testSimpleOverride() throws Exception {
+    Injector injector = new InterceptingInjectorBuilder()
+        .install(injectionController.createModule(),
+            new AbstractModule() {
+              protected void configure() {
+                bind(String.class).toInstance("a");
+              }
+            })
+        .intercept(String.class)
+        .build();
+
+    assertEquals("a", injector.getInstance(String.class));
+    injectionController.substitute(String.class, "b");
+    assertEquals("b", injector.getInstance(String.class));
+  }
+

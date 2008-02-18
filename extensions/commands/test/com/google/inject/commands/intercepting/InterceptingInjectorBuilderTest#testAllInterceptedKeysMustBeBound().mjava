@@ -1,0 +1,18 @@
+  public void testAllInterceptedKeysMustBeBound() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(ProvisionInterceptor.class).toInstance(failingInterceptor);
+      }
+    };
+
+    InterceptingInjectorBuilder builder = new InterceptingInjectorBuilder()
+        .intercept(ArrayList.class)
+        .install(module);
+
+    try {
+      builder.build();
+      fail();
+    } catch(IllegalArgumentException expected) {
+    }
+  }
+

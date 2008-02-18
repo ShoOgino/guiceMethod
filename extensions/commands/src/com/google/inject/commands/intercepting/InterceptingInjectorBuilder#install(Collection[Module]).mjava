@@ -1,0 +1,5 @@
+  public InterceptingInjectorBuilder install(Collection<Module> modules) {
+    this.modules.addAll(modules);
+    return this;
+  }
+

@@ -1,0 +1,27 @@
+  public void testBindConstantAnnotations() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bindConstant().annotatedWith(SampleAnnotation.class).to("A");
+            bindConstant().annotatedWith(Names.named("Bee")).to("B");
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitBindConstant(BindConstantCommand command) {
+            assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
+            assertEquals("A", command.getTarget().get(null));
+            return null;
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitBindConstant(BindConstantCommand command) {
+            assertEquals(Key.get(String.class, Names.named("Bee")), command.getKey());
+            assertEquals("B", command.getTarget().get(null));
+            return null;
+          }
+        }
+    );
+  }
+

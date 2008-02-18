@@ -1,0 +1,4 @@
+    public void addError(Throwable t) {
+      commands.add(new AddThrowableErrorCommand(t));
+    }
+

@@ -1,0 +1,4 @@
+    public Void visitAddMessageError(AddMessageErrorCommand command) {
+      throw new AssertionFailedError();
+    }
+

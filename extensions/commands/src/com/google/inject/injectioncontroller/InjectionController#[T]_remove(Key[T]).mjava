@@ -1,0 +1,14 @@
+  /**
+   * Restores the original binding for {@code key}.
+   */
+  public <T> InjectionController remove(Key<T> key) {
+    Objects.nonNull(key, "key");
+
+    if (!map.containsKey(key)) {
+      throw new IllegalStateException(key + " was not being doubled.");
+    }
+
+    mapWritable.remove(key);
+    return this;
+  }
+

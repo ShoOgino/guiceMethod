@@ -1,0 +1,15 @@
+  /**
+   * Returns an annotation instance that is not equal to any other annotation
+   * instances, for use in creating distinct {@link Key}s.
+   */
+  private static Annotation uniqueAnnotation() {
+    return new Annotation() {
+      public Class<? extends Annotation> annotationType() {
+        return Internal.class;
+      }
+      @Override public String toString() {
+        return "InterceptingBinderPrivate";
+      }
+    };
+  }
+

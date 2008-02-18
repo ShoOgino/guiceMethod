@@ -1,0 +1,6 @@
+    private void assertNoBindingAnnotation() {
+      if (bindingAnnotation != null) {
+        throw new IllegalStateException("Already annotated with " + bindingAnnotation);
+      }
+    }
+

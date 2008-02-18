@@ -1,0 +1,25 @@
+  public void testProvisionInterception() {
+    final ProvisionInterceptor interceptor = new ProvisionInterceptor() {
+      @SuppressWarnings({"unchecked"})
+      public <T> T intercept(Key<T> key, Provider<? extends T> delegate) {
+        assertEquals(Key.get(String.class), key);
+        assertEquals("A", delegate.get());
+        return (T) "B";
+      }
+    };
+
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("A");
+        bind(ProvisionInterceptor.class).toInstance(interceptor);
+      }
+    };
+
+    Injector injector = new InterceptingInjectorBuilder()
+        .intercept(String.class)
+        .install(module)
+        .build();
+
+    assertEquals("B", injector.getInstance(String.class));
+  }
+

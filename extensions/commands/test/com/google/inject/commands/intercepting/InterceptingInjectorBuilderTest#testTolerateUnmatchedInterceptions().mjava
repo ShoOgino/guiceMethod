@@ -1,0 +1,16 @@
+  public void testTolerateUnmatchedInterceptions() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(ProvisionInterceptor.class).toInstance(failingInterceptor);
+      }
+    };
+
+    Injector injector = new InterceptingInjectorBuilder()
+        .intercept(ArrayList.class)
+        .tolerateUnmatchedInterceptions()
+        .install(module)
+        .build();
+
+    assertEquals(new ArrayList(), injector.getInstance(ArrayList.class));
+  }
+

@@ -1,0 +1,45 @@
+  public void testGetProvider() {
+    final List<Key> calls = new ArrayList<Key>();
+
+    earlyRequestProvider = new EarlyRequestsProvider() {
+      @SuppressWarnings({"unchecked"})
+      public <T> T get(Key<T> key) {
+        calls.add(key);
+        return (T) "A";
+      }
+    };
+
+    commandRecorder = new CommandRecorder(earlyRequestProvider);
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            Provider<String> keyGetProvider = getProvider(Key.get(String.class, SampleAnnotation.class));
+            assertEquals("A", keyGetProvider.get());
+            assertEquals(Key.get(String.class, SampleAnnotation.class), calls.get(0));
+
+            Provider<String> typeGetProvider = getProvider(String.class);
+            assertEquals("A", typeGetProvider.get());
+            assertEquals(Key.get(String.class), calls.get(1));
+            assertEquals(2, calls.size());
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitGetProvider(GetProviderCommand command) {
+            assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
+            assertEquals(earlyRequestProvider, command.getEarlyRequestsProvider());
+            return null;
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitGetProvider(GetProviderCommand command) {
+            assertEquals(Key.get(String.class), command.getKey());
+            assertEquals(earlyRequestProvider, command.getEarlyRequestsProvider());
+            return null;
+          }
+        }
+    );
+  }
+

@@ -1,0 +1,4 @@
+  public List<Class> getTypes() {
+    return types;
+  }
+

@@ -1,0 +1,2 @@
+    V visitAddError(AddThrowableErrorCommand command);
+

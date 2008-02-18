@@ -1,0 +1,6 @@
+  @Override public String toString() {
+    return "bind " + key
+        + (bindTarget == null ? "" : (" to " + bindTarget))
+        + (bindScoping == null ? "" : (" in " + bindScoping));
+  }
+

@@ -1,0 +1,15 @@
+    public ConstantBindingBuilder annotatedWith(final Class<? extends Annotation> annotationType) {
+      assertNoBindingAnnotation();
+
+      bindingAnnotation = new BindingAnnotation() {
+        public ConstantBindingBuilder execute(AnnotatedConstantBindingBuilder builder) {
+          return builder.annotatedWith(annotationType);
+        }
+        @SuppressWarnings({"unchecked"})
+        public <T> Key<T> getKey() {
+          return Key.get((Class<T>) target.getType(), annotationType);
+        }
+      };
+      return this;
+    }
+

@@ -1,0 +1,7 @@
+  /**
+   * Restores the original binding for {@code type}.
+   */
+  public <T> InjectionController remove(Class<T> type) {
+    return remove(Key.get(type));
+  }
+

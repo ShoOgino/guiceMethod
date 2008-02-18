@@ -1,0 +1,18 @@
+  public void testAddMessageErrorCommand() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            addError("Message", "A", "B", "C");
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+            assertEquals(Arrays.asList("A", "B", "C"), command.getArguments());
+            assertEquals("Message", command.getMessage());
+            return null;
+          }
+        }
+    );
+  }
+

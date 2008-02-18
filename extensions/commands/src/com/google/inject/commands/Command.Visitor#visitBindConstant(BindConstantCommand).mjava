@@ -1,0 +1,2 @@
+    V visitBindConstant(BindConstantCommand command);
+

@@ -1,0 +1,22 @@
+  public void testBindKeysWithAnnotationInstance() {
+    FailingVisitor annotationChecker = new FailingVisitor() {
+      @Override public Void visitBind(BindCommand command) {
+        assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
+        return null;
+      }
+    };
+
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).annotatedWith(Names.named("a")).toInstance("B");
+            bind(new TypeLiteral<String>() {
+            }).annotatedWith(Names.named("a")).toInstance("C");
+          }
+        },
+        annotationChecker,
+        annotationChecker
+    );
+  }
+

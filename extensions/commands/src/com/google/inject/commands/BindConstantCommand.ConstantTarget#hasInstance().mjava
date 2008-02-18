@@ -1,0 +1,4 @@
+    public boolean hasInstance() {
+      return true;
+    }
+

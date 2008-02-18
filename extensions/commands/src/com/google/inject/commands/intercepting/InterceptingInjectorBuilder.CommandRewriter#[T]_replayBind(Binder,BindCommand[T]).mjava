@@ -1,0 +1,30 @@
+    @Override public <T> void replayBind(Binder binder, BindCommand<T> command) {
+      Key<T> key = command.getKey();
+
+      if (!keysToIntercept.contains(key)) {
+        super.replayBind(binder, command);
+        return;
+      }
+
+      if (command.getTarget() == null) {
+        throw new UnsupportedOperationException(
+            String.format("Cannot intercept bare binding of %s.", key));
+      }
+
+      Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
+      binder.bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
+
+      LinkedBindingBuilder<T> linkedBindingBuilder = binder.bind(anonymousKey);
+      ScopedBindingBuilder scopedBindingBuilder = command.getTarget().execute(linkedBindingBuilder);
+
+      // we scope the user's provider, not the interceptor. This is dangerous,
+      // but convenient. It means that although the user's provider will live
+      // in its proper scope, the intereptor gets invoked without a scope
+      BindScoping scoping = command.getScoping();
+      if (scoping != null) {
+        scoping.execute(scopedBindingBuilder);
+      }
+
+      keysIntercepted.add(key);
+    }
+

@@ -1,0 +1,17 @@
+  public void testAddThrowableErrorCommand() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            addError(new Exception("A"));
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitAddError(AddThrowableErrorCommand command) {
+            assertEquals("A", command.getThrowable().getMessage());
+            return null;
+          }
+        }
+    );
+  }
+

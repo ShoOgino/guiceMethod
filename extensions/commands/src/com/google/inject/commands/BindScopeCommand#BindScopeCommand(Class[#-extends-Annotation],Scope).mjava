@@ -1,0 +1,6 @@
+  BindScopeCommand(
+      Class<? extends Annotation> annotationType, Scope scope) {
+    this.annotationType = annotationType;
+    this.scope = scope;
+  }
+

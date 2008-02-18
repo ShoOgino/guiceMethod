@@ -1,0 +1,15 @@
+  /**
+   * Substitutes the injector's existing binding for {@code key} with
+   * {@code instance}.
+   */
+  public <T> InjectionController substitute(Key<T> key, T instance) {
+    Objects.nonNull(key, "key");
+
+    if (map.containsKey(key)) {
+      throw new IllegalStateException(key + " was already being doubled.");
+    }
+
+    mapWritable.put(key, instance);
+    return this;
+  }
+

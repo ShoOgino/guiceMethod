@@ -1,0 +1,4 @@
+    public Void visitGetProvider(GetProviderCommand command) {
+      throw new AssertionFailedError();
+    }
+

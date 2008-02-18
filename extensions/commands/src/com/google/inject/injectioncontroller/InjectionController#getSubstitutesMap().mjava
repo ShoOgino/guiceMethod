@@ -1,0 +1,7 @@
+  /**
+   * Returns an unmodifiable, mutable map with the substituted bindings.
+   */
+  public Map<Key<?>, Object> getSubstitutesMap() {
+    return map;
+  }
+
