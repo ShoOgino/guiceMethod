@@ -1,0 +1,14 @@
+  public void testFactoryFailsWithMissingBinding() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(ColoredCarFactory.class)
+              .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+        }
+      });
+    } catch (ProvisionException e) {
+      assertTrue(e.getCause().getMessage().contains("Parameter of type 'double' is not " +
+          "injectable or annotated with @Assisted"));
+    }
+  }
+

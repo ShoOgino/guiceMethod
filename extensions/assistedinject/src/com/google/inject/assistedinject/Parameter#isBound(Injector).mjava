@@ -1,7 +1,7 @@
   public boolean isBound(Injector injector) {
-    return injector.getBinding(getPrimaryBindingKey()) != null
-        || injector.getBinding(getAlternateGuiceBindingKey()) != null
-        || injector.getBinding(fixAnnotations(getPrimaryBindingKey())) != null
-        || injector.getBinding(fixAnnotations(getAlternateGuiceBindingKey())) != null;
+    return isBound(injector, getPrimaryBindingKey())
+        || isBound(injector, getAlternateGuiceBindingKey())
+        || isBound(injector, fixAnnotations(getPrimaryBindingKey()))
+        || isBound(injector, fixAnnotations(getAlternateGuiceBindingKey()));
   }
 
