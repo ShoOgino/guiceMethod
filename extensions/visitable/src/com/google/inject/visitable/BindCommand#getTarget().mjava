@@ -1,4 +1,0 @@
-  public BindTarget<T> getTarget() {
-    return bindTarget;
-  }
-

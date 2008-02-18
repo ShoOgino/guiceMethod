@@ -1,4 +1,0 @@
-  public Matcher<? super Class<?>> getClassMatcher() {
-    return classMatcher;
-  }
-

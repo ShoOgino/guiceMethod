@@ -1,4 +1,0 @@
-  public <T> InjectionController set(Class<T> clazz, T instance) {
-    return set(Key.get(clazz), instance);
-  }
-

@@ -1,4 +1,0 @@
-  public <T> void replayGetProvider(Binder binder, GetProviderCommand<T> command) {
-    binder.getProvider(command.getKey());
-  }
-

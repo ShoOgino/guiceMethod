@@ -1,4 +1,0 @@
-  public void replayAddError(Binder binder, AddThrowableErrorCommand command) {
-    binder.addError(command.getThrowable());
-  }
-

@@ -1,8 +1,0 @@
-  public void initialize(Injector injector) {
-    if (this.injector != null) {
-      throw new IllegalStateException("Already initialized");
-    }
-
-    this.injector = injector;
-  }
-

@@ -1,9 +1,0 @@
-  public void testCannotOverrideDouble() throws Exception {
-    injectionController.set(String.class, "b");
-    try {
-      injectionController.set(String.class, "c");
-      fail();
-    } catch(IllegalStateException expected) {
-    }
-  }
-

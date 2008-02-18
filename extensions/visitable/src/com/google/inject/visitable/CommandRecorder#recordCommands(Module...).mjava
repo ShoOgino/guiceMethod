@@ -1,7 +1,0 @@
-  /**
-   * Records the commands executed by {@code modules}.
-   */
-  public List<Command> recordCommands(Module... modules) {
-    return recordCommands(Arrays.asList(modules));
-  }
-

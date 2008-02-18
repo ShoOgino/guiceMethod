@@ -1,4 +1,0 @@
-    public Void visitBindConstant(BindConstantCommand command) {
-      throw new AssertionFailedError();
-    }
-

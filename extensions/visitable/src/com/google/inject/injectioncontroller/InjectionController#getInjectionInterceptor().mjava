@@ -1,7 +1,0 @@
-  /**
-   * Returns the injection interceptor for binding
-   */
-  public ProvisionInterceptor getInjectionInterceptor() {
-    return provisionInterceptor;
-  }
-

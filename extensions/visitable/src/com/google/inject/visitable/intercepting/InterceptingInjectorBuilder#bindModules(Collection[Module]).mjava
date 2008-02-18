@@ -1,5 +1,0 @@
-  public InterceptingInjectorBuilder bindModules(Collection<Module> modules) {
-    this.modules.addAll(modules);
-    return this;
-  }
-

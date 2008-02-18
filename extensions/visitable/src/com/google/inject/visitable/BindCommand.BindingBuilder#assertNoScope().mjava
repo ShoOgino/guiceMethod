@@ -1,6 +1,0 @@
-    private void assertNoScope() {
-      if (bindScoping != null) {
-        throw new IllegalStateException("Already scoped by " + bindScoping);
-      }
-    }
-

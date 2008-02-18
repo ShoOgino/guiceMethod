@@ -1,6 +1,0 @@
-    private void assertNoTarget() {
-      if (target != null) {
-        throw new IllegalStateException("Already targetted to " + target);
-      }
-    }
-

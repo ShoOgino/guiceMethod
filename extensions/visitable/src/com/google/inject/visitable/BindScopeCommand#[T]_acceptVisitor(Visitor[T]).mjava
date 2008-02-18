@@ -1,4 +1,0 @@
-  public <T> T acceptVisitor(Visitor<T> visitor) {
-    return visitor.visitBindScope(this);
-  }
-

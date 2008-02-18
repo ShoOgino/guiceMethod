@@ -1,4 +1,0 @@
-    public boolean isEagerSingleton() {
-      return false;
-    }
-

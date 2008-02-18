@@ -1,4 +1,0 @@
-    public Scope getScope(Scope defaultValue) {
-      return defaultValue;
-    }
-

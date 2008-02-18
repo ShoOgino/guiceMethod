@@ -1,7 +1,0 @@
-    public void bindInterceptor(
-        Matcher<? super Class<?>> classMatcher,
-        Matcher<? super Method> methodMatcher,
-        MethodInterceptor... interceptors) {
-      commands.add(new BindInterceptorCommand(classMatcher, methodMatcher, interceptors));
-    }
-

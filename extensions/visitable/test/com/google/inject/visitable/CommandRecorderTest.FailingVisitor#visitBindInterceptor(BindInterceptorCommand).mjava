@@ -1,4 +1,0 @@
-    public Void visitBindInterceptor(BindInterceptorCommand command) {
-      throw new AssertionFailedError();
-    }
-
