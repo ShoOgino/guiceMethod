@@ -1,0 +1,4 @@
+  public Provider<? extends T> getProviderInstance() {
+    return this.providerInstance;
+  }
+

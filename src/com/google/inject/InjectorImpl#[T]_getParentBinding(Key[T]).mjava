@@ -1,0 +1,38 @@
+  /**
+   * Checks the parent injector for a scoped binding, and if available, creates
+   * an appropriate binding local to this injector and remembers it.
+   */
+  @SuppressWarnings("unchecked")
+  private <T> BindingImpl<T> getParentBinding(Key<T> key) {
+    BindingImpl<T> bindingImpl;
+    synchronized(parentBindings) {
+      // null values will mean that the parent doesn't have this binding
+      if (!parentBindings.containsKey(key)) {
+        Binding<T> binding = null;
+        try {
+          binding = parentInjector.getBinding(key);
+        } catch (ConfigurationException e) {
+          // if this happens, the parent can't create this key, and we ignore it
+        }
+        if (binding != null
+            && binding.getScope() != null
+            && !binding.getScope().equals(Scopes.NO_SCOPE)) {
+          bindingImpl = new ProviderInstanceBindingImpl(
+              this,
+              key,
+              binding.getSource(),
+              new InternalFactoryToProviderAdapter(binding.getProvider(),
+                  binding.getSource()),
+              Scopes.NO_SCOPE,
+              binding.getProvider());
+        } else {
+          bindingImpl = null;
+        }
+        parentBindings.put(key, bindingImpl);
+      } else {
+        bindingImpl = (BindingImpl<T>) parentBindings.get(key);
+      }
+    }
+    return bindingImpl;
+  }
+

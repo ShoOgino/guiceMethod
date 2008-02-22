@@ -1,7 +1,9 @@
-  InjectorImpl(ConstructionProxyFactory constructionProxyFactory,
+  InjectorImpl(Injector parentInjector,
+      ConstructionProxyFactory constructionProxyFactory,
       Map<Key<?>, BindingImpl<?>> bindings,
       Map<Class<? extends Annotation>, Scope> scopes,
       List<MatcherAndConverter<?>> converters) {
+    this.parentInjector = parentInjector;
     this.constructionProxyFactory = constructionProxyFactory;
     this.explicitBindings = bindings;
     this.scopes = scopes;

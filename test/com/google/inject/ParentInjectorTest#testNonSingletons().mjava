@@ -1,0 +1,13 @@
+  /**
+   * Make sure that when there are non scoped bindings in the parent,
+   * they are not used.
+   */
+  public void testNonSingletons() throws Exception {
+    Bar barParent = injector.getInstance(Bar.class);
+    Bar barChild = childInjector.getInstance(Bar.class);
+
+    assertNotSame(barParent, barChild);
+    assertTrue(barParent instanceof BarOne);
+    assertTrue(barChild instanceof BarTwo);
+  }
+
