@@ -5,7 +5,6 @@
     suite.addTestSuite(CommandReplayerTest.class);
     suite.addTestSuite(CommandRewriteTest.class);
     suite.addTestSuite(InterceptingInjectorBuilderTest.class);
-    suite.addTestSuite(InjectionControllerTest.class);
 
     return suite;
   }
