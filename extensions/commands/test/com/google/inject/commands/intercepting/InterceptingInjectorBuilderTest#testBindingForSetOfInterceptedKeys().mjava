@@ -1,0 +1,22 @@
+  public void testBindingForSetOfInterceptedKeys() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(ProvisionInterceptor.class).toInstance(failingInterceptor);
+        bind(List.class).to(LinkedList.class);
+        bind(Map.class).to(HashMap.class);
+        bind(Collection.class).to(ArrayList.class);
+      }
+    };
+
+    Injector injector = new InterceptingInjectorBuilder()
+        .intercept(List.class)
+        .intercept(Collection.class)
+        .install(module)
+        .build();
+
+    Set<Key> interceptableKeys = injector.getInstance(
+        Key.get(new TypeLiteral<Set<Key>>() {}, Names.named("Interceptable")));
+    assertEquals(new HashSet<Key>(Arrays.asList(Key.get(List.class), Key.get(Collection.class))),
+        interceptableKeys);
+  }
+
