@@ -1,0 +1,5 @@
+    private BuiltInModule(Injector injector, Stage stage) {
+      this.injector = injector;
+      this.stage = stage;
+    }
+

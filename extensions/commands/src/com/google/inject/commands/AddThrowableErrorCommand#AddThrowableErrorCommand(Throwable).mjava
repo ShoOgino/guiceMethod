@@ -1,4 +1,0 @@
-  AddThrowableErrorCommand(Throwable throwable) {
-    this.throwable = throwable;
-  }
-

@@ -1,0 +1,7 @@
+  ConvertToTypesCommand(Object source, Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter typeConverter) {
+    this.source = nonNull(source, "source");
+    this.typeMatcher = nonNull(typeMatcher, "typeMatcher");
+    this.typeConverter = nonNull(typeConverter, "typeConverter");
+  }
+

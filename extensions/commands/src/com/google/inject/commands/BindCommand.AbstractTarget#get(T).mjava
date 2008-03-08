@@ -1,4 +1,0 @@
-    public T get(T defaultValue) {
-      return defaultValue;
-    }
-

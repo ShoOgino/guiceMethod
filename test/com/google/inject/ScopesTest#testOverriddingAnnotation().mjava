@@ -1,8 +1,11 @@
   public void testOverriddingAnnotation()
       throws CreationException {
-    BinderImpl binder = new BinderImpl();
-    binder.bind(SampleSingleton.class).in(Scopes.NO_SCOPE);
-    Injector injector = binder.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(SampleSingleton.class).in(Scopes.NO_SCOPE);
+      }
+    });
+
     assertNotSame(
         injector.getInstance(SampleSingleton.class),
         injector.getInstance(SampleSingleton.class));

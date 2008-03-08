@@ -1,4 +1,0 @@
-    public T get(InternalContext context, InjectionPoint<?> injectionPoint) {
-      return targetFactory.get(context, injectionPoint);
-    }
-

@@ -1,8 +1,13 @@
   public void testNormalBinding() throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    Foo foo = new Foo();
-    builder.bind(Foo.class).toInstance(foo);
-    Injector injector = builder.createInjector();
+    InjectorBuilder builder = new InjectorBuilder();
+    final Foo foo = new Foo();
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Foo.class).toInstance(foo);
+      }
+    });
+
     Binding<Foo> fooBinding = injector.getBinding(Key.get(Foo.class));
     assertSame(foo, fooBinding.getProvider().get());
     assertNotNull(fooBinding.getSource());

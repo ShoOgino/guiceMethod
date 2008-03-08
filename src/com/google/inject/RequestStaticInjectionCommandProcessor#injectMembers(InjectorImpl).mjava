@@ -1,0 +1,6 @@
+  public void injectMembers(InjectorImpl injector) {
+    for (StaticInjection staticInjection : staticInjections) {
+      staticInjection.injectMembers(injector);
+    }
+  }
+

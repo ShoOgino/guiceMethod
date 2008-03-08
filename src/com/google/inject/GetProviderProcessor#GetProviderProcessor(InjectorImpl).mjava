@@ -1,0 +1,4 @@
+  GetProviderProcessor(InjectorImpl injector) {
+    this.injector = injector;
+  }
+

@@ -1,0 +1,5 @@
+    public StaticInjection(Object source, Class type) {
+      this.source = source;
+      this.type = type;
+    }
+

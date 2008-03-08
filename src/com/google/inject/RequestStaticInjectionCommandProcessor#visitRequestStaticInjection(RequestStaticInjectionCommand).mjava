@@ -1,0 +1,7 @@
+  @Override public Boolean visitRequestStaticInjection(RequestStaticInjectionCommand command) {
+    for (Class<?> type : command.getTypes()) {
+      staticInjections.add(new StaticInjection(command.getSource(), type));
+    }
+    return true;
+  }
+

@@ -1,4 +1,0 @@
-  BindingImpl<?> createBinding(InjectorImpl injector) {
-    return bindingInfo.createBinding(injector);
-  }
-

@@ -1,5 +1,6 @@
     public LinkedBindingBuilder<T> annotatedWith(
         Class<? extends Annotation> annotationType) {
+      nonNull(annotationType, "annotationType");
       assertNotAnnotated();
       key = Key.get(key.getTypeLiteral(), annotationType);
       return this;

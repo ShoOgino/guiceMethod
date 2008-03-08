@@ -11,8 +11,8 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
-            assertEquals(Scopes.SINGLETON, command.getScoping().getScope(null));
-            assertNull(command.getScoping().getScopeAnnotation(null));
+            assertEquals(Scopes.SINGLETON, command.getScoping().getScope());
+            assertNull(command.getScoping().getScopeAnnotation());
             assertFalse(command.getScoping().isEagerSingleton());
             return null;
           }
@@ -21,8 +21,8 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Map.class), command.getKey());
-            assertEquals(Singleton.class, command.getScoping().getScopeAnnotation(null));
-            assertNull(command.getScoping().getScope(null));
+            assertEquals(Singleton.class, command.getScoping().getScopeAnnotation());
+            assertNull(command.getScoping().getScope());
             assertFalse(command.getScoping().isEagerSingleton());
             return null;
           }
@@ -31,8 +31,8 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
-            assertNull(command.getScoping().getScopeAnnotation(null));
-            assertNull(command.getScoping().getScope(null));
+            assertNull(command.getScoping().getScopeAnnotation());
+            assertNull(command.getScoping().getScope());
             assertTrue(command.getScoping().isEagerSingleton());
             return null;
           }

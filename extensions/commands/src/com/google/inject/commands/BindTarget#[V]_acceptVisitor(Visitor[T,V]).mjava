@@ -1,0 +1,2 @@
+  <V> V acceptVisitor(Visitor<T, V> visitor);
+

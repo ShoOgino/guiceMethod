@@ -1,0 +1,15 @@
+    public Void call(InternalContext context) {
+      InjectionPoint<?> injectionPoint
+          = InjectionPoint.newInstance(key, context.getInjectorImpl());
+      context.setInjectionPoint(injectionPoint);
+      try {
+        factory.get(context, injectionPoint);
+        return null;
+      } catch(ProvisionException provisionException) {
+        provisionException.addContext(injectionPoint);
+        throw provisionException;
+      } finally {
+        context.setInjectionPoint(null);
+      }
+    }
+

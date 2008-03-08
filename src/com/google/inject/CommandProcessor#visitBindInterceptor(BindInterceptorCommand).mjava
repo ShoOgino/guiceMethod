@@ -1,0 +1,4 @@
+  public Boolean visitBindInterceptor(BindInterceptorCommand command) {
+    return false;
+  }
+

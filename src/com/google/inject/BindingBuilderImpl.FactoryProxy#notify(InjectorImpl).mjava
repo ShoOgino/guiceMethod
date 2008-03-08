@@ -1,8 +1,0 @@
-    public void notify(final InjectorImpl injector) {
-      injector.withDefaultSource(source, new Runnable() {
-        public void run() {
-          targetFactory = injector.getInternalFactory(targetKey);
-        }
-      });
-    }
-

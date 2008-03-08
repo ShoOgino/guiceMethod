@@ -1,0 +1,16 @@
+  private <T> void validateKey(Object source, Key<T> key) {
+    if (key.hasAnnotationType()) {
+      Class<? extends Annotation> annotationType = key.getAnnotationType();
+
+      if (!Annotations.isRetainedAtRuntime(annotationType)) {
+        addError(StackTraceElements.forType(annotationType),
+            ErrorMessages.MISSING_RUNTIME_RETENTION, source);
+      }
+
+      if (!Key.isBindingAnnotation(annotationType)) {
+        addError(StackTraceElements.forType(annotationType),
+            ErrorMessages.MISSING_BINDING_ANNOTATION, source);
+      }
+    }
+  }
+

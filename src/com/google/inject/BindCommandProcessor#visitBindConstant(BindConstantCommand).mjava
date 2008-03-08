@@ -1,0 +1,14 @@
+  @Override public Boolean visitBindConstant(BindConstantCommand command) {
+    Object value = command.getTarget().get();
+    if (value == null) {
+      addError(command.getSource(), ErrorMessages.MISSING_CONSTANT_VALUE);
+    }
+
+    validateKey(command.getSource(), command.getKey());
+    ConstantFactory<Object> factory = new ConstantFactory<Object>(value);
+    putBinding(new ContantBindingImpl<Object>(
+        injector, command.getKey(), command.getSource(), factory, value));
+
+    return true;
+  }
+

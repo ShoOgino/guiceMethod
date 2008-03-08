@@ -1,0 +1,4 @@
+    void checkDependencies(InjectorImpl injector) {
+      injector.injectors.get(o.getClass());
+    }
+

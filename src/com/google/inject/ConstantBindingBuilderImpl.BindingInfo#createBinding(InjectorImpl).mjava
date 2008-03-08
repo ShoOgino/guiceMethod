@@ -1,6 +1,0 @@
-    BindingImpl<T> createBinding(InjectorImpl injector) {
-      Key<T> key = Key.get(type, annotationStrategy);
-        ConstantFactory<T> factory = new ConstantFactory<T>(value);
-      return new ContantBindingImpl<T>(injector, key, source, factory, value);
-    }
-

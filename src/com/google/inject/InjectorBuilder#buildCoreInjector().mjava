@@ -1,0 +1,35 @@
+  /**
+   * Builds the injector.
+   */
+  private void buildCoreInjector() {
+    new ErrorsCommandProcessor()
+        .processCommands(commands, configurationErrorHandler);
+
+    BindInterceptorCommandProcessor bindInterceptorCommandProcessor
+        = new BindInterceptorCommandProcessor();
+    bindInterceptorCommandProcessor.processCommands(commands, configurationErrorHandler);
+    injector.constructionProxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
+    stopwatch.resetAndLog("Interceptors creation");
+
+    new ScopesCommandProcessor(injector.scopes)
+        .processCommands(commands, configurationErrorHandler);
+    stopwatch.resetAndLog("Scopes creation");
+
+    new ConvertToTypesCommandProcessor(injector.converters)
+        .processCommands(commands, configurationErrorHandler);
+    stopwatch.resetAndLog("Converters creation");
+
+    bindCommandProcesor = new BindCommandProcessor(
+        injector, injector.scopes, stage, injector.explicitBindings);
+    bindCommandProcesor.processCommands(commands, configurationErrorHandler);
+    stopwatch.resetAndLog("Binding creation");
+
+    injector.index();
+    stopwatch.resetAndLog("Binding indexing");
+
+    requestStaticInjectionCommandProcessor = new RequestStaticInjectionCommandProcessor();
+    requestStaticInjectionCommandProcessor
+        .processCommands(commands, configurationErrorHandler);
+    stopwatch.resetAndLog("Static injection");
+  }
+

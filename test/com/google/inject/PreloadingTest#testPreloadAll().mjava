@@ -1,6 +1,5 @@
   public void testPreloadAll() throws CreationException {
-    BinderImpl builder = createBinder(Stage.PRODUCTION);
-    builder.createInjector();
+    createBinder(Stage.PRODUCTION);
     assertEquals(1, Foo.count);
     assertEquals(1, Bar.count);
   }

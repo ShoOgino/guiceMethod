@@ -1,4 +1,0 @@
-  public void to(float value) {
-    to(float.class, value);
-  }
-

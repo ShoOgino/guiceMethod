@@ -1,8 +1,10 @@
   public void testSingletonAnnotation() throws CreationException {
-    BinderImpl binder = new BinderImpl();
-    BindingBuilderImpl<SampleSingleton> bindingBuilder
-        = binder.bind(SampleSingleton.class);
-    Injector injector = binder.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(SampleSingleton.class);
+      }
+    });
+
     assertSame(
         injector.getInstance(SampleSingleton.class),
         injector.getInstance(SampleSingleton.class));

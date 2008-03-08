@@ -1,5 +1,5 @@
     public void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
-                               TypeConverter converter) {
-      commands.add(new ConvertToTypesCommand(typeMatcher, converter));
+        TypeConverter converter) {
+      commands.add(new ConvertToTypesCommand(defaultSource(), typeMatcher, converter));
     }
 

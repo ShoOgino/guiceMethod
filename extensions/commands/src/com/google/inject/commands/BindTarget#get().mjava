@@ -1,0 +1,5 @@
+  /**
+   * Returns the bound instance, if it exists, or {@code null} if no bound value exists.
+   */
+  T get();
+

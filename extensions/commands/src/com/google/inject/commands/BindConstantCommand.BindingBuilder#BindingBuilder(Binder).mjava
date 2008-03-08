@@ -1,0 +1,4 @@
+    BindingBuilder(Binder binder) {
+      this.binder = binder;
+    }
+

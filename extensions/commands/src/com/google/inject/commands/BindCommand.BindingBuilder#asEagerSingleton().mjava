@@ -7,6 +7,9 @@
         @Override public boolean isEagerSingleton() {
           return true;
         }
+        public <V> V acceptVisitor(Visitor<V> visitor) {
+          return visitor.visitEagerSingleton();
+        }
         @Override public String toString() {
           return "eager singleton";
         }

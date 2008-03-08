@@ -1,6 +1,6 @@
     private void assertNotAnnotated() {
       if (BindCommand.this.key.getAnnotationType() != null) {
-        throw new IllegalStateException("Already annotated with " + key.getAnnotationType());
+        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
       }
     }
 

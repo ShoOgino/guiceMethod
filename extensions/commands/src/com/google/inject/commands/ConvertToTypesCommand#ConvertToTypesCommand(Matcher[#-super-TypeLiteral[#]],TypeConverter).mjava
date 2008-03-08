@@ -1,6 +1,0 @@
-  ConvertToTypesCommand(Matcher<? super TypeLiteral<?>> typeMatcher,
-      TypeConverter typeConverter) {
-    this.typeMatcher = typeMatcher;
-    this.typeConverter = typeConverter;
-  }
-

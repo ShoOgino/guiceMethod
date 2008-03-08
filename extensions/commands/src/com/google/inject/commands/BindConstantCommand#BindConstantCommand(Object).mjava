@@ -1,0 +1,4 @@
+  BindConstantCommand(Object source) {
+    this.source = nonNull(source, "source");
+  }
+

@@ -5,8 +5,11 @@
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           return linkedBindingBuilder.toProvider(provider);
         }
-        @Override public Provider<? extends T> getProvider(Provider<? extends T> defaultValue) {
+        @Override public Provider<? extends T> getProvider() {
           return provider;
+        }
+        public <V> V acceptVisitor(Visitor<T, V> visitor) {
+          return visitor.visitToProvider(provider);
         }
         @Override public String toString() {
           return "provider " + provider;

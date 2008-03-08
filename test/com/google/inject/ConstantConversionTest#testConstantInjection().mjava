@@ -1,11 +1,14 @@
   public void testConstantInjection() throws CreationException {
-    BinderImpl b = new BinderImpl();
-    b.bindConstant().annotatedWith(NumericValue.class).to("5");
-    b.bindConstant().annotatedWith(BooleanValue.class).to("true");
-    b.bindConstant().annotatedWith(EnumValue.class).to("TEE");
-    b.bindConstant().annotatedWith(ClassName.class).to(Foo.class.getName());
-    Injector c = b.createInjector();
-    Foo foo = c.getInstance(Foo.class);
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindConstant().annotatedWith(NumericValue.class).to("5");
+        bindConstant().annotatedWith(BooleanValue.class).to("true");
+        bindConstant().annotatedWith(EnumValue.class).to("TEE");
+        bindConstant().annotatedWith(ClassName.class).to(Foo.class.getName());
+      }
+    });
+
+    Foo foo = injector.getInstance(Foo.class);
 
     checkNumbers(
       foo.integerField,

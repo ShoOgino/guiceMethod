@@ -1,0 +1,10 @@
+  @Override public Boolean visitAddError(AddThrowableErrorCommand command) {
+    Object source = command.getSource();
+    String message = ErrorMessages.getRootMessage(command.getThrowable());
+    String logMessage = String.format(
+        ErrorMessages.EXCEPTION_REPORTED_BY_MODULE, message);
+    logger.log(Level.INFO, logMessage, command.getThrowable());
+    addError(source, ErrorMessages.EXCEPTION_REPORTED_BY_MODULE_SEE_LOG, message);
+    return true;
+  }
+

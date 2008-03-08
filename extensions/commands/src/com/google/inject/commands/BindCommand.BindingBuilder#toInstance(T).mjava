@@ -1,13 +1,20 @@
     public void toInstance(final T instance) {
-      nonNull(instance, "instance"); // might someday want to tolerate null here
+      // might someday want to tolerate null here, probably by setting up a
+      // Provider<null> rather than trying to distinguish between null and
+      // not set
+      nonNull(instance, "instance");
+
       assertNoTarget();
       bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           linkedBindingBuilder.toInstance(instance);
           return null;
         }
-        @Override public T get(T defaultValue) {
+        @Override public T get() {
           return instance;
+        }
+        public <V> V acceptVisitor(Visitor<T, V> visitor) {
+          return visitor.visitToInstance(instance);
         }
         @Override public String toString() {
           return "instance " + instance;

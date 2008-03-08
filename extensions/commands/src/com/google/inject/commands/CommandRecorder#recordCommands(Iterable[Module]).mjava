@@ -4,7 +4,7 @@
   public List<Command> recordCommands(Iterable<Module> modules) {
     RecordingBinder binder = new RecordingBinder();
     for (Module module : modules) {
-      module.configure(binder);
+      binder.install(module);
     }
     return Collections.unmodifiableList(binder.commands);
   }

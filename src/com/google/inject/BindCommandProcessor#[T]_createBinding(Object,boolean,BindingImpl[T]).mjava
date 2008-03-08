@@ -1,0 +1,16 @@
+  private <T> void createBinding(Object source, boolean shouldPreload,
+      BindingImpl<T> binding) {
+    putBinding(binding);
+
+    // Register to preload if necessary.
+    if (binding.getScope() == Scopes.SINGLETON) {
+      if (stage == Stage.PRODUCTION || shouldPreload) {
+        preloaders.add(new BindingPreloader(binding.key, binding.internalFactory));
+      }
+    } else {
+      if (shouldPreload) {
+        addError(source, ErrorMessages.PRELOAD_NOT_ALLOWED);
+      }
+    }
+  }
+

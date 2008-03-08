@@ -1,8 +1,11 @@
   public void testOneConstantInjection() throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    builder.bindConstant().annotatedWith(NumericValue.class).to("5");
-    builder.bind(Simple.class);
-    Injector injector = builder.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindConstant().annotatedWith(NumericValue.class).to("5");
+        bind(Simple.class);
+      }
+    });
+
     Simple simple = injector.getInstance(Simple.class);
     assertEquals(5, simple.i);
   }

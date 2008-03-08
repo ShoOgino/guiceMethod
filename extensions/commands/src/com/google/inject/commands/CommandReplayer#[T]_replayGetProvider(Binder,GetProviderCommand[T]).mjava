@@ -1,4 +1,8 @@
-  public <T> void replayGetProvider(Binder binder, GetProviderCommand<T> command) {
-    binder.getProvider(command.getKey());
+  public <T> void replayGetProvider(final Binder binder, final GetProviderCommand<T> command) {
+    SourceProviders.withDefault(command.getSource(), new Runnable() {
+      public void run() {
+        binder.getProvider(command.getKey());
+      }
+    });
   }
 

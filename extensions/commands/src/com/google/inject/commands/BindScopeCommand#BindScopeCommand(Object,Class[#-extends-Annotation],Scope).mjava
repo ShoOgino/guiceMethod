@@ -1,0 +1,6 @@
+  BindScopeCommand(Object source, Class<? extends Annotation> annotationType, Scope scope) {
+    this.source = nonNull(source, "source");
+    this.annotationType = nonNull(annotationType, "annotationType");
+    this.scope = nonNull(scope, "scope");
+  }
+

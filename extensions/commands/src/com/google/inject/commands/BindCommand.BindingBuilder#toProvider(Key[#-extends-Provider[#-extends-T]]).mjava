@@ -6,9 +6,11 @@
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           return linkedBindingBuilder.toProvider(providerKey);
         }
-        @Override public Key<? extends Provider<? extends T>> getProviderKey(
-            Key<Provider<? extends T>> defaultValue) {
+        @Override public Key<? extends Provider<? extends T>> getProviderKey() {
           return providerKey;
+        }
+        public <V> V acceptVisitor(Visitor<T, V> visitor) {
+          return visitor.visitToProviderKey(providerKey);
         }
         @Override public String toString() {
           return "provider " + providerKey;

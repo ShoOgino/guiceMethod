@@ -1,4 +1,0 @@
-  BindCommand(Key<T> key) {
-    this.key = nonNull(key, "key");
-  }
-

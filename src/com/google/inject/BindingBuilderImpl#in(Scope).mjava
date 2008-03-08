@@ -1,5 +1,0 @@
-  public void in(Scope scope) {
-    ensureScopeNotSet();
-    this.scope = Objects.nonNull(scope, "scope");
-  }
-

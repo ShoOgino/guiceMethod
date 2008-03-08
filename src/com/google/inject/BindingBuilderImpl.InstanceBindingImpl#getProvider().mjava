@@ -1,5 +1,0 @@
-    @Override
-    public Provider<T> getProvider() {
-      return this.provider;
-    }
-

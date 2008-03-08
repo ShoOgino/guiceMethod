@@ -1,10 +1,12 @@
   public void testFooProvider() throws CreationException {
-    BinderImpl cb = new BinderImpl();
-    cb.bind(Foo.class).toProvider(FooProvider.class);
-    Injector c = cb.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Foo.class).toProvider(FooProvider.class);
+      }
+    });
 
-    Foo a = c.getInstance(Foo.class);
-    Foo b = c.getInstance(Foo.class);
+    Foo a = injector.getInstance(Foo.class);
+    Foo b = injector.getInstance(Foo.class);
 
     assertEquals(0, a.i);
     assertEquals(0, b.i);

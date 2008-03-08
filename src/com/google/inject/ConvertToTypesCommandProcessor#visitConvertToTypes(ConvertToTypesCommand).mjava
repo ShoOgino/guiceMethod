@@ -1,0 +1,6 @@
+  @Override public Boolean visitConvertToTypes(ConvertToTypesCommand command) {
+    converters.add(MatcherAndConverter.newInstance(
+        command.getTypeMatcher(), command.getTypeConverter()));
+    return true;
+  }
+

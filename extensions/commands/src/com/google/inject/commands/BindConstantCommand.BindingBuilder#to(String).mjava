@@ -1,11 +1,12 @@
     public void to(final String value) {
+      nonNull(value, "value");
       assertNoTarget();
 
       BindConstantCommand.this.target = new ConstantTarget() {
         public void execute(ConstantBindingBuilder builder) {
           builder.to(value);
         }
-        public Object get(Object defaultValue) {
+        public Object get() {
           return value;
         }
         public Class getType() {

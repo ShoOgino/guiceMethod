@@ -1,6 +1,12 @@
     private void assertNoScope() {
-      if (bindScoping != null) {
-        throw new IllegalStateException("Already scoped by " + bindScoping);
+      // Scoping isn't allowed when we have only one instance.
+      if (bindTarget.get() != null) {
+        binder.addError(SINGLE_INSTANCE_AND_SCOPE);
+        return;
+      }
+
+      if (bindScoping != EMPTY_SCOPING) {
+        binder.addError(SCOPE_ALREADY_SET);
       }
     }
 

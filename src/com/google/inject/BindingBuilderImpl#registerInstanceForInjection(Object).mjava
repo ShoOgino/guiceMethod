@@ -1,4 +1,0 @@
-  void registerInstanceForInjection(final Object o) {
-    binder.membersInjectors.add(new MembersInjector(o));
-  }
-

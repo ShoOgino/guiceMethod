@@ -1,6 +1,6 @@
     private void assertNoTarget() {
-      if (bindTarget != null) {
-        throw new IllegalStateException("Already targetted to " + bindTarget);
+      if (bindTarget != EMPTY_BIND_TARGET) {
+        binder.addError(IMPLEMENTATION_ALREADY_SET);
       }
     }
 

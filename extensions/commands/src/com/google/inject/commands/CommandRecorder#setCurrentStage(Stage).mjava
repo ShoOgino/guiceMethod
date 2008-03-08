@@ -1,0 +1,7 @@
+  /**
+   * Sets the stage reported by the binder.
+   */
+  public void setCurrentStage(Stage currentStage) {
+    this.currentStage = currentStage;
+  }
+

@@ -1,5 +1,0 @@
-  GetProviderCommand(Key<T> key, EarlyRequestsProvider earlyRequestsProvider) {
-    this.key = key;
-    this.earlyRequestsProvider = earlyRequestsProvider;
-  }
-

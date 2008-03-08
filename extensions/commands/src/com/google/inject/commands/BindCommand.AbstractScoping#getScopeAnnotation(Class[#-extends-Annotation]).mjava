@@ -1,5 +1,0 @@
-    public Class<? extends Annotation> getScopeAnnotation(
-        Class<? extends Annotation> defaultValue) {
-      return defaultValue;
-    }
-

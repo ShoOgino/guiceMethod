@@ -1,9 +1,11 @@
   public void testInjectStatics() throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    builder.bindConstant().annotatedWith(S.class).to("test");
-    builder.bindConstant().annotatedWith(I.class).to(5);
-    builder.requestStaticInjection(Static.class);
-    builder.createInjector();
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindConstant().annotatedWith(S.class).to("test");
+        bindConstant().annotatedWith(I.class).to(5);
+        requestStaticInjection(Static.class);
+      }
+    });
 
     assertEquals("test", Static.s);
     assertEquals(5, Static.i);

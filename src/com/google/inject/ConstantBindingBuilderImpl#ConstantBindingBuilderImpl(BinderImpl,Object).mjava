@@ -1,5 +1,0 @@
-  ConstantBindingBuilderImpl(BinderImpl binder, Object source) {
-    this.binder = binder;
-    this.source = source;
-  }
-

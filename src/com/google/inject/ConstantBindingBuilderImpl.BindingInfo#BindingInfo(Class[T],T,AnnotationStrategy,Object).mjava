@@ -1,8 +1,0 @@
-    BindingInfo(Class<T> type, T value,
-        AnnotationStrategy annotationStrategy, Object source) {
-      this.type = type;
-      this.value = value;
-      this.annotationStrategy = annotationStrategy;
-      this.source = source;
-    }
-

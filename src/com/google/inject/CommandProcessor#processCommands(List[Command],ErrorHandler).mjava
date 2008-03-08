@@ -1,0 +1,14 @@
+  public void processCommands(List<Command> commands, ErrorHandler errorHandler) {
+    this.errorHandler = errorHandler;
+    try {
+      for (Iterator<Command> i = commands.iterator(); i.hasNext(); ) {
+        Boolean allDone = i.next().acceptVisitor(this);
+        if (allDone) {
+          i.remove();
+        }
+      }
+    } finally {
+      this.errorHandler = null;
+    }
+  }
+

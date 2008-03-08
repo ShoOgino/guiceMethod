@@ -1,0 +1,2 @@
+    V visitScope(Scope scope);
+

@@ -1,0 +1,5 @@
+    public BindingPreloader(Key<?> key, InternalFactory<?> factory) {
+      this.key = key;
+      this.factory = Objects.nonNull(factory, "factory");
+    }
+

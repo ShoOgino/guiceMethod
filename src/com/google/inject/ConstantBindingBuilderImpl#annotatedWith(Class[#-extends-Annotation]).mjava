@@ -1,8 +1,0 @@
-  public ConstantBindingBuilder annotatedWith(
-      Class<? extends Annotation> annotationType) {
-    Objects.nonNull(annotationType, "annotation type");
-    validateAnnotation(annotationType);
-    annotationStrategy = Key.strategyFor(annotationType);
-    return this;
-  }
-

@@ -15,7 +15,7 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
-            assertEquals("A", command.getTarget().getProvider(null).get());
+            assertEquals("A", command.getTarget().getProvider().get());
             return null;
           }
         },
@@ -23,8 +23,8 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
-            assertNull(command.getTarget().get(null));
-            assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey(null));
+            assertNull(command.getTarget().get());
+            assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey());
             return null;
           }
         },
@@ -32,8 +32,8 @@
         new FailingVisitor() {
           @Override public <T> Void visitBind(BindCommand<T> command) {
             assertEquals(Key.get(Collection.class), command.getKey());
-            assertNull(command.getTarget().get(null));
-            assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey(null));
+            assertNull(command.getTarget().get());
+            assertEquals(Key.get(ListProvider.class), command.getTarget().getProviderKey());
             return null;
           }
         }

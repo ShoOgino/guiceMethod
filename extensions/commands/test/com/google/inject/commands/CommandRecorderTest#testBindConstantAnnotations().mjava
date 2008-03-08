@@ -10,7 +10,7 @@
         new FailingVisitor() {
           @Override public Void visitBindConstant(BindConstantCommand command) {
             assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
-            assertEquals("A", command.getTarget().get(null));
+            assertEquals("A", command.getTarget().get());
             return null;
           }
         },
@@ -18,7 +18,7 @@
         new FailingVisitor() {
           @Override public Void visitBindConstant(BindConstantCommand command) {
             assertEquals(Key.get(String.class, Names.named("Bee")), command.getKey());
-            assertEquals("B", command.getTarget().get(null));
+            assertEquals("B", command.getTarget().get());
             return null;
           }
         }

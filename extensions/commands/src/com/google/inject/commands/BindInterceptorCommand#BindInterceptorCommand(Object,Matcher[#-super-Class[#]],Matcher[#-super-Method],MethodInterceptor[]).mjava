@@ -1,0 +1,11 @@
+  BindInterceptorCommand(
+      Object source,
+      Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher,
+      MethodInterceptor[] interceptors) {
+    this.source = nonNull(source, "source");
+    this.classMatcher = nonNull(classMatcher, "classMatcher");
+    this.methodMatcher = nonNull(methodMatcher, "methodMatcher");
+    this.interceptors = unmodifiableList(Arrays.asList(interceptors.clone()));
+  }
+

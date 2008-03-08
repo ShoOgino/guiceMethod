@@ -1,4 +1,4 @@
     public Stage currentStage() {
-      return stage;
+      return currentStage;
     }
 

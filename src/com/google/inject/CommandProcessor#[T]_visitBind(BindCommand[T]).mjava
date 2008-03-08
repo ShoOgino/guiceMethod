@@ -1,0 +1,4 @@
+  public <T> Boolean visitBind(BindCommand<T> command) {
+    return false;
+  }
+

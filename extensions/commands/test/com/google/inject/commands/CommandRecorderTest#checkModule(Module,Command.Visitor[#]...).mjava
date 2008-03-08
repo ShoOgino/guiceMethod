@@ -9,6 +9,7 @@
     for (int i = 0; i < visitors.length; i++) {
       Command.Visitor<?> visitor = visitors[i];
       Command command = commands.get(i);
+      assertTrue(command.getSource().toString().contains("CommandRecorderTest"));
       command.acceptVisitor(visitor);
     }
   }

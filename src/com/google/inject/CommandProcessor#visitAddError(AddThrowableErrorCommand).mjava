@@ -1,0 +1,4 @@
+  public Boolean visitAddError(AddThrowableErrorCommand command) {
+    return false;
+  }
+

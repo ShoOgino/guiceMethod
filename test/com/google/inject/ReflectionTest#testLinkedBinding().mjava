@@ -1,9 +1,14 @@
   public void testLinkedBinding() throws CreationException {
-    BinderImpl builder = new BinderImpl();
-    Bar bar = new Bar();
-    builder.bind(Bar.class).toInstance(bar);
-    builder.bind(Key.get(Foo.class)).to(Key.get(Bar.class));
-    Injector injector = builder.createInjector();
+    InjectorBuilder builder = new InjectorBuilder();
+    final Bar bar = new Bar();
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Bar.class).toInstance(bar);
+        bind(Key.get(Foo.class)).to(Key.get(Bar.class));
+      }
+    });
+
     Binding<Foo> fooBinding = injector.getBinding(Key.get(Foo.class));
     assertSame(bar, fooBinding.getProvider().get());
     assertNotNull(fooBinding.getSource());

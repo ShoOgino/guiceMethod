@@ -1,0 +1,27 @@
+  @Override public Boolean visitBindScope(BindScopeCommand command) {
+    Scope scope = command.getScope();
+    Class<? extends Annotation> annotationType = command.getAnnotationType();
+
+    if (!Scopes.isScopeAnnotation(annotationType)) {
+      addError(StackTraceElements.forType(annotationType),
+          ErrorMessages.MISSING_SCOPE_ANNOTATION);
+      // Go ahead and bind anyway so we don't get collateral errors.
+    }
+
+    if (!Annotations.isRetainedAtRuntime(annotationType)) {
+      addError(StackTraceElements.forType(annotationType),
+          ErrorMessages.MISSING_RUNTIME_RETENTION, command.getSource());
+      // Go ahead and bind anyway so we don't get collateral errors.
+    }
+
+    Scope existing = scopes.get(nonNull(annotationType, "annotation type"));
+    if (existing != null) {
+      addError(command.getSource(), ErrorMessages.DUPLICATE_SCOPES, existing,
+          annotationType, scope);
+    } else {
+      scopes.put(annotationType, nonNull(scope, "scope"));
+    }
+
+    return true;
+  }
+

@@ -1,4 +1,0 @@
-  RequestStaticInjectionCommand(Class[] types) {
-    this.types = unmodifiableList(Arrays.asList(types.clone()));
-  }
-

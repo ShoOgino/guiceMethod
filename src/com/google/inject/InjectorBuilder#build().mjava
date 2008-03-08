@@ -1,0 +1,36 @@
+  Injector build() {
+    if (injector != null) {
+      throw new AssertionError("Already built, builders are not reusable.");
+    }
+
+    modules.add(0, new BuiltInModule(injector, stage));
+
+    CommandRecorder commandRecorder = new CommandRecorder(futureInjector);
+    commandRecorder.setCurrentStage(stage);
+    commands.addAll(commandRecorder.recordCommands(modules));
+
+    injector = new InjectorImpl(parent);
+    injector.setErrorHandler(configurationErrorHandler);
+
+    buildCoreInjector();
+
+    validate();
+
+    injector.setErrorHandler(RuntimeErrorHandler.INSTANCE);
+
+    // If we're in the tool stage, stop here. Don't eagerly inject or load
+    // anything.
+    if (stage == Stage.TOOL) {
+      // TODO: Wrap this and prevent usage of anything besides getBindings().
+      return injector;
+    }
+
+    fulfillInjectionRequests();
+
+    if (!commands.isEmpty()) {
+      throw new AssertionError("Failed to execute " + commands);
+    }
+
+    return injector;
+  }
+

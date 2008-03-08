@@ -1,0 +1,4 @@
+    public void handle(Object source, String message) {
+      errorMessages.add(new Message(source, message));
+    }
+

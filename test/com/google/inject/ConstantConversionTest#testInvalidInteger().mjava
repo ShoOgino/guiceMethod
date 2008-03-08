@@ -1,9 +1,12 @@
   public void testInvalidInteger() throws CreationException {
-    BinderImpl b = new BinderImpl();
-    b.bindConstant().annotatedWith(NumericValue.class).to("invalid");
-    Injector c = b.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindConstant().annotatedWith(NumericValue.class).to("invalid");
+      }
+    });
+
     try {
-      c.getInstance(InvalidInteger.class);
+      injector.getInstance(InvalidInteger.class);
       fail();
     } catch (ConfigurationException e) { /* expected */ }
   }
