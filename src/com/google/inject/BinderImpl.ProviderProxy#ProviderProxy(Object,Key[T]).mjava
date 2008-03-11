@@ -1,5 +1,0 @@
-    public ProviderProxy(Object source, Key<T> key) {
-      this.source = source;
-      this.key = key;
-    }
-

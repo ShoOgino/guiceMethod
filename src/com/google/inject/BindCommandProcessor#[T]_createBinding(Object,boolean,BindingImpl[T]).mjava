@@ -5,7 +5,7 @@
     // Register to preload if necessary.
     if (binding.getScope() == Scopes.SINGLETON) {
       if (stage == Stage.PRODUCTION || shouldPreload) {
-        preloaders.add(new BindingPreloader(binding.key, binding.internalFactory));
+        eagerSingletonCreators.add(new EagerSingletonCreator(binding.key, binding.internalFactory));
       }
     } else {
       if (shouldPreload) {

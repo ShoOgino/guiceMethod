@@ -1,5 +1,0 @@
-  <T> void convertToType(TypeLiteral<T> type,
-      TypeConverter converter) {
-    convertToClasses(Matchers.identicalTo(type), converter);
-  }
-

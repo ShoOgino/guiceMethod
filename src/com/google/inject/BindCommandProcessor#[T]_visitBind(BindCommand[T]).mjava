@@ -46,8 +46,8 @@
 
     command.getTarget().acceptVisitor(new BindTarget.Visitor<T, Void>() {
       public Void visitToInstance(T instance) {
-        InternalFactory<? extends T> factory = new ConstantFactory<T>(instance);
-        registerInstanceForInjection(instance);
+        ConstantFactory<? extends T> factory = new ConstantFactory<T>(instance);
+        outstandingInjections.put(instance, null);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
         createBinding(source, shouldPreload, new InstanceBindingImpl<T>(
@@ -56,9 +56,9 @@
       }
 
       public Void visitToProvider(Provider<? extends T> provider) {
-        InternalFactory<? extends T> factory
+        InternalFactoryToProviderAdapter<? extends T> factory
             = new InternalFactoryToProviderAdapter<T>(provider, source);
-        registerInstanceForInjection(provider);
+        outstandingInjections.put(provider, null);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
         createBinding(source, shouldPreload, new ProviderInstanceBindingImpl<T>(

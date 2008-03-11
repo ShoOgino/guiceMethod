@@ -1,9 +1,0 @@
-  private void createConstantBinding(ConstantBindingBuilderImpl builder) {
-    if (builder.hasValue()) {
-      putBinding(builder.createBinding(injector));
-    }
-    else {
-      addError(builder.getSource(), ErrorMessages.MISSING_CONSTANT_VALUE);
-    }
-  }
-

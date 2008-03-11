@@ -1,4 +1,0 @@
-  static boolean inGuiceNamespace(Class<?> clazz) {
-    return clazz == Provider.class;
-  }
-

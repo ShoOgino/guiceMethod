@@ -1,6 +1,0 @@
-  public void injectMembers(InjectorImpl injector) {
-    for (MembersInjector membersInjector : membersInjectors) {
-      membersInjector.injectMembers(injector);
-    }
-  }
-

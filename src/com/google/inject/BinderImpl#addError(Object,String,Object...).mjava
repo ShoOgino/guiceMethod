@@ -1,4 +1,0 @@
-  void addError(Object source, String message, Object... arguments) {
-    configurationErrorHandler.handle(source, message, arguments);
-  }
-

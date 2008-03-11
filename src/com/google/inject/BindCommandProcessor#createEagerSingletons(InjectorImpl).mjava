@@ -1,0 +1,6 @@
+  public void createEagerSingletons(InjectorImpl injector) {
+    for (ContextualCallable<Void> preloader : eagerSingletonCreators) {
+      injector.callInContext(preloader);
+    }
+  }
+

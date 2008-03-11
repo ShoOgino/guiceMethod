@@ -1,4 +1,0 @@
-  void registerInstanceForInjection(final Object o) {
-    membersInjectors.add(new MembersInjector(o));
-  }
-

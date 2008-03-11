@@ -4,13 +4,12 @@
   private void fulfillInjectionRequests() {
     futureInjector.initialize(injector);
 
-    // TODO(jessewilson): sort these injections by their dependencies
     requestStaticInjectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
-    bindCommandProcesor.injectMembers(injector);
+    injector.fulfillOutstandingInjections();
     stopwatch.resetAndLog("Instance injection");
 
-    bindCommandProcesor.runPreloaders(injector);
+    bindCommandProcesor.createEagerSingletons(injector);
     stopwatch.resetAndLog("Preloading");
   }
 

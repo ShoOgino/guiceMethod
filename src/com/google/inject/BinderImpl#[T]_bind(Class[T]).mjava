@@ -1,4 +1,0 @@
-  public <T> BindingBuilderImpl<T> bind(Class<T> clazz) {
-    return bind(Key.get(clazz));
-  }
-

@@ -1,6 +1,0 @@
-  public void install(Module module) {
-    if (modulesInstalled.add(module)) {
-      module.configure(this);
-    }
-  }
-

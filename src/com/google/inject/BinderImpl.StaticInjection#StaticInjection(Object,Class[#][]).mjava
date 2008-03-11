@@ -1,5 +1,0 @@
-    public StaticInjection(Object source, Class<?>[] types) {
-      this.source = source;
-      this.types = types;
-    }
-

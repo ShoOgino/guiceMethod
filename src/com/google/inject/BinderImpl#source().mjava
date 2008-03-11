@@ -1,7 +1,0 @@
-  /**
-   * Gets the current source.
-   */
-  Object source() {
-    return SourceProviders.defaultSource();    
-  }
-

@@ -1,4 +1,5 @@
   public T get(InternalContext context, InjectionPoint<?> injectionPoint) {
+    context.ensureMemberInjected(provider);
     T provided = provider.get();
     return injectionPoint.checkForNull(provided, source);
   }

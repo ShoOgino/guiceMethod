@@ -1,10 +1,12 @@
   BindCommandProcessor(InjectorImpl injector,
       Map<Class<? extends Annotation>, Scope> scopes,
       Stage stage,
-      Map<Key<?>, BindingImpl<?>> bindings) {
+      Map<Key<?>, BindingImpl<?>> bindings,
+      Map<Object, Void> outstandingInjections) {
     this.injector = injector;
     this.scopes = scopes;
     this.stage = stage;
     this.bindings = bindings;
+    this.outstandingInjections = outstandingInjections;
   }
 

@@ -1,5 +1,0 @@
-  <T> void convertToClass(Class<T> type,
-      TypeConverter converter) {
-    convertToClasses(Matchers.identicalTo(type), converter);
-  }
-

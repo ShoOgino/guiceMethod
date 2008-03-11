@@ -1,6 +1,0 @@
-  private void createConstantBindings() {
-    for (ConstantBindingBuilderImpl builder : constantBindingBuilders) {
-      createConstantBinding(builder);
-    }
-  }
-

@@ -1,7 +1,0 @@
-  public ConstantBindingBuilderImpl bindConstant() {
-    ConstantBindingBuilderImpl constantBuilder
-        = new ConstantBindingBuilderImpl(this, source());
-    constantBindingBuilders.add(constantBuilder);
-    return constantBuilder;
-  }
-

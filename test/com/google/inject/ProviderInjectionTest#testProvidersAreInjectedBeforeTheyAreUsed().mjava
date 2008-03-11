@@ -4,10 +4,10 @@
    * List.class is injected before it is used.
    */
   public void testProvidersAreInjectedBeforeTheyAreUsed() {
-    Injector injector = Guice.createInjector(new Module() {
-      public void configure(Binder binder) {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      public void configure() {
         // should bind String to "[true]"
-        binder.bind(String.class).toProvider(new Provider<String>() {
+        bind(String.class).toProvider(new Provider<String>() {
           private String value;
           @Inject void initialize(List list) {
             value = list.toString();
@@ -18,7 +18,7 @@
         });
 
         // should bind List to [true]
-        binder.bind(List.class).toProvider(new Provider<List>() {
+        bind(List.class).toProvider(new Provider<List>() {
           @Inject Boolean injectedYet = Boolean.FALSE;
           public List get() {
             return Arrays.asList(injectedYet);
@@ -26,7 +26,7 @@
         });
 
         // should bind Boolean to true
-        binder.bind(Boolean.class).toInstance(Boolean.TRUE);
+        bind(Boolean.class).toInstance(Boolean.TRUE);
       }
     });
 

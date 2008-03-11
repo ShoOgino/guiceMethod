@@ -1,4 +1,0 @@
-    InjectorProvider(Injector injector) {
-      this.injector = injector;
-    }
-
