@@ -40,6 +40,10 @@
     suite.addTestSuite(ProvidersTest.class);
     suite.addTestSuite(ParentInjectorTest.class);
 
+    suite.addTestSuite(CommandRecorderTest.class);
+    suite.addTestSuite(CommandReplayerTest.class);
+    suite.addTestSuite(CommandRewriteTest.class);
+
     return suite;
   }
 

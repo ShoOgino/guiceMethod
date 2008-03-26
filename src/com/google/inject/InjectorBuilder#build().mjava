@@ -3,14 +3,14 @@
       throw new AssertionError("Already built, builders are not reusable.");
     }
 
+    injector = new InjectorImpl(parent);
+    injector.setErrorHandler(configurationErrorHandler);
+
     modules.add(0, new BuiltInModule(injector, stage));
 
     CommandRecorder commandRecorder = new CommandRecorder(futureInjector);
     commandRecorder.setCurrentStage(stage);
     commands.addAll(commandRecorder.recordCommands(modules));
-
-    injector = new InjectorImpl(parent);
-    injector.setErrorHandler(configurationErrorHandler);
 
     buildCoreInjector();
 

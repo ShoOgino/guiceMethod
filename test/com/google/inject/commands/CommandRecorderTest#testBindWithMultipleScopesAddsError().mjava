@@ -1,0 +1,25 @@
+  public void testBindWithMultipleScopesAddsError() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            ScopedBindingBuilder sbb = bind(List.class).to(ArrayList.class);
+            sbb.in(Scopes.NO_SCOPE);
+            sbb.asEagerSingleton();
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
+            return null;
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+            assertEquals("Scope is set more than once.", command.getMessage());
+            return null;
+          }
+        }
+    );
+  }
+

@@ -1,6 +1,6 @@
     public ScopedBindingBuilder to(final Key<? extends T> targetKey) {
       nonNull(targetKey, "targetKey");
-      assertNoTarget();
+      checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           return linkedBindingBuilder.to(targetKey);

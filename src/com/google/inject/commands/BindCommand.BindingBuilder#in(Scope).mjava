@@ -1,6 +1,6 @@
     public void in(final Scope scope) {
       nonNull(scope, "scope");
-      assertNoScope();
+      checkNotScoped();
       bindScoping = new AbstractScoping() {
 
         public void execute(ScopedBindingBuilder scopedBindingBuilder) {

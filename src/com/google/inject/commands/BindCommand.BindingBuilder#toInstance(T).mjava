@@ -4,7 +4,7 @@
       // not set
       nonNull(instance, "instance");
 
-      assertNoTarget();
+      checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {
           linkedBindingBuilder.toInstance(instance);

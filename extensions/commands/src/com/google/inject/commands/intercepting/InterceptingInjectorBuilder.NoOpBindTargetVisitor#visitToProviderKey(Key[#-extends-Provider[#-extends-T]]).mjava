@@ -1,0 +1,4 @@
+    public V visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+      return null;
+    }
+

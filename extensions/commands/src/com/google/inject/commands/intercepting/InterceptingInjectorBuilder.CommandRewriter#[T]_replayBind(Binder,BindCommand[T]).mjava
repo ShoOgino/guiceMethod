@@ -1,15 +1,17 @@
     @Override public <T> void replayBind(Binder binder, BindCommand<T> command) {
-      Key<T> key = command.getKey();
+      final Key<T> key = command.getKey();
 
       if (!keysToIntercept.contains(key)) {
         super.replayBind(binder, command);
         return;
       }
 
-      if (command.getTarget() == null) {
-        throw new UnsupportedOperationException(
-            String.format("Cannot intercept bare binding of %s.", key));
-      }
+      command.getTarget().acceptVisitor(new NoOpBindTargetVisitor<T, Void>() {
+        @Override public Void visitUntargetted() {
+          throw new UnsupportedOperationException(
+              String.format("Cannot intercept bare binding of %s.", key));
+        }
+      });
 
       Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
       binder.bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));

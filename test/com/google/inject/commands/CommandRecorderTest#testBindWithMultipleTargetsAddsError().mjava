@@ -1,0 +1,25 @@
+  public void testBindWithMultipleTargetsAddsError() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            AnnotatedBindingBuilder<String> abb = bind(String.class);
+            abb.toInstance("A");
+            abb.toInstance("B");
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
+            return null;
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+            assertEquals("Implementation is set more than once.", command.getMessage());
+            return null;
+          }
+        }
+    );
+  }
+

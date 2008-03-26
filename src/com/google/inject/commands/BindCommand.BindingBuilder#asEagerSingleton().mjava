@@ -1,5 +1,5 @@
     public void asEagerSingleton() {
-      assertNoScope();
+      checkNotScoped();
       bindScoping = new AbstractScoping() {
         public void execute(ScopedBindingBuilder scopedBindingBuilder) {
           scopedBindingBuilder.asEagerSingleton();

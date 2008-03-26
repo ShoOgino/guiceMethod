@@ -1,4 +1,4 @@
-    private void assertNoScope() {
+    private void checkNotScoped() {
       // Scoping isn't allowed when we have only one instance.
       if (bindTarget.get() != null) {
         binder.addError(SINGLE_INSTANCE_AND_SCOPE);

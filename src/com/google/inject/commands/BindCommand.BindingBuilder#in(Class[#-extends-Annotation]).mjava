@@ -1,6 +1,6 @@
     public void in(final Class<? extends Annotation> scopeAnnotation) {
       nonNull(scopeAnnotation, "scopeAnnotation");
-      assertNoScope();
+      checkNotScoped();
 
       bindScoping = new AbstractScoping() {
         public void execute(ScopedBindingBuilder scopedBindingBuilder) {

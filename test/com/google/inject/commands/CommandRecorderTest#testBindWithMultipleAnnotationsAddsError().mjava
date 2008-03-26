@@ -1,0 +1,26 @@
+  public void testBindWithMultipleAnnotationsAddsError() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            AnnotatedBindingBuilder<String> abb = bind(String.class);
+            abb.annotatedWith(SampleAnnotation.class);
+            abb.annotatedWith(Names.named("A"));
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public <T> Void visitBind(BindCommand<T> command) {
+            return null;
+          }
+        },
+
+        new FailingVisitor() {
+          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+            assertEquals("More than one annotation is specified for this binding.",
+                command.getMessage());
+            return null;
+          }
+        }
+    );
+  }
+
