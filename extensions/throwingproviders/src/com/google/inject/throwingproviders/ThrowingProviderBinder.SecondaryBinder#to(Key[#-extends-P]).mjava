@@ -1,6 +1,6 @@
     public ScopedBindingBuilder to(final Key<? extends P> targetKey) {
       Objects.nonNull(targetKey, "targetKey");
-      final Key<Result> resultKey = Key.get(Result.class, uniqueAnnotation());
+      final Key<Result> resultKey = Key.get(Result.class, UniqueAnnotations.create());
       final Key<P> key = createKey();
 
       binder.bind(key).toProvider(new Provider<P>() {

@@ -13,7 +13,7 @@
         }
       });
 
-      Key<T> anonymousKey = Key.get(key.getTypeLiteral(), uniqueAnnotation());
+      Key<T> anonymousKey = Key.get(key.getTypeLiteral(), UniqueAnnotations.create());
       binder.bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
 
       LinkedBindingBuilder<T> linkedBindingBuilder = binder.bind(anonymousKey);

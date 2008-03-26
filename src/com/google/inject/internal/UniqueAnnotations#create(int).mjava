@@ -1,9 +1,4 @@
-  /**
-   * Returns an annotation instance that is not equal to any other annotation
-   * instances, for use in creating distinct {@link Key}s.
-   */
-  private static Annotation uniqueAnnotation() {
-    final int value = nextUniqueValue.getAndIncrement();
+  static Annotation create(final int value) {
     return new Internal() {
       public int value() {
         return value;

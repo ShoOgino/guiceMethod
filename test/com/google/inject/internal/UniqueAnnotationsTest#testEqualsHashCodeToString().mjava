@@ -1,0 +1,11 @@
+  public void testEqualsHashCodeToString() {
+    Annotation actual = UniqueAnnotations.create(31);
+
+    Annotation expected = getClass().getFields()[0].getAnnotations()[0];
+
+    assertEquals(expected.toString(), actual.toString());
+    assertEquals(expected.hashCode(), actual.hashCode());
+    assertEquals(expected, actual);
+
+  }
+
