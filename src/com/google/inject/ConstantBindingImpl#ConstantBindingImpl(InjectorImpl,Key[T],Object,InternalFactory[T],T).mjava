@@ -1,4 +1,4 @@
-  ContantBindingImpl(InjectorImpl injector, Key<T> key, Object source,
+  ConstantBindingImpl(InjectorImpl injector, Key<T> key, Object source,
       InternalFactory<T> internalFactory, T value) {
     super(injector, key, source, internalFactory, Scopes.NO_SCOPE);
     this.value = value;

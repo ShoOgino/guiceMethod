@@ -92,7 +92,7 @@
       }
 
       public Void visitUntargetted() {
-        Type type = key.getTypeLiteral().getType();
+        final Type type = key.getTypeLiteral().getType();
 
         // Error: Missing implementation.
         // Example: bind(Date.class).annotatedWith(Red.class);
@@ -104,20 +104,26 @@
           return null;
         }
 
-        // This cast is safe after the preceeding check.
-        @SuppressWarnings("unchecked")
-        Class<T> clazz = (Class<T>) type;
+        untargettedBindings.add(new Runnable() {
+          public void run() {
+            // This cast is safe after the preceeding check.
+            @SuppressWarnings("unchecked")
+            Class<T> clazz = (Class<T>) type;
 
-        BindingImpl<T> binding = injector.createBindingFromType(clazz, scope, source);
-        // TODO: Should we clean up the binding left behind in jitBindings?
+            BindingImpl<T> binding = injector.createBindingFromType(clazz, scope, source);
+            // TODO: Should we clean up the binding left behind in jitBindings?
 
-        if (binding == null) {
-          addError(source, ErrorMessages.CANNOT_INJECT_ABSTRACT_TYPE, clazz);
-          createBinding(source, shouldPreload, invalidBinding(injector, key, source));
-          return null;
-        }
+            if (binding == null) {
+              injector.errorHandler.handle(
+                  source, ErrorMessages.CANNOT_INJECT_ABSTRACT_TYPE, clazz);
+              createBinding(source, shouldPreload, invalidBinding(injector, key, source));
+              return;
+            }
 
-        createBinding(source, shouldPreload, binding);
+            createBinding(source, shouldPreload, binding);
+          }
+        });
+
         return null;
       }
     });

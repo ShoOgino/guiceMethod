@@ -6,7 +6,7 @@
 
     validateKey(command.getSource(), command.getKey());
     ConstantFactory<Object> factory = new ConstantFactory<Object>(value);
-    putBinding(new ContantBindingImpl<Object>(
+    putBinding(new ConstantBindingImpl<Object>(
         injector, command.getKey(), command.getSource(), factory, value));
 
     return true;
