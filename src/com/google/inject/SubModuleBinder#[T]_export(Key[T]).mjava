@@ -1,0 +1,3 @@
+  /** Exports the key into the parent module at the same key as the child **/
+  <T> SubModuleBinder export(Key<T> key);
+

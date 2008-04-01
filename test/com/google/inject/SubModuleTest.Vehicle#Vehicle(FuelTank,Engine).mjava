@@ -1,0 +1,5 @@
+    public Vehicle(FuelTank fuelTank, Engine engine) {
+      this.fuelTank = fuelTank;
+      this.engine = engine;
+    }
+

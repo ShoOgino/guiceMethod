@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#installAsSubModule(Module)
+   */
+  protected SubModuleBinder installAsSubModule(Module module) {
+    return binder.installAsSubModule(module);
+  }
+

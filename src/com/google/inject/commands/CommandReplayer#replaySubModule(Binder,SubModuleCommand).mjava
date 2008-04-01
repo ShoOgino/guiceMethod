@@ -1,0 +1,8 @@
+  public void replaySubModule(final Binder binder, final SubModuleCommand command) {
+    SourceProviders.withDefault(command.getSource(), new Runnable() {
+      public void run() {
+        replay(binder, command.getCommands());
+      }
+    });
+  }
+

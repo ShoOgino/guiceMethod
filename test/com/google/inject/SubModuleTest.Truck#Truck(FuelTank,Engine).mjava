@@ -1,0 +1,5 @@
+    @Inject
+    public Truck(FuelTank fuelTank, Engine engine) {
+      super(fuelTank, engine);
+    }
+

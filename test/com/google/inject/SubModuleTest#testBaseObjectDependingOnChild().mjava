@@ -1,0 +1,4 @@
+  public void testBaseObjectDependingOnChild() throws Exception {
+    Fleet fleet = injector.getInstance(Fleet.class);
+  }
+

@@ -50,6 +50,11 @@
         replayGetProvider(binder, command);
         return null;
       }
+
+      public Void visitSubModule(SubModuleCommand command) {
+        replaySubModule(binder, command);
+        return null;
+      }
     };
 
     for (Command command : commands) {

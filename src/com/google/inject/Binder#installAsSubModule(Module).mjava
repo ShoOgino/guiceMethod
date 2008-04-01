@@ -1,0 +1,6 @@
+  /**
+   * Installs the module as a submodule to this one, allowing it access to the
+   * parent's bindings.
+   */
+  SubModuleBinder installAsSubModule(Module module);
+

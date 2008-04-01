@@ -39,6 +39,7 @@
 
     suite.addTestSuite(ProvidersTest.class);
     suite.addTestSuite(ParentInjectorTest.class);
+    suite.addTestSuite(SubModuleTest.class);
 
     suite.addTestSuite(CommandRecorderTest.class);
     suite.addTestSuite(CommandReplayerTest.class);

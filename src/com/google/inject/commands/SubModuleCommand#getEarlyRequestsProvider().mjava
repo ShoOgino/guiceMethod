@@ -1,0 +1,4 @@
+  public FutureInjector getEarlyRequestsProvider() {
+    return earlyRequestsProvider;
+  }
+

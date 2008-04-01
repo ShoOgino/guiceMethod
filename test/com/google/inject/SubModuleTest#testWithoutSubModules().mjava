@@ -1,0 +1,10 @@
+  public void testWithoutSubModules() throws Exception {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(Fleet.class);
+      fail("Fleet should not be available");
+    } catch (ConfigurationException e) {
+
+    }
+  }
+

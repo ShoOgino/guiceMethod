@@ -1,0 +1,12 @@
+  public SubModuleCommand(Object source,
+                          Stage stage,
+                          Module module) {
+    this.source = source;
+    earlyRequestsProvider = new FutureInjector();
+    CommandRecorder recorder
+        = new CommandRecorder(earlyRequestsProvider);
+    recorder.setCurrentStage(stage);
+    commands = recorder.recordCommands(module);
+
+  }
+
