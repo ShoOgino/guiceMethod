@@ -1,3 +1,0 @@
-  /** Exports the class from the child to the parent at the default key for the class **/
-  <T> SubModuleBinder export(Class <? extends T> clazz);
-

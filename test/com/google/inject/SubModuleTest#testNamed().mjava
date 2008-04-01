@@ -1,8 +1,0 @@
-  public void testNamed() throws Exception {
-    Truck smallTruck = injector.getInstance(this.smallTruck);
-    assertEquals(4, smallTruck.getEngine().getCylinders());
-
-    Car bigCar = injector.getInstance(this.bigCar);
-    assertEquals(8, bigCar.getEngine().getCylinders());
-  }
-

@@ -14,8 +14,6 @@
 
     buildCoreInjector();
 
-    buildSubInjectors();
-
     validate();
 
     injector.setErrorHandler(RuntimeErrorHandler.INSTANCE);

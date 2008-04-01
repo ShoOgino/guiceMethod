@@ -1,6 +1,0 @@
-    @Inject
-    public Fleet(Truck truck, Car car) {
-      this.truck = truck;
-      this.car = car;
-    }
-

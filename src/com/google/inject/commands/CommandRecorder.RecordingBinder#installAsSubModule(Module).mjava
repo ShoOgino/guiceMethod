@@ -1,7 +1,0 @@
-    public SubModuleBinder installAsSubModule(Module module) {
-      SubModuleCommand subModuleCommand
-          = new SubModuleCommand(defaultSource(), currentStage(), module);
-      commands.add(subModuleCommand);
-      return subModuleCommand.subModuleBinder(RecordingBinder.this);
-    }
-

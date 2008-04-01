@@ -1,4 +1,0 @@
-    public Void visitSubModule(SubModuleCommand command) {
-      throw new AssertionFailedError();
-    }
-

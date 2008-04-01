@@ -1,3 +1,0 @@
-  /** Exports the key from the child to the parent as parentKey **/
-  <T> SubModuleBinder exportKeyAs(Key<T> childKey, Key<T> parentKey);
-

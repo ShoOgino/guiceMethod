@@ -1,4 +1,0 @@
-    public Truck getTruck() {
-      return truck;
-    }
-

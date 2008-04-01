@@ -1,4 +1,0 @@
-    public FuelTank getFuelTank() {
-      return fuelTank;
-    }
-
