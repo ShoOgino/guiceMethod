@@ -1,0 +1,12 @@
+  public void testBindToUnboundLinkedBinding() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(Collection.class).to(List.class);
+        }
+      });
+      fail("Dangling linked binding");
+    } catch (CreationException expected) {
+    }
+  }
+
