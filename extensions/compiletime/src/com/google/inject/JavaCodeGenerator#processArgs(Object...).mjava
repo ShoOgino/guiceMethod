@@ -1,0 +1,10 @@
+  private Object[] processArgs(Object... args) {
+    args = args.clone();
+    for (int i = 0; i < args.length; i++) {
+      if (args[i] instanceof Class<?>) {
+        args[i] = typeName((Class<?>) args[i]);
+      }
+    }
+    return args;
+  }
+

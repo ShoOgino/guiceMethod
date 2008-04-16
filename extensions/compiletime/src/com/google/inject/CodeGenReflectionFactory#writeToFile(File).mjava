@@ -2,14 +2,9 @@
    * Writes generated .java files to {@code generatedSourceDirectory}.
    */
   void writeToFile(File generatedSourceDirectory) throws IOException {
-    File directory = generatedSourceDirectory;
-    for (String packagePart : new String[] { "com", "google", "inject" }) {
-      directory = new File(directory, packagePart);
-    }
-    directory.mkdirs();
-    File sourceFile = new File(directory, generatedClassSimpleName() + ".java");
-    Writer writer = new OutputStreamWriter(new FileOutputStream(sourceFile), "ISO-8859-1");
-    new ClassWriter(writer).writeClass();
-    writer.close();
+    JavaCodeGenerator out = JavaCodeGenerator.open(generatedSourceDirectory,
+        generatedCodePackage, generatedClassSimpleName());
+    new ClassWriter(out).writeClass();
+    out.close();
   }
 

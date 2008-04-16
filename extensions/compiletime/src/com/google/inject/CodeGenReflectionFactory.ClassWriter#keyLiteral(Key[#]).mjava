@@ -5,6 +5,6 @@
       if (key.getAnnotationType() != null) {
         throw new UnsupportedOperationException("TODO");
       }
-      return String.format("Key.get(%s.class)", typeName(key.getTypeLiteral().getType()));
+      return String.format("Key.get(%s.class)", out.typeName(key.getTypeLiteral().getType()));
     }
 

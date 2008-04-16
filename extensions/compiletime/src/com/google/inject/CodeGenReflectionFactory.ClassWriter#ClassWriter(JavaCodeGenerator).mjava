@@ -1,0 +1,4 @@
+    ClassWriter(JavaCodeGenerator out) {
+      this.out = out;
+    }
+

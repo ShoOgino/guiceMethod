@@ -1,4 +1,0 @@
-    ClassWriter(Writer writer) {
-      this.writer = writer;
-    }
-

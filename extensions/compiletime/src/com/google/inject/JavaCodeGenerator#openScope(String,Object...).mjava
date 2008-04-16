@@ -1,0 +1,5 @@
+  public void openScope(String format, Object... args) throws IOException {
+    writeLine(format, args);
+    indent++;
+  }
+

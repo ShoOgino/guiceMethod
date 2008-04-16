@@ -1,0 +1,4 @@
+  public void writeLine() throws IOException {
+    writer.append("\n");
+  }
+

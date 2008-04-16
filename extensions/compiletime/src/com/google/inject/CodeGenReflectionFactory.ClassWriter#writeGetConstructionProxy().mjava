@@ -1,39 +1,41 @@
     void writeGetConstructionProxy() throws IOException {
-      writeLine("  public <T> ConstructionProxy<T> getConstructionProxy(Class<T> implementation) {");
+      out.writeLine("@%s(\"unchecked\")", SuppressWarnings.class);
+      out.openScope("public <T> ConstructionProxy<T> getConstructionProxy(Class<T> implementation) {");
 
       for (Map.Entry<Class<?>, ConstructionProxy<?>> entry : constructionProxies.entrySet()) {
-        String implementation = typeName(entry.getKey());
-        writeLine("    if (implementation == %s.class) {", implementation);
-        writeLine("      return (ConstructionProxy) new ConstructionProxy<%s>() {", implementation);
-        writeLine("        public %s newInstance(final Object... arguments) throws InvocationTargetException {", implementation);
-        writeLine("          return new %s(", implementation);
+        Class<?> implementation = entry.getKey();
+        out.openScope("if (implementation == %s.class) {", implementation);
+        out.openScope("return (%s) new %s<%s>() {", ConstructionProxy.class, ConstructionProxy.class, implementation);
+        out.openScope("public %s newInstance(final %s... arguments) throws %s {", implementation, Object.class, InvocationTargetException.class);
+        out.openScope("return new %s(", implementation);
         int argument = 0;
         for (Iterator<Parameter<?>> i = entry.getValue().getParameters().iterator(); i.hasNext(); ) {
           Parameter<?> parameter = i.next();
           String separator = i.hasNext() ? "," : "";
-          writeLine("              (%s) arguments[%d]%s", typeName(parameter.getKey().getTypeLiteral().getType()), argument, separator);
+          out.writeLine("(%s) arguments[%d]%s", parameter.getKey().getTypeLiteral().getType(), argument, separator);
           argument++;
         }
-        writeLine("          );");
-        writeLine("        }");
-        writeLine("        public List<Parameter<?>> getParameters() {");
-        writeLine("          return Arrays.<Parameter<?>>asList(");
+        out.closeScope(");");
+        out.closeScope("}");
+        out.openScope("public %s<%s<?>> getParameters() {", List.class, Parameter.class);
+        out.openScope("return %s.<%s<?>>asList(", Arrays.class, Parameter.class);
+        argument = 0;
         for (Iterator<Parameter<?>> i = entry.getValue().getParameters().iterator(); i.hasNext(); ) {
           Parameter<?> parameter = i.next();
           String separator = i.hasNext() ? "," : "";
-          writeLine("              Parameter.create(%s, %s, Nullability.%s)%s", argument, keyLiteral(parameter.getKey()), parameter.getNullability(), separator);
+          out.writeLine("%s.create(%s, %s, %s.%s)%s", Parameter.class, argument, keyLiteral(parameter.getKey()), Nullability.class, parameter.getNullability(), separator);
           argument++;
         }
-        writeLine("          );");
-        writeLine("        }");
-        writeLine("        public Member getMember() {");
-        writeLine("          return null;");
-        writeLine("        }");
-        writeLine("      };");
-        writeLine("    }");
+        out.closeScope(");");
+        out.closeScope("}");
+        out.openScope("public %s getMember() {", Member.class);
+        out.writeLine("return null;");
+        out.closeScope("}");
+        out.closeScope("};");
+        out.closeScope("}");
       }
-      writeLine();
-      writeLine("    throw new IllegalArgumentException();");
-      writeLine("  }");
+      out.writeLine();
+      out.writeLine("throw new %s();", IllegalArgumentException.class);
+      out.closeScope("}");
     }
 

@@ -1,0 +1,5 @@
+  private JavaCodeGenerator(Writer writer, String packageName) {
+    this.writer = writer;
+    this.packageName = packageName;
+  }
+
