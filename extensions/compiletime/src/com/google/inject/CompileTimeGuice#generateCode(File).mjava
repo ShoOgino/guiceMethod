@@ -1,0 +1,17 @@
+  /**
+   * "Compile-time" step that generates <code>.java</code> source directories
+   * to support runtime reflection. This step must be executed whenever the
+   * modules or their dependendent classes have changed.
+   */
+  void generateCode(File generatedSourceDirectory) throws IOException {
+    CodeGenReflectionFactory reflectionFactory = new CodeGenReflectionFactory(name);
+
+    new InjectorBuilder()
+        .stage(Stage.TOOL)
+        .addModules(modules)
+        .usingReflectionFactory(reflectionFactory)
+        .build();
+
+    reflectionFactory.writeToFile(generatedSourceDirectory);
+  }
+

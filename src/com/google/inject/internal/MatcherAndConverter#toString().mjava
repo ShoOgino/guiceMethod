@@ -1,0 +1,5 @@
+  @Override public String toString() {
+    return typeConverter + " which matches " + typeMatcher
+        + " (bound at " + source + ")";
+  }
+

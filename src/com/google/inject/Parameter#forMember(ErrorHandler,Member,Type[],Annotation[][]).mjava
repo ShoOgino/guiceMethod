@@ -1,0 +1,16 @@
+  private static List<Parameter<?>> forMember(ErrorHandler errorHandler, Member member,
+      Type[] genericParameterTypes, Annotation[][] annotations) {
+    Iterator<Annotation[]> annotationsIterator = Arrays.asList(annotations).iterator();
+
+    List<Parameter<?>> parameters = new ArrayList<Parameter<?>>();
+    int index = 0;
+    for (Type parameterType : genericParameterTypes) {
+      Annotation[] parameterAnnotations = annotationsIterator.next();
+      Key<?> key = Keys.get(parameterType, member, parameterAnnotations, errorHandler);
+      parameters.add(create(index, key, Nullability.forAnnotations(parameterAnnotations)));
+      index++;
+    }
+
+    return parameters;
+  }
+

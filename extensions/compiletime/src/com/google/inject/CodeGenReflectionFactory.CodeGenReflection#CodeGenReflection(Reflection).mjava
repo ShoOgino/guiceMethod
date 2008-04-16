@@ -1,0 +1,4 @@
+    private CodeGenReflection(Reflection delegate) {
+      this.delegate = nonNull(delegate, "delegate");
+    }
+

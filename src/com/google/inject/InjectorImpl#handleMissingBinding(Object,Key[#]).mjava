@@ -1,0 +1,16 @@
+  void handleMissingBinding(Object source, Key<?> key) {
+    List<String> otherNames = getNamesOfBindingAnnotations(key.getTypeLiteral());
+
+    if (source instanceof Member) {
+      source = StackTraceElements.forMember((Member) source);
+    }
+
+    if (otherNames.isEmpty()) {
+      errorHandler.handle(source, ErrorMessages.MISSING_BINDING, key);
+    }
+    else {
+      errorHandler.handle(source,
+          ErrorMessages.MISSING_BINDING_BUT_OTHERS_EXIST, key, otherNames);
+    }
+  }
+

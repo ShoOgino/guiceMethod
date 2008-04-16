@@ -1,0 +1,42 @@
+    private <T> Constructor<T> findConstructorIn(Class<T> implementation) {
+      Constructor<T> found = null;
+      @SuppressWarnings("unchecked")
+      Constructor<T>[] constructors
+          = (Constructor<T>[]) implementation.getDeclaredConstructors();
+      for (Constructor<T> constructor : constructors) {
+        Inject inject = constructor.getAnnotation(Inject.class);
+        if (inject != null) {
+          if (inject.optional()) {
+            errorHandler.handle(
+                StackTraceElements.forMember(constructor),
+                ErrorMessages.OPTIONAL_CONSTRUCTOR);
+          }
+
+          if (found != null) {
+            errorHandler.handle(
+                StackTraceElements.forMember(found),
+                ErrorMessages.TOO_MANY_CONSTRUCTORS);
+            return invalidConstructor();
+          }
+          found = constructor;
+        }
+      }
+      if (found != null) {
+        return found;
+      }
+
+      // If no annotated constructor is found, look for a no-arg constructor
+      // instead.
+      try {
+        return implementation.getDeclaredConstructor();
+      }
+      catch (NoSuchMethodException e) {
+        errorHandler.handle(
+            StackTraceElements.forMember(
+                implementation.getDeclaredConstructors()[0]),
+            ErrorMessages.MISSING_CONSTRUCTOR,
+            implementation);
+        return invalidConstructor();
+      }
+    }
+

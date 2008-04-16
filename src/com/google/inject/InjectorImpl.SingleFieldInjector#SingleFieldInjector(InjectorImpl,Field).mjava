@@ -5,7 +5,7 @@
       // Ewwwww...
       field.setAccessible(true);
 
-      final Key<?> key = Key.get(
+      final Key<?> key = Keys.get(
           field.getGenericType(), field, field.getAnnotations(), errorHandler);
       factory = SourceProviders.withDefault(StackTraceElements.forMember(field),
         new Callable<InternalFactory<?>>() {

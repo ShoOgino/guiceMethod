@@ -1,0 +1,4 @@
+  private String generatedClassSimpleName() {
+    return "Generated_" + name;
+  }
+

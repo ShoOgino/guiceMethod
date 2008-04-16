@@ -6,9 +6,10 @@
         .processCommands(commands, configurationErrorHandler);
 
     BindInterceptorCommandProcessor bindInterceptorCommandProcessor
-        = new BindInterceptorCommandProcessor();
+        = new BindInterceptorCommandProcessor(configurationErrorHandler);
     bindInterceptorCommandProcessor.processCommands(commands, configurationErrorHandler);
-    injector.constructionProxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
+    ConstructionProxyFactory proxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
+    injector.reflection = reflectionFactory.create(configurationErrorHandler, proxyFactory);
     stopwatch.resetAndLog("Interceptors creation");
 
     new ScopesCommandProcessor(injector.scopes)

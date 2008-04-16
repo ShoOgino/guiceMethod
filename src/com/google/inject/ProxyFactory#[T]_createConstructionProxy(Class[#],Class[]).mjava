@@ -12,6 +12,14 @@
           throws InvocationTargetException {
         return (T) fastConstructor.newInstance(arguments);
       }
+
+      public List<Parameter<?>> getParameters() {
+        return Parameter.forConstructor(errorHandler, fastConstructor.getJavaConstructor());
+      }
+
+      public Member getMember() {
+        return fastConstructor.getJavaConstructor();
+      }
     };
   }
 

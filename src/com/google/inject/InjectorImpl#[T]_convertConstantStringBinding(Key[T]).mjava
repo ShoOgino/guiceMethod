@@ -22,7 +22,7 @@
     TypeLiteral<T> type = key.getTypeLiteral();
     MatcherAndConverter<?> matchingConverter = null;
     for (MatcherAndConverter<?> converter : converters) {
-      if (converter.typeMatcher.matches(type)) {
+      if (converter.getTypeMatcher().matches(type)) {
         if (matchingConverter != null) {
           // More than one matching converter!
           errorHandler.handle(SourceProviders.defaultSource(),
@@ -44,7 +44,8 @@
     try {
       // This cast is safe because we double check below.
       @SuppressWarnings("unchecked")
-      T converted = (T) matchingConverter.typeConverter.convert(stringValue, key.getTypeLiteral());
+      T converted = (T) matchingConverter.getTypeConverter()
+          .convert(stringValue, key.getTypeLiteral());
 
       if (converted == null) {
         throw new RuntimeException("Converter returned null.");

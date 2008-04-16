@@ -1,0 +1,13 @@
+  /**
+   * Builds a new compile-time guice instance. The instance must be provided
+   * the exact same {@code name} and {@code modules} at both compile-time and
+   * at runtime, otherwise behaviour is undefined.
+   *
+   * @param name a unique, valid Java identifier such as "FooApplication".
+   * @param modules the modules used to build the injector.
+   */
+  public CompileTimeGuice(String name, Set<? extends Module> modules) {
+    this.name = nonNull(name, "name");
+    this.modules = nonNull(modules, "modules");
+  }
+

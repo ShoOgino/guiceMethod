@@ -1,0 +1,19 @@
+  /**
+   * Gets parameter injectors.
+   *
+   * @param member to which the parameters belong
+   * @return injections
+   */
+  SingleParameterInjector<?>[] getParametersInjectors(Member member,
+      List<Parameter<?>> parameters)
+      throws MissingDependencyException {
+    SingleParameterInjector<?>[] parameterInjectors
+        = new SingleParameterInjector<?>[parameters.size()];
+    int index = 0;
+    for (Parameter<?> parameter : parameters) {
+      parameterInjectors[index] = createParameterInjector(parameter, member);
+      index++;
+    }
+    return parameterInjectors;
+  }
+

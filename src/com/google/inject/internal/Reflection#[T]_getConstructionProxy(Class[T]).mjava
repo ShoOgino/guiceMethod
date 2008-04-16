@@ -1,0 +1,2 @@
+  public <T> ConstructionProxy<T> getConstructionProxy(Class<T> implementation);
+

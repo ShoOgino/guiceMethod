@@ -1,0 +1,6 @@
+    public <T> ConstructionProxy<T> getConstructionProxy(Class<T> implementation) {
+      ConstructionProxy<T> result = delegate.getConstructionProxy(implementation);
+      constructionProxies.put(implementation, result);
+      return result;
+    }
+

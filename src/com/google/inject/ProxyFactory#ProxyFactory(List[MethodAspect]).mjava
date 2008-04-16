@@ -1,4 +1,0 @@
-  ProxyFactory(List<MethodAspect> methodAspects) {
-    this.methodAspects = methodAspects;
-  }
-

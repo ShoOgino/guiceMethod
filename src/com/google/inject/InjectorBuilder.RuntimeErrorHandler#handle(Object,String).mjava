@@ -1,4 +1,0 @@
-    public void handle(Object source, String message) {
-      throw new ConfigurationException("Error at " + source + " " + message);
-    }
-

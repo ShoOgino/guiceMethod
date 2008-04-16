@@ -1,4 +1,4 @@
     void handle(ErrorHandler errorHandler) {
-      ErrorMessages.handleMissingBinding(InjectorImpl.this, member, key);
+      handleMissingBinding(member, key);
     }
 

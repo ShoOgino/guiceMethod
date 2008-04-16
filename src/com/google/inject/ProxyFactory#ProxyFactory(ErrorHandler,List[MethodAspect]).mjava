@@ -1,0 +1,6 @@
+  ProxyFactory(ErrorHandler errorHandler, List<MethodAspect> methodAspects) {
+    this.errorHandler = errorHandler;
+    this.methodAspects = methodAspects;
+    defaultFactory = new DefaultConstructionProxyFactory(errorHandler);
+  }
+

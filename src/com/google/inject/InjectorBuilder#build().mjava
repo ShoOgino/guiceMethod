@@ -16,7 +16,7 @@
 
     validate();
 
-    injector.setErrorHandler(RuntimeErrorHandler.INSTANCE);
+    injector.setErrorHandler(ErrorHandlers.RUNTIME);
 
     // If we're in the tool stage, stop here. Don't eagerly inject or load
     // anything.

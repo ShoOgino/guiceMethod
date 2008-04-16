@@ -16,6 +16,12 @@
             throw new AssertionError(e);
           }
         }
+        public List<Parameter<?>> getParameters() {
+          return Parameter.forConstructor(errorHandler, constructor);
+        }
+        public Member getMember() {
+          return constructor;
+        }
       };
     }
 
@@ -28,6 +34,12 @@
       public T newInstance(Object... arguments)
           throws InvocationTargetException {
         return (T) fastConstructor.newInstance(arguments);
+      }
+      public List<Parameter<?>> getParameters() {
+        return Parameter.forConstructor(errorHandler, fastConstructor);
+      }
+      public Member getMember() {
+        return fastConstructor.getJavaConstructor();
       }
     };
   }

@@ -1,0 +1,15 @@
+  InjectorImpl.SingleParameterInjector<?>[] createParameterInjector(
+      InjectorImpl injector, ConstructionProxy<T> constructionProxy) {
+    try {
+      return constructionProxy.getParameters().isEmpty()
+          ? null // default constructor.
+          : injector.getParametersInjectors(
+              constructionProxy.getMember(),
+              constructionProxy.getParameters());
+    }
+    catch (InjectorImpl.MissingDependencyException e) {
+      e.handle(injector.errorHandler);
+      return null;
+    }
+  }
+

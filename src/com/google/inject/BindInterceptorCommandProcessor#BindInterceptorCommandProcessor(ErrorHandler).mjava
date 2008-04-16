@@ -1,0 +1,4 @@
+  BindInterceptorCommandProcessor(ErrorHandler errorHandler) {
+    proxyFactoryBuilder = new ProxyFactoryBuilder(errorHandler);
+  }
+

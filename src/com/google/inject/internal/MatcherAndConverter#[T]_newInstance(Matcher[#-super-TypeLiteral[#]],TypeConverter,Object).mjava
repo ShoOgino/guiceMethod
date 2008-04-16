@@ -1,0 +1,6 @@
+  public static <T> MatcherAndConverter<T> newInstance(
+      Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter typeConverter, Object source) {
+    return new MatcherAndConverter<T>(typeMatcher, typeConverter, source);
+  }
+

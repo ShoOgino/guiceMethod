@@ -2,6 +2,6 @@
    * Creates a {@code ProxyFactory}.
    */
   public ProxyFactory create() {
-    return new ProxyFactory(new ArrayList<MethodAspect>(methodAspects));
+    return new ProxyFactory(errorHandler, new ArrayList<MethodAspect>(methodAspects));
   }
 

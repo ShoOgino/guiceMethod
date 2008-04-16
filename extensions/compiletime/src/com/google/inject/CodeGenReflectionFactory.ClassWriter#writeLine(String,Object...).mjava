@@ -1,0 +1,5 @@
+    void writeLine(String format, Object... args) throws IOException {
+      writer.append(String.format(format, args));
+      writeLine();
+    }
+

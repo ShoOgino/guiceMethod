@@ -1,0 +1,17 @@
+  public Reflection.Factory getRuntimeReflectionFactory() {
+    final Reflection reflection;
+    try {
+      reflection = (Reflection) Class.forName(getGeneratedClassName()).newInstance();
+    } catch (Exception e) {
+      throw new IllegalStateException("Failed to build reflection class for \""
+          + name + "\", has code been generated yet?");
+    }
+
+    return new Reflection.Factory() {
+      public Reflection create(ErrorHandler errorHandler,
+          ConstructionProxyFactory constructionProxyFactory) {
+        return reflection;
+      }
+    };
+  }
+

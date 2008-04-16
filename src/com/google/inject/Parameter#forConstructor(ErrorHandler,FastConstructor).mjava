@@ -1,0 +1,5 @@
+  public static List<Parameter<?>> forConstructor(
+      ErrorHandler errorHandler, FastConstructor constructor) {
+    return forConstructor(errorHandler, constructor.getJavaConstructor());
+  }
+

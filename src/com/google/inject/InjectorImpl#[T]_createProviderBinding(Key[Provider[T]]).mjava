@@ -22,7 +22,7 @@
 
     // If binding isn't found...
     if (providedBinding == null) {
-      ErrorMessages.handleMissingBinding(this, key);
+      handleMissingBinding(this, key);
       return invalidBinding(key);
     }
 
