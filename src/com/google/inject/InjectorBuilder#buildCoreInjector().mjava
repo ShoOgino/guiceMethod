@@ -25,6 +25,7 @@
         injector.outstandingInjections);
     bindCommandProcesor.processCommands(commands, configurationErrorHandler);
     bindCommandProcesor.createUntargettedBindings();
+    bindLogger();
     stopwatch.resetAndLog("Binding creation");
 
     injector.index();

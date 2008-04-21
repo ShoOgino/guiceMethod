@@ -1,0 +1,13 @@
+  /**
+   * The Logger is a special case because it knows the injection point of the
+   * injected member. It's the only binding that does this.
+   */
+  private void bindLogger() {
+    Key<Logger> key = Key.get(Logger.class);
+    LoggerFactory loggerFactory = new LoggerFactory();
+    injector.explicitBindings.put(key,
+        new ProviderInstanceBindingImpl<Logger>(injector, key,
+            SourceProviders.UNKNOWN_SOURCE, loggerFactory, Scopes.NO_SCOPE,
+            loggerFactory));
+  }
+
