@@ -1,6 +1,6 @@
     public Void call(InternalContext context) {
       InjectionPoint<?> injectionPoint
-          = InjectionPoint.newInstance(key, context.getInjectorImpl());
+          = InjectionPoint.newInstance(key, context.getInjector());
       context.setInjectionPoint(injectionPoint);
       try {
         factory.get(context, injectionPoint);

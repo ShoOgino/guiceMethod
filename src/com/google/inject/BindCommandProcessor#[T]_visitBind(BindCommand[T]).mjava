@@ -10,9 +10,7 @@
     }
 
     if (Logger.class == rawType) {
-      // TODO(jessewilson): assert this is coming from the internal module?
-      // addError(source, ErrorMessages.LOGGER_ALREADY_BOUND);
-      // return true;
+       addError(source, ErrorMessages.LOGGER_ALREADY_BOUND);
     }
 
     validateKey(command.getSource(), command.getKey());

@@ -20,11 +20,13 @@
         }
       }
 
-      out.writeLine();
-      out.openScope("public class %s implements Reflection {", generatedClassSimpleName());
-      out.writeLine();
+      out.writeLine()
+          .openScope("public class %s implements %s {", generatedClassSimpleName(), Reflection.class)
+          .writeLine();
+
       writeGetConstructionProxy();
-      out.writeLine();
-      out.closeScope("}");
+
+      out.writeLine()
+          .closeScope("}");
     }
 

@@ -1,8 +1,5 @@
     public void toInstance(final T instance) {
-      // might someday want to tolerate null here, probably by setting up a
-      // Provider<null> rather than trying to distinguish between null and
-      // not set
-      nonNull(instance, "instance");
+      nonNull(instance, ErrorMessages.CANNOT_BIND_TO_NULL_INSTANCE);
 
       checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {

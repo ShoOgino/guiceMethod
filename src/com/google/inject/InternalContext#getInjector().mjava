@@ -1,0 +1,4 @@
+  public InjectorImpl getInjector() {
+    return injector;
+  }
+

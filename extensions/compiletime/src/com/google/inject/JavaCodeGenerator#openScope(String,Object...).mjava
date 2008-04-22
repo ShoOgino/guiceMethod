@@ -1,5 +1,6 @@
-  public void openScope(String format, Object... args) throws IOException {
+  public JavaCodeGenerator openScope(String format, Object... args) throws IOException {
     writeLine(format, args);
     indent++;
+    return this;
   }
 
