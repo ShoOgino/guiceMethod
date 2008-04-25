@@ -1,0 +1,14 @@
+  public void testCannotBindLogger() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(Logger.class).toInstance(Logger.getAnonymousLogger());
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertTrue(expected.getMessage().contains(
+          "A binding to java.util.logging.Logger was already configured"));
+    }
+  }
+
