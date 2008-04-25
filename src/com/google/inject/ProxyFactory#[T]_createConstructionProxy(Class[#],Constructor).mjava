@@ -1,11 +1,11 @@
   /**
    * Creates a construction proxy given a class and parameter types.
    */
-  <T> ConstructionProxy<T> createConstructionProxy(Class<?> clazz,
-      Class[] parameterTypes) {
+  private <T> ConstructionProxy<T> createConstructionProxy(final Class<?> clazz,
+      final Constructor standardConstructor) {
     FastClass fastClass = GuiceFastClass.create(clazz);
     final FastConstructor fastConstructor
-        = fastClass.getConstructor(parameterTypes);
+        = fastClass.getConstructor(standardConstructor.getParameterTypes());
     return new ConstructionProxy<T>() {
       @SuppressWarnings("unchecked")
       public T newInstance(Object... arguments)
@@ -18,7 +18,7 @@
       }
 
       public Member getMember() {
-        return fastConstructor.getJavaConstructor();
+        return standardConstructor;
       }
     };
   }
