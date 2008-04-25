@@ -1,0 +1,22 @@
+  public void testCanHandleLineNumbersForGuiceGeneratedClasses() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bindInterceptor(Matchers.only(A.class),
+              Matchers.any(),
+              new MethodInterceptor() {
+                public Object invoke(MethodInvocation methodInvocation) {
+                  return null;
+                }
+              });
+
+          bind(A.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertTrue(expected.getMessage().contains("No bindings to that type were found."));
+      assertTrue(expected.getMessage().contains("LineNumbersTest$B"));
+    }
+  }
+
