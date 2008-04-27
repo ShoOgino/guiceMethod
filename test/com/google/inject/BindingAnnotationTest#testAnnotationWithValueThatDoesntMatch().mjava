@@ -1,0 +1,17 @@
+  public void testAnnotationWithValueThatDoesntMatch() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bindConstant().annotatedWith(createBlue(6)).to("six");
+          bind(String.class).toInstance("bar");
+          bind(Foo.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertTrue(expected.getMessage().contains("BindingAnnotationTest$Foo.s"));
+      assertTrue(expected.getMessage().contains("Binding to java.lang.String"));
+      assertTrue(expected.getMessage().contains("BindingAnnotationTest$Blue(value=5) not found"));
+    }
+  }
+

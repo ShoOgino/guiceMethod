@@ -1,0 +1,10 @@
+  public void testStaticInjection() {
+    staticInjectA = injectA;
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        requestStaticInjection(OptionalBindingTest.class);
+      }
+    });
+    assertSame(staticInjectA, injectA);
+  }
+

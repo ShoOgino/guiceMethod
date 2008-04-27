@@ -1,0 +1,6 @@
+  public void testPartialInjectorInjectMembers() {
+    HasOptionalInjections instance = new HasOptionalInjections();
+    Guice.createInjector(partialModule).injectMembers(instance);
+    instance.assertNothingInjected();
+  }
+

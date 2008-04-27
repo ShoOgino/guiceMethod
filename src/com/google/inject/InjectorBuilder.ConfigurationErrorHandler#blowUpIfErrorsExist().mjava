@@ -1,6 +1,0 @@
-    void blowUpIfErrorsExist() {
-      if (!errorMessages.isEmpty()) {
-        throw new CreationException(errorMessages);
-      }
-    }
-

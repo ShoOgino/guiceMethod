@@ -1,0 +1,6 @@
+  public void testEverythingInjectorInjectMembers() {
+    HasOptionalInjections instance = new HasOptionalInjections();
+    Guice.createInjector(everythingModule).injectMembers(instance);
+    instance.assertEverythingInjected();
+  }
+

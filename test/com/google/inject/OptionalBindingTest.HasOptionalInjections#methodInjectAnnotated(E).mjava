@@ -1,0 +1,5 @@
+    @Inject(optional=true) void methodInjectAnnotated(@Named("e") E e) {
+      this.e = e;
+      invokedAnnotated = true;
+    }
+

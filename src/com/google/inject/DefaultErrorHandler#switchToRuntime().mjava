@@ -1,0 +1,5 @@
+  void switchToRuntime() {
+    state = State.RUNTIME;
+    errorMessages.clear();
+  }
+

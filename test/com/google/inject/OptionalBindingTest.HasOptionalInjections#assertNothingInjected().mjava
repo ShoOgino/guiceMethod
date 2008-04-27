@@ -1,0 +1,12 @@
+    void assertNothingInjected() {
+      assertSame(originalA, a);
+      assertNull(b);
+      assertNull(c);
+      assertNull(d);
+      assertNull(e);
+      assertTrue(invoked0);
+      assertFalse(invoked1);
+      assertFalse(invoked2);
+      assertFalse(invokedAnnotated);
+    }
+

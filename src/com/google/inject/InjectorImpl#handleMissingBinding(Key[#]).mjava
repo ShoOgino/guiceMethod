@@ -1,4 +1,0 @@
-  void handleMissingBinding(Key<?> key) {
-    handleMissingBinding(SourceProviders.defaultSource(), key);
-  }
-

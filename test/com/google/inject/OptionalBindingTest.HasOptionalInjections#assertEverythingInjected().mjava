@@ -1,0 +1,13 @@
+    public void assertEverythingInjected() {
+      assertNotSame(injectA, originalA);
+      assertSame(injectA, a);
+      assertSame(injectB, b);
+      assertSame(injectC, c);
+      assertSame(injectD, d);
+      assertSame(injectE, e);
+      assertTrue(invoked0);
+      assertTrue(invoked1);
+      assertTrue(invoked2);
+      assertTrue(invokedAnnotated);
+    }
+

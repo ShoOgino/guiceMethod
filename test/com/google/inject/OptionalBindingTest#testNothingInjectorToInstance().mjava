@@ -1,0 +1,6 @@
+  public void testNothingInjectorToInstance() {
+    Guice.createInjector(toInstanceModule)
+        .getInstance(HasOptionalInjections.class)
+        .assertNothingInjected();
+  }
+

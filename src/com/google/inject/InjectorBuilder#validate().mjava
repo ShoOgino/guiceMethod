@@ -13,9 +13,9 @@
     stopwatch.resetAndLog("Instance member validation");
 
     new GetProviderProcessor(injector)
-        .processCommands(commands, configurationErrorHandler);
+        .processCommands(commands, errorHandler);
     stopwatch.resetAndLog("Provider verification");
 
-    configurationErrorHandler.blowUpIfErrorsExist();
+    errorHandler.blowUpIfErrorsExist();
   }
 

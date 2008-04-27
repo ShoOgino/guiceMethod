@@ -1,0 +1,6 @@
+  public void testPartialInjectorToProviderInstance() {
+    Guice.createInjector(partialModule, toProviderInstanceModule)
+        .getInstance(HasOptionalInjections.class)
+        .assertNothingInjected();
+  }
+

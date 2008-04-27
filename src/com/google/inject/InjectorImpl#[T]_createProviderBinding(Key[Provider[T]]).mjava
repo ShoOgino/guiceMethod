@@ -22,7 +22,7 @@
 
     // If binding isn't found...
     if (providedBinding == null) {
-      handleMissingBinding(key);
+      handleMissingBinding(SourceProviders.defaultSource(), key);
       return invalidBinding(key);
     }
 

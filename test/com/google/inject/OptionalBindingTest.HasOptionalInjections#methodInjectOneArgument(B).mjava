@@ -1,0 +1,5 @@
+    @Inject(optional=true) void methodInjectOneArgument(B b) {
+      this.b = b;
+      invoked1 = true;
+    }
+
