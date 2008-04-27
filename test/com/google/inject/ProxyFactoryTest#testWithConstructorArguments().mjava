@@ -2,7 +2,7 @@
       throws InvocationTargetException, NoSuchMethodException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder(ErrorHandlers.INVALID);
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder(new InvalidErrorHandler());
     builder.intercept(any(), any(), interceptor);
     ProxyFactory factory = builder.create();
 

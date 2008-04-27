@@ -1,0 +1,10 @@
+  /**
+   * Implements formatting. Converts known types to readable strings.
+   */
+  public final void handle(Object source, String message, Object... arguments) {
+    for (int i = 0; i < arguments.length; i++) {
+      arguments[i] = ErrorMessages.convert(arguments[i]);
+    }
+    handle(source, String.format(message, arguments));
+  }
+
