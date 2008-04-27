@@ -5,6 +5,8 @@
       assertSame(injectC, c);
       assertSame(injectD, d);
       assertSame(injectE, e);
+      assertSame(injectF, fProvider.get());
+      assertSame(injectG, gProvider.get());
       assertTrue(invoked0);
       assertTrue(invoked1);
       assertTrue(invoked2);

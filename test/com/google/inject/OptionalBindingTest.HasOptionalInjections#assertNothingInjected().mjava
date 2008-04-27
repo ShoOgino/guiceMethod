@@ -4,6 +4,8 @@
       assertNull(c);
       assertNull(d);
       assertNull(e);
+      assertNull(fProvider);
+      assertNull(gProvider);
       assertTrue(invoked0);
       assertFalse(invoked1);
       assertFalse(invoked2);
