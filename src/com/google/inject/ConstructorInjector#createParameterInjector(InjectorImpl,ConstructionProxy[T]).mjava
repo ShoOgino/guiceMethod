@@ -7,8 +7,8 @@
               constructionProxy.getMember(),
               constructionProxy.getParameters());
     }
-    catch (InjectorImpl.MissingDependencyException e) {
-      e.handle(injector.errorHandler);
+    catch (ResolveFailedException e) {
+      injector.errorHandler.handle(constructionProxy.getMember(), e.getMessage());
       return null;
     }
   }

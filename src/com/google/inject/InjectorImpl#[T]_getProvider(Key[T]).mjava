@@ -1,11 +1,9 @@
   public <T> Provider<T> getProvider(final Key<T> key) {
-    Provider<T> provider = maybeGetProvider(key);
-
-    if (provider == null) {
+    try {
+      return getProviderOrThrow(key);
+    } catch (ResolveFailedException e) {
       throw new ConfigurationException(
-          "Missing binding to " + ErrorMessages.convert(key) + ".");
+          "Missing binding to " + ErrorMessages.convert(key) + ": " + e.getMessage());
     }
-
-    return provider;
   }
 

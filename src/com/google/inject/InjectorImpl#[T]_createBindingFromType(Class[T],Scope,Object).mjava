@@ -1,8 +1,8 @@
   <T> BindingImpl<T> createBindingFromType(Class<T> type, Scope scope,
-      Object source) {
+      Object source) throws ResolveFailedException {
     // Don't try to inject primitives, arrays, or enums.
     if (type.isArray() || type.isEnum() || type.isPrimitive()) {
-      return null;
+      throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, type);
     }
 
     // Handle @ImplementedBy

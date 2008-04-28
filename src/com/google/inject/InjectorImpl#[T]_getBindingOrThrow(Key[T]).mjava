@@ -1,0 +1,24 @@
+  /**
+   * Gets a binding implementation.  First, it check to see if the parent has
+   * a binding.  If the parent has a binding and the binding is scoped, it
+   * will use that binding.  Otherwise, this checks for an explicit binding.
+   * If no explicit binding is found, it looks for a just-in-time binding.
+   */
+  public <T> BindingImpl<T> getBindingOrThrow(Key<T> key) throws ResolveFailedException {
+    if (parentInjector != null) {
+      BindingImpl<T> bindingImpl = getParentBinding(key);
+      if (bindingImpl != null) {
+        return bindingImpl;
+      }
+    }
+
+    // Check explicit bindings, i.e. bindings created by modules.
+    BindingImpl<T> binding = getExplicitBindingImpl(key);
+    if (binding != null) {
+      return binding;
+    }
+
+    // Look for an on-demand binding.
+    return getJitBindingImpl(key);
+  }
+

@@ -1,5 +1,5 @@
     public SingleMethodInjector(InjectorImpl injector, final Method method)
-        throws MissingDependencyException {
+        throws ResolveFailedException {
       // We can't use FastMethod if the method is private.
       if (Modifier.isPrivate(method.getModifiers())
           || Modifier.isProtected(method.getModifiers())) {

@@ -1,5 +1,5 @@
     public SingleFieldInjector(final InjectorImpl injector, Field field)
-        throws MissingDependencyException {
+        throws ResolveFailedException {
       this.field = field;
 
       // Ewwwww...
@@ -7,17 +7,11 @@
 
       final Key<?> key = Keys.get(
           field.getGenericType(), field, field.getAnnotations(), errorHandler);
-      factory = SourceProviders.withDefault(StackTraceElements.forMember(field),
-        new Callable<InternalFactory<?>>() {
-          public InternalFactory<?> call() throws Exception {
+      factory = new ResolvingCallable<InternalFactory<?>>() {
+          public InternalFactory<?> call() throws ResolveFailedException {
             return injector.getInternalFactory(key);
           }
-        }
-      );
-
-      if (factory == null) {
-        throw new MissingDependencyException(key, field);
-      }
+        }.runWithDefaultSource(StackTraceElements.forMember(field));
 
       this.injectionPoint = InjectionPoint.newInstance(field,
           Nullability.forAnnotations(field.getAnnotations()), key, injector);

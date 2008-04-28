@@ -104,17 +104,13 @@
             @SuppressWarnings("unchecked")
             Class<T> clazz = (Class<T>) type;
 
-            BindingImpl<T> binding = injector.createBindingFromType(clazz, scope, source);
-            // TODO: Should we clean up the binding left behind in jitBindings?
-
-            if (binding == null) {
-              injector.errorHandler.handle(
-                  source, ErrorMessages.CANNOT_INJECT_ABSTRACT_TYPE, clazz);
+            try {
+              BindingImpl<T> binding = injector.createBindingFromType(clazz, scope, source);
+              createBinding(source, shouldPreload, binding);
+            } catch (ResolveFailedException e) {
+              injector.errorHandler.handle(source, e.getMessage());
               createBinding(source, shouldPreload, invalidBinding(injector, key, source));
-              return;
             }
-
-            createBinding(source, shouldPreload, binding);
           }
         });
 

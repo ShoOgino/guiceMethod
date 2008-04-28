@@ -1,7 +1,11 @@
   public void notify(final InjectorImpl injector) {
     injector.withDefaultSource(source, new Runnable() {
       public void run() {
-        providerFactory = injector.getInternalFactory(providerKey);
+        try {
+          providerFactory = injector.getInternalFactory(providerKey);
+        } catch (ResolveFailedException e) {
+          injector.errorHandler.handle(source, e.getMessage());
+        }
       }
     });
   }

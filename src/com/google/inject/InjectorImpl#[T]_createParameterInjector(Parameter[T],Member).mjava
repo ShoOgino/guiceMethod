@@ -1,18 +1,12 @@
   <T> SingleParameterInjector<T> createParameterInjector(
       final Parameter<T> parameter, Member member)
-      throws MissingDependencyException {
-    InternalFactory<? extends T> factory =
-        SourceProviders.withDefault(StackTraceElements.forMember(member),
-      new Callable<InternalFactory<? extends T>>() {
-        public InternalFactory<? extends T> call() throws Exception {
-          return getInternalFactory(parameter.getKey());
-        }
-      }
-    );
-
-    if (factory == null) {
-      throw new MissingDependencyException(parameter.getKey(), member);
-    }
+      throws ResolveFailedException {
+    InternalFactory<? extends T> factory
+        = new ResolvingCallable<InternalFactory<? extends T>>() {
+          public InternalFactory<? extends T> call() throws ResolveFailedException {
+            return getInternalFactory(parameter.getKey());
+          }
+    }.runWithDefaultSource(StackTraceElements.forMember(member));
 
     InjectionPoint<T> injectionPoint = InjectionPoint.newInstance(
         member, parameter.getIndex(), parameter.getNullability(), parameter.getKey(), this);

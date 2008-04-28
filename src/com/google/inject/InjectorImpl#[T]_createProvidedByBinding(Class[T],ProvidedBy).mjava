@@ -1,15 +1,13 @@
   /**
-   * Creates a binding for a type annotated with @ImplementedBy.
+   * Creates a binding for a type annotated with @ProvidedBy.
    */
   <T> BindingImpl<T> createProvidedByBinding(final Class<T> type,
-      ProvidedBy providedBy) {
+      ProvidedBy providedBy) throws ResolveFailedException {
     final Class<? extends Provider<?>> providerType = providedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?
     if (providerType == type) {
-      errorHandler.handle(StackTraceElements.forType(type),
-          ErrorMessages.RECURSIVE_PROVIDER_TYPE, type);
-      return invalidBinding(type);
+      throw new ResolveFailedException(ErrorMessages.RECURSIVE_PROVIDER_TYPE);
     }
 
     // TODO: Make sure the provided type extends type. We at least check
@@ -21,13 +19,7 @@
     Key<? extends Provider<T>> providerKey
         = (Key<? extends Provider<T>>) Key.get(providerType);
     final BindingImpl<? extends Provider<?>> providerBinding
-        = getBinding(providerKey);
-
-    if (providerBinding == null) {
-      errorHandler.handle(StackTraceElements.forType(type),
-          ErrorMessages.BINDING_NOT_FOUND, type);
-      return invalidBinding(type);
-    }
+        = getBindingOrThrow(providerKey);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(InternalContext context, InjectionPoint injectionPoint) {

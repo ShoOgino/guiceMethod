@@ -1,4 +1,4 @@
-  <T> BindingImpl<T> createBindingJustInTime(Key<T> key) {
+  <T> BindingImpl<T> createBindingJustInTime(Key<T> key) throws ResolveFailedException {
     // Handle cases where T is a Provider<?>.
     if (isProvider(key)) {
       // These casts are safe. We know T extends Provider<X> and that given
@@ -25,8 +25,14 @@
     // If the key has an annotation...
     if (key.hasAnnotationType()) {
       // Look for a binding without annotation attributes or return null.
-      return key.hasAttributes()
-          ? getBinding(key.withoutAttributes()) : null;
+      if (key.hasAttributes()) {
+        try {
+          return getBindingOrThrow(key.withoutAttributes());
+        } catch (ResolveFailedException ignored) {
+          // throw with a more appropriate message below
+        }
+      }
+      throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, key);
     }
 
     // Create a binding based on the raw type.

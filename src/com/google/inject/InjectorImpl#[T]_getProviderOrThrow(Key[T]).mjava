@@ -1,9 +1,5 @@
-  <T> Provider<T> maybeGetProvider(final Key<T> key) {
+  <T> Provider<T> getProviderOrThrow(final Key<T> key) throws ResolveFailedException {
     final InternalFactory<? extends T> factory = getInternalFactory(key);
-
-    if (factory == null) {
-      return null;
-    }
 
     return new Provider<T>() {
       public T get() {

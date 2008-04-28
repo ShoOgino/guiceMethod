@@ -8,10 +8,10 @@
           try {
             injectors.add(injectorFactory.create(this, member));
           }
-          catch (MissingDependencyException e) {
+          catch (ResolveFailedException e) {
             if (!inject.optional()) {
               // TODO: Report errors for more than one parameter per member.
-              e.handle(errorHandler);
+              errorHandler.handle(member, e.getMessage());
             }
           }
         }

@@ -6,7 +6,7 @@
    */
   SingleParameterInjector<?>[] getParametersInjectors(Member member,
       List<Parameter<?>> parameters)
-      throws MissingDependencyException {
+      throws ResolveFailedException {
     SingleParameterInjector<?>[] parameterInjectors
         = new SingleParameterInjector<?>[parameters.size()];
     int index = 0;

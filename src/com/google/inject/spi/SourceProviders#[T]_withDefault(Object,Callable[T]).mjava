@@ -5,10 +5,6 @@
    */
   public static <T> T withDefault(
       final Object source, Callable<T> c) {
-    return withDefault(new SourceProvider() {
-      public Object source() {
-        return source;
-      }
-    }, c);
+    return withDefault(sourceProviderFor(source), c);
   }
 

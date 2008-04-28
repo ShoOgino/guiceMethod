@@ -4,7 +4,7 @@
    * Provider<X> binding, etc.
    */
   @SuppressWarnings("unchecked")
-  <T> BindingImpl<T> getJitBindingImpl(Key<T> key) {
+  <T> BindingImpl<T> getJitBindingImpl(Key<T> key) throws ResolveFailedException {
     synchronized (jitBindings) {
       // Support null values.
       if (!jitBindings.containsKey(key)) {

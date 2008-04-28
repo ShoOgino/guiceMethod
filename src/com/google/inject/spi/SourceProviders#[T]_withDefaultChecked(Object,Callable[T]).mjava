@@ -1,0 +1,18 @@
+  /**
+   * Sets the default source provider, runs the given command, and then
+   * restores the previous default source provider. Unlike
+   * {@link #withDefault}, this method doesn't wrap exceptions.
+   */
+  public static <T> T withDefaultChecked(Object source, Callable<T> c)
+      throws Exception {
+    // We use a holder so we perform only 1 thread local access instead of 3.
+    SourceProvider[] holder = localSourceProvider.get();
+    SourceProvider previous = holder[0];
+    try {
+      holder[0] = sourceProviderFor(source);
+      return c.call();
+    } finally {
+      holder[0] = previous;
+    }
+  }
+

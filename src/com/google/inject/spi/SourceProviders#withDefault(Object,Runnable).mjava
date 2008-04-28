@@ -4,10 +4,6 @@
    */
   public static void withDefault(
       final Object source, Runnable r) {
-    withDefault(new SourceProvider() {
-      public Object source() {
-        return source;
-      }
-    }, r);
+    withDefault(sourceProviderFor(source), r);
   }
 

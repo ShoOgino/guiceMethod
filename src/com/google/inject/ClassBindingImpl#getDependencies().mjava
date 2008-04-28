@@ -1,8 +1,12 @@
   public Collection<Dependency<?>> getDependencies() {
+    if (lateBoundConstructor == null) {
+      throw new AssertionError();
+    }
+
     Class<T> boundClass = getBoundClass();
     Collection<Dependency<?>> injectors
         = injector.getModifiableFieldAndMethodDependenciesFor(boundClass);
-    ConstructorInjector<T> constructor = injector.getConstructor(boundClass);
+    ConstructorInjector<T> constructor = lateBoundConstructor.constructorInjector;
     if (constructor.parameterInjectors != null) {
       for (SingleParameterInjector<?> parameterInjector
           : constructor.parameterInjectors) {

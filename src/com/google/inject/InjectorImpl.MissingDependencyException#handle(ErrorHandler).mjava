@@ -1,4 +1,0 @@
-    void handle(ErrorHandler errorHandler) {
-      handleMissingBinding(member, key);
-    }
-

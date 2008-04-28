@@ -1,4 +1,6 @@
   public void handle(Object source, String message) {
+    source = ErrorMessages.convert(source);
+
     if (state == State.RUNTIME) {
       throw new ConfigurationException("Error at " + source + " " + message);
 

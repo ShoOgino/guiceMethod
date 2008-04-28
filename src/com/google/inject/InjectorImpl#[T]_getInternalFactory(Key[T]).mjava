@@ -1,5 +1,5 @@
-  <T> InternalFactory<? extends T> getInternalFactory(Key<T> key) {
-    BindingImpl<T> binding = getBinding(key);
-    return binding == null ? null : binding.internalFactory;
+  <T> InternalFactory<? extends T> getInternalFactory(Key<T> key)
+      throws ResolveFailedException {
+    return getBindingOrThrow(key).internalFactory;
   }
 

@@ -3,7 +3,7 @@
     addInjectorsForMembers(Arrays.asList(methods), statics, injectors,
         new SingleInjectorFactory<Method>() {
           public SingleMemberInjector create(InjectorImpl injector,
-              Method method) throws MissingDependencyException {
+              Method method) throws ResolveFailedException {
             return new SingleMethodInjector(injector, method);
           }
         });
