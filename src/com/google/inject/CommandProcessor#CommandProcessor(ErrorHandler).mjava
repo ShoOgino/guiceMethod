@@ -1,0 +1,4 @@
+  protected CommandProcessor(ErrorHandler errorHandler) {
+    this.errorHandler = errorHandler;
+  }
+

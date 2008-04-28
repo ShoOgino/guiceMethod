@@ -13,7 +13,7 @@
     stopwatch.resetAndLog("Instance member validation");
 
     new GetProviderProcessor(injector)
-        .processCommands(commands, errorHandler);
+        .processCommands(commands);
     stopwatch.resetAndLog("Provider verification");
 
     errorHandler.blowUpIfErrorsExist();

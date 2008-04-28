@@ -1,0 +1,9 @@
+  public void processCommands(List<Command> commands) {
+    for (Iterator<Command> i = commands.iterator(); i.hasNext(); ) {
+      Boolean allDone = i.next().acceptVisitor(this);
+      if (allDone) {
+        i.remove();
+      }
+    }
+  }
+

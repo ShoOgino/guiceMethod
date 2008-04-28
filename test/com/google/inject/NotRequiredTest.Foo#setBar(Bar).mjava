@@ -1,4 +1,0 @@
-    @Inject(optional=true) void setBar(Bar bar) {
-      fromMethod = bar;
-    }
-

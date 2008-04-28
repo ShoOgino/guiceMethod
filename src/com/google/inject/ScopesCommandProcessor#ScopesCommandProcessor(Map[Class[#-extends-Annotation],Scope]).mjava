@@ -1,4 +1,0 @@
-  ScopesCommandProcessor(Map<Class<? extends Annotation>, Scope> scopes) {
-    this.scopes = scopes;
-  }
-

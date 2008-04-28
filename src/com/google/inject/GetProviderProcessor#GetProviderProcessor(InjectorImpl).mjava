@@ -1,4 +1,5 @@
   GetProviderProcessor(InjectorImpl injector) {
+    super(injector.errorHandler);
     this.injector = injector;
   }
 

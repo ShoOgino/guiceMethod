@@ -1,4 +1,6 @@
-  ConvertToTypesCommandProcessor(List<MatcherAndConverter<?>> converters) {
+  ConvertToTypesCommandProcessor(ErrorHandler errorHandler,
+      List<MatcherAndConverter<?>> converters) {
+    super(errorHandler);
     this.converters = converters;
 
     // Configure type converters.
