@@ -1,5 +1,6 @@
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
       return o instanceof Module
+          && ((RealMultibinder)o ).elementType.equals(elementType)
           && ((RealMultibinder)o ).setName.equals(setName);
     }
 
