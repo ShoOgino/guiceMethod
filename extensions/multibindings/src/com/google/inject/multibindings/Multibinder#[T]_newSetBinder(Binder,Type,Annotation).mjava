@@ -2,7 +2,7 @@
    * Returns a new multibinder that collects instances of {@code type} in a
    * {@link Set} that is itself bound with {@code annotation}.
    */
-  static <T> Multibinder<T> newSetBinder(Binder binder, Type type, Annotation annotation) {
+  public static <T> Multibinder<T> newSetBinder(Binder binder, Type type, Annotation annotation) {
     nonNull(annotation, "annotation");
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, annotation);
     binder.install(result);
