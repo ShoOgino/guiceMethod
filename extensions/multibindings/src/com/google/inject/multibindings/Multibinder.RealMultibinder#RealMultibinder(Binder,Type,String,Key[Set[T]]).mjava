@@ -1,0 +1,8 @@
+    private RealMultibinder(Binder binder, Type elementType,
+        String setName, Key<Set<T>> setKey) {
+      this.binder = nonNull(binder, "binder");
+      this.elementType = nonNull(elementType, "elementType");
+      this.setName = nonNull(setName, "setName");
+      this.setKey = nonNull(setKey, "setKey");
+    }
+

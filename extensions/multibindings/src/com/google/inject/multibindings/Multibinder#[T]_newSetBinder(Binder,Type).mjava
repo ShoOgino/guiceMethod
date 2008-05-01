@@ -3,7 +3,8 @@
    * {@link Set} that is itself bound with no binding annotation.
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, Type type) {
-    RealMultibinder<T> result = new RealMultibinder<T>(binder, type, null);
+    RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "",
+        Key.get(Multibinder.<T>setOf(type)));
     binder.install(result);
     return result;
   }
