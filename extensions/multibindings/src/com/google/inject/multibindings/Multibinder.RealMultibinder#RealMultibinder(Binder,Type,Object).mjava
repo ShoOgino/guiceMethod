@@ -1,0 +1,18 @@
+    private RealMultibinder(Binder binder, Type elementType,
+        /* @Nullable */ Object bindingAnnotation) {
+      this.binder = nonNull(binder, "binder");
+      this.elementType = nonNull(elementType, "elementType");
+      this.bindingAnnotation = bindingAnnotation;
+
+      if (bindingAnnotation == null) {
+        setName = "";
+      } else if (bindingAnnotation instanceof Class) {
+        setName = "@" + ((Class) bindingAnnotation).getName();
+      } else if (bindingAnnotation instanceof Annotation) {
+        // we're hosed if the user doesn't provide a reasonable toString()
+        setName = bindingAnnotation.toString();
+      } else {
+        throw new IllegalArgumentException("Not an annotation " + bindingAnnotation);
+      }
+    }
+

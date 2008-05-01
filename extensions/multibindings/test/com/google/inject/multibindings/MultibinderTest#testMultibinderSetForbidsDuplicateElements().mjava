@@ -1,0 +1,18 @@
+  public void testMultibinderSetForbidsDuplicateElements() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toInstance("A");
+      }
+    });
+
+    try {
+      injector.getInstance(Key.get(setOfString));
+      fail();
+    } catch(IllegalStateException expected) {
+      assertEquals("Set injection failed due to duplicated element \"A\"",
+          expected.getMessage());
+    }
+  }
+

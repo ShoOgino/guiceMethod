@@ -1,0 +1,10 @@
+  /**
+   * Returns a new multibinder that collects instances of {@code type} in a
+   * {@link Set} that is itself bound with no binding annotation.
+   */
+  static <T> Multibinder<T> newSetBinder(Binder binder, Type type) {
+    RealMultibinder<T> result = new RealMultibinder<T>(binder, type, null);
+    binder.install(result);
+    return result;
+  }
+

@@ -2,6 +2,7 @@
     TypeLiteral<List<String>> a = new TypeLiteral<List<String>>() {};
     TypeLiteral<List<String>> b = new TypeLiteral<List<String>>(
         new TypeWithArgument(List.class, String.class)) {};
-    assertEquals(a, b);
+    assertTrue(b.equals(a) && a.equals(b));
+    assertEquals(a.hashCode(), b.hashCode());
   }
 

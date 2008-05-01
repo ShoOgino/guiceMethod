@@ -1,4 +1,4 @@
-  ProvisionException(Throwable cause, String errorMessage) {
+  public ProvisionException(Throwable cause, String errorMessage) {
     super(errorMessage, cause);
     this.errorMessage = errorMessage;
   }

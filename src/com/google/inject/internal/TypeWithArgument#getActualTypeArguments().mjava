@@ -1,0 +1,4 @@
+  public Type[] getActualTypeArguments() {
+    return typeArguments.clone();
+  }
+

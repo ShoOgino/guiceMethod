@@ -1,0 +1,18 @@
+    /**
+     * Invoked by Guice at Injector-creation time to prepare providers for each
+     * element in this set. At this time the set's size is known, but its
+     * contents are only evaluated when get() is invoked.
+     */
+    @Inject void initialize(Injector injector) {
+      providers = new ArrayList<Provider<T>>();
+      for (Map.Entry<Key<?>, Binding<?>> entry : injector.getBindings().entrySet()) {
+        if (keyMatches(entry.getKey())) {
+          @SuppressWarnings("unchecked")
+          Binding<T> binding = (Binding<T>) entry.getValue();
+          providers.add(binding.getProvider());
+        }
+      }
+
+      this.binder = null;
+    }
+

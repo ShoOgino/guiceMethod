@@ -1,0 +1,19 @@
+    @SuppressWarnings("unchecked")
+    public void configure(Binder binder) {
+      if (isInitialized()) {
+        throw new IllegalStateException("Multibinder was already initialized");
+      }
+
+      Key<Set<T>> setKey;
+      Type setType = new TypeWithArgument(Set.class, elementType);
+      if (bindingAnnotation instanceof Annotation) {
+        setKey = (Key<Set<T>>) Key.get(setType, (Annotation) bindingAnnotation);
+      } else if (bindingAnnotation instanceof Class<?>) {
+        setKey = (Key<Set<T>>) Key.get(setType, (Class<? extends Annotation>) bindingAnnotation);
+      } else {
+        setKey = (Key<Set<T>>) Key.get(setType);
+      }
+
+      binder.bind(setKey).toProvider(this);
+    }
+

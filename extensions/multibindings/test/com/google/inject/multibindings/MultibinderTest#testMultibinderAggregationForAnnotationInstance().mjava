@@ -1,0 +1,17 @@
+  public void testMultibinderAggregationForAnnotationInstance() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder
+            = Multibinder.newSetBinder(binder(), String.class, Names.named("abc"));
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toInstance("B");
+
+        multibinder = Multibinder.newSetBinder(binder(), String.class, Names.named("abc"));
+        multibinder.addBinding().toInstance("C");
+      }
+    });
+
+    Set<String> abcde = injector.getInstance(Key.get(setOfString, Names.named("abc")));
+    assertEquals(setOf("A", "B", "C"), abcde);
+  }
+

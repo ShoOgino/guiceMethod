@@ -1,0 +1,23 @@
+  public void testMultibinderAggregatesMultipleModules() {
+    Module abc = new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toInstance("B");
+        multibinder.addBinding().toInstance("C");
+      }
+    };
+    Module de = new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("D");
+        multibinder.addBinding().toInstance("E");
+      }
+    };
+
+    Injector injector = Guice.createInjector(abc, de);
+    Set<String> abcde = injector.getInstance(Key.get(setOfString));
+
+    assertEquals(setOf("A", "B", "C", "D", "E"), abcde);
+  }
+

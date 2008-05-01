@@ -1,0 +1,22 @@
+  public void testMultibinderWithMultipleAnnotationTypeSets() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> abcMultibinder
+            = Multibinder.newSetBinder(binder(), String.class, Abc.class);
+        abcMultibinder.addBinding().toInstance("A");
+        abcMultibinder.addBinding().toInstance("B");
+        abcMultibinder.addBinding().toInstance("C");
+
+        Multibinder<String> deMultibinder
+            = Multibinder.newSetBinder(binder(), String.class, De.class);
+        deMultibinder.addBinding().toInstance("D");
+        deMultibinder.addBinding().toInstance("E");
+      }
+    });
+
+    Set<String> abc = injector.getInstance(Key.get(setOfString, Abc.class));
+    Set<String> de = injector.getInstance(Key.get(setOfString, De.class));
+    assertEquals(setOf("A", "B", "C"), abc);
+    assertEquals(setOf("D", "E"), de);
+  }
+

@@ -1,0 +1,17 @@
+  public void testMultibinderSetForbidsNullElements() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder.newSetBinder(binder(), String.class)
+            .addBinding().toProvider(Providers.<String>of(null));
+      }
+    });
+
+    try {
+      injector.getInstance(Key.get(setOfString));
+      fail();
+    } catch(IllegalStateException expected) {
+      assertEquals("Set injection failed due to null element",
+          expected.getMessage());
+    }
+  }
+

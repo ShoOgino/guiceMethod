@@ -1,0 +1,12 @@
+  /**
+   * Returns a new multibinder that collects instances of {@code type} in a
+   * {@link Set} that is itself bound with {@code annotationType}.
+   */
+  static <T> Multibinder<T> newSetBinder(Binder binder, Type type,
+      Class<? extends Annotation> annotationType) {
+    nonNull(annotationType, "annotationType");
+    RealMultibinder<T> result = new RealMultibinder<T>(binder, type, annotationType);
+    binder.install(result);
+    return result;
+  }
+

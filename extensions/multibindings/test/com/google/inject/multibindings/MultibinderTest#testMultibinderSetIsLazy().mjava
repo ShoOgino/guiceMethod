@@ -1,0 +1,18 @@
+  public void testMultibinderSetIsLazy() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder.newSetBinder(binder(), Integer.class)
+            .addBinding().toProvider(new Provider<Integer>() {
+          int nextValue = 1;
+          public Integer get() {
+            return nextValue++;
+          }
+        });
+      }
+    });
+
+    assertEquals(setOf(1), injector.getInstance(Key.get(setOfInteger)));
+    assertEquals(setOf(2), injector.getInstance(Key.get(setOfInteger)));
+    assertEquals(setOf(3), injector.getInstance(Key.get(setOfInteger)));
+  }
+
