@@ -1,0 +1,30 @@
+  /**
+   * This test demonstrates that if the user throws a ProvisionException,
+   * sometimes we wrap it and sometimes we don't. We should be consistent.
+   */
+  public void testUserCodeProvisionExceptionsAreWrapped() {
+    try {
+      Guice.createInjector().getInstance(F.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertNotSame(e, provisionException);
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$F");
+      assertEquals("User Exception", e.getCause().getMessage());
+    }
+
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(F.class).toProvider(FProvider.class);
+        }
+      }).getInstance(F.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertNotSame(e, provisionException);
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$F");
+      assertEquals("User Exception", e.getCause().getMessage());
+    }
+  }
+
