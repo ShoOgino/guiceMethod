@@ -1,24 +1,7 @@
   <T> BindingImpl<T> createBindingFromType(Class<T> type, Scope scope,
       Object source) throws ResolveFailedException {
-    // Don't try to inject primitives, arrays, or enums.
-    if (type.isArray() || type.isEnum() || type.isPrimitive()) {
-      throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, type);
-    }
-
-    // Handle @ImplementedBy
-    ImplementedBy implementedBy = type.getAnnotation(ImplementedBy.class);
-    if (implementedBy != null) {
-      // TODO: Scope internal factory.
-      return createImplementedByBinding(type, implementedBy);
-    }
-
-    // Handle @ProvidedBy.
-    ProvidedBy providedBy = type.getAnnotation(ProvidedBy.class);
-    if (providedBy != null) {
-      // TODO: Scope internal factory.
-      return createProvidedByBinding(type, providedBy);
-    }
-
-    return createBindingForInjectableType(type, scope, source);
+    BindingImpl<T> binding = createUnitializedBinding(type, scope, source);
+    initializeBinding(binding);
+    return binding;
   }
 
