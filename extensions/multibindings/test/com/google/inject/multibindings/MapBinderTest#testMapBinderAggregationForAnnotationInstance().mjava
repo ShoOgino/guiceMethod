@@ -1,0 +1,18 @@
+  public void testMapBinderAggregationForAnnotationInstance() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class, Names.named("abc"));
+        multibinder.addBinding("a").toInstance("A");
+        multibinder.addBinding("b").toInstance("B");
+
+        multibinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class, Names.named("abc"));
+        multibinder.addBinding("c").toInstance("C");
+      }
+    });
+
+    Map<String, String> abc = injector.getInstance(Key.get(mapOfString, Names.named("abc")));
+    assertEquals(mapOf("a", "A", "b", "B", "c", "C"), abc);
+  }
+

@@ -1,4 +1,0 @@
-    public String setName() {
-      return setName;
-    }
-

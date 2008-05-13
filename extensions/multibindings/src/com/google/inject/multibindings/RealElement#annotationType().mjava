@@ -1,0 +1,4 @@
+  public Class<? extends Annotation> annotationType() {
+    return Element.class;
+  }
+

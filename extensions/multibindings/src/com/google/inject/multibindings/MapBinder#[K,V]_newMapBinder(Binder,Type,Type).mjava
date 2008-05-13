@@ -1,0 +1,14 @@
+  /**
+   * Returns a new mapbinder that collects entries of {@code keyType}/{@code 
+   * valueType} in a {@link Map} that is itself bound with no binding 
+   * annotation.
+   */
+  public static <K, V> MapBinder<K, V> newMapBinder(Binder binder, 
+      Type keyType, Type valueType) {
+    return newMapBinder(binder,
+        Key.get(MapBinder.<K, V>mapOf(keyType, valueType)),
+        Key.get(MapBinder.<K, V>mapOfProviderOf(keyType, valueType)),
+        Multibinder.<K>newSetBinder(binder, keyType),
+        Multibinder.<V>newSetBinder(binder, valueType));
+  }
+

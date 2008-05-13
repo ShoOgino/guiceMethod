@@ -1,0 +1,4 @@
+    public Type getElementType() {
+      return elementType;
+    }
+

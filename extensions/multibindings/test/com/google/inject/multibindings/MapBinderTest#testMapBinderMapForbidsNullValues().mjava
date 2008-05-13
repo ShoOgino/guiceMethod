@@ -1,0 +1,17 @@
+  public void testMapBinderMapForbidsNullValues() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder.newMapBinder(binder(), String.class, String.class)
+            .addBinding("null").toProvider(Providers.<String>of(null));
+      }
+    });
+
+    try {
+      injector.getInstance(Key.get(mapOfString));
+      fail();
+    } catch(IllegalStateException expected) {
+      assertEquals("Map injection failed due to null value for key \"null\"",
+          expected.getMessage());
+    }
+  }
+

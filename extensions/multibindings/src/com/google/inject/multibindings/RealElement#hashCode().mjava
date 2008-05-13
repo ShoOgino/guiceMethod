@@ -1,0 +1,6 @@
+  @Override public int hashCode() {
+    return 127 * ("setName".hashCode() ^ setName.hashCode())
+        + 127 * ("role".hashCode() ^ role.hashCode())
+        + 127 * ("uniqueId".hashCode() ^ uniqueId);
+  }
+

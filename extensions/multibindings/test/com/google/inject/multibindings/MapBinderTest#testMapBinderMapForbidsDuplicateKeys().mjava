@@ -1,0 +1,17 @@
+  public void testMapBinderMapForbidsDuplicateKeys() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+              binder(), String.class, String.class);
+          multibinder.addBinding("a").toInstance("A");
+          multibinder.addBinding("a").toInstance("B");
+        }
+      });
+      fail();
+    } catch(ProvisionException expected) {
+      assertEquals("Map injection failed due to duplicated key \"a\"",
+          expected.getCause().getMessage());
+    }
+  }
+

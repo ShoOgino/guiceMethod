@@ -1,5 +1,0 @@
-    @Override public int hashCode() {
-      return 127 * ("uniqueId".hashCode() ^ uniqueId)
-          + 127 * ("setName".hashCode() ^ setName.hashCode());
-    }
-

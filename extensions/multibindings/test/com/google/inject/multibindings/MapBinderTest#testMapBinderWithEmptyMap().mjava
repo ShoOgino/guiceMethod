@@ -1,0 +1,11 @@
+  public void testMapBinderWithEmptyMap() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder.newMapBinder(binder(), String.class, String.class);
+      }
+    });
+
+    Map<String, String> map = injector.getInstance(Key.get(mapOfString));
+    assertEquals(Collections.emptyMap(), map);
+  }
+

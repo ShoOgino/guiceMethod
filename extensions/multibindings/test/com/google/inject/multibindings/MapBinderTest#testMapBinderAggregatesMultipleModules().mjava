@@ -1,0 +1,25 @@
+  public void testMapBinderAggregatesMultipleModules() {
+    Module abc = new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class);
+        multibinder.addBinding("a").toInstance("A");
+        multibinder.addBinding("b").toInstance("B");
+        multibinder.addBinding("c").toInstance("C");
+      }
+    };
+    Module de = new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class);
+        multibinder.addBinding("d").toInstance("D");
+        multibinder.addBinding("e").toInstance("E");
+      }
+    };
+
+    Injector injector = Guice.createInjector(abc, de);
+    Map<String, String> abcde = injector.getInstance(Key.get(mapOfString));
+
+    assertEquals(mapOf("a", "A", "b", "B", "c", "C", "d", "D", "e", "E"), abcde);
+  }
+

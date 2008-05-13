@@ -1,0 +1,10 @@
+    @SuppressWarnings("unchecked")
+    LinkedBindingBuilder<T> addBinding(String role, int uniqueId) {
+      if (isInitialized()) {
+        throw new IllegalStateException("Multibinder was already initialized");
+      }
+
+      return (LinkedBindingBuilder<T>) binder.bind(
+          Key.get(elementType, new RealElement(setName, role, uniqueId)));
+    }
+

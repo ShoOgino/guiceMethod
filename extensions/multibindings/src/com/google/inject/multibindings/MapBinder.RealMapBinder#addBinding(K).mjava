@@ -1,0 +1,10 @@
+    public LinkedBindingBuilder<V> addBinding(K key) {
+      // this code is currently quite crufty - we depend on the fact that the
+      // key and the value have the same unique ID. A better approach would be
+      // to create an element annotation that knows the Map.Entry type
+      Objects.nonNull(key, "key");
+      int uniqueId = RealMultibinder.nextUniqueId.getAndIncrement();
+      keyBinder.addBinding("key", uniqueId).toInstance(key);
+      return valueBinder.addBinding("value", uniqueId);
+    }
+

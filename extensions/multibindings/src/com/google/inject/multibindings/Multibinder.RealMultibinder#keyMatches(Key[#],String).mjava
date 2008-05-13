@@ -1,0 +1,7 @@
+    boolean keyMatches(Key<?> key, String role) {
+      return key.getTypeLiteral().getType().equals(elementType)
+          && key.getAnnotation() instanceof Element
+          && ((Element) key.getAnnotation()).setName().equals(setName)
+          && ((Element) key.getAnnotation()).role().equals(role);
+    }
+

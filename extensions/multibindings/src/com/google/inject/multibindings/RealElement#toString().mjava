@@ -1,0 +1,5 @@
+  @Override public String toString() {
+    return "@" + Element.class.getName() + "(setName=" + setName
+        + ",role=" + role + ",uniqueId=" + uniqueId + ")";
+  }
+

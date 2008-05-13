@@ -1,0 +1,19 @@
+  public void testMapBinderProviderIsScoped() {
+    final Provider<Integer> counter = new Provider<Integer>() {
+      int next = 1;
+      public Integer get() {
+        return next++;
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder.newMapBinder(binder(), String.class, Integer.class)
+            .addBinding("one").toProvider(counter).asEagerSingleton();
+      }
+    });
+
+    assertEquals(1, (int) injector.getInstance(Key.get(mapOfInteger)).get("one"));
+    assertEquals(1, (int) injector.getInstance(Key.get(mapOfInteger)).get("one"));
+  }
+

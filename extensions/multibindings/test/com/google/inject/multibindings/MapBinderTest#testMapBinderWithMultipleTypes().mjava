@@ -1,0 +1,14 @@
+  public void testMapBinderWithMultipleTypes() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder.newMapBinder(binder(), String.class, String.class)
+            .addBinding("a").toInstance("A");
+        MapBinder.newMapBinder(binder(), String.class, Integer.class)
+            .addBinding("1").toInstance(1);
+      }
+    });
+
+    assertEquals(mapOf("a", "A"), injector.getInstance(Key.get(mapOfString)));
+    assertEquals(mapOf("1", 1), injector.getInstance(Key.get(mapOfInteger)));
+  }
+

@@ -1,0 +1,22 @@
+  public void testMapBinderWithMultipleAnnotationTypeSets() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MapBinder<String, String> abcMapBinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class, Abc.class);
+        abcMapBinder.addBinding("a").toInstance("A");
+        abcMapBinder.addBinding("b").toInstance("B");
+        abcMapBinder.addBinding("c").toInstance("C");
+
+        MapBinder<String, String> deMapBinder = MapBinder.newMapBinder(
+            binder(), String.class, String.class, De.class);
+        deMapBinder.addBinding("d").toInstance("D");
+        deMapBinder.addBinding("e").toInstance("E");
+      }
+    });
+
+    Map<String, String> abc = injector.getInstance(Key.get(mapOfString, Abc.class));
+    Map<String, String> de = injector.getInstance(Key.get(mapOfString, De.class));
+    assertEquals(mapOf("a", "A", "b", "B", "c", "C"), abc);
+    assertEquals(mapOf("d", "D", "e", "E"), de);
+  }
+

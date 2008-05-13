@@ -1,4 +1,0 @@
-    RealElement(String setName) {
-      this.setName = setName;
-    }
-
