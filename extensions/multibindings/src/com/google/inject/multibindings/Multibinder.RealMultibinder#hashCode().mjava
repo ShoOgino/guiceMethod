@@ -1,4 +1,4 @@
     @Override public int hashCode() {
-      return setName.hashCode() ^ elementType.hashCode();
+      return setKey.hashCode();
     }
 
