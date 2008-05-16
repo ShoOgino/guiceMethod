@@ -6,7 +6,7 @@
     @Inject void initialize(Injector injector) {
       providers = new ArrayList<Provider<T>>();
       for (Map.Entry<Key<?>, Binding<?>> entry : injector.getBindings().entrySet()) {
-        if (keyMatches(entry.getKey(), "element")) {
+        if (keyMatches(entry.getKey())) {
           @SuppressWarnings("unchecked")
           Binding<T> binding = (Binding<T>) entry.getValue();
           providers.add(binding.getProvider());

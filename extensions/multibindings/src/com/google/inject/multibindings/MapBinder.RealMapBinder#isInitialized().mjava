@@ -1,0 +1,4 @@
+    private boolean isInitialized() {
+      return binder == null;
+    }
+

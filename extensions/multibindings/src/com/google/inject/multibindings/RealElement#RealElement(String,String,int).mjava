@@ -1,6 +1,0 @@
-  RealElement(String setName, String role, int uniqueId) {
-    this.setName = setName;
-    this.role = role;
-    this.uniqueId = uniqueId;
-  }
-

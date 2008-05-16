@@ -4,10 +4,10 @@
    */
   public static <K, V> MapBinder<K, V> newMapBinder(Binder binder, 
       Type keyType, Type valueType, Annotation annotation) {
-    return newMapBinder(binder,
+    return newMapBinder(binder, valueType,
         Key.get(MapBinder.<K, V>mapOf(keyType, valueType), annotation),
-        Key.get(MapBinder.<K, V>mapOfProviderOf(keyType, valueType), annotation),
-        Multibinder.<K>newSetBinder(binder, keyType, annotation),
-        Multibinder.<V>newSetBinder(binder, valueType, annotation));
+        Key.get(MapBinder.<K, V>mapOfProviderOf(keyType, valueType), annotation), 
+        Multibinder.<Entry<K, Provider<V>>>newSetBinder(
+            binder, entryOfProviderOf(keyType, valueType), annotation));
   }
 

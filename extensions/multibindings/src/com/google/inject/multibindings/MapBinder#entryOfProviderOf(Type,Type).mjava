@@ -1,0 +1,5 @@
+  private static Type entryOfProviderOf(Type keyType, final Type valueType) {
+    return new TypeWithArgument(Map.Entry.class, keyType, 
+        new TypeWithArgument(Provider.class, valueType));
+  }
+

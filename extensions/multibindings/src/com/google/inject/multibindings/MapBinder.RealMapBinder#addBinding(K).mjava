@@ -1,10 +1,17 @@
-    public LinkedBindingBuilder<V> addBinding(K key) {
-      // this code is currently quite crufty - we depend on the fact that the
-      // key and the value have the same unique ID. A better approach would be
-      // to create an element annotation that knows the Map.Entry type
+    /**
+     * This creates two bindings. One for the {@code Map.Entry<K, Provider<V>>}
+     * and another for {@code V}.
+     */
+    @Override public LinkedBindingBuilder<V> addBinding(K key) {
       Objects.nonNull(key, "key");
-      int uniqueId = RealMultibinder.nextUniqueId.getAndIncrement();
-      keyBinder.addBinding("key", uniqueId).toInstance(key);
-      return valueBinder.addBinding("value", uniqueId);
+      if (isInitialized()) {
+        throw new IllegalStateException("MapBinder was already initialized");
+      }
+
+      @SuppressWarnings("unchecked")
+      Key<V> valueKey = (Key<V>) Key.get(valueType, new RealElement(entrySetBinder.getSetName()));
+      entrySetBinder.addBinding()
+          .toInstance(new MapEntry<K, Provider<V>>(key, binder.getProvider(valueKey)));
+      return binder.bind(valueKey);
     }
 

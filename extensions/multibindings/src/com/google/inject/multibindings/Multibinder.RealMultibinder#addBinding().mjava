@@ -1,4 +1,9 @@
-    public LinkedBindingBuilder<T> addBinding() {
-      return addBinding("element", nextUniqueId.getAndIncrement());
+    @SuppressWarnings("unchecked")
+    @Override public LinkedBindingBuilder<T> addBinding() {
+      if (isInitialized()) {
+        throw new IllegalStateException("Multibinder was already initialized");
+      }
+
+      return binder.bind((Key<T>) Key.get(elementType, new RealElement(setName)));
     }
 

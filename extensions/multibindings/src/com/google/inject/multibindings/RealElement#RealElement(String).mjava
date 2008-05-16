@@ -1,0 +1,5 @@
+  RealElement(String setName) {
+    uniqueId = nextUniqueId.getAndIncrement();
+    this.setName = setName;
+  }
+

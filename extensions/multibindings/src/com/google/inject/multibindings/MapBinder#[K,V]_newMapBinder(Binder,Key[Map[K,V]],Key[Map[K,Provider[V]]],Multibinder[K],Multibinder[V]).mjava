@@ -1,9 +1,0 @@
-  private static <K, V> MapBinder<K, V> newMapBinder(Binder binder,
-      Key<Map<K, V>> mapKey, Key<Map<K, Provider<V>>> valueKey,
-      Multibinder<K> keyMultibinder, Multibinder<V> valueMultibinder) {
-    RealMapBinder<K, V> realMapBinder = new RealMapBinder<K, V>(
-        mapKey, valueKey, keyMultibinder, valueMultibinder);
-    binder.install(realMapBinder);
-    return realMapBinder;
-  }
-
