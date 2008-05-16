@@ -1,0 +1,13 @@
+  public void testDanglingConstantBinding() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override public void configure() {
+          bindConstant();
+        }
+      });
+      fail();
+    } catch (CreationException e) {
+      assertTrue(e.getMessage().contains("Missing constant value."));
+    }
+  }
+

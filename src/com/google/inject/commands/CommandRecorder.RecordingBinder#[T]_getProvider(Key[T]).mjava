@@ -4,6 +4,10 @@
         public T get() {
           return earlyRequestsProvider.get(key);
         }
+
+        @Override public String toString() {
+          return "Provider<" + key.getTypeLiteral() + ">";
+        }
       };
     }
 
