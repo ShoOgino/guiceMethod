@@ -3,6 +3,6 @@
    * occurred.
    */
   void addContext(InjectionPoint<?> injectionPoint) {
-    this.contexts.add(injectionPoint);
+    this.contexts.add(contextToSnippet(injectionPoint));
   }
 
