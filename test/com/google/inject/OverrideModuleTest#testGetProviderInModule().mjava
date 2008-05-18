@@ -1,0 +1,13 @@
+  public void testGetProviderInModule() {
+    Module original = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("A");
+        bind(key2).toProvider(getProvider(String.class));
+      }
+    };
+
+    Injector injector = createInjector(overrideModule(original, EMPTY_MODULE));
+    assertEquals("A", injector.getInstance(String.class));
+    assertEquals("A", injector.getInstance(key2));
+  }
+

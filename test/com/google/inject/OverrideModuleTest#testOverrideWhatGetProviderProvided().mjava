@@ -1,0 +1,19 @@
+  public void testOverrideWhatGetProviderProvided() {
+    Module original = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("A");
+        bind(key2).toProvider(getProvider(String.class));
+      }
+    };
+
+    Module replacements = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("B");
+      }
+    };
+
+    Injector injector = createInjector(overrideModule(original, replacements));
+    assertEquals("B", injector.getInstance(String.class));
+    assertEquals("B", injector.getInstance(key2));
+  }
+

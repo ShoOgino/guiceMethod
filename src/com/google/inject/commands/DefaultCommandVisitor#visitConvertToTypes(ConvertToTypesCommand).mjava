@@ -1,0 +1,4 @@
+  public V visitConvertToTypes(ConvertToTypesCommand command) {
+    return visitCommand(command);
+  }
+

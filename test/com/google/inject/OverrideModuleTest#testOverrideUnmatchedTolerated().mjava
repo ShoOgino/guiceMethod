@@ -1,0 +1,11 @@
+  public void testOverrideUnmatchedTolerated() {
+    Module replacements = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("B");
+      }
+    };
+
+    Injector injector = createInjector(overrideModule(EMPTY_MODULE, replacements));
+    assertEquals("B", injector.getInstance(String.class));
+  }
+

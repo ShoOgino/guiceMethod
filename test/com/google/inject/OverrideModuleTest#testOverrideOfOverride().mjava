@@ -1,0 +1,31 @@
+  public void testOverrideOfOverride() {
+    Module original = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("A1");
+        bind(key2).toInstance("A2");
+        bind(key3).toInstance("A3");
+      }
+    };
+
+    Module replacements1 = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("B1");
+        bind(key2).toInstance("B2");
+      }
+    };
+
+    Module overrides = overrideModule(original, replacements1);
+
+    Module replacements2 = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("C1");
+        bind(key3).toInstance("C3");
+      }
+    };
+
+    Injector injector = createInjector(overrideModule(overrides, replacements2));
+    assertEquals("C1", injector.getInstance(String.class));
+    assertEquals("B2", injector.getInstance(key2));
+    assertEquals("C3", injector.getInstance(key3));
+  }
+

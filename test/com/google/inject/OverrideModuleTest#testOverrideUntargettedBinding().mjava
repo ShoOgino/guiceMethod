@@ -1,0 +1,17 @@
+  public void testOverrideUntargettedBinding() {
+    Module original = new AbstractModule() {
+      protected void configure() {
+        bind(Date.class);
+      }
+    };
+
+    Module replacements = new AbstractModule() {
+      protected void configure() {
+        bind(Date.class).toInstance(new Date(0));
+      }
+    };
+
+    Injector injector = createInjector(overrideModule(original, replacements));
+    assertEquals(0, injector.getInstance(Date.class).getTime());
+  }
+

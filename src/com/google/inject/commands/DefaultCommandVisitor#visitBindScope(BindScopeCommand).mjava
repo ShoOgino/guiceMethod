@@ -1,0 +1,4 @@
+  public V visitBindScope(BindScopeCommand command) {
+    return visitCommand(command);
+  }
+

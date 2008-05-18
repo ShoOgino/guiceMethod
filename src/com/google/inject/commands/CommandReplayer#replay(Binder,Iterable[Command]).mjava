@@ -1,7 +1,7 @@
   /**
    * Replays {@code commands} against {@code binder}.
    */
-  public void replay(final Binder binder, Iterable<Command> commands) {
+  public final void replay(final Binder binder, Iterable<Command> commands) {
     Objects.nonNull(binder, "binder");
     Objects.nonNull(commands, "commands");
 
