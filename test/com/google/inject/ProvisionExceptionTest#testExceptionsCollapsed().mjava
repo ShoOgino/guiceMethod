@@ -2,8 +2,7 @@
     try {
       Guice.createInjector().getInstance(A.class);
       fail(); 
-    }
-    catch (ProvisionException e) {
+    } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
       assertContains(e.getMessage(), "Error injecting constructor");
       assertContains(e.getMessage(), "while locating "

@@ -1,0 +1,8 @@
+  private void assertNotSerializable(Object object) throws IOException {
+    try {
+      reserialize(object);
+      fail();
+    } catch (NotSerializableException expected) {
+    }
+  }
+

@@ -1,0 +1,16 @@
+  public void testProvisionExceptionsAreWrappedForBindToProviderInstance() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(F.class).toProvider(new FProvider());
+        }
+      }).getInstance(F.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertNotSame(e, provisionException);
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$F");
+      assertSame(provisionException, e.getCause());
+    }
+  }
+

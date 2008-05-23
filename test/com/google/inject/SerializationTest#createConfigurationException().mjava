@@ -1,0 +1,9 @@
+  private ConfigurationException createConfigurationException() {
+    try {
+      Guice.createInjector().getInstance(List.class);
+      throw new AssertionFailedError();
+    } catch (ConfigurationException e) {
+      return e;
+    }
+  }
+

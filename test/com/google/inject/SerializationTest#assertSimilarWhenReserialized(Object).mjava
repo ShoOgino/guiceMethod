@@ -1,0 +1,9 @@
+  /**
+   * For objects that don't define equals(), we test that they produce the same
+   * toString() output.
+   */
+  public void assertSimilarWhenReserialized(Object object) throws IOException {
+    Object reserialized = reserialize(object);
+    assertEquals(object.toString(), reserialized.toString());
+  }
+

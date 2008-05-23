@@ -1,0 +1,4 @@
+  public void testConfigurationExceptionIsSerializable() throws IOException {
+    assertSimilarWhenReserialized(createConfigurationException());
+  }
+

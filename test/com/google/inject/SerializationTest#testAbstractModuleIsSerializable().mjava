@@ -1,0 +1,4 @@
+  public void testAbstractModuleIsSerializable() throws IOException {
+    reserialize(new MyAbstractModule());
+  }
+

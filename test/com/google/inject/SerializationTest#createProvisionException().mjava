@@ -1,0 +1,13 @@
+  private ProvisionException createProvisionException() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(B.class).toProvider(ProviderThatThrows.class);
+        }
+      }).getInstance(A.class);
+      throw new AssertionFailedError();
+    } catch (ProvisionException e) {
+      return e;
+    }
+  }
+

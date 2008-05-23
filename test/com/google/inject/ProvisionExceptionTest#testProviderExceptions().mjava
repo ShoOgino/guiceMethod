@@ -6,8 +6,7 @@
         }
       }).getInstance(D.class);
       fail();
-    }
-    catch (ProvisionException e) {
+    } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
       assertContains(e.getMessage(), "Error in custom provider");
       assertContains(e.getMessage(), "while locating "

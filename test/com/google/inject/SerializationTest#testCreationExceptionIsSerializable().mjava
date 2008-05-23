@@ -1,0 +1,4 @@
+  public void testCreationExceptionIsSerializable() throws IOException {
+    assertEqualWhenReserialized(createCreationException());
+  }
+

@@ -1,0 +1,4 @@
+  public void testInjectorIsNotSerializable() throws IOException {
+    assertNotSerializable(Guice.createInjector());
+  }
+
