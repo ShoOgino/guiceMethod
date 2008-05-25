@@ -1,4 +1,4 @@
-  public String toString() {
+  @Override public String toString() {
     return type instanceof Class<?>
         ? ((Class<?>) type).getName()
         : type.toString();

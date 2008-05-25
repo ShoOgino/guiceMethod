@@ -1,8 +1,8 @@
   public String toString() {
-    return "Context" + new LinkedHashMap<String, Object>() {{
-      put("member", member);
-      put("key", getKey());
-      put("injector", injector);
-    }}.toString();
+    return new ToStringBuilder("Context")
+        .add("member", member)
+        .add("key", key)
+        .add("injector", injector)
+        .toString();
   }
 

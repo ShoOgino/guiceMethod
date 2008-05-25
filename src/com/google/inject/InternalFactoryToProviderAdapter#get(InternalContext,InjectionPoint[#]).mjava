@@ -1,6 +1,11 @@
   public T get(InternalContext context, InjectionPoint<?> injectionPoint) {
     context.ensureMemberInjected(provider);
-    T provided = provider.get();
-    return injectionPoint.checkForNull(provided, source);
+    try {
+      return injectionPoint.checkForNull(provider.get(), source);
+    } catch(ProvisionException e) {
+      throw e;
+    } catch(RuntimeException e) {
+      throw new ProvisionException(e, ErrorMessages.ERROR_IN_PROVIDER);
+    }
   }
 

@@ -1,0 +1,2 @@
+  public void bar(Provider<List<String>> a) {}
+

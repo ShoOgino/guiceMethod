@@ -1,4 +1,0 @@
-    @Inject public G() {
-      throw runtimeException;
-    }
-

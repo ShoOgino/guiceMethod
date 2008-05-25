@@ -1,0 +1,11 @@
+  public void testBindToTypeExceptions() {
+    try {
+      Guice.createInjector().getInstance(D.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertTrue(e.getCause() instanceof UnsupportedOperationException);
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$D");
+    }
+  }
+

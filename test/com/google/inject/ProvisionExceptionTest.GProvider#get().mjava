@@ -1,4 +1,0 @@
-    public G get() {
-      return new G();
-    }
-

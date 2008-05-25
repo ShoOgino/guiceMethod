@@ -1,7 +1,0 @@
-  public void testEquality() {
-    assertEquals(
-      new Key<List<String>>(Foo.class) {},
-      Key.get(new TypeLiteral<List<String>>() {}, Foo.class)
-    );
-  }
-

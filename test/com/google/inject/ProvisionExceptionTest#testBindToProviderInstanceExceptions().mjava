@@ -1,0 +1,15 @@
+  public void testBindToProviderInstanceExceptions() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(D.class).toProvider(new DProvider());
+        }
+      }).getInstance(D.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertTrue(e.getCause() instanceof UnsupportedOperationException);
+      assertContains(e.getMessage(), "while locating "
+          + "com.google.inject.ProvisionExceptionTest$D");
+    }
+  }
+
