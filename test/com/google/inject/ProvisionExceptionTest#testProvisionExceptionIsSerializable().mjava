@@ -1,0 +1,9 @@
+  public void testProvisionExceptionIsSerializable() throws IOException {
+    try {
+      Guice.createInjector().getInstance(A.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertSimilarWhenReserialized(expected);
+    }
+  }
+

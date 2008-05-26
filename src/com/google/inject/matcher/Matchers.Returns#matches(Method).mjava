@@ -1,0 +1,4 @@
+    public boolean matches(Method m) {
+      return returnType.matches(m.getReturnType());
+    }
+

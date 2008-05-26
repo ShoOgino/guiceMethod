@@ -1,0 +1,5 @@
+    @Override public boolean equals(Object other) {
+      return other instanceof AnnotatedWith
+          && ((AnnotatedWith) other).annotation.equals(annotation);
+    }
+

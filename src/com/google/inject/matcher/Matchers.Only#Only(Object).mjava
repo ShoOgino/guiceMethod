@@ -1,0 +1,4 @@
+    public Only(Object value) {
+      this.value = Objects.nonNull(value, "value");
+    }
+

@@ -1,0 +1,7 @@
+  public void testWithParameterizedType() {
+    TypeLiteral<List<String>> a = new TypeLiteral<List<String>>() {};
+    TypeLiteral<List<String>> b = new TypeLiteral<List<String>>(
+        Types.newTypeWithArgument(List.class, String.class)) {};
+    assertEqualsBothWays(a, b);
+  }
+

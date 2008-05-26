@@ -7,8 +7,9 @@
               .to(mockRemoteProvider);
         }
       });
-    } catch (IllegalArgumentException e) {
-      assertTrue(e.getMessage().contains("is not a compliant interface"));
+      fail();
+    } catch (IllegalArgumentException expected) {
+      assertContains(expected.getMessage(), "is not a compliant interface");
     }
   }
 

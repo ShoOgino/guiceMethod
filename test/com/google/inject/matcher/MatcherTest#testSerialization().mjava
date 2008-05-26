@@ -1,0 +1,14 @@
+  public void testSerialization() throws IOException {
+    assertEqualWhenReserialized(Matchers.any());
+    assertEqualWhenReserialized(Matchers.not(Matchers.any()));
+    assertEqualWhenReserialized(Matchers.annotatedWith(Named.class));
+    assertEqualWhenReserialized(Matchers.annotatedWith(Names.named("foo")));
+    assertEqualWhenReserialized(Matchers.only("foo"));
+    assertEqualWhenReserialized(Matchers.identicalTo(Object.class));
+    assertEqualWhenReserialized(Matchers.inPackage(String.class.getPackage()));
+    assertEqualWhenReserialized(Matchers.returns(Matchers.any()));
+    assertEqualWhenReserialized(Matchers.subclassesOf(AbstractList.class));
+    assertEqualWhenReserialized(Matchers.only("a").or(Matchers.only("b")));
+    assertEqualWhenReserialized(Matchers.only("a").and(Matchers.only("b")));
+  }
+

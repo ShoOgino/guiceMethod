@@ -2,15 +2,6 @@
    * Inverts the given matcher.
    */
   public static <T> Matcher<T> not(final Matcher<? super T> p) {
-    Objects.nonNull(p, "p");
-    return new AbstractMatcher<T>() {
-      public boolean matches(T t) {
-        return !p.matches(t);
-      }
-
-      public String toString() {
-        return "not(" + p + ")";
-      }
-    };
+    return new Not<T>(p);
   }
 

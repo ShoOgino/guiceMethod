@@ -9,7 +9,7 @@
   @SuppressWarnings("unchecked")
   protected TypeLiteral() {
     this.type = getSuperclassTypeParameter(getClass());
-    this.rawType = (Class<? super T>) getRawType(type);
-    this.hashCode = hashCode(type);
+    this.rawType = (Class<? super T>) Types.getRawType(type);
+    this.hashCode = Types.hashCode(type);
   }
 

@@ -4,7 +4,7 @@
         MatcherTest.class.getMethods()[0]));
 
     try {
-      annotatedWith(Baz.class).matches(Car.class);
+      annotatedWith(Baz.class);
       fail();
     } catch (IllegalArgumentException expected) {
     }

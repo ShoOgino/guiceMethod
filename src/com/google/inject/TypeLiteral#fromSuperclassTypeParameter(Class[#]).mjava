@@ -2,6 +2,6 @@
    * Gets type literal from super class's type parameter.
    */
   static TypeLiteral<?> fromSuperclassTypeParameter(Class<?> subclass) {
-    return new SimpleTypeLiteral<Object>(getSuperclassTypeParameter(subclass));
+    return new TypeLiteral<Object>(getSuperclassTypeParameter(subclass));
   }
 

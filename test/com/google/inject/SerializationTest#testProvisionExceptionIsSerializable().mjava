@@ -1,4 +1,0 @@
-  public void testProvisionExceptionIsSerializable() throws IOException {
-    assertSimilarWhenReserialized(createProvisionException());
-  }
-

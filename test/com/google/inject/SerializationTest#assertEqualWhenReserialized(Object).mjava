@@ -1,6 +1,0 @@
-  public void assertEqualWhenReserialized(Object object) throws IOException {
-    Object reserialized = reserialize(object);
-    assertEquals(object, reserialized);
-    assertEquals(object.hashCode(), reserialized.hashCode());
-  }
-

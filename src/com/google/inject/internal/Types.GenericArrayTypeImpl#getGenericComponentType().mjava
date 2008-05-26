@@ -1,0 +1,4 @@
+    public Type getGenericComponentType() {
+      return componentType;
+    }
+

@@ -1,9 +1,10 @@
   public void testOptionalConstructorBlowsUp() {
     try {
       Guice.createInjector().getInstance(HasOptionalConstructor.class);
-    } catch (ConfigurationException e) {
-      assertTrue(e.getMessage().contains(
-          "@Inject(optional=true) is not allowed on constructors"));
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "@Inject(optional=true) is not allowed on constructors");
     }
   }
 

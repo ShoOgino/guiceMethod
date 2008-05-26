@@ -14,8 +14,8 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertTrue(expected.getMessage().contains("LineNumbersTest$B"));
-      assertTrue(expected.getMessage().contains("Injecting into abstract types is not supported."));
+      assertContains(expected.getMessage(), "LineNumbersTest$B");
+      assertContains(expected.getMessage(), "Injecting into abstract types is not supported.");
     }
   }
 

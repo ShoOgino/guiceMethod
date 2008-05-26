@@ -1,5 +1,5 @@
   private static <K, V> TypeLiteral<Map<K, Provider<V>>> mapOfProviderOf(
       Type keyType, Type valueType) {
-    return mapOf(keyType, new TypeWithArgument(Provider.class, valueType));
+    return mapOf(keyType, Types.newTypeWithArgument(Provider.class, valueType));
   }
 

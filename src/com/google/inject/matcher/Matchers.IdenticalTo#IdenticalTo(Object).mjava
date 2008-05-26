@@ -1,0 +1,4 @@
+    public IdenticalTo(Object value) {
+      this.value = Objects.nonNull(value, "value");
+    }
+

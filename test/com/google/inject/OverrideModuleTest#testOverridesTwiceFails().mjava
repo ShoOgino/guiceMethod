@@ -17,10 +17,9 @@
       createInjector(module);
       fail();
     } catch (CreationException expected) {
-      assertTrue(expected.getMessage().contains("Error at " + replacements.getClass().getName()));
-      assertTrue(expected.getMessage().contains(
-          "A binding to java.lang.String was already configured at "
-              + replacements.getClass().getName()));
+      assertContains(expected.getMessage(), "Error at " + replacements.getClass().getName());
+      assertContains(expected.getMessage(), "A binding to java.lang.String "
+          + "was already configured at " + replacements.getClass().getName());
     }
   }
 

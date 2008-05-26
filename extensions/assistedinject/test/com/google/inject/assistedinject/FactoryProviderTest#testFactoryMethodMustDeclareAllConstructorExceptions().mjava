@@ -2,8 +2,8 @@
     try {
       FactoryProvider.newFactory(DefectiveCarFactoryWithNoExceptions.class, DefectiveCar.class);
       fail();
-    } catch (IllegalStateException e) {
-      assertTrue(e.getMessage().contains("no compatible exception is thrown"));
+    } catch (IllegalStateException expected) {
+      assertContains(expected.getMessage(), "no compatible exception is thrown");
     }
   }
 

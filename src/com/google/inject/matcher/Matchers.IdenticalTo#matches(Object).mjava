@@ -1,0 +1,4 @@
+    public boolean matches(Object other) {
+      return value == other;
+    }
+

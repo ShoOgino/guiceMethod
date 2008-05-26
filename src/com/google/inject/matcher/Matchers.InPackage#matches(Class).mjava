@@ -1,0 +1,4 @@
+    public boolean matches(Class c) {
+      return c.getPackage().equals(targetPackage);
+    }
+

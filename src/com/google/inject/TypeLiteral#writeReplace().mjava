@@ -1,0 +1,4 @@
+  protected final Object writeReplace() {
+    return get(Types.makeSerializable(type));
+  }
+

@@ -1,0 +1,4 @@
+    public Returns(Matcher<? super Class<?>> returnType) {
+      this.returnType = Objects.nonNull(returnType, "return type matcher");
+    }
+

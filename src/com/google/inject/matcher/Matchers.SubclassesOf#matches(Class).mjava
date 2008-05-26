@@ -1,0 +1,4 @@
+    public boolean matches(Class subclass) {
+      return superclass.isAssignableFrom(subclass);
+    }
+

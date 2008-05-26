@@ -3,9 +3,7 @@
         .getGenericParameterTypes()[0]).providerKey();
     Key<?> expected = Key.get(getClass().getMethod("bar", Provider.class)
         .getGenericParameterTypes()[0]);
-    assertTrue(expected.equals(actual));
-    assertTrue(actual.equals(expected));
-    assertEquals(expected.hashCode(), actual.hashCode());
+    assertEqualsBothWays(expected, actual);
     assertEquals(expected.toString(), actual.toString());
   }
 

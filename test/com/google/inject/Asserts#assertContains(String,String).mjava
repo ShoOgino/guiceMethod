@@ -1,0 +1,8 @@
+  /**
+   * Fails unless {@code text} includes {@code substring}.
+   */
+  public static void assertContains(String text, String substring) {
+    Assert.assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"",
+        text, substring), text.contains(substring));
+  }
+

@@ -9,9 +9,9 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertTrue(expected.getMessage().contains("BindingAnnotationTest$Foo.s"));
-      assertTrue(expected.getMessage().contains("Binding to java.lang.String"));
-      assertTrue(expected.getMessage().contains("BindingAnnotationTest$Blue(value=5) not found"));
+      assertContains(expected.getMessage(), "BindingAnnotationTest$Foo.s");
+      assertContains(expected.getMessage(), "Binding to java.lang.String");
+      assertContains(expected.getMessage(), "BindingAnnotationTest$Blue(value=5) not found");
     }
   }
 

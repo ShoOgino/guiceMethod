@@ -6,8 +6,8 @@
         }
       });
       fail();
-    } catch (CreationException e) {
-      assertTrue(e.getMessage().contains("Missing constant value."));
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "Missing constant value.");
     }
   }
 

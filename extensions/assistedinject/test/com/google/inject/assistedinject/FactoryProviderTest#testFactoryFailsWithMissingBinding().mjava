@@ -6,9 +6,10 @@
               .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
         }
       });
-    } catch (ProvisionException e) {
-      assertTrue(e.getCause().getMessage().contains("Parameter of type 'double' is not " +
-          "injectable or annotated with @Assisted"));
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(), "Parameter of type 'double' is not " +
+          "injectable or annotated with @Assisted");
     }
   }
 

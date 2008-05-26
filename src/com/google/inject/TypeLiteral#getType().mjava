@@ -1,7 +1,7 @@
   /**
    * Gets underlying {@code Type} instance.
    */
-  public Type getType() {
+  public final Type getType() {
     return type;
   }
 

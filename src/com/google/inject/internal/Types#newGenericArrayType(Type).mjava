@@ -1,0 +1,4 @@
+  public static GenericArrayType newGenericArrayType(Type componentType) {
+    return new GenericArrayTypeImpl(componentType);
+  }
+

@@ -1,4 +1,0 @@
-    public SimpleTypeLiteral(Type type) {
-      super(type);
-    }
-

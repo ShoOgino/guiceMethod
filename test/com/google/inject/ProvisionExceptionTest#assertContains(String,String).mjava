@@ -1,5 +1,0 @@
-  private void assertContains(String text, String substring) {
-    assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"",
-        text, substring), text.contains(substring));
-  }
-

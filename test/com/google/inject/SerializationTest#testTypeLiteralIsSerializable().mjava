@@ -1,4 +1,0 @@
-  public void testTypeLiteralIsSerializable() throws IOException {
-    assertEqualWhenReserialized(new TypeLiteral<List<B>>() {});
-  }
-

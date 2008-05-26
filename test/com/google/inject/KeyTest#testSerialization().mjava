@@ -1,0 +1,9 @@
+  public void testSerialization() throws IOException {
+    assertEqualWhenReserialized(Key.get(B.class));
+    assertEqualWhenReserialized(Key.get(B.class, Names.named("bee")));
+    assertEqualWhenReserialized(Key.get(B.class, Named.class));
+    assertEqualWhenReserialized(Key.get(B[].class));
+    assertEqualWhenReserialized(Key.get(new TypeLiteral<Map<List<B>, B>>() {}));
+    assertEqualWhenReserialized(Key.get(new TypeLiteral<List<B[]>>() {}));
+  }
+

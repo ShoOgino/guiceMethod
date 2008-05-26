@@ -1,0 +1,5 @@
+  public static ParameterizedType newParameterizedType(
+      Type ownerType, Type rawType, Type... typeArguments) {
+    return new ParameterizedTypeImpl(ownerType, rawType, typeArguments);
+  }
+

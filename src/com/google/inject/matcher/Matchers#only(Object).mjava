@@ -1,16 +1,7 @@
   /**
    * Returns a matcher which matches objects equal to the given object.
    */
-  public static Matcher<Object> only(final Object o) {
-    Objects.nonNull(o, "o");
-    return new AbstractMatcher<Object>() {
-      public boolean matches(Object other) {
-        return o.equals(other);
-      }
-
-      public String toString() {
-        return "only(" + o + ")";
-      }
-    };
+  public static Matcher<Object> only(Object value) {
+    return new Only(value);
   }
 

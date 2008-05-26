@@ -1,0 +1,12 @@
+  public void testEqualsAndHashcode() {
+    ParameterizedType parameterizedType
+        = Types.newTypeWithArgument(Map.class, String.class, Integer.class);
+    assertEqualsBothWays(mapStringInteger, parameterizedType);
+    assertEquals(mapStringInteger.toString(), parameterizedType.toString());
+
+    GenericArrayType genericArrayType = Types.newGenericArrayType(
+        Types.newGenericArrayType(String.class));
+    assertEqualsBothWays(stringArray, genericArrayType);
+    assertEquals(stringArray.toString(), genericArrayType.toString());
+  }
+

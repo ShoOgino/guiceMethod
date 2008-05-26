@@ -1,0 +1,4 @@
+    public boolean matches(T t) {
+      return !delegate.matches(t);
+    }
+

@@ -1,0 +1,4 @@
+    @Override public int hashCode() {
+      return 41 * (a.hashCode() ^ b.hashCode());
+    }
+

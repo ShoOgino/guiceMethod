@@ -4,17 +4,6 @@
    */
   public static Matcher<AnnotatedElement> annotatedWith(
       final Class<? extends Annotation> annotationType) {
-    Objects.nonNull(annotationType, "annotation type");
-    checkForRuntimeRetention(annotationType);
-    return new AbstractMatcher<AnnotatedElement>() {
-      public boolean matches(AnnotatedElement element) {
-        Annotation annotation = element.getAnnotation(annotationType);
-        return annotation != null;
-      }
-
-      public String toString() {
-        return "annotatedWith(" + annotationType.getSimpleName() + ".class)";
-      }
-    };
+    return new AnnotatedWithType(annotationType);
   }
 

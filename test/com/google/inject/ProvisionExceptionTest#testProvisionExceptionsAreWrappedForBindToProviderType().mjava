@@ -7,10 +7,9 @@
       }).getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertNotSame(e, provisionException);
+      assertTrue(e.getCause() instanceof ProvisionException);
       assertContains(e.getMessage(), "while locating "
           + "com.google.inject.ProvisionExceptionTest$F");
-      assertSame(provisionException, e.getCause());
     }
   }
 

@@ -1,7 +1,6 @@
   public void testKeyEquality() {
     Key<List<String>> a = new Key<List<String>>(Foo.class) {};
     Key<List<String>> b = Key.get(new TypeLiteral<List<String>>() {}, Foo.class);
-    assertEquals(a, b);
-    assertEquals(a.hashCode(), b.hashCode());
+    assertEqualsBothWays(a, b);
   }
 

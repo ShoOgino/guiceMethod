@@ -1,0 +1,10 @@
+  /**
+   * Fails unless {@code object} doesn't equal itself when reserialized.
+   */
+  public static void assertEqualWhenReserialized(Object object)
+      throws IOException {
+    Object reserialized = reserialize(object);
+    Assert.assertEquals(object, reserialized);
+    Assert.assertEquals(object.hashCode(), reserialized.hashCode());
+  }
+

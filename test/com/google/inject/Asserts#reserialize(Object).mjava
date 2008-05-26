@@ -1,0 +1,11 @@
+  static Object reserialize(Object object) throws IOException {
+    try {
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      new ObjectOutputStream(out).writeObject(object);
+      ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+      return new ObjectInputStream(in).readObject();
+    } catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+  }
+

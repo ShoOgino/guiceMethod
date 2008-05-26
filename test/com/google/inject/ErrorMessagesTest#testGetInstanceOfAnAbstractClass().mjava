@@ -3,8 +3,8 @@
     try {
       injector.getInstance(AbstractClass.class);
       fail();
-    } catch(ConfigurationException e) {
-      assertTrue(e.getMessage().contains("Injecting into abstract types is not supported."));
+    } catch(ConfigurationException expected) {
+      assertContains(expected.getMessage(), "Injecting into abstract types is not supported.");
     }
   }
 

@@ -1,4 +1,0 @@
-    public B get() {
-      throw new IllegalArgumentException();
-    }
-
