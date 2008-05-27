@@ -2,6 +2,6 @@
    * Gets a key for an injection type and an annotation.
    */
   public static <T> Key<T> get(Class<T> type, Annotation annotation) {
-    return new SimpleKey<T>(type, strategyFor(annotation));
+    return new Key<T>(type, strategyFor(annotation));
   }
 

@@ -1,0 +1,8 @@
+  public void testJustInTimeAnnotatedSingleton() {
+    Injector injector = Guice.createInjector();
+
+    assertSame(
+        injector.getInstance(AnnotatedSingleton.class),
+        injector.getInstance(AnnotatedSingleton.class));
+  }
+

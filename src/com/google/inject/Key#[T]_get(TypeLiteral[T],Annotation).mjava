@@ -3,6 +3,6 @@
    */
   public static <T> Key<T> get(TypeLiteral<T> typeLiteral,
       Annotation annotation) {
-    return new SimpleKey<T>(typeLiteral, strategyFor(annotation));
+    return new Key<T>(typeLiteral, strategyFor(annotation));
   }
 

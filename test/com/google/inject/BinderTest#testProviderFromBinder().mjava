@@ -9,6 +9,6 @@
       }
     });
 
-    assertTrue(fooProvider.get() instanceof Foo);
+    assertNotNull(fooProvider.get());
   }
 

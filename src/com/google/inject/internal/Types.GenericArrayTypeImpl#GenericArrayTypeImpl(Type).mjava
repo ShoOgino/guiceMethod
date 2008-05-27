@@ -1,4 +1,4 @@
     private GenericArrayTypeImpl(Type componentType) {
-      this.componentType = componentType;
+      this.componentType = canonicalize(componentType);
     }
 

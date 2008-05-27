@@ -1,7 +1,7 @@
   /**
    * Gets the key type.
    */
-  public TypeLiteral<T> getTypeLiteral() {
+  public final TypeLiteral<T> getTypeLiteral() {
     return typeLiteral;
   }
 

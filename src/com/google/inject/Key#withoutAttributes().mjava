@@ -3,6 +3,6 @@
    * annotation type.
    */
   Key<T> withoutAttributes() {
-    return new SimpleKey<T>(typeLiteral, annotationStrategy.withoutAttributes());
+    return new Key<T>(typeLiteral, annotationStrategy.withoutAttributes());
   }
 

@@ -1,7 +1,7 @@
   /**
-   * Gets the source of the configuration which resulted in this error message.
+   * Returns a string representation of the source object. 
    */
-  public Object getSource() {
+  public String getSource() {
     return source;
   }
 

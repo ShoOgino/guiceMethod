@@ -3,6 +3,6 @@
    * key.
    */
   Key<?> ofType(Type type) {
-    return new SimpleKey<Object>(type, annotationStrategy);
+    return new Key<Object>(type, annotationStrategy);
   }
 

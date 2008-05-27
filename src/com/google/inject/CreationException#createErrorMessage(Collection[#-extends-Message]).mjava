@@ -3,7 +3,7 @@
     Formatter fmt = new Formatter().format("Guice configuration errors:%n%n");
     int index = 1;
     for (Message errorMessage : errorMessages) {
-      fmt.format("%s) Error at %s:%n", index++, errorMessage.getSourceString())
+      fmt.format("%s) Error at %s:%n", index++, errorMessage.getSource())
          .format(" %s%n%n", errorMessage.getMessage());
     }
     return fmt.format("%s error[s]", errorMessages.size()).toString();

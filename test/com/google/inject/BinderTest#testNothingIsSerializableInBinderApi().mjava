@@ -1,0 +1,22 @@
+  public void testNothingIsSerializableInBinderApi() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override public void configure() {
+          try {
+            assertNotSerializable(binder());
+            assertNotSerializable(getProvider(Integer.class));
+            assertNotSerializable(getProvider(Key.get(new TypeLiteral<List<String>>() {})));
+            assertNotSerializable(bind(Integer.class));
+            assertNotSerializable(bind(Integer.class).annotatedWith(Names.named("a")));
+            assertNotSerializable(bindConstant());
+            assertNotSerializable(bindConstant().annotatedWith(Names.named("b")));
+          } catch (IOException e) {
+            fail(e.getMessage());
+          }
+        }
+      });
+      fail();
+    } catch (CreationException ignored) {
+    }
+  }
+

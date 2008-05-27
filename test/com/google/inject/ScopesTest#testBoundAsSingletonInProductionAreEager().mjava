@@ -1,0 +1,12 @@
+  public void testBoundAsSingletonInProductionAreEager() {
+    int nextInstanceId = BoundAsSingleton.nextInstanceId.intValue();
+
+    Guice.createInjector(Stage.PRODUCTION, new AbstractModule() {
+      protected void configure() {
+        bind(BoundAsSingleton.class).in(Scopes.SINGLETON);
+      }
+    });
+
+    assertEquals(nextInstanceId + 1, BoundAsSingleton.nextInstanceId.intValue());
+  }
+

@@ -1,12 +1,12 @@
-  public void testSingletonAnnotation() throws CreationException {
+  public void testSingletonAnnotation() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bind(SampleSingleton.class);
+        bind(AnnotatedSingleton.class);
       }
     });
 
     assertSame(
-        injector.getInstance(SampleSingleton.class),
-        injector.getInstance(SampleSingleton.class));
+        injector.getInstance(AnnotatedSingleton.class),
+        injector.getInstance(AnnotatedSingleton.class));
   }
 

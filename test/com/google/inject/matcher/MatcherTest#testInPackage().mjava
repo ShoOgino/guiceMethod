@@ -1,7 +1,9 @@
   public void testInPackage() {
-    assertTrue(inPackage(Matchers.class.getPackage())
-        .matches(MatcherTest.class));
-    assertFalse(inPackage(Matchers.class.getPackage())
-        .matches(Object.class));
+    Package matchersPackage = Matchers.class.getPackage();
+    assertEquals("inPackage(com.google.inject.matcher)", inPackage(matchersPackage).toString());
+    assertTrue(inPackage(matchersPackage).matches(MatcherTest.class));
+    assertFalse(inPackage(matchersPackage).matches(Object.class));
+    assertEqualsBothWays(inPackage(matchersPackage), inPackage(matchersPackage));
+    assertFalse(inPackage(matchersPackage).equals(inPackage(Object.class.getPackage())));
   }
 

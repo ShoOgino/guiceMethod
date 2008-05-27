@@ -1,0 +1,6 @@
+  public void testSingletonIsPerInjector() {
+    assertNotSame(
+        Guice.createInjector().getInstance(AnnotatedSingleton.class),
+        Guice.createInjector().getInstance(AnnotatedSingleton.class));
+  }
+

@@ -1,6 +1,5 @@
   /**
    * Returns true if this key has annotation attributes.
-   * @return
    */
   boolean hasAttributes() {
     return annotationStrategy.hasAttributes();

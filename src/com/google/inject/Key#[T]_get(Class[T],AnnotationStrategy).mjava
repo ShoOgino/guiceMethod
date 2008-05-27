@@ -3,6 +3,6 @@
    */
   static <T> Key<T> get(Class<T> type,
       AnnotationStrategy annotationStrategy) {
-    return new SimpleKey<T>(type, annotationStrategy);
+    return new Key<T>(type, annotationStrategy);
   }
 

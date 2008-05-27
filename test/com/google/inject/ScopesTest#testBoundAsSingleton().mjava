@@ -1,0 +1,12 @@
+  public void testBoundAsSingleton() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(BoundAsSingleton.class).in(Scopes.SINGLETON);
+      }
+    });
+
+    assertSame(
+        injector.getInstance(BoundAsSingleton.class),
+        injector.getInstance(BoundAsSingleton.class));
+  }
+

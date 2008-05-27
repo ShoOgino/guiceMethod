@@ -1,0 +1,10 @@
+  public void testInjectorApiIsNotSerializable() throws IOException {
+    Injector injector = Guice.createInjector();
+    assertNotSerializable(injector);
+    assertNotSerializable(injector.getProvider(String.class));
+    assertNotSerializable(injector.getBinding(String.class));
+    for (Binding<?> binding : injector.getBindings().values()) {
+      assertNotSerializable(binding);
+    }
+  }
+

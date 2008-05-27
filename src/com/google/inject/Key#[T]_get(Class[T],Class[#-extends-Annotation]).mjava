@@ -3,6 +3,6 @@
    */
   public static <T> Key<T> get(Class<T> type,
       Class<? extends Annotation> annotationType) {
-    return new SimpleKey<T>(type, strategyFor(annotationType));
+    return new Key<T>(type, strategyFor(annotationType));
   }
 

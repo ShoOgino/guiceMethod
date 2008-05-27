@@ -1,4 +1,7 @@
   public void testAny() {
     assertTrue(any().matches(null));
+    assertEquals("any()", any().toString());
+    assertEqualsBothWays(any(), any());
+    assertFalse(any().equals(not(any())));
   }
 

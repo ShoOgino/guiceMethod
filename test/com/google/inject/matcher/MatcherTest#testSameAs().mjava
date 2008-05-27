@@ -1,6 +1,0 @@
-  public void testSameAs() {
-    Object o = new Object();
-    assertTrue(only(o).matches(o));
-    assertFalse(only(o).matches(new Object()));
-  }
-

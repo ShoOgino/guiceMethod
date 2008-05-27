@@ -2,5 +2,8 @@
     assertTrue(subclassesOf(Runnable.class).matches(Runnable.class));
     assertTrue(subclassesOf(Runnable.class).matches(MyRunnable.class));
     assertFalse(subclassesOf(Runnable.class).matches(Object.class));
+    assertEquals("subclassesOf(Runnable.class)", subclassesOf(Runnable.class).toString());
+    assertEqualsBothWays(subclassesOf(Runnable.class), subclassesOf(Runnable.class));
+    assertFalse(subclassesOf(Runnable.class).equals(subclassesOf(Object.class)));
   }
 

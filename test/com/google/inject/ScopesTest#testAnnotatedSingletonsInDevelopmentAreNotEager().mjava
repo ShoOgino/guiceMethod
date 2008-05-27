@@ -1,0 +1,12 @@
+  public void testAnnotatedSingletonsInDevelopmentAreNotEager() {
+    int nextInstanceId = AnnotatedSingleton.nextInstanceId.intValue();
+
+    Guice.createInjector(Stage.DEVELOPMENT, new AbstractModule() {
+      protected void configure() {
+        bind(AnnotatedSingleton.class);
+      }
+    });
+
+    assertEquals(nextInstanceId, AnnotatedSingleton.nextInstanceId.intValue());
+  }
+

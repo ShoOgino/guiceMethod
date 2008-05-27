@@ -3,8 +3,8 @@
    */
   @SuppressWarnings("unchecked")
   TypeLiteral(Type type) {
-    this.rawType = (Class<? super T>) Types.getRawType(nonNull(type, "type"));
-    this.type = type;
-    this.hashCode = Types.hashCode(type);
+    this.type = canonicalize(nonNull(type, "type"));
+    this.rawType = (Class<? super T>) Types.getRawType(this.type);
+    this.hashCode = Types.hashCode(this.type);
   }
 

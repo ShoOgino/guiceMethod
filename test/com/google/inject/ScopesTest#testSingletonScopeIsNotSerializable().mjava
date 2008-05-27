@@ -1,4 +1,4 @@
   public void testSingletonScopeIsNotSerializable() throws IOException {
-    assertNotSerializable(Scopes.SINGLETON);
+    Asserts.assertNotSerializable(Scopes.SINGLETON);
   }
 

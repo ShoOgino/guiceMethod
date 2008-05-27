@@ -1,4 +1,4 @@
-    public String toString() {
+    @Override public String toString() {
       return "@" + annotationType.getName();
     }
 

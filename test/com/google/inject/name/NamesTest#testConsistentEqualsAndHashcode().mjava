@@ -1,0 +1,6 @@
+  public void testConsistentEqualsAndHashcode() {
+    Named actual = Names.named("foo");
+    assertEqualsBothWays(namedFoo, actual);
+    assertEquals(namedFoo.toString(), actual.toString());
+  }
+

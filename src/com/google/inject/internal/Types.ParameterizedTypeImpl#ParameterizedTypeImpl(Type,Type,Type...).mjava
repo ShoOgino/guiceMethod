@@ -1,9 +1,9 @@
     private ParameterizedTypeImpl(Type ownerType, Type rawType, Type... typeArguments) {
-      this.ownerType = ownerType == null ? null : makeSerializable(ownerType);
-      this.rawType = makeSerializable(rawType);
+      this.ownerType = ownerType == null ? null : canonicalize(ownerType);
+      this.rawType = canonicalize(rawType);
       this.typeArguments = typeArguments.clone();
       for (int t = 0; t < this.typeArguments.length; t++) {
-        this.typeArguments[t] = makeSerializable(this.typeArguments[t]);
+        this.typeArguments[t] = canonicalize(this.typeArguments[t]);
       }
     }
 

@@ -1,0 +1,8 @@
+  public void testOr() {
+    assertTrue(any().or(not(any())).matches(null));
+    assertFalse(not(any()).or(not(any())).matches(null));
+    assertEquals("or(any(), any())", any().or(any()).toString());
+    assertEqualsBothWays(any().or(any()), any().or(any()));
+    assertFalse(any().or(any()).equals(not(any())));
+  }
+

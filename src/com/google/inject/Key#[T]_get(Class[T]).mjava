@@ -2,6 +2,6 @@
    * Gets a key for an injection type.
    */
   public static <T> Key<T> get(Class<T> type) {
-    return new SimpleKey<T>(type, NULL_STRATEGY);
+    return new Key<T>(type, NullAnnotationStrategy.INSTANCE);
   }
 

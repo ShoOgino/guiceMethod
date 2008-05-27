@@ -1,0 +1,4 @@
+  public void testNamedIsSerializable() throws IOException {
+    assertEqualWhenReserialized(Names.named("foo"));
+  }
+

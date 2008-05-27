@@ -1,5 +1,8 @@
   public void testAnd() {
     assertTrue(any().and(any()).matches(null));
     assertFalse(any().and(not(any())).matches(null));
+    assertEquals("and(any(), any())", any().and(any()).toString());
+    assertEqualsBothWays(any().and(any()), any().and(any()));
+    assertFalse(any().and(any()).equals(not(any())));
   }
 

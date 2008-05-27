@@ -1,0 +1,5 @@
+  protected void setUp() throws Exception {
+    super.setUp();
+    namedFoo = getClass().getDeclaredField("foo").getAnnotation(Named.class);
+  }
+

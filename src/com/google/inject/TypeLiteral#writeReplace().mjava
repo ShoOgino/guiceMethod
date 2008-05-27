@@ -1,4 +1,11 @@
+  /**
+   * Returns the canonical form of this type literal for serialization. The
+   * returned instance is always a {@code TypeLiteral}, never a subclass. This
+   * prevents problems caused by serializing anonymous types.
+   */
   protected final Object writeReplace() {
-    return get(Types.makeSerializable(type));
+    return getClass() == TypeLiteral.class
+        ? this
+        : get(type);
   }
 

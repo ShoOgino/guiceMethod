@@ -1,4 +1,0 @@
-    private SimpleKey(Type type, AnnotationStrategy annotationStrategy) {
-      super(type, annotationStrategy);
-    }
-

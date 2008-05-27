@@ -1,0 +1,4 @@
+  public void testNoScopeIsNotSerializable() throws IOException {
+    Asserts.assertNotSerializable(Scopes.NO_SCOPE);
+  }
+

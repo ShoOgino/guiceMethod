@@ -4,7 +4,7 @@
   public static void bindProperties(final Binder binder,
       final Properties properties) {
     SourceProviders.withDefault(
-        new SimpleSourceProvider(SourceProviders.defaultSource()),
+        SourceProviders.defaultSource(),
         new Runnable() {
           public void run() {
             for (Map.Entry<Object, Object> entry : properties.entrySet()) {

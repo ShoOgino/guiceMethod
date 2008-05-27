@@ -1,6 +1,6 @@
   public static void assertNotSerializable(Object object) throws IOException {
     try {
-      Asserts.reserialize(object);
+      reserialize(object);
       Assert.fail();
     } catch (NotSerializableException expected) {
     }

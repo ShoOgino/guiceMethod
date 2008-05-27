@@ -1,0 +1,11 @@
+  /**
+   * Returns the canonical form of this key for serialization. The returned
+   * instance is always a {@code Key}, never a subclass. This prevents problems
+   * caused by serializing anonymous types.
+   */
+  protected final Object writeReplace() {
+    return getClass() == Key.class
+        ? this
+        : new Key<T>(typeLiteral, annotationStrategy);
+  }
+

@@ -1,7 +1,7 @@
   /**
    * Gets the annotation.
    */
-  public Annotation getAnnotation() {
+  public final Annotation getAnnotation() {
     return annotationStrategy.getAnnotation();
   }
 

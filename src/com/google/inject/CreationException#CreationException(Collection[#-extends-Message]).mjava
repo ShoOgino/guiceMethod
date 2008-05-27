@@ -8,7 +8,7 @@
     this.errorMessages = new ArrayList<Message>(errorMessages);
     Collections.sort(this.errorMessages, new Comparator<Message>() {
       public int compare(Message a, Message b) {
-        return a.getSourceString().compareTo(b.getSourceString());
+        return a.getSource().compareTo(b.getSource());
       }
     });
   }
