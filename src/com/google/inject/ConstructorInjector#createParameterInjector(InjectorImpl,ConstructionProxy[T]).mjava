@@ -1,4 +1,4 @@
-  InjectorImpl.SingleParameterInjector<?>[] createParameterInjector(
+  SingleParameterInjector<?>[] createParameterInjector(
       InjectorImpl injector, ConstructionProxy<T> constructionProxy) {
     try {
       return constructionProxy.getParameters().isEmpty()

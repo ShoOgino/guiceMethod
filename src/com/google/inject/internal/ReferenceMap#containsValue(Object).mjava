@@ -1,5 +1,5 @@
   public boolean containsValue(Object value) {
-    ensureNotNull(value);
+    Objects.nonNull(value, "value");
     for (Object valueReference : delegate.values()) {
       if (value.equals(dereferenceValue(valueReference))) {
         return true;

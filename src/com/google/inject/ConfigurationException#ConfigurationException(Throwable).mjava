@@ -1,4 +1,0 @@
-  ConfigurationException(Throwable cause) {
-    super(cause);
-  }
-

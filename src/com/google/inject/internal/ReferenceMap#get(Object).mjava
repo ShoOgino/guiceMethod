@@ -1,5 +1,5 @@
   public V get(final Object key) {
-    ensureNotNull(key);
+    Objects.nonNull(key, "key");
     return internalGet((K) key);
   }
 

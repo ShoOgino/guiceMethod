@@ -2,7 +2,8 @@
     this.implementation = implementation;
     constructionProxy = injector.reflection.getConstructionProxy(implementation);
     parameterInjectors = createParameterInjector(injector, constructionProxy);
-    memberInjectors = injector.injectors.get(implementation)
-        .toArray(new InjectorImpl.SingleMemberInjector[0]);
+    List<SingleMemberInjector> memberInjectorsList = injector.injectors.get(implementation);
+    memberInjectors = memberInjectorsList.toArray(
+        new SingleMemberInjector[memberInjectorsList.size()]);
   }
 

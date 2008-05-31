@@ -1,5 +1,5 @@
   public boolean containsKey(Object key) {
-    ensureNotNull(key);
+    Objects.nonNull(key, "key");
     Object referenceAwareKey = makeKeyReferenceAware(key);
     return delegate.containsKey(referenceAwareKey);
   }

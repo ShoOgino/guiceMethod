@@ -1,7 +1,0 @@
-  // TODO(kevinb): use preconditions
-  static void ensureNotNull(Object o) {
-    if (o == null) {
-      throw new NullPointerException();
-    }
-  }
-

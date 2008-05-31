@@ -1,5 +1,5 @@
   public V remove(Object key) {
-    ensureNotNull(key);
+    Objects.nonNull(key, "key");
     Object referenceAwareKey = makeKeyReferenceAware(key);
     Object valueReference = delegate.remove(referenceAwareKey);
     return dereferenceValue(valueReference);
