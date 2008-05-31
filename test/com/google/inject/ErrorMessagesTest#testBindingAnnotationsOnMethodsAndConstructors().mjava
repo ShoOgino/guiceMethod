@@ -1,0 +1,20 @@
+  public void testBindingAnnotationsOnMethodsAndConstructors() {
+    try {
+      Guice.createInjector().getInstance(B.class);
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Binding annotations on injected methods are not supported. "
+              + "Annotate the parameter instead?");
+    }
+
+    try {
+      Guice.createInjector().getInstance(C.class);
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Binding annotations on injected constructors are not supported. "
+              + "Annotate the parameter instead?");
+    }
+  }
+

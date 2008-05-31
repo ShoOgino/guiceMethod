@@ -1,0 +1,14 @@
+  public void testScopingAnnotationsOnAbstractTypes() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(A.class).to(AImpl.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Scope annotations on abstract types are not supported.");
+    }
+  }
+
