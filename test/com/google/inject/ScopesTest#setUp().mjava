@@ -3,5 +3,7 @@
     BoundAsSingleton.nextInstanceId = 0;
     EagerSingleton.nextInstanceId = 0;
     RealLinkedSingleton.nextInstanceId = 0;
+    JustInTimeSingleton.nextInstanceId = 0;
+    NotASingleton.nextInstanceId = 0;
   }
 
