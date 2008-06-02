@@ -1,6 +1,6 @@
   ConstantBindingImpl(InjectorImpl injector, Key<T> key, Object source,
       InternalFactory<T> internalFactory, T value) {
-    super(injector, key, source, internalFactory, Scopes.NO_SCOPE);
+    super(injector, key, source, internalFactory, Scopes.NO_SCOPE, LoadStrategy.LAZY);
     this.value = value;
     this.provider = Providers.of(value);
   }

@@ -1,5 +1,4 @@
-  @Override
-  public String toString() {
+  @Override public String toString() {
     return new ToStringBuilder(ConstantBinding.class)
         .add("key", key)
         .add("value", value)

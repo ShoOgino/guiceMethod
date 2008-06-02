@@ -5,9 +5,6 @@
       catch (IllegalAccessException e) {
         throw new AssertionError(e);
       }
-      catch (ProvisionException e) {
-        throw e;
-      }
       catch (InvocationTargetException e) {
         Throwable cause = e.getCause() != null ? e.getCause() : e;
         throw new ProvisionException(cause,

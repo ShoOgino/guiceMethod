@@ -1,0 +1,4 @@
+  LoadStrategy getLoadStrategy() {
+    return loadStrategy;
+  }
+

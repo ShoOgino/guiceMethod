@@ -1,0 +1,24 @@
+  public void loadEagerSingletons(InjectorImpl injector) {
+    // load eager singletons, or all singletons if we're in Stage.PRODUCTION.
+    for (final BindingImpl<?> binding : bindings.values()) {
+      if (stage == Stage.PRODUCTION || binding.getLoadStrategy() == LoadStrategy.EAGER) {
+        injector.callInContext(new ContextualCallable<Void>() {
+          public Void call(InternalContext context) {
+            InjectionPoint<?> injectionPoint
+                = InjectionPoint.newInstance(binding.key, context.getInjector());
+            context.setInjectionPoint(injectionPoint);
+            try {
+              binding.internalFactory.get(context, injectionPoint);
+              return null;
+            } catch(ProvisionException provisionException) {
+              provisionException.addContext(injectionPoint);
+              throw provisionException;
+            } finally {
+              context.setInjectionPoint(null);
+            }
+          }
+        });
+      }
+    }
+  }
+

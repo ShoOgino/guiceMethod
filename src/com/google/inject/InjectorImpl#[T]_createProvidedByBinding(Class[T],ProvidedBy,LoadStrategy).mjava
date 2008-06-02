@@ -2,7 +2,7 @@
    * Creates a binding for a type annotated with @ProvidedBy.
    */
   <T> BindingImpl<T> createProvidedByBinding(final Class<T> type,
-      ProvidedBy providedBy) throws ResolveFailedException {
+      ProvidedBy providedBy, LoadStrategy loadStrategy) throws ResolveFailedException {
     final Class<? extends Provider<?>> providerType = providedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?
@@ -38,6 +38,6 @@
 
     return new LinkedProviderBindingImpl<T>(this, Key.get(type),
         StackTraceElements.forType(type), internalFactory, Scopes.NO_SCOPE,
-        providerKey);
+        providerKey, loadStrategy);
   }
 

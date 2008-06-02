@@ -24,7 +24,8 @@
               new InternalFactoryToProviderAdapter(binding.getProvider(),
                   binding.getSource()),
               Scopes.NO_SCOPE,
-              binding.getProvider());
+              binding.getProvider(),
+              LoadStrategy.LAZY);
         } else {
           bindingImpl = null;
         }

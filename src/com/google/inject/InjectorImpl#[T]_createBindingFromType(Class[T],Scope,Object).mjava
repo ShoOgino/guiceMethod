@@ -1,7 +1,0 @@
-  <T> BindingImpl<T> createBindingFromType(Class<T> type, Scope scope,
-      Object source) throws ResolveFailedException {
-    BindingImpl<T> binding = createUnitializedBinding(type, scope, source);
-    initializeBinding(binding);
-    return binding;
-  }
-

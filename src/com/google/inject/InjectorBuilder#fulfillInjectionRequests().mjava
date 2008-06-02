@@ -9,7 +9,7 @@
     injector.fulfillOutstandingInjections();
     stopwatch.resetAndLog("Instance injection");
 
-    bindCommandProcesor.createEagerSingletons(injector);
+    bindCommandProcesor.loadEagerSingletons(injector);
     stopwatch.resetAndLog("Preloading");
   }
 

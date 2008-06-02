@@ -6,7 +6,7 @@
       // BindingImpl<Provider<X>>.
       @SuppressWarnings({ "UnnecessaryLocalVariable", "unchecked" })
       BindingImpl<T> binding
-          = (BindingImpl<T>) createProviderBinding((Key) key);
+          = (BindingImpl<T>) createProviderBinding((Key) key, LoadStrategy.LAZY);
       return binding;
     }
 
@@ -32,6 +32,6 @@
     // Create a binding based on the raw type.
     @SuppressWarnings("unchecked")
     Class<T> clazz = (Class<T>) key.getTypeLiteral().getRawType();
-    return createBindingFromType(clazz);
+    return createBindingFromType(clazz, LoadStrategy.LAZY);
   }
 

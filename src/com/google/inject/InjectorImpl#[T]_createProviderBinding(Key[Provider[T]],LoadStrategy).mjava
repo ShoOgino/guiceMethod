@@ -3,7 +3,7 @@
    * from Binding<T>.
    */
   private <T> BindingImpl<Provider<T>> createProviderBinding(
-      Key<Provider<T>> key) throws ResolveFailedException {
+      Key<Provider<T>> key, LoadStrategy loadStrategy) throws ResolveFailedException {
     Type providerType = key.getTypeLiteral().getType();
 
     // If the Provider has no type parameter (raw Provider)...
@@ -18,6 +18,6 @@
     @SuppressWarnings("unchecked")
     Key<T> providedKey = (Key<T>) key.ofType(entryType);
 
-    return new ProviderBindingImpl<T>(this, key, getBindingOrThrow(providedKey));
+    return new ProviderBindingImpl<T>(this, key, getBindingOrThrow(providedKey), loadStrategy);
   }
 

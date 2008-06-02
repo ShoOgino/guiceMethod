@@ -1,6 +1,6 @@
   InstanceBindingImpl(InjectorImpl injector, Key<T> key, Object source,
       InternalFactory<? extends T> internalFactory, T instance) {
-    super(injector, key, source, internalFactory, Scopes.NO_SCOPE);
+    super(injector, key, source, internalFactory, Scopes.NO_SCOPE, LoadStrategy.EAGER);
     this.instance = instance;
     this.provider = Providers.of(instance);
   }

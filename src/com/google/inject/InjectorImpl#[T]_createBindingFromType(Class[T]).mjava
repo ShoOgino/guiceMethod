@@ -1,5 +1,0 @@
-  <T> BindingImpl<T> createBindingFromType(Class<T> type)
-      throws ResolveFailedException {
-    return createBindingFromType(type, null, SourceProviders.defaultSource());
-  }
-

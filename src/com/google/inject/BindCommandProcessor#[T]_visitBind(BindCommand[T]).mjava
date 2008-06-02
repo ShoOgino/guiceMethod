@@ -11,8 +11,9 @@
 
     validateKey(command.getSource(), command.getKey());
 
-    // TODO(jessewilson): Scope annotation on type, like @Singleton
-    final boolean shouldPreload = command.getScoping().isEagerSingleton();
+    final LoadStrategy loadStrategy = command.getScoping().isEagerSingleton()
+        ? LoadStrategy.EAGER
+        : LoadStrategy.LAZY;
     final Scope scope = command.getScoping().acceptVisitor(new BindScoping.Visitor<Scope>() {
       public Scope visitEagerSingleton() {
         return Scopes.SINGLETON;
@@ -44,8 +45,8 @@
         outstandingInjections.put(instance, null);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
-        createBinding(source, shouldPreload, new InstanceBindingImpl<T>(
-            injector, key, source, scopedFactory, instance));
+        putBinding(new InstanceBindingImpl<T>(
+                injector, key, source, scopedFactory, instance));
         return null;
       }
 
@@ -55,8 +56,8 @@
         outstandingInjections.put(provider, null);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
-        createBinding(source, shouldPreload, new ProviderInstanceBindingImpl<T>(
-            injector, key, source, scopedFactory, scope, provider));
+        putBinding(new ProviderInstanceBindingImpl<T>(
+                injector, key, source, scopedFactory, scope, provider, loadStrategy));
         return null;
       }
 
@@ -66,8 +67,8 @@
         creationListeners.add(boundProviderFactory);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(
             key, injector, (InternalFactory<? extends T>) boundProviderFactory, scope);
-        createBinding(source, shouldPreload, new LinkedProviderBindingImpl<T>(
-            injector, key, source, scopedFactory, scope, providerKey));
+        putBinding(new LinkedProviderBindingImpl<T>(
+                injector, key, source, scopedFactory, scope, providerKey, loadStrategy));
         return null;
       }
 
@@ -80,8 +81,8 @@
         creationListeners.add(factory);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
-        createBinding(source, shouldPreload, new LinkedBindingImpl<T>(
-            injector, key, source, scopedFactory, scope, targetKey));
+        putBinding(new LinkedBindingImpl<T>(
+                injector, key, source, scopedFactory, scope, targetKey, loadStrategy));
         return null;
       }
 
@@ -94,7 +95,7 @@
         // @ImplementedBy annotation or something.
         if (key.hasAnnotationType() || !(type instanceof Class<?>)) {
           addError(source, ErrorMessages.MISSING_IMPLEMENTATION);
-          createBinding(source, shouldPreload, invalidBinding(injector, key, source));
+          putBinding(invalidBinding(injector, key, source));
           return null;
         }
 
@@ -103,11 +104,11 @@
         Class<T> clazz = (Class<T>) type;
         final BindingImpl<T> binding;
         try {
-          binding = injector.createUnitializedBinding(clazz, scope, source);
-          createBinding(source, shouldPreload, binding);
+          binding = injector.createUnitializedBinding(clazz, scope, source, loadStrategy);
+          putBinding(binding);
         } catch (ResolveFailedException e) {
           injector.errorHandler.handle(source, e.getMessage());
-          createBinding(source, shouldPreload, invalidBinding(injector, key, source));
+          putBinding(invalidBinding(injector, key, source));
           return null;
         }
 

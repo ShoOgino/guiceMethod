@@ -3,6 +3,6 @@
       public T get(InternalContext context, InjectionPoint<?> injectionPoint) {
         throw new AssertionError();
       }
-    }, Scopes.NO_SCOPE);
+    }, Scopes.NO_SCOPE, LoadStrategy.LAZY);
   }
 
