@@ -26,20 +26,22 @@
     }
     
     Key<Integer> integerKey = Key.get(Integer.class);
+    Key<Integer> integerKey2 = Key.get(Integer.class, Named.class);
+    Key<Integer> integerKey3 = Key.get(Integer.class, Names.named("int"));
 
     Class<Integer> intClassLiteral = int.class;
     assertEquals(integerKey, Key.get(intClassLiteral));
-    assertEquals(integerKey, Key.get(intClassLiteral, Named.class));
-    assertEquals(integerKey, Key.get(intClassLiteral, Names.named("int")));
+    assertEquals(integerKey2, Key.get(intClassLiteral, Named.class));
+    assertEquals(integerKey3, Key.get(intClassLiteral, Names.named("int")));
 
     Type intType = int.class;
     assertEquals(integerKey, Key.get(intType));
-    assertEquals(integerKey, Key.get(intType, Named.class));
-    assertEquals(integerKey, Key.get(intType, Names.named("int")));
+    assertEquals(integerKey2, Key.get(intType, Named.class));
+    assertEquals(integerKey3, Key.get(intType, Names.named("int")));
 
     TypeLiteral<Integer> intTypeLiteral = TypeLiteral.get(int.class);
     assertEquals(integerKey, Key.get(intTypeLiteral));
-    assertEquals(integerKey, Key.get(intTypeLiteral, Named.class));
-    assertEquals(integerKey, Key.get(intTypeLiteral, Names.named("int")));
+    assertEquals(integerKey2, Key.get(intTypeLiteral, Named.class));
+    assertEquals(integerKey3, Key.get(intTypeLiteral, Names.named("int")));
   }
 

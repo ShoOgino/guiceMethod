@@ -1,0 +1,17 @@
+  public void testInvalidCharacter() throws CreationException {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindConstant().annotatedWith(NumericValue.class).to("invalid");
+      }
+    });
+
+    try {
+      injector.getInstance(InvalidCharacter.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), "Error converting 'invalid'");
+      assertContains(expected.getMessage(), "bound at " + getClass().getName());
+      assertContains(expected.getMessage(), "to java.lang.Character");
+    }
+  }
+

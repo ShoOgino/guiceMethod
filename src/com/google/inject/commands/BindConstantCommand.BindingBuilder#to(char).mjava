@@ -9,7 +9,7 @@
           return value;
         }
         public Class getType() {
-          return char.class;
+          return Character.class;
         }
         @Override public String toString() {
           return String.valueOf(value);

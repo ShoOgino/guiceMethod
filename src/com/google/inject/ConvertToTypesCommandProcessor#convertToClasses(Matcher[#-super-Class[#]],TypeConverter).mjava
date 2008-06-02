@@ -10,7 +10,7 @@
         return typeMatcher.matches(clazz);
       }
 
-      public String toString() {
+      @Override public String toString() {
         return typeMatcher.toString();
       }
     }, converter);

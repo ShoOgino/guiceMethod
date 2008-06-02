@@ -12,7 +12,7 @@
     convertToPrimitiveType(float.class, Float.class);
     convertToPrimitiveType(double.class, Double.class);
 
-    TypeConverter characterConverter = new TypeConverter() {
+    convertToClass(Character.class, new TypeConverter() {
       public Object convert(String value, TypeLiteral<?> toType) {
         value = value.trim();
         if (value.length() != 1) {
@@ -24,10 +24,7 @@
       @Override public String toString() {
         return "TypeConverter<Character>";
       }
-    };
-
-    convertToClass(char.class, characterConverter);
-    convertToClass(Character.class, characterConverter);
+    });
 
     convertToClasses(Matchers.subclassesOf(Enum.class), new TypeConverter() {
       @SuppressWarnings("unchecked")

@@ -1,7 +1,5 @@
   public boolean isBound(Injector injector) {
     return isBound(injector, getPrimaryBindingKey())
-        || isBound(injector, getAlternateGuiceBindingKey())
-        || isBound(injector, fixAnnotations(getPrimaryBindingKey()))
-        || isBound(injector, fixAnnotations(getAlternateGuiceBindingKey()));
+        || isBound(injector, fixAnnotations(getPrimaryBindingKey()));
   }
 

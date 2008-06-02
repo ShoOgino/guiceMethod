@@ -9,7 +9,7 @@
           return value;
         }
         public Class getType() {
-          return float.class;
+          return Float.class;
         }
         @Override public String toString() {
           return String.valueOf(value);

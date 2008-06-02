@@ -4,7 +4,7 @@
   @SuppressWarnings("unchecked")
   private Key(Type type, AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;
-    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.get(type);
+    this.typeLiteral = Types.wrapPrimitives((TypeLiteral<T>) TypeLiteral.get(type));
     this.hashCode = computeHashCode();
   }
 

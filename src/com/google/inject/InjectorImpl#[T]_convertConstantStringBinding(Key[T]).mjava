@@ -1,10 +1,10 @@
   /**
    * Converts a constant string binding to the required type.
    *
-   * <p>If the required type is elligible for conversion and a constant string
+   * <p>If the required type is eligible for conversion and a constant string
    * binding is found but the actual conversion fails, an error is generated.
    *
-   * <p>If the type is not elligible for conversion or a constant string
+   * <p>If the type is not eligible for conversion or a constant string
    * binding is not found, this method returns null.
    */
   private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key)
@@ -52,8 +52,7 @@
       // We have to filter out primitive types because an Integer is not an
       // instance of int, and we provide converters for all the primitive types
       // and know that they work anyway.
-      if (!type.rawType.isPrimitive()
-          && !type.getRawType().isInstance(converted)) {
+      if (!type.getRawType().isInstance(converted)) {
         throw new ResolveFailedException(ErrorMessages.CONVERSION_TYPE_ERROR, converted, type);
       }
 

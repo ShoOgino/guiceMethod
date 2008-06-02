@@ -1,0 +1,17 @@
+  public void testCustomTypeConversion() throws CreationException {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)) , dateConverter);
+        bindConstant().annotatedWith(NumericValue.class).to("15-Aug-1981");
+        bind(DateHolder.class);
+      }
+    });
+
+    DateHolder dateHolder = injector.getInstance(DateHolder.class);
+    Calendar calendar = new GregorianCalendar();
+    calendar.setTime(dateHolder.date);
+    assertEquals(15, calendar.get(Calendar.DAY_OF_MONTH));
+    assertEquals(7, calendar.get(Calendar.MONTH));
+    assertEquals(1981, calendar.get(Calendar.YEAR));
+  }
+

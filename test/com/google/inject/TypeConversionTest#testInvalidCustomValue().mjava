@@ -1,0 +1,21 @@
+  public void testInvalidCustomValue() throws CreationException {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), dateConverter);
+        bindConstant().annotatedWith(NumericValue.class).to("invalid");
+        bind(DateHolder.class);
+      }
+    };
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "Error converting 'invalid'");
+      assertContains(expected.getMessage(), "Reason: Unparseable date: \"invalid\"");
+      assertContains(expected.getMessage(), "to java.util.Date");
+      assertContains(expected.getMessage(), "using TypeConverter<Date> which matches "
+          + "only(java.util.Date) (bound at " + module.getClass().getName());
+    }
+  }
+

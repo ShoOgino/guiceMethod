@@ -9,7 +9,7 @@
           return value;
         }
         public Class getType() {
-          return long.class;
+          return Long.class;
         }
         @Override public String toString() {
           return String.valueOf(value);

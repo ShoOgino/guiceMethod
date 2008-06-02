@@ -9,7 +9,7 @@
           return value;
         }
         public Class getType() {
-          return boolean.class;
+          return Boolean.class;
         }
         @Override public String toString() {
           return String.valueOf(value);

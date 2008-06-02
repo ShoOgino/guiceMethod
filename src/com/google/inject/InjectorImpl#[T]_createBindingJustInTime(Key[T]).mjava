@@ -10,12 +10,6 @@
       return binding;
     }
 
-    // Treat primitive types and their wrappers interchangeably.
-    BindingImpl<T> boxedOrUnboxed = getBoxedOrUnboxedBinding(key);
-    if (boxedOrUnboxed != null) {
-      return boxedOrUnboxed;
-    }
-
     // Try to convert a constant string binding to the requested type.
     BindingImpl<T> convertedBinding = convertConstantStringBinding(key);
     if (convertedBinding != null) {

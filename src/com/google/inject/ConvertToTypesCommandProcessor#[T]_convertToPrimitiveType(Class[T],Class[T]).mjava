@@ -2,7 +2,7 @@
       final Class<T> wrapperType) {
     try {
       final Method parser = wrapperType.getMethod(
-        "parse" + Strings.capitalize(primitiveType.getName()), String.class);
+          "parse" + Strings.capitalize(primitiveType.getName()), String.class);
 
       TypeConverter typeConverter = new TypeConverter() {
         @SuppressWarnings("unchecked")
@@ -23,10 +23,8 @@
         }
       };
 
-      convertToClass(primitiveType, typeConverter);
       convertToClass(wrapperType, typeConverter);
-    }
-    catch (NoSuchMethodException e) {
+    } catch (NoSuchMethodException e) {
       throw new AssertionError(e);
     }
   }
