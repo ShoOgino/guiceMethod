@@ -22,7 +22,7 @@
 
     bindLogger();
     bindCommandProcesor = new BindCommandProcessor(
-        injector, injector.scopes, stage, injector.explicitBindings,
+        injector, injector.scopes, injector.explicitBindings,
         injector.outstandingInjections);
     bindCommandProcesor.processCommands(commands);
     bindCommandProcesor.createUntargettedBindings();

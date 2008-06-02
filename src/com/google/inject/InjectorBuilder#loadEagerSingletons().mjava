@@ -1,6 +1,6 @@
-  public void loadEagerSingletons(InjectorImpl injector) {
+  public void loadEagerSingletons() {
     // load eager singletons, or all singletons if we're in Stage.PRODUCTION.
-    for (final BindingImpl<?> binding : bindings.values()) {
+    for (final BindingImpl<?> binding : injector.explicitBindings.values()) {
       if (stage == Stage.PRODUCTION || binding.getLoadStrategy() == LoadStrategy.EAGER) {
         injector.callInContext(new ContextualCallable<Void>() {
           public Void call(InternalContext context) {
