@@ -1,6 +1,0 @@
-  public void testPreloadSome() throws CreationException {
-    createBinder(Stage.DEVELOPMENT);
-    assertEquals(1, Foo.count);
-    assertEquals(0, Bar.count);
-  }
-

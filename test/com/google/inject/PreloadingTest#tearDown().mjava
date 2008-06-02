@@ -1,5 +1,0 @@
-  protected void tearDown() throws Exception {
-    Foo.count = 0;
-    Bar.count = 0;
-  }
-

@@ -1,0 +1,27 @@
+  public void testSingletons() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(BoundAsSingleton.class).in(Scopes.SINGLETON);
+        bind(AnnotatedSingleton.class);
+        bind(EagerSingleton.class).asEagerSingleton();
+        bind(LinkedSingleton.class).to(RealLinkedSingleton.class);
+      }
+    });
+
+    assertSame(
+        injector.getInstance(BoundAsSingleton.class),
+        injector.getInstance(BoundAsSingleton.class));
+
+    assertSame(
+        injector.getInstance(AnnotatedSingleton.class),
+        injector.getInstance(AnnotatedSingleton.class));
+
+    assertSame(
+        injector.getInstance(EagerSingleton.class),
+        injector.getInstance(EagerSingleton.class));
+
+    assertSame(
+        injector.getInstance(LinkedSingleton.class),
+        injector.getInstance(LinkedSingleton.class));
+  }
+

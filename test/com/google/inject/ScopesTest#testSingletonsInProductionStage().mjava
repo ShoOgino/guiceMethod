@@ -1,0 +1,16 @@
+  public void testSingletonsInProductionStage() {
+    Guice.createInjector(Stage.PRODUCTION, new AbstractModule() {
+      protected void configure() {
+        bind(AnnotatedSingleton.class);
+        bind(BoundAsSingleton.class).in(Scopes.SINGLETON);
+        bind(EagerSingleton.class).asEagerSingleton();
+        bind(LinkedSingleton.class).to(RealLinkedSingleton.class);
+      }
+    });
+
+    assertEquals(1, AnnotatedSingleton.nextInstanceId);
+    assertEquals(1, BoundAsSingleton.nextInstanceId);
+    assertEquals(1, EagerSingleton.nextInstanceId);
+    assertEquals(1, RealLinkedSingleton.nextInstanceId);
+  }
+

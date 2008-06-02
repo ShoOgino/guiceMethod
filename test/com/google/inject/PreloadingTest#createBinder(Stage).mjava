@@ -1,9 +1,0 @@
-  private Injector createBinder(Stage stage) {
-    return Guice.createInjector(stage, new AbstractModule() {
-      protected void configure() {
-        bind(Foo.class).asEagerSingleton();
-        bind(Bar.class);
-      }
-    });
-  }
-
