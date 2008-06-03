@@ -1,5 +1,5 @@
     public ScopedBindingBuilder toProvider(final Provider<? extends T> provider) {
-      nonNull(provider, "provider");
+      checkNotNull(provider, "provider");
       checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {

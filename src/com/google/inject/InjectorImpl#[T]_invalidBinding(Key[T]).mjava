@@ -1,5 +1,4 @@
   <T> BindingImpl<T> invalidBinding(Key<T> key) {
-    return new InvalidBindingImpl<T>(
-        this, key, SourceProviders.defaultSource());
+    return new InvalidBindingImpl<T>(this, key, SourceProviders.defaultSource());
   }
 

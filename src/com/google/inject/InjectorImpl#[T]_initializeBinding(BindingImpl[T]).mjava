@@ -1,9 +1,7 @@
   <T> void initializeBinding(BindingImpl<T> binding) throws ResolveFailedException {
-    // Put the partially constructed binding in the map a little early. This
-    // enables us to handle circular dependencies.
-    // Example: FooImpl -> BarImpl -> FooImpl.
-    // Note: We don't need to synchronize on jitBindings during injector
-    // creation.
+    // Put the partially constructed binding in the map a little early. This enables us to handle
+    // circular dependencies. Example: FooImpl -> BarImpl -> FooImpl.
+    // Note: We don't need to synchronize on jitBindings during injector creation.
     if (binding instanceof ClassBindingImpl<?>) {
       Key<T> key = binding.getKey();
       jitBindings.put(key, binding);
@@ -11,7 +9,8 @@
       try {
         binding.initialize(this);
         successful = true;
-      } finally {
+      }
+      finally {
         if (!successful) {
           jitBindings.remove(key);
         }

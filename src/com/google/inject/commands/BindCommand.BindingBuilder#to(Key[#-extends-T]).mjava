@@ -1,5 +1,5 @@
     public ScopedBindingBuilder to(final Key<? extends T> targetKey) {
-      nonNull(targetKey, "targetKey");
+      checkNotNull(targetKey, "targetKey");
       checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {
         public ScopedBindingBuilder execute(LinkedBindingBuilder<T> linkedBindingBuilder) {

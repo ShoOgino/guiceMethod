@@ -1,12 +1,10 @@
   <T> BindingImpl<T> createBindingJustInTime(Key<T> key) throws ResolveFailedException {
     // Handle cases where T is a Provider<?>.
     if (isProvider(key)) {
-      // These casts are safe. We know T extends Provider<X> and that given
-      // Key<Provider<X>>, createProviderBinding() will return
-      // BindingImpl<Provider<X>>.
-      @SuppressWarnings({ "UnnecessaryLocalVariable", "unchecked" })
-      BindingImpl<T> binding
-          = (BindingImpl<T>) createProviderBinding((Key) key, LoadStrategy.LAZY);
+      // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
+      // createProviderBinding() will return BindingImpl<Provider<X>>.
+      @SuppressWarnings("unchecked")
+      BindingImpl<T> binding = (BindingImpl<T>) createProviderBinding((Key) key, LoadStrategy.LAZY);
       return binding;
     }
 
@@ -22,7 +20,8 @@
       if (key.hasAttributes()) {
         try {
           return getBindingOrThrow(key.withoutAttributes());
-        } catch (ResolveFailedException ignored) {
+        }
+        catch (ResolveFailedException ignored) {
           // throw with a more appropriate message below
         }
       }

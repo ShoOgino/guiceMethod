@@ -1,4 +1,4 @@
     public SubclassesOf(Class<?> superclass) {
-      this.superclass = Objects.nonNull(superclass, "superclass");
+      this.superclass = checkNotNull(superclass, "superclass");
     }
 

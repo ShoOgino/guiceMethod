@@ -2,8 +2,8 @@
    * Replays {@code commands} against {@code binder}.
    */
   public final void replay(final Binder binder, Iterable<Command> commands) {
-    Objects.nonNull(binder, "binder");
-    Objects.nonNull(commands, "commands");
+    checkNotNull(binder, "binder");
+    checkNotNull(commands, "commands");
 
     Command.Visitor<Void> visitor = new Command.Visitor<Void>() {
       public Void visitAddMessageError(AddMessageErrorCommand command) {

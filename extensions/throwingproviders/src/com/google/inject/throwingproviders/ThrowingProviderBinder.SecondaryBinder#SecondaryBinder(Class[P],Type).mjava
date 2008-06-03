@@ -1,6 +1,6 @@
     public SecondaryBinder(Class<P> interfaceType, Type valueType) {
-      this.interfaceType = Objects.nonNull(interfaceType, "interfaceType");
-      this.valueType = Objects.nonNull(valueType, "valueType");
+      this.interfaceType = checkNotNull(interfaceType, "interfaceType");
+      this.valueType = checkNotNull(valueType, "valueType");
       checkInterface();
       this.exceptionType = getExceptionType(interfaceType);
     }

@@ -1,6 +1,4 @@
-  /**
-   * Gets a binding which was specified explicitly in a module.
-   */
+  /** Gets a binding which was specified explicitly in a module. */
   @SuppressWarnings("unchecked")
   <T> BindingImpl<T> getExplicitBindingImpl(Key<T> key) {
     return (BindingImpl<T>) explicitBindings.get(key);

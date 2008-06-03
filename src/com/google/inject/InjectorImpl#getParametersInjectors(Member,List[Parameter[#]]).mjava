@@ -4,8 +4,7 @@
    * @param member to which the parameters belong
    * @return injections
    */
-  SingleParameterInjector<?>[] getParametersInjectors(Member member,
-      List<Parameter<?>> parameters)
+  SingleParameterInjector<?>[] getParametersInjectors(Member member, List<Parameter<?>> parameters)
       throws ResolveFailedException {
     SingleParameterInjector<?>[] parameterInjectors
         = new SingleParameterInjector<?>[parameters.size()];

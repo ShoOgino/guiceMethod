@@ -1,5 +1,5 @@
   AddThrowableErrorCommand(Object source, Throwable throwable) {
-    this.source = nonNull(source, "source");
-    this.throwable = nonNull(throwable, "throwable");
+    this.source = checkNotNull(source, "source");
+    this.throwable = checkNotNull(throwable, "throwable");
   }
 

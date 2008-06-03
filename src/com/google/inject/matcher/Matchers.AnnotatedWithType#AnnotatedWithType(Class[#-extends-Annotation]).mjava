@@ -1,5 +1,5 @@
     public AnnotatedWithType(Class<? extends Annotation> annotationType) {
-      this.annotationType = Objects.nonNull(annotationType, "annotation type");
+      this.annotationType = checkNotNull(annotationType, "annotation type");
       checkForRuntimeRetention(annotationType);
     }
 

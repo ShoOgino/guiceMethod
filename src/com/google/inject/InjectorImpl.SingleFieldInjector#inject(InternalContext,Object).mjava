@@ -15,8 +15,7 @@
         throw provisionException;
       }
       catch (RuntimeException runtimeException) {
-        throw new ProvisionException(runtimeException,
-            ErrorMessages.ERROR_INJECTING_FIELD);
+        throw new ProvisionException(runtimeException, ErrorMessages.ERROR_INJECTING_FIELD);
       }
       finally {
         context.setInjectionPoint(null);

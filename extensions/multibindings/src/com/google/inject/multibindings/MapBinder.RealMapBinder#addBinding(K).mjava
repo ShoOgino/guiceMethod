@@ -3,7 +3,7 @@
      * and another for {@code V}.
      */
     @Override public LinkedBindingBuilder<V> addBinding(K key) {
-      Objects.nonNull(key, "key");
+      checkNotNull(key, "key");
       if (isInitialized()) {
         throw new IllegalStateException("MapBinder was already initialized");
       }

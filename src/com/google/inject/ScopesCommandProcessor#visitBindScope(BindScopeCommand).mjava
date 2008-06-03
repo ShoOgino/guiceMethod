@@ -14,12 +14,12 @@
       // Go ahead and bind anyway so we don't get collateral errors.
     }
 
-    Scope existing = scopes.get(nonNull(annotationType, "annotation type"));
+    Scope existing = scopes.get(checkNotNull(annotationType, "annotation type"));
     if (existing != null) {
       addError(command.getSource(), ErrorMessages.DUPLICATE_SCOPES, existing,
           annotationType, scope);
     } else {
-      scopes.put(annotationType, nonNull(scope, "scope"));
+      scopes.put(annotationType, checkNotNull(scope, "scope"));
     }
 
     return true;

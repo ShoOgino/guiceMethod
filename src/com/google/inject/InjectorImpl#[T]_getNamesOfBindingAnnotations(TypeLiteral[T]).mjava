@@ -1,13 +1,9 @@
   // not test-covered
   <T> List<String> getNamesOfBindingAnnotations(TypeLiteral<T> type) {
-    List<String> names = new ArrayList<String>();
+    List<String> names = Lists.newArrayList();
     for (Binding<T> binding : findBindingsByType(type)) {
       Key<T> key = binding.getKey();
-      if (!key.hasAnnotationType()) {
-        names.add("[no annotation]");
-      } else {
-        names.add(key.getAnnotationName());
-      }
+      names.add(key.hasAnnotationType() ? key.getAnnotationName() : "[no annotation]");
     }
     return names;
   }

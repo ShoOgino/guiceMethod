@@ -1,15 +1,14 @@
-  /**
-   * Gets a constructor function for a given implementation class.
-   */
+  /** Gets a constructor function for a given implementation class. */
   @SuppressWarnings("unchecked")
-  <T> ConstructorInjector<T> getConstructor(Class<T> implementation)
-      throws ResolveFailedException {
+  <T> ConstructorInjector<T> getConstructor(Class<T> implementation) throws ResolveFailedException {
     Object o = constructors.get(implementation);
     if (o instanceof ResolveFailedException) {
       throw (ResolveFailedException) o;
-    } else if (o instanceof ConstructorInjector<?>) {
+    }
+    else if (o instanceof ConstructorInjector<?>) {
       return (ConstructorInjector<T>) o;
-    } else {
+    }
+    else {
       throw new AssertionError();
     }
   }

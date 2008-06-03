@@ -9,8 +9,7 @@
       errorHandler.handle(source, ErrorMessages.MISSING_BINDING, key);
     }
     else {
-      errorHandler.handle(source,
-          ErrorMessages.MISSING_BINDING_BUT_OTHERS_EXIST, key, otherNames);
+      errorHandler.handle(source, ErrorMessages.MISSING_BINDING_BUT_OTHERS_EXIST, key, otherNames);
     }
   }
 

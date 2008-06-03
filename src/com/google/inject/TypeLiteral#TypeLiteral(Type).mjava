@@ -3,7 +3,7 @@
    */
   @SuppressWarnings("unchecked")
   TypeLiteral(Type type) {
-    this.type = canonicalize(nonNull(type, "type"));
+    this.type = canonicalize(checkNotNull(type, "type"));
     this.rawType = (Class<? super T>) Types.getRawType(this.type);
     this.hashCode = Types.hashCode(this.type);
   }

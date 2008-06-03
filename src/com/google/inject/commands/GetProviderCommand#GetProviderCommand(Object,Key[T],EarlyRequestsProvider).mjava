@@ -1,5 +1,5 @@
   GetProviderCommand(Object source, Key<T> key, EarlyRequestsProvider earlyRequestsProvider) {
-    this.source = nonNull(source, "source");
+    this.source = checkNotNull(source, "source");
     this.key = key;
     this.earlyRequestsProvider = earlyRequestsProvider;
   }

@@ -1,9 +1,6 @@
-  /**
-   * Iterates over parameter injectors and creates an array of parameter
-   * values.
-   */
-  static Object[] getParameters(InternalContext context,
-      SingleParameterInjector[] parameterInjectors) {
+  /** Iterates over parameter injectors and creates an array of parameter values. */
+  static Object[] getParameters(
+      InternalContext context, SingleParameterInjector[] parameterInjectors) {
     if (parameterInjectors == null) {
       return null;
     }

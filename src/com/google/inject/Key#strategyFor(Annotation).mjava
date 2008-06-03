@@ -2,7 +2,7 @@
    * Gets the strategy for an annotation.
    */
   static AnnotationStrategy strategyFor(Annotation annotation) {
-    nonNull(annotation, "annotation");
+    checkNotNull(annotation, "annotation");
     Class<? extends Annotation> annotationType = annotation.annotationType();
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);

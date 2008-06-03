@@ -1,11 +1,8 @@
-  /**
-   * Creates a binding for a type annotated with @ImplementedBy.
-   */
-  <T> BindingImpl<T> createImplementedByBinding(Class<T> type,
-      ImplementedBy implementedBy, LoadStrategy loadStrategy) throws ResolveFailedException {
-    // TODO: Use scope annotation on type if present. Right now, we always
-    // use NO_SCOPE.
-
+  /** Creates a binding for a type annotated with @ImplementedBy. */
+  <T> BindingImpl<T> createImplementedByBinding(
+      Class<T> type, ImplementedBy implementedBy, LoadStrategy loadStrategy)
+      throws ResolveFailedException {
+    // TODO: Use scope annotation on type if present. Right now, we always use NO_SCOPE.
     Class<?> implementationType = implementedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper cycles?
@@ -23,8 +20,7 @@
     Class<? extends T> subclass = (Class<? extends T>) implementationType;
 
     // Look up the target binding.
-    final BindingImpl<? extends T> targetBinding
-        = getBindingOrThrow(Key.get(subclass));
+    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(Key.get(subclass));
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(InternalContext context, InjectionPoint<?> injectionPoint) {
@@ -32,8 +28,13 @@
       }
     };
 
-    return new LinkedBindingImpl<T>(this, Key.get(type), 
-        StackTraceElements.forType(type), internalFactory, Scopes.NO_SCOPE,
-        Key.get(subclass), loadStrategy);
+    return new LinkedBindingImpl<T>(
+        this,
+        Key.get(type),
+        StackTraceElements.forType(type),
+        internalFactory,
+        Scopes.NO_SCOPE,
+        Key.get(subclass),
+        loadStrategy);
   }
 

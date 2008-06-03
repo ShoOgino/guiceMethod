@@ -1,5 +1,4 @@
   Collection<Dependency<?>> getFieldAndMethodDependenciesFor(Class<?> clazz) {
-    return Collections.unmodifiableList(
-        getModifiableFieldAndMethodDependenciesFor(clazz));
+    return Collections.unmodifiableList(getModifiableFieldAndMethodDependenciesFor(clazz));
   }
 

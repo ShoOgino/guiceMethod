@@ -1,9 +1,10 @@
   /**
-   * Creates a binding for an injectable type with the given scope. Looks for
-   * a scope on the type if none is specified.
+   * Creates a binding for an injectable type with the given scope. Looks for a scope on the type if
+   * none is specified.
    */
-  <T> BindingImpl<T> createUnitializedBinding(Class<T> type,
-      Scope scope, Object source, LoadStrategy loadStrategy) throws ResolveFailedException {
+  <T> BindingImpl<T> createUnitializedBinding(
+      Class<T> type, Scope scope, Object source, LoadStrategy loadStrategy)
+      throws ResolveFailedException {
     // Don't try to inject arrays, or enums.
     if (type.isArray() || type.isEnum()) {
       throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, type);
@@ -44,8 +45,7 @@
     LateBoundConstructor<T> lateBoundConstructor = new LateBoundConstructor<T>();
     InternalFactory<? extends T> scopedFactory
         = Scopes.scope(key, this, lateBoundConstructor, scope);
-
-    return new ClassBindingImpl<T>(this, key, source, scopedFactory, scope, lateBoundConstructor,
-        loadStrategy);
+    return new ClassBindingImpl<T>(
+        this, key, source, scopedFactory, scope, lateBoundConstructor, loadStrategy);
   }
 

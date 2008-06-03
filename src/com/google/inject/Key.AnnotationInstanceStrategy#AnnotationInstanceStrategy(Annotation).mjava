@@ -1,4 +1,4 @@
     AnnotationInstanceStrategy(Annotation annotation) {
-      this.annotation = nonNull(annotation, "annotation");
+      this.annotation = checkNotNull(annotation, "annotation");
     }
 

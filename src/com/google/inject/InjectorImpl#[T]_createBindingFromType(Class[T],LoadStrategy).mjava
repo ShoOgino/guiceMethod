@@ -1,7 +1,7 @@
   <T> BindingImpl<T> createBindingFromType(Class<T> type, LoadStrategy loadStrategy)
       throws ResolveFailedException {
-    BindingImpl<T> binding = createUnitializedBinding(
-        type, null, SourceProviders.defaultSource(), loadStrategy);
+    BindingImpl<T> binding
+        = createUnitializedBinding(type, null, SourceProviders.defaultSource(), loadStrategy);
     initializeBinding(binding);
     return binding;
   }

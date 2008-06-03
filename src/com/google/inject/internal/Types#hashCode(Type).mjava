@@ -10,15 +10,14 @@
       ParameterizedType p = (ParameterizedType) type;
       return Arrays.hashCode(p.getActualTypeArguments())
           ^ p.getRawType().hashCode()
-          ^ Objects.hashCode(p.getOwnerType());
+          ^ hashCodeOrZero(p.getOwnerType());
 
     } else if (type instanceof GenericArrayType) {
       return hashCode(((GenericArrayType) type).getGenericComponentType());
 
     } else {
-      // This isn't a type we support. Could be a generic array type, wildcard
-      // type, etc.
-      return Objects.hashCode(type);
+      // This isn't a type we support. Could be a generic array type, wildcard type, etc.
+      return hashCodeOrZero(type);
     }
   }
 

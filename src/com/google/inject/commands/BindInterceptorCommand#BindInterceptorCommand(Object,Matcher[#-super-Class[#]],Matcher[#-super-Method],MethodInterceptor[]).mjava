@@ -3,9 +3,9 @@
       Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
       MethodInterceptor[] interceptors) {
-    this.source = nonNull(source, "source");
-    this.classMatcher = nonNull(classMatcher, "classMatcher");
-    this.methodMatcher = nonNull(methodMatcher, "methodMatcher");
+    this.source = checkNotNull(source, "source");
+    this.classMatcher = checkNotNull(classMatcher, "classMatcher");
+    this.methodMatcher = checkNotNull(methodMatcher, "methodMatcher");
     this.interceptors = unmodifiableList(Arrays.asList(interceptors.clone()));
   }
 

@@ -2,7 +2,6 @@
     if (o == null) {
       return;
     }
-
     List<SingleMemberInjector> injectorsForClass = injectors.get(o.getClass());
     for (SingleMemberInjector injector : injectorsForClass) {
       injector.inject(context, o);

@@ -3,7 +3,7 @@
       if (this.binder != null) {
         throw new IllegalStateException("Re-entry is not allowed.");
       }
-      this.binder = Objects.nonNull(builder, "builder");
+      this.binder = checkNotNull(builder, "builder");
 
       configure();
 

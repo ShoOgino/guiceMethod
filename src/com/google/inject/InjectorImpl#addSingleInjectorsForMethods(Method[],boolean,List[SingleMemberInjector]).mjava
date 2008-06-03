@@ -2,8 +2,8 @@
       List<SingleMemberInjector> injectors) {
     addInjectorsForMembers(Arrays.asList(methods), statics, injectors,
         new SingleInjectorFactory<Method>() {
-          public SingleMemberInjector create(InjectorImpl injector,
-              Method method) throws ResolveFailedException {
+          public SingleMemberInjector create(InjectorImpl injector, Method method)
+              throws ResolveFailedException {
             return new SingleMethodInjector(injector, method);
           }
         });

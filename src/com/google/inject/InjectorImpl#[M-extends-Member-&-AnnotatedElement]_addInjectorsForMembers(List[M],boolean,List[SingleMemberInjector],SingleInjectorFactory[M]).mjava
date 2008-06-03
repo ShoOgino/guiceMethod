@@ -1,5 +1,5 @@
-  <M extends Member & AnnotatedElement> void addInjectorsForMembers(
-      List<M> members, boolean statics, List<SingleMemberInjector> injectors,
+  <M extends Member & AnnotatedElement> void addInjectorsForMembers(List<M> members,
+      boolean statics, List<SingleMemberInjector> injectors,
       SingleInjectorFactory<M> injectorFactory) {
     for (M member : members) {
       if (isStatic(member) == statics) {

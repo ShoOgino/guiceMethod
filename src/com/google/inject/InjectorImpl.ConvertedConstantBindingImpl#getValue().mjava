@@ -1,4 +1,4 @@
     public T getValue() {
-      return this.value;
+      return value;
     }
 

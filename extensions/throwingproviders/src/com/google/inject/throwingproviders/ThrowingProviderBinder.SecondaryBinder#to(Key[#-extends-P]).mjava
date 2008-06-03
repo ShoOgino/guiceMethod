@@ -1,5 +1,5 @@
     public ScopedBindingBuilder to(final Key<? extends P> targetKey) {
-      Objects.nonNull(targetKey, "targetKey");
+      checkNotNull(targetKey, "targetKey");
       final Key<Result> resultKey = Key.get(Result.class, UniqueAnnotations.create());
       final Key<P> key = createKey();
 

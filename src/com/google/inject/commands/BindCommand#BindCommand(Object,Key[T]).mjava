@@ -1,5 +1,5 @@
   BindCommand(Object source, Key<T> key) {
-    this.source = nonNull(source, "source");
-    this.key = nonNull(key, "key");
+    this.source = checkNotNull(source, "source");
+    this.key = checkNotNull(key, "key");
   }
 

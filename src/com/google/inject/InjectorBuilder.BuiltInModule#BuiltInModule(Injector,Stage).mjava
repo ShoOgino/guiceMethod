@@ -1,5 +1,5 @@
     private BuiltInModule(Injector injector, Stage stage) {
-      this.injector = Objects.nonNull(injector, "injector");
-      this.stage = Objects.nonNull(stage, "stage");
+      this.injector = checkNotNull(injector, "injector");
+      this.stage = checkNotNull(stage, "stage");
     }
 

@@ -1,9 +1,8 @@
   /**
    * Gets the strategy for an annotation type.
    */
-  static AnnotationStrategy strategyFor(
-      Class<? extends Annotation> annotationType) {
-    nonNull(annotationType, "annotation type");
+  static AnnotationStrategy strategyFor(Class<? extends Annotation> annotationType) {
+    checkNotNull(annotationType, "annotation type");
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);
     return new AnnotationTypeStrategy(annotationType, null);

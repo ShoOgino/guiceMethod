@@ -1,5 +1,4 @@
-    void bind(InjectorImpl injector, Class<T> implementation)
-        throws ResolveFailedException {
-      this.constructorInjector = injector.getConstructor(implementation);
+    void bind(InjectorImpl injector, Class<T> implementation) throws ResolveFailedException {
+      constructorInjector = injector.getConstructor(implementation);
     }
 

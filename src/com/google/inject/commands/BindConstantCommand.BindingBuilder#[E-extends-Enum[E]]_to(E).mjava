@@ -1,5 +1,5 @@
     public <E extends Enum<E>> void to(final E value) {
-      Objects.nonNull(value, "value");
+      checkNotNull(value, "value");
       assertNoTarget();
 
       BindConstantCommand.this.target = new ConstantTarget() {

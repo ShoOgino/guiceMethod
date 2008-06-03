@@ -1,4 +1,4 @@
     private Not(Matcher<? super T> delegate) {
-      this.delegate = Objects.nonNull(delegate, "delegate");
+      this.delegate = checkNotNull(delegate, "delegate");
     }
 

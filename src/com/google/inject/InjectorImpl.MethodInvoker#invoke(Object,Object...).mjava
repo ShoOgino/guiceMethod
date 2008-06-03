@@ -1,3 +1,3 @@
-    Object invoke(Object target, Object... parameters) throws
-        IllegalAccessException, InvocationTargetException;
+    Object invoke(Object target, Object... parameters)
+        throws IllegalAccessException, InvocationTargetException;
 

@@ -1,5 +1,4 @@
-    @Override
-    public Provider<T> getProvider() {
-      return this.provider;
+    @Override public Provider<T> getProvider() {
+      return provider;
     }
 

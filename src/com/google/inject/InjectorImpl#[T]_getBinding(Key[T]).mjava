@@ -1,11 +1,9 @@
-  /**
-   * Returns the binding for {@code key}, or {@code null} if that binding
-   * cannot be resolved.
-   */
+  /** Returns the binding for {@code key}, or {@code null} if that binding cannot be resolved. */
   public <T> BindingImpl<T> getBinding(Key<T> key) {
     try {
       return getBindingOrThrow(key);
-    } catch(ResolveFailedException e) {
+    }
+    catch (ResolveFailedException e) {
       return null;
     }
   }

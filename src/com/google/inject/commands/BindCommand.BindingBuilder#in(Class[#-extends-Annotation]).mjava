@@ -1,5 +1,5 @@
     public void in(final Class<? extends Annotation> scopeAnnotation) {
-      nonNull(scopeAnnotation, "scopeAnnotation");
+      checkNotNull(scopeAnnotation, "scopeAnnotation");
       checkNotScoped();
 
       bindScoping = new AbstractScoping() {

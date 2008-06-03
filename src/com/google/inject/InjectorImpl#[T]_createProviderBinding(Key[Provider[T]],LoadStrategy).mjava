@@ -1,7 +1,4 @@
-  /**
-   * Creates a synthetic binding to Provider<T>, i.e. a binding to the provider
-   * from Binding<T>.
-   */
+  /** Creates a synthetic binding to Provider<T>, i.e. a binding to the provider from Binding<T>. */
   private <T> BindingImpl<Provider<T>> createProviderBinding(
       Key<Provider<T>> key, LoadStrategy loadStrategy) throws ResolveFailedException {
     Type providerType = key.getTypeLiteral().getType();
@@ -11,11 +8,9 @@
       throw new ResolveFailedException(ErrorMessages.CANNOT_INJECT_RAW_PROVIDER);
     }
 
-    Type entryType
-        = ((ParameterizedType) providerType).getActualTypeArguments()[0];
+    Type entryType = ((ParameterizedType) providerType).getActualTypeArguments()[0];
 
-    // This cast is safe. 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // safe because T came from Key<Provider<T>>
     Key<T> providedKey = (Key<T>) key.ofType(entryType);
 
     return new ProviderBindingImpl<T>(this, key, getBindingOrThrow(providedKey), loadStrategy);

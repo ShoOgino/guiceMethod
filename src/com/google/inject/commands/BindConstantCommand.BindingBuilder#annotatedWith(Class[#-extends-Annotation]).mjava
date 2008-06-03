@@ -1,5 +1,5 @@
     public ConstantBindingBuilder annotatedWith(final Class<? extends Annotation> annotationType) {
-      nonNull(annotationType, "annotationType");
+      checkNotNull(annotationType, "annotationType");
       assertNoBindingAnnotation();
 
       bindingAnnotation = new BindingAnnotation() {

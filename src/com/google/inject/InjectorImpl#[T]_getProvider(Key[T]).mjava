@@ -1,7 +1,8 @@
   public <T> Provider<T> getProvider(final Key<T> key) {
     try {
       return getProviderOrThrow(key);
-    } catch (ResolveFailedException e) {
+    }
+    catch (ResolveFailedException e) {
       throw new ConfigurationException(
           "Missing binding to " + ErrorMessages.convert(key) + ": " + e.getMessage());
     }

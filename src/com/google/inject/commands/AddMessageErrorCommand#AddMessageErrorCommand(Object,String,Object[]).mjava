@@ -1,6 +1,6 @@
   AddMessageErrorCommand(Object source, String message, Object[] arguments) {
-    this.source = nonNull(source, "source");
-    this.message = nonNull(message, "message");
+    this.source = checkNotNull(source, "source");
+    this.message = checkNotNull(message, "message");
     this.arguments = unmodifiableList(Arrays.asList(arguments.clone()));
   }
 

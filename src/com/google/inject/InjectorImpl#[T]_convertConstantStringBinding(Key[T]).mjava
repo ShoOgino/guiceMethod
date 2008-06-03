@@ -1,11 +1,11 @@
   /**
    * Converts a constant string binding to the required type.
    *
-   * <p>If the required type is eligible for conversion and a constant string
-   * binding is found but the actual conversion fails, an error is generated.
+   * <p>If the required type is eligible for conversion and a constant string binding is found but
+   * the actual conversion fails, an error is generated.
    *
-   * <p>If the type is not eligible for conversion or a constant string
-   * binding is not found, this method returns null.
+   * <p>If the type is not eligible for conversion or a constant string binding is not found, this
+   * method returns null.
    */
   private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key)
       throws ResolveFailedException {
@@ -13,7 +13,6 @@
     Key<String> stringKey = key.ofType(String.class);
     BindingImpl<String> stringBinding = getExplicitBindingImpl(stringKey);
     if (stringBinding == null || !stringBinding.isConstant()) {
-      // No constant string binding found.
       return null;
     }
 
@@ -28,7 +27,6 @@
           throw new ResolveFailedException(ErrorMessages.AMBIGUOUS_TYPE_CONVERSION,
               stringValue, type, matchingConverter, converter);
         }
-
         matchingConverter = converter;
       }
     }
@@ -40,8 +38,7 @@
 
     // Try to convert the string. A failed conversion results in an error.
     try {
-      // This cast is safe because we double check below.
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings("unchecked") // This cast is safe because we double check below.
       T converted = (T) matchingConverter.getTypeConverter()
           .convert(stringValue, key.getTypeLiteral());
 
@@ -49,18 +46,17 @@
         throw new ResolveFailedException(ErrorMessages.CONVERTER_RETURNED_NULL);
       }
 
-      // We have to filter out primitive types because an Integer is not an
-      // instance of int, and we provide converters for all the primitive types
-      // and know that they work anyway.
+      // We have to filter out primitive types because an Integer is not an instance of int, and we
+      // provide converters for all the primitive types and know that they work anyway.
       if (!type.getRawType().isInstance(converted)) {
         throw new ResolveFailedException(ErrorMessages.CONVERSION_TYPE_ERROR, converted, type);
       }
-
-      return new ConvertedConstantBindingImpl<T>(
-          this, key, converted, stringBinding);
-    } catch (ResolveFailedException e) {
+      return new ConvertedConstantBindingImpl<T>(this, key, converted, stringBinding);
+    }
+    catch (ResolveFailedException e) {
       throw e;
-    } catch (Exception e) {
+    }
+    catch (Exception e) {
       throw new ResolveFailedException(ErrorMessages.CONVERSION_ERROR, stringValue,
           stringBinding.getSource(), type, matchingConverter, e.getMessage());
     }

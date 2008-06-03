@@ -1,7 +1,4 @@
-  /**
-   * Looks up thread local context. Creates (and removes) a new context if
-   * necessary.
-   */
+  /** Looks up thread local context. Creates (and removes) a new context if necessary. */
   <T> T callInContext(ContextualCallable<T> callable) {
     InternalContext[] reference = localContext.get();
     if (reference[0] == null) {

@@ -1,6 +1,6 @@
     public T get() {
-      nonNull(injectionInterceptorProvider, "injectionInterceptorProvider");
-      nonNull(delegateProvider, "delegateProvider");
+      checkNotNull(injectionInterceptorProvider, "injectionInterceptorProvider");
+      checkNotNull(delegateProvider, "delegateProvider");
       return injectionInterceptorProvider.get().intercept(key, delegateProvider);
     }
 

@@ -1,5 +1,5 @@
   public Message(Object source, String message) {
-    this.source = nonNull(source, "source").toString();
-    this.message = nonNull(message, "message");
+    this.source = checkNotNull(source, "source").toString();
+    this.message = checkNotNull(message, "message");
   }
 

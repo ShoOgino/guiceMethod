@@ -1,7 +1,7 @@
   BindCommandProcessor(InjectorImpl injector,
       Map<Class<? extends Annotation>, Scope> scopes,
       Map<Key<?>, BindingImpl<?>> bindings,
-      Map<Object, Void> outstandingInjections) {
+      Set<Object> outstandingInjections) {
     super(injector.errorHandler);
     this.injector = injector;
     this.scopes = scopes;

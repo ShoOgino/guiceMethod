@@ -1,7 +1,6 @@
-  /**
-   * Gets a just-in-time binding. This could be an injectable class (including
-   * those with @ImplementedBy), an automatically converted constant, a
-   * Provider<X> binding, etc.
+  /*
+   * Gets a just-in-time binding. This could be an injectable class (including those with
+   * @ImplementedBy), an automatically converted constant, a Provider<X> binding, etc.
    */
   @SuppressWarnings("unchecked")
   <T> BindingImpl<T> getJitBindingImpl(Key<T> key) throws ResolveFailedException {
@@ -11,7 +10,8 @@
         BindingImpl<T> binding = createBindingJustInTime(key);
         jitBindings.put(key, binding);
         return binding;
-      } else {
+      }
+      else {
         return (BindingImpl<T>) jitBindings.get(key);
       }
     }

@@ -1,5 +1,5 @@
     public Collection<Dependency<?>> getDependencies() {
-      List<Dependency<?>> dependencies = new ArrayList<Dependency<?>>();
+      List<Dependency<?>> dependencies = new ArrayList<Dependency<?>>(parameterInjectors.length);
       for (SingleParameterInjector<?> parameterInjector : parameterInjectors) {
         dependencies.add(parameterInjector.injectionPoint);
       }

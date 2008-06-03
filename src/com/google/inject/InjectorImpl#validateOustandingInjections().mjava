@@ -1,5 +1,5 @@
   void validateOustandingInjections() {
-    for (Object toInject : outstandingInjections.keySet()) {
+    for (Object toInject : outstandingInjections) {
       injectors.get(toInject.getClass());
     }
   }

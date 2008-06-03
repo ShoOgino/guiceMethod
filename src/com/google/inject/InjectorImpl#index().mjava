@@ -1,6 +1,4 @@
-  /**
-   * Indexes bindings by type.
-   */
+  /** Indexes bindings by type. */
   void index() {
     for (BindingImpl<?> binding : explicitBindings.values()) {
       index(binding);

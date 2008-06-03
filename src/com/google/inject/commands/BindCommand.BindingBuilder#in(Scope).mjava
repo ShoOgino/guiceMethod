@@ -1,5 +1,5 @@
     public void in(final Scope scope) {
-      nonNull(scope, "scope");
+      checkNotNull(scope, "scope");
       checkNotScoped();
       bindScoping = new AbstractScoping() {
 

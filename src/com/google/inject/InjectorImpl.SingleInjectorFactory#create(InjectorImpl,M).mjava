@@ -1,3 +1,2 @@
-    SingleMemberInjector create(InjectorImpl injector, M member)
-        throws ResolveFailedException;
+    SingleMemberInjector create(InjectorImpl injector, M member) throws ResolveFailedException;
 

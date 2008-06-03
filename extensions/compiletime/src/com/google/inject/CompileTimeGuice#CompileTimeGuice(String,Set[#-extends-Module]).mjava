@@ -7,7 +7,7 @@
    * @param modules the modules used to build the injector.
    */
   public CompileTimeGuice(String name, Set<? extends Module> modules) {
-    this.name = nonNull(name, "name");
-    this.modules = nonNull(modules, "modules");
+    this.name = checkNotNull(name, "name");
+    this.modules = checkNotNull(modules, "modules");
   }
 

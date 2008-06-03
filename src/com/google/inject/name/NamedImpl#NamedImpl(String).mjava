@@ -1,4 +1,4 @@
   public NamedImpl(String value) {
-    this.value = Objects.nonNull(value, "name");
+    this.value = checkNotNull(value, "name");
   }
 

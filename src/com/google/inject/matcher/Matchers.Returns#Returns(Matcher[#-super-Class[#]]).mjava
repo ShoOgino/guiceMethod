@@ -1,4 +1,4 @@
     public Returns(Matcher<? super Class<?>> returnType) {
-      this.returnType = Objects.nonNull(returnType, "return type matcher");
+      this.returnType = checkNotNull(returnType, "return type matcher");
     }
 

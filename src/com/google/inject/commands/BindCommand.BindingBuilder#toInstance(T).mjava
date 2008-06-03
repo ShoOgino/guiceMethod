@@ -1,5 +1,5 @@
     public void toInstance(final T instance) {
-      nonNull(instance, ErrorMessages.CANNOT_BIND_TO_NULL_INSTANCE);
+      checkNotNull(instance, ErrorMessages.CANNOT_BIND_TO_NULL_INSTANCE);
 
       checkNotTargetted();
       bindTarget = new AbstractTarget<T>() {
