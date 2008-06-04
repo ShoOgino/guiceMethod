@@ -1,0 +1,5 @@
+    public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+      providers.put(key, unscoped);
+      return unscoped;
+    }
+
