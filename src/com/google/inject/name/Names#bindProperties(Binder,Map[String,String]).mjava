@@ -1,5 +1,6 @@
   /**
-   * Creates a constant binding to {@code @Named(key)} for each property.
+   * Creates a constant binding to {@code @Named(key)} for each entry in
+   * {@code properties}.
    */
   public static void bindProperties(final Binder binder,
       final Map<String, String> properties) {

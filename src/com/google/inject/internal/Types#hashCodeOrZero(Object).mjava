@@ -1,4 +1,0 @@
-  private static int hashCodeOrZero(Object o) {
-    return o != null ? o.hashCode() : 0;
-  }
-

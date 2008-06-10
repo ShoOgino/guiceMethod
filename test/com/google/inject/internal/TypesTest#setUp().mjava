@@ -1,8 +1,0 @@
-  protected void setUp() throws Exception {
-    super.setUp();
-    mapStringInteger = (ParameterizedType) getClass().getDeclaredField("map").getGenericType();
-    innerFloatDouble = (ParameterizedType) getClass().getDeclaredField("inner").getGenericType();
-    listStringArray = (ParameterizedType) getClass().getDeclaredField("list").getGenericType();
-    stringArray = (GenericArrayType) listStringArray.getActualTypeArguments()[0];
-  }
-

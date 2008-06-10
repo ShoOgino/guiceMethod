@@ -1,5 +1,0 @@
-    @Override public boolean equals(Object o) {
-      return o instanceof GenericArrayType
-          && Types.equals(this, (GenericArrayType) o);
-    }
-

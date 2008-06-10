@@ -1,4 +1,0 @@
-  public static ParameterizedType newTypeWithArgument(Type rawType, Type... typeArguments) {
-    return newParameterizedType(null, rawType, typeArguments);
-  }
-
