@@ -2,20 +2,9 @@
     private Key<P> createKey() {
       TypeLiteral<P> typeLiteral;
       if (interfaceType.getTypeParameters().length == 1) {
-        typeLiteral = (TypeLiteral<P>) TypeLiteral.get(new ParameterizedType() {
-
-          public Type[] getActualTypeArguments() {
-            return new Type[]{valueType};
-          }
-
-          public Type getRawType() {
-            return interfaceType;
-          }
-
-          public Type getOwnerType() {
-            throw new UnsupportedOperationException();
-          }
-        });
+        ParameterizedType type = Types.newParameterizedTypeWithOwner(
+            interfaceType.getEnclosingClass(), interfaceType, valueType);
+        typeLiteral = (TypeLiteral<P>) TypeLiteral.get(type);
       } else {
         typeLiteral = TypeLiteral.get(interfaceType);
       }

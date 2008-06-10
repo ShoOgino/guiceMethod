@@ -3,7 +3,7 @@
       Types.newParameterizedType(Map.class, String.class, int.class);
       fail();
     } catch (IllegalArgumentException expected) {
-      Asserts.assertContains(expected.getMessage(),
+      assertContains(expected.getMessage(),
           "Parameterized types may not have primitive arguments: int");
     }
   }

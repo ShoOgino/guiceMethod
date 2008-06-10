@@ -1,0 +1,21 @@
+  /**
+   * Ensure that owning types are required when necessary, and forbidden
+   * otherwise.
+   */
+  public void testCanonicalizeRequiresOwnerTypes() throws NoSuchFieldException {
+    try {
+      Types.newParameterizedType(Owning.class, String.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+      assertContains(expected.getMessage(),
+          "No owner type for enclosed " + Owning.class);
+    }
+
+    try {
+      Types.newParameterizedTypeWithOwner(Object.class, Set.class, String.class);
+    } catch (IllegalArgumentException expected) {
+      assertContains(expected.getMessage(),
+          "Owner type for unenclosed " + Set.class);
+    }
+  }
+

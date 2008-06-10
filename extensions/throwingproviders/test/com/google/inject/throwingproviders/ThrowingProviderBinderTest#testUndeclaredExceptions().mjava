@@ -7,7 +7,7 @@
       remoteProvider.get();
       fail();
     } catch (RuntimeException e) {
-      assertEquals("A", e.getMessage());
+      assertEquals("A", e.getCause().getMessage());
     }
 
     // undeclared exceptions shouldn't be scoped
@@ -16,7 +16,7 @@
       remoteProvider.get();
       fail();
     } catch (RuntimeException e) {
-      assertEquals("B", e.getMessage());
+      assertEquals("B", e.getCause().getMessage());
     }
   }
 

@@ -9,9 +9,9 @@
     try {
       injector.getInstance(Key.get(setOfString));
       fail();
-    } catch(IllegalStateException expected) {
+    } catch(ProvisionException expected) {
       assertEquals("Set injection failed due to null element",
-          expected.getMessage());
+          expected.getCause().getMessage());
     }
   }
 
