@@ -1,5 +1,5 @@
   @Override public final boolean equals(Object o) {
     return o instanceof TypeLiteral<?>
-        && Types.equals(type, ((TypeLiteral) o).type);
+        && MoreTypes.equals(type, ((TypeLiteral) o).type);
   }
 

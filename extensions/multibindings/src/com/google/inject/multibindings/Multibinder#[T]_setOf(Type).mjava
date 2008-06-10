@@ -1,6 +1,6 @@
   @SuppressWarnings("unchecked")
   private static <T> TypeLiteral<Set<T>> setOf(Type elementType) {
-    Type type = Types.newTypeWithArgument(Set.class, elementType);
+    Type type = Types.setOf(elementType);
     return (TypeLiteral<Set<T>>) TypeLiteral.get(type);
   }
 

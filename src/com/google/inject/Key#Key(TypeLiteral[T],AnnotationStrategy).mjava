@@ -2,7 +2,7 @@
   private Key(TypeLiteral<T> typeLiteral,
       AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;
-    this.typeLiteral = Types.wrapPrimitives(typeLiteral);
+    this.typeLiteral = MoreTypes.wrapPrimitives(typeLiteral);
     this.hashCode = computeHashCode();
   }
 

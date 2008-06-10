@@ -1,0 +1,11 @@
+  /**
+   * Returns a new parameterized type, applying {@code typeArguments} to
+   * {@code rawType} and enclosed by {@code ownerType}.
+   *
+   * @return a {@link java.io.Serializable serializable} parameterized type.
+   */
+  public static ParameterizedType newParameterizedTypeWithOwner(
+      Type ownerType, Type rawType, Type... typeArguments) {
+    return new ParameterizedTypeImpl(ownerType, rawType, typeArguments);
+  }
+

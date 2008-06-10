@@ -1,0 +1,6 @@
+  public void testListSetMap() {
+    assertEqualsBothWays(mapStringInteger, Types.mapOf(String.class, Integer.class));
+    assertEqualsBothWays(listString, Types.listOf(String.class));
+    assertEqualsBothWays(setString, Types.setOf(String.class));
+  }
+

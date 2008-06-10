@@ -1,0 +1,8 @@
+  public void testTypeWithOwnerType() {
+    ParameterizedType actual = Types.newParameterizedTypeWithOwner(
+        TypesTest.class, Inner.class, Float.class, Double.class);
+    assertEquals(TypesTest.class, actual.getOwnerType());
+    assertEqualsBothWays(innerFloatDouble, actual);
+    assertEquals(innerFloatDouble.toString(), actual.toString());
+  }
+

@@ -1,5 +1,5 @@
   private static Type entryOfProviderOf(Type keyType, final Type valueType) {
-    return Types.newTypeWithArgument(Map.Entry.class, keyType,
-        Types.newTypeWithArgument(Provider.class, valueType));
+    return Types.newParameterizedType(Map.Entry.class, keyType,
+        Types.providerOf(valueType));
   }
 

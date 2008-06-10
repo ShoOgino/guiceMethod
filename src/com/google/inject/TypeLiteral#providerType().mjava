@@ -5,7 +5,6 @@
   final TypeLiteral<Provider<T>> providerType() {
     // This cast is safe and wouldn't generate a warning if Type had a type
     // parameter.
-    return (TypeLiteral<Provider<T>>) get(
-        Types.newTypeWithArgument(Provider.class, getType()));
+    return (TypeLiteral<Provider<T>>) get(Types.providerOf(getType()));
   }
 

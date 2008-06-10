@@ -1,0 +1,4 @@
+    public Type getRawType() {
+      return rawType;
+    }
+

@@ -1,0 +1,10 @@
+  public void testTypeParametersMustNotBePrimitives() {
+    try {
+      Types.newParameterizedType(Map.class, String.class, int.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+      Asserts.assertContains(expected.getMessage(),
+          "Parameterized types may not have primitive arguments: int");
+    }
+  }
+

@@ -1,0 +1,13 @@
+  /**
+   * Returns an equivalent (but not necessarily equal) type literal that is
+   * free of primitive types. Type literals of primitives will return the
+   * corresponding wrapper types.
+   */
+  public static <T> TypeLiteral<T> wrapPrimitives(TypeLiteral<T> typeLiteral) {
+    @SuppressWarnings("unchecked")
+    TypeLiteral<T> wrappedPrimitives = (TypeLiteral<T>) PRIMITIVE_TO_WRAPPER.get(typeLiteral);
+    return wrappedPrimitives != null
+        ? wrappedPrimitives
+        : typeLiteral;
+  }
+

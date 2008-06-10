@@ -1,6 +1,6 @@
   /**
    * Returns the type from super class's type parameter in {@link
-   * Types#canonicalize(Type) canonical form}.
+   * com.google.inject.internal.MoreTypes#canonicalize(Type) canonical form}.
    */
   static Type getSuperclassTypeParameter(Class<?> subclass) {
     Type superclass = subclass.getGenericSuperclass();

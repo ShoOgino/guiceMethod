@@ -1,0 +1,11 @@
+  public void testToString() {
+    Assert.assertEquals("java.lang.String", MoreTypes.toString(String.class));
+    assertEquals("java.lang.String[][]", MoreTypes.toString(stringArray));
+    assertEquals("java.util.Map<java.lang.String, java.lang.Integer>",
+        MoreTypes.toString(mapStringInteger));
+    assertEquals("java.util.List<java.lang.String[][]>",
+        MoreTypes.toString(listStringArray));
+    assertEquals(innerFloatDouble.toString(),
+        MoreTypes.toString(innerFloatDouble));
+  }
+

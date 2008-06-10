@@ -1,0 +1,10 @@
+  /**
+   * Returns a type modelling a {@link Map} whose keys are of type
+   * {@code keyType} and whose values are of type {@code valueType}.
+   *
+   * @return a {@link java.io.Serializable serializable} parameterized type.
+   */
+  public static ParameterizedType mapOf(Type keyType, Type valueType) {
+    return newParameterizedType(Map.class, keyType, valueType);
+  }
+
