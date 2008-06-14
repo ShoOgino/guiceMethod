@@ -1,0 +1,8 @@
+  public static ErrorMessage ambiguousTypeConversion(String stringValue, TypeLiteral<?> type,
+      MatcherAndConverter<?> matchingConverter, MatcherAndConverter<?> converter) {
+    return new ErrorMessage("Error converting '%s' to  %s. "
+        + "More than one type converter can apply: %s, and %s. "
+        + "Please adjust your type converter configuration to avoid  overlapping matches.",
+        stringValue, type, matchingConverter, converter);
+  }
+

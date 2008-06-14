@@ -1,0 +1,5 @@
+  public static ErrorMessage missingConstructor(Class<?> implementation) {
+    return new ErrorMessage("Could not find a suitable constructor in %s. " + CONSTRUCTOR_RULES,
+        implementation);
+  }
+

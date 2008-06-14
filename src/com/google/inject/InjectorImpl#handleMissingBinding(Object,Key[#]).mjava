@@ -6,10 +6,10 @@
     }
 
     if (otherNames.isEmpty()) {
-      errorHandler.handle(source, ErrorMessages.MISSING_BINDING, key);
+      errorHandler.handle(source, ErrorMessage.missingBinding(key));
     }
     else {
-      errorHandler.handle(source, ErrorMessages.MISSING_BINDING_BUT_OTHERS_EXIST, key, otherNames);
+      errorHandler.handle(source, ErrorMessage.missingBindingButOthersExist(key, otherNames));
     }
   }
 

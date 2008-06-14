@@ -4,12 +4,12 @@
 
       if (!Annotations.isRetainedAtRuntime(annotationType)) {
         addError(StackTraceElements.forType(annotationType),
-            ErrorMessages.MISSING_RUNTIME_RETENTION, source);
+            ErrorMessage.missingRuntimeRetention(source));
       }
 
       if (!Key.isBindingAnnotation(annotationType)) {
         addError(StackTraceElements.forType(annotationType),
-            ErrorMessages.MISSING_BINDING_ANNOTATION, source);
+            ErrorMessage.missingBindingAnnotation(source));
       }
     }
   }

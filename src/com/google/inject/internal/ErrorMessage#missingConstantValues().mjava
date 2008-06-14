@@ -1,0 +1,4 @@
+  public static ErrorMessage missingConstantValues() {
+    return new ErrorMessage("Missing constant value. Please call to(...).");
+  }
+

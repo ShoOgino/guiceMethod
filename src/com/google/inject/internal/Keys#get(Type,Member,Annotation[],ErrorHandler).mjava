@@ -10,7 +10,8 @@
           found = annotation;
         } else {
           errorHandler.handle(StackTraceElements.forMember(member),
-              ErrorMessages.DUPLICATE_BINDING_ANNOTATIONS, found, annotation);
+              ErrorMessage.duplicateBindingAnnotations(
+                  found.annotationType(), annotation.annotationType()));
         }
       }
     }

@@ -25,7 +25,7 @@
           // throw with a more appropriate message below
         }
       }
-      throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, key);
+      throw new ResolveFailedException(ErrorMessage.missingBinding(key));
     }
 
     // Create a binding based on the raw type.

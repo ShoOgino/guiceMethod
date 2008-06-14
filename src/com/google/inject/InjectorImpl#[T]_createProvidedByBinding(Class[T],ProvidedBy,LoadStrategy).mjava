@@ -5,7 +5,7 @@
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?
     if (providerType == type) {
-      throw new ResolveFailedException(ErrorMessages.RECURSIVE_PROVIDER_TYPE);
+      throw new ResolveFailedException(ErrorMessage.recursiveProviderType());
     }
 
     // TODO: Make sure the provided type extends type. We at least check the type at runtime below.
@@ -20,8 +20,8 @@
         Provider<?> provider = providerBinding.internalFactory.get(context, injectionPoint);
         Object o = provider.get();
         if (o != null && !type.isInstance(o)) {
-          errorHandler.handle(StackTraceElements.forType(type), ErrorMessages.SUBTYPE_NOT_PROVIDED,
-              providerType, type);
+          errorHandler.handle(StackTraceElements.forType(type),
+              ErrorMessage.subtypeNotProvided(providerType, type));
           throw new AssertionError();
         }
 

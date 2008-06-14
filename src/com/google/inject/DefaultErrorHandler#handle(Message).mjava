@@ -1,0 +1,12 @@
+  public final void handle(Message message) {
+    if (state == State.RUNTIME) {
+      throw new CreationException(Collections.singleton(message));
+
+    } else if (state == State.CONFIGURATION_TIME) {
+      errorMessages.add(message);
+
+    } else {
+      throw new AssertionError();
+    }
+  }
+

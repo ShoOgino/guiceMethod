@@ -1,0 +1,4 @@
+  public static ErrorMessage notASubtype(Class<?> implementationType, Class<?> type) {
+    return new ErrorMessage("%s doesn't extend %s.", implementationType, type);
+  }
+

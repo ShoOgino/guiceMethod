@@ -8,6 +8,6 @@
     try {
       injector.getInstance(InvalidCharacter.class);
       fail();
-    } catch (ConfigurationException e) { /* expected */ }
+    } catch (CreationException expected) { /* expected */ }
   }
 

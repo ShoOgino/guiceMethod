@@ -1,0 +1,4 @@
+  public static ErrorMessage scopeNotFound(String s) {
+    return new ErrorMessage("No scope is bound to %s.", s);
+  }
+

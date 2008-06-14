@@ -1,5 +1,6 @@
   @Override public Boolean visitAddMessageError(AddMessageErrorCommand command) {
-    addError(command.getSource(), command.getMessage(), command.getArguments().toArray());
+    String message = String.format(command.getMessage(), command.getArguments());
+    errorHandler.handle(new Message(command.getSource(), message));
     return true;
   }
 

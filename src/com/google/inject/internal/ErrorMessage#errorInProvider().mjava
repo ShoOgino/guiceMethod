@@ -1,0 +1,4 @@
+  public static ErrorMessage errorInProvider() {
+    return new ErrorMessage("Error in custom provider");
+  }
+

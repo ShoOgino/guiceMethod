@@ -1,0 +1,4 @@
+  public static ErrorMessage recursiveBinding() {
+    return new ErrorMessage("Binding points to itself.");
+  }
+

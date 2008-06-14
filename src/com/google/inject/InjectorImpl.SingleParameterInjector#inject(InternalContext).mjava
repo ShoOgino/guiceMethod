@@ -3,7 +3,7 @@
       try {
         return factory.get(context, injectionPoint);
       }
-      catch (ConfigurationException e) {
+      catch (CreationException e) {
         throw e;
       }
       catch (ProvisionException provisionException) {
@@ -11,7 +11,8 @@
         throw provisionException;
       }
       catch (RuntimeException runtimeException) {
-        throw new ProvisionException(runtimeException, ErrorMessages.ERROR_INJECTING_METHOD);
+        throw new ProvisionException(
+            ErrorMessage.errorInjectingMethod().toString(), runtimeException);
       }
       finally {
         context.setInjectionPoint(null);

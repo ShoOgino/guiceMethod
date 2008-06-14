@@ -8,7 +8,7 @@
               constructionProxy.getParameters());
     }
     catch (ResolveFailedException e) {
-      injector.errorHandler.handle(constructionProxy.getMember(), e.getMessage());
+      injector.errorHandler.handle(e.getMessage(constructionProxy.getMember()));
       return null;
     }
   }

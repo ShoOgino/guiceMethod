@@ -6,11 +6,10 @@
     }
 
     String message = getMember() != null
-        ? String.format(ErrorMessages.CANNOT_INJECT_NULL_INTO_MEMBER, source,
-            getMember())
-        : String.format(ErrorMessages.CANNOT_INJECT_NULL, source);
+        ? ErrorMessage.cannotInjectNullIntoMember(source, getMember()).toString()
+        : ErrorMessage.cannotInjectNull(source).toString();
 
-    throw new ProvisionException(new NullPointerException(message),
-        String.format(ErrorMessages.CANNOT_INJECT_NULL, source));
+    throw new ProvisionException(ErrorMessage.cannotInjectNull(source).toString(),
+        new NullPointerException(message));
   }
 

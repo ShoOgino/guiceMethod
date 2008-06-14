@@ -1,0 +1,4 @@
+  public static ErrorMessage cannotInjectRawProvider() {
+    return new ErrorMessage("Cannot inject a Provider that has no type parameter");
+  }
+

@@ -1,5 +1,0 @@
-  /**
-   * Handles an error.
-   */
-  void handle(Object source, String message);
-

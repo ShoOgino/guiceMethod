@@ -1,0 +1,4 @@
+  public static ErrorMessage bindingNotFound(Key<?> key, String message) {
+    return new ErrorMessage("Binding to %s not found: %s", key, message);
+  }
+

@@ -1,0 +1,4 @@
+  public static ErrorMessage cannotInjectNull(Object source) {
+    return new ErrorMessage("null returned by binding at %s", source);
+  }
+

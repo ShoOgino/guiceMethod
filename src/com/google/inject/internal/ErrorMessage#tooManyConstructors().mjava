@@ -1,0 +1,5 @@
+  public static ErrorMessage tooManyConstructors() {
+    return new ErrorMessage(
+        "Found more than one constructor annotated with @Inject. " + CONSTRUCTOR_RULES);
+  }
+

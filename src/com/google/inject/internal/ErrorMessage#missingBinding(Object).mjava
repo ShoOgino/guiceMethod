@@ -1,0 +1,5 @@
+  public static ErrorMessage missingBinding(Object keyOrType) {
+    return new ErrorMessage("Binding to %s not found. No bindings to that type were found.",
+        keyOrType);
+  }
+

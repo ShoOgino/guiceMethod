@@ -24,8 +24,8 @@
     for (MatcherAndConverter<?> converter : converters) {
       if (converter.getTypeMatcher().matches(type)) {
         if (matchingConverter != null) {
-          throw new ResolveFailedException(ErrorMessages.AMBIGUOUS_TYPE_CONVERSION,
-              stringValue, type, matchingConverter, converter);
+          throw new ResolveFailedException(ErrorMessage.ambiguousTypeConversion(
+              stringValue, type, matchingConverter, converter));
         }
         matchingConverter = converter;
       }
@@ -43,13 +43,13 @@
           .convert(stringValue, key.getTypeLiteral());
 
       if (converted == null) {
-        throw new ResolveFailedException(ErrorMessages.CONVERTER_RETURNED_NULL);
+        throw new ResolveFailedException(ErrorMessage.converterReturnedNull());
       }
 
       // We have to filter out primitive types because an Integer is not an instance of int, and we
       // provide converters for all the primitive types and know that they work anyway.
       if (!type.getRawType().isInstance(converted)) {
-        throw new ResolveFailedException(ErrorMessages.CONVERSION_TYPE_ERROR, converted, type);
+        throw new ResolveFailedException(ErrorMessage.conversionTypeError(converted, type));
       }
       return new ConvertedConstantBindingImpl<T>(this, key, converted, stringBinding);
     }
@@ -57,8 +57,8 @@
       throw e;
     }
     catch (Exception e) {
-      throw new ResolveFailedException(ErrorMessages.CONVERSION_ERROR, stringValue,
-          stringBinding.getSource(), type, matchingConverter, e.getMessage());
+      throw new ResolveFailedException(ErrorMessage.conversionError(stringValue,
+          stringBinding.getSource(), type, matchingConverter, e.getMessage()));
     }
   }
 

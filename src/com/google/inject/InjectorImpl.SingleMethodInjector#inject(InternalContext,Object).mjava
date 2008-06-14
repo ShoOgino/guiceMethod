@@ -7,7 +7,7 @@
       }
       catch (InvocationTargetException e) {
         Throwable cause = e.getCause() != null ? e.getCause() : e;
-        throw new ProvisionException(cause, ErrorMessages.ERROR_INJECTING_METHOD);
+        throw new ProvisionException(ErrorMessage.errorInjectingMethod().toString(), cause);
       }
     }
 

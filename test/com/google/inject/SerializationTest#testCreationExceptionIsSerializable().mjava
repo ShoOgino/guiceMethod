@@ -1,8 +1,4 @@
   public void testCreationExceptionIsSerializable() throws IOException {
-    try {
-      assertSimilarWhenReserialized(createCreationException());
-    } catch (NotSerializableException e) {
-      fail("Known failure. CreationException is not Serializable.");
-    }
+    assertSimilarWhenReserialized(createCreationException());
   }
 

@@ -1,0 +1,6 @@
+  public static ErrorMessage cannotSatisfyCircularDependency(Class<?> expectedType) {
+    return new ErrorMessage(
+        "Tried proxying %s to support a circular dependency, but it is not an interface.",
+        expectedType);
+  }
+

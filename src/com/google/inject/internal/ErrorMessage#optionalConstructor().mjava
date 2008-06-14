@@ -1,0 +1,4 @@
+  public static ErrorMessage optionalConstructor() {
+    return new ErrorMessage("@Inject(optional=true) is not allowed on constructors.");
+  }
+

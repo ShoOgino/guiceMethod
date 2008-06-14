@@ -5,7 +5,7 @@
 
     // If the Provider has no type parameter (raw Provider)...
     if (!(providerType instanceof ParameterizedType)) {
-      throw new ResolveFailedException(ErrorMessages.CANNOT_INJECT_RAW_PROVIDER);
+      throw new ResolveFailedException(ErrorMessage.cannotInjectRawProvider());
     }
 
     Type entryType = ((ParameterizedType) providerType).getActualTypeArguments()[0];

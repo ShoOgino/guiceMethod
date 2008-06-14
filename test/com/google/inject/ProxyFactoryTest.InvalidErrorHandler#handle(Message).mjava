@@ -1,0 +1,4 @@
+    public void handle(Message message) {
+      throw new AssertionError(message.getMessage());
+    }
+

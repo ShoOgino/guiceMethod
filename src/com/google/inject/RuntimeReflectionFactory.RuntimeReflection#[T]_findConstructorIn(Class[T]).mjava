@@ -9,13 +9,13 @@
           if (inject.optional()) {
             errorHandler.handle(
                 StackTraceElements.forMember(constructor),
-                ErrorMessages.OPTIONAL_CONSTRUCTOR);
+                ErrorMessage.optionalConstructor());
           }
 
           if (found != null) {
             errorHandler.handle(
                 StackTraceElements.forMember(found),
-                ErrorMessages.TOO_MANY_CONSTRUCTORS);
+                ErrorMessage.tooManyConstructors());
             return invalidConstructor();
           }
           found = constructor;
@@ -34,8 +34,7 @@
         errorHandler.handle(
             StackTraceElements.forMember(
                 implementation.getDeclaredConstructors()[0]),
-            ErrorMessages.MISSING_CONSTRUCTOR,
-            implementation);
+            ErrorMessage.missingConstructor(implementation));
         return invalidConstructor();
       }
     }

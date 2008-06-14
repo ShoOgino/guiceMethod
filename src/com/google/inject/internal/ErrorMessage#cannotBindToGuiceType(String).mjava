@@ -1,0 +1,8 @@
+//  public static ErrorMessage constantConversionError() {
+//    return new ErrorMessage("Error converting String constant bound at %s to %s: %s");
+//  }
+//
+  public static ErrorMessage cannotBindToGuiceType(String simpleName) {
+    return new ErrorMessage("Binding to core guice framework type is not allowed: %s.", simpleName);
+  }
+

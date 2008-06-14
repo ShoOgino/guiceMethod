@@ -1,0 +1,7 @@
+  /**
+   * Implements formatting. Converts known types to readable strings.
+   */
+  public final void handle(Object source, ErrorMessage errorMessage) {
+    handle(new Message(source, errorMessage.toString()));
+  }
+

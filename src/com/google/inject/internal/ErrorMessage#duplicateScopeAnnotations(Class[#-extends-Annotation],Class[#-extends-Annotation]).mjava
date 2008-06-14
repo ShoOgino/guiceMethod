@@ -1,0 +1,5 @@
+  public static ErrorMessage duplicateScopeAnnotations(
+      Class<? extends Annotation> a, Class<? extends Annotation> b) {
+    return new ErrorMessage("More than one scope annotation was found: %s and %s", a, b);
+  }
+

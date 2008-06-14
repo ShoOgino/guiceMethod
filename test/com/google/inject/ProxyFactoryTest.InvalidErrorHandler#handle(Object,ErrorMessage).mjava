@@ -1,0 +1,4 @@
+    public void handle(Object source, ErrorMessage errorMessage) {
+      throw new AssertionError(errorMessage.toString());
+    }
+

@@ -5,7 +5,7 @@
     } catch(ProvisionException e) {
       throw e;
     } catch(RuntimeException e) {
-      throw new ProvisionException(e, ErrorMessages.ERROR_IN_PROVIDER);
+      throw new ProvisionException(ErrorMessage.errorInProvider().toString(), e);
     }
   }
 

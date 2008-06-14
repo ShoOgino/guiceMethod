@@ -1,0 +1,4 @@
+  public Message getMessage(Object source) {
+    return new Message(source, getMessage());
+  }
+

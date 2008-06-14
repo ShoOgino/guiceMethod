@@ -1,4 +1,0 @@
-  ConfigurationException(String message) {
-    super(message);
-  }
-

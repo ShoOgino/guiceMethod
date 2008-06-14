@@ -1,0 +1,5 @@
+  /**
+   * Handles a user-reported error.
+   */
+  void handle(Message message);
+

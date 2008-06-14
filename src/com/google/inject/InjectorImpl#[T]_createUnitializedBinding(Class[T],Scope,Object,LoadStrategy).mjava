@@ -7,7 +7,7 @@
       throws ResolveFailedException {
     // Don't try to inject arrays, or enums.
     if (type.isArray() || type.isEnum()) {
-      throw new ResolveFailedException(ErrorMessages.MISSING_BINDING, type);
+      throw new ResolveFailedException(ErrorMessage.missingBinding(type));
     }
 
     // Handle @ImplementedBy
@@ -28,12 +28,12 @@
     // TODO: Method interceptors could actually enable us to implement
     // abstract types. Should we remove this restriction?
     if (Modifier.isAbstract(type.getModifiers())) {
-      throw new ResolveFailedException(ErrorMessages.CANNOT_INJECT_ABSTRACT_TYPE, type);
+      throw new ResolveFailedException(ErrorMessage.cannotInjectAbstractType(type));
     }
 
     // Error: Inner class.
     if (Classes.isInnerClass(type)) {
-      throw new ResolveFailedException(ErrorMessages.CANNOT_INJECT_INNER_CLASS, type);
+      throw new ResolveFailedException(ErrorMessage.cannotInjectInnerClass(type));
     }
 
     if (scope == null) {

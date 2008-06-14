@@ -3,8 +3,8 @@
       return getProviderOrThrow(key);
     }
     catch (ResolveFailedException e) {
-      throw new ConfigurationException(
-          "Missing binding to " + ErrorMessages.convert(key) + ": " + e.getMessage());
+      throw new CreationException(new Message(
+          ErrorMessage.bindingNotFound(key, e.getMessage()).toString()));
     }
   }
 

@@ -1,4 +1,0 @@
-  public ResolveFailedException(String message, Object... arguments) {
-    super(ErrorMessages.format(message, arguments));
-  }
-

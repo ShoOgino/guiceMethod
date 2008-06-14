@@ -5,10 +5,8 @@
         if (annotation.annotationType()
             .isAnnotationPresent(BindingAnnotation.class)) {
           if (found != null) {
-            addError(ErrorMessages.DUPLICATE_BINDING_ANNOTATIONS,
-                "@" + found.annotationType().getSimpleName(),
-                "@" + annotation.annotationType().getSimpleName()
-            );
+            addError(ErrorMessage.duplicateBindingAnnotations(
+                found.annotationType(), annotation.annotationType()).toString());
           } else {
             found = annotation;
           }

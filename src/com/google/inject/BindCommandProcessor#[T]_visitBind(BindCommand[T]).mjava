@@ -5,7 +5,7 @@
     Class<? super T> rawType = key.getTypeLiteral().getRawType();
 
     if (rawType == Provider.class) {
-      addError(source, ErrorMessages.BINDING_TO_PROVIDER);
+      addError(source, ErrorMessage.bindingToProvider());
       return true;
     }
 
@@ -28,8 +28,8 @@
         if (scope != null) {
           return scope;
         } else {
-          addError(source, ErrorMessages.SCOPE_NOT_FOUND,
-              "@" + scopeAnnotation.getSimpleName());
+          addError(source, ErrorMessage.scopeNotFound(
+              "@" + scopeAnnotation.getSimpleName()));
           return Scopes.NO_SCOPE;
         }
       }
@@ -74,7 +74,7 @@
 
       public Void visitToKey(Key<? extends T> targetKey) {
         if (key.equals(targetKey)) {
-          addError(source, ErrorMessages.RECURSIVE_BINDING);
+          addError(source, ErrorMessage.recursiveBinding());
         }
 
         FactoryProxy<T> factory = new FactoryProxy<T>(key, targetKey, source);
@@ -94,7 +94,7 @@
         // We can't assume abstract types aren't injectable. They may have an
         // @ImplementedBy annotation or something.
         if (key.hasAnnotationType() || !(type instanceof Class<?>)) {
-          addError(source, ErrorMessages.MISSING_IMPLEMENTATION);
+          addError(source, ErrorMessage.missingImplementation());
           putBinding(invalidBinding(injector, key, source));
           return null;
         }
@@ -107,7 +107,7 @@
           binding = injector.createUnitializedBinding(clazz, scope, source, loadStrategy);
           putBinding(binding);
         } catch (ResolveFailedException e) {
-          injector.errorHandler.handle(source, e.getMessage());
+          injector.errorHandler.handle(e.getMessage(source));
           putBinding(invalidBinding(injector, key, source));
           return null;
         }
@@ -117,7 +117,7 @@
             try {
               injector.initializeBinding(binding);
             } catch (ResolveFailedException e) {
-              injector.errorHandler.handle(source, e.getMessage());
+              injector.errorHandler.handle(e.getMessage(source));
             }
           }
         });

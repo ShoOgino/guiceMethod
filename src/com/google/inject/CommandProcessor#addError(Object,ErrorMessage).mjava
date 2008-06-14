@@ -1,0 +1,4 @@
+  protected void addError(Object source, ErrorMessage errorMessage) {
+    errorHandler.handle(source, errorMessage);
+  }
+

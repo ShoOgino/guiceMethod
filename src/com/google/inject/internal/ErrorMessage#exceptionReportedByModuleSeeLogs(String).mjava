@@ -1,0 +1,5 @@
+  public static ErrorMessage exceptionReportedByModuleSeeLogs(String message) {
+    return new ErrorMessage("An exception was caught and reported. "
+        + "See log for details. Message: %s", message);
+  }
+

@@ -1,0 +1,6 @@
+  public static ErrorMessage missingBindingButOthersExist(Key<?> key, List<String> otherNames) {
+    return new ErrorMessage(
+        "Binding to %s not found. Annotations on other bindings to that type include: %s", key,
+        otherNames);
+  }
+

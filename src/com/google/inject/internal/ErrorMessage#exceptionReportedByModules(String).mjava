@@ -1,0 +1,4 @@
+  public static ErrorMessage exceptionReportedByModules(String message) {
+    return new ErrorMessage("An exception was caught and reported. Message: %s", message);
+  }
+

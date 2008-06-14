@@ -11,7 +11,7 @@
           catch (ResolveFailedException e) {
             if (!inject.optional()) {
               // TODO: Report errors for more than one parameter per member.
-              errorHandler.handle(member, e.getMessage());
+              errorHandler.handle(e.getMessage(member));
             }
           }
         }

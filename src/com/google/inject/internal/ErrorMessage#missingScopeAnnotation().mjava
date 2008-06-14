@@ -1,0 +1,4 @@
+  public static ErrorMessage missingScopeAnnotation() {
+    return new ErrorMessage("Please annotate with @ScopeAnnotation.");
+  }
+

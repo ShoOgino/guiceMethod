@@ -1,0 +1,4 @@
+  public static ErrorMessage missingImplementation() {
+    return new ErrorMessage("No implementation was specified.");
+  }
+

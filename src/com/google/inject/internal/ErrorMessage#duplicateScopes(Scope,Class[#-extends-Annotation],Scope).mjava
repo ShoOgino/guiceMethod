@@ -1,0 +1,6 @@
+  public static ErrorMessage duplicateScopes(Scope existing,
+      Class<? extends Annotation> annotationType, Scope scope) {
+    return new ErrorMessage("Scope %s is already bound to %s. Cannot bind %s.", existing,
+        annotationType, scope);
+  }
+

@@ -7,12 +7,12 @@
 
     // Make sure it's not the same type. TODO: Can we check for deeper cycles?
     if (implementationType == type) {
-      throw new ResolveFailedException(ErrorMessages.RECURSIVE_IMPLEMENTATION_TYPE);
+      throw new ResolveFailedException(ErrorMessage.recursiveImplementationType());
     }
 
     // Make sure implementationType extends type.
     if (!type.isAssignableFrom(implementationType)) {
-      throw new ResolveFailedException(ErrorMessages.NOT_A_SUBTYPE, implementationType, type);
+      throw new ResolveFailedException(ErrorMessage.notASubtype(implementationType, type));
     }
 
     // After the preceding check, this cast is safe.

@@ -1,0 +1,4 @@
+  public static ErrorMessage errorInjectingMethod() {
+    return new ErrorMessage("Error injecting method");
+  }
+

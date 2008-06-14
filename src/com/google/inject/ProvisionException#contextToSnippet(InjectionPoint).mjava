@@ -4,20 +4,19 @@
    */
   private String contextToSnippet(InjectionPoint injectionPoint) {
     Key<?> key = injectionPoint.getKey();
-    Object keyDescription = ErrorMessages.convert(key);
     Member member = injectionPoint.getMember();
 
     if (member instanceof Field) {
-      return String.format(ERROR_WHILE_LOCATING_FIELD,
-          keyDescription, StackTraceElements.forMember(member));
+      return whileLocatingField(
+          key, StackTraceElements.forMember(member)).toString();
 
     } else if (member instanceof Method || member instanceof Constructor) {
-      return String.format(ERROR_WHILE_LOCATING_PARAMETER,
-          keyDescription, injectionPoint.getParameterIndex(),
-          StackTraceElements.forMember(member));
+      return whileLocatingParameter(
+          key, injectionPoint.getParameterIndex(),
+          StackTraceElements.forMember(member)).toString();
 
     } else {
-      return String.format(ERROR_WHILE_LOCATING_VALUE, keyDescription);
+      return whileLocatingValue(key).toString();
     }
   }
 

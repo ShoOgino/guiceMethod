@@ -1,0 +1,4 @@
+  public ResolveFailedException(ErrorMessage errorMessage) {
+    super(errorMessage.toString());
+  }
+

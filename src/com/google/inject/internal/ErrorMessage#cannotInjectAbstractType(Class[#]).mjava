@@ -1,0 +1,5 @@
+  public static ErrorMessage cannotInjectAbstractType(Class<?> type) {
+    return new ErrorMessage("Injecting into abstract types is not supported. "
+        + "Please use a concrete type instead of %s.", type);
+  }
+

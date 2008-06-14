@@ -4,7 +4,7 @@
         try {
           targetFactory = injector.getInternalFactory(targetKey);
         } catch (ResolveFailedException e) {
-          injector.errorHandler.handle(source, e.getMessage());
+          injector.errorHandler.handle(e.getMessage(source));
         }
       }
     });
