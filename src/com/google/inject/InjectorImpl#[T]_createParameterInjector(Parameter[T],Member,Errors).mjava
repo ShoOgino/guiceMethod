@@ -1,0 +1,16 @@
+  <T> SingleParameterInjector<T> createParameterInjector(final Parameter<T> parameter,
+      Member member, final Errors errors) throws ResolveFailedException {
+    InternalFactory<? extends T> factory;
+    Object source = StackTraceElements.forMember(member);
+    errors.pushSource(source);
+    try {
+      factory = getInternalFactory(parameter.getKey(), errors);
+    } finally {
+      errors.popSource(source);
+    }
+
+    InjectionPoint<T> injectionPoint = InjectionPoint.newInstance(
+        member, parameter.getIndex(), parameter.allowsNull(), parameter.getKey());
+    return new SingleParameterInjector<T>(injectionPoint, factory);
+  }
+

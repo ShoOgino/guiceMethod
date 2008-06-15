@@ -1,4 +1,4 @@
-  public String getMessage() {
-    return createErrorMessage(errorMessages);
+  @Override public String getMessage() {
+    return Errors.format("Guice configuration errors", errorMessages);
   }
 

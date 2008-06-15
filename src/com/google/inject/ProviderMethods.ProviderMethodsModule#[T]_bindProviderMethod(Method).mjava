@@ -5,8 +5,7 @@
 
       Class<? extends Annotation> scopeAnnotation
           = findScopeAnnotation(method.getAnnotations());
-      Annotation bindingAnnotation = findBindingAnnotation(
-          method.getAnnotations());
+      Annotation bindingAnnotation = findBindingAnnotation(method, method.getAnnotations());
 
       final List<Provider<?>> parameterProviders
           = findParameterProviders(method);

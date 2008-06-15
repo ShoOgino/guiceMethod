@@ -1,4 +1,0 @@
-  public static ErrorMessage bindingToProvider() {
-    return new ErrorMessage("Binding to Provider is not allowed.");
-  }
-

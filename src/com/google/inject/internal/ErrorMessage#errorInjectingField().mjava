@@ -1,4 +1,0 @@
-  public static ErrorMessage errorInjectingField() {
-    return new ErrorMessage("Error injecting field");
-  }
-

@@ -7,7 +7,6 @@
       out.writeImport(List.class);
       out.writeImport(Member.class);
       out.writeImport(Parameter.class);
-      out.writeImport(Nullability.class);
       out.writeImport(Arrays.class);
       out.writeImport(SuppressWarnings.class);
       out.writeImport(Key.class);

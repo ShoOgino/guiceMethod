@@ -1,9 +1,0 @@
-  ConstructorInjector(InjectorImpl injector, Class<T> implementation) {
-    this.implementation = implementation;
-    constructionProxy = injector.reflection.getConstructionProxy(implementation);
-    parameterInjectors = createParameterInjector(injector, constructionProxy);
-    List<SingleMemberInjector> memberInjectorsList = injector.injectors.get(implementation);
-    memberInjectors = memberInjectorsList.toArray(
-        new SingleMemberInjector[memberInjectorsList.size()]);
-  }
-

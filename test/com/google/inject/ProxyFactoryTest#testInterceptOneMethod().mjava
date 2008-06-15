@@ -1,17 +1,17 @@
   public void testInterceptOneMethod()
-      throws NoSuchMethodException, InvocationTargetException {
+      throws NoSuchMethodException, InvocationTargetException, ResolveFailedException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder(new InvalidErrorHandler());
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
 
     builder.intercept(
         only(Bar.class), annotatedWith(Intercept.class), interceptor);
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<Foo> fooFactory =
-        factory.get(Foo.class.getDeclaredConstructor());
+        factory.get(new Errors(), Foo.class.getDeclaredConstructor());
     ConstructionProxy<Bar> barFactory =
-        factory.get(Bar.class.getDeclaredConstructor());
+        factory.get(new Errors(), Bar.class.getDeclaredConstructor());
 
     Foo foo = fooFactory.newInstance();
     Bar bar = barFactory.newInstance();

@@ -1,0 +1,10 @@
+  void validateOustandingInjections(Errors errors) {
+    for (Object toInject : outstandingInjections) {
+      try {
+        getMemberInjectors(toInject.getClass());
+      } catch (ResolveFailedException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+  }
+

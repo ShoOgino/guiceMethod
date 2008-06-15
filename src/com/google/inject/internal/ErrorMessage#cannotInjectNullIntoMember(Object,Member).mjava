@@ -1,5 +1,0 @@
-  public static ErrorMessage cannotInjectNullIntoMember(Object source, Member member) {
-    return new ErrorMessage("null returned by binding at %s%n but %s is not @Nullable",
-        source, member);
-  }
-

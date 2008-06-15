@@ -1,4 +1,0 @@
-  public static ErrorMessage recursiveImplementationType() {
-    return new ErrorMessage("@ImplementedBy points to the same class it annotates.");
-  }
-

@@ -1,4 +1,4 @@
-  public boolean equals(Object o) {
+  @Override public boolean equals(Object o) {
     if (!(o instanceof Message)) {
       return false;
     }

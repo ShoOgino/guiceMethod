@@ -1,0 +1,23 @@
+  /**
+   * Gets parameter injectors.
+   *
+   * @param member to which the parameters belong
+   * @return injections
+   */
+  SingleParameterInjector<?>[] getParametersInjectors(
+      Member member, List<Parameter<?>> parameters, Errors errors) throws ResolveFailedException {
+    SingleParameterInjector<?>[] parameterInjectors
+        = new SingleParameterInjector<?>[parameters.size()];
+    int index = 0;
+    for (Parameter<?> parameter : parameters) {
+      try {
+        parameterInjectors[index] = createParameterInjector(parameter, member, errors);
+      } catch (ResolveFailedException rethrownBelow) {
+      }
+      index++;
+    }
+
+    errors.throwIfNecessary();
+    return parameterInjectors;
+  }
+

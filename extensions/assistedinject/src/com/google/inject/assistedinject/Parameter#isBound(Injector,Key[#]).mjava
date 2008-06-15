@@ -6,13 +6,6 @@
           || injector.getProvider(key) != null;
     } catch (ProvisionException e) {
       return false;
-    } catch (RuntimeException re) {
-      // TODO: make ConfigurationException public?
-      if (re.getClass().getName().contains("ConfigurationException")) {
-        return false;
-      } else {
-        throw re;
-      }
     }
   }
 

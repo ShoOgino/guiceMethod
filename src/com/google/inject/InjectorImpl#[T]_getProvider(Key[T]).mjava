@@ -1,10 +1,12 @@
   public <T> Provider<T> getProvider(final Key<T> key) {
+    Errors errors = new Errors();
     try {
-      return getProviderOrThrow(key);
+      Provider<T> result = getProviderOrThrow(key, errors);
+      errors.throwIfNecessary();
+      return result;
     }
     catch (ResolveFailedException e) {
-      throw new CreationException(new Message(
-          ErrorMessage.bindingNotFound(key, e.getMessage()).toString()));
+      throw errors.merge(e.getErrors()).toProvisionException();
     }
   }
 

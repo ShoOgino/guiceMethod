@@ -1,4 +1,0 @@
-  @Override void initialize(InjectorImpl injector) throws ResolveFailedException {
-    lateBoundConstructor.bind(injector, getBoundClass());
-  }
-

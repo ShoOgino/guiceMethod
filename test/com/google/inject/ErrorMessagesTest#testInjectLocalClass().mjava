@@ -6,7 +6,6 @@
       injector.getInstance(LocalClass.class);
       fail();
     } catch (Exception expected) {
-      // TODO(kevinb): why does the source come out as unknown??
       assertContains(expected.getMessage(), "Injecting into inner classes is not supported.");
     }
   }

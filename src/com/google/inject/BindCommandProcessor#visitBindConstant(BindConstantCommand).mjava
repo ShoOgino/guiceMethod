@@ -1,7 +1,7 @@
   @Override public Boolean visitBindConstant(BindConstantCommand command) {
     BindTarget<?> target = command.getTarget();
     if (target == null) {
-      addError(command.getSource(), ErrorMessage.missingConstantValues());
+      errors.at(command.getSource()).missingConstantValues();
       return true;
     }
 

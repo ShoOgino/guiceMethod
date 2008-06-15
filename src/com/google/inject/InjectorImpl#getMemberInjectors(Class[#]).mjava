@@ -1,0 +1,14 @@
+  public List<SingleMemberInjector> getMemberInjectors(Class<?> type)
+      throws ResolveFailedException {
+    Object injectorsOrError = injectors.get(type);
+    if (injectorsOrError instanceof List) {
+      @SuppressWarnings("unchecked") // the only type of list we use
+      List<SingleMemberInjector> result = (List<SingleMemberInjector>) injectorsOrError;
+      return result;
+    } else if (injectorsOrError instanceof Errors) {
+      throw ((Errors) injectorsOrError).copy().toException();
+    } else {
+      throw new AssertionError();
+    }
+  }
+

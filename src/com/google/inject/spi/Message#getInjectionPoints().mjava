@@ -1,0 +1,4 @@
+  public List<InjectionPoint> getInjectionPoints() {
+    return injectionPoints;
+  }
+

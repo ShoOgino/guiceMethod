@@ -1,7 +1,4 @@
-  /**
-   * Validate everything that we can validate now that the injector is ready
-   * for use.
-   */
+  /** Validate everything that we can validate now that the injector is ready for use. */
   private void validate() {
     bindCommandProcesor.runCreationListeners(injector);
     stopwatch.resetAndLog("Validation");
@@ -9,13 +6,12 @@
     requestStaticInjectionCommandProcessor.validate(injector);
     stopwatch.resetAndLog("Static validation");
 
-    injector.validateOustandingInjections();
+    injector.validateOustandingInjections(errors);
     stopwatch.resetAndLog("Instance member validation");
 
-    new GetProviderProcessor(injector)
-        .processCommands(commands);
+    new GetProviderProcessor(errors, injector).processCommands(commands);
     stopwatch.resetAndLog("Provider verification");
 
-    errorHandler.blowUpIfErrorsExist();
+    errors.throwCreationExceptionIfErrorsExist();
   }
 

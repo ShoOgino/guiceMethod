@@ -7,7 +7,7 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "Injecting into abstract types is not supported.");
+      assertContains(expected.getMessage(), "No implementation for java.util.List was bound.");
     }
   }
 

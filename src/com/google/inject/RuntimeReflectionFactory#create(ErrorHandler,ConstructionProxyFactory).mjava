@@ -1,5 +1,0 @@
-  public Reflection create(ErrorHandler errorHandler,
-      ConstructionProxyFactory constructionProxyFactory) {
-    return new RuntimeReflection(errorHandler, constructionProxyFactory);
-  }
-

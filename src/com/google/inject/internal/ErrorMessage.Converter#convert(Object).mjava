@@ -1,4 +1,0 @@
-    String convert(Object o) {
-      return toString(type.cast(o));
-    }
-

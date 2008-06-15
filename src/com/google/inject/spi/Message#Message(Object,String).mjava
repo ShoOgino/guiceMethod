@@ -1,5 +1,4 @@
   public Message(Object source, String message) {
-    this.source = checkNotNull(source, "source").toString();
-    this.message = checkNotNull(message, "message");
+    this(source, message, ImmutableList.<InjectionPoint>of(), null);
   }
 

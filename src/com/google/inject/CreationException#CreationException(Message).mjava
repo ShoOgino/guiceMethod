@@ -1,4 +1,0 @@
-  public CreationException(Message message) {
-    this.errorMessages = Collections.singletonList(message);
-  }
-

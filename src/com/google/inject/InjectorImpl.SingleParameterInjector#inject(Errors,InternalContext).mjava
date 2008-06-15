@@ -1,0 +1,12 @@
+    T inject(Errors errors, InternalContext context) throws ResolveFailedException {
+      context.setInjectionPoint(injectionPoint);
+      errors.pushInjectionPoint(injectionPoint);
+      try {
+        return factory.get(errors, context, injectionPoint);
+      }
+      finally {
+        errors.popInjectionPoint(injectionPoint);
+        context.setInjectionPoint(null);
+      }
+    }
+

@@ -1,7 +1,0 @@
-  public static String format(String message, Object... arguments) {
-    for (int i = 0; i < arguments.length; i++) {
-      arguments[i] = ErrorMessages.convert(arguments[i]);
-    }
-    return String.format(message, arguments);
-  }
-

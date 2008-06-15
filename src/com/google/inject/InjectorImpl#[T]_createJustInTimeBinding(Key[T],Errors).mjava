@@ -1,0 +1,45 @@
+  /**
+   * Returns a new just-in-time binding created by resolving {@code key}. This could be an
+   * injectable class (including those with @ImplementedBy, etc.), an automatically converted
+   * constant, a {@code Provider<X>} binding, etc.
+   *
+   * @throws ResolveFailedException if the binding cannot be created.
+   */
+  <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors)
+      throws ResolveFailedException {
+    // Handle cases where T is a Provider<?>.
+    if (isProvider(key)) {
+      // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
+      // createProviderBinding() will return BindingImpl<Provider<X>>.
+      @SuppressWarnings("unchecked")
+      BindingImpl<T> binding
+          = (BindingImpl<T>) createProviderBinding((Key) key, LoadStrategy.LAZY, errors);
+      return binding;
+    }
+
+    // Try to convert a constant string binding to the requested type.
+    BindingImpl<T> convertedBinding = convertConstantStringBinding(key, errors);
+    if (convertedBinding != null) {
+      return convertedBinding;
+    }
+
+    // If the key has an annotation...
+    if (key.hasAnnotationType()) {
+      // Look for a binding without annotation attributes or return null.
+      if (key.hasAttributes()) {
+        try {
+          return getBindingOrThrow(key.withoutAttributes(), new Errors());
+        }
+        catch (ResolveFailedException ignored) {
+          // throw with a more appropriate message below
+        }
+      }
+      throw errors.missingImplementation(key).toException();
+    }
+
+    // Create a binding based on the raw type.
+    @SuppressWarnings("unchecked")
+    Class<T> clazz = (Class<T>) key.getTypeLiteral().getRawType();
+    return createBindingFromType(clazz, LoadStrategy.LAZY, errors);
+  }
+

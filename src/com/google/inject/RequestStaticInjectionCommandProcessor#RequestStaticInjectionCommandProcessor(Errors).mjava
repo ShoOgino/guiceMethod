@@ -1,0 +1,4 @@
+  RequestStaticInjectionCommandProcessor(Errors errors) {
+    super(errors);
+  }
+

@@ -1,0 +1,5 @@
+  public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
+      throws ResolveFailedException {
+    return targetFactory.get(errors, context, injectionPoint);
+  }
+

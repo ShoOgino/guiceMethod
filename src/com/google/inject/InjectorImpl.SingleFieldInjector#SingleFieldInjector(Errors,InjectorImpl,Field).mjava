@@ -1,0 +1,21 @@
+    public SingleFieldInjector(final Errors errors, final InjectorImpl injector, Field field)
+        throws ResolveFailedException {
+      this.field = field;
+
+      // Ewwwww...
+      field.setAccessible(true);
+
+      final Key<?> key = Keys.get(field.getGenericType(), field, field.getAnnotations(), errors);
+
+      Object source = StackTraceElements.forMember(field);
+      errors.pushSource(source);
+      try {
+        factory = injector.getInternalFactory(key, errors);
+      } finally {
+        errors.popSource(source);
+      }
+
+      injectionPoint = InjectionPoint.newInstance(
+          field, Nullability.allowsNull(field.getAnnotations()), key);
+    }
+

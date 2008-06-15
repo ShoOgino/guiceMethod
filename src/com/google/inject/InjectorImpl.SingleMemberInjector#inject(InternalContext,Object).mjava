@@ -1,2 +1,0 @@
-    void inject(InternalContext context, Object o);
-

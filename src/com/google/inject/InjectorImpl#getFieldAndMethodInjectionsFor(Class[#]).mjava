@@ -1,0 +1,5 @@
+  Collection<InjectionPoint<?>> getFieldAndMethodInjectionsFor(Class<?> clazz)
+      throws ResolveFailedException {
+    return Collections.unmodifiableList(getModifiableFieldAndMethodInjectionsFor(clazz));
+  }
+

@@ -1,0 +1,4 @@
+  public Reflection create(ConstructionProxyFactory constructionProxyFactory) {
+    return new RuntimeReflection(constructionProxyFactory);
+  }
+

@@ -1,0 +1,19 @@
+  /** Creates a synthetic binding to Provider<T>, i.e. a binding to the provider from Binding<T>. */
+  private <T> BindingImpl<Provider<T>> createProviderBinding(Key<Provider<T>> key,
+      LoadStrategy loadStrategy, Errors errors) throws ResolveFailedException {
+    Type providerType = key.getTypeLiteral().getType();
+
+    // If the Provider has no type parameter (raw Provider)...
+    if (!(providerType instanceof ParameterizedType)) {
+      throw errors.cannotInjectRawProvider().toException();
+    }
+
+    Type entryType = ((ParameterizedType) providerType).getActualTypeArguments()[0];
+
+    @SuppressWarnings("unchecked") // safe because T came from Key<Provider<T>>
+    Key<T> providedKey = (Key<T>) key.ofType(entryType);
+
+    BindingImpl<T> delegate = getBindingOrThrow(providedKey, errors);
+    return new ProviderBindingImpl<T>(this, key, delegate, loadStrategy);
+  }
+

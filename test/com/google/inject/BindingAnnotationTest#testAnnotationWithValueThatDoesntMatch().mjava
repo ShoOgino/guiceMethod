@@ -9,9 +9,9 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "BindingAnnotationTest$Foo.s");
-      assertContains(expected.getMessage(), "Binding to java.lang.String");
-      assertContains(expected.getMessage(), "BindingAnnotationTest$Blue(value=5) not found");
+      assertContains(expected.getMessage(), "BindingAnnotationTest$Foo.s",
+          "No implementation for java.lang.String annotated with",
+          "BindingAnnotationTest$Blue(value=5) was bound");
     }
   }
 

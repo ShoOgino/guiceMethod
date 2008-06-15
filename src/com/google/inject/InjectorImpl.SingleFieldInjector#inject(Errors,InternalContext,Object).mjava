@@ -1,0 +1,19 @@
+    public void inject(Errors errors, InternalContext context, Object o) {
+      context.setInjectionPoint(injectionPoint);
+      errors.pushInjectionPoint(injectionPoint);
+      try {
+        Object value = factory.get(errors, context, injectionPoint);
+        field.set(o, value);
+      }
+      catch (IllegalAccessException e) {
+        throw new AssertionError(e);
+      }
+      catch (ResolveFailedException e) {
+        errors.merge(e.getErrors());
+      }
+      finally {
+        context.setInjectionPoint(null);
+        errors.popInjectionPoint(injectionPoint);
+      }
+    }
+

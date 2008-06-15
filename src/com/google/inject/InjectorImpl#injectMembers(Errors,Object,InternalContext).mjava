@@ -1,0 +1,11 @@
+  void injectMembers(Errors errors, Object o, InternalContext context)
+      throws ResolveFailedException {
+    if (o == null) {
+      return;
+    }
+
+    for (SingleMemberInjector injector : getMemberInjectors(o.getClass())) {
+      injector.inject(errors, context, o);
+    }
+  }
+

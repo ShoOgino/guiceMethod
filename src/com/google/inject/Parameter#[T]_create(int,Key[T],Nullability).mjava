@@ -1,4 +1,0 @@
-  public static <T> Parameter<T> create(int index, Key<T> key, Nullability nullability) {
-    return new Parameter<T>(index, key, nullability);
-  }
-

@@ -1,0 +1,50 @@
+  /**
+   * Creates a binding for an injectable type with the given scope. Looks for a scope on the type if
+   * none is specified.
+   */
+  <T> BindingImpl<T> createUnitializedBinding(Class<T> type, Scope scope, Object source,
+      LoadStrategy loadStrategy, Errors errors) throws ResolveFailedException {
+    // Don't try to inject arrays, or enums.
+    if (type.isArray() || type.isEnum()) {
+      throw errors.missingImplementation(type).toException();
+    }
+
+    // Handle @ImplementedBy
+    ImplementedBy implementedBy = type.getAnnotation(ImplementedBy.class);
+    if (implementedBy != null) {
+      // TODO: Scope internal factory.
+      return createImplementedByBinding(type, implementedBy, loadStrategy, errors);
+    }
+
+    // Handle @ProvidedBy.
+    ProvidedBy providedBy = type.getAnnotation(ProvidedBy.class);
+    if (providedBy != null) {
+      // TODO: Scope internal factory.
+      return createProvidedByBinding(type, providedBy, loadStrategy, errors);
+    }
+
+    // We can't inject abstract classes.
+    // TODO: Method interceptors could actually enable us to implement
+    // abstract types. Should we remove this restriction?
+    if (Modifier.isAbstract(type.getModifiers())) {
+      throw errors.missingImplementation(type).toException();
+    }
+
+    // Error: Inner class.
+    if (Classes.isInnerClass(type)) {
+      throw errors.cannotInjectInnerClass(type).toException();
+    }
+
+    if (scope == null) {
+      scope = Scopes.getScopeForType(errors, type, scopes);
+    }
+
+    Key<T> key = Key.get(type);
+
+    LateBoundConstructor<T> lateBoundConstructor = new LateBoundConstructor<T>();
+    InternalFactory<? extends T> scopedFactory
+        = Scopes.scope(key, this, lateBoundConstructor, scope);
+    return new ClassBindingImpl<T>(
+        this, key, source, scopedFactory, scope, lateBoundConstructor, loadStrategy);
+  }
+

@@ -1,0 +1,9 @@
+  SingleParameterInjector<?>[] createParameterInjector(Errors errors,
+      InjectorImpl injector, ConstructionProxy<T> constructionProxy)
+      throws ResolveFailedException {
+    return constructionProxy.getParameters().isEmpty()
+        ? null // default constructor.
+        : injector.getParametersInjectors(constructionProxy.getMember(),
+            constructionProxy.getParameters(), errors);
+  }
+

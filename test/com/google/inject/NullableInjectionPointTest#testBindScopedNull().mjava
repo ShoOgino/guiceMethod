@@ -14,8 +14,7 @@
       injector.getInstance(FooField.class);
     }
     catch(ProvisionException expected) {
-      NullPointerException cause = (NullPointerException)expected.getCause();
-      assertContains(cause.getMessage(), "null returned by binding at");
+      assertContains(expected.getMessage(), "null returned by binding at");
     }
   }
 

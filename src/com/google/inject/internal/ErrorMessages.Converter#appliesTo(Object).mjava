@@ -1,4 +1,0 @@
-    boolean appliesTo(Object o) {
-      return type.isAssignableFrom(o.getClass());
-    }
-

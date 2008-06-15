@@ -1,0 +1,13 @@
+  /**
+   * Creates a ProvisionException containing {@code errors}.
+   */
+  public ProvisionException(Errors errors) { // TODO: make private
+    this.errors = errors;
+
+    // include the cause in the common where there's just a single message
+    List<Message> messages = errors.getMessages();
+    if (messages.size() == 1) {
+      initCause(messages.get(0).getCause());
+    }
+  }
+

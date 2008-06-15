@@ -1,6 +1,0 @@
-  public static ErrorMessage duplicateBindingAnnotations(
-      Class<? extends Annotation> a, Class<? extends Annotation> b) {
-    return new ErrorMessage(
-        "Found more than one annotation annotated with @BindingAnnotation: %s and %s", a, b);
-  }
-

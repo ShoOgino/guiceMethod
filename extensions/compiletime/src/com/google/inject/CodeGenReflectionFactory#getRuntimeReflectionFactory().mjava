@@ -8,8 +8,7 @@
     }
 
     return new Reflection.Factory() {
-      public Reflection create(ErrorHandler errorHandler,
-          ConstructionProxyFactory constructionProxyFactory) {
+      public Reflection create(ConstructionProxyFactory constructionProxyFactory) {
         return reflection;
       }
     };

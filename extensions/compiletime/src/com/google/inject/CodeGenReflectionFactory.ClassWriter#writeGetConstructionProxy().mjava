@@ -27,7 +27,7 @@
         for (Iterator<Parameter<?>> i = entry.getValue().getParameters().iterator(); i.hasNext(); ) {
           Parameter<?> parameter = i.next();
           String separator = i.hasNext() ? "," : "";
-          out.writeLine("%s.create(%s, %s, %s.%s)%s", Parameter.class, argument, keyLiteral(parameter.getKey()), Nullability.class, parameter.getNullability(), separator);
+          out.writeLine("%s.create(%s, %s, %s)%s", Parameter.class, argument, keyLiteral(parameter.getKey()), parameter.allowsNull(), separator);
           argument++;
         }
         out.closeScope(");")

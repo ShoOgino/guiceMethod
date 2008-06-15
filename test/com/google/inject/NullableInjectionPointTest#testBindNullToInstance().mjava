@@ -2,19 +2,16 @@
    * We haven't decided on what the desired behaviour of this test should be...
    */
   public void testBindNullToInstance() {
-    Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        try {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
           bind(Foo.class).toInstance(null);
-          fail();
         }
-        catch(NullPointerException expected) {
-          assertEquals("Binding to null instances is not allowed. "
-              + "Use toProvider(Providers.of(null)) if this is your intended behaviour.", 
-              expected.getMessage());
-        }
-      }
-    });
-
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "Error at " + getClass().getName(),
+          "Binding to null instances is not allowed.");
+    }
   }
 

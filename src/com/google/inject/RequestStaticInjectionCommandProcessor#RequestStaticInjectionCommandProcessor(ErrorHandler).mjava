@@ -1,4 +1,0 @@
-  RequestStaticInjectionCommandProcessor(ErrorHandler errorHandler) {
-    super(errorHandler);
-  }
-

@@ -1,0 +1,6 @@
+  /**
+   * Gets a construction proxy for the given constructor.
+   */
+  <T> ConstructionProxy<T> get(Errors errors, Constructor<T> constructor)
+      throws ResolveFailedException;
+

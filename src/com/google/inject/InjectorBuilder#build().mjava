@@ -3,7 +3,7 @@
       throw new AssertionError("Already built, builders are not reusable.");
     }
 
-    injector = new InjectorImpl(parent, errorHandler);
+    injector = new InjectorImpl(parent);
 
     modules.add(0, new BuiltInModule(injector, stage));
 
@@ -15,7 +15,7 @@
 
     validate();
 
-    errorHandler.switchToRuntime();
+    errors.throwCreationExceptionIfErrorsExist();
 
     // If we're in the tool stage, stop here. Don't eagerly inject or load
     // anything.

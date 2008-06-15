@@ -1,4 +1,0 @@
-  public static ErrorMessage errorInjectingConstructor() {
-    return new ErrorMessage("Error injecting constructor");
-  }
-

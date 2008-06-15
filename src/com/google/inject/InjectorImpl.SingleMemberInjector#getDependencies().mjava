@@ -1,2 +1,2 @@
-    Collection<Dependency<?>> getDependencies();
+    Collection<InjectionPoint<?>> getDependencies();
 

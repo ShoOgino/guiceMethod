@@ -1,0 +1,6 @@
+  private Parameter(int index, Key<T> key, boolean allowsNull) {
+    this.index = index;
+    this.key = key;
+    this.allowsNull = allowsNull;
+  }
+

@@ -1,0 +1,5 @@
+  <T> InternalFactory<? extends T> getInternalFactory(Key<T> key, Errors errors)
+      throws ResolveFailedException {
+    return getBindingOrThrow(key, errors).internalFactory;
+  }
+

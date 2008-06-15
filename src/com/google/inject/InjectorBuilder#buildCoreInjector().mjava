@@ -1,27 +1,23 @@
-  /**
-   * Builds the injector.
-   */
+  /** Builds the injector. */
   private void buildCoreInjector() {
-    new ErrorsCommandProcessor(errorHandler)
+    new ErrorsCommandProcessor(errors)
         .processCommands(commands);
 
     BindInterceptorCommandProcessor bindInterceptorCommandProcessor
-        = new BindInterceptorCommandProcessor(errorHandler);
+        = new BindInterceptorCommandProcessor(errors);
     bindInterceptorCommandProcessor.processCommands(commands);
     ConstructionProxyFactory proxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
-    injector.reflection = reflectionFactory.create(errorHandler, proxyFactory);
+    injector.reflection = reflectionFactory.create(proxyFactory);
     stopwatch.resetAndLog("Interceptors creation");
 
-    new ScopesCommandProcessor(errorHandler, injector.scopes)
-        .processCommands(commands);
+    new ScopesCommandProcessor(errors, injector.scopes).processCommands(commands);
     stopwatch.resetAndLog("Scopes creation");
 
-    new ConvertToTypesCommandProcessor(errorHandler, injector.converters)
-        .processCommands(commands);
+    new ConvertToTypesCommandProcessor(errors, injector.converters).processCommands(commands);
     stopwatch.resetAndLog("Converters creation");
 
     bindLogger();
-    bindCommandProcesor = new BindCommandProcessor(
+    bindCommandProcesor = new BindCommandProcessor(errors,
         injector, injector.scopes, injector.explicitBindings,
         injector.outstandingInjections);
     bindCommandProcesor.processCommands(commands);
@@ -32,7 +28,7 @@
     stopwatch.resetAndLog("Binding indexing");
 
     requestStaticInjectionCommandProcessor
-        = new RequestStaticInjectionCommandProcessor(errorHandler);
+        = new RequestStaticInjectionCommandProcessor(errors);
     requestStaticInjectionCommandProcessor
         .processCommands(commands);
     stopwatch.resetAndLog("Static injection");

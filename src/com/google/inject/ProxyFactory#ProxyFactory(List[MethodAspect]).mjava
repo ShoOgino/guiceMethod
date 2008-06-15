@@ -1,0 +1,5 @@
+  ProxyFactory(List<MethodAspect> methodAspects) {
+    this.methodAspects = methodAspects;
+    defaultFactory = new DefaultConstructionProxyFactory();
+  }
+

@@ -1,4 +1,0 @@
-  public Nullability getNullability() {
-    return nullability;
-  }
-

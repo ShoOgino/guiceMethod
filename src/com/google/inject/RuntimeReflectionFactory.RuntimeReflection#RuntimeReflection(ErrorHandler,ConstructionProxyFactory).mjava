@@ -1,6 +1,0 @@
-    private RuntimeReflection(ErrorHandler errorHandler,
-        ConstructionProxyFactory constructionProxyFactory) {
-      this.errorHandler = checkNotNull(errorHandler, "errorHandler");
-      this.constructionProxyFactory = checkNotNull(constructionProxyFactory, "constructionProxyFatory");
-    }
-

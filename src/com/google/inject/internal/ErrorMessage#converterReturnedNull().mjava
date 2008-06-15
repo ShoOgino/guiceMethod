@@ -1,4 +1,0 @@
-  public static ErrorMessage converterReturnedNull() {
-    return new ErrorMessage("Converter returned null.");
-  }
-

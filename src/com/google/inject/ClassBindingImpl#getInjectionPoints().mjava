@@ -1,0 +1,23 @@
+  public Collection<InjectionPoint<?>> getInjectionPoints() {
+    if (lateBoundConstructor == null) {
+      throw new AssertionError();
+    }
+
+    Class<T> boundClass = getBoundClass();
+    Collection<InjectionPoint<?>> injectors;
+    try {
+      injectors = injector.getModifiableFieldAndMethodInjectionsFor(boundClass);
+    } catch (ResolveFailedException e) {
+      throw new AssertionError("This should have failed at CreationTime");
+    }
+
+    ConstructorInjector<T> constructor = lateBoundConstructor.constructorInjector;
+    if (constructor.parameterInjectors != null) {
+      for (SingleParameterInjector<?> parameterInjector
+          : constructor.parameterInjectors) {
+        injectors.add(parameterInjector.injectionPoint);
+      }
+    }
+    return injectors;
+  }
+

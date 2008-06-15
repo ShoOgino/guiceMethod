@@ -1,0 +1,30 @@
+    public SingleMethodInjector(Errors errors, InjectorImpl injector, final Method method)
+        throws ResolveFailedException {
+      // We can't use FastMethod if the method is private.
+      if (Modifier.isPrivate(method.getModifiers())
+          || Modifier.isProtected(method.getModifiers())) {
+        method.setAccessible(true);
+        methodInvoker = new MethodInvoker() {
+          public Object invoke(Object target, Object... parameters)
+              throws IllegalAccessException, InvocationTargetException {
+            return method.invoke(target, parameters);
+          }
+        };
+      }
+      else {
+        FastClass fastClass = GuiceFastClass.create(method.getDeclaringClass());
+        final FastMethod fastMethod = fastClass.getMethod(method);
+
+        methodInvoker = new MethodInvoker() {
+          public Object invoke(Object target, Object... parameters)
+              throws IllegalAccessException, InvocationTargetException {
+            return fastMethod.invoke(target, parameters);
+          }
+        };
+      }
+
+      parameterInjectors = method.getGenericParameterTypes().length > 0
+          ? injector.getParametersInjectors(method, Parameter.forMethod(method, errors), errors)
+          : null;
+    }
+

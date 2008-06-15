@@ -1,4 +1,0 @@
-  ProxyFactoryBuilder(ErrorHandler errorHandler) {
-    this.errorHandler = errorHandler;
-  }
-

@@ -1,7 +1,0 @@
-  public Reflection create(ErrorHandler errorHandler,
-      ConstructionProxyFactory constructionProxyFactory) {
-    Reflection delegate = new RuntimeReflectionFactory()
-        .create(errorHandler, constructionProxyFactory);
-    return new CodeGenReflection(delegate);
-  }
-

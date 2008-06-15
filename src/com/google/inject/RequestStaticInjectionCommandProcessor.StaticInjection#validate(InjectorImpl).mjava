@@ -1,12 +1,11 @@
     void validate(final InjectorImpl injector) {
-      injector.withDefaultSource(source,
-          new Runnable() {
-            public void run() {
-              injector.addSingleInjectorsForFields(
-                  type.getDeclaredFields(), true, memberInjectors);
-              injector.addSingleInjectorsForMethods(
-                  type.getDeclaredMethods(), true, memberInjectors);
-            }
-          });
+      SourceProviders.withDefault(source, new Runnable() {
+        public void run() {
+          injector.addSingleInjectorsForFields(
+              type.getDeclaredFields(), true, memberInjectors, errors);
+          injector.addSingleInjectorsForMethods(
+              type.getDeclaredMethods(), true, memberInjectors, errors);
+        }
+      });
     }
 

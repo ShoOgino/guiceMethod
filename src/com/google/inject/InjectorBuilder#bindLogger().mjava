@@ -1,6 +1,6 @@
   /**
-   * The Logger is a special case because it knows the injection point of the
-   * injected member. It's the only binding that does this.
+   * The Logger is a special case because it knows the injection point of the injected member. It's
+   * the only binding that does this.
    */
   private void bindLogger() {
     Key<Logger> key = Key.get(Logger.class);

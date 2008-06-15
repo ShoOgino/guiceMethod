@@ -4,22 +4,27 @@
         : Iterables.concat(injector.explicitBindings.values(), injector.jitBindings.values())) {
       if ((stage == Stage.PRODUCTION && binding.getScope() == Scopes.SINGLETON)
           || binding.getLoadStrategy() == LoadStrategy.EAGER) {
-        injector.callInContext(new ContextualCallable<Void>() {
-          public Void call(InternalContext context) {
-            InjectionPoint<?> injectionPoint
-                = InjectionPoint.newInstance(binding.key, context.getInjector());
-            context.setInjectionPoint(injectionPoint);
-            try {
-              binding.internalFactory.get(context, injectionPoint);
+        try {
+          injector.callInContext(new ContextualCallable<Void>() {
+            public Void call(InternalContext context) {
+              InjectionPoint<?> injectionPoint = InjectionPoint.newInstance(binding.key);
+              context.setInjectionPoint(injectionPoint);
+              errors.pushInjectionPoint(injectionPoint);
+              try {
+                binding.internalFactory.get(errors, context, injectionPoint);
+              } catch (ResolveFailedException e) {
+                errors.merge(e.getErrors());
+              } finally {
+                context.setInjectionPoint(null);
+                errors.popInjectionPoint(injectionPoint);
+              }
+
               return null;
-            } catch(ProvisionException provisionException) {
-              provisionException.addContext(injectionPoint);
-              throw provisionException;
-            } finally {
-              context.setInjectionPoint(null);
             }
-          }
-        });
+          });
+        } catch (ResolveFailedException e) {
+          throw new AssertionError();
+        }
       }
     }
   }

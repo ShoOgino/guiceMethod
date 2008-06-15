@@ -1,2 +1,0 @@
-    SingleMemberInjector create(InjectorImpl injector, M member) throws ResolveFailedException;
-

@@ -15,7 +15,7 @@
       try {
         binding = parentInjector.getBinding(key);
       }
-      catch (CreationException e) {
+      catch (ProvisionException e) {
         // if this happens, the parent can't create this key, and we ignore it
       }
 

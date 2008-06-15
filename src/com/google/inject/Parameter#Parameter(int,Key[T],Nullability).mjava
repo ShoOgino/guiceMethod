@@ -1,6 +1,0 @@
-  private Parameter(int index, Key<T> key, Nullability nullability) {
-    this.index = index;
-    this.key = key;
-    this.nullability = nullability;
-  }
-

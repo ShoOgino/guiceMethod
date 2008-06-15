@@ -1,14 +1,15 @@
   public void testSimpleCase()
-      throws NoSuchMethodException, InvocationTargetException {
+      throws NoSuchMethodException, InvocationTargetException, ResolveFailedException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder(new InvalidErrorHandler());
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
     builder.intercept(any(), any(), interceptor);
     ProxyFactory factory = builder.create();
 
-    Provider<Simple> creator = factory.getFactory(Simple.class);
+    ConstructionProxy<Simple> constructionProxy = factory
+        .createConstructionProxy(new Errors(), Simple.class.getDeclaredConstructor());
 
-    Simple simple = creator.get();
+    Simple simple = constructionProxy.newInstance();
     simple.invoke();
     assertTrue(simple.invoked);
     assertTrue(interceptor.invoked);

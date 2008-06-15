@@ -1,8 +1,0 @@
-  /**
-   * Add an injection point that was being resolved when this exception
-   * occurred.
-   */
-  void addContext(InjectionPoint<?> injectionPoint) {
-    this.contexts.add(contextToSnippet(injectionPoint));
-  }
-

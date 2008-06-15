@@ -1,0 +1,5 @@
+  public ProvisionException(String message) {
+    super(message);
+    this.errors = null;
+  }
+

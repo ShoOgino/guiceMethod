@@ -1,0 +1,10 @@
+  public void injectMembersOrThrow(final Errors errors, final Object o)
+      throws ResolveFailedException {
+    callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) throws ResolveFailedException {
+        injectMembers(errors, o, context);
+        return null;
+      }
+    });
+  }
+

@@ -1,0 +1,10 @@
+  ConstructorInjector(Errors errors, InjectorImpl injector, Class<T> implementation)
+      throws ResolveFailedException {
+    this.implementation = implementation;
+    constructionProxy = injector.reflection.getConstructionProxy(errors, implementation);
+    parameterInjectors = createParameterInjector(errors, injector, constructionProxy);
+    List<SingleMemberInjector> memberInjectorsList = injector.getMemberInjectors(implementation);
+    memberInjectors = memberInjectorsList.toArray(
+        new SingleMemberInjector[memberInjectorsList.size()]);
+  }
+

@@ -1,10 +1,13 @@
   // Not test-covered
   public void injectMembers(final Object o) {
-    callInContext(new ContextualCallable<Void>() {
-      public Void call(InternalContext context) {
-        injectMembers(o, context);
-        return null;
-      }
-    });
+    Errors errors = new Errors();
+    try {
+      injectMembersOrThrow(errors, o);
+    }
+    catch (ResolveFailedException e) {
+      errors.merge(e.getErrors());
+    }
+
+    errors.throwProvisionExceptionIfNecessary();
   }
 

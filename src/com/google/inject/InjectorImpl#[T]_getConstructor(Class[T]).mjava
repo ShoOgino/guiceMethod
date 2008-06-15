@@ -2,8 +2,8 @@
   @SuppressWarnings("unchecked")
   <T> ConstructorInjector<T> getConstructor(Class<T> implementation) throws ResolveFailedException {
     Object o = constructors.get(implementation);
-    if (o instanceof ResolveFailedException) {
-      throw (ResolveFailedException) o;
+    if (o instanceof Errors) {
+      throw ((Errors) o).copy().toException();
     }
     else if (o instanceof ConstructorInjector<?>) {
       return (ConstructorInjector<T>) o;

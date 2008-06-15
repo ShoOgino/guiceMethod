@@ -1,4 +1,0 @@
-  public static ErrorMessage conversionTypeError(Object converted, TypeLiteral<?> type) {
-    return new ErrorMessage("Converter returned %s but we expected a[n] %s.", converted, type);
-  }
-

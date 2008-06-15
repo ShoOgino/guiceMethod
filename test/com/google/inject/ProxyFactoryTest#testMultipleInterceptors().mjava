@@ -1,14 +1,14 @@
   public void testMultipleInterceptors()
-      throws NoSuchMethodException, InvocationTargetException {
+      throws NoSuchMethodException, InvocationTargetException, ResolveFailedException {
     DoubleInterceptor doubleInterceptor = new DoubleInterceptor();
     CountingInterceptor countingInterceptor = new CountingInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder(new InvalidErrorHandler());
+    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
     builder.intercept(any(), any(), doubleInterceptor, countingInterceptor);
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<Counter> constructor =
-        factory.get(Counter.class.getDeclaredConstructor());
+        factory.get(new Errors(), Counter.class.getDeclaredConstructor());
 
     Counter counter = constructor.newInstance();
     counter.inc();

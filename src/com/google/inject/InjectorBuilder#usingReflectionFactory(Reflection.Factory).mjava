@@ -1,5 +1,0 @@
-  InjectorBuilder usingReflectionFactory(Reflection.Factory reflectionFactory) {
-    this.reflectionFactory = reflectionFactory;
-    return this;
-  }
-

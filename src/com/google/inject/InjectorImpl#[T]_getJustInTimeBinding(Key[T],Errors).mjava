@@ -1,0 +1,20 @@
+  /**
+   * Returns a just-in-time binding for {@code key}, creating it if necessary.
+   *
+   * @throws ResolveFailedException if the binding could not be created.
+   */
+  @SuppressWarnings("unchecked")
+  <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors) throws ResolveFailedException {
+    synchronized (jitBindings) {
+      // Support null values.
+      if (!jitBindings.containsKey(key)) {
+        BindingImpl<T> binding = createJustInTimeBinding(key, errors);
+        jitBindings.put(key, binding);
+        return binding;
+      }
+      else {
+        return (BindingImpl<T>) jitBindings.get(key);
+      }
+    }
+  }
+

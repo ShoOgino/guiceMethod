@@ -1,0 +1,13 @@
+  public ConstructionProxy<?> getConstructionProxy(Constructor<?> constructor)
+      throws ResolveFailedException {
+    Object constructionProxyOrErrors = constructionProxies.get(constructor);
+
+    if (constructionProxyOrErrors instanceof ConstructionProxy<?>) {
+      return (ConstructionProxy<?>) constructionProxyOrErrors;
+    } else if (constructionProxyOrErrors instanceof Errors) {
+      throw ((Errors) constructionProxyOrErrors).copy().toException();
+    } else {
+      throw new AssertionError();
+    }
+  }
+

@@ -1,0 +1,41 @@
+  /** Creates a binding for a type annotated with @ImplementedBy. */
+  <T> BindingImpl<T> createImplementedByBinding(
+      Class<T> type, ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
+      throws ResolveFailedException {
+    // TODO: Use scope annotation on type if present. Right now, we always use NO_SCOPE.
+    Class<?> implementationType = implementedBy.value();
+
+    // Make sure it's not the same type. TODO: Can we check for deeper cycles?
+    if (implementationType == type) {
+      throw errors.recursiveImplementationType().toException();
+    }
+
+    // Make sure implementationType extends type.
+    if (!type.isAssignableFrom(implementationType)) {
+      throw errors.notASubtype(implementationType, type).toException();
+    }
+
+    // After the preceding check, this cast is safe.
+    @SuppressWarnings("unchecked")
+    Class<? extends T> subclass = (Class<? extends T>) implementationType;
+
+    // Look up the target binding.
+    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(Key.get(subclass), errors);
+
+    InternalFactory<T> internalFactory = new InternalFactory<T>() {
+      public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
+          throws ResolveFailedException {
+        return targetBinding.internalFactory.get(errors, context, injectionPoint);
+      }
+    };
+
+    return new LinkedBindingImpl<T>(
+        this,
+        Key.get(type),
+        StackTraceElements.forType(type),
+        internalFactory,
+        Scopes.NO_SCOPE,
+        Key.get(subclass),
+        loadStrategy);
+  }
+

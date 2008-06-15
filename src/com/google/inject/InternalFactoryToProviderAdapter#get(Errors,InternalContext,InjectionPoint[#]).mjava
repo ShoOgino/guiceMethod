@@ -1,0 +1,11 @@
+  public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
+      throws ResolveFailedException {
+    try {
+      context.ensureMemberInjected(errors, provider);
+      T result = provider.get();
+      return injectionPoint.checkForNull(errors, result, source);
+    } catch (RuntimeException userException) {
+      throw errors.errorInProvider(userException).toException();
+    }
+  }
+

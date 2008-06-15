@@ -5,7 +5,7 @@
         if (annotation.annotationType()
             .isAnnotationPresent(ScopeAnnotation.class)) {
           if (found != null) {
-            addError(ErrorMessage.duplicateScopeAnnotations(
+            addError(new Errors().duplicateScopeAnnotations(
                 found, annotation.annotationType()).toString());
           } else {
             found = annotation.annotationType();

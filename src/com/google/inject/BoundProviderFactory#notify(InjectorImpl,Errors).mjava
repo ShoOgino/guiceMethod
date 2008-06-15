@@ -1,0 +1,12 @@
+  public void notify(final InjectorImpl injector, final Errors errors) {
+    SourceProviders.withDefault(source, new Runnable() {
+      public void run() {
+        try {
+          providerFactory = injector.getInternalFactory(providerKey, errors);
+        } catch (ResolveFailedException e) {
+          errors.merge(e.getErrors());
+        }
+      }
+    });
+  }
+

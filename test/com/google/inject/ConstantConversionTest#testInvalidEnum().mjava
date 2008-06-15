@@ -8,6 +8,6 @@
     try {
       injector.getInstance(InvalidEnum.class);
       fail();
-    } catch (CreationException expected) { /* expected */ }
+    } catch (ProvisionException expected) { /* expected */ }
   }
 

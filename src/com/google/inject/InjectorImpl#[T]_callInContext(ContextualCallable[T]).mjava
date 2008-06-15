@@ -1,5 +1,5 @@
   /** Looks up thread local context. Creates (and removes) a new context if necessary. */
-  <T> T callInContext(ContextualCallable<T> callable) {
+  <T> T callInContext(ContextualCallable<T> callable) throws ResolveFailedException {
     InternalContext[] reference = localContext.get();
     if (reference[0] == null) {
       reference[0] = new InternalContext(this);

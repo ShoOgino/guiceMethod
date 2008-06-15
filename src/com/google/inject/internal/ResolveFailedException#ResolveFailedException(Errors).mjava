@@ -1,0 +1,4 @@
+  public ResolveFailedException(Errors errors) {
+    this.errors = errors;
+  }
+

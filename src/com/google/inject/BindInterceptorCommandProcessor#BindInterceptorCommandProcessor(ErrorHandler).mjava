@@ -1,5 +1,0 @@
-  BindInterceptorCommandProcessor(ErrorHandler errorHandler) {
-    super(errorHandler);
-    proxyFactoryBuilder = new ProxyFactoryBuilder(errorHandler);
-  }
-

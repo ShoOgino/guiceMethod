@@ -5,7 +5,7 @@
     Class<? super T> rawType = key.getTypeLiteral().getRawType();
 
     if (rawType == Provider.class) {
-      addError(source, ErrorMessage.bindingToProvider());
+      errors.bindingToProvider();
       return true;
     }
 
@@ -28,8 +28,7 @@
         if (scope != null) {
           return scope;
         } else {
-          addError(source, ErrorMessage.scopeNotFound(
-              "@" + scopeAnnotation.getSimpleName()));
+          errors.scopeNotFound(scopeAnnotation);
           return Scopes.NO_SCOPE;
         }
       }
@@ -41,12 +40,17 @@
 
     command.getTarget().acceptVisitor(new BindTarget.Visitor<T, Void>() {
       public Void visitToInstance(T instance) {
+        if (instance == null) {
+          errors.cannotBindToNullInstance();
+          putBinding(invalidBinding(injector, key, source));
+          return null;
+        }
+
         ConstantFactory<? extends T> factory = new ConstantFactory<T>(instance);
         outstandingInjections.add(instance);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
-        putBinding(new InstanceBindingImpl<T>(
-                injector, key, source, scopedFactory, instance));
+        putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, instance));
         return null;
       }
 
@@ -74,7 +78,7 @@
 
       public Void visitToKey(Key<? extends T> targetKey) {
         if (key.equals(targetKey)) {
-          addError(source, ErrorMessage.recursiveBinding());
+          errors.recursiveBinding();
         }
 
         FactoryProxy<T> factory = new FactoryProxy<T>(key, targetKey, source);
@@ -94,7 +98,7 @@
         // We can't assume abstract types aren't injectable. They may have an
         // @ImplementedBy annotation or something.
         if (key.hasAnnotationType() || !(type instanceof Class<?>)) {
-          addError(source, ErrorMessage.missingImplementation());
+          errors.missingImplementation(key);
           putBinding(invalidBinding(injector, key, source));
           return null;
         }
@@ -104,10 +108,10 @@
         Class<T> clazz = (Class<T>) type;
         final BindingImpl<T> binding;
         try {
-          binding = injector.createUnitializedBinding(clazz, scope, source, loadStrategy);
+          binding = injector.createUnitializedBinding(clazz, scope, source, loadStrategy, errors);
           putBinding(binding);
         } catch (ResolveFailedException e) {
-          injector.errorHandler.handle(e.getMessage(source));
+          errors.merge(e.getErrors());
           putBinding(invalidBinding(injector, key, source));
           return null;
         }
@@ -115,9 +119,9 @@
         untargettedBindings.add(new Runnable() {
           public void run() {
             try {
-              injector.initializeBinding(binding);
+              injector.initializeBinding(binding, errors);
             } catch (ResolveFailedException e) {
-              injector.errorHandler.handle(e.getMessage(source));
+              errors.merge(e.getErrors());
             }
           }
         });

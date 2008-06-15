@@ -1,0 +1,6 @@
+  public static Errors getErrors(RuntimeException userException) {
+    return userException instanceof ProvisionException
+        ? ((ProvisionException) userException).errors
+        : null;
+  }
+

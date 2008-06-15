@@ -1,5 +1,0 @@
-  InjectorImpl(Injector parentInjector, ErrorHandler errorHandler) {
-    this.parentInjector = parentInjector;
-    this.errorHandler = errorHandler;
-  }
-

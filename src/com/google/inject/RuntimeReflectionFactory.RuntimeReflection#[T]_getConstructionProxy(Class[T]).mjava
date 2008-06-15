@@ -1,4 +1,0 @@
-    public <T> ConstructionProxy<T> getConstructionProxy(Class<T> implementation) {
-      return constructionProxyFactory.get(findConstructorIn(implementation));
-    }
-

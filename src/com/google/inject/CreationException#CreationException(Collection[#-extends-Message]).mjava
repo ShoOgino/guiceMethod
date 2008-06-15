@@ -2,12 +2,6 @@
    * Constructs a new exception for the given errors.
    */
   public CreationException(Collection<? extends Message> errorMessages) {
-    // Sort the messages by source.
-    this.errorMessages = new ArrayList<Message>(errorMessages);
-    Collections.sort(this.errorMessages, new Comparator<Message>() {
-      public int compare(Message a, Message b) {
-        return a.getSource().compareTo(b.getSource());
-      }
-    });
+    this.errorMessages = ImmutableList.copyOf(errorMessages);
   }
 

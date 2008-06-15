@@ -1,6 +1,0 @@
-  public static ErrorMessage whileLocatingParameter(Key key,
-      int parameterIndex, Object source) {
-    return new ErrorMessage("  while locating %s%n    for parameter %s at %s",
-        key, parameterIndex, source);
-  }
-

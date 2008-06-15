@@ -1,4 +1,0 @@
-  public static ErrorMessage whileLocatingValue(Key key) {
-    return new ErrorMessage("  while locating %s", key);
-  }
-

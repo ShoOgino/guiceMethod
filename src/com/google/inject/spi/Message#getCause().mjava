@@ -1,0 +1,8 @@
+  /**
+   * Returns the throwable that caused this message, or {@code null} if this
+   * message was not caused by a throwable.
+   */
+  public Throwable getCause() {
+    return cause;
+  }
+
