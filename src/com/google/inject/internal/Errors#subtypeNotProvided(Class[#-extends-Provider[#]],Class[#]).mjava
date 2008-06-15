@@ -1,0 +1,5 @@
+  public Errors subtypeNotProvided(Class<? extends Provider<?>> providerType,
+      Class<?> type) {
+    return addMessage("%s doesn't provide instances of %s.", providerType, type);
+  }
+

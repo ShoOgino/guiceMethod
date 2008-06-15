@@ -1,9 +1,12 @@
   public void processCommands(List<Command> commands) {
     for (Iterator<Command> i = commands.iterator(); i.hasNext(); ) {
-      Boolean allDone = i.next().acceptVisitor(this);
+      Command command = i.next();
+      errors.pushSource(command.getSource());
+      Boolean allDone = command.acceptVisitor(this);
       if (allDone) {
         i.remove();
       }
+      errors.popSource(command.getSource());
     }
   }
 

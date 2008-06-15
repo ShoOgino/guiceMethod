@@ -1,17 +1,14 @@
   /**
    * Get the line number associated with the given member.
    *
-   * @param member a field, constructor, or method belonging to the class used
-   * during construction
+   * @param member a field, constructor, or method belonging to the class used during construction
    * @return the wrapped line number, or null if not available
-   * @throws IllegalArgumentException if the member does not belong to the
-   * class used during construction
+   * @throws IllegalArgumentException if the member does not belong to the class used during
+   * construction
    */
   public Integer getLineNumber(Member member) {
-    if (!cls.equals(member.getDeclaringClass())) {
-      throw new IllegalArgumentException("Member " + member + " belongs to "
-          + member.getDeclaringClass() + ", not " + cls);
-    }
-    return lines.get(getKey(member));
+    checkArgument(type == member.getDeclaringClass(),
+        "Member %s belongs to %s, not %s", member, member.getDeclaringClass(), type);
+    return lines.get(MoreTypes.memberKey(member));
   }
 

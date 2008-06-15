@@ -1,0 +1,12 @@
+  public List<Message> getMessages() {
+    List<Message> result = Lists.newArrayList(errors);
+
+    Collections.sort(result, new Comparator<Message>() {
+      public int compare(Message a, Message b) {
+        return a.getSource().compareTo(b.getSource());
+      }
+    });
+
+    return result;
+  }
+

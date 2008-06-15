@@ -1,0 +1,4 @@
+  public Errors errorInjectingMethod(Throwable cause) {
+    return addMessage(cause, "Error injecting method, %s", cause);
+  }
+

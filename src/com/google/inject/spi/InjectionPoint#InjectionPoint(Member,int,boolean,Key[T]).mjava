@@ -1,0 +1,8 @@
+  private InjectionPoint(Member member, int paramterIndex,
+      boolean allowsNull, Key<T> key) {
+    this.member = member == null ? null : MoreTypes.canonicalize(member);
+    this.parameterIndex = paramterIndex;
+    this.allowsNull = allowsNull;
+    this.key = checkNotNull(key, "key");
+  }
+

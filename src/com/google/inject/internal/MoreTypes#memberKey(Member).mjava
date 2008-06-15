@@ -1,0 +1,25 @@
+  public static String memberKey(Member member) {
+    checkNotNull(member, "member");
+
+    if (member instanceof MemberImpl) {
+      return ((MemberImpl) member).memberKey;
+
+    } else if (member instanceof Field) {
+      return member.getName();
+
+    } else if (member instanceof Method) {
+      return member.getName() + org.objectweb.asm.Type.getMethodDescriptor((Method) member);
+
+    } else if (member instanceof Constructor) {
+      StringBuilder sb = new StringBuilder().append("<init>(");
+      for (Class param : ((Constructor) member).getParameterTypes()) {
+          sb.append(org.objectweb.asm.Type.getDescriptor(param));
+      }
+      return sb.append(")V").toString();
+
+    } else {
+      throw new IllegalArgumentException(
+          "Unsupported implementation class for Member, " + member.getClass());
+    }
+  }
+

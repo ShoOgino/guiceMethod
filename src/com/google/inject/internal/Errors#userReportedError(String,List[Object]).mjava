@@ -1,0 +1,4 @@
+  public Errors userReportedError(String messageFormat, List<Object> arguments) {
+    return addMessage(messageFormat, arguments);
+  }
+

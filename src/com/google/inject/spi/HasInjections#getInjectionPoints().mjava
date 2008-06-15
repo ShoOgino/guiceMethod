@@ -1,0 +1,5 @@
+  /**
+   * Gets dependencies.
+   */
+  Collection<InjectionPoint<?>> getInjectionPoints();
+

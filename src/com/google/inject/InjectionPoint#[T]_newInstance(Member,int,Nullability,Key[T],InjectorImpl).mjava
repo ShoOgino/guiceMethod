@@ -1,6 +1,0 @@
-  static <T> InjectionPoint<T> newInstance(Member member, int parameterIndex,
-      Nullability nullability, Key<T> key, InjectorImpl injector) {
-    return new InjectionPoint<T>(member, parameterIndex, nullability, key,
-        injector);
-  }
-

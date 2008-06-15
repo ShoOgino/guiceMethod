@@ -1,0 +1,8 @@
+  public Errors cannotInjectNull(Object source, Member member, int parameterIndex) {
+    String parameterName = (parameterIndex != -1)
+        ? "parameter " + parameterIndex + " of "
+        : "";
+    return addMessage("null returned by binding at %s%n but %s%s is not @Nullable",
+        source, parameterName, member);
+  }
+

@@ -1,0 +1,8 @@
+  public void throwIfNecessary() throws ResolveFailedException {
+    if (!hasErrors()) {
+      return;
+    }
+
+    throw toException();
+  }
+

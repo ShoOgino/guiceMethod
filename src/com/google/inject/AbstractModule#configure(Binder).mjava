@@ -1,12 +1,9 @@
   public final synchronized void configure(Binder builder) {
+    checkState(this.binder == null, "Re-entry is not allowed.");
+
+    this.binder = checkNotNull(builder, "builder");
     try {
-      if (this.binder != null) {
-        throw new IllegalStateException("Re-entry is not allowed.");
-      }
-      this.binder = checkNotNull(builder, "builder");
-
       configure();
-
     }
     finally {
       this.binder = null;

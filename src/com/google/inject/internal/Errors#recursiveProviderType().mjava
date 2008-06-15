@@ -1,0 +1,4 @@
+  public Errors recursiveProviderType() {
+    return addMessage("@ProvidedBy points to the same class it annotates.");
+  }
+

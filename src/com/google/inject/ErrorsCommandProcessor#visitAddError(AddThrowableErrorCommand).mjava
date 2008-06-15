@@ -1,9 +1,5 @@
   @Override public Boolean visitAddError(AddThrowableErrorCommand command) {
-    Object source = command.getSource();
-    String message = ErrorMessage.getRootMessage(command.getThrowable());
-    String logMessage = ErrorMessage.exceptionReportedByModules(message).toString();
-    logger.log(Level.INFO, logMessage, command.getThrowable());
-    addError(source, ErrorMessage.exceptionReportedByModuleSeeLogs(message));
+    errors.at(command.getSource()).exceptionReportedByModuleSeeLogs(command.getThrowable());
     return true;
   }
 

@@ -1,0 +1,4 @@
+  public void pushInjectionPoint(InjectionPoint<?> injectionPoint) {
+    injectionPoints.add(injectionPoint);
+  }
+

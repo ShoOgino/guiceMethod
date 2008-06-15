@@ -1,0 +1,4 @@
+  public Errors recursiveBinding() {
+    return addMessage("Binding points to itself.");
+  }
+

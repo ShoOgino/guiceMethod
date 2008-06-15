@@ -1,0 +1,21 @@
+  private Errors addMessage(Throwable cause, String messageFormat, Object... arguments) {
+    if (!isMutable) {
+      throw new AssertionError();
+    }
+
+    String message = format(messageFormat, arguments);
+
+    Object source;
+    if (sourceForNextError != null) {
+      source = sourceForNextError;
+      sourceForNextError = null;
+    } else if (!sources.isEmpty()) {
+      source = sources.get(sources.size() - 1);
+    } else {
+      source = SourceProviders.UNKNOWN_SOURCE;
+    }
+
+    errors.add(new Message(source, message, ImmutableList.copyOf(injectionPoints), cause));
+    return this;
+  }
+

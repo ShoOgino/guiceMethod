@@ -1,0 +1,4 @@
+  public Errors cannotInjectNull(Object source) {
+    return addMessage("null returned by binding at %s", source);
+  }
+

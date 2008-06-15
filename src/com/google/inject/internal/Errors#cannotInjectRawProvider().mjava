@@ -1,0 +1,4 @@
+  public Errors cannotInjectRawProvider() {
+    return addMessage("Cannot inject a Provider that has no type parameter");
+  }
+

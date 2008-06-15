@@ -1,5 +1,0 @@
-  static <T> InjectionPoint<T> newInstance(Field field,
-      Nullability nullability, Key<T> key, InjectorImpl injector) {
-    return new InjectionPoint<T>(field, -1, nullability, key, injector);
-  }
-

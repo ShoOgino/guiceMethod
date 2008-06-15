@@ -1,0 +1,4 @@
+  private Errors addMessage(String messageFormat, Object... arguments) {
+    return addMessage(null, messageFormat, arguments);
+  }
+

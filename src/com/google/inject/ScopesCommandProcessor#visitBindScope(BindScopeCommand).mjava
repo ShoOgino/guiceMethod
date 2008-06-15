@@ -3,20 +3,19 @@
     Class<? extends Annotation> annotationType = command.getAnnotationType();
 
     if (!Scopes.isScopeAnnotation(annotationType)) {
-      addError(StackTraceElements.forType(annotationType),
-          ErrorMessage.missingScopeAnnotation());
+      errors.at(StackTraceElements.forType(annotationType)).missingScopeAnnotation();
       // Go ahead and bind anyway so we don't get collateral errors.
     }
 
     if (!Annotations.isRetainedAtRuntime(annotationType)) {
-      addError(StackTraceElements.forType(annotationType),
-          ErrorMessage.missingRuntimeRetention(command.getSource()));
+      errors.at(StackTraceElements.forType(annotationType))
+          .missingRuntimeRetention(command.getSource());
       // Go ahead and bind anyway so we don't get collateral errors.
     }
 
     Scope existing = scopes.get(checkNotNull(annotationType, "annotation type"));
     if (existing != null) {
-      addError(command.getSource(), ErrorMessage.duplicateScopes(existing, annotationType, scope));
+      errors.at(command.getSource()).duplicateScopes(existing, annotationType, scope);
     } else {
       scopes.put(annotationType, checkNotNull(scope, "scope"));
     }

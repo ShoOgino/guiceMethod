@@ -1,0 +1,4 @@
+  public ProvisionException toProvisionException() {
+    throw new ProvisionException(this);
+  }
+

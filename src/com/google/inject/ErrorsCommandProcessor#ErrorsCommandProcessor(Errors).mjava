@@ -1,0 +1,4 @@
+  ErrorsCommandProcessor(Errors errors) {
+    super(errors);
+  }
+

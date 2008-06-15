@@ -1,0 +1,4 @@
+  public ResolveFailedException toException() {
+    return new ResolveFailedException(this);
+  }
+

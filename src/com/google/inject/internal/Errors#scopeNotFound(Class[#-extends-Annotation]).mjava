@@ -1,0 +1,4 @@
+  public Errors scopeNotFound(Class<? extends Annotation> scopeAnnotation) {
+    return addMessage("No scope is bound to %s.", scopeAnnotation);
+  }
+

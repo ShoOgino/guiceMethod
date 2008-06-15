@@ -1,0 +1,16 @@
+  public Errors merge(Errors moreErrors) {
+    checkState(isMutable);
+
+    if (moreErrors != this) {
+      for (Message message : moreErrors.errors) {
+        List<InjectionPoint> injectionPoints = Lists.newArrayList();
+        injectionPoints.addAll(this.injectionPoints);
+        injectionPoints.addAll(message.getInjectionPoints());
+        errors.add(new Message(message.getSource(), message.getMessage(), injectionPoints,
+            message.getCause()));
+      }
+    }
+
+    return this;
+  }
+

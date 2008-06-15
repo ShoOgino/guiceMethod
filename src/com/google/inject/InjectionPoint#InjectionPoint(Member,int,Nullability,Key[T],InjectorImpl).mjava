@@ -1,9 +1,0 @@
-  private InjectionPoint(Member member, int paramterIndex,
-      Nullability nullability, Key<T> key, InjectorImpl injector) {
-    this.member = member;
-    this.parameterIndex = paramterIndex;
-    this.nullability = checkNotNull(nullability, "nullability");
-    this.key = key;
-    this.injector = injector;
-  }
-

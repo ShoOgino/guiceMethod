@@ -1,0 +1,5 @@
+  public Errors cannotInjectInnerClass(Class<?> type) {
+    return addMessage("Injecting into inner classes is not supported.  "
+        + "Please use a 'static' class (top-level or nested) instead of %s.", type);
+  }
+

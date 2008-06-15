@@ -1,0 +1,7 @@
+  public String toString() {
+    return new ToStringBuilder(InjectionPoint.class)
+        .add("member", member)
+        .add("key", key)
+        .toString();
+  }
+

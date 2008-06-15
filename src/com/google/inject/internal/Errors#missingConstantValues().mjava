@@ -1,0 +1,4 @@
+  public Errors missingConstantValues() {
+    return addMessage("Missing constant value. Please call to(...).");
+  }
+

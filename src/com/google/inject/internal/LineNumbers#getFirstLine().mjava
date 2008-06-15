@@ -1,6 +1,4 @@
-  /**
-   * Gets the first line number.
-   */
+  /** Gets the first line number. */
   public int getFirstLine() {
     return firstLine == Integer.MAX_VALUE ? 1 : firstLine;
   }

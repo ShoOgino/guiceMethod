@@ -1,4 +1,0 @@
-  ErrorsCommandProcessor(ErrorHandler errorHandler) {
-    super(errorHandler);
-  }
-

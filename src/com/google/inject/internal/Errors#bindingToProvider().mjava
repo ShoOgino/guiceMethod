@@ -1,0 +1,4 @@
+  public Errors bindingToProvider() {
+    return addMessage("Binding to Provider is not allowed.");
+  }
+

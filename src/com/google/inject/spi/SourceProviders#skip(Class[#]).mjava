@@ -8,7 +8,7 @@
    */
   public synchronized static void skip(Class<?> clazz) {
     // Poor man's copy-on-write hash set.
-    Set<String> copy = new HashSet<String>();
+    Set<String> copy = Sets.newHashSet();
     copy.addAll(skippedClassNames);
     copy.add(clazz.getName());
     skippedClassNames = Collections.unmodifiableSet(copy);

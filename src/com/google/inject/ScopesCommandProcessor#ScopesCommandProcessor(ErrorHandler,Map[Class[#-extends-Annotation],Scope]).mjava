@@ -1,6 +1,0 @@
-  ScopesCommandProcessor(ErrorHandler errorHandler,
-      Map<Class<? extends Annotation>, Scope> scopes) {
-    super(errorHandler);
-    this.scopes = scopes;
-  }
-

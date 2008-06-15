@@ -1,0 +1,9 @@
+  public void throwCreationExceptionIfErrorsExist() {
+    if (!hasErrors()) {
+      return;
+    }
+
+    makeImmutable();
+    throw new CreationException(getMessages());
+  }
+

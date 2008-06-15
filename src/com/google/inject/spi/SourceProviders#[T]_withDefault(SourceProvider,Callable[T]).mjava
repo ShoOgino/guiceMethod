@@ -11,8 +11,6 @@
     try {
       holder[0] = sourceProvider;
       return c.call();
-    } catch (Error e) {
-      throw e;
     } catch (RuntimeException e) {
       throw e;
     } catch (Exception e) {

@@ -1,0 +1,11 @@
+  /**
+   * Returns a type that's functionally equal but not necessarily equal
+   * according to {@link Object#equals(Object) Object.equals}. The returned
+   * member is {@link Serializable}.
+   */
+  public static Member canonicalize(Member member) {
+    return member instanceof MemberImpl
+        ? member
+        : new MemberImpl(member);
+  }
+

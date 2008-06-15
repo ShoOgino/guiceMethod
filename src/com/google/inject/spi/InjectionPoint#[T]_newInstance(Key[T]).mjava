@@ -1,0 +1,4 @@
+  public static <T> InjectionPoint<T> newInstance(Key<T> key) {
+    return new InjectionPoint<T>(null, -1, true, key);
+  }
+

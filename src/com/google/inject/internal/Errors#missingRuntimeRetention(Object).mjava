@@ -1,0 +1,4 @@
+  public Errors missingRuntimeRetention(Object source) {
+    return addMessage("Please annotate with @Retention(RUNTIME). Bound at %s.", source);
+  }
+
