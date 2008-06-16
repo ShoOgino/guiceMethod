@@ -12,7 +12,7 @@
             : userException;
         errors.errorInjectingMethod(cause);
       }
-      catch (ResolveFailedException e) {
+      catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

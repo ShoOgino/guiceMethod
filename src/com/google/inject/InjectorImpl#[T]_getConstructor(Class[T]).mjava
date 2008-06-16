@@ -1,6 +1,6 @@
   /** Gets a constructor function for a given implementation class. */
   @SuppressWarnings("unchecked")
-  <T> ConstructorInjector<T> getConstructor(Class<T> implementation) throws ResolveFailedException {
+  <T> ConstructorInjector<T> getConstructor(Class<T> implementation) throws ErrorsException {
     Object o = constructors.get(implementation);
     if (o instanceof Errors) {
       throw ((Errors) o).copy().toException();

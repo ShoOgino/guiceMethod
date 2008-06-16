@@ -1,4 +1,4 @@
-  Object createProxy(Errors errors, Class<?> expectedType) throws ResolveFailedException {
+  Object createProxy(Errors errors, Class<?> expectedType) throws ErrorsException {
     // TODO: if I create a proxy which implements all the interfaces of
     // the implementation type, I'll be able to get away with one proxy
     // instance (as opposed to one per caller).

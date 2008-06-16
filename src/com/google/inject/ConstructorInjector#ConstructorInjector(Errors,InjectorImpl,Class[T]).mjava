@@ -1,5 +1,5 @@
   ConstructorInjector(Errors errors, InjectorImpl injector, Class<T> implementation)
-      throws ResolveFailedException {
+      throws ErrorsException {
     this.implementation = implementation;
     constructionProxy = injector.reflection.getConstructionProxy(errors, implementation);
     parameterInjectors = createParameterInjector(errors, injector, constructionProxy);

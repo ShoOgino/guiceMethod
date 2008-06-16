@@ -1,10 +1,10 @@
   /**
    * Returns a just-in-time binding for {@code key}, creating it if necessary.
    *
-   * @throws ResolveFailedException if the binding could not be created.
+   * @throws com.google.inject.internal.ErrorsException if the binding could not be created.
    */
   @SuppressWarnings("unchecked")
-  <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors) throws ResolveFailedException {
+  <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors) throws ErrorsException {
     synchronized (jitBindings) {
       // Support null values.
       if (!jitBindings.containsKey(key)) {

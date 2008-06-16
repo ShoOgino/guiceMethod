@@ -1,6 +1,6 @@
     @SuppressWarnings("unchecked")
     public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
-        throws ResolveFailedException {
+        throws ErrorsException {
       checkState(constructorInjector != null, "Construct before bind, " + constructorInjector);
 
       // This may not actually be safe because it could return a super type of T (if that's all the

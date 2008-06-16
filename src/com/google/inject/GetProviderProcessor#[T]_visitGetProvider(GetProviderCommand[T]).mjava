@@ -2,7 +2,7 @@
     // ensure the provider can be created
     try {
       injector.getProviderOrThrow(command.getKey(), errors);
-    } catch (ResolveFailedException e) {
+    } catch (ErrorsException e) {
       errors.merge(e.getErrors()); // TODO: source
     }
 

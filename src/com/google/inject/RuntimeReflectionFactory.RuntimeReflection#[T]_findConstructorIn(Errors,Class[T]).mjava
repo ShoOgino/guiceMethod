@@ -1,5 +1,5 @@
     private <T> Constructor<T> findConstructorIn(Errors errors, Class<T> implementation)
-        throws ResolveFailedException{
+        throws ErrorsException {
       Constructor<T> found = null;
       @SuppressWarnings("unchecked")
       Constructor<T>[] constructors

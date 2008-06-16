@@ -1,5 +1,5 @@
   List<InjectionPoint<?>> getModifiableFieldAndMethodInjectionsFor(Class<?> clazz)
-      throws ResolveFailedException {
+      throws ErrorsException {
     List<InjectionPoint<?>> dependencies = Lists.newArrayList();
     for (SingleMemberInjector singleMemberInjector : getMemberInjectors(clazz)) {
       dependencies.addAll(singleMemberInjector.getDependencies());

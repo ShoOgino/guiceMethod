@@ -110,7 +110,7 @@
         try {
           binding = injector.createUnitializedBinding(clazz, scope, source, loadStrategy, errors);
           putBinding(binding);
-        } catch (ResolveFailedException e) {
+        } catch (ErrorsException e) {
           errors.merge(e.getErrors());
           putBinding(invalidBinding(injector, key, source));
           return null;
@@ -120,7 +120,7 @@
           public void run() {
             try {
               injector.initializeBinding(binding, errors);
-            } catch (ResolveFailedException e) {
+            } catch (ErrorsException e) {
               errors.merge(e.getErrors());
             }
           }

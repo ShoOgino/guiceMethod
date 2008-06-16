@@ -4,10 +4,10 @@
     try {
       injectMembersOrThrow(errors, o);
     }
-    catch (ResolveFailedException e) {
+    catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }
 
-    errors.throwProvisionExceptionIfNecessary();
+    ProvisionException.throwNewIfNonEmpty(errors);
   }
 

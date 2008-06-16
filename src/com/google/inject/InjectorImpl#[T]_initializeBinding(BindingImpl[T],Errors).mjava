@@ -1,4 +1,4 @@
-  <T> void initializeBinding(BindingImpl<T> binding, Errors errors) throws ResolveFailedException {
+  <T> void initializeBinding(BindingImpl<T> binding, Errors errors) throws ErrorsException {
     // Put the partially constructed binding in the map a little early. This enables us to handle
     // circular dependencies. Example: FooImpl -> BarImpl -> FooImpl.
     // Note: We don't need to synchronize on jitBindings during injector creation.

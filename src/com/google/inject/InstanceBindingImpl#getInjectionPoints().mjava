@@ -2,7 +2,7 @@
     try {
       return injector.getFieldAndMethodInjectionsFor(instance.getClass());
     }
-    catch (ResolveFailedException e) {
+    catch (ErrorsException e) {
       // this would have been a creation exception
       // TODO: initialize the dependencies via a callback
       throw new AssertionError(e);

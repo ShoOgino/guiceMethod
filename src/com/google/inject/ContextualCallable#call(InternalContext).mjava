@@ -1,2 +1,2 @@
-  T call(InternalContext context) throws ResolveFailedException;
+  T call(InternalContext context) throws ErrorsException;
 

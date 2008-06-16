@@ -1,6 +1,6 @@
   /** Creates a binding for a type annotated with @ProvidedBy. */
   <T> BindingImpl<T> createProvidedByBinding(final Class<T> type, ProvidedBy providedBy,
-      LoadStrategy loadStrategy, Errors errors) throws ResolveFailedException {
+      LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
     final Class<? extends Provider<?>> providerType = providedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?
@@ -18,7 +18,7 @@
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(Errors errors, InternalContext context, InjectionPoint injectionPoint)
-          throws ResolveFailedException {
+          throws ErrorsException {
         Provider<?> provider = providerBinding.internalFactory.get(errors, context, injectionPoint);
         Object o = provider.get();
         if (o != null && !type.isInstance(o)) {

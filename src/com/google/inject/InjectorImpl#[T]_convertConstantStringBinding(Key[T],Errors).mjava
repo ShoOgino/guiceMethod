@@ -2,10 +2,10 @@
    * Converts a constant string binding to the required type.
    *
    * @return the binding if it could be resolved, or null if the binding doesn't exist
-   * @throws ResolveFailedException if there was an error resolving the binding
+   * @throws com.google.inject.internal.ErrorsException if there was an error resolving the binding
    */
   private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key, Errors errors)
-      throws ResolveFailedException {
+      throws ErrorsException {
     // Find a constant string binding.
     Key<String> stringKey = key.ofType(String.class);
     BindingImpl<String> stringBinding = getExplicitBindingImpl(stringKey);
@@ -14,6 +14,7 @@
     }
 
     String stringValue = stringBinding.getProvider().get();
+    Object source = stringBinding.getSource();
 
     // Find a matching type converter.
     TypeLiteral<T> type = key.getTypeLiteral();
@@ -21,7 +22,7 @@
     for (MatcherAndConverter<?> converter : converters) {
       if (converter.getTypeMatcher().matches(type)) {
         if (matchingConverter != null) {
-          errors.ambiguousTypeConversion(stringValue, type, matchingConverter, converter);
+          errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);
         }
         matchingConverter = converter;
       }
@@ -33,7 +34,6 @@
     }
 
     // Try to convert the string. A failed conversion results in an error.
-    Object source = stringBinding.getSource();
     try {
       @SuppressWarnings("unchecked") // This cast is safe because we double check below.
       T converted = (T) matchingConverter.getTypeConverter().convert(stringValue, type);
@@ -43,15 +43,14 @@
             .toException();
       }
 
-      // We have to filter out primitive types because an Integer is not an instance of int, and we
-      // provide converters for all the primitive types and know that they work anyway.
       if (!type.getRawType().isInstance(converted)) {
         throw errors.conversionTypeError(stringValue, source, type, matchingConverter, converted)
             .toException();
       }
+
       return new ConvertedConstantBindingImpl<T>(this, key, converted, stringBinding);
     }
-    catch (ResolveFailedException e) {
+    catch (ErrorsException e) {
       throw e;
     }
     catch (Exception e) {

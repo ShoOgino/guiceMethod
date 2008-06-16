@@ -1,5 +1,5 @@
   <T> ConstructionProxy<T> createConstructionProxy(Errors errors, Constructor<T> constructor)
-      throws ResolveFailedException {
+      throws ErrorsException {
     Class<T> declaringClass = constructor.getDeclaringClass();
 
     // Find applicable aspects. Bow out if none are applicable to this class.

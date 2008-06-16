@@ -5,7 +5,7 @@
    * binding.
    */
   public <T> BindingImpl<T> getBindingOrThrow(Key<T> key, Errors errors)
-      throws ResolveFailedException {
+      throws ErrorsException {
     if (parentInjector != null) {
       BindingImpl<T> bindingImpl = getParentBinding(key);
       if (bindingImpl != null) {

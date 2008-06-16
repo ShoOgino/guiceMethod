@@ -1,7 +1,7 @@
   /** Creates a binding for a type annotated with @ImplementedBy. */
   <T> BindingImpl<T> createImplementedByBinding(
       Class<T> type, ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
-      throws ResolveFailedException {
+      throws ErrorsException {
     // TODO: Use scope annotation on type if present. Right now, we always use NO_SCOPE.
     Class<?> implementationType = implementedBy.value();
 
@@ -24,7 +24,7 @@
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
-          throws ResolveFailedException {
+          throws ErrorsException {
         return targetBinding.internalFactory.get(errors, context, injectionPoint);
       }
     };

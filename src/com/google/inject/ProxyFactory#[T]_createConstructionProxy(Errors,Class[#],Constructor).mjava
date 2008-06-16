@@ -2,7 +2,7 @@
    * Creates a construction proxy given a class and parameter types.
    */
   private <T> ConstructionProxy<T> createConstructionProxy(Errors errors, final Class<?> clazz,
-      final Constructor standardConstructor) throws ResolveFailedException {
+      final Constructor standardConstructor) throws ErrorsException {
     FastClass fastClass = GuiceFastClass.create(clazz);
     final FastConstructor fastConstructor
         = fastClass.getConstructor(standardConstructor.getParameterTypes());

@@ -1,5 +1,5 @@
   @Override public Boolean visitAddError(AddThrowableErrorCommand command) {
-    errors.at(command.getSource()).exceptionReportedByModuleSeeLogs(command.getThrowable());
+    errors.exceptionReportedByModuleSeeLogs(command.getThrowable());
     return true;
   }
 

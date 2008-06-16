@@ -4,12 +4,12 @@
 
     Class<?> rawType = key.getRawType();
     if (FORBIDDEN_TYPES.contains(rawType)) {
-      errors.at(binding.getSource()).cannotBindToGuiceType(rawType.getSimpleName());
+      errors.cannotBindToGuiceType(rawType.getSimpleName());
       return;
     }
 
     if (bindings.containsKey(key)) {
-      errors.at(binding.getSource()).bindingAlreadySet(key, original.getSource());
+      errors.bindingAlreadySet(key, original.getSource());
     } else {
       bindings.put(key, binding);
     }

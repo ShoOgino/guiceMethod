@@ -1,4 +1,4 @@
-  public ResolveFailedException toException() {
-    return new ResolveFailedException(this);
+  public ErrorsException toException() {
+    return new ErrorsException(this);
   }
 

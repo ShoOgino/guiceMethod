@@ -1,15 +1,7 @@
   public void testNullCustomValue() {
     Module module = new AbstractModule() {
       protected void configure() {
-        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), new TypeConverter() {
-          public Object convert(String value, TypeLiteral<?> toType) {
-            return null;
-          }
-
-          @Override public String toString() {
-            return "TypeConverter<Null>";
-          }
-        });
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), mockTypeConverter(null));
         bindConstant().annotatedWith(NumericValue.class).to("foo");
         bind(DateHolder.class);
       }
@@ -23,7 +15,7 @@
           "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
           "Received null converting 'foo' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date",
-          "using TypeConverter<Null> which matches only(java.util.Date) ",
+          "using CustomConverter which matches only(java.util.Date) ",
           "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:");
     }
   }

@@ -1,4 +1,4 @@
-    T inject(Errors errors, InternalContext context) throws ResolveFailedException {
+    T inject(Errors errors, InternalContext context) throws ErrorsException {
       context.setInjectionPoint(injectionPoint);
       errors.pushInjectionPoint(injectionPoint);
       try {

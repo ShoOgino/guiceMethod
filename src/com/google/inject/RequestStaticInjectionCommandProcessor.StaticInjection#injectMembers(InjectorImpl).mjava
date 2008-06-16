@@ -8,7 +8,7 @@
             return null;
           }
         });
-      } catch (ResolveFailedException e) {
+      } catch (ErrorsException e) {
         throw new AssertionError();
       }
     }

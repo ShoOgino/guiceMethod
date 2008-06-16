@@ -1,5 +1,5 @@
   public void testInterceptOneMethod()
-      throws NoSuchMethodException, InvocationTargetException, ResolveFailedException {
+      throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     ProxyFactoryBuilder builder = new ProxyFactoryBuilder();

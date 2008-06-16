@@ -1,0 +1,9 @@
+  public Errors ambiguousTypeConversion(String stringValue, Object source, TypeLiteral<?> type,
+      MatcherAndConverter<?> a, MatcherAndConverter<?> b) {
+    return addMessage("Multiple converters can convert '%s' (bound at %s) to %s:%n"
+        + " %s and%n"
+        + " %s.%n"
+        + " Please adjust your type converter configuration to avoid overlapping matches.",
+        stringValue, source, type, a, b);
+  }
+

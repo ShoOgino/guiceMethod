@@ -1,9 +1,0 @@
-  public Errors errorInProvider(RuntimeException runtimeException) {
-    Errors newErrors = ProvisionException.getErrors(runtimeException);
-    if (newErrors != null) {
-      return merge(newErrors);
-    } else {
-      return addMessage(runtimeException, "Error in custom provider, %s", runtimeException);
-    }
-  }
-

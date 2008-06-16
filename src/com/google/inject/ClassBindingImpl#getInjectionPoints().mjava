@@ -7,7 +7,7 @@
     Collection<InjectionPoint<?>> injectors;
     try {
       injectors = injector.getModifiableFieldAndMethodInjectionsFor(boundClass);
-    } catch (ResolveFailedException e) {
+    } catch (ErrorsException e) {
       throw new AssertionError("This should have failed at CreationTime");
     }
 

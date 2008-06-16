@@ -3,7 +3,7 @@
    * it may return a proxy.
    */
   Object construct(Errors errors, InternalContext context, Class<?> expectedType)
-      throws ResolveFailedException {
+      throws ErrorsException {
     ConstructionContext<T> constructionContext = context.getConstructionContext(this);
 
     // We have a circular reference between constructors. Return a proxy.

@@ -1,7 +1,7 @@
   public void testInvalidCustomValue() throws CreationException {
     Module module = new AbstractModule() {
       protected void configure() {
-        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), dateConverter);
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), failingTypeConverter());
         bindConstant().annotatedWith(NumericValue.class).to("invalid");
         bind(DateHolder.class);
       }
@@ -12,14 +12,14 @@
       fail();
     } catch (CreationException expected) {
       Throwable cause = Iterables.getOnlyElement(expected.getErrorMessages()).getCause();
-      assertTrue(cause instanceof IllegalArgumentException);
+      assertTrue(cause instanceof UnsupportedOperationException);
       assertContains(expected.getMessage(),
           "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
           "Error converting 'invalid' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date",
-          "using TypeConverter<Date> which matches only(java.util.Date) ",
+          "using BrokenConverter which matches only(java.util.Date) ",
           "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:",
-          "Reason: java.lang.IllegalArgumentException: Unparseable date: \"invalid\"");
+          "Reason: java.lang.UnsupportedOperationException: Cannot convert");
     }
   }
 

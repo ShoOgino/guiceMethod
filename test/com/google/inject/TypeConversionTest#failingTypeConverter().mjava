@@ -1,0 +1,11 @@
+  private TypeConverter failingTypeConverter() {
+    return new TypeConverter() {
+      public Object convert(String value, TypeLiteral<?> toType) {
+        throw new UnsupportedOperationException("Cannot convert");
+      }
+      @Override public String toString() {
+        return "BrokenConverter";
+      }
+    };
+  }
+

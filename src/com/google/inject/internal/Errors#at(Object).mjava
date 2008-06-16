@@ -1,3 +1,6 @@
+  /**
+   * Convenience method to set the source for a single error.
+   */
   public Errors at(Object source) {
     sourceForNextError = source;
     return this;

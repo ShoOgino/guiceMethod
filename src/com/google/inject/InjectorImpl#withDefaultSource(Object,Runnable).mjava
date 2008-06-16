@@ -1,6 +1,0 @@
-  /** This is only used during Injector building. */
-  void withDefaultSource(Object defaultSource, Runnable runnable) {
-    // TODO: inline/get rid of?
-    SourceProviders.withDefault(defaultSource, runnable);
-  }
-

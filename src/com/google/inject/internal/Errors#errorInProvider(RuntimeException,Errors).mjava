@@ -1,0 +1,8 @@
+  public Errors errorInProvider(RuntimeException runtimeException, Errors errorsFromException) {
+    if (errorsFromException != null) {
+      return merge(errorsFromException);
+    } else {
+      return addMessage(runtimeException, "Error in custom provider, %s", runtimeException);
+    }
+  }
+

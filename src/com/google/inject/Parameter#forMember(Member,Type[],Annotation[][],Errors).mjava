@@ -1,5 +1,5 @@
   private static List<Parameter<?>> forMember(Member member, Type[] genericParameterTypes,
-      Annotation[][] annotations, Errors errors) throws ResolveFailedException {
+      Annotation[][] annotations, Errors errors) throws ErrorsException {
     Iterator<Annotation[]> annotationsIterator = Arrays.asList(annotations).iterator();
 
     List<Parameter<?>> parameters = Lists.newArrayList();
@@ -10,7 +10,7 @@
         Key<?> key = Keys.get(parameterType, member, parameterAnnotations, errors);
         parameters.add(create(index, key, Nullability.allowsNull(parameterAnnotations)));
         index++;
-      } catch (ResolveFailedException e) {
+      } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

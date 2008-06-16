@@ -8,7 +8,7 @@
       catch (IllegalAccessException e) {
         throw new AssertionError(e);
       }
-      catch (ResolveFailedException e) {
+      catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
       finally {

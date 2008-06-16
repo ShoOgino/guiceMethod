@@ -2,7 +2,7 @@
     for (Object toInject : outstandingInjections) {
       try {
         getMemberInjectors(toInject.getClass());
-      } catch (ResolveFailedException e) {
+      } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

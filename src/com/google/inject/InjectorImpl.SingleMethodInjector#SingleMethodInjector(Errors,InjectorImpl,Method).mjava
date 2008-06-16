@@ -1,5 +1,5 @@
     public SingleMethodInjector(Errors errors, InjectorImpl injector, final Method method)
-        throws ResolveFailedException {
+        throws ErrorsException {
       // We can't use FastMethod if the method is private.
       if (Modifier.isPrivate(method.getModifiers())
           || Modifier.isProtected(method.getModifiers())) {

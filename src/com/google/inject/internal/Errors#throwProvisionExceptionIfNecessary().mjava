@@ -1,9 +1,0 @@
-  public void throwProvisionExceptionIfNecessary() {
-    makeImmutable();
-    if (!hasErrors()) {
-      return;
-    }
-
-    throw toProvisionException();
-  }
-

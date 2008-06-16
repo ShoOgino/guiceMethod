@@ -5,8 +5,8 @@
       errors.throwIfNecessary();
       return result;
     }
-    catch (ResolveFailedException e) {
-      throw errors.merge(e.getErrors()).toProvisionException();
+    catch (ErrorsException e) {
+      throw new ProvisionException(errors.merge(e.getErrors()));
     }
   }
 

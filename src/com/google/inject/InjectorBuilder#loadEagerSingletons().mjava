@@ -12,7 +12,7 @@
               errors.pushInjectionPoint(injectionPoint);
               try {
                 binding.internalFactory.get(errors, context, injectionPoint);
-              } catch (ResolveFailedException e) {
+              } catch (ErrorsException e) {
                 errors.merge(e.getErrors());
               } finally {
                 context.setInjectionPoint(null);
@@ -22,7 +22,7 @@
               return null;
             }
           });
-        } catch (ResolveFailedException e) {
+        } catch (ErrorsException e) {
           throw new AssertionError();
         }
       }

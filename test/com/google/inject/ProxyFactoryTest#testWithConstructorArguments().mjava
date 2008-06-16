@@ -1,5 +1,5 @@
   public void testWithConstructorArguments()
-      throws InvocationTargetException, NoSuchMethodException, ResolveFailedException {
+      throws InvocationTargetException, NoSuchMethodException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     ProxyFactoryBuilder builder = new ProxyFactoryBuilder();

@@ -16,7 +16,7 @@
       errorsForMember.pushSource(source);
       try {
         injectors.add(injectorFactory.create(this, member, errorsForMember));
-      } catch (ResolveFailedException ignoredForNow) {
+      } catch (ErrorsException ignoredForNow) {
         // if this was an optional injection, it is completely ignored
       } finally {
         errorsForMember.popSource(source);

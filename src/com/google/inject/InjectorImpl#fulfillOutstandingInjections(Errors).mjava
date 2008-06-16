@@ -14,7 +14,7 @@
           for (Object toInject : Lists.newArrayList(outstandingInjections)) {
             try {
               context.ensureMemberInjected(errors, toInject);
-            } catch (ResolveFailedException e) {
+            } catch (ErrorsException e) {
               errors.merge(e.getErrors());
             }
           }
@@ -22,7 +22,7 @@
         }
       });
     }
-    catch (ResolveFailedException e) {
+    catch (ErrorsException e) {
       throw new AssertionError(e);
     }
 

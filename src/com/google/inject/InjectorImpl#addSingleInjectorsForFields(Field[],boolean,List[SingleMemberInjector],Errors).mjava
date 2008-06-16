@@ -3,7 +3,7 @@
     addInjectorsForMembers(errors, Arrays.asList(fields), statics, injectors,
         new SingleInjectorFactory<Field>() {
           public SingleMemberInjector create(InjectorImpl injector, Field field, Errors errors)
-              throws ResolveFailedException {
+              throws ErrorsException {
             return new SingleFieldInjector(errors, injector, field);
           }
         });

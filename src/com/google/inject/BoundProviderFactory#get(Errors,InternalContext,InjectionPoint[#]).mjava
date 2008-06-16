@@ -1,10 +1,11 @@
   public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
-      throws ResolveFailedException {
+      throws ErrorsException {
     Provider<? extends T> provider = providerFactory.get(errors, context, injectionPoint);
     try {
       return injectionPoint.checkForNull(errors, provider.get(), source);
-    } catch(RuntimeException userCodeFailed) {
-      throw errors.errorInProvider(userCodeFailed).toException();
+    } catch(RuntimeException userException) {
+      Errors userErrors = ProvisionException.getErrors(userException);
+      throw errors.errorInProvider(userException, userErrors).toException();
     }
   }
 

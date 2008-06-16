@@ -1,4 +1,4 @@
-  public void throwIfNecessary() throws ResolveFailedException {
+  public void throwIfNecessary() throws ErrorsException {
     if (!hasErrors()) {
       return;
     }

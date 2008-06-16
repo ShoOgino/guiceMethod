@@ -5,14 +5,14 @@
    * @return injections
    */
   SingleParameterInjector<?>[] getParametersInjectors(
-      Member member, List<Parameter<?>> parameters, Errors errors) throws ResolveFailedException {
+      Member member, List<Parameter<?>> parameters, Errors errors) throws ErrorsException {
     SingleParameterInjector<?>[] parameterInjectors
         = new SingleParameterInjector<?>[parameters.size()];
     int index = 0;
     for (Parameter<?> parameter : parameters) {
       try {
         parameterInjectors[index] = createParameterInjector(parameter, member, errors);
-      } catch (ResolveFailedException rethrownBelow) {
+      } catch (ErrorsException rethrownBelow) {
       }
       index++;
     }

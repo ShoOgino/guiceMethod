@@ -1,5 +1,5 @@
   public ConstructionProxy<?> getConstructionProxy(Constructor<?> constructor)
-      throws ResolveFailedException {
+      throws ErrorsException {
     Object constructionProxyOrErrors = constructionProxies.get(constructor);
 
     if (constructionProxyOrErrors instanceof ConstructionProxy<?>) {

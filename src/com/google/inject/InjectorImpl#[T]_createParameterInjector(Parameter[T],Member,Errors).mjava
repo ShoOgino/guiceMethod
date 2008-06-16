@@ -1,5 +1,5 @@
   <T> SingleParameterInjector<T> createParameterInjector(final Parameter<T> parameter,
-      Member member, final Errors errors) throws ResolveFailedException {
+      Member member, final Errors errors) throws ErrorsException {
     InternalFactory<? extends T> factory;
     Object source = StackTraceElements.forMember(member);
     errors.pushSource(source);

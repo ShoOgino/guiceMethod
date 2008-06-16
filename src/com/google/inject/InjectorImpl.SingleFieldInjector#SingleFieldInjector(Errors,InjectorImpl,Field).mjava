@@ -1,5 +1,5 @@
     public SingleFieldInjector(final Errors errors, final InjectorImpl injector, Field field)
-        throws ResolveFailedException {
+        throws ErrorsException {
       this.field = field;
 
       // Ewwwww...

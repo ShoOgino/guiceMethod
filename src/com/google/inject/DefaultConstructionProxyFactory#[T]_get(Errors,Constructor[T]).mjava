@@ -1,5 +1,5 @@
   public <T> ConstructionProxy<T> get(Errors errors, final Constructor<T> constructor)
-      throws ResolveFailedException {
+      throws ErrorsException {
     final List<Parameter<?>> parameters = Parameter.forConstructor(constructor, errors);
 
     // We can't use FastConstructor if the constructor is private or protected.

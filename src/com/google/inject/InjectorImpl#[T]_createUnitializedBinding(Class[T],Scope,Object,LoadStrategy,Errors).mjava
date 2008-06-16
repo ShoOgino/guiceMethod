@@ -3,7 +3,7 @@
    * none is specified.
    */
   <T> BindingImpl<T> createUnitializedBinding(Class<T> type, Scope scope, Object source,
-      LoadStrategy loadStrategy, Errors errors) throws ResolveFailedException {
+      LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
     // Don't try to inject arrays, or enums.
     if (type.isArray() || type.isEnum()) {
       throw errors.missingImplementation(type).toException();

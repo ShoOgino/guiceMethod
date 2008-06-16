@@ -1,20 +1,11 @@
   public void notify(final InjectorImpl injector, final Errors errors) {
+    errors.pushSource(source);
     try {
-      SourceProviders.withDefaultChecked(source, new Callable<Void>() {
-        public Void call() throws ResolveFailedException {
-          targetFactory = injector.getInternalFactory(targetKey, errors);
-          return null;
-        }
-      });
-    }
-    catch (RuntimeException e) {
-      throw e;
-    }
-    catch (ResolveFailedException e) {
+      targetFactory = injector.getInternalFactory(targetKey, errors);
+    } catch (ErrorsException e) {
       errors.merge(e.getErrors());
-    }
-    catch (Exception e) {
-      throw new AssertionError();
+    } finally {
+      errors.popSource(source);
     }
   }
 

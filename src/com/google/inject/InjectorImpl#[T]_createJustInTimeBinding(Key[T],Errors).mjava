@@ -3,10 +3,10 @@
    * injectable class (including those with @ImplementedBy, etc.), an automatically converted
    * constant, a {@code Provider<X>} binding, etc.
    *
-   * @throws ResolveFailedException if the binding cannot be created.
+   * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
    */
   <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors)
-      throws ResolveFailedException {
+      throws ErrorsException {
     // Handle cases where T is a Provider<?>.
     if (isProvider(key)) {
       // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
@@ -30,7 +30,7 @@
         try {
           return getBindingOrThrow(key.withoutAttributes(), new Errors());
         }
-        catch (ResolveFailedException ignored) {
+        catch (ErrorsException ignored) {
           // throw with a more appropriate message below
         }
       }

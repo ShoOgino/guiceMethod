@@ -1,4 +1,8 @@
-  public static Errors getErrors(RuntimeException userException) {
+  /**
+   * Returns any {@code errors} on {@code userException} if it is a
+   * ProvisionException.
+   */
+  static Errors getErrors(RuntimeException userException) {
     return userException instanceof ProvisionException
         ? ((ProvisionException) userException).errors
         : null;

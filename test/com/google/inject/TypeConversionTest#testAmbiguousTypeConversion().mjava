@@ -1,0 +1,24 @@
+  public void testAmbiguousTypeConversion() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), mockTypeConverter(new Date()));
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), mockTypeConverter(new Date()));
+        bindConstant().annotatedWith(NumericValue.class).to("foo");
+        bind(DateHolder.class);
+      }
+    };
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
+          "Multiple converters can convert 'foo' (bound at ", getClass().getName(),
+          ".configure(TypeConversionTest.java:", "to java.util.Date:",
+          "CustomConverter which matches only(java.util.Date)", "and",
+          "CustomConverter which matches only(java.util.Date)",
+          "Please adjust your type converter configuration to avoid overlapping matches.");
+    }
+  }
+

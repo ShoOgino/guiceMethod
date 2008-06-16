@@ -1,4 +1,4 @@
-  public <T> T checkForNull(Errors errors, T value, Object source) throws ResolveFailedException {
+  public <T> T checkForNull(Errors errors, T value, Object source) throws ErrorsException {
     if (value != null
         || allowsNull()
         || allowNullsBadBadBad()) {

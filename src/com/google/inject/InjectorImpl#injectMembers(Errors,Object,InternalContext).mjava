@@ -1,5 +1,5 @@
   void injectMembers(Errors errors, Object o, InternalContext context)
-      throws ResolveFailedException {
+      throws ErrorsException {
     if (o == null) {
       return;
     }

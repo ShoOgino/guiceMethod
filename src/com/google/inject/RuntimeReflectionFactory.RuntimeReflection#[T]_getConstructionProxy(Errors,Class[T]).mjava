@@ -1,5 +1,5 @@
     public <T> ConstructionProxy<T> getConstructionProxy(Errors errors, Class<T> implementation)
-        throws ResolveFailedException {
+        throws ErrorsException {
       return constructionProxyFactory.get(errors, findConstructorIn(errors, implementation));
     }
 
