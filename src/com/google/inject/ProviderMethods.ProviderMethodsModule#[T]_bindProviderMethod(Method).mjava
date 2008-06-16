@@ -1,19 +1,23 @@
     <T> void bindProviderMethod(final Method method) {
-      this.source = StackTraceElements.forMember(method);
+      Errors errors = new Errors()
+          .pushSource(StackTraceElements.forMember(method));
 
       method.setAccessible(true);
 
       Class<? extends Annotation> scopeAnnotation
-          = findScopeAnnotation(method.getAnnotations());
-      Annotation bindingAnnotation = findBindingAnnotation(method, method.getAnnotations());
+          = findScopeAnnotation(errors, method.getAnnotations());
+      Annotation bindingAnnotation
+          = Keys.findBindingAnnotation(errors, method, method.getAnnotations());
 
-      final List<Provider<?>> parameterProviders
-          = findParameterProviders(method);
+      final List<Provider<?>> parameterProviders = findParameterProviders(errors, method);
+
+      for (Message message : errors.getMessages()) {
+        addError(message);
+      }
 
       // Define T as the method's return type.
       @SuppressWarnings("unchecked")
-      TypeLiteral<T> returnType 
-          = (TypeLiteral<T>) TypeLiteral.get(method.getGenericReturnType());
+      TypeLiteral<T> returnType = (TypeLiteral<T>) TypeLiteral.get(method.getGenericReturnType());
 
       Provider<T> provider = new Provider<T>() {
         public T get() {
@@ -24,8 +28,8 @@
 
           try {
             // We know this cast is safe becase T is the method's return type.
-            @SuppressWarnings({"unchecked", "UnnecessaryLocalVariable"})
-            T result = (T) method.invoke(providers, parameters);
+            @SuppressWarnings({ "unchecked", "UnnecessaryLocalVariable" }) T result = (T) method
+                .invoke(providers, parameters);
             return result;
           }
           catch (IllegalAccessException e) {

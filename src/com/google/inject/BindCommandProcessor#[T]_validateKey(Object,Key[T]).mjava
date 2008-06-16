@@ -10,5 +10,14 @@
         errors.at(StackTraceElements.forType(annotationType)).missingBindingAnnotation(source);
       }
     }
+
+    Class<? super T> rawType = key.getRawType();
+    if (!Classes.isConcrete(rawType)) {
+      Class<? extends Annotation> scopeAnnotation = Scopes.getScopeAnnotation(errors, rawType);
+      if (scopeAnnotation != null) {
+        errors.at(StackTraceElements.forType(rawType))
+            .scopeAnnotationOnAbstractType(scopeAnnotation, rawType, source);
+      }
+    }
   }
 

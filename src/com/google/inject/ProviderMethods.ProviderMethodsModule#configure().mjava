@@ -1,8 +1,4 @@
     protected void configure() {
-      SourceProviders.withDefault(sourceProvider, new Runnable() {
-        public void run() {
-          bindProviderMethods(providers.getClass());
-        }
-      });
+      bindProviderMethods(providers.getClass());
     }
 

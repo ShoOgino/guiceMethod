@@ -3,17 +3,8 @@
    */
   public static Key<?> get(Type type, Member member, Annotation[] annotations, Errors errors)
       throws ErrorsException {
-    Annotation found = null;
-    for (Annotation annotation : annotations) {
-      if (annotation.annotationType().getAnnotation(BindingAnnotation.class) != null) {
-        if (found == null) {
-          found = annotation;
-        } else {
-          throw errors.duplicateBindingAnnotations(
-              member, found.annotationType(), annotation.annotationType()).toException();
-        }
-      }
-    }
+    Annotation found = findBindingAnnotation(errors, member, annotations);
+    errors.throwIfNecessary();
     return found == null ? Key.get(type) : Key.get(type, found);
   }
 

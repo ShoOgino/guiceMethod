@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#addError(Message)
+   */
+  protected void addError(Message message) {
+    binder.addError(message);
+  }
+

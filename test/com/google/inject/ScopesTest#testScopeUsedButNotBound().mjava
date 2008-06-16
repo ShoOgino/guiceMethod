@@ -1,0 +1,18 @@
+  public void testScopeUsedButNotBound() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(B.class).in(CustomScoped.class);
+          bind(C.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + getClass().getName(), ".configure(ScopesTest.java:",
+          "No scope is bound to " + CustomScoped.class.getName(),
+          "2) Error at " + C.class.getName() + ".class",
+          "No scope is bound to " + CustomScoped.class.getName());
+    }
+  }
+

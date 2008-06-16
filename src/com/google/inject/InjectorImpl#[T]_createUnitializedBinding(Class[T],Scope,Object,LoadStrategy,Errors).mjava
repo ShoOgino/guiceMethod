@@ -36,7 +36,13 @@
     }
 
     if (scope == null) {
-      scope = Scopes.getScopeForType(errors, type, scopes);
+      Class<? extends Annotation> scopeAnnotation = Scopes.getScopeAnnotation(errors, type);
+      if (scopeAnnotation != null) {
+        scope = scopes.get(scopeAnnotation);
+        if (scope == null) {
+          errors.at(StackTraceElements.forType(type)).scopeNotFound(scopeAnnotation);
+        }
+      }
     }
 
     Key<T> key = Key.get(type);

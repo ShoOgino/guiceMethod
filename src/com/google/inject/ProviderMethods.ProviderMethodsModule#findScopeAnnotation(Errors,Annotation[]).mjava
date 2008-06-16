@@ -1,12 +1,14 @@
-    Class<? extends Annotation> findScopeAnnotation(Annotation[] annotations) {
+    /**
+     * Returns the scoping annotation, or null if there isn't one.
+     */
+    Class<? extends Annotation> findScopeAnnotation(Errors errors, Annotation[] annotations) {
       Class<? extends Annotation> found = null;
 
       for (Annotation annotation : annotations) {
         if (annotation.annotationType()
             .isAnnotationPresent(ScopeAnnotation.class)) {
           if (found != null) {
-            addError(new Errors().duplicateScopeAnnotations(
-                found, annotation.annotationType()).toString());
+            errors.duplicateScopeAnnotations(found, annotation.annotationType());
           } else {
             found = annotation.annotationType();
           }

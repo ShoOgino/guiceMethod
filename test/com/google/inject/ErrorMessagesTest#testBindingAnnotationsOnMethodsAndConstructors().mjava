@@ -4,8 +4,9 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Binding annotations on injected methods are not supported. "
-              + "Annotate the parameter instead?");
+          "method " + B.class.getName() + ".injectMe() ",
+          "is annotated with @", Green.class.getName() + "(), ",
+          "but binding annotations should be applied to its parameters instead.");
     }
 
     try {
@@ -13,8 +14,9 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Binding annotations on injected constructors are not supported. "
-              + "Annotate the parameter instead?");
+          "constructor " + C.class.getName() + "() ",
+          "is annotated with @", Green.class.getName() + "(), ",
+          "but binding annotations should be applied to its parameters instead.");
     }
   }
 

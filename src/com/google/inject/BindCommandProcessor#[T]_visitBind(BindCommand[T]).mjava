@@ -29,7 +29,7 @@
           return scope;
         } else {
           errors.scopeNotFound(scopeAnnotation);
-          return Scopes.NO_SCOPE;
+          return null;
         }
       }
 

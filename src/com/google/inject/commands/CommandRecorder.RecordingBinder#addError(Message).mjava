@@ -1,0 +1,4 @@
+    public void addError(Message message) {
+      throw new UnsupportedOperationException("TODO");
+    }
+

@@ -22,7 +22,7 @@
         public List<Parameter<?>> getParameters() {
           return parameters;
         }
-        public Member getMember() {
+        public Constructor getConstructor() {
           return constructor;
         }
       };
@@ -40,7 +40,7 @@
       public List<Parameter<?>> getParameters() {
         return parameters;
       }
-      public Member getMember() {
+      public Constructor getConstructor() {
         return constructor;
       }
     };

@@ -1,10 +1,11 @@
-    List<Provider<?>> findParameterProviders(Method method) {
+    List<Provider<?>> findParameterProviders(Errors errors, Method method) {
       List<Provider<?>> parameterProviders = Lists.newArrayList();
 
       Type[] parameterTypes = method.getGenericParameterTypes();
       Annotation[][] parameterAnnotations = method.getParameterAnnotations();
       for (int i = 0; i < parameterTypes.length; i++) {
-        Annotation bindingAnnotation = findBindingAnnotation(method, parameterAnnotations[i]);
+        Annotation bindingAnnotation
+            = Keys.findBindingAnnotation(errors, method, parameterAnnotations[i]);
         Key<?> key = bindingAnnotation == null ? Key.get(parameterTypes[i])
             : Key.get(parameterTypes[i], bindingAnnotation);
         Provider<?> provider = getProvider(key);

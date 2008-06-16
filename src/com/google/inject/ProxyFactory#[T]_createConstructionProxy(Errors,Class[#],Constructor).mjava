@@ -19,7 +19,7 @@
         return parameters;
       }
 
-      public Member getMember() {
+      public Constructor getConstructor() {
         return standardConstructor;
       }
     };
