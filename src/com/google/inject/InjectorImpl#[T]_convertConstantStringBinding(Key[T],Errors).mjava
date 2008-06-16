@@ -18,8 +18,8 @@
 
     // Find a matching type converter.
     TypeLiteral<T> type = key.getTypeLiteral();
-    MatcherAndConverter<?> matchingConverter = null;
-    for (MatcherAndConverter<?> converter : converters) {
+    MatcherAndConverter matchingConverter = null;
+    for (MatcherAndConverter converter : converters) {
       if (converter.getTypeMatcher().matches(type)) {
         if (matchingConverter != null) {
           errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);

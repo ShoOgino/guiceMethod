@@ -1,4 +1,0 @@
-  <T> BindingImpl<T> invalidBinding(Class<T> clazz) {
-    return invalidBinding(Key.get(clazz));
-  }
-
