@@ -1,6 +1,0 @@
-  void checkNumbers(Number... ns) {
-    for (Number n : ns) {
-      assertEquals(5, n.intValue());
-    }
-  }
-

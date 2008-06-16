@@ -1,4 +1,0 @@
-  public Errors converterReturnedNull() {
-    return addMessage("Converter returned null.");
-  }
-

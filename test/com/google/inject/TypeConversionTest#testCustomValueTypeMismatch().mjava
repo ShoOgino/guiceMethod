@@ -1,8 +1,16 @@
-  public void testInvalidCustomValue() throws CreationException {
+  public void testCustomValueTypeMismatch() {
     Module module = new AbstractModule() {
       protected void configure() {
-        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), dateConverter);
-        bindConstant().annotatedWith(NumericValue.class).to("invalid");
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), new TypeConverter() {
+          public Object convert(String value, TypeLiteral<?> toType) {
+            return -1;
+          }
+
+          @Override public String toString() {
+            return "TypeConverter<Date>";
+          }
+        });
+        bindConstant().annotatedWith(NumericValue.class).to("foo");
         bind(DateHolder.class);
       }
     };
@@ -11,15 +19,13 @@
       Guice.createInjector(module);
       fail();
     } catch (CreationException expected) {
-      Throwable cause = Iterables.getOnlyElement(expected.getErrorMessages()).getCause();
-      assertTrue(cause instanceof IllegalArgumentException);
       assertContains(expected.getMessage(),
           "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
-          "Error converting 'invalid' (bound at ", getClass().getName(),
+          "Type mismatch converting 'foo' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date",
           "using TypeConverter<Date> which matches only(java.util.Date) ",
           "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:",
-          "Reason: java.lang.IllegalArgumentException: Unparseable date: \"invalid\"");
+          "Converter returned -1.");
     }
   }
 

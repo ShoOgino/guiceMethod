@@ -1,4 +1,0 @@
-  public Errors conversionTypeError(Object converted, TypeLiteral<?> type) {
-    return addMessage("Converter returned %s but we expected a[n] %s.", converted, type);
-  }
-
