@@ -1,8 +1,5 @@
   public void replayAddMessageError(final Binder binder, final AddMessageErrorCommand command) {
-    SourceProviders.withDefault(command.getSource(), new Runnable() {
-      public void run() {
-        binder.addError(command.getMessage(), command.getArguments().toArray());
-      }
-    });
+    binder.withSource(command.getSource())
+        .addError(command.getMessage(), command.getArguments().toArray());
   }
 

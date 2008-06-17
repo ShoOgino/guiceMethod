@@ -1,0 +1,11 @@
+    public void configure(Binder binder) {
+      binder = binder.withSource(SourceProviders.UNKNOWN_SOURCE);
+
+      binder.bind(Stage.class).toInstance(stage);
+      binder.bindScope(Singleton.class, SINGLETON);
+      // Create default bindings.
+      // We use toProvider() instead of toInstance() to avoid infinite recursion
+      // in toString().
+      binder.bind(Injector.class).toProvider(new InjectorProvider(injector));
+    }
+

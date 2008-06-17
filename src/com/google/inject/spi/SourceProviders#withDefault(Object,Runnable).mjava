@@ -1,8 +1,0 @@
-  /**
-   * Sets the default source, runs the given command, and then
-   * restores the previous default source provider.
-   */
-  public static void withDefault(final Object source, Runnable r) {
-    withDefault(sourceProviderFor(source), r);
-  }
-

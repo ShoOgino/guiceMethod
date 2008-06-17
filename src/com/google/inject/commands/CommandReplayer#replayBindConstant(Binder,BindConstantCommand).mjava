@@ -1,15 +1,12 @@
   public void replayBindConstant(final Binder binder, final BindConstantCommand command) {
-    SourceProviders.withDefault(command.getSource(), new Runnable() {
-      public void run() {
-        AnnotatedConstantBindingBuilder constantBindingBuilder = binder.bindConstant();
+    AnnotatedConstantBindingBuilder constantBindingBuilder
+        = binder.withSource(command.getSource()).bindConstant();
 
-        Key<Object> key = command.getKey();
-        ConstantBindingBuilder builder = key.getAnnotation() != null
-            ? constantBindingBuilder.annotatedWith(key.getAnnotation())
-            : constantBindingBuilder.annotatedWith(key.getAnnotationType());
+    Key<Object> key = command.getKey();
+    ConstantBindingBuilder builder = key.getAnnotation() != null
+        ? constantBindingBuilder.annotatedWith(key.getAnnotation())
+        : constantBindingBuilder.annotatedWith(key.getAnnotationType());
 
-        command.getTarget().execute(builder);
-      }
-    });
+    command.getTarget().execute(builder);
   }
 

@@ -1,10 +1,7 @@
   public void replayRequestStaticInjection(final Binder binder,
       final RequestStaticInjectionCommand command) {
-    SourceProviders.withDefault(command.getSource(), new Runnable() {
-      public void run() {
-        List<Class> types = command.getTypes();
-        binder.requestStaticInjection(types.toArray(new Class[types.size()]));
-      }
-    });
+    List<Class> types = command.getTypes();
+    binder.withSource(command.getSource())
+        .requestStaticInjection(types.toArray(new Class[types.size()]));
   }
 

@@ -1,0 +1,5 @@
+    private RecordingBinder() {
+      modules = Sets.newHashSet();
+      commands = Lists.newArrayList();
+    }
+

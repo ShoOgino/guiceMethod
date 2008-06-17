@@ -1,18 +1,14 @@
   public <T> void replayBind(final Binder binder, final BindCommand<T> command) {
-    SourceProviders.withDefault(command.getSource(), new Runnable() {
-      public void run() {
-        LinkedBindingBuilder<T> lbb = binder.bind(command.getKey());
+    LinkedBindingBuilder<T> lbb = binder.withSource(command.getSource()).bind(command.getKey());
 
-        BindTarget<T> bindTarget = command.getTarget();
-        ScopedBindingBuilder sbb = bindTarget != null
-            ? bindTarget.execute(lbb)
-            : lbb;
+    BindTarget<T> bindTarget = command.getTarget();
+    ScopedBindingBuilder sbb = bindTarget != null
+        ? bindTarget.execute(lbb)
+        : lbb;
 
-        BindScoping scoping = command.getScoping();
-        if (scoping != null) {
-          scoping.execute(sbb);
-        }
-      }
-    });
+    BindScoping scoping = command.getScoping();
+    if (scoping != null) {
+      scoping.execute(sbb);
+    }
   }
 

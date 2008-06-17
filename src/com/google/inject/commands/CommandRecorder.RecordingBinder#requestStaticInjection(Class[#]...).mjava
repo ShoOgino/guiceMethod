@@ -1,4 +1,4 @@
     public void requestStaticInjection(Class<?>... types) {
-      commands.add(new RequestStaticInjectionCommand(defaultSource(), types));
+      commands.add(new RequestStaticInjectionCommand(getSource(), types));
     }
 

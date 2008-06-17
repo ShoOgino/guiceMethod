@@ -1,8 +1,5 @@
   public void replayBindScope(final Binder binder, final BindScopeCommand command) {
-    SourceProviders.withDefault(command.getSource(), new Runnable() {
-      public void run() {
-        binder.bindScope(command.getAnnotationType(), command.getScope());
-      }
-    });
+    binder.withSource(command.getSource()).bindScope(
+        command.getAnnotationType(), command.getScope());
   }
 

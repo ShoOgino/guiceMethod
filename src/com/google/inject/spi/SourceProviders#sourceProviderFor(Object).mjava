@@ -1,8 +1,0 @@
-  private static SourceProvider sourceProviderFor(final Object source) {
-    return new SourceProvider() {
-      public Object source() {
-        return source;
-      }
-    };
-  }
-

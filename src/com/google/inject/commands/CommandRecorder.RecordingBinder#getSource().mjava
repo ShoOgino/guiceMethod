@@ -1,0 +1,4 @@
+    protected Object getSource() {
+      return SourceProviders.defaultSource();
+    }
+

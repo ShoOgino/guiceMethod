@@ -1,0 +1,10 @@
+    public Binder withSource(final Object source) {
+      checkNotNull(source, "source");
+
+      return new RecordingBinder(this) {
+        @Override protected Object getSource() {
+          return source;
+        }
+      };
+    }
+
