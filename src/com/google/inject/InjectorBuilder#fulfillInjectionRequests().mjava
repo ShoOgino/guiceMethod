@@ -1,13 +1,16 @@
-  /** Inject everything that can be injected. This uses runtime error handling. */
+  /** Inject everything that can be injected. */
   private void fulfillInjectionRequests() {
     futureInjector.initialize(injector);
 
     requestStaticInjectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
+
     injector.fulfillOutstandingInjections(errors);
     stopwatch.resetAndLog("Instance injection");
+    errors.throwCreationExceptionIfErrorsExist();
 
     loadEagerSingletons();
     stopwatch.resetAndLog("Preloading");
+    errors.throwCreationExceptionIfErrorsExist();
   }
 

@@ -12,7 +12,7 @@
     } else if (!sources.isEmpty()) {
       source = sources.get(sources.size() - 1);
     } else {
-      source = SourceProviders.UNKNOWN_SOURCE;
+      source = SourceProvider.UNKNOWN_SOURCE;
     }
 
     errors.add(new Message(source, message, ImmutableList.copyOf(injectionPoints), cause));

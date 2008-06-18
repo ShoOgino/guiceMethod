@@ -8,8 +8,8 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "Error at " + getClass().getName());
-      assertContains(expected.getMessage(), "No implementation was specified.");
+      assertContains(expected.getMessage(), "Error at " + getClass().getName(),
+          "No implementation for java.lang.Integer");
     }
   }
 

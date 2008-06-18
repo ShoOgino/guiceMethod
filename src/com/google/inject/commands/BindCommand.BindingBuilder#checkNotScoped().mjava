@@ -1,12 +1,12 @@
     private void checkNotScoped() {
       // Scoping isn't allowed when we have only one instance.
       if (bindTarget.get() != null) {
-        binder.addError(SINGLE_INSTANCE_AND_SCOPE);
+        binder.withSource(sourceProvider.get()).addError(SINGLE_INSTANCE_AND_SCOPE);
         return;
       }
 
       if (bindScoping != EMPTY_SCOPING) {
-        binder.addError(SCOPE_ALREADY_SET);
+        binder.withSource(sourceProvider.get()).addError(SCOPE_ALREADY_SET);
       }
     }
 

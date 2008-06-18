@@ -6,7 +6,7 @@
       Class<? extends Annotation> annotationType) {
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "@" + annotationType.getName(),
         Key.get(Multibinder.<T>setOf(type), annotationType));
-    binder.install(result);
+    binder.withSource(sourceProvider.get()).install(result);
     return result;
   }
 

@@ -1,4 +1,0 @@
-  private static Object getSource() {
-    return SourceProviders.defaultSource();
-  }
-

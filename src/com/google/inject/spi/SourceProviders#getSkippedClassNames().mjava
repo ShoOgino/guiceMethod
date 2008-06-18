@@ -1,8 +1,0 @@
-  /**
-   * Gets the set of class names which should be skipped by stacktrace-based
-   * providers.
-   */
-  public synchronized static Set<String> getSkippedClassNames() {
-    return skippedClassNames;
-  }
-

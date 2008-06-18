@@ -7,7 +7,7 @@
     LoggerFactory loggerFactory = new LoggerFactory();
     injector.explicitBindings.put(key,
         new ProviderInstanceBindingImpl<Logger>(injector, key,
-            SourceProviders.UNKNOWN_SOURCE, loggerFactory, Scopes.NO_SCOPE,
+            SourceProvider.UNKNOWN_SOURCE, loggerFactory, Scopes.NO_SCOPE,
             loggerFactory, LoadStrategy.LAZY));
   }
 

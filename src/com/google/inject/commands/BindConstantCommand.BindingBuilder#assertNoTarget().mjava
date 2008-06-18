@@ -1,6 +1,6 @@
     private void assertNoTarget() {
       if (target != null) {
-        binder.addError(CONSTANT_VALUE_ALREADY_SET);
+        binder.withSource(sourceProvider.get()).addError(CONSTANT_VALUE_ALREADY_SET);
       }
     }
 

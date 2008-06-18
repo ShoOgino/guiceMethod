@@ -4,7 +4,7 @@
    * {@link Properties#defaults defaults}.
    */
   public static void bindProperties(Binder binder, Properties properties) {
-    binder = binder.withSource(getSource());
+    binder = binder.withSource(sourceProvider.get());
 
     // use enumeration to include the default properties
     for (Enumeration<?> e = properties.propertyNames(); e.hasMoreElements(); ) {

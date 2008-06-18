@@ -6,7 +6,7 @@
       super(
           injector,
           key,
-          SourceProviders.UNKNOWN_SOURCE,
+          SourceProvider.UNKNOWN_SOURCE,
           createInternalFactory(providedBinding),
           Scopes.NO_SCOPE,
           loadStrategy);

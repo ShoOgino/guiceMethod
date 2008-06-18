@@ -1,18 +1,12 @@
     public Set<T> get() {
-      if (!isInitialized()) {
-        throw new IllegalStateException("Multibinder is not initialized");
-      }
+      checkState(isInitialized(), "Multibinder is not initialized");
 
       Set<T> result = new LinkedHashSet<T>();
       for (Provider<T> provider : providers) {
         final T newValue = provider.get();
-        if (newValue == null) {
-          throw new IllegalStateException("Set injection failed due to null element");
-        }
-        if (!result.add(newValue)) {
-          throw new IllegalStateException("Set injection failed due to duplicated element \""
-              + newValue + "\"");
-        }
+        checkState(newValue != null, "Set injection failed due to null element");
+        checkState(result.add(newValue),
+            "Set injection failed due to duplicated element \"%s\"", newValue);
       }
       return Collections.unmodifiableSet(result);
     }

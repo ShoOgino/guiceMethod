@@ -9,9 +9,9 @@
         }
       });
       fail();
-    } catch(ProvisionException expected) {
-      assertEquals("Map injection failed due to duplicated key \"a\"",
-          expected.getCause().getMessage());
+    } catch(CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Map injection failed due to duplicated key \"a\"");
     }
   }
 

@@ -1,8 +1,6 @@
   public <T> T get(Key<T> key) {
-    if (injector == null) {
-      throw new IllegalStateException("This provider cannot be used until the"
-          + " Injector has been created.");
-    }
+    checkState(injector != null,
+        "This provider cannot be used until the Injector has been created.");
 
     return injector.getInstance(key);
   }

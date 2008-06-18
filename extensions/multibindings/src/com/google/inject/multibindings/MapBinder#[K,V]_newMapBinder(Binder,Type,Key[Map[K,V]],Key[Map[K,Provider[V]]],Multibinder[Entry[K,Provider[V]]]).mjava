@@ -3,7 +3,7 @@
       Multibinder<Entry<K, Provider<V>>> entrySetBinder) {
     RealMapBinder<K, V> mapBinder = new RealMapBinder<K, V>(binder, 
         valueType, mapKey, providerMapKey, entrySetBinder);
-    binder.install(mapBinder);
+    binder.withSource(sourceProvider.get()).install(mapBinder);
     return mapBinder;
   }
 

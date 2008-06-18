@@ -7,8 +7,8 @@
         }
       });
       fail();
-    } catch (ProvisionException expected) {
-      assertContains(expected.getCause().getMessage(),
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
           "Parameter of type 'double' is not injectable or annotated with @Assisted");
     }
   }

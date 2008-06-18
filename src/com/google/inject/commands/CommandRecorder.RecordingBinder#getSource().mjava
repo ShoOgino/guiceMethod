@@ -1,4 +1,4 @@
     protected Object getSource() {
-      return SourceProviders.defaultSource();
+      return sourceProvider.get();
     }
 

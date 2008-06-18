@@ -7,6 +7,8 @@
    * @see com.google.inject.name.Names#named(String) 
    */
   public static void bindAll(Binder binder, ListableBeanFactory beanFactory) {
+    binder = binder.withSource(sourceProvider.get());
+
     for (String name : beanFactory.getBeanDefinitionNames()) {
       Class<?> type = beanFactory.getType(name);
       bindBean(binder, beanFactory, name, type);

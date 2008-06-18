@@ -1,7 +1,0 @@
-  /**
-   * Returns the current source obtained from the default provider.
-   */
-  public static Object defaultSource() {
-    return localSourceProvider.get()[0].source();
-  }
-

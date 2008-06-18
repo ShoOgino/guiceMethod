@@ -1,6 +1,6 @@
   public static Object forMember(Member member) {
     if (member == null) {
-      return SourceProviders.UNKNOWN_SOURCE;
+      return SourceProvider.UNKNOWN_SOURCE;
     }
 
     Class declaringClass = member.getDeclaringClass();

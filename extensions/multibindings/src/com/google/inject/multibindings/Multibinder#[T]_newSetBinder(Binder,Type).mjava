@@ -5,7 +5,7 @@
   public static <T> Multibinder<T> newSetBinder(Binder binder, Type type) {
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "",
         Key.get(Multibinder.<T>setOf(type)));
-    binder.install(result);
+    binder.withSource(sourceProvider.get()).install(result);
     return result;
   }
 

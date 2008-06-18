@@ -1,5 +1,5 @@
     public void configure(Binder binder) {
-      binder = binder.withSource(SourceProviders.UNKNOWN_SOURCE);
+      binder = binder.withSource(SourceProvider.UNKNOWN_SOURCE);
 
       binder.bind(Stage.class).toInstance(stage);
       binder.bindScope(Singleton.class, SINGLETON);
