@@ -1,9 +1,0 @@
-  public SourceProvider(Class... classesToSkip) {
-    String[] classNamesToSkip = new String[classesToSkip.length + 1];
-    for (int i = 0; i < classesToSkip.length; i++) {
-      classNamesToSkip[i] = classesToSkip[i].getName();
-    }
-    classNamesToSkip[classesToSkip.length] = SourceProvider.class.getName();
-    this.classNamesToSkip = ImmutableSet.of(classNamesToSkip);
-  }
-
