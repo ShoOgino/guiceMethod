@@ -6,6 +6,7 @@
     assertEqualWhenReserialized(only("foo"));
     assertEqualWhenReserialized(identicalTo(Object.class));
     assertEqualWhenReserialized(inPackage(String.class.getPackage()));
+    assertEqualWhenReserialized(inSubpackage(String.class.getPackage().getName()));
     assertEqualWhenReserialized(returns(any()));
     assertEqualWhenReserialized(subclassesOf(AbstractList.class));
     assertEqualWhenReserialized(only("a").or(only("b")));

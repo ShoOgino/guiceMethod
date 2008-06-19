@@ -1,0 +1,6 @@
+    public boolean matches(Class c) {
+      String classPackageName = c.getPackage().getName();
+      return classPackageName.equals(targetPackageName)
+          || classPackageName.startsWith(targetPackageName + ".");
+    }
+

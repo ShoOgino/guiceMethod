@@ -1,0 +1,4 @@
+    public InSubpackage(String targetPackageName) {
+      this.targetPackageName = targetPackageName;
+    }
+

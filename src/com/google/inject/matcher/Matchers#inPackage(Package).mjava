@@ -1,5 +1,6 @@
   /**
-   * Returns a matcher which matches classes in the given package.
+   * Returns a matcher which matches classes in the given package. Packages are specific to their
+   * classloader, so classes with the same package name may not have the same package at runtime.
    */
   public static Matcher<Class> inPackage(final Package targetPackage) {
     return new InPackage(targetPackage);
