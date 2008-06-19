@@ -3,7 +3,7 @@
    * {@code properties}.
    */
   public static void bindProperties(Binder binder, Map<String, String> properties) {
-    binder = binder.withSource(sourceProvider.get());
+    binder = binder.skipSources(Names.class);
     for (Map.Entry<String, String> entry : properties.entrySet()) {
       String key = entry.getKey();
       String value = entry.getValue();

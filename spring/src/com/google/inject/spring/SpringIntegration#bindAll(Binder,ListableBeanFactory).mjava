@@ -7,7 +7,7 @@
    * @see com.google.inject.name.Names#named(String) 
    */
   public static void bindAll(Binder binder, ListableBeanFactory beanFactory) {
-    binder = binder.withSource(sourceProvider.get());
+    binder = binder.skipSources(SpringIntegration.class);
 
     for (String name : beanFactory.getBeanDefinitionNames()) {
       Class<?> type = beanFactory.getType(name);

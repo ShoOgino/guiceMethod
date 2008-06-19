@@ -1,6 +1,6 @@
     private void assertNoBindingAnnotation() {
       if (bindingAnnotation != null) {
-        binder.withSource(sourceProvider.get()).addError(ANNOTATION_ALREADY_SPECIFIED);
+        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
       }
     }
 

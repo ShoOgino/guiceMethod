@@ -3,9 +3,10 @@
    * {@link Set} that is itself bound with no binding annotation.
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, Type type) {
+    binder = binder.skipSources(RealMultibinder.class, Multibinder.class);
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "",
         Key.get(Multibinder.<T>setOf(type)));
-    binder.withSource(sourceProvider.get()).install(result);
+    binder.install(result);
     return result;
   }
 

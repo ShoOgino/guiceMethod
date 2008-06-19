@@ -1,4 +1,6 @@
     protected Object getSource() {
-      return sourceProvider.get();
+      return sourceProvider != null
+          ? sourceProvider.get()
+          : source;
     }
 

@@ -1,5 +1,0 @@
-  /**
-   * Gets the member (constructor, method, or field) which has the dependency.
-   */
-  Member getMember();
-

@@ -1,9 +1,0 @@
-    /**
-     * Creates a recording binder that's backed by the same configuration as
-     * {@code backingBinder}.
-     */
-    private RecordingBinder(RecordingBinder backingBinder) {
-      modules = backingBinder.modules;
-      commands = backingBinder.commands;
-    }
-

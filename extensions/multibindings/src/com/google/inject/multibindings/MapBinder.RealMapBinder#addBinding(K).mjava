@@ -5,12 +5,11 @@
     @Override public LinkedBindingBuilder<V> addBinding(K key) {
       checkNotNull(key, "key");
       checkState(!isInitialized(), "MapBinder was already initialized");
-      Object source = sourceProvider.get();
 
       @SuppressWarnings("unchecked")
       Key<V> valueKey = (Key<V>) Key.get(valueType, new RealElement(entrySetBinder.getSetName()));
       entrySetBinder.addBinding().toInstance(new MapEntry<K, Provider<V>>(key,
-          binder.withSource(source).getProvider(valueKey)));
-      return binder.withSource(source).bind(valueKey);
+          binder.getProvider(valueKey)));
+      return binder.bind(valueKey);
     }
 

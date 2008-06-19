@@ -1,0 +1,9 @@
+  /** Returns the class names as Strings */
+  private static List<String> asStrings(Class... classes) {
+    List<String> strings = Lists.newArrayList();
+    for (Class c : classes) {
+      strings.add(c.getName());
+    }
+    return strings;
+  }
+

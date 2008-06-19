@@ -1,6 +1,6 @@
   /**
    * Returns a binder that uses {@code source} as the reference location for
-   * errors in its configuration. This is typically a {@link StackTraceElement}
+   * configuration errors. This is typically a {@link StackTraceElement}
    * for {@code .java} source but it could any binding source, such as the
    * path to a {@code .properties} file.
    *

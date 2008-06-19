@@ -1,6 +1,6 @@
     private void checkNotAnnotated() {
       if (BindCommand.this.key.getAnnotationType() != null) {
-        binder.withSource(sourceProvider.get()).addError(ANNOTATION_ALREADY_SPECIFIED);
+        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
       }
     }
 

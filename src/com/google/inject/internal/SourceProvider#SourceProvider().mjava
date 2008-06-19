@@ -1,0 +1,4 @@
+  public SourceProvider() {
+    this.classNamesToSkip = ImmutableSet.of(SourceProvider.class.getName());
+  }
+

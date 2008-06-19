@@ -5,6 +5,7 @@
    */
   public static <K, V> MapBinder<K, V> newMapBinder(Binder binder, 
       Type keyType, Type valueType) {
+    binder = binder.skipSources(MapBinder.class, RealMapBinder.class);
     return newMapBinder(binder, valueType,
         Key.get(MapBinder.<K, V>mapOf(keyType, valueType)),
         Key.get(MapBinder.<K, V>mapOfProviderOf(keyType, valueType)), 

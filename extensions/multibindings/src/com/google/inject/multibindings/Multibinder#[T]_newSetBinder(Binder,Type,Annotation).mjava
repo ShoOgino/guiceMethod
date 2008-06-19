@@ -3,9 +3,10 @@
    * {@link Set} that is itself bound with {@code annotation}.
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, Type type, Annotation annotation) {
+    binder = binder.skipSources(RealMultibinder.class, Multibinder.class);
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, annotation.toString(),
         Key.get(Multibinder.<T>setOf(type), annotation));
-    binder.withSource(sourceProvider.get()).install(result);
+    binder.install(result);
     return result;
   }
 

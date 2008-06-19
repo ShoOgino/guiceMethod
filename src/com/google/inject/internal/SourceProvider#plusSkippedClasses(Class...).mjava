@@ -1,0 +1,5 @@
+  /** Returns a new instance that also skips {@code moreClassesToSkip}. */
+  public SourceProvider plusSkippedClasses(Class... moreClassesToSkip) {
+    return new SourceProvider(concat(classNamesToSkip, asStrings(moreClassesToSkip)));
+  }
+

@@ -4,9 +4,10 @@
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, Type type,
       Class<? extends Annotation> annotationType) {
+    binder = binder.skipSources(RealMultibinder.class, Multibinder.class);
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "@" + annotationType.getName(),
         Key.get(Multibinder.<T>setOf(type), annotationType));
-    binder.withSource(sourceProvider.get()).install(result);
+    binder.install(result);
     return result;
   }
 
