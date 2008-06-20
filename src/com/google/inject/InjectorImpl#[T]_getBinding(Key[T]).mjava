@@ -1,6 +1,6 @@
   /** Returns the binding for {@code key} */
   public <T> BindingImpl<T> getBinding(Key<T> key) {
-    Errors errors = new Errors();
+    Errors errors = new Errors(StackTraceElements.forType(key.getRawType()));
     try {
       BindingImpl<T> result = getBindingOrThrow(key, errors);
       ProvisionException.throwNewIfNonEmpty(errors);

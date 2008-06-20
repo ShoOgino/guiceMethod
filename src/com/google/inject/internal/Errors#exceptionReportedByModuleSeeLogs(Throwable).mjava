@@ -1,9 +1,0 @@
-  public Errors exceptionReportedByModuleSeeLogs(Throwable throwable) {
-    String rootMessage = getRootMessage(throwable);
-
-    logger.log(Level.INFO, format("An exception was caught and reported. Message: %s", rootMessage),
-        throwable);
-    return addMessage(throwable,
-        "An exception was caught and reported. See log for details. Message: %s", rootMessage);
-  }
-

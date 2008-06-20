@@ -3,8 +3,7 @@
     Errors errors = new Errors();
     try {
       injectMembersOrThrow(errors, o);
-    }
-    catch (ErrorsException e) {
+    } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }
 

@@ -11,15 +11,14 @@
         continue;
       }
 
-      Errors errorsForMember = inject.optional() ? new Errors() : errors;
       Object source = StackTraceElements.forMember(member);
-      errorsForMember.pushSource(source);
+      Errors errorsForMember = inject.optional()
+          ? new Errors(source)
+          : errors.withSource(source);
       try {
         injectors.add(injectorFactory.create(this, member, errorsForMember));
       } catch (ErrorsException ignoredForNow) {
         // if this was an optional injection, it is completely ignored
-      } finally {
-        errorsForMember.popSource(source);
       }
     }
   }

@@ -15,9 +15,12 @@
         },
 
         new FailingVisitor() {
-          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
+          @Override public Void visitAddMessage(AddMessageCommand command) {
             assertEquals("More than one annotation is specified for this binding.",
-                command.getMessage());
+                command.getMessage().getMessage());
+            assertNull(command.getMessage().getCause());
+            assertTrue(command.getMessage().getInjectionPoints().isEmpty());
+            assertContains(command.getMessage().getSource(), "CommandRecorderTest.java");
             return null;
           }
         }

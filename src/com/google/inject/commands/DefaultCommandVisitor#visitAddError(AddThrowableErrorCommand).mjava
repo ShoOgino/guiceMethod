@@ -1,4 +1,0 @@
-  public V visitAddError(AddThrowableErrorCommand command) {
-    return visitCommand(command);
-  }
-

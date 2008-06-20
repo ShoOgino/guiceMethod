@@ -1,5 +1,0 @@
-  @Override public Boolean visitAddMessageError(AddMessageErrorCommand command) {
-    errors.userReportedError(command.getMessage(), command.getArguments());
-    return true;
-  }
-

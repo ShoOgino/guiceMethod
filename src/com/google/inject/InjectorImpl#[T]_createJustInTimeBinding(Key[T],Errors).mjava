@@ -28,9 +28,9 @@
       // Look for a binding without annotation attributes or return null.
       if (key.hasAttributes()) {
         try {
-          return getBindingOrThrow(key.withoutAttributes(), new Errors());
-        }
-        catch (ErrorsException ignored) {
+          Errors ignored = new Errors();
+          return getBindingOrThrow(key.withoutAttributes(), ignored);
+        } catch (ErrorsException ignored) {
           // throw with a more appropriate message below
         }
       }

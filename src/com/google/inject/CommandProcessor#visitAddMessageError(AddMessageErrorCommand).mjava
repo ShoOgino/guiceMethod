@@ -1,4 +1,0 @@
-  public Boolean visitAddMessageError(AddMessageErrorCommand command) {
-    return false;
-  }
-

@@ -1,9 +1,0 @@
-  /**
-   * Specifies the source for every error added until the matching call to
-   * {@link #popSource(Object)}.
-   */
-  public Errors pushSource(Object source) {
-    sources.add(source);
-    return this;
-  }
-

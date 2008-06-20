@@ -1,0 +1,4 @@
+  public void replayAddMessageError(final Binder binder, final AddMessageCommand command) {
+    binder.withSource(command.getSource()).addError(command.getMessage());
+  }
+

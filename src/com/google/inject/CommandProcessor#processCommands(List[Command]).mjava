@@ -1,12 +1,16 @@
   public void processCommands(List<Command> commands) {
-    for (Iterator<Command> i = commands.iterator(); i.hasNext(); ) {
-      Command command = i.next();
-      errors.pushSource(command.getSource());
-      Boolean allDone = command.acceptVisitor(this);
-      if (allDone) {
-        i.remove();
+    Errors errorsAnyCommand = this.errors;
+    try {
+      for (Iterator<Command> i = commands.iterator(); i.hasNext(); ) {
+        Command command = i.next();
+        this.errors = errorsAnyCommand.withSource(command.getSource());
+        Boolean allDone = command.acceptVisitor(this);
+        if (allDone) {
+          i.remove();
+        }
       }
-      errors.popSource(command.getSource());
+    } finally {
+      this.errors = errorsAnyCommand;
     }
   }
 

@@ -1,0 +1,2 @@
+    V visitAddMessage(AddMessageCommand command);
+

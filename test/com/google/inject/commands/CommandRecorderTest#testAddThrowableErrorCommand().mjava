@@ -7,8 +7,12 @@
         },
 
         new FailingVisitor() {
-          @Override public Void visitAddError(AddThrowableErrorCommand command) {
-            assertEquals("A", command.getThrowable().getMessage());
+          @Override public Void visitAddMessage(AddMessageCommand command) {
+            assertEquals("A", command.getMessage().getCause().getMessage());
+            assertEquals(command.getMessage().getMessage(),
+                "An exception was caught and reported. Message: A");
+            assertTrue(command.getMessage().getInjectionPoints().isEmpty());
+            assertContains(command.getMessage().getSource(), "CommandRecorderTest.java");
             return null;
           }
         }

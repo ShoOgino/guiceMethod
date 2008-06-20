@@ -36,11 +36,11 @@
     }
 
     if (scope == null) {
-      Class<? extends Annotation> scopeAnnotation = Scopes.getScopeAnnotation(errors, type);
+      Class<? extends Annotation> scopeAnnotation = Scopes.findScopeAnnotation(errors, type);
       if (scopeAnnotation != null) {
         scope = scopes.get(scopeAnnotation);
         if (scope == null) {
-          errors.at(StackTraceElements.forType(type)).scopeNotFound(scopeAnnotation);
+          errors.withSource(StackTraceElements.forType(type)).scopeNotFound(scopeAnnotation);
         }
       }
     }

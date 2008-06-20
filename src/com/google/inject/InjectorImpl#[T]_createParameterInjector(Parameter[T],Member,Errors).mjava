@@ -2,12 +2,7 @@
       Member member, final Errors errors) throws ErrorsException {
     InternalFactory<? extends T> factory;
     Object source = StackTraceElements.forMember(member);
-    errors.pushSource(source);
-    try {
-      factory = getInternalFactory(parameter.getKey(), errors);
-    } finally {
-      errors.popSource(source);
-    }
+    factory = getInternalFactory(parameter.getKey(), errors.withSource(source));
 
     InjectionPoint<T> injectionPoint = InjectionPoint.newInstance(
         member, parameter.getIndex(), parameter.allowsNull(), parameter.getKey());

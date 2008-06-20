@@ -15,8 +15,12 @@
         },
 
         new FailingVisitor() {
-          @Override public Void visitAddMessageError(AddMessageErrorCommand command) {
-            assertEquals("Constant value is set more than once.", command.getMessage());
+          @Override public Void visitAddMessage(AddMessageCommand command) {
+            assertEquals("Constant value is set more than once.",
+                command.getMessage().getMessage());
+            assertNull(command.getMessage().getCause());
+            assertTrue(command.getMessage().getInjectionPoints().isEmpty());
+            assertContains(command.getMessage().getSource(), "CommandRecorderTest.java");
             return null;
           }
         }

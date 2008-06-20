@@ -1,7 +1,7 @@
   public Errors merge(Errors moreErrors) {
     checkState(isMutable);
 
-    if (moreErrors != this) {
+    if (moreErrors.errors != this.errors) {
       for (Message message : moreErrors.errors) {
         List<InjectionPoint> injectionPoints = Lists.newArrayList();
         injectionPoints.addAll(this.injectionPoints);

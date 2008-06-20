@@ -8,12 +8,7 @@
       final Key<?> key = Keys.get(field.getGenericType(), field, field.getAnnotations(), errors);
 
       Object source = StackTraceElements.forMember(field);
-      errors.pushSource(source);
-      try {
-        factory = injector.getInternalFactory(key, errors);
-      } finally {
-        errors.popSource(source);
-      }
+      factory = injector.getInternalFactory(key, errors.withSource(source));
 
       injectionPoint = InjectionPoint.newInstance(
           field, Nullability.allowsNull(field.getAnnotations()), key);

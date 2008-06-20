@@ -1,6 +1,0 @@
-  public Errors popSource(Object source) {
-    Object popped = sources.remove(sources.size() - 1);
-    checkArgument(popped == source);
-    return this;
-  }
-

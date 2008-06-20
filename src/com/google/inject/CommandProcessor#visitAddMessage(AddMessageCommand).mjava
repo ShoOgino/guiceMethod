@@ -1,0 +1,4 @@
+  public Boolean visitAddMessage(AddMessageCommand command) {
+    return false;
+  }
+

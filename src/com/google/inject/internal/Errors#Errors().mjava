@@ -1,0 +1,4 @@
+  public Errors() {
+    this(SourceProvider.UNKNOWN_SOURCE);
+  }
+

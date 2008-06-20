@@ -1,0 +1,4 @@
+  AddMessageCommand(Message message) {
+    this.message = message;
+  }
+

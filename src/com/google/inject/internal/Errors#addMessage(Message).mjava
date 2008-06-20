@@ -1,0 +1,9 @@
+  public Errors addMessage(Message message) {
+    if (!isMutable) {
+      throw new AssertionError();
+    }
+
+    errors.add(message);
+    return this;
+  }
+

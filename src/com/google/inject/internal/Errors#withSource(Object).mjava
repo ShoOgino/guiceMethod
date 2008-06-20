@@ -1,0 +1,8 @@
+  /**
+   * Returns a new instance that uses {@code source} as a reference point for
+   * newly added errors.
+   */
+  public Errors withSource(Object source) {
+    return new Errors(this, source);
+  }
+

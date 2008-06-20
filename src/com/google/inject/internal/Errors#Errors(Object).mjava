@@ -1,0 +1,7 @@
+  public Errors(Object source) {
+    this.source = source;
+    isMutable = true;
+    errors = Lists.newArrayList();
+    injectionPoints = Lists.newArrayList();
+  }
+
