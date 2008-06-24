@@ -1,5 +1,5 @@
   RequestStaticInjectionCommand(Object source, Class[] types) {
     this.source = checkNotNull(source, "source");
-    this.types = unmodifiableList(Arrays.asList(types.clone()));
+    this.types = ImmutableList.of(types);
   }
 

@@ -2,7 +2,7 @@
   private void fulfillInjectionRequests() {
     futureInjector.initialize(injector);
 
-    requestStaticInjectionCommandProcessor.injectMembers(injector);
+    requestInjectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
 
     injector.fulfillOutstandingInjections(errors);

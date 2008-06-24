@@ -1,0 +1,4 @@
+  public Boolean visitRequestInjection(RequestInjectionCommand command) {
+    return false;
+  }
+

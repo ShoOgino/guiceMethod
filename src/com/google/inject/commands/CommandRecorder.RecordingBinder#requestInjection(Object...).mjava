@@ -1,0 +1,4 @@
+    public void requestInjection(Object... instances) {
+      commands.add(new RequestInjectionCommand(getSource(), instances));
+    }
+

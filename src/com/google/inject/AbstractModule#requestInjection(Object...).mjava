@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#requestInjection(Object[])
+   */
+  protected void requestInjection(Object... objects) {
+    binder.requestInjection(objects);
+  }
+

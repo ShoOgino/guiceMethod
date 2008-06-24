@@ -1,0 +1,4 @@
+  public V visitRequestInjection(RequestInjectionCommand command) {
+    return visitCommand(command);
+  }
+

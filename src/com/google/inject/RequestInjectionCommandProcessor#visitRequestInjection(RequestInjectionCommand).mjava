@@ -1,0 +1,7 @@
+  @Override public Boolean visitRequestInjection(RequestInjectionCommand command) {
+    for (Object instance : command.getInstances()) {
+      outstandingInjections.add(instance);
+    }
+    return true;
+  }
+

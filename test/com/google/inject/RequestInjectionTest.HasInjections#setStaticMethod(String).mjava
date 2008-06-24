@@ -1,0 +1,4 @@
+    @Inject static void setStaticMethod(@ForMethod String staticMethod) {
+      HasInjections.staticMethod = staticMethod;
+    }
+

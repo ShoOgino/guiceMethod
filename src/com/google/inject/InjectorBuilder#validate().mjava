@@ -3,7 +3,7 @@
     bindCommandProcesor.runCreationListeners(injector);
     stopwatch.resetAndLog("Validation");
 
-    requestStaticInjectionCommandProcessor.validate(injector);
+    requestInjectionCommandProcessor.validate(injector);
     stopwatch.resetAndLog("Static validation");
 
     injector.validateOustandingInjections(errors);

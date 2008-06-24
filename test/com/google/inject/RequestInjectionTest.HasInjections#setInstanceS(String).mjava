@@ -1,0 +1,4 @@
+    @Inject void setInstanceS(@ForMethod String instanceS) {
+      this.instanceMethod = instanceS;
+    }
+

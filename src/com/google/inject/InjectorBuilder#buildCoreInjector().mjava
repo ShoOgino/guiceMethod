@@ -27,10 +27,9 @@
     injector.index();
     stopwatch.resetAndLog("Binding indexing");
 
-    requestStaticInjectionCommandProcessor
-        = new RequestStaticInjectionCommandProcessor(errors);
-    requestStaticInjectionCommandProcessor
-        .processCommands(commands);
+    requestInjectionCommandProcessor
+        = new RequestInjectionCommandProcessor(errors, injector.outstandingInjections);
+    requestInjectionCommandProcessor.processCommands(commands);
     stopwatch.resetAndLog("Static injection");
   }
 

@@ -21,6 +21,11 @@
         return null;
       }
 
+      public Void visitRequestInjection(RequestInjectionCommand command) {
+        replayRequestInjection(binder, command);
+        return null;
+      }
+
       public Void visitRequestStaticInjection(RequestStaticInjectionCommand command) {
         replayRequestStaticInjection(binder, command);
         return null;

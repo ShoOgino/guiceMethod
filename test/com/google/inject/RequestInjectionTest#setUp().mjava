@@ -1,0 +1,6 @@
+  protected void setUp() throws Exception {
+    super.setUp();
+    HasInjections.staticField = 0;
+    HasInjections.staticMethod = null;
+  }
+
