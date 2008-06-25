@@ -1,0 +1,7 @@
+  public void testEqualityOfAnnotationTypesAndInstances() throws NoSuchFieldException {
+    Foo instance = getClass().getDeclaredField("baz").getAnnotation(Foo.class);
+    Key<String> keyWithInstance = Key.get(String.class, instance);
+    Key<String> keyWithLiteral = Key.get(String.class, Foo.class);
+    assertEqualsBothWays(keyWithInstance, keyWithLiteral);
+  }
+
