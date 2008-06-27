@@ -15,8 +15,8 @@
         = new DelegatingInvocationHandler<T>();
     invocationHandlers.add(invocationHandler);
 
-    Object object = Proxy.newProxyInstance(expectedType.getClassLoader(),
-        new Class[] { expectedType }, invocationHandler);
-    return expectedType.cast(object);
+    ClassLoader classLoader = BytecodeGen.getClassLoader(expectedType);
+    return expectedType.cast(Proxy.newProxyInstance(classLoader,
+        new Class[] { expectedType }, invocationHandler));
   }
 

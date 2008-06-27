@@ -1,0 +1,10 @@
+  /**
+   * For class loaders, {@code null}, is always an alias to the
+   * {@link ClassLoader#getSystemClassLoader() system class loader}.
+   */
+  private static ClassLoader canonicalize(ClassLoader classLoader) {
+    return classLoader != null
+        ? classLoader
+        : ClassLoader.getSystemClassLoader();
+  }
+

@@ -59,17 +59,13 @@
     }
 
     // Create the proxied class.
-    Enhancer enhancer = new Enhancer();
-    enhancer.setSuperclass(declaringClass);
-    enhancer.setUseCache(false); // We do enough caching.
+    Enhancer enhancer = newEnhancer(declaringClass);
     enhancer.setCallbackFilter(new CallbackFilter() {
       public int accept(Method method) {
         return indices.get(method);
       }
     });
     enhancer.setCallbackTypes(callbackTypes);
-    enhancer.setUseFactory(false);
-    enhancer.setNamingPolicy(new GuiceNamingPolicy());
 
     Class<?> proxied = enhancer.createClass();
 

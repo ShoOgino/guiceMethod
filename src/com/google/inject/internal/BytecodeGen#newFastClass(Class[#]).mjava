@@ -1,0 +1,8 @@
+  public static FastClass newFastClass(Class<?> type) {
+    FastClass.Generator generator = new FastClass.Generator();
+    generator.setType(type);
+    generator.setClassLoader(getClassLoader(type));
+    generator.setNamingPolicy(NAMING_POLICY);
+    return generator.create();
+  }
+

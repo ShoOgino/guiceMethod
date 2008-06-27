@@ -1,4 +1,0 @@
-  public static FastClass create(Class type) {
-    return create(type.getClassLoader(), type);
-  }
-

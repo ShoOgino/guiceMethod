@@ -1,0 +1,4 @@
+    public BridgeClassLoader(ClassLoader usersClassLoader) {
+      super(usersClassLoader);
+    }
+

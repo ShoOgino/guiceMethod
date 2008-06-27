@@ -1,0 +1,10 @@
+  public static Enhancer newEnhancer(Class<?> type) {
+    Enhancer enhancer = new Enhancer();
+    enhancer.setSuperclass(type);
+    enhancer.setUseCache(false); // We do enough caching.
+    enhancer.setUseFactory(false);
+    enhancer.setNamingPolicy(NAMING_POLICY);
+    enhancer.setClassLoader(getClassLoader(type));
+    return enhancer;
+  }
+

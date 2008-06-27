@@ -46,6 +46,7 @@
     suite.addTestSuite(ReferenceMapTest.class);
     suite.addTestSuite(TypesTest.class);
     suite.addTestSuite(UniqueAnnotationsTest.class);
+    suite.addTestSuite(BytecodeGenTest.class);
 
     // matcher
     suite.addTestSuite(MatcherTest.class);

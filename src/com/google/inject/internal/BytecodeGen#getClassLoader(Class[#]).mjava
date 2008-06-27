@@ -1,0 +1,7 @@
+  /**
+   * Returns the class loader to host generated classes for {@code type}.
+   */
+  public static ClassLoader getClassLoader(Class<?> type) {
+    return getClassLoader(type, type.getClassLoader());
+  }
+

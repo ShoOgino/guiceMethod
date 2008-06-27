@@ -1,0 +1,10 @@
+  private static ClassLoader getClassLoader(Class<?> type, ClassLoader delegate) {
+    delegate = canonicalize(delegate);
+
+    if (HOOK_ENABLED && isHookable(type)) {
+      return CLASS_LOADER_CACHE.get(delegate);
+    }
+
+    return delegate;
+  }
+

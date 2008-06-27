@@ -1,0 +1,34 @@
+    /**
+     * Classic parent-delegating classloaders are meant to override findClass.
+     * However, non-delegating classloaders (as used in OSGi) instead override
+     * loadClass to provide support for "class-space" separation.
+     */
+    @Override
+    protected Class<?> loadClass(final String name, final boolean resolve)
+        throws ClassNotFoundException {
+
+      if (name.startsWith("java.")) {
+
+        // standard bootdelegation of java.*
+        return super.loadClass(name, resolve);
+
+      } else if ((!name.contains(".internal.") && !name.contains(".cglib."))
+          || name.contains("Test")) {
+
+        /*
+         * load public and test classes directly from the classpath - we don't
+         * delegate to our parent because then the loaded classes would also be
+         * able to see private internal Guice classes, as they are also loaded
+         * by the parent classloader.
+         */
+        final Class<?> clazz = findClass(name);
+        if (resolve) {
+          resolveClass(clazz);
+        }
+        return clazz;
+      }
+
+      // hide internal non-test classes
+      throw new ClassNotFoundException();
+    }
+

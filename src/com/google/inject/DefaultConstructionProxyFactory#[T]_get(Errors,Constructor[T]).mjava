@@ -30,7 +30,7 @@
 
     return new ConstructionProxy<T>() {
       Class<T> classToConstruct = constructor.getDeclaringClass();
-      FastClass fastClass = GuiceFastClass.create(classToConstruct);
+      FastClass fastClass = newFastClass(classToConstruct);
       final FastConstructor fastConstructor = fastClass.getConstructor(constructor);
 
       @SuppressWarnings("unchecked")
