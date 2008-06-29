@@ -1,0 +1,26 @@
+  public void testProxyClassUnloading() {
+    ProxyTest testProxy = Guice.createInjector(interceptorModule, new Module() {
+      public void configure(Binder binder) {
+        binder.bind(ProxyTest.class).to(ProxyTestImpl.class);
+      }
+    }).getInstance(ProxyTest.class);
+
+    // take a weak reference to the generated proxy class
+    Reference<Class<?>> clazzRef = new WeakReference<Class<?>>(testProxy.getClass());
+
+    assertNotNull(clazzRef.get());
+
+    // null the proxy
+    testProxy = null;
+
+    /*
+     * this should be enough to queue the weak reference
+     * unless something is holding onto it accidentally.
+     */
+    System.gc();
+    System.gc();
+    System.gc();
+
+    assertNull(clazzRef.get());
+  }
+

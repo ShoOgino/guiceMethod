@@ -1,0 +1,6 @@
+  public void testProxyingPackagePrivateMethods() {
+    Injector injector = Guice.createInjector(interceptorModule);
+    PackagePrivate instance = injector.getInstance(PackagePrivate.class);
+    assertEquals("HI WORLD", instance.sayHi());
+  }
+
