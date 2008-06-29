@@ -1,0 +1,4 @@
+  private void assertBindingSucceeds(final Class<?> clazz) {
+    assertNotNull(Guice.createInjector().getInstance(clazz));
+  }
+

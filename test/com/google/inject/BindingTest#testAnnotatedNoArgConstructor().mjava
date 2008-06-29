@@ -1,0 +1,7 @@
+  public void testAnnotatedNoArgConstructor() {
+    assertBindingSucceeds(PublicNoArgAnnotated.class);
+    assertBindingSucceeds(ProtectedNoArgAnnotated.class);
+    assertBindingSucceeds(PackagePrivateNoArgAnnotated.class);
+    assertBindingSucceeds(PrivateNoArgAnnotated.class);
+  }
+

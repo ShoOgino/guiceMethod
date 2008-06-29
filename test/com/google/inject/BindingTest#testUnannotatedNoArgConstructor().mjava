@@ -1,0 +1,7 @@
+  public void testUnannotatedNoArgConstructor() throws Exception{
+    assertBindingSucceeds(PublicNoArg.class);
+    assertBindingSucceeds(ProtectedNoArg.class);
+    assertBindingSucceeds(PackagePrivateNoArg.class);
+    assertBindingFails(PrivateNoArg.class);
+  }
+

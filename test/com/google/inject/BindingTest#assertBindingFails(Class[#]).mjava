@@ -1,0 +1,11 @@
+  private void assertBindingFails(final Class<?> clazz) throws NoSuchMethodException {
+    try {
+      Guice.createInjector().getInstance(clazz);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "Error at " + PrivateNoArg.class.getName() + ".class(BindingTest.java:",
+          "Could not find a suitable constructor in " + PrivateNoArg.class.getName());
+    }
+  }
+
