@@ -7,13 +7,20 @@
     protected Class<?> loadClass(final String name, final boolean resolve)
         throws ClassNotFoundException {
 
+      synchronized (this) {
+        // check our local cache to avoid duplicates
+        final Class<?> clazz = findLoadedClass(name);
+        if (clazz != null) {
+          return clazz;
+        }
+      }
+
       if (name.startsWith("java.")) {
 
         // standard bootdelegation of java.*
         return super.loadClass(name, resolve);
 
-      } else if ((!name.contains(".internal.") && !name.contains(".cglib."))
-          || name.contains("Test")) {
+      } else if (!name.contains(".internal.") && !name.contains(".cglib.")) {
 
         /*
          * load public and test classes directly from the classpath - we don't

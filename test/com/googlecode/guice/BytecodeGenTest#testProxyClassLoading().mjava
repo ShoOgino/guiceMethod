@@ -12,13 +12,18 @@
       throw new RuntimeException(e);
     }
 
-    final ProxyTest test = Guice.createInjector(interceptorModule, new Module() {
+    final Object testObject = Guice.createInjector(interceptorModule, new Module() {
       public void configure(Binder binder) {
         binder.bind(testAPIClazz).to(testImplClazz);
       }
     }).getInstance(testAPIClazz);
 
-    // verify method interception still works
-    assertEquals("HELLO WORLD", test.sayHello());
+    try {
+      // verify method interception still works
+      Method m = testImplClazz.getMethod("sayHello");
+      assertEquals("HELLO WORLD", m.invoke(testObject));
+    } catch (final Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
