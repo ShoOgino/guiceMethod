@@ -21,6 +21,8 @@
     System.gc();
     System.gc();
 
+    // This test could be somewhat flaky when the GC isn't working.
+    // If it fails, run the test again to make sure it's failing reliably.
     assertNull(clazzRef.get());
   }
 

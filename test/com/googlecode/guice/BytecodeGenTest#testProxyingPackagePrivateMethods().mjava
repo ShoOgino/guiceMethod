@@ -2,5 +2,6 @@
     Injector injector = Guice.createInjector(interceptorModule);
     assertEquals("HI WORLD", injector.getInstance(PackageClassPackageMethod.class).sayHi());
     assertEquals("HI WORLD", injector.getInstance(PublicClassPackageMethod.class).sayHi());
+    assertEquals("HI WORLD", injector.getInstance(ProtectedClassProtectedMethod.class).sayHi());
   }
 

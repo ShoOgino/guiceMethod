@@ -1,0 +1,4 @@
+    protected String sayHi() {
+      return "HI";
+    }
+
