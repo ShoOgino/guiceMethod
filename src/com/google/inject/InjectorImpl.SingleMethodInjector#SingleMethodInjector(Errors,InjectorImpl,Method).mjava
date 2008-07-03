@@ -11,7 +11,8 @@
           }
         };
       } else {
-        FastClass fastClass = newFastClass(method.getDeclaringClass());
+        FastClass fastClass = newFastClass(method.getDeclaringClass(),
+            Visibility.forMember(method));
         final FastMethod fastMethod = fastClass.getMethod(method);
 
         methodInvoker = new MethodInvoker() {

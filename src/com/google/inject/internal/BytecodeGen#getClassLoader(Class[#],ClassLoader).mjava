@@ -1,7 +1,7 @@
   private static ClassLoader getClassLoader(Class<?> type, ClassLoader delegate) {
     delegate = canonicalize(delegate);
 
-    if (HOOK_ENABLED && isHookable(type)) {
+    if (HOOK_ENABLED && Visibility.forType(type) == Visibility.PUBLIC) {
       return CLASS_LOADER_CACHE.get(delegate);
     }
 

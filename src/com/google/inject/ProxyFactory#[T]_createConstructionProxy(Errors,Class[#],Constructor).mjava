@@ -3,7 +3,7 @@
    */
   private <T> ConstructionProxy<T> createConstructionProxy(Errors errors, final Class<?> clazz,
       final Constructor standardConstructor) throws ErrorsException {
-    FastClass fastClass = newFastClass(clazz);
+    FastClass fastClass = newFastClass(clazz, Visibility.PUBLIC);
     final FastConstructor fastConstructor
         = fastClass.getConstructor(standardConstructor.getParameterTypes());
     final List<Parameter<?>> parameters = Parameter.forConstructor(standardConstructor, errors);

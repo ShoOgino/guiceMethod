@@ -1,0 +1,6 @@
+    public static Visibility forMember(Member member) {
+      return (member.getModifiers() & (Modifier.PROTECTED | Modifier.PUBLIC)) != 0
+          ? PUBLIC
+          : SAME_PACKAGE;
+    }
+

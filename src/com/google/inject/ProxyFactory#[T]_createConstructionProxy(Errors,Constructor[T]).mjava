@@ -26,11 +26,16 @@
       indices.put(method, i);
     }
 
+    // true if all the methods we're intercepting are public. This impacts which classloader we
+    // should use for loading the enhanced class
+    Visibility visibility = Visibility.PUBLIC;
+
     // Iterate over aspects and add interceptors for the methods they apply to
     boolean anyMatched = false;
     for (MethodAspect methodAspect : applicableAspects) {
       for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
         if (methodAspect.matches(pair.method)) {
+          visibility = visibility.and(Visibility.forMember(pair.method));
           pair.addAll(methodAspect.interceptors());
           anyMatched = true;
         }
@@ -59,7 +64,7 @@
     }
 
     // Create the proxied class.
-    Enhancer enhancer = newEnhancer(declaringClass);
+    Enhancer enhancer = newEnhancer(declaringClass, visibility);
     enhancer.setCallbackFilter(new CallbackFilter() {
       public int accept(Method method) {
         return indices.get(method);

@@ -1,0 +1,11 @@
+  public static FastClass newFastClass(Class<?> type, Visibility visibility) {
+    FastClass.Generator generator = new FastClass.Generator();
+    generator.setType(type);
+    if (visibility == Visibility.PUBLIC) {
+      generator.setClassLoader(getClassLoader(type));
+    }
+    generator.setNamingPolicy(NAMING_POLICY);
+    logger.fine("Loading " + type + " FastClass with " + generator.getClassLoader());
+    return generator.create();
+  }
+
