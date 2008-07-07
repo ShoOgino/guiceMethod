@@ -8,7 +8,7 @@
     };
 
     // record the commands from that module
-    CommandRecorder commandRecorder = new CommandRecorder(new FutureInjector());
+    CommandRecorder commandRecorder = new CommandRecorder();
     List<Command> commands = commandRecorder.recordCommands(module);
 
     // create a rewriter that rewrites the binding to 'Wine' with a binding to 'Beer'

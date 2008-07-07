@@ -1,4 +1,5 @@
   public <T> void replayGetProvider(final Binder binder, final GetProviderCommand<T> command) {
-    binder.withSource(command.getSource()).getProvider(command.getKey());
+    Provider<T> provider = binder.withSource(command.getSource()).getProvider(command.getKey());
+    command.initDelegate(provider);
   }
 

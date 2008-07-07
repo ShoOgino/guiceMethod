@@ -24,11 +24,9 @@
     assertEquals("A", injector.getInstance(Key.get(String.class, Names.named("2"))));
 
     // and it should also work fine if we rewrite it
-    FutureInjector futureInjector = new FutureInjector();
-    List<Command> commands = new CommandRecorder(futureInjector).recordCommands(module);
+    List<Command> commands = new CommandRecorder().recordCommands(module);
     Module replayed = new CommandReplayer().createModule(commands);
     Injector replayedInjector = Guice.createInjector(replayed);
-    futureInjector.initialize(replayedInjector);
     assertEquals("A", replayedInjector.getInstance(Key.get(String.class, Names.named("2"))));
   }
 

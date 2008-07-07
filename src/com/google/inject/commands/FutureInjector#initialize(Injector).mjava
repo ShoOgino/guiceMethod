@@ -1,6 +1,0 @@
-  public void initialize(Injector injector) {
-    checkState(this.injector == null, "Already initialized");
-
-    this.injector = injector;
-  }
-

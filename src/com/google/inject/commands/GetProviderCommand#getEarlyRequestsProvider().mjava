@@ -1,4 +1,0 @@
-  public EarlyRequestsProvider getEarlyRequestsProvider() {
-    return earlyRequestsProvider;
-  }
-

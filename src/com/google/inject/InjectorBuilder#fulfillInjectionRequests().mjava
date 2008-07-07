@@ -1,7 +1,5 @@
   /** Inject everything that can be injected. */
   private void fulfillInjectionRequests() {
-    futureInjector.initialize(injector);
-
     requestInjectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
 

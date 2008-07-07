@@ -1,0 +1,5 @@
+  GetProviderCommand(Object source, Key<T> key) {
+    this.source = checkNotNull(source, "source");
+    this.key = checkNotNull(key, "key");
+  }
+

@@ -7,7 +7,7 @@
 
     modules.add(0, new BuiltInModule(injector, stage));
 
-    CommandRecorder commandRecorder = new CommandRecorder(futureInjector);
+    CommandRecorder commandRecorder = new CommandRecorder();
     commandRecorder.setCurrentStage(stage);
     commands.addAll(commandRecorder.recordCommands(modules));
 
