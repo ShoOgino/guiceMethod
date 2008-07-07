@@ -2,6 +2,7 @@
     assertBindingSucceeds(PublicNoArg.class);
     assertBindingSucceeds(ProtectedNoArg.class);
     assertBindingSucceeds(PackagePrivateNoArg.class);
+    assertBindingSucceeds(PrivateNoArgInPrivateClass.class);
     assertBindingFails(PrivateNoArg.class);
   }
 
