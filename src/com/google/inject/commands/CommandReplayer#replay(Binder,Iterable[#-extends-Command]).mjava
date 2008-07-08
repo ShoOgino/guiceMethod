@@ -1,7 +1,7 @@
   /**
    * Replays {@code commands} against {@code binder}.
    */
-  public final void replay(final Binder binder, Iterable<Command> commands) {
+  public final void replay(final Binder binder, Iterable<? extends Command> commands) {
     checkNotNull(binder, "binder");
     checkNotNull(commands, "commands");
 
