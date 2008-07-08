@@ -1,0 +1,28 @@
+  /**
+   * Reentrant. If {@code toInject} was registered for injection at injector-creation time, this
+   * method will ensure that all its members have been injected before returning. This method is
+   * used both internally, and by {@code InternalContext} to satisfy injections while satisfying
+   * other injections.
+   */
+  void ensureInjected(Errors errors, Object toInject) throws ErrorsException {
+    if (ready.getCount() == 0) {
+      return;
+    }
+
+    // just wait for everything to be injected by another thread
+    if (Thread.currentThread() != creatingThread) {
+      try {
+        ready.await();
+        return;
+      } catch (InterruptedException e) {
+        // Give up, since we don't know if our injection is ready
+        throw new RuntimeException(e);
+      }
+    }
+
+    // toInject needs injection, do it right away
+    if (outstandingInjections.remove(toInject)) {
+      injector.injectMembersOrThrow(errors, toInject);
+    }
+  }
+

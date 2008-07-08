@@ -6,11 +6,6 @@
       }
     });
 
-    // For untargetted bindings with scopes, sometimes we lose the scope at
-    // injector time. This is because we use the injector's just-in-time
-    // bindings to build these, rather than the bind command. This is a known
-    // bug.
-    assertSame("known bug: untargetted binding out-of-order",
-        injector.getInstance(A.class).b, injector.getInstance(A.class).b);
+    assertSame(injector.getInstance(A.class).b, injector.getInstance(A.class).b);
   }
 

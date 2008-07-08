@@ -19,7 +19,7 @@
     bindLogger();
     bindCommandProcesor = new BindCommandProcessor(errors,
         injector, injector.scopes, injector.explicitBindings,
-        injector.outstandingInjections);
+        injector.memberInjector);
     bindCommandProcesor.processCommands(commands);
     bindCommandProcesor.createUntargettedBindings();
     stopwatch.resetAndLog("Binding creation");
@@ -28,7 +28,7 @@
     stopwatch.resetAndLog("Binding indexing");
 
     requestInjectionCommandProcessor
-        = new RequestInjectionCommandProcessor(errors, injector.outstandingInjections);
+        = new RequestInjectionCommandProcessor(errors, injector.memberInjector);
     requestInjectionCommandProcessor.processCommands(commands);
     stopwatch.resetAndLog("Static injection");
   }

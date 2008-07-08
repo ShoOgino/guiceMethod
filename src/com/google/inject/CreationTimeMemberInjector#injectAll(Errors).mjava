@@ -1,0 +1,25 @@
+  /**
+   * Performs creation-time injections on all objects that require it. Whenever fulfilling an
+   * injection depends on another object that requires injection, we use {@link
+   * #ensureInjected(Errors, Object)} to inject that member first.
+   *
+   * <p>If the two objects are codependent (directly or transitively), ordering of injection is
+   * arbitrary.
+   */
+  void injectAll(final Errors errors) {
+    // loop over a defensive copy since ensureInjected() mutates the set
+    for (Object toInject : Lists.newArrayList(outstandingInjections)) {
+      try {
+        ensureInjected(errors, toInject);
+      } catch (ErrorsException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+
+    if (!outstandingInjections.isEmpty()) {
+      throw new AssertionError("Failed to satisfy " + outstandingInjections);
+    }
+
+    ready.countDown();
+  }
+

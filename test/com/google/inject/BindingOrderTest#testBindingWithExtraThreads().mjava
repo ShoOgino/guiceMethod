@@ -1,0 +1,36 @@
+  public void testBindingWithExtraThreads() throws InterruptedException {
+    final CountDownLatch ready = new CountDownLatch(1);
+    final CountDownLatch done = new CountDownLatch(1);
+    final AtomicReference<B> ref = new AtomicReference<B>();
+
+    final Object createsAThread = new Object() {
+      @Inject void createAnotherThread(final Injector injector) {
+        new Thread() {
+          public void run() {
+            ready.countDown();
+            A a = injector.getInstance(A.class);
+            ref.set(a.b);
+            done.countDown();
+          }
+        }.start();
+
+        // to encourage collisions, we make sure the other thread is running before returning
+        try {
+          ready.await();
+        } catch (InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    };
+    
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        requestInjection(createsAThread);
+        bind(A.class).toInstance(new A());
+      }
+    });
+
+    done.await();
+    assertNotNull(ref.get());
+  }
+

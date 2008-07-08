@@ -1,6 +1,0 @@
-  RequestInjectionCommandProcessor(Errors errors,
-      Set<Object> outstandingInjections) {
-    super(errors);
-    this.outstandingInjections = outstandingInjections;
-  }
-
