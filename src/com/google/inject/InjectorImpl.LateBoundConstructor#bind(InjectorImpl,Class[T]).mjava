@@ -1,4 +1,0 @@
-    void bind(InjectorImpl injector, Class<T> implementation) throws ErrorsException {
-      constructorInjector = injector.getConstructor(implementation);
-    }
-

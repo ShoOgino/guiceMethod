@@ -1,11 +1,12 @@
-  public ConstructionProxy<?> getConstructionProxy(Constructor<?> constructor)
+  public ConstructionProxy<?> getConstructionProxy(Constructor<?> constructor, Errors errors)
       throws ErrorsException {
     Object constructionProxyOrErrors = constructionProxies.get(constructor);
 
     if (constructionProxyOrErrors instanceof ConstructionProxy<?>) {
       return (ConstructionProxy<?>) constructionProxyOrErrors;
     } else if (constructionProxyOrErrors instanceof Errors) {
-      throw ((Errors) constructionProxyOrErrors).copy().toException();
+      errors.merge((Errors) constructionProxyOrErrors);
+      throw errors.toException();
     } else {
       throw new AssertionError();
     }

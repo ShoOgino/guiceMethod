@@ -1,9 +1,11 @@
   /** Gets a constructor function for a given implementation class. */
   @SuppressWarnings("unchecked")
-  <T> ConstructorInjector<T> getConstructor(Class<T> implementation) throws ErrorsException {
+  <T> ConstructorInjector<T> getConstructor(Class<T> implementation, Errors errors)
+      throws ErrorsException {
     Object o = constructors.get(implementation);
     if (o instanceof Errors) {
-      throw ((Errors) o).copy().toException();
+      errors.merge((Errors) o);
+      throw errors.toException();
     }
     else if (o instanceof ConstructorInjector<?>) {
       return (ConstructorInjector<T>) o;

@@ -7,7 +7,9 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "Missing constant value.");
+      assertContains(expected.getMessage(),
+          "1) Error at " + getClass().getName(),
+          "Missing constant value. Please call to(...).");
     }
   }
 

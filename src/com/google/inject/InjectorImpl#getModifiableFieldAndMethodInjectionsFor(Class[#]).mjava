@@ -1,9 +1,11 @@
   List<InjectionPoint<?>> getModifiableFieldAndMethodInjectionsFor(Class<?> clazz)
       throws ErrorsException {
+    Errors errors = new Errors();
     List<InjectionPoint<?>> dependencies = Lists.newArrayList();
-    for (SingleMemberInjector singleMemberInjector : getMemberInjectors(clazz)) {
+    for (SingleMemberInjector singleMemberInjector : getMemberInjectors(clazz, errors)) {
       dependencies.addAll(singleMemberInjector.getDependencies());
     }
+    errors.throwIfNecessary();
     return dependencies;
   }
 

@@ -1,4 +1,4 @@
-  public List<SingleMemberInjector> getMemberInjectors(Class<?> type)
+  public List<SingleMemberInjector> getMemberInjectors(Class<?> type, Errors errors)
       throws ErrorsException {
     Object injectorsOrError = injectors.get(type);
     if (injectorsOrError instanceof List) {
@@ -6,7 +6,8 @@
       List<SingleMemberInjector> result = (List<SingleMemberInjector>) injectorsOrError;
       return result;
     } else if (injectorsOrError instanceof Errors) {
-      throw ((Errors) injectorsOrError).copy().toException();
+      errors.merge((Errors) injectorsOrError);
+      throw errors.toException();
     } else {
       throw new AssertionError();
     }
