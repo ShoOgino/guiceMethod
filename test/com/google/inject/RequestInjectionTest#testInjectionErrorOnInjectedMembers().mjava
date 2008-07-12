@@ -1,0 +1,21 @@
+  public void testInjectionErrorOnInjectedMembers() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(Runnable.class).toProvider(new Provider<Runnable>() {
+            public Runnable get() {
+              throw new UnsupportedOperationException();
+            }
+          });
+          requestInjection(new NeedsRunnable());
+        }
+      });
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Error at " + getClass().getName(),
+          "Error in custom provider, java.lang.UnsupportedOperationException",
+          "while locating java.lang.Runnable",
+          "for field at " + NeedsRunnable.class.getName() + ".runnable(RequestInjectionTest.java:");
+    }
+  }
+

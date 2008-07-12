@@ -4,7 +4,7 @@
    * used both internally, and by {@code InternalContext} to satisfy injections while satisfying
    * other injections.
    */
-  void ensureInjected(Errors errors, Object toInject) throws ErrorsException {
+  void ensureInjected(Object toInject, Errors errors) throws ErrorsException {
     if (ready.getCount() == 0) {
       return;
     }
@@ -21,7 +21,7 @@
     }
 
     // toInject needs injection, do it right away
-    if (outstandingInjections.remove(toInject)) {
+    if (outstandingInjections.remove(toInject) != null) {
       injector.injectMembersOrThrow(errors, toInject);
     }
   }

@@ -1,0 +1,14 @@
+  public void testValidationErrorOnInjectedMembers() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          requestInjection(new NeedsRunnable());
+        }
+      });
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + NeedsRunnable.class.getName(), ".runnable(RequestInjectionTest.java:",
+          "No implementation for java.lang.Runnable was bound");
+    }
+  }
+

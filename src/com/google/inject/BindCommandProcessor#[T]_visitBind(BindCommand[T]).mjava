@@ -47,7 +47,7 @@
         }
 
         ConstantFactory<? extends T> factory = new ConstantFactory<T>(instance);
-        memberInjector.add(instance);
+        memberInjector.requestInjection(instance, source);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
         putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, instance));
@@ -57,7 +57,7 @@
       public Void visitToProvider(Provider<? extends T> provider) {
         InternalFactoryToProviderAdapter<? extends T> factory
             = new InternalFactoryToProviderAdapter<T>(provider, source);
-        memberInjector.add(provider);
+        memberInjector.requestInjection(provider, source);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
         putBinding(new ProviderInstanceBindingImpl<T>(
@@ -119,7 +119,7 @@
         untargettedBindings.add(new Runnable() {
           public void run() {
             try {
-              injector.initializeBinding(binding, errors);
+              injector.initializeBinding(binding, errors.withSource(source));
             } catch (ErrorsException e) {
               errors.merge(e.getErrors());
             }
