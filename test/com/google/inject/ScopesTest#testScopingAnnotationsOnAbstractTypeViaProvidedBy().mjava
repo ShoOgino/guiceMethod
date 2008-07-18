@@ -1,0 +1,12 @@
+  public void testScopingAnnotationsOnAbstractTypeViaProvidedBy() {
+    try {
+      Guice.createInjector().getInstance(E.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "Error at " + E.class.getName() + ".class(ScopesTest.java:",
+          E.class.getName() + " is annotated with " + Singleton.class.getName(),
+          "but scope annotations are not supported for abstract types.");
+    }
+  }
+

@@ -1,4 +1,4 @@
-  public void testScopingAnnotationsOnAbstractTypes() {
+  public void testScopingAnnotationsOnAbstractTypeViaBind() {
     try {
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
