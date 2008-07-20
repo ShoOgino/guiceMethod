@@ -1,0 +1,13 @@
+  /**
+   * Returns a list of the resolved generic parameter types of {@code
+   * constructor}.
+   *
+   * @param constructor a constructor defined by this resolver's type or any of
+   *      its superclasses.
+   */
+  public List<Type> getParameterTypes(Constructor constructor) {
+    checkArgument(implementedTypes.containsKey(constructor.getDeclaringClass()),
+        "%s does not construct a supertype of %s", constructor, type);
+    return resolveAll(constructor.getGenericParameterTypes());
+  }
+

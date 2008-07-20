@@ -1,0 +1,10 @@
+  /** Ensure the cache doesn't cache too much */
+  public void testCachingAndReindexing() throws NoSuchMethodException {
+    TypeResolver resolver = new TypeResolver(
+        newParameterizedTypeWithOwner(getClass(), HasLists.class, String.class, Short.class));
+    assertEquals(listOf(String.class),
+        resolver.getReturnType(HasLists.class.getMethod("listS")));
+    assertEquals(listOf(Short.class),
+        resolver.getReturnType(HasLists.class.getMethod("listT")));
+  }
+

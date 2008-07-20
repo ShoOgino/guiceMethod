@@ -1,0 +1,12 @@
+  /**
+   * Returns the resolved generic type of {@code field}.
+   *
+   * @param field a field defined by this resolver's type or any of its
+   *      superclasses.
+   */
+  public Type getFieldType(Field field) {
+    checkArgument(implementedTypes.containsKey(field.getDeclaringClass()),
+        "%s is not defined by a supertype of %s", field, type);
+    return resolve(field.getGenericType());
+  }
+

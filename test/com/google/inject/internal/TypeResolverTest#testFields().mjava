@@ -1,0 +1,6 @@
+  public void testFields() {
+    TypeResolver resolver = new TypeResolver(hasGenericFieldsOfShort);
+    assertEquals(listOf(Short.class), resolver.getFieldType(list));
+    assertEquals(Short.class, resolver.getFieldType(instance));
+  }
+

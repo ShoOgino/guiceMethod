@@ -1,0 +1,17 @@
+  /**
+   * Resolves and stores all generic information for {@code type} and all of
+   * its implemented interfaces and supertypes.
+   */
+  private void resolveRecursive(Type type) {
+    Class<?> rawType = MoreTypes.getRawType(type);
+    implementedTypes.put(rawType, resolve(type));
+
+    Type supertype = rawType.getGenericSuperclass();
+    if (supertype != null) {
+      resolveRecursive(supertype);
+    }
+    for (Type genericInterface : rawType.getGenericInterfaces()) {
+      resolveRecursive(genericInterface);
+    }
+  }
+

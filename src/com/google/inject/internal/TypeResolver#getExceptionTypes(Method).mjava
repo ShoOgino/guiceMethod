@@ -1,0 +1,12 @@
+  /**
+   * Returns a list of the resolved generic exception types of {@code method}.
+   *
+   * @param method a method defined by this resolver's type, its superclasses
+   *      or implemented interfaces.
+   */
+  public List<Type> getExceptionTypes(Method method) {
+    checkArgument(implementedTypes.containsKey(method.getDeclaringClass()),
+        "%s is not defined by a supertype of %s", method, type);
+    return resolveAll(method.getGenericExceptionTypes());
+  }
+

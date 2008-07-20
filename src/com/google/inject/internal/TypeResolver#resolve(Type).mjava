@@ -1,0 +1,59 @@
+  /**
+   * Projects the known type information from this resolver on {@code type} and
+   * returns the result.
+   */
+  private Type resolve(Type type) {
+    checkNotNull(type, "type");
+    Type alreadyResolved = cache.get(type);
+
+    if (alreadyResolved != null) {
+      return alreadyResolved;
+
+    } else if (type instanceof ParameterizedType) {
+      ParameterizedType parameterizedType = (ParameterizedType) type;
+      Class<?> rawType = MoreTypes.getRawType(parameterizedType);
+      TypeVariable<? extends Class<?>>[] typeVariables = rawType.getTypeParameters();
+      Type[] arguments = parameterizedType.getActualTypeArguments();
+      Type[] resolvedArguments = new Type[typeVariables.length];
+      for (int v = 0; v < typeVariables.length; v++) {
+        FqTypeVar typeVar = new FqTypeVar(rawType, typeVariables[v].getName());
+        resolvedArguments[v] = resolve(arguments[v]);
+        index.put(typeVar, resolvedArguments[v]);
+      }
+
+      Type resolvedRawType = resolve(rawType);
+      Type ownerType = parameterizedType.getOwnerType();
+      Type resolvedOwnerType = ownerType != null ? resolve(ownerType) : null;
+      Type resolved = Types.newParameterizedTypeWithOwner(resolvedOwnerType,
+          resolvedRawType, resolvedArguments);
+      cache.put(type, resolved);
+      return resolved;
+
+    } else if (type instanceof TypeVariable) {
+      TypeVariable typeVariable = (TypeVariable) type;
+      GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
+      Type result = typeVariable;
+      if (genericDeclaration instanceof Class) {
+        FqTypeVar fqTypeVar = new FqTypeVar((Class<?>) genericDeclaration, typeVariable.getName());
+        Type resolved = index.get(fqTypeVar);
+        result = resolved != null ? resolved : result;
+      }
+      cache.put(type, result);
+      return result;
+
+    } else if (type instanceof Class) {
+      cache.put(type, type);
+      return type;
+
+    } else if (type instanceof GenericArrayType) {
+      GenericArrayType arrayType = (GenericArrayType) type;
+      Type componentTypeResolved = resolve(arrayType.getGenericComponentType());
+      GenericArrayType resolved = Types.arrayOf(componentTypeResolved);
+      cache.put(type, resolved);
+      return resolved;
+
+    } else {
+      return type;
+    }
+  }
+

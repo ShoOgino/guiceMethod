@@ -1,0 +1,8 @@
+  /**
+   * Creates a new type resolver that can resolve the members of {@code type}.
+   */
+  public TypeResolver(Type type) {
+    this.type = type;
+    resolveRecursive(type);
+  }
+

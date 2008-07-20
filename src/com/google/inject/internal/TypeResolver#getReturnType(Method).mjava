@@ -1,0 +1,12 @@
+  /**
+   * Returns the resolved generic return type of {@code method}.
+   *
+   * @param method a method defined by this resolver's type, its superclasses
+   *      or implemented interfaces.
+   */
+  public Type getReturnType(Method method) {
+    checkArgument(implementedTypes.containsKey(method.getDeclaringClass()),
+        "%s is not defined by a supertype of %s", method, type);
+    return resolve(method.getGenericReturnType());
+  }
+

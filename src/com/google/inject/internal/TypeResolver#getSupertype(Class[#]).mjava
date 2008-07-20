@@ -1,0 +1,15 @@
+  /**
+   * Returns the generic equivalent of {@code supertype}. For example, if this
+   * is a resolver of {@code ArrayList<String>}, this method returns {@code
+   * Iterable<String>} given the input {@code Iterable.class}.
+   *
+   * @param supertype a superclass of, or interface implemented by, this
+   *      resolver's type.
+   */
+  public Type getSupertype(Class<?> supertype) {
+    Type type = implementedTypes.get(supertype);
+    checkArgument(type != null,
+        "%s is not a supertype of %s", supertype, this.type);
+    return type;
+  }
+
