@@ -1,8 +1,0 @@
-  <T> BindingImpl<T> createBindingFromType(
-      Class<T> type, LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
-    BindingImpl<T> binding = createUnitializedBinding(
-        type, null, StackTraceElements.forType(type), loadStrategy, errors);
-    initializeBinding(binding, errors);
-    return binding;
-  }
-

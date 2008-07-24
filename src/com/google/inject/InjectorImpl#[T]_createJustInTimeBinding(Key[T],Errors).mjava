@@ -38,8 +38,6 @@
     }
 
     // Create a binding based on the raw type.
-    @SuppressWarnings("unchecked")
-    Class<T> clazz = (Class<T>) key.getTypeLiteral().getRawType();
-    return createBindingFromType(clazz, LoadStrategy.LAZY, errors);
+    return createBindingFromType(key, LoadStrategy.LAZY, errors);
   }
 
