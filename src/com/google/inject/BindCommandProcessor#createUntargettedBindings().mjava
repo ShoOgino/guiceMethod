@@ -1,6 +1,0 @@
-  public void createUntargettedBindings() {
-    for (Runnable untargettedBinding : untargettedBindings) {
-      untargettedBinding.run();
-    }
-  }
-

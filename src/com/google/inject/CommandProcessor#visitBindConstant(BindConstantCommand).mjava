@@ -1,4 +1,0 @@
-  public Boolean visitBindConstant(BindConstantCommand command) {
-    return false;
-  }
-

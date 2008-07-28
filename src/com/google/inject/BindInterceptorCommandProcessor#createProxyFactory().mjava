@@ -1,4 +1,0 @@
-  ProxyFactory createProxyFactory() {
-    return proxyFactoryBuilder.create();
-  }
-

@@ -1,4 +1,0 @@
-  protected CommandProcessor(Errors errors) {
-    this.errors = errors;
-  }
-

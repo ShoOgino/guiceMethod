@@ -1,6 +1,0 @@
-  public void validate(InjectorImpl injector) {
-    for (StaticInjection staticInjection : staticInjections) {
-      staticInjection.validate(injector);
-    }
-  }
-

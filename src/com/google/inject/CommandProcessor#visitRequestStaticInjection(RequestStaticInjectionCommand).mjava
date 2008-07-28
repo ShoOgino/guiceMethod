@@ -1,4 +1,0 @@
-  public Boolean visitRequestStaticInjection(RequestStaticInjectionCommand command) {
-    return false;
-  }
-

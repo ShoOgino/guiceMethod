@@ -1,4 +1,0 @@
-  public Boolean visitBindScope(BindScopeCommand command) {
-    return false;
-  }
-

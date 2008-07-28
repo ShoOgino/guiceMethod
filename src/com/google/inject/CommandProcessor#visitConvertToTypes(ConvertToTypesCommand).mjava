@@ -1,4 +1,0 @@
-  public Boolean visitConvertToTypes(ConvertToTypesCommand command) {
-    return false;
-  }
-
