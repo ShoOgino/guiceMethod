@@ -1,4 +1,0 @@
-    public Binding<T> getTarget() {
-      return providedBinding;
-    }
-

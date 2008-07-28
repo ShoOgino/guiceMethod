@@ -1,0 +1,7 @@
+  /**
+   * Records the elements executed by {@code modules}.
+   */
+  public static List<Element> getElements(Module... modules) {
+    return getElements(Stage.DEVELOPMENT, Arrays.asList(modules));
+  }
+

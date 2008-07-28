@@ -1,0 +1,16 @@
+  public void processCommands(List<Element> elements) {
+    Errors errorsAnyElement = this.errors;
+    try {
+      for (Iterator<Element> i = elements.iterator(); i.hasNext(); ) {
+        Element element = i.next();
+        this.errors = errorsAnyElement.withSource(element.getSource());
+        Boolean allDone = element.acceptVisitor(this);
+        if (allDone) {
+          i.remove();
+        }
+      }
+    } finally {
+      this.errors = errorsAnyElement;
+    }
+  }
+

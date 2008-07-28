@@ -1,0 +1,4 @@
+  public V visitMessage(Message message) {
+    return visitElement(message);
+  }
+

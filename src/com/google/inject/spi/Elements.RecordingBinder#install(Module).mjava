@@ -1,0 +1,10 @@
+    public void install(Module module) {
+      if (modules.add(module)) {
+        try {
+          module.configure(this);
+        } catch (RuntimeException e) {
+          addError(e);
+        }
+      }
+    }
+

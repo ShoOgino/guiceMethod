@@ -1,0 +1,12 @@
+    public ScopedBindingBuilder toProvider(
+        final Key<? extends Provider<? extends T>> providerKey) {
+      checkNotNull(providerKey, "providerKey");
+      checkNotTargetted();
+      target = new Target<T>() {
+        public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
+          return visitor.visitToProviderKey(providerKey);
+        }
+      };
+      return this;
+    }
+

@@ -1,0 +1,24 @@
+  public void testToProviderKeyBinding() {
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toProvider(StringProvider.class);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(String.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitToProviderKey(Key<? extends Provider<? extends T>> key) {
+                assertEquals(Key.get(StringProvider.class), key);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

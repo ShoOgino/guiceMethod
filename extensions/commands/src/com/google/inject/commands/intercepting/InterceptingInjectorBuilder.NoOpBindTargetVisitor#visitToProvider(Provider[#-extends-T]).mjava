@@ -1,4 +1,0 @@
-    public V visitToProvider(Provider<? extends T> provider) {
-      return null;
-    }
-

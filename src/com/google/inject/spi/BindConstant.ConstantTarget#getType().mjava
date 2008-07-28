@@ -1,0 +1,8 @@
+    /**
+     * Returns the type of constant, such as {@code Integer.class} or
+     * {@code Enum.class}.
+     */
+    public Class getType() {
+      return type;
+    }
+

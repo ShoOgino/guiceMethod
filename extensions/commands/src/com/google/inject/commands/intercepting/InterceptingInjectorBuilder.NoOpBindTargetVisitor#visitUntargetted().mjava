@@ -1,4 +1,0 @@
-    public V visitUntargetted() {
-      return null;
-    }
-

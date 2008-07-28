@@ -1,0 +1,60 @@
+  /**
+   * Replays {@code elements} against {@code binder}.
+   */
+  public final void apply(final Binder binder, Iterable<? extends Element> elements) {
+    checkNotNull(binder, "binder");
+    checkNotNull(elements, "elements");
+
+    Element.Visitor<Void> visitor = new Element.Visitor<Void>() {
+
+      public Void visitMessage(Message message) {
+        writeMessage(binder, message);
+        return null;
+      }
+
+      public Void visitBindInterceptor(BindInterceptor command) {
+        writeBindInterceptor(binder, command);
+        return null;
+      }
+
+      public Void visitBindScope(BindScope command) {
+        writeBindScope(binder, command);
+        return null;
+      }
+
+      public Void visitRequestInjection(RequestInjection command) {
+        writeRequestInjection(binder, command);
+        return null;
+      }
+
+      public Void visitRequestStaticInjection(RequestStaticInjection command) {
+        writeRequestStaticInjection(binder, command);
+        return null;
+      }
+
+      public Void visitBindConstant(BindConstant command) {
+        writeBindConstant(binder, command);
+        return null;
+      }
+
+      public Void visitConvertToTypes(ConvertToTypes command) {
+        writeConvertToTypes(binder, command);
+        return null;
+      }
+
+      public <T> Void visitBinding(Binding<T> command) {
+        writeBind(binder, command);
+        return null;
+      }
+
+      public <T> Void visitGetProvider(GetProvider<T> command) {
+        writeGetProvider(binder, command);
+        return null;
+      }
+    };
+
+    for (Element element : elements) {
+      element.acceptVisitor(visitor);
+    }
+  }
+

@@ -1,0 +1,35 @@
+  public void testToKeyBinding() {
+    final Key<String> aKey = Key.get(String.class, Names.named("a"));
+    final Key<String> bKey = Key.get(String.class, Names.named("b"));
+
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(aKey).to(bKey);
+            bind(bKey).toInstance("B");
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(aKey, command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitToKey(Key<? extends T> key) {
+                assertEquals(bKey, key);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(bKey, command.getKey());
+            return null;
+          }
+        }
+    );
+  }
+

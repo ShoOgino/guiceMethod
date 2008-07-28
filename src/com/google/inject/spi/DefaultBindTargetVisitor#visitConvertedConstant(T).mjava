@@ -1,0 +1,4 @@
+  public V visitConvertedConstant(T value) {
+    return visitTarget();
+  }
+

@@ -1,0 +1,6 @@
+    private void checkNotTargetted() {
+      if (target != EMPTY_TARGET) {
+        binder.addError(IMPLEMENTATION_ALREADY_SET);
+      }
+    }
+

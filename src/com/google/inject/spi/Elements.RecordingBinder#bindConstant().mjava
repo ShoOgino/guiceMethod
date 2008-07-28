@@ -1,0 +1,6 @@
+    public AnnotatedConstantBindingBuilder bindConstant() {
+      BindConstant bindConstantCommand = new BindConstant(getSource());
+      elements.add(bindConstantCommand);
+      return bindConstantCommand.bindingBuilder(RecordingBinder.this);
+    }
+

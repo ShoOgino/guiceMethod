@@ -1,0 +1,12 @@
+    public void asEagerSingleton() {
+      checkNotScoped();
+      scoping = new AbstractScoping() {
+        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+          return visitor.visitEagerSingleton();
+        }
+        @Override public String toString() {
+          return "eager singleton";
+        }
+      };
+    }
+

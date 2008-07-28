@@ -1,0 +1,4 @@
+  public Boolean visitBindConstant(BindConstant bindConstant) {
+    return false;
+  }
+

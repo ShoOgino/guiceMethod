@@ -1,0 +1,5 @@
+    public void to(final long value) {
+      assertNoTarget();
+      BindConstant.this.target = new ConstantTarget<Long>(value, Long.class);
+    }
+

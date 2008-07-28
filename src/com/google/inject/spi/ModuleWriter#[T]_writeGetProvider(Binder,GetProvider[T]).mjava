@@ -1,0 +1,5 @@
+  public <T> void writeGetProvider(final Binder binder, final GetProvider<T> command) {
+    Provider<T> provider = binder.withSource(command.getSource()).getProvider(command.getKey());
+    command.initDelegate(provider);
+  }
+

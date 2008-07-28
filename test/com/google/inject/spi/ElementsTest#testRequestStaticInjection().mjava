@@ -1,0 +1,17 @@
+  public void testRequestStaticInjection() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            requestStaticInjection(ArrayList.class);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitRequestStaticInjection(RequestStaticInjection command) {
+            assertEquals(Arrays.asList(ArrayList.class), command.getTypes());
+            return null;
+          }
+        }
+    );
+  }
+

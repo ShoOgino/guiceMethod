@@ -1,0 +1,24 @@
+  public void testConvertToTypes() {
+    final TypeConverter typeConverter = new TypeConverter() {
+      public Object convert(String value, TypeLiteral<?> toType) {
+        return value;
+      }
+    };
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            convertToTypes(Matchers.any(), typeConverter);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitConvertToTypes(ConvertToTypes command) {
+            assertSame(typeConverter, command.getTypeConverter());
+            assertSame(Matchers.any(), command.getTypeMatcher());
+            return null;
+          }
+        }
+    );
+  }
+

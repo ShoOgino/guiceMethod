@@ -1,0 +1,4 @@
+  public void writeMessage(final Binder binder, final Message message) {
+    binder.addError(message);
+  }
+

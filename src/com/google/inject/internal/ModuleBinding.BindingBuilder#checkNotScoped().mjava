@@ -1,0 +1,15 @@
+    private void checkNotScoped() {
+      @SuppressWarnings("unchecked") TargetVisitor<T,Boolean> supportsScopesOfT
+          = (TargetVisitor<T,Boolean>) SUPPORTS_SCOPES;
+
+      // Scoping isn't allowed when we have only one instance.
+      if (!target.acceptTargetVisitor(supportsScopesOfT)) {
+        binder.addError(SINGLE_INSTANCE_AND_SCOPE);
+        return;
+      }
+
+      if (scoping != EMPTY_SCOPING) {
+        binder.addError(SCOPE_ALREADY_SET);
+      }
+    }
+

@@ -9,7 +9,7 @@
     injector.memberInjector.validateOustandingInjections(errors);
     stopwatch.resetAndLog("Instance member validation");
 
-    new GetProviderProcessor(errors, injector).processCommands(commands);
+    new GetProviderProcessor(errors, injector).processCommands(elements);
     stopwatch.resetAndLog("Provider verification");
 
     errors.throwCreationExceptionIfErrorsExist();

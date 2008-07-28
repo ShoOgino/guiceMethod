@@ -1,0 +1,33 @@
+  public void testRewriteBindings() {
+    // create a module the binds String.class and CharSequence.class
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("Pizza");
+        bind(CharSequence.class).toInstance("Wine");
+      }
+    };
+
+    // record the elements from that module
+    List<Element> elements = Elements.getElements(module);
+
+    // create a rewriter that rewrites the binding to 'Wine' with a binding to 'Beer'
+    ModuleWriter rewriter = new ModuleWriter() {
+      @Override public <T> void writeBind(Binder binder, Binding<T> binding) {
+        T target = binding.acceptTargetVisitor(Elements.<T>getInstanceVisitor());
+        if ("Wine".equals(target)) {
+          binder.bind(CharSequence.class).toInstance("Beer");
+        } else {
+          super.writeBind(binder, binding);
+        }
+      }
+    };
+
+    // create a module from the original list of elements and the rewriter
+    Module rewrittenModule = rewriter.create(elements);
+
+    // it all works
+    Injector injector = Guice.createInjector(rewrittenModule);
+    assertEquals("Pizza", injector.getInstance(String.class));
+    assertEquals("Beer", injector.getInstance(CharSequence.class));
+  }
+

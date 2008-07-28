@@ -1,0 +1,4 @@
+  public BindingBuilder bindingBuilder(Binder binder) {
+    return new BindingBuilder(binder);
+  }
+

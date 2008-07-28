@@ -1,0 +1,7 @@
+  /**
+   * Visit {@code element} and return a result.
+   */
+  protected V visitElement(Element element) {
+    return null;
+  }
+

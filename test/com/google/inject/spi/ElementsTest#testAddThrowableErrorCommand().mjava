@@ -1,0 +1,21 @@
+  public void testAddThrowableErrorCommand() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            addError(new Exception("A"));
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitMessage(Message command) {
+            assertEquals("A", command.getCause().getMessage());
+            assertEquals(command.getMessage(),
+                "An exception was caught and reported. Message: A");
+            assertTrue(command.getInjectionPoints().isEmpty());
+            Asserts.assertContains(command.getSource(), "ElementsTest.java");
+            return null;
+          }
+        }
+    );
+  }
+

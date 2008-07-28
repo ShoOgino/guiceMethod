@@ -1,0 +1,5 @@
+  /**
+   * Gets the binding from which the provider comes.
+   */
+  OldVersionBinding<T> getTargetBinding();
+

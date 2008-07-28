@@ -1,0 +1,7 @@
+  public <T> void writeBind(final Binder binder, final Binding<T> binding) {
+    LinkedBindingBuilder<T> lbb = binder.withSource(binding.getSource()).bind(binding.getKey());
+
+    ScopedBindingBuilder sbb = applyTarget(binding, lbb);
+    applyScoping(binding, sbb);
+  }
+

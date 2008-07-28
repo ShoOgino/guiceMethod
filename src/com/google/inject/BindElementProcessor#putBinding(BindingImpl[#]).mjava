@@ -1,0 +1,17 @@
+  private void putBinding(BindingImpl<?> binding) {
+    Key<?> key = binding.getKey();
+    Binding<?> original = bindings.get(key);
+
+    Class<?> rawType = key.getRawType();
+    if (FORBIDDEN_TYPES.contains(rawType)) {
+      errors.cannotBindToGuiceType(rawType.getSimpleName());
+      return;
+    }
+
+    if (bindings.containsKey(key)) {
+      errors.bindingAlreadySet(key, original.getSource());
+    } else {
+      bindings.put(key, binding);
+    }
+  }
+

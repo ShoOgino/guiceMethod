@@ -1,0 +1,68 @@
+  public void testScopes() {
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).annotatedWith(Names.named("a"))
+                .toProvider(StringProvider.class).in(Singleton.class);
+            bind(String.class).annotatedWith(Names.named("b"))
+                .toProvider(StringProvider.class).in(Scopes.SINGLETON);
+            bind(String.class).annotatedWith(Names.named("c"))
+                .toProvider(StringProvider.class).asEagerSingleton();
+            bind(String.class).annotatedWith(Names.named("d"))
+                .toProvider(StringProvider.class);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
+            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+              @Override public Void visitScope(Scope scope) {
+                // even though we bound with an annotation, the injector always uses instances
+                assertSame(Scopes.SINGLETON, scope);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(String.class, Names.named("b")), command.getKey());
+            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+              @Override public Void visitScope(Scope scope) {
+                assertSame(Scopes.SINGLETON, scope);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(String.class, Names.named("c")), command.getKey());
+            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+              @Override public Void visitEagerSingleton() {
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(String.class, Names.named("d")), command.getKey());
+            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+              @Override public Void visitNoScoping() {
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

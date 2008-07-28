@@ -1,0 +1,19 @@
+  public void testProviderBinding() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("A");
+      }
+    });
+
+    Key<Provider<String>> providerOfStringKey = new Key<Provider<String>>() {};
+    Binding<Provider<String>> binding = injector.getBinding(providerOfStringKey);
+    assertEquals(providerOfStringKey, binding.getKey());
+    assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    binding.acceptTargetVisitor(new FailingTargetVisitor<Provider<String>>() {
+      @Override public Void visitProviderBinding(Key<?> provided) {
+        assertEquals(Key.get(String.class), provided);
+        return null;
+      }
+    });
+  }
+

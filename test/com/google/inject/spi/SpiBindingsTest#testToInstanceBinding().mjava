@@ -1,0 +1,24 @@
+  public void testToInstanceBinding() {
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("A");
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(String.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitToInstance(T instance) {
+                assertEquals("A", instance);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

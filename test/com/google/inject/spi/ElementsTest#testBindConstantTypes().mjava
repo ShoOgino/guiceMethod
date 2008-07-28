@@ -1,0 +1,99 @@
+  public void testBindConstantTypes() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bindConstant().annotatedWith(Names.named("String")).to("A");
+            bindConstant().annotatedWith(Names.named("int")).to(2);
+            bindConstant().annotatedWith(Names.named("long")).to(3L);
+            bindConstant().annotatedWith(Names.named("boolean")).to(false);
+            bindConstant().annotatedWith(Names.named("double")).to(5.0d);
+            bindConstant().annotatedWith(Names.named("float")).to(6.0f);
+            bindConstant().annotatedWith(Names.named("short")).to((short) 7);
+            bindConstant().annotatedWith(Names.named("char")).to('h');
+            bindConstant().annotatedWith(Names.named("Class")).to(Iterator.class);
+            bindConstant().annotatedWith(Names.named("Enum")).to(CoinSide.TAILS);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(String.class, Names.named("String")), command.getKey());
+            assertEquals("A", getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Integer.class, Names.named("int")), command.getKey());
+            assertEquals(2, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Long.class, Names.named("long")), command.getKey());
+            assertEquals(3L, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Boolean.class, Names.named("boolean")), command.getKey());
+            assertEquals(false, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Double.class, Names.named("double")), command.getKey());
+            assertEquals(5.0d, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Float.class, Names.named("float")), command.getKey());
+            assertEquals(6.0f, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Short.class, Names.named("short")), command.getKey());
+            assertEquals((short) 7, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Character.class, Names.named("char")), command.getKey());
+            assertEquals('h', getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(Class.class, Names.named("Class")), command.getKey());
+            assertEquals(Iterator.class, getInstance(command));
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            assertEquals(Key.get(CoinSide.class, Names.named("Enum")), command.getKey());
+            assertEquals(CoinSide.TAILS, getInstance(command));
+            return null;
+          }
+        }
+    );
+  }
+

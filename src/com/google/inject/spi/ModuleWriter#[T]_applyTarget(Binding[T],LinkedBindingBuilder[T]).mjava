@@ -1,0 +1,45 @@
+  /**
+   * Execute this target against the linked binding builder.
+   */
+  public <T> ScopedBindingBuilder applyTarget(Binding<T> binding,
+      final LinkedBindingBuilder<T> linkedBindingBuilder) {
+    return binding.acceptTargetVisitor(new com.google.inject.Binding.TargetVisitor<T, ScopedBindingBuilder>() {
+      public ScopedBindingBuilder visitToInstance(T instance) {
+        linkedBindingBuilder.toInstance(instance);
+        return null;
+      }
+
+      public ScopedBindingBuilder visitToProvider(Provider<? extends T> provider) {
+        return linkedBindingBuilder.toProvider(provider);
+      }
+
+      public ScopedBindingBuilder visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+        return linkedBindingBuilder.toProvider(providerKey);
+      }
+
+      public ScopedBindingBuilder visitToKey(Key<? extends T> key) {
+        return linkedBindingBuilder.to(key);
+      }
+
+      public ScopedBindingBuilder visitUntargetted() {
+        return linkedBindingBuilder;
+      }
+
+      public ScopedBindingBuilder visitConstant(T value) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+
+      public ScopedBindingBuilder visitConvertedConstant(T value) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+
+      public ScopedBindingBuilder visitConstructor(Constructor<? extends T> constructor) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+
+      public ScopedBindingBuilder visitProviderBinding(Key<?> provided) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+    });
+  }
+

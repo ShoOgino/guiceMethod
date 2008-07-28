@@ -1,4 +1,4 @@
-    public Binding<String> getOriginal() {
-      return originalBinding;
+    public OldVersionBinding<String> getOriginal() {
+      return (OldVersionBinding) originalBinding;
     }
 

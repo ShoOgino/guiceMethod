@@ -1,0 +1,4 @@
+  private <T> T getInstance(Binding<T> binding) {
+    return binding.acceptTargetVisitor(Elements.<T>getInstanceVisitor());
+  }
+

@@ -1,0 +1,5 @@
+  public Message(Object source, Throwable throwable) {
+    this(source, "An exception was caught and reported. Message: " + throwable.getMessage(),
+        ImmutableList.<InjectionPoint>of(), throwable);
+  }
+

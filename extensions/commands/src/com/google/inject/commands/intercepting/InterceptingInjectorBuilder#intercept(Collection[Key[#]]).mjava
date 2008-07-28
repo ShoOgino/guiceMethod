@@ -1,7 +1,6 @@
   public InterceptingInjectorBuilder intercept(Collection<Key<?>> keys) {
-    if (keys.contains(INJECTION_INTERCEPTOR_KEY)) {
-      throw new IllegalArgumentException("Cannot intercept the interceptor!");
-    }
+    checkArgument(!keys.contains(INJECTION_INTERCEPTOR_KEY),
+        "Cannot intercept the interceptor!");
 
     keysToIntercept.addAll(keys);
     return this;

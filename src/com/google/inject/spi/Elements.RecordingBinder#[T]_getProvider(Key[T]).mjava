@@ -1,0 +1,17 @@
+    public <T> Provider<T> getProvider(final Key<T> key) {
+      final GetProvider<T> command = new GetProvider<T>(getSource(), key);
+      elements.add(command);
+      return new Provider<T>() {
+        public T get() {
+          Provider<T> delegate = command.getDelegate();
+          checkState(delegate != null,
+              "This provider cannot be used until the Injector has been created.");
+          return delegate.get();
+        }
+
+        @Override public String toString() {
+          return "Provider<" + key.getTypeLiteral() + ">";
+        }
+      };
+    }
+

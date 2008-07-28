@@ -1,0 +1,5 @@
+  BindInterceptorElementProcessor(Errors errors) {
+    super(errors);
+    proxyFactoryBuilder = new ProxyFactoryBuilder();
+  }
+

@@ -1,0 +1,5 @@
+  private void internalConvertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter converter) {
+    converters.add(new MatcherAndConverter(typeMatcher, converter, SourceProvider.UNKNOWN_SOURCE));
+  }
+

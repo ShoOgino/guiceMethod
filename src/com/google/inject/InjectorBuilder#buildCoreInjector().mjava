@@ -1,26 +1,26 @@
   /** Builds the injector. */
   private void buildCoreInjector() {
-    new ErrorsCommandProcessor(errors)
-        .processCommands(commands);
+    new ErrorsElementProcessor(errors)
+        .processCommands(elements);
 
-    BindInterceptorCommandProcessor bindInterceptorCommandProcessor
-        = new BindInterceptorCommandProcessor(errors);
-    bindInterceptorCommandProcessor.processCommands(commands);
+    BindInterceptorElementProcessor bindInterceptorCommandProcessor
+        = new BindInterceptorElementProcessor(errors);
+    bindInterceptorCommandProcessor.processCommands(elements);
     ConstructionProxyFactory proxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
     injector.reflection = reflectionFactory.create(proxyFactory);
     stopwatch.resetAndLog("Interceptors creation");
 
-    new ScopesCommandProcessor(errors, injector.scopes).processCommands(commands);
+    new ScopesElementProcessor(errors, injector.scopes).processCommands(elements);
     stopwatch.resetAndLog("Scopes creation");
 
-    new ConvertToTypesCommandProcessor(errors, injector.converters).processCommands(commands);
+    new ConvertToTypesElementProcessor(errors, injector.converters).processCommands(elements);
     stopwatch.resetAndLog("Converters creation");
 
     bindLogger();
-    bindCommandProcesor = new BindCommandProcessor(errors,
+    bindCommandProcesor = new BindElementProcessor(errors,
         injector, injector.scopes, injector.explicitBindings,
         injector.memberInjector);
-    bindCommandProcesor.processCommands(commands);
+    bindCommandProcesor.processCommands(elements);
     bindCommandProcesor.createUntargettedBindings();
     stopwatch.resetAndLog("Binding creation");
 
@@ -28,8 +28,8 @@
     stopwatch.resetAndLog("Binding indexing");
 
     requestInjectionCommandProcessor
-        = new RequestInjectionCommandProcessor(errors, injector.memberInjector);
-    requestInjectionCommandProcessor.processCommands(commands);
+        = new RequestInjectionElementProcessor(errors, injector.memberInjector);
+    requestInjectionCommandProcessor.processCommands(elements);
     stopwatch.resetAndLog("Static injection");
   }
 

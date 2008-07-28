@@ -1,0 +1,5 @@
+    public void to(final char value) {
+      assertNoTarget();
+      BindConstant.this.target = new ConstantTarget<Character>(value, Character.class);
+    }
+

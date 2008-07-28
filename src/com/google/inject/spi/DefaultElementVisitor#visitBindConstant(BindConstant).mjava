@@ -1,0 +1,4 @@
+  public V visitBindConstant(BindConstant command) {
+    return visitElement(command);
+  }
+

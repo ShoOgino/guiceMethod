@@ -1,0 +1,4 @@
+  public OldVersionBinding<? extends T> getTargetBinding() {
+    return injector.getBinding(targetKey);
+  }
+

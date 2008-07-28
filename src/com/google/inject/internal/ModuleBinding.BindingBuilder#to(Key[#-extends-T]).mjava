@@ -1,0 +1,14 @@
+    public ScopedBindingBuilder to(final Key<? extends T> targetKey) {
+      checkNotNull(targetKey, "targetKey");
+      checkNotTargetted();
+      target = new Target<T>() {
+        public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
+          return visitor.visitToKey(targetKey);
+        }
+        @Override public String toString() {
+          return String.valueOf(targetKey);
+        }
+      };
+      return this;
+    }
+

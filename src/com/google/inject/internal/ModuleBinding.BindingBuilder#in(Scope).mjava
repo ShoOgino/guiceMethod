@@ -1,0 +1,16 @@
+    public void in(final Scope scope) {
+      checkNotNull(scope, "scope");
+      checkNotScoped();
+      scoping = new AbstractScoping() {
+        @Override public Scope getScope() {
+          return scope;
+        }
+        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+          return visitor.visitScope(scope);
+        }
+        @Override public String toString() {
+          return String.valueOf(scope);
+        }
+      };
+    }
+

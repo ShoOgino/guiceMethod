@@ -1,0 +1,14 @@
+    /**
+     * Creates a recording binder that's backed by the same configuration as
+     * {@code backingBinder}.
+     */
+    private RecordingBinder(RecordingBinder parent, Object source, SourceProvider sourceProvider) {
+      checkArgument(source == null ^ sourceProvider == null);
+
+      this.stage = parent.stage;
+      this.modules = parent.modules;
+      this.elements = parent.elements;
+      this.source = source;
+      this.sourceProvider = sourceProvider;
+    }
+

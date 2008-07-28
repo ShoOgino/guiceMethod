@@ -1,0 +1,5 @@
+    public Constructor<T> getConstructor() {
+      checkState(constructorInjector != null, "Constructor is not ready");
+      return constructorInjector.constructionProxy.getConstructor();
+    }
+

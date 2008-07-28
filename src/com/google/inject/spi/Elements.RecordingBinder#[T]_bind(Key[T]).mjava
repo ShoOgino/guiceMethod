@@ -1,0 +1,6 @@
+    public <T> ModuleBinding<T>.BindingBuilder bind(Key<T> key) {
+      ModuleBinding<T> moduleBindingCommand = new ModuleBinding<T>(getSource(), key);
+      elements.add(moduleBindingCommand);
+      return moduleBindingCommand.bindingBuilder(RecordingBinder.this);
+    }
+

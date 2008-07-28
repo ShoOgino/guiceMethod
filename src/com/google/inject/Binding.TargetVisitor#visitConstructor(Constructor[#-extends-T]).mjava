@@ -1,0 +1,3 @@
+    // injector-only bindings
+    V visitConstructor(Constructor<? extends T> constructor);
+

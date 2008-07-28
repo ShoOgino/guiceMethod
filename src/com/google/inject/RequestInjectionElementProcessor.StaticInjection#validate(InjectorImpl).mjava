@@ -1,0 +1,8 @@
+    void validate(final InjectorImpl injector) {
+      Errors errorsForMember = errors.withSource(source);
+      injector.addSingleInjectorsForFields(
+          type.getDeclaredFields(), true, memberInjectors, errorsForMember);
+      injector.addSingleInjectorsForMethods(
+          type.getDeclaredMethods(), true, memberInjectors, errorsForMember);
+    }
+

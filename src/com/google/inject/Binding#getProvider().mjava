@@ -1,6 +1,10 @@
   /**
    * Returns the scoped provider guice uses to fulfill requests for this
    * binding.
+   *
+   * @throws UnsupportedOperationException when invoked on a {@link Binding}
+   *      created via {@link com.google.inject.spi.Elements#getElements}. This
+   *      method is only supported on {@link Binding}s returned from an injector.
    */
   Provider<T> getProvider();
 

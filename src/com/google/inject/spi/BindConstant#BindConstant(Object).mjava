@@ -1,0 +1,4 @@
+  BindConstant(Object source) {
+    this.source = checkNotNull(source, "source");
+  }
+

@@ -1,0 +1,2 @@
+    V visitConvertedConstant(T value);
+

@@ -1,0 +1,4 @@
+  public <V> V acceptVisitor(Element.Visitor<V> visitor) {
+    return visitor.visitBinding(this);
+  }
+

@@ -1,0 +1,4 @@
+  public <T> V visitGetProvider(GetProvider<T> command) {
+    return visitElement(command);
+  }
+

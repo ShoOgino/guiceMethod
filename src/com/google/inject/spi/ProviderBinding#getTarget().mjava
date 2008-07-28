@@ -1,5 +1,0 @@
-  /**
-   * Gets the binding from which the provider comes.
-   */
-  Binding<T> getTarget();
-

@@ -1,0 +1,16 @@
+  public void checkInjector(Module module, Element.Visitor<?>... visitors) {
+    Injector injector = Guice.createInjector(module);
+
+    List<Binding<?>> bindings = Lists.newArrayList(
+        Iterables.filter(injector.getBindings().values(), isUserBinding));
+    orderByKey.sort(bindings);
+
+    assertEquals(bindings.size(), visitors.length);
+
+    for (int i = 0; i < visitors.length; i++) {
+      Element.Visitor<?> visitor = visitors[i];
+      Binding<?> binding = bindings.get(i);
+      binding.acceptVisitor(visitor);
+    }
+  }
+

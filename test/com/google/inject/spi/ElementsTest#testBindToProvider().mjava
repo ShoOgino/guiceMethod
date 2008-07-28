@@ -1,0 +1,57 @@
+  public void testBindToProvider() {
+    final Provider<String> aProvider = new Provider<String>() {
+      public String get() {
+        return "A";
+      }
+    };
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toProvider(aProvider);
+            bind(List.class).toProvider(ListProvider.class);
+            bind(Collection.class).toProvider(Key.get(ListProvider.class));
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(String.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToProvider(Provider<? extends T> provider) {
+                assertSame(aProvider, provider);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(List.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+                assertEquals(Key.get(ListProvider.class), providerKey);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(Collection.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+                assertEquals(Key.get(ListProvider.class), providerKey);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

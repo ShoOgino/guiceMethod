@@ -1,5 +1,0 @@
-  /**
-   * Gets the binding for the provider of this binding.
-   */
-  Binding<? extends Provider<? extends T>> getTargetProvider();
-

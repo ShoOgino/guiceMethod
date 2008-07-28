@@ -1,0 +1,20 @@
+  public void testAddMessageErrorCommand() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            addError("Message %s %d %s", "A", 5, "C");
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitMessage(Message command) {
+            assertEquals("Message A 5 C", command.getMessage());
+            assertNull(command.getCause());
+            assertTrue(command.getInjectionPoints().isEmpty());
+            Asserts.assertContains(command.getSource(), "ElementsTest.java");
+            return null;
+          }
+        }
+    );
+  }
+

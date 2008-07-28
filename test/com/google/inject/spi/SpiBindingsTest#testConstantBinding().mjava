@@ -1,0 +1,24 @@
+  public void testConstantBinding() {
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bindConstant().annotatedWith(Names.named("one")).to(1);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(Integer.class, Names.named("one")), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitConstant(T value) {
+                assertEquals((Integer) 1, value);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

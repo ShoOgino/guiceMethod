@@ -1,10 +1,10 @@
   public Injector build() {
     // record commands from the modules
-    List<Command> commands = new CommandRecorder().recordCommands(modules);
+    List<Element> elements = Elements.getElements(modules);
 
     // rewrite the commands to insert interception
-    CommandRewriter rewriter = new CommandRewriter();
-    Module module = rewriter.createModule(commands);
+    ModuleRewriter rewriter = new ModuleRewriter();
+    Module module = rewriter.create(elements);
 
     // create and injector with the rewritten commands
     Injector injector = Guice.createInjector(module);

@@ -1,0 +1,22 @@
+  public void testBindKeysNoAnnotations() {
+    FailingElementVisitor keyChecker = new FailingElementVisitor() {
+      @Override public <T> Void visitBinding(Binding<T> command) {
+        assertEquals(Key.get(String.class), command.getKey());
+        return null;
+      }
+    };
+
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("A");
+            bind(new TypeLiteral<String>() {}).toInstance("B");
+            bind(Key.get(String.class)).toInstance("C");
+          }
+        },
+        keyChecker,
+        keyChecker,
+        keyChecker
+    );
+  }
+

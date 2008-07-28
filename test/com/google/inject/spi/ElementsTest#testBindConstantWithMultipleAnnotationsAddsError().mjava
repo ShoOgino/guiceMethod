@@ -1,0 +1,29 @@
+  public void testBindConstantWithMultipleAnnotationsAddsError() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            AnnotatedConstantBindingBuilder cbb = bindConstant();
+            cbb.annotatedWith(SampleAnnotation.class).to("A");
+            cbb.annotatedWith(Names.named("A"));
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitBindConstant(BindConstant command) {
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitMessage(Message command) {
+            assertEquals("More than one annotation is specified for this binding.",
+                command.getMessage());
+            assertNull(command.getCause());
+            assertTrue(command.getInjectionPoints().isEmpty());
+            Asserts.assertContains(command.getSource(), "ElementsTest.java");
+            return null;
+          }
+        }
+    );
+  }
+

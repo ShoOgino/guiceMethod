@@ -7,9 +7,7 @@
 
     modules.add(0, new BuiltInModule(injector, stage));
 
-    CommandRecorder commandRecorder = new CommandRecorder();
-    commandRecorder.setCurrentStage(stage);
-    commands.addAll(commandRecorder.recordCommands(modules));
+    elements.addAll(Elements.getElements(stage, modules));
 
     buildCoreInjector();
 
@@ -26,8 +24,8 @@
 
     fulfillInjectionRequests();
 
-    if (!commands.isEmpty()) {
-      throw new AssertionError("Failed to execute " + commands);
+    if (!elements.isEmpty()) {
+      throw new AssertionError("Failed to execute " + elements);
     }
 
     return injector;

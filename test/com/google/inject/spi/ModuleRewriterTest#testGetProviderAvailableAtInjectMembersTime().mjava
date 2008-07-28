@@ -1,0 +1,32 @@
+  public void testGetProviderAvailableAtInjectMembersTime() {
+    Module module = new AbstractModule() {
+      public void configure() {
+        final Provider<String> stringProvider = getProvider(String.class);
+
+        bind(String.class).annotatedWith(Names.named("2")).toProvider(new Provider<String>() {
+          private String value;
+
+          @Inject void initialize() {
+            value = stringProvider.get();
+          }
+
+          public String get() {
+            return value;
+          }
+        });
+
+        bind(String.class).toInstance("A");
+      }
+    };
+
+    // the module works fine normally
+    Injector injector = Guice.createInjector(module);
+    assertEquals("A", injector.getInstance(Key.get(String.class, Names.named("2"))));
+
+    // and it should also work fine if we rewrite it
+    List<Element> elements = Elements.getElements(module);
+    Module replayed = new ModuleWriter().create(elements);
+    Injector replayedInjector = Guice.createInjector(replayed);
+    assertEquals("A", replayedInjector.getInstance(Key.get(String.class, Names.named("2"))));
+  }
+

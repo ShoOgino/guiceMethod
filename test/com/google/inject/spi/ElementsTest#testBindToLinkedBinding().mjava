@@ -1,0 +1,51 @@
+  public void testBindToLinkedBinding() {
+    checkModule(
+        new AbstractModule() {
+          protected void configure() {
+            bind(List.class).to(ArrayList.class);
+            bind(Map.class).to(new TypeLiteral<HashMap<Integer, String>>() {});
+            bind(Set.class).to(Key.get(TreeSet.class, SampleAnnotation.class));
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(List.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToKey(Key<? extends T> key) {
+                assertEquals(Key.get(ArrayList.class), key);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(Map.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToKey(Key<? extends T> key) {
+                assertEquals(Key.get(new TypeLiteral<HashMap<Integer, String>>() {}), key);
+                return null;
+              }
+            });
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertEquals(Key.get(Set.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              public Void visitToKey(Key<? extends T> key) {
+                assertEquals(Key.get(TreeSet.class, SampleAnnotation.class), key);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

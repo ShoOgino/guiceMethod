@@ -35,9 +35,10 @@
     suite.addTestSuite(TypeLiteralTest.class);
 
     // commands
-    suite.addTestSuite(CommandRecorderTest.class);
-    suite.addTestSuite(CommandReplayerTest.class);
-    suite.addTestSuite(CommandRewriteTest.class);
+    suite.addTestSuite(ElementsTest.class);
+    suite.addTestSuite(ModuleWriterTest.class);
+    suite.addTestSuite(ModuleRewriterTest.class);
+    suite.addTestSuite(SpiBindingsTest.class);
 
     // internal
     suite.addTestSuite(FinalizableReferenceQueueTest.class);

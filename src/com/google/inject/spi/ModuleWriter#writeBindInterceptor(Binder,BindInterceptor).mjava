@@ -1,0 +1,7 @@
+  public void writeBindInterceptor(final Binder binder, final BindInterceptor command) {
+    List<MethodInterceptor> interceptors = command.getInterceptors();
+    binder.withSource(command.getSource()).bindInterceptor(
+        command.getClassMatcher(), command.getMethodMatcher(),
+        interceptors.toArray(new MethodInterceptor[interceptors.size()]));
+  }
+

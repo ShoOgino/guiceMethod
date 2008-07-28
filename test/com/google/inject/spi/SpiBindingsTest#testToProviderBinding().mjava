@@ -1,0 +1,26 @@
+  public void testToProviderBinding() {
+    final Provider<String> stringProvider = new StringProvider();
+
+    checkInjector(
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toProvider(stringProvider);
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public <T> Void visitBinding(Binding<T> command) {
+            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(String.class), command.getKey());
+            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitToProvider(Provider<? extends T> provider) {
+                assertSame(stringProvider, provider);
+                return null;
+              }
+            });
+            return null;
+          }
+        }
+    );
+  }
+

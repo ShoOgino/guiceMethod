@@ -1,0 +1,4 @@
+  public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
+    return target.acceptTargetVisitor(visitor);
+  }
+

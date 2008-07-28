@@ -6,10 +6,10 @@
       super(
           injector,
           key,
-          SourceProvider.UNKNOWN_SOURCE,
+          providedBinding.getSource(),
           createInternalFactory(providedBinding),
           Scopes.NO_SCOPE,
           loadStrategy);
-      this.providedBinding = providedBinding;
+      this.providedBinding = (OldVersionBinding<T>) providedBinding;
     }
 

@@ -21,7 +21,7 @@
         public List<Parameter<?>> getParameters() {
           return parameters;
         }
-        public Constructor getConstructor() {
+        public Constructor<T> getConstructor() {
           return constructor;
         }
       };
@@ -39,7 +39,7 @@
       public List<Parameter<?>> getParameters() {
         return parameters;
       }
-      public Constructor getConstructor() {
+      public Constructor<T> getConstructor() {
         return constructor;
       }
     };

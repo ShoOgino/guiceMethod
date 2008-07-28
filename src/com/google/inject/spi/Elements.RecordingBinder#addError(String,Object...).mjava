@@ -1,0 +1,4 @@
+    public void addError(String message, Object... arguments) {
+      elements.add(new Message(getSource(), String.format(message, arguments)));
+    }
+

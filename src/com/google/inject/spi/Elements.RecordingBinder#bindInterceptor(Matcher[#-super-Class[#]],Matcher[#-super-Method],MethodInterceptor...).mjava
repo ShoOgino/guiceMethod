@@ -1,0 +1,7 @@
+    public void bindInterceptor(
+        Matcher<? super Class<?>> classMatcher,
+        Matcher<? super Method> methodMatcher,
+        MethodInterceptor... interceptors) {
+      elements.add(new BindInterceptor(getSource(), classMatcher, methodMatcher, interceptors));
+    }
+

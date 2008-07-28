@@ -1,0 +1,17 @@
+    public void in(final Class<? extends Annotation> scopeAnnotation) {
+      checkNotNull(scopeAnnotation, "scopeAnnotation");
+      checkNotScoped();
+
+      scoping = new AbstractScoping() {
+        @Override public Class<? extends Annotation> getScopeAnnotation() {
+          return scopeAnnotation;
+        }
+        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+          return visitor.visitScopeAnnotation(scopeAnnotation);
+        }
+        @Override public String toString() {
+          return scopeAnnotation.getName();
+        }
+      };
+    }
+

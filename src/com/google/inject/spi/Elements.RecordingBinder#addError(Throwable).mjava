@@ -1,0 +1,4 @@
+    public void addError(Throwable t) {
+      elements.add(new Message(getSource(), t));
+    }
+

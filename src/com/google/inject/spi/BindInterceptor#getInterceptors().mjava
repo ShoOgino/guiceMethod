@@ -1,0 +1,4 @@
+  public List<MethodInterceptor> getInterceptors() {
+    return interceptors;
+  }
+

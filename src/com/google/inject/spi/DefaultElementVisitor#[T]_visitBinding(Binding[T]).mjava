@@ -1,0 +1,4 @@
+  public <T> V visitBinding(Binding<T> command) {
+    return visitElement(command);
+  }
+

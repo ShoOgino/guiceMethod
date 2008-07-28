@@ -1,0 +1,4 @@
+    public void addError(Message message) {
+      elements.add(message);
+    }
+

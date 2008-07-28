@@ -1,0 +1,4 @@
+  public V visitProviderBinding(Key<?> provided) {
+    return visitTarget();
+  }
+
