@@ -1,6 +1,6 @@
   @Override public Boolean visitBindConstant(BindConstant command) {
     Object value = command.acceptTargetVisitor(new DefaultBindTargetVisitor<Object, Object>() {
-      @Override public Object visitToInstance(Object instance) {
+      @Override public Object visitInstance(Object instance) {
         return instance;
       }
 

@@ -15,7 +15,7 @@
             assertContains(command.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(aKey, command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitToKey(Key<? extends T> key) {
+              @Override public Void visitKey(Key<? extends T> key) {
                 assertEquals(bKey, key);
                 return null;
               }

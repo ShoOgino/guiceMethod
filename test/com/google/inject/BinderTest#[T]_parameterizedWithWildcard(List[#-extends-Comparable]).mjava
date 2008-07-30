@@ -1,2 +1,0 @@
-  <T> void parameterizedWithWildcard(List<? extends Comparable> typeWithWildcard) {}
-

@@ -1,4 +1,0 @@
-  public V visitToKey(Key<? extends T> key) {
-    return visitTarget();
-  }
-

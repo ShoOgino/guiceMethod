@@ -12,7 +12,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToKey(Key<? extends T> key) {
+              public Void visitKey(Key<? extends T> key) {
                 assertEquals(Key.get(ArrayList.class), key);
                 return null;
               }
@@ -25,7 +25,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(Map.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToKey(Key<? extends T> key) {
+              public Void visitKey(Key<? extends T> key) {
                 assertEquals(Key.get(new TypeLiteral<HashMap<Integer, String>>() {}), key);
                 return null;
               }
@@ -38,7 +38,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToKey(Key<? extends T> key) {
+              public Void visitKey(Key<? extends T> key) {
                 assertEquals(Key.get(TreeSet.class, SampleAnnotation.class), key);
                 return null;
               }

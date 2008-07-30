@@ -2,7 +2,7 @@
       checkNotTargetted();
       target = new Target<T>() {
         public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
-          return visitor.visitToInstance(instance);
+          return visitor.visitInstance(instance);
         }
       };
     }

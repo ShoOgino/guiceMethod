@@ -1,4 +1,0 @@
-  public V visitToInstance(T instance) {
-    return visitTarget();
-  }
-

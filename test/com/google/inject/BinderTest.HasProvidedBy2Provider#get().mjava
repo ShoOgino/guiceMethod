@@ -1,4 +1,0 @@
-    public HasProvidedBy2 get() {
-      return new HasProvidedBy2() {};
-    }
-

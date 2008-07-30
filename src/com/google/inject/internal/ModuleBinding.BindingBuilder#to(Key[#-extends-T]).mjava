@@ -3,7 +3,7 @@
       checkNotTargetted();
       target = new Target<T>() {
         public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
-          return visitor.visitToKey(targetKey);
+          return visitor.visitKey(targetKey);
         }
         @Override public String toString() {
           return String.valueOf(targetKey);

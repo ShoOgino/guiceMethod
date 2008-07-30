@@ -1,4 +1,4 @@
     public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
-      return visitor.visitToInstance(value);
+      return visitor.visitInstance(value);
     }
 

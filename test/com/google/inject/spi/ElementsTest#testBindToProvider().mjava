@@ -18,7 +18,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToProvider(Provider<? extends T> provider) {
+              public Void visitProvider(Provider<? extends T> provider) {
                 assertSame(aProvider, provider);
                 return null;
               }
@@ -31,7 +31,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+              public Void visitProviderKey(Key<? extends Provider<? extends T>> providerKey) {
                 assertEquals(Key.get(ListProvider.class), providerKey);
                 return null;
               }
@@ -44,7 +44,7 @@
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(Collection.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitToProviderKey(Key<? extends Provider<? extends T>> providerKey) {
+              public Void visitProviderKey(Key<? extends Provider<? extends T>> providerKey) {
                 assertEquals(Key.get(ListProvider.class), providerKey);
                 return null;
               }

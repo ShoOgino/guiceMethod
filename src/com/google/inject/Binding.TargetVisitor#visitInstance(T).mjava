@@ -1,0 +1,6 @@
+    /**
+     * Visit a instance binding. The same instance is returned for every injection. This target is
+     * used in both module and injector bindings.
+     */
+    V visitInstance(T instance);
+
