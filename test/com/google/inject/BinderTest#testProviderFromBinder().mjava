@@ -1,0 +1,14 @@
+  public void testProviderFromBinder() {
+    Guice.createInjector(new Module() {
+      public void configure(Binder binder) {
+        fooProvider = binder.getProvider(Foo.class);
+
+        try {
+          fooProvider.get();
+        } catch (IllegalStateException e) { /* expected */ }
+      }
+    });
+
+    assertNotNull(fooProvider.get());
+  }
+

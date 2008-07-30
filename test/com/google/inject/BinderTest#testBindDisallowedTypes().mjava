@@ -1,0 +1,26 @@
+  /** Test for issue 186 */
+  public void testBindDisallowedTypes() throws NoSuchMethodException {
+    Type[] types = new Type[] {
+        parameterizedWithVariable,
+        parameterizedWithWildcard,
+        typeVariable,
+        wildcardType,
+    };
+
+    for (Type type : types) {
+      @SuppressWarnings("unchecked") final
+      Key<Object> key = (Key<Object>) Key.get(type);
+
+      try {
+        Guice.createInjector(new AbstractModule() {
+          protected void configure() {
+            bind(key).toProvider(Providers.of(null));
+          }
+        });
+        fail("Guice should not allow bindings to " + type);
+      } catch (CreationException e) {
+        assertContains(e.getMessage(), "Cannot bind types that have type variables");
+      }
+    }
+  }
+
