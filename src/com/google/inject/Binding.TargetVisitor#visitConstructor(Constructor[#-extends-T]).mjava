@@ -1,3 +1,9 @@
-    // injector-only bindings
+    /**
+     * Visit a constructor binding. To resolve injections, an instance is instantiated by invoking
+     * {@code constructor}. This target is found only on injector bindings.
+     *
+     * @param constructor the {@link Inject annotated} or default constructor that is invoked for
+     *      creating values
+     */
     V visitConstructor(Constructor<? extends T> constructor);
 

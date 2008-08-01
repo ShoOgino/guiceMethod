@@ -1,2 +1,10 @@
+    /**
+     * Visit a binding to a {@link Provider} that delegates to the binding for the provided type.
+     * This target is found only on injector bindings.
+     *
+     * @param provided the key whose binding is used to {@link Provider#get provide instances}. That
+     *      binding can be retrieved from an injector using {@link Injector#getBinding(Key)
+     *      Injector.getBinding(provided)}
+     */
     V visitProviderBinding(Key<?> provided);
 
