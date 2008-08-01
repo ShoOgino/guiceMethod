@@ -1,0 +1,4 @@
+  public ConstantBuilder constantBuilder(Binder binder) {
+    return new ConstantBuilder(binder);
+  }
+

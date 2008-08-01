@@ -1,6 +1,0 @@
-    public <E extends Enum<E>> void to(final E value) {
-      checkNotNull(value, "value");
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<Enum>(value, value.getDeclaringClass());
-    }
-

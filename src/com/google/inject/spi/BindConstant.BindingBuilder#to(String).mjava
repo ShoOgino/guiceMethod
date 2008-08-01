@@ -1,6 +1,0 @@
-    public void to(final String value) {
-      checkNotNull(value, "value");
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<String>(value, String.class);
-    }
-

@@ -1,4 +1,4 @@
   public V visitConstructor(Constructor<? extends T> constructor) {
-    return visitTarget();
+    return visitOther();
   }
 

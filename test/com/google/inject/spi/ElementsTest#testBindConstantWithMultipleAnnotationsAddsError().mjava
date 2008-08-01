@@ -9,7 +9,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitBindConstant(BindConstant command) {
+          @Override public <T> Void visitBinding(Binding<T> command) {
             return null;
           }
         },

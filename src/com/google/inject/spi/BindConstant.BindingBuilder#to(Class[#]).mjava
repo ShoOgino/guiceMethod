@@ -1,6 +1,0 @@
-    public void to(final Class<?> value) {
-      checkNotNull(value, "value");
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<Class<?>>(value, Class.class);
-    }
-

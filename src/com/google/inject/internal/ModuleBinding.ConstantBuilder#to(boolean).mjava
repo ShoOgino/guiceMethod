@@ -1,0 +1,4 @@
+    public void to(final boolean value) {
+      to(Boolean.class, value);
+    }
+

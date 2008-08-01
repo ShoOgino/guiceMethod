@@ -1,5 +1,0 @@
-    public void to(final float value) {
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<Float>(value, Float.class);
-    }
-

@@ -1,4 +1,0 @@
-  protected V visitTarget() {
-    return null;
-  }
-

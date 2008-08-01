@@ -1,5 +1,0 @@
-  public <V> V acceptTargetVisitor(TargetVisitor<?, V> visitor) {
-    TargetVisitor v = (TargetVisitor) visitor;
-    return (V) target.acceptTargetVisitor(v);
-  }
-

@@ -32,11 +32,6 @@
         return null;
       }
 
-      public Void visitBindConstant(BindConstant command) {
-        writeBindConstant(binder, command);
-        return null;
-      }
-
       public Void visitConvertToTypes(ConvertToTypes command) {
         writeConvertToTypes(binder, command);
         return null;

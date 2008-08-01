@@ -1,8 +1,0 @@
-  @Override public String toString() {
-    return new ToStringBuilder(ConstantBinding.class)
-        .add("key", key)
-        .add("value", value)
-        .add("source", source)
-        .toString();
-  }
-

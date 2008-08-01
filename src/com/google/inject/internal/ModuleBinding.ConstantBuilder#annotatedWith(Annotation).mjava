@@ -1,0 +1,10 @@
+    public ConstantBindingBuilder annotatedWith(final Annotation annotation) {
+      checkNotNull(annotation, "annotation");
+      if (key.getAnnotationType() != null) {
+        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
+      } else {
+        key = Key.get(key.getTypeLiteral(), annotation);
+      }
+      return this;
+    }
+

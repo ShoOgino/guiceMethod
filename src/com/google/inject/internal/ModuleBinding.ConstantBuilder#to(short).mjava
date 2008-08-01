@@ -1,0 +1,4 @@
+    public void to(final short value) {
+      to(Short.class, value);
+    }
+

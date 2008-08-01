@@ -25,10 +25,6 @@
         return linkedBindingBuilder;
       }
 
-      public ScopedBindingBuilder visitConstant(T value) {
-        throw new IllegalArgumentException("Non-module element");
-      }
-
       public ScopedBindingBuilder visitConvertedConstant(T value) {
         throw new IllegalArgumentException("Non-module element");
       }

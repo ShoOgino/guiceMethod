@@ -1,5 +1,0 @@
-    public void to(final short value) {
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<Short>(value, Short.class);
-    }
-

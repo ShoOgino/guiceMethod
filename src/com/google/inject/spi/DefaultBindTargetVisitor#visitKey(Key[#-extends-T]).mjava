@@ -1,4 +1,4 @@
   public V visitKey(Key<? extends T> key) {
-    return visitTarget();
+    return visitOther();
   }
 

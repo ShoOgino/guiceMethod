@@ -1,6 +1,11 @@
   @Override public <T> Boolean visitBinding(Binding<T> command) {
     final Object source = command.getSource();
 
+    if (Void.class.equals(command.getKey().getRawType())) {
+      errors.missingConstantValues();
+      return true;
+    }
+
     final Key<T> key = command.getKey();
     Class<? super T> rawType = key.getTypeLiteral().getRawType();
 
@@ -126,10 +131,6 @@
         });
 
         return null;
-      }
-
-      public Void visitConstant(T value) {
-        throw new IllegalArgumentException("Cannot apply a non-module element");
       }
 
       public Void visitConvertedConstant(T value) {

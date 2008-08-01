@@ -1,5 +1,0 @@
-    protected ConstantTarget(T value, Class<?> type) {
-      this.value = value;
-      this.type = type;
-    }
-

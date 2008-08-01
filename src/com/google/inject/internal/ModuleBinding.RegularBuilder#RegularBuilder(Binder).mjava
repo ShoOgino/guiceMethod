@@ -1,0 +1,4 @@
+    RegularBuilder(Binder binder) {
+      this.binder = binder.skipSources(RegularBuilder.class);
+    }
+

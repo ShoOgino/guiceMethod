@@ -1,4 +1,0 @@
-  private <T> T getInstance(BindConstant bindConstant) {
-    return bindConstant.acceptTargetVisitor(Elements.<T>getInstanceVisitor());
-  }
-

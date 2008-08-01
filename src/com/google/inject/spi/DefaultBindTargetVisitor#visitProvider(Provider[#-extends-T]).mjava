@@ -1,4 +1,4 @@
   public V visitProvider(Provider<? extends T> provider) {
-    return visitTarget();
+    return visitOther();
   }
 

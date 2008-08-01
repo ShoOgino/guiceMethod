@@ -1,0 +1,4 @@
+    public void to(final float value) {
+      to(Float.class, value);
+    }
+

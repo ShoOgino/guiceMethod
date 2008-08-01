@@ -1,4 +1,0 @@
-  @Override protected Void visitTarget() {
-    throw new AssertionFailedError();
-  }
-

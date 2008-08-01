@@ -1,6 +1,0 @@
-    private void assertNoTarget() {
-      if (target != UNTARGETTED) {
-        binder.addError(CONSTANT_VALUE_ALREADY_SET);
-      }
-    }
-

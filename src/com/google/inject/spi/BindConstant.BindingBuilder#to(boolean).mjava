@@ -1,5 +1,0 @@
-    public void to(final boolean value) {
-      assertNoTarget();
-      BindConstant.this.target = new ConstantTarget<Boolean>(value, Boolean.class);
-    }
-

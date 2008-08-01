@@ -22,10 +22,6 @@
             overriddenKeys.add(binding.getKey());
             super.writeBind(binder, binding);
           }
-          @Override public void writeBindConstant(Binder binder, BindConstant command) {
-            overriddenKeys.add(command.getKey());
-            super.writeBindConstant(binder, command);
-          }
         }.apply(binder(), overrideElements);
 
         // bind the regular module, skipping overridden keys. We only skip each
@@ -35,11 +31,6 @@
           @Override public <T> void writeBind(Binder binder, Binding<T> binding) {
             if (!overriddenKeys.remove(binding.getKey())) {
               super.writeBind(binder, binding);
-            }
-          }
-          @Override public void writeBindConstant(Binder binder, BindConstant command) {
-            if (!overriddenKeys.remove(command.getKey())) {
-              super.writeBindConstant(binder, command);
             }
           }
         }.apply(binder(), elements);

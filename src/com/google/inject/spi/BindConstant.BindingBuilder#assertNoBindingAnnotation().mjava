@@ -1,6 +1,0 @@
-    private void assertNoBindingAnnotation() {
-      if (bindingAnnotation != null) {
-        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
-      }
-    }
-
