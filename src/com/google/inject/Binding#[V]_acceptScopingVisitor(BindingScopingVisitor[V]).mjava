@@ -1,0 +1,7 @@
+  /**
+   * Accepts a scoping visitor. Invokes the visitor method specific to this binding's scoping.
+   *
+   * @param visitor to call back on
+   */
+  <V> V acceptScopingVisitor(BindingScopingVisitor<V> visitor);
+

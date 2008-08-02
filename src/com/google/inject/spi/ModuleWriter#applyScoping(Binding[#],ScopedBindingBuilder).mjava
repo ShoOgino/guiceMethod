@@ -1,5 +1,5 @@
   public void applyScoping(Binding<?> binding, final ScopedBindingBuilder scopedBindingBuilder) {
-    binding.acceptScopingVisitor(new BindScopingVisitor<Void>() {
+    binding.acceptScopingVisitor(new BindingScopingVisitor<Void>() {
       public Void visitEagerSingleton() {
         scopedBindingBuilder.asEagerSingleton();
         return null;

@@ -1,5 +1,5 @@
   @SuppressWarnings("unchecked")
-  public static <T> BindTargetVisitor<T, T> getInstanceVisitor() {
-    return (BindTargetVisitor<T, T>) GET_INSTANCE_VISITOR;
+  public static <T> BindingTargetVisitor<T, T> getInstanceVisitor() {
+    return (BindingTargetVisitor<T, T>) GET_INSTANCE_VISITOR;
   }
 

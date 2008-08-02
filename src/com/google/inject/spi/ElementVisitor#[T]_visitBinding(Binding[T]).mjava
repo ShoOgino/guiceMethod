@@ -1,0 +1,6 @@
+  /**
+   * Visit a mapping from a key (type and optional annotation) to the strategy for getting
+   * instances of the type.
+   */
+  <T> V visitBinding(Binding<T> binding);
+

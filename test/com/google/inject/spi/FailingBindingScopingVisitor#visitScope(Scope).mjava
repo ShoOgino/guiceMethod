@@ -1,0 +1,4 @@
+  public Void visitScope(Scope scope) {
+    throw new AssertionFailedError();
+  }
+

@@ -16,7 +16,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitScope(Scope scope) {
                 // even though we bound with an annotation, the injector always uses instances
                 assertSame(Scopes.SINGLETON, scope);
@@ -30,7 +30,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class, Names.named("b")), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitScope(Scope scope) {
                 assertSame(Scopes.SINGLETON, scope);
                 return null;
@@ -43,7 +43,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class, Names.named("c")), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitEagerSingleton() {
                 return null;
               }
@@ -55,7 +55,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class, Names.named("d")), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitNoScoping() {
                 return null;
               }

@@ -2,7 +2,7 @@
       checkNotNull(targetKey, "targetKey");
       checkNotTargetted();
       target = new Target<T>() {
-        public <V> V acceptTargetVisitor(BindTargetVisitor<? super T, V> visitor) {
+        public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
           return visitor.visitKey(targetKey);
         }
         @Override public String toString() {

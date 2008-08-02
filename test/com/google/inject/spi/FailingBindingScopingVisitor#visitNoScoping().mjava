@@ -1,0 +1,4 @@
+  public Void visitNoScoping() {
+    throw new AssertionFailedError();
+  }
+

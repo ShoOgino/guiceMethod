@@ -12,7 +12,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitNoScoping() {
                 return null;
               }
@@ -24,7 +24,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitScope(Scope scope) {
                 assertEquals(Scopes.SINGLETON, scope);
                 return null;
@@ -37,7 +37,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(Map.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               @Override public Void visitScopeAnnotation(Class<? extends Annotation> annotation) {
                 assertEquals(Singleton.class, annotation);
                 return null;
@@ -50,7 +50,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindScopingVisitor() {
+            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               public Void visitEagerSingleton() {
                 return null;
               }

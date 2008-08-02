@@ -1,0 +1,2 @@
+    <V> V acceptVisitor(BindingScopingVisitor<V> visitor);
+

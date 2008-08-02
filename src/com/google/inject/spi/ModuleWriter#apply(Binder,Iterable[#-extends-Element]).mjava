@@ -5,7 +5,7 @@
     checkNotNull(binder, "binder");
     checkNotNull(elements, "elements");
 
-    Element.Visitor<Void> visitor = new Element.Visitor<Void>() {
+    ElementVisitor<Void> visitor = new ElementVisitor<Void>() {
 
       public Void visitMessage(Message message) {
         writeMessage(binder, message);

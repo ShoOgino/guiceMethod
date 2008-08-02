@@ -1,0 +1,4 @@
+  public <T> T acceptVisitor(ElementVisitor<T> visitor) {
+    return visitor.visitStaticInjectionRequest(this);
+  }
+

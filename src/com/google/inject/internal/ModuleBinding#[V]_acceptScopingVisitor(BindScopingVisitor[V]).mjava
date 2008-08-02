@@ -1,4 +1,0 @@
-  public <V> V acceptScopingVisitor(BindScopingVisitor<V> visitor) {
-    return scoping.acceptVisitor(visitor);
-  }
-
