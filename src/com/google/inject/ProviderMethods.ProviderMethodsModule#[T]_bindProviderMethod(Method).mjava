@@ -16,7 +16,8 @@
 
       // Define T as the method's return type.
       @SuppressWarnings("unchecked")
-      TypeLiteral<T> returnType = (TypeLiteral<T>) TypeLiteral.get(method.getGenericReturnType());
+      TypeLiteral<T> returnType
+          = (TypeLiteral<T>) TypeLiteral.get(typeResolver.getReturnType(method));
 
       Provider<T> provider = new Provider<T>() {
         public T get() {

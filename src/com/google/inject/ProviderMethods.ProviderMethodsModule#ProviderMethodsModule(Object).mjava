@@ -1,4 +1,5 @@
     ProviderMethodsModule(Object providers) {
-      this.providers = providers;
+      this.providers = checkNotNull(providers, "providers");
+      this.typeResolver = new TypeResolver(providers.getClass());
     }
 
