@@ -1,4 +1,0 @@
-  protected ElementProcessor(Errors errors) {
-    this.errors = errors;
-  }
-

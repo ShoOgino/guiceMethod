@@ -1,6 +1,0 @@
-  public void initDelegate(Provider<T> delegate) {
-    checkState(this.delegate == null, "delegate already initialized");
-    checkNotNull(delegate, "delegate");
-    this.delegate = delegate;
-  }
-

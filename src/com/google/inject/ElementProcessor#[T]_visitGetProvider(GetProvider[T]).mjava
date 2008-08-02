@@ -1,4 +1,0 @@
-  public <T> Boolean visitGetProvider(GetProvider<T> getProvider) {
-    return false;
-  }
-
