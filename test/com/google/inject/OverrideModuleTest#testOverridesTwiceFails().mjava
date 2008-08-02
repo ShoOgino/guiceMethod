@@ -1,9 +1,5 @@
   public void testOverridesTwiceFails() {
-    Module original = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("A");
-      }
-    };
+    Module original = newModule("A");
 
     Module replacements = new AbstractModule() {
       protected void configure() {
@@ -12,7 +8,7 @@
       }
     };
 
-    Module module = overrideModule(original, replacements);
+    Module module = Modules.override(original).with(replacements);
     try {
       createInjector(module);
       fail();

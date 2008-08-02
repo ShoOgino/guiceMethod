@@ -1,0 +1,32 @@
+    public Module with(Iterable<? extends Module> overrides) {
+      final List<Element> elements = Elements.getElements(baseModules);
+      final List<Element> overrideElements = Elements.getElements(overrides);
+
+      return new AbstractModule() {
+        public void configure() {
+          final Set<Key> overriddenKeys = Sets.newHashSet();
+
+          // execute the overrides module, keeping track of which keys were bound
+          new ModuleWriter() {
+            @Override public <T> void writeBind(Binder binder, Binding<T> binding) {
+              overriddenKeys.add(binding.getKey());
+              super.writeBind(binder, binding);
+            }
+          }.apply(binder(), overrideElements);
+
+          // bind the regular module, skipping overridden keys. We only skip each
+          // overridden key once, so things still blow up if the module binds the
+          // same key multiple times
+          new ModuleWriter() {
+            @Override public <T> void writeBind(Binder binder, Binding<T> binding) {
+              if (!overriddenKeys.remove(binding.getKey())) {
+                super.writeBind(binder, binding);
+              }
+            }
+          }.apply(binder(), elements);
+
+          // TODO: bind the overridden keys using multibinder
+        }
+      };
+    }
+

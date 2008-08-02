@@ -1,0 +1,10 @@
+  public void testOverrideMultiple() {
+    Module module = Modules.override(newModule("A"), newModule(1), newModule(0.5f))
+        .with(newModule("B"), newModule(2), newModule(1.5d));
+    Injector injector = createInjector(module);
+    assertEquals("B", injector.getInstance(String.class));
+    assertEquals(2, injector.getInstance(Integer.class).intValue());
+    assertEquals(0.5f, injector.getInstance(Float.class));
+    assertEquals(1.5d, injector.getInstance(Double.class));
+  }
+

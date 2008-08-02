@@ -1,0 +1,4 @@
+    private RealOverriddenModuleBuilder(Iterable<? extends Module> baseModules) {
+      this.baseModules = ImmutableSet.copyOf(baseModules);
+    }
+

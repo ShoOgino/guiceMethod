@@ -14,7 +14,7 @@
       }
     };
 
-    Module overrides = overrideModule(original, replacements1);
+    Module overrides = Modules.override(original).with(replacements1);
 
     Module replacements2 = new AbstractModule() {
       protected void configure() {
@@ -23,7 +23,7 @@
       }
     };
 
-    Injector injector = createInjector(overrideModule(overrides, replacements2));
+    Injector injector = createInjector(Modules.override(overrides).with(replacements2));
     assertEquals("C1", injector.getInstance(String.class));
     assertEquals("B2", injector.getInstance(key2));
     assertEquals("C3", injector.getInstance(key3));

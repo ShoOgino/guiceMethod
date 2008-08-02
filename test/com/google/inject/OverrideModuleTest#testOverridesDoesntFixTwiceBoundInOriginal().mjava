@@ -12,7 +12,7 @@
       }
     };
 
-    Module module = overrideModule(original, replacements);
+    Module module = Modules.override(original).with(replacements);
     try {
       createInjector(module);
       fail();

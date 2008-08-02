@@ -12,7 +12,7 @@
       }
     };
 
-    Injector injector = createInjector(overrideModule(original, replacements));
+    Injector injector = createInjector(Modules.override(original).with(replacements));
     assertEquals("B", injector.getInstance(String.class));
     assertEquals("B", injector.getInstance(key2));
   }

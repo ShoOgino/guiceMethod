@@ -1,17 +1,5 @@
   public void testOverride() {
-    Module original = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("A");
-      }
-    };
-
-    Module replacements = new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("B");
-      }
-    };
-
-    Injector injector = createInjector(overrideModule(original, replacements));
+    Injector injector = createInjector(Modules.override(newModule("A")).with(newModule("B")));
     assertEquals("B", injector.getInstance(String.class));
   }
 

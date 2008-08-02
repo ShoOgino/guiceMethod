@@ -1,0 +1,4 @@
+    public Module with(Module... overrides) {
+      return with(Arrays.asList(overrides));
+    }
+
