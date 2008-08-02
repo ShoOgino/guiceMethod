@@ -1,4 +1,4 @@
-  public <V> V acceptScopingVisitor(ScopingVisitor<V> visitor) {
+  public <V> V acceptScopingVisitor(BindScopingVisitor<V> visitor) {
     if (loadStrategy == LoadStrategy.EAGER) {
       return visitor.visitEagerSingleton();
     } else if (scope != Scopes.NO_SCOPE && scope != null) {

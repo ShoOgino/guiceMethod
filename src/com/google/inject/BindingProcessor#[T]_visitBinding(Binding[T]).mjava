@@ -17,7 +17,7 @@
     validateKey(command.getSource(), command.getKey());
 
     final LoadStrategy loadStrategy = command.acceptScopingVisitor(LOAD_STRATEGY_VISITOR);
-    final Scope scope = command.acceptScopingVisitor(new com.google.inject.Binding.ScopingVisitor<Scope>() {
+    final Scope scope = command.acceptScopingVisitor(new BindScopingVisitor<Scope>() {
       public Scope visitEagerSingleton() {
         return Scopes.SINGLETON;
       }
@@ -41,7 +41,7 @@
       }
     });
 
-    command.acceptTargetVisitor(new com.google.inject.Binding.TargetVisitor<T, Void>() {
+    command.acceptTargetVisitor(new BindTargetVisitor<T, Void>() {
       public Void visitInstance(T instance) {
         if (instance == null) {
           errors.cannotBindToNullInstance();

@@ -1,4 +1,0 @@
-    public <V> V acceptTargetVisitor(TargetVisitor<? super Provider<T>, V> visitor) {
-      return visitor.visitProviderBinding(providedBinding.getKey());
-    }
-

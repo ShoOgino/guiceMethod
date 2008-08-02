@@ -3,7 +3,7 @@
       checkNotNull(providerKey, "providerKey");
       checkNotTargetted();
       target = new Target<T>() {
-        public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
+        public <V> V acceptTargetVisitor(BindTargetVisitor<? super T, V> visitor) {
           return visitor.visitProviderKey(providerKey);
         }
       };

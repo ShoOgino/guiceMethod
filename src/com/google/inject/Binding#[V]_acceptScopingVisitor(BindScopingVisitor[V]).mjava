@@ -3,5 +3,5 @@
    *
    * @param visitor to call back on
    */
-  <V> V acceptScopingVisitor(ScopingVisitor<V> visitor);
+  <V> V acceptScopingVisitor(BindScopingVisitor<V> visitor);
 

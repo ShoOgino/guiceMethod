@@ -1,4 +1,0 @@
-  public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
-    return visitor.visitProviderKey(providerKey);
-  }
-

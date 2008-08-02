@@ -1,4 +1,4 @@
-  public <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor) {
+  public <V> V acceptTargetVisitor(BindTargetVisitor<? super T, V> visitor) {
     return visitor.visitConstructor(lateBoundConstructor.getConstructor());
   }
 

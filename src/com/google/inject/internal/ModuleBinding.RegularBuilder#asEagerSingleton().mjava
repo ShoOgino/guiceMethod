@@ -1,7 +1,7 @@
     public void asEagerSingleton() {
       checkNotScoped();
       scoping = new AbstractScoping() {
-        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+        public <V> V acceptVisitor(BindScopingVisitor<V> visitor) {
           return visitor.visitEagerSingleton();
         }
         @Override public String toString() {

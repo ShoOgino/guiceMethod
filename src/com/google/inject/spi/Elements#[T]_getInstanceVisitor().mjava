@@ -1,5 +1,5 @@
   @SuppressWarnings("unchecked")
-  public static <T> com.google.inject.Binding.TargetVisitor<T, T> getInstanceVisitor() {
-    return (com.google.inject.Binding.TargetVisitor<T, T>) GET_INSTANCE_VISITOR;
+  public static <T> BindTargetVisitor<T, T> getInstanceVisitor() {
+    return (BindTargetVisitor<T, T>) GET_INSTANCE_VISITOR;
   }
 

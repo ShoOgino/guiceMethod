@@ -3,5 +3,5 @@
    *
    * @param visitor to call back on
    */
-  <V> V acceptTargetVisitor(TargetVisitor<? super T, V> visitor);
+  <V> V acceptTargetVisitor(BindTargetVisitor<? super T, V> visitor);
 

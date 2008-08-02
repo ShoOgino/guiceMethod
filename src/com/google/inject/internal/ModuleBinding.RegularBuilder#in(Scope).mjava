@@ -5,7 +5,7 @@
         @Override public Scope getScope() {
           return scope;
         }
-        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+        public <V> V acceptVisitor(BindScopingVisitor<V> visitor) {
           return visitor.visitScope(scope);
         }
         @Override public String toString() {

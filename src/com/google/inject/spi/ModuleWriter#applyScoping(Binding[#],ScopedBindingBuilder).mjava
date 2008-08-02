@@ -1,5 +1,5 @@
   public void applyScoping(Binding<?> binding, final ScopedBindingBuilder scopedBindingBuilder) {
-    binding.acceptScopingVisitor(new com.google.inject.Binding.ScopingVisitor<Void>() {
+    binding.acceptScopingVisitor(new BindScopingVisitor<Void>() {
       public Void visitEagerSingleton() {
         scopedBindingBuilder.asEagerSingleton();
         return null;

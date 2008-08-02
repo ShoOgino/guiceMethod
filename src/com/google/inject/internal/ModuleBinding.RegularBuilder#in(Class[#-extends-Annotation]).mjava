@@ -6,7 +6,7 @@
         @Override public Class<? extends Annotation> getScopeAnnotation() {
           return scopeAnnotation;
         }
-        public <V> V acceptVisitor(ScopingVisitor<V> visitor) {
+        public <V> V acceptVisitor(BindScopingVisitor<V> visitor) {
           return visitor.visitScopeAnnotation(scopeAnnotation);
         }
         @Override public String toString() {

@@ -1,0 +1,9 @@
+  /**
+   * Visit a linked key binding. The other key's binding is used to resolve injections. This
+   * target is found in both module and injector bindings.
+   *
+   * @param key the linked key used to resolve injections. That binding can be retrieved from an
+   *      injector using {@link com.google.inject.Injector#getBinding(Key) Injector.getBinding(key)}
+   */
+  V visitKey(Key<? extends T> key);
+
