@@ -1,4 +1,0 @@
-  public Void visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-    throw new AssertionFailedError();
-  }
-

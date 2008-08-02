@@ -1,4 +1,0 @@
-  public Void visitEagerSingleton() {
-    throw new AssertionFailedError();
-  }
-
