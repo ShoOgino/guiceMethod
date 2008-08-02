@@ -1,4 +1,4 @@
     public void requestStaticInjection(Class<?>... types) {
-      elements.add(new RequestStaticInjection(getSource(), types));
+      elements.add(new StaticInjectionRequest(getSource(), types));
     }
 

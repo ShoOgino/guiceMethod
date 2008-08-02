@@ -1,0 +1,7 @@
+  public void writeRequestStaticInjection(final Binder binder,
+      final StaticInjectionRequest element) {
+    List<Class> types = element.getTypes();
+    binder.withSource(element.getSource())
+        .requestStaticInjection(types.toArray(new Class[types.size()]));
+  }
+

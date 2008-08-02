@@ -1,6 +1,0 @@
-  BindScope(Object source, Class<? extends Annotation> annotationType, Scope scope) {
-    this.source = checkNotNull(source, "source");
-    this.annotationType = checkNotNull(annotationType, "annotationType");
-    this.scope = checkNotNull(scope, "scope");
-  }
-

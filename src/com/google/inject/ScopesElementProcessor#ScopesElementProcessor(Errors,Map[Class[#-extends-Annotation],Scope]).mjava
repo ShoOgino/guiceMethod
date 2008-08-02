@@ -1,6 +1,0 @@
-  ScopesElementProcessor(Errors errors,
-      Map<Class<? extends Annotation>, Scope> scopes) {
-    super(errors);
-    this.scopes = scopes;
-  }
-

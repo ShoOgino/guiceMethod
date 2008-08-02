@@ -12,38 +12,38 @@
         return null;
       }
 
-      public Void visitBindInterceptor(BindInterceptor command) {
-        writeBindInterceptor(binder, command);
+      public Void visitInterceptorBinding(InterceptorBinding element) {
+        writeBindInterceptor(binder, element);
         return null;
       }
 
-      public Void visitBindScope(BindScope command) {
-        writeBindScope(binder, command);
+      public Void visitScopeBinding(ScopeBinding element) {
+        writeBindScope(binder, element);
         return null;
       }
 
-      public Void visitRequestInjection(RequestInjection command) {
-        writeRequestInjection(binder, command);
+      public Void visitInjectionRequest(InjectionRequest element) {
+        writeRequestInjection(binder, element);
         return null;
       }
 
-      public Void visitRequestStaticInjection(RequestStaticInjection command) {
-        writeRequestStaticInjection(binder, command);
+      public Void visitStaticInjectionRequest(StaticInjectionRequest element) {
+        writeRequestStaticInjection(binder, element);
         return null;
       }
 
-      public Void visitConvertToTypes(ConvertToTypes command) {
-        writeConvertToTypes(binder, command);
+      public Void visitTypeConverterBinding(TypeConverterBinding element) {
+        writeConvertToTypes(binder, element);
         return null;
       }
 
-      public <T> Void visitBinding(Binding<T> command) {
-        writeBind(binder, command);
+      public <T> Void visitBinding(Binding<T> element) {
+        writeBind(binder, element);
         return null;
       }
 
-      public <T> Void visitGetProvider(GetProvider<T> command) {
-        writeGetProvider(binder, command);
+      public <T> Void visitProviderLookup(ProviderLookup<T> element) {
+        writeGetProvider(binder, element);
         return null;
       }
     };

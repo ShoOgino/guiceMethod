@@ -1,0 +1,4 @@
+  protected AbstractProcessor(Errors errors) {
+    this.errors = errors;
+  }
+

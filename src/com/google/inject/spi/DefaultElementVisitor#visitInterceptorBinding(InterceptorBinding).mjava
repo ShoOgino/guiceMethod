@@ -1,0 +1,4 @@
+  public V visitInterceptorBinding(InterceptorBinding command) {
+    return visitElement(command);
+  }
+

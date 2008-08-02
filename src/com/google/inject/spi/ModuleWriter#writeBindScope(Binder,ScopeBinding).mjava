@@ -1,0 +1,5 @@
+  public void writeBindScope(final Binder binder, final ScopeBinding element) {
+    binder.withSource(element.getSource()).bindScope(
+        element.getAnnotationType(), element.getScope());
+  }
+

@@ -1,5 +1,5 @@
     public <T> Provider<T> getProvider(final Key<T> key) {
-      final GetProvider<T> command = new GetProvider<T>(getSource(), key);
+      final ProviderLookup<T> command = new ProviderLookup<T>(getSource(), key);
       elements.add(command);
       return new Provider<T>() {
         public T get() {

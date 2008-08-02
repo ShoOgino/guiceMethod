@@ -1,2 +1,0 @@
-    <T> V visitGetProvider(GetProvider<T> getProvider);
-

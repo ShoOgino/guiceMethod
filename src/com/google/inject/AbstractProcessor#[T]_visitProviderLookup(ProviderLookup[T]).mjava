@@ -1,0 +1,4 @@
+  public <T> Boolean visitProviderLookup(ProviderLookup<T> providerLookup) {
+    return false;
+  }
+

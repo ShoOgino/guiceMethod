@@ -1,0 +1,4 @@
+  public V visitTypeConverterBinding(TypeConverterBinding command) {
+    return visitElement(command);
+  }
+

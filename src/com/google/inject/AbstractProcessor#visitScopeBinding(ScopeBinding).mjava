@@ -1,0 +1,4 @@
+  public Boolean visitScopeBinding(ScopeBinding scopeBinding) {
+    return false;
+  }
+

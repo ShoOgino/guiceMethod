@@ -10,7 +10,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitRequestInjection(RequestInjection command) {
+          @Override public Void visitInjectionRequest(InjectionRequest command) {
             assertEquals(Arrays.asList(firstObject, secondObject), command.getInstances());
             return null;
           }

@@ -1,5 +1,0 @@
-  public void writeConvertToTypes(final Binder binder, final ConvertToTypes command) {
-    binder.withSource(command.getSource())
-        .convertToTypes(command.getTypeMatcher(), command.getTypeConverter());
-  }
-

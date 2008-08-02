@@ -1,23 +1,23 @@
   /** Builds the injector. */
   private void buildCoreInjector() {
-    new ErrorsElementProcessor(errors)
+    new MessageProcessor(errors)
         .processCommands(elements);
 
-    BindInterceptorElementProcessor bindInterceptorCommandProcessor
-        = new BindInterceptorElementProcessor(errors);
-    bindInterceptorCommandProcessor.processCommands(elements);
-    ConstructionProxyFactory proxyFactory = bindInterceptorCommandProcessor.createProxyFactory();
+    InterceptorBindingProcessor interceptorCommandProcessor
+        = new InterceptorBindingProcessor(errors);
+    interceptorCommandProcessor.processCommands(elements);
+    ConstructionProxyFactory proxyFactory = interceptorCommandProcessor.createProxyFactory();
     injector.reflection = reflectionFactory.create(proxyFactory);
     stopwatch.resetAndLog("Interceptors creation");
 
-    new ScopesElementProcessor(errors, injector.scopes).processCommands(elements);
+    new ScopeBindingProcessor(errors, injector.scopes).processCommands(elements);
     stopwatch.resetAndLog("Scopes creation");
 
-    new ConvertToTypesElementProcessor(errors, injector.converters).processCommands(elements);
+    new TypeConverterBindingProcessor(errors, injector.converters).processCommands(elements);
     stopwatch.resetAndLog("Converters creation");
 
     bindLogger();
-    bindCommandProcesor = new BindElementProcessor(errors,
+    bindCommandProcesor = new BindingProcessor(errors,
         injector, injector.scopes, injector.explicitBindings,
         injector.memberInjector);
     bindCommandProcesor.processCommands(elements);
@@ -27,9 +27,9 @@
     injector.index();
     stopwatch.resetAndLog("Binding indexing");
 
-    requestInjectionCommandProcessor
-        = new RequestInjectionElementProcessor(errors, injector.memberInjector);
-    requestInjectionCommandProcessor.processCommands(elements);
+    injectionCommandProcessor
+        = new InjectionRequestProcessor(errors, injector.memberInjector);
+    injectionCommandProcessor.processCommands(elements);
     stopwatch.resetAndLog("Static injection");
   }
 

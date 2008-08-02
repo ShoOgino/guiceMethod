@@ -1,0 +1,8 @@
+  /**
+   * Returns the delegate provider, or {@code null} if it has not yet been initialized. The delegate
+   * will be initialized when this element is processed, or otherwise used to create an injector.
+   */
+  public Provider<T> getDelegate() {
+    return delegate;
+  }
+

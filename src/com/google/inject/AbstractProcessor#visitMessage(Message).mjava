@@ -1,0 +1,4 @@
+  public Boolean visitMessage(Message message) {
+    return false;
+  }
+

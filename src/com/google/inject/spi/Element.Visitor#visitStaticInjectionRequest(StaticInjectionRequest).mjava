@@ -1,0 +1,5 @@
+    /**
+     * Visit a request to inject the static fields and methods of type.
+     */
+    V visitStaticInjectionRequest(StaticInjectionRequest staticInjectionRequest);
+

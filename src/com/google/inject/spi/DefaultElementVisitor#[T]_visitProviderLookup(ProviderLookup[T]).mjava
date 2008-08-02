@@ -1,0 +1,4 @@
+  public <T> V visitProviderLookup(ProviderLookup<T> command) {
+    return visitElement(command);
+  }
+

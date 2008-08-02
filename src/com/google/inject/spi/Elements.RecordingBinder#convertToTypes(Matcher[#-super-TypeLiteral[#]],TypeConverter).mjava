@@ -1,5 +1,5 @@
     public void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
         TypeConverter converter) {
-      elements.add(new ConvertToTypes(getSource(), typeMatcher, converter));
+      elements.add(new TypeConverterBinding(getSource(), typeMatcher, converter));
     }
 

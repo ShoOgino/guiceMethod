@@ -1,4 +1,0 @@
-  ErrorsElementProcessor(Errors errors) {
-    super(errors);
-  }
-

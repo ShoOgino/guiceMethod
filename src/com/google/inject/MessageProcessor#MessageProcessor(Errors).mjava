@@ -1,0 +1,4 @@
+  MessageProcessor(Errors errors) {
+    super(errors);
+  }
+

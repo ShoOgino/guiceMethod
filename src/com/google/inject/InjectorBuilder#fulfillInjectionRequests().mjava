@@ -1,6 +1,6 @@
   /** Inject everything that can be injected. */
   private void fulfillInjectionRequests() {
-    requestInjectionCommandProcessor.injectMembers(injector);
+    injectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
 
     injector.memberInjector.injectAll(errors);

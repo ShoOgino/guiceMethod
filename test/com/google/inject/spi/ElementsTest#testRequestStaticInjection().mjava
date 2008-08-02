@@ -7,7 +7,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitRequestStaticInjection(RequestStaticInjection command) {
+          @Override public Void visitStaticInjectionRequest(StaticInjectionRequest command) {
             assertEquals(Arrays.asList(ArrayList.class), command.getTypes());
             return null;
           }
