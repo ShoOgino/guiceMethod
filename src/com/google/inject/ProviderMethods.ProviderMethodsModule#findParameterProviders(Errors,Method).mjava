@@ -9,7 +9,7 @@
             = Keys.findBindingAnnotation(errors, method, parameterAnnotations[i]);
         Key<?> key = bindingAnnotation == null ? Key.get(parameterType)
             : Key.get(parameterType, bindingAnnotation);
-        Provider<?> provider = getProvider(key);
+        Provider<?> provider = binder.getProvider(key);
         parameterProviders.add(provider);
       }
 

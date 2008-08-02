@@ -1,4 +1,0 @@
-    protected void configure() {
-      bindProviderMethods(providers.getClass());
-    }
-

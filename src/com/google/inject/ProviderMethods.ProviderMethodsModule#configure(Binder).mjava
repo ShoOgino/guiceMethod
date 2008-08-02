@@ -1,0 +1,19 @@
+    public synchronized void configure(Binder binder) {
+      checkState(this.binder == null, "Re-entry is not allowed.");
+
+      for (Class c = providers.getClass(); c != Object.class; c = c.getSuperclass()) {
+        for (Method method : c.getDeclaredMethods()) {
+          if (!method.isAnnotationPresent(Provides.class)) {
+            continue;
+          }
+
+          this.binder = binder.withSource(StackTraceElements.forMember(method));
+          try {
+            bindProviderMethod(method);
+          } finally {
+            this.binder = null;
+          }
+        }
+      }
+    }
+

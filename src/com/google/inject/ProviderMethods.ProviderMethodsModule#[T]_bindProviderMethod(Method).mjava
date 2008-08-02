@@ -11,7 +11,7 @@
       final List<Provider<?>> parameterProviders = findParameterProviders(errors, method);
 
       for (Message message : errors.getMessages()) {
-        addError(message);
+        binder.addError(message);
       }
 
       // Define T as the method's return type.
@@ -41,17 +41,16 @@
         }
       };
 
-      if (scopeAnnotation == null && bindingAnnotation == null) {
-        bind(returnType).toProvider(provider);
-      } else if (scopeAnnotation == null) {
-        bind(returnType).annotatedWith(bindingAnnotation).toProvider(provider);
-      } else if (bindingAnnotation == null) {
-        bind(returnType).toProvider(provider).in(scopeAnnotation);
-      } else {
-        bind(returnType)
-            .annotatedWith(bindingAnnotation)
-            .toProvider(provider)
-            .in(scopeAnnotation);
+      AnnotatedBindingBuilder<T> builder = binder.bind(returnType);
+
+      if (bindingAnnotation != null) {
+        builder.annotatedWith(bindingAnnotation);
+      }
+
+      builder.toProvider(provider);
+
+      if (scopeAnnotation != null) {
+        builder.in(scopeAnnotation);
       }
     }
 

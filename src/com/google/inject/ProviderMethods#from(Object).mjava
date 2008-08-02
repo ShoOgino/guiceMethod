@@ -3,6 +3,11 @@
    * given object.
    */
   public static Module from(Object providers) {
+    // avoid infinite recursion, since installing a module always installs itself
+    if (providers instanceof ProviderMethodsModule) {
+      return Modules.EMPTY_MODULE;
+    }
+
     return new ProviderMethodsModule(providers);
   }
 
