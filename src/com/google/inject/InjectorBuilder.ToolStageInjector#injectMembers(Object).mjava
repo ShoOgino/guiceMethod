@@ -1,0 +1,5 @@
+    public void injectMembers(Object o) {
+      throw new UnsupportedOperationException(
+        "Injector.injectMembers(Object) is not supported in Stage.TOOL");
+    }
+

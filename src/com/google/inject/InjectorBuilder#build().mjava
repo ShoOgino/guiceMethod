@@ -18,8 +18,7 @@
     // If we're in the tool stage, stop here. Don't eagerly inject or load
     // anything.
     if (stage == Stage.TOOL) {
-      // TODO: Wrap this and prevent usage of anything besides getBindings().
-      return injector;
+      return new ToolStageInjector(injector);
     }
 
     fulfillInjectionRequests();

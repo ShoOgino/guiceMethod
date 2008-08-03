@@ -1,0 +1,5 @@
+    public <T> Provider<T> getProvider(Key<T> key) {
+      throw new UnsupportedOperationException(
+        "Injector.getProvider(Key<T>) is not supported in Stage.TOOL");
+    }
+

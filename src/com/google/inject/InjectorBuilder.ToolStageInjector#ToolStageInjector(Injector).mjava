@@ -1,0 +1,4 @@
+    ToolStageInjector(Injector delegateInjector) {
+      this.delegateInjector = delegateInjector;
+    }
+

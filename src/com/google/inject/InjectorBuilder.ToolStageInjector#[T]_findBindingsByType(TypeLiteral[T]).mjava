@@ -1,0 +1,4 @@
+    public <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type) {
+      return this.delegateInjector.findBindingsByType(type);
+    }
+
