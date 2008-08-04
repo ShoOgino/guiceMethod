@@ -1,16 +1,4 @@
   private <T> void validateKey(Object source, Key<T> key) {
-    if (key.hasAnnotationType()) {
-      Class<? extends Annotation> annotationType = key.getAnnotationType();
-
-      if (!Annotations.isRetainedAtRuntime(annotationType)) {
-        errors.withSource(StackTraceElements.forType(annotationType)).missingRuntimeRetention(source);
-      }
-
-      if (!Key.isBindingAnnotation(annotationType)) {
-        errors.withSource(StackTraceElements.forType(annotationType)).missingBindingAnnotation(source);
-      }
-    }
-
     Class<? super T> rawType = key.getRawType();
     if (!Classes.isConcrete(rawType)) {
       Class<? extends Annotation> scopeAnnotation = Scopes.findScopeAnnotation(errors, rawType);

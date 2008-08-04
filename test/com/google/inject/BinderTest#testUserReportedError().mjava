@@ -1,0 +1,14 @@
+  public void testUserReportedError() {
+    final Message message = new Message(getClass(), "Whoops!");
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          addError(message);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertSame(message, Iterables.getOnlyElement(expected.getErrorMessages()));
+    }
+  }
+

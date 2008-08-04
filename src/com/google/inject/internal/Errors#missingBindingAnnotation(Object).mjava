@@ -1,5 +1,0 @@
-  public Errors missingBindingAnnotation(Object source) {
-    return addMessage("Please annotate with @BindingAnnotation.%n"
-        + " Bound at %s.", source);
-  }
-

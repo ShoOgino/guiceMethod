@@ -1,0 +1,15 @@
+  public void testScopeAnnotationWithoutRuntimeRetention() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bindScope(NotRuntimeRetainedScoped.class, Scopes.NO_SCOPE);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + NotRuntimeRetainedScoped.class.getName() + ".class(ScopesTest.java:",
+          "Please annotate with @Retention(RUNTIME).");
+    }
+  }
+

@@ -12,6 +12,10 @@
       public T get() {
         return instance;
       }
+
+      @Override public String toString() {
+        return "of(" + instance + ")";
+      }
     };
   }
 

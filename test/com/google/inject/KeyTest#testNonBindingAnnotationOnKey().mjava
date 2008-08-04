@@ -1,0 +1,10 @@
+  public void testNonBindingAnnotationOnKey() {
+    try {
+      Key.get(String.class, Deprecated.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+      assertContains(expected.getMessage(), "java.lang.Deprecated is not a binding annotation. ",
+          "Please annotate it with @BindingAnnotation.");
+    }
+  }
+
