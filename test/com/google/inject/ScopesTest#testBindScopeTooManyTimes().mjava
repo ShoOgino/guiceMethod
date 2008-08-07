@@ -1,0 +1,17 @@
+  public void testBindScopeTooManyTimes() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bindScope(CustomScoped.class, Scopes.NO_SCOPE);
+          bindScope(CustomScoped.class, Scopes.SINGLETON);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + ScopesTest.class.getName(), ".configure(ScopesTest.java:",
+          "Scope Scopes.NO_SCOPE is already bound to " + CustomScoped.class.getName(), 
+          "Cannot bind Scopes.SINGLETON.\n\n" + "1 error[s]");
+    }
+  }
+

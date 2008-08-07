@@ -1,0 +1,11 @@
+  public void testDuplicateScopeAnnotations() {
+    try {
+      Guice.createInjector().getInstance(SingletonAndCustomScoped.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + SingletonAndCustomScoped.class.getName(), ".class(ScopesTest.java:",
+          "More than one scope annotation was found: ");
+    }
+  }
+

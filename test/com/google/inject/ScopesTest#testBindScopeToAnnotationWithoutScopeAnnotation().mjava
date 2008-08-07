@@ -1,0 +1,15 @@
+  public void testBindScopeToAnnotationWithoutScopeAnnotation() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bindScope(Deprecated.class, Scopes.NO_SCOPE);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error at " + Deprecated.class.getName() + ".class(",
+          "Please annotate with @ScopeAnnotation.");
+    }
+  }
+
