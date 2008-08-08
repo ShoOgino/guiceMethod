@@ -1,0 +1,4 @@
+    public ProvidedBySingleton get() {
+      return new ProvidedBySingleton();
+    }
+

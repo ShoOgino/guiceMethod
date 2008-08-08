@@ -17,15 +17,15 @@
     // Handle @ImplementedBy
     ImplementedBy implementedBy = type.getAnnotation(ImplementedBy.class);
     if (implementedBy != null) {
-      // TODO: Scope internal factory.
-      return createImplementedByBinding(type, implementedBy, loadStrategy, errors);
+      Scopes.checkForMisplacedScopeAnnotations(type, source, errors);
+      return createImplementedByBinding(type, scope, implementedBy, loadStrategy, errors);
     }
 
     // Handle @ProvidedBy.
     ProvidedBy providedBy = type.getAnnotation(ProvidedBy.class);
     if (providedBy != null) {
-      // TODO: Scope internal factory.
-      return createProvidedByBinding(type, providedBy, loadStrategy, errors);
+      Scopes.checkForMisplacedScopeAnnotations(type, source, errors);
+      return createProvidedByBinding(type, scope, providedBy, loadStrategy, errors);
     }
 
     // We can't inject abstract classes.

@@ -1,11 +1,4 @@
   private <T> void validateKey(Object source, Key<T> key) {
-    Class<? super T> rawType = key.getRawType();
-    if (!Classes.isConcrete(rawType)) {
-      Class<? extends Annotation> scopeAnnotation = Scopes.findScopeAnnotation(errors, rawType);
-      if (scopeAnnotation != null) {
-        errors.withSource(StackTraceElements.forType(rawType))
-            .scopeAnnotationOnAbstractType(scopeAnnotation, rawType, source);
-      }
-    }
+    Scopes.checkForMisplacedScopeAnnotations(key.getRawType(), source, errors);
   }
 

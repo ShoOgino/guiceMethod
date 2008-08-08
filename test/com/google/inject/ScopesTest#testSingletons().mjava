@@ -24,5 +24,13 @@
     assertNotSame(
         injector.getInstance(NotASingleton.class),
         injector.getInstance(NotASingleton.class));
+
+    assertSame(
+        injector.getInstance(ImplementedBySingleton.class),
+        injector.getInstance(ImplementedBySingleton.class));
+
+    assertSame(
+        injector.getInstance(ProvidedBySingleton.class),
+        injector.getInstance(ProvidedBySingleton.class));
   }
 

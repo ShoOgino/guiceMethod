@@ -1,6 +1,6 @@
   /** Creates a binding for a type annotated with @ImplementedBy. */
-  <T> BindingImpl<T> createImplementedByBinding(
-      Class<T> type, ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
+  <T> BindingImpl<T> createImplementedByBinding(Class<T> type, Scope scope,
+      ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
       throws ErrorsException {
     // TODO: Use scope annotation on type if present. Right now, we always use NO_SCOPE.
     Class<?> implementationType = implementedBy.value();
@@ -29,12 +29,13 @@
       }
     };
 
+    Key<T> key = Key.get(type);
     return new LinkedBindingImpl<T>(
         this,
-        Key.get(type),
+        key,
         StackTraceElements.forType(type),
-        internalFactory,
-        Scopes.NO_SCOPE,
+        Scopes.<T>scope(key, this, internalFactory, scope),
+        scope,
         Key.get(subclass),
         loadStrategy);
   }
