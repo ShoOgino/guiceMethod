@@ -1,0 +1,4 @@
+    public Type[] getLowerBounds() {
+      return lowerBound != null ? new Type[] { lowerBound } : EMPTY_TYPE_ARRAY;
+    }
+

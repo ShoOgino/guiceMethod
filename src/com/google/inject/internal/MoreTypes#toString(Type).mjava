@@ -21,6 +21,26 @@
     } else if (type instanceof GenericArrayType) {
       return toString(((GenericArrayType) type).getGenericComponentType()) + "[]";
 
+    } else if (type instanceof WildcardType) {
+      WildcardType wildcardType = (WildcardType) type;
+      Type[] lowerBounds = wildcardType.getLowerBounds();
+      Type[] upperBounds = wildcardType.getUpperBounds();
+
+      if (upperBounds.length != 1 || lowerBounds.length > 1) {
+        throw new UnsupportedOperationException("Unsupported wildcard type " + type);
+      }
+
+      if (lowerBounds.length == 1) {
+        if (upperBounds[0] != Object.class) {
+          throw new UnsupportedOperationException("Unsupported wildcard type " + type);
+        }
+        return "? super " + toString(lowerBounds[0]);
+      } else if (upperBounds[0] == Object.class) {
+        return "?";
+      } else {
+        return "? extends " + toString(upperBounds[0]);
+      }
+
     } else {
       return type.toString();
     }

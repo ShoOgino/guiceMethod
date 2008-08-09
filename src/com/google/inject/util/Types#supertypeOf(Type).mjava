@@ -1,0 +1,7 @@
+  /**
+   * Returns a type that represents an unknown supertype of {@code bound}.
+   */
+  public static WildcardType supertypeOf(Type bound) {
+    return new WildcardTypeImpl(new Type[] { Object.class }, new Type[] { bound });
+  }
+

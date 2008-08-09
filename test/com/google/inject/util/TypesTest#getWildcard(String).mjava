@@ -1,0 +1,5 @@
+  private WildcardType getWildcard(String fieldName) throws NoSuchFieldException {
+    ParameterizedType type = (ParameterizedType) getClass().getField(fieldName).getGenericType();
+    return (WildcardType) type.getActualTypeArguments()[0];
+  }
+

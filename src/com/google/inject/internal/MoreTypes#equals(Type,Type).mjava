@@ -15,6 +15,7 @@
         return false;
       }
 
+      // TODO(jessewilson): save a .clone() call
       ParameterizedType pa = (ParameterizedType) a;
       ParameterizedType pb = (ParameterizedType) b;
       return Objects.equal(pa.getOwnerType(), pb.getOwnerType())
@@ -29,6 +30,16 @@
       GenericArrayType ga = (GenericArrayType) a;
       GenericArrayType gb = (GenericArrayType) b;
       return equals(ga.getGenericComponentType(), gb.getGenericComponentType());
+
+    } else if (a instanceof WildcardType) {
+      if (!(b instanceof WildcardType)) {
+        return false;
+      }
+
+      WildcardType wa = (WildcardType) a;
+      WildcardType wb = (WildcardType) b;
+      return Arrays.equals(wa.getUpperBounds(), wb.getUpperBounds())
+          && Arrays.equals(wa.getLowerBounds(), wb.getLowerBounds());
 
     } else {
       // This isn't a type we support. Could be a generic array type, wildcard

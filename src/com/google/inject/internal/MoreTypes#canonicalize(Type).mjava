@@ -5,21 +5,26 @@
    */
   public static Type canonicalize(Type type) {
     if (type instanceof ParameterizedTypeImpl
-        || type instanceof GenericArrayTypeImpl) {
+        || type instanceof GenericArrayTypeImpl
+        || type instanceof WildcardTypeImpl) {
       return type;
 
     } else if (type instanceof ParameterizedType) {
       ParameterizedType p = (ParameterizedType) type;
-      return Types.newParameterizedTypeWithOwner(p.getOwnerType(),
+      return new ParameterizedTypeImpl(p.getOwnerType(),
           p.getRawType(), p.getActualTypeArguments());
 
     } else if (type instanceof GenericArrayType) {
       GenericArrayType g = (GenericArrayType) type;
-      return Types.arrayOf(g.getGenericComponentType());
+      return new GenericArrayTypeImpl(g.getGenericComponentType());
 
-    } else if (type instanceof Class<?> && ((Class<?>) type).isArray()) {
+    } else if (type instanceof Class && ((Class<?>) type).isArray()) {
       Class<?> c = (Class<?>) type;
-      return Types.arrayOf(c.getComponentType());
+      return new GenericArrayTypeImpl(c.getComponentType());
+
+    } else if (type instanceof WildcardType) {
+      WildcardType w = (WildcardType) type;
+      return new WildcardTypeImpl(w.getUpperBounds(), w.getLowerBounds());
 
     } else {
       // type is either serializable as-is or unsupported

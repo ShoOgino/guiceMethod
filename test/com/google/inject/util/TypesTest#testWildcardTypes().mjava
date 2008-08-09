@@ -1,0 +1,13 @@
+  public void testWildcardTypes() throws NoSuchFieldException, IOException {
+    assertEqualsBothWays(getWildcard("wildcardSuper"), supertypeOf(CharSequence.class));
+    assertEqualsBothWays(getWildcard("wildcardExtends"), subtypeOf(CharSequence.class));
+    assertEqualsBothWays(getWildcard("wildcardObject"), subtypeOf(Object.class));
+
+    assertEquals("? super java.lang.CharSequence", supertypeOf(CharSequence.class).toString());
+    assertEquals("? extends java.lang.CharSequence", subtypeOf(CharSequence.class).toString());
+    assertEquals("?", subtypeOf(Object.class).toString());
+
+    assertEqualWhenReserialized(supertypeOf(CharSequence.class));
+    assertEqualWhenReserialized(subtypeOf(CharSequence.class));
+  }
+

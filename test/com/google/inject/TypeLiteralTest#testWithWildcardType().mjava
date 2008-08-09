@@ -1,0 +1,10 @@
+  public void testWithWildcardType() throws NoSuchFieldException, IOException {
+    TypeLiteral<?> a = TypeLiteral.get(getClass().getField("wildcardExtends").getGenericType());
+    TypeLiteral<?> b = TypeLiteral.get(Types.listOf(Types.subtypeOf(CharSequence.class)));
+    assertEqualsBothWays(a, b);
+    assertEquals("java.util.List<? extends java.lang.CharSequence>", a.toString());
+    assertEquals("java.util.List<? extends java.lang.CharSequence>", b.toString());
+    assertEqualWhenReserialized(a);
+    assertEqualWhenReserialized(b);
+  }
+

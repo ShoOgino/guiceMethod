@@ -4,7 +4,7 @@
       fail();
     } catch (IllegalArgumentException expected) {
       assertContains(expected.getMessage(),
-          "Parameterized types may not have primitive arguments: int");
+          "Primitive types are not allowed in type parameters: int");
     }
   }
 

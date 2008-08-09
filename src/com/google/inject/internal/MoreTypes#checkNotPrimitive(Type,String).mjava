@@ -1,0 +1,5 @@
+  private static void checkNotPrimitive(Type type, String use) {
+    checkArgument(!(type instanceof Class<?>) || !((Class) type).isPrimitive(),
+        "Primitive types are not allowed in %s: %s", use, type);
+  }
+

@@ -12,9 +12,8 @@
       this.rawType = canonicalize(rawType);
       this.typeArguments = typeArguments.clone();
       for (int t = 0; t < this.typeArguments.length; t++) {
-        checkArgument(!(this.typeArguments[t] instanceof Class<?>)
-            || !((Class) this.typeArguments[t]).isPrimitive(),
-            "Parameterized types may not have primitive arguments: %s", this.typeArguments[t]);
+        checkNotNull(this.typeArguments[t], "type parameter");
+        checkNotPrimitive(this.typeArguments[t], "type parameters");
         this.typeArguments[t] = canonicalize(this.typeArguments[t]);
       }
     }

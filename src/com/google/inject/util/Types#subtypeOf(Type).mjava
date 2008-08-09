@@ -1,0 +1,7 @@
+  /**
+   * Returns a type that represents an unknown type that extends {@code bound}.
+   */
+  public static WildcardType subtypeOf(Type bound) {
+    return new WildcardTypeImpl(new Type[] { bound }, MoreTypes.EMPTY_TYPE_ARRAY);
+  }
+

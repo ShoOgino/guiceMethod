@@ -1,0 +1,4 @@
+    public Type[] getUpperBounds() {
+      return new Type[] { upperBound };
+    }
+
