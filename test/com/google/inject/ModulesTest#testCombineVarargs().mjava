@@ -1,0 +1,8 @@
+  public void testCombineVarargs() {
+    Module combined = Modules.combine(newModule(1), newModule(2L), newModule((short) 3));
+    Injector injector = Guice.createInjector(combined);
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    assertEquals(2L, injector.getInstance(Long.class).longValue());
+    assertEquals(3, injector.getInstance(Short.class).shortValue());
+  }
+
