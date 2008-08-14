@@ -9,8 +9,7 @@
 
     Class<? extends Annotation> scopeAnnotation = findScopeAnnotation(errors, type);
     if (scopeAnnotation != null) {
-      errors.withSource(StackTraceElements.forType(type))
-          .scopeAnnotationOnAbstractType(scopeAnnotation, type, source);
+      errors.withSource(type).scopeAnnotationOnAbstractType(scopeAnnotation, type, source);
     }
   }
 

@@ -1,5 +1,5 @@
   public <T> Provider<T> getProvider(final Key<T> key) {
-    Errors errors = new Errors(StackTraceElements.forType(key.getRawType()));
+    Errors errors = new Errors(key.getRawType());
     try {
       Provider<T> result = getProviderOrThrow(key, errors);
       errors.throwIfNecessary();

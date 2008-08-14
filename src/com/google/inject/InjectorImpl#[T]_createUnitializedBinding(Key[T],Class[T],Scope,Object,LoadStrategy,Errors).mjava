@@ -45,7 +45,7 @@
       if (scopeAnnotation != null) {
         scope = scopes.get(scopeAnnotation);
         if (scope == null) {
-          errors.withSource(StackTraceElements.forType(type)).scopeNotFound(scopeAnnotation);
+          errors.withSource(type).scopeNotFound(scopeAnnotation);
         }
       }
     }

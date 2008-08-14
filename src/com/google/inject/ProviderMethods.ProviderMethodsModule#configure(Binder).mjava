@@ -7,7 +7,7 @@
             continue;
           }
 
-          this.binder = binder.withSource(StackTraceElements.forMember(method));
+          this.binder = binder.withSource(method);
           try {
             bindProviderMethod(method);
           } finally {

@@ -1,8 +1,7 @@
   <T> BindingImpl<T> createUnitializedBinding(Key<T> key, Scope scope,
       LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
     @SuppressWarnings("unchecked")
-    Class<T> type = (Class<T>) key.getTypeLiteral().getRawType();
-    Object source = StackTraceElements.forType(type);
-    return createUnitializedBinding(key, type, scope, source, loadStrategy, errors);
+    Class<T> type = (Class<T>) key.getRawType();
+    return createUnitializedBinding(key, type, scope, type, loadStrategy, errors);
   }
 

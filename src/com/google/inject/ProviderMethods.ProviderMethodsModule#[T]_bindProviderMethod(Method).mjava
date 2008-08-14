@@ -1,5 +1,5 @@
     <T> void bindProviderMethod(final Method method) {
-      Errors errors = new Errors(StackTraceElements.forMember(method));
+      Errors errors = new Errors(method);
 
       method.setAccessible(true);
 

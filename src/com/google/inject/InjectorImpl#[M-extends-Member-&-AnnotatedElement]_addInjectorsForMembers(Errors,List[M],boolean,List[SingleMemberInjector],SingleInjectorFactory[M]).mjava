@@ -11,10 +11,9 @@
         continue;
       }
 
-      Object source = StackTraceElements.forMember(member);
       Errors errorsForMember = inject.optional()
-          ? new Errors(source)
-          : errors.withSource(source);
+          ? new Errors(member)
+          : errors.withSource(member);
       try {
         injectors.add(injectorFactory.create(this, member, errorsForMember));
       } catch (ErrorsException ignoredForNow) {

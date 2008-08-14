@@ -1,8 +1,7 @@
   <T> SingleParameterInjector<T> createParameterInjector(final Parameter<T> parameter,
       Member member, final Errors errors) throws ErrorsException {
     InternalFactory<? extends T> factory;
-    Object source = StackTraceElements.forMember(member);
-    factory = getInternalFactory(parameter.getKey(), errors.withSource(source));
+    factory = getInternalFactory(parameter.getKey(), errors.withSource(member));
 
     InjectionPoint<T> injectionPoint = InjectionPoint.newInstance(
         member, parameter.getIndex(), parameter.allowsNull(), parameter.getKey());

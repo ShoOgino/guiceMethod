@@ -22,8 +22,7 @@
         Provider<?> provider = providerBinding.internalFactory.get(errors, context, injectionPoint);
         Object o = provider.get();
         if (o != null && !type.isInstance(o)) {
-          throw errors.withSource(StackTraceElements.forType(type))
-              .subtypeNotProvided(providerType, type).toException();
+          throw errors.withSource(type).subtypeNotProvided(providerType, type).toException();
         }
 
         @SuppressWarnings("unchecked") // protected by isInstance() check above
@@ -36,7 +35,7 @@
     return new LinkedProviderBindingImpl<T>(
         this,
         key,
-        StackTraceElements.forType(type),
+        type,
         Scopes.<T>scope(key, this, internalFactory, scope),
         scope,
         providerKey,

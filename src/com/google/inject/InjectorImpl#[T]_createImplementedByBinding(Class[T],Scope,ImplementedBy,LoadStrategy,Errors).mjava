@@ -32,7 +32,7 @@
     return new LinkedBindingImpl<T>(
         this,
         key,
-        StackTraceElements.forType(type),
+        type,
         Scopes.<T>scope(key, this, internalFactory, scope),
         scope,
         Key.get(subclass),

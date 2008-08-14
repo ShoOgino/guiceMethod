@@ -2,8 +2,7 @@
       InjectorImpl injector, ConstructionProxy<T> constructionProxy)
       throws ErrorsException {
     Constructor constructor = constructionProxy.getConstructor();
-    Object source = StackTraceElements.forMember(constructor);
-    errors = errors.withSource(source);
+    errors = errors.withSource(constructor);
     return constructionProxy.getParameters().isEmpty()
         ? null // default constructor.
         : injector.getParametersInjectors(constructor,
