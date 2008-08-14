@@ -1,0 +1,17 @@
+  public void testMethodInjectionPoint() throws NoSuchMethodException, IOException {
+    Method barMethod = getClass().getMethod("bar", String.class);
+    InjectionPoint<String> injectionPoint
+        = InjectionPoint.newInstance(barMethod, 0, false, Key.get(String.class, Names.named("b")));
+
+    assertEquals("InjectionPoint["
+        + "key=Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=b)], "
+        + "allowsNull=false, "
+        + "member=com.google.inject.InjectionPointTest.bar(), "
+        + "parameterIndex=0]", injectionPoint.toString());
+    assertEquals(barMethod, injectionPoint.getMember());
+    assertEquals(0, injectionPoint.getParameterIndex());
+    assertEquals(Key.get(String.class, Names.named("b")), injectionPoint.getKey());
+    assertEquals(false, injectionPoint.allowsNull());
+    Asserts.assertSimilarWhenReserialized(injectionPoint);
+  }
+

@@ -3,7 +3,7 @@
    * according to {@link Object#equals(Object) Object.equals}. The returned
    * member is {@link Serializable}.
    */
-  public static Member canonicalize(Member member) {
+  public static Member serializableCopy(Member member) {
     return member instanceof MemberImpl
         ? member
         : new MemberImpl(member);

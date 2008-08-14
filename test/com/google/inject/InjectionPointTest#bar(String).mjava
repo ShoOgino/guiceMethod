@@ -1,0 +1,2 @@
+  public @Inject void bar(@Named("b") String param) {}
+

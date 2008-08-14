@@ -1,0 +1,5 @@
+  private Object writeReplace() throws ObjectStreamException {
+    Member serializableMember = member != null ? MoreTypes.serializableCopy(member) : null;
+    return new InjectionPoint<T>(serializableMember, parameterIndex, allowsNull, key);
+  }
+

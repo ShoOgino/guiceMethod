@@ -1,12 +1,4 @@
     @Override public String toString() {
-      if (memberType == Method.class) {
-        return "method " + getDeclaringClass().getName() + "." + getName() + "()";
-      } else if (memberType == Field.class) {
-        return "field " + getDeclaringClass().getName() + "." + getName();
-      } else if (memberType == Constructor.class) {
-        return "constructor " + getDeclaringClass().getName() + "()";
-      } else {
-        throw new AssertionError();
-      }
+      return MoreTypes.toString(this);
     }
 

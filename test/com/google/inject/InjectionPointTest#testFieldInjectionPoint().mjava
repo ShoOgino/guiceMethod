@@ -1,0 +1,16 @@
+  public void testFieldInjectionPoint() throws NoSuchFieldException, IOException {
+    Field fooField = getClass().getField("foo");
+    InjectionPoint<String> injectionPoint
+        = InjectionPoint.newInstance(fooField, false, Key.get(String.class, Names.named("a")));
+
+    assertEquals("InjectionPoint["
+        + "key=Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=a)], "
+        + "allowsNull=false, "
+        + "member=com.google.inject.InjectionPointTest.foo]", injectionPoint.toString());
+    assertEquals(fooField, injectionPoint.getMember());
+    assertEquals(-1, injectionPoint.getParameterIndex());
+    assertEquals(Key.get(String.class, Names.named("a")), injectionPoint.getKey());
+    assertEquals(false, injectionPoint.allowsNull());
+    Asserts.assertSimilarWhenReserialized(injectionPoint);
+  }
+

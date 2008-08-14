@@ -1,0 +1,14 @@
+  public void testPlainKeyInjectionPoint() throws IOException {
+    InjectionPoint<String> injectionPoint
+        = InjectionPoint.newInstance(Key.get(String.class, Names.named("d")));
+
+    assertEquals("InjectionPoint["
+        + "key=Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=d)], "
+        + "allowsNull=true]", injectionPoint.toString());
+    assertNull(injectionPoint.getMember());
+    assertEquals(-1, injectionPoint.getParameterIndex());
+    assertEquals(Key.get(String.class, Names.named("d")), injectionPoint.getKey());
+    assertEquals(true, injectionPoint.allowsNull());
+    Asserts.assertSimilarWhenReserialized(injectionPoint);
+  }
+

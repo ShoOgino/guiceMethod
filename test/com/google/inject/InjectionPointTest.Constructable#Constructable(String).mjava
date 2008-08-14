@@ -1,0 +1,2 @@
+    @Inject public Constructable(@Named("c") String param) {}
+

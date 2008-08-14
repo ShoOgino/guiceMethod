@@ -6,7 +6,7 @@
     catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
           "null returned by binding at " + getClass().getName(),
-          "parameter 0 of method " + FooMethod.class.getName() + ".setFoo() is not @Nullable");
+          "parameter 0 of " + FooMethod.class.getName() + ".setFoo() is not @Nullable");
     }
   }
 

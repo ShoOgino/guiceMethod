@@ -1,0 +1,18 @@
+  /**
+   * Formats a member as concise string, such as {@code java.util.ArrayList.size},
+   * {@code java.util.ArrayList<init>()} or {@code java.util.List.remove()}.
+   */
+  public static String toString(Member member) {
+    Class<? extends Member> memberType = memberType(member);
+
+    if (memberType == Method.class) {
+      return member.getDeclaringClass().getName() + "." + member.getName() + "()";
+    } else if (memberType == Field.class) {
+      return member.getDeclaringClass().getName() + "." + member.getName();
+    } else if (memberType == Constructor.class) {
+      return member.getDeclaringClass().getName() + ".<init>()";
+    } else {
+      throw new AssertionError();
+    }
+  }
+
