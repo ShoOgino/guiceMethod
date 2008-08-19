@@ -1,6 +1,6 @@
   private static <T> Module newModule(final T bound) {
     return new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         @SuppressWarnings("unchecked")
         Class<T> type = (Class<T>) bound.getClass();
         bind(type).toInstance(bound);

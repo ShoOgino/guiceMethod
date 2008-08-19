@@ -1,0 +1,6 @@
+    public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+      assertFalse(used);
+      used = true;
+      return unscoped;
+    }
+

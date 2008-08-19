@@ -1,0 +1,27 @@
+  public void testOverrideScopeAnnotation() {
+    final Scope scope = new Scope() {
+      public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+        throw new AssertionError("Should not be called");
+      }
+    };
+
+    final SingleUseScope replacementScope = new SingleUseScope();
+
+    Module original = new AbstractModule() {
+      @Override protected void configure() {
+        bindScope(TestScopeAnnotation.class, scope);
+        bind(Date.class).in(TestScopeAnnotation.class);
+      }
+    };
+
+    Module replacements = new AbstractModule() {
+      @Override protected void configure() {
+        bindScope(TestScopeAnnotation.class, replacementScope);
+      }
+    };
+
+    Injector injector = createInjector(Modules.override(original).with(replacements));
+    injector.getInstance(Date.class);
+    assertTrue(replacementScope.used);
+  }
+

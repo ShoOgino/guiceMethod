@@ -1,13 +1,13 @@
   public void testOverridesDoesntFixTwiceBoundInOriginal() {
     Module original = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("A");
         bind(String.class).toInstance("B");
       }
     };
 
     Module replacements = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("C");
       }
     };

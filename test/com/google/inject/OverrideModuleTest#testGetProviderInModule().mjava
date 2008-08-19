@@ -1,6 +1,6 @@
   public void testGetProviderInModule() {
     Module original = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("A");
         bind(key2).toProvider(getProvider(String.class));
       }

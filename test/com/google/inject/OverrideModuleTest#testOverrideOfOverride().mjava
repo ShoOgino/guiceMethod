@@ -1,6 +1,6 @@
   public void testOverrideOfOverride() {
     Module original = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("A1");
         bind(key2).toInstance("A2");
         bind(key3).toInstance("A3");
@@ -8,7 +8,7 @@
     };
 
     Module replacements1 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("B1");
         bind(key2).toInstance("B2");
       }
@@ -17,7 +17,7 @@
     Module overrides = Modules.override(original).with(replacements1);
 
     Module replacements2 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("C1");
         bind(key3).toInstance("C3");
       }
