@@ -1,0 +1,4 @@
+  public V visitScope(Scope scope) {
+    return visitOther();
+  }
+

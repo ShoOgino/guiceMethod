@@ -1,0 +1,4 @@
+  public V visitEagerSingleton() {
+    return visitOther();
+  }
+
