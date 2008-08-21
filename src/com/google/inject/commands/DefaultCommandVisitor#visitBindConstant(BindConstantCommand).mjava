@@ -1,4 +1,0 @@
-  public V visitBindConstant(BindConstantCommand command) {
-    return visitCommand(command);
-  }
-

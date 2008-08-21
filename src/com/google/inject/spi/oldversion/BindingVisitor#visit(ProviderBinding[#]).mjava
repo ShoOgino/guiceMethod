@@ -1,7 +1,0 @@
-  /**
-   * Visits a synthetic binding to the provider from a binding.
-   */
-  // To provide any more type safety, the compiler would have to know that
-  // T extends Provider<X>.
-  void visit(ProviderBinding<?> binding);
-

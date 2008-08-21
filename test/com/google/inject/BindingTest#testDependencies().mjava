@@ -1,8 +1,0 @@
-  public void testDependencies() {
-    Injector injector = Guice.createInjector();
-    ClassBinding<Dependent> binding
-        = (ClassBinding<Dependent>) injector.getBinding(Dependent.class);
-    Collection<InjectionPoint<?>> dependencies = binding.getInjectionPoints();
-    assertEquals(4, dependencies.size());
-  }
-

@@ -1,5 +1,0 @@
-  /**
-   * Visits a converted constant binding.
-   */
-  void visit(ConvertedConstantBinding<? extends T> binding);
-

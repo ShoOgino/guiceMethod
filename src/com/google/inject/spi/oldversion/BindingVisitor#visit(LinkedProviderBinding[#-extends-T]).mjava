@@ -1,5 +1,0 @@
-  /**
-   * Visits a binding which resolves instances from a bound provider.
-   */
-  void visit(LinkedProviderBinding<? extends T> binding);
-

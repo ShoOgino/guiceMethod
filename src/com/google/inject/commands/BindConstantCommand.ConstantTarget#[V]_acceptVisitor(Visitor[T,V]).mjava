@@ -1,4 +1,0 @@
-    public <V> V acceptVisitor(Visitor<T, V> visitor) {
-      return visitor.visitToInstance(get());
-    }
-

@@ -10,6 +10,6 @@
           createInternalFactory(providedBinding),
           Scopes.NO_SCOPE,
           loadStrategy);
-      this.providedBinding = (OldVersionBinding<T>) providedBinding;
+      this.providedBinding = (BindingImpl<T>) providedBinding;
     }
 

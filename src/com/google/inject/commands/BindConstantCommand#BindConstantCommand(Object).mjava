@@ -1,4 +1,0 @@
-  BindConstantCommand(Object source) {
-    this.source = checkNotNull(source, "source");
-  }
-

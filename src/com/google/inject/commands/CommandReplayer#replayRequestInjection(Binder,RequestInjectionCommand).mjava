@@ -1,7 +1,0 @@
-  public void replayRequestInjection(final Binder binder,
-      final RequestInjectionCommand command) {
-    List<Object> objects = command.getInstances();
-    binder.withSource(command.getSource())
-        .requestInjection(objects.toArray());
-  }
-

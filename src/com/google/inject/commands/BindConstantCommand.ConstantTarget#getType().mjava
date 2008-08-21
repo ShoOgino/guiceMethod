@@ -1,6 +1,0 @@
-    /**
-     * Returns the type of constant, such as {@code Integer.class} or
-     * {@code Enum.class}.
-     */
-    abstract Class getType();
-

@@ -1,5 +1,0 @@
-  /**
-   * Visits a linked binding.
-   */
-  void visit(LinkedBinding<? extends T> binding);
-

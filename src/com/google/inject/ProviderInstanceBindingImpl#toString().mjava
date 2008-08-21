@@ -1,6 +1,6 @@
   @Override
   public String toString() {
-    return new ToStringBuilder(ProviderInstanceBinding.class)
+    return new ToStringBuilder(Binding.class)
         .add("key", key)
         .add("provider", providerInstance)
         .add("scope", scope)

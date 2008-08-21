@@ -1,5 +1,0 @@
-  /**
-   * Visits a binding to an instance.
-   */
-  void visit(InstanceBinding<? extends T> binding);
-

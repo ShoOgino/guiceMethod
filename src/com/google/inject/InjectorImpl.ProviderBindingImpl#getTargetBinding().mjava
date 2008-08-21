@@ -1,4 +1,4 @@
-    public OldVersionBinding<T> getTargetBinding() {
+    public BindingImpl<T> getTargetBinding() {
       return providedBinding;
     }
 

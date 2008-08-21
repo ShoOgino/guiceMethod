@@ -1,5 +1,0 @@
-  public V visitRequestStaticInjection(
-      RequestStaticInjectionCommand command) {
-    return visitCommand(command);
-  }
-

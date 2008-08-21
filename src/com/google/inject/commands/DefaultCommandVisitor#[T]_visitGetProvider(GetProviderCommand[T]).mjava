@@ -1,4 +1,0 @@
-  public <T> V visitGetProvider(GetProviderCommand<T> command) {
-    return visitCommand(command);
-  }
-

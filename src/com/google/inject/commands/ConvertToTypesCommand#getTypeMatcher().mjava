@@ -1,4 +1,0 @@
-  public Matcher<? super TypeLiteral<?>> getTypeMatcher() {
-    return typeMatcher;
-  }
-

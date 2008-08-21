@@ -1,7 +1,0 @@
-    @Override public String toString() {
-      String type = key.getAnnotationType() == null
-          ? "AnnotatedBindingBuilder<"
-          : "LinkedBindingBuilder<";
-      return type + key.getTypeLiteral() + ">";
-    }
-

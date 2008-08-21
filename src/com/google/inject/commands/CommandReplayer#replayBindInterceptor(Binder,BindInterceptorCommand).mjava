@@ -1,7 +1,0 @@
-  public void replayBindInterceptor(final Binder binder, final BindInterceptorCommand command) {
-    List<MethodInterceptor> interceptors = command.getInterceptors();
-    binder.withSource(command.getSource()).bindInterceptor(
-        command.getClassMatcher(), command.getMethodMatcher(),
-        interceptors.toArray(new MethodInterceptor[interceptors.size()]));
-  }
-

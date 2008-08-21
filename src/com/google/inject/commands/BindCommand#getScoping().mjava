@@ -1,4 +1,0 @@
-  public BindScoping getScoping() {
-    return bindScoping;
-  }
-

@@ -1,8 +1,0 @@
-    public void visit(ProviderInstanceBinding<?> providerInstanceBinding) {
-      if (providerInstanceBinding.getKey().getRawType() == Foo.class) {
-        providerInstanceVisited = true;
-        assertTrue(providerInstanceBinding.getProvider().get() instanceof Foo);
-        assertEquals(Scopes.SINGLETON, providerInstanceBinding.getScope());
-      }
-    }
-

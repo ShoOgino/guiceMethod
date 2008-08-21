@@ -1,7 +1,0 @@
-    public void visit(LinkedBinding<?> linkedBinding) {
-      linkedVisited = true;
-      assertEquals(Runnable.class,
-          linkedBinding.getTargetBinding().getKey().getTypeLiteral().getType());
-      assertEquals(Scopes.SINGLETON, linkedBinding.getScope());
-    }
-

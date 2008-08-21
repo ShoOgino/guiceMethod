@@ -8,12 +8,12 @@
   private <T> BindingImpl<T> getParentBinding(Key<T> key) {
     synchronized (parentBindings) {
       // null values will mean that the parent doesn't have this binding
-      OldVersionBinding<T> binding = (OldVersionBinding<T>) parentBindings.get(key);
+      BindingImpl<T> binding = (BindingImpl<T>) parentBindings.get(key);
       if (binding != null) {
         return (BindingImpl<T>) binding;
       }
       try {
-        binding = (OldVersionBinding) parentInjector.getBinding(key);
+        binding = (BindingImpl) parentInjector.getBinding(key);
       }
       catch (ProvisionException e) {
         // if this happens, the parent can't create this key, and we ignore it

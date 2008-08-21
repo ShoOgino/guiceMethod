@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(LinkedBinding.class)
+    return new ToStringBuilder(Binding.class)
         .add("key", key)
         .add("target", targetKey)
         .add("scope", scope)

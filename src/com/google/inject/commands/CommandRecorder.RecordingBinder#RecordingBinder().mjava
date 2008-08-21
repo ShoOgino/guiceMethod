@@ -1,8 +1,0 @@
-    private RecordingBinder() {
-      modules = Sets.newHashSet();
-      commands = Lists.newArrayList();
-      source = null;
-      sourceProvider = new SourceProvider()
-          .plusSkippedClasses(CommandRecorder.class, RecordingBinder.class, AbstractModule.class);
-    }
-

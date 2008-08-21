@@ -1,5 +1,0 @@
-  /**
-   * Gets the target of this link.
-   */
-  OldVersionBinding<? extends T> getTargetBinding();
-

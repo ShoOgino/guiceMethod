@@ -1,4 +1,0 @@
-  public <T> V visitBind(BindCommand<T> command) {
-    return visitCommand(command);
-  }
-

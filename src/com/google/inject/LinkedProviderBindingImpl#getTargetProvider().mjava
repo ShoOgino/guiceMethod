@@ -1,4 +1,0 @@
-  public OldVersionBinding<? extends Provider<? extends T>> getTargetProvider() {
-    return injector.getBinding(providerKey);
-  }
-

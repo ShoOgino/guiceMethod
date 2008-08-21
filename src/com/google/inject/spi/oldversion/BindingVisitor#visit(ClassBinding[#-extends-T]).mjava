@@ -1,5 +1,0 @@
-  /**
-   * Visits a class binding.
-   */
-  void visit(ClassBinding<? extends T> binding);
-

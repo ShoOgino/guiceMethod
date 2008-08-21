@@ -1,7 +1,0 @@
-  /**
-   * Visit {@code command} and return a result.
-   */
-  public V visitCommand(Command command) {
-    return null;
-  }
-

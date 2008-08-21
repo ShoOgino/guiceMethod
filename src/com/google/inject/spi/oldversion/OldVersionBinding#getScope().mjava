@@ -1,5 +1,0 @@
-  /**
-   * Returns the scope applied by this binding.
-   */
-  Scope getScope();
-

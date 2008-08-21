@@ -1,7 +1,0 @@
-    public void visit(ClassBinding<?> classBinding) {
-      if (classBinding.getKey().getRawType().equals(Bar.class)) {
-        classVisitied = true;
-        assertEquals(Scopes.SINGLETON, classBinding.getScope());
-      }
-    }
-

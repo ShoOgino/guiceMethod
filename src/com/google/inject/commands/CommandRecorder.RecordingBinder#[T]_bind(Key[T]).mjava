@@ -1,6 +1,0 @@
-    public <T> BindCommand<T>.BindingBuilder bind(Key<T> key) {
-      BindCommand<T> bindCommand = new BindCommand<T>(getSource(), key);
-      commands.add(bindCommand);
-      return bindCommand.bindingBuilder(RecordingBinder.this);
-    }
-

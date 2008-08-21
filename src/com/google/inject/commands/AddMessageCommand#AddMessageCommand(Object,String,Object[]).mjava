@@ -1,4 +1,0 @@
-  AddMessageCommand(Object source, String message, Object[] arguments) {
-    this.message = new Message(source, String.format(message, arguments));
-  }
-

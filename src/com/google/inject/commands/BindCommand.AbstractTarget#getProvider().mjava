@@ -1,4 +1,0 @@
-    public Provider<? extends T> getProvider() {
-      return null;
-    }
-

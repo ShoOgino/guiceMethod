@@ -1,5 +1,0 @@
-  /**
-   * Gets the class associated with this binding.
-   */
-  Class<T> getBoundClass();
-

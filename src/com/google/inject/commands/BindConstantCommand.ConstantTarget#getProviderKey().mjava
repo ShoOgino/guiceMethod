@@ -1,4 +1,0 @@
-    public Key<? extends Provider<? extends T>> getProviderKey() {
-      return null;
-    }
-

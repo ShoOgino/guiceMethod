@@ -1,4 +1,0 @@
-  public V visitAddMessage(AddMessageCommand command) {
-    return visitCommand(command);
-  }
-

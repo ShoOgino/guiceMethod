@@ -1,5 +1,0 @@
-  RequestStaticInjectionCommand(Object source, Class[] types) {
-    this.source = checkNotNull(source, "source");
-    this.types = ImmutableList.of(types);
-  }
-

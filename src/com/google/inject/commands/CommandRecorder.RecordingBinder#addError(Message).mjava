@@ -1,4 +1,0 @@
-    public void addError(Message message) {
-      commands.add(new AddMessageCommand(message));
-    }
-
