@@ -1,0 +1,6 @@
+    private Builder scoper(Scoper scoper) {
+      name(name + " in " + scoper.toString());
+      scoper.apply(this);
+      return this;
+    }
+

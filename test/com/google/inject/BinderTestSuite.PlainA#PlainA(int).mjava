@@ -1,0 +1,4 @@
+    PlainA(int value) {
+      this.value = value;
+    }
+

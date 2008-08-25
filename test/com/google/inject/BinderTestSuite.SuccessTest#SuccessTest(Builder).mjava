@@ -1,0 +1,8 @@
+    public SuccessTest(Builder builder) {
+      super("test");
+      name = builder.name;
+      key = builder.key;
+      modules = ImmutableList.copyOf(builder.modules);
+      expectedValues = ImmutableList.copyOf(builder.expectedValues);
+    }
+

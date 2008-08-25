@@ -1,0 +1,15 @@
+    public void addToSuite(TestSuite suite) {
+      if (creationException != null) {
+        suite.addTest(new CreationExceptionTest(this));
+
+      } else if (provisionException != null) {
+        suite.addTest(new ProvisionExceptionTest(this));
+
+      } else {
+        suite.addTest(new SuccessTest(this));
+        if (creationTime != CreationTime.NONE) {
+          suite.addTest(new UserExceptionsTest(this));
+        }
+      }
+    }
+

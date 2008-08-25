@@ -1,0 +1,8 @@
+    public CreationExceptionTest(Builder builder) {
+      super("test");
+      name = builder.name;
+      key = builder.key;
+      modules = ImmutableList.copyOf(builder.modules);
+      creationException = builder.creationException;
+    }
+

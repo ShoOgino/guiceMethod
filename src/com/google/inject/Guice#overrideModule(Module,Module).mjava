@@ -1,9 +1,0 @@
-  /**
-   * @deprecated replaced with a two-step EDSL via {@link Modules#override(Module[])}. Inline calls
-   *     to this method.
-   */
-  @Deprecated
-  public static Module overrideModule(Module module, Module overridesModule) {
-    return Modules.override(module).with(overridesModule);
-  }
-

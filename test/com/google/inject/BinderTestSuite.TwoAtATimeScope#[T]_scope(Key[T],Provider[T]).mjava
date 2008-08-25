@@ -1,0 +1,16 @@
+    public <T> Provider<T> scope(Key<T> key, final Provider<T> unscoped) {
+      return new Provider<T>() {
+        T instance;
+        public T get() {
+          if (instance == null) {
+            instance = unscoped.get();
+            return instance;
+          } else {
+            T result = instance;
+            instance = null;
+            return result;
+          }
+        }
+      };
+    }
+

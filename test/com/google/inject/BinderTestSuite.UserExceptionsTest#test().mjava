@@ -1,0 +1,40 @@
+    public void test() {
+      Injector injector;
+      try {
+        nextId.set(-1);
+        injector = Guice.createInjector(modules);
+        assertEquals(CreationTime.LAZY, creationTime);
+      } catch (CreationException expected) {
+        assertEquals(CreationTime.EAGER, creationTime);
+        assertContains(expected.getMessage(), "Illegal value: -1");
+        return;
+      }
+
+      Provider<?> provider = injector.getProvider(key);
+      Provider<?> bindingProvider = injector.getBinding(key).getProvider();
+
+      nextId.set(-1);
+      try {
+        injector.getInstance(key);
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1");
+      }
+
+      nextId.set(-1);
+      try {
+        provider.get();
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1");
+      }
+
+      nextId.set(-1);
+      try {
+        bindingProvider.get();
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1");
+      }
+    }
+

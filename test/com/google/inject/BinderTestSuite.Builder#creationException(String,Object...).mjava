@@ -1,0 +1,5 @@
+    private Builder creationException(String message, Object... args) {
+      this.creationException = String.format(message, args);
+      return this;
+    }
+

@@ -1,0 +1,23 @@
+    public void test() {
+      nextId.set(101);
+      Injector injector = Guice.createInjector(modules);
+
+      Provider<?> provider = injector.getProvider(key);
+      Provider<?> bindingProvider = injector.getBinding(key).getProvider();
+
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        assertEquals(value, injector.getInstance(key));
+      }
+
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        assertEquals(value, provider.get());
+      }
+
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        assertEquals(value, bindingProvider.get());
+      }
+    }
+

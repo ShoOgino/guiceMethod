@@ -1,0 +1,5 @@
+    public Builder key(Key<?> key) {
+      this.key = key;
+      return this;
+    }
+

@@ -1,0 +1,9 @@
+    public void test() {
+      try {
+        Guice.createInjector(modules);
+        fail();
+      } catch (CreationException expected) {
+        assertContains(expected.getMessage(), creationException);
+      }
+    }
+

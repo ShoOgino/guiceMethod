@@ -1,0 +1,8 @@
+    public ProvisionExceptionTest(Builder builder) {
+      super("test");
+      name = builder.name;
+      key = builder.key;
+      modules = ImmutableList.copyOf(builder.modules);
+      provisionException = builder.provisionException;
+    }
+

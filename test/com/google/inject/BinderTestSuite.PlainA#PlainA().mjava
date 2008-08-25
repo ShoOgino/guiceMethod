@@ -1,0 +1,7 @@
+    PlainA() {
+      value = nextId.getAndIncrement();
+      if (value < 0) {
+        throw new RuntimeException("Illegal value: " + value);
+      }
+    }
+

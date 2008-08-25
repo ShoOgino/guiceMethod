@@ -1,0 +1,25 @@
+    public void test() {
+      Injector injector = Guice.createInjector(modules);
+
+      try {
+        injector.getProvider(key);
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), provisionException);
+      }
+
+      try {
+        injector.getBinding(key).getProvider();
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), provisionException);
+      }
+
+      try {
+        injector.getInstance(key);
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), provisionException);
+      }
+    }
+

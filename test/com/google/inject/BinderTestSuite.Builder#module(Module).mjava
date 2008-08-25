@@ -1,0 +1,5 @@
+    public Builder module(Module module) {
+      this.modules.add(module);
+      return this;
+    }
+
