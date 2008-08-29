@@ -2,6 +2,6 @@
     this.source = source;
     isMutable = parent.isMutable;
     errors = parent.errors;
-    injectionPoints = Lists.newArrayList(parent.injectionPoints);
+    dependencies = Lists.newArrayList(parent.dependencies);
   }
 

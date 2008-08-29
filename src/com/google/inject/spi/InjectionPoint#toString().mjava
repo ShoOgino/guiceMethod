@@ -1,14 +1,4 @@
   @Override public String toString() {
-    ToStringBuilder builder = new ToStringBuilder(InjectionPoint.class)
-        .add("key", key)
-        .add("allowsNull", allowsNull);
-
-    if (member != null) {
-      builder.add("member", MoreTypes.toString(member));
-    }
-    if (parameterIndex != -1) {
-      builder.add("parameterIndex", parameterIndex);
-    }
-    return builder.toString();
+    return MoreTypes.toString(member);
   }
 

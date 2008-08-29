@@ -1,0 +1,2 @@
+    InjectionPoint getInjectionPoint();
+

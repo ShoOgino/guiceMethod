@@ -1,0 +1,8 @@
+  /**
+   * Returns the injection point to which this dependency belongs, or null if this dependency isn't
+   * attached to a particular injection point.
+   */
+  public InjectionPoint getInjectionPoint() {
+    return injectionPoint;
+  }
+

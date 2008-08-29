@@ -5,11 +5,8 @@
       // Ewwwww...
       field.setAccessible(true);
 
-      final Key<?> key = Keys.get(field.getGenericType(), field, field.getAnnotations(), errors);
-
-      factory = injector.getInternalFactory(key, errors.withSource(field));
-
-      injectionPoint = InjectionPoint.newInstance(
-          field, Nullability.allowsNull(field.getAnnotations()), key);
+      injectionPoint = InjectionPoint.get(field);
+      dependency = injectionPoint.getDependencies().get(0);
+      factory = injector.getInternalFactory(dependency.getKey(), errors.withSource(field));
     }
 

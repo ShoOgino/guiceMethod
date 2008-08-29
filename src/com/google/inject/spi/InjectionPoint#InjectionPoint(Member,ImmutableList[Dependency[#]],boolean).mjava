@@ -1,0 +1,7 @@
+  private InjectionPoint(Member member,
+      ImmutableList<Dependency<?>> dependencies, boolean optional) {
+    this.member = member;
+    this.dependencies = dependencies;
+    this.optional = optional;
+  }
+

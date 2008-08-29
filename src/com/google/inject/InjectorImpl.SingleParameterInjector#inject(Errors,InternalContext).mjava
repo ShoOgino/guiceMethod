@@ -1,12 +1,12 @@
     T inject(Errors errors, InternalContext context) throws ErrorsException {
-      context.setInjectionPoint(injectionPoint);
-      errors.pushInjectionPoint(injectionPoint);
+      context.setDependency(dependency);
+      errors.pushInjectionPoint(dependency);
       try {
-        return factory.get(errors, context, injectionPoint);
+        return factory.get(errors, context, dependency);
       }
       finally {
-        errors.popInjectionPoint(injectionPoint);
-        context.setInjectionPoint(null);
+        errors.popInjectionPoint(dependency);
+        context.setDependency(null);
       }
     }
 

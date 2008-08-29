@@ -1,0 +1,9 @@
+  /**
+   * Returns a new injection point for {@code field}.
+   *
+   * @param field a field with the {@literal @}{@link Inject} annotation.
+   */
+  public static InjectionPoint get(Field field) throws ErrorsException {
+    return new InjectionPoint(field);
+  }
+

@@ -1,0 +1,7 @@
+    public Logger get(Errors errors, InternalContext context, Dependency<?> dependency) {
+      InjectionPoint injectionPoint = dependency.getInjectionPoint();
+      return injectionPoint == null
+          ? Logger.getAnonymousLogger()
+          : Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+    }
+

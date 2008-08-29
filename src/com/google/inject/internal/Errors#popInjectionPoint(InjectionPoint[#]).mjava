@@ -1,5 +1,0 @@
-  public void popInjectionPoint(InjectionPoint<?> injectionPoint) {
-    InjectionPoint popped = injectionPoints.remove(injectionPoints.size() - 1);
-    checkArgument(injectionPoint == popped);
-  }
-

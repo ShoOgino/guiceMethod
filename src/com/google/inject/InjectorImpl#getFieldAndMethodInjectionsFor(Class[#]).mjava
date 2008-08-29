@@ -1,5 +1,11 @@
-  Collection<InjectionPoint<?>> getFieldAndMethodInjectionsFor(Class<?> clazz)
+  Set<InjectionPoint> getFieldAndMethodInjectionsFor(Class<?> clazz)
       throws ErrorsException {
-    return Collections.unmodifiableList(getModifiableFieldAndMethodInjectionsFor(clazz));
+    Errors errors = new Errors();
+    Set<InjectionPoint> dependencies = Sets.newLinkedHashSet();
+    for (SingleMemberInjector singleMemberInjector : getMemberInjectors(clazz, errors)) {
+      dependencies.add(singleMemberInjector.getInjectionPoint());
+    }
+    errors.throwIfNecessary();
+    return ImmutableSet.copyOf(dependencies);
   }
 

@@ -1,7 +1,0 @@
-    public Logger get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint) {
-      Member member = injectionPoint.getMember();
-      return member == null
-          ? Logger.getAnonymousLogger()
-          : Logger.getLogger(member.getDeclaringClass().getName());
-    }
-

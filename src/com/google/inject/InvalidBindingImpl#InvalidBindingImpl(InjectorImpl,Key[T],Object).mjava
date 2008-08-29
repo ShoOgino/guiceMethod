@@ -1,6 +1,6 @@
   InvalidBindingImpl(InjectorImpl injector, Key<T> key, Object source) {
     super(injector, key, source, new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint) {
+      public T get(Errors errors, InternalContext context, Dependency<?> dependency) {
         throw new AssertionError();
       }
     }, Scopes.NO_SCOPE, LoadStrategy.LAZY);

@@ -1,0 +1,11 @@
+  public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+      throws ErrorsException {
+    try {
+      context.ensureMemberInjected(errors, provider);
+      return errors.checkForNull(provider.get(), source, dependency);
+    } catch (RuntimeException userException) {
+      Errors userErrors = ProvisionException.getErrors(userException);
+      throw errors.errorInProvider(userException, userErrors).toException();
+    }
+  }
+

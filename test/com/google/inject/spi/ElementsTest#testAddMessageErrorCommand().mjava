@@ -10,7 +10,7 @@
           @Override public Void visitMessage(Message command) {
             assertEquals("Message A 5 C", command.getMessage());
             assertNull(command.getCause());
-            assertTrue(command.getInjectionPoints().isEmpty());
+            assertTrue(command.getDependencies().isEmpty());
             Asserts.assertContains(command.getSource(), "ElementsTest.java");
             return null;
           }

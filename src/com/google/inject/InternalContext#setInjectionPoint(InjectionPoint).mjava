@@ -1,4 +1,0 @@
-  public void setInjectionPoint(InjectionPoint injectionPoint) {
-    this.injectionPoint = injectionPoint;
-  }
-

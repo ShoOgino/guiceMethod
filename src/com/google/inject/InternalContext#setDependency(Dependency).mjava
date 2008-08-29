@@ -1,0 +1,4 @@
+  public void setDependency(Dependency dependency) {
+    this.dependency = dependency;
+  }
+

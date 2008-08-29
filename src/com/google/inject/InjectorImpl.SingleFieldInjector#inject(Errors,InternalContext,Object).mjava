@@ -1,8 +1,8 @@
     public void inject(Errors errors, InternalContext context, Object o) {
-      context.setInjectionPoint(injectionPoint);
-      errors.pushInjectionPoint(injectionPoint);
+      context.setDependency(dependency);
+      errors.pushInjectionPoint(dependency);
       try {
-        Object value = factory.get(errors, context, injectionPoint);
+        Object value = factory.get(errors, context, dependency);
         field.set(o, value);
       }
       catch (IllegalAccessException e) {
@@ -12,8 +12,8 @@
         errors.merge(e.getErrors());
       }
       finally {
-        context.setInjectionPoint(null);
-        errors.popInjectionPoint(injectionPoint);
+        context.setDependency(null);
+        errors.popInjectionPoint(dependency);
       }
     }
 

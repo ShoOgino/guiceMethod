@@ -1,0 +1,5 @@
+  public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+      throws ErrorsException {
+    return targetFactory.get(errors, context, dependency);
+  }
+

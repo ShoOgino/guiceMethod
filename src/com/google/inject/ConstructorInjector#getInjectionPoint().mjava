@@ -1,0 +1,4 @@
+  InjectionPoint getInjectionPoint() {
+    return constructionProxy.getInjectionPoint();
+  }
+

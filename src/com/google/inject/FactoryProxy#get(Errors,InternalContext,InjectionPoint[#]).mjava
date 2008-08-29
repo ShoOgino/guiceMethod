@@ -1,5 +1,0 @@
-  public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
-      throws ErrorsException {
-    return targetFactory.get(errors, context, injectionPoint);
-  }
-

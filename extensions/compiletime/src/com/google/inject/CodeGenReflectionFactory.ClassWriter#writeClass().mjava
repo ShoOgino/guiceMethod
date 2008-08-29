@@ -3,10 +3,9 @@
       out.writeImport(Reflection.class);
       out.writeImport(ConstructionProxy.class);
       out.writeImport(InvocationTargetException.class);
-      out.writeImport(Parameter.class);
+      out.writeImport(Dependency.class);
       out.writeImport(List.class);
       out.writeImport(Member.class);
-      out.writeImport(Parameter.class);
       out.writeImport(Arrays.class);
       out.writeImport(SuppressWarnings.class);
       out.writeImport(Key.class);
@@ -14,8 +13,8 @@
       out.writeImport(Object.class);
       for (Map.Entry<Class<?>, ConstructionProxy<?>> entry : constructionProxies.entrySet()) {
         out.writeImport(entry.getKey());
-        for (Parameter<?> parameter : entry.getValue().getParameters()) {
-          out.writeImport(parameter.getKey().getTypeLiteral().getType());
+        for (Dependency<?> dependency : entry.getValue().getInjectionPoint().getDependencies()) {
+          out.writeImport(dependency.getKey().getTypeLiteral().getType());
         }
       }
 

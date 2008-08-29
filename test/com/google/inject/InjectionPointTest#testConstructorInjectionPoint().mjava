@@ -1,17 +1,21 @@
-  public void testConstructorInjectionPoint() throws NoSuchMethodException, IOException {
+  public void testConstructorInjectionPoint() throws NoSuchMethodException, IOException,
+      ErrorsException {
     Constructor<?> constructor = Constructable.class.getConstructor(String.class);
-    InjectionPoint<String> injectionPoint
-        = InjectionPoint.newInstance(constructor, 0, true, Key.get(String.class, Names.named("c")));
+    InjectionPoint injectionPoint = InjectionPoint.get(constructor, new Errors());
+    assertSame(constructor, injectionPoint.getMember());
+    assertFalse(injectionPoint.isOptional());
+    assertEquals("com.google.inject.InjectionPointTest$Constructable.<init>()",
+        injectionPoint.toString());
+    assertEqualsBothWays(injectionPoint, InjectionPoint.get(constructor, new Errors()));
+    assertSimilarWhenReserialized(injectionPoint);
 
-    assertEquals("InjectionPoint["
-        + "key=Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=c)], "
-        + "allowsNull=true, "
-        + "member=com.google.inject.InjectionPointTest$Constructable.<init>(), "
-        + "parameterIndex=0]", injectionPoint.toString());
-    assertEquals(constructor, injectionPoint.getMember());
-    assertEquals(0, injectionPoint.getParameterIndex());
-    assertEquals(Key.get(String.class, Names.named("c")), injectionPoint.getKey());
-    assertEquals(true, injectionPoint.allowsNull());
-    Asserts.assertSimilarWhenReserialized(injectionPoint);
+    Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
+    assertEquals("Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=c)]"
+        + "@com.google.inject.InjectionPointTest$Constructable.<init>()[0]", dependency.toString());
+    assertEquals(constructor, dependency.getInjectionPoint().getMember());
+    assertEquals(0, dependency.getParameterIndex());
+    assertEquals(Key.get(String.class, Names.named("c")), dependency.getKey());
+    assertEquals(false, dependency.isNullable());
+    assertSimilarWhenReserialized(dependency);
   }
 

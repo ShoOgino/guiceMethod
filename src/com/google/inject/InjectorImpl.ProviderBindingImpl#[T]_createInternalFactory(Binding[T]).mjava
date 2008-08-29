@@ -1,8 +1,7 @@
     static <T> InternalFactory<Provider<T>> createInternalFactory(Binding<T> providedBinding) {
       final Provider<T> provider = providedBinding.getProvider();
       return new InternalFactory<Provider<T>>() {
-        public Provider<T> get(Errors errors, InternalContext context,
-            InjectionPoint injectionPoint) {
+        public Provider<T> get(Errors errors, InternalContext context, Dependency dependency) {
           return provider;
         }
       };

@@ -1,6 +1,0 @@
-  public T get(Errors errors, InternalContext context, InjectionPoint injectionPoint)
-      throws ErrorsException {
-    context.ensureMemberInjected(errors, value);
-    return value;
-  }
-

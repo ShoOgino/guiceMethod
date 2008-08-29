@@ -1,0 +1,8 @@
+  private InjectionPoint(Constructor<?> constructor, Errors errors) throws ErrorsException {
+    this.member = constructor;
+    this.optional = false;
+    // TODO(jessewilson): make sure that if @Inject it exists, its not optional
+    this.dependencies = forMember(constructor, constructor.getGenericParameterTypes(),
+        constructor.getParameterAnnotations(), errors);
+  }
+

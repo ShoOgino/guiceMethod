@@ -1,0 +1,7 @@
+  <T> SingleParameterInjector<T> createParameterInjector(final Dependency<T> dependency,
+      Member member, final Errors errors) throws ErrorsException {
+    InternalFactory<? extends T> factory;
+    factory = getInternalFactory(dependency.getKey(), errors.withSource(member));
+    return new SingleParameterInjector<T>(dependency, factory);
+  }
+

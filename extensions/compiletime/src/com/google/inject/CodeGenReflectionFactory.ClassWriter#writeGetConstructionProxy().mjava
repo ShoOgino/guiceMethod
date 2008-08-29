@@ -11,8 +11,9 @@
         out.openScope("public %s newInstance(final %s... arguments) throws %s {", implementation, Object.class, InvocationTargetException.class)
             .openScope("return new %s(", implementation);
         int argument = 0;
-        for (Iterator<Parameter<?>> i = entry.getValue().getParameters().iterator(); i.hasNext(); ) {
-          Parameter<?> parameter = i.next();
+        for (Iterator<Dependency<?>> i
+            = entry.getValue().getInjectionPoint().getDependencies().iterator(); i.hasNext(); ) {
+          Dependency<?> parameter = i.next();
           String separator = i.hasNext() ? "," : "";
           out.writeLine("(%s) arguments[%d]%s", parameter.getKey().getTypeLiteral().getType(), argument, separator);
           argument++;
@@ -21,13 +22,14 @@
             .closeScope("}");
 
         // getParameters
-        out.openScope("public %s<%s<?>> getParameters() {", List.class, Parameter.class)
-            .openScope("return %s.<%s<?>>asList(", Arrays.class, Parameter.class);
+        out.openScope("public %s<%s<?>> getParameters() {", List.class, Dependency.class)
+            .openScope("return %s.<%s<?>>asList(", Arrays.class, Dependency.class);
         argument = 0;
-        for (Iterator<Parameter<?>> i = entry.getValue().getParameters().iterator(); i.hasNext(); ) {
-          Parameter<?> parameter = i.next();
+        for (Iterator<Dependency<?>> i
+            = entry.getValue().getInjectionPoint().getDependencies().iterator(); i.hasNext(); ) {
+          Dependency<?> parameter = i.next();
           String separator = i.hasNext() ? "," : "";
-          out.writeLine("%s.create(%s, %s, %s)%s", Parameter.class, argument, keyLiteral(parameter.getKey()), parameter.allowsNull(), separator);
+          out.writeLine("%s.create(%s, %s, %s)%s", Dependency.class, argument, keyLiteral(parameter.getKey()), parameter.isNullable(), separator);
           argument++;
         }
         out.closeScope(");")

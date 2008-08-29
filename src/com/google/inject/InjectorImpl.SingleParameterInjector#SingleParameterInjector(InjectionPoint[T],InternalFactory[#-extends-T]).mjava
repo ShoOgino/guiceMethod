@@ -1,6 +1,0 @@
-    public SingleParameterInjector(InjectionPoint<T> injectionPoint,
-        InternalFactory<? extends T> factory) {
-      this.injectionPoint = injectionPoint;
-      this.factory = factory;
-    }
-

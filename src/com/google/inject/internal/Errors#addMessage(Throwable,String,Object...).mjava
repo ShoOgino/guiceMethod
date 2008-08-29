@@ -1,6 +1,6 @@
   private Errors addMessage(Throwable cause, String messageFormat, Object... arguments) {
     String message = format(messageFormat, arguments);
-    addMessage(new Message(source, message, ImmutableList.copyOf(injectionPoints), cause));
+    addMessage(new Message(source, message, ImmutableList.copyOf(dependencies), cause));
     return this;
   }
 

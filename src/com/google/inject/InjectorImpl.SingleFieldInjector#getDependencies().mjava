@@ -1,4 +1,4 @@
-    public Collection<InjectionPoint<?>> getDependencies() {
-      return Collections.<InjectionPoint<?>>singleton(injectionPoint);
+    public Collection<Dependency<?>> getDependencies() {
+      return injectionPoint.getDependencies();
     }
 

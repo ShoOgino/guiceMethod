@@ -3,9 +3,9 @@
       throws ErrorsException {
     Constructor constructor = constructionProxy.getConstructor();
     errors = errors.withSource(constructor);
-    return constructionProxy.getParameters().isEmpty()
+    return getInjectionPoint().getDependencies().isEmpty()
         ? null // default constructor.
         : injector.getParametersInjectors(constructor,
-            constructionProxy.getParameters(), errors);
+            constructionProxy.getInjectionPoint().getDependencies(), errors);
   }
 

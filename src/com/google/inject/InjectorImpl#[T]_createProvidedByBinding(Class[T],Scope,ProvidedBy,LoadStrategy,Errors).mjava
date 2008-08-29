@@ -17,9 +17,9 @@
         = getBindingOrThrow(providerKey, errors);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, InjectionPoint injectionPoint)
+      public T get(Errors errors, InternalContext context, Dependency dependency)
           throws ErrorsException {
-        Provider<?> provider = providerBinding.internalFactory.get(errors, context, injectionPoint);
+        Provider<?> provider = providerBinding.internalFactory.get(errors, context, dependency);
         Object o = provider.get();
         if (o != null && !type.isInstance(o)) {
           throw errors.withSource(type).subtypeNotProvided(providerType, type).toException();

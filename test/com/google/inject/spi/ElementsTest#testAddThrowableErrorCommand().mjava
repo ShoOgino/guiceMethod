@@ -11,7 +11,7 @@
             assertEquals("A", command.getCause().getMessage());
             assertEquals(command.getMessage(),
                 "An exception was caught and reported. Message: A");
-            assertTrue(command.getInjectionPoints().isEmpty());
+            assertTrue(command.getDependencies().isEmpty());
             Asserts.assertContains(command.getSource(), "ElementsTest.java");
             return null;
           }

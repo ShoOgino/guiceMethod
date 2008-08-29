@@ -16,7 +16,7 @@
           @Override public Void visitMessage(Message command) {
             assertEquals("Throwing RuntimeException in AbstractModule.configure().",
                 command.getCause().getMessage());
-            assertTrue(command.getInjectionPoints().isEmpty());
+            assertTrue(command.getDependencies().isEmpty());
             return null;
           }
         },

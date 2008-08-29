@@ -1,6 +1,0 @@
-  public static List<Parameter<?>> forMethod(Method method, Errors errors)
-      throws ErrorsException {
-    return forMember(method, method.getGenericParameterTypes(),
-        method.getParameterAnnotations(), errors);
-  }
-

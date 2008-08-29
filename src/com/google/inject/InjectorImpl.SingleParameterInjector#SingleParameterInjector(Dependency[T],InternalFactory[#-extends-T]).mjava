@@ -1,0 +1,6 @@
+    public SingleParameterInjector(Dependency<T> dependency,
+        InternalFactory<? extends T> factory) {
+      this.dependency = dependency;
+      this.factory = factory;
+    }
+

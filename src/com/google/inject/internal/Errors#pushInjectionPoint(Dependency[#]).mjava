@@ -1,0 +1,4 @@
+  public void pushInjectionPoint(Dependency<?> dependency) {
+    dependencies.add(dependency);
+  }
+

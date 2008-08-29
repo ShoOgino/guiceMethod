@@ -22,9 +22,9 @@
     final BindingImpl<? extends T> targetBinding = getBindingOrThrow(Key.get(subclass), errors);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, InjectionPoint<?> injectionPoint)
+      public T get(Errors errors, InternalContext context, Dependency<?> dependency)
           throws ErrorsException {
-        return targetBinding.internalFactory.get(errors, context, injectionPoint);
+        return targetBinding.internalFactory.get(errors, context, dependency);
       }
     };
 

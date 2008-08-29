@@ -1,6 +1,0 @@
-  public static List<Parameter<?>> forConstructor(Constructor constructor, Errors errors)
-      throws ErrorsException {
-    return forMember(constructor, constructor.getGenericParameterTypes(),
-        constructor.getParameterAnnotations(), errors);
-  }
-

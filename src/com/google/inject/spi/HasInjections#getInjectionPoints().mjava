@@ -1,5 +1,5 @@
   /**
-   * Gets dependencies.
+   * Gets the injection points for this binding.
    */
-  Collection<InjectionPoint<?>> getInjectionPoints();
+  Set<InjectionPoint> getInjectionPoints();
 

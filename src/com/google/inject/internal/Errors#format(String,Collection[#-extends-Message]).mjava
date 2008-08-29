@@ -5,25 +5,26 @@
       fmt.format("%s) Error at %s:%n", index++, errorMessage.getSource())
          .format(" %s%n", errorMessage.getMessage());
 
-      List<InjectionPoint> injectionPoints = errorMessage.getInjectionPoints();
-      for (int i = injectionPoints.size() - 1; i >= 0; i--) {
-        InjectionPoint injectionPoint = injectionPoints.get(i);
+      List<Dependency> dependencies = errorMessage.getDependencies();
+      for (int i = dependencies.size() - 1; i >= 0; i--) {
+        Dependency dependency = dependencies.get(i);
 
-        Key key = injectionPoint.getKey();
+        Key key = dependency.getKey();
         fmt.format("  while locating %s%n", convert(key));
 
-        Member member = injectionPoint.getMember();
-        if (member == null) {
+        InjectionPoint injectionPoint = dependency.getInjectionPoint();
+        if (injectionPoint == null) {
           continue;
         }
 
+        Member member = injectionPoint.getMember();
         Class<? extends Member> memberType = MoreTypes.memberType(member);
         if (memberType == Field.class) {
           fmt.format("    for field at %s%n", StackTraceElements.forMember(member));
 
         } else if (memberType == Method.class || memberType == Constructor.class) {
           fmt.format("    for parameter %s at %s%n",
-              injectionPoint.getParameterIndex(), StackTraceElements.forMember(member));
+              dependency.getParameterIndex(), StackTraceElements.forMember(member));
         }
       }
 

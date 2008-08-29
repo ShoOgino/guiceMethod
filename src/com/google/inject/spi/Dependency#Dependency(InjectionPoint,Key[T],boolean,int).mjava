@@ -1,0 +1,8 @@
+  Dependency(InjectionPoint injectionPoint, Key<T> key,
+      boolean nullable, int parameterIndex) {
+    this.injectionPoint = injectionPoint;
+    this.key = key;
+    this.nullable = nullable;
+    this.parameterIndex = parameterIndex;
+  }
+

@@ -7,16 +7,16 @@
         try {
           injector.callInContext(new ContextualCallable<Void>() {
             public Void call(InternalContext context) {
-              InjectionPoint<?> injectionPoint = InjectionPoint.newInstance(binding.key);
-              context.setInjectionPoint(injectionPoint);
-              errors.pushInjectionPoint(injectionPoint);
+              Dependency<?> dependency = Dependency.get(binding.key);
+              context.setDependency(dependency);
+              errors.pushInjectionPoint(dependency);
               try {
-                binding.internalFactory.get(errors, context, injectionPoint);
+                binding.internalFactory.get(errors, context, dependency);
               } catch (ErrorsException e) {
                 errors.merge(e.getErrors());
               } finally {
-                context.setInjectionPoint(null);
-                errors.popInjectionPoint(injectionPoint);
+                context.setDependency(null);
+                errors.popInjectionPoint(dependency);
               }
 
               return null;

@@ -1,0 +1,4 @@
+  private <T> Dependency<T> newDependency(Key<T> key, boolean allowsNull, int parameterIndex) {
+    return new Dependency<T>(this, key, allowsNull, parameterIndex);
+  }
+

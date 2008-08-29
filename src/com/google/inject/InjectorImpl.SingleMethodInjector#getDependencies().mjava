@@ -1,9 +1,0 @@
-    public Collection<InjectionPoint<?>> getDependencies() {
-      List<InjectionPoint<?>> dependencies
-          = new ArrayList<InjectionPoint<?>>(parameterInjectors.length);
-      for (SingleParameterInjector<?> parameterInjector : parameterInjectors) {
-        dependencies.add(parameterInjector.injectionPoint);
-      }
-      return Collections.unmodifiableList(dependencies);
-    }
-

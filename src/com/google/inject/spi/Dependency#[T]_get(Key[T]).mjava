@@ -1,0 +1,8 @@
+  /**
+   * Returns a new dependency that is not attached to an injection point. The returned dependency is
+   * nullable.
+   */
+  public static <T> Dependency<T> get(Key<T> key) {
+    return new Dependency<T>(null, key, true, -1);
+  }
+

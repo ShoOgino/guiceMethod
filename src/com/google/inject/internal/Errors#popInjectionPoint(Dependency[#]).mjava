@@ -1,0 +1,5 @@
+  public void popInjectionPoint(Dependency<?> dependency) {
+    Dependency popped = dependencies.remove(dependencies.size() - 1);
+    checkArgument(dependency == popped);
+  }
+

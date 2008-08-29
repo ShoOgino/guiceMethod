@@ -23,8 +23,10 @@
         };
       }
 
-      parameterInjectors = method.getGenericParameterTypes().length > 0
-          ? injector.getParametersInjectors(method, Parameter.forMethod(method, errors), errors)
-          : null;
+      injectionPoint = InjectionPoint.get(method);
+
+      parameterInjectors = injectionPoint.getDependencies().isEmpty()
+          ? null
+          : injector.getParametersInjectors(method, injectionPoint.getDependencies(), errors);
     }
 

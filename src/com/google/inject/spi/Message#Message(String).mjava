@@ -1,4 +1,4 @@
   public Message(String message) {
-    this(SourceProvider.UNKNOWN_SOURCE, message, ImmutableList.<InjectionPoint>of(), null);
+    this(SourceProvider.UNKNOWN_SOURCE, message, ImmutableList.<Dependency>of(), null);
   }
 

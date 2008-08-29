@@ -18,7 +18,7 @@
           @Override public Void visitMessage(Message command) {
             assertEquals("Implementation is set more than once.", command.getMessage());
             assertNull(command.getCause());
-            assertTrue(command.getInjectionPoints().isEmpty());
+            assertTrue(command.getDependencies().isEmpty());
             Asserts.assertContains(command.getSource(), "ElementsTest.java");
             return null;
           }

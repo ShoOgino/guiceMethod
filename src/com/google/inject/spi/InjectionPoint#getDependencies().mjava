@@ -1,0 +1,9 @@
+  /**
+   * Returns the dependencies for this injection point. If the injection point is for a method or
+   * constructor, the dependencies will correspond to that member's parameters. Field injection
+   * points always have a single dependency for the field itself.
+   */
+  public List<Dependency<?>> getDependencies() {
+    return dependencies;
+  }
+

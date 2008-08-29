@@ -1,5 +1,0 @@
-  public static <T> InjectionPoint<T> newInstance(
-      Field field, boolean allowsNull, Key<T> key) {
-    return new InjectionPoint<T>(field, -1, allowsNull, key);
-  }
-

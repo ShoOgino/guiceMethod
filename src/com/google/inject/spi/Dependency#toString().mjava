@@ -1,0 +1,12 @@
+  @Override public String toString() {
+    StringBuilder builder = new StringBuilder();
+    builder.append(key);
+    if (injectionPoint != null) {
+      builder.append("@").append(injectionPoint);
+      if (parameterIndex != -1) {
+        builder.append("[").append(parameterIndex).append("]");
+      }
+    }
+    return builder.toString();
+  }
+

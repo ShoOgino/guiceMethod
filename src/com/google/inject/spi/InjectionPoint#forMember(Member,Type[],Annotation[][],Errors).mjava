@@ -1,0 +1,21 @@
+  private ImmutableList<Dependency<?>> forMember(Member member, Type[] genericParameterTypes,
+      Annotation[][] annotations, Errors errors) throws ErrorsException {
+    Iterator<Annotation[]> annotationsIterator = Arrays.asList(annotations).iterator();
+
+    List<Dependency<?>> dependencies = Lists.newArrayList();
+    int index = 0;
+    for (Type parameterType : genericParameterTypes) {
+      try {
+        Annotation[] parameterAnnotations = annotationsIterator.next();
+        Key<?> key = Keys.get(parameterType, member, parameterAnnotations, errors);
+        dependencies.add(newDependency(key, Nullability.allowsNull(parameterAnnotations), index));
+        index++;
+      } catch (ErrorsException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+
+    errors.throwIfNecessary();
+    return ImmutableList.copyOf(dependencies);
+  }
+
