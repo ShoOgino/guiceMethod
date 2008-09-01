@@ -35,37 +35,39 @@
 
     new Builder()
         .name("no binding, AWithProvidedBy")
-        .key(Key.get(AWithProvidedBy.class))
+        .key(Key.get(AWithProvidedBy.class), InjectsAWithProvidedBy.class)
         .addToSuite(suite);
 
     new Builder()
         .name("no binding, AWithImplementedBy")
-        .key(Key.get(AWithImplementedBy.class))
+        .key(Key.get(AWithImplementedBy.class), InjectsAWithImplementedBy.class)
         .addToSuite(suite);
 
     new Builder()
         .name("no binding, ScopedA")
-        .key(Key.get(ScopedA.class))
+        .key(Key.get(ScopedA.class), InjectsScopedA.class)
         .expectedValues(new PlainA(201), new PlainA(201), new PlainA(202), new PlainA(202))
         .addToSuite(suite);
 
     new Builder()
         .name("no binding, AWithProvidedBy named apple")
-        .key(Key.get(AWithProvidedBy.class, named("apple")))
+        .key(Key.get(AWithProvidedBy.class, named("apple")),
+            InjectsAWithProvidedByNamedApple.class)
         .provisionException("No implementation for %s annotated with %s was bound",
             AWithProvidedBy.class.getName(), named("apple"))
         .addToSuite(suite);
 
     new Builder()
         .name("no binding, AWithImplementedBy named apple")
-        .key(Key.get(AWithImplementedBy.class, named("apple")))
+        .key(Key.get(AWithImplementedBy.class, named("apple")),
+            InjectsAWithImplementedByNamedApple.class)
         .provisionException("No implementation for %s annotated with %s was bound",
             AWithImplementedBy.class.getName(), named("apple"))
         .addToSuite(suite);
 
     new Builder()
         .name("no binding, ScopedA named apple")
-        .key(Key.get(ScopedA.class, named("apple")))
+        .key(Key.get(ScopedA.class, named("apple")), InjectsScopedANamedApple.class)
         .provisionException("No implementation for %s annotated with %s was bound",
             ScopedA.class.getName(), named("apple"))
         .addToSuite(suite);
@@ -73,7 +75,7 @@
     for (final Scoper scoper : Scoper.values()) {
       new Builder()
           .name("bind PlainA")
-          .key(Key.get(PlainA.class))
+          .key(Key.get(PlainA.class), InjectsPlainA.class)
           .module(new AbstractModule() {
             protected void configure() {
               AnnotatedBindingBuilder<PlainA> abb = bind(PlainA.class);
@@ -118,7 +120,7 @@
 
       new Builder()
           .name("bind AWithProvidedBy")
-          .key(Key.get(AWithProvidedBy.class))
+          .key(Key.get(AWithProvidedBy.class), InjectsAWithProvidedBy.class)
           .module(new AbstractModule() {
             protected void configure() {
               ScopedBindingBuilder sbb = bind(AWithProvidedBy.class);
@@ -130,7 +132,7 @@
 
       new Builder()
           .name("bind AWithImplementedBy")
-          .key(Key.get(AWithImplementedBy.class))
+          .key(Key.get(AWithImplementedBy.class), InjectsAWithImplementedBy.class)
           .module(new AbstractModule() {
             protected void configure() {
               ScopedBindingBuilder sbb = bind(AWithImplementedBy.class);
@@ -142,7 +144,7 @@
 
       new Builder()
           .name("bind ScopedA")
-          .key(Key.get(ScopedA.class))
+          .key(Key.get(ScopedA.class), InjectsScopedA.class)
           .module(new AbstractModule() {
             protected void configure() {
               ScopedBindingBuilder sbb = bind(ScopedA.class);

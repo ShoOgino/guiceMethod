@@ -2,6 +2,7 @@
       super("test");
       name = builder.name;
       key = builder.key;
+      injectsKey = builder.injectsKey;
       modules = ImmutableList.copyOf(builder.modules);
       provisionException = builder.provisionException;
     }

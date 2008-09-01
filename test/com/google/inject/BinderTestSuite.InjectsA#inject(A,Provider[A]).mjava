@@ -1,0 +1,5 @@
+    @Inject public void inject(A a, Provider<A> aProvider) {
+      this.value = a;
+      this.provider = aProvider;
+    }
+

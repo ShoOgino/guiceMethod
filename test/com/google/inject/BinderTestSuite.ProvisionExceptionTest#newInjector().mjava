@@ -1,0 +1,4 @@
+    Injector newInjector() {
+      return Guice.createInjector(modules);
+    }
+

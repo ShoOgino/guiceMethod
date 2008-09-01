@@ -1,23 +1,43 @@
-    public void test() {
-      nextId.set(101);
-      Injector injector = Guice.createInjector(modules);
-
-      Provider<?> provider = injector.getProvider(key);
-      Provider<?> bindingProvider = injector.getBinding(key).getProvider();
-
+    public void test() throws IllegalAccessException, InstantiationException {
+      Injector injector = newInjector();
       nextId.set(201);
       for (Object value : expectedValues) {
         assertEquals(value, injector.getInstance(key));
       }
 
+      Provider<?> provider = newInjector().getProvider(key);
       nextId.set(201);
       for (Object value : expectedValues) {
         assertEquals(value, provider.get());
       }
 
+      Provider<?> bindingProvider = newInjector().getBinding(key).getProvider();
       nextId.set(201);
       for (Object value : expectedValues) {
         assertEquals(value, bindingProvider.get());
+      }
+
+      injector = newInjector();
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        assertEquals(value, injector.getInstance(injectsKey).value);
+      }
+
+      injector = newInjector();
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        Injectable injectable = injectsKey.newInstance();
+        injector.injectMembers(injectable);
+        assertEquals(value, injectable.value);
+      }
+
+      Injector injector1 = newInjector();
+      nextId.set(201);
+      Injectable hasProvider = injector1.getInstance(injectsKey);
+      hasProvider.provider.get();
+      nextId.set(201);
+      for (Object value : expectedValues) {
+        assertEquals(value, hasProvider.provider.get());
       }
     }
 

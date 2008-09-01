@@ -1,0 +1,5 @@
+    Injector newInjector() {
+      nextId.set(101);
+      return Guice.createInjector(modules);
+    }
+

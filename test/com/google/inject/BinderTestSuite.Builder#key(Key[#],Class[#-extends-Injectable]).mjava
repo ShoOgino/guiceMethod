@@ -1,0 +1,6 @@
+    public Builder key(Key<?> key, Class<? extends Injectable> injectsKey) {
+      this.key = key;
+      this.injectsKey = injectsKey;
+      return this;
+    }
+

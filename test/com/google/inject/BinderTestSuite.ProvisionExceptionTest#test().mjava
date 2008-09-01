@@ -1,25 +1,44 @@
-    public void test() {
-      Injector injector = Guice.createInjector(modules);
-
+    public void test() throws IllegalAccessException, InstantiationException {
       try {
-        injector.getProvider(key);
+        newInjector().getProvider(key);
         fail();
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), provisionException);
       }
 
       try {
-        injector.getBinding(key).getProvider();
+        newInjector().getBinding(key).getProvider();
         fail();
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), provisionException);
       }
 
       try {
-        injector.getInstance(key);
+        newInjector().getInstance(key);
         fail();
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), provisionException);
+      }
+
+      try {
+        newInjector().getInstance(injectsKey);
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(),
+            injectsKey.getName() + ".inject", provisionException,
+            injectsKey.getName() + ".inject", provisionException,
+            "2 error[s]");
+      }
+
+      try {
+        Injectable injectable = injectsKey.newInstance();
+        newInjector().injectMembers(injectable);
+        fail();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(),
+            injectsKey.getName() + ".inject", provisionException,
+            injectsKey.getName() + ".inject", provisionException,
+            "2 error[s]");
       }
     }
 

@@ -1,8 +1,7 @@
-    public void test() {
-      Injector injector;
+    public void test() throws IllegalAccessException, InstantiationException {
+      nextId.set(-1);
       try {
-        nextId.set(-1);
-        injector = Guice.createInjector(modules);
+        newInjector();
         assertEquals(CreationTime.LAZY, creationTime);
       } catch (CreationException expected) {
         assertEquals(CreationTime.EAGER, creationTime);
@@ -10,12 +9,12 @@
         return;
       }
 
-      Provider<?> provider = injector.getProvider(key);
-      Provider<?> bindingProvider = injector.getBinding(key).getProvider();
+      Provider<?> provider = newInjector().getProvider(key);
+      Provider<?> bindingProvider = newInjector().getBinding(key).getProvider();
 
       nextId.set(-1);
       try {
-        injector.getInstance(key);
+        newInjector().getInstance(key);
         fail();
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), "Illegal value: -1");
@@ -35,6 +34,37 @@
         fail();
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), "Illegal value: -1");
+      }
+
+      try {
+        nextId.set(-1);
+        newInjector().getInstance(injectsKey);
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1",
+            "while locating ", key.getTypeLiteral().toString(),
+            "for parameter 0 at " + injectsKey.getName() + ".inject");
+      }
+
+      nextId.set(201);
+      Injectable injectable = injectsKey.newInstance();
+      try {
+        nextId.set(-1);
+        newInjector().injectMembers(injectable);
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1",
+            "while locating ", key.getTypeLiteral().toString(),
+            "for parameter 0 at " + injectsKey.getName() + ".inject");
+      }
+
+      nextId.set(201);
+      Injectable hasProvider = newInjector().getInstance(injectsKey);
+      hasProvider.provider.get();
+      try {
+        nextId.set(-1);
+        hasProvider.provider.get();
+      } catch (ProvisionException expected) {
+        assertContains(expected.getMessage(), "Illegal value: -1",
+            "while locating ", key.getTypeLiteral().toString());
       }
     }
 
