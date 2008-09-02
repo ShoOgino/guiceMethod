@@ -1,0 +1,16 @@
+  /**
+   * Constructs a new exception for the given errors.
+   */
+  ConfigurationException(Errors errors) {
+    errors.makeImmutable();
+    this.errors = errors;
+
+    // find a cause
+    for (Message message : errors.getMessages()) {
+      if (message.getCause() != null) {
+        initCause(message.getCause());
+        break;
+      }
+    }
+  }
+

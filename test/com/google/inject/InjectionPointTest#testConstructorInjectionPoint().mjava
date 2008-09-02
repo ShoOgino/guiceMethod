@@ -1,12 +1,12 @@
   public void testConstructorInjectionPoint() throws NoSuchMethodException, IOException,
       ErrorsException {
     Constructor<?> constructor = Constructable.class.getConstructor(String.class);
-    InjectionPoint injectionPoint = InjectionPoint.get(constructor, new Errors());
+    InjectionPoint injectionPoint = InjectionPoint.get(constructor);
     assertSame(constructor, injectionPoint.getMember());
     assertFalse(injectionPoint.isOptional());
     assertEquals("com.google.inject.InjectionPointTest$Constructable.<init>()",
         injectionPoint.toString());
-    assertEqualsBothWays(injectionPoint, InjectionPoint.get(constructor, new Errors()));
+    assertEqualsBothWays(injectionPoint, InjectionPoint.get(constructor));
     assertSimilarWhenReserialized(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());

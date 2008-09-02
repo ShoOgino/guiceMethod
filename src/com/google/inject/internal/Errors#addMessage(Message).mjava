@@ -1,4 +1,5 @@
   public Errors addMessage(Message message) {
+    // TODO: merge the sources?
     if (!isMutable) {
       throw new AssertionError();
     }

@@ -6,7 +6,14 @@
     FastClass fastClass = newFastClass(clazz, Visibility.PUBLIC);
     final FastConstructor fastConstructor
         = fastClass.getConstructor(standardConstructor.getParameterTypes());
-    final InjectionPoint injectionPoint = InjectionPoint.get(standardConstructor, errors);
+    final InjectionPoint injectionPoint;
+
+    try {
+      injectionPoint = InjectionPoint.get(standardConstructor);
+    } catch (ConfigurationException e) {
+      errors.merge(e.getErrorMessages());
+      throw errors.toException();
+    }
 
     return new ConstructionProxy<T>() {
       @SuppressWarnings("unchecked")

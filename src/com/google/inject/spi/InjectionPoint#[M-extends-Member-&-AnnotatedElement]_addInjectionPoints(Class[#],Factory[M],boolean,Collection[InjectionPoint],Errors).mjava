@@ -1,0 +1,14 @@
+  private static <M extends Member & AnnotatedElement> void addInjectionPoints(Class<?> type,
+      Factory<M> factory, boolean statics, Collection<InjectionPoint> injectionPoints,
+      Errors errors) {
+    if (type == Object.class) {
+      return;
+    }
+
+    // Add injectors for superclass first.
+    addInjectionPoints(type.getSuperclass(), factory, statics, injectionPoints, errors);
+
+    // Add injectors for all members next
+    addInjectorsForMembers(type, factory, statics, injectionPoints, errors);
+  }
+

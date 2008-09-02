@@ -1,18 +1,6 @@
   public Errors merge(Errors moreErrors) {
     checkState(isMutable);
-
-    if (moreErrors.errors != this.errors) {
-      for (Message message : moreErrors.errors) {
-        List<Dependency> dependencies = Lists.newArrayList();
-        dependencies.addAll(this.dependencies);
-        dependencies.addAll(message.getDependencies());
-        Object source = message.getSource() != SourceProvider.UNKNOWN_SOURCE
-            ? message.getSource()
-            : this.source;
-        errors.add(new Message(source, message.getMessage(), dependencies, message.getCause()));
-      }
-    }
-
+    merge(moreErrors.errors);
     return this;
   }
 

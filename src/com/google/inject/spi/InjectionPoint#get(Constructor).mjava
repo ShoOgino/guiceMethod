@@ -4,8 +4,7 @@
    * @param constructor a no arguments constructor, or a constructor with any number of arguments
    *      and the {@literal @}{@link Inject} annotation.
    */
-  public static InjectionPoint get(Constructor constructor, Errors errors)
-      throws ErrorsException {
-    return new InjectionPoint(constructor, errors);
+  public static InjectionPoint get(Constructor constructor) {
+    return new InjectionPoint(constructor);
   }
 

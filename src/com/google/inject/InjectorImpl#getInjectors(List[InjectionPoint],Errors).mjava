@@ -1,0 +1,21 @@
+  /**
+   * Returns the injectors for the specified injection points.
+   */
+  ImmutableList<SingleMemberInjector> getInjectors(
+      List<InjectionPoint> injectionPoints, Errors errors) {
+    List<SingleMemberInjector> injectors = Lists.newArrayList();
+    for (InjectionPoint injectionPoint : injectionPoints) {
+      try {
+        Errors errorsForMember = injectionPoint.isOptional()
+            ? new Errors(injectionPoint.getMember())
+            : errors.withSource(injectionPoint.getMember());
+        SingleMemberInjector injector = injectionPoint.getMember() instanceof Field
+            ? new SingleFieldInjector(errorsForMember, this, injectionPoint)
+            : new SingleMethodInjector(errorsForMember, this, injectionPoint);
+        injectors.add(injector);
+      } catch (ErrorsException ignoredForNow) {
+      }
+    }
+    return ImmutableList.copyOf(injectors);
+  }
+

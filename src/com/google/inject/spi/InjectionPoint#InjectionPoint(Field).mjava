@@ -1,11 +1,20 @@
-  private InjectionPoint(Field field) throws ErrorsException {
+  private InjectionPoint(Field field) {
     this.member = field;
 
     Inject inject = field.getAnnotation(Inject.class);
     this.optional = inject.optional();
 
     Annotation[] annotations = field.getAnnotations();
-    Key<?> key = Keys.get(field.getGenericType(), field, annotations, new Errors());
+
+    Errors errors = new Errors(field);
+    Key<?> key = null;
+    try {
+      key = Keys.get(field.getGenericType(), field, annotations, errors);
+    } catch (ErrorsException e) {
+      errors.merge(e.getErrors());
+    }
+    ConfigurationException.throwNewIfNonEmpty(errors);
+
     this.dependencies = ImmutableList.<Dependency<?>>of(
         newDependency(key, Nullability.allowsNull(annotations), -1));
   }

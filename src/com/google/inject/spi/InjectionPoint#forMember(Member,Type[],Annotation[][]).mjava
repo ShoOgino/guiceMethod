@@ -1,5 +1,6 @@
   private ImmutableList<Dependency<?>> forMember(Member member, Type[] genericParameterTypes,
-      Annotation[][] annotations, Errors errors) throws ErrorsException {
+      Annotation[][] annotations) {
+    Errors errors = new Errors(member);
     Iterator<Annotation[]> annotationsIterator = Arrays.asList(annotations).iterator();
 
     List<Dependency<?>> dependencies = Lists.newArrayList();
@@ -15,7 +16,7 @@
       }
     }
 
-    errors.throwIfNecessary();
+    ConfigurationException.throwNewIfNonEmpty(errors);
     return ImmutableList.copyOf(dependencies);
   }
 

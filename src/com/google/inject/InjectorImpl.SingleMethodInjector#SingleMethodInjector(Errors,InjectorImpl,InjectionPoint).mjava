@@ -1,5 +1,8 @@
-    public SingleMethodInjector(Errors errors, InjectorImpl injector, final Method method)
+    public SingleMethodInjector(Errors errors, InjectorImpl injector, InjectionPoint injectionPoint)
         throws ErrorsException {
+      this.injectionPoint = injectionPoint;
+      final Method method = (Method) injectionPoint.getMember();
+
       // We can't use FastMethod if the method is private.
       if (Modifier.isPrivate(method.getModifiers())
           || Modifier.isProtected(method.getModifiers())) {
@@ -23,7 +26,12 @@
         };
       }
 
-      injectionPoint = InjectionPoint.get(method);
+      try {
+        injectionPoint = InjectionPoint.get(method);
+      } catch (ConfigurationException e) {
+        errors.merge(e.getErrorMessages());
+        throw errors.toException();
+      }
 
       parameterInjectors = injectionPoint.getDependencies().isEmpty()
           ? null

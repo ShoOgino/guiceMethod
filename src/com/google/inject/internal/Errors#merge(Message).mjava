@@ -1,0 +1,10 @@
+  private Message merge(Message message) {
+    List<Dependency> dependencies = Lists.newArrayList();
+    dependencies.addAll(this.dependencies);
+    dependencies.addAll(message.getDependencies());
+    Object source = message.getSource() != SourceProvider.UNKNOWN_SOURCE
+        ? message.getSource()
+        : this.source;
+    return new Message(source, message.getMessage(), dependencies, message.getCause());
+  }
+
