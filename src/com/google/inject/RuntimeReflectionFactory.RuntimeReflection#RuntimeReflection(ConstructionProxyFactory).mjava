@@ -1,4 +1,5 @@
     private RuntimeReflection(ConstructionProxyFactory constructionProxyFactory) {
-      this.constructionProxyFactory = checkNotNull(constructionProxyFactory, "constructionProxyFatory");
+      this.constructionProxyFactory
+          = checkNotNull(constructionProxyFactory, "constructionProxyFatory");
     }
 

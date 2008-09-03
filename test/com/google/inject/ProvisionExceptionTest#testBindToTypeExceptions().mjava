@@ -4,8 +4,9 @@
       fail();
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
-      assertContains(e.getMessage(), "while locating "
-          + "com.google.inject.ProvisionExceptionTest$D");
+      assertContains(e.getMessage(),
+          "1) Error injecting constructor, java.lang.UnsupportedOperationException",
+          "at " + D.class.getName() + ".<init>(ProvisionExceptionTest.java:");
     }
   }
 

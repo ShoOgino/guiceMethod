@@ -41,7 +41,6 @@
         newInjector().getInstance(injectsKey);
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), "Illegal value: -1",
-            "while locating ", key.getTypeLiteral().toString(),
             "for parameter 0 at " + injectsKey.getName() + ".inject");
       }
 
@@ -52,7 +51,6 @@
         newInjector().injectMembers(injectable);
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), "Illegal value: -1",
-            "while locating ", key.getTypeLiteral().toString(),
             "for parameter 0 at " + injectsKey.getName() + ".inject");
       }
 
@@ -63,8 +61,7 @@
         nextId.set(-1);
         hasProvider.provider.get();
       } catch (ProvisionException expected) {
-        assertContains(expected.getMessage(), "Illegal value: -1",
-            "while locating ", key.getTypeLiteral().toString());
+        assertContains(expected.getMessage(), "Illegal value: -1");
       }
     }
 

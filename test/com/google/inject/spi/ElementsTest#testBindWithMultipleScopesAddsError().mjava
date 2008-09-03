@@ -18,8 +18,7 @@
           @Override public Void visitMessage(Message command) {
             assertEquals("Scope is set more than once.", command.getMessage());
             assertNull(command.getCause());
-            assertTrue(command.getDependencies().isEmpty());
-            Asserts.assertContains(command.getSource(), "ElementsTest.java");
+            assertContains(command.getSource(), "ElementsTest.java");
             return null;
           }
         }

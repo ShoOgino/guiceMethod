@@ -7,7 +7,7 @@
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<A> constructor =
-        factory.get(new Errors(), A.class.getDeclaredConstructor(int.class));
+        factory.get(new Errors(), InjectionPoint.forConstructorOf(A.class));
 
     A a = constructor.newInstance(5);
     assertEquals(A.class, a.getClass());

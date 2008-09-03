@@ -1,4 +1,4 @@
   public Message(Object source, String message) {
-    this(source, message, ImmutableList.<Dependency>of(), null);
+    this(message, null, ImmutableList.of(source));
   }
 

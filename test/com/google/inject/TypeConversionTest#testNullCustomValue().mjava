@@ -12,11 +12,11 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
-          "Received null converting 'foo' (bound at ", getClass().getName(),
+          "1) Received null converting 'foo' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date",
           "using CustomConverter which matches only(java.util.Date) ",
-          "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:");
+          "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:",
+          "at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:");
     }
   }
 

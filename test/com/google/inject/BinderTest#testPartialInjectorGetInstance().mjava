@@ -5,8 +5,8 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "1) Error at " + MissingParameter.class.getName() + ".<init>(BinderTest.java:",
-          "Could not find a suitable constructor in " + NoInjectConstructor.class.getName());
+          "1) Could not find a suitable constructor in " + NoInjectConstructor.class.getName(),
+          "at " + MissingParameter.class.getName() + ".<init>(BinderTest.java:");
     }
   }
 

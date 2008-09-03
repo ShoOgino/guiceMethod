@@ -1,5 +1,13 @@
     public <T> ConstructionProxy<T> getConstructionProxy(Errors errors, Class<T> implementation)
         throws ErrorsException {
-      return constructionProxyFactory.get(errors, findConstructorIn(errors, implementation));
+      InjectionPoint injectionPoint;
+      try {
+        injectionPoint = InjectionPoint.forConstructorOf(implementation);
+      } catch (ConfigurationException e) {
+        throw errors.merge(e.getErrorMessages()).toException();
+      }
+
+      errors = errors.withSource(injectionPoint);
+      return constructionProxyFactory.get(errors, injectionPoint);
     }
 

@@ -3,6 +3,6 @@
       return false;
     }
     Message e = (Message) o;
-    return source.equals(e.source) && message.equals(e.message);
+    return message.equals(e.message) && Objects.equal(cause, e.cause) && sources.equals(e.sources);
   }
 

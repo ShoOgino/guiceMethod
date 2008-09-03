@@ -8,7 +8,7 @@
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<Counter> constructor =
-        factory.get(new Errors(), Counter.class.getDeclaredConstructor());
+        factory.get(new Errors(), InjectionPoint.forConstructorOf(Counter.class));
 
     Counter counter = constructor.newInstance();
     counter.inc();

@@ -1,7 +1,5 @@
   public Errors(Object source) {
-    this.source = source;
-    isMutable = true;
+    sources = Lists.newArrayList(source);
     errors = Lists.newArrayList();
-    dependencies = Lists.newArrayList();
   }
 

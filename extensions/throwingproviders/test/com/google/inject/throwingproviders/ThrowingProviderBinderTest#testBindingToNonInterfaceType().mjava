@@ -8,7 +8,7 @@
         }
       });
       fail();
-    } catch (IllegalArgumentException expected) {
+    } catch (CreationException expected) {
       assertContains(expected.getMessage(), "is not a compliant interface");
     }
   }

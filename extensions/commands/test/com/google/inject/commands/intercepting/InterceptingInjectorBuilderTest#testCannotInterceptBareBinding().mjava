@@ -12,7 +12,7 @@
     try {
       builder.build();
       fail();
-    } catch(UnsupportedOperationException expected) {
+    } catch(CreationException expected) {
     }
   }
 

@@ -8,8 +8,8 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "1) Error at " + BinderTest.class.getName(), "configure(BinderTest.java:",
-          "Binding to Provider is not allowed.");
+          "1) Binding to Provider is not allowed.",
+          "at " + BinderTest.class.getName(), "configure(BinderTest.java:");
     }
   }
 

@@ -13,12 +13,12 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
-          "Multiple converters can convert 'foo' (bound at ", getClass().getName(),
+          "1) Multiple converters can convert 'foo' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date:",
           "CustomConverter which matches only(java.util.Date)", "and",
           "CustomConverter which matches only(java.util.Date)",
-          "Please adjust your type converter configuration to avoid overlapping matches.");
+          "Please adjust your type converter configuration to avoid overlapping matches.",
+          "at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:");
     }
   }
 

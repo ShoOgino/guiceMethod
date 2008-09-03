@@ -11,15 +11,15 @@
     } catch (CreationException e) {
       assertEquals(4, e.getErrorMessages().size());
       assertContains(e.getMessage(),
-          "1) Error at " + getClass().getName(),
-          "No implementation for java.lang.Runnable was bound.",
-          "2) Error at " + getClass().getName(),
-          "No implementation for " + Comparator.class.getName() + " was bound.",
-          "3) Error at " + getClass().getName(),
-          "No implementation for java.util.concurrent.Callable<java.lang.String> was bound.",
-          "4) Error at " + getClass().getName(),
-          "No implementation for java.util.Date annotated with "
-              + "@com.google.inject.name.Named(value=date) was bound.");
+          "1) No implementation for java.lang.Runnable was bound.",
+          "at " + getClass().getName(),
+          "2) No implementation for " + Comparator.class.getName() + " was bound.",
+          "at " + getClass().getName(),
+          "3) No implementation for java.util.concurrent.Callable<java.lang.String> was bound.",
+          "at " + getClass().getName(),
+          "4) No implementation for java.util.Date annotated with @"
+              + Named.class.getName() + "(value=date) was bound.",
+          "at " + getClass().getName());
     }
   }
 

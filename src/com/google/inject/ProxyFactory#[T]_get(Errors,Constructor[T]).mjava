@@ -1,6 +1,0 @@
-  @SuppressWarnings("unchecked")
-  public <T> ConstructionProxy<T> get(Errors errors, Constructor<T> constructor)
-      throws ErrorsException {
-    return (ConstructionProxy<T>) getConstructionProxy(constructor, errors);
-  }
-

@@ -33,8 +33,6 @@
         throw errors.toException();
       }
 
-      parameterInjectors = injectionPoint.getDependencies().isEmpty()
-          ? null
-          : injector.getParametersInjectors(method, injectionPoint.getDependencies(), errors);
+      parameterInjectors = injector.getParametersInjectors(injectionPoint, errors);
     }
 

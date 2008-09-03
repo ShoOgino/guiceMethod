@@ -4,9 +4,9 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + D.class.getName() + ".class(ScopesTest.java:",
           D.class.getName() + " is annotated with " + Singleton.class.getName(),
-          "but scope annotations are not supported for abstract types.");
+          "but scope annotations are not supported for abstract types.",
+          "at " + D.class.getName() + ".class(ScopesTest.java:");
     }
   }
 

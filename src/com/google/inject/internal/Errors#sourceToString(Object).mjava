@@ -5,7 +5,9 @@
   public static String sourceToString(Object source) {
     checkNotNull(source, "source");
 
-    if (source instanceof Member) {
+    if (source instanceof InjectionPoint) {
+      return sourceToString(((InjectionPoint) source).getMember());
+    } else if (source instanceof Member) {
       return StackTraceElements.forMember((Member) source).toString();
     } else if (source instanceof Class) {
       return StackTraceElements.forType(((Class<?>) source)).toString();

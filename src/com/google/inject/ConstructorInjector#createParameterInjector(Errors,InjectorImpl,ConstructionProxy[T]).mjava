@@ -1,11 +1,6 @@
   SingleParameterInjector<?>[] createParameterInjector(Errors errors,
       InjectorImpl injector, ConstructionProxy<T> constructionProxy)
       throws ErrorsException {
-    Constructor constructor = constructionProxy.getConstructor();
-    errors = errors.withSource(constructor);
-    return getInjectionPoint().getDependencies().isEmpty()
-        ? null // default constructor.
-        : injector.getParametersInjectors(constructor,
-            constructionProxy.getInjectionPoint().getDependencies(), errors);
+    return injector.getParametersInjectors(constructionProxy.getInjectionPoint(), errors);
   }
 

@@ -7,8 +7,8 @@
     for (InjectionPoint injectionPoint : injectionPoints) {
       try {
         Errors errorsForMember = injectionPoint.isOptional()
-            ? new Errors(injectionPoint.getMember())
-            : errors.withSource(injectionPoint.getMember());
+            ? new Errors(injectionPoint)
+            : errors;
         SingleMemberInjector injector = injectionPoint.getMember() instanceof Field
             ? new SingleFieldInjector(errorsForMember, this, injectionPoint)
             : new SingleMethodInjector(errorsForMember, this, injectionPoint);

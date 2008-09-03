@@ -8,9 +8,9 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + A.class.getName() + ".class(ScopesTest.java:",
           A.class.getName() + " is annotated with " + Singleton.class.getName(),
-          "but scope annotations are not supported for abstract types.");
+          "but scope annotations are not supported for abstract types.",
+          "at " + A.class.getName() + ".class(ScopesTest.java:");
     }
   }
 

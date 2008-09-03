@@ -2,30 +2,32 @@
     Formatter fmt = new Formatter().format(heading).format(":%n%n");
     int index = 1;
     for (Message errorMessage : errorMessages) {
-      fmt.format("%s) Error at %s:%n", index++, errorMessage.getSource())
-         .format(" %s%n", errorMessage.getMessage());
+      fmt.format("%s) %s%n", index++, errorMessage.getMessage());
 
-      List<Dependency> dependencies = errorMessage.getDependencies();
+      List<Object> dependencies = errorMessage.getSources();
       for (int i = dependencies.size() - 1; i >= 0; i--) {
-        Dependency dependency = dependencies.get(i);
+        Object source = dependencies.get(i);
 
-        Key key = dependency.getKey();
-        fmt.format("  while locating %s%n", convert(key));
+        if (source instanceof Dependency) {
+          Dependency<?> dependency = (Dependency<?>) source;
 
-        InjectionPoint injectionPoint = dependency.getInjectionPoint();
-        if (injectionPoint == null) {
+          InjectionPoint injectionPoint = dependency.getInjectionPoint();
+          if (injectionPoint != null) {
+            Member member = injectionPoint.getMember();
+            Class<? extends Member> memberType = MoreTypes.memberType(member);
+            if (memberType == Field.class) {
+              fmt.format("  for field at %s%n", StackTraceElements.forMember(member));
+            } else if (memberType == Method.class || memberType == Constructor.class) {
+              fmt.format("  for parameter %s at %s%n",
+                  dependency.getParameterIndex(), StackTraceElements.forMember(member));
+            } else {
+              throw new AssertionError();
+            }
+          }
           continue;
         }
 
-        Member member = injectionPoint.getMember();
-        Class<? extends Member> memberType = MoreTypes.memberType(member);
-        if (memberType == Field.class) {
-          fmt.format("    for field at %s%n", StackTraceElements.forMember(member));
-
-        } else if (memberType == Method.class || memberType == Constructor.class) {
-          fmt.format("    for parameter %s at %s%n",
-              dependency.getParameterIndex(), StackTraceElements.forMember(member));
-        }
+        fmt.format("  at %s%n", sourceToString(source));
       }
 
       fmt.format("%n");

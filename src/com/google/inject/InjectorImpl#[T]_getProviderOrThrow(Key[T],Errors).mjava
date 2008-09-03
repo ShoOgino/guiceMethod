@@ -10,13 +10,13 @@
             public T call(InternalContext context) throws ErrorsException {
               Dependency<T> dependency = Dependency.get(key);
               context.setDependency(dependency);
-              errors.pushInjectionPoint(dependency);
+              errors.pushSource(dependency);
               try {
                 return factory.get(errors, context, dependency);
               }
               finally {
                 context.setDependency(null);
-                errors.popInjectionPoint(dependency);
+                errors.popSource(dependency);
               }
             }
           });

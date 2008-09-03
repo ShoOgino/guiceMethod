@@ -5,13 +5,9 @@
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
       assertContains(e.getMessage(), "Error injecting constructor",
-          "while locating com.google.inject.ProvisionExceptionTest$D",
           "for parameter 0 at com.google.inject.ProvisionExceptionTest$C.setD",
-          "while locating com.google.inject.ProvisionExceptionTest$C",
           "for field at com.google.inject.ProvisionExceptionTest$B.c",
-          "while locating com.google.inject.ProvisionExceptionTest$B",
-          "for parameter 0 at com.google.inject.ProvisionExceptionTest$A",
-          "while locating com.google.inject.ProvisionExceptionTest$A");
+          "for parameter 0 at com.google.inject.ProvisionExceptionTest$A");
     }
   }
 

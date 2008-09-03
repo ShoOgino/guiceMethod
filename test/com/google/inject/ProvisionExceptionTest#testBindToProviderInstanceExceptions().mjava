@@ -8,8 +8,9 @@
       fail();
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
-      assertContains(e.getMessage(), "while locating "
-          + "com.google.inject.ProvisionExceptionTest$D");
+      assertContains(e.getMessage(),
+          "1) Error in custom provider, java.lang.UnsupportedOperationException",
+          "at " + ProvisionExceptionTest.class.getName(), ".configure(ProvisionExceptionTest.java");
     }
   }
 

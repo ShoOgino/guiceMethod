@@ -1,5 +1,4 @@
   public Errors merge(Collection<Message> messages) {
-    checkState(isMutable);
     if (messages != this.errors) {
       for (Message message : messages) {
         errors.add(merge(message));

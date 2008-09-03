@@ -1,5 +1,7 @@
-  <T> ConstructionProxy<T> createConstructionProxy(Errors errors, Constructor<T> constructor)
+  <T> ConstructionProxy<T> createConstructionProxy(Errors errors, InjectionPoint injectionPoint)
       throws ErrorsException {
+    @SuppressWarnings("unchecked") // the member of injectionPoint is always a Constructor<T>
+    Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
     Class<T> declaringClass = constructor.getDeclaringClass();
 
     // Find applicable aspects. Bow out if none are applicable to this class.
@@ -10,7 +12,7 @@
       }
     }
     if (applicableAspects.isEmpty()) {
-      return defaultFactory.get(errors, constructor);
+      return defaultFactory.get(errors, injectionPoint);
     }
 
     // Get list of methods from cglib.
@@ -43,7 +45,7 @@
     }
     if (!anyMatched) {
       // not test-covered
-      return defaultFactory.get(errors, constructor);
+      return defaultFactory.get(errors, injectionPoint);
     }
 
     // Create callbacks.

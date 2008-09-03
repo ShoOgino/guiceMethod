@@ -6,6 +6,6 @@
 
       // Ewwwww...
       field.setAccessible(true);
-      factory = injector.getInternalFactory(dependency.getKey(), errors.withSource(field));
+      factory = injector.getInternalFactory(dependency.getKey(), errors.withSource(dependency));
     }
 

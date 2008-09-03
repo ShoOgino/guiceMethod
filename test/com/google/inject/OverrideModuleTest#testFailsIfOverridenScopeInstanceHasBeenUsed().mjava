@@ -26,8 +26,9 @@
       createInjector(Modules.override(original).with(replacements));
       fail("Exception expected");
     } catch (CreationException e) {
-      assertContains(e.getMessage(), "Error at ", getClass().getName(), ".configure(",
-          "The scope for @TestScopeAnnotation is bound directly and cannot be overridden.");
+      assertContains(e.getMessage(),
+          "1) The scope for @TestScopeAnnotation is bound directly and cannot be overridden.",
+          "at ", getClass().getName(), ".configure(");
     }
   }
 

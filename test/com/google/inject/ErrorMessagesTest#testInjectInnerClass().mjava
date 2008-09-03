@@ -4,10 +4,9 @@
       injector.getInstance(InnerClass.class);
       fail();
     } catch (Exception expected) {
-      // TODO(kevinb): why does the source come out as unknown??
       assertContains(expected.getMessage(),
-          "Error at " + InnerClass.class.getName() + ".class(ErrorMessagesTest.java:",
-          "Injecting into inner classes is not supported.");
+          "Injecting into inner classes is not supported.",
+          "at " + InnerClass.class.getName() + ".class(ErrorMessagesTest.java:");
     }
   }
 

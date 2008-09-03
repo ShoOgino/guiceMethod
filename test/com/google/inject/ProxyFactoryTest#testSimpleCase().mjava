@@ -7,7 +7,7 @@
     ProxyFactory factory = builder.create();
 
     ConstructionProxy<Simple> constructionProxy = factory
-        .createConstructionProxy(new Errors(), Simple.class.getDeclaredConstructor());
+        .createConstructionProxy(new Errors(), InjectionPoint.forConstructorOf(Simple.class));
 
     Simple simple = constructionProxy.newInstance();
     simple.invoke();

@@ -1,6 +1,6 @@
-  public ConstructionProxy<?> getConstructionProxy(Constructor<?> constructor, Errors errors)
+  public ConstructionProxy<?> getConstructionProxy(InjectionPoint injectionPoint, Errors errors)
       throws ErrorsException {
-    Object constructionProxyOrErrors = constructionProxies.get(constructor);
+    Object constructionProxyOrErrors = constructionProxies.get(injectionPoint);
 
     if (constructionProxyOrErrors instanceof ConstructionProxy<?>) {
       return (ConstructionProxy<?>) constructionProxyOrErrors;

@@ -1,7 +1,6 @@
-  public Errors(Errors parent, Object source) {
-    this.source = source;
-    isMutable = parent.isMutable;
+  private Errors(Errors parent, Object source) {
     errors = parent.errors;
-    dependencies = Lists.newArrayList(parent.dependencies);
+    sources = Lists.newArrayList(parent.sources);
+    sources.add(source);
   }
 

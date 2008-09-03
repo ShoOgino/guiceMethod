@@ -6,9 +6,9 @@
       Guice.createInjector().getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertEquals("User Exception", e.getCause().getMessage());
-      assertContains(e.getMessage(), "while locating "
-          + "com.google.inject.ProvisionExceptionTest$F");
+      assertContains(e.getMessage(),
+          "1) Error injecting constructor, com.google.inject.ProvisionException: User Exception",
+          "at " + F.class.getName() + ".<init>(ProvisionExceptionTest.java:");
     }
   }
 

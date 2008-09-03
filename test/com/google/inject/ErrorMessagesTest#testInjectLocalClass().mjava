@@ -7,8 +7,8 @@
       fail();
     } catch (Exception expected) {
       assertContains(expected.getMessage(),
-          "Error at " + LocalClass.class.getName() + ".class(ErrorMessagesTest.java:",
-          "Injecting into inner classes is not supported.");
+          "Injecting into inner classes is not supported.",
+          "at " + LocalClass.class.getName() + ".class(ErrorMessagesTest.java:");
     }
   }
 

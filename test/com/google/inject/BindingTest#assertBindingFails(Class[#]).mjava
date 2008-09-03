@@ -4,8 +4,8 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + PrivateNoArg.class.getName() + ".class(BindingTest.java:",
-          "Could not find a suitable constructor in " + PrivateNoArg.class.getName());
+          "Could not find a suitable constructor in " + PrivateNoArg.class.getName(),
+          "at " + PrivateNoArg.class.getName() + ".class(BindingTest.java:");
     }
   }
 

@@ -2,17 +2,14 @@
       try {
         Object[] parameters = getParameters(errors, context, parameterInjectors);
         methodInvoker.invoke(o, parameters);
-      }
-      catch (IllegalAccessException e) {
+      } catch (IllegalAccessException e) {
         throw new AssertionError(e);
-      }
-      catch (InvocationTargetException userException) {
+      } catch (InvocationTargetException userException) {
         Throwable cause = userException.getCause() != null
             ? userException.getCause()
             : userException;
-        errors.errorInjectingMethod(cause);
-      }
-      catch (ErrorsException e) {
+        errors.withSource(injectionPoint).errorInjectingMethod(cause);
+      } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

@@ -12,12 +12,12 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:",
-          "Type mismatch converting 'foo' (bound at ", getClass().getName(),
+          "1) Type mismatch converting 'foo' (bound at ", getClass().getName(),
           ".configure(TypeConversionTest.java:", "to java.util.Date",
           "using CustomConverter which matches only(java.util.Date) ",
           "(bound at " + getClass().getName(), ".configure(TypeConversionTest.java:",
-          "Converter returned -1.");
+          "Converter returned -1.",
+          "at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:");
     }
   }
 

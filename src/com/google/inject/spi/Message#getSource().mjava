@@ -1,4 +1,6 @@
   public String getSource() {
-    return source;
+    return sources.isEmpty()
+        ? SourceProvider.UNKNOWN_SOURCE.toString()
+        : Errors.sourceToString(sources.get(sources.size() - 1));
   }
 

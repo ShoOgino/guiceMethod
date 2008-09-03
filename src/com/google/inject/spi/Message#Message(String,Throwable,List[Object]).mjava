@@ -1,0 +1,6 @@
+  public Message(String message, Throwable cause, List<Object> sources) {
+    this.message = checkNotNull(message, "message");
+    this.cause = cause;
+    this.sources = ImmutableList.copyOf(sources);
+  }
+

@@ -41,14 +41,13 @@
       }
 
       return t;
-    }
-    catch (InvocationTargetException userException) {
+    } catch (InvocationTargetException userException) {
       Throwable cause = userException.getCause() != null
           ? userException.getCause()
           : userException;
-      throw errors.errorInjectingConstructor(cause).toException();
-    }
-    finally {
+      throw errors.withSource(constructionProxy.getInjectionPoint())
+          .errorInjectingConstructor(cause).toException();
+    } finally {
       constructionContext.removeCurrentReference();
     }
   }

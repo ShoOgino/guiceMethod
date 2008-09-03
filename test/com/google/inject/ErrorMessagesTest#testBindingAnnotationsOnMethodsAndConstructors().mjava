@@ -4,9 +4,9 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + B.class.getName() + ".injectMe(ErrorMessagesTest.java:",
           B.class.getName() + ".injectMe() is annotated with @", Green.class.getName() + "(), ",
-          "but binding annotations should be applied to its parameters instead.");
+          "but binding annotations should be applied to its parameters instead.",
+          "at " + B.class.getName() + ".injectMe(ErrorMessagesTest.java:");
     }
 
     try {
@@ -14,9 +14,9 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Error at " + C.class.getName() + ".<init>(ErrorMessagesTest.java:",
           C.class.getName() + ".<init>() is annotated with @", Green.class.getName() + "(), ",
-          "but binding annotations should be applied to its parameters instead.");
+          "but binding annotations should be applied to its parameters instead.",
+          "at " + C.class.getName() + ".<init>(ErrorMessagesTest.java:");
     }
   }
 

@@ -1,8 +1,0 @@
-  public Message(Object source, String message, List<Dependency> dependencies,
-      Throwable cause) {
-    this.source = Errors.sourceToString(source);
-    this.message = checkNotNull(message, "message");
-    this.dependencies = ImmutableList.copyOf(dependencies);
-    this.cause = cause;
-  }
-
