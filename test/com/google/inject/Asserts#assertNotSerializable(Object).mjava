@@ -1,4 +1,5 @@
   public static void assertNotSerializable(Object object) throws IOException {
+    Assert.assertFalse("Unexpected serialVersionUID", hasSerialVersionUid(object));
     try {
       reserialize(object);
       Assert.fail();

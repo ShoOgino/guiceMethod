@@ -1,5 +1,0 @@
-  /** Returns an immutable set with the names of the classes that are skipped. */
-  public Set<String> getSkippedClassNames() {
-    return classNamesToSkip;
-  }
-

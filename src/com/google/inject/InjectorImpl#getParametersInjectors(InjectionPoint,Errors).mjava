@@ -6,7 +6,7 @@
     errors.pushSource(injectionPoint);
     try {
       Member member = injectionPoint.getMember();
-      Annotation misplacedBindingAnnotation = Keys.findBindingAnnotation(
+      Annotation misplacedBindingAnnotation = Annotations.findBindingAnnotation(
           errors, member, ((AnnotatedElement) member).getAnnotations());
       if (misplacedBindingAnnotation != null) {
         errors.misplacedBindingAnnotation(member, misplacedBindingAnnotation);

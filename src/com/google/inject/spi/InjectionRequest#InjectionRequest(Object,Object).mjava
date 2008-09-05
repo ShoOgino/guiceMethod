@@ -1,0 +1,5 @@
+  public InjectionRequest(Object source, Object instance) {
+    this.source = checkNotNull(source, "source");
+    this.instance = checkNotNull(instance, "instance");
+  }
+

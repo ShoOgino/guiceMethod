@@ -1,0 +1,9 @@
+  ImmutableSet<InjectionPoint> getInjectionPoints() {
+    InjectionPoint[] injectionPoints = new InjectionPoint[memberInjectors.length + 1];
+    injectionPoints[0] = constructionProxy.getInjectionPoint();
+    for (int i = 0; i < memberInjectors.length; i++) {
+      injectionPoints[i+1] = memberInjectors[i].getInjectionPoint();
+    }
+    return ImmutableSet.of(injectionPoints);
+  }
+

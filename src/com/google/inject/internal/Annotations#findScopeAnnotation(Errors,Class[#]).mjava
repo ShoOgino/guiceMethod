@@ -1,0 +1,6 @@
+  /** Returns the scope annotation on {@code type}, or null if none is specified. */
+  public static Class<? extends Annotation> findScopeAnnotation(
+      Errors errors, Class<?> implementation) {
+    return findScopeAnnotation(errors, implementation.getAnnotations());
+  }
+

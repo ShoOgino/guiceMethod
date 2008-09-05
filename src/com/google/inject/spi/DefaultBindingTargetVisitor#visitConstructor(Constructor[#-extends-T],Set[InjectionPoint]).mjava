@@ -1,0 +1,5 @@
+  public V visitConstructor(Constructor<? extends T> constructor,
+      Set<InjectionPoint> injectionPoints) {
+    return visitOther();
+  }
+

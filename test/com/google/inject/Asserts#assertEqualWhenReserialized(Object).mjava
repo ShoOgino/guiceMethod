@@ -3,6 +3,7 @@
    */
   public static void assertEqualWhenReserialized(Object object)
       throws IOException {
+    Assert.assertTrue("Expected serialVersionUID", hasSerialVersionUid(object));
     Object reserialized = reserialize(object);
     Assert.assertEquals(object, reserialized);
     Assert.assertEquals(object.hashCode(), reserialized.hashCode());

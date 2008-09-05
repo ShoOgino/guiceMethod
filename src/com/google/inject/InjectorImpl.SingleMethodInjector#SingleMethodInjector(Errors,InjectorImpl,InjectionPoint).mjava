@@ -26,13 +26,6 @@
         };
       }
 
-      try {
-        injectionPoint = InjectionPoint.get(method);
-      } catch (ConfigurationException e) {
-        errors.merge(e.getErrorMessages());
-        throw errors.toException();
-      }
-
       parameterInjectors = injector.getParametersInjectors(injectionPoint, errors);
     }
 

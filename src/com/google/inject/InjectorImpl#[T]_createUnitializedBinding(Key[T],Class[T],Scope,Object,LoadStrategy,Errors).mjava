@@ -17,14 +17,14 @@
     // Handle @ImplementedBy
     ImplementedBy implementedBy = type.getAnnotation(ImplementedBy.class);
     if (implementedBy != null) {
-      Scopes.checkForMisplacedScopeAnnotations(type, source, errors);
+      Annotations.checkForMisplacedScopeAnnotations(type, source, errors);
       return createImplementedByBinding(type, scope, implementedBy, loadStrategy, errors);
     }
 
     // Handle @ProvidedBy.
     ProvidedBy providedBy = type.getAnnotation(ProvidedBy.class);
     if (providedBy != null) {
-      Scopes.checkForMisplacedScopeAnnotations(type, source, errors);
+      Annotations.checkForMisplacedScopeAnnotations(type, source, errors);
       return createProvidedByBinding(type, scope, providedBy, loadStrategy, errors);
     }
 
@@ -41,7 +41,7 @@
     }
 
     if (scope == null) {
-      Class<? extends Annotation> scopeAnnotation = Scopes.findScopeAnnotation(errors, type);
+      Class<? extends Annotation> scopeAnnotation = Annotations.findScopeAnnotation(errors, type);
       if (scopeAnnotation != null) {
         scope = scopes.get(scopeAnnotation);
         if (scope == null) {

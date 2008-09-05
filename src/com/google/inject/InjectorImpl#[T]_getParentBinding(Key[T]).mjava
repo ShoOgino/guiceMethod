@@ -23,6 +23,7 @@
       if (binding != null
           && binding.getScope() != null
           && !binding.getScope().equals(Scopes.NO_SCOPE)) {
+        // TODO: this binding won't report its injection points or scoping properly
         bindingImpl = new ProviderInstanceBindingImpl(
             this,
             key,
@@ -30,7 +31,8 @@
             new InternalFactoryToProviderAdapter(binding.getProvider(), binding.getSource()),
             Scopes.NO_SCOPE,
             binding.getProvider(),
-            LoadStrategy.LAZY);
+            LoadStrategy.LAZY,
+            ImmutableSet.<InjectionPoint>of());
       }
       parentBindings.put(key, bindingImpl); // this kinda scares me
       return bindingImpl;

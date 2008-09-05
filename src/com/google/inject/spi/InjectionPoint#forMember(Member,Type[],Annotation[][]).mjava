@@ -8,7 +8,7 @@
     for (Type parameterType : genericParameterTypes) {
       try {
         Annotation[] parameterAnnotations = annotationsIterator.next();
-        Key<?> key = Keys.get(parameterType, member, parameterAnnotations, errors);
+        Key<?> key = Annotations.getKey(parameterType, member, parameterAnnotations, errors);
         dependencies.add(newDependency(key, Nullability.allowsNull(parameterAnnotations), index));
         index++;
       } catch (ErrorsException e) {

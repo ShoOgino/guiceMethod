@@ -1,6 +1,4 @@
-  /**
-   * Returns the injectors for the specified injection points.
-   */
+  /** Returns the injectors for the specified injection points. */
   ImmutableList<SingleMemberInjector> getInjectors(
       List<InjectionPoint> injectionPoints, Errors errors) {
     List<SingleMemberInjector> injectors = Lists.newArrayList();

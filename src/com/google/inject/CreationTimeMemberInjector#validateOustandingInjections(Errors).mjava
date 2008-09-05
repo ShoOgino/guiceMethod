@@ -7,7 +7,7 @@
       try {
         Object toInject = entry.getKey();
         Object source = entry.getValue();
-        injector.getMemberInjectors(toInject.getClass(), errors.withSource(source));
+        injector.injectors.get(toInject.getClass(), errors.withSource(source));
       } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }

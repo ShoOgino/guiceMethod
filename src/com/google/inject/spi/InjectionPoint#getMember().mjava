@@ -1,3 +1,6 @@
+  /**
+   * Returns the injected constructor, field, or method.
+   */
   public Member getMember() {
     return member;
   }

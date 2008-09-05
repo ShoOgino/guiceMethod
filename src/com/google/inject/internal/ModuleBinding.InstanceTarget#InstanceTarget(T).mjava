@@ -1,4 +1,0 @@
-    public InstanceTarget(T instance) {
-      this.instance = instance;
-    }
-

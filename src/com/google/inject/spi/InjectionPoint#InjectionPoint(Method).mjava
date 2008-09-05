@@ -1,4 +1,4 @@
-  private InjectionPoint(Method method) {
+  InjectionPoint(Method method) {
     this.member = method;
 
     Inject inject = method.getAnnotation(Inject.class);

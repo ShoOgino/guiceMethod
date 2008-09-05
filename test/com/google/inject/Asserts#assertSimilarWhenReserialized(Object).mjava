@@ -2,6 +2,7 @@
    * Fails unless {@code object} has the same toString value when reserialized.
    */
   public static void assertSimilarWhenReserialized(Object object) throws IOException {
+    Assert.assertTrue("Expected serialVersionUID", hasSerialVersionUid(object));
     Object reserialized = reserialize(object);
     Assert.assertEquals(object.toString(), reserialized.toString());
   }

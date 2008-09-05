@@ -11,7 +11,14 @@
 
         new FailingElementVisitor() {
           @Override public Void visitInjectionRequest(InjectionRequest command) {
-            assertEquals(Arrays.asList(firstObject, secondObject), command.getInstances());
+            assertEquals(firstObject, command.getInstance());
+            return null;
+          }
+        },
+
+        new FailingElementVisitor() {
+          @Override public Void visitInjectionRequest(InjectionRequest command) {
+            assertEquals(secondObject, command.getInstance());
             return null;
           }
         }

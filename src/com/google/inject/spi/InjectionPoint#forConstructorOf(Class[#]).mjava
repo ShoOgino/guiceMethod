@@ -29,7 +29,7 @@
     ConfigurationException.throwNewIfNonEmpty(errors);
 
     if (found != null) {
-      return get(found);
+      return new InjectionPoint(found);
     }
 
     // If no annotated constructor is found, look for a no-arg constructor
@@ -44,7 +44,7 @@
         throw new ConfigurationException(errors);
       }
 
-      return get(noArgCtor);
+      return new InjectionPoint(noArgCtor);
     } catch (NoSuchMethodException e) {
       errors.missingConstructor(type);
       throw new ConfigurationException(errors);

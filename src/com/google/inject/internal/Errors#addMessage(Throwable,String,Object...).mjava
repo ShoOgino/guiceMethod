@@ -1,6 +1,6 @@
   private Errors addMessage(Throwable cause, String messageFormat, Object... arguments) {
     String message = format(messageFormat, arguments);
-    addMessage(new Message(message, cause, stripDuplicates(sources)));
+    addMessage(new Message(stripDuplicates(sources), message, cause));
     return this;
   }
 

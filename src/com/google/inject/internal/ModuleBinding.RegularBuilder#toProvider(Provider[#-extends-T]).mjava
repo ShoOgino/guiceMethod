@@ -1,9 +1,21 @@
     public ScopedBindingBuilder toProvider(final Provider<? extends T> provider) {
       checkNotNull(provider, "provider");
       checkNotTargetted();
+
+      // lookup the injection points, adding any errors to the binder's errors list
+      List<InjectionPoint> injectionPointsList = Lists.newArrayList();
+      try {
+        InjectionPoint.addForInstanceMethodsAndFields(provider.getClass(), injectionPointsList);
+      } catch (ConfigurationException e) {
+        for (Message message : e.getErrorMessages()) {
+          binder.addError(message);
+        }
+      }
+      final ImmutableSet<InjectionPoint> injectionPoints = ImmutableSet.copyOf(injectionPointsList);
+
       target = new Target<T>() {
         public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
-          return visitor.visitProvider(provider);
+          return visitor.visitProvider(provider, injectionPoints);
         }
       };
       return this;

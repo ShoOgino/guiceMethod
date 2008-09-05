@@ -11,7 +11,8 @@
             assertContains(command.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(D.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitConstructor(Constructor<? extends T> constructor) {
+              @Override public Void visitConstructor(Constructor<? extends T> constructor,
+                  Set<InjectionPoint> injectionPoints) {
                 Constructor<?> expected = D.class.getDeclaredConstructors()[0];
                 assertEquals(expected, constructor);
                 return null;

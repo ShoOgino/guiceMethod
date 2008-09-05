@@ -1,7 +1,5 @@
   public void writeRequestInjection(final Binder binder,
       final InjectionRequest command) {
-    List<Object> objects = command.getInstances();
-    binder.withSource(command.getSource())
-        .requestInjection(objects.toArray());
+    binder.withSource(command.getSource()).requestInjection(command.getInstance());
   }
 

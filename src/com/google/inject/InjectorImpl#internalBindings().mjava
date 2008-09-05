@@ -1,4 +1,0 @@
-  Map<Key<?>, BindingImpl<?>> internalBindings() {
-    return explicitBindings;
-  }
-

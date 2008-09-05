@@ -1,0 +1,19 @@
+  public void testMultipleBindingAnnotations() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {}
+
+        @Provides @Named("A") @Blue
+        public String provideString() {
+          return "a";
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      Asserts.assertContains(expected.getMessage(),
+          "more than one annotation annotated with @BindingAnnotation:", "Named", "Blue",
+          "at " + getClass().getName(), ".provideString(ProviderMethodsTest.java:");
+    }
+
+  }
+

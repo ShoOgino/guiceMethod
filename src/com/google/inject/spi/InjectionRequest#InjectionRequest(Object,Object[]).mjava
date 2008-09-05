@@ -1,5 +1,0 @@
-  public InjectionRequest(Object source, Object[] instances) {
-    this.source = checkNotNull(source, "source");
-    this.instances = ImmutableList.of(instances);
-  }
-

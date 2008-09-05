@@ -1,0 +1,22 @@
+  public void testFieldInjectionPoint() throws NoSuchFieldException, IOException, ErrorsException {
+    Field fooField = getClass().getField("foo");
+
+    InjectionPoint injectionPoint = new InjectionPoint(fooField);
+    assertSame(fooField, injectionPoint.getMember());
+    assertFalse(injectionPoint.isOptional());
+    assertEquals(getClass().getName() + ".foo", injectionPoint.toString());
+    assertEqualsBothWays(injectionPoint, new InjectionPoint(fooField));
+    assertSimilarWhenReserialized(injectionPoint);
+
+    Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
+    assertEquals("Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=a)]@"
+        + getClass().getName() + ".foo", dependency.toString());
+    assertEquals(fooField, dependency.getInjectionPoint().getMember());
+    assertEquals(-1, dependency.getParameterIndex());
+    Assert.assertEquals(Key.get(String.class, Names.named("a")), dependency.getKey());
+    assertEquals(false, dependency.isNullable());
+    assertSimilarWhenReserialized(dependency);
+    assertEqualsBothWays(dependency,
+        getOnlyElement(new InjectionPoint(fooField).getDependencies()));
+  }
+

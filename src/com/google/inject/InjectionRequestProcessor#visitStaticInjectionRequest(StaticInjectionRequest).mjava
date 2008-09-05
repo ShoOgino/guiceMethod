@@ -1,7 +1,5 @@
   @Override public Boolean visitStaticInjectionRequest(StaticInjectionRequest command) {
-    for (Class<?> type : command.getTypes()) {
-      staticInjections.add(new StaticInjection(command.getSource(), type));
-    }
+    staticInjections.add(new StaticInjection(command.getSource(), command.getType()));
     return true;
   }
 

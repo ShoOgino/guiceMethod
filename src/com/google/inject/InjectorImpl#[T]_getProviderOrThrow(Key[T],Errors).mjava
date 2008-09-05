@@ -1,5 +1,4 @@
-  <T> Provider<T> getProviderOrThrow(final Key<T> key, Errors errors)
-      throws ErrorsException {
+  <T> Provider<T> getProviderOrThrow(final Key<T> key, Errors errors) throws ErrorsException {
     final InternalFactory<? extends T> factory = getInternalFactory(key, errors);
 
     return new Provider<T>() {

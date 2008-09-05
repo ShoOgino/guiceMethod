@@ -1,4 +1,0 @@
-  public List<Object> getInstances() {
-    return instances;
-  }
-

@@ -1,4 +1,5 @@
   @Override void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
     lateBoundConstructor.bind(injector, getBoundClass(), errors);
+    injectionPoints = lateBoundConstructor.constructorInjector.getInjectionPoints();
   }
 

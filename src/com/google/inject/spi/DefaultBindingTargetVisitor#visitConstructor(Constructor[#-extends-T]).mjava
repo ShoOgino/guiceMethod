@@ -1,4 +1,0 @@
-  public V visitConstructor(Constructor<? extends T> constructor) {
-    return visitOther();
-  }
-

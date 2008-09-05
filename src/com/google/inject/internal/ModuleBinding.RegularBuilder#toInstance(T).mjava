@@ -1,5 +1,25 @@
     public void toInstance(final T instance) {
       checkNotTargetted();
-      target = new InstanceTarget<T>(instance);
+
+      if (instance == null) {
+        binder.addError("Binding to null instances is not allowed. "
+            + "Use toProvider(Providers.of(null)) if this is your intended behaviour.");
+        // we finish the binding to prevent additional errors
+        toProvider(Providers.<T>of(null));
+        return;
+      }
+
+      // lookup the injection points, adding any errors to the binder's errors list
+      List<InjectionPoint> injectionPointsList = Lists.newArrayList();
+      try {
+        InjectionPoint.addForInstanceMethodsAndFields(instance.getClass(), injectionPointsList);
+      } catch (ConfigurationException e) {
+        for (Message message : e.getErrorMessages()) {
+          binder.addError(message);
+        }
+      }
+      ImmutableSet<InjectionPoint> injectionPoints = ImmutableSet.copyOf(injectionPointsList);
+
+      target = new InstanceTarget<T>(instance, injectionPoints);
     }
 

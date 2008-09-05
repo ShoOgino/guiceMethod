@@ -1,0 +1,5 @@
+    public InstanceTarget(T instance, ImmutableSet<InjectionPoint> injectionPoints) {
+      this.instance = instance;
+      this.injectionPoints = injectionPoints;
+    }
+

@@ -2,6 +2,6 @@
     List<Object> sources = Lists.newArrayList();
     sources.addAll(this.sources);
     sources.addAll(message.getSources());
-    return new Message(message.getMessage(), message.getCause(), stripDuplicates(sources));
+    return new Message(stripDuplicates(sources), message.getMessage(), message.getCause());
   }
 

@@ -1,5 +1,0 @@
-  public Errors cannotBindToNullInstance() {
-    return addMessage("Binding to null instances is not allowed. "
-        + "Use toProvider(Providers.of(null)) if this is your intended behaviour.");
-  }
-

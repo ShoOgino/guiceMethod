@@ -1,9 +1,0 @@
-  /**
-   * Returns a new injection point for {@code method}.
-   *
-   * @param method a method with the {@literal @}{@link Inject} annotation.
-   */
-  public static InjectionPoint get(Method method) {
-    return new InjectionPoint(method);
-  }
-

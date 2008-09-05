@@ -7,11 +7,10 @@
    *      field with multiple binding annotations. When such an exception is thrown, the valid
    *      injection points are still added to the collection.
    */
-  public static void addForStaticMethodsAndFields(Class<?> type,
-      Collection<InjectionPoint> injectionPoints) {
+  public static void addForStaticMethodsAndFields(Class<?> type, Collection<InjectionPoint> sink) {
     Errors errors = new Errors();
-    addInjectionPoints(type, Factory.FIELDS, true, injectionPoints, errors);
-    addInjectionPoints(type, Factory.METHODS, true, injectionPoints, errors);
+    addInjectionPoints(type, Factory.FIELDS, true, sink, errors);
+    addInjectionPoints(type, Factory.METHODS, true, sink, errors);
     ConfigurationException.throwNewIfNonEmpty(errors);
   }
 

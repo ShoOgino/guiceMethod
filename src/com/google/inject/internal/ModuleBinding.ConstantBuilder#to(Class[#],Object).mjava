@@ -20,6 +20,7 @@
         key = Key.get(typeAsClassT);
       }
 
-      ModuleBinding.this.target = new InstanceTarget<T>(instanceAsT);
+      ModuleBinding.this.target = new InstanceTarget<T>(instanceAsT,
+          ImmutableSet.<InjectionPoint>of());
     }
 

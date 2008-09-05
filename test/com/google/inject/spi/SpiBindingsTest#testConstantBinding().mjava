@@ -11,7 +11,7 @@
             assertContains(command.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(Integer.class, Names.named("one")), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitInstance(T instance) {
+              @Override public Void visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
                 assertEquals((Integer) 1, instance);
                 return null;
               }

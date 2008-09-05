@@ -1,6 +1,6 @@
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked") // the constructed T is the same as the injection point's T
   public <T> ConstructionProxy<T> get(Errors errors, InjectionPoint injectionPoint)
       throws ErrorsException {
-    return (ConstructionProxy<T>) getConstructionProxy(injectionPoint, errors);
+    return (ConstructionProxy<T>) constructionProxies.get(injectionPoint, errors);
   }
 

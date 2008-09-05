@@ -1,8 +1,0 @@
-  /**
-   * Visit a provider instance binding. The provider's {@code get} method is invoked to resolve
-   * injections. This target is found in both module and injector bindings.
-   *
-   * @param provider the user-supplied, unscoped provider
-   */
-  V visitProvider(Provider<? extends T> provider);
-

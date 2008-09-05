@@ -1,5 +1,0 @@
-  /**
-   * Gets the injection points for this binding.
-   */
-  Set<InjectionPoint> getInjectionPoints();
-

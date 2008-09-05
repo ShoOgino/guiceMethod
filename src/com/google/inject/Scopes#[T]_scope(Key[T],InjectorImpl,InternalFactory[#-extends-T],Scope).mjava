@@ -1,6 +1,4 @@
-  /**
-   * Scopes an internal factory.
-   */
+  /** Scopes an internal factory. */
   static <T> InternalFactory<? extends T> scope(Key<T> key,
       InjectorImpl injector, InternalFactory<? extends T> creator,
       Scope scope) {

@@ -1,4 +1,4 @@
-  private InjectionPoint(Field field) {
+  InjectionPoint(Field field) {
     this.member = field;
 
     Inject inject = field.getAnnotation(Inject.class);
@@ -9,7 +9,7 @@
     Errors errors = new Errors(field);
     Key<?> key = null;
     try {
-      key = Keys.get(field.getGenericType(), field, annotations, errors);
+      key = Annotations.getKey(field.getGenericType(), field, annotations, errors);
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }

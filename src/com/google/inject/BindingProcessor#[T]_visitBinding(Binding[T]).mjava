@@ -42,29 +42,24 @@
     });
 
     command.acceptTargetVisitor(new BindingTargetVisitor<T, Void>() {
-      public Void visitInstance(T instance) {
-        if (instance == null) {
-          errors.cannotBindToNullInstance();
-          putBinding(invalidBinding(injector, key, source));
-          return null;
-        }
-
+      public Void visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
         ConstantFactory<? extends T> factory = new ConstantFactory<T>(instance);
-        memberInjector.requestInjection(instance, source);
-        InternalFactory<? extends T> scopedFactory
-            = Scopes.scope(key, injector, factory, scope);
-        putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, instance));
+        memberInjector.requestInjection(instance, source, injectionPoints);
+        InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
+        putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, injectionPoints,
+            instance));
         return null;
       }
 
-      public Void visitProvider(Provider<? extends T> provider) {
+      public Void visitProvider(Provider<? extends T> provider,
+          Set<InjectionPoint> injectionPoints) {
         InternalFactoryToProviderAdapter<? extends T> factory
             = new InternalFactoryToProviderAdapter<T>(provider, source);
-        memberInjector.requestInjection(provider, source);
+        memberInjector.requestInjection(provider, source, injectionPoints);
         InternalFactory<? extends T> scopedFactory
             = Scopes.scope(key, injector, factory, scope);
-        putBinding(new ProviderInstanceBindingImpl<T>(
-                injector, key, source, scopedFactory, scope, provider, loadStrategy));
+        putBinding(new ProviderInstanceBindingImpl<T>(injector, key, source, scopedFactory, scope,
+            provider, loadStrategy, injectionPoints));
         return null;
       }
 
@@ -137,7 +132,8 @@
         throw new IllegalArgumentException("Cannot apply a non-module element");
       }
 
-      public Void visitConstructor(Constructor<? extends T> constructor) {
+      public Void visitConstructor(Constructor<? extends T> constructor,
+          Set<InjectionPoint> injectionPoints) {
         throw new IllegalArgumentException("Cannot apply a non-module element");
       }
 

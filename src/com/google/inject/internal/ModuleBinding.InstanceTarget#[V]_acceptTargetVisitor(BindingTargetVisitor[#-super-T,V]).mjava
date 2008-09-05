@@ -1,4 +1,4 @@
     public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
-      return visitor.visitInstance(instance);
+      return visitor.visitInstance(instance, injectionPoints);
     }
 

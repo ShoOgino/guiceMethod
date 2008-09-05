@@ -1,0 +1,11 @@
+  ProviderInstanceBindingImpl(InjectorImpl injector, Key<T> key,
+      Object source,
+      InternalFactory<? extends T> internalFactory, Scope scope,
+      Provider<? extends T> providerInstance,
+      LoadStrategy loadStrategy,
+      Set<InjectionPoint> injectionPoints) {
+    super(injector, key, source, internalFactory, scope, loadStrategy);
+    this.providerInstance = providerInstance;
+    this.injectionPoints = ImmutableSet.copyOf(injectionPoints);
+  }
+

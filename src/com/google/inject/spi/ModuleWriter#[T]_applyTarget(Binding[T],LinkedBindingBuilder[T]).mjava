@@ -4,12 +4,13 @@
   public <T> ScopedBindingBuilder applyTarget(Binding<T> binding,
       final LinkedBindingBuilder<T> linkedBindingBuilder) {
     return binding.acceptTargetVisitor(new BindingTargetVisitor<T, ScopedBindingBuilder>() {
-      public ScopedBindingBuilder visitInstance(T instance) {
+      public ScopedBindingBuilder visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
         linkedBindingBuilder.toInstance(instance);
         return null;
       }
 
-      public ScopedBindingBuilder visitProvider(Provider<? extends T> provider) {
+      public ScopedBindingBuilder visitProvider(Provider<? extends T> provider,
+          Set<InjectionPoint> injectionPoints) {
         return linkedBindingBuilder.toProvider(provider);
       }
 
@@ -29,7 +30,8 @@
         throw new IllegalArgumentException("Non-module element");
       }
 
-      public ScopedBindingBuilder visitConstructor(Constructor<? extends T> constructor) {
+      public ScopedBindingBuilder visitConstructor(Constructor<? extends T> constructor,
+          Set<InjectionPoint> injectionPoints) {
         throw new IllegalArgumentException("Non-module element");
       }
 

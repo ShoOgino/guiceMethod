@@ -1,0 +1,13 @@
+  @Provides
+  Bob provideBob(final Dagny dagny) {
+    return new Bob() {
+      public String getName() {
+        return "A Bob";
+      }
+
+      public Dagny getDaughter() {
+        return dagny;
+      }
+    };
+  }
+

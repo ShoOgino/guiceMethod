@@ -4,7 +4,7 @@
       return;
     }
 
-    for (SingleMemberInjector injector : getMemberInjectors(o.getClass(), errors)) {
+    for (SingleMemberInjector injector : injectors.get(o.getClass(), errors)) {
       injector.inject(errors, context, o);
     }
   }
