@@ -4,10 +4,10 @@
    * for testing the equals method itself.
    */
   public static void assertEqualsBothWays(Object expected, Object actual) {
-    Assert.assertNotNull(expected);
-    Assert.assertNotNull(actual);
-    Assert.assertTrue("expected.equals(actual)", expected.equals(actual));
-    Assert.assertTrue("actual.equals(expected)", actual.equals(expected));
-    Assert.assertEquals("hashCode", expected.hashCode(), actual.hashCode());
+    assertNotNull(expected);
+    assertNotNull(actual);
+    assertTrue("expected.equals(actual)", expected.equals(actual));
+    assertTrue("actual.equals(expected)", actual.equals(expected));
+    assertEquals("hashCode", expected.hashCode(), actual.hashCode());
   }
 

@@ -3,15 +3,15 @@
    */
   public static void assertContains(String text, String... substrings) {
     int startingFrom = 0;
-    for (int i = 0; i < substrings.length; i++) {
-      int index = text.indexOf(substrings[i], startingFrom);
-      Assert.assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"",
-          text, substrings[i]), index >= startingFrom);
-      startingFrom = index + substrings[i].length();
+    for (String substring : substrings) {
+      int index = text.indexOf(substring, startingFrom);
+      assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"", text, substring),
+          index >= startingFrom);
+      startingFrom = index + substring.length();
     }
 
     String lastSubstring = substrings[substrings.length - 1];
-    Assert.assertTrue(String.format("Expected \"%s\" to contain substring \"%s\" only once),",
+    assertTrue(String.format("Expected \"%s\" to contain substring \"%s\" only once),",
         text, lastSubstring), text.indexOf(lastSubstring, startingFrom) == -1);
   }
 

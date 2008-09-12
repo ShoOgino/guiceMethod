@@ -1,7 +1,7 @@
   /**
    * Execute this target against the linked binding builder.
    */
-  public <T> ScopedBindingBuilder applyTarget(Binding<T> binding,
+  protected <T> ScopedBindingBuilder applyTarget(Binding<T> binding,
       final LinkedBindingBuilder<T> linkedBindingBuilder) {
     return binding.acceptTargetVisitor(new BindingTargetVisitor<T, ScopedBindingBuilder>() {
       public ScopedBindingBuilder visitInstance(T instance, Set<InjectionPoint> injectionPoints) {

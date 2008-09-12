@@ -1,4 +1,4 @@
   public void testSerialization() throws IOException {
-    assertEqualWhenReserialized(new TypeLiteral<List<String>>() {});
+    assertNotSerializable(new TypeLiteral<List<String>>() {});
   }
 

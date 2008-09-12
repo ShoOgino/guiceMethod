@@ -4,7 +4,7 @@
     assertEqualsBothWays(a, b);
     assertEquals("java.util.List<? extends java.lang.CharSequence>", a.toString());
     assertEquals("java.util.List<? extends java.lang.CharSequence>", b.toString());
-    assertEqualWhenReserialized(a);
-    assertEqualWhenReserialized(b);
+    assertNotSerializable(a);
+    assertNotSerializable(b);
   }
 

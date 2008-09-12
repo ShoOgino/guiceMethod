@@ -1,0 +1,6 @@
+    SerializedForm(Key<?> key) {
+      this.type = key.getTypeLiteral().getType();
+      this.annotationType = key.getAnnotationType();
+      this.annotationInstance = key.getAnnotation();
+    }
+

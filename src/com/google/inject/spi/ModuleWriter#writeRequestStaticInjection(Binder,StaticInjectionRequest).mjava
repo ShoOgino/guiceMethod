@@ -1,4 +1,4 @@
-  public void writeRequestStaticInjection(final Binder binder,
+  protected void writeRequestStaticInjection(final Binder binder,
       final StaticInjectionRequest element) {
     Class<?> type = element.getType();
     binder.withSource(element.getSource()).requestStaticInjection(type);

@@ -1,8 +1,0 @@
-  static boolean hasSerialVersionUid(Object object) {
-    try {
-      return null != object.getClass().getDeclaredField("serialVersionUID");
-    } catch (NoSuchFieldException e) {
-      return false;
-    }
-  }
-
