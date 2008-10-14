@@ -1,4 +1,0 @@
-  CreationTimeMemberInjector(InjectorImpl injector) {
-    this.injector = injector;
-  }
-
