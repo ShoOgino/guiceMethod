@@ -1,3 +1,10 @@
+  /**
+   * @param classMatcher matches classes the interceptor should apply to. For example: {@code
+   *     only(Runnable.class)}.
+   * @param methodMatcher matches methods the interceptor should apply to. For example: {@code
+   *     annotatedWith(Transactional.class)}.
+   * @param interceptors to apply
+   */
   MethodAspect(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher, List<MethodInterceptor> interceptors) {
     this.classMatcher = checkNotNull(classMatcher, "class matcher");

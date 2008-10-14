@@ -13,11 +13,11 @@
       // Go ahead and bind anyway so we don't get collateral errors.
     }
 
-    Scope existing = scopes.get(checkNotNull(annotationType, "annotation type"));
+    Scope existing = state.getScope(checkNotNull(annotationType, "annotation type"));
     if (existing != null) {
       errors.duplicateScopes(existing, annotationType, scope);
     } else {
-      scopes.put(annotationType, checkNotNull(scope, "scope"));
+      state.putAnnotation(annotationType, checkNotNull(scope, "scope"));
     }
 
     return true;

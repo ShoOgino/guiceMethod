@@ -1,0 +1,15 @@
+  InjectorImpl(@Nullable InjectorImpl parent) {
+    this.parent = parent;
+    this.state = new InheritingState(parent != null ? parent.state : State.NONE);
+
+    if (parent != null) {
+      localContext = parent.localContext;
+    } else {
+      localContext = new ThreadLocal<InternalContext[]>() {
+        protected InternalContext[] initialValue() {
+          return new InternalContext[1];
+        }
+      };
+    }
+  }
+

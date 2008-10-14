@@ -1,0 +1,8 @@
+    /**
+     * Ensures that the instance has been injected, and returns it.
+     */
+    public T get(Errors errors) throws ErrorsException {
+      initializer.ensureInjected(instance, errors);
+      return instance;
+    }
+

@@ -1,0 +1,7 @@
+  public void testTypeConvertersInherited() {
+    Injector parent = Guice.createInjector(bindListConverterModule);
+    Injector child = parent.createChildInjector(bindStringNamedB);
+
+    assertEquals(ImmutableList.of(), child.getInstance(Key.get(List.class, Names.named("B"))));
+  }
+

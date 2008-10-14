@@ -1,3 +1,0 @@
-    @Inject
-    Truck(Bus bus) {}
-

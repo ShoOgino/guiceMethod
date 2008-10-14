@@ -1,5 +1,5 @@
   // not test-covered
   public Map<Key<?>, Binding<?>> getBindings() {
-    return Collections.<Key<?>, Binding<?>>unmodifiableMap(explicitBindings);
+    return state.getExplicitBindingsThisLevel();
   }
 

@@ -3,9 +3,8 @@
     DoubleInterceptor doubleInterceptor = new DoubleInterceptor();
     CountingInterceptor countingInterceptor = new CountingInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
-    builder.intercept(any(), any(), doubleInterceptor, countingInterceptor);
-    ProxyFactory factory = builder.create();
+    aspects.add(new MethodAspect(any(), any(), doubleInterceptor, countingInterceptor));
+    ProxyFactory factory = new ProxyFactory(aspects);
 
     ConstructionProxy<Counter> constructor =
         factory.get(new Errors(), InjectionPoint.forConstructorOf(Counter.class));

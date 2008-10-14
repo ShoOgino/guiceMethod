@@ -1,0 +1,4 @@
+  public boolean contains(Object o) {
+    return o instanceof Key && backingSet.contains(o.toString());
+  }
+

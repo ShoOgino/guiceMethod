@@ -1,9 +1,0 @@
-  /** Make sure that singletons are properly handled **/
-  public void testExplicitSingleton() throws Exception {
-    Foo fooParent = injector.getInstance(Foo.class);
-    Foo fooChild = childInjector.getInstance(Foo.class);
-
-    assertTrue(fooChild instanceof FooImpl);
-    assertSame(fooParent, fooChild);
-  }
-

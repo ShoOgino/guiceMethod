@@ -6,15 +6,8 @@
    */
   public <T> BindingImpl<T> getBindingOrThrow(Key<T> key, Errors errors)
       throws ErrorsException {
-    if (parentInjector != null) {
-      BindingImpl<T> bindingImpl = getParentBinding(key);
-      if (bindingImpl != null) {
-        return bindingImpl;
-      }
-    }
-
     // Check explicit bindings, i.e. bindings created by modules.
-    BindingImpl<T> binding = getExplicitBindingImpl(key);
+    BindingImpl<T> binding = state.getExplicitBinding(key);
     if (binding != null) {
       return binding;
     }

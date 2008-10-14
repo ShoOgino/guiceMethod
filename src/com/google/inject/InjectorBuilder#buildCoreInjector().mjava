@@ -4,22 +4,22 @@
         .processCommands(elements);
 
     InterceptorBindingProcessor interceptorCommandProcessor
-        = new InterceptorBindingProcessor(errors);
+        = new InterceptorBindingProcessor(errors, injector.state);
     interceptorCommandProcessor.processCommands(elements);
     ConstructionProxyFactory proxyFactory = interceptorCommandProcessor.createProxyFactory();
     injector.reflection = reflectionFactory.create(proxyFactory);
     stopwatch.resetAndLog("Interceptors creation");
 
-    new ScopeBindingProcessor(errors, injector.scopes).processCommands(elements);
+    new ScopeBindingProcessor(errors, injector.state).processCommands(elements);
     stopwatch.resetAndLog("Scopes creation");
 
-    new TypeConverterBindingProcessor(errors, injector.converters).processCommands(elements);
+    new TypeConverterBindingProcessor(errors, injector.state).processCommands(elements);
     stopwatch.resetAndLog("Converters creation");
 
+    bindInjector();
     bindLogger();
     bindCommandProcesor = new BindingProcessor(errors,
-        injector, injector.scopes, injector.explicitBindings,
-        injector.memberInjector);
+        injector, injector.state, injector.initializer);
     bindCommandProcesor.processCommands(elements);
     bindCommandProcesor.createUntargettedBindings();
     stopwatch.resetAndLog("Binding creation");
@@ -27,8 +27,7 @@
     injector.index();
     stopwatch.resetAndLog("Binding indexing");
 
-    injectionCommandProcessor
-        = new InjectionRequestProcessor(errors, injector.memberInjector);
+    injectionCommandProcessor = new InjectionRequestProcessor(errors, injector.initializer);
     injectionCommandProcessor.processCommands(elements);
     stopwatch.resetAndLog("Static injection");
   }

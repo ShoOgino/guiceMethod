@@ -1,0 +1,4 @@
+  Initializer(InjectorImpl injector) {
+    this.injector = injector;
+  }
+

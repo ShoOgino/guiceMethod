@@ -1,0 +1,12 @@
+  public void testTypeConvertersConflicting() {
+    Injector parent = Guice.createInjector(bindListConverterModule);
+    Injector child = parent.createChildInjector(bindListConverterModule, bindStringNamedB);
+
+    try {
+      child.getInstance(Key.get(List.class, Names.named("B")));
+      fail();
+    } catch (ProvisionException expected) {
+      Asserts.assertContains(expected.getMessage(), "Multiple converters can convert");
+    }
+  }
+

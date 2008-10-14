@@ -1,0 +1,7 @@
+  public List<MethodAspect> getMethodAspects() {
+    List<MethodAspect> result = Lists.newArrayList();
+    result.addAll(parent.getMethodAspects());
+    result.addAll(methodAspects);
+    return result;
+  }
+

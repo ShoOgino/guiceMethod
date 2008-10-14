@@ -1,0 +1,6 @@
+  /**
+   * Returns true if {@code key} is forbidden from being bound in this injector. This indicates that
+   * one of this injector's descendent's has bound the key.
+   */
+  boolean isBlacklisted(Key<?> key);
+

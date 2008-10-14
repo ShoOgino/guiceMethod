@@ -1,0 +1,5 @@
+  InterceptorBindingProcessor(Errors errors, State state) {
+    super(errors);
+    this.state = state;
+  }
+

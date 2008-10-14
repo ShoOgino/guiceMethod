@@ -1,0 +1,4 @@
+  public Injector createChildInjector(Module... modules) {
+    return createChildInjector(ImmutableList.of(modules));
+  }
+

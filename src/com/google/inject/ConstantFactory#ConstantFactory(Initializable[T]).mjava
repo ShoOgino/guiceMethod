@@ -1,0 +1,4 @@
+  public ConstantFactory(Initializable<T> initializable) {
+    this.initializable = initializable;
+  }
+

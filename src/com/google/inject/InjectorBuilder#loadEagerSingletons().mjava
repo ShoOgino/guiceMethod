@@ -1,8 +1,10 @@
   public void loadEagerSingletons() {
     // load eager singletons, or all singletons if we're in Stage.PRODUCTION.
     // Bindings discovered while we're binding these singletons are not be eager.
-    Set<BindingImpl<?>> candidateBindings = ImmutableSet.copyOf(
-        Iterables.concat(injector.explicitBindings.values(), injector.jitBindings.values()));
+    @SuppressWarnings("unchecked") // casting Collection<Binding> to Collection<BindingImpl> is safe
+    Set<BindingImpl<?>> candidateBindings = ImmutableSet.copyOf(Iterables.concat(
+        (Collection) injector.state.getExplicitBindingsThisLevel().values(),
+        injector.jitBindings.values()));
     for (final BindingImpl<?> binding : candidateBindings) {
       if ((stage == Stage.PRODUCTION && binding.getScope() == SINGLETON)
           || binding.getLoadStrategy() == LoadStrategy.EAGER) {

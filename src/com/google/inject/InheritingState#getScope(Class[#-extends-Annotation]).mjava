@@ -1,0 +1,5 @@
+  public Scope getScope(Class<? extends Annotation> annotationType) {
+    Scope scope = scopes.get(annotationType);
+    return scope != null ? scope : parent.getScope(annotationType);
+  }
+

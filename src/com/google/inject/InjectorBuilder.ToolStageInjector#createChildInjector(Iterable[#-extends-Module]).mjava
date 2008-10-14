@@ -1,0 +1,4 @@
+    public Injector createChildInjector(Iterable<? extends Module> modules) {
+      return delegateInjector.createChildInjector(modules);
+    }
+

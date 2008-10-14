@@ -1,0 +1,3 @@
+  /** Returns the matching scope, or null. */
+  Scope getScope(Class<? extends Annotation> scopingAnnotation);
+

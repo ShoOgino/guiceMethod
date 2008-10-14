@@ -1,0 +1,6 @@
+  InjectionRequestProcessor(Errors errors,
+      Initializer memberInjector) {
+    super(errors);
+    this.memberInjector = memberInjector;
+  }
+

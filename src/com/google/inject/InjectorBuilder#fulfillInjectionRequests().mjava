@@ -3,7 +3,7 @@
     injectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
 
-    injector.memberInjector.injectAll(errors);
+    injector.initializer.injectAll(errors);
     stopwatch.resetAndLog("Instance injection");
     errors.throwCreationExceptionIfErrorsExist();
 

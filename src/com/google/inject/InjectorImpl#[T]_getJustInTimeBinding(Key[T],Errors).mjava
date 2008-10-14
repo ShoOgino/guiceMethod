@@ -4,17 +4,33 @@
    * @throws com.google.inject.internal.ErrorsException if the binding could not be created.
    */
   @SuppressWarnings("unchecked")
-  <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors) throws ErrorsException {
+  private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors)
+      throws ErrorsException {
+
+    // TODO: synch should span parent and child
+
     synchronized (jitBindings) {
-      // Support null values.
-      if (!jitBindings.containsKey(key)) {
-        BindingImpl<T> binding = createJustInTimeBinding(key, errors);
-        jitBindings.put(key, binding);
-        return binding;
+      // try to get the JIT binding from the parent injector
+      if (parent != null) {
+        try {
+          return parent.getJustInTimeBinding(key, new Errors());
+        } catch (ErrorsException ignored) {
+        }
       }
-      else {
+
+      // Support null values.
+      if (jitBindings.containsKey(key)) {
         return (BindingImpl<T>) jitBindings.get(key);
       }
+
+      if (state.isBlacklisted(key)) {
+        throw errors.childBindingAlreadySet(key).toException();
+      }
+
+      BindingImpl<T> binding = createJustInTimeBinding(key, errors);
+      state.parent().blacklist(key);
+      jitBindings.put(key, binding);
+      return binding;
     }
   }
 

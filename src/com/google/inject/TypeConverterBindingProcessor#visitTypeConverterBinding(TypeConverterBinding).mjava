@@ -1,5 +1,5 @@
   @Override public Boolean visitTypeConverterBinding(TypeConverterBinding command) {
-    converters.add(new MatcherAndConverter(
+    state.addConverter(new MatcherAndConverter(
         command.getTypeMatcher(), command.getTypeConverter(), command.getSource()));
     return true;
   }

@@ -1,0 +1,4 @@
+  public InternalFactoryToProviderAdapter(Initializable<Provider<? extends T>> initializable) {
+    this(initializable, SourceProvider.UNKNOWN_SOURCE);
+  }
+

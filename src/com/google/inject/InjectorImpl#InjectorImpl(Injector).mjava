@@ -1,4 +1,0 @@
-  InjectorImpl(Injector parentInjector) {
-    this.parentInjector = parentInjector;
-  }
-

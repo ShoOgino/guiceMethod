@@ -1,0 +1,5 @@
+  InjectorBuilder parentInjector(InjectorImpl parent) {
+    this.parent = parent;
+    return this;
+  }
+

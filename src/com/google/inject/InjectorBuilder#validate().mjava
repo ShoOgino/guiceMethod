@@ -6,7 +6,7 @@
     injectionCommandProcessor.validate(injector);
     stopwatch.resetAndLog("Static validation");
 
-    injector.memberInjector.validateOustandingInjections(errors);
+    injector.initializer.validateOustandingInjections(errors);
     stopwatch.resetAndLog("Instance member validation");
 
     new ProviderLookupProcessor(errors, injector).processCommands(elements);

@@ -1,5 +1,0 @@
-  public void testImplicitSingletonFromChild() throws Exception {
-    Truck truck = childInjector.getInstance(Truck.class);
-    assertNotNull(truck);
-  }
-

@@ -1,0 +1,4 @@
+  /** Returns the matching converter for {@code type}, or null if none match. */
+  MatcherAndConverter getConverter(
+      String stringValue, TypeLiteral<?> type, Errors errors, Object source);
+

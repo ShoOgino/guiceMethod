@@ -1,0 +1,4 @@
+  public void addConverter(MatcherAndConverter matcherAndConverter) {
+    converters.add(matcherAndConverter);
+  }
+

@@ -1,6 +1,0 @@
-  public ProxyFactoryBuilder intercept(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher,
-      MethodInterceptor... interceptors) {
-    return intercept(classMatcher, methodMatcher, Arrays.asList(interceptors));
-  }
-

@@ -27,7 +27,7 @@
       }
 
       public Scope visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-        Scope scope = scopes.get(scopeAnnotation);
+        Scope scope = state.getScope(scopeAnnotation);
         if (scope != null) {
           return scope;
         } else {
@@ -43,8 +43,8 @@
 
     command.acceptTargetVisitor(new BindingTargetVisitor<T, Void>() {
       public Void visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
-        ConstantFactory<? extends T> factory = new ConstantFactory<T>(instance);
-        memberInjector.requestInjection(instance, source, injectionPoints);
+        Initializable<T> ref = initializer.requestInjection(instance, source, injectionPoints);
+        ConstantFactory<? extends T> factory = new ConstantFactory<T>(ref);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
         putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, injectionPoints,
             instance));
@@ -53,11 +53,10 @@
 
       public Void visitProvider(Provider<? extends T> provider,
           Set<InjectionPoint> injectionPoints) {
-        InternalFactoryToProviderAdapter<? extends T> factory
-            = new InternalFactoryToProviderAdapter<T>(provider, source);
-        memberInjector.requestInjection(provider, source, injectionPoints);
-        InternalFactory<? extends T> scopedFactory
-            = Scopes.scope(key, injector, factory, scope);
+        Initializable<Provider<? extends T>> initializable = initializer
+            .<Provider<? extends T>>requestInjection(provider, source, injectionPoints);
+        InternalFactory<T> factory = new InternalFactoryToProviderAdapter<T>(initializable, source);
+        InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
         putBinding(new ProviderInstanceBindingImpl<T>(injector, key, source, scopedFactory, scope,
             provider, loadStrategy, injectionPoints));
         return null;

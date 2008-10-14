@@ -1,4 +1,0 @@
-  public ConstantFactory(T value) {
-    this.value = value;
-  }
-

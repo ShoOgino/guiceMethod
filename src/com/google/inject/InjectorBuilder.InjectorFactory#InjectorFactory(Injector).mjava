@@ -1,0 +1,4 @@
+    private InjectorFactory(Injector injector) {
+      this.injector = injector;
+    }
+

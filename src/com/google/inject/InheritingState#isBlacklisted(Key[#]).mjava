@@ -1,0 +1,4 @@
+  public boolean isBlacklisted(Key<?> key) {
+    return blacklistedKeys.contains(key);
+  }
+

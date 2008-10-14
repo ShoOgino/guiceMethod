@@ -1,6 +1,6 @@
   public String toString() {
     return new ToStringBuilder(Injector.class)
-        .add("bindings", explicitBindings)
+        .add("bindings", state.getExplicitBindingsThisLevel())
         .toString();
   }
 

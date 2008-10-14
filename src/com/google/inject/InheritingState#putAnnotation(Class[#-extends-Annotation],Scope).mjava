@@ -1,0 +1,4 @@
+  public void putAnnotation(Class<? extends Annotation> annotationType, Scope scope) {
+    scopes.put(annotationType, scope);
+  }
+

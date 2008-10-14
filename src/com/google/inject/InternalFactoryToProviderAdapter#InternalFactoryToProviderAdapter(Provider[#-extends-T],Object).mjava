@@ -1,6 +1,0 @@
-  public InternalFactoryToProviderAdapter(
-      Provider<? extends T> provider, Object source) {
-    this.provider = checkNotNull(provider, "provider");
-    this.source = checkNotNull(source, "source");
-  }
-

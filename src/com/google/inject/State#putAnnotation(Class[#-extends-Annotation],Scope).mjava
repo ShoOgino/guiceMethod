@@ -1,0 +1,2 @@
+  void putAnnotation(Class<? extends Annotation> annotationType, Scope scope);
+

@@ -1,9 +1,0 @@
-  public void testImplicitSingleton() throws Exception {
-    Car carParent = injector.getInstance(Car.class);
-    Car carChild = childInjector.getInstance(Car.class);
-
-    assertNotNull(carParent);
-    assertNotNull(carChild);
-    assertSame(carParent, carChild);
-  }
-

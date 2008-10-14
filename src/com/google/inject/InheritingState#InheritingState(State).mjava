@@ -1,0 +1,4 @@
+  InheritingState(State parent) {
+    this.parent = checkNotNull(parent, "parent");
+  }
+

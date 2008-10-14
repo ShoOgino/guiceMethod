@@ -1,0 +1,2 @@
+  void putBinding(Key<?> key, BindingImpl<?> binding);
+

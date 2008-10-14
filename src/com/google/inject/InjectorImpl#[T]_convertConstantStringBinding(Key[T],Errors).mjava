@@ -8,7 +8,7 @@
       throws ErrorsException {
     // Find a constant string binding.
     Key<String> stringKey = key.ofType(String.class);
-    BindingImpl<String> stringBinding = getExplicitBindingImpl(stringKey);
+    BindingImpl<String> stringBinding = state.getExplicitBinding(stringKey);
     if (stringBinding == null || !stringBinding.isConstant()) {
       return null;
     }
@@ -18,15 +18,7 @@
 
     // Find a matching type converter.
     TypeLiteral<T> type = key.getTypeLiteral();
-    MatcherAndConverter matchingConverter = null;
-    for (MatcherAndConverter converter : converters) {
-      if (converter.getTypeMatcher().matches(type)) {
-        if (matchingConverter != null) {
-          errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);
-        }
-        matchingConverter = converter;
-      }
-    }
+    MatcherAndConverter matchingConverter = state.getConverter(stringValue, type, errors, source);
 
     if (matchingConverter == null) {
       // No converter can handle the given type.

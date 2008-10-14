@@ -2,7 +2,7 @@
   <T> T callInContext(ContextualCallable<T> callable) throws ErrorsException {
     InternalContext[] reference = localContext.get();
     if (reference[0] == null) {
-      reference[0] = new InternalContext(this);
+      reference[0] = new InternalContext();
       try {
         return callable.call(reference[0]);
       } finally {

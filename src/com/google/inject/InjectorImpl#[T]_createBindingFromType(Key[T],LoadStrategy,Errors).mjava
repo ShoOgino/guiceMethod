@@ -1,8 +1,0 @@
-  <T> BindingImpl<T> createBindingFromType(
-      Key<T> key, LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
-    BindingImpl<T> binding = createUnitializedBinding(
-        key, null, loadStrategy, errors);
-    initializeBinding(binding, errors);
-    return binding;
-  }
-

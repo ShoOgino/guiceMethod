@@ -1,6 +1,5 @@
   public T get(Errors errors, InternalContext context, Dependency dependency)
       throws ErrorsException {
-    context.ensureMemberInjected(errors, value);
-    return value;
+    return initializable.get(errors);
   }
 

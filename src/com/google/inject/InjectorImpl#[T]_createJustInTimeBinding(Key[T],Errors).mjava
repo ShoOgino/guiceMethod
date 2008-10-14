@@ -1,12 +1,21 @@
   /**
-   * Returns a new just-in-time binding created by resolving {@code key}. This could be an
-   * injectable class (including those with @ImplementedBy, etc.), an automatically converted
-   * constant, a {@code Provider<X>} binding, etc.
+   * Returns a new just-in-time binding created by resolving {@code key}. The strategies used to
+   * create just-in-time bindings are:
+   * <ol>
+   *   <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
+   *     to the binding for {@code T}.
+   *   <li>Converting constants.
+   *   <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
+   *   <li>The constructor of the raw type. Only for unannotated keys.
+   * </ol>
    *
    * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
    */
-  <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors)
-      throws ErrorsException {
+  <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors) throws ErrorsException {
+    if (state.isBlacklisted(key)) {
+      throw errors.childBindingAlreadySet(key).toException();
+    }
+
     // Handle cases where T is a Provider<?>.
     if (isProvider(key)) {
       // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
@@ -38,6 +47,11 @@
     }
 
     // Create a binding based on the raw type.
-    return createBindingFromType(key, LoadStrategy.LAZY, errors);
+    @SuppressWarnings("unchecked")
+    Class<T> rawType = (Class<T>) key.getRawType();
+    BindingImpl<T> binding = createUnitializedBinding(key, rawType, null /* scope */, rawType,
+        LoadStrategy.LAZY, errors);
+    initializeBinding(binding, errors);
+    return binding;
   }
 

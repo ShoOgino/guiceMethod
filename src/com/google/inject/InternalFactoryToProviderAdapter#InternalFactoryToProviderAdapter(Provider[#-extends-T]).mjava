@@ -1,4 +1,0 @@
-  public InternalFactoryToProviderAdapter(Provider<? extends T> provider) {
-    this(provider, SourceProvider.UNKNOWN_SOURCE);
-  }
-

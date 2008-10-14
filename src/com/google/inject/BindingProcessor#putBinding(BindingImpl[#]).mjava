@@ -1,6 +1,5 @@
   private void putBinding(BindingImpl<?> binding) {
     Key<?> key = binding.getKey();
-    Binding<?> original = bindings.get(key);
 
     Class<?> rawType = key.getRawType();
     if (FORBIDDEN_TYPES.contains(rawType)) {
@@ -8,10 +7,16 @@
       return;
     }
 
-    if (bindings.containsKey(key)) {
+    Binding<?> original = state.getExplicitBinding(key);
+    if (original != null) {
       errors.bindingAlreadySet(key, original.getSource());
-    } else {
-      bindings.put(key, binding);
+      return;
     }
+
+    // TODO: make getExplicitBinding() and blacklist() atomic
+
+    // prevent the parent from creating a JIT binding for this key
+    state.parent().blacklist(key);
+    state.putBinding(key, binding);
   }
 

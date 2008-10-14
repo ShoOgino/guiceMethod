@@ -1,0 +1,2 @@
+  void addConverter(MatcherAndConverter matcherAndConverter);
+

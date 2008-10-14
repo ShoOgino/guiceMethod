@@ -5,7 +5,10 @@
 
     injector = new InjectorImpl(parent);
 
-    modules.add(0, new BuiltInModule(injector, stage));
+    // bind Stage and Singleton if this is a top-level injector
+    if (parent == null) {
+      modules.add(0, new RootModule(stage));
+    }
 
     elements.addAll(Elements.getElements(stage, modules));
 

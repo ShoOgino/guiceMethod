@@ -1,4 +1,0 @@
-    <T> void put(TypeLiteral<T> type, BindingImpl<T> binding) {
-      multimap.put(type, binding);
-    }
-

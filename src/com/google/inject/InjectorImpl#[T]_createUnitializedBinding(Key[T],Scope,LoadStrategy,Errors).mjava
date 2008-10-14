@@ -1,7 +1,0 @@
-  <T> BindingImpl<T> createUnitializedBinding(Key<T> key, Scope scope,
-      LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
-    @SuppressWarnings("unchecked")
-    Class<T> type = (Class<T>) key.getRawType();
-    return createUnitializedBinding(key, type, scope, type, loadStrategy, errors);
-  }
-

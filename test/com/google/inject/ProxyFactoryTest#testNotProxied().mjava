@@ -2,9 +2,8 @@
       throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
-    ProxyFactoryBuilder builder = new ProxyFactoryBuilder();
-    builder.intercept(not(any()), not(any()), interceptor);
-    ProxyFactory factory = builder.create();
+    aspects.add(new MethodAspect(not(any()), not(any()), interceptor));
+    ProxyFactory factory = new ProxyFactory(aspects);
 
     ConstructionProxy<A> constructor =
         factory.get(new Errors(), InjectionPoint.forConstructorOf(A.class));

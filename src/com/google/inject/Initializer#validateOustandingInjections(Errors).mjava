@@ -1,0 +1,16 @@
+  /**
+   * Prepares member injectors for all injected instances. This prompts Guice to do static analysis
+   * on the injected instances.
+   */
+  void validateOustandingInjections(Errors errors) {
+    for (Map.Entry<Object, Object> entry : outstandingInjections.entrySet()) {
+      try {
+        Object toInject = entry.getKey();
+        Object source = entry.getValue();
+        injector.injectors.get(toInject.getClass(), errors.withSource(source));
+      } catch (ErrorsException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+  }
+

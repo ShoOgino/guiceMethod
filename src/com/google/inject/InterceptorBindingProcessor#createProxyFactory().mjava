@@ -1,4 +1,4 @@
   ProxyFactory createProxyFactory() {
-    return proxyFactoryBuilder.create();
+    return new ProxyFactory(state.getMethodAspects());
   }
 

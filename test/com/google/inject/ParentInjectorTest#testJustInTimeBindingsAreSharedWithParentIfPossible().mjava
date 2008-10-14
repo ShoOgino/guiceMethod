@@ -1,0 +1,12 @@
+  public void testJustInTimeBindingsAreSharedWithParentIfPossible() {
+    Injector parent = Guice.createInjector();
+    Injector child = parent.createChildInjector();
+    assertSame(child.getInstance(A.class), parent.getInstance(A.class));
+
+    Injector anotherChild = parent.createChildInjector();
+    assertSame(anotherChild.getInstance(A.class), parent.getInstance(A.class));
+
+    Injector grandchild = child.createChildInjector();
+    assertSame(grandchild.getInstance(A.class), parent.getInstance(A.class));
+  }
+

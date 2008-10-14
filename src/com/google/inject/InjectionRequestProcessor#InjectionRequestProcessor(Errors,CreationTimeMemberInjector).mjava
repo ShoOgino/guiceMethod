@@ -1,6 +1,0 @@
-  InjectionRequestProcessor(Errors errors,
-      CreationTimeMemberInjector memberInjector) {
-    super(errors);
-    this.memberInjector = memberInjector;
-  }
-

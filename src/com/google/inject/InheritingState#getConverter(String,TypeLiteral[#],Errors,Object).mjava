@@ -1,0 +1,16 @@
+  public MatcherAndConverter getConverter(
+      String stringValue, TypeLiteral<?> type, Errors errors, Object source) {
+    MatcherAndConverter matchingConverter = null;
+    for (State s = this; s != State.NONE; s = s.parent()) {
+      for (MatcherAndConverter converter : s.getConvertersThisLevel()) {
+        if (converter.getTypeMatcher().matches(type)) {
+          if (matchingConverter != null) {
+            errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);
+          }
+          matchingConverter = converter;
+        }
+      }
+    }
+    return matchingConverter;
+  }
+

@@ -43,7 +43,7 @@
     if (scope == null) {
       Class<? extends Annotation> scopeAnnotation = Annotations.findScopeAnnotation(errors, type);
       if (scopeAnnotation != null) {
-        scope = scopes.get(scopeAnnotation);
+        scope = state.getScope(scopeAnnotation);
         if (scope == null) {
           errors.withSource(type).scopeNotFound(scopeAnnotation);
         }

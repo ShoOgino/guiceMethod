@@ -1,0 +1,10 @@
+  public void testChildBindingsNotVisibleToParent() {
+    Injector parent = Guice.createInjector();
+    parent.createChildInjector(bindsB);
+    try {
+      parent.getBinding(B.class);
+      fail();
+    } catch (ProvisionException expected) {
+    }
+  }
+

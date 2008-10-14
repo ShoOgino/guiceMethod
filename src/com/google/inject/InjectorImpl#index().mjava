@@ -1,6 +1,6 @@
   /** Indexes bindings by type. */
   void index() {
-    for (BindingImpl<?> binding : explicitBindings.values()) {
+    for (Binding<?> binding : state.getExplicitBindingsThisLevel().values()) {
       index(binding);
     }
   }

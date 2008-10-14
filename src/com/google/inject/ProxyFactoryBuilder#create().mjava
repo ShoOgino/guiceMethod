@@ -1,5 +1,0 @@
-  /** Creates a {@code ProxyFactory}. */
-  public ProxyFactory create() {
-    return new ProxyFactory(new ArrayList<MethodAspect>(methodAspects));
-  }
-

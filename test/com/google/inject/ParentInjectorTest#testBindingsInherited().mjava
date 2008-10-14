@@ -1,0 +1,6 @@
+  public void testBindingsInherited() {
+    Injector parent = Guice.createInjector(bindsB);
+    Injector child = parent.createChildInjector();
+    assertSame(RealB.class, child.getInstance(B.class).getClass());
+  }
+
