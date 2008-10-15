@@ -1,0 +1,7 @@
+  protected <T> ExposedKeyBuilder expose(TypeLiteral<T> type) {
+    checkState(exposes != null, "Cannot expose %s, private module is not ready");
+    Expose<T> expose = new Expose<T>(sourceProvider.get(), readyProvider, Key.get(type));
+    exposes.add(expose);
+    return expose;
+  }
+

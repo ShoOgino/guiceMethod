@@ -1,0 +1,4 @@
+  protected void addError(Throwable t) {
+    privateBinder.addError(t);
+  }
+

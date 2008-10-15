@@ -1,0 +1,4 @@
+  protected void requestStaticInjection(Class<?>... types) {
+    privateBinder.requestStaticInjection(types);
+  }
+

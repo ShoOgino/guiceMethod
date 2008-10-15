@@ -1,0 +1,4 @@
+  protected void install(Module module) {
+    privateBinder.install(module);
+  }
+

@@ -1,0 +1,4 @@
+  protected <T> LinkedBindingBuilder<T> bind(Key<T> key) {
+    return privateBinder.bind(key);
+  }
+

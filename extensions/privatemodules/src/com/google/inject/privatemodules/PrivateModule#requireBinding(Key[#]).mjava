@@ -1,0 +1,4 @@
+  protected void requireBinding(Key<?> key) {
+    privateBinder.getProvider(key);
+  }
+

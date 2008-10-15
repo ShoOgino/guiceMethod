@@ -1,0 +1,27 @@
+  private void configurePublicBindings(Binder publicBinder) {
+    exposes = Sets.newLinkedHashSet();
+    Key<Ready> readyKey = Key.get(Ready.class, UniqueAnnotations.create());
+    readyProvider = publicBinder.getProvider(readyKey);
+    try {
+      // gather elements and exposes from the private module by being re-entrant on configure()
+      final Module privateModule = new ModuleWriter().create(Elements.getElements(this));
+      for (Expose<?> expose : exposes) {
+        expose.configure(publicBinder);
+      }
+
+      // create the private injector while the public injector is injecting its members
+      publicBinder.bind(readyKey).toProvider(new Provider<Ready>() {
+        @Inject Injector publicInjector;
+        public Ready get() {
+          // this is necessary so the providers from getProvider() will work
+          publicInjector.createChildInjector(privateModule);
+          return new Ready();
+        }
+      }).in(Scopes.SINGLETON);
+
+    } finally {
+      readyProvider = null;
+      exposes = null;
+    }
+  }
+

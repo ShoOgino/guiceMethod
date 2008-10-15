@@ -1,0 +1,4 @@
+  protected void addError(String message, Object... arguments) {
+    privateBinder.addError(message, arguments);
+  }
+

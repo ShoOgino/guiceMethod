@@ -1,0 +1,21 @@
+  public final synchronized void configure(Binder binder) {
+    // when exposes is null, we're being run for the public injector
+    if (exposes == null) {
+      configurePublicBindings(binder);
+
+    // otherwise we're being run for the private injector
+    } else {
+      checkState(this.privateBinder == null, "Re-entry is not allowed.");
+      this.privateBinder = binder.skipSources(PrivateModule.class);
+      try {
+        configurePrivateBindings();
+
+        for (Expose<?> expose : exposes) {
+          expose.initPrivateProvider(binder);
+        }
+      } finally {
+        this.privateBinder = null;
+      }
+    }
+  }
+

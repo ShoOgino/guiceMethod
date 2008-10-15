@@ -1,0 +1,5 @@
+    /** Creates a binding in the public binder */
+    private void configure(Binder publicBinder) {
+      publicBinder.withSource(source).bind(key).toProvider(this);
+    }
+

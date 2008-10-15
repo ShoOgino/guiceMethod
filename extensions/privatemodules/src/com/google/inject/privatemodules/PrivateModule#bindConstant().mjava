@@ -1,0 +1,4 @@
+  protected AnnotatedConstantBindingBuilder bindConstant() {
+    return privateBinder.bindConstant();
+  }
+

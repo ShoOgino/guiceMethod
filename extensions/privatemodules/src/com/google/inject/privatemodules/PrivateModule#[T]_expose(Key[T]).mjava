@@ -1,0 +1,5 @@
+  protected <T> void expose(Key<T> key) {
+    checkState(exposes != null, "Cannot expose %s, private module is not ready");
+    exposes.add(new Expose<T>(sourceProvider.get(), readyProvider, key));
+  }
+

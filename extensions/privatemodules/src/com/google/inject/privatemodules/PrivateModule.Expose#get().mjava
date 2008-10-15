@@ -1,0 +1,5 @@
+    public T get() {
+      readyProvider.get(); // force creation of the private injector
+      return privateProvider.get();
+    }
+

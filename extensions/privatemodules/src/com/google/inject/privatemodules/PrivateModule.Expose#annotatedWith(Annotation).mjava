@@ -1,0 +1,5 @@
+    public void annotatedWith(Annotation annotation) {
+      checkState(key.getAnnotationType() == null, "already annotated");
+      key = Key.get(key.getTypeLiteral(), annotation);
+    }
+

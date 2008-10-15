@@ -1,0 +1,34 @@
+  public void testBasicUsage() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String.class).annotatedWith(named("a")).toInstance("public");
+
+        install(new PrivateModule() {
+          public void configurePrivateBindings() {
+            bind(String.class).annotatedWith(named("b")).toInstance("i");
+
+            bind(AB.class).annotatedWith(named("one")).to(AB.class);
+            expose(AB.class).annotatedWith(named("one"));
+          }
+        });
+
+        install(new PrivateModule() {
+          public void configurePrivateBindings() {
+            bind(String.class).annotatedWith(named("b")).toInstance("ii");
+
+            bind(AB.class).annotatedWith(named("two")).to(AB.class);
+            expose(AB.class).annotatedWith(named("two"));
+          }
+        });
+      }
+    });
+
+    AB ab1 = injector.getInstance(Key.get(AB.class, named("one")));
+    assertEquals("public", ab1.a);
+    assertEquals("i", ab1.b);
+
+    AB ab2 = injector.getInstance(Key.get(AB.class, named("two")));
+    assertEquals("public", ab2.a);
+    assertEquals("ii", ab2.b);
+  }
+

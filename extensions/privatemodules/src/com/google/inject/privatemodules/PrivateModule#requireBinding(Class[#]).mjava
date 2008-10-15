@@ -1,0 +1,4 @@
+  protected void requireBinding(Class<?> type) {
+    privateBinder.getProvider(type);
+  }
+
