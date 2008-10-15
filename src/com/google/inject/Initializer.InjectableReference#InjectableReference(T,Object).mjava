@@ -1,0 +1,5 @@
+    public InjectableReference(T instance, Object source) {
+      this.instance = checkNotNull(instance, "instance");
+      this.source = checkNotNull(source, "source");
+    }
+

@@ -3,11 +3,9 @@
    * on the injected instances.
    */
   void validateOustandingInjections(Errors errors) {
-    for (Map.Entry<Object, Object> entry : outstandingInjections.entrySet()) {
+    for (InjectableReference<?> reference : pendingInjection.values()) {
       try {
-        Object toInject = entry.getKey();
-        Object source = entry.getValue();
-        injector.injectors.get(toInject.getClass(), errors.withSource(source));
+        reference.validate(errors);
       } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }

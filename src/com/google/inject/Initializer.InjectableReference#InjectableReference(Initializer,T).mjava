@@ -1,5 +1,0 @@
-    public InjectableReference(Initializer initializer, T instance) {
-      this.initializer = checkNotNull(initializer, "initializer");
-      this.instance = checkNotNull(instance, "instance");
-    }
-
