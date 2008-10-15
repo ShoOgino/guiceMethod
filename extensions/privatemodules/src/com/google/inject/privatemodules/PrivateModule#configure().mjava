@@ -1,0 +1,3 @@
+  // prevent classes migrated from AbstractModule from implementing the wrong method.
+  protected final void configure() {}
+

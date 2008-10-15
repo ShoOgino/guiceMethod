@@ -1,0 +1,37 @@
+  public void testDependenciesBetweenPrivateAndPublicWithPublicEagerSingleton() {
+    Injector injector = Guice.createInjector(
+        new PrivateModule() {
+          protected void configurePrivateBindings() {}
+
+          @Provides @Exposed @Named("a") String provideA() {
+            return "A";
+          }
+
+          @Provides @Exposed @Named("abc") String provideC(@Named("ab") String ab) {
+            return ab + "C";
+          }
+        },
+        new AbstractModule() {
+          protected void configure() {
+            bind(String.class).annotatedWith(named("abcde")).toProvider(new Provider<String>() {
+              @Inject @Named("abcd") String abcd;
+
+              public String get() {
+                return abcd + "E";
+              }
+            }).asEagerSingleton();
+          }
+
+          @Provides @Named("ab") String provideB(@Named("a") String a) {
+            return a + "B";
+          }
+
+          @Provides @Named("abcd") String provideD(@Named("abc") String abc) {
+            return abc + "D";
+          }
+        }
+    );
+
+    assertEquals("ABCDE", injector.getInstance(Key.get(String.class, named("abcde"))));
+  }
+
