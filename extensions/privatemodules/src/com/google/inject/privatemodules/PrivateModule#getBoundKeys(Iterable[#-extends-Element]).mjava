@@ -1,6 +1,4 @@
-  /**
-   * Returns the set of keys bound by {@code elements}.
-   */
+  /** Returns the set of keys bound by {@code elements}. */
   private Set<Key<?>> getBoundKeys(Iterable<? extends Element> elements) {
     final Set<Key<?>> privatelyBoundKeys = Sets.newHashSet();
     ElementVisitor<Void> visitor = new DefaultElementVisitor<Void>() {

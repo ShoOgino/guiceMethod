@@ -1,3 +1,8 @@
+  /**
+   * Makes a binding for {@code type} available to other modules and the injector. Use {@link
+   * ExposedKeyBuilder#annotatedWith(Class) annotatedWith()} to expose {@code type} with a binding
+   * annotation.
+   */
   protected final <T> ExposedKeyBuilder expose(Class<T> type) {
     checkState(exposes != null, "Cannot expose %s, private module is not ready");
     Expose<T> expose = new Expose<T>(sourceProvider.get(), readyProvider, Key.get(type));
