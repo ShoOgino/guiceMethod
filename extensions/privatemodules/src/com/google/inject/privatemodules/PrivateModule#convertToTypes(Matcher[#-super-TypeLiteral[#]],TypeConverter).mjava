@@ -1,4 +1,4 @@
-  protected void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+  protected final void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter) {
     privateBinder.convertToTypes(typeMatcher, converter);
   }

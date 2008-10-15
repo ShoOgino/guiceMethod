@@ -1,4 +1,4 @@
-  protected Stage currentStage() {
+  protected final Stage currentStage() {
     return privateBinder.currentStage();
   }
 

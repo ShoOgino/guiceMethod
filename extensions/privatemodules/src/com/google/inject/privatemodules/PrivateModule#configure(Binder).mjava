@@ -6,15 +6,24 @@
     // otherwise we're being run for the private injector
     } else {
       checkState(this.privateBinder == null, "Re-entry is not allowed.");
-      this.privateBinder = binder.skipSources(PrivateModule.class);
+      privateBinder = binder.skipSources(PrivateModule.class);
       try {
         configurePrivateBindings();
+
+        ProviderMethodsModule providerMethodsModule = ProviderMethodsModule.forPrivateModule(this);
+        for (ProviderMethod<?> providerMethod
+            : providerMethodsModule.getProviderMethods(privateBinder)) {
+          providerMethod.configure(privateBinder);
+          if (providerMethod.getMethod().isAnnotationPresent(Exposed.class)) {
+            expose(providerMethod.getKey());
+          }
+        }
 
         for (Expose<?> expose : exposes) {
           expose.initPrivateProvider(binder);
         }
       } finally {
-        this.privateBinder = null;
+        privateBinder = null;
       }
     }
   }

@@ -3,10 +3,17 @@
     Key<Ready> readyKey = Key.get(Ready.class, UniqueAnnotations.create());
     readyProvider = publicBinder.getProvider(readyKey);
     try {
-      // gather elements and exposes from the private module by being re-entrant on configure()
-      final Module privateModule = new ModuleWriter().create(Elements.getElements(this));
+      List<Element> privateElements = Elements.getElements(this); // reentrant on configure()
+      Set<Key<?>> privatelyBoundKeys = getBoundKeys(privateElements);
+      final Module privateModule = new ModuleWriter().create(privateElements);
+
       for (Expose<?> expose : exposes) {
-        expose.configure(publicBinder);
+        if (!privatelyBoundKeys.contains(expose.key)) {
+          publicBinder.addError("Could not expose() at %s%n %s must be explicitly bound.", 
+              expose.source, expose.key);
+        } else {
+          expose.configure(publicBinder);
+        }
       }
 
       // create the private injector while the public injector is injecting its members
@@ -17,7 +24,7 @@
           publicInjector.createChildInjector(privateModule);
           return new Ready();
         }
-      }).in(Scopes.SINGLETON);
+      }).asEagerSingleton();
 
     } finally {
       readyProvider = null;

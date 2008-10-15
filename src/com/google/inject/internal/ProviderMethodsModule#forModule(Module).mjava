@@ -1,0 +1,21 @@
+  /**
+   * Returns a module which creates bindings for provider methods from the given module.
+   */
+  public static Module forModule(Module module) {
+    // avoid infinite recursion, since installing a module always installs itself
+    if (module instanceof ProviderMethodsModule) {
+      return Modules.EMPTY_MODULE;
+    }
+
+    // don't install provider methods for private modules, they take care of that manually
+    for (Class<?> c = module.getClass(); c != Object.class; c = c.getSuperclass()) {
+      // use the ugly class name to avoid an even uglier dependency. If private modules ever get
+      // incorporated into core, we could use a single instanceof instead of this loop
+      if (c.getName().equals("com.google.inject.privatemodules.PrivateModule")) {
+        return Modules.EMPTY_MODULE;
+      }
+    }
+
+    return new ProviderMethodsModule(module);
+  }
+

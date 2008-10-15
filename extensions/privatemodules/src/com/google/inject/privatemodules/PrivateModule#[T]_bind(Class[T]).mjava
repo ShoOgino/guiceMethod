@@ -1,4 +1,4 @@
-  protected <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
+  protected final <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
     return privateBinder.bind(clazz);
   }
 

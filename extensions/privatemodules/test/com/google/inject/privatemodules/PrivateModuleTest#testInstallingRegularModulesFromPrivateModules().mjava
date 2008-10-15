@@ -1,0 +1,16 @@
+  public void testInstallingRegularModulesFromPrivateModules() {
+    Injector injector = Guice.createInjector(new PrivateModule() {
+      public void configurePrivateBindings() {
+        expose(String.class);
+
+        install(new AbstractModule() {
+          protected void configure() {
+            bind(String.class).toInstance("nested");
+          }
+        });
+      }
+    });
+
+    assertEquals("nested", injector.getInstance(String.class));
+  }
+

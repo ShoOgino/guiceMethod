@@ -4,6 +4,6 @@
         + " %s and%n"
         + " %s.%n"
         + " Please adjust your type converter configuration to avoid overlapping matches.",
-        stringValue, source, type, a, b);
+        stringValue, sourceToString(source), type, a, b);
   }
 

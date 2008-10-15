@@ -1,4 +1,4 @@
-  protected void requestInjection(Object... objects) {
+  protected final void requestInjection(Object... objects) {
     privateBinder.requestInjection(objects);
   }
 

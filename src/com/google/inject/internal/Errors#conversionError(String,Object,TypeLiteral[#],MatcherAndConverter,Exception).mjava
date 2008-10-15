@@ -3,6 +3,6 @@
     return addMessage(cause, "Error converting '%s' (bound at %s) to %s%n" 
         + " using %s.%n"
         + " Reason: %s",
-        stringValue, source, type, matchingConverter, cause);
+        stringValue, sourceToString(source), type, matchingConverter, cause);
   }
 

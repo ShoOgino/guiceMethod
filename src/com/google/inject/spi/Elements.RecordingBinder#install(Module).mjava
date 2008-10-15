@@ -5,7 +5,7 @@
         } catch (RuntimeException e) {
           addError(e);
         }
-        install(ProviderMethods.from(module));
+        install(ProviderMethodsModule.forModule(module));
       }
     }
 

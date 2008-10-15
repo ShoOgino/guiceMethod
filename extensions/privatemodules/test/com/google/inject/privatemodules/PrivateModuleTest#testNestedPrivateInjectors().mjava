@@ -1,0 +1,17 @@
+  public void testNestedPrivateInjectors() {
+    Injector injector = Guice.createInjector(new PrivateModule() {
+      public void configurePrivateBindings() {
+        expose(String.class);
+
+        install(new PrivateModule() {
+          public void configurePrivateBindings() {
+            bind(String.class).toInstance("nested");
+            expose(String.class);
+          }
+        });
+      }
+    });
+
+    assertEquals("nested", injector.getInstance(String.class));
+  }
+

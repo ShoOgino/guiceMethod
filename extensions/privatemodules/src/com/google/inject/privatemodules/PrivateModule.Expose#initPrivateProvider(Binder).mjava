@@ -1,5 +1,5 @@
     /** Sets the provider in the private injector, to be used by the public injector */
     private void initPrivateProvider(Binder privateBinder) {
-      privateProvider = privateBinder.getProvider(key);
+      privateProvider = privateBinder.withSource(source).getProvider(key);
     }
 

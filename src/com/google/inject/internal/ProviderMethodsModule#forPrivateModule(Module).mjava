@@ -1,0 +1,5 @@
+  /** See {@link com.google.inject.privatemodules.PrivateModule}. */
+  public static ProviderMethodsModule forPrivateModule(Module privateModule) {
+    return new ProviderMethodsModule(privateModule);
+  }
+

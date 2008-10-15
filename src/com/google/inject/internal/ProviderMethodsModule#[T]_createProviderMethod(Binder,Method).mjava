@@ -1,0 +1,29 @@
+  <T> ProviderMethod<T> createProviderMethod(Binder binder, final Method method) {
+    binder = binder.withSource(method);
+    Errors errors = new Errors(method);
+
+    // prepare the parameter providers
+    List<Provider<?>> parameterProviders = Lists.newArrayList();
+    List<Type> parameterTypes = typeResolver.getParameterTypes(method);
+    Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+    for (int i = 0; i < parameterTypes.size(); i++) {
+      Key<?> key = getKey(errors, TypeLiteral.get(parameterTypes.get(i)),
+          method, parameterAnnotations[i]);
+      parameterProviders.add(binder.getProvider(key));
+    }
+
+    // Define T as the method's return type.
+    @SuppressWarnings("unchecked") TypeLiteral<T> returnType
+        = (TypeLiteral<T>) TypeLiteral.get(typeResolver.getReturnType(method));
+
+    Key<T> key = getKey(errors, returnType, method, method.getAnnotations());
+    Class<? extends Annotation> scopeAnnotation
+        = Annotations.findScopeAnnotation(errors, method.getAnnotations());
+
+    for (Message message : errors.getMessages()) {
+      binder.addError(message);
+    }
+
+    return new ProviderMethod<T>(key, method, delegate, parameterProviders, scopeAnnotation);
+  }
+

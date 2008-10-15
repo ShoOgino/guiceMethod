@@ -9,8 +9,8 @@
 
     Binding<?> original = state.getExplicitBinding(key);
     if (original != null && !"com.google.inject.privatemodules.PrivateModule$Expose"
-        .equals(original.acceptTargetVisitor(GET_BINDING_PROVIDER).getClass().getName())) {
-      // the hard-coded class name is certainly lame, but it avoids an even lamer dependency... 
+        .equals(original.acceptTargetVisitor(GET_BOUND_PROVIDER_CLASS_NAME))) {
+      // the hard-coded class name is certainly lame, but it avoids an even lamer dependency...
       errors.bindingAlreadySet(key, original.getSource());
       return;
     }
