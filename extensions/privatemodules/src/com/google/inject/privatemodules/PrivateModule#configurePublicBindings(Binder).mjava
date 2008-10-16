@@ -9,7 +9,7 @@
 
       for (Expose<?> expose : exposes) {
         if (!privatelyBoundKeys.contains(expose.key)) {
-          publicBinder.addError("Could not expose() at %s%n %s must be explicitly bound.", 
+          publicBinder.addError("Could not expose() at %s%n %s must be explicitly bound.",
               expose.source, expose.key);
         } else {
           expose.configure(publicBinder);
