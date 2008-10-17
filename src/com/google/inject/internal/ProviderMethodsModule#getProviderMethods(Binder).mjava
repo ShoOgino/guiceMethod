@@ -1,6 +1,6 @@
   public List<ProviderMethod<?>> getProviderMethods(Binder binder) {
     List<ProviderMethod<?>> result = Lists.newArrayList();
-    for (Class c = delegate.getClass(); c != Object.class; c = c.getSuperclass()) {
+    for (Class<?> c = delegate.getClass(); c != Object.class; c = c.getSuperclass()) {
       for (Method method : c.getDeclaredMethods()) {
         if (method.isAnnotationPresent(Provides.class)) {
           result.add(createProviderMethod(binder, method));

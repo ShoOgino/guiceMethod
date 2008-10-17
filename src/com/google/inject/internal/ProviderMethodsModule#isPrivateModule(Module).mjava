@@ -1,0 +1,11 @@
+  private static boolean isPrivateModule(Module module) {
+    // use the ugly class name to avoid an even uglier dependency. If private modules ever get
+    // incorporated into core, we could use a single instanceof instead of this loop
+    for (Class<?> c = module.getClass(); c != Object.class; c = c.getSuperclass()) {
+      if (c.getName().equals("com.google.inject.privatemodules.PrivateModule")) {
+        return true;
+      }
+    }
+    return false;
+  }
+

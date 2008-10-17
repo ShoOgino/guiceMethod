@@ -1,6 +1,6 @@
   /** Makes the binding for {@code key} available to other modules and the injector. */
   protected final <T> void expose(Key<T> key) {
-    checkState(exposes != null, "Cannot expose %s, private module is not ready");
+    checkState(exposes != null, "Cannot expose %s, private module is not ready", key);
     exposes.add(new Expose<T>(sourceProvider.get(), readyProvider, key));
   }
 

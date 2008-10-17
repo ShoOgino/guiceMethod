@@ -4,7 +4,7 @@
    * annotation.
    */
   protected final <T> ExposedKeyBuilder expose(TypeLiteral<T> type) {
-    checkState(exposes != null, "Cannot expose %s, private module is not ready");
+    checkState(exposes != null, "Cannot expose %s, private module is not ready", type);
     Expose<T> expose = new Expose<T>(sourceProvider.get(), readyProvider, Key.get(type));
     exposes.add(expose);
     return expose;
