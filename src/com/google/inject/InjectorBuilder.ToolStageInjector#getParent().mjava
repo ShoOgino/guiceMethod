@@ -1,0 +1,4 @@
+    public Injector getParent() {
+      return delegateInjector.getParent();
+    }
+
