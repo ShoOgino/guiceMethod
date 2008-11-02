@@ -2,8 +2,7 @@
       checkNotTargetted();
 
       if (instance == null) {
-        binder.addError("Binding to null instances is not allowed. "
-            + "Use toProvider(Providers.of(null)) if this is your intended behaviour.");
+        binder.addError(BINDING_TO_NULL);
         // we finish the binding to prevent additional errors
         toProvider(Providers.<T>of(null));
         return;
