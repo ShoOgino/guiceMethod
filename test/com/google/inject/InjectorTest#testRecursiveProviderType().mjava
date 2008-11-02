@@ -5,7 +5,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "@ProvidedBy points to the same class it annotates",
-          "at ", Chicken.class.getName() + ".class(InjectorTest.java:");
+          "while locating ", Chicken.class.getName());
     }
   }
 

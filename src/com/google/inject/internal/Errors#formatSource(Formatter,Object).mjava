@@ -19,18 +19,8 @@
 
     } else if (source instanceof Key) {
       Key<?> key = (Key<?>) source;
-      Type type = key.getTypeLiteral().getType();
-      if (key.getAnnotationType() != null) {
-        formatter.format("  at binding for %s annotated with %s%n", MoreTypes.toString(type),
-            (key.getAnnotation() != null ? key.getAnnotation() : key.getAnnotationType()));
+      formatter.format("  while locating %s%n", convert(key));
 
-      } else if (type instanceof Class) {
-        formatter.format("  at binding for %s%n", StackTraceElements.forType((Class<?>) type));
-
-      } else {
-          formatter.format("  at binding for %s%n", type);
-
-      }
     } else {
       formatter.format("  at %s%n", source);
     }

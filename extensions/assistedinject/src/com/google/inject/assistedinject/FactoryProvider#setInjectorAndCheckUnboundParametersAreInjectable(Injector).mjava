@@ -1,7 +1,6 @@
   @Inject
   @SuppressWarnings({"unchecked", "unused"})
-  private void setInjectorAndCheckUnboundParametersAreInjectable(
-      Injector injector) {
+  void setInjectorAndCheckUnboundParametersAreInjectable(Injector injector) {
     this.injector = injector;
     for (AssistedConstructor<?> c : factoryMethodToConstructor.values()) {
       for (Parameter p : c.getAllParameters()) {
@@ -9,9 +8,8 @@
           // this is lame - we're not using the proper mechanism to add an
           // error to the injector. Throughout this class we throw exceptions
           // to add errors, which isn't really the best way in Guice
-          throw new IllegalStateException(String.format(
-              "Parameter of type '%s' is not injectable or annotated "
-                + "with @Assisted for Constructor '%s'", p, c));
+          throw newConfigurationException("Parameter of type '%s' is not injectable or annotated "
+                + "with @Assisted for Constructor '%s'", p, c);
         }
       }
     }

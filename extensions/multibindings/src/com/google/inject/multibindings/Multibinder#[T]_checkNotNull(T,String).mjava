@@ -1,0 +1,10 @@
+  static <T> T checkNotNull(T reference, String name) {
+    if (reference != null) {
+      return reference;
+    }
+
+    NullPointerException npe = new NullPointerException(name);
+    throw new ConfigurationException(ImmutableSet.of(
+        new Message(ImmutableList.of(), npe.toString(), npe)));
+  }
+

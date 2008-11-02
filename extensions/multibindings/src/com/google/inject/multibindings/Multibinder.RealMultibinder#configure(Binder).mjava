@@ -1,6 +1,6 @@
     @SuppressWarnings("unchecked")
     public void configure(Binder binder) {
-      checkState(!isInitialized(), "Multibinder was already initialized");
+      checkConfiguration(!isInitialized(), "Multibinder was already initialized");
 
       binder.bind(setKey).toProvider(this);
     }

@@ -10,8 +10,8 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "at binding for " + DProvider.class.getName() + ".class(ProvisionExceptionTest.java:",
-          "at binding for " + D.class.getName() + ".class(ProvisionExceptionTest.java:");
+          "while locating " + DProvider.class.getName(),
+          "while locating " + D.class.getName());
     }
   }
 

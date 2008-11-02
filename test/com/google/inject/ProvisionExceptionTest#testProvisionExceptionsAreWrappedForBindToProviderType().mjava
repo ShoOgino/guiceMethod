@@ -8,8 +8,8 @@
       fail();
     } catch (ProvisionException e) {
       assertContains(e.getMessage(), "1) User Exception",
-          "at binding for ", FProvider.class.getName(), ".class(ProvisionExceptionTest.java",
-          "at binding for ", F.class.getName(), ".class(ProvisionExceptionTest.java:");
+          "while locating ", FProvider.class.getName(),
+          "while locating ", F.class.getName());
     }
   }
 

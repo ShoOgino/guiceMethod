@@ -1,11 +1,11 @@
     public Set<T> get() {
-      checkState(isInitialized(), "Multibinder is not initialized");
+      checkConfiguration(isInitialized(), "Multibinder is not initialized");
 
       Set<T> result = new LinkedHashSet<T>();
       for (Provider<T> provider : providers) {
         final T newValue = provider.get();
-        checkState(newValue != null, "Set injection failed due to null element");
-        checkState(result.add(newValue),
+        checkConfiguration(newValue != null, "Set injection failed due to null element");
+        checkConfiguration(result.add(newValue),
             "Set injection failed due to duplicated element \"%s\"", newValue);
       }
       return Collections.unmodifiableSet(result);

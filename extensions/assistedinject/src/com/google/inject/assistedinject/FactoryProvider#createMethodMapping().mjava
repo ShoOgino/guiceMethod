@@ -1,36 +1,29 @@
   @SuppressWarnings({"unchecked"})
   private Map<Method, AssistedConstructor<?>> createMethodMapping() {
-    
-    List<AssistedConstructor<?>> constructors = new ArrayList<AssistedConstructor<?>>();
-    
+    List<AssistedConstructor<?>> constructors = Lists.newArrayList();
+
     for (Constructor c : implementationType.getDeclaredConstructors()) {
       if (c.getAnnotation(AssistedInject.class) != null) {
         constructors.add(new AssistedConstructor(c));
       }
     }
-    
+
     if (constructors.size() != factoryType.getMethods().length) {
-      throw new IllegalArgumentException(
-          String.format(
-              "Constructor mismatch: %s has %s @AssistedInject " +
-              "constructors, factory %s has %s creation methods",
-              implementationType.getSimpleName(),
-              constructors.size(),
-              factoryType.getSimpleName(),
-              factoryType.getMethods().length));
+      throw newConfigurationException("Constructor mismatch: %s has %s @AssistedInject "
+          + "constructors, factory %s has %s creation methods", implementationType.getSimpleName(),
+          constructors.size(), factoryType.getSimpleName(), factoryType.getMethods().length);
     }
-    
-    Map<ParameterListKey, AssistedConstructor> paramsToConstructor
-        = new HashMap<ParameterListKey, AssistedConstructor>();
-    
+
+    Map<ParameterListKey, AssistedConstructor> paramsToConstructor = Maps.newHashMap();
+
     for (AssistedConstructor c : constructors) {
       if (paramsToConstructor.containsKey(c.getAssistedParameters())) {
         throw new RuntimeException("Duplicate constructor, " + c);
       }
       paramsToConstructor.put(c.getAssistedParameters(), c);
     }
-    
-    Map<Method, AssistedConstructor<?>> result = new HashMap<Method, AssistedConstructor<?>>();
+
+    Map<Method, AssistedConstructor<?>> result = Maps.newHashMap();
     for (Method method : factoryType.getMethods()) {
       if (!method.getReturnType().isAssignableFrom(implementationType)) {
         throw new RuntimeException(String.format("Return type of method \"%s\""
@@ -38,15 +31,14 @@
             implementationType.getName()));
       }
       ParameterListKey methodParams = new ParameterListKey(method.getGenericParameterTypes());
-      
+
       if (!paramsToConstructor.containsKey(methodParams)) {
-        throw new IllegalArgumentException(String.format("%s has no " +
-            "@AssistInject constructor that takes the @Assisted parameters %s " +
-            "in that order. @AssistInject constructors are %s",
-            implementationType, methodParams, paramsToConstructor.values()));
+        throw newConfigurationException("%s has no @AssistInject constructor that takes the "
+            + "@Assisted parameters %s in that order. @AssistInject constructors are %s",
+            implementationType, methodParams, paramsToConstructor.values());
       }
       AssistedConstructor matchingConstructor = paramsToConstructor.remove(methodParams);
-      
+
       result.put(method, matchingConstructor);
     }
     return result;

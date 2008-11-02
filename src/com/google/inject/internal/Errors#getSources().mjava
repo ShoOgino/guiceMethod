@@ -1,7 +1,9 @@
   public List<Object> getSources() {
     List<Object> sources = Lists.newArrayList();
     for (Errors e = this; e != null; e = e.parent) {
-      sources.add(0, e.source);
+      if (e.source != SourceProvider.UNKNOWN_SOURCE) {
+        sources.add(0, e.source);
+      }
     }
     return sources;
   }

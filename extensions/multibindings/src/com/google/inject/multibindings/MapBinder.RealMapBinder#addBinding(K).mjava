@@ -4,7 +4,7 @@
      */
     @Override public LinkedBindingBuilder<V> addBinding(K key) {
       checkNotNull(key, "key");
-      checkState(!isInitialized(), "MapBinder was already initialized");
+      checkConfiguration(!isInitialized(), "MapBinder was already initialized");
 
       @SuppressWarnings("unchecked")
       Key<V> valueKey = (Key<V>) Key.get(valueType, new RealElement(entrySetBinder.getSetName()));

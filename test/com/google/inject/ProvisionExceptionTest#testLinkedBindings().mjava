@@ -11,8 +11,8 @@
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
           "at " + RealD.class.getName() + ".<init>(ProvisionExceptionTest.java:",
-          "at binding for " + RealD.class.getName() + ".class(ProvisionExceptionTest.java:",
-          "at binding for " + D.class.getName() + ".class(ProvisionExceptionTest.java:");
+          "while locating " + RealD.class.getName(),
+          "while locating " + D.class.getName());
     }
   }
 

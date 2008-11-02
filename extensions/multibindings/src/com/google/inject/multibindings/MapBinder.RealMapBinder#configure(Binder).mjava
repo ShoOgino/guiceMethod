@@ -1,5 +1,5 @@
     public void configure(Binder binder) {
-      checkState(!isInitialized(), "MapBinder was already initialized");
+      checkConfiguration(!isInitialized(), "MapBinder was already initialized");
 
       // binds a Map<K, Provider<V>> from a collection of Map<Entry<K, Provider<V>>
       final Provider<Set<Entry<K, Provider<V>>>> entrySetProvider = binder
@@ -13,7 +13,7 @@
 
           Map<K, Provider<V>> providerMapMutable = new LinkedHashMap<K, Provider<V>>();
           for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
-            checkState(providerMapMutable.put(entry.getKey(), entry.getValue()) == null,
+            checkConfiguration(providerMapMutable.put(entry.getKey(), entry.getValue()) == null,
                 "Map injection failed due to duplicated key \"%s\"", entry.getKey());
           }
 
@@ -32,7 +32,7 @@
           for (Entry<K, Provider<V>> entry : mapProvider.get().entrySet()) {
             V value = entry.getValue().get();
             K key = entry.getKey();
-            checkState(value != null,
+            checkConfiguration(value != null,
                 "Map injection failed due to null value for key \"%s\"", key);
             map.put(key, value);
           }

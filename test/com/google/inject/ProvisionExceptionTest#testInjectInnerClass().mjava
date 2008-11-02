@@ -6,7 +6,7 @@
     } catch (Exception expected) {
       assertContains(expected.getMessage(),
           "Injecting into inner classes is not supported.",
-          "at binding for " + InnerClass.class.getName() + ".class(ProvisionExceptionTest.java:");
+          "while locating " + InnerClass.class.getName());
     }
   }
 

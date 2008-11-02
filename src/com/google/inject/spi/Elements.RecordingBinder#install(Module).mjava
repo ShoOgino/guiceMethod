@@ -3,7 +3,12 @@
         try {
           module.configure(this);
         } catch (RuntimeException e) {
-          addError(e);
+          Collection<Message> messages = Errors.getMessagesFromThrowable(e);
+          if (!messages.isEmpty()) {
+            elements.addAll(messages);
+          } else {
+            addError(e);
+          }
         }
         install(ProviderMethodsModule.forModule(module));
       }

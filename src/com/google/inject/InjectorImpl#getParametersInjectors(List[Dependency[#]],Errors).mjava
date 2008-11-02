@@ -7,6 +7,7 @@
       return null;
     }
 
+    int numErrorsBefore = errors.size();
     SingleParameterInjector<?>[] result = new SingleParameterInjector<?>[parameters.size()];
     int i = 0;
     for (Dependency<?> parameter : parameters) {
@@ -17,7 +18,7 @@
       }
     }
 
-    errors.throwIfNecessary();
+    errors.throwIfNewErrors(numErrorsBefore);
     return ImmutableList.of(result);
   }
 

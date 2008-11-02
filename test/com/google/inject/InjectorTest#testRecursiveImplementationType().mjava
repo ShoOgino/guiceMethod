@@ -5,7 +5,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "@ImplementedBy points to the same class it annotates.",
-          "at ", SeaHorse.class.getName() + ".class(InjectorTest.java:");
+          "while locating ", SeaHorse.class.getName());
     }
   }
 

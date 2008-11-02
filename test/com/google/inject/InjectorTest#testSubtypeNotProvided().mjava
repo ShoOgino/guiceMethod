@@ -5,7 +5,8 @@
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
           Tree.class.getName() + " doesn't provide instances of " + Money.class.getName(),
-          "at ", Money.class.getName() + ".class(InjectorTest.java:");
+          "while locating ", Tree.class.getName(),
+          "while locating ", Money.class.getName());
     }
   }
 

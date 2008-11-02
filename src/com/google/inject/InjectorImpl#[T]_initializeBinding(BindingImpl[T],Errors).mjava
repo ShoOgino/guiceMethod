@@ -10,8 +10,7 @@
         // TODO: does this put the binding in JIT bindings?
         binding.initialize(this, errors);
         successful = true;
-      }
-      finally {
+      } finally {
         if (!successful) {
           jitBindings.remove(key);
         }

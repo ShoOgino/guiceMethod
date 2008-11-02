@@ -1,7 +1,6 @@
   @SuppressWarnings({"unchecked"})
   public F get() {
     InvocationHandler invocationHandler = new InvocationHandler() {
-
       public Object invoke(Object proxy, Method method, Object[] creationArgs) throws Throwable {
         // pass methods from Object.class to the proxy
         if (method.getDeclaringClass().equals(Object.class)) {

@@ -5,7 +5,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           Tree.class.getName() + " doesn't extend " + PineTree.class.getName(),
-          "at ", PineTree.class.getName() + ".class(InjectorTest.java:");
+          "while locating ", PineTree.class.getName());
     }
   }
 
