@@ -1,6 +1,0 @@
-  public void generateCode() throws IOException {
-    new CompileTimeGuice("test", Collections.singleton(module))
-        .generateCode(new File("/Users/jessewilson/svn/google-guice/generatedsrc"));
-
-  }
-

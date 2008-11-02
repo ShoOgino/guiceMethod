@@ -1,5 +1,0 @@
-  public JavaCodeGenerator writeLine() throws IOException {
-    writer.append("\n");
-    return this;
-  }
-

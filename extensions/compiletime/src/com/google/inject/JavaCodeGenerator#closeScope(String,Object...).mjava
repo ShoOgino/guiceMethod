@@ -1,5 +1,0 @@
-  public JavaCodeGenerator closeScope(String format, Object... args) throws IOException {
-    indent--;
-    return writeLine(format, args);
-  }
-

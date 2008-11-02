@@ -1,8 +1,0 @@
-  /**
-   * @param name uniquely identifies this reflection instance. This name needs
-   *     to be used both at code generation time and then later at runtime.
-   */
-  public CodeGenReflectionFactory(String name) {
-    this.name = name;
-  }
-

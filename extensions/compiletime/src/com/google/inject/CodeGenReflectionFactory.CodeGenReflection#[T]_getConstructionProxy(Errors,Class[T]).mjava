@@ -1,7 +1,0 @@
-    public <T> ConstructionProxy<T> getConstructionProxy(Errors errors, Class<T> implementation)
-        throws ErrorsException {
-      ConstructionProxy<T> result = delegate.getConstructionProxy(errors, implementation);
-      constructionProxies.put(implementation, result);
-      return result;
-    }
-

@@ -1,7 +1,0 @@
-  public void test() {
-    Injector injector = new CompileTimeGuice("test", Collections.singleton(module))
-        .createInjector();
-    
-    assertTrue(injector.getInstance(Foo.class) instanceof RealFoo);
-  }
-

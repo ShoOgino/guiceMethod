@@ -1,5 +1,0 @@
-  public Reflection create(ConstructionProxyFactory constructionProxyFactory) {
-    Reflection delegate = new RuntimeReflectionFactory().create(constructionProxyFactory);
-    return new CodeGenReflection(delegate);
-  }
-
