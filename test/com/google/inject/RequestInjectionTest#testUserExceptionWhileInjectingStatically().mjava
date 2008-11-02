@@ -1,0 +1,15 @@
+  public void testUserExceptionWhileInjectingStatically() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          requestStaticInjection(BlowsUpOnInject.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Error injecting method, java.lang.UnsupportedOperationException: Snap",
+          "at " + BlowsUpOnInject.class.getName() + ".injectStatically(RequestInjectionTest.java:");
+    }
+  }
+

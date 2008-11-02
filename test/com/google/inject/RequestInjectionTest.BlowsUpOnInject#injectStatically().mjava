@@ -1,0 +1,4 @@
+    @Inject static void injectStatically() {
+      throw new UnsupportedOperationException("Snap");
+    }
+
