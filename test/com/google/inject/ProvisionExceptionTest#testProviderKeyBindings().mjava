@@ -1,0 +1,17 @@
+  public void testProviderKeyBindings() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(D.class).toProvider(DProvider.class);
+      }
+    });
+
+    try {
+      injector.getInstance(D.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "at binding for " + DProvider.class.getName() + ".class(ProvisionExceptionTest.java:",
+          "at binding for " + D.class.getName() + ".class(ProvisionExceptionTest.java:");
+    }
+  }
+

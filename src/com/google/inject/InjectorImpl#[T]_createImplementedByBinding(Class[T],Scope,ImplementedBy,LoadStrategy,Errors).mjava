@@ -14,17 +14,17 @@
       throw errors.notASubtype(implementationType, type).toException();
     }
 
-    // After the preceding check, this cast is safe.
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // After the preceding check, this cast is safe.
     Class<? extends T> subclass = (Class<? extends T>) implementationType;
 
     // Look up the target binding.
-    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(Key.get(subclass), errors);
+    final Key<? extends T> targetKey = Key.get(subclass);
+    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(targetKey, errors);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(Errors errors, InternalContext context, Dependency<?> dependency)
           throws ErrorsException {
-        return targetBinding.internalFactory.get(errors, context, dependency);
+        return targetBinding.internalFactory.get(errors.withSource(targetKey), context, dependency);
       }
     };
 
@@ -34,8 +34,7 @@
         key,
         type,
         Scopes.<T>scope(key, this, internalFactory, scope),
-        scope,
-        Key.get(subclass),
+        scope, targetKey,
         loadStrategy);
   }
 

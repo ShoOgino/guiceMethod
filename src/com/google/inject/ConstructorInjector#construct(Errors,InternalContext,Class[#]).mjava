@@ -23,11 +23,10 @@
       // First time through...
       constructionContext.startConstruction();
       try {
-        Object[] parameters = InjectorImpl.getParameters(errors, context, parameterInjectors);
+        Object[] parameters = SingleParameterInjector.getAll(errors, context, parameterInjectors);
         t = constructionProxy.newInstance(parameters);
         constructionContext.setProxyDelegates(t);
-      }
-      finally {
+      } finally {
         constructionContext.finishConstruction();
       }
 
@@ -36,7 +35,7 @@
       constructionContext.setCurrentReference(t);
 
       // Inject fields and methods.
-      for (InjectorImpl.SingleMemberInjector injector : memberInjectors) {
+      for (SingleMemberInjector injector : memberInjectors) {
         injector.inject(errors, context, t);
       }
 

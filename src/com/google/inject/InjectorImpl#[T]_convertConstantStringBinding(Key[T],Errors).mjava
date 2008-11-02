@@ -41,11 +41,9 @@
       }
 
       return new ConvertedConstantBindingImpl<T>(this, key, converted, stringBinding);
-    }
-    catch (ErrorsException e) {
+    } catch (ErrorsException e) {
       throw e;
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       throw errors.conversionError(stringValue, source, type, matchingConverter, e)
           .toException();
     }

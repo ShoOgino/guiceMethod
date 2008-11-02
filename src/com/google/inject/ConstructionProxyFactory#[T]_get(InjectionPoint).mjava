@@ -1,0 +1,7 @@
+  /**
+   * Gets a construction proxy for the given constructor.
+   *
+   * @param injectionPoint an injection point whose member is a constructor of {@code T}.
+   */
+  <T> ConstructionProxy<T> get(InjectionPoint injectionPoint);
+

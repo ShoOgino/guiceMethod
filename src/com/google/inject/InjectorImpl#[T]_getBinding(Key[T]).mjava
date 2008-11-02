@@ -1,9 +1,9 @@
   /** Returns the binding for {@code key} */
   public <T> BindingImpl<T> getBinding(Key<T> key) {
-    Errors errors = new Errors(key.getRawType());
+    Errors errors = new Errors(key);
     try {
       BindingImpl<T> result = getBindingOrThrow(key, errors);
-      errors.throwConfigurationExceptionIfNecessary();
+      errors.throwConfigurationExceptionIfErrorsExist();
       return result;
     } catch (ErrorsException e) {
       throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());

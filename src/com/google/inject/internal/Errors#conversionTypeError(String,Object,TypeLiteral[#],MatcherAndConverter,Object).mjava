@@ -3,6 +3,6 @@
     return addMessage("Type mismatch converting '%s' (bound at %s) to %s%n"
         + " using %s.%n"
         + " Converter returned %s.",
-        stringValue, sourceToString(source), type, matchingConverter, converted);
+        stringValue, convert(source), type, matchingConverter, converted);
   }
 

@@ -1,4 +1,8 @@
   public Errors merge(Errors moreErrors) {
+    if (moreErrors.errors == errors) {
+      return this;
+    }
+
     merge(moreErrors.errors);
     return this;
   }

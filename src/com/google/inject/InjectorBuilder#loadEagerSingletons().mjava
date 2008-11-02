@@ -10,17 +10,16 @@
           || binding.getLoadStrategy() == LoadStrategy.EAGER) {
         try {
           injector.callInContext(new ContextualCallable<Void>() {
+            Dependency<?> dependency = Dependency.get(binding.key);
             public Void call(InternalContext context) {
-              Dependency<?> dependency = Dependency.get(binding.key);
               context.setDependency(dependency);
-              errors.pushSource(dependency);
+              Errors errorsForBinding = errors.withSource(dependency);
               try {
-                binding.internalFactory.get(errors, context, dependency);
+                binding.internalFactory.get(errorsForBinding, context, dependency);
               } catch (ErrorsException e) {
-                errors.merge(e.getErrors());
+                errorsForBinding.merge(e.getErrors());
               } finally {
                 context.setDependency(null);
-                errors.popSource(dependency);
               }
 
               return null;

@@ -6,7 +6,7 @@
     ProxyFactory factory = new ProxyFactory(aspects);
 
     ConstructionProxy<A> constructor =
-        factory.get(new Errors(), InjectionPoint.forConstructorOf(A.class));
+        factory.get(InjectionPoint.forConstructorOf(A.class));
 
     A a = constructor.newInstance(5);
     a.a();

@@ -1,0 +1,17 @@
+  public static void formatInjectionPoint(Formatter formatter, Dependency<?> dependency,
+      InjectionPoint injectionPoint) {
+    Member member = injectionPoint.getMember();
+    Class<? extends Member> memberType = MoreTypes.memberType(member);
+
+    if (memberType == Field.class) {
+      formatter.format("  for field at %s%n", StackTraceElements.forMember(member));
+
+    } else if (dependency != null) {
+      formatter.format("  for parameter %s at %s%n",
+          dependency.getParameterIndex(), StackTraceElements.forMember(member));
+
+    } else {
+      formatSource(formatter, injectionPoint.getMember());
+    }
+  }
+

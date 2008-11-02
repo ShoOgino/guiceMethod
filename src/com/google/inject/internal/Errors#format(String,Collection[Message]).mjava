@@ -10,28 +10,7 @@
       List<Object> dependencies = errorMessage.getSources();
       for (int i = dependencies.size() - 1; i >= 0; i--) {
         Object source = dependencies.get(i);
-
-        if (source instanceof Dependency) {
-          Dependency<?> dependency = (Dependency<?>) source;
-
-          InjectionPoint injectionPoint = dependency.getInjectionPoint();
-          if (injectionPoint != null) {
-            Member member = injectionPoint.getMember();
-            Class<? extends Member> memberType = MoreTypes.memberType(member);
-            if (memberType == Field.class) {
-              fmt.format("  for field at %s%n", StackTraceElements.forMember(member));
-            } else if (memberType == Method.class || memberType == Constructor.class) {
-              fmt.format("  for parameter %s at %s%n",
-                  dependency.getParameterIndex(), StackTraceElements.forMember(member));
-            } else {
-              throw new AssertionError();
-            }
-          } else {
-            fmt.format("  while locating %s%n", convert(dependency.getKey()));
-          }
-        }
-
-        fmt.format("  at %s%n", sourceToString(source));
+        formatSource(fmt, source);
       }
 
       Throwable cause = errorMessage.getCause();

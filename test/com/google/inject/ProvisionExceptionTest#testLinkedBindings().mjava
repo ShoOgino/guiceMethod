@@ -1,0 +1,18 @@
+  public void testLinkedBindings() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(D.class).to(RealD.class);
+      }
+    });
+
+    try {
+      injector.getInstance(D.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "at " + RealD.class.getName() + ".<init>(ProvisionExceptionTest.java:",
+          "at binding for " + RealD.class.getName() + ".class(ProvisionExceptionTest.java:",
+          "at binding for " + D.class.getName() + ".class(ProvisionExceptionTest.java:");
+    }
+  }
+

@@ -1,6 +1,6 @@
   // Not test-covered
   public void injectMembers(final Object o) {
-    Errors errors = new Errors();
+    Errors errors = new Errors(o.getClass());
 
     // configuration/validation stuff throws ConfigurationException
     List<SingleMemberInjector> injectors;

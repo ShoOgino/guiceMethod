@@ -1,3 +1,0 @@
-  public <T> ConstructionProxy<T> getConstructionProxy(Errors errors, Class<T> implementation)
-      throws ErrorsException;
-

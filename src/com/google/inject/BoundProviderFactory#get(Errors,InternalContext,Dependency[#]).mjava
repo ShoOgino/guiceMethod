@@ -1,10 +1,11 @@
   public T get(Errors errors, InternalContext context, Dependency<?> dependency)
       throws ErrorsException {
+    errors = errors.withSource(providerKey);
     Provider<? extends T> provider = providerFactory.get(errors, context, dependency);
     try {
       return errors.checkForNull(provider.get(), source, dependency);
     } catch(RuntimeException userException) {
-      throw errors.withSource(source).errorInProvider(userException).toException();
+      throw errors.errorInProvider(userException).toException();
     }
   }
 

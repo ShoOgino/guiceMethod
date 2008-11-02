@@ -10,7 +10,7 @@
   public static InjectionPoint forConstructorOf(Class<?> type) {
     Errors errors = new Errors(type);
 
-    Constructor<?> found = null;
+    Constructor<?> injectableConstructor = null;
     for (Constructor<?> constructor : type.getDeclaredConstructors()) {
       Inject inject = constructor.getAnnotation(Inject.class);
       if (inject != null) {
@@ -18,33 +18,34 @@
           errors.optionalConstructor(constructor);
         }
 
-        if (found != null) {
+        if (injectableConstructor != null) {
           errors.tooManyConstructors(type);
         }
 
-        found = constructor;
+        injectableConstructor = constructor;
+        checkForMisplacedBindingAnnotations(injectableConstructor, errors);
       }
     }
 
-    errors.throwConfigurationExceptionIfNecessary();
+    errors.throwConfigurationExceptionIfErrorsExist();
 
-    if (found != null) {
-      return new InjectionPoint(found);
+    if (injectableConstructor != null) {
+      return new InjectionPoint(injectableConstructor);
     }
 
-    // If no annotated constructor is found, look for a no-arg constructor
-    // instead.
+    // If no annotated constructor is found, look for a no-arg constructor instead.
     try {
-      Constructor<?> noArgCtor = type.getDeclaredConstructor();
+      Constructor<?> noArgConstructor = type.getDeclaredConstructor();
 
       // Disallow private constructors on non-private classes (unless they have @Inject)
-      if (Modifier.isPrivate(noArgCtor.getModifiers())
+      if (Modifier.isPrivate(noArgConstructor.getModifiers())
           && !Modifier.isPrivate(type.getModifiers())) {
         errors.missingConstructor(type);
         throw new ConfigurationException(errors.getMessages());
       }
 
-      return new InjectionPoint(noArgCtor);
+      checkForMisplacedBindingAnnotations(noArgConstructor, errors);
+      return new InjectionPoint(noArgConstructor);
     } catch (NoSuchMethodException e) {
       errors.missingConstructor(type);
       throw new ConfigurationException(errors.getMessages());

@@ -1,0 +1,24 @@
+  /**
+   * Returns an array of parameter values.
+   */
+  static Object[] getAll(Errors errors, InternalContext context,
+      List<SingleParameterInjector<?>> parameterInjectors) throws ErrorsException {
+    if (parameterInjectors == null) {
+      return null;
+    }
+
+    Object[] parameters = new Object[parameterInjectors.size()];
+
+    int i = 0;
+    for (SingleParameterInjector<?> parameterInjector : parameterInjectors) {
+      try {
+        parameters[i++] = parameterInjector.inject(errors, context);
+      } catch (ErrorsException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+
+    errors.throwIfNecessary();
+    return parameters;
+  }
+

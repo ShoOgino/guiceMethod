@@ -12,7 +12,7 @@
       }
 
       try {
-        injectionPoints.add(factory.create(member));
+        injectionPoints.add(factory.create(member, errors));
       } catch (ConfigurationException ignorable) {
         if (!inject.optional()) {
           errors.merge(ignorable.getErrorMessages());

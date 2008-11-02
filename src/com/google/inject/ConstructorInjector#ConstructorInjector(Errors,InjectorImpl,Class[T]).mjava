@@ -1,10 +1,15 @@
   ConstructorInjector(Errors errors, InjectorImpl injector, Class<T> implementation)
       throws ErrorsException {
     this.implementation = implementation;
-    constructionProxy = injector.reflection.getConstructionProxy(errors, implementation);
-    parameterInjectors = createParameterInjector(errors, injector, constructionProxy);
-    List<SingleMemberInjector> memberInjectorsList = injector.injectors.get(implementation, errors);
-    memberInjectors = memberInjectorsList.toArray(
-        new SingleMemberInjector[memberInjectorsList.size()]);
+
+    try {
+      this.injectionPoint = InjectionPoint.forConstructorOf(implementation);
+    } catch (ConfigurationException e) {
+      throw errors.merge(e.getErrorMessages()).toException();
+    }
+
+    constructionProxy = injector.constructionProxyFactory.get(injectionPoint);
+    parameterInjectors = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
+    memberInjectors = injector.injectors.get(implementation, errors);
   }
 

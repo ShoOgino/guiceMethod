@@ -1,4 +1,0 @@
-      InvalidConstructor() {
-        throw new AssertionError();
-      }
-

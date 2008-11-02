@@ -1,5 +1,6 @@
   public Errors() {
-    sources = Lists.newArrayList();
-    errors = Lists.newArrayList();
+    this.errors = Lists.newArrayList();
+    this.parent = null;
+    this.source = SourceProvider.UNKNOWN_SOURCE;
   }
 

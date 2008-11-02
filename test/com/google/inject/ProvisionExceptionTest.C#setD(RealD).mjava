@@ -1,0 +1,3 @@
+    @Inject
+    void setD(RealD d) { }
+

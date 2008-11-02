@@ -1,5 +1,0 @@
-  public void popSource(Object source) {
-    Object popped = sources.remove(sources.size() - 1);
-    checkArgument(source == popped);
-  }
-

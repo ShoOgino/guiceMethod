@@ -1,0 +1,9 @@
+  private T inject(Errors errors, InternalContext context) throws ErrorsException {
+    context.setDependency(dependency);
+    try {
+      return factory.get(errors.withSource(dependency), context, dependency);
+    } finally {
+      context.setDependency(null);
+    }
+  }
+

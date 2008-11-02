@@ -1,6 +1,0 @@
-  SingleParameterInjector<?>[] createParameterInjector(Errors errors,
-      InjectorImpl injector, ConstructionProxy<T> constructionProxy)
-      throws ErrorsException {
-    return injector.getParametersInjectors(constructionProxy.getInjectionPoint(), errors);
-  }
-

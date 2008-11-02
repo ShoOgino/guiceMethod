@@ -1,20 +1,18 @@
   <T> Provider<T> getProviderOrThrow(final Key<T> key, Errors errors) throws ErrorsException {
     final InternalFactory<? extends T> factory = getInternalFactory(key, errors);
+    final Dependency<T> dependency = Dependency.get(key);
 
     return new Provider<T>() {
       public T get() {
-        final Errors errors = new Errors();
+        final Errors errors = new Errors(dependency);
         try {
           T t = callInContext(new ContextualCallable<T>() {
             public T call(InternalContext context) throws ErrorsException {
-              Dependency<T> dependency = Dependency.get(key);
               context.setDependency(dependency);
-              errors.pushSource(dependency);
               try {
                 return factory.get(errors, context, dependency);
               } finally {
                 context.setDependency(null);
-                errors.popSource(dependency);
               }
             }
           });

@@ -6,10 +6,10 @@
       try {
         Errors errorsForMember = injectionPoint.isOptional()
             ? new Errors(injectionPoint)
-            : errors;
+            : errors.withSource(injectionPoint);
         SingleMemberInjector injector = injectionPoint.getMember() instanceof Field
-            ? new SingleFieldInjector(errorsForMember, this, injectionPoint)
-            : new SingleMethodInjector(errorsForMember, this, injectionPoint);
+            ? new SingleFieldInjector(this, injectionPoint, errorsForMember)
+            : new SingleMethodInjector(this, injectionPoint, errorsForMember);
         injectors.add(injector);
       } catch (ErrorsException ignoredForNow) {
       }

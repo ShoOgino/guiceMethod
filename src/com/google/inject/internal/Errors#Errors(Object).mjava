@@ -1,5 +1,6 @@
   public Errors(Object source) {
-    sources = Lists.newArrayList(source);
-    errors = Lists.newArrayList();
+    this.errors = Lists.newArrayList();
+    this.parent = null;
+    this.source = source;
   }
 

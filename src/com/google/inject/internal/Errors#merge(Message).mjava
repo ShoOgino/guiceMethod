@@ -1,7 +1,7 @@
   private Message merge(Message message) {
     List<Object> sources = Lists.newArrayList();
-    sources.addAll(this.sources);
+    sources.addAll(getSources());
     sources.addAll(message.getSources());
-    return new Message(stripDuplicates(sources), message.getMessage(), message.getCause());
+    return new Message(sources, message.getMessage(), message.getCause());
   }
 

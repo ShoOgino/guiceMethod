@@ -2,6 +2,6 @@
       TypeLiteral<?> type, MatcherAndConverter matchingConverter) {
     return addMessage("Received null converting '%s' (bound at %s) to %s%n"
         + " using %s.",
-        stringValue, sourceToString(source), type, matchingConverter);
+        stringValue, convert(source), type, matchingConverter);
   }
 

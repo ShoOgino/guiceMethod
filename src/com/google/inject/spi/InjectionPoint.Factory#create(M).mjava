@@ -1,2 +1,0 @@
-    InjectionPoint create(M member);
-

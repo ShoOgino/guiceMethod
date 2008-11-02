@@ -1,0 +1,23 @@
+  public void testBindingAnnotationsOnMethodsAndConstructors() {
+    try {
+      Guice.createInjector().getInstance(MethodWithBindingAnnotation.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), MethodWithBindingAnnotation.class.getName()
+          + ".injectMe() is annotated with @", Green.class.getName() + "(), ",
+          "but binding annotations should be applied to its parameters instead.",
+          "at binding for " + MethodWithBindingAnnotation.class.getName() + ".class");
+    }
+
+    try {
+      Guice.createInjector().getInstance(ConstructorWithBindingAnnotation.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), ConstructorWithBindingAnnotation.class.getName()
+          + ".<init>() is annotated with @", Green.class.getName() + "(), ",
+          "but binding annotations should be applied to its parameters instead.",
+          "at " + ConstructorWithBindingAnnotation.class.getName() + ".class",
+          "at binding for " + ConstructorWithBindingAnnotation.class.getName() + ".class");
+    }
+  }
+

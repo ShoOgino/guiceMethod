@@ -1,0 +1,2 @@
+  void inject(Errors errors, InternalContext context, Object o);
+

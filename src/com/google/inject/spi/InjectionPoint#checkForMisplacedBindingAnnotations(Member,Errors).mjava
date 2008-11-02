@@ -1,0 +1,8 @@
+  private static void checkForMisplacedBindingAnnotations(Member member, Errors errors) {
+    Annotation misplacedBindingAnnotation = Annotations.findBindingAnnotation(
+        errors, member, ((AnnotatedElement) member).getAnnotations());
+    if (misplacedBindingAnnotation != null) {
+      errors.misplacedBindingAnnotation(member, misplacedBindingAnnotation);
+    }
+  }
+

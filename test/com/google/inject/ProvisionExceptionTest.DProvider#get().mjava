@@ -1,4 +1,4 @@
     public D get() {
-      return new D();
+      throw new UnsupportedOperationException();
     }
 

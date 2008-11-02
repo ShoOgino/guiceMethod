@@ -11,6 +11,6 @@
     Errors errors = new Errors();
     addInjectionPoints(type, Factory.FIELDS, true, sink, errors);
     addInjectionPoints(type, Factory.METHODS, true, sink, errors);
-    errors.throwConfigurationExceptionIfNecessary();;
+    errors.throwConfigurationExceptionIfErrorsExist();
   }
 

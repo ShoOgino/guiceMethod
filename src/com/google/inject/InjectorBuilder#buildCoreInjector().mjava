@@ -6,8 +6,7 @@
     InterceptorBindingProcessor interceptorCommandProcessor
         = new InterceptorBindingProcessor(errors, injector.state);
     interceptorCommandProcessor.processCommands(elements);
-    ConstructionProxyFactory proxyFactory = interceptorCommandProcessor.createProxyFactory();
-    injector.reflection = reflectionFactory.create(proxyFactory);
+    injector.constructionProxyFactory = interceptorCommandProcessor.createProxyFactory();
     stopwatch.resetAndLog("Interceptors creation");
 
     new ScopeBindingProcessor(errors, injector.state).processCommands(elements);

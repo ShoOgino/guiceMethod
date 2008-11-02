@@ -1,5 +1,0 @@
-  public Errors makeImmutable() {
-    errors = ImmutableList.copyOf(errors);
-    return this;
-  }
-

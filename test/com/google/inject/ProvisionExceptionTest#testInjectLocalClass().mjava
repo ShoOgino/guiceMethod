@@ -1,0 +1,14 @@
+  public void testInjectLocalClass() throws Exception {
+    class LocalClass {}
+
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(LocalClass.class);
+      fail();
+    } catch (Exception expected) {
+      assertContains(expected.getMessage(),
+          "Injecting into inner classes is not supported.",
+          "at binding for " + LocalClass.class.getName() + ".class(ProvisionExceptionTest.java:");
+    }
+  }
+

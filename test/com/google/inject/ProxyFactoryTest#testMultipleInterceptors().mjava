@@ -7,7 +7,7 @@
     ProxyFactory factory = new ProxyFactory(aspects);
 
     ConstructionProxy<Counter> constructor =
-        factory.get(new Errors(), InjectionPoint.forConstructorOf(Counter.class));
+        factory.get(InjectionPoint.forConstructorOf(Counter.class));
 
     Counter counter = constructor.newInstance();
     counter.inc();

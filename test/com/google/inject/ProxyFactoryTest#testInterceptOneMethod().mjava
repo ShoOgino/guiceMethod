@@ -6,9 +6,9 @@
     ProxyFactory factory = new ProxyFactory(aspects);
 
     ConstructionProxy<Foo> fooFactory =
-        factory.get(new Errors(), InjectionPoint.forConstructorOf(Foo.class));
+        factory.get(InjectionPoint.forConstructorOf(Foo.class));
     ConstructionProxy<Bar> barFactory =
-        factory.get(new Errors(), InjectionPoint.forConstructorOf(Bar.class));
+        factory.get(InjectionPoint.forConstructorOf(Bar.class));
 
     Foo foo = fooFactory.newInstance();
     Bar bar = barFactory.newInstance();

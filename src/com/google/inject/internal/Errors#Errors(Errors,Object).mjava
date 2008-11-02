@@ -1,6 +1,6 @@
   private Errors(Errors parent, Object source) {
-    errors = parent.errors;
-    sources = Lists.newArrayList(parent.sources);
-    sources.add(source);
+    this.errors = parent.errors;
+    this.parent = parent;
+    this.source = source;
   }
 

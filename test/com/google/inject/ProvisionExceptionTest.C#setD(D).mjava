@@ -1,3 +1,0 @@
-    @Inject
-    void setD(D d) { }
-

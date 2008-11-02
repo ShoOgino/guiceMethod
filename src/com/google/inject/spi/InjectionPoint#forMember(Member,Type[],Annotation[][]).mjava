@@ -16,7 +16,7 @@
       }
     }
 
-    errors.throwConfigurationExceptionIfNecessary();
+    errors.throwConfigurationExceptionIfErrorsExist();
     return ImmutableList.copyOf(dependencies);
   }
 

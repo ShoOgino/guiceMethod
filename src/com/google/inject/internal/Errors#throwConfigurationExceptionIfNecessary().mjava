@@ -1,8 +1,0 @@
-  public void throwConfigurationExceptionIfNecessary() {
-    if (!hasErrors()) {
-      return;
-    }
-
-    throw new ConfigurationException(getMessages());
-  }
-

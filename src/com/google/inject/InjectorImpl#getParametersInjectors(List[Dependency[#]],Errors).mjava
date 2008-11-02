@@ -1,0 +1,23 @@
+  /**
+   * Returns parameter injectors, or {@code null} if there are no parameters.
+   */
+  ImmutableList<SingleParameterInjector<?>> getParametersInjectors(
+      List<Dependency<?>> parameters, Errors errors) throws ErrorsException {
+    if (parameters.isEmpty()) {
+      return null;
+    }
+
+    SingleParameterInjector<?>[] result = new SingleParameterInjector<?>[parameters.size()];
+    int i = 0;
+    for (Dependency<?> parameter : parameters) {
+      try {
+        result[i++] = createParameterInjector(parameter, errors.withSource(parameter));
+      } catch (ErrorsException rethrownBelow) {
+        // rethrown below
+      }
+    }
+
+    errors.throwIfNecessary();
+    return ImmutableList.of(result);
+  }
+

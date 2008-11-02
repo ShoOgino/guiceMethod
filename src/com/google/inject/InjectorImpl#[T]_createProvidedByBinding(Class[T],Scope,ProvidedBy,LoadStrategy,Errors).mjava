@@ -8,28 +8,28 @@
       throw errors.recursiveProviderType().toException();
     }
 
-    // TODO: Make sure the provided type extends type. We at least check the type at runtime below.
-
     // Assume the provider provides an appropriate type. We double check at runtime.
     @SuppressWarnings("unchecked")
-    Key<? extends Provider<T>> providerKey = (Key<? extends Provider<T>>) Key.get(providerType);
+    final Key<? extends Provider<T>> providerKey
+        = (Key<? extends Provider<T>>) Key.get(providerType);
     final BindingImpl<? extends Provider<?>> providerBinding
         = getBindingOrThrow(providerKey, errors);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(Errors errors, InternalContext context, Dependency dependency)
           throws ErrorsException {
+        errors = errors.withSource(providerKey);
         Provider<?> provider = providerBinding.internalFactory.get(errors, context, dependency);
         try {
           Object o = provider.get();
           if (o != null && !type.isInstance(o)) {
-            throw errors.withSource(type).subtypeNotProvided(providerType, type).toException();
+            throw errors.subtypeNotProvided(providerType, type).toException();
           }
           @SuppressWarnings("unchecked") // protected by isInstance() check above
           T t = (T) o;
           return t;
         } catch (RuntimeException e) {
-          throw errors.withSource(type).errorInProvider(e).toException();
+          throw errors.errorInProvider(e).toException();
         }
       }
     };
