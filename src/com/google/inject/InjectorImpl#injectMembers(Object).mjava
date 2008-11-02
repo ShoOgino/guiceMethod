@@ -1,12 +1,22 @@
   // Not test-covered
   public void injectMembers(final Object o) {
     Errors errors = new Errors();
+
+    // configuration/validation stuff throws ConfigurationException
+    List<SingleMemberInjector> injectors;
     try {
-      injectMembersOrThrow(errors, o);
+      injectors = this.injectors.get(o.getClass(), errors);
+    } catch (ErrorsException e) {
+      throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
+    }
+
+    // injection can throw ProvisionException
+    try {
+      injectMembersOrThrow(errors, o, injectors);
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }
 
-    ProvisionException.throwNewIfNonEmpty(errors);
+    errors.throwProvisionExceptionIfErrorsExist();
   }
 

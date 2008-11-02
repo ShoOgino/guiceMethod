@@ -13,9 +13,9 @@
 
       try {
         injectionPoints.add(factory.create(member));
-      } catch (ConfigurationException e) {
+      } catch (ConfigurationException ignorable) {
         if (!inject.optional()) {
-          errors.merge(e.getErrorMessages());
+          errors.merge(ignorable.getErrorMessages());
         }
       }
     }

@@ -4,7 +4,7 @@
     try {
       parent.getBinding(B.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
     }
   }
 

@@ -13,7 +13,7 @@
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }
-    ConfigurationException.throwNewIfNonEmpty(errors);
+    errors.throwConfigurationExceptionIfNecessary();
 
     this.dependencies = ImmutableList.<Dependency<?>>of(
         newDependency(key, Nullability.allowsNull(annotations), -1));

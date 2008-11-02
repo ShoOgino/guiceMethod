@@ -1,7 +1,8 @@
   /**
-   * Returns the provider used to obtain instances for the given injection key.
-   * When feasible, it's generally preferable to avoid using this method, in
-   * favor of having Guice inject your dependencies ahead of time.
+   * Returns the provider used to obtain instances for the given type. When feasible, avoid
+   * using this method, in favor of having Guice inject your dependencies ahead of time.
+   *
+   * @throws ConfigurationException if this injector cannot find or create the provider.
    */
   <T> Provider<T> getProvider(Class<T> type);
 

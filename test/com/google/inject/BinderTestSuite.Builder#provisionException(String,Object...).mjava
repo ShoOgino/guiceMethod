@@ -1,5 +1,0 @@
-    private Builder provisionException(String message, Object... args) {
-      provisionException = String.format(message, args);
-      return this;
-    }
-

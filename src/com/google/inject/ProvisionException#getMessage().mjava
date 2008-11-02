@@ -1,6 +1,4 @@
   @Override public String getMessage() {
-    return errors != null 
-        ? Errors.format("Guice provision errors", errors.getMessages())
-        : super.getMessage();
+    return Errors.format("Guice provision errors", messages);
   }
 

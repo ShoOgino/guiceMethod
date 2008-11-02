@@ -1,7 +1,5 @@
-  /**
-   * Gets the error messages which resulted in this exception.
-   */
+  /** Returns messages for the errors that caused this exception. */
   public Collection<Message> getErrorMessages() {
-    return errors.getMessages();
+    return messages;
   }
 

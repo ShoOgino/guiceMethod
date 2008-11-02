@@ -1,0 +1,8 @@
+  void injectMembers(Errors errors, Object o, InternalContext context,
+      List<SingleMemberInjector> injectors)
+      throws ErrorsException {
+    for (SingleMemberInjector injector : injectors) {
+      injector.inject(errors, context, o);
+    }
+  }
+

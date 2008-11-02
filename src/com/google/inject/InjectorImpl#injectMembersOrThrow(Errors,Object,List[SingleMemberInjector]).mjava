@@ -1,0 +1,15 @@
+  public void injectMembersOrThrow(final Errors errors, final Object o,
+      final List<SingleMemberInjector> injectors)
+      throws ErrorsException {
+    if (o == null) {
+      return;
+    }
+
+    callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) throws ErrorsException {
+        injectMembers(errors, o, context, injectors);
+        return null;
+      }
+    });
+  }
+

@@ -1,0 +1,15 @@
+  public Errors errorInUserCode(String message, Throwable cause) {
+    if (cause instanceof ProvisionException) {
+      return merge(((ProvisionException) cause).getErrorMessages());
+
+    } else if (cause instanceof ConfigurationException) {
+      return merge(((ConfigurationException) cause).getErrorMessages());
+
+    } else if (cause instanceof CreationException) {
+      return merge(((CreationException) cause).getErrorMessages());
+
+    } else {
+      return addMessage(cause, message, cause);
+    }
+  }
+

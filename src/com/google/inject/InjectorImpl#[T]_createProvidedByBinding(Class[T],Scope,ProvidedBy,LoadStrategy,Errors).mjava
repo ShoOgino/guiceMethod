@@ -29,7 +29,7 @@
           T t = (T) o;
           return t;
         } catch (RuntimeException e) {
-          throw errors.withSource(type).errorInProvider(e, null).toException();
+          throw errors.withSource(type).errorInProvider(e).toException();
         }
       }
     };

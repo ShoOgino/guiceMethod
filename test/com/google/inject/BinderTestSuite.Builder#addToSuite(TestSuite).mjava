@@ -2,8 +2,8 @@
       if (creationException != null) {
         suite.addTest(new CreationExceptionTest(this));
 
-      } else if (provisionException != null) {
-        suite.addTest(new ProvisionExceptionTest(this));
+      } else if (configurationException != null) {
+        suite.addTest(new ConfigurationExceptionTest(this));
 
       } else {
         suite.addTest(new SuccessTest(this));

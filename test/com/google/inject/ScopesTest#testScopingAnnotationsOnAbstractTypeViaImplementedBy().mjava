@@ -2,7 +2,7 @@
     try {
       Guice.createInjector().getInstance(D.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           D.class.getName() + " is annotated with " + Singleton.class.getName(),
           "but scope annotations are not supported for abstract types.",

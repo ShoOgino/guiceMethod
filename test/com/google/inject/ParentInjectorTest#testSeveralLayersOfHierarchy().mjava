@@ -15,13 +15,13 @@
     try {
       top.getInstance(D.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
     }
 
     try {
       left.getInstance(D.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
     }
   }
 

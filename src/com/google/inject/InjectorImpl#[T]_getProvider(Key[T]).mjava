@@ -4,9 +4,8 @@
       Provider<T> result = getProviderOrThrow(key, errors);
       errors.throwIfNecessary();
       return result;
-    }
-    catch (ErrorsException e) {
-      throw new ProvisionException(errors.merge(e.getErrors()));
+    } catch (ErrorsException e) {
+      throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
     }
   }
 

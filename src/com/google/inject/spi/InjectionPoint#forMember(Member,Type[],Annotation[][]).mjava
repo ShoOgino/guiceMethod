@@ -16,7 +16,7 @@
       }
     }
 
-    ConfigurationException.throwNewIfNonEmpty(errors);
+    errors.throwConfigurationExceptionIfNecessary();
     return ImmutableList.copyOf(dependencies);
   }
 

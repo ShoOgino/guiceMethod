@@ -1,6 +1,7 @@
   /**
-   * Returns all explicit bindings for the given type. This method is part of the Injector
-   * Introspection API and is primarily intended for use by tools.
+   * Returns all explicit bindings for {@code type}.
+   *
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
    */
   <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type);
 

@@ -1,5 +1,5 @@
   public ProvisionException(String message, Throwable cause) {
-    super(message, cause);
-    this.errors = null;
+    super(cause);
+    this.messages = ImmutableSet.of(new Message(ImmutableList.of(), message, cause));
   }
 

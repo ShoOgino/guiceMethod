@@ -1,0 +1,22 @@
+  /**
+   * Returns the cause throwable if there is exactly one cause in {@code messages}. If there are
+   * zero or multiple messages with causes, null is returned.
+   */
+  public static Throwable getOnlyCause(Collection<Message> messages) {
+    Throwable onlyCause = null;
+    for (Message message : messages) {
+      Throwable messageCause = message.getCause();
+      if (messageCause == null) {
+        continue;
+      }
+
+      if (onlyCause != null) {
+        return null;
+      }
+
+      onlyCause = messageCause;
+    }
+
+    return onlyCause;
+  }
+

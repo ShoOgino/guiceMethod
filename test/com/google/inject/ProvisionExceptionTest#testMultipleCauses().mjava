@@ -1,0 +1,15 @@
+  public void testMultipleCauses() {
+    try {
+      Guice.createInjector().getInstance(G.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "1) Error injecting method, java.lang.IllegalArgumentException",
+          "Caused by: java.lang.IllegalArgumentException: java.lang.UnsupportedOperationException",
+          "Caused by: java.lang.UnsupportedOperationException: Unsupported",
+          "2) Error injecting method, java.lang.NullPointerException: can't inject second either",
+          "Caused by: java.lang.NullPointerException: can't inject second either",
+          "2 errors");
+    }
+  }
+

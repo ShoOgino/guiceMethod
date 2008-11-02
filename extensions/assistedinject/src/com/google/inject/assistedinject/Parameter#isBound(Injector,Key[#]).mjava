@@ -4,7 +4,7 @@
     try {
       return injector.getBinding(key) != null
           || injector.getProvider(key) != null;
-    } catch (ProvisionException e) {
+    } catch (ConfigurationException e) {
       return false;
     }
   }

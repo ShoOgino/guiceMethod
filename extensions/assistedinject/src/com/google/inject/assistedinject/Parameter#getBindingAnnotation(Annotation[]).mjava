@@ -8,10 +8,8 @@
     Annotation bindingAnnotation = null;
     for (Annotation a : annotations) {
       if (a.annotationType().getAnnotation(BindingAnnotation.class) != null) {
-        if (bindingAnnotation != null) {
-          throw new IllegalArgumentException(String.format("Parameter has " +
-              "multiple binding annotations: %s and %s", bindingAnnotation, a));
-        }
+        checkArgument(bindingAnnotation == null,
+            "Parameter has multiple binding annotations: %s and %s", bindingAnnotation, a);
         bindingAnnotation = a;
       }
     }

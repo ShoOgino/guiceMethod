@@ -1,8 +1,10 @@
   /**
-   * Gets all explicit bindings.
+   * Returns all explicit bindings.
    *
-   * <p>This method is part of the Injector
-   * Introspection API and is primarily intended for use by tools.
+   * <p>The returned map does not include bindings inherited from a {@link #getParent() parent
+   * injector}, should one exist.
+   *
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
    */
   Map<Key<?>, Binding<?>> getBindings();
 

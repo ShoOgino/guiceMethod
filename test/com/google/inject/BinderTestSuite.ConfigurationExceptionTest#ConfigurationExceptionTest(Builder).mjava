@@ -1,9 +1,9 @@
-    public ProvisionExceptionTest(Builder builder) {
+    public ConfigurationExceptionTest(Builder builder) {
       super("test");
       name = builder.name;
       key = builder.key;
       injectsKey = builder.injectsKey;
       modules = ImmutableList.copyOf(builder.modules);
-      provisionException = builder.provisionException;
+      configurationException = builder.configurationException;
     }
 

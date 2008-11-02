@@ -2,7 +2,7 @@
     try {
       Guice.createInjector().getInstance(PineTree.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           Tree.class.getName() + " doesn't extend " + PineTree.class.getName(),
           "at ", PineTree.class.getName() + ".class(InjectorTest.java:");

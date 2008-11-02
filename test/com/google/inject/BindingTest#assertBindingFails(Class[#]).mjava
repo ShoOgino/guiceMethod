@@ -2,7 +2,7 @@
     try {
       Guice.createInjector().getInstance(clazz);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "Could not find a suitable constructor in " + PrivateNoArg.class.getName(),
           "at " + PrivateNoArg.class.getName() + ".class(BindingTest.java:");

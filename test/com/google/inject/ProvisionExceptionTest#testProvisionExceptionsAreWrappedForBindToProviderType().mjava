@@ -7,8 +7,7 @@
       }).getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
-          "1) Error in custom provider, com.google.inject.ProvisionException: User Exception",
+      assertContains(e.getMessage(), "1) User Exception",
           "at " + ProvisionExceptionTest.class.getName(), ".configure(ProvisionExceptionTest.java");
     }
   }

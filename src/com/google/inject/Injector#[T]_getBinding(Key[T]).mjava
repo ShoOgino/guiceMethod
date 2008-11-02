@@ -1,10 +1,11 @@
   /**
-   * Gets a binding for the given key, or null if no binding for this key is
-   * found. Returns explicit bindings as well as those synthesized by the
-   * container such as bindings for converted constants, etc.
+   * Returns the binding for the given injection key. This will be an explicit bindings if the key
+   * was bound explicitly by a module, or an implicit binding otherwise. The implicit binding will
+   * be created if necessary.
    *
-   * <p>This method is part of the Injector Introspection API and is
-   * primarily intended for use by tools.
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
+   *
+   * @throws ConfigurationException if this injector cannot find or create the binding.
    */
   <T> Binding<T> getBinding(Key<T> key);
 

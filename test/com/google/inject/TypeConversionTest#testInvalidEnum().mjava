@@ -8,7 +8,7 @@
     try {
       injector.getInstance(InvalidEnum.class);
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(), "Error converting 'invalid'");
       assertContains(expected.getMessage(), "bound at " + getClass().getName());
       assertContains(expected.getMessage(), "to " + Bar.class.getName());

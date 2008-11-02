@@ -1,4 +1,4 @@
   public Errors errorInjectingConstructor(Throwable cause) {
-    return addMessage(cause, "Error injecting constructor, %s", cause);
+    return errorInUserCode("Error injecting constructor, %s", cause);
   }
 

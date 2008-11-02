@@ -3,11 +3,10 @@
     Errors errors = new Errors(key.getRawType());
     try {
       BindingImpl<T> result = getBindingOrThrow(key, errors);
-      ProvisionException.throwNewIfNonEmpty(errors);
+      errors.throwConfigurationExceptionIfNecessary();
       return result;
-    }
-    catch (ErrorsException e) {
-      throw new ProvisionException(errors.merge(e.getErrors()));
+    } catch (ErrorsException e) {
+      throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
     }
   }
 

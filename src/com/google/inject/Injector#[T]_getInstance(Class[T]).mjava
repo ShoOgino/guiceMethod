@@ -1,8 +1,10 @@
   /**
-   * Returns the appropriate instance for the given type; equivalent to
-   * {@code getProvider(type).get()}. When feasible, it's generally preferable
-   * to avoid using this method, in favor of having Guice inject your
-   * dependencies ahead of time.
+   * Returns the appropriate instance for the given injection type; equivalent to {@code
+   * getProvider(type).get()}. When feasible, avoid using this method, in favor of having Guice
+   * inject your dependencies ahead of time.
+   *
+   * @throws ConfigurationException if this injector cannot find or create the provider.
+   * @throws ProvisionException if there was a runtime failure while providing an instance.
    */
   <T> T getInstance(Class<T> type);
 

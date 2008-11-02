@@ -1,0 +1,44 @@
+    public void test() throws IllegalAccessException, InstantiationException {
+      try {
+        newInjector().getProvider(key);
+        fail();
+      } catch (ConfigurationException expected) {
+        assertContains(expected.getMessage(), configurationException);
+      }
+
+      try {
+        newInjector().getBinding(key).getProvider();
+        fail();
+      } catch (ConfigurationException expected) {
+        assertContains(expected.getMessage(), configurationException);
+      }
+
+      try {
+        newInjector().getInstance(key);
+        fail();
+      } catch (ConfigurationException expected) {
+        assertContains(expected.getMessage(), configurationException);
+      }
+
+      try {
+        newInjector().getInstance(injectsKey);
+        fail();
+      } catch (ConfigurationException expected) {
+        assertContains(expected.getMessage(),
+            configurationException, injectsKey.getName() + ".inject",
+            configurationException, injectsKey.getName() + ".inject",
+            "2 errors");
+      }
+
+      try {
+        Injectable injectable = injectsKey.newInstance();
+        newInjector().injectMembers(injectable);
+        fail();
+      } catch (ConfigurationException expected) {
+        assertContains(expected.getMessage(),
+            configurationException, injectsKey.getName() + ".inject",
+            configurationException, injectsKey.getName() + ".inject",
+            "2 errors");
+      }
+    }
+

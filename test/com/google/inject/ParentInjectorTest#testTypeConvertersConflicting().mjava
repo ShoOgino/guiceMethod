@@ -5,7 +5,7 @@
     try {
       child.getInstance(Key.get(List.class, Names.named("B")));
       fail();
-    } catch (ProvisionException expected) {
+    } catch (ConfigurationException expected) {
       Asserts.assertContains(expected.getMessage(), "Multiple converters can convert");
     }
   }

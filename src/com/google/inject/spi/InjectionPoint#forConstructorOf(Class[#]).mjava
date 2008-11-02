@@ -26,7 +26,7 @@
       }
     }
 
-    ConfigurationException.throwNewIfNonEmpty(errors);
+    errors.throwConfigurationExceptionIfNecessary();
 
     if (found != null) {
       return new InjectionPoint(found);
@@ -41,13 +41,13 @@
       if (Modifier.isPrivate(noArgCtor.getModifiers())
           && !Modifier.isPrivate(type.getModifiers())) {
         errors.missingConstructor(type);
-        throw new ConfigurationException(errors);
+        throw new ConfigurationException(errors.getMessages());
       }
 
       return new InjectionPoint(noArgCtor);
     } catch (NoSuchMethodException e) {
       errors.missingConstructor(type);
-      throw new ConfigurationException(errors);
+      throw new ConfigurationException(errors.getMessages());
     }
   }
 

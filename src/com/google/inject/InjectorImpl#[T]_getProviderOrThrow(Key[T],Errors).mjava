@@ -12,8 +12,7 @@
               errors.pushSource(dependency);
               try {
                 return factory.get(errors, context, dependency);
-              }
-              finally {
+              } finally {
                 context.setDependency(null);
                 errors.popSource(dependency);
               }
@@ -22,7 +21,7 @@
           errors.throwIfNecessary();
           return t;
         } catch (ErrorsException e) {
-          throw new ProvisionException(errors.merge(e.getErrors()));
+          throw new ProvisionException(errors.merge(e.getErrors()).getMessages());
         }
       }
 

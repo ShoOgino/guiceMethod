@@ -1,0 +1,8 @@
+  public void throwProvisionExceptionIfErrorsExist() {
+    if (!hasErrors()) {
+      return;
+    }
+
+    throw new ProvisionException(getMessages());
+  }
+

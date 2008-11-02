@@ -1,0 +1,5 @@
+    private Builder configurationException(String message, Object... args) {
+      configurationException = String.format(message, args);
+      return this;
+    }
+
