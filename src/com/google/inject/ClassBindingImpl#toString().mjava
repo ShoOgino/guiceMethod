@@ -1,6 +1,6 @@
   @Override public String toString() {
     return new ToStringBuilder(Binding.class)
-        .add("class", getBoundClass())
+        .add("type", getKey().getTypeLiteral())
         .add("scope", scope)
         .add("source", source)
         .toString();

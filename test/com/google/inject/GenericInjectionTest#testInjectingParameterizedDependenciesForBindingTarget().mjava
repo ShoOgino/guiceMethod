@@ -1,0 +1,11 @@
+  public void testInjectingParameterizedDependenciesForBindingTarget() {
+    final TypeLiteral<ParameterizedDeps<String, Integer>> type
+        = new TypeLiteral<ParameterizedDeps<String, Integer>>() {};
+
+    assertParameterizedDepsInjected(Key.get(Object.class), new AbstractModule() {
+      protected void configure() {
+        bind(Object.class).to(type);
+      }
+    });
+  }
+

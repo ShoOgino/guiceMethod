@@ -1,0 +1,28 @@
+  /**
+   * Returns a list of the resolved generic parameter types of {@code methodOrConstructor}.
+   *
+   * @param methodOrConstructor a method or constructor defined by this resolver's type, its
+   *      superclasses or implemented interfaces.
+   */
+  public List<Type> getParameterTypes(Member methodOrConstructor) {
+    Type[] genericParameterTypes;
+
+    if (methodOrConstructor instanceof Method) {
+      Method method = (Method) methodOrConstructor;
+      checkArgument(implementedTypes.containsKey(method.getDeclaringClass()),
+          "%s is not defined by a supertype of %s", method, type);
+      genericParameterTypes = method.getGenericParameterTypes();
+
+    } else if (methodOrConstructor instanceof Constructor) {
+      Constructor constructor = (Constructor) methodOrConstructor;
+      checkArgument(implementedTypes.containsKey(constructor.getDeclaringClass()),
+          "%s does not construct a supertype of %s", constructor, type);
+      genericParameterTypes = constructor.getGenericParameterTypes();
+
+    } else {
+      throw new IllegalArgumentException("Not a method or a constructor: " + methodOrConstructor);
+    }
+
+    return resolveAll(genericParameterTypes);
+  }
+

@@ -46,10 +46,8 @@
       throw errors.missingImplementation(key).toException();
     }
 
-    // Create a binding based on the raw type.
-    @SuppressWarnings("unchecked")
-    Class<T> rawType = (Class<T>) key.getRawType();
-    BindingImpl<T> binding = createUnitializedBinding(key, rawType, null /* scope */, rawType,
+    Object source = MoreTypes.getRawType(key.getTypeLiteral().getType());
+    BindingImpl<T> binding = createUnitializedBinding(key, null /* scope */, source,
         LoadStrategy.LAZY, errors);
     initializeBinding(binding, errors);
     return binding;

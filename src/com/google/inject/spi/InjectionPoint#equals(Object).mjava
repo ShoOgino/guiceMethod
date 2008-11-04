@@ -1,5 +1,5 @@
   @Override public boolean equals(Object o) {
     return o instanceof InjectionPoint
-        && member == ((InjectionPoint) o).member;
+        && member.equals(((InjectionPoint) o).member);
   }
 

@@ -1,0 +1,4 @@
+    @Inject ParameterizedDeps(Set<K> keys) {
+      this.keys = keys;
+    }
+

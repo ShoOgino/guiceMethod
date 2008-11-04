@@ -1,0 +1,5 @@
+  public void testForConstructorOf() {
+    InjectionPoint injectionPoint = InjectionPoint.forConstructorOf(Constructable.class);
+    assertEquals(Constructable.class.getName() + ".<init>()", injectionPoint.toString());
+  }
+

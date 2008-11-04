@@ -16,9 +16,8 @@
       Type[] arguments = parameterizedType.getActualTypeArguments();
       Type[] resolvedArguments = new Type[typeVariables.length];
       for (int v = 0; v < typeVariables.length; v++) {
-        FqTypeVar typeVar = new FqTypeVar(rawType, typeVariables[v].getName());
         resolvedArguments[v] = resolve(arguments[v]);
-        index.put(typeVar, resolvedArguments[v]);
+        index.put(typeVariables[v], resolvedArguments[v]);
       }
 
       Type resolvedRawType = resolve(rawType);
@@ -34,8 +33,7 @@
       GenericDeclaration genericDeclaration = typeVariable.getGenericDeclaration();
       Type result = typeVariable;
       if (genericDeclaration instanceof Class) {
-        FqTypeVar fqTypeVar = new FqTypeVar((Class<?>) genericDeclaration, typeVariable.getName());
-        Type resolved = index.get(fqTypeVar);
+        Type resolved = index.get(typeVariable);
         result = resolved != null ? resolved : result;
       }
       cache.put(type, result);

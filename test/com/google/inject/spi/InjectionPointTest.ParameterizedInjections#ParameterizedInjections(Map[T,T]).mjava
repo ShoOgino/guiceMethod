@@ -1,0 +1,2 @@
+    @Inject public ParameterizedInjections(Map<T, T> map) {}
+

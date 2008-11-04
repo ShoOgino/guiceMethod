@@ -1,11 +1,13 @@
   public void testConstructorInjectionPoint() throws NoSuchMethodException, IOException,
       ErrorsException {
+    TypeResolver typeResolver = new TypeResolver(Constructable.class);
+
     Constructor<?> constructor = Constructable.class.getConstructor(String.class);
-    InjectionPoint injectionPoint = new InjectionPoint(constructor);
+    InjectionPoint injectionPoint = new InjectionPoint(typeResolver, constructor);
     assertSame(constructor, injectionPoint.getMember());
     assertFalse(injectionPoint.isOptional());
     assertEquals(Constructable.class.getName() + ".<init>()", injectionPoint.toString());
-    assertEqualsBothWays(injectionPoint, new InjectionPoint(constructor));
+    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeResolver, constructor));
     assertSimilarWhenReserialized(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
@@ -13,10 +15,10 @@
         + Constructable.class.getName() + ".<init>()[0]", dependency.toString());
     assertEquals(constructor, dependency.getInjectionPoint().getMember());
     assertEquals(0, dependency.getParameterIndex());
-    assertEquals(Key.get(String.class, Names.named("c")), dependency.getKey());
+    assertEquals(Key.get(String.class, named("c")), dependency.getKey());
     assertEquals(false, dependency.isNullable());
     assertSimilarWhenReserialized(dependency);
     assertEqualsBothWays(dependency,
-        getOnlyElement(new InjectionPoint(constructor).getDependencies()));
+        getOnlyElement(new InjectionPoint(typeResolver, constructor).getDependencies()));
   }
 

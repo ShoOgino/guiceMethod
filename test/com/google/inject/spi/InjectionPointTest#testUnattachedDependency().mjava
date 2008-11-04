@@ -1,12 +1,12 @@
   public void testUnattachedDependency() throws IOException {
-    Dependency<String> dependency = Dependency.get(Key.get(String.class, Names.named("d")));
+    Dependency<String> dependency = Dependency.get(Key.get(String.class, named("d")));
     assertEquals("Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=d)]",
         dependency.toString());
     assertNull(dependency.getInjectionPoint());
     assertEquals(-1, dependency.getParameterIndex());
-    assertEquals(Key.get(String.class, Names.named("d")), dependency.getKey());
+    assertEquals(Key.get(String.class, named("d")), dependency.getKey());
     assertEquals(true, dependency.isNullable());
     assertSimilarWhenReserialized(dependency);
-    assertEqualsBothWays(dependency, Dependency.get(Key.get(String.class, Names.named("d"))));
+    assertEqualsBothWays(dependency, Dependency.get(Key.get(String.class, named("d"))));
   }
 

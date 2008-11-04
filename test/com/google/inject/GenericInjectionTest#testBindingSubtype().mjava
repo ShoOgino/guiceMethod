@@ -1,0 +1,11 @@
+  public void testBindingSubtype() {
+    final TypeLiteral<SubParameterizedDeps<String, Long, Integer>> type
+        = new TypeLiteral<SubParameterizedDeps<String, Long, Integer>>() {};
+
+    assertParameterizedDepsInjected(Key.get(type), new AbstractModule() {
+      protected void configure() {
+        bind(type);
+      }
+    });
+  }
+

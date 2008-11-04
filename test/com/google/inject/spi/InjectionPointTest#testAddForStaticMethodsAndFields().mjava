@@ -1,0 +1,12 @@
+  public void testAddForStaticMethodsAndFields() throws Exception {
+    Method staticMethod = HasInjections.class.getMethod("staticMethod", String.class);
+    Field staticField = HasInjections.class.getField("staticField");
+
+    Set<InjectionPoint> sink = Sets.newHashSet();
+    InjectionPoint.addForStaticMethodsAndFields(HasInjections.class, sink);
+    assertEquals(ImmutableSet.of(
+        new InjectionPoint(new TypeResolver(HasInjections.class), staticMethod),
+        new InjectionPoint(new TypeResolver(HasInjections.class), staticField)),
+        sink);
+  }
+

@@ -3,15 +3,17 @@
    *
    * @param type a concrete type with exactly one constructor annotated {@literal @}{@link Inject},
    *     or a no-arguments constructor that is not private.
-   * @throws RuntimeException if there is no injectable constructor, more than one injectable
+   * @throws ConfigurationException if there is no injectable constructor, more than one injectable
    *     constructor, or if parameters of the injectable constructor are malformed, such as a
    *     parameter with multiple binding annotations.
    */
-  public static InjectionPoint forConstructorOf(Class<?> type) {
+  public static InjectionPoint forConstructorOf(Type type) {
     Errors errors = new Errors(type);
+    TypeResolver typeResolver = new TypeResolver(type);
+    Class<?> rawType = typeResolver.getRawType();
 
     Constructor<?> injectableConstructor = null;
-    for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+    for (Constructor<?> constructor : rawType.getDeclaredConstructors()) {
       Inject inject = constructor.getAnnotation(Inject.class);
       if (inject != null) {
         if (inject.optional()) {
@@ -19,7 +21,7 @@
         }
 
         if (injectableConstructor != null) {
-          errors.tooManyConstructors(type);
+          errors.tooManyConstructors(rawType);
         }
 
         injectableConstructor = constructor;
@@ -30,24 +32,24 @@
     errors.throwConfigurationExceptionIfErrorsExist();
 
     if (injectableConstructor != null) {
-      return new InjectionPoint(injectableConstructor);
+      return new InjectionPoint(typeResolver, injectableConstructor);
     }
 
     // If no annotated constructor is found, look for a no-arg constructor instead.
     try {
-      Constructor<?> noArgConstructor = type.getDeclaredConstructor();
+      Constructor<?> noArgConstructor = rawType.getDeclaredConstructor();
 
       // Disallow private constructors on non-private classes (unless they have @Inject)
       if (Modifier.isPrivate(noArgConstructor.getModifiers())
-          && !Modifier.isPrivate(type.getModifiers())) {
-        errors.missingConstructor(type);
+          && !Modifier.isPrivate(rawType.getModifiers())) {
+        errors.missingConstructor(rawType);
         throw new ConfigurationException(errors.getMessages());
       }
 
       checkForMisplacedBindingAnnotations(noArgConstructor, errors);
-      return new InjectionPoint(noArgConstructor);
+      return new InjectionPoint(typeResolver, noArgConstructor);
     } catch (NoSuchMethodException e) {
-      errors.missingConstructor(type);
+      errors.missingConstructor(rawType);
       throw new ConfigurationException(errors.getMessages());
     }
   }

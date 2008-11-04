@@ -1,10 +1,12 @@
   public void testMethodInjectionPoint() throws Exception {
+    TypeResolver typeResolver = new TypeResolver(getClass());
+
     Method barMethod = getClass().getMethod("bar", String.class);
-    InjectionPoint injectionPoint = new InjectionPoint(barMethod);
+    InjectionPoint injectionPoint = new InjectionPoint(typeResolver, barMethod);
     assertSame(barMethod, injectionPoint.getMember());
     assertFalse(injectionPoint.isOptional());
     assertEquals(getClass().getName() + ".bar()", injectionPoint.toString());
-    assertEqualsBothWays(injectionPoint, new InjectionPoint(barMethod));
+    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeResolver, barMethod));
     assertSimilarWhenReserialized(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
@@ -12,10 +14,10 @@
         + getClass().getName() + ".bar()[0]", dependency.toString());
     assertEquals(barMethod, dependency.getInjectionPoint().getMember());
     assertEquals(0, dependency.getParameterIndex());
-    assertEquals(Key.get(String.class, Names.named("b")), dependency.getKey());
+    assertEquals(Key.get(String.class, named("b")), dependency.getKey());
     assertEquals(false, dependency.isNullable());
     assertSimilarWhenReserialized(dependency);
     assertEqualsBothWays(dependency,
-        getOnlyElement(new InjectionPoint(barMethod).getDependencies()));
+        getOnlyElement(new InjectionPoint(typeResolver, barMethod).getDependencies()));
   }
 

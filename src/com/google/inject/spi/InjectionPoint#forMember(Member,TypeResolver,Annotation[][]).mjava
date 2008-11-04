@@ -1,11 +1,12 @@
-  private ImmutableList<Dependency<?>> forMember(Member member, Type[] genericParameterTypes,
-      Annotation[][] annotations) {
+  private ImmutableList<Dependency<?>> forMember(Member member, TypeResolver typeResolver,
+      Annotation[][] paramterAnnotations) {
     Errors errors = new Errors(member);
-    Iterator<Annotation[]> annotationsIterator = Arrays.asList(annotations).iterator();
+    Iterator<Annotation[]> annotationsIterator = Arrays.asList(paramterAnnotations).iterator();
 
     List<Dependency<?>> dependencies = Lists.newArrayList();
     int index = 0;
-    for (Type parameterType : genericParameterTypes) {
+
+    for (Type parameterType : typeResolver.getParameterTypes(member)) {
       try {
         Annotation[] parameterAnnotations = annotationsIterator.next();
         Key<?> key = Annotations.getKey(parameterType, member, parameterAnnotations, errors);

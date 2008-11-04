@@ -1,5 +1,0 @@
-    private FqTypeVar(Class<?> rawType, String name) {
-      this.rawType = rawType;
-      this.name = name;
-    }
-

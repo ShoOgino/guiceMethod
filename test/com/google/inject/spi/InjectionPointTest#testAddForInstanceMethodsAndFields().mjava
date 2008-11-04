@@ -1,0 +1,12 @@
+  public void testAddForInstanceMethodsAndFields() throws Exception {
+    Method instanceMethod = HasInjections.class.getMethod("instanceMethod", String.class);
+    Field instanceField = HasInjections.class.getField("instanceField");
+
+    Set<InjectionPoint> sink = Sets.newHashSet();
+    InjectionPoint.addForInstanceMethodsAndFields(HasInjections.class, sink);
+    assertEquals(ImmutableSet.of(
+        new InjectionPoint(new TypeResolver(HasInjections.class), instanceMethod),
+        new InjectionPoint(new TypeResolver(HasInjections.class), instanceField)),
+        sink);
+  }
+

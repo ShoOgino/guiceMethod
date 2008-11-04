@@ -1,17 +1,18 @@
   /** Creates a binding for a type annotated with @ImplementedBy. */
-  <T> BindingImpl<T> createImplementedByBinding(Class<T> type, Scope scope,
+  <T> BindingImpl<T> createImplementedByBinding(Key<T> key, Scope scope,
       ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
       throws ErrorsException {
+    Class<?> rawType = MoreTypes.getRawType(key.getTypeLiteral().getType());
     Class<?> implementationType = implementedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper cycles?
-    if (implementationType == type) {
+    if (implementationType == rawType) {
       throw errors.recursiveImplementationType().toException();
     }
 
     // Make sure implementationType extends type.
-    if (!type.isAssignableFrom(implementationType)) {
-      throw errors.notASubtype(implementationType, type).toException();
+    if (!rawType.isAssignableFrom(implementationType)) {
+      throw errors.notASubtype(implementationType, rawType).toException();
     }
 
     @SuppressWarnings("unchecked") // After the preceding check, this cast is safe.
@@ -28,13 +29,13 @@
       }
     };
 
-    Key<T> key = Key.get(type);
     return new LinkedBindingImpl<T>(
         this,
         key,
-        type,
+        rawType /* source */,
         Scopes.<T>scope(key, this, internalFactory, scope),
-        scope, targetKey,
+        scope,
+        targetKey,
         loadStrategy);
   }
 

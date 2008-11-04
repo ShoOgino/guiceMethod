@@ -1,10 +1,11 @@
   /** Creates a binding for a type annotated with @ProvidedBy. */
-  <T> BindingImpl<T> createProvidedByBinding(final Class<T> type, Scope scope,
+  <T> BindingImpl<T> createProvidedByBinding(Key<T> key, Scope scope,
       ProvidedBy providedBy, LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
+    final Class<?> rawType = MoreTypes.getRawType(key.getTypeLiteral().getType());
     final Class<? extends Provider<?>> providerType = providedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?
-    if (providerType == type) {
+    if (providerType == rawType) {
       throw errors.recursiveProviderType().toException();
     }
 
@@ -22,8 +23,8 @@
         Provider<?> provider = providerBinding.internalFactory.get(errors, context, dependency);
         try {
           Object o = provider.get();
-          if (o != null && !type.isInstance(o)) {
-            throw errors.subtypeNotProvided(providerType, type).toException();
+          if (o != null && !rawType.isInstance(o)) {
+            throw errors.subtypeNotProvided(providerType, rawType).toException();
           }
           @SuppressWarnings("unchecked") // protected by isInstance() check above
           T t = (T) o;
@@ -34,11 +35,10 @@
       }
     };
 
-    Key<T> key = Key.get(type);
     return new LinkedProviderBindingImpl<T>(
         this,
         key,
-        type,
+        rawType /* source */,
         Scopes.<T>scope(key, this, internalFactory, scope),
         scope,
         providerKey,

@@ -1,0 +1,2 @@
+    @Inject public void instanceMethod(@Named("d") String d) {}
+
