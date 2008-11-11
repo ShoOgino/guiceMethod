@@ -15,8 +15,6 @@
       return;
     }
 
-    // TODO: make getExplicitBinding() and blacklist() atomic
-
     // prevent the parent from creating a JIT binding for this key
     state.parent().blacklist(key);
     state.putBinding(key, binding);

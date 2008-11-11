@@ -9,7 +9,7 @@
 
     // TODO: synch should span parent and child
 
-    synchronized (jitBindings) {
+    synchronized (state.lock()) {
       // try to get the JIT binding from the parent injector
       if (parent != null) {
         try {

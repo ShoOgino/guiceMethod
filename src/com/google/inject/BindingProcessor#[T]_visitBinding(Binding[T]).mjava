@@ -87,8 +87,6 @@
       }
 
       public Void visitUntargetted() {
-        final Type type = key.getTypeLiteral().getType();
-
         // Error: Missing implementation.
         // Example: bind(Date.class).annotatedWith(Red.class);
         // We can't assume abstract types aren't injectable. They may have an

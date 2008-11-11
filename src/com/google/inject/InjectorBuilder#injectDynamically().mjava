@@ -1,5 +1,9 @@
-  /** Inject everything that can be injected. */
-  private void fulfillInjectionRequests() {
+  /**
+   * Inject everything that can be injected. This method is intentionally not synchronized. If we
+   * locked while injecting members (ie. running user code), things would deadlock should the user
+   * code build a just-in-time binding from another thread.
+   */
+  private void injectDynamically() {
     injectionCommandProcessor.injectMembers(injector);
     stopwatch.resetAndLog("Static member injection");
 

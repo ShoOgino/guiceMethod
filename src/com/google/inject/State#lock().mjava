@@ -1,0 +1,6 @@
+  /**
+   * Returns the shared lock for all injector data. This is a low-granularity, high-contention lock
+   * to be used when reading mutable data (ie. just-in-time bindings, and binding blacklists).
+   */
+  Object lock();
+

@@ -5,30 +5,14 @@
 
     injector = new InjectorImpl(parent);
 
-    // bind Stage and Singleton if this is a top-level injector
-    if (parent == null) {
-      modules.add(0, new RootModule(stage));
-    }
+    buildStatically();
 
-    elements.addAll(Elements.getElements(stage, modules));
-
-    buildCoreInjector();
-
-    validate();
-
-    errors.throwCreationExceptionIfErrorsExist();
-
-    // If we're in the tool stage, stop here. Don't eagerly inject or load
-    // anything.
+    // If we're in the tool stage, stop here. Don't eagerly inject or load anything.
     if (stage == Stage.TOOL) {
       return new ToolStageInjector(injector);
     }
 
-    fulfillInjectionRequests();
-
-    if (!elements.isEmpty()) {
-      throw new AssertionError("Failed to execute " + elements);
-    }
+    injectDynamically();
 
     return injector;
   }

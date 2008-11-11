@@ -1,0 +1,23 @@
+  public void testJitBindingFromAnotherThreadDuringInjection() {
+    final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    final AtomicReference<JustInTime> got = new AtomicReference<JustInTime>();
+
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        requestInjection(new Object() {
+          @Inject void initialize(final Injector injector)
+              throws ExecutionException, InterruptedException {
+            Future<JustInTime> future = executorService.submit(new Callable<JustInTime>() {
+              public JustInTime call() throws Exception {
+                return injector.getInstance(JustInTime.class);
+              }
+            });
+            got.set(future.get());
+          }
+        });
+      }
+    });
+
+    assertNotNull(got.get());
+  }
+
