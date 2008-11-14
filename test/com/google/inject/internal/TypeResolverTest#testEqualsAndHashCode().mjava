@@ -1,9 +1,0 @@
-  public void testEqualsAndHashCode() throws IOException {
-    TypeResolver a1 = new TypeResolver(arrayListOfString);
-    TypeResolver a2 = new TypeResolver(arrayListOfString);
-    TypeResolver b = new TypeResolver(listOf(String.class));
-    assertEqualsBothWays(a1, a2);
-    assertNotSerializable(a1);
-    assertFalse(a1.equals(b));
-  }
-

@@ -1,5 +1,0 @@
-  public void testGenericConstructor() throws NoSuchMethodException {
-    TypeResolver resolver = new TypeResolver(hasGenericConstructorOfShort);
-    assertEquals(Short.class, resolver.getParameterTypes(newHasGenericConstructor).get(0));
-  }
-

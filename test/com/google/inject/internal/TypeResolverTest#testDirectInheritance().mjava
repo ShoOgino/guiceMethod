@@ -1,8 +1,0 @@
-  public void testDirectInheritance() throws NoSuchMethodException {
-    TypeResolver resolver = new TypeResolver(arrayListOfString);
-    assertEquals(listOf(String.class),
-        resolver.getReturnType(List.class.getMethod("subList", int.class, int.class)));
-    assertEquals(ImmutableList.<Type>of(String.class), 
-        resolver.getParameterTypes(Collection.class.getMethod("add", Object.class)));
-  }
-

@@ -1,3 +1,0 @@
-    @SuppressWarnings("UnusedDeclaration")
-    public <T> HasGenericConstructor(S s, T t) {}
-

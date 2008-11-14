@@ -1,6 +1,0 @@
-  public void testArrays() {
-    TypeResolver resolver = new TypeResolver(hasArrayOfShort);
-    assertEquals(arrayOf(Short.class), resolver.getReturnType(getArray));
-    assertEquals(setOf(arrayOf(Short.class)), resolver.getReturnType(getSetOfArray));
-  }
-
