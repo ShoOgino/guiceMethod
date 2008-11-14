@@ -1,0 +1,6 @@
+  public void testArrays() {
+    TypeLiteral<?> resolver = TypeLiteral.get(hasArrayOfShort);
+    assertEquals(arrayOf(Short.class), resolver.getReturnType(getArray));
+    assertEquals(setOf(arrayOf(Short.class)), resolver.getReturnType(getSetOfArray));
+  }
+

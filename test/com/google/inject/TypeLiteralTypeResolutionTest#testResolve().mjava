@@ -1,0 +1,21 @@
+  public void testResolve() {
+    TypeLiteral<?> typeResolver = TypeLiteral.get(StringIntegerMap.class);
+    assertEquals(String.class, typeResolver.resolve(mapK));
+
+    typeResolver = new TypeLiteral<Map<String, Integer>>() {};
+    assertEquals(String.class, typeResolver.resolve(mapK));
+    assertEquals(Types.mapOf(String.class, Integer.class), typeResolver.getSupertype(Map.class));
+
+    typeResolver = new TypeLiteral<BetterMap<String, Integer>>() {};
+    assertEquals(String.class, typeResolver.resolve(mapK));
+
+    typeResolver = new TypeLiteral<BestMap<String, Integer>>() {};
+    assertEquals(String.class, typeResolver.resolve(mapK));
+
+    typeResolver = TypeLiteral.get(StringIntegerHashMap.class);
+    assertEquals(String.class, typeResolver.resolve(mapK));
+    assertEquals(String.class, typeResolver.resolve(hashMapK));
+    assertEquals(entryStringInteger, typeResolver.resolve(setEntryKV));
+    assertEquals(Object.class, typeResolver.getSupertype(Object.class));
+  }
+

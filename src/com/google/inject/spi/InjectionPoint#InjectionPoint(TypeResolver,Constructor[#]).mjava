@@ -1,6 +1,0 @@
-  InjectionPoint(TypeResolver typeResolver, Constructor<?> constructor) {
-    this.member = constructor;
-    this.optional = false;
-    this.dependencies = forMember(constructor, typeResolver, constructor.getParameterAnnotations());
-  }
-

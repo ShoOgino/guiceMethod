@@ -1,0 +1,48 @@
+  /**
+   * Resolves known type parameters in {@code toResolve} and returns the result.
+   */
+  Type resolve(Type toResolve) {
+    while (true) {
+      if (toResolve instanceof TypeVariable) {
+        TypeVariable original = (TypeVariable) toResolve;
+        toResolve = MoreTypes.resolveTypeVariable(type, rawType, original);
+        if (toResolve == original) {
+          return toResolve;
+        }
+
+      } else if (toResolve instanceof GenericArrayType) {
+        GenericArrayType original = (GenericArrayType) toResolve;
+        Type componentType = original.getGenericComponentType();
+        Type newComponentType = resolve(componentType);
+        return componentType == newComponentType
+            ? original
+            : Types.arrayOf(newComponentType);
+
+      } else if (toResolve instanceof ParameterizedType) {
+        ParameterizedType original = (ParameterizedType) toResolve;
+        Type ownerType = original.getOwnerType();
+        Type newOwnerType = resolve(ownerType);
+        boolean changed = newOwnerType != ownerType;
+
+        Type[] args = original.getActualTypeArguments();
+        for (int t = 0, length = args.length; t < length; t++) {
+          Type resolvedTypeArgument = resolve(args[t]);
+          if (resolvedTypeArgument != args[t]) {
+            if (!changed) {
+              args = args.clone();
+              changed = true;
+            }
+            args[t] = resolvedTypeArgument;
+          }
+        }
+
+        return changed
+            ? Types.newParameterizedTypeWithOwner(newOwnerType, original.getRawType(), args)
+            : original;
+
+      } else {
+        return toResolve;
+      }
+    }
+  }
+

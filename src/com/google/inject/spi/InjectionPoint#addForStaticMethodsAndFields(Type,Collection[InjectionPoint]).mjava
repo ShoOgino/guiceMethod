@@ -9,8 +9,9 @@
    */
   public static void addForStaticMethodsAndFields(Type type, Collection<InjectionPoint> sink) {
     Errors errors = new Errors();
-    addInjectionPoints(type, Factory.FIELDS, true, sink, errors);
-    addInjectionPoints(type, Factory.METHODS, true, sink, errors);
+    TypeLiteral<?> typeLiteral = TypeLiteral.get(type);
+    addInjectionPoints(typeLiteral, Factory.FIELDS, true, sink, errors);
+    addInjectionPoints(typeLiteral, Factory.METHODS, true, sink, errors);
     errors.throwConfigurationExceptionIfErrorsExist();
   }
 

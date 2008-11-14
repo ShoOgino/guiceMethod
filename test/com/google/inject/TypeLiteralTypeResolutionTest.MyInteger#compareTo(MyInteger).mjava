@@ -1,0 +1,4 @@
+    public int compareTo(MyInteger o) {
+      return value - o.value;
+    }
+

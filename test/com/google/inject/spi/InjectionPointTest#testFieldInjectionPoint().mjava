@@ -1,12 +1,12 @@
   public void testFieldInjectionPoint() throws NoSuchFieldException, IOException, ErrorsException {
-    TypeResolver typeResolver = new TypeResolver(getClass());
+    TypeLiteral<?> typeLiteral = TypeLiteral.get(getClass());
     Field fooField = getClass().getField("foo");
 
-    InjectionPoint injectionPoint = new InjectionPoint(typeResolver, fooField);
+    InjectionPoint injectionPoint = new InjectionPoint(typeLiteral, fooField);
     assertSame(fooField, injectionPoint.getMember());
     assertFalse(injectionPoint.isOptional());
     assertEquals(getClass().getName() + ".foo", injectionPoint.toString());
-    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeResolver, fooField));
+    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeLiteral, fooField));
     assertSimilarWhenReserialized(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
@@ -18,6 +18,6 @@
     assertEquals(false, dependency.isNullable());
     assertSimilarWhenReserialized(dependency);
     assertEqualsBothWays(dependency,
-        getOnlyElement(new InjectionPoint(typeResolver, fooField).getDependencies()));
+        getOnlyElement(new InjectionPoint(typeLiteral, fooField).getDependencies()));
   }
 

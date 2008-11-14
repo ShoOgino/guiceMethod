@@ -4,7 +4,7 @@
 
     // prepare the parameter providers
     List<Provider<?>> parameterProviders = Lists.newArrayList();
-    List<Type> parameterTypes = typeResolver.getParameterTypes(method);
+    List<Type> parameterTypes = typeLiteral.getParameterTypes(method);
     Annotation[][] parameterAnnotations = method.getParameterAnnotations();
     for (int i = 0; i < parameterTypes.size(); i++) {
       Key<?> key = getKey(errors, TypeLiteral.get(parameterTypes.get(i)),
@@ -14,7 +14,7 @@
 
     // Define T as the method's return type.
     @SuppressWarnings("unchecked") TypeLiteral<T> returnType
-        = (TypeLiteral<T>) TypeLiteral.get(typeResolver.getReturnType(method));
+        = (TypeLiteral<T>) TypeLiteral.get(typeLiteral.getReturnType(method));
 
     Key<T> key = getKey(errors, returnType, method, method.getAnnotations());
     Class<? extends Annotation> scopeAnnotation

@@ -9,8 +9,8 @@
    */
   public static InjectionPoint forConstructorOf(Type type) {
     Errors errors = new Errors(type);
-    TypeResolver typeResolver = new TypeResolver(type);
-    Class<?> rawType = typeResolver.getRawType();
+    TypeLiteral<?> typeLiteral = TypeLiteral.get(type);
+    Class<?> rawType = MoreTypes.getRawType(type);
 
     Constructor<?> injectableConstructor = null;
     for (Constructor<?> constructor : rawType.getDeclaredConstructors()) {
@@ -32,7 +32,7 @@
     errors.throwConfigurationExceptionIfErrorsExist();
 
     if (injectableConstructor != null) {
-      return new InjectionPoint(typeResolver, injectableConstructor);
+      return new InjectionPoint(typeLiteral, injectableConstructor);
     }
 
     // If no annotated constructor is found, look for a no-arg constructor instead.
@@ -47,7 +47,7 @@
       }
 
       checkForMisplacedBindingAnnotations(noArgConstructor, errors);
-      return new InjectionPoint(typeResolver, noArgConstructor);
+      return new InjectionPoint(typeLiteral, noArgConstructor);
     } catch (NoSuchMethodException e) {
       errors.missingConstructor(rawType);
       throw new ConfigurationException(errors.getMessages());

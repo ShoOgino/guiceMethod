@@ -1,6 +1,4 @@
-  /**
-   * Returns an immutable list of the resolved types.
-   */
+  /** Returns an immutable list of the resolved types. */
   private List<Type> resolveAll(Type[] types) {
     Type[] result = new Type[types.length];
     for (int t = 0; t < types.length; t++) {

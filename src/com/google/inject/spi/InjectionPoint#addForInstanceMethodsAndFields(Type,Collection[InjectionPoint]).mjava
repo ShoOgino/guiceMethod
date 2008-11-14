@@ -10,8 +10,9 @@
   public static void addForInstanceMethodsAndFields(Type type, Collection<InjectionPoint> sink) {
     // TODO (crazybob): Filter out overridden members.
     Errors errors = new Errors();
-    addInjectionPoints(type, Factory.FIELDS, false, sink, errors);
-    addInjectionPoints(type, Factory.METHODS, false, sink, errors);
+    TypeLiteral<?> typeLiteral = TypeLiteral.get(type);
+    addInjectionPoints(typeLiteral, Factory.FIELDS, false, sink, errors);
+    addInjectionPoints(typeLiteral, Factory.METHODS, false, sink, errors);
     errors.throwConfigurationExceptionIfErrorsExist();
   }
 

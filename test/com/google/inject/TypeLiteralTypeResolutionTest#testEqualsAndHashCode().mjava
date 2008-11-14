@@ -1,0 +1,9 @@
+  public void testEqualsAndHashCode() throws IOException {
+    TypeLiteral<?> a1 = TypeLiteral.get(arrayListOfString);
+    TypeLiteral<?> a2 = TypeLiteral.get(arrayListOfString);
+    TypeLiteral<?> b = TypeLiteral.get(listOf(String.class));
+    assertEqualsBothWays(a1, a2);
+    assertNotSerializable(a1);
+    assertFalse(a1.equals(b));
+  }
+

@@ -1,7 +1,0 @@
-  /**
-   * Returns the raw form of the type being resolved, such as {@code List}.
-   */
-  public Class<?> getRawType() {
-    return MoreTypes.getRawType(type);
-  }
-

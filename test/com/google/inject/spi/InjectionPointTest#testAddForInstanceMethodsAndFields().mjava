@@ -5,8 +5,8 @@
     Set<InjectionPoint> sink = Sets.newHashSet();
     InjectionPoint.addForInstanceMethodsAndFields(HasInjections.class, sink);
     assertEquals(ImmutableSet.of(
-        new InjectionPoint(new TypeResolver(HasInjections.class), instanceMethod),
-        new InjectionPoint(new TypeResolver(HasInjections.class), instanceField)),
+        new InjectionPoint(TypeLiteral.get(HasInjections.class), instanceMethod),
+        new InjectionPoint(TypeLiteral.get(HasInjections.class), instanceField)),
         sink);
   }
 

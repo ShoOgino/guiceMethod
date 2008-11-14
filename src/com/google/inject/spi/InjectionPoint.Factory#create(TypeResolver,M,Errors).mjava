@@ -1,2 +1,0 @@
-    InjectionPoint create(TypeResolver typeResolver, M member, Errors errors);
-

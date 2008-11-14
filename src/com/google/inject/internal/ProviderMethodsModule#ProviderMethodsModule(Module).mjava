@@ -1,5 +1,5 @@
   private ProviderMethodsModule(Module delegate) {
     this.delegate = checkNotNull(delegate, "delegate");
-    this.typeResolver = new TypeResolver(this.delegate.getClass());
+    this.typeLiteral = TypeLiteral.get(this.delegate.getClass());
   }
 

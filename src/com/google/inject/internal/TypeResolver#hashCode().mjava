@@ -1,4 +1,0 @@
-  @Override public int hashCode() {
-    return 79 * type.hashCode();
-  }
-

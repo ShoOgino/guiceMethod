@@ -1,11 +1,10 @@
   /**
    * Returns the resolved generic type of {@code field}.
    *
-   * @param field a field defined by this resolver's type or any of its
-   *      superclasses.
+   * @param field a field defined by this or any superclass.
    */
   public Type getFieldType(Field field) {
-    checkArgument(implementedTypes.containsKey(field.getDeclaringClass()),
+    checkArgument(field.getDeclaringClass().isAssignableFrom(rawType),
         "%s is not defined by a supertype of %s", field, type);
     return resolve(field.getGenericType());
   }
