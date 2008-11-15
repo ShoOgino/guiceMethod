@@ -1,0 +1,17 @@
+  public void testInjectTypeLiteralWithRawTypes() {
+    Type t = A.class.getTypeParameters()[0];
+
+    A a = Guice.createInjector().getInstance(A.class);
+    assertEquals(TypeLiteral.get(String.class), a.string);
+    assertEquals(TypeLiteral.get(listOf(t)), a.listOfT);
+    assertEquals(TypeLiteral.get(listOf(Types.subtypeOf(t))), a.listOfWildcardT);
+
+    try {
+      Guice.createInjector().getInstance(B.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), "Cannot inject a TypeLiteral of T",
+          "while locating com.google.inject.TypeLiteral<T>");
+    }
+  }
+

@@ -1,0 +1,15 @@
+  public void testBindingToParameterizedTypeLiteralIsNotAllowed() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(new TypeLiteral<TypeLiteral<String>>() {})
+              .toInstance(TypeLiteral.get(String.class));
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Binding to core guice framework type is not allowed: TypeLiteral");
+    }
+  }
+

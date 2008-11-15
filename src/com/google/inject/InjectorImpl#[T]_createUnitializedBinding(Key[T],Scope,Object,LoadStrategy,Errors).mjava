@@ -11,6 +11,14 @@
       throw errors.missingImplementation(key).toException();
     }
 
+    // Handle TypeLiteral<T> by binding the inner type
+    if (rawType == TypeLiteral.class) {
+      @SuppressWarnings("unchecked") // we have to fudge the inner type as Object
+      BindingImpl<T> binding = (BindingImpl<T>) createTypeLiteralBinding(
+          (Key<TypeLiteral<Object>>) key, errors);
+      return binding;
+    }
+
     // Handle @ImplementedBy
     ImplementedBy implementedBy = rawType.getAnnotation(ImplementedBy.class);
     if (implementedBy != null) {

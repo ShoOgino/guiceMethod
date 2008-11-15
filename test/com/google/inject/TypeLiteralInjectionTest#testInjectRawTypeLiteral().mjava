@@ -1,0 +1,10 @@
+  public void testInjectRawTypeLiteral() {
+    try {
+      Guice.createInjector().getInstance(TypeLiteral.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "Cannot inject a TypeLiteral that has no type parameter");
+    }
+  }
+
