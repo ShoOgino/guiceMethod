@@ -2,11 +2,10 @@
     Method instanceMethod = HasInjections.class.getMethod("instanceMethod", String.class);
     Field instanceField = HasInjections.class.getField("instanceField");
 
-    Set<InjectionPoint> sink = Sets.newHashSet();
-    InjectionPoint.addForInstanceMethodsAndFields(HasInjections.class, sink);
+    TypeLiteral<HasInjections> type = TypeLiteral.get(HasInjections.class);
     assertEquals(ImmutableSet.of(
-        new InjectionPoint(TypeLiteral.get(HasInjections.class), instanceMethod),
-        new InjectionPoint(TypeLiteral.get(HasInjections.class), instanceField)),
-        sink);
+        new InjectionPoint(type, instanceMethod),
+        new InjectionPoint(type, instanceField)),
+        InjectionPoint.forInstanceMethodsAndFields(HasInjections.class));
   }
 

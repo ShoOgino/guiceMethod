@@ -1,13 +1,11 @@
   public void testAddForParameterizedInjections() {
-    Set<InjectionPoint> sink = Sets.newHashSet();
-    Type type = new TypeLiteral<ParameterizedInjections<String>>() {}.getType();
+    TypeLiteral<?> type = new TypeLiteral<ParameterizedInjections<String>>() {};
 
     InjectionPoint constructor = InjectionPoint.forConstructorOf(type);
     assertEquals(new Key<Map<String, String>>() {},
         getOnlyElement(constructor.getDependencies()).getKey());
 
-    InjectionPoint.addForInstanceMethodsAndFields(type, sink);
-    InjectionPoint field = getOnlyElement(sink);
+    InjectionPoint field = getOnlyElement(InjectionPoint.forInstanceMethodsAndFields(type));
     assertEquals(new Key<Set<String>>() {}, getOnlyElement(field.getDependencies()).getKey());
   }
 

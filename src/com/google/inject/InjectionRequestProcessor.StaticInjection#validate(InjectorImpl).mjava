@@ -1,10 +1,11 @@
     void validate(final InjectorImpl injector) {
       Errors errorsForMember = errors.withSource(source);
-      List<InjectionPoint> injectionPoints = Lists.newArrayList();
+      Set<InjectionPoint> injectionPoints;
       try {
-        InjectionPoint.addForStaticMethodsAndFields(type, injectionPoints);
+        injectionPoints = InjectionPoint.forStaticMethodsAndFields(type);
       } catch (ConfigurationException e) {
         errors.merge(e.getErrorMessages());
+        injectionPoints = e.getPartialValue();
       }
       memberInjectors = injector.getInjectors(injectionPoints, errorsForMember);
     }

@@ -1,14 +1,14 @@
   @Override public Boolean visitInjectionRequest(InjectionRequest command) {
-    List<InjectionPoint> injectionPointsList = Lists.newArrayList();
+    Set<InjectionPoint> injectionPoints;
     try {
-      InjectionPoint.addForInstanceMethodsAndFields(
-          command.getInstance().getClass(), injectionPointsList);
+      injectionPoints = InjectionPoint.forInstanceMethodsAndFields(
+          command.getInstance().getClass());
     } catch (ConfigurationException e) {
       errors.merge(e.getErrorMessages());
+      injectionPoints = e.getPartialValue();
     }
 
-    memberInjector.requestInjection(command.getInstance(), command.getSource(),
-        ImmutableSet.copyOf(injectionPointsList));
+    memberInjector.requestInjection(command.getInstance(), command.getSource(), injectionPoints);
     return true;
   }
 

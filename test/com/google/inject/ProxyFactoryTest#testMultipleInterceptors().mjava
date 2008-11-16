@@ -6,8 +6,8 @@
     aspects.add(new MethodAspect(any(), any(), doubleInterceptor, countingInterceptor));
     ProxyFactory factory = new ProxyFactory(aspects);
 
-    ConstructionProxy<Counter> constructor =
-        factory.get(InjectionPoint.forConstructorOf(Counter.class));
+    ConstructionProxy<Counter> constructor
+        = factory.get(InjectionPoint.forConstructorOf(Counter.class));
 
     Counter counter = constructor.newInstance();
     counter.inc();

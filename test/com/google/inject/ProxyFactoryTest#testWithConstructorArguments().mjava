@@ -5,8 +5,7 @@
     aspects.add(new MethodAspect(any(), any(), interceptor));
     ProxyFactory factory = new ProxyFactory(aspects);
 
-    ConstructionProxy<A> constructor =
-        factory.get(InjectionPoint.forConstructorOf(A.class));
+    ConstructionProxy<A> constructor = factory.get(InjectionPoint.forConstructorOf(A.class));
 
     A a = constructor.newInstance(5);
     a.a();

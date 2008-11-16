@@ -3,19 +3,20 @@
       checkNotTargetted();
 
       // lookup the injection points, adding any errors to the binder's errors list
-      List<InjectionPoint> injectionPointsList = Lists.newArrayList();
+      Set<InjectionPoint> injectionPoints;
       try {
-        InjectionPoint.addForInstanceMethodsAndFields(provider.getClass(), injectionPointsList);
+        injectionPoints = InjectionPoint.forInstanceMethodsAndFields(provider.getClass());
       } catch (ConfigurationException e) {
         for (Message message : e.getErrorMessages()) {
           binder.addError(message);
         }
+        injectionPoints = e.getPartialValue();
       }
-      final ImmutableSet<InjectionPoint> injectionPoints = ImmutableSet.copyOf(injectionPointsList);
 
+      final Set<InjectionPoint> injectionPointsFinal = injectionPoints;
       target = new Target<T>() {
         public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
-          return visitor.visitProvider(provider, injectionPoints);
+          return visitor.visitProvider(provider, injectionPointsFinal);
         }
       };
       return this;

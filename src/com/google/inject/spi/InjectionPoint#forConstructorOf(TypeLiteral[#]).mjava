@@ -7,10 +7,9 @@
    *     constructor, or if parameters of the injectable constructor are malformed, such as a
    *     parameter with multiple binding annotations.
    */
-  public static InjectionPoint forConstructorOf(Type type) {
-    Errors errors = new Errors(type);
-    TypeLiteral<?> typeLiteral = TypeLiteral.get(type);
-    Class<?> rawType = MoreTypes.getRawType(type);
+  public static InjectionPoint forConstructorOf(TypeLiteral<?> type) {
+    Class<?> rawType = MoreTypes.getRawType(type.getType());
+    Errors errors = new Errors(rawType);
 
     Constructor<?> injectableConstructor = null;
     for (Constructor<?> constructor : rawType.getDeclaredConstructors()) {
@@ -32,7 +31,7 @@
     errors.throwConfigurationExceptionIfErrorsExist();
 
     if (injectableConstructor != null) {
-      return new InjectionPoint(typeLiteral, injectableConstructor);
+      return new InjectionPoint(type, injectableConstructor);
     }
 
     // If no annotated constructor is found, look for a no-arg constructor instead.
@@ -47,7 +46,7 @@
       }
 
       checkForMisplacedBindingAnnotations(noArgConstructor, errors);
-      return new InjectionPoint(typeLiteral, noArgConstructor);
+      return new InjectionPoint(type, noArgConstructor);
     } catch (NoSuchMethodException e) {
       errors.missingConstructor(rawType);
       throw new ConfigurationException(errors.getMessages());
