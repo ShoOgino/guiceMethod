@@ -1,5 +1,6 @@
   /**
    * @see Binder#getProvider(Class)
+   * @since 2.0
    */
   protected <T> Provider<T> getProvider(Class<T> type) {
     return binder.getProvider(type);

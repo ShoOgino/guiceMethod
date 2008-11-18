@@ -7,6 +7,7 @@
    * @param source any object representing the source location and has a
    *     concise {@link Object#toString() toString()} value
    * @return a binder that shares its configuration with this binder
+   * @since 2.0
    */
   Binder withSource(Object source);
 

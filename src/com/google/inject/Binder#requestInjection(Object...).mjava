@@ -3,6 +3,7 @@
    * and methods of the given objects.
    *
    * @param instances for which members will be injected
+   * @since 2.0
    */
   void requestInjection(Object... instances);
 

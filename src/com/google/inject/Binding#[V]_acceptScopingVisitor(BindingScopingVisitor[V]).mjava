@@ -2,6 +2,7 @@
    * Accepts a scoping visitor. Invokes the visitor method specific to this binding's scoping.
    *
    * @param visitor to call back on
+   * @since 2.0
    */
   <V> V acceptScopingVisitor(BindingScopingVisitor<V> visitor);
 

@@ -1,3 +1,4 @@
+  /** @since 2.0 */
   public <T> T acceptVisitor(ElementVisitor<T> visitor) {
     return visitor.visitMessage(this);
   }

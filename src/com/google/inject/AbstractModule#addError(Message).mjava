@@ -1,5 +1,6 @@
   /**
    * @see Binder#addError(Message)
+   * @since 2.0
    */
   protected void addError(Message message) {
     binder.addError(message);

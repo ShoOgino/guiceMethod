@@ -6,6 +6,7 @@
    * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
    *
    * @throws ConfigurationException if this injector cannot find or create the binding.
+   * @since 2.0
    */
   <T> Binding<T> getBinding(Class<T> type);
 

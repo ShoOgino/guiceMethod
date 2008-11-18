@@ -1,3 +1,4 @@
+  /** @since 2.0 */
   protected final Object writeReplace() {
     return new SerializedForm(this);
   }

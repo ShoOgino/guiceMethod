@@ -2,6 +2,7 @@
    * Returns the resolved generic return type of {@code method}.
    *
    * @param method a method defined by this or any supertype.
+   * @since 2.0
    */
   public Type getReturnType(Method method) {
     checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),

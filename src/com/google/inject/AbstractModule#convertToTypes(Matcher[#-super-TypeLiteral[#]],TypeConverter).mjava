@@ -1,5 +1,6 @@
   /**
    * @see Binder#convertToTypes
+   * @since 2.0
    */
   protected void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter) {

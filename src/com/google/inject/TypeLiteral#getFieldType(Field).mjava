@@ -2,6 +2,7 @@
    * Returns the resolved generic type of {@code field}.
    *
    * @param field a field defined by this or any superclass.
+   * @since 2.0
    */
   public Type getFieldType(Field field) {
     checkArgument(field.getDeclaringClass().isAssignableFrom(rawType),

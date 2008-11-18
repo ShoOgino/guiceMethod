@@ -3,6 +3,8 @@
    * created, Guice will report an error if {@code key} cannot be injected.
    * Note that this requirement may be satisfied by implicit binding, such as
    * a public no-arguments constructor.
+   *
+   * @since 2.0
    */
   protected void requireBinding(Key<?> key) {
     binder.getProvider(key);

@@ -1,5 +1,7 @@
   /**
    * Records an error message to be presented to the user at a later time.
+   *
+   * @since 2.0
    */
   void addError(Message message);
 

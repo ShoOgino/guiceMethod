@@ -1,5 +1,7 @@
   /**
    * Returns this injector's parent, or {@code null} if this is a top-level injector.
+   *
+   * @since 2.0
    */
   Injector getParent();
 

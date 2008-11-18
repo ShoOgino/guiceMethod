@@ -4,6 +4,7 @@
    *
    * @param typeMatcher matches types the converter can handle
    * @param converter converts values
+   * @since 2.0
    */
   void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter);

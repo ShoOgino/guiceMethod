@@ -2,6 +2,7 @@
    * Returns the resolved generic exception types thrown by {@code constructor}.
    *
    * @param methodOrConstructor a method or constructor defined by this or any supertype.
+   * @since 2.0
    */
   public List<Type> getExceptionTypes(Member methodOrConstructor) {
     Type[] genericExceptionTypes;
