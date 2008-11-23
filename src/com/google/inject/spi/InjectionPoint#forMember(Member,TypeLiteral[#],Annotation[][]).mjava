@@ -6,7 +6,7 @@
     List<Dependency<?>> dependencies = Lists.newArrayList();
     int index = 0;
 
-    for (Type parameterType : type.getParameterTypes(member)) {
+    for (TypeLiteral<?> parameterType : type.getParameterTypes(member)) {
       try {
         Annotation[] parameterAnnotations = annotationsIterator.next();
         Key<?> key = Annotations.getKey(parameterType, member, parameterAnnotations, errors);

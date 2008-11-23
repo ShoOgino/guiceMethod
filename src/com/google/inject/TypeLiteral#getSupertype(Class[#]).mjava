@@ -6,7 +6,7 @@
    * @param supertype a superclass of, or interface implemented by, this.
    * @since 2.0
    */
-  public Type getSupertype(Class<?> supertype) {
+  public TypeLiteral<?> getSupertype(Class<?> supertype) {
     checkArgument(supertype.isAssignableFrom(rawType),
         "%s is not a supertype of %s", supertype, this.type);
     return resolve(MoreTypes.getGenericSupertype(type, rawType, supertype));

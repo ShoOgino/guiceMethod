@@ -1,11 +1,12 @@
   public void testGetSupertype() {
     TypeLiteral<AbstractList<String>> listOfString = new TypeLiteral<AbstractList<String>>() {};
     assertEquals(Types.newParameterizedType(AbstractCollection.class, String.class),
-        listOfString.getSupertype(AbstractCollection.class));
+        listOfString.getSupertype(AbstractCollection.class).getType());
 
     TypeLiteral arrayListOfE = TypeLiteral.get(newParameterizedType(
         ArrayList.class, ArrayList.class.getTypeParameters()));
-    assertEquals(newParameterizedType(AbstractCollection.class,
-        ArrayList.class.getTypeParameters()), arrayListOfE.getSupertype(AbstractCollection.class));
+    assertEquals(
+        newParameterizedType(AbstractCollection.class, ArrayList.class.getTypeParameters()),
+        arrayListOfE.getSupertype(AbstractCollection.class).getType());
   }
 

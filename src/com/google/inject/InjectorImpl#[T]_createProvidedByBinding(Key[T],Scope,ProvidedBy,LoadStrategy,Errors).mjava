@@ -1,7 +1,7 @@
   /** Creates a binding for a type annotated with @ProvidedBy. */
   <T> BindingImpl<T> createProvidedByBinding(Key<T> key, Scope scope,
       ProvidedBy providedBy, LoadStrategy loadStrategy, Errors errors) throws ErrorsException {
-    final Class<?> rawType = MoreTypes.getRawType(key.getTypeLiteral().getType());
+    final Class<?> rawType = key.getTypeLiteral().getRawType();
     final Class<? extends Provider<?>> providerType = providedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper loops?

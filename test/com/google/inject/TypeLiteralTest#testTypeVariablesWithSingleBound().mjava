@@ -1,0 +1,15 @@
+  public void testTypeVariablesWithSingleBound() {
+    TypeVariable<Class<HasTypeParameters>>[] typeVariables
+        = HasTypeParameters.class.getTypeParameters();
+
+    TypeLiteral<?> cTl = TypeLiteral.get(typeVariables[2]);
+    assertEquals(Object.class, cTl.getRawType());
+    assertEquals("C", cTl.toString());
+    TypeVariable<?> cTv = (TypeVariable) cTl.getType();
+    assertEquals(HasTypeParameters.class, cTv.getGenericDeclaration());
+    assertEquals("C", cTv.getName());
+    assertEquals(ImmutableList.<Type>of(Runnable.class), ImmutableList.of(cTv.getBounds()));
+    assertEquals("C", cTv.toString());
+    assertEqualsBothWays(cTl, TypeLiteral.get(HasTypeParameters.class.getTypeParameters()[2]));
+  }
+

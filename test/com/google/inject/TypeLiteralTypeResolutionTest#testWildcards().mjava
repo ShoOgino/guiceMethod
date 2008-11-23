@@ -2,10 +2,10 @@
     TypeLiteral<Parameterized<String>> ofString = new TypeLiteral<Parameterized<String>>() {};
 
     assertEquals(new TypeLiteral<List<String>>() {}.getType(),
-        ofString.getFieldType(Parameterized.class.getField("t")));
+        ofString.getFieldType(Parameterized.class.getField("t")).getType());
     assertEquals(new TypeLiteral<List<? extends String>>() {}.getType(),
-        ofString.getFieldType(Parameterized.class.getField("extendsT")));
+        ofString.getFieldType(Parameterized.class.getField("extendsT")).getType());
     assertEquals(new TypeLiteral<List<? super String>>() {}.getType(),
-        ofString.getFieldType(Parameterized.class.getField("superT")));
+        ofString.getFieldType(Parameterized.class.getField("superT")).getType());
   }
 

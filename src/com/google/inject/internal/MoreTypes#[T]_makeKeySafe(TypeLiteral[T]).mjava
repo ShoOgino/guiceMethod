@@ -1,0 +1,20 @@
+  /**
+   * Returns an equivalent type that's safe for use in a key. The returned type will be free of
+   * primitive types. Type literals of primitives will return the corresponding wrapper types.
+   *
+   * @throws ConfigurationException if {@code type} contains a type variable
+   */
+  public static <T> TypeLiteral<T> makeKeySafe(TypeLiteral<T> type) {
+    if (!isFullySpecified(type.getType())) {
+      String message = type + " cannot be used as a key; It is not fully specified.";
+      throw new ConfigurationException(ImmutableSet.of(
+          new Message(SourceProvider.UNKNOWN_SOURCE, message)));
+    }
+
+    @SuppressWarnings("unchecked")
+    TypeLiteral<T> wrappedPrimitives = (TypeLiteral<T>) PRIMITIVE_TO_WRAPPER.get(type);
+    return wrappedPrimitives != null
+        ? wrappedPrimitives
+        : type;
+  }
+

@@ -3,6 +3,6 @@
     Type anotherE = arraysAsListClass.getTypeParameters()[0];
     TypeLiteral type = TypeLiteral.get(newParameterizedType(AbstractList.class, anotherE));
     assertEquals(newParameterizedType(AbstractCollection.class, anotherE),
-        type.getSupertype(AbstractCollection.class));
+        type.getSupertype(AbstractCollection.class).getType());
   }
 

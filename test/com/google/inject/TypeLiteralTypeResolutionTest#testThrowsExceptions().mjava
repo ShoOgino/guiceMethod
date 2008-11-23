@@ -1,6 +1,6 @@
   public void testThrowsExceptions() {
-    TypeLiteral<?> resolver = TypeLiteral.get(throwerOfNpe);
-    assertEquals(NullPointerException.class, resolver.getExceptionTypes(newThrower).get(0));
-    assertEquals(NullPointerException.class, resolver.getExceptionTypes(throwS).get(0));
+    TypeLiteral<?> type = TypeLiteral.get(throwerOfNpe);
+    assertEquals(NullPointerException.class, type.getExceptionTypes(newThrower).get(0).getType());
+    assertEquals(NullPointerException.class, type.getExceptionTypes(throwS).get(0).getType());
   }
 

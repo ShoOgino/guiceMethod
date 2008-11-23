@@ -6,8 +6,8 @@
     }
 
     // Add injectors for superclass first.
-    Type superType = type.getSupertype(MoreTypes.getRawType(type.getType()).getSuperclass());
-    addInjectionPoints(TypeLiteral.get(superType), factory, statics, injectionPoints, errors);
+    TypeLiteral<?> superType = type.getSupertype(type.getRawType().getSuperclass());
+    addInjectionPoints(superType, factory, statics, injectionPoints, errors);
 
     // Add injectors for all members next
     addInjectorsForMembers(type, factory, statics, injectionPoints, errors);

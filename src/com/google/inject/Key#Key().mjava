@@ -12,8 +12,7 @@
   @SuppressWarnings("unchecked")
   protected Key() {
     this.annotationStrategy = NullAnnotationStrategy.INSTANCE;
-    this.typeLiteral
-        = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();
   }
 

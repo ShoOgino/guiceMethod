@@ -8,7 +8,7 @@
    *     parameter with multiple binding annotations.
    */
   public static InjectionPoint forConstructorOf(TypeLiteral<?> type) {
-    Class<?> rawType = MoreTypes.getRawType(type.getType());
+    Class<?> rawType = getRawType(type.getType());
     Errors errors = new Errors(rawType);
 
     Constructor<?> injectableConstructor = null;

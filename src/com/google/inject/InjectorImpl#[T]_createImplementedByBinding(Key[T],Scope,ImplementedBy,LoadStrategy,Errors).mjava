@@ -2,7 +2,7 @@
   <T> BindingImpl<T> createImplementedByBinding(Key<T> key, Scope scope,
       ImplementedBy implementedBy, LoadStrategy loadStrategy, Errors errors)
       throws ErrorsException {
-    Class<?> rawType = MoreTypes.getRawType(key.getTypeLiteral().getType());
+    Class<?> rawType = key.getTypeLiteral().getRawType();
     Class<?> implementationType = implementedBy.value();
 
     // Make sure it's not the same type. TODO: Can we check for deeper cycles?

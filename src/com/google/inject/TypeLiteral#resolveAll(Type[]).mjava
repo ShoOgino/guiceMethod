@@ -1,6 +1,6 @@
   /** Returns an immutable list of the resolved types. */
-  private List<Type> resolveAll(Type[] types) {
-    Type[] result = new Type[types.length];
+  private List<TypeLiteral<?>> resolveAll(Type[] types) {
+    TypeLiteral<?>[] result = new TypeLiteral<?>[types.length];
     for (int t = 0; t < types.length; t++) {
       result[t] = resolve(types[t]);
     }

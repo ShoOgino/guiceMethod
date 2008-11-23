@@ -1,5 +1,5 @@
   public void testRecursiveTypeVariable() {
     TypeLiteral<?> resolver = TypeLiteral.get(MyInteger.class);
-    assertEquals(MyInteger.class, resolver.getParameterTypes(comparableCompareTo).get(0));
+    assertEquals(MyInteger.class, resolver.getParameterTypes(comparableCompareTo).get(0).getType());
   }
 

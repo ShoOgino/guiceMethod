@@ -1,6 +1,6 @@
   public void testRelatedTypeVariables() {
     TypeLiteral<?> resolver = TypeLiteral.get(hasRelatedOfString);
-    assertEquals(String.class, resolver.getParameterTypes(echo).get(0));
-    assertEquals(String.class, resolver.getReturnType(echo));
+    assertEquals(String.class, resolver.getParameterTypes(echo).get(0).getType());
+    assertEquals(String.class, resolver.getReturnType(echo).getType());
   }
 

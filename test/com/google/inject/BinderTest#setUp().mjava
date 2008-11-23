@@ -1,9 +1,0 @@
-  @Override protected void setUp() throws Exception {
-    parameterizedWithVariable = (ParameterizedType) getClass()
-        .getDeclaredMethod("parameterizedWithVariable", List.class).getGenericParameterTypes()[0];
-    parameterizedWithWildcard = (ParameterizedType) getClass()
-        .getDeclaredMethod("parameterizedWithWildcard", List.class).getGenericParameterTypes()[0];
-    typeVariable = (TypeVariable) parameterizedWithVariable.getActualTypeArguments()[0];
-    wildcardType = (WildcardType) parameterizedWithWildcard.getActualTypeArguments()[0];
-  }
-

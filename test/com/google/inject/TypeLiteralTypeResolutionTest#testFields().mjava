@@ -1,6 +1,6 @@
   public void testFields() {
     TypeLiteral<?> resolver = TypeLiteral.get(hasGenericFieldsOfShort);
-    assertEquals(listOf(Short.class), resolver.getFieldType(list));
-    assertEquals(Short.class, resolver.getFieldType(instance));
+    assertEquals(listOf(Short.class), resolver.getFieldType(list).getType());
+    assertEquals(Short.class, resolver.getFieldType(instance).getType());
   }
 

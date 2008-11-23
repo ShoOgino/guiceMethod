@@ -4,7 +4,7 @@
    * @param method a method defined by this or any supertype.
    * @since 2.0
    */
-  public Type getReturnType(Method method) {
+  public TypeLiteral<?> getReturnType(Method method) {
     checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
         "%s is not defined by a supertype of %s", method, type);
     return resolve(method.getGenericReturnType());

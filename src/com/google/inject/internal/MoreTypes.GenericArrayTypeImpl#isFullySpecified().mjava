@@ -1,0 +1,4 @@
+    public boolean isFullySpecified() {
+      return MoreTypes.isFullySpecified(componentType);
+    }
+

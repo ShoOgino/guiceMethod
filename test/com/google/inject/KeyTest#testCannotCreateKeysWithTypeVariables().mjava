@@ -1,0 +1,25 @@
+  /** Test for issue 186 */
+  public void testCannotCreateKeysWithTypeVariables() throws NoSuchMethodException {
+    ParameterizedType listOfTType = (ParameterizedType) getClass().getDeclaredMethod(
+        "parameterizedWithVariable", List.class).getGenericParameterTypes()[0];
+
+    TypeLiteral<?> listOfT = TypeLiteral.get(listOfTType);
+    try {
+      Key.get(listOfT);
+      fail("Guice should not allow keys for java.util.List<T>");
+    } catch (ConfigurationException e) {
+      assertContains(e.getMessage(),
+          "java.util.List<T> cannot be used as a key; It is not fully specified.");
+    }
+
+    TypeVariable tType = (TypeVariable) listOfTType.getActualTypeArguments()[0];
+    TypeLiteral<?> t = TypeLiteral.get(tType);
+    try {
+      Key.get(t);
+      fail("Guice should not allow keys for T");
+    } catch (ConfigurationException e) {
+      assertContains(e.getMessage(),
+          "T cannot be used as a key; It is not fully specified.");
+    }
+  }
+

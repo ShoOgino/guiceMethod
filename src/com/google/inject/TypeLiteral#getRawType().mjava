@@ -1,7 +1,7 @@
   /**
-   * Gets the raw type.
+   * Returns the raw (non-generic) type for this type.
    */
-  final Class<? super T> getRawType() {
+  public final Class<? super T> getRawType() {
     return rawType;
   }
 

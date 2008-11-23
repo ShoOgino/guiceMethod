@@ -1,7 +1,7 @@
   private static <M extends Member & AnnotatedElement> void addInjectorsForMembers(
       TypeLiteral<?> typeResolver, Factory<M> factory, boolean statics,
       Collection<InjectionPoint> injectionPoints, Errors errors) {
-    for (M member : factory.getMembers(MoreTypes.getRawType(typeResolver.getType()))) {
+    for (M member : factory.getMembers(getRawType(typeResolver.getType()))) {
       if (isStatic(member) != statics) {
         continue;
       }
