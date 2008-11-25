@@ -1,4 +1,4 @@
-  protected void writeConvertToTypes(final Binder binder, final TypeConverterBinding element) {
+  protected void writeConvertToTypes(Binder binder, TypeConverterBinding element) {
     binder.withSource(element.getSource())
         .convertToTypes(element.getTypeMatcher(), element.getTypeConverter());
   }

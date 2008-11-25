@@ -1,0 +1,10 @@
+    /** Creates a private recording binder. */
+    private RecordingBinder(RecordingBinder parent, PrivateEnvironment privateEnvironment) {
+      this.stage = parent.stage;
+      this.modules = Sets.newHashSet();
+      this.elements = privateEnvironment.elementsMutable;
+      this.source = parent.source;
+      this.sourceProvider = parent.sourceProvider;
+      this.privateEnvironment = privateEnvironment;
+    }
+

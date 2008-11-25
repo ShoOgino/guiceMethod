@@ -1,0 +1,4 @@
+  public V visitPrivateElements(PrivateEnvironment privateEnvironment) {
+    return visitElement(privateEnvironment);
+  }
+

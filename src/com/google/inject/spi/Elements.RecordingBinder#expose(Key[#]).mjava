@@ -1,0 +1,4 @@
+    public void expose(Key<?> type) {
+      exposeInternal(type);
+    }
+

@@ -1,0 +1,5 @@
+  protected void writeExpose(Binder binder, Exposure exposure) {
+    PrivateBinder privateBinder = (PrivateBinder) binder;
+    privateBinder.withSource(exposure.getSource()).expose(exposure.getKey());
+  }
+

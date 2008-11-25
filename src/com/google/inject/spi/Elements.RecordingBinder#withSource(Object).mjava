@@ -1,4 +1,4 @@
-    public Binder withSource(final Object source) {
+    public RecordingBinder withSource(final Object source) {
       return new RecordingBinder(this, source, null);
     }
 

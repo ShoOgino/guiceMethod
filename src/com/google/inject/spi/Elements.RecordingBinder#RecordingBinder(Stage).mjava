@@ -5,5 +5,6 @@
       this.source = null;
       this.sourceProvider = new SourceProvider()
           .plusSkippedClasses(Elements.class, RecordingBinder.class, AbstractModule.class);
+      this.privateEnvironment = null;
     }
 

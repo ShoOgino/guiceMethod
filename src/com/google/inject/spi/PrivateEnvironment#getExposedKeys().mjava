@@ -1,0 +1,17 @@
+  /**
+   * Returns the unique exposed keys for these private elements.
+   */
+  public Set<Key<?>> getExposedKeys() {
+    if (exposedKeys == null) {
+      Set<Key<?>> exposedKeysMutable = Sets.newLinkedHashSet();
+      for (Element element : getElements()) {
+        if (element instanceof Exposure) {
+          exposedKeysMutable.add(((Exposure) element).getKey());
+        }
+      }
+      exposedKeys = ImmutableSet.copyOf(exposedKeysMutable);
+    }
+
+    return exposedKeys;
+  }
+

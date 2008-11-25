@@ -1,4 +1,4 @@
-  public V visitInjectionRequest(InjectionRequest command) {
-    return visitElement(command);
+  public V visitInjectionRequest(InjectionRequest injectionRequest) {
+    return visitElement(injectionRequest);
   }
 

@@ -1,4 +1,4 @@
-  protected void writeBindInterceptor(final Binder binder, final InterceptorBinding element) {
+  protected void writeBindInterceptor(Binder binder, InterceptorBinding element) {
     List<MethodInterceptor> interceptors = element.getInterceptors();
     binder.withSource(element.getSource()).bindInterceptor(
         element.getClassMatcher(), element.getMethodMatcher(),

@@ -3,14 +3,7 @@
    */
   protected void checkModule(Module module, ElementVisitor<?>... visitors) {
     List<Element> elements = Elements.getElements(module);
-
     assertEquals(elements.size(), visitors.length);
-
-    for (int i = 0; i < visitors.length; i++) {
-      ElementVisitor<?> visitor = visitors[i];
-      Element element = elements.get(i);
-      assertContains(element.getSource().toString(), "ElementsTest.java");
-      element.acceptVisitor(visitor);
-    }
+    checkElements(elements, visitors);
   }
 

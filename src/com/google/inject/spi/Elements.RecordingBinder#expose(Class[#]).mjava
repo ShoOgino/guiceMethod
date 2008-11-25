@@ -1,0 +1,4 @@
+    public AnnotatedElementBuilder expose(Class<?> type) {
+      return exposeInternal(Key.get(type));
+    }
+

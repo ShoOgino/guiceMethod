@@ -1,0 +1,5 @@
+  protected void writePrivateElements(Binder binder, PrivateEnvironment element) {
+    PrivateBinder privateBinder = binder.withSource(element.getSource()).newPrivateBinder();
+    apply(privateBinder, element.getElements());
+  }
+

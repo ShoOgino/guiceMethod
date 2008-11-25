@@ -1,4 +1,4 @@
-  protected void writeMessage(final Binder binder, final Message element) {
+  protected void writeMessage(Binder binder, Message element) {
     binder.addError(element);
   }
 

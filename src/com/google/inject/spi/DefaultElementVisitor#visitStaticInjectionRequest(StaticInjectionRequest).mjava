@@ -1,4 +1,4 @@
-  public V visitStaticInjectionRequest(StaticInjectionRequest command) {
-    return visitElement(command);
+  public V visitStaticInjectionRequest(StaticInjectionRequest staticInjectionRequest) {
+    return visitElement(staticInjectionRequest);
   }
 

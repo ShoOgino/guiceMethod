@@ -1,4 +1,4 @@
-  public V visitTypeConverterBinding(TypeConverterBinding command) {
-    return visitElement(command);
+  public V visitTypeConverterBinding(TypeConverterBinding typeConverterBinding) {
+    return visitElement(typeConverterBinding);
   }
 

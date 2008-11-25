@@ -1,5 +1,4 @@
-  protected void writeRequestInjection(final Binder binder,
-      final InjectionRequest command) {
+  protected void writeRequestInjection(Binder binder, InjectionRequest command) {
     binder.withSource(command.getSource()).requestInjection(command.getInstance());
   }
 

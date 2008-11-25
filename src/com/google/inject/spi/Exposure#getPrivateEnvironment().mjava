@@ -1,0 +1,8 @@
+  /**
+   * Returns the environment that owns this binding. Its enclosing environment gains access to the
+   * binding via this exposure.
+   */
+  public PrivateEnvironment getPrivateEnvironment() {
+    return privateEnvironment;
+  }
+

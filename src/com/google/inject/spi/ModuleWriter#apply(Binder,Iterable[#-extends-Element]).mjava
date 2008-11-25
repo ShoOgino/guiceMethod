@@ -46,6 +46,16 @@
         writeGetProvider(binder, element);
         return null;
       }
+
+      public Void visitPrivateElements(PrivateEnvironment privateEnvironment) {
+        writePrivateElements(binder, privateEnvironment);
+        return null;
+      }
+
+      public Void visitExposure(Exposure expose) {
+        writeExpose(binder, expose);
+        return null;
+      }
     };
 
     for (Element element : elements) {

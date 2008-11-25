@@ -1,7 +1,4 @@
-    /**
-     * Creates a recording binder that's backed by the same configuration as
-     * {@code backingBinder}.
-     */
+    /** Creates a recording binder that's backed by {@code backingBinder}. */
     private RecordingBinder(RecordingBinder parent, Object source, SourceProvider sourceProvider) {
       checkArgument(source == null ^ sourceProvider == null);
 
@@ -10,5 +7,6 @@
       this.elements = parent.elements;
       this.source = source;
       this.sourceProvider = sourceProvider;
+      this.privateEnvironment = parent.privateEnvironment;
     }
 

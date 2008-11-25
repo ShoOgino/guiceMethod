@@ -1,0 +1,4 @@
+    public AnnotatedElementBuilder expose(TypeLiteral<?> type) {
+      return exposeInternal(Key.get(type));
+    }
+

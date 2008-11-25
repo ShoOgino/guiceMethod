@@ -1,0 +1,23 @@
+  /** Returns a builder that applies annotations to this exposed key. */
+  AnnotatedElementBuilder annotatedElementBuilder(final Binder binder) {
+    return new AnnotatedElementBuilder() {
+      public void annotatedWith(Class<? extends Annotation> annotationType) {
+        checkNotNull(annotationType, "annotationType");
+        checkNotAnnotated();
+        key = Key.get(key.getTypeLiteral(), annotationType);
+      }
+
+      public void annotatedWith(Annotation annotation) {
+        checkNotNull(annotation, "annotation");
+        checkNotAnnotated();
+        key = Key.get(key.getTypeLiteral(), annotation);
+      }
+
+      private void checkNotAnnotated() {
+        if (key.getAnnotationType() != null) {
+          binder.addError(ModuleBinding.ANNOTATION_ALREADY_SPECIFIED);
+        }
+      }
+    };
+  }
+

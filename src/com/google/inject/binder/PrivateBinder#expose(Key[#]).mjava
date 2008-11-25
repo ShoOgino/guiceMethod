@@ -1,0 +1,3 @@
+  /** Makes the binding for {@code key} available to the enclosing environment */
+  void expose(Key<?> type);
+

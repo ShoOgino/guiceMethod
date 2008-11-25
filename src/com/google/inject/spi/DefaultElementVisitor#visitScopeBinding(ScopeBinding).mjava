@@ -1,4 +1,4 @@
-  public V visitScopeBinding(ScopeBinding command) {
-    return visitElement(command);
+  public V visitScopeBinding(ScopeBinding scopeBinding) {
+    return visitElement(scopeBinding);
   }
 
