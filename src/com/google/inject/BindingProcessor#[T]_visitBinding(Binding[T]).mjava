@@ -27,7 +27,7 @@
       }
 
       public Scope visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-        Scope scope = state.getScope(scopeAnnotation);
+        Scope scope = injector.state.getScope(scopeAnnotation);
         if (scope != null) {
           return scope;
         } else {
@@ -43,7 +43,8 @@
 
     command.acceptTargetVisitor(new BindingTargetVisitor<T, Void>() {
       public Void visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
-        Initializable<T> ref = initializer.requestInjection(instance, source, injectionPoints);
+        Initializable<T> ref = initializer.requestInjection(
+            injector, instance, source, injectionPoints);
         ConstantFactory<? extends T> factory = new ConstantFactory<T>(ref);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
         putBinding(new InstanceBindingImpl<T>(injector, key, source, scopedFactory, injectionPoints,
@@ -54,7 +55,7 @@
       public Void visitProvider(Provider<? extends T> provider,
           Set<InjectionPoint> injectionPoints) {
         Initializable<Provider<? extends T>> initializable = initializer
-            .<Provider<? extends T>>requestInjection(provider, source, injectionPoints);
+            .<Provider<? extends T>>requestInjection(injector, provider, source, injectionPoints);
         InternalFactory<T> factory = new InternalFactoryToProviderAdapter<T>(initializable, source);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
         putBinding(new ProviderInstanceBindingImpl<T>(injector, key, source, scopedFactory, scope,
@@ -63,8 +64,8 @@
       }
 
       public Void visitProviderKey(Key<? extends Provider<? extends T>> providerKey) {
-        final BoundProviderFactory<T> boundProviderFactory =
-            new BoundProviderFactory<T>(providerKey, source);
+        BoundProviderFactory<T> boundProviderFactory
+            = new BoundProviderFactory<T>(injector, providerKey, source);
         creationListeners.add(boundProviderFactory);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(
             key, injector, (InternalFactory<? extends T>) boundProviderFactory, scope);
@@ -78,7 +79,7 @@
           errors.recursiveBinding();
         }
 
-        FactoryProxy<T> factory = new FactoryProxy<T>(key, targetKey, source);
+        FactoryProxy<T> factory = new FactoryProxy<T>(injector, key, targetKey, source);
         creationListeners.add(factory);
         InternalFactory<? extends T> scopedFactory = Scopes.scope(key, injector, factory, scope);
         putBinding(new LinkedBindingImpl<T>(
@@ -108,16 +109,23 @@
           return null;
         }
 
-        untargettedBindings.add(new Runnable() {
+        uninitializedBindings.add(new Runnable() {
           public void run() {
             try {
-              injector.initializeBinding(binding, errors.withSource(source));
+              binding.injector.initializeBinding(binding, errors.withSource(source));
             } catch (ErrorsException e) {
               errors.merge(e.getErrors());
             }
           }
         });
 
+        return null;
+      }
+
+      public Void visitExposed(PrivateEnvironment privateEnvironment) {
+        Factory<T> factory = new Factory<T>(key, privateEnvironment);
+        creationListeners.add(factory);
+        putBinding(new ExposedBindingImpl<T>(injector, source, factory));
         return null;
       }
 

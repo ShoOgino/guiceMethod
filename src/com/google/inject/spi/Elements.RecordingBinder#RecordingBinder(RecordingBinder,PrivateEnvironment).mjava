@@ -2,9 +2,10 @@
     private RecordingBinder(RecordingBinder parent, PrivateEnvironment privateEnvironment) {
       this.stage = parent.stage;
       this.modules = Sets.newHashSet();
-      this.elements = privateEnvironment.elementsMutable;
+      this.elements = privateEnvironment.getElementsMutable();
       this.source = parent.source;
       this.sourceProvider = parent.sourceProvider;
+      this.parent = parent;
       this.privateEnvironment = privateEnvironment;
     }
 

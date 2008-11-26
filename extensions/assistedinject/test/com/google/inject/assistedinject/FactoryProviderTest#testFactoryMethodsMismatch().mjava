@@ -2,8 +2,8 @@
     try {
       FactoryProvider.newFactory(SummerCarFactory.class, Beetle.class);
       fail();
-    } catch(IllegalArgumentException e) {
-      assertTrue(e.getMessage().startsWith("Constructor mismatch"));
+    } catch(ConfigurationException e) {
+      assertContains(e.getMessage(), "Constructor mismatch");
     }
   }
 

@@ -1,6 +1,5 @@
-  InjectionRequestProcessor(Errors errors,
-      Initializer memberInjector) {
+  InjectionRequestProcessor(Errors errors, Initializer initializer) {
     super(errors);
-    this.memberInjector = memberInjector;
+    this.initializer = initializer;
   }
 

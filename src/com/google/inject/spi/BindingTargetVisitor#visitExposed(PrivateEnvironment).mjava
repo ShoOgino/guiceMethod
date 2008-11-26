@@ -1,0 +1,5 @@
+  /**
+   * Visit a binding to a key exposed by a private environment.
+   */
+  V visitExposed(PrivateEnvironment privateEnvironment);
+

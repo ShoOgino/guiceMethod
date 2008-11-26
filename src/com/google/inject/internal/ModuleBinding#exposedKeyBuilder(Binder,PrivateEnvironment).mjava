@@ -1,0 +1,16 @@
+  /** @param binder the binder where errors will be reported. */
+  public ExposureBuilder<T> exposedKeyBuilder(Binder binder,
+      final PrivateEnvironment privateEnvironment) {
+    if (target != EMPTY_TARGET) {
+      throw new AssertionError();
+    }
+
+    target = new Target<T>() {
+      public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
+        return visitor.visitExposed(privateEnvironment);
+      }
+    };
+
+    return new ExposureBuilder<T>(this, binder);
+  }
+

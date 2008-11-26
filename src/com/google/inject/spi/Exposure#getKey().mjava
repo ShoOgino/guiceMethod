@@ -1,7 +1,0 @@
-  /**
-   * Returns the exposed key.
-   */
-  public Key<?> getKey() {
-    return key;
-  }
-

@@ -1,4 +1,0 @@
-  public V visitExposure(Exposure exposure) {
-    return visitElement(exposure);
-  }
-

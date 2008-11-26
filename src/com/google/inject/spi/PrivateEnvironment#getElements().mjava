@@ -1,6 +1,5 @@
   /**
-   * Returns the configuration information in this private environment, including the {@link
-   * Exposure} elements that make configuration available to the enclosing environment.
+   * Returns the configuration information in this private environment.
    */
   public List<Element> getElements() {
     if (elements == null) {

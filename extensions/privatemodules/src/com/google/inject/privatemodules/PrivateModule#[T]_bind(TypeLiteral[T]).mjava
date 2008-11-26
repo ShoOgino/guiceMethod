@@ -1,4 +1,0 @@
-  protected final <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
-    return privateBinder.bind(typeLiteral);
-  }
-

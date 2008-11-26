@@ -1,0 +1,2 @@
+    void notify(Map<PrivateEnvironment, InjectorImpl> privateInjectors, Errors errors);
+

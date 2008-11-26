@@ -1,0 +1,4 @@
+  protected final Stage currentStage() {
+    return binder.currentStage();
+  }
+

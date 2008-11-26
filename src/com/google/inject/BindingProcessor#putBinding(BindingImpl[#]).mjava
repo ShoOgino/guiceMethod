@@ -7,21 +7,14 @@
       return;
     }
 
-    Binding<?> original = state.getExplicitBinding(key);
-
-    if (original != null) {
-      // the hard-coded class name is certainly lame, but it avoids an even lamer dependency...
-      boolean isOkayDuplicate = original instanceof ProviderInstanceBindingImpl
-          && "com.google.inject.privatemodules.PrivateModule$Expose"
-              .equals(original.acceptTargetVisitor(GET_BOUND_PROVIDER_CLASS_NAME));
-      if (!isOkayDuplicate) {
-        errors.bindingAlreadySet(key, original.getSource());
-        return;
-      }
+    Binding<?> original = injector.state.getExplicitBinding(key);
+    if (original != null && !isOkayDuplicate(original, binding)) {
+      errors.bindingAlreadySet(key, original.getSource());
+      return;
     }
 
     // prevent the parent from creating a JIT binding for this key
-    state.parent().blacklist(key);
-    state.putBinding(key, binding);
+    injector.state.parent().blacklist(key);
+    injector.state.putBinding(key, binding);
   }
 

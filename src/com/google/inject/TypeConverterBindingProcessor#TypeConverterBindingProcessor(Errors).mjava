@@ -1,0 +1,4 @@
+  TypeConverterBindingProcessor(Errors errors) {
+    super(errors);
+  }
+

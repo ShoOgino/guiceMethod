@@ -1,0 +1,4 @@
+  protected final <T> Provider<T> getProvider(Key<T> key) {
+    return binder.getProvider(key);
+  }
+

@@ -1,5 +1,0 @@
-  protected final void bindInterceptor(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
-    privateBinder.bindInterceptor(classMatcher, methodMatcher, interceptors);
-  }
-

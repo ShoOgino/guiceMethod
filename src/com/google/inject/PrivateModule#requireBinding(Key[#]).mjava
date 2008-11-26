@@ -1,0 +1,4 @@
+  protected final void requireBinding(Key<?> key) {
+    binder.getProvider(key);
+  }
+

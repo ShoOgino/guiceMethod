@@ -1,4 +1,0 @@
-  protected final void addError(Message message) {
-    privateBinder.addError(message);
-  }
-

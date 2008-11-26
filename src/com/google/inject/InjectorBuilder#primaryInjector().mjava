@@ -1,0 +1,7 @@
+  /**
+   * Returns the injector being constructed. This is not necessarily the root injector.
+   */
+  private Injector primaryInjector() {
+    return shells.get(0).getInjector();
+  }
+

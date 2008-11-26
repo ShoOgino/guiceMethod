@@ -1,5 +1,0 @@
-  ProviderLookupProcessor(Errors errors, InjectorImpl injector) {
-    super(errors);
-    this.injector = injector;
-  }
-

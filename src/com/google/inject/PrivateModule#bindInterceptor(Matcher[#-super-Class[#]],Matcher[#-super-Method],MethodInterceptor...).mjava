@@ -1,0 +1,5 @@
+  protected final void bindInterceptor(Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
+    binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
+  }
+

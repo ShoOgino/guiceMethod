@@ -1,0 +1,27 @@
+  public void testCannotBindAKeyExportedByASibling() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          install(new PrivateModule() {
+            public void configurePrivateBindings() {
+              bind(String.class).toInstance("public");
+              expose(String.class);
+            }
+          });
+
+          install(new PrivateModule() {
+            public void configurePrivateBindings() {
+              bind(String.class).toInstance("private");
+            }
+          });
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "A binding to java.lang.String was already configured at ",
+          getClass().getName(), ".configurePrivateBindings(PrivateModuleTest.java:",
+          " at " + getClass().getName(), ".configurePrivateBindings(PrivateModuleTest.java:");
+    }
+  }
+

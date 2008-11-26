@@ -1,6 +1,0 @@
-  Exposure(Object source, PrivateEnvironment privateEnvironment, Key<?> key) {
-    this.source = checkNotNull(source, "source");
-    this.privateEnvironment = privateEnvironment;
-    this.key = checkNotNull(key, "key");
-  }
-

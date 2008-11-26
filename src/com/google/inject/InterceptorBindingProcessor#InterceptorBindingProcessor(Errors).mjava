@@ -1,0 +1,4 @@
+  InterceptorBindingProcessor(Errors errors) {
+    super(errors);
+  }
+

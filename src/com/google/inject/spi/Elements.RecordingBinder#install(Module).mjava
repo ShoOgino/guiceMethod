@@ -1,7 +1,12 @@
     public void install(Module module) {
       if (modules.add(module)) {
+        Binder binder = this;
+        if (module instanceof PrivateModule) {
+          binder = binder.newPrivateBinder();
+        }
+
         try {
-          module.configure(this);
+          module.configure(binder);
         } catch (RuntimeException e) {
           Collection<Message> messages = Errors.getMessagesFromThrowable(e);
           if (!messages.isEmpty()) {
@@ -10,7 +15,7 @@
             addError(e);
           }
         }
-        install(ProviderMethodsModule.forModule(module));
+        binder.install(ProviderMethodsModule.forModule(module));
       }
     }
 

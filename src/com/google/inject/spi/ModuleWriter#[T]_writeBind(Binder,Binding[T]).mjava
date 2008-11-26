@@ -1,6 +1,6 @@
   protected <T> void writeBind(Binder binder, Binding<T> element) {
-    LinkedBindingBuilder<T> lbb = binder.withSource(element.getSource()).bind(element.getKey());
-    ScopedBindingBuilder sbb = applyTarget(element, lbb);
+    ScopedBindingBuilder sbb
+        = bindKeyToTarget(element, binder.withSource(element.getSource()), element.getKey());
     applyScoping(element, sbb);
   }
 

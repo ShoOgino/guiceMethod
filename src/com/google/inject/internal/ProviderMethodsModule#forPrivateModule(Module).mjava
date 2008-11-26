@@ -1,6 +1,0 @@
-  /** See {@link com.google.inject.privatemodules.PrivateModule}. */
-  public static ProviderMethodsModule forPrivateModule(Module privateModule) {
-    checkArgument(isPrivateModule(privateModule));
-    return new ProviderMethodsModule(privateModule);
-  }
-

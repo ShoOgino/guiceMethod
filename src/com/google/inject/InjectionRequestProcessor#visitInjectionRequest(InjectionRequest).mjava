@@ -8,7 +8,7 @@
       injectionPoints = e.getPartialValue();
     }
 
-    memberInjector.requestInjection(command.getInstance(), command.getSource(), injectionPoints);
+    initializer.requestInjection(injector, command.getInstance(), command.getSource(), injectionPoints);
     return true;
   }
 

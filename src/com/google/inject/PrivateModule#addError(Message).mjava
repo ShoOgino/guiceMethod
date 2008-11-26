@@ -1,0 +1,4 @@
+  protected final void addError(Message message) {
+    binder.addError(message);
+  }
+

@@ -1,4 +1,0 @@
-  protected final <T> Provider<T> getProvider(Class<T> type) {
-    return privateBinder.getProvider(type);
-  }
-

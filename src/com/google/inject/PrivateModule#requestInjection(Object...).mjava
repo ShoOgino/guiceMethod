@@ -1,0 +1,4 @@
+  protected final void requestInjection(Object... objects) {
+    binder.requestInjection(objects);
+  }
+

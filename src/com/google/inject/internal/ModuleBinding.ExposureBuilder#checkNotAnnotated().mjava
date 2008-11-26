@@ -1,0 +1,6 @@
+    private void checkNotAnnotated() {
+      if (binding.key.getAnnotationType() != null) {
+        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
+      }
+    }
+

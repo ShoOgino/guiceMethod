@@ -1,0 +1,19 @@
+  public void testWithoutPrivateModules() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        PrivateBinder bindA = binder().newPrivateBinder();
+        bindA.bind(String.class).annotatedWith(named("a")).toInstance("i");
+        bindA.expose(String.class).annotatedWith(named("a"));
+        bindA.bind(String.class).annotatedWith(named("c")).toInstance("private to A");
+
+        PrivateBinder bindB = binder().newPrivateBinder();
+        bindB.bind(String.class).annotatedWith(named("b")).toInstance("ii");
+        bindB.expose(String.class).annotatedWith(named("b"));
+        bindB.bind(String.class).annotatedWith(named("c")).toInstance("private to B");
+      }
+    });
+
+    assertEquals("i", injector.getInstance(Key.get(String.class, named("a"))));
+    assertEquals("ii", injector.getInstance(Key.get(String.class, named("b"))));
+  }
+

@@ -1,6 +1,0 @@
-    private Expose(Object source, Provider<Ready> readyProvider, Key<T> key) {
-      this.source = checkNotNull(source, "source");
-      this.readyProvider = checkNotNull(readyProvider, "readyProvider");
-      this.key = checkNotNull(key, "key");
-    }
-

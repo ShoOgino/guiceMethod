@@ -1,4 +1,0 @@
-  protected final void bindScope(Class<? extends Annotation> scopeAnnotation, Scope scope) {
-    privateBinder.bindScope(scopeAnnotation, scope);
-  }
-

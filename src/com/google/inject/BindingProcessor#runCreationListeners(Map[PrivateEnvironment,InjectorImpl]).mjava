@@ -1,0 +1,6 @@
+  public void runCreationListeners(Map<PrivateEnvironment, InjectorImpl> privateInjectors) {
+    for (CreationListener creationListener : creationListeners) {
+      creationListener.notify(privateInjectors, errors);
+    }
+  }
+

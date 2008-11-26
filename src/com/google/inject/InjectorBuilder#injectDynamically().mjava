@@ -4,15 +4,17 @@
    * code build a just-in-time binding from another thread.
    */
   private void injectDynamically() {
-    injectionCommandProcessor.injectMembers(injector);
+    injectionRequestProcessor.injectMembers();
     stopwatch.resetAndLog("Static member injection");
 
-    injector.initializer.injectAll(errors);
+    initializer.injectAll(errors);
     stopwatch.resetAndLog("Instance injection");
     errors.throwCreationExceptionIfErrorsExist();
 
-    loadEagerSingletons();
-    stopwatch.resetAndLog("Preloading");
+    for (InjectorShell shell : shells) {
+      loadEagerSingletons(shell.getInjector(), stage, errors);
+    }
+    stopwatch.resetAndLog("Preloading singletons");
     errors.throwCreationExceptionIfErrorsExist();
   }
 

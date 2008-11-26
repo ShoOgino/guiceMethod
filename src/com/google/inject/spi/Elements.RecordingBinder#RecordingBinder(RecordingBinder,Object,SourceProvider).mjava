@@ -1,12 +1,14 @@
-    /** Creates a recording binder that's backed by {@code backingBinder}. */
-    private RecordingBinder(RecordingBinder parent, Object source, SourceProvider sourceProvider) {
+    /** Creates a recording binder that's backed by {@code prototype}. */
+    private RecordingBinder(
+        RecordingBinder prototype, Object source, SourceProvider sourceProvider) {
       checkArgument(source == null ^ sourceProvider == null);
 
-      this.stage = parent.stage;
-      this.modules = parent.modules;
-      this.elements = parent.elements;
+      this.stage = prototype.stage;
+      this.modules = prototype.modules;
+      this.elements = prototype.elements;
       this.source = source;
       this.sourceProvider = sourceProvider;
-      this.privateEnvironment = parent.privateEnvironment;
+      this.parent = prototype.parent;
+      this.privateEnvironment = prototype.privateEnvironment;
     }
 

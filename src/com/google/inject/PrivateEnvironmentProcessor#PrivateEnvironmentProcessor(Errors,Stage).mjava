@@ -1,0 +1,5 @@
+  PrivateEnvironmentProcessor(Errors errors, Stage stage) {
+    super(errors);
+    this.stage = stage;
+  }
+

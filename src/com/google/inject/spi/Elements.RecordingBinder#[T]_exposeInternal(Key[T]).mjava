@@ -1,0 +1,14 @@
+    private <T> AnnotatedElementBuilder exposeInternal(Key<T> key) {
+      if (privateEnvironment == null) {
+        throw new UnsupportedOperationException("expose() only supported on PrivateBinder. "
+            + "Avoid using 'instanceof PrivateBinder', it's unsafe.");
+      }
+
+      ModuleBinding<T> exposeBinding = new ModuleBinding<T>(getSource(), key);
+      parent.elements.add(exposeBinding);
+
+      ExposureBuilder<T> builder = exposeBinding.exposedKeyBuilder(this, privateEnvironment);
+      privateEnvironment.addExposureBuilder(builder);
+      return builder;
+    }
+

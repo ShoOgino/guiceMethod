@@ -1,6 +1,5 @@
   /**
-   * Returns a module that executes the specified elements
-   * using this executing visitor.
+   * Returns a module that executes the specified elements using this executing visitor.
    */
   public final Module create(final Iterable<? extends Element> elements) {
     return new Module() {

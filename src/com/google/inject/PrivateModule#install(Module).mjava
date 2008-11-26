@@ -1,0 +1,4 @@
+  protected final void install(Module module) {
+    binder.install(module);
+  }
+

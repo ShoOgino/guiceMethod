@@ -1,0 +1,9 @@
+  /**
+   * Makes a binding for {@code type} available to other modules and the injector. Use {@link
+   * AnnotatedElementBuilder#annotatedWith(Class) annotatedWith()} to expose {@code type} with a
+   * binding annotation.
+   */
+  protected final AnnotatedElementBuilder expose(TypeLiteral<?> type) {
+    return binder.expose(type);
+  }
+

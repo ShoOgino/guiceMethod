@@ -1,7 +1,6 @@
   public Injector createChildInjector(Iterable<? extends Module> modules) {
     return new InjectorBuilder()
         .parentInjector(this)
-        .stage(getInstance(Stage.class))
         .addModules(modules)
         .build();
   }

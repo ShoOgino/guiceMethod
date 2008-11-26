@@ -1,0 +1,5 @@
+    /** Synchronize on this before calling {@link #build}. */
+    Object lock() {
+      return getState().lock();
+    }
+

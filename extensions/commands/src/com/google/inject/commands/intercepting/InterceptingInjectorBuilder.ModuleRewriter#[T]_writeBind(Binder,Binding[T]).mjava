@@ -16,8 +16,7 @@
       Key<T> anonymousKey = Key.get(key.getTypeLiteral(), UniqueAnnotations.create());
       binder.bind(key).toProvider(new InterceptingProvider<T>(key, anonymousKey));
 
-      LinkedBindingBuilder<T> linkedBindingBuilder = binder.bind(anonymousKey);
-      ScopedBindingBuilder scopedBindingBuilder = applyTarget(binding, linkedBindingBuilder);
+      ScopedBindingBuilder scopedBindingBuilder = bindKeyToTarget(binding, binder, anonymousKey);
 
       // we scope the user's provider, not the interceptor. This is dangerous,
       // but convenient. It means that although the user's provider will live

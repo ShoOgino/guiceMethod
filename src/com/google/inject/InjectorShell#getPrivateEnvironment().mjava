@@ -1,0 +1,4 @@
+  PrivateEnvironment getPrivateEnvironment() {
+    return privateEnvironment;
+  }
+

@@ -7,11 +7,6 @@
       return Modules.EMPTY_MODULE;
     }
 
-    // don't install provider methods for private modules, they take care of that manually
-    if (isPrivateModule(module)) {
-      return Modules.EMPTY_MODULE;
-    }
-
     return new ProviderMethodsModule(module);
   }
 

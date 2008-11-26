@@ -1,8 +1,14 @@
   public void configure(Binder binder) {
+    binder = binder.withSource(method);
+
     if (scopeAnnotation != null) {
-      binder.withSource(method).bind(key).toProvider(this).in(scopeAnnotation);
+      binder.bind(key).toProvider(this).in(scopeAnnotation);
     } else {
-      binder.withSource(method).bind(key).toProvider(this);
+      binder.bind(key).toProvider(this);
+    }
+
+    if (exposed) {
+      ((PrivateBinder) binder).expose(key);
     }
   }
 

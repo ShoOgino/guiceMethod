@@ -1,0 +1,4 @@
+  ScopeBindingProcessor(Errors errors) {
+    super(errors);
+  }
+

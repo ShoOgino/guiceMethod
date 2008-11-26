@@ -1,0 +1,4 @@
+  protected final AnnotatedConstantBindingBuilder bindConstant() {
+    return binder.bindConstant();
+  }
+

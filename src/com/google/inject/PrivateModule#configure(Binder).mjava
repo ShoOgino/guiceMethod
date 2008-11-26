@@ -1,0 +1,11 @@
+  public final synchronized void configure(Binder binder) {
+    checkState(this.binder == null, "Re-entry is not allowed.");
+
+    this.binder = (PrivateBinder) binder.skipSources(PrivateModule.class);
+    try {
+      configurePrivateBindings();
+    } finally {
+      this.binder = null;
+    }
+  }
+

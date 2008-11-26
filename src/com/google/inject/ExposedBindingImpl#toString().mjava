@@ -1,0 +1,9 @@
+  @Override public String toString() {
+    return new ToStringBuilder(Binding.class)
+        .add("key", key)
+        .add("privateEnvironment", factory.privateEnvironment)
+        .add("scope", scope)
+        .add("source", source)
+        .toString();
+  }
+

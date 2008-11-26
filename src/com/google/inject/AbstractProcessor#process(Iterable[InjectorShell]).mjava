@@ -1,0 +1,6 @@
+  public void process(Iterable<InjectorShell> isolatedInjectorBuilders) {
+    for (InjectorShell injectorShell : isolatedInjectorBuilders) {
+      process(injectorShell.getInjector(), injectorShell.getElements());
+    }
+  }
+

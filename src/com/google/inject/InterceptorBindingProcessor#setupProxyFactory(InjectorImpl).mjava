@@ -1,0 +1,4 @@
+  void setupProxyFactory(InjectorImpl injector) {
+    injector.constructionProxyFactory = new ProxyFactory(injector.state.getMethodAspects());
+  }
+

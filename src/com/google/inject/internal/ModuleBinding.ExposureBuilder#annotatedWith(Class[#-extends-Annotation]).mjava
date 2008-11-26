@@ -1,0 +1,6 @@
+    public void annotatedWith(Class<? extends Annotation> annotationType) {
+      checkNotNull(annotationType, "annotationType");
+      checkNotAnnotated();
+      binding.key = Key.get(binding.key.getTypeLiteral(), annotationType);
+    }
+

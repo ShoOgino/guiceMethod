@@ -1,7 +1,5 @@
   InjectorBuilder addModules(Iterable<? extends Module> modules) {
-    for (Module module : modules) {
-      this.modules.add(module);
-    }
+    shellBuilder.addModules(modules);
     return this;
   }
 

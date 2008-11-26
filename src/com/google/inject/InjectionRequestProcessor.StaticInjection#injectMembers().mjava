@@ -1,0 +1,15 @@
+    void injectMembers() {
+      try {
+        injector.callInContext(new ContextualCallable<Void>() {
+          public Void call(InternalContext context) {
+            for (SingleMemberInjector injector : memberInjectors) {
+              injector.inject(errors, context, null);
+            }
+            return null;
+          }
+        });
+      } catch (ErrorsException e) {
+        throw new AssertionError();
+      }
+    }
+

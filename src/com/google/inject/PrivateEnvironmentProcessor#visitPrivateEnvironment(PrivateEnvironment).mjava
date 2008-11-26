@@ -1,0 +1,9 @@
+  @Override public Boolean visitPrivateEnvironment(PrivateEnvironment privateEnvironment) {
+    InjectorShell.Builder builder = new InjectorShell.Builder()
+        .parent(injector)
+        .stage(stage)
+        .privateEnvironment(privateEnvironment);
+    injectorShellBuilders.add(builder);
+    return true;
+  }
+

@@ -1,0 +1,34 @@
+  /** Initialize and validate everything. */
+  private void initializeStatically() {
+    bindingProcesor.initializeBindings();
+    stopwatch.resetAndLog("Binding initialization");
+
+    for (InjectorShell shell : shells) {
+      shell.getInjector().index();
+    }
+    stopwatch.resetAndLog("Binding indexing");
+
+    injectionRequestProcessor.process(shells);
+    stopwatch.resetAndLog("Collecting injection requests");
+
+    bindingProcesor.runCreationListeners(environmentToInjector);
+    stopwatch.resetAndLog("Binding validation");
+
+    injectionRequestProcessor.validate();
+    stopwatch.resetAndLog("Static validation");
+
+    initializer.validateOustandingInjections(errors);
+    stopwatch.resetAndLog("Instance member validation");
+
+    new ProviderLookupProcessor(errors).process(shells);
+    stopwatch.resetAndLog("Provider verification");
+
+    for (InjectorShell shell : shells) {
+      if (!shell.getElements().isEmpty()) {
+        throw new AssertionError("Failed to execute " + shell.getElements());
+      }
+    }
+
+    errors.throwCreationExceptionIfErrorsExist();
+  }
+

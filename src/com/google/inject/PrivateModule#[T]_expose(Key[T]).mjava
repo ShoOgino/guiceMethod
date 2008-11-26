@@ -1,0 +1,5 @@
+  /** Makes the binding for {@code key} available to other modules and the injector. */
+  protected final <T> void expose(Key<T> key) {
+    binder.expose(key);
+  }
+

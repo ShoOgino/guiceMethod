@@ -1,4 +1,0 @@
-  protected final void requestInjection(Object... objects) {
-    privateBinder.requestInjection(objects);
-  }
-

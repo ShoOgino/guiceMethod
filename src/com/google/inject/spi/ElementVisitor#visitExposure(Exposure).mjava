@@ -1,5 +1,0 @@
-  /**
-   * Visit the exposure of a binding to its enclosing environment.
-   */
-  V visitExposure(Exposure exposure);
-

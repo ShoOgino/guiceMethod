@@ -1,0 +1,22 @@
+  public void testExposeButNoBind() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(String.class).annotatedWith(named("a")).toInstance("a");
+          bind(String.class).annotatedWith(named("b")).toInstance("b");
+
+          install(new PrivateModule() {
+            public void configurePrivateBindings() {
+              expose(AB.class);
+            }
+          });
+        }
+      });
+      fail("AB was exposed but not bound");
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Could not expose() " + AB.class.getName() + ", it must be explicitly bound",
+          ".configurePrivateBindings(PrivateModuleTest.java:");
+    }
+  }
+

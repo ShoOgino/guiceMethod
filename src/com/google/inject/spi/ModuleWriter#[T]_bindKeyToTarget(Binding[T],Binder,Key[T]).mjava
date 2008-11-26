@@ -1,0 +1,50 @@
+  /**
+   * Execute this target against the linked binding builder.
+   */
+  protected <T> ScopedBindingBuilder bindKeyToTarget(
+      final Binding<T> binding, final Binder binder, final Key<T> key) {
+    return binding.acceptTargetVisitor(new BindingTargetVisitor<T, ScopedBindingBuilder>() {
+      public ScopedBindingBuilder visitInstance(T instance, Set<InjectionPoint> injectionPoints) {
+        binder.bind(key).toInstance(instance);
+        return null;
+      }
+
+      public ScopedBindingBuilder visitProvider(Provider<? extends T> provider,
+          Set<InjectionPoint> injectionPoints) {
+        return binder.bind(key).toProvider(provider);
+      }
+
+      public ScopedBindingBuilder visitProviderKey(
+          Key<? extends Provider<? extends T>> providerKey) {
+        return binder.bind(key).toProvider(providerKey);
+      }
+
+      public ScopedBindingBuilder visitKey(Key<? extends T> targetKey) {
+        return binder.bind(key).to(targetKey);
+      }
+
+      public ScopedBindingBuilder visitUntargetted() {
+        return binder.bind(key);
+      }
+
+      public ScopedBindingBuilder visitExposed(PrivateEnvironment privateEnvironment) {
+        PrivateBinder privateBinder = getPrivateBinder(privateEnvironment);
+        privateBinder.withSource(binding.getSource()).expose(key);
+        return null;
+      }
+
+      public ScopedBindingBuilder visitConvertedConstant(T value) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+
+      public ScopedBindingBuilder visitConstructor(Constructor<? extends T> constructor,
+          Set<InjectionPoint> injectionPoints) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+
+      public ScopedBindingBuilder visitProviderBinding(Key<?> provided) {
+        throw new IllegalArgumentException("Non-module element");
+      }
+    });
+  }
+

@@ -1,0 +1,9 @@
+  BoundProviderFactory(
+      InjectorImpl injector,
+      Key<? extends Provider<? extends T>> providerKey,
+      Object source) {
+    this.injector = injector;
+    this.providerKey = providerKey;
+    this.source = source;
+  }
+

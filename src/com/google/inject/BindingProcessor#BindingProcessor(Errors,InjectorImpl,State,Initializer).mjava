@@ -1,8 +1,0 @@
-  BindingProcessor(Errors errors, InjectorImpl injector, State state,
-      Initializer initializer) {
-    super(errors);
-    this.injector = injector;
-    this.state = state;
-    this.initializer = initializer;
-  }
-
