@@ -1,7 +1,6 @@
   /**
-   * Writes all the elements bound in the private environment to new private binder that's enclosed
-   * by the current binder. The private binder will be associated with its environment, so exposed
-   * bindings from the main elements list can be exposed from the corresponding private binder.
+   * Writes the elements of the private environment to a new private binder and {@link
+   * #setPrivateBinder associates} the two.
    */
   protected void writePrivateElements(Binder binder, PrivateEnvironment element) {
     PrivateBinder privateBinder = binder.withSource(element.getSource()).newPrivateBinder();

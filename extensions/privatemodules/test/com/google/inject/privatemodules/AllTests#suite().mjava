@@ -1,6 +1,0 @@
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
-    suite.addTestSuite(PrivateModuleTest.class);
-    return suite;
-  }
-

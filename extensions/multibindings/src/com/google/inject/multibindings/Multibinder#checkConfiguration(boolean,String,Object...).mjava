@@ -3,6 +3,6 @@
       return;
     }
 
-    throw new ConfigurationException(ImmutableSet.of(new Message(String.format(format, args))));
+    throw new ConfigurationException(ImmutableSet.of(new Message(Errors.format(format, args))));
   }
 

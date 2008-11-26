@@ -1,6 +1,6 @@
   /**
    * Returns the {@code binder} accociated with {@code privateEnvironment}. This can be used to
-   * expose bindings from {@code privateEnvironment} from the corresponding private binder.
+   * expose bindings to the enclosing environment.
    */
   protected PrivateBinder getPrivateBinder(PrivateEnvironment privateEnvironment) {
     PrivateBinder privateBinder = environmentToBinder.get(privateEnvironment);
