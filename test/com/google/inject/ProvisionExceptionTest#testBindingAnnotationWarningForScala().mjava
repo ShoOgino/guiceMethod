@@ -1,0 +1,9 @@
+  public void testBindingAnnotationWarningForScala() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String.class).annotatedWith(Green.class).toInstance("lime!");
+      }
+    });
+    injector.getInstance(LikeScala.class);
+  }
+

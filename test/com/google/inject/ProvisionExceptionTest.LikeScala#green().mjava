@@ -1,0 +1,2 @@
+    @Inject @Green String green() { return green; }
+
