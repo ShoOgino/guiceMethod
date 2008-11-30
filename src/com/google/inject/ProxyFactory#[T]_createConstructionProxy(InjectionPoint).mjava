@@ -27,7 +27,7 @@
       indices.put(method, i);
     }
 
-    // true if all the methods we're intercepting are public. This impacts which classloader we
+    // PUBLIC if all the methods we're intercepting are public. This impacts which classloader we
     // should use for loading the enhanced class
     Visibility visibility = Visibility.PUBLIC;
 

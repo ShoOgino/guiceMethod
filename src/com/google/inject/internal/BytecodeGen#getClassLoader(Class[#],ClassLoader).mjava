@@ -1,6 +1,16 @@
   private static ClassLoader getClassLoader(Class<?> type, ClassLoader delegate) {
     delegate = canonicalize(delegate);
 
+    // if the application is running in the System classloader, assume we can run there too
+    if (delegate == ClassLoader.getSystemClassLoader()) {
+      return delegate;
+    }
+
+    // Don't bother bridging existing bridge classloaders
+    if (delegate instanceof BridgeClassLoader) {
+      return delegate;
+    }
+
     if (HOOK_ENABLED && Visibility.forType(type) == Visibility.PUBLIC) {
       return CLASS_LOADER_CACHE.get(delegate);
     }

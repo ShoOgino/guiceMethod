@@ -1,0 +1,5 @@
+  public void testInterceptedPackageVisibility() {
+    Injector injector = Guice.createInjector(interceptorModule, new PackageVisibilityTestModule());
+    injector.getInstance(PublicUserOfPackagePrivate.class); // This must pass.
+  }
+

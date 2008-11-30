@@ -1,0 +1,2 @@
+    @Inject public void acceptPackagePrivateParameter(PackagePrivateInterface ppi) {}
+
