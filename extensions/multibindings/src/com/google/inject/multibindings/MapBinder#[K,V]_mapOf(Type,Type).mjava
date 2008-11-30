@@ -1,6 +1,0 @@
-  @SuppressWarnings("unchecked")
-  private static <K, V> TypeLiteral<Map<K, V>> mapOf(Type keyType, Type valueType) {
-    Type type = Types.mapOf(keyType, valueType);
-    return (TypeLiteral<Map<K, V>>) TypeLiteral.get(type);
-  }
-

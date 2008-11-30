@@ -1,8 +1,8 @@
   /**
-   * Returns a new multibinder that collects instances of {@code type} in a
-   * {@link Set} that is itself bound with {@code annotationType}.
+   * Returns a new multibinder that collects instances of {@code type} in a {@link Set} that is
+   * itself bound with {@code annotationType}.
    */
-  public static <T> Multibinder<T> newSetBinder(Binder binder, Type type,
+  public static <T> Multibinder<T> newSetBinder(Binder binder, TypeLiteral<T> type,
       Class<? extends Annotation> annotationType) {
     binder = binder.skipSources(RealMultibinder.class, Multibinder.class);
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type, "@" + annotationType.getName(),

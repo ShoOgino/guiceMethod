@@ -1,4 +1,4 @@
-    private RealMultibinder(Binder binder, Type elementType,
+    private RealMultibinder(Binder binder, TypeLiteral<T> elementType,
         String setName, Key<Set<T>> setKey) {
       this.binder = checkNotNull(binder, "binder");
       this.elementType = checkNotNull(elementType, "elementType");
