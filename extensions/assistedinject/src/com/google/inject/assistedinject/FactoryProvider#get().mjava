@@ -1,4 +1,3 @@
-  @SuppressWarnings({"unchecked"})
   public F get() {
     InvocationHandler invocationHandler = new InvocationHandler() {
       public Object invoke(Object proxy, Method method, Object[] creationArgs) throws Throwable {
@@ -6,7 +5,7 @@
         if (method.getDeclaringClass().equals(Object.class)) {
           return method.invoke(this, creationArgs);
         }
-        
+
         AssistedConstructor<?> constructor = factoryMethodToConstructor.get(method);
         Object[] constructorArgs = gatherArgsForConstructor(
             constructor, creationArgs);
@@ -21,7 +20,7 @@
         int numParams = constructor.getAllParameters().size();
         int argPosition = 0;
         Object[] result = new Object[numParams];
-        
+
         for (int i = 0; i < numParams; i++) {
           Parameter parameter = constructor.getAllParameters().get(i);
           if (parameter.isProvidedByFactory()) {
@@ -35,7 +34,7 @@
       }
     };
 
-    return (F) Proxy.newProxyInstance(factoryType.getClassLoader(),
-        new Class[] {factoryType}, invocationHandler);
+    return factoryType.cast(Proxy.newProxyInstance(factoryType.getClassLoader(),
+        new Class[] {factoryType}, invocationHandler));
   }
 

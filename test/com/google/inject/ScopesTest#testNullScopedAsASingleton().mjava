@@ -1,0 +1,14 @@
+  public void testNullScopedAsASingleton() {
+    Provider<String> unscoped = new Provider<String>() {
+      final Iterator<String> values = Arrays.asList(null, "A").iterator();
+      public String get() {
+        return values.next();
+      }
+    };
+
+    Provider<String> scoped = Scopes.SINGLETON.scope(Key.get(String.class), unscoped);
+    assertNull(scoped.get());
+    assertNull(scoped.get());
+    assertNull(scoped.get());
+  }
+

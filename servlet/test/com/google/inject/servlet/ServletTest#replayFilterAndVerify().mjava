@@ -1,0 +1,11 @@
+  private void replayFilterAndVerify() throws IOException, ServletException {
+    replay(request);
+    replay(session);
+
+    filter.doFilter(request, null, filterChain);
+
+    verify(request);
+    verify(session);
+    assertTrue(invoked);
+  }
+

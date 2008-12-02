@@ -2,7 +2,7 @@
   private Map<Method, AssistedConstructor<?>> createMethodMapping() {
     List<AssistedConstructor<?>> constructors = Lists.newArrayList();
 
-    for (Constructor c : implementationType.getDeclaredConstructors()) {
+    for (Constructor<?> c : implementationType.getDeclaredConstructors()) {
       if (c.getAnnotation(AssistedInject.class) != null) {
         constructors.add(new AssistedConstructor(c));
       }

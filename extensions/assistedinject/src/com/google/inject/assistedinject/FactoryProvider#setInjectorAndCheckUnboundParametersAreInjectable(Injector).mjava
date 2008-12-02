@@ -1,5 +1,4 @@
   @Inject
-  @SuppressWarnings({"unchecked", "unused"})
   void setInjectorAndCheckUnboundParametersAreInjectable(Injector injector) {
     this.injector = injector;
     for (AssistedConstructor<?> c : factoryMethodToConstructor.values()) {

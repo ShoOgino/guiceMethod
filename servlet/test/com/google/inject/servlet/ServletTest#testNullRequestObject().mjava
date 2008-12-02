@@ -1,0 +1,22 @@
+  public void testNullRequestObject() throws Exception {
+    expect(request.getAttribute(nullRequestKey.toString())).andReturn(null).times(2);
+    request.setAttribute(eq(nullRequestKey.toString()), isNull());
+
+    expect(request.getSession()).andReturn(session);
+    expect(session.getAttribute(nullSessionKey.toString())).andReturn(null);
+    session.setAttribute(eq(nullSessionKey.toString()), isNull());
+
+    filterChain = new FilterChain() {
+      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse) {
+        invoked = true;
+        assertSame(request, servletRequest);
+        assertNull(injector.getInstance(nullRequestKey));
+        assertNull(injector.getInstance(nullRequestKey));
+        assertNull(injector.getInstance(nullSessionKey));
+        assertNull(injector.getInstance(nullSessionKey));
+      }
+    };
+
+    replayFilterAndVerify();
+  }
+
