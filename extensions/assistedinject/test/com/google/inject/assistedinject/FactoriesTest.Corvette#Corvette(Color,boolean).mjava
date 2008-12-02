@@ -1,0 +1,4 @@
+    public Corvette(Color color, boolean isConvertable) {
+      throw new IllegalStateException("Not an @AssistedInject constructor");
+    }
+

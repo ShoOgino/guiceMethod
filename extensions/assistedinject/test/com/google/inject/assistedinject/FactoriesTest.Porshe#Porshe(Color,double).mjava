@@ -1,0 +1,6 @@
+    @Inject
+    public Porshe(@Assisted Color color, double price) {
+      this.color = color;
+      this.price = price;
+    }
+

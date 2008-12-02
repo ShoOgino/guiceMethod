@@ -1,0 +1,6 @@
+    @Inject
+    public Fiat(SteeringWheel steeringWheel, @Assisted Color color) {
+      this.steeringWheel = steeringWheel;
+      this.color = color;
+    }
+

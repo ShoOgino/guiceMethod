@@ -1,0 +1,16 @@
+  public void testFactoryFailsWithMissingBinding() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(ColoredCarFactory.class).toInstance(
+              Factories.create(ColoredCarFactory.class, Mustang.class));
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Could not find a suitable constructor in java.lang.Double.",
+          "at " + ColoredCarFactory.class.getName() + ".create(FactoriesTest.java");
+    }
+  }
+

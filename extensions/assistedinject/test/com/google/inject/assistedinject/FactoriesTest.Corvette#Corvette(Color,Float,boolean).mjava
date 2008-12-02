@@ -1,0 +1,7 @@
+    @Inject
+    public Corvette(@Assisted Color color, Float maxMph, @Assisted boolean isConvertable) {
+      this.isConvertable = isConvertable;
+      this.color = color;
+      this.maxMph = maxMph;
+    }
+

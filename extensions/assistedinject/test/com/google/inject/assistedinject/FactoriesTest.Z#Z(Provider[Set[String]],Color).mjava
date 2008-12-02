@@ -1,0 +1,6 @@
+    @Inject
+    public Z(Provider<Set<String>> manufacturersProvider, @Assisted Color color) {
+      this.manufacturersProvider = manufacturersProvider;
+      this.color = color;
+    }
+

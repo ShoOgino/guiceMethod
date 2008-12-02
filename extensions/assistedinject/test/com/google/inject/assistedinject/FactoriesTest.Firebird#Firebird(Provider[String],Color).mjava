@@ -1,0 +1,6 @@
+    @Inject
+    public Firebird(Provider<String> modifiersProvider, @Assisted Color color) {
+      this.modifiersProvider = modifiersProvider;
+      this.color = color;
+    }
+

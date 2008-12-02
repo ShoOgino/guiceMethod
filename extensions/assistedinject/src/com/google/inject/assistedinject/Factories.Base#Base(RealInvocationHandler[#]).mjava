@@ -1,0 +1,4 @@
+    protected Base(RealInvocationHandler<?> invocationHandler) {
+      this.invocationHandler = invocationHandler;
+    }
+

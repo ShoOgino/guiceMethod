@@ -1,0 +1,6 @@
+    @Override public boolean equals(Object o) {
+      // this equals() is wacky; we pretend it's defined on the Proxy object rather than here
+      return o instanceof Base
+          && ((Base) o).invocationHandler == this;
+    }
+

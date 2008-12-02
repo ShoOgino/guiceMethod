@@ -1,0 +1,8 @@
+    @Inject
+    public DeLorean(
+        Set<String> extraFeatures, Set<Integer> featureActivationSpeeds, @Assisted Color color) {
+      this.features = extraFeatures;
+      this.featureActivationSpeeds = featureActivationSpeeds;
+      this.color = color;
+    }
+

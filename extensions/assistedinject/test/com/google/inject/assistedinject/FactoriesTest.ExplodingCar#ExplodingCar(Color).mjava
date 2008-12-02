@@ -1,0 +1,5 @@
+    @Inject
+    public ExplodingCar(@Assisted Color color) {
+      throw new IllegalStateException("kaboom!");
+    }
+

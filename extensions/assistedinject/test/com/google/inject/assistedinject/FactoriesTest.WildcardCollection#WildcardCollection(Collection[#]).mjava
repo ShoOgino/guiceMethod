@@ -1,0 +1,3 @@
+    @Inject
+    public WildcardCollection(@Assisted Collection<?> items) { }
+

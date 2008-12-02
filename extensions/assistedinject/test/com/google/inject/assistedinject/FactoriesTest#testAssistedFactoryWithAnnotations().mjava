@@ -1,0 +1,24 @@
+  public void testAssistedFactoryWithAnnotations() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(int.class).annotatedWith(Names.named("horsePower")).toInstance(250);
+        bind(int.class).annotatedWith(Names.named("modelYear")).toInstance(1984);
+        bind(ColoredCarFactory.class).toInstance(
+            Factories.create(ColoredCarFactory.class, Camaro.class));
+      }
+    });
+
+    ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
+
+    Camaro blueCamaro = (Camaro) carFactory.create(Color.BLUE);
+    assertEquals(Color.BLUE, blueCamaro.color);
+    assertEquals(1984, blueCamaro.modelYear);
+    assertEquals(250, blueCamaro.horsePower);
+
+    Camaro redCamaro = (Camaro) carFactory.create(Color.RED);
+    assertEquals(Color.RED, redCamaro.color);
+    assertEquals(1984, redCamaro.modelYear);
+    assertEquals(250, redCamaro.horsePower);
+  }
+

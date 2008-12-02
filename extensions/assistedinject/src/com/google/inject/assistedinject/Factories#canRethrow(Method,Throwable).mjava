@@ -1,0 +1,15 @@
+  /** Returns true if {@code thrown} can be thrown by {@code invoked} without wrapping. */
+  static boolean canRethrow(Method invoked, Throwable thrown) {
+    if (thrown instanceof Error || thrown instanceof RuntimeException) {
+      return true;
+    }
+
+    for (Class<?> declared : invoked.getExceptionTypes()) {
+      if (declared.isInstance(thrown)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+

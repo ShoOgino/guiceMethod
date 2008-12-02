@@ -1,0 +1,5 @@
+    @Inject
+    public Beetle(@Assisted Color color) {
+      this.color = color;
+    }
+

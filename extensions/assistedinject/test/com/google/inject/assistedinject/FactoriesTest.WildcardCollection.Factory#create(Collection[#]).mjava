@@ -1,0 +1,2 @@
+      WildcardCollection create(Collection<?> items);
+
