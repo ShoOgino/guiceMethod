@@ -1,0 +1,4 @@
+    public Bar bar() {
+      return new Bar() {};
+    }
+

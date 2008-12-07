@@ -1,0 +1,34 @@
+  public void testSharedProxyClasses() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.returns(Matchers.only(Foo.class)),
+            returnNullInterceptor);
+      }
+    });
+
+    Injector nullFoosInjector = injector.createChildInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Interceptable.class);
+      }
+    });
+
+    Interceptable nullFoos = nullFoosInjector.getInstance(Interceptable.class);
+    assertNotNull(nullFoos.bar());
+    assertNull(nullFoos.foo());
+
+    Injector nullFoosAndBarsInjector = injector.createChildInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Interceptable.class);
+        bindInterceptor(Matchers.any(), Matchers.returns(Matchers.only(Bar.class)),
+            returnNullInterceptor);
+      }
+    });
+
+    Interceptable bothNull = nullFoosAndBarsInjector.getInstance(Interceptable.class);
+    assertNull(bothNull.bar());
+    assertNull(bothNull.foo());
+    
+    assertSame("Child injectors should share proxy classes, otherwise memory leaks!",
+        nullFoos.getClass(), bothNull.getClass());
+  }
+
