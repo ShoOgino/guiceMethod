@@ -1,0 +1,19 @@
+    @SuppressWarnings("unchecked") // the constructor promises to construct 'T's
+    ProxyConstructor(List<Method> methods, List<MethodInterceptorsPair> methodInterceptorsPairs,
+        Enhancer enhancer, InjectionPoint injectionPoint) {
+      this.enhanced = enhancer.createClass(); // this returns a cached class if possible
+      this.injectionPoint = injectionPoint;
+      this.constructor = (Constructor<T>) injectionPoint.getMember();
+
+      this.callbacks = new Callback[methods.size()];
+      for (int i = 0; i < methods.size(); i++) {
+        MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
+        callbacks[i] = pair.hasInterceptors()
+            ? new InterceptorStackCallback(pair.method, pair.interceptors)
+            : NO_OP_METHOD_INTERCEPTOR;
+      }
+
+      FastClass fastClass = BytecodeGen.newFastClass(enhanced, Visibility.forMember(constructor));
+      this.fastConstructor = fastClass.getConstructor(constructor.getParameterTypes());
+    }
+

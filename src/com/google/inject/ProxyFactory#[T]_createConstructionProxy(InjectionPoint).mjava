@@ -17,14 +17,11 @@
     // Get list of methods from cglib.
     List<Method> methods = Lists.newArrayList();
     Enhancer.getMethods(declaringClass, null, methods);
-    final Map<Method, Integer> indices = Maps.newHashMap();
 
     // Create method/interceptor holders and record indices.
     List<MethodInterceptorsPair> methodInterceptorsPairs = Lists.newArrayList();
-    for (int i = 0; i < methods.size(); i++) {
-      Method method = methods.get(i);
+    for (Method method : methods) {
       methodInterceptorsPairs.add(new MethodInterceptorsPair(method));
-      indices.put(method, i);
     }
 
     // PUBLIC if all the methods we're intercepting are public. This impacts which classloader we
@@ -47,36 +44,18 @@
       return defaultFactory.get(injectionPoint);
     }
 
-    // Create callbacks.
-    Callback[] callbacks = new Callback[methods.size()];
-
     @SuppressWarnings("unchecked")
     Class<? extends Callback>[] callbackTypes = new Class[methods.size()];
-    for (int i = 0; i < methods.size(); i++) {
-      MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
-      if (!pair.hasInterceptors()) {
-        callbacks[i] = NoOp.INSTANCE;
-        callbackTypes[i] = NoOp.class;
-      } else {
-        callbacks[i] = new InterceptorStackCallback(pair.method, pair.interceptors);
-        callbackTypes[i] = net.sf.cglib.proxy.MethodInterceptor.class;
-      }
-    }
+    Callback[] callbacks = new Callback[methods.size()];
+    Arrays.fill(callbackTypes, net.sf.cglib.proxy.MethodInterceptor.class);
+    Arrays.fill(callbacks, NO_OP_METHOD_INTERCEPTOR);
 
-    // Create the proxied class.
+    // Create the proxied class. We're careful to ensure that all enhancer state is not-specific to
+    // this injector. Otherwise, the proxies for each injector will waste Permgen memory
     Enhancer enhancer = newEnhancer(declaringClass, visibility);
-    enhancer.setCallbackFilter(new CallbackFilter() {
-      public int accept(Method method) {
-        return indices.get(method);
-      }
-    });
+    enhancer.setCallbackFilter(new IndicesCallbackFilter(declaringClass, methods));
     enhancer.setCallbackTypes(callbackTypes);
 
-    Class<?> proxied = enhancer.createClass();
-
-    // Store callbacks.
-    Enhancer.registerStaticCallbacks(proxied, callbacks);
-
-    return createConstructionProxy(proxied, injectionPoint);
+    return new ProxyConstructor<T>(methods, methodInterceptorsPairs, enhancer, injectionPoint);
   }
 

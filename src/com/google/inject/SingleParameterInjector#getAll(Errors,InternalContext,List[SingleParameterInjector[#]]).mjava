@@ -4,7 +4,7 @@
   static Object[] getAll(Errors errors, InternalContext context,
       List<SingleParameterInjector<?>> parameterInjectors) throws ErrorsException {
     if (parameterInjectors == null) {
-      return null;
+      return NO_ARGUMENTS;
     }
 
     int numErrorsBefore = errors.size();
