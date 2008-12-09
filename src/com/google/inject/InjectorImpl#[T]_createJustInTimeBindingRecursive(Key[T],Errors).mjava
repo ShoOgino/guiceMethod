@@ -1,0 +1,24 @@
+  /**
+   * Attempts to create a just-in-time binding for {@code key} in the root injector, falling back to
+   * other ancestor injectors until this injector is tried.
+   */
+  private <T> BindingImpl<T> createJustInTimeBindingRecursive(Key<T> key, Errors errors)
+      throws ErrorsException {
+    // ask the parent to create the JIT binding
+    if (parent != null) {
+      try {
+        return parent.createJustInTimeBindingRecursive(key, new Errors());
+      } catch (ErrorsException ignored) {
+      }
+    }
+
+    if (state.isBlacklisted(key)) {
+      throw errors.childBindingAlreadySet(key).toException();
+    }
+
+    BindingImpl<T> binding = createJustInTimeBinding(key, errors);
+    state.parent().blacklist(key);
+    jitBindings.put(key, binding);
+    return binding;
+  }
+

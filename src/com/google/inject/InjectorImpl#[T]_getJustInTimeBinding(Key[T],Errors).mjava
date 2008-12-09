@@ -1,36 +1,22 @@
   /**
    * Returns a just-in-time binding for {@code key}, creating it if necessary.
    *
-   * @throws com.google.inject.internal.ErrorsException if the binding could not be created.
+   * @throws ErrorsException if the binding could not be created.
    */
-  @SuppressWarnings("unchecked")
   private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors)
       throws ErrorsException {
-
-    // TODO: synch should span parent and child
-
     synchronized (state.lock()) {
-      // try to get the JIT binding from the parent injector
-      if (parent != null) {
-        try {
-          return parent.getJustInTimeBinding(key, new Errors());
-        } catch (ErrorsException ignored) {
+      // first try to find a JIT binding that we've already created
+      for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
+        @SuppressWarnings("unchecked") // we only store bindings that match their key
+        BindingImpl<T> binding = (BindingImpl<T>) injector.jitBindings.get(key);
+
+        if (binding != null) {
+          return binding;
         }
       }
 
-      // Support null values.
-      if (jitBindings.containsKey(key)) {
-        return (BindingImpl<T>) jitBindings.get(key);
-      }
-
-      if (state.isBlacklisted(key)) {
-        throw errors.childBindingAlreadySet(key).toException();
-      }
-
-      BindingImpl<T> binding = createJustInTimeBinding(key, errors);
-      state.parent().blacklist(key);
-      jitBindings.put(key, binding);
-      return binding;
+      return createJustInTimeBindingRecursive(key, errors);
     }
   }
 
