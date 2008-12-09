@@ -1,0 +1,5 @@
+  @Override public String toString() {
+    return factory.getClass().getInterfaces()[0].getName()
+        + " for " + producedType.getTypeLiteral();
+  }
+

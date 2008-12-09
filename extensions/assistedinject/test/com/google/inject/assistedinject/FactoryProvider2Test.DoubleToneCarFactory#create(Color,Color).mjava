@@ -1,0 +1,2 @@
+    Car create(@Assisted("paint") Color paint, @Assisted("paint") Color morePaint);
+

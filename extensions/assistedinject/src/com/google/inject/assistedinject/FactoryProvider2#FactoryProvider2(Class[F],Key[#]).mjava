@@ -1,0 +1,35 @@
+  /**
+   * @param factoryType a Java interface that defines one or more create methods.
+   * @param producedType a concrete type that is assignable to the return types of all factory
+   *      methods.
+   */
+  FactoryProvider2(Class<F> factoryType, Key<?> producedType) {
+    this.producedType = producedType;
+
+    Errors errors = new Errors();
+    try {
+      ImmutableMap.Builder<Method, Key<?>> returnTypesBuilder = ImmutableMap.builder();
+      ImmutableMultimap.Builder<Method, Key<?>> paramTypesBuilder = ImmutableMultimap.builder();
+      // TODO: also grab methods from superinterfaces
+      for (Method method : factoryType.getMethods()) {
+        Key<?> returnType = getKey(TypeLiteral.get(method.getGenericReturnType()),
+            method, method.getAnnotations(), errors);
+        returnTypesBuilder.put(method, returnType);
+        Type[] params = method.getGenericParameterTypes();
+        Annotation[][] paramAnnotations = method.getParameterAnnotations();
+        int p = 0;
+        for (Type param : params) {
+          Key<?> paramKey = getKey(TypeLiteral.get(param), method, paramAnnotations[p++], errors);
+          paramTypesBuilder.put(method, assistKey(method, paramKey, errors));
+        }
+      }
+      returnTypesByMethod = returnTypesBuilder.build();
+      paramTypes = paramTypesBuilder.build();
+    } catch (ErrorsException e) {
+      throw new ConfigurationException(e.getErrors().getMessages());
+    }
+
+    factory = factoryType.cast(Proxy.newProxyInstance(factoryType.getClassLoader(),
+        new Class[] { factoryType }, this));
+  }
+

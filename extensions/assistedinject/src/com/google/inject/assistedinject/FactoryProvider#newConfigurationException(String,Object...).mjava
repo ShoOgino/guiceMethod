@@ -1,4 +1,4 @@
-  private ConfigurationException newConfigurationException(String format, Object... args) {
+  private static ConfigurationException newConfigurationException(String format, Object... args) {
     return new ConfigurationException(ImmutableSet.of(new Message(Errors.format(format, args))));
   }
 

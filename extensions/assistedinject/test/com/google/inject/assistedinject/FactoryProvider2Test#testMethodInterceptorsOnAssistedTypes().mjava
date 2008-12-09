@@ -1,0 +1,26 @@
+  public void testMethodInterceptorsOnAssistedTypes() {
+    final AtomicInteger invocationCount = new AtomicInteger();
+    final MethodInterceptor interceptor = new MethodInterceptor() {
+      public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        invocationCount.incrementAndGet();
+        return methodInvocation.proceed();
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.any(), interceptor);
+        bind(Double.class).toInstance(5.0d);
+        bind(ColoredCarFactory.class).toProvider(
+            FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+      }
+    });
+
+    ColoredCarFactory factory = injector.getInstance(ColoredCarFactory.class);
+    Mustang mustang = (Mustang) factory.create(Color.GREEN);
+    assertEquals(0, invocationCount.get());
+    mustang.drive();
+    assertEquals(1, invocationCount.get());
+  }
+

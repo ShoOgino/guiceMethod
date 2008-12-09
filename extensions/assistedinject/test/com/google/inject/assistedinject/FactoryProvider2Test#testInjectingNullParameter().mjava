@@ -1,0 +1,15 @@
+  public void testInjectingNullParameter() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(ColoredCarFactory.class).toProvider(
+              FactoryProvider.newFactory(ColoredCarFactory.class, Subaru.class));
+        }
+      });
+
+    ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
+    Subaru subaru = (Subaru) carFactory.create(null);
+
+    assertNull(subaru.colorProvider.get());
+    assertNull(subaru.colorProvider.get());
+  }
+

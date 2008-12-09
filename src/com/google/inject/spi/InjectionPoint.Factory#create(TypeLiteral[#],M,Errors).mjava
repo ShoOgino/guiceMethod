@@ -1,2 +1,2 @@
-    InjectionPoint create(TypeLiteral<?> typeResolver, M member, Errors errors);
+    InjectionPoint create(TypeLiteral<?> typeLiteral, M member, Errors errors);
 

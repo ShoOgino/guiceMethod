@@ -1,0 +1,7 @@
+  private FactoryProvider(Class<F> factoryType,
+      Map<Method, AssistedConstructor<?>> factoryMethodToConstructor) {
+    this.factoryType = factoryType;
+    this.factoryMethodToConstructor = factoryMethodToConstructor;
+    checkDeclaredExceptionsMatch();
+  }
+

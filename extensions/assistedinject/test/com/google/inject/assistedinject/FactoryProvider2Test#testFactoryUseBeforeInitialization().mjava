@@ -1,0 +1,12 @@
+  public void testFactoryUseBeforeInitialization() {
+    ColoredCarFactory carFactory = FactoryProvider.newFactory(ColoredCarFactory.class, Subaru.class)
+        .get();
+    try {
+      carFactory.create(Color.RED);
+      fail();
+    } catch (IllegalStateException expected) {
+      assertContains(expected.getMessage(),
+          "Factories.create() factories cannot be used until they're initialized by Guice.");
+    }
+  }
+

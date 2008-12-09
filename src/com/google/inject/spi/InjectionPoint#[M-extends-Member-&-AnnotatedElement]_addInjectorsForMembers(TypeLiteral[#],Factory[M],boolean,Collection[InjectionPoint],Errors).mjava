@@ -1,7 +1,7 @@
   private static <M extends Member & AnnotatedElement> void addInjectorsForMembers(
-      TypeLiteral<?> typeResolver, Factory<M> factory, boolean statics,
+      TypeLiteral<?> typeLiteral, Factory<M> factory, boolean statics,
       Collection<InjectionPoint> injectionPoints, Errors errors) {
-    for (M member : factory.getMembers(getRawType(typeResolver.getType()))) {
+    for (M member : factory.getMembers(getRawType(typeLiteral.getType()))) {
       if (isStatic(member) != statics) {
         continue;
       }
@@ -12,7 +12,7 @@
       }
 
       try {
-        injectionPoints.add(factory.create(typeResolver, member, errors));
+        injectionPoints.add(factory.create(typeLiteral, member, errors));
       } catch (ConfigurationException ignorable) {
         if (!inject.optional()) {
           errors.merge(ignorable.getErrorMessages());

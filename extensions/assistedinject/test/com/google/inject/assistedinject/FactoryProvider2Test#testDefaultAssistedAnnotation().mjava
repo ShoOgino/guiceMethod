@@ -1,0 +1,5 @@
+  public void testDefaultAssistedAnnotation() throws NoSuchFieldException {
+    assertEqualsBothWays(FactoryProvider2.DEFAULT_ANNOTATION,
+        Subaru.class.getDeclaredField("colorProvider").getAnnotation(Assisted.class));
+  }
+

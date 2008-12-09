@@ -1,5 +1,0 @@
-    @SuppressWarnings("unused")
-    @Inject private void initialize(Injector injector) {
-      invocationHandler.initialize(injector);
-    }
-

@@ -1,0 +1,16 @@
+  public void testExceptionDuringConstruction() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(ColoredCarFactory.class).toProvider(
+            FactoryProvider.newFactory(ColoredCarFactory.class, ExplodingCar.class));
+      }
+    });
+    try {
+      injector.getInstance(ColoredCarFactory.class).create(Color.ORANGE);
+      fail();
+    } catch (IllegalStateException e) {
+      assertEquals("kaboom!", e.getMessage());
+    }
+  }
+

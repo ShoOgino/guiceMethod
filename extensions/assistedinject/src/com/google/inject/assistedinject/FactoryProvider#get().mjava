@@ -7,8 +7,7 @@
         }
 
         AssistedConstructor<?> constructor = factoryMethodToConstructor.get(method);
-        Object[] constructorArgs = gatherArgsForConstructor(
-            constructor, creationArgs);
+        Object[] constructorArgs = gatherArgsForConstructor(constructor, creationArgs);
         Object objectToReturn = constructor.newInstance(constructorArgs);
         injector.injectMembers(objectToReturn);
         return objectToReturn;

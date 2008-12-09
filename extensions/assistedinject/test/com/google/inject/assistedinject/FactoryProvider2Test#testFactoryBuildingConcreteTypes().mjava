@@ -1,0 +1,16 @@
+  public void testFactoryBuildingConcreteTypes() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(double.class).toInstance(5.0d);
+        // note there is no 'thatMakes()' call here:
+        bind(MustangFactory.class).toProvider(
+            FactoryProvider.newFactory(MustangFactory.class, Mustang.class));
+      }
+    });
+    MustangFactory factory = injector.getInstance(MustangFactory.class);
+
+    Mustang mustang = factory.create(Color.RED);
+    assertSame(Color.RED, mustang.color);
+    assertEquals(5.0d, mustang.engineSize);
+  }
+

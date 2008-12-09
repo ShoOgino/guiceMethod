@@ -1,0 +1,16 @@
+  public void testMethodsDeclaredInObject() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(Double.class).toInstance(5.0d);
+          bind(ColoredCarFactory.class).toProvider(
+              FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+        }
+      });
+
+    ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
+
+    assertEqualsBothWays(carFactory, carFactory);
+    assertEquals(ColoredCarFactory.class.getName() + " for " + Mustang.class.getName(),
+        carFactory.toString());
+  }
+

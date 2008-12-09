@@ -1,0 +1,15 @@
+  public void testDuplicateKeys() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(DoubleToneCarFactory.class).toProvider(
+              FactoryProvider.newFactory(DoubleToneCarFactory.class, Maxima.class));
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "A binding to java.awt.Color annotated with @"
+          + Assisted.class.getName() + "(value=paint) was already configured at");
+    }
+  }
+

@@ -1,5 +1,0 @@
-    @Inject
-    public MultipleConstructorDefectiveCar(@Assisted Color c) throws FireException {
-      throw new FireException();
-    }
-
