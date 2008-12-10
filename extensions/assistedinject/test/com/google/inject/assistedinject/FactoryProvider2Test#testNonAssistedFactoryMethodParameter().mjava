@@ -1,0 +1,10 @@
+  public void testNonAssistedFactoryMethodParameter() {
+    try {
+      FactoryProvider.newFactory(NamedParameterFactory.class, Mustang.class);
+      fail();
+    } catch(ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "Only @Assisted is allowed for factory parameters, but found @" + Named.class.getName());
+    }
+  }
+

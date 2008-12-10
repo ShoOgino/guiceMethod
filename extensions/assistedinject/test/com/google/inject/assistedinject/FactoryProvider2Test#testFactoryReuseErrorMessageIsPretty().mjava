@@ -1,0 +1,29 @@
+  /**
+   * Our factories aren't reusable across injectors. Although this behaviour isn't something we
+   * like, I have a test case to make sure the error message is pretty.
+   */
+  public void testFactoryReuseErrorMessageIsPretty() {
+    final Provider<ColoredCarFactory> factoryProvider
+        = FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class);
+
+    Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(Double.class).toInstance(5.0d);
+        bind(ColoredCarFactory.class).toProvider(factoryProvider);
+      }
+    });
+
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(Double.class).toInstance(5.0d);
+          bind(ColoredCarFactory.class).toProvider(factoryProvider);
+        }
+      });
+      fail();
+    } catch(CreationException expected) {
+      assertContains(expected.getMessage(),
+          "Factories.create() factories may only be used in one Injector!");
+    }
+  }
+
