@@ -1,0 +1,5 @@
+  //the first level of the EDSL--
+  public FilterKeyBindingBuilder filter(String urlPattern) {
+    return new FilterKeyBindingBuilderImpl(urlPattern, UriPatternType.SERVLET);
+  }
+

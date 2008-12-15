@@ -1,0 +1,11 @@
+  public void destroyPipeline() {
+    //destroy servlets first
+    servletPipeline.destroy();
+
+    //go down chain and destroy all our filters
+    //TODO check servlet spec if we should continue destroying even if exceptions are thrown
+    for (FilterDefinition filterDefinition : filterDefinitions) {
+      filterDefinition.destroy();
+    }
+  }
+

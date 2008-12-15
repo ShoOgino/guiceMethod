@@ -1,0 +1,6 @@
+  public void init(ServletContext servletContext, Injector injector) throws ServletException {
+    for (ServletDefinition servletDefinition : servletDefinitions) {
+      servletDefinition.init(servletContext, injector);
+    }
+  }
+

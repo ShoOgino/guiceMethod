@@ -1,0 +1,14 @@
+  public boolean service(ServletRequest request, ServletResponse response)
+      throws IOException, ServletException {
+
+    //stop at the first matching servlet and service
+    for (ServletDefinition servletDefinition : servletDefinitions) {
+      if (servletDefinition.service(request, response)) {
+        return true;
+      }
+    }
+
+    //there was no match...
+    return false;
+  }
+

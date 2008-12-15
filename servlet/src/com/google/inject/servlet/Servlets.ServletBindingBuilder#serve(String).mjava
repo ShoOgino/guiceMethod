@@ -1,0 +1,6 @@
+    /**
+     * @param urlPattern A servlet-style URL pattern ({@code /*, *.html}, etc.)
+     * @see Servlets#configure() Configuring Guice Servlet.
+     */
+    ServletKeyBindingBuilder serve(String urlPattern);
+

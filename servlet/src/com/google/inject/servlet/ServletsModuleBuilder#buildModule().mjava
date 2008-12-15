@@ -1,0 +1,4 @@
+  public Module buildModule() {
+    return this;
+  }
+

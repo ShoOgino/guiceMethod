@@ -1,0 +1,4 @@
+  public DummyFilterImpl(int num) {
+    this.num = num;
+  }
+

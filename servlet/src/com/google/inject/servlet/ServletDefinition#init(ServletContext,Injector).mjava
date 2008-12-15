@@ -1,0 +1,37 @@
+  public void init(final ServletContext servletContext, Injector injector) throws ServletException {
+    //TODO this absolutely must be a singleton, and so is only initialized once
+    HttpServlet httpServlet = injector.getInstance(servletKey);
+    this.httpServlet.set(httpServlet);
+
+    //initialize our servlet with the configured context params and servlet context
+    //noinspection OverlyComplexAnonymousInnerClass,AnonymousInnerClassWithTooManyMethods
+    httpServlet.init(new ServletConfig() {
+      public String getServletName() {
+        return servletKey.toString();
+      }
+
+      public ServletContext getServletContext() {
+        return servletContext;
+      }
+
+      public String getInitParameter(String s) {
+        return initParams.get(s);
+      }
+
+      public Enumeration getInitParameterNames() {
+        //noinspection InnerClassTooDeeplyNested,AnonymousInnerClassWithTooManyMethods
+        return new Enumeration() {
+          private final Iterator<String> paramNames = initParams.keySet().iterator();
+
+          public boolean hasMoreElements() {
+            return paramNames.hasNext();
+          }
+
+          public Object nextElement() {
+            return paramNames.next();
+          }
+        };
+      }
+    });
+  }
+

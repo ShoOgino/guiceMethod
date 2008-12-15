@@ -1,0 +1,37 @@
+  public void init(final ServletContext servletContext, Injector injector) throws ServletException {
+    //TODO validate that the filter is bound as a singleton, to match with servlet spec idiom
+    Filter filter = injector.getInstance(filterKey);
+    this.filter.set(filter);
+
+    //initialize our filter with the configured context params and servlet context
+    //noinspection OverlyComplexAnonymousInnerClass,AnonymousInnerClassWithTooManyMethods
+    filter.init(new FilterConfig() {
+      public String getFilterName() {
+        return filterKey.toString();
+      }
+
+      public ServletContext getServletContext() {
+        return servletContext;
+      }
+
+      public String getInitParameter(String s) {
+        return initParams.get(s);
+      }
+
+      public Enumeration getInitParameterNames() {
+        //noinspection InnerClassTooDeeplyNested,AnonymousInnerClassWithTooManyMethods
+        return new Enumeration() {
+          private final Iterator<String> paramNames = initParams.keySet().iterator();
+
+          public boolean hasMoreElements() {
+            return paramNames.hasNext();
+          }
+
+          public Object nextElement() {
+            return paramNames.next();
+          }
+        };
+      }
+    });
+  }
+

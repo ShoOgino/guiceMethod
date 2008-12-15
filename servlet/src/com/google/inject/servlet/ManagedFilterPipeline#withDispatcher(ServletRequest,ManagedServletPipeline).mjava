@@ -1,0 +1,29 @@
+  /**
+   * Used to create an proxy that dispatches either to the guice-servlet pipeline or the regular
+   * pipeline based on uri-path match. This proxy also provides minimal forwarding support.
+   *
+   * We cannot forward from a web.xml Servlet/JSP to a guice-servlet (because the filter pipeline
+   * is not called again). However, we can wrap requests with our own dispatcher to forward the
+   * *other* way. web.xml Servlets/JSPs can forward to themselves as per normal.
+   *
+   * This is not a problem cuz we intend for people to migrate from web.xml to guice-servlet,
+   * incrementally, but not the other way around (which, we should actively discourage).
+   */
+  @SuppressWarnings({ "JavaDoc", "deprecation" })
+  private ServletRequest withDispatcher(ServletRequest servletRequest,
+      final ManagedServletPipeline servletPipeline) {
+
+    HttpServletRequest request = (HttpServletRequest) servletRequest;
+
+    //noinspection OverlyComplexAnonymousInnerClass
+    return new HttpServletRequestWrapper(request) {
+
+      @Override
+      public RequestDispatcher getRequestDispatcher(String path) {
+        final RequestDispatcher dispatcher = servletPipeline.getRequestDispatcher(path);
+
+        return (null != dispatcher) ? dispatcher : super.getRequestDispatcher(path);
+      }
+    };
+  }
+

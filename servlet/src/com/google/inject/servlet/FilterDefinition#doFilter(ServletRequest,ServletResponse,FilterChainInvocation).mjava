@@ -1,0 +1,16 @@
+  public void doFilter(ServletRequest servletRequest,
+      ServletResponse servletResponse, FilterChainInvocation filterChainInvocation)
+      throws IOException, ServletException {
+
+    final String path = ((HttpServletRequest) servletRequest).getServletPath();
+
+    if (shouldFilter(path)) {
+      filter.get()
+            .doFilter(servletRequest, servletResponse, filterChainInvocation);
+
+    } else {
+      //otherwise proceed down chain anyway
+      filterChainInvocation.doFilter(servletRequest, servletResponse);
+    }
+  }
+

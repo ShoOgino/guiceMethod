@@ -1,0 +1,2 @@
+  void initPipeline(ServletContext context) throws ServletException;
+

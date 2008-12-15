@@ -1,0 +1,4 @@
+    public FilterBindingBuilder through(Key<? extends Filter> filterKey) {
+      return through(filterKey, new HashMap<String, String>());
+    }
+

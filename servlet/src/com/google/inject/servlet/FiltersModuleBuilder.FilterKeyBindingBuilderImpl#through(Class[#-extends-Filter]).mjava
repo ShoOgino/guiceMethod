@@ -1,0 +1,4 @@
+    public FilterBindingBuilder through(Class<? extends Filter> filterKey) {
+      return through(Key.get(filterKey));
+    }
+

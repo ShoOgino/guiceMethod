@@ -1,0 +1,6 @@
+    /**
+     * @return Returns configured Guice Module. Use install() or pass into createInjector().
+     * @see Servlets#configure() Configuring Guice Servlet.
+     */
+    Module buildModule();
+

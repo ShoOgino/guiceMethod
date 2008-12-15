@@ -1,0 +1,4 @@
+    public String extractPath(String pattern) {
+      return null;
+    }
+

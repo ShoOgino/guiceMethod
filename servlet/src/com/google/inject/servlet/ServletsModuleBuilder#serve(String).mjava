@@ -1,0 +1,4 @@
+  public ServletKeyBindingBuilder serve(String urlPattern) {
+    return new ServletKeyBindingBuilderImpl(urlPattern, UriPatternType.SERVLET);
+  }
+

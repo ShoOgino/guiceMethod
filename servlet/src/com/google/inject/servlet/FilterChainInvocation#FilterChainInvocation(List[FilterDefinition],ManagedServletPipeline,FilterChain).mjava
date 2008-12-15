@@ -1,0 +1,8 @@
+  public FilterChainInvocation(List<FilterDefinition> filterDefinitions,
+      ManagedServletPipeline servletPipeline, FilterChain proceedingChain) {
+
+    this.filterDefinitions = filterDefinitions;
+    this.servletPipeline = servletPipeline;
+    this.proceedingChain = proceedingChain;
+  }
+

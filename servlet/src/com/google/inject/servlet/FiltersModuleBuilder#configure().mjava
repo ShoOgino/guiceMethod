@@ -1,0 +1,8 @@
+  //invoked on injector config
+  @Override
+  protected void configure() {
+    //bind these filter definitions to a singleton dispatcher pipeline (overrides the
+    // DefaultFilterPipeline)
+    bind(FilterPipeline.class).toInstance(new ManagedFilterPipeline(filterDefinitions));
+  }
+

@@ -1,0 +1,24 @@
+  /**
+   * Wrapper around the service chain to ensure a servlet is servicing what it must and provides it
+   * with a wrapped request.
+   *
+   * @return Returns true if this servlet triggered for the given request. Or false if
+   *          guice-servlet should continue dispatching down the servlet pipeline.
+   * 
+   * @throws IOException If thrown by underlying servlet
+   * @throws ServletException If thrown by underlying servlet
+   */
+  public boolean service(ServletRequest servletRequest,
+      ServletResponse servletResponse) throws IOException, ServletException {
+
+    final boolean serve = shouldServe(((HttpServletRequest) servletRequest).getServletPath());
+
+    //invocations of the chain end at the first matched servlet
+    if (serve) {
+      doService(servletRequest, servletResponse);
+    }
+
+    //return false if no servlet matched (so we can proceed down to the web.xml servlets)
+    return serve;
+  }
+

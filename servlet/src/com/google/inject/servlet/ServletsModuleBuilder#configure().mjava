@@ -1,0 +1,10 @@
+  //invoked on injector config
+  protected void configure() {
+    //install preceeding module(s)
+    install(new ServletModule(true)); //using the hidden local constructor
+    install(filtersModule);
+
+    //bind these servlet definitions to a singleton pipeline
+    bind(ManagedServletPipeline.class).toInstance(new ManagedServletPipeline(servletDefinitions));
+  }
+

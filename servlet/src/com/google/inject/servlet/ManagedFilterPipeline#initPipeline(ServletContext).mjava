@@ -1,0 +1,18 @@
+  public synchronized void initPipeline(ServletContext servletContext)
+      throws ServletException {
+
+    //double-checked lock, prevents duplicate initialization
+    if (initialized)
+      return;
+
+    for (FilterDefinition filterDefinition : filterDefinitions) {
+      filterDefinition.init(servletContext, injector);
+    }
+
+    //next, initialize servlets...
+    servletPipeline.init(servletContext, injector);
+
+    //everything was ok...
+    initialized = true;
+  }
+

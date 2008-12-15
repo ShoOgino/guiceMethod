@@ -1,3 +1,4 @@
+  @Override
   protected void configure() {
     // Scopes.
     bindScope(RequestScoped.class, REQUEST);
@@ -42,6 +43,17 @@
       }
     });
 
+    // Bind servlet context.
+    bind(ServletContext.class).toProvider(new Provider<ServletContext>() {
+      public ServletContext get() {
+        return GuiceFilter.getServletContext();
+      }
+
+      public String toString() {
+        return "ServletContextProvider";
+      }
+    });
+
     // Bind request parameters.
     bind(new TypeLiteral<Map<String, String[]>>() {})
         .annotatedWith(RequestParameters.class)
@@ -55,5 +67,9 @@
                 return "RequestParametersProvider";
               }
             });
+
+    //inject the pipeline into GuiceFilter so it can route requests correctly
+    //Unfortunate staticness... =(
+    requestStaticInjection(GuiceFilter.class);
   }
 

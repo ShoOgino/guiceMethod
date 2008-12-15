@@ -1,0 +1,6 @@
+    /**
+     * @param regex Any Java-style regular expression.
+     * @see Servlets#configure() Configuring Guice Servlet.
+     */
+    FilterKeyBindingBuilder filterRegex(String regex);
+

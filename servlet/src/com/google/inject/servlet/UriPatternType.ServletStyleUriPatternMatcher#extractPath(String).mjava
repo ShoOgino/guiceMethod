@@ -1,0 +1,18 @@
+    public String extractPath(String pattern) {
+      if (pattern.startsWith("*")) {
+        return null;
+      } else if (pattern.endsWith("*")) {
+        String extract = pattern.substring(0, pattern.length() - 1);
+
+        //trim the trailing '/'
+        if (extract.endsWith("/")) {
+          extract = extract.substring(0, extract.length() - 1);
+        }
+
+        return extract;
+      }
+
+      //else treat as literal
+      return pattern;
+    }
+

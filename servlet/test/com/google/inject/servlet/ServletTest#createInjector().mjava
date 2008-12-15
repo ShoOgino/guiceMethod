@@ -1,11 +1,12 @@
   private Injector createInjector() throws CreationException {
+
     return Guice.createInjector(new AbstractModule() {
+
+      @Override
       protected void configure() {
-        install(new ServletModule());
+        install(Servlets.configure().filters().buildModule());
         bind(InSession.class);
         bind(InRequest.class);
-        bind(nullRequestKey).toProvider(new NullThenNonNullProvider()).in(RequestScoped.class);
-        bind(nullSessionKey).toProvider(new NullThenNonNullProvider()).in(SessionScoped.class);
       }
     });
   }

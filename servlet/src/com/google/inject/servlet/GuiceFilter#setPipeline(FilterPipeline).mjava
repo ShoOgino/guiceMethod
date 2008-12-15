@@ -1,0 +1,21 @@
+  //VisibleForTesting
+  @Inject
+  static void setPipeline(FilterPipeline pipeline) {
+
+    //multiple injectors with ServletModules!
+    if (null != GuiceFilter.pipeline.get()) {
+      throw new RuntimeException(
+                  "Multiple injectors detected. Please install only one"
+                      + " ServletModule in your web application. While you may "
+                      + "have more than one injector, you should only configure"
+                      + " guice-servlet in one of them. (Hint: look for legacy "
+                      + "ServetModules or multiple calls to Servlets.configure())."
+
+          );
+    }
+
+    //we obtain the pipeline using a special key, so we can identify if the
+    //servlet module was installed properly.
+    GuiceFilter.pipeline = new WeakReference<FilterPipeline>(pipeline);
+  }
+

@@ -1,0 +1,6 @@
+  public void destroy() {
+    for (ServletDefinition servletDefinition : servletDefinitions) {
+      servletDefinition.destroy();
+    }
+  }
+

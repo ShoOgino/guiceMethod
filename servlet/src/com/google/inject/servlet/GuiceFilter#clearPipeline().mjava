@@ -1,0 +1,5 @@
+  //VisibleForTesting (only)
+  public static void clearPipeline() {
+    pipeline = new WeakReference<FilterPipeline>(null);
+  }
+

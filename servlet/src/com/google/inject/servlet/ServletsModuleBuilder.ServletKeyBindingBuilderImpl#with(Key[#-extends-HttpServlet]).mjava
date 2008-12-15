@@ -1,0 +1,4 @@
+    public ServletBindingBuilder with(Key<? extends HttpServlet> servletKey) {
+      return with(servletKey, new HashMap<String, String>());
+    }
+

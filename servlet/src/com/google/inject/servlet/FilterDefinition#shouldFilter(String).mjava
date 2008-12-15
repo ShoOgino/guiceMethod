@@ -1,0 +1,4 @@
+  private boolean shouldFilter(String uri) {
+    return patternMatcher.matches(uri, pattern);
+  }
+
