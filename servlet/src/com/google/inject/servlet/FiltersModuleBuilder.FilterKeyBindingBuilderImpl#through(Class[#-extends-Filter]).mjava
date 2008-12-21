@@ -1,4 +1,4 @@
-    public FilterBindingBuilder through(Class<? extends Filter> filterKey) {
-      return through(Key.get(filterKey));
+    public void through(Class<? extends Filter> filterKey) {
+      through(Key.get(filterKey));
     }
 

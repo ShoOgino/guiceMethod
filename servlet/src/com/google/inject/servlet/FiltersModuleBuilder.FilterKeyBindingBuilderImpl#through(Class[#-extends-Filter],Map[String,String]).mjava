@@ -1,6 +1,6 @@
-    public FilterBindingBuilder through(Class<? extends Filter> filterKey,
+    public void through(Class<? extends Filter> filterKey,
         Map<String, String> contextParams) {
-      //careful you don't accidentally make this method recursive!! thank you IntelliJ IDEA!
-      return through(Key.get(filterKey), contextParams);
+      // Careful you don't accidentally make this method recursive, thank you IntelliJ IDEA!
+      through(Key.get(filterKey), contextParams);
     }
 

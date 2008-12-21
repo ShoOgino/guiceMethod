@@ -1,5 +1,0 @@
-  //shortcut method if there are no servlets to configure
-  public Module buildModule() {
-    return new ServletsModuleBuilder(this);
-  }
-

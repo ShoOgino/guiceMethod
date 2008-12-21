@@ -1,0 +1,6 @@
+    public void init(FilterConfig filterConfig) throws ServletException {
+      init = true;
+
+      this.config = filterConfig;
+    }
+

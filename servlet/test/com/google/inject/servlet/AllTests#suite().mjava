@@ -1,0 +1,13 @@
+  public static Test suite() {
+    TestSuite suite = new TestSuite();
+
+    // Servlet tests.
+    suite.addTestSuite(EdslTest.class);
+    suite.addTestSuite(FilterDefinitionTest.class);
+    suite.addTestSuite(FilterDispatchIntegrationTest.class);
+    suite.addTestSuite(FilterPipelineTest.class);
+    suite.addTestSuite(ServletTest.class);
+
+    return suite;
+  }
+

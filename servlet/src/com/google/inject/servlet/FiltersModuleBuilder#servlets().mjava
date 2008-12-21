@@ -1,4 +1,0 @@
-  public ServletBindingBuilder servlets() {
-    return new ServletsModuleBuilder(this);
-  }
-

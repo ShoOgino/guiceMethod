@@ -1,0 +1,46 @@
+  public final void testFilterCreateDispatchDestroySupressChain()
+      throws ServletException, IOException {
+
+    Injector injector = createMock(Injector.class);
+    HttpServletRequest request = createMock(HttpServletRequest.class);
+
+    final MockFilter mockFilter = new MockFilter() {
+      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
+          FilterChain filterChain) throws IOException, ServletException {
+        setRun(true);
+
+        //suppress rest of chain...
+      }
+    };
+    expect(injector.getInstance(Key.get(Filter.class))).andReturn(mockFilter).anyTimes();
+
+    expect(request.getServletPath()).andReturn("/index.html");
+
+    replay(injector, request);
+
+    final FilterDefinition filterDef = new FilterDefinition("/*", Key.get(Filter.class),
+        UriPatternType.get(UriPatternType.SERVLET), new HashMap<String, String>());
+    assert filterDef.getFilter() instanceof MockFilter;
+
+    //should fire on mockfilter now
+    filterDef.init(createMock(ServletContext.class), injector);
+
+    assert mockFilter.isInit() : "Init did not fire";
+
+    final boolean proceed[] = new boolean[1];
+    filterDef.doFilter(request, null, new FilterChainInvocation(null, null, null) {
+      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse)
+          throws IOException, ServletException {
+        proceed[0] = true;
+      }
+    });
+
+    assert !proceed[0] : "Filter did not suppress chain";
+
+    filterDef.destroy();
+    assert mockFilter.isDestroy() : "Destroy did not fire";
+
+    verify(injector, request);
+
+  }
+

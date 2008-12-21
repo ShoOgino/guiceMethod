@@ -1,0 +1,4 @@
+    public FilterConfig getConfig() {
+      return config;
+    }
+

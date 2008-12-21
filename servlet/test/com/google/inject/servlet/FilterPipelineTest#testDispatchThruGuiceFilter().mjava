@@ -1,0 +1,35 @@
+  public final void testDispatchThruGuiceFilter() throws ServletException, IOException {
+
+    //create mocks
+    FilterConfig filterConfig = createMock(FilterConfig.class);
+    ServletContext servletContext = createMock(ServletContext.class);
+    HttpServletRequest request = createMock(HttpServletRequest.class);
+    FilterChain proceedingFilterChain = createMock(FilterChain.class);
+
+    //begin mock script ***
+
+    expect(filterConfig.getServletContext())
+        .andReturn(servletContext)
+        .once();
+
+    expect(request.getServletPath())
+        .andReturn("/public/login.jsp")
+        .anyTimes();
+
+    //at the end, proceed down webapp's normal filter chain
+    proceedingFilterChain.doFilter(isA(HttpServletRequest.class), (ServletResponse) isNull());
+    expectLastCall().once();
+
+    //run mock script ***
+    replay(filterConfig, servletContext, request, proceedingFilterChain);
+
+    final GuiceFilter webFilter = new GuiceFilter();
+
+    webFilter.init(filterConfig);
+    webFilter.doFilter(request, null, proceedingFilterChain);
+    webFilter.destroy();
+
+    //assert expectations
+    verify(filterConfig, servletContext, request, proceedingFilterChain);
+  }
+

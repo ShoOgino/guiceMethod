@@ -1,4 +1,0 @@
-    protected Injector getInjector() {
-      return Guice.createInjector();
-    }
-

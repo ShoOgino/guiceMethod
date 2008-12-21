@@ -1,14 +1,12 @@
   public void init(FilterConfig filterConfig) throws ServletException {
     final ServletContext servletContext = filterConfig.getServletContext();
 
-    //store servlet context in a weakreference, for injection
+    // Store servlet context in a weakreference, for injection
     GuiceFilter.servletContext = new WeakReference<ServletContext>(servletContext);
-    
-    FilterPipeline filterPipeline = GuiceFilter.pipeline.get();
 
-    //we must allow for the possibility that the injector is created *after*
-    // GuiceFilter is initialized, to preserve backwards compatibility with Guice 1.0.
-    if (null != filterPipeline)
-      filterPipeline.initPipeline(servletContext);
+    // In the default pipeline, this is a noop. However, if replaced
+    // by a managed pipeline, a lazy init will be triggered the first time
+    // dispatch occurs.
+    GuiceFilter.pipeline.get().initPipeline(servletContext);
   }
 

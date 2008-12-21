@@ -1,4 +1,4 @@
-    public ServletBindingBuilder with(Class<? extends HttpServlet> servletKey) {
-      return with(Key.get(servletKey));
+    public void with(Class<? extends HttpServlet> servletKey) {
+      with(Key.get(servletKey));
     }
 

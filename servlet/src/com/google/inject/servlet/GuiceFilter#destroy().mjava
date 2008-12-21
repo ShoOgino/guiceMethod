@@ -1,7 +1,7 @@
   public void destroy() {
 
     try {
-      //destroy all registered filters & servlets in that order
+      // Destroy all registered filters & servlets in that order
       pipeline.get().destroyPipeline();
 
     } finally {

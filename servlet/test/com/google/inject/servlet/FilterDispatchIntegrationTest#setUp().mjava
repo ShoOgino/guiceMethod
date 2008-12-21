@@ -1,0 +1,9 @@
+  @Override
+  public final void setUp() {
+    inits = 0;
+    doFilters = 0;
+    destroys = 0;
+
+    GuiceFilter.clearPipeline();
+  }
+

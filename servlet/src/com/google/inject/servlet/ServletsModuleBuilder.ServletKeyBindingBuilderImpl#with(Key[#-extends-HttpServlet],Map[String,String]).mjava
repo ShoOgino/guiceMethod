@@ -1,9 +1,7 @@
-    public ServletBindingBuilder with(Key<? extends HttpServlet> servletKey,
+    public void with(Key<? extends HttpServlet> servletKey,
         Map<String, String> contextParams) {
       servletDefinitions.add(
           new ServletDefinition(uriPattern, servletKey, UriPatternType.get(uriPatternType),
               contextParams));
-
-      return ServletsModuleBuilder.this;
     }
 

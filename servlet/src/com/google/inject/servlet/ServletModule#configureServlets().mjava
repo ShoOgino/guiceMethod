@@ -1,0 +1,101 @@
+  /**
+   * <h3>Servlet Mapping EDSL</h3>
+   *
+   * <p> Part of the EDSL builder language for configuring servlets
+   * and filters with guice-servlet. Think of this as an in-code replacement for web.xml.
+   * Filters and servlets are configured here using simple java method calls. Here is a typical
+   * example of registering a filter when creating your Guice injector:
+   *
+   * <pre>
+   *   Guice.createInjector(..., new ServletModule() {
+   *
+   *     {@literal @}Override
+   *     protected void configureServlets() {
+   *       <b>serve("*.html").with(MyServlet.class)</b>
+   *     }
+   *   }
+   * </pre>
+   *
+   * This registers a servlet (subclass of {@code HttpServlet}) called {@code MyServlet} to service
+   * any web pages ending in {@code .html}. You can also use a path-style syntax to register
+   * servlets:
+   *
+   * <pre>
+   *       <b>serve("/my/*").with(MyServlet.class)</b>
+   * </pre>
+   *
+   * You are free to register as many servlets and filters as you like this way:
+   *
+   * <pre>
+   *
+   *   Guice.createInjector(..., new ServletModule() {
+   *
+   *     {@literal @}Override
+   *     protected void configureServlets() {
+   *       filter("/*").through(MyFilter.class)
+   *       filter("*.css").through(MyCssFilter.class)
+   *       // etc..
+   *
+   *       serve("*.html").with(MyServlet.class)
+   *       serve("/my/*").with(MyServlet.class)
+   *       // etc..
+   *      }
+   *    }
+   * </pre>
+   *
+   * You can also map servlets (or filters) to URIs using regular expressions:
+   * <pre>
+   *    <b>serveRegex("(.)*ajax(.)*").with(MyAjaxServlet.class)</b>
+   * </pre>
+   *
+   * This will map any URI containing the text "ajax" in it to {@code MyAjaxServlet}. Such as:
+   * <ul>
+   * <li>http://www.google.com/ajax.html</li>
+   * <li>http://www.google.com/content/ajax/index</li>
+   * <li>http://www.google.com/it/is_totally_ajaxian</li>
+   * </ul>
+   *
+   *
+   * <h3>Initialization Parameters</h3>
+   *
+   * Servlets (and filters) allow you to pass in init params
+   * using the {@code <init-param>} tag in web.xml. You can similarly pass in parameters to
+   * Servlets and filters registered in Guice-servlet using a {@link java.util.Map} of parameter
+   * name/value pairs. For example, to initialize {@code MyServlet} with two parameters
+   * ({@code name="Dhanji", site="google.com"}) you could write:
+   *
+   * <pre>
+   *  Map&lt;String, String&gt; params = new HashMap&lt;String, String&gt;();
+   *  params.put("name", "Dhanji");
+   *  params.put("site", "google.com");
+   *
+   *  ...
+   *      serve("/*").with(MyServlet.class, <b>params</b>)
+   * </pre>
+   *
+   *
+   * <h3>Binding Keys</h3>
+   *
+   * <p> You can also bind keys rather than classes. This lets you hide
+   * implementations with package-local visbility and expose them using
+   * only a Guice module and an annotation:
+   *
+   * <pre>
+   *
+   *  ...
+   *      filter("/*").through(<b>Key.get(Filter.class, Fave.class)</b>);
+   * </pre>
+   *
+   * Where {@code Filter.class} refers to the Servlet API interface and {@code Fave.class} is a
+   * custom binding annotation. Elsewhere (in one of your own modules) you can bind this
+   * filter's implementation:
+   *
+   * <pre>
+   *   bind(Filter.class)<b>.annotatedWith(Fave.class)</b>.to(MyFilterImpl.class);
+   * </pre>
+   *
+   * See Guice documentation for more information on binding annotations.
+   */
+  protected void configureServlets() {
+  }
+

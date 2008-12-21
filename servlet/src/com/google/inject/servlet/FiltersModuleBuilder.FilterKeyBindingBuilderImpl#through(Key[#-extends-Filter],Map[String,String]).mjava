@@ -1,9 +1,8 @@
-    public FilterBindingBuilder through(Key<? extends Filter> filterKey,
+    public void through(Key<? extends Filter> filterKey,
         Map<String, String> contextParams) {
+
       filterDefinitions.add(
           new FilterDefinition(uriPattern, filterKey, UriPatternType.get(uriPatternType),
               contextParams));
-
-      return FiltersModuleBuilder.this;
     }
 

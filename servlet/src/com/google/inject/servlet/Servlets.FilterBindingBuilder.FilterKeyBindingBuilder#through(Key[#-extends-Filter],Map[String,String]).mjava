@@ -1,3 +1,0 @@
-      FilterBindingBuilder through(Key<? extends Filter> dummyFilterClass,
-          Map<String, String> contextParams);
-

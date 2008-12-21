@@ -1,0 +1,4 @@
+    public boolean isDestroy() {
+      return destroy;
+    }
+

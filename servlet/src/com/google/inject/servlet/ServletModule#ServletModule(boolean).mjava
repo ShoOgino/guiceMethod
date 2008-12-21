@@ -1,3 +1,0 @@
-  @SuppressWarnings("UnusedDeclaration")
-  ServletModule(boolean locallyCreated) {}
-

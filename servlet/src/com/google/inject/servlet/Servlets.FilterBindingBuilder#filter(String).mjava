@@ -1,6 +1,0 @@
-    /**
-     * @param urlPattern Any Servlet-style pattern. examples: /*, /html/*, *.html, etc.
-     * @see Servlets#configure() Configuring Guice Servlet.
-     */
-    FilterKeyBindingBuilder filter(String urlPattern);
-

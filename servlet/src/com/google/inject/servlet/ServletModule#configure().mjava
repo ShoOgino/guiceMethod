@@ -1,5 +1,9 @@
   @Override
-  protected void configure() {
+  protected final void configure() {
+    // Install the filter and servlet bindings.
+    install(filtersModuleBuilder);
+    install(servletsModuleBuilder);
+
     // Scopes.
     bindScope(RequestScoped.class, REQUEST);
     bindScope(SessionScoped.class, SESSION);
@@ -68,8 +72,8 @@
               }
             });
 
-    //inject the pipeline into GuiceFilter so it can route requests correctly
-    //Unfortunate staticness... =(
+    // inject the pipeline into GuiceFilter so it can route requests correctly
+    // Unfortunate staticness... =(
     requestStaticInjection(GuiceFilter.class);
   }
 

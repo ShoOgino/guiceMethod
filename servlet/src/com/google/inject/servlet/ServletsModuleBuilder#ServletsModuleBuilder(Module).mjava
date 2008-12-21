@@ -1,4 +1,0 @@
-  public ServletsModuleBuilder(Module filtersModule) {
-    this.filtersModule = filtersModule;
-  }
-

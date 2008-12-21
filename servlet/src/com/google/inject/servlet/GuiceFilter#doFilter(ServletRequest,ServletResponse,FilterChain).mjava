@@ -5,18 +5,11 @@
     Context previous = localContext.get();
     FilterPipeline filterPipeline = pipeline.get();
 
-    //not even a default pipeline was available--bad!
-    if (null == filterPipeline)
-      throw new ServletException("No Guice Injector was present. You should also "
-                               + "setup the servlet module by using Servlets.configure()."
-                               + " An injector must be present for GuiceFilter to work"
-                               + " and for servlet support in your web application.");
-
     try {
       localContext.set(new Context((HttpServletRequest) servletRequest,
           (HttpServletResponse) servletResponse));
 
-      //dispatch across the servlet pipeline, ensuring web.xml's filterchain is also honored
+      //dispatch across the servlet pipeline, ensuring web.xml's filterchain is honored
       filterPipeline.dispatch(servletRequest, servletResponse, filterChain);
 
     } finally {

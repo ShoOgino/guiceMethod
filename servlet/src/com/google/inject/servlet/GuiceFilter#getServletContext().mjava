@@ -1,4 +1,4 @@
-  public static ServletContext getServletContext() {
+  static ServletContext getServletContext() {
     return servletContext.get();
   }
 

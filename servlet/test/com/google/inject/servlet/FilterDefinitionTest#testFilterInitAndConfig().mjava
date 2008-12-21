@@ -1,0 +1,45 @@
+  public final void testFilterInitAndConfig() throws ServletException {
+
+    Injector injector = createMock(Injector.class);
+
+    final MockFilter mockFilter = new MockFilter();
+    expect(injector.getInstance(Key.get(Filter.class))).andReturn(mockFilter).anyTimes();
+
+    replay(injector);
+
+    //some init params
+    //noinspection SSBasedInspection
+    final Map<String, String> initParams = new HashMap<String, String>() {{
+      put("ahsd", "asdas24dok");
+      put("ahssd", "asdasd124ok");
+      put("ahfsasd", "asda124sdok");
+      put("ahsasgd", "a124sdasdok");
+      put("ahsd124124", "as124124124dasdok");
+    }};
+
+    final FilterDefinition filterDef = new FilterDefinition("/*", Key.get(Filter.class),
+        UriPatternType.get(UriPatternType.SERVLET), initParams);
+    assert filterDef.getFilter() instanceof MockFilter;
+
+    ServletContext servletContext = createMock(ServletContext.class);
+    final String contextName = "thing__!@@44";
+    expect(servletContext.getServletContextName()).andReturn(contextName);
+
+    replay(servletContext);
+
+    filterDef.init(servletContext, injector);
+
+    final FilterConfig filterConfig = mockFilter.getConfig();
+    assert null != filterConfig;
+    assert contextName.equals(filterConfig.getServletContext().getServletContextName());
+    assert Key.get(Filter.class).toString().equals(filterConfig.getFilterName());
+
+    final Enumeration names = filterConfig.getInitParameterNames();
+    while (names.hasMoreElements()) {
+      String name = (String) names.nextElement();
+
+      assert initParams.containsKey(name);
+      assert initParams.get(name).equals(filterConfig.getInitParameter(name));
+    }
+  }
+

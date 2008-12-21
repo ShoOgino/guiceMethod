@@ -1,5 +1,5 @@
-    public ServletBindingBuilder with(Class<? extends HttpServlet> servletKey,
+    public void with(Class<? extends HttpServlet> servletKey,
         Map<String, String> contextParams) {
-      return with(Key.get(servletKey), contextParams);
+      with(Key.get(servletKey), contextParams);
     }
 

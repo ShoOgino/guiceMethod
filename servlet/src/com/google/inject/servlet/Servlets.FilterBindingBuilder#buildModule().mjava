@@ -1,7 +1,0 @@
-    /**
-     * @return Returns a fully prepared Guice module to be used in
-     *  {@link com.google.inject.Guice#createInjector(com.google.inject.Module[])}.
-     * @see Servlets#configure() Configuring Guice Servlet.
-     */
-    Module buildModule();
-
