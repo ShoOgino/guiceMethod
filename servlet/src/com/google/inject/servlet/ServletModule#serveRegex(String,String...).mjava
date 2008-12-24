@@ -1,0 +1,7 @@
+  /**
+   * @param regex Any Java-style regular expression.
+   */
+  protected final ServletKeyBindingBuilder serveRegex(String regex, String... regexes) {
+    return servletsModuleBuilder.serveRegex(Lists.asList(regex, regexes));
+  }
+

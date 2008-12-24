@@ -1,0 +1,24 @@
+  // Data-driven test.
+  public final void testPathInfoWithServletStyleMatching() throws IOException, ServletException {
+    pathInfoWithServletStyleMatching("/path/index.html", "/path", "/*", "/index.html", "");
+    pathInfoWithServletStyleMatching("/path//hulaboo///index.html", "/path", "/*",
+        "/hulaboo/index.html", "");
+    pathInfoWithServletStyleMatching("/path/", "/path", "/*", "/", "");
+    pathInfoWithServletStyleMatching("/path////////", "/path", "/*", "/", "");
+
+    // a servlet mapping of /thing/*
+    pathInfoWithServletStyleMatching("/path/thing////////", "/path", "/thing/*", "/", "/thing");
+    pathInfoWithServletStyleMatching("/path/thing/stuff", "/path", "/thing/*", "/stuff", "/thing");
+    pathInfoWithServletStyleMatching("/path/thing/stuff.html", "/path", "/thing/*", "/stuff.html",
+        "/thing");
+    pathInfoWithServletStyleMatching("/path/thing", "/path", "/thing/*", null, "/thing");
+
+    // *.xx style mapping
+    pathInfoWithServletStyleMatching("/path/thing.thing", "/path", "*.thing", null, "/thing.thing");
+    pathInfoWithServletStyleMatching("/path///h.thing", "/path", "*.thing", null, "/h.thing");
+    pathInfoWithServletStyleMatching("/path///...//h.thing", "/path", "*.thing", null,
+        "/.../h.thing");
+    pathInfoWithServletStyleMatching("/path/my/h.thing", "/path", "*.thing", null, "/my/h.thing");
+
+  }
+

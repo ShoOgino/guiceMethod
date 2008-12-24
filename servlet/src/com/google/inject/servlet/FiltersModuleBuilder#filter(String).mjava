@@ -1,4 +1,0 @@
-  public ServletModule.FilterKeyBindingBuilder filter(String urlPattern) {
-    return new FilterKeyBindingBuilderImpl(urlPattern, UriPatternType.SERVLET);
-  }
-

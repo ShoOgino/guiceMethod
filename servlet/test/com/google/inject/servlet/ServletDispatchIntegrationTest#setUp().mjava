@@ -1,0 +1,10 @@
+  @Override
+  public void setUp() {
+    inits = 0;
+    services = 0;
+    destroys = 0;
+    doFilters = 0;
+
+    GuiceFilter.clearPipeline();
+  }
+

@@ -1,0 +1,14 @@
+  // Data-driven test.
+  public final void testServletPathMatching() throws IOException, ServletException {
+    servletPath("/index.html", "*.html", "/index.html");
+    servletPath("/somewhere/index.html", "*.html", "/somewhere/index.html");
+    servletPath("/somewhere/index.html", "/*", "");
+    servletPath("/index.html", "/*", "");
+    servletPath("/", "/*", "");
+    servletPath("//", "/*", "");
+    servletPath("/////", "/*", "");
+    servletPath("", "/*", "");
+    servletPath("/thing/index.html", "/thing/*", "/thing");
+    servletPath("/thing/wing/index.html", "/thing/*", "/thing");
+  }
+

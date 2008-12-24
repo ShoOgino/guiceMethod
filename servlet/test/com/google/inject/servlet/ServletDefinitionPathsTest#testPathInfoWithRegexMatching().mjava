@@ -1,0 +1,24 @@
+  // Data-driven test.
+  public final void testPathInfoWithRegexMatching() throws IOException, ServletException {
+    // first a mapping of /*
+    pathInfoWithRegexMatching("/path/index.html", "/path", "/(.)*", "/index.html", "");
+    pathInfoWithRegexMatching("/path//hulaboo///index.html", "/path", "/(.)*",
+        "/hulaboo/index.html", "");
+    pathInfoWithRegexMatching("/path/", "/path", "/(.)*", "/", "");
+    pathInfoWithRegexMatching("/path////////", "/path", "/(.)*", "/", "");
+
+    // a servlet mapping of /thing/*
+    pathInfoWithRegexMatching("/path/thing////////", "/path", "/thing/(.)*", "/", "/thing");
+    pathInfoWithRegexMatching("/path/thing/stuff", "/path", "/thing/(.)*", "/stuff", "/thing");
+    pathInfoWithRegexMatching("/path/thing/stuff.html", "/path", "/thing/(.)*", "/stuff.html",
+        "/thing");
+    pathInfoWithRegexMatching("/path/thing", "/path", "/thing/(.)*", null, "/thing");
+
+    // *.xx style mapping
+    pathInfoWithRegexMatching("/path/thing.thing", "/path", "(.)*\\.thing", null, "/thing.thing");
+    pathInfoWithRegexMatching("/path///h.thing", "/path", "(.)*\\.thing", null, "/h.thing");
+    pathInfoWithRegexMatching("/path///...//h.thing", "/path", "(.)*\\.thing", null,
+        "/.../h.thing");
+    pathInfoWithRegexMatching("/path/my/h.thing", "/path", "(.)*\\.thing", null, "/my/h.thing");
+  }
+

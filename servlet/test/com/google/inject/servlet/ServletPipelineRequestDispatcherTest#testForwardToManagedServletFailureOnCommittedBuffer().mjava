@@ -1,0 +1,13 @@
+  public final void testForwardToManagedServletFailureOnCommittedBuffer()
+      throws IOException, ServletException {
+    IllegalStateException expected = null;
+    try {
+      forwardToManagedServletFailureOnCommittedBuffer();
+    }
+    catch (IllegalStateException ise) {
+      expected = ise;
+    } finally {
+      assertNotNull("Expected IllegalStateException was not thrown", expected);
+    }
+  }
+

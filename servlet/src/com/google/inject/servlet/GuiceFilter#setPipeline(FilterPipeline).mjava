@@ -3,7 +3,7 @@
   static void setPipeline(FilterPipeline pipeline) {
 
     // Multiple injectors with ServletModules?
-    if (GuiceFilter.pipeline.get() instanceof ManagedFilterPipeline) {
+    if (GuiceFilter.pipeline instanceof ManagedFilterPipeline) {
       throw new RuntimeException("Multiple injectors detected. Please install only one"
           + " ServletModule in your web application. While you may "
           + "have more than one injector, you should only configure"
@@ -12,6 +12,6 @@
     }
 
     // We will only overwrite the default pipeline
-    GuiceFilter.pipeline = new WeakReference<FilterPipeline>(pipeline);
+    GuiceFilter.pipeline = pipeline;
   }
 

@@ -1,7 +1,0 @@
-  /**
-   * @param regex Any Java-style regular expression.
-   */
-  protected final FilterKeyBindingBuilder filterRegex(String regex) {
-    return filtersModuleBuilder.filterRegex(regex);
-  }
-

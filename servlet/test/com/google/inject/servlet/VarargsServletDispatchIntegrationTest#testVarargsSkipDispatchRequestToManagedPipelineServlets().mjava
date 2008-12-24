@@ -1,0 +1,37 @@
+  public final void testVarargsSkipDispatchRequestToManagedPipelineServlets()
+      throws ServletException, IOException {
+    final Injector injector = Guice.createInjector(new ServletModule() {
+
+      @Override
+      protected void configureServlets() {
+        serve("/notindex", "/&*", "/index.html").with(TestServlet.class);
+
+        // These servets should never fire... (ordering test)
+        serve("*.html", "/*", "/index/*", "*.jsp").with(Key.get(NeverServlet.class));
+      }
+    });
+
+    final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
+
+    pipeline.initPipeline(null);
+
+    //create ourselves a mock request with test URI
+    HttpServletRequest requestMock = createMock(HttpServletRequest.class);
+
+    expect(requestMock.getServletPath())
+        .andReturn("/index.html")
+        .times(3);
+
+    //dispatch request
+    replay(requestMock);
+
+    pipeline.dispatch(requestMock, null, createMock(FilterChain.class));
+    pipeline.destroyPipeline();
+
+    verify(requestMock);
+
+    assertTrue("lifecycle states did not fire correct number of times-- inits: " + inits + "; dos: "
+            + services + "; destroys: " + destroys,
+        inits == 7 && services == 1 && destroys == 7);
+  }
+

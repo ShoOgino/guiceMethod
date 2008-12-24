@@ -1,7 +1,10 @@
     public void with(Key<? extends HttpServlet> servletKey,
         Map<String, String> contextParams) {
-      servletDefinitions.add(
-          new ServletDefinition(uriPattern, servletKey, UriPatternType.get(uriPatternType),
-              contextParams));
+
+      for (String pattern : uriPatterns) {
+        servletDefinitions.add(
+            new ServletDefinition(pattern, servletKey, UriPatternType.get(uriPatternType),
+                contextParams));
+      }
     }
 

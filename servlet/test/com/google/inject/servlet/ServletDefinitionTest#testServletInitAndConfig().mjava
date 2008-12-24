@@ -1,0 +1,49 @@
+  public final void testServletInitAndConfig() throws ServletException {
+    Injector injector = createMock(Injector.class);
+
+    final HttpServlet mockServlet = new HttpServlet() {
+    };
+    expect(injector.getInstance(Key.get(HttpServlet.class)))
+        .andReturn(mockServlet)
+        .anyTimes();
+
+    replay(injector);
+
+    //some init params
+    //noinspection SSBasedInspection
+    final Map<String, String> initParams = new HashMap<String, String>() {
+      {
+        put("ahsd", "asdas24dok");
+        put("ahssd", "asdasd124ok");
+        put("ahfsasd", "asda124sdok");
+        put("ahsasgd", "a124sdasdok");
+        put("ahsd124124", "as124124124dasdok");
+      }
+    };
+
+    final ServletDefinition servletDefinition = new ServletDefinition("/*",
+        Key.get(HttpServlet.class), UriPatternType.get(UriPatternType.SERVLET), initParams);
+
+    ServletContext servletContext = createMock(ServletContext.class);
+    final String contextName = "thing__!@@44__SRV" + getClass();
+    expect(servletContext.getServletContextName())
+        .andReturn(contextName);
+
+    replay(servletContext);
+
+    servletDefinition.init(servletContext, injector);
+
+    assertNotNull(mockServlet.getServletContext());
+    assertEquals(contextName, mockServlet.getServletContext().getServletContextName());
+    assertEquals(Key.get(HttpServlet.class).toString(), mockServlet.getServletName());
+
+    final ServletConfig servletConfig = mockServlet.getServletConfig();
+    final Enumeration names = servletConfig.getInitParameterNames();
+    while (names.hasMoreElements()) {
+      String name = (String) names.nextElement();
+
+      assertTrue(initParams.containsKey(name));
+      assertEquals(initParams.get(name), servletConfig.getInitParameter(name));
+    }
+  }
+

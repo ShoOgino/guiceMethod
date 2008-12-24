@@ -7,6 +7,6 @@
     // In the default pipeline, this is a noop. However, if replaced
     // by a managed pipeline, a lazy init will be triggered the first time
     // dispatch occurs.
-    GuiceFilter.pipeline.get().initPipeline(servletContext);
+    GuiceFilter.pipeline.initPipeline(servletContext);
   }
 

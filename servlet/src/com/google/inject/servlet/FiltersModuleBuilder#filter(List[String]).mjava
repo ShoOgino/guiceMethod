@@ -1,0 +1,4 @@
+  public ServletModule.FilterKeyBindingBuilder filter(List<String> patterns) {
+    return new FilterKeyBindingBuilderImpl(patterns, UriPatternType.SERVLET);
+  }
+

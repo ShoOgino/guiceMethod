@@ -1,0 +1,36 @@
+  public final void testDispatchFilterPipelineWithRegexMatching() throws ServletException,
+      IOException {
+
+    final Injector injector = Guice.createInjector(new ServletModule() {
+
+      @Override
+      protected void configureServlets() {
+        filterRegex("/[A-Za-z]*", "/index").through(TestFilter.class);
+
+        //these filters should never fire
+        filterRegex("\\w").through(Key.get(TestFilter.class));
+      }
+    });
+
+    final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
+    pipeline.initPipeline(null);
+
+    //create ourselves a mock request with test URI
+    HttpServletRequest requestMock = createMock(HttpServletRequest.class);
+
+    expect(requestMock.getServletPath())
+            .andReturn("/index")
+            .anyTimes();
+
+    //dispatch request
+    replay(requestMock);
+    pipeline.dispatch(requestMock, null, createMock(FilterChain.class));
+    pipeline.destroyPipeline();
+
+    verify(requestMock);
+
+    assert inits == 3 && doFilters == 2 && destroys == 3 : "lifecycle states did not fire "
+        + "correct number of times-- inits: " + inits + "; dos: " + doFilters
+        + "; destroys: " + destroys;
+  }
+

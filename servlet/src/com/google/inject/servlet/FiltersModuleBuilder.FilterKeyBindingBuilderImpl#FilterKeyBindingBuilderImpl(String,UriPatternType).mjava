@@ -1,5 +1,0 @@
-    private FilterKeyBindingBuilderImpl(String uriPattern, UriPatternType uriPatternType) {
-      this.uriPattern = uriPattern;
-      this.uriPatternType = uriPatternType;
-    }
-

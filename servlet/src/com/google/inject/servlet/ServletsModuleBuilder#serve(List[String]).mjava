@@ -1,0 +1,5 @@
+  //the first level of the EDSL--
+  public ServletModule.ServletKeyBindingBuilder serve(List<String> urlPatterns) {
+    return new ServletKeyBindingBuilderImpl(urlPatterns, UriPatternType.SERVLET);
+  }
+

@@ -2,10 +2,10 @@
 
     try {
       // Destroy all registered filters & servlets in that order
-      pipeline.get().destroyPipeline();
+      pipeline.destroyPipeline();
 
     } finally {
-      pipeline.clear();
+      clearPipeline();
       servletContext.clear();
     }
   }

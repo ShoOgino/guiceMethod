@@ -1,0 +1,4 @@
+  public ServletModule.FilterKeyBindingBuilder filterRegex(List<String> regexes) {
+    return new FilterKeyBindingBuilderImpl(regexes, UriPatternType.REGEX);
+  }
+

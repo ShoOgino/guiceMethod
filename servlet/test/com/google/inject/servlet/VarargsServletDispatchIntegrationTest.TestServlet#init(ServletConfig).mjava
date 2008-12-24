@@ -1,0 +1,4 @@
+    public void init(ServletConfig filterConfig) throws ServletException {
+      inits++;
+    }
+

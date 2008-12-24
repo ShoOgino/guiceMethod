@@ -1,0 +1,5 @@
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse)
+        throws IOException, ServletException {
+      services++;
+    }
+

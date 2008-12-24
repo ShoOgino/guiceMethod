@@ -1,0 +1,42 @@
+  public final void testIncludeManagedServlet() throws IOException, ServletException {
+    final ServletDefinition servletDefinition = new ServletDefinition("blah.html",
+        Key.get(HttpServlet.class), UriPatternType.get(UriPatternType.SERVLET),
+        new HashMap<String, String>());
+
+    final Injector injector = createMock(Injector.class);
+    final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
+
+    expect(mockRequest.getAttribute(A_KEY))
+        .andReturn(A_VALUE);
+
+    final boolean[] run = new boolean[1];
+    final HttpServlet mockServlet = new HttpServlet() {
+      protected void service(HttpServletRequest request, HttpServletResponse httpServletResponse)
+          throws ServletException, IOException {
+        run[0] = true;
+
+        final Object o = request.getAttribute(A_KEY);
+        assertEquals("Wrong attrib returned - " + o, A_VALUE, o);
+      }
+    };
+
+    expect(injector.getInstance(HTTP_SERLVET_KEY))
+        .andReturn(mockServlet);
+
+    replay(injector, mockRequest);
+
+    // Have to init the Servlet before we can dispatch to it.
+    servletDefinition.init(null, injector);
+
+    final RequestDispatcher dispatcher = new ManagedServletPipeline(
+        Arrays.asList(servletDefinition))
+        .getRequestDispatcher("blah.html");
+
+    assertNotNull(dispatcher);
+    dispatcher.include(mockRequest, createMock(HttpServletResponse.class));
+
+    assertTrue("Include did not dispatch to our servlet!", run[0]);
+
+    verify(injector, mockRequest);
+  }
+

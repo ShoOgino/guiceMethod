@@ -3,7 +3,7 @@
       throws IOException, ServletException {
 
     Context previous = localContext.get();
-    FilterPipeline filterPipeline = pipeline.get();
+    FilterPipeline filterPipeline = pipeline;
 
     try {
       localContext.set(new Context((HttpServletRequest) servletRequest,
