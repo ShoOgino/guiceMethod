@@ -8,10 +8,10 @@
         };
       }
 
-      ModuleBinding<T> exposeBinding = new ModuleBinding<T>(getSource(), key);
-      parent.elements.add(exposeBinding);
+      BindingBuilder<T> exposeBinding = new BindingBuilder<T>(
+          this, parent.elements, getSource(), key);
 
-      ExposureBuilder<T> builder = exposeBinding.exposedKeyBuilder(this, privateEnvironment);
+      BindingBuilder.ExposureBuilder<T> builder = exposeBinding.usingKeyFrom(privateEnvironment);
       privateEnvironment.addExposureBuilder(builder);
       return builder;
     }

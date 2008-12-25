@@ -1,4 +1,0 @@
-    public <E extends Enum<E>> void to(final E value) {
-      to(value.getDeclaringClass(), value);
-    }
-

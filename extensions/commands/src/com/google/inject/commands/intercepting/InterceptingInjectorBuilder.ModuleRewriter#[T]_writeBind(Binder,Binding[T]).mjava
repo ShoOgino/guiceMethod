@@ -7,7 +7,7 @@
       }
 
       binding.acceptTargetVisitor(new DefaultBindingTargetVisitor<T, Void>() {
-        @Override public Void visitUntargetted() {
+        @Override public Void visitUntargetted(UntargettedBinding<T> tUntargettedBinding) {
           throw new UnsupportedOperationException(
               String.format("Cannot intercept bare binding of %s.", key));
         }

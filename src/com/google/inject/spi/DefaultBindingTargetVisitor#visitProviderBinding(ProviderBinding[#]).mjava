@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked") // if we visit a ProviderBinding, we know T == Provider<?>
+  public V visitProviderBinding(ProviderBinding<?> providerBinding) {
+    return visitOther((Binding<T>) providerBinding);
+  }
+

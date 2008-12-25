@@ -1,0 +1,4 @@
+  public <V> V acceptTargetVisitor(BindingTargetVisitor<T, V> visitor) {
+    return visitor.visitLinkedKey(this);
+  }
+

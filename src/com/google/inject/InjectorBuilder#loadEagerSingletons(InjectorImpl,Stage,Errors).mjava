@@ -8,16 +8,15 @@
         (Collection) injector.state.getExplicitBindingsThisLevel().values(),
         injector.jitBindings.values()));
     for (final BindingImpl<?> binding : candidateBindings) {
-      if ((stage == Stage.PRODUCTION && binding.getScope() == Scopes.SINGLETON)
-          || binding.getLoadStrategy() == LoadStrategy.EAGER) {
+      if (binding.getScoping().isEagerSingleton(stage)) {
         try {
           injector.callInContext(new ContextualCallable<Void>() {
-            Dependency<?> dependency = Dependency.get(binding.key);
+            Dependency<?> dependency = Dependency.get(binding.getKey());
             public Void call(InternalContext context) {
               context.setDependency(dependency);
               Errors errorsForBinding = errors.withSource(dependency);
               try {
-                binding.internalFactory.get(errorsForBinding, context, dependency);
+                binding.getInternalFactory().get(errorsForBinding, context, dependency);
               } catch (ErrorsException e) {
                 errorsForBinding.merge(e.getErrors());
               } finally {

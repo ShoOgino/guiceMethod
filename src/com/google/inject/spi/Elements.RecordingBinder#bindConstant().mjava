@@ -1,6 +1,4 @@
     public AnnotatedConstantBindingBuilder bindConstant() {
-      ModuleBinding<Object> moduleBindingCommand = new ModuleBinding<Object>(getSource());
-      elements.add(moduleBindingCommand);
-      return moduleBindingCommand.constantBuilder(RecordingBinder.this);
+      return new ConstantBindingBuilderImpl<Void>(this, elements, getSource());
     }
 

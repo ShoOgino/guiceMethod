@@ -1,0 +1,4 @@
+  public BindingImpl<T> withKey(Key<T> key) {
+    return new LinkedProviderBindingImpl<T>(getSource(), key, getScoping(), providerKey);
+  }
+

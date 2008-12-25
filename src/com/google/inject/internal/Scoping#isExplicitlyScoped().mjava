@@ -1,0 +1,8 @@
+  /**
+   * Returns true if this scope was explicitly applied. If no scope was explicitly applied then the
+   * scoping annotation will be used.
+   */
+  public boolean isExplicitlyScoped() {
+    return this != UNSCOPED;
+  }
+

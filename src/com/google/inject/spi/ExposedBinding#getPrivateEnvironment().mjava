@@ -1,0 +1,5 @@
+  /**
+   * Returns the enclosed environment that holds the original binding.
+   */
+  PrivateEnvironment getPrivateEnvironment();
+

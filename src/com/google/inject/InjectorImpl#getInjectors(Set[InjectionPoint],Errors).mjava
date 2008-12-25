@@ -12,6 +12,7 @@
             : new SingleMethodInjector(this, injectionPoint, errorsForMember);
         injectors.add(injector);
       } catch (ErrorsException ignoredForNow) {
+        // ignored for now
       }
     }
     return ImmutableList.copyOf(injectors);

@@ -1,0 +1,6 @@
+  /**
+   * Visit a linked key binding. The other key's binding is used to resolve injections. This
+   * target is found in both module and injector bindings.
+   */
+  V visitLinkedKey(LinkedKeyBinding<T> binding);
+

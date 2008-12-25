@@ -1,0 +1,5 @@
+    public ExposureBuilder(BindingBuilder<T> bindingBuilder, ExposedBindingImpl<T> binding) {
+      this.binding = binding;
+      this.bindingBuilder = bindingBuilder;
+    }
+

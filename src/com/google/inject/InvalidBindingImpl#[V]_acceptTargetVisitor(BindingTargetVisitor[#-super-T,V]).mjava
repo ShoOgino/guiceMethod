@@ -1,4 +1,0 @@
-  public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> vVisitor) {
-    throw new UnsupportedOperationException();
-  }
-

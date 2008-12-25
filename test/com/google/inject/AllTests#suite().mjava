@@ -28,7 +28,6 @@
     suite.addTestSuite(ParentInjectorTest.class);
     suite.addTestSuite(PrivateModuleTest.class);
     suite.addTestSuite(ProviderInjectionTest.class);
-    suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(ProvisionExceptionTest.class);
     suite.addTestSuite(ProxyFactoryTest.class);
     suite.addTest(ReferenceMapTestSuite.suite());
@@ -41,8 +40,10 @@
     suite.addTestSuite(TypeLiteralTest.class);
     suite.addTestSuite(TypeLiteralTypeResolutionTest.class);
 
-    // commands
+    // spi
     suite.addTestSuite(ElementsTest.class);
+    suite.addTestSuite(HasDependenciesTest.class);
+    suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(ModuleWriterTest.class);
     suite.addTestSuite(ModuleRewriterTest.class);
     suite.addTestSuite(SpiBindingsTest.class);

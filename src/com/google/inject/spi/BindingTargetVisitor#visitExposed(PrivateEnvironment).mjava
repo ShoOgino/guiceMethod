@@ -1,8 +1,0 @@
-  /**
-   * Visit a binding to a key exposed from an enclosed private environment. This target is found in
-   * both module and injector bindings.
-   *
-   * @param privateEnvironment an enclosed environment that holds the original binding.
-   */
-  V visitExposed(PrivateEnvironment privateEnvironment);
-

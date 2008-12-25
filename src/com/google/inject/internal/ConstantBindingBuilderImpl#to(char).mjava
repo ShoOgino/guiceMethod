@@ -1,0 +1,4 @@
+  public void to(final char value) {
+    toConstant(Character.class, value);
+  }
+

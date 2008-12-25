@@ -1,0 +1,4 @@
+  public UntargettedBindingImpl(Object source, Key<T> key, Scoping scoping) {
+    super(source, key, scoping);
+  }
+

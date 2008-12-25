@@ -16,11 +16,11 @@
 
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
+            assertTrue(command instanceof ProviderInstanceBinding);
             assertEquals(Key.get(String.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitProvider(Provider<? extends T> provider,
-                  Set<InjectionPoint> injectionPoints) {
-                assertSame(aProvider, provider);
+              @Override public Void visitProviderInstance(ProviderInstanceBinding<T> binding) {
+                assertSame(aProvider, binding.getProviderInstance());
                 return null;
               }
             });
@@ -30,10 +30,11 @@
 
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
+            assertTrue(command instanceof ProviderKeyBinding);
             assertEquals(Key.get(List.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitProviderKey(Key<? extends Provider<? extends T>> providerKey) {
-                assertEquals(Key.get(ListProvider.class), providerKey);
+              @Override public Void visitProviderKey(ProviderKeyBinding<T> binding) {
+                assertEquals(Key.get(ListProvider.class), binding.getProviderKey());
                 return null;
               }
             });
@@ -43,10 +44,11 @@
 
         new FailingElementVisitor() {
           @Override public <T> Void visitBinding(Binding<T> command) {
+            assertTrue(command instanceof ProviderKeyBinding);
             assertEquals(Key.get(Collection.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              public Void visitProviderKey(Key<? extends Provider<? extends T>> providerKey) {
-                assertEquals(Key.get(ListProvider.class), providerKey);
+              @Override public Void visitProviderKey(ProviderKeyBinding<T> binding) {
+                assertEquals(Key.get(ListProvider.class), binding.getProviderKey());
                 return null;
               }
             });

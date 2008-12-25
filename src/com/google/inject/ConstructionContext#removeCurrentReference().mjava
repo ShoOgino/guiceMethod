@@ -1,4 +1,0 @@
-  void removeCurrentReference() {
-    this.currentReference = null;
-  }
-

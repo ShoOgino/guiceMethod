@@ -1,8 +1,0 @@
-  /**
-   * Returns the scoped provider guice uses to fulfill requests for this
-   * binding.
-   */
-  public Provider<T> getProvider() {
-    throw new UnsupportedOperationException();
-  }
-

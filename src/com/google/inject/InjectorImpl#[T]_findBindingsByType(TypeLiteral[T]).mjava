@@ -1,4 +1,4 @@
   public <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type) {
-    return Collections.<Binding<T>>unmodifiableList(bindingsMultimap.getAll(type));
+    return bindingsMultimap.getAll(type);
   }
 

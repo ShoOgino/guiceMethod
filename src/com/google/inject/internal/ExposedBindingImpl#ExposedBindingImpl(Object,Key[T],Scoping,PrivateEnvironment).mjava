@@ -1,0 +1,6 @@
+  public ExposedBindingImpl(Object source, Key<T> key, Scoping scoping,
+      PrivateEnvironment privateEnvironment) {
+    super(source, key, scoping);
+    this.privateEnvironment = privateEnvironment;
+  }
+

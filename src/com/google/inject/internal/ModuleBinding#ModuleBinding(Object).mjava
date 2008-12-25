@@ -1,8 +1,0 @@
-  public ModuleBinding(Object source) {
-    @SuppressWarnings("unchecked") // unsafe, but we won't ever return this (Key.get fails)
-    Key<T> NULL_KEY_OF_T = (Key<T>) NULL_KEY;
-
-    this.source = checkNotNull(source);
-    this.key = NULL_KEY_OF_T;
-  }
-

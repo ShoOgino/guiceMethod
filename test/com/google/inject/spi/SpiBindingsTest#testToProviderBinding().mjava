@@ -9,13 +9,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
-            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
-            assertEquals(Key.get(String.class), command.getKey());
-            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitProvider(Provider<? extends T> provider,
-                  Set<InjectionPoint> injectionPoints) {
-                assertSame(stringProvider, provider);
+          @Override public <T> Void visitBinding(Binding<T> binding) {
+            assertTrue(binding instanceof ProviderInstanceBinding);
+            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(String.class), binding.getKey());
+            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitProviderInstance(ProviderInstanceBinding<T> binding) {
+                assertSame(stringProvider, binding.getProviderInstance());
                 return null;
               }
             });

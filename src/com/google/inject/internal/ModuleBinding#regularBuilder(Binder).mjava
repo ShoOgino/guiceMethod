@@ -1,4 +1,0 @@
-  public RegularBuilder regularBuilder(Binder binder) {
-    return new RegularBuilder(binder);
-  }
-

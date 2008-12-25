@@ -1,0 +1,9 @@
+  @Override public String toString() {
+    return new ToStringBuilder(LinkedKeyBinding.class)
+        .add("key", getKey())
+        .add("target", targetKey)
+        .add("scope", getScoping())
+        .add("source", getSource())
+        .toString();
+  }
+

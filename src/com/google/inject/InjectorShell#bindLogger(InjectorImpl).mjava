@@ -7,7 +7,7 @@
     LoggerFactory loggerFactory = new LoggerFactory();
     injector.state.putBinding(key,
         new ProviderInstanceBindingImpl<Logger>(injector, key,
-            SourceProvider.UNKNOWN_SOURCE, loggerFactory, Scopes.NO_SCOPE,
-            loggerFactory, LoadStrategy.LAZY, ImmutableSet.<InjectionPoint>of()));
+            SourceProvider.UNKNOWN_SOURCE, loggerFactory, Scoping.UNSCOPED,
+            loggerFactory, ImmutableSet.<InjectionPoint>of()));
   }
 

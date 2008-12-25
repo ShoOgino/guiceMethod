@@ -1,0 +1,4 @@
+  public void to(final double value) {
+    toConstant(Double.class, value);
+  }
+

@@ -1,0 +1,4 @@
+  public Scoping getScoping() {
+    return scoping;
+  }
+

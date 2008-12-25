@@ -1,6 +1,4 @@
     public <T> AnnotatedBindingBuilder<T> bind(Key<T> key) {
-      ModuleBinding<T> moduleBindingCommand = new ModuleBinding<T>(getSource(), key);
-      elements.add(moduleBindingCommand);
-      return moduleBindingCommand.regularBuilder(RecordingBinder.this);
+      return new BindingBuilder<T>(this, elements, getSource(), key);
     }
 

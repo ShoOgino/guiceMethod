@@ -1,0 +1,4 @@
+  public BindingImpl<T> withScoping(Scoping scoping) {
+    return new InstanceBindingImpl<T>(getSource(), getKey(), scoping, injectionPoints, instance);
+  }
+

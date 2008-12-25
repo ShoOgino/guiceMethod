@@ -1,0 +1,6 @@
+  public void in(final Class<? extends Annotation> scopeAnnotation) {
+    checkNotNull(scopeAnnotation, "scopeAnnotation");
+    checkNotScoped();
+    setBinding(getBinding().withScoping(Scoping.forAnnotation(scopeAnnotation)));
+  }
+

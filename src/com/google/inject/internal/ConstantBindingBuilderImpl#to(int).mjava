@@ -1,0 +1,4 @@
+  public void to(final int value) {
+    toConstant(Integer.class, value);
+  }
+

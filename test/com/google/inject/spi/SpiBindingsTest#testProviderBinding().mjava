@@ -9,9 +9,10 @@
     Binding<Provider<String>> binding = injector.getBinding(providerOfStringKey);
     assertEquals(providerOfStringKey, binding.getKey());
     assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    assertTrue(binding instanceof ProviderBinding);
     binding.acceptTargetVisitor(new FailingTargetVisitor<Provider<String>>() {
-      @Override public Void visitProviderBinding(Key<?> provided) {
-        assertEquals(Key.get(String.class), provided);
+      @Override public Void visitProviderBinding(ProviderBinding<?> binding) {
+        assertEquals(Key.get(String.class), binding.getProvidedKey());
         return null;
       }
     });

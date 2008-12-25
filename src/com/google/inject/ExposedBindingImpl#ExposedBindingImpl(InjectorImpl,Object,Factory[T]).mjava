@@ -1,5 +1,0 @@
-  public ExposedBindingImpl(InjectorImpl injector, Object source, Factory<T> factory) {
-    super(injector, factory.key, source, factory, Scopes.NO_SCOPE, LoadStrategy.LAZY);
-    this.factory = factory;
-  }
-

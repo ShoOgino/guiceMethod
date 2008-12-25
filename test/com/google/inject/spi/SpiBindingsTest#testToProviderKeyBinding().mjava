@@ -7,12 +7,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
-            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
-            assertEquals(Key.get(String.class), command.getKey());
-            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitProviderKey(Key<? extends Provider<? extends T>> key) {
-                assertEquals(Key.get(StringProvider.class), key);
+          @Override public <T> Void visitBinding(Binding<T> binding) {
+            assertTrue(binding instanceof ProviderKeyBinding);
+            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(Key.get(String.class), binding.getKey());
+            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitProviderKey(ProviderKeyBinding<T> binding) {
+                assertEquals(Key.get(StringProvider.class), binding.getProviderKey());
                 return null;
               }
             });

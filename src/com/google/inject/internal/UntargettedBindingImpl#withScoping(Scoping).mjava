@@ -1,0 +1,4 @@
+  public BindingImpl<T> withScoping(Scoping scoping) {
+    return new UntargettedBindingImpl<T>(getSource(), getKey(), scoping);
+  }
+

@@ -1,0 +1,24 @@
+  public void testStringIsConvertedOnlyOnce() {
+    final TypeConverter converter = new TypeConverter() {
+      boolean converted = false;
+      public Object convert(String value, TypeLiteral<?> toType) {
+        if (converted) {
+          throw new AssertionFailedError("converted multiple times!");
+        }
+        converted = true;
+        return new Date();
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), converter);
+        bindConstant().annotatedWith(NumericValue.class).to("unused");
+      }
+    });
+
+    Date first = injector.getInstance(Key.get(Date.class, NumericValue.class));
+    Date second = injector.getInstance(Key.get(Date.class, NumericValue.class));
+    assertSame(first, second);
+  }
+

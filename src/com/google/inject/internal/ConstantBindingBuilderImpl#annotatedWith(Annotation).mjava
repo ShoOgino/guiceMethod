@@ -1,0 +1,5 @@
+  public ConstantBindingBuilder annotatedWith(Annotation annotation) {
+    annotatedWithInternal(annotation);
+    return this;
+  }
+

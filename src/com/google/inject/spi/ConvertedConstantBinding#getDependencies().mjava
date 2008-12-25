@@ -1,0 +1,5 @@
+  /**
+   * Returns a singleton set containing only the converted key.
+   */
+  Set<Dependency<?>> getDependencies();
+

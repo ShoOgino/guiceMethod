@@ -1,0 +1,8 @@
+  /** Sets the binding to a copy with the specified annotation on the bound key */
+  protected BindingImpl<T> annotatedWithInternal(Annotation annotation) {
+    checkNotNull(annotation, "annotation");
+    checkNotAnnotated();
+    return setBinding(binding.withKey(
+        Key.get(this.binding.getKey().getTypeLiteral(), annotation)));
+  }
+

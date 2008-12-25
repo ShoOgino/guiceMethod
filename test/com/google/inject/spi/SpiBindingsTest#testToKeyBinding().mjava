@@ -11,12 +11,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
-            assertContains(command.getSource().toString(), "SpiBindingsTest.java");
-            assertEquals(aKey, command.getKey());
-            command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitKey(Key<? extends T> key) {
-                assertEquals(bKey, key);
+          @Override public <T> Void visitBinding(Binding<T> binding) {
+            assertTrue(binding instanceof LinkedKeyBinding);
+            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+            assertEquals(aKey, binding.getKey());
+            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
+              @Override public Void visitLinkedKey(LinkedKeyBinding<T> binding) {
+                assertEquals(bKey, binding.getLinkedKey());
                 return null;
               }
             });
@@ -25,8 +26,8 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
-            assertEquals(bKey, command.getKey());
+          @Override public <T> Void visitBinding(Binding<T> binding) {
+            assertEquals(bKey, binding.getKey());
             return null;
           }
         }

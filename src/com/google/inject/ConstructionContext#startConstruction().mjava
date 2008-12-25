@@ -1,4 +1,0 @@
-  void startConstruction() {
-    this.constructing = true;
-  }
-

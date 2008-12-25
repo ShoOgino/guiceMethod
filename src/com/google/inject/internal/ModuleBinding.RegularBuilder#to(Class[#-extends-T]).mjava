@@ -1,4 +1,0 @@
-    public ScopedBindingBuilder to(final Class<? extends T> implementation) {
-      return to(Key.get(implementation));
-    }
-

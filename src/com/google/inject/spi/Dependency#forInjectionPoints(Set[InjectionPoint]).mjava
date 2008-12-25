@@ -1,0 +1,11 @@
+  /**
+   * Returns the dependencies from the given injection points.
+   */
+  public static Set<Dependency<?>> forInjectionPoints(Set<InjectionPoint> injectionPoints) {
+    List<Dependency<?>> dependencies = Lists.newArrayList();
+    for (InjectionPoint injectionPoint : injectionPoints) {
+      dependencies.addAll(injectionPoint.getDependencies());
+    }
+    return ImmutableSet.copyOf(dependencies);
+  }
+

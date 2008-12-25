@@ -1,8 +1,8 @@
   @Override public String toString() {
-    return new ToStringBuilder(Binding.class)
-        .add("type", getKey().getTypeLiteral())
-        .add("scope", scope)
-        .add("source", source)
+    return new ToStringBuilder(ConstructorBinding.class)
+        .add("key", getKey())
+        .add("scope", getScoping())
+        .add("source", getSource())
         .toString();
   }
 

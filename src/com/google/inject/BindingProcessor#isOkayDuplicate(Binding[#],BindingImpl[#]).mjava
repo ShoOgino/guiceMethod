@@ -8,7 +8,7 @@
     if (original instanceof ExposedBindingImpl) {
       ExposedBindingImpl exposed = (ExposedBindingImpl) original;
       InjectorImpl exposedFrom = environmentToInjector.get(exposed.getPrivateEnvironment());
-      return (exposedFrom == binding.injector);
+      return (exposedFrom == binding.getInjector());
     }
     return false;
   }

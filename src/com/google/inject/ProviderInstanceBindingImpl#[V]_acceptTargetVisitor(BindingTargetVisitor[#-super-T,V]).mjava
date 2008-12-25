@@ -1,4 +1,0 @@
-  public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
-    return visitor.visitProvider(providerInstance, injectionPoints);
-  }
-

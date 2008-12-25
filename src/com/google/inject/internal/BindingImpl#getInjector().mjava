@@ -1,0 +1,4 @@
+  public Injector getInjector() {
+    return injector;
+  }
+

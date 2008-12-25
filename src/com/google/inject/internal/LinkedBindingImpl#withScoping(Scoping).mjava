@@ -1,0 +1,4 @@
+  public BindingImpl<T> withScoping(Scoping scoping) {
+    return new LinkedBindingImpl<T>(getSource(), getKey(), scoping, targetKey);
+  }
+

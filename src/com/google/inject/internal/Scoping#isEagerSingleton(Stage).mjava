@@ -1,0 +1,15 @@
+  /**
+   * Returns true if this scope is a singleton that should be loaded eagerly in {@code stage}.
+   */
+  public boolean isEagerSingleton(Stage stage) {
+    if (this == EAGER_SINGLETON) {
+      return true;
+    }
+
+    if (stage == Stage.PRODUCTION) {
+      return this == SINGLETON_ANNOTATION || this == SINGLETON_INSTANCE;
+    }
+
+    return false;
+  }
+

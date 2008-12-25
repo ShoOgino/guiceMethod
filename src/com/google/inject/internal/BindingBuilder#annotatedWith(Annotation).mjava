@@ -1,0 +1,5 @@
+  public BindingBuilder<T> annotatedWith(Annotation annotation) {
+    annotatedWithInternal(annotation);
+    return this;
+  }
+

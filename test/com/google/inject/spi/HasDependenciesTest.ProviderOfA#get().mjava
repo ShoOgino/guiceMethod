@@ -1,0 +1,4 @@
+    public A get() {
+      throw new UnsupportedOperationException();
+    }
+

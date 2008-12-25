@@ -1,7 +1,0 @@
-  public Provider<T> getProvider() {
-    if (provider == null) {
-      provider = injector.getProvider(key);
-    }
-    return provider;
-  }
-

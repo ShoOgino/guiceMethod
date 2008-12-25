@@ -1,0 +1,6 @@
+    ProviderBindingImpl(InjectorImpl injector, Key<Provider<T>> key, Binding<T> providedBinding) {
+      super(injector, key, providedBinding.getSource(), createInternalFactory(providedBinding),
+          Scoping.UNSCOPED);
+      this.providedBinding = (BindingImpl<T>) providedBinding;
+    }
+

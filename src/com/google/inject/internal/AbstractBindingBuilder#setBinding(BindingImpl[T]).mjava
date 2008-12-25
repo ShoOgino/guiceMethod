@@ -1,0 +1,6 @@
+  protected BindingImpl<T> setBinding(BindingImpl<T> binding) {
+    this.binding = binding;
+    elements.set(position, binding);
+    return binding;
+  }
+

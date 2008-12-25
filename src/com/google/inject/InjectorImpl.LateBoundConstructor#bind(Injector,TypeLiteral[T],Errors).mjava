@@ -1,0 +1,8 @@
+    @SuppressWarnings("unchecked") // the constructor T is the same as the implementation T
+    void bind(Injector injector, TypeLiteral<T> implementation, Errors errors)
+        throws ErrorsException {
+      InjectorImpl injectorImpl = (InjectorImpl) injector;
+      constructorInjector
+          = (ConstructorInjector<T>) injectorImpl.constructors.get(implementation, errors);
+    }
+

@@ -1,9 +1,0 @@
-  @Override public String toString() {
-    return new ToStringBuilder(Binding.class)
-        .add("key", key)
-        .add("target", targetKey)
-        .add("scope", scope)
-        .add("source", source)
-        .toString();
-  }
-

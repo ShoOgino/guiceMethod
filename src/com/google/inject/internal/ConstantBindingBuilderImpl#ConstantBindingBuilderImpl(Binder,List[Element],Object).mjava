@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked") // constant bindings start out with T unknown
+  public ConstantBindingBuilderImpl(Binder binder, List<Element> elements, Object source) {
+    super(binder, elements, source, (Key<T>) NULL_KEY);
+  }
+

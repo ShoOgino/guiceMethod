@@ -1,0 +1,8 @@
+  /**
+   * Returns the field and method injection points of the provider, injected at injector-creation
+   * time only.
+   *
+   * @return a possibly empty set
+   */
+  Set<InjectionPoint> getInjectionPoints();
+

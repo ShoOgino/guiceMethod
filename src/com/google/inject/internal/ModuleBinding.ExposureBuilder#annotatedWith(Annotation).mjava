@@ -1,6 +1,0 @@
-    public void annotatedWith(Annotation annotation) {
-      checkNotNull(annotation, "annotation");
-      checkNotAnnotated();
-      binding.key = Key.get(binding.key.getTypeLiteral(), annotation);
-    }
-

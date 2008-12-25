@@ -7,7 +7,7 @@
     InjectorFactory injectorFactory = new InjectorFactory(injector);
     injector.state.putBinding(key,
         new ProviderInstanceBindingImpl<Injector>(injector, key, SourceProvider.UNKNOWN_SOURCE,
-            injectorFactory, Scopes.NO_SCOPE, injectorFactory, LoadStrategy.LAZY,
+            injectorFactory, Scoping.UNSCOPED, injectorFactory,
             ImmutableSet.<InjectionPoint>of()));
   }
 

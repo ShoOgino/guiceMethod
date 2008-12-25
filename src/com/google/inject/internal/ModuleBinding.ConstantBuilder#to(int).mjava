@@ -1,4 +1,0 @@
-    public void to(final int value) {
-      to(Integer.class, value);
-    }
-

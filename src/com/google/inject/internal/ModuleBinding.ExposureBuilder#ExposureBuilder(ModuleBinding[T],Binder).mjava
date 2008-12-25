@@ -1,5 +1,0 @@
-    public ExposureBuilder(ModuleBinding<T> binding, Binder binder) {
-      this.binding = binding;
-      this.binder = binder;
-    }
-

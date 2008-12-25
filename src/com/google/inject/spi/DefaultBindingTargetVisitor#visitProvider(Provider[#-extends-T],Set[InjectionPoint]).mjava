@@ -1,4 +1,0 @@
-  public V visitProvider(Provider<? extends T> provider, Set<InjectionPoint> injectionPoints) {
-    return visitOther();
-  }
-

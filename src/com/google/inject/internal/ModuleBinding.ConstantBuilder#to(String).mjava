@@ -1,4 +1,0 @@
-    public void to(final String value) {
-      to(String.class, value);
-    }
-

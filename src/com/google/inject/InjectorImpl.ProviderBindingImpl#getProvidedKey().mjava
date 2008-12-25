@@ -1,0 +1,4 @@
+    public Key<? extends T> getProvidedKey() {
+      return providedBinding.getKey();
+    }
+

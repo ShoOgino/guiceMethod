@@ -1,4 +1,0 @@
-  private boolean keyTypeIsSet() {
-    return !Void.class.equals(key.getTypeLiteral().getType());
-  }
-

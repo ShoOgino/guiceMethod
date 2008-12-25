@@ -1,0 +1,4 @@
+  protected boolean keyTypeIsSet() {
+    return !Void.class.equals(binding.getKey().getTypeLiteral().getType());
+  }
+

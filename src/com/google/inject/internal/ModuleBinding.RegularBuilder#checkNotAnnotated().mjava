@@ -1,6 +1,0 @@
-    private void checkNotAnnotated() {
-      if (ModuleBinding.this.key.getAnnotationType() != null) {
-        binder.addError(ANNOTATION_ALREADY_SPECIFIED);
-      }
-    }
-

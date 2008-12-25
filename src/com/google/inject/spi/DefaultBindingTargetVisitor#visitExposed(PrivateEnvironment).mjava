@@ -1,4 +1,0 @@
-  public V visitExposed(PrivateEnvironment privateEnvironment) {
-    return visitOther();
-  }
-

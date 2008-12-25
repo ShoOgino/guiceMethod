@@ -1,0 +1,8 @@
+  /**
+   * Returns true if this is the default scope. In this case a new instance will be provided for
+   * each injection.
+   */
+  public boolean isNoScope() {
+    return getScopeInstance() == Scopes.NO_SCOPE;
+  }
+

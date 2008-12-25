@@ -1,0 +1,6 @@
+  /**
+   * Returns the constructor, field and method injection points to create and populate a new
+   * instance. The set contains exactly one constructor injection point.
+   */
+  Set<InjectionPoint> getInjectionPoints();
+

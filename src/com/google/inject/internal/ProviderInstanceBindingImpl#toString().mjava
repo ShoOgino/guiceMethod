@@ -1,0 +1,10 @@
+  @Override
+  public String toString() {
+    return new ToStringBuilder(ProviderInstanceBinding.class)
+        .add("key", getKey())
+        .add("provider", providerInstance)
+        .add("scope", getScoping())
+        .add("source", getSource())
+        .toString();
+  }
+

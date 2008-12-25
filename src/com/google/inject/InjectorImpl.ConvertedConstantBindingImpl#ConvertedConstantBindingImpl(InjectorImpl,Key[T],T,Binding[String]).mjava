@@ -1,9 +1,0 @@
-    ConvertedConstantBindingImpl(
-        InjectorImpl injector, Key<T> key, T value, Binding<String> originalBinding) {
-      super(injector, key, originalBinding.getSource(),
-          new ConstantFactory<T>(Initializables.of(value)), Scopes.NO_SCOPE, LoadStrategy.LAZY);
-      this.value = value;
-      provider = Providers.of(value);
-      this.originalBinding = originalBinding;
-    }
-

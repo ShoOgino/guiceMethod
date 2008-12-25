@@ -22,7 +22,7 @@
       // createProviderBinding() will return BindingImpl<Provider<X>>.
       @SuppressWarnings("unchecked")
       BindingImpl<T> binding
-          = (BindingImpl<T>) createProviderBinding((Key) key, LoadStrategy.LAZY, errors);
+          = (BindingImpl<T>) createProviderBinding((Key) key, errors);
       return binding;
     }
 
@@ -47,8 +47,7 @@
     }
 
     Object source = key.getTypeLiteral().getRawType();
-    BindingImpl<T> binding = createUnitializedBinding(key, null /* scope */, source,
-        LoadStrategy.LAZY, errors);
+    BindingImpl<T> binding = createUnitializedBinding(key, Scoping.UNSCOPED, source, errors);
     initializeBinding(binding, errors);
     return binding;
   }

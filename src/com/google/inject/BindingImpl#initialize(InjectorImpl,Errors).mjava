@@ -1,6 +1,0 @@
-  /**
-   * Perform any post-creation initialization, that could require construction
-   * of other bindings.
-   */
-  void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {}
-

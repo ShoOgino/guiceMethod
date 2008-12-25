@@ -1,0 +1,5 @@
+  /**
+   * Returns the user-supplied, unscoped provider.
+   */
+  Provider<? extends T> getProviderInstance();
+

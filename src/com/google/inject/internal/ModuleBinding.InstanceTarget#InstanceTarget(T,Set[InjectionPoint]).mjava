@@ -1,5 +1,0 @@
-    public InstanceTarget(T instance, Set<InjectionPoint> injectionPoints) {
-      this.instance = instance;
-      this.injectionPoints = ImmutableSet.copyOf(injectionPoints);
-    }
-

@@ -8,9 +8,10 @@
     Binding<Integer> binding = injector.getBinding(Key.get(Integer.class, Names.named("one")));
     assertEquals(Key.get(Integer.class, Names.named("one")), binding.getKey());
     assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    assertTrue(binding instanceof ConvertedConstantBinding);
     binding.acceptTargetVisitor(new FailingTargetVisitor<Integer>() {
-      @Override public Void visitConvertedConstant(Integer value) {
-        assertEquals((Integer) 1, value);
+      @Override public Void visitConvertedConstant(ConvertedConstantBinding<Integer> binding) {
+        assertEquals((Integer) 1, binding.getValue());
         return null;
       }
     });

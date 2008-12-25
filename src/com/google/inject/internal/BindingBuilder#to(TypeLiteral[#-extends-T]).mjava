@@ -1,0 +1,4 @@
+  public BindingBuilder<T> to(TypeLiteral<? extends T> implementation) {
+    return to(Key.get(implementation));
+  }
+

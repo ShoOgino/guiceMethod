@@ -1,0 +1,4 @@
+  protected BindingImpl<T> withScoping(Scoping scoping) {
+    throw new AssertionError();
+  }
+

@@ -1,0 +1,4 @@
+  protected BindingImpl<T> withKey(Key<T> key) {
+    throw new AssertionError();
+  }
+

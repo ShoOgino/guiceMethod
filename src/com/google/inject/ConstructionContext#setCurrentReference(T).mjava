@@ -1,4 +1,0 @@
-  void setCurrentReference(T currentReference) {
-    this.currentReference = currentReference;
-  }
-

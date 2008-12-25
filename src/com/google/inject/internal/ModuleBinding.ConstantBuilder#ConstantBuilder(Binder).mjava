@@ -1,4 +1,0 @@
-    ConstantBuilder(Binder binder) {
-      this.binder = binder.skipSources(ConstantBuilder.class);
-    }
-
