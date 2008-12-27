@@ -1,0 +1,4 @@
+    public Key<String> getSourceKey() {
+      return originalBinding.getKey();
+    }
+

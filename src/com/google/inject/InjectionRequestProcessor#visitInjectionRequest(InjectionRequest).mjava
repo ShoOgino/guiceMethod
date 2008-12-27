@@ -1,14 +1,14 @@
-  @Override public Boolean visitInjectionRequest(InjectionRequest command) {
+  @Override public Boolean visitInjectionRequest(InjectionRequest request) {
     Set<InjectionPoint> injectionPoints;
     try {
-      injectionPoints = InjectionPoint.forInstanceMethodsAndFields(
-          command.getInstance().getClass());
+      injectionPoints = request.getInjectionPoints();
     } catch (ConfigurationException e) {
       errors.merge(e.getErrorMessages());
       injectionPoints = e.getPartialValue();
     }
 
-    initializer.requestInjection(injector, command.getInstance(), command.getSource(), injectionPoints);
+    initializer.requestInjection(
+        injector, request.getInstance(), request.getSource(), injectionPoints);
     return true;
   }
 

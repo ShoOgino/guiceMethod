@@ -2,7 +2,7 @@
       Errors errorsForMember = errors.withSource(source);
       Set<InjectionPoint> injectionPoints;
       try {
-        injectionPoints = InjectionPoint.forStaticMethodsAndFields(type);
+        injectionPoints = request.getInjectionPoints();
       } catch (ConfigurationException e) {
         errors.merge(e.getErrorMessages());
         injectionPoints = e.getPartialValue();

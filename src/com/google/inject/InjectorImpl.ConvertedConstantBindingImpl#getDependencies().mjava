@@ -1,4 +1,4 @@
     public Set<Dependency<?>> getDependencies() {
-      return ImmutableSet.<Dependency<?>>of(Dependency.get(originalBinding.getKey()));
+      return ImmutableSet.<Dependency<?>>of(Dependency.get(getSourceKey()));
     }
 

@@ -1,6 +1,0 @@
-    public StaticInjection(InjectorImpl injector, Object source, Class type) {
-      this.injector = injector;
-      this.source = source;
-      this.type = type;
-    }
-

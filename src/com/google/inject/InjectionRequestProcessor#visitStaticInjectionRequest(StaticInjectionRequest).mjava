@@ -1,5 +1,5 @@
-  @Override public Boolean visitStaticInjectionRequest(StaticInjectionRequest command) {
-    staticInjections.add(new StaticInjection(injector, command.getSource(), command.getType()));
+  @Override public Boolean visitStaticInjectionRequest(StaticInjectionRequest request) {
+    staticInjections.add(new StaticInjection(injector, request));
     return true;
   }
 

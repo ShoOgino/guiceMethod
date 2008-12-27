@@ -1,5 +1,6 @@
   /**
-   * Returns all static method and field injection points on {@code type}.
+   * Returns the static methods and fields of {@code type} that will be injected to fulfill this
+   * request.
    *
    * @return a possibly empty set of injection points. The set has a specified iteration order. All
    *      fields are returned and then all methods. Within the fields, supertype fields are returned
@@ -9,17 +10,7 @@
    *      ConfigurationException#getPartialValue() partial value} is a {@code Set<InjectionPoint>}
    *      of the valid injection points.
    */
-  public static Set<InjectionPoint> forStaticMethodsAndFields(TypeLiteral type) {
-    List<InjectionPoint> sink = Lists.newArrayList();
-    Errors errors = new Errors();
-
-    addInjectionPoints(type, Factory.FIELDS, true, sink, errors);
-    addInjectionPoints(type, Factory.METHODS, true, sink, errors);
-
-    ImmutableSet<InjectionPoint> result = ImmutableSet.copyOf(sink);
-    if (errors.hasErrors()) {
-      throw new ConfigurationException(errors.getMessages()).withPartialValue(result);
-    }
-    return result;
+  public Set<InjectionPoint> getInjectionPoints() throws ConfigurationException {
+    return InjectionPoint.forStaticMethodsAndFields(type);
   }
 

@@ -2,7 +2,7 @@
       return new ToStringBuilder(ConvertedConstantBinding.class)
           .add("key", getKey())
           .add("value", value)
-          .add("original", originalBinding)
+          .add("sourceKey", getSourceKey())
           .toString();
     }
 
