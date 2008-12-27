@@ -1,4 +1,4 @@
-    public void expose(Key<?> type) {
-      exposeInternal(type);
+    public void expose(Key<?> key) {
+      exposeInternal(key);
     }
 
