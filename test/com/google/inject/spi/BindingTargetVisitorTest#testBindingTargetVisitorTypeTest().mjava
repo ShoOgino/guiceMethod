@@ -1,0 +1,7 @@
+  public void testBindingTargetVisitorTypeTest() throws Exception {
+    Injector injector = Guice.createInjector();
+    for (Binding<?> binding : injector.getBindings().values()) {
+      binding.acceptTargetVisitor(new DefaultBindingTargetVisitor<Object, Object>() {});
+    }
+  }
+

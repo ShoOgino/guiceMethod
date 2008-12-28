@@ -1,4 +1,0 @@
-  public V visitInstance(InstanceBinding<T> instanceBinding) {
-    return visitOther(instanceBinding);
-  }
-

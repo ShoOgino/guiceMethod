@@ -2,5 +2,5 @@
    * Visit a constructor binding. To resolve injections, an instance is instantiated by invoking
    * {@code constructor}. This target is found only on injector bindings.
    */
-  V visitConstructor(ConstructorBinding<T> binding);
+  V visitConstructor(ConstructorBinding<? extends T> binding);
 

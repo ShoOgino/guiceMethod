@@ -14,7 +14,8 @@
             assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(String.class), binding.getKey());
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitProviderInstance(ProviderInstanceBinding<T> binding) {
+              @Override public Void visitProviderInstance(
+                  ProviderInstanceBinding<? extends T> binding) {
                 assertSame(stringProvider, binding.getProviderInstance());
                 return null;
               }

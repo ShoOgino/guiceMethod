@@ -1,4 +1,0 @@
-  public V visitUntargetted(UntargettedBinding<T> untargettedBinding) {
-    return visitOther(untargettedBinding);
-  }
-

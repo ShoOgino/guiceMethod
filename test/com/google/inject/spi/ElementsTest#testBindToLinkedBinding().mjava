@@ -13,7 +13,7 @@
             assertTrue(command instanceof LinkedKeyBinding);
             assertEquals(Key.get(List.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitLinkedKey(LinkedKeyBinding<T> binding) {
+              @Override public Void visitLinkedKey(LinkedKeyBinding<? extends T> binding) {
                 assertEquals(Key.get(ArrayList.class), binding.getLinkedKey());
                 return null;
               }
@@ -27,7 +27,7 @@
             assertTrue(command instanceof LinkedKeyBinding);
             assertEquals(Key.get(Map.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitLinkedKey(LinkedKeyBinding<T> binding) {
+              @Override public Void visitLinkedKey(LinkedKeyBinding<? extends T> binding) {
                 assertEquals(Key.get(new TypeLiteral<HashMap<Integer, String>>() {}),
                     binding.getLinkedKey());
                 return null;
@@ -42,7 +42,7 @@
             assertTrue(command instanceof LinkedKeyBinding);
             assertEquals(Key.get(Set.class), command.getKey());
             command.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitLinkedKey(LinkedKeyBinding<T> binding) {
+              @Override public Void visitLinkedKey(LinkedKeyBinding<? extends T> binding) {
                 assertEquals(Key.get(TreeSet.class, SampleAnnotation.class),
                     binding.getLinkedKey());
                 return null;

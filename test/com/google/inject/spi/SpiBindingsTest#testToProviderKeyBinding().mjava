@@ -12,7 +12,7 @@
             assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(String.class), binding.getKey());
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitProviderKey(ProviderKeyBinding<T> binding) {
+              @Override public Void visitProviderKey(ProviderKeyBinding<? extends T> binding) {
                 assertEquals(Key.get(StringProvider.class), binding.getProviderKey());
                 return null;
               }

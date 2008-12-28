@@ -1,4 +1,0 @@
-  public V visitProviderKey(ProviderKeyBinding<T> providerKeyBinding) {
-    return visitOther(providerKeyBinding);
-  }
-

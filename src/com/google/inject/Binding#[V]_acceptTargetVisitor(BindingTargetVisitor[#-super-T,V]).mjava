@@ -4,5 +4,5 @@
    * @param visitor to call back on
    * @since 2.0
    */
-  <V> V acceptTargetVisitor(BindingTargetVisitor<T, V> visitor);
+  <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor);
 

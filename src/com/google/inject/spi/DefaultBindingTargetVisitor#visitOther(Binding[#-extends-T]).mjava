@@ -1,0 +1,4 @@
+  protected V visitOther(Binding<? extends T> binding) {
+    return null;
+  }
+

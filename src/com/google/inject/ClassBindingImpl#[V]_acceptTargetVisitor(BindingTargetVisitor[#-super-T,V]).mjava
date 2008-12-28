@@ -1,4 +1,4 @@
-  public <V> V acceptTargetVisitor(BindingTargetVisitor<T, V> visitor) {
+  public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
     checkState(injectionPoints != null, "not initialized");
     return visitor.visitConstructor(this);
   }

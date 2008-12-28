@@ -3,5 +3,5 @@
    * that provider's {@code get} method is invoked. This target is found in both module and injector
    * bindings.
    */
-  V visitProviderKey(ProviderKeyBinding<T> binding);
+  V visitProviderKey(ProviderKeyBinding<? extends T> binding);
 

@@ -1,4 +1,0 @@
-  public V visitLinkedKey(LinkedKeyBinding<T> linkedKeyBinding) {
-    return visitOther(linkedKeyBinding);
-  }
-
