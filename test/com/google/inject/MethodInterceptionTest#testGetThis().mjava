@@ -1,0 +1,19 @@
+  public void testGetThis() {
+    final AtomicReference<Object> lastTarget = new AtomicReference<Object>();
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.any(), new MethodInterceptor() {
+          public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+            lastTarget.set(methodInvocation.getThis());
+            return methodInvocation.proceed();
+          }
+        });
+      }
+    });
+
+    Interceptable interceptable = injector.getInstance(Interceptable.class);
+    interceptable.foo();
+    assertSame(interceptable, lastTarget.get());
+  }
+
