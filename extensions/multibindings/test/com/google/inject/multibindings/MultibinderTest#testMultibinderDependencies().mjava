@@ -1,0 +1,24 @@
+  /**
+   * We just want to make sure that multibinder's binding depends on each of its values. We don't
+   * really care about the underlying structure of those bindings, which are implementation details.
+   */
+  public void testMultibinderDependencies() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
+
+        bindConstant().annotatedWith(Names.named("b")).to("B");
+      }
+    });
+
+    Binding<Set<String>> binding = injector.getBinding(new Key<Set<String>>() {});
+    HasDependencies withDependencies = (HasDependencies) binding;
+    Set<String> elements = Sets.newHashSet();
+    for (Dependency<?> dependency : withDependencies.getDependencies()) {
+      elements.add((String) injector.getInstance(dependency.getKey()));
+    }
+    assertEquals(ImmutableSet.of("A", "B"), elements);
+  }
+

@@ -1,0 +1,16 @@
+  public void testFactoryBindingDependencies() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Double.class).toInstance(5.0d);
+        bind(ColoredCarFactory.class)
+            .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+      }
+    });
+
+    Binding<?> binding = injector.getBinding(ColoredCarFactory.class);
+    HasDependencies hasDependencies = (HasDependencies) binding;
+    assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(double.class))),
+        hasDependencies.getDependencies());
+  }
+
