@@ -1,5 +1,0 @@
-  public InterceptingInjectorBuilder tolerateUnmatchedInterceptions() {
-    this.tolerateUnmatchedInterceptions = true;
-    return this;
-  }
-

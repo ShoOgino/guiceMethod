@@ -1,5 +1,0 @@
-  public InterceptingInjectorBuilder intercept(Key<?>... keys) {
-    this.keysToIntercept.addAll(Arrays.asList(keys));
-    return this;
-  }
-

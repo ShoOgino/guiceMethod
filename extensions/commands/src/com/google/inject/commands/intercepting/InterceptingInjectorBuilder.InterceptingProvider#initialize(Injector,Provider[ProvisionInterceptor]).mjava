@@ -1,8 +1,0 @@
-    @Inject void initialize(Injector injector,
-        Provider<ProvisionInterceptor> injectionInterceptorProvider) {
-      this.injectionInterceptorProvider
-          = checkNotNull(injectionInterceptorProvider, "injectionInterceptorProvider");
-      this.delegateProvider
-          = checkNotNull(injector.getProvider(anonymousKey), "delegateProvider");
-    }
-
