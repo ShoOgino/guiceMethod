@@ -1,7 +1,7 @@
   public void testSharedProxyClasses() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.returns(Matchers.only(Foo.class)),
+        bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class)),
             returnNullInterceptor);
       }
     });
@@ -19,7 +19,7 @@
     Injector nullFoosAndBarsInjector = injector.createChildInjector(new AbstractModule() {
       protected void configure() {
         bind(Interceptable.class);
-        bindInterceptor(Matchers.any(), Matchers.returns(Matchers.only(Bar.class)),
+        bindInterceptor(Matchers.any(), Matchers.returns(only(Bar.class)),
             returnNullInterceptor);
       }
     });

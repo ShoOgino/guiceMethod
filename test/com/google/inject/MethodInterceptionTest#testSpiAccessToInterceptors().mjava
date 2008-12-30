@@ -1,0 +1,28 @@
+  public void testSpiAccessToInterceptors() throws NoSuchMethodException {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class)),
+            countingInterceptor);
+        bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class).or(only(Bar.class))),
+            returnNullInterceptor);
+      }
+    });
+
+    ConstructorBinding<?> interceptedBinding
+        = (ConstructorBinding<?>) injector.getBinding(Interceptable.class);
+    Method barMethod = Interceptable.class.getMethod("bar");
+    Method fooMethod = Interceptable.class.getMethod("foo");
+    assertEquals(ImmutableMap.<Method, List<MethodInterceptor>>of(
+        fooMethod, ImmutableList.of(countingInterceptor, returnNullInterceptor),
+        barMethod, ImmutableList.of(returnNullInterceptor)),
+        interceptedBinding.getMethodInterceptors());
+
+    ConstructorBinding<?> nonInterceptedBinding
+        = (ConstructorBinding<?>) injector.getBinding(Foo.class);
+    assertEquals(ImmutableMap.<Method, List<MethodInterceptor>>of(),
+        nonInterceptedBinding.getMethodInterceptors());
+
+    injector.getInstance(Interceptable.class).foo();
+    assertEquals("expected counting interceptor to be invoked first", 1, count.get());
+  }
+

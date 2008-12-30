@@ -21,6 +21,9 @@
         public Constructor<T> getConstructor() {
           return constructor;
         }
+        public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
+          return ImmutableMap.of();
+        }
       };
     }
 
@@ -38,6 +41,9 @@
       }
       public Constructor<T> getConstructor() {
         return constructor;
+      }
+      public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
+        return ImmutableMap.of();
       }
     };
   }

@@ -1,6 +1,6 @@
     void addAll(List<MethodInterceptor> interceptors) {
       if (this.interceptors == null) {
-        this.interceptors = new ArrayList<MethodInterceptor>();
+        this.interceptors = Lists.newArrayList();
       }
       this.interceptors.addAll(interceptors);
     }

@@ -1,0 +1,5 @@
+  /**
+   * Returns the interceptors applied to each method, in order of invocation.
+   */
+  Map<Method, List<MethodInterceptor>> getMethodInterceptors();
+
