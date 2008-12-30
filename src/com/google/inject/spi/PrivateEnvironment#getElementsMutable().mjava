@@ -1,4 +1,0 @@
-  List<Element> getElementsMutable() {
-    return elementsMutable;
-  }
-

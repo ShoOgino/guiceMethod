@@ -1,5 +1,0 @@
-  public ExposedKeyFactory(Key<T> key, PrivateEnvironment privateEnvironment) {
-    this.key = key;
-    this.privateEnvironment = privateEnvironment;
-  }
-

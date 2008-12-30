@@ -1,0 +1,6 @@
+  /**
+   * Returns the child injector that hosts these private elements, or null if the elements haven't
+   * been used to create an injector.
+   */
+  Injector getInjector();
+

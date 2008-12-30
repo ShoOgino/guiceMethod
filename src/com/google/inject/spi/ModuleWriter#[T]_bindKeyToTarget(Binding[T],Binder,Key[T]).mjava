@@ -27,7 +27,7 @@
       }
 
       public ScopedBindingBuilder visitExposed(ExposedBinding<? extends T> binding) {
-        PrivateBinder privateBinder = getPrivateBinder(binding.getPrivateEnvironment());
+        PrivateBinder privateBinder = getPrivateBinder(binding.getPrivateElements());
         privateBinder.withSource(binding.getSource()).expose(key);
         return null;
       }

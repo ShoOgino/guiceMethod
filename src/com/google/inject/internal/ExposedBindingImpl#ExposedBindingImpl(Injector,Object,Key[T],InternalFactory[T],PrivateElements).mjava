@@ -1,0 +1,6 @@
+  public ExposedBindingImpl(Injector injector, Object source, Key<T> key,
+      InternalFactory<T> factory, PrivateElements privateElements) {
+    super(injector, key, source, factory, Scoping.UNSCOPED);
+    this.privateElements = privateElements;
+  }
+

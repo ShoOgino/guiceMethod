@@ -1,0 +1,20 @@
+  public void testSpiAccess() {
+    Injector injector = Guice.createInjector(new PrivateModule() {
+          public void configurePrivateBindings() {
+            bind(String.class).annotatedWith(named("a")).toInstance("private");
+            bind(String.class).annotatedWith(named("b")).toInstance("exposed");
+            expose(String.class).annotatedWith(named("b"));
+          }
+        });
+
+    ExposedBinding<?> binding
+        = (ExposedBinding<?>) injector.getBinding(Key.get(String.class, Names.named("b")));
+    assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class))),
+        binding.getDependencies());
+    PrivateElements privateElements = binding.getPrivateElements();
+    assertEquals(ImmutableSet.<Key<?>>of(Key.get(String.class, named("b"))),
+        privateElements.getExposedKeys());
+    Injector privateInjector = privateElements.getInjector();
+    assertEquals("private", privateInjector.getInstance(Key.get(String.class, Names.named("a"))));
+  }
+

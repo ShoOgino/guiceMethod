@@ -47,8 +47,8 @@
         return null;
       }
 
-      public Void visitPrivateEnvironment(PrivateEnvironment privateEnvironment) {
-        writePrivateElements(binder, privateEnvironment);
+      public Void visitPrivateElements(PrivateElements privateElements) {
+        writePrivateElements(binder, privateElements);
         return null;
       }
     };

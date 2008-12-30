@@ -1,6 +1,0 @@
-    Builder privateEnvironment(PrivateEnvironment privateEnvironment) {
-      this.privateEnvironment = privateEnvironment;
-      this.elements.addAll(privateEnvironment.getElements());
-      return this;
-    }
-

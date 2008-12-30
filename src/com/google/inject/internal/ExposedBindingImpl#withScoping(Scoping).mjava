@@ -1,4 +1,4 @@
   public BindingImpl<T> withScoping(Scoping scoping) {
-    return new ExposedBindingImpl<T>(getSource(), getKey(), scoping, privateEnvironment);
+    return new ExposedBindingImpl<T>(getSource(), getKey(), scoping, privateElements);
   }
 

@@ -1,6 +1,6 @@
     public PrivateBinder newPrivateBinder() {
-      PrivateEnvironment privateEnvironment = new PrivateEnvironment(getSource());
-      elements.add(privateEnvironment);
-      return new RecordingBinder(this, privateEnvironment);
+      PrivateElementsImpl privateElements = new PrivateElementsImpl(getSource());
+      elements.add(privateElements);
+      return new RecordingBinder(this, privateElements);
     }
 

@@ -9,6 +9,6 @@
       this.source = source;
       this.sourceProvider = sourceProvider;
       this.parent = prototype.parent;
-      this.privateEnvironment = prototype.privateEnvironment;
+      this.privateElements = prototype.privateElements;
     }
 

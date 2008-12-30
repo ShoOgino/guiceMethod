@@ -1,4 +1,0 @@
-  public <T> T acceptVisitor(ElementVisitor<T> visitor) {
-    return visitor.visitPrivateEnvironment(this);
-  }
-

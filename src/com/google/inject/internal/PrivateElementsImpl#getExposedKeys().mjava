@@ -1,0 +1,13 @@
+  public Set<Key<?>> getExposedKeys() {
+    if (exposedKeys == null) {
+      Set<Key<?>> exposedKeysMutable = Sets.newLinkedHashSet();
+      for (ExposureBuilder<?> exposureBuilder : exposureBuilders) {
+        exposedKeysMutable.add(exposureBuilder.getKey());
+      }
+      exposedKeys = ImmutableSet.copyOf(exposedKeysMutable);
+      exposureBuilders = null;
+    }
+
+    return exposedKeys;
+  }
+

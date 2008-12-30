@@ -1,0 +1,7 @@
+    @Override public String toString() {
+      return new ToStringBuilder(ProviderKeyBinding.class)
+          .add("key", getKey())
+          .add("providedKey", getProvidedKey())
+          .toString();
+    }
+

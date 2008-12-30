@@ -1,5 +1,5 @@
     private <T> AnnotatedElementBuilder exposeInternal(Key<T> key) {
-      if (privateEnvironment == null) {
+      if (privateElements == null) {
         addError("Cannot expose %s on a standard binder. "
             + "Exposed bindings are only applicable to private binders.", key);
         return new AnnotatedElementBuilder() {
@@ -11,8 +11,8 @@
       BindingBuilder<T> exposeBinding = new BindingBuilder<T>(
           this, parent.elements, getSource(), key);
 
-      BindingBuilder.ExposureBuilder<T> builder = exposeBinding.usingKeyFrom(privateEnvironment);
-      privateEnvironment.addExposureBuilder(builder);
+      BindingBuilder.ExposureBuilder<T> builder = exposeBinding.usingKeyFrom(privateElements);
+      privateElements.addExposureBuilder(builder);
       return builder;
     }
 

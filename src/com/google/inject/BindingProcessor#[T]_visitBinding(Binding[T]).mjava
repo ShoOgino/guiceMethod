@@ -108,11 +108,11 @@
       }
 
       public Void visitExposed(ExposedBinding<? extends T> binding) {
-        PrivateEnvironment privateEnvironment = binding.getPrivateEnvironment();
-        ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<T>(key, privateEnvironment);
+        PrivateElements privateElements = binding.getPrivateElements();
+        ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<T>(key, privateElements);
         creationListeners.add(exposedKeyFactory);
         putBinding(new ExposedBindingImpl<T>(
-            injector, source, key, exposedKeyFactory, privateEnvironment));
+            injector, source, key, exposedKeyFactory, privateElements));
         return null;
       }
 

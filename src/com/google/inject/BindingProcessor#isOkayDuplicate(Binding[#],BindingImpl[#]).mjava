@@ -7,7 +7,7 @@
   private boolean isOkayDuplicate(Binding<?> original, BindingImpl<?> binding) {
     if (original instanceof ExposedBindingImpl) {
       ExposedBindingImpl exposed = (ExposedBindingImpl) original;
-      InjectorImpl exposedFrom = environmentToInjector.get(exposed.getPrivateEnvironment());
+      InjectorImpl exposedFrom = (InjectorImpl) exposed.getPrivateElements().getInjector();
       return (exposedFrom == binding.getInjector());
     }
     return false;

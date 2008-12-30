@@ -1,0 +1,5 @@
+  BindingProcessor(Errors errors, Initializer initializer) {
+    super(errors);
+    this.initializer = initializer;
+  }
+

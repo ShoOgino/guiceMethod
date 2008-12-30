@@ -1,8 +1,8 @@
     @Override public String toString() {
       return new ToStringBuilder(ConvertedConstantBinding.class)
           .add("key", getKey())
-          .add("value", value)
           .add("sourceKey", getSourceKey())
+          .add("value", value)
           .toString();
     }
 

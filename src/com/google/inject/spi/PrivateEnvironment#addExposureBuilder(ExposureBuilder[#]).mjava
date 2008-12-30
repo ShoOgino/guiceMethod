@@ -1,4 +1,0 @@
-  void addExposureBuilder(ExposureBuilder<?> exposureBuilder) {
-    exposureBuilders.add(exposureBuilder);
-  }
-

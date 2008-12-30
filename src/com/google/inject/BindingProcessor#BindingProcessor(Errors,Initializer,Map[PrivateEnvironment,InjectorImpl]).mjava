@@ -1,7 +1,0 @@
-  BindingProcessor(Errors errors, Initializer initializer,
-      Map<PrivateEnvironment, InjectorImpl> environmentToInjector) {
-    super(errors);
-    this.initializer = initializer;
-    this.environmentToInjector = environmentToInjector;
-  }
-

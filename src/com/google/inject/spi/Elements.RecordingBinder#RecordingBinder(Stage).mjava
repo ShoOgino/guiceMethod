@@ -7,6 +7,6 @@
           Elements.class, RecordingBinder.class, AbstractModule.class,
           ConstantBindingBuilderImpl.class, AbstractBindingBuilder.class, BindingBuilder.class);
       this.parent = null;
-      this.privateEnvironment = null;
+      this.privateElements = null;
     }
 

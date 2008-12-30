@@ -11,7 +11,7 @@
     injectionRequestProcessor.process(shells);
     stopwatch.resetAndLog("Collecting injection requests");
 
-    bindingProcesor.runCreationListeners(environmentToInjector);
+    bindingProcesor.runCreationListeners();
     stopwatch.resetAndLog("Binding validation");
 
     injectionRequestProcessor.validate();

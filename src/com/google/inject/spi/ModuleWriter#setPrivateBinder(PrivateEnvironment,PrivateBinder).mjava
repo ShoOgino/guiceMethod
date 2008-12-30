@@ -1,7 +1,0 @@
-  /** Associates {@code binder} with {@code privateEnvironment}. */
-  protected void setPrivateBinder(PrivateEnvironment privateEnvironment, PrivateBinder binder) {
-    checkArgument(!environmentToBinder.containsKey(privateEnvironment),
-        "A private binder already exists for %s", privateEnvironment);
-    environmentToBinder.put(privateEnvironment, binder);
-  }
-

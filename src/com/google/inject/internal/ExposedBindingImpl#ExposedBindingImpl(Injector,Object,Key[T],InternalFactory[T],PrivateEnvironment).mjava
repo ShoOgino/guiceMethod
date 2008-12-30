@@ -1,6 +1,0 @@
-  public ExposedBindingImpl(Injector injector, Object source, Key<T> key,
-      InternalFactory<T> factory, PrivateEnvironment privateEnvironment) {
-    super(injector, key, source, factory, Scoping.UNSCOPED);
-    this.privateEnvironment = privateEnvironment;
-  }
-

@@ -1,0 +1,4 @@
+  public PrivateElementsImpl(Object source) {
+    this.source = checkNotNull(source, "source");
+  }
+

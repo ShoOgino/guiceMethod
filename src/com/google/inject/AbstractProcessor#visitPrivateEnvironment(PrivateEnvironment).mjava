@@ -1,4 +1,0 @@
-  public Boolean visitPrivateEnvironment(PrivateEnvironment privateEnvironment) {
-    return false;
-  }
-
