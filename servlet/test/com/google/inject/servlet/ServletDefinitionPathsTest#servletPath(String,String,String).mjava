@@ -28,7 +28,7 @@
     replay(injector, request);
 
     ServletDefinition servletDefinition = new ServletDefinition(mapping, Key.get(HttpServlet.class),
-        UriPatternType.get(UriPatternType.SERVLET), new HashMap<String, String>());
+        UriPatternType.get(UriPatternType.SERVLET, mapping), new HashMap<String, String>());
 
     servletDefinition.init(null, injector);
     servletDefinition.doService(request, response);

@@ -1,0 +1,13 @@
+    public ServletStyleUriPatternMatcher(String pattern) {
+      if (pattern.startsWith("*")) {
+        this.pattern = pattern.substring(1);
+        this.patternKind = Kind.PREFIX;
+      } else if (pattern.endsWith("*")) {
+        this.pattern = pattern.substring(0, pattern.length() - 1);
+        this.patternKind = Kind.SUFFIX;
+      } else {
+        this.pattern = pattern;
+        this.patternKind = Kind.LITERAL;
+      }
+    }
+

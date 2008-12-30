@@ -7,7 +7,7 @@
       initPipeline(servletContext.get());
     }
 
-    //obtain the servlet pipeline to dispatch against (we use getInstance() to avoid holding refs)
+    //obtain the servlet pipeline to dispatch against
     new FilterChainInvocation(filterDefinitions, servletPipeline, proceedingFilterChain)
         .doFilter(withDispatcher(request, servletPipeline), response);
 

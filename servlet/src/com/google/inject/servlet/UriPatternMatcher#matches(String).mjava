@@ -1,0 +1,6 @@
+  /**
+   * @param uri A "contextual" (i.e. relative) Request URI, *not* a complete one.
+   * @return Returns true if the uri matches the pattern.
+   */
+  boolean matches(String uri);
+

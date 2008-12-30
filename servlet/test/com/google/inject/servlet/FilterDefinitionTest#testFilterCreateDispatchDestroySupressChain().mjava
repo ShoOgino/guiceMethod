@@ -18,8 +18,9 @@
 
     replay(injector, request);
 
-    final FilterDefinition filterDef = new FilterDefinition("/*", Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET), new HashMap<String, String>());
+    String pattern = "/*";
+    final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
+        UriPatternType.get(UriPatternType.SERVLET, pattern), new HashMap<String, String>());
     assert filterDef.getFilter() instanceof MockFilter;
 
     //should fire on mockfilter now

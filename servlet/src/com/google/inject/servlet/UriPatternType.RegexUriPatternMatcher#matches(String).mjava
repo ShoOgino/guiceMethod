@@ -1,0 +1,4 @@
+    public boolean matches(String uri) {
+      return null != uri && this.pattern.matcher(uri).matches();
+    }
+

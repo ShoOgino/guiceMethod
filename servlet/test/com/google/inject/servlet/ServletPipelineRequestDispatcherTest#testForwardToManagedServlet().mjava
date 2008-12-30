@@ -1,6 +1,7 @@
   public final void testForwardToManagedServlet() throws IOException, ServletException {
-    final ServletDefinition servletDefinition = new ServletDefinition("blah.html",
-        Key.get(HttpServlet.class), UriPatternType.get(UriPatternType.SERVLET),
+    String pattern = "blah.html";
+    final ServletDefinition servletDefinition = new ServletDefinition(pattern,
+        Key.get(HttpServlet.class), UriPatternType.get(UriPatternType.SERVLET, pattern),
         new HashMap<String, String>());
 
     final Injector injector = createMock(Injector.class);
@@ -37,7 +38,7 @@
 
     final RequestDispatcher dispatcher = new ManagedServletPipeline(
         Arrays.asList(servletDefinition))
-        .getRequestDispatcher("blah.html");
+        .getRequestDispatcher(pattern);
 
     assertNotNull(dispatcher);
     dispatcher.forward(mockRequest, mockResponse);

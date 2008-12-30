@@ -4,7 +4,6 @@
     this.filter.set(filter);
 
     //initialize our filter with the configured context params and servlet context
-    //noinspection OverlyComplexAnonymousInnerClass,AnonymousInnerClassWithTooManyMethods
     filter.init(new FilterConfig() {
       public String getFilterName() {
         return filterKey.toString();
@@ -19,18 +18,7 @@
       }
 
       public Enumeration getInitParameterNames() {
-        //noinspection InnerClassTooDeeplyNested,AnonymousInnerClassWithTooManyMethods
-        return new Enumeration() {
-          private final Iterator<String> paramNames = initParams.keySet().iterator();
-
-          public boolean hasMoreElements() {
-            return paramNames.hasNext();
-          }
-
-          public Object nextElement() {
-            return paramNames.next();
-          }
-        };
+        return Iterators.asEnumeration(initParams.keySet().iterator());
       }
     });
   }

@@ -1,0 +1,15 @@
+    public boolean matches(String uri) {
+      if (null == uri) {
+        return false;
+      }
+
+      if (patternKind == Kind.PREFIX) {
+        return uri.endsWith(pattern);
+      } else if (patternKind == Kind.SUFFIX) {
+        return uri.startsWith(pattern);
+      }
+
+      //else treat as a literal
+      return pattern.equals(uri);
+    }
+

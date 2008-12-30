@@ -1,0 +1,4 @@
+    public RegexUriPatternMatcher(String pattern) {
+      this.pattern = Pattern.compile(pattern);
+    }
+

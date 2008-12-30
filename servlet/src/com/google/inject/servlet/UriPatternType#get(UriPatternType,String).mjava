@@ -1,0 +1,11 @@
+  public static UriPatternMatcher get(UriPatternType type, String pattern) {
+    switch (type) {
+      case SERVLET:
+        return new ServletStyleUriPatternMatcher(pattern);
+      case REGEX:
+        return new RegexUriPatternMatcher(pattern);
+      default:
+        return null;
+    }
+  }
+

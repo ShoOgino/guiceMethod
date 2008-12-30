@@ -1,4 +1,8 @@
-  public RequestDispatcher getRequestDispatcher(String path) {
+  /**
+   * @return Returns a request dispatcher wrapped with a servlet mapped to
+   * the given path or null if no mapping was found.
+   */
+  RequestDispatcher getRequestDispatcher(String path) {
     for (final ServletDefinition servletDefinition : servletDefinitions) {
       if (servletDefinition.shouldServe(path)) {
         return new RequestDispatcher() {
