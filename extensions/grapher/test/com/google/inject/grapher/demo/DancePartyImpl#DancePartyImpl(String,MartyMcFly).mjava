@@ -1,0 +1,3 @@
+  @Inject
+  public DancePartyImpl(@Assisted String thatNewSound, MartyMcFly guitarist) {}
+

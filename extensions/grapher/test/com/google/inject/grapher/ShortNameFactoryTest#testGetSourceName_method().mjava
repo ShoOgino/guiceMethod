@@ -1,0 +1,6 @@
+  public void testGetSourceName_method() throws Exception {
+    Member method = Obj.class.getDeclaredMethod("method", String.class);
+    assertEquals("Method name and parameters should not have packages",
+        "void ShortNameFactoryTest$Obj.method(String)", nameFactory.getSourceName(method));
+  }
+

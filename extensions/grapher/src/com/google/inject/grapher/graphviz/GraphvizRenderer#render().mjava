@@ -1,0 +1,16 @@
+  public void render() {
+    start();
+    
+    for (GraphvizNode node : nodes) {
+      renderNode(node);
+    }
+
+    for (GraphvizEdge edge : edges) {
+      renderEdge(edge);
+    }
+    
+    finish();
+    
+    out.flush();
+  }
+

@@ -1,0 +1,9 @@
+    /**
+     * Creates a new {@link BindingEdge} instance and adds it to the graph.
+     *
+     * @param fromId Node ID for the interface node.
+     * @param toId Node ID for the implementation (class or instance) node.
+     * @return The newly created and added {@link BindingEdge}.
+     */
+    T newBindingEdge(K fromId, K toId);
+

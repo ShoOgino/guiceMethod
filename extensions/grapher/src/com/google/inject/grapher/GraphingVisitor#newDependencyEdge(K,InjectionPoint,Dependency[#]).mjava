@@ -1,0 +1,20 @@
+  /**
+   * Creates a new {@link DependencyEdge} from the given node to a
+   * {@link Dependency}.
+   * <p>
+   * This method takes more comprehensive parameters than strictly necessary
+   * in case they would be useful to overriding implementations.
+   *
+   * @param nodeId ID of the {@link ImplementationNode} where the edges will start.
+   * @param injectionPoint The {@link InjectionPoint} that gave rise to this
+   *     {@link Dependency}, if one exists. Used to figure out which
+   *     {@link Member} the edge should point from.
+   * @param dependency The {@link Dependency} to represent with this edge.
+   * @return The newly-created and added {@link DependencyEdge}.
+   */
+  protected D newDependencyEdge(K nodeId,
+      @Nullable InjectionPoint injectionPoint, Dependency<?> dependency) {
+    K toId = idFactory.getClassNodeId(dependency.getKey());
+    return dependencyEdgeFactory.newDependencyEdge(nodeId, injectionPoint, toId);
+  }
+

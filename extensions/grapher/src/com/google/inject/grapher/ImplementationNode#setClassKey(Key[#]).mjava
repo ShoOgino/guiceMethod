@@ -1,0 +1,6 @@
+  /**
+   * Sets the {@link Key} that this node is for. Used when the node is
+   * representing a class that Guice will instantiate.
+   */
+  void setClassKey(Key<?> key);
+

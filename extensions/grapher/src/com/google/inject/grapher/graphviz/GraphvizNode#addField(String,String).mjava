@@ -1,0 +1,4 @@
+  public void addField(String portId, String title) {
+    fields.put(portId, title);
+  }
+

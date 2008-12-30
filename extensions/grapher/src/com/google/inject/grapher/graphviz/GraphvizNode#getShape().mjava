@@ -1,0 +1,4 @@
+  public NodeShape getShape() {
+    return shape;
+  }
+

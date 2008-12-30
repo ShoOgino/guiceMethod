@@ -1,0 +1,7 @@
+  @Override
+  protected void configure() {
+    Multibinder<Person> charactersBinder = Multibinder.newSetBinder(binder(), Person.class);
+    charactersBinder.addBinding().to(MartyMcFly.class);
+    charactersBinder.addBinding().to(DocBrown.class);
+  }
+

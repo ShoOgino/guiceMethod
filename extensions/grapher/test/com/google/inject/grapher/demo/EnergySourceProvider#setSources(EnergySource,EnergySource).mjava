@@ -1,0 +1,2 @@
+  @Inject void setSources(@Nuclear EnergySource nuclear, @Renewable EnergySource renewable) {}
+

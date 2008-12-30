@@ -1,0 +1,4 @@
+  public void setHeadCompassPoint(CompassPoint headCompassPoint) {
+    this.headCompassPoint = headCompassPoint;
+  }
+

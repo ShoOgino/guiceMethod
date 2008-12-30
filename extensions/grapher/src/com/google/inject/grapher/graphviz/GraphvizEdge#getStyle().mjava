@@ -1,0 +1,4 @@
+  public EdgeStyle getStyle() {
+    return style;
+  }
+

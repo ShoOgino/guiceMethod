@@ -1,0 +1,2 @@
+    @Inject ConstructedClass(B b, C c) {}
+

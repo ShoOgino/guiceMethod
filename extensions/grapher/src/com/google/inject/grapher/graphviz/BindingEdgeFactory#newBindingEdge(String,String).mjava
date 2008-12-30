@@ -1,0 +1,7 @@
+  public BindingEdge<String> newBindingEdge(String fromId, String toId) {
+    GraphvizEdge edge = new GraphvizEdge(fromId, toId);
+
+    renderer.addEdge(edge);
+    return newAdaptor(edge);
+  }
+

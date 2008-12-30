@@ -1,0 +1,4 @@
+  public void addEdge(GraphvizEdge edge) {
+    edges.add(edge);
+  }
+

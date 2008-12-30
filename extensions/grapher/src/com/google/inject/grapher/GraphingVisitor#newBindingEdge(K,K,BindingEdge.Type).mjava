@@ -1,0 +1,16 @@
+  /**
+   * Creates a new {@link BindingEdge} from the given node to the specified
+   * node.
+   *
+   * @param nodeId ID of the {@link InterfaceNode} that binds to the other.
+   * @param toId The node ID of a class or instance that is bound.
+   * @param type The {@link BindingEdge.Type} of this binding.
+   * @return The newly-created and added {@link BindingEdge}.
+   */
+  protected B newBindingEdge(K nodeId, K toId, BindingEdge.Type type) {
+    B edge = bindingEdgeFactory.newBindingEdge(nodeId, toId);
+    edge.setType(type);
+
+    return edge;
+  }
+

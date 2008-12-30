@@ -1,0 +1,13 @@
+  public void testNewDependencies_withInjectionPoints() throws Exception {
+    replayAll();
+
+    ConstructorBinding<?> binding = (ConstructorBinding<?>) createInjector().getBinding(Obj.class);
+
+    Collection<DependencyEdge<String>> edges = graphingVisitor.newDependencyEdges("",
+        binding.getInjectionPoints(), binding.getDependencies());
+
+    assertEquals("There should be three edges, from the InjectionPoints", 3, edges.size());
+    
+    verifyAll();
+  }
+

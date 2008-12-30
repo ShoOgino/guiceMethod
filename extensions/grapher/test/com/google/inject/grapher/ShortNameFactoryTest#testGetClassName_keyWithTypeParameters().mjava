@@ -1,0 +1,6 @@
+  public void testGetClassName_keyWithTypeParameters() throws Exception {
+    Key<?> key = Key.get(new TypeLiteral<Provider<String>>() {});
+    assertEquals("Class name and type values should not have packages",
+        "Provider<String>", nameFactory.getClassName(key));
+  }
+

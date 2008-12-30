@@ -1,0 +1,4 @@
+  public GraphvizNode(String nodeId) {
+    this.nodeId = nodeId;
+  }
+

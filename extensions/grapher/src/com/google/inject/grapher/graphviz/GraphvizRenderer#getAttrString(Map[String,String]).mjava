@@ -1,0 +1,14 @@
+  private String getAttrString(Map<String, String> attrs) {
+    List<String> attrList = Lists.newArrayList();
+    
+    for (Entry<String, String> attr : attrs.entrySet()) {
+      String value = attr.getValue();
+
+      if (value != null) {
+        attrList.add(attr.getKey() + "=" + value);
+      }
+    }
+    
+    return "[" + Join.join(", ", attrList) + "]";
+  }
+

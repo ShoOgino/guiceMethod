@@ -1,0 +1,6 @@
+  private void replayAll() {
+    for (Object mock : mocks) {
+      replay(mock);
+    }
+  }
+

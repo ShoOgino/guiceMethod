@@ -1,0 +1,10 @@
+  /**
+   * Helper method to return the standard node ID for the {@link Binding}'s
+   * {@link Key}.
+   * 
+   * @see NodeIdFactory#getClassNodeId(Key)
+   */
+  protected final K getClassNodeId(Binding<?> binding) {
+    return idFactory.getClassNodeId(binding.getKey());
+  }
+

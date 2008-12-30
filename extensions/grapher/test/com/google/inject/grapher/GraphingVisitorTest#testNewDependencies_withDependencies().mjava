@@ -1,0 +1,14 @@
+  public void testNewDependencies_withDependencies() throws Exception {
+    replayAll();
+
+    ProviderInstanceBinding<?> binding =
+        (ProviderInstanceBinding<?>) createInjector().getBinding(Intf.class);
+
+    Collection<DependencyEdge<String>> edges = graphingVisitor.newDependencyEdges("",
+        ImmutableList.<InjectionPoint>of(), binding.getDependencies());
+
+    assertEquals("There should be three edges, from the parameter Dependencies", 3, edges.size());
+    
+    verifyAll();
+  }
+

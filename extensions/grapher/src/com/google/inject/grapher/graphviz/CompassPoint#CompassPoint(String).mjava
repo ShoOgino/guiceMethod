@@ -1,0 +1,4 @@
+  CompassPoint(String compassPt) {
+    this.compassPt = compassPt;
+  }
+

@@ -1,0 +1,44 @@
+  /**
+   * Takes the set of starting {@link Binding}s, which comes either from the
+   * {@link Injector} or from {@link #rootedAt(Class...)}, and applies the
+   * {@link #graphingVisitor} to them. Uses the {@link #keyVisitor} to build
+   * out the set of {@link Key}s so that the graph covers the transitive
+   * dependencies and bindings.
+   */
+  private void processBindings() {
+    Set<Key<?>> keys = Sets.newLinkedHashSet();
+    Set<Key<?>> visitedKeys = Sets.newHashSet();
+
+    // build up the root set from the Injector if it wasn't specified
+    if (root == null) {
+      for (Key<?> key : injector.getBindings().keySet()) {
+        if (!skipKey(key)) {
+          keys.add(key);
+        }
+      }
+    } else {
+      keys.addAll(root);
+    }
+    
+    while (!keys.isEmpty()) {
+      Iterator<Key<?>> iterator = keys.iterator();
+      Key<?> key = iterator.next();
+      iterator.remove();
+      
+      if (visitedKeys.contains(key)) {
+        continue;
+      }
+      
+      Binding<?> binding = injector.getBinding(key);
+      visitedKeys.add(key);
+
+      binding.acceptTargetVisitor(graphingVisitor);
+
+      // find the dependencies and make sure that they get visited
+      Collection<Key<?>> newKeys = binding.acceptTargetVisitor(keyVisitor);
+      if (newKeys != null) {
+        keys.addAll(newKeys);
+      }
+    }
+  }
+

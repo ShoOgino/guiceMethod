@@ -1,0 +1,4 @@
+  public List<String> getSubtitles() {
+    return ImmutableList.copyOf(subtitles.values());
+  }
+

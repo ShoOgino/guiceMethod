@@ -1,0 +1,10 @@
+  public String getMemberName(Member member) {
+    if (member instanceof Constructor) {
+      return "<init>";
+    } else if (member instanceof Method) {
+      return "#" + member.getName() + "(...)";
+    } else {
+      return member.getName();      
+    }
+  }
+

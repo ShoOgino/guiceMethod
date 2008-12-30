@@ -1,0 +1,5 @@
+  public String getClassName(Key<?> key) {
+    TypeLiteral<?> typeLiteral = key.getTypeLiteral();
+    return stripPackages(typeLiteral.toString());
+  }
+

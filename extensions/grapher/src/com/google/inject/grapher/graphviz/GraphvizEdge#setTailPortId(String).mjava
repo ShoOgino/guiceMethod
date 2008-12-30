@@ -1,0 +1,4 @@
+  public void setTailPortId(String tailPortId) {
+    this.tailPortId = tailPortId;
+  }
+

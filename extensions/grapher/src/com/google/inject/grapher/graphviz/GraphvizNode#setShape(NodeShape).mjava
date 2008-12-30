@@ -1,0 +1,4 @@
+  public void setShape(NodeShape shape) {
+    this.shape = shape;
+  }
+

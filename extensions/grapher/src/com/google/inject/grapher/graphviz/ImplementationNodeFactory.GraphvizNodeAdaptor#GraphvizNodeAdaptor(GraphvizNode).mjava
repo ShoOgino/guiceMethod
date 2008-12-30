@@ -1,0 +1,6 @@
+    public GraphvizNodeAdaptor(GraphvizNode node) {
+      this.node = node;
+
+      this.node.setStyle(NodeStyle.INVISIBLE);
+    }
+

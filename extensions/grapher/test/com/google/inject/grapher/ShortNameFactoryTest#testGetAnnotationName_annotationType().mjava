@@ -1,0 +1,5 @@
+  public void testGetAnnotationName_annotationType() throws Exception {
+    Key<?> key = Key.get(String.class, Annotated.class);
+    assertEquals("@Annotated", nameFactory.getAnnotationName(key));
+  }
+

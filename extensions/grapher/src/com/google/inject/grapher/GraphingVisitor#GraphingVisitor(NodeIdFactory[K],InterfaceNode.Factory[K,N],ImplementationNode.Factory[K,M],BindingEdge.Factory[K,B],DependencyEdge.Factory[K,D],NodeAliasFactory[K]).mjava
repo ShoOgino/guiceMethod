@@ -1,0 +1,15 @@
+  @Inject
+  public GraphingVisitor(NodeIdFactory<K> idFactory,
+      InterfaceNode.Factory<K, N> interfaceNodeFactory,
+      ImplementationNode.Factory<K, M> implementationNodeFactory,
+      BindingEdge.Factory<K, B> bindingEdgeFactory,
+      DependencyEdge.Factory<K, D> dependencyEdgeFactory,
+      NodeAliasFactory<K> nodeAliasFactory) {
+    this.idFactory = idFactory;
+    this.interfaceNodeFactory = interfaceNodeFactory;
+    this.implementationNodeFactory = implementationNodeFactory;
+    this.bindingEdgeFactory = bindingEdgeFactory;
+    this.dependencyEdgeFactory = dependencyEdgeFactory;
+    this.nodeAliasFactory = nodeAliasFactory;
+  }
+

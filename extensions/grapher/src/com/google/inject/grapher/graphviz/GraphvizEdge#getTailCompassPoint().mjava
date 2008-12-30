@@ -1,0 +1,4 @@
+  public CompassPoint getTailCompassPoint() {
+    return tailCompassPoint;
+  }
+

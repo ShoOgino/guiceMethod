@@ -1,0 +1,4 @@
+  ArrowType(String arrowType) {
+    this.arrowType = arrowType;
+  }
+

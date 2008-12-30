@@ -1,0 +1,4 @@
+  public Collection<Key<?>> visitConvertedConstant(ConvertedConstantBinding<?> binding) {
+    return visitHasDependencies(binding, ImmutableSet.<InjectionPoint>of());
+  }
+

@@ -1,0 +1,6 @@
+    public void setKey(Key<?> key) {
+      String title = nameFactory.getClassName(key);
+      node.setTitle(title);
+      node.addSubtitle(0, nameFactory.getAnnotationName(key));
+    }
+

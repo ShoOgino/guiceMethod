@@ -1,0 +1,4 @@
+  public void setArrowTail(List<ArrowType> arrowTail) {
+    this.arrowTail = ImmutableList.copyOf(arrowTail);
+  }
+

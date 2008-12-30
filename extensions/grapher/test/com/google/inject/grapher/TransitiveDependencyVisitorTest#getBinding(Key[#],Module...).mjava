@@ -1,0 +1,4 @@
+  private Binding<?> getBinding(Key<?> key, Module... modules) {
+    return Guice.createInjector(modules).getBinding(key);
+  }
+

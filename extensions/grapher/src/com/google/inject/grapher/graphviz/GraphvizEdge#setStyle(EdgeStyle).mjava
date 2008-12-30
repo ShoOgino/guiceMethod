@@ -1,0 +1,4 @@
+  public void setStyle(EdgeStyle style) {
+    this.style = style;
+  }
+

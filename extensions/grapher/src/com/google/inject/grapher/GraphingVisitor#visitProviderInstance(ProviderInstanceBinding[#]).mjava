@@ -1,0 +1,21 @@
+  /**
+   * Same as {@link #visitInstance(InstanceBinding)}, but the
+   * {@link BindingEdge} is {@link BindingEdge.Type#PROVIDER}.
+   * 
+   * @see #newInterfaceNode(Binding)
+   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   * @see #newInstanceImplementationNode(Binding, Object)
+   * @see #newDependencyEdges(ImplementationNode, Collection, Collection)
+   */
+  public Void visitProviderInstance(ProviderInstanceBinding<?> binding) {
+    newInterfaceNode(binding);
+    newBindingEdge(getClassNodeId(binding), getInstanceNodeId(binding), BindingEdge.Type.PROVIDER);
+
+    newInstanceImplementationNode(binding, binding.getProviderInstance(),
+        binding.getInjectionPoints());
+    newDependencyEdges(getInstanceNodeId(binding), binding.getInjectionPoints(),
+        binding.getDependencies());
+
+    return null;
+  }
+

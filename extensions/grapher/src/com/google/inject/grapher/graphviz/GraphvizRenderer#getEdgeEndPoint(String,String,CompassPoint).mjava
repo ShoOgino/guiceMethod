@@ -1,0 +1,14 @@
+  protected String getEdgeEndPoint(String nodeId, String portId, CompassPoint compassPoint) {
+    List<String> portStrings = Lists.newArrayList(nodeId);
+    
+    if (portId != null) {
+      portStrings.add(portId);
+    }
+    
+    if (compassPoint != null) {
+      portStrings.add(compassPoint.toString());
+    }
+    
+    return Join.join(":", portStrings);
+  }
+

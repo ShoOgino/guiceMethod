@@ -1,0 +1,4 @@
+  public String getTailPortId() {
+    return tailPortId;
+  }
+

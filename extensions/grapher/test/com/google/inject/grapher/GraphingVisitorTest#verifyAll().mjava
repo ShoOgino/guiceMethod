@@ -1,0 +1,6 @@
+  private void verifyAll() {
+    for (Object mock : mocks) {
+      verify(mock);
+    }
+  }
+

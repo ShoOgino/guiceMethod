@@ -1,0 +1,9 @@
+  /**
+   * Renders a graph with the bound {@link Renderer}. The {@link Injector}
+   * must have already been specified with {@link #of(Injector)}.
+   */
+  public void graph() throws IOException {
+    processBindings();
+    renderer.render();
+  }
+

@@ -1,0 +1,4 @@
+  public void setHeadPortId(String headPortId) {
+    this.headPortId = headPortId;
+  }
+

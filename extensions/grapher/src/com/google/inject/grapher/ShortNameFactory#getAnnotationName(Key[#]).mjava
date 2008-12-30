@@ -1,0 +1,18 @@
+  public String getAnnotationName(Key<?> key) {
+    Annotation annotation = key.getAnnotation();
+    Class<? extends Annotation> annotationType = key.getAnnotationType();
+    if (annotation != null) {
+      annotationType = annotation.annotationType();
+
+      String annotationString = annotation.toString();
+      String canonicalName = annotationType.getName();
+      String simpleName = annotationType.getSimpleName();
+ 
+      return annotationString.replace(canonicalName, simpleName).replace("()", "");
+    } else if (annotationType != null) {
+      return "@" + annotationType.getSimpleName();
+    } else {
+      return "";
+    }
+  }
+

@@ -1,0 +1,4 @@
+  public void newAlias(String fromId, String toId) {
+    aliases.put(fromId, toId);
+  }
+

@@ -1,0 +1,14 @@
+  @Override
+  protected void configure() {
+    requireBinding(Renderer.class);
+
+    bind(InjectorGrapher.class);
+
+    bind(new TypeLiteral<BindingTargetVisitor<Object, Collection<Key<?>>>>() {})
+        .to(TransitiveDependencyVisitor.class);
+
+    bind(new TypeLiteral<BindingTargetVisitor<Object, Void>>() {})
+        .to(new TypeLiteral<GraphingVisitor<String, InterfaceNode<String>,
+            ImplementationNode<String>, BindingEdge<String>, DependencyEdge<String>>>() {});
+  }
+

@@ -1,0 +1,5 @@
+    @Override
+    protected void configure() {
+      bindConstant().annotatedWith(Names.named("number")).to("2008");
+    }
+

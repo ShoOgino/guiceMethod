@@ -1,0 +1,44 @@
+  /**
+   * Adds {@link DependencyEdge}s to the graph from the given
+   * {@link ImplementationNode} to the {@link Key}s specified in the
+   * {@link InjectionPoint}s.
+   * <p>
+   * Also adds edges for any {@link Dependency}s passed in that are not covered
+   * in the set of {@link InjectionPoint}s.
+   *
+   * @see #newDependencyEdge(Object, InjectionPoint, Dependency)
+   * 
+   * @param nodeId ID of the node that should be the tail of the
+   *     {@link DependencyEdge}s.
+   * @param injectionPoints {@link Collection} of {@link InjectionPoint}s on
+   *     the class or instance represented by the {@link ImplementationNode}.
+   * @param dependencies {@link Collection} of {@link Dependency}s from the
+   *     {@link Binding}. Some {@link Binding}s may have {@link Dependency}s
+   *     even if they do not have {@link InjectionPoint}s.
+   * @return A {@link Collection} of the {@link DependencyEdge}s that were
+   *     added to the graph.
+   */
+  protected Collection<D> newDependencyEdges(K nodeId, Collection<InjectionPoint> injectionPoints,
+      Collection<Dependency<?>> dependencies) {
+    List<D> edges = Lists.newArrayList();
+
+    // Set to keep track of which of the given Dependencies is not duplicated
+    // by the InjectionPoints.
+    Set<Dependency<?>> remainingDependencies = Sets.newHashSet(dependencies);
+    
+    for (InjectionPoint injectionPoint : injectionPoints) {
+      for (Dependency<?> dependency : injectionPoint.getDependencies()) {
+        D edge = newDependencyEdge(nodeId, injectionPoint, dependency);
+        edges.add(edge);
+        remainingDependencies.remove(dependency);
+      }
+    }
+
+    for (Dependency<?> dependency : remainingDependencies) {
+      D edge = newDependencyEdge(nodeId, null, dependency);    
+      edges.add(edge);
+    }
+
+    return edges;
+  }
+

@@ -1,0 +1,4 @@
+  NodeStyle(String name) {
+    this.name = name;
+  }
+

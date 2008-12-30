@@ -1,0 +1,4 @@
+  public String getSourceName(Object source) {
+    return stripPackages(source.toString());
+  }
+

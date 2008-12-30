@@ -1,0 +1,4 @@
+  public List<ArrowType> getArrowHead() {
+    return arrowHead;
+  }
+

@@ -1,0 +1,4 @@
+  EdgeStyle(String name) {
+    this.name = name;
+  }
+

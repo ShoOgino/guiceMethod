@@ -1,0 +1,4 @@
+  public NodeStyle getStyle() {
+    return style;
+  }
+

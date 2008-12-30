@@ -1,0 +1,14 @@
+  public DependencyEdge<String> newDependencyEdge(String fromId,
+      InjectionPoint fromPoint, String toId) {
+    GraphvizEdge edge = new GraphvizEdge(fromId, toId);
+
+    if (fromPoint == null) {
+      edge.setTailPortId("header");
+    } else {
+      edge.setTailPortId(portIdFactory.getPortId(fromPoint.getMember()));
+    }
+
+    renderer.addEdge(edge);
+    return newAdaptor(edge);
+  }
+

@@ -1,0 +1,15 @@
+  public static void main(String[] args) throws Exception {
+    // TODO(phopkins): Switch to Stage.TOOL when issue 297 is fixed.
+    Injector demoInjector = Guice.createInjector(Stage.DEVELOPMENT,
+        new BackToTheFutureModule(), new MultibinderModule());
+    PrintWriter out = new PrintWriter(new File(args[0]), "UTF-8");
+
+    Injector injector = Guice.createInjector(new GrapherModule(), new GraphvizModule());
+    GraphvizRenderer renderer = injector.getInstance(GraphvizRenderer.class);
+    renderer.setOut(out).setRankdir("TB");
+
+    injector.getInstance(InjectorGrapher.class)
+        .of(demoInjector)
+        .graph();
+  }
+

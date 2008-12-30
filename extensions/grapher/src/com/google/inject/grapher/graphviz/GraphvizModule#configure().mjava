@@ -1,0 +1,20 @@
+  @Override
+  protected void configure() {
+    bind(Renderer.class).to(GraphvizRenderer.class);
+    bind(new TypeLiteral<NodeAliasFactory<String>>() {}).to(GraphvizRenderer.class);
+    bind(GraphvizRenderer.class).in(Singleton.class);
+
+    bind(NameFactory.class).to(ShortNameFactory.class);
+    bind(new TypeLiteral<NodeIdFactory<String>>() {}).to(StringNodeIdFactory.class);
+    bind(PortIdFactory.class).to(PortIdFactoryImpl.class);
+
+    bind(new TypeLiteral<BindingEdge.Factory<String, BindingEdge<String>>>() {})
+        .to(BindingEdgeFactory.class);
+    bind(new TypeLiteral<DependencyEdge.Factory<String, DependencyEdge<String>>>() {})
+        .to(DependencyEdgeFactory.class);
+    bind(new TypeLiteral<InterfaceNode.Factory<String, InterfaceNode<String>>>() {})
+        .to(InterfaceNodeFactory.class);
+    bind(new TypeLiteral<ImplementationNode.Factory<String, ImplementationNode<String>>>() {})
+        .to(ImplementationNodeFactory.class);
+  }
+

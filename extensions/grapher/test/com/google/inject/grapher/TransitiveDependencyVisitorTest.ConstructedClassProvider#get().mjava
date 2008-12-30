@@ -1,0 +1,4 @@
+    public ConstructedClass get() {
+      return null;
+    }
+

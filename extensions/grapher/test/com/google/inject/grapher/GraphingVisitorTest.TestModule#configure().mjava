@@ -1,0 +1,7 @@
+    @Override
+    protected void configure() {
+      bind(String.class).toInstance("String");
+      bind(Integer.class).toInstance(Integer.valueOf(8));
+      bind(Boolean.class).toInstance(Boolean.TRUE);
+    }
+

@@ -1,0 +1,4 @@
+  public Collection<Key<?>> visitProviderKey(ProviderKeyBinding<?> binding) {
+    return ImmutableSet.<Key<?>>of(binding.getProviderKey());
+  }
+

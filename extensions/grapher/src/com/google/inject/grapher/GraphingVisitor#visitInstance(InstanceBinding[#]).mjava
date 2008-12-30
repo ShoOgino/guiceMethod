@@ -1,0 +1,28 @@
+  /**
+   * Visitor for {@link InstanceBinding}. We render two nodes in this case: a
+   * {@link InterfaceNode} for the binding's {@link Key}, and then an
+   * {@link ImplementationNode} for the instance {@link Object} itself. We run
+   * a {@link BindingNode} between them.
+   * <p>
+   * We then render any {@link DependencyEdge}s that the instance may have,
+   * which come either from {@link InjectionPoint}s (method and field) on the
+   * instance, or on {@link Dependency}s the instance declares through the
+   * {@link HasDependencies} interface.
+   * 
+   * @see #newInterfaceNode(Binding)
+   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   * @see #newInstanceImplementationNode(Binding, Object)
+   * @see #newDependencyEdges(ImplementationNode, Collection, Collection)
+   */
+  public Void visitInstance(InstanceBinding<?> binding) {
+    newInterfaceNode(binding);
+    newBindingEdge(getClassNodeId(binding), getInstanceNodeId(binding),
+        BindingEdge.Type.NORMAL);
+
+    newInstanceImplementationNode(binding, binding.getInstance(), binding.getInjectionPoints());
+    newDependencyEdges(getInstanceNodeId(binding), binding.getInjectionPoints(),
+        binding.getDependencies());
+
+    return null;
+  }
+

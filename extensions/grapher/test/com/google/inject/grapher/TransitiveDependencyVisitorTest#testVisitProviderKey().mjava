@@ -1,0 +1,8 @@
+  public void testVisitProviderKey() {
+    Binding<?> binding = getBinding(Key.get(ConstructedClass.class), new ProviderKeyModule());
+    Collection<Key<?>> dependencies = visitor.visitProviderKey((ProviderKeyBinding<?>) binding);
+
+    // Dependency should be to the class that provides this one.
+    assertDependencies(dependencies, Key.get(ConstructedClassProvider.class));
+  }
+

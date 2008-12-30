@@ -1,0 +1,8 @@
+  public void testVisitConstructor() {
+    Binding<?> binding = getBinding(Key.get(ConstructedClass.class));
+    Collection<Key<?>> dependencies = visitor.visitConstructor((ConstructorBinding<?>) binding);
+    
+    assertDependencies(dependencies, Key.get(A.class), Key.get(B.class), Key.get(C.class),
+        Key.get(D.class));
+  }
+

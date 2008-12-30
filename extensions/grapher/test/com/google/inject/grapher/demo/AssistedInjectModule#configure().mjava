@@ -1,0 +1,6 @@
+  @Override
+  protected void configure() {
+    bind(DancePartyFactory.class).toProvider(
+        FactoryProvider.newFactory(DancePartyFactory.class, DancePartyImpl.class));
+  }
+

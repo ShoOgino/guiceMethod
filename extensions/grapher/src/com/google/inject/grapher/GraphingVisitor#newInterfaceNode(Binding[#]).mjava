@@ -1,0 +1,12 @@
+  /**
+   * Creates and returns a new {@link InterfaceNode} object for the given
+   * {@link Binding}.
+   */
+  protected N newInterfaceNode(Binding<?> binding) {
+    N node = interfaceNodeFactory.newInterfaceNode(getClassNodeId(binding));
+    node.setKey(binding.getKey());
+    node.setSource(binding.getSource());
+
+    return node;
+  }
+

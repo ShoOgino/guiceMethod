@@ -1,0 +1,4 @@
+  public String getInstanceNodeId(Key<?> key) {
+    return "i_" + Integer.toHexString(key.hashCode());
+  }
+

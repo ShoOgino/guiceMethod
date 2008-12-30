@@ -1,0 +1,4 @@
+  NodeShape(String shape) {
+    this.shape = shape;
+  }
+

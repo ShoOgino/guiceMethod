@@ -1,0 +1,6 @@
+    public void setClassKey(Key<?> key) {
+      node.setHeaderBackgroundColor("#000000");
+      node.setHeaderTextColor("#ffffff");
+      node.setTitle(nameFactory.getClassName(key));
+    }
+

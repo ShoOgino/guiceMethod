@@ -1,0 +1,5 @@
+  public void testGetMemberName_constructor() throws Exception {
+    Member constructor = Obj.class.getDeclaredConstructor();
+    assertEquals("<init>", nameFactory.getMemberName(constructor));
+  }
+

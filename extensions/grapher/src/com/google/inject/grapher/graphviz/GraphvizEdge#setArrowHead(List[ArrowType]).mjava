@@ -1,0 +1,4 @@
+  public void setArrowHead(List<ArrowType> arrowHead) {
+    this.arrowHead = ImmutableList.copyOf(arrowHead);
+  }
+

@@ -1,0 +1,8 @@
+  public void testVisitLinkedKey() {
+    Binding<?> binding = getBinding(Key.get(Interface.class), new LinkedKeyModule());
+    Collection<Key<?>> dependencies = visitor.visitLinkedKey((LinkedKeyBinding<?>) binding);
+
+    // Dependency should be to the class this interface is bound to.
+    assertDependencies(dependencies, Key.get(ConstructedClass.class));
+  }
+

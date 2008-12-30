@@ -1,0 +1,4 @@
+  public void setTailCompassPoint(CompassPoint tailCompassPoint) {
+    this.tailCompassPoint = tailCompassPoint;
+  }
+

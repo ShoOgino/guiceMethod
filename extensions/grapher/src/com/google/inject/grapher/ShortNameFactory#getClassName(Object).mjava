@@ -1,0 +1,4 @@
+  public String getClassName(Object instance) {
+    return stripPackages(instance.getClass().getName());
+  }
+

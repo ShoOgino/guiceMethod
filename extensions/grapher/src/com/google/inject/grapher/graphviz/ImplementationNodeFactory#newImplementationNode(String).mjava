@@ -1,0 +1,7 @@
+  public ImplementationNode<String> newImplementationNode(String nodeId) {
+    GraphvizNode node = new GraphvizNode(nodeId);
+
+    renderer.addNode(node);
+    return newAdaptor(node);
+  }
+

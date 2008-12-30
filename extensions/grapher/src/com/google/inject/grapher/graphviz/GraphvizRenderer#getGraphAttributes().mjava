@@ -1,0 +1,6 @@
+  protected Map<String, String> getGraphAttributes() {
+    Map<String, String> attrs = Maps.newHashMap();
+    attrs.put("rankdir", rankdir);
+    return attrs;
+  }
+

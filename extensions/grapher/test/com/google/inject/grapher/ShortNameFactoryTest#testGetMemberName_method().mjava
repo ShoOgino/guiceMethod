@@ -1,0 +1,5 @@
+  public void testGetMemberName_method() throws Exception {
+    Member method = Obj.class.getDeclaredMethod("method", String.class);
+    assertEquals("#method(...)", nameFactory.getMemberName(method));
+  }
+

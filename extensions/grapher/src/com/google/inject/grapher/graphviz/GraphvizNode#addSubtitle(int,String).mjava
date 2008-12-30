@@ -1,0 +1,4 @@
+  public void addSubtitle(int position, String subtitle) {
+    this.subtitles.put(position, subtitle);
+  }
+

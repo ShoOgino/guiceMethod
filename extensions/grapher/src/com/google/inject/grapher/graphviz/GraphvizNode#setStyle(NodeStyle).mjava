@@ -1,0 +1,4 @@
+  public void setStyle(NodeStyle style) {
+    this.style = style;
+  }
+

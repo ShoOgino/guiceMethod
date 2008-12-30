@@ -1,0 +1,2 @@
+    @Inject ConstructedClassProvider(A a, B b, C c) {}
+

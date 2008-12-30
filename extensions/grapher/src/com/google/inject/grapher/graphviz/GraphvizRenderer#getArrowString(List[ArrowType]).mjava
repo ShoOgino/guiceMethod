@@ -1,0 +1,9 @@
+  /**
+   * Turns a {@link List} of {@link ArrowType}s into a {@link String} that
+   * represents combining them. With Graphviz, that just means concatenating
+   * them.
+   */
+  protected String getArrowString(List<ArrowType> arrows) {
+    return Join.join("", arrows);
+  }
+

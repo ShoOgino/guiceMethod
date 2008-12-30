@@ -1,0 +1,15 @@
+  /**
+   * Sets an initial group of {@link Class}es to use as the starting point for
+   * the graph. The graph will be of these classes and their transitive
+   * dependencies and bindings.
+   */
+  public InjectorGrapher rootedAt(Class<?>... classes) {
+    this.root = Sets.newHashSet();
+    
+    for (Class<?> clazz : classes) {
+      this.root.add(Key.get(clazz));
+    }
+    
+    return this;
+  }
+

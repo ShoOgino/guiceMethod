@@ -1,0 +1,5 @@
+    @Override
+    protected void configure() {
+      bind(Interface.class).to(ConstructedClass.class);
+    }
+

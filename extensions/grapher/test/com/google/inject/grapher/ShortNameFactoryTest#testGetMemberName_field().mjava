@@ -1,0 +1,5 @@
+  public void testGetMemberName_field() throws Exception {
+    Member field = Obj.class.getDeclaredField("field");
+    assertEquals("field", nameFactory.getMemberName(field));
+  }
+

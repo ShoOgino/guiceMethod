@@ -1,0 +1,4 @@
+    public void addMember(Member member) {
+      node.addField(portIdFactory.getPortId(member), nameFactory.getMemberName(member));
+    }
+

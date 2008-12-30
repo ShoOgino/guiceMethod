@@ -1,0 +1,8 @@
+    /**
+     * Creates a new {@link ImplementationNode} and adds it to the graph.
+     *
+     * @param nodeId ID for the node.
+     * @return The new {@link ImplementationNode} instance.
+     */
+    T newImplementationNode(K nodeId);
+

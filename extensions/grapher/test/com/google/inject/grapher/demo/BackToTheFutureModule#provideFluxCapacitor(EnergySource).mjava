@@ -1,0 +1,5 @@
+  @Provides
+  public FluxCapacitor provideFluxCapacitor(EnergySource energySource) {
+    return null;
+  }
+

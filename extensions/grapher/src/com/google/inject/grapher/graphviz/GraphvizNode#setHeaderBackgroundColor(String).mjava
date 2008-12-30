@@ -1,0 +1,4 @@
+  public void setHeaderBackgroundColor(String headerBackgroundColor) {
+    this.headerBackgroundColor = headerBackgroundColor;
+  }
+
