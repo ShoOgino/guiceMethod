@@ -5,6 +5,6 @@
         (ProviderInstanceBinding<?>) binding);
     
     // Dependencies will only be on the field- and method-injected classes.
-    assertDependencies(dependencies, Key.get(E.class), Key.get(F.class), Key.get(G.class));
+    assertDependencies(dependencies, Key.get(E.class), Key.get(F.class));
   }
 

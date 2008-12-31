@@ -1,4 +1,4 @@
   public Collection<Key<?>> visitConstructor(ConstructorBinding<?> binding) {
-    return visitHasDependencies(binding, binding.getInjectionPoints());
+    return visitHasDependencies(binding);
   }
 

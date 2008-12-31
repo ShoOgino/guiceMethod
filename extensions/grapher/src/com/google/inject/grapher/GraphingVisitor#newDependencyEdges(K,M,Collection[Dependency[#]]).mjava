@@ -1,0 +1,37 @@
+  /**
+   * Adds {@link DependencyEdge}s to the graph for each of the provided
+   * {@link Dependency}s. These will be from the given node ID to the
+   * {@link Dependency}'s {@link Key}.
+   * <p>
+   * If a {@link Dependency} has an associated {@link InjectionPoint}, its
+   * member will be added to the given {@link ImplementationNode} and the edge
+   * will start at the {@link Member}.
+   *
+   * @see #newDependencyEdge(Object, InjectionPoint, Dependency)
+   * 
+   * @param nodeId ID of the node that should be the tail of the
+   *     {@link DependencyEdge}s.
+   * @param node An {@link ImplementationNode} to add {@link Member}s to.
+   * @param dependencies {@link Collection} of {@link Dependency}s from the
+   *     {@link Binding}.
+   * @return A {@link Collection} of the {@link DependencyEdge}s that were
+   *     added to the graph.
+   */
+  protected Collection<D> newDependencyEdges(K nodeId, M node,
+      Collection<Dependency<?>> dependencies) {
+    List<D> edges = Lists.newArrayList();
+
+    for (Dependency<?> dependency : dependencies) {
+      InjectionPoint injectionPoint = dependency.getInjectionPoint();
+
+      if (injectionPoint != null) {
+        node.addMember(injectionPoint.getMember());
+      }
+
+      D edge = newDependencyEdge(nodeId, injectionPoint, dependency);
+      edges.add(edge);
+    }
+
+    return edges;
+  }
+

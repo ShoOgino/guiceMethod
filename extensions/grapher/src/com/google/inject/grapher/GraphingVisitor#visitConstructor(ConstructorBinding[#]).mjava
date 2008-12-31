@@ -8,9 +8,8 @@
    * @see #newDependencyEdges(ImplementationNode, Collection, Collection)
    */
   public Void visitConstructor(ConstructorBinding<?> binding) {
-    newClassImplementationNode(binding, binding.getInjectionPoints());
-    newDependencyEdges(getClassNodeId(binding), binding.getInjectionPoints(),
-        binding.getDependencies());
+    M node = newClassImplementationNode(binding, binding.getInjectionPoints());
+    newDependencyEdges(getClassNodeId(binding), node, binding.getDependencies());
 
     return null;
   }

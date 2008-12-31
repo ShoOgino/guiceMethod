@@ -1,4 +1,0 @@
-  private Injector createInjector() {
-    return Guice.createInjector(new TestModule());
-  }
-

@@ -1,4 +1,4 @@
   public Collection<Key<?>> visitInstance(InstanceBinding<?> binding) {
-    return visitHasDependencies(binding, binding.getInjectionPoints());
+    return visitHasDependencies(binding);
   }
 

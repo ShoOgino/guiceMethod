@@ -19,9 +19,8 @@
     newBindingEdge(getClassNodeId(binding), getInstanceNodeId(binding),
         BindingEdge.Type.NORMAL);
 
-    newInstanceImplementationNode(binding, binding.getInstance(), binding.getInjectionPoints());
-    newDependencyEdges(getInstanceNodeId(binding), binding.getInjectionPoints(),
-        binding.getDependencies());
+    M node = newInstanceImplementationNode(binding, binding.getInstance());
+    newDependencyEdges(getInstanceNodeId(binding), node, binding.getDependencies());
 
     return null;
   }

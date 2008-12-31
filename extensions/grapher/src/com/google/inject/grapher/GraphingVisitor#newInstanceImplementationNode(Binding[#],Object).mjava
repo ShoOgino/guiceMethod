@@ -3,15 +3,10 @@
    * {@link Binding}, where the {@link Binding} is for an instance, rather than
    * a class.
    */
-  protected M newInstanceImplementationNode(Binding<?> binding, Object instance,
-      Collection<InjectionPoint> injectionPoints) {
+  protected M newInstanceImplementationNode(Binding<?> binding, Object instance) {
     M node = implementationNodeFactory.newImplementationNode(getInstanceNodeId(binding));
     node.setSource(binding.getSource());
     node.setInstance(instance);
-
-    for (InjectionPoint injectionPoint : injectionPoints) {
-      node.addMember(injectionPoint.getMember());
-    }
 
     return node;
   }

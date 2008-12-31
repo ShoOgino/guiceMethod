@@ -1,5 +1,0 @@
-    @Provides
-    public Intf provideIntf(String string, Integer integer, Boolean bool) {
-      return null;
-    }
-
