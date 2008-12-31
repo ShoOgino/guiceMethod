@@ -124,6 +124,8 @@
    * </pre>
    *
    * See {@link com.google.inject.Binder} for more information on binding syntax.
+   * 
+   * @since 2.0
    */
   protected void configureServlets() {
   }

@@ -1,5 +1,6 @@
   /**
    * @param urlPattern Any Servlet-style pattern. examples: /*, /html/*, *.html, etc.
+   * @since 2.0
    */
   protected final ServletKeyBindingBuilder serve(String urlPattern, String... morePatterns) {
     return servletsModuleBuilder.serve(Lists.asList(urlPattern, morePatterns));
