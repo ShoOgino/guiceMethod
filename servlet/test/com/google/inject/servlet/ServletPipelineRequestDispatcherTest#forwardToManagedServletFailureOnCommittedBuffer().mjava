@@ -24,13 +24,24 @@
     expect(injector.getInstance(Key.get(HttpServlet.class)))
         .andReturn(mockServlet);
 
+
+    final Key<List<ServletDefinition>> servetDefsKey = Key
+        .get(new TypeLiteral<List<ServletDefinition>>() {});
+    expect(injector.getBindings())
+        .andReturn(new HashMap<Key<?>, Binding<?>>() {{
+
+          put(servetDefsKey, createMock(Binding.class));
+        }});
+
+    expect(injector.getInstance(servetDefsKey))
+        .andReturn(ImmutableList.of(servletDefinition));
+
     replay(injector, mockRequest, mockResponse);
 
     // Have to init the Servlet before we can dispatch to it.
     servletDefinition.init(null, injector);
 
-    final RequestDispatcher dispatcher = new ManagedServletPipeline(
-        Arrays.asList(servletDefinition))
+    final RequestDispatcher dispatcher = new ManagedServletPipeline(injector)
         .getRequestDispatcher(pattern);
 
     assertNotNull(dispatcher);

@@ -1,80 +1,11 @@
   @Override
   protected final void configure() {
-    // Install the filter and servlet bindings.
+    // Install common bindings (skipped if already installed).
+    install(new InternalServletModule());
+
+    // Install local filter and servlet bindings.
     configureServlets();
     install(filtersModuleBuilder);
     install(servletsModuleBuilder);
-
-    // Scopes.
-    bindScope(RequestScoped.class, REQUEST);
-    bindScope(SessionScoped.class, SESSION);
-
-    // Bind request.
-    Provider<HttpServletRequest> requestProvider =
-        new Provider<HttpServletRequest>() {
-          public HttpServletRequest get() {
-            return GuiceFilter.getRequest();
-          }
-
-          public String toString() {
-            return "RequestProvider";
-          }
-        };
-    bind(HttpServletRequest.class).toProvider(requestProvider);
-    bind(ServletRequest.class).toProvider(requestProvider);
-
-    // Bind response.
-    Provider<HttpServletResponse> responseProvider =
-        new Provider<HttpServletResponse>() {
-          public HttpServletResponse get() {
-            return GuiceFilter.getResponse();
-          }
-
-          public String toString() {
-            return "ResponseProvider";
-          }
-        };
-    bind(HttpServletResponse.class).toProvider(responseProvider);
-    bind(ServletResponse.class).toProvider(responseProvider);
-
-    // Bind session.
-    bind(HttpSession.class).toProvider(new Provider<HttpSession>() {
-      public HttpSession get() {
-        return GuiceFilter.getRequest().getSession();
-      }
-
-      public String toString() {
-        return "SessionProvider";
-      }
-    });
-
-    // Bind servlet context.
-    bind(ServletContext.class).toProvider(new Provider<ServletContext>() {
-      public ServletContext get() {
-        return GuiceFilter.getServletContext();
-      }
-
-      public String toString() {
-        return "ServletContextProvider";
-      }
-    });
-
-    // Bind request parameters.
-    bind(new TypeLiteral<Map<String, String[]>>() {})
-        .annotatedWith(RequestParameters.class)
-        .toProvider(new Provider<Map<String, String[]>>() {
-              @SuppressWarnings({"unchecked"})
-              public Map<String, String[]> get() {
-                return GuiceFilter.getRequest().getParameterMap();
-              }
-
-              public String toString() {
-                return "RequestParametersProvider";
-              }
-            });
-
-    // inject the pipeline into GuiceFilter so it can route requests correctly
-    // Unfortunate staticness... =(
-    requestStaticInjection(GuiceFilter.class);
   }
 

@@ -1,0 +1,10 @@
+  @Inject
+  public ManagedFilterPipeline(Injector injector, ManagedServletPipeline servletPipeline,
+      Provider<ServletContext> servletContext) {
+    this.injector = injector;
+    this.servletPipeline = servletPipeline;
+    this.servletContext = servletContext;
+
+    this.filterDefinitions = Collections.unmodifiableList(collectFilterDefinitions(injector));
+  }
+

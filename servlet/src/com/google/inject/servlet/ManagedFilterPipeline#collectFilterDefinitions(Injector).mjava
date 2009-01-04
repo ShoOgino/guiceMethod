@@ -1,0 +1,21 @@
+  /**
+   * Introspects the injector and collects all instances of bound {@code List<FilterDefinition>}
+   * into a master list.
+   * 
+   * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
+   * that preserves insertion order in entry-set iterators.
+   */
+  private List<FilterDefinition> collectFilterDefinitions(Injector injector) {
+    List<FilterDefinition> filterDefinitions = Lists.newArrayList();
+    for (Map.Entry<Key<?>, Binding<?>> entry : injector.getBindings().entrySet()) {
+      if (FILTER_DEFS.equals(entry.getKey().getTypeLiteral())) {
+
+        @SuppressWarnings("unchecked")
+        Key<List<FilterDefinition>> defsKey = (Key<List<FilterDefinition>>) entry.getKey();
+        filterDefinitions.addAll(injector.getInstance(defsKey));
+      }
+    }
+
+    return filterDefinitions;
+  }
+

@@ -1,0 +1,21 @@
+  /**
+   * Introspects the injector and collects all instances of bound {@code List<ServletDefinition>}
+   * into a master list.
+   *
+   * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
+   * that preserves insertion order in entry-set iterators.
+   */
+  private List<ServletDefinition> collectServletDefinitions(Injector injector) {
+    List<ServletDefinition> servletDefinitions = Lists.newArrayList();
+    for (Map.Entry<Key<?>, Binding<?>> entry : injector.getBindings().entrySet()) {
+      if (SERVLET_DEFS.equals(entry.getKey().getTypeLiteral())) {
+
+        @SuppressWarnings("unchecked")
+        Key<List<ServletDefinition>> defsKey = (Key<List<ServletDefinition>>) entry.getKey();
+        servletDefinitions.addAll(injector.getInstance(defsKey));
+      }
+    }
+
+    return servletDefinitions;
+  }
+

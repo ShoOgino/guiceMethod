@@ -124,6 +124,41 @@
    * </pre>
    *
    * See {@link com.google.inject.Binder} for more information on binding syntax.
+   *
+   * <p>
+   * <h3>Multiple Modules</h3>
+   *
+   * It is sometimes useful to capture servlet and filter mappings from multiple different
+   * modules. This is essential if you want to package and offer drop-in Guice plugins that
+   * provide servlet functionality.
+   *
+   * <p>
+   * Guice Servlet allows you to register several instances of {@code ServletModule} to your
+   * injector. The order in which these modules are installed determines the dispatch order
+   * of filters and the precedence order of servlets. For example, if you had two servlet modules,
+   * {@code RpcModule} and {@code WebServiceModule} and they each contained a filter that mapped
+   * to the same URI pattern, {@code "/*"}:
+   *
+   * <p>
+   * In {@code RpcModule}:
+   * <pre>
+   *     filter("/*").through(RpcFilter.class);
+   * </pre>
+   *
+   * In {@code WebServiceModule}:
+   * <pre>
+   *     filter("/*").through(WebServiceFilter.class);
+   * </pre>
+   *
+   * Then the order in which these filters are dispatched is determined by the order in which
+   * the modules are installed:
+   *
+   * <pre>
+   *   <b>install(new WebServiceModule());</b>
+   *   install(new RpcModule());
+   * </pre>
+   *
+   * In the case shown above {@code WebServiceFilter} will run first.
    * 
    * @since 2.0
    */

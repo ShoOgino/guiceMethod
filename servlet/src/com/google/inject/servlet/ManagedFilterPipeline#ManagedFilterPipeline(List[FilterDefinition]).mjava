@@ -1,4 +1,0 @@
-  public ManagedFilterPipeline(List<FilterDefinition> filterDefinitions) {
-    this.filterDefinitions = Collections.unmodifiableList(filterDefinitions);
-  }
-

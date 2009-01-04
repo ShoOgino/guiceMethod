@@ -1,0 +1,5 @@
+  @Inject
+  public ManagedServletPipeline(Injector injector) {
+    this.servletDefinitions = Collections.unmodifiableList(collectServletDefinitions(injector));
+  }
+

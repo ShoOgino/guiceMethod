@@ -1,4 +1,0 @@
-  public ManagedServletPipeline(List<ServletDefinition> servletDefinitions) {
-    this.servletDefinitions = Collections.unmodifiableList(servletDefinitions);
-  }
-
