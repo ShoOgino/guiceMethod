@@ -12,7 +12,13 @@
         //suppress rest of chain...
       }
     };
-    expect(injector.getInstance(Key.get(Filter.class))).andReturn(mockFilter).anyTimes();
+
+    expect(injector.getBinding(Key.get(Filter.class)))
+        .andReturn(createMock(Binding.class));
+    
+    expect(injector.getInstance(Key.get(Filter.class)))
+        .andReturn(mockFilter)
+        .anyTimes();
 
     expect(request.getServletPath()).andReturn("/index.html");
 

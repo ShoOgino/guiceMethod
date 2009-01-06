@@ -1,6 +1,8 @@
   public final void testServletInitAndConfig() throws ServletException {
     Injector injector = createMock(Injector.class);
 
+    expect(injector.getBinding(Key.get(HttpServlet.class)))
+        .andReturn(createMock(Binding.class));
     final HttpServlet mockServlet = new HttpServlet() {
     };
     expect(injector.getInstance(Key.get(HttpServlet.class)))

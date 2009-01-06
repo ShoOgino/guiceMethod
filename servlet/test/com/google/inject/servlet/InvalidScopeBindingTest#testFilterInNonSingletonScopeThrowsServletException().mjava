@@ -1,0 +1,20 @@
+  public final void testFilterInNonSingletonScopeThrowsServletException(){
+    GuiceFilter guiceFilter = new GuiceFilter();
+
+    Guice.createInjector(new ServletModule() {
+      @Override
+      protected void configureServlets() {
+        filter("/*").through(MyNonSingletonFilter.class);
+      }
+    });
+
+    ServletException se = null;
+    try {
+      guiceFilter.init(createMock(FilterConfig.class));
+    } catch (ServletException e) {
+      se = e;
+    } finally {
+      assertNotNull("Servlet exception was not thrown with wrong scope binding", se);
+    }
+  }
+

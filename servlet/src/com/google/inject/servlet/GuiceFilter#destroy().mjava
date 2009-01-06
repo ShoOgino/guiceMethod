@@ -5,7 +5,7 @@
       pipeline.destroyPipeline();
 
     } finally {
-      clearPipeline();
+      reset();
       servletContext.clear();
     }
   }

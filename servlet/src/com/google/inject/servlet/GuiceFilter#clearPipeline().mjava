@@ -1,5 +1,0 @@
-  //VisibleForTesting
-  static void clearPipeline() {
-    pipeline = null;
-  }
-

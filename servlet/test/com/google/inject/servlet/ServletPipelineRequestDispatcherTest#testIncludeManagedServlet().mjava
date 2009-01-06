@@ -21,6 +21,8 @@
       }
     };
 
+    expect(injector.getBinding(Key.get(HttpServlet.class)))
+        .andReturn(createMock(Binding.class));
     expect(injector.getInstance(HTTP_SERLVET_KEY))
         .andReturn(mockServlet);
 

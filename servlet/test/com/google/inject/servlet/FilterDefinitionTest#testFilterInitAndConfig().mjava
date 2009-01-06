@@ -3,7 +3,13 @@
     Injector injector = createMock(Injector.class);
 
     final MockFilter mockFilter = new MockFilter();
-    expect(injector.getInstance(Key.get(Filter.class))).andReturn(mockFilter).anyTimes();
+
+    expect(injector.getBinding(Key.get(Filter.class)))
+        .andReturn(createMock(Binding.class));
+
+    expect(injector.getInstance(Key.get(Filter.class)))
+        .andReturn(mockFilter)
+        .anyTimes();
 
     replay(injector);
 

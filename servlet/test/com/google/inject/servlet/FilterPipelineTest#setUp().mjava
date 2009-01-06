@@ -1,6 +1,6 @@
   @Override
   public final void setUp() {
-    GuiceFilter.clearPipeline();
+    GuiceFilter.reset();
     
     Guice.createInjector(new ServletModule() {
 
