@@ -2,11 +2,6 @@
    * Returns a module which creates bindings for provider methods from the given module.
    */
   public static Module forModule(Module module) {
-    // avoid infinite recursion, since installing a module always installs itself
-    if (module instanceof ProviderMethodsModule) {
-      return Modules.EMPTY_MODULE;
-    }
-
-    return new ProviderMethodsModule(module);
+    return forObject(module);
   }
 

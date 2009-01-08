@@ -1,0 +1,13 @@
+  /**
+   * Returns a module which creates bindings for provider methods from the given object.
+   * This is useful notably for <a href="http://code.google.com/p/google-gin/">GIN</a>
+   */
+  public static Module forObject(Object object) {
+    // avoid infinite recursion, since installing a module always installs itself
+    if (object instanceof ProviderMethodsModule) {
+      return Modules.EMPTY_MODULE;
+    }
+
+    return new ProviderMethodsModule(object);
+  }
+

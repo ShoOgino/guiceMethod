@@ -1,0 +1,5 @@
+  // exposed for GIN
+  public Object getInstance() {
+    return instance;
+  }
+
