@@ -1,5 +1,5 @@
   /** Creates a CreationException containing {@code messages}. */
-  public CreationException(Iterable<Message> messages) {
+  public CreationException(Collection<Message> messages) {
     this.messages = ImmutableSet.copyOf(messages);
     checkArgument(!this.messages.isEmpty());
     initCause(Errors.getOnlyCause(this.messages));
