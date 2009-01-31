@@ -7,13 +7,11 @@
    */
   private List<ServletDefinition> collectServletDefinitions(Injector injector) {
     List<ServletDefinition> servletDefinitions = Lists.newArrayList();
-    for (Map.Entry<Key<?>, Binding<?>> entry : injector.getBindings().entrySet()) {
-      if (SERVLET_DEFS.equals(entry.getKey().getTypeLiteral())) {
+    for (Binding<?> entry : injector.findBindingsByType(SERVLET_DEFS)) {
 
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked") //guarded by findBindingsByType()
         Key<List<ServletDefinition>> defsKey = (Key<List<ServletDefinition>>) entry.getKey();
         servletDefinitions.addAll(injector.getInstance(defsKey));
-      }
     }
 
     return servletDefinitions;
