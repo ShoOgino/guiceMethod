@@ -1,0 +1,22 @@
+  public String getInstanceName(Object instance) {
+    if (instance instanceof ProviderMethod) {
+      return getMethodString(((ProviderMethod<?>) instance).getMethod());
+    }
+
+    if (instance instanceof CharSequence) {
+      return "\"" + instance + "\"";
+    }
+
+    try {
+      if (instance.getClass().getMethod("toString").getDeclaringClass().equals(Object.class)) {
+        return stripPackages(instance.getClass().getName());
+      }
+    } catch (SecurityException e) {
+      throw new AssertionError(e);
+    } catch (NoSuchMethodException e) {
+      throw new AssertionError(e);
+    }
+
+    return instance.toString();
+  }
+

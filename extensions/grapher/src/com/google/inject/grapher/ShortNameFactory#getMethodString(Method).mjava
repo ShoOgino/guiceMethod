@@ -1,0 +1,10 @@
+  protected String getMethodString(Method method) {
+    List<String> paramStrings = Lists.newArrayList();
+    for (Class<?> paramType : method.getParameterTypes()) {
+      paramStrings.add(paramType.getSimpleName());
+    }
+
+    String paramString = Join.join(", ", paramStrings);
+    return "#" + method.getName() + "(" + paramString + ")";
+  }
+

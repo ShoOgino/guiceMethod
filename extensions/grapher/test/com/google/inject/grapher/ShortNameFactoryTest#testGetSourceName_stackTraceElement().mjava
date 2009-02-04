@@ -1,0 +1,7 @@
+  public void testGetSourceName_stackTraceElement() throws Exception {
+    StackTraceElement element = 
+        (StackTraceElement) StackTraceElements.forMember(Obj.class.getField("field"));
+    assertEquals("Stack trace element should be identified by its file name and line number",
+        "ShortNameFactoryTest.java:52", nameFactory.getSourceName(element));
+  }
+

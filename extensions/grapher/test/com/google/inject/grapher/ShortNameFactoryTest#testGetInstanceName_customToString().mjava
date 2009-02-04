@@ -1,0 +1,5 @@
+  public void testGetInstanceName_customToString() throws Exception {
+    assertEquals("Should use class's toString() method since it's defined",
+        "I'm a ToStringObj", nameFactory.getInstanceName(new ToStringObj()));
+  }
+

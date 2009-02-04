@@ -1,4 +1,17 @@
+  /**
+   * Returns a name for a Guice "source" object. This will typically be either
+   * a {@link StackTraceElement} for when the binding is made to the instance,
+   * or a {@link Method} when a provider method is used.
+   */
   public String getSourceName(Object source) {
+    if (source instanceof Method) {
+      source = StackTraceElements.forMember((Method) source);
+    }
+
+    if (source instanceof StackTraceElement) {
+      return getFileString((StackTraceElement) source);
+    }
+
     return stripPackages(source.toString());
   }
 

@@ -1,0 +1,5 @@
+    @Provides
+    public Integer provideInteger(String string) {
+      return Integer.valueOf(string);
+    }
+

@@ -1,0 +1,4 @@
+  protected String getFileString(StackTraceElement stackTraceElement) {
+    return stackTraceElement.getFileName() + ":" + stackTraceElement.getLineNumber();
+  }
+

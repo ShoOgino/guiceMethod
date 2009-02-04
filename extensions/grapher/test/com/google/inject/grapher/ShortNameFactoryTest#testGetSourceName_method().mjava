@@ -1,6 +1,10 @@
+  /**
+   * Tests the case where a provider method is the source of the 
+   * @throws Exception
+   */
   public void testGetSourceName_method() throws Exception {
     Member method = Obj.class.getDeclaredMethod("method", String.class);
-    assertEquals("Method name and parameters should not have packages",
-        "void ShortNameFactoryTest$Obj.method(String)", nameFactory.getSourceName(method));
+    assertEquals("Method should be identified by its file name and line number",
+        "ShortNameFactoryTest.java:53", nameFactory.getSourceName(method));
   }
 
