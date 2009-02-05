@@ -1,0 +1,16 @@
+    /**
+     * Sets a custom initial capacity (defaults to 16). Resizing this or any
+     * other kind of hash table is a relatively slow operation, so, when
+     * possible, it is a good idea to provide estimates of expected table
+     * sizes.
+     *
+     * @throws IllegalArgumentException if initialCapacity < 0
+     */
+    public Builder initialCapacity(int initialCapacity) {
+      if (initialCapacity < 0) {
+        throw new IllegalArgumentException();
+      }
+      this.initialCapacity = initialCapacity;
+      return this;
+    }
+

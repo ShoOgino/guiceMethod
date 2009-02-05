@@ -1,0 +1,10 @@
+    /**
+     * isEmpty is true of empty map and false for non-empty
+     */
+    public void testIsEmpty() {
+        Jsr166HashMap empty = new Jsr166HashMap();
+        Jsr166HashMap map = map5();
+        assertTrue(empty.isEmpty());
+        assertFalse(map.isEmpty());
+    }
+

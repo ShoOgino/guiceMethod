@@ -1,8 +1,0 @@
-    public void testPutAll() {
-      ReferenceMap map = newInstance();
-      Object k = "key";
-      Object v = "value";
-      map.putAll(Collections.singletonMap(k, v));
-      assertSame(v, map.get(k));
-    }
-

@@ -1,0 +1,12 @@
+    /**
+     * containsKey(null) throws NPE
+     */
+    public void testContainsKey_NullPointerException() {
+        try {
+            Jsr166HashMap c = new Jsr166HashMap(5);
+            c.containsKey(null);
+            shouldThrow();
+        } catch (NullPointerException e) {
+        }
+    }
+

@@ -1,5 +1,0 @@
-  public ReferenceCache(ReferenceType keyReferenceType,
-      ReferenceType valueReferenceType) {
-    super(keyReferenceType, valueReferenceType);
-  }
-

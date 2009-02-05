@@ -1,0 +1,6 @@
+  /**
+   * Constructs a new {@code MapMaker} instance with default settings,
+   * including strong keys, strong values, and no automatic expiration.
+   */
+  public MapMaker() {}
+

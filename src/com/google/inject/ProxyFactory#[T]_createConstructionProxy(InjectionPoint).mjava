@@ -1,3 +1,4 @@
+  // TODO: This isn't safe.
   <T> ConstructionProxy<T> createConstructionProxy(InjectionPoint injectionPoint) {
     @SuppressWarnings("unchecked") // the member of injectionPoint is always a Constructor<T>
     Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();

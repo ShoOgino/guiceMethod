@@ -1,0 +1,8 @@
+      public void testPutAll() {
+        ConcurrentMap<Object, Object> map = newMap();
+        Object k = "key";
+        Object v = "value";
+        map.putAll(Collections.singletonMap(k, v));
+        assertSame(v, map.get(k));
+      }
+

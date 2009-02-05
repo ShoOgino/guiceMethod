@@ -1,0 +1,5 @@
+    public ValueReference<K, V> copyFor(
+        ReferenceEntry<K, V> entry) {
+      return new SoftValueReference<K, V>(get(), entry);
+    }
+

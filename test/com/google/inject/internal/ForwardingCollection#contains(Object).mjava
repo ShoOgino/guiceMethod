@@ -1,0 +1,4 @@
+  public boolean contains(Object object) {
+    return delegate().contains(object);
+  }
+

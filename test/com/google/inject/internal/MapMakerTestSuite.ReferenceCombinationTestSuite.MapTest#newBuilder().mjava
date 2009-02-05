@@ -1,0 +1,7 @@
+      MapMaker newBuilder() {
+        MapMaker maker = new MapMaker();
+        keyOption.applyTo(maker);
+        valueOption.applyTo(maker);
+        return maker;
+      }
+

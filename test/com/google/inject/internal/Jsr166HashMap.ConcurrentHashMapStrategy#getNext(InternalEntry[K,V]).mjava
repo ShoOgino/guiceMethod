@@ -1,0 +1,4 @@
+    public InternalEntry<K, V> getNext(InternalEntry<K, V> entry) {
+      return entry.next;
+    }
+

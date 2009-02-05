@@ -1,4 +1,0 @@
-    Thread winningThread() {
-      return winningThread;
-    }
-

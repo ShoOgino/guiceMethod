@@ -1,0 +1,8 @@
+    public void setValue(ReferenceEntry<K, V> entry, V value) {
+      setValueReference(
+          entry, valueStrength.referenceValue(entry, value));
+      if (expirationNanos > 0) {
+        scheduleRemoval(entry.getKey(), value);
+      }
+    }
+

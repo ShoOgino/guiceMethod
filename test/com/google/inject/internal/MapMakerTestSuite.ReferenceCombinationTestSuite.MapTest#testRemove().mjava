@@ -1,0 +1,8 @@
+      public void testRemove() {
+        ConcurrentMap<Object, String> map = newMap();
+        Object k = "key";
+        map.put(k, "value");
+        map.remove(k);
+        assertFalse(map.containsKey(k));
+      }
+

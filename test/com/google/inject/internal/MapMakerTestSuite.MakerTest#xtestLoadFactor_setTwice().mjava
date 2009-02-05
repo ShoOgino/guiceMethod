@@ -1,0 +1,11 @@
+    // TODO: enable when ready
+    public void xtestLoadFactor_setTwice() {
+      MapMaker maker = new MapMaker().loadFactor(0.75f);
+      try {
+        // even to the same value is not allowed
+        maker.loadFactor(0.75f);
+        fail();
+      } catch (IllegalArgumentException expected) {
+      }
+    }
+

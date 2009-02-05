@@ -1,0 +1,6 @@
+    public void testSleepCanonical() throws InterruptedException {
+      ConcurrentMap<String, Integer> cache = new MapMaker()
+          .softValues().makeComputingMap(new SleepFunction());
+      assertConcurrency(cache, true);
+    }
+

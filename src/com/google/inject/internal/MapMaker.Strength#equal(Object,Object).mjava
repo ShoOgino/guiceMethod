@@ -1,0 +1,6 @@
+    /**
+     * Determines if two keys or values are equal according to this
+     * strength strategy.
+     */
+    abstract boolean equal(Object a, Object b);
+

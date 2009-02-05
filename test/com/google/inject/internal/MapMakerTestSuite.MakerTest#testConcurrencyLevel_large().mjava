@@ -1,0 +1,5 @@
+    public void testConcurrencyLevel_large() {
+      MapMaker maker = new MapMaker().concurrencyLevel(Integer.MAX_VALUE);
+      // don't actually build this beast
+    }
+

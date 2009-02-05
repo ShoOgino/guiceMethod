@@ -1,7 +1,0 @@
-    public MapTest(String name, ReferenceType keyType,
-        ReferenceType valueType) {
-      super(name);
-      this.keyType = keyType;
-      this.valueType = valueType;
-    }
-

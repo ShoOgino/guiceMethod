@@ -1,0 +1,2 @@
+      void applyTo(MapMaker maker);
+

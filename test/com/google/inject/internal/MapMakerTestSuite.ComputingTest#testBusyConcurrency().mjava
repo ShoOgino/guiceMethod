@@ -1,0 +1,6 @@
+    public void testBusyConcurrency() throws InterruptedException {
+      ConcurrentMap<String, Integer> cache = new MapMaker()
+          .weakKeys().weakValues().makeComputingMap(new BusyFunction());
+      assertConcurrency(cache, false);
+    }
+

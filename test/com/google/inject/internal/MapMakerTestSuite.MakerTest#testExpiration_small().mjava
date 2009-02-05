@@ -1,0 +1,5 @@
+    public void testExpiration_small() {
+      MapMaker maker = new MapMaker().expiration(1, NANOSECONDS);
+      // well, it didn't blow up.
+    }
+

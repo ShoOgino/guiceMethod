@@ -1,0 +1,10 @@
+      /**
+       * Removes the entry in the event of an exception. Ideally,
+       * we'd clean up as soon as the computation completes, but we
+       * can't do that without keeping a reference to this entry from
+       * the original.
+       */
+      void removeEntry() {
+        internals.removeEntry(newEntry);
+      }
+

@@ -1,0 +1,4 @@
+  public boolean addAll(Collection<? extends E> collection) {
+    return delegate().addAll(collection);
+  }
+

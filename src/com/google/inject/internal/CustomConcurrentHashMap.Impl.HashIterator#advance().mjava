@@ -1,0 +1,23 @@
+      final void advance() {
+        nextExternal = null;
+
+        if (nextInChain()) {
+          return;
+        }
+
+        if (nextInTable()) {
+          return;
+        }
+
+        while (nextSegmentIndex >= 0) {
+          Segment seg = segments[nextSegmentIndex--];
+          if (seg.count != 0) {
+            currentTable = seg.table;
+            nextTableIndex = currentTable.length() - 1;
+            if (nextInTable()) {
+              return;
+            }
+          }
+        }
+      }
+

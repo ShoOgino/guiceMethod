@@ -1,5 +1,0 @@
-  public V get(final Object key) {
-    checkNotNull(key, "key");
-    return internalGet((K) key);
-  }
-

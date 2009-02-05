@@ -1,0 +1,8 @@
+    StrategyImpl(MapMaker maker) {
+      this.keyStrength = maker.keyStrength;
+      this.valueStrength = maker.valueStrength;
+      this.expirationNanos = maker.expirationNanos;
+
+      map = maker.builder.buildMap(this);
+    }
+

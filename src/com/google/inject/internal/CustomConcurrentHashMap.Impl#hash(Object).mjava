@@ -1,0 +1,5 @@
+    int hash(Object key) {
+      int h = strategy.hashKey(key);
+      return rehash(h);
+    }
+

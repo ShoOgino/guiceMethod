@@ -1,0 +1,11 @@
+    public void testSerialization() {
+      ConcurrentMap<String, Integer> map =
+          new MapMaker().makeMap();
+      map.put("one", 1);
+      reserializeAndAssert(map);
+
+      map = new MapMaker().weakKeys().makeMap();
+      map.put("one", 1);
+      reserialize(map);
+    }
+

@@ -1,2 +1,17 @@
-  private FinalizableReferenceQueue() {}
+  /**
+   * Constructs a new queue.
+   */
+  @SuppressWarnings("unchecked")
+  public FinalizableReferenceQueue() {
+    // We could start the finalizer lazily, but I'd rather it blow up early.
+    try {
+      this.queue = (ReferenceQueue<Object>) startFinalizer.invoke(null,
+          FinalizableReference.class, this);
+    } catch (IllegalAccessException e) {
+      // Finalizer.startFinalizer() is public.
+      throw new AssertionError(e);
+    } catch (InvocationTargetException e) {
+      throw new RuntimeException(e);
+    }
+  }
 

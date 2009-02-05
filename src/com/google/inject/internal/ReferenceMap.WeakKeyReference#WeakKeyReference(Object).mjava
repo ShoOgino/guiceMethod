@@ -1,5 +1,0 @@
-    public WeakKeyReference(Object key) {
-      super(key);
-      this.hashCode = keyHashCode(key);
-    }
-

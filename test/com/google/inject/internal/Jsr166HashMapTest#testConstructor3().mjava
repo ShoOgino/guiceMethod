@@ -1,0 +1,11 @@
+    /**
+     * Cannot create with only negative capacity
+     */
+    public void testConstructor3() {
+        try {
+            new Jsr166HashMap(-1);
+            shouldThrow();
+        } catch (IllegalArgumentException e) {
+        }
+    }
+

@@ -1,0 +1,7 @@
+    public void testInternedValueCleanupWithWeakKey() {
+      ConcurrentMap<Object, Object> map =
+          new MapMaker().weakKeys().makeMap();
+      map.put(new Integer(5), "foo");
+      assertCleanup(map);
+    }
+

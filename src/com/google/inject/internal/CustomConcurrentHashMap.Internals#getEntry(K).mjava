@@ -1,0 +1,9 @@
+    /**
+     * Returns the internal entry corresponding to the given key from the map.
+     *
+     * @param key to retrieve entry for
+     *
+     * @throws NullPointerException if key is null
+     */
+    E getEntry(K key);
+

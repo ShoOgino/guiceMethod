@@ -1,0 +1,13 @@
+  /**
+   * Sets a custom load factor (defaults to 0.75).
+   *
+   * @throws IllegalArgumentException if {@code loadFactor} is
+   *     nonpositive
+   * @throws IllegalStateException if a load factor was already set
+   *     (TODO: make that true)
+   */
+  public MapMaker loadFactor(float loadFactor) {
+    builder.loadFactor(loadFactor);
+    return this;
+  }
+

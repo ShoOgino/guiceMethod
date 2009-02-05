@@ -1,0 +1,9 @@
+    public void testReturnsPlainConcurrentHashMapWhenPossible() {
+      Map<?, ?> map = new MapMaker()
+          .concurrencyLevel(5)
+          .loadFactor(0.5f)
+          .initialCapacity(5)
+          .makeMap();
+      assertTrue(map instanceof ConcurrentHashMap);
+    }
+

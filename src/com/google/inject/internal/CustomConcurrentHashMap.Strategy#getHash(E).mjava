@@ -1,0 +1,6 @@
+    /**
+     * Returns the hash code that was passed to {@link Strategy#newEntry})
+     * when the given entry was created.
+     */
+    int getHash(E entry);
+

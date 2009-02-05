@@ -1,0 +1,7 @@
+      <K, V> ConcurrentMap<K, V> newMap() {
+        MapMaker maker = new MapMaker();
+        keyOption.applyTo(maker);
+        valueOption.applyTo(maker);
+        return maker.makeMap();
+      }
+

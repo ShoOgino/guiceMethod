@@ -1,0 +1,17 @@
+      /**
+       * Finds the next entry in the current chain. Returns true if an entry
+       * was found.
+       */
+      boolean nextInChain() {
+        Strategy<K, V, E> s = Impl.this.strategy;
+        if (nextEntry != null) {
+          for (nextEntry = s.getNext(nextEntry); nextEntry != null;
+              nextEntry = s.getNext(nextEntry)) {
+            if (advanceTo(nextEntry)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+

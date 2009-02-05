@@ -1,5 +1,0 @@
-  /**
-   * Creates a value for the given key.
-   */
-  abstract V create(FutureValue<V> futureValue, K key);
-

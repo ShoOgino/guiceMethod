@@ -1,0 +1,18 @@
+    /**
+     * Creates a copy of the given entry pointing to the given next entry.
+     * Copies the value and any other implementation-specific state from
+     * {@code original} to the returned entry. For example,
+     * CustomConcurrentHashMap might use this method when removing other
+     * entries or expanding the internal table.
+     *
+     * @param key for {@code original} as well as the returned entry.
+     *  Explicitly provided here to prevent reclamation of the key at an
+     *  inopportune time in implementations that don't otherwise keep
+     *  a strong reference to the key.
+     * @param original entry from which the value and other
+     *  implementation-specific state should be copied
+     * @param newNext the next entry the new entry should point to, possibly
+     *  null
+     */
+    E copyEntry(K key, E original, E newNext);
+

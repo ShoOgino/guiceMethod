@@ -1,0 +1,14 @@
+    /**
+     * remove(key,value) removes only if pair present
+     */
+    public void testRemove2() {
+        Jsr166HashMap map = map5();
+        map.remove(five, "E");
+        assertEquals(4, map.size());
+        assertFalse(map.containsKey(five));
+        map.remove(four, "A");
+        assertEquals(4, map.size());
+        assertTrue(map.containsKey(four));
+
+    }
+

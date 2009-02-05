@@ -1,0 +1,9 @@
+      WriteThroughEntry nextEntry() {
+        if (nextExternal == null) {
+          throw new NoSuchElementException();
+        }
+        lastReturned = nextExternal;
+        advance();
+        return lastReturned;
+      }
+

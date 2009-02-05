@@ -1,0 +1,11 @@
+    /**
+     * Returns true if the two given values are equal, false otherwise. Neither
+     * value will be null.
+     *
+     * @param a value from inside the map
+     * @param b value passed from caller, not necesarily of type V
+     *
+     * @see Object#equals the same contractual obligations apply here
+     */
+    boolean equalValues(V a, Object b);
+

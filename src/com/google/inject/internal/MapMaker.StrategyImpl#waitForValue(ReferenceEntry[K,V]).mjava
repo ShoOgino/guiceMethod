@@ -1,0 +1,18 @@
+    /**
+     * Waits for a computation to complete. Returns the result of the
+     * computation or null if none was available.
+     */
+    public V waitForValue(ReferenceEntry<K, V> entry)
+        throws InterruptedException {
+      ValueReference<K, V> valueReference = entry.getValueReference();
+      if (valueReference == COMPUTING) {
+        synchronized (entry) {
+          while ((valueReference = entry.getValueReference())
+              == COMPUTING) {
+            entry.wait();
+          }
+        }
+      }
+      return valueReference.waitForValue();
+    }
+

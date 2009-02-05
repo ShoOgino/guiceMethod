@@ -1,0 +1,4 @@
+  public V replace(K key, V value) {
+    return delegate().replace(key, value);
+  }
+

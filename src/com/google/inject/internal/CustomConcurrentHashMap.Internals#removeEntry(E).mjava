@@ -1,0 +1,9 @@
+    /**
+     * Removes the given entry from the map.
+     *
+     * @param entry to remove
+     *
+     * @throws NullPointerException if entry is null
+     */
+    boolean removeEntry(E entry);
+

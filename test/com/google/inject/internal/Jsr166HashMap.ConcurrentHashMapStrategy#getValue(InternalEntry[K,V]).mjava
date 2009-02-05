@@ -1,0 +1,2 @@
+    public V getValue(InternalEntry<K, V> entry) { return entry.value; }
+

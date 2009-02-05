@@ -1,0 +1,13 @@
+    /**
+     * Sets a custom load factor (defaults to 0.75).
+     *
+     * @throws IllegalArgumentException if loadFactor <= 0
+     */
+    public Builder loadFactor(float loadFactor) {
+      if (loadFactor <= 0) {
+        throw new IllegalArgumentException();
+      }
+      this.loadFactor = loadFactor;
+      return this;
+    }
+

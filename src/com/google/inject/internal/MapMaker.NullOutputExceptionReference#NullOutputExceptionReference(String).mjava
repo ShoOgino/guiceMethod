@@ -1,0 +1,4 @@
+    NullOutputExceptionReference(String message) {
+      this.message = message;
+    }
+

@@ -1,8 +1,0 @@
-    public void testPutIfAbsent() {
-      ReferenceMap map = newInstance();
-      map.putIfAbsent("a", "1");
-      assertEquals("1", map.get("a"));
-      map.putIfAbsent("a", "2");
-      assertEquals("1", map.get("a"));
-    }
-

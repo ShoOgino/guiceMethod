@@ -1,0 +1,4 @@
+    public void finalizeReferent() {
+      internals.removeEntry(this);
+    }
+

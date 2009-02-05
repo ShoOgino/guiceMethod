@@ -1,0 +1,10 @@
+    public void testWeakKeyIdentityLookup() {
+      ConcurrentMap<Integer, String> map =
+          new MapMaker().weakKeys().makeMap();
+      Integer key1 = new Integer(12357);
+      Integer key2 = new Integer(12357);
+      map.put(key1, "a");
+      assertTrue(map.containsKey(key1));
+      assertFalse(map.containsKey(key2));
+    }
+

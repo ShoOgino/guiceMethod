@@ -1,4 +1,0 @@
-  protected FinalizableWeakReference(T referent) {
-    super(referent, FinalizableReferenceQueue.getInstance());
-  }
-

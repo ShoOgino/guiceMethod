@@ -1,0 +1,13 @@
+    public void testComputerThatReturnsNull() {
+      ConcurrentMap<Integer, String> map = new MapMaker()
+          .makeComputingMap(new Function<Integer, String>() {
+            public String apply(Integer key) {
+              return null;
+            }
+          });
+      try {
+        map.get(1);
+        fail();
+      } catch (NullPointerException e) { /* expected */ }
+    }
+

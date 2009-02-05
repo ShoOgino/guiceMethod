@@ -1,4 +1,0 @@
-    ReferenceMap newInstance() {
-      return new ReferenceMap(keyType, valueType);
-    }
-

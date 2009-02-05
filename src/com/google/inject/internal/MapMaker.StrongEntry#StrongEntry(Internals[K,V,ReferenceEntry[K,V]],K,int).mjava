@@ -1,0 +1,7 @@
+    StrongEntry(Internals<K, V, ReferenceEntry<K, V>> internals, K key,
+        int hash) {
+      this.internals = internals;
+      this.key = key;
+      this.hash = hash;
+    }
+

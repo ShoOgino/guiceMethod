@@ -1,6 +1,0 @@
-  public void putAll(Map<? extends K, ? extends V> t) {
-    for (Map.Entry<? extends K, ? extends V> entry : t.entrySet()) {
-      put(entry.getKey(), entry.getValue());
-    }
-  }
-

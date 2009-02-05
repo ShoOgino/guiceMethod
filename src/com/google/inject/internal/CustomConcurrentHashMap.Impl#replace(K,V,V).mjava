@@ -1,0 +1,19 @@
+    /**
+     * {@inheritDoc}
+     *
+     * @throws NullPointerException if any of the arguments are null
+     */
+    public boolean replace(K key, V oldValue, V newValue) {
+      if (key == null) {
+        throw new NullPointerException("key");
+      }
+      if (oldValue == null) {
+        throw new NullPointerException("oldValue");
+      }
+      if (newValue == null) {
+        throw new NullPointerException("newValue");
+      }
+      int hash = hash(key);
+      return segmentFor(hash).replace(key, hash, oldValue, newValue);
+    }
+

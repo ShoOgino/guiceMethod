@@ -1,0 +1,7 @@
+    /**
+     * Waits for a value that may still be computing. Unlike get(),
+     * this method can block (in the case of FutureValueReference) or
+     * throw an exception.
+     */
+    V waitForValue() throws InterruptedException;
+

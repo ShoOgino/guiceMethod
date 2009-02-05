@@ -1,0 +1,13 @@
+    /**
+     * remove(x, null) returns false
+     */
+    public void testRemove3() {
+        try {
+            Jsr166HashMap c = new Jsr166HashMap(5);
+            c.put("sadsdf", "asdads");
+            assertFalse(c.remove("sadsdf", null));
+        } catch (NullPointerException e) {
+            fail();
+        }
+    }
+

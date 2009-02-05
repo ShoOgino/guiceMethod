@@ -1,7 +1,0 @@
-    public String getName() {
-      return super.getName()
-          + "For"
-          + Strings.capitalize(keyType.toString().toLowerCase())
-          + Strings.capitalize(valueType.toString().toLowerCase());
-    }
-

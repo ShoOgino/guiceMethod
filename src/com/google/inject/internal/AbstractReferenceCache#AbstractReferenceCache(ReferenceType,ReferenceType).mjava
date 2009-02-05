@@ -1,5 +1,0 @@
-  AbstractReferenceCache(ReferenceType keyReferenceType,
-      ReferenceType valueReferenceType) {
-    super(keyReferenceType, valueReferenceType);
-  }
-

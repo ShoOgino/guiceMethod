@@ -1,4 +1,0 @@
-  protected FinalizableSoftReference(T referent) {
-    super(referent, FinalizableReferenceQueue.getInstance());
-  }
-

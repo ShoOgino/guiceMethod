@@ -1,0 +1,13 @@
+  public static Test suite() {
+    TestSuite suite = new TestSuite();
+
+    suite.addTestSuite(RecursiveComputationTest.class);
+    suite.addTestSuite(ReferenceMapTest.class);
+    suite.addTestSuite(ComputingTest.class);
+    suite.addTest(ReferenceCombinationTestSuite.suite());
+    suite.addTestSuite(ExpiringReferenceMapTest.class);
+    suite.addTestSuite(ExpiringComputingReferenceMapTest.class);
+
+    return suite;
+  }
+

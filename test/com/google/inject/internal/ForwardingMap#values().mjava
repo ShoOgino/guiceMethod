@@ -1,0 +1,11 @@
+  /**
+   * {@inheritDoc}
+   * 
+   * <p>The returned collection's {@code removeAll} and {@code retainAll}
+   * methods always throw a {@link NullPointerException} when given a null
+   * collection.  
+   */
+  public Collection<V> values() {
+    return (values == null) ? values = createValues() : values;
+  }
+

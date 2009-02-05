@@ -1,0 +1,4 @@
+    public int getHash(ReferenceEntry entry) {
+      return entry.getHash();
+    }
+

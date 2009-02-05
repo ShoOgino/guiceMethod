@@ -1,0 +1,7 @@
+    /**
+     * fail with message "Unexpected exception"
+     */
+    public void unexpectedException() {
+        fail("Unexpected exception");
+    }
+

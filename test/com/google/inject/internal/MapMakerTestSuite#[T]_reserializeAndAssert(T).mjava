@@ -1,0 +1,9 @@
+  static <T> T reserializeAndAssert(T object) {
+    T copy = reserialize(object);
+    if (!copy.equals(object)) {
+      throw new AssertionError("The re-serialized object " + copy +
+          " does not equal the original object " + object);
+    }
+    return copy;
+  }
+

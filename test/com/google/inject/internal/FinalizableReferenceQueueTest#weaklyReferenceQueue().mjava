@@ -1,0 +1,21 @@
+  /**
+   * Create the FRQ in a method that goes out of scope so that we're sure
+   * it will be reclaimed.
+   */
+  private void weaklyReferenceQueue() {
+    frq = new FinalizableReferenceQueue();
+    queueReference = new WeakReference<ReferenceQueue<Object>>(frq.queue);
+
+    /*
+     * Queue and clear a reference for good measure. We test later on that
+     * the finalizer thread stopped, but we should test that it actually
+     * started first.
+     */
+    reference = new FinalizableWeakReference<Object>(new Object(), frq) {
+      public void finalizeReferent() {
+        reference = null;
+        frq = null;
+      }
+    };
+  }
+

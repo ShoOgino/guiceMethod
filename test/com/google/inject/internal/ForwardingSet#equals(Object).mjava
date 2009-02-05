@@ -1,0 +1,4 @@
+  @Override public boolean equals(@Nullable Object object) {
+    return object == this || delegate().equals(object);
+  }
+

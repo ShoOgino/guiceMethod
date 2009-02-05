@@ -1,0 +1,9 @@
+    /**
+     * Gets the key for the given entry. This may return null (for example,
+     * if the key was reclaimed by the garbage collector).
+     *
+     * @param entry to get key from
+     * @return key from the given entry
+     */
+    K getKey(E entry);
+

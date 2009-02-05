@@ -1,0 +1,9 @@
+    /**
+     * Sets the value of an entry using volatile semantics. Values are set
+     * synchronously on a per-entry basis.
+     *
+     * @param entry to set the value on
+     * @param value to set
+     */
+    void setValue(E entry, V value);
+

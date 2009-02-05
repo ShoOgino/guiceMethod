@@ -1,0 +1,16 @@
+  /**
+   * Ensures that an {@code Iterable} object passed as a parameter to the
+   * calling method is not null and contains no null elements.
+   *
+   * @param iterable the iterable to check the contents of
+   * @return the non-null {@code iterable} reference just validated
+   * @throws NullPointerException if {@code iterable} is null or contains at
+   *     least one null element
+   */
+  public static <T extends Iterable<?>> T checkContentsNotNull(T iterable) {
+    if (containsOrIsNull(iterable)) {
+      throw new NullPointerException();
+    }
+    return iterable;
+  }
+

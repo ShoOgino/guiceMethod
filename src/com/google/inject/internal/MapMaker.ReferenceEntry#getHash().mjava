@@ -1,0 +1,3 @@
+    /** Gets the entry's hash. */
+    int getHash();
+

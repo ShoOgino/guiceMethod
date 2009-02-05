@@ -1,0 +1,4 @@
+      public WatchedCreatorFunction() {
+        this(KEY_PREFIX);
+      }
+

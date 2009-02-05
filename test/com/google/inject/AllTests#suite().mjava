@@ -30,7 +30,6 @@
     suite.addTestSuite(ProviderInjectionTest.class);
     suite.addTestSuite(ProvisionExceptionTest.class);
     suite.addTestSuite(ProxyFactoryTest.class);
-    suite.addTest(ReferenceMapTestSuite.suite());
     suite.addTestSuite(ReflectionTest.class);
     suite.addTestSuite(ScopesTest.class);
     suite.addTestSuite(SerializationTest.class);
@@ -51,8 +50,8 @@
     // internal
     suite.addTestSuite(FinalizableReferenceQueueTest.class);
     suite.addTestSuite(LineNumbersTest.class);
-    suite.addTestSuite(ReferenceCacheTest.class);
-    suite.addTestSuite(ReferenceMapTest.class);
+    suite.addTest(MapMakerTestSuite.suite());
+    suite.addTestSuite(Jsr166HashMapTest.class);
     suite.addTestSuite(TypesTest.class);
     suite.addTestSuite(UniqueAnnotationsTest.class);
     suite.addTestSuite(BytecodeGenTest.class);

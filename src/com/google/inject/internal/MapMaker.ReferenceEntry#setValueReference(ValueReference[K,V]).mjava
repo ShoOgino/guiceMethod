@@ -1,0 +1,7 @@
+    /**
+     * Sets the value reference for this entry.
+     *
+     * @param valueReference
+     */
+    void setValueReference(ValueReference<K, V> valueReference);
+

@@ -1,0 +1,4 @@
+      public Integer apply(String s) {
+        return ++numApplies;
+      }
+

@@ -1,5 +1,0 @@
-      protected Object create(Object key) {
-        count++;
-        return Value.valueOf(((Key) key).toString());
-      }
-

@@ -1,0 +1,4 @@
+  public boolean replace(K key, V oldValue, V newValue)  {
+    return delegate().replace(key, oldValue, newValue);
+  }
+

@@ -1,9 +1,0 @@
-    public void testReplace() {
-      ReferenceMap map = newInstance();
-      map.put("a", "1");
-      map.replace("a", "2", "2");
-      assertEquals("1", map.get("a"));
-      map.replace("a", "1", "2");
-      assertEquals("2", map.get("a"));
-    }
-

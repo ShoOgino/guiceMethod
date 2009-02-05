@@ -1,0 +1,7 @@
+      public void testContainsKey() {
+        ConcurrentMap<Object, String> map = newMap();
+        Object k = "key";
+        map.put(k, "value");
+        assertTrue(map.containsKey(k));
+      }
+

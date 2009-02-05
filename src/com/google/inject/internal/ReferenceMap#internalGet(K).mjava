@@ -1,5 +1,0 @@
-  V internalGet(K key) {
-    Object valueReference = delegate.get(makeKeyReferenceAware(key));
-    return dereferenceValue(valueReference);
-  }
-

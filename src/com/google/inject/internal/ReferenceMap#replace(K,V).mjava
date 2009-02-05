@@ -1,4 +1,0 @@
-  public V replace(K key, V value) {
-    return execute(replaceStrategy(), key, value);
-  }
-

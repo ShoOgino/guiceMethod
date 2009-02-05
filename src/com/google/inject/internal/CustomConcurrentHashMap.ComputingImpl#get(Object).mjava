@@ -1,0 +1,90 @@
+    @Override
+    public V get(Object k) {
+      /*
+       * This cast isn't safe, but we can rely on the fact that K is almost
+       * always passed to Map.get(), and tools like IDEs and Findbugs can
+       * catch situations where this isn't the case.
+       *
+       * The alternative is to add an overloaded method, but the chances of
+       * a user calling get() instead of the new API and the risks inherent
+       * in adding a new API outweigh this little hole.
+       */
+      @SuppressWarnings("unchecked")
+      K key = (K) k;
+
+      if (key == null) {
+        throw new NullPointerException("key");
+      }
+
+      int hash = hash(key);
+      Segment segment = segmentFor(hash);
+      outer: while (true) {
+        E entry = segment.getEntry(key, hash);
+        if (entry == null) {
+          boolean created = false;
+          segment.lock();
+          try {
+            // Try again--an entry could have materialized in the interim.
+            entry = segment.getEntry(key, hash);
+            if (entry == null) {
+              // Create a new entry.
+              created = true;
+              int count = segment.count;
+              if (count++ > segment.threshold) { // ensure capacity
+                segment.expand();
+              }
+              AtomicReferenceArray<E> table = segment.table;
+              int index = hash & (table.length() - 1);
+              E first = table.get(index);
+              ++segment.modCount;
+              entry = strategy.newEntry(key, hash, first);
+              table.set(index, entry);
+              segment.count = count; // write-volatile
+            }
+          } finally {
+            segment.unlock();
+          }
+
+          if (created) {
+            // This thread solely created the entry.
+            boolean success = false;
+            try {
+              V value = strategy.compute(key, entry, computer);
+              if (value == null) {
+                throw new NullPointerException(
+                    "compute() returned null unexpectedly");
+              }
+              success = true;
+              return value;
+            } finally {
+              if (!success) {
+                segment.removeEntry(entry, hash);
+              }
+            }
+          }
+        }
+
+        // The entry already exists. Wait for the computation.
+        boolean interrupted = false;
+        try {
+          while (true) {
+            try {
+              V value = strategy.waitForValue(entry);
+              if (value == null) {
+                // Purge entry and try again.
+                segment.removeEntry(entry, hash);
+                continue outer;
+              }
+              return value;
+            } catch (InterruptedException e) {
+              interrupted = true;
+            }
+          }
+        } finally {
+          if (interrupted) {
+            Thread.currentThread().interrupt();
+          }
+        }
+      }
+    }
+

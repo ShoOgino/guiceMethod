@@ -1,0 +1,7 @@
+    /**
+     * Creates a reference for the given value according to this value
+     * strength.
+     */
+    abstract <K, V> ValueReference<K, V> referenceValue(
+        ReferenceEntry<K, V> entry, V value);
+

@@ -1,5 +1,0 @@
-    synchronized void setValue(V v) {
-      set();
-      value = v;
-    }
-

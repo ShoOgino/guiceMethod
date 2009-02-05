@@ -1,0 +1,23 @@
+    public void testKeyStrengthSetTwice() {
+      MapMaker maker1 = new MapMaker().weakKeys();
+      try {
+        maker1.weakKeys();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+
+      MapMaker maker2 = new MapMaker().softKeys();
+      try {
+        maker2.softKeys();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+
+      MapMaker maker3 = new MapMaker().weakKeys();
+      try {
+        maker3.softKeys();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+    }
+

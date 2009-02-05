@@ -1,0 +1,8 @@
+      public void testKeySet() {
+        ConcurrentMap<String, String> map = newMap();
+        map.put("a", "foo");
+        map.put("b", "foo");
+        Set<String> expected = set("a", "b");
+        assertEquals(expected, map.keySet());
+      }
+

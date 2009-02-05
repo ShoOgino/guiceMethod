@@ -1,4 +1,0 @@
-  void deliverBadNews(Throwable t) {
-    logger.log(Level.SEVERE, "Error cleaning up after reference.", t);
-  }
-

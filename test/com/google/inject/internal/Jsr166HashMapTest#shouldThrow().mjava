@@ -1,0 +1,7 @@
+    /**
+     * fail with message "should throw exception"
+     */
+    public void shouldThrow() {
+        fail("Should throw exception");
+    }
+

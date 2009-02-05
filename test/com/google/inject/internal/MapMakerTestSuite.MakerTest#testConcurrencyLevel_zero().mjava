@@ -1,0 +1,9 @@
+    public void testConcurrencyLevel_zero() {
+      MapMaker maker = new MapMaker();
+      try {
+        maker.concurrencyLevel(0);
+        fail();
+      } catch (IllegalArgumentException expected) {
+      }
+    }
+

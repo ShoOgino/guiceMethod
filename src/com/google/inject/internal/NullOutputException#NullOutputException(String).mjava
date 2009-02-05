@@ -1,0 +1,4 @@
+  public NullOutputException(String s) {
+    super(s);
+  }
+

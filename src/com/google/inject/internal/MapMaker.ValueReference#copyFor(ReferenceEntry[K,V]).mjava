@@ -1,0 +1,3 @@
+    /** Creates a copy of this reference for the given entry. */
+    ValueReference<K, V> copyFor(ReferenceEntry<K, V> entry);
+

@@ -1,0 +1,15 @@
+    public void testExpiringPut() {
+      ConcurrentMap<String, Integer> map = new MapMaker()
+          .expiration(EXPIRING_TIME, TimeUnit.MILLISECONDS).makeMap();
+
+      for (int i = 0; i < 10; i++) {
+        map.put(KEY_PREFIX + i, VALUE_PREFIX + i);
+        assertEquals(Integer.valueOf(VALUE_PREFIX + i),
+            map.get(KEY_PREFIX + i));
+      }
+
+      runTasks();
+
+      assertEquals("Map must be empty by now", 0, map.size());
+    }
+

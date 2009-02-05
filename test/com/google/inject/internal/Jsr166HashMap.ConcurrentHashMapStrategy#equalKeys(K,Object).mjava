@@ -1,0 +1,2 @@
+    public boolean equalKeys(K a, Object b) { return a.equals(b); }
+

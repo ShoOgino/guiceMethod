@@ -1,7 +1,0 @@
-    public void testContainsKey() {
-      ReferenceMap map = newInstance();
-      Object k = "key";
-      map.put(k, "value");
-      assertTrue(map.containsKey(k));
-    }
-

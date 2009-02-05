@@ -1,0 +1,7 @@
+    public void testKeyCleanupWithWeakValue() {
+      ConcurrentMap<Object, Object> map =
+          new MapMaker().weakValues().makeMap();
+      map.put(new Object(), new Object());
+      assertCleanup(map);
+    }
+

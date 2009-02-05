@@ -1,0 +1,4 @@
+  public void testGetFinalizerUrl() {
+    assertNotNull(getClass().getResource("Finalizer.class"));
+  }
+

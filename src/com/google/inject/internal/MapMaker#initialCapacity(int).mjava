@@ -1,0 +1,16 @@
+  /**
+   * Sets a custom initial capacity (defaults to 16). Resizing this or
+   * any other kind of hash table is a relatively slow operation, so,
+   * when possible, it is a good idea to provide estimates of expected
+   * table sizes.
+   *
+   * @throws IllegalArgumentException if {@code initialCapacity} is
+   *   negative
+   * @throws IllegalStateException if an initial capacity was already set
+   *     (TODO: make that true)
+   */
+  public MapMaker initialCapacity(int initialCapacity) {
+    builder.initialCapacity(initialCapacity);
+    return this;
+  }
+

@@ -1,0 +1,8 @@
+      public E getEntry(K key) {
+        if (key == null) {
+          throw new NullPointerException("key");
+        }
+        int hash = hash(key);
+        return segmentFor(hash).getEntry(key, hash);
+      }
+

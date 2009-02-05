@@ -1,0 +1,18 @@
+  // TODO: Clone the referenced doc here after things stabilize more so
+  // we don't expose this implementation detail.
+  /**
+   * See {@link CustomConcurrentHashMap.Builder#buildComputingMap(
+   * CustomConcurrentHashMap.ComputingStrategy,
+   * com.google.inject.internal.Function)}.
+   *
+   * <p>If {@link java.util.Map#put} is called before a computation
+   * completes, other threads waiting on the computation will wake up and
+   * return the put value up until the computation completes, at which
+   * point the computation result will overwrite the value from the
+   * {@code put} in the map.
+   */
+  public <K, V> ConcurrentMap<K, V> makeComputingMap(
+      Function<? super K, ? extends V> computer) {
+    return new StrategyImpl<K, V>(this, computer).map;
+  }
+

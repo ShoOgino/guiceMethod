@@ -1,0 +1,20 @@
+  /**
+   * Generates a {@link Set} for use by {@link #keySet()}.
+   * 
+   * <p>ForwardingMap's implementation of keySet() calls this method to
+   * generate a collection of values, and then reuses that Set
+   * for subsequent invocations.  By default, this Set is essentially the
+   * result of invoking keySet() on the delegate.  Override this method if you
+   * want to provide another implementation.
+   * 
+   * @return A set for use by keySet().
+   */
+  protected Set<K> createKeySet() {
+    final Set<K> delegate = delegate().keySet();
+    return new ForwardingSet<K>() {
+      @Override protected Set<K> delegate() {
+        return delegate;
+      }
+    };
+  }
+

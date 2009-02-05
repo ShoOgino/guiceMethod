@@ -1,0 +1,12 @@
+    /**
+     * containsValue(null) throws NPE
+     */
+    public void testContainsValue_NullPointerException() {
+        try {
+            Jsr166HashMap c = new Jsr166HashMap(5);
+            c.containsValue(null);
+            shouldThrow();
+        } catch (NullPointerException e) {
+        }
+    }
+

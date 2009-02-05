@@ -1,0 +1,9 @@
+    public void testLoadFactor_small() {
+      MapMaker maker = new MapMaker().loadFactor(Float.MIN_VALUE);
+      Impl<?, ?, ?> map = makeCustomMap(maker);
+      assertEquals(Float.MIN_VALUE, map.loadFactor);
+
+      // has no other effect until we add an entry (which would be bad)
+      assertEquals(1, map.segments[0].table.length());
+    }
+

@@ -1,0 +1,29 @@
+  /**
+   * Starts the Finalizer thread. FinalizableReferenceQueue calls this method
+   * reflectively.
+   *
+   * @param finalizableReferenceClass FinalizableReference.class
+   * @param frq reference to instance of FinalizableReferenceQueue that started
+   *  this thread
+   * @return ReferenceQueue which Finalizer will poll
+   */
+  public static ReferenceQueue<Object> startFinalizer(
+      Class<?> finalizableReferenceClass, Object frq) {
+    /*
+     * We use FinalizableReference.class for two things:
+     *
+     * 1) To invoke FinalizableReference.finalizeReferent()
+     *
+     * 2) To detect when FinalizableReference's class loader has to be garbage
+     * collected, at which point, Finalizer can stop running
+     */
+    if (!finalizableReferenceClass.getName().equals(FINALIZABLE_REFERENCE)) {
+      throw new IllegalArgumentException(
+          "Expected " + FINALIZABLE_REFERENCE + ".");
+    }
+
+    Finalizer finalizer = new Finalizer(finalizableReferenceClass, frq);
+    finalizer.start();
+    return finalizer.queue;
+  }
+

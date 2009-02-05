@@ -2,9 +2,9 @@
    * Applies the function to an object of type {@code F}, resulting in an object
    * of type {@code T}.  Note that types {@code F} and {@code T} may or may not
    * be the same.
-   *
-   * @param from The from object.
-   * @return The resulting object.
+   * 
+   * @param from the source object
+   * @return the resulting object
    */
-  T apply(F from);
+  T apply(@Nullable F from);
 

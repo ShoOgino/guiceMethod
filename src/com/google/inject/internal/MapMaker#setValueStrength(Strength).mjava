@@ -1,0 +1,10 @@
+  private MapMaker setValueStrength(Strength strength) {
+    if (valueStrength != Strength.STRONG) {
+      throw new IllegalStateException("Value strength was already set to "
+          + valueStrength + ".");
+    }
+    valueStrength = strength;
+    useCustomMap = true;
+    return this;
+  }
+

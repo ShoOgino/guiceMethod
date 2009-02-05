@@ -1,0 +1,11 @@
+    /**
+     * Creates a new, empty map with the specified strategy, initial capacity,
+     * load factor and concurrency level.
+     */
+    ComputingImpl(ComputingStrategy<K, V, E> strategy, Builder builder,
+        Function<? super K, ? extends V> computer) {
+      super(strategy, builder);
+      this.strategy = strategy;
+      this.computer = computer;
+    }
+

@@ -1,5 +1,0 @@
-  // TODO(crazybob): a getter called put() is probably a bad idea
-  protected Strategy putStrategy() {
-    return PutStrategy.PUT;
-  }
-

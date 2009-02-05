@@ -1,0 +1,6 @@
+  public V setValue(V v) {
+    V old = value;
+    value = v;
+    return old;
+  }
+

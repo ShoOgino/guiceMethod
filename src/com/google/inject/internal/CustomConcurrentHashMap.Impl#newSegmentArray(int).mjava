@@ -1,0 +1,10 @@
+    @SuppressWarnings("unchecked")
+    Segment[] newSegmentArray(int ssize) {
+      // Note: This is the only way I could figure out how to create
+      // a segment array (the compile has a tough time with arrays of
+      // inner classes of generic types apparently). Safe because we're
+      // restricting what can go in the array and no one has an
+      // unrestricted reference.
+      return (Segment[]) Array.newInstance(Segment.class, ssize);
+    }
+

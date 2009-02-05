@@ -1,0 +1,10 @@
+      public void testValues() {
+        ConcurrentMap<String, String> map = newMap();
+        map.put("a", "1");
+        map.put("b", "2");
+        Set<String> expected = set("1", "2");
+        Set<String> actual = new HashSet<String>();
+        actual.addAll(map.values());
+        assertEquals(expected, actual);
+      }
+

@@ -1,0 +1,6 @@
+    public void testBusyCanonical() throws InterruptedException {
+      ConcurrentMap<String, Integer> cache = new MapMaker()
+          .softValues().makeComputingMap(new BusyFunction());
+      assertConcurrency(cache, true);
+    }
+

@@ -1,0 +1,4 @@
+  public AsynchronousComputationException(Throwable cause) {
+    super(cause);
+  }
+

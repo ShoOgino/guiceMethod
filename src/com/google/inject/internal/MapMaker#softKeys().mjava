@@ -1,0 +1,11 @@
+  /**
+   * Specifies that each key (not value) stored in the map should be
+   * wrapped in a {@link SoftReference} (by default, strong references
+   * are used).
+   *
+   * @throws IllegalStateException if the key strength was already set
+   */
+  public MapMaker softKeys() {
+    return setKeyStrength(Strength.SOFT);
+  }
+

@@ -1,0 +1,4 @@
+  public boolean containsAll(Collection<?> collection) {
+    return delegate().containsAll(collection);
+  }
+

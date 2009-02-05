@@ -1,0 +1,10 @@
+    private static Impl<?, ?, ?> makeCustomMap(MapMaker maker) {
+      // Use makeComputingMap() to force it to return CCHM.Impl, not
+      // ConcurrentHashMap.
+      return (Impl<?, ?, ?>) maker.makeComputingMap(new Function<Object, Object>() {
+        public Object apply(Object from) {
+          return from;
+        }
+      });
+    }
+

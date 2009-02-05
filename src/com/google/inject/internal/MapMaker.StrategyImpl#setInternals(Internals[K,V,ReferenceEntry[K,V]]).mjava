@@ -1,0 +1,5 @@
+    public void setInternals(
+        Internals<K, V, ReferenceEntry<K, V>> internals) {
+      this.internals = internals;
+    }
+

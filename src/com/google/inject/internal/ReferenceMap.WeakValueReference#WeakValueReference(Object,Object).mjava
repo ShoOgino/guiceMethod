@@ -1,5 +1,0 @@
-    public WeakValueReference(Object keyReference, Object value) {
-      super(value);
-      this.keyReference = keyReference;
-    }
-

@@ -1,0 +1,11 @@
+    @Override
+    protected void setUp() throws Exception {
+      oldTimer = ExpirationTimer.instance;
+      ExpirationTimer.instance = new Timer() {
+        @Override
+        public void schedule(TimerTask task, long delay) {
+          tasks.add(task);
+        }
+      };
+    }
+

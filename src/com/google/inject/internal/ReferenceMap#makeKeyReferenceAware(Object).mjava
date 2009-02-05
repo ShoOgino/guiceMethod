@@ -1,7 +1,0 @@
-  /**
-   * Wraps key so it can be compared to a referenced key for equality.
-   */
-  private Object makeKeyReferenceAware(Object o) {
-    return keyReferenceType == STRONG ? o : new KeyReferenceAwareWrapper(o);
-  }
-

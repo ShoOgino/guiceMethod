@@ -1,0 +1,9 @@
+      public void testEntrySet() {
+        final ConcurrentMap<String, String> map = newMap();
+        map.put("a", "1");
+        map.put("b", "2");
+        Set<Map.Entry<String, String>> expected
+            = set(entry("a", "1"), entry("b", "2"));
+        assertEquals(expected, map.entrySet());
+      }
+

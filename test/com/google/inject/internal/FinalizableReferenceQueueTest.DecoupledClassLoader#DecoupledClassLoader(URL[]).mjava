@@ -1,0 +1,4 @@
+    public DecoupledClassLoader(URL[] urls) {
+      super(urls);
+    }
+

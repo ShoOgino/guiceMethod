@@ -1,0 +1,7 @@
+    WeakEntry(Internals<K, V, ReferenceEntry<K, V>> internals, K key,
+        int hash) {
+      super(key, QueueHolder.queue);
+      this.internals = internals;
+      this.hash = hash;
+    }
+

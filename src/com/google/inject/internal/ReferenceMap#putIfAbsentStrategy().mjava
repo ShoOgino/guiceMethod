@@ -1,4 +1,0 @@
-  protected Strategy putIfAbsentStrategy() {
-    return PutStrategy.PUT_IF_ABSENT;
-  }
-

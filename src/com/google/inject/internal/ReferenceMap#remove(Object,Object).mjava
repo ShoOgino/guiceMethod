@@ -1,7 +1,0 @@
-  public boolean remove(Object key, Object value) {
-    ensureNotNull(key, value);
-    Object referenceAwareKey = makeKeyReferenceAware(key);
-    Object referenceAwareValue = makeValueReferenceAware(value);
-    return delegate.remove(referenceAwareKey, referenceAwareValue);
-  }
-

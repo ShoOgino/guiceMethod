@@ -1,0 +1,33 @@
+  /**
+   * Cleans up a single reference. Catches and logs all throwables.
+   */
+  private void cleanUp(Reference<?> reference) throws ShutDown {
+    Method finalizeReferentMethod = getFinalizeReferentMethod();
+    do {
+      /*
+       * This is for the benefit of phantom references. Weak and soft
+       * references will have already been cleared by this point.
+       */
+      reference.clear();
+
+      if (reference == frqReference) {
+        /*
+         * The client no longer has a reference to the
+         * FinalizableReferenceQueue. We can stop.
+         */
+        throw new ShutDown();
+      }
+
+      try {
+        finalizeReferentMethod.invoke(reference);
+      } catch (Throwable t) {
+        logger.log(Level.SEVERE, "Error cleaning up after reference.", t);
+      }
+
+      /*
+       * Loop as long as we have references available so as not to waste
+       * CPU looking up the Method over and over again.
+       */
+    } while ((reference = queue.poll()) != null);
+  }
+

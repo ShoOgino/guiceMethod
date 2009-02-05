@@ -1,0 +1,4 @@
+  public V putIfAbsent(K key, V value) {
+    return delegate().putIfAbsent(key, value);
+  }
+

@@ -1,0 +1,7 @@
+    public void testExpiringGetForSoft() {
+      ConcurrentMap<String, Integer> map = new MapMaker()
+          .expiration(EXPIRING_TIME, TimeUnit.MILLISECONDS).makeMap();
+
+      runExpirationTest(map);
+    }
+

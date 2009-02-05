@@ -1,0 +1,12 @@
+    /**
+     * replace(x, y, null) throws NPE
+     */
+    public void testReplaceValue3_NullPointerException() {
+        try {
+            Jsr166HashMap c = new Jsr166HashMap(5);
+            c.replace("whatever", one, null);
+            shouldThrow();
+        } catch (NullPointerException e) {
+        }
+    }
+

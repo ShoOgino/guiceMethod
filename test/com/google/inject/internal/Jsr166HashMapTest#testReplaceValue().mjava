@@ -1,0 +1,10 @@
+    /**
+     * replace value fails when the given key not mapped to expected value
+     */
+    public void testReplaceValue() {
+        Jsr166HashMap map = map5();
+        assertEquals("A", map.get(one));
+        assertFalse(map.replace(one, "Z", "Z"));
+        assertEquals("A", map.get(one));
+    }
+

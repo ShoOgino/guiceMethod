@@ -1,0 +1,4 @@
+  public ComputationException(Throwable cause) {
+    super(cause);
+  }
+

@@ -1,0 +1,13 @@
+      public V get() {
+        boolean success = false;
+        try {
+          V value = original.getValueReference().get();
+          success = true;
+          return value;
+        } finally {
+          if (!success) {
+            removeEntry();
+          }
+        }
+      }
+

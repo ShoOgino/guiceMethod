@@ -1,0 +1,12 @@
+    /**
+     * putIfAbsent(x, null) throws NPE
+     */
+    public void testPutIfAbsent2_NullPointerException() {
+        try {
+            Jsr166HashMap c = new Jsr166HashMap(5);
+            c.putIfAbsent("whatever", null);
+            shouldThrow();
+        } catch (NullPointerException e) {
+        }
+    }
+

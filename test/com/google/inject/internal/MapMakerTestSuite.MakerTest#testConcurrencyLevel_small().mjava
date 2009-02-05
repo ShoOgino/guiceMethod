@@ -1,0 +1,6 @@
+    public void testConcurrencyLevel_small() {
+      MapMaker maker = new MapMaker().concurrencyLevel(1);
+      Impl<?, ?, ?> map = makeCustomMap(maker);
+      assertEquals(1, map.segments.length);
+    }
+

@@ -1,0 +1,11 @@
+    // TODO: enable when ready
+    public void xtestConcurrencyLevel_setTwice() {
+      MapMaker maker = new MapMaker().concurrencyLevel(16);
+      try {
+        // even to the same value is not allowed
+        maker.concurrencyLevel(16);
+        fail();
+      } catch (IllegalArgumentException expected) {
+      }
+    }
+

@@ -1,5 +1,0 @@
-    synchronized void setThrowable(Throwable t) {
-      set();
-      this.t = t;
-    }
-

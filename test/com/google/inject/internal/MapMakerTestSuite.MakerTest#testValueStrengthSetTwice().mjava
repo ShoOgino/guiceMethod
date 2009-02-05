@@ -1,0 +1,23 @@
+    public void testValueStrengthSetTwice() {
+      MapMaker maker1 = new MapMaker().weakValues();
+      try {
+        maker1.weakValues();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+
+      MapMaker maker2 = new MapMaker().softValues();
+      try {
+        maker2.softValues();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+
+      MapMaker maker3 = new MapMaker().weakValues();
+      try {
+        maker3.softValues();
+        fail();
+      } catch (IllegalStateException expected) {
+      }
+    }
+

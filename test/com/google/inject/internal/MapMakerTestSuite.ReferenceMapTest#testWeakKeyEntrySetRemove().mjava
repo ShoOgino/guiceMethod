@@ -1,0 +1,12 @@
+    public void testWeakKeyEntrySetRemove() {
+      ConcurrentMap<Integer, String> map =
+          new MapMaker().weakKeys().makeMap();
+      Integer key1 = new Integer(12357);
+      Integer key2 = new Integer(12357);
+      map.put(key1, "a");
+      assertFalse(map.entrySet().remove(entry(key2, "a")));
+      assertEquals(1, map.size());
+      assertTrue(map.entrySet().remove(entry(key1, "a")));
+      assertEquals(0, map.size());
+    }
+

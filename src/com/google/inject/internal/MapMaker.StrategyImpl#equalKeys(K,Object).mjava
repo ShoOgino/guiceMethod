@@ -1,0 +1,4 @@
+    public boolean equalKeys(K a, Object b) {
+      return keyStrength.equal(a, b);
+    }
+
