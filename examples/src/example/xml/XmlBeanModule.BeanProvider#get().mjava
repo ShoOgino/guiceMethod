@@ -1,0 +1,16 @@
+    public T get() {
+      try {
+        T t = type.newInstance();
+        for (Property property : properties) {
+          property.setOn(t);
+        }
+        return t;
+      }
+      catch (InstantiationException e) {
+        throw new RuntimeException(e);
+      }
+      catch (IllegalAccessException e) {
+        throw new RuntimeException(e);
+      }
+    }
+

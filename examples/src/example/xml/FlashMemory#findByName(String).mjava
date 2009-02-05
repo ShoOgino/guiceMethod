@@ -1,0 +1,4 @@
+  public Iterable<Contact> findByName(String name) {
+    return Collections.emptyList();
+  }
+

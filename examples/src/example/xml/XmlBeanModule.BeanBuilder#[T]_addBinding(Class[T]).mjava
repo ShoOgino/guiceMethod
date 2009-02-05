@@ -1,0 +1,5 @@
+    <T> void addBinding(Class<T> type) {
+      originalBinder.withSource(xmlSource())
+          .bind(type).toProvider(new BeanProvider<T>(type, properties));
+    }
+

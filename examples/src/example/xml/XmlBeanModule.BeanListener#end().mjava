@@ -1,0 +1,7 @@
+    public void end() {
+      if (beanBuilder != null) {
+        beanBuilder.build();
+        beanBuilder = null;
+      }
+    }
+

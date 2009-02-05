@@ -1,0 +1,21 @@
+  public void configure(Binder binder) {
+    this.originalBinder = binder;
+
+    try {
+      RootElement beans = new RootElement("beans");
+      locator = beans.getLocator();
+
+      Element bean = beans.getChild("bean");
+      bean.setElementListener(new BeanListener());
+
+      Element property = bean.getChild("property");
+      property.setStartElementListener(new PropertyListener());
+
+      Reader in = new InputStreamReader(xmlUrl.openStream());
+      Parsers.parse(in, beans.getContentHandler());
+    }
+    catch (Exception e) {
+      originalBinder.addError(e);
+    }
+  }
+

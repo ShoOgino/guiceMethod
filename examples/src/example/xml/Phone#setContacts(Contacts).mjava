@@ -1,0 +1,4 @@
+  public void setContacts(Contacts contacts) {
+    this.contacts = contacts;
+  }
+

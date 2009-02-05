@@ -1,0 +1,5 @@
+    BeanProvider(Class<T> type, List<Property> properties) {
+      this.type = type;
+      this.properties = properties;
+    }
+

@@ -1,0 +1,4 @@
+  public XmlBeanModule(URL xmlUrl) {
+    this.xmlUrl = xmlUrl;
+  }
+

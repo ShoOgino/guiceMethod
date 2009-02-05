@@ -1,0 +1,4 @@
+  public Contacts getContacts() {
+    return contacts;
+  }
+

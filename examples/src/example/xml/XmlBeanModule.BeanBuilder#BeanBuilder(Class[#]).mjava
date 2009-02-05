@@ -1,0 +1,4 @@
+    BeanBuilder(Class<?> type) {
+      this.type = type;
+    }
+

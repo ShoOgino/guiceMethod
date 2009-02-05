@@ -1,0 +1,5 @@
+    Property(Method setter, Provider<?> provider) {
+      this.setter = setter;
+      this.provider = provider;
+    }
+

@@ -1,0 +1,45 @@
+    public void start(final Attributes attributes) {
+      Binder sourced = originalBinder.withSource(xmlSource());
+
+      if (beanBuilder == null) {
+        // We must have already run into an error.
+        return;
+      }
+
+      // Check for 'name'.
+      String name = attributes.getValue("name");
+      if (name == null) {
+        sourced.addError("Missing attribute name.");
+        return;
+      }
+
+      Class<?> type = beanBuilder.type;
+
+      // Find setter method for the given property name.
+      String setterName = "set" + capitalize(name);
+      Method setter = null;
+      for (Method method : type.getMethods()) {
+        if (method.getName().equals(setterName)) {
+          setter = method;
+          break;
+        }
+      }
+      if (setter == null) {
+        sourced.addError("%s.%s() not found.", type.getName(), setterName);
+        return;
+      }
+
+      // Validate number of parameters.
+      Type[] parameterTypes = setter.getGenericParameterTypes();
+      if (parameterTypes.length != 1) {
+        sourced.addError("%s.%s() must take one argument.",
+            setterName, type.getName());
+        return;
+      }
+
+      // Add property descriptor to builder.
+      Provider<?> provider = sourced.getProvider(Key.get(parameterTypes[0]));
+      beanBuilder.properties.add(
+          new Property(setter, provider));
+    }
+

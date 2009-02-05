@@ -1,0 +1,34 @@
+    public void start(final Attributes attributes) {
+      Binder sourced = originalBinder.withSource(xmlSource());
+
+      String typeString = attributes.getValue("type");
+
+      // Make sure 'type' is present.
+      if (typeString == null) {
+        sourced.addError("Missing 'type' attribute.");
+        return;
+      }
+
+      // Resolve 'type'.
+      Class<?> type;
+      try {
+        type = Class.forName(typeString);
+      }
+      catch (ClassNotFoundException e) {
+        sourced.addError(e);
+        return;
+      }
+
+      // Look for a no-arg constructor.
+      try {
+        type.getConstructor();
+      }
+      catch (NoSuchMethodException e) {
+        sourced.addError("%s doesn't have a no-arg constructor.");
+        return;
+      }
+
+      // Create a bean builder for the given type.
+      beanBuilder = new BeanBuilder(type);
+    }
+

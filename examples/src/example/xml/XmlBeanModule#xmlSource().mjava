@@ -1,0 +1,4 @@
+  Object xmlSource() {
+    return xmlUrl + ":" + locator.getLineNumber();
+  }
+
