@@ -1,6 +1,6 @@
   public void testInstallingRegularModulesFromPrivateModules() {
     Injector injector = Guice.createInjector(new PrivateModule() {
-      public void configurePrivateBindings() {
+      public void configure() {
         expose(String.class);
 
         install(new AbstractModule() {

@@ -1,9 +1,10 @@
   public final synchronized void configure(Binder binder) {
     checkState(this.binder == null, "Re-entry is not allowed.");
 
+    // Guice treats PrivateModules specially and passes in a PrivateBinder automatically.
     this.binder = (PrivateBinder) binder.skipSources(PrivateModule.class);
     try {
-      configurePrivateBindings();
+      configure();
     } finally {
       this.binder = null;
     }

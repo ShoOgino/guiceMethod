@@ -12,7 +12,7 @@
           }
         },
         new PrivateModule() {
-          protected void configurePrivateBindings() {
+          protected void configure() {
             bind(String.class).annotatedWith(named("abcde")).toProvider(new Provider<String>() {
               @Inject @Named("abcd") String abcd;
 

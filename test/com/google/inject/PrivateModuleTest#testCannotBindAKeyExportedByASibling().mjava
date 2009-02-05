@@ -3,14 +3,14 @@
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
           install(new PrivateModule() {
-            public void configurePrivateBindings() {
+            public void configure() {
               bind(String.class).toInstance("public");
               expose(String.class);
             }
           });
 
           install(new PrivateModule() {
-            public void configurePrivateBindings() {
+            public void configure() {
               bind(String.class).toInstance("private");
             }
           });
@@ -20,8 +20,8 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "A binding to java.lang.String was already configured at ",
-          getClass().getName(), ".configurePrivateBindings(PrivateModuleTest.java:",
-          " at " + getClass().getName(), ".configurePrivateBindings(PrivateModuleTest.java:");
+          getClass().getName(), ".configure(PrivateModuleTest.java:",
+          " at " + getClass().getName(), ".configure(PrivateModuleTest.java:");
     }
   }
 

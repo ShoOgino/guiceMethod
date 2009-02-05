@@ -1,3 +1,6 @@
-  // prevent classes migrated from AbstractModule from implementing the wrong method.
-  protected final void configure() {}
+  /**
+   * Creates bindings and other configurations private to this module. Use {@link #expose(Class)
+   * expose()} to make the bindings in this module available externally.
+   */
+  protected abstract void configure();
 

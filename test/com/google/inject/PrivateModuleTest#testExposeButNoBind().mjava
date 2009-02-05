@@ -6,7 +6,7 @@
           bind(String.class).annotatedWith(named("b")).toInstance("b");
 
           install(new PrivateModule() {
-            public void configurePrivateBindings() {
+            public void configure() {
               expose(AB.class);
             }
           });
@@ -16,7 +16,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "Could not expose() " + AB.class.getName() + ", it must be explicitly bound",
-          ".configurePrivateBindings(PrivateModuleTest.java:");
+          ".configure(PrivateModuleTest.java:");
     }
   }
 

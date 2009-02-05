@@ -1,6 +1,6 @@
   /**
    * Makes a binding for {@code type} available to the enclosing environment. Use {@link
-   * AnnotatedElementBuilder#annotatedWith(Class) annotatedWith()} to expose {@code type} with a
+   * com.google.inject.binder.AnnotatedElementBuilder#annotatedWith(Class) annotatedWith()} to expose {@code type} with a
    * binding annotation.
    */
   AnnotatedElementBuilder expose(Class<?> type);

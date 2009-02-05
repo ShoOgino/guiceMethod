@@ -1,6 +1,6 @@
   public void testSpiAccess() {
     Injector injector = Guice.createInjector(new PrivateModule() {
-          public void configurePrivateBindings() {
+          public void configure() {
             bind(String.class).annotatedWith(named("a")).toInstance("private");
             bind(String.class).annotatedWith(named("b")).toInstance("exposed");
             expose(String.class).annotatedWith(named("b"));

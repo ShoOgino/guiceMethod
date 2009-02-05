@@ -2,7 +2,7 @@
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         install(new PrivateModule() {
-          public void configurePrivateBindings() {
+          public void configure() {
             expose(String.class).annotatedWith(named("a"));
           }
 
@@ -16,7 +16,7 @@
         });
 
         install(new PrivateModule() {
-          public void configurePrivateBindings() {}
+          public void configure() {}
 
           @Provides @Named("c") String providePrivateC() {
             return "private";

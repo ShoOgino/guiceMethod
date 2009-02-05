@@ -1,7 +1,7 @@
   public void testDependenciesBetweenPrivateAndPublic() {
     Injector injector = Guice.createInjector(
         new PrivateModule() {
-          protected void configurePrivateBindings() {}
+          protected void configure() {}
 
           @Provides @Exposed @Named("a") String provideA() {
             return "A";
