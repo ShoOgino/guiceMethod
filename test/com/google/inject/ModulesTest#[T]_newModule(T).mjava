@@ -3,7 +3,7 @@
       protected void configure() {
         @SuppressWarnings("unchecked") // getClass always needs a cast
         Class<T> tClass = (Class<T>) toBind.getClass();
-        bind(tClass).toInstance(toBind);
+        binder().skipSources(getClass()).bind(tClass).toInstance(toBind);
       }
     };
   }

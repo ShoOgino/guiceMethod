@@ -1,4 +1,4 @@
-  protected final Binder binder() {
+  protected final PrivateBinder binder() {
     return binder;
   }
 
