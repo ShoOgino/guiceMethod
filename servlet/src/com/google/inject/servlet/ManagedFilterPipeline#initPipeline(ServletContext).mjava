@@ -5,8 +5,11 @@
     if (initialized)
       return;
 
+    // Used to prevent duplicate initialization.
+    Set<Filter> initializedSoFar = Sets.newIdentityHashSet(ReferenceType.STRONG);
+
     for (FilterDefinition filterDefinition : filterDefinitions) {
-      filterDefinition.init(servletContext, injector);
+      filterDefinition.init(servletContext, injector, initializedSoFar);
     }
 
     //next, initialize servlets...

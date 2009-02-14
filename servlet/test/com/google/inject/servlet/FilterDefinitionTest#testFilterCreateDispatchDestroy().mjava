@@ -21,7 +21,8 @@
     assert filterDef.getFilter() instanceof MockFilter;
 
     //should fire on mockfilter now
-    filterDef.init(createMock(ServletContext.class), injector);
+    filterDef.init(createMock(ServletContext.class), injector,
+        Sets.<Filter>newIdentityHashSet(ReferenceType.STRONG));
 
     assert mockFilter.isInit() : "Init did not fire";
 
@@ -36,7 +37,7 @@
 
     assertTrue("Filter did not proceed down chain", proceed[0]);
 
-    filterDef.destroy();
+    filterDef.destroy(Sets.<Filter>newIdentityHashSet(ReferenceType.STRONG));
     assertTrue("Destroy did not fire", mockFilter.isDestroy());
 
     verify(injector, request);

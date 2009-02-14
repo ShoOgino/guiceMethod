@@ -1,0 +1,19 @@
+  public void destroy(Set<HttpServlet> destroyedSoFar) {
+    HttpServlet reference = httpServlet.get();
+
+    // Do nothing if this Servlet was invalid (usually due to not being scoped
+    // properly). According to Servlet Spec: it is "out of service", and does not
+    // need to be destroyed.
+    // Also prevent duplicate destroys to the same singleton that may appear
+    // more than once on the filter chain.
+    if (null == reference || destroyedSoFar.contains(reference)) {
+      return;
+    }
+
+    try {
+      reference.destroy();
+    } finally {
+      destroyedSoFar.add(reference);
+    }
+  }
+

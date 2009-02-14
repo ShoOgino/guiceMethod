@@ -34,7 +34,7 @@
 
     replay(servletContext);
 
-    servletDefinition.init(servletContext, injector);
+    servletDefinition.init(servletContext, injector, Sets.<HttpServlet>newIdentityHashSet(ReferenceType.STRONG));
 
     assertNotNull(mockServlet.getServletContext());
     assertEquals(contextName, mockServlet.getServletContext().getServletContextName());

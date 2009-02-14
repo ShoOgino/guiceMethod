@@ -1,6 +1,8 @@
   public void init(ServletContext servletContext, Injector injector) throws ServletException {
+    Set<HttpServlet> initializedSoFar = Sets.newIdentityHashSet(ReferenceType.STRONG);
+
     for (ServletDefinition servletDefinition : servletDefinitions) {
-      servletDefinition.init(servletContext, injector);
+      servletDefinition.init(servletContext, injector, initializedSoFar);
     }
   }
 

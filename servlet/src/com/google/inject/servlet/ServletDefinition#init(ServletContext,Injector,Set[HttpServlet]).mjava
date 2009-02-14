@@ -1,4 +1,6 @@
-  public void init(final ServletContext servletContext, Injector injector) throws ServletException {
+  public void init(final ServletContext servletContext, Injector injector,
+      Set<HttpServlet> initializedSoFar) throws ServletException {
+
     // This absolutely must be a singleton, and so is only initialized once.
     if (!isSingletonBinding(injector.getBinding(servletKey))) {
       throw new ServletException("Servlets must be bound as singletons. "
@@ -7,6 +9,11 @@
 
     HttpServlet httpServlet = injector.getInstance(servletKey);
     this.httpServlet.set(httpServlet);
+
+    // Only fire init() if we have not appeared before in the filter chain.
+    if (initializedSoFar.contains(httpServlet)) {
+      return;
+    }
 
     //initialize our servlet with the configured context params and servlet context
     httpServlet.init(new ServletConfig() {
@@ -26,5 +33,8 @@
         return Iterators.asEnumeration(initParams.keySet().iterator());
       }
     });
+
+    // Mark as initialized.
+    initializedSoFar.add(httpServlet);
   }
 
