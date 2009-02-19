@@ -1,3 +1,4 @@
+  /*if[AOP]*/
   public void testMethodInterceptorsOnAssistedTypes() {
     final AtomicInteger invocationCount = new AtomicInteger();
     final MethodInterceptor interceptor = new MethodInterceptor() {
@@ -23,4 +24,5 @@
     mustang.drive();
     assertEquals(1, invocationCount.get());
   }
+  /*end[AOP]*/
 

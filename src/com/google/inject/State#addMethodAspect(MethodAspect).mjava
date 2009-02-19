@@ -1,2 +1,3 @@
+  /*if[AOP]*/
   void addMethodAspect(MethodAspect methodAspect);
 

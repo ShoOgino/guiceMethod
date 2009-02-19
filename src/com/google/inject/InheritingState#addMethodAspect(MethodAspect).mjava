@@ -1,3 +1,4 @@
+  /*if[AOP]*/
   public void addMethodAspect(MethodAspect methodAspect) {
     methodAspects.add(methodAspect);
   }

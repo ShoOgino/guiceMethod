@@ -1,4 +1,6 @@
+  /*if[AOP]*/
   public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
     return lateBoundConstructor.constructorInjector.constructionProxy.getMethodInterceptors();
   }
+  /*end[AOP]*/
 

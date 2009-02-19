@@ -1,3 +1,4 @@
+  /*if[AOP]*/
   public void testBindIntercepor() {
     final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
     final Matcher<Object> methodMatcher = Matchers.any();
@@ -24,4 +25,5 @@
         }
     );
   }
+  /*end[AOP]*/
 

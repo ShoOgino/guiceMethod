@@ -4,4 +4,5 @@
     result.addAll(methodAspects);
     return result;
   }
+  /*end[AOP]*/
 

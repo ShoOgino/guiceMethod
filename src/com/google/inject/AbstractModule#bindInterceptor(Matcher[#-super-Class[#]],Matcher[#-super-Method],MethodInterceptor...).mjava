@@ -1,3 +1,4 @@
+  /*if[AOP]*/
   /**
    * @see Binder#bindInterceptor(com.google.inject.matcher.Matcher,
    *  com.google.inject.matcher.Matcher,
@@ -8,4 +9,5 @@
       MethodInterceptor... interceptors) {
     binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
   }
+  /*end[AOP]*/
 

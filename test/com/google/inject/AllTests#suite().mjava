@@ -16,10 +16,8 @@
     suite.addTestSuite(ImplicitBindingTest.class);
     suite.addTestSuite(InjectionPointTest.class);
     suite.addTestSuite(InjectorTest.class);
-    suite.addTestSuite(IntegrationTest.class);
     suite.addTestSuite(KeyTest.class);
     suite.addTestSuite(LoggerInjectionTest.class);
-    suite.addTestSuite(MethodInterceptionTest.class);
     suite.addTestSuite(ModuleTest.class);
     suite.addTestSuite(ModulesTest.class);
     suite.addTestSuite(NullableInjectionPointTest.class);
@@ -54,7 +52,6 @@
     suite.addTestSuite(Jsr166HashMapTest.class);
     suite.addTestSuite(TypesTest.class);
     suite.addTestSuite(UniqueAnnotationsTest.class);
-    suite.addTestSuite(BytecodeGenTest.class);
 
     // matcher
     suite.addTestSuite(MatcherTest.class);
@@ -67,6 +64,12 @@
 
     // util
     suite.addTestSuite(ProvidersTest.class);
+
+    /*if[AOP]*/
+    suite.addTestSuite(IntegrationTest.class);
+    suite.addTestSuite(MethodInterceptionTest.class);
+    suite.addTestSuite(BytecodeGenTest.class);
+    /*end[AOP]*/
 
     return suite;
   }
