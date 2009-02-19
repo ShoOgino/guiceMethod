@@ -10,6 +10,7 @@
    * @param interceptors to bind
    */
   void bindInterceptor(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors);
+      Matcher<? super Method> methodMatcher,
+      org.aopalliance.intercept.MethodInterceptor... interceptors);
   /*end[AOP]*/
 

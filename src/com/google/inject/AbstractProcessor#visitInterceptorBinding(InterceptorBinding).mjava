@@ -1,6 +1,0 @@
-  /*if[AOP]*/
-  public Boolean visitInterceptorBinding(InterceptorBinding interceptorBinding) {
-    return false;
-  }
-  /*end[AOP]*/
-

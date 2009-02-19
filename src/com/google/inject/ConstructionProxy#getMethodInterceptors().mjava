@@ -2,6 +2,6 @@
   /**
    * Returns the interceptors applied to each method, in order of invocation.
    */
-  Map<Method, List<MethodInterceptor>> getMethodInterceptors();
+  Map<Method, List<org.aopalliance.intercept.MethodInterceptor>> getMethodInterceptors();
   /*end[AOP]*/
 

@@ -1,9 +1,9 @@
   /*if[AOP]*/
   protected void writeBindInterceptor(Binder binder, InterceptorBinding element) {
-    List<MethodInterceptor> interceptors = element.getInterceptors();
+    List<org.aopalliance.intercept.MethodInterceptor> interceptors = element.getInterceptors();
     binder.withSource(element.getSource()).bindInterceptor(
         element.getClassMatcher(), element.getMethodMatcher(),
-        interceptors.toArray(new MethodInterceptor[interceptors.size()]));
+        interceptors.toArray(new org.aopalliance.intercept.MethodInterceptor[interceptors.size()]));
   }
   /*end[AOP]*/
 

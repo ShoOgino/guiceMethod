@@ -2,29 +2,7 @@
       throws ErrorsException {
     this.injectionPoint = injectionPoint;
     final Method method = (Method) injectionPoint.getMember();
-
-    // We can't use FastMethod if the method is private.
-    int modifiers = method.getModifiers();
-    if (Modifier.isPrivate(modifiers) || Modifier.isProtected(modifiers)) {
-      method.setAccessible(true);
-      methodInvoker = new MethodInvoker() {
-        public Object invoke(Object target, Object... parameters)
-            throws IllegalAccessException, InvocationTargetException {
-          return method.invoke(target, parameters);
-        }
-      };
-    } else {
-      FastClass fastClass = newFastClass(method.getDeclaringClass(), Visibility.forMember(method));
-      final FastMethod fastMethod = fastClass.getMethod(method);
-
-      methodInvoker = new MethodInvoker() {
-        public Object invoke(Object target, Object... parameters)
-            throws IllegalAccessException, InvocationTargetException {
-          return fastMethod.invoke(target, parameters);
-        }
-      };
-    }
-
+    methodInvoker = createMethodInvoker(method);
     parameterInjectors = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
   }
 

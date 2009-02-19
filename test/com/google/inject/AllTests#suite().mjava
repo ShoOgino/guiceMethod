@@ -27,7 +27,6 @@
     suite.addTestSuite(PrivateModuleTest.class);
     suite.addTestSuite(ProviderInjectionTest.class);
     suite.addTestSuite(ProvisionExceptionTest.class);
-    suite.addTestSuite(ProxyFactoryTest.class);
     suite.addTestSuite(ReflectionTest.class);
     suite.addTestSuite(ScopesTest.class);
     suite.addTestSuite(SerializationTest.class);
@@ -66,9 +65,10 @@
     suite.addTestSuite(ProvidersTest.class);
 
     /*if[AOP]*/
+    suite.addTestSuite(ProxyFactoryTest.class);
     suite.addTestSuite(IntegrationTest.class);
     suite.addTestSuite(MethodInterceptionTest.class);
-    suite.addTestSuite(BytecodeGenTest.class);
+    suite.addTestSuite(com.googlecode.guice.BytecodeGenTest.class);
     /*end[AOP]*/
 
     return suite;

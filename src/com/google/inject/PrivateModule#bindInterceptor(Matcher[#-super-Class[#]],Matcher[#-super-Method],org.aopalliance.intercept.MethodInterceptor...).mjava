@@ -1,6 +1,7 @@
   /*if[AOP]*/
   protected final void bindInterceptor(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
+      Matcher<? super Method> methodMatcher,
+      org.aopalliance.intercept.MethodInterceptor... interceptors) {
     binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
   }
   /*end[AOP]*/

@@ -1,4 +1,3 @@
-  /*if[AOP]*/
   public void testInterceptorsInherited() {
     Injector parent = Guice.createInjector(new AbstractModule() {
       protected void configure() {

@@ -1,5 +1,8 @@
-  public static FastClass newFastClass(Class<?> type, Visibility visibility) {
-    FastClass.Generator generator = new FastClass.Generator();
+  /*if[AOP]*/
+  // use fully-qualified names so imports don't need preprocessor statements 
+  public static net.sf.cglib.reflect.FastClass newFastClass(Class<?> type, Visibility visibility) {
+    net.sf.cglib.reflect.FastClass.Generator generator
+        = new net.sf.cglib.reflect.FastClass.Generator();
     generator.setType(type);
     if (visibility == Visibility.PUBLIC) {
       generator.setClassLoader(getClassLoader(type));

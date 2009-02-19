@@ -2,8 +2,9 @@
   public void testBindIntercepor() {
     final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
     final Matcher<Object> methodMatcher = Matchers.any();
-    final MethodInterceptor methodInterceptor = new MethodInterceptor() {
-      public Object invoke(MethodInvocation methodInvocation) {
+    final org.aopalliance.intercept.MethodInterceptor methodInterceptor
+        = new org.aopalliance.intercept.MethodInterceptor() {
+      public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation) {
         return null;
       }
     };
