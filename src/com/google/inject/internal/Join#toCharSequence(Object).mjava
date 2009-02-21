@@ -1,0 +1,6 @@
+  private static CharSequence toCharSequence(Object token) {
+    return (token instanceof CharSequence)
+        ? (CharSequence) token
+        : String.valueOf(token);
+  }
+

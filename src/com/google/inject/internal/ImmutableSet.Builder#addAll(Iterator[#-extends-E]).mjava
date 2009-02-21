@@ -1,0 +1,17 @@
+    /**
+     * Adds each element of {@code elements} to the {@code ImmutableSet},
+     * ignoring duplicate elements (only the first duplicate element is added).
+     *
+     * @param elements the elements to add to the {@code ImmutableSet}
+     * @return this {@code Builder} object
+     * @throws NullPointerException if {@code elements} is or contains null
+     */
+    public Builder<E> addAll(Iterator<? extends E> elements) {
+      while (elements.hasNext()) {
+        E element = elements.next();
+        Preconditions.checkNotNull(element, "element cannot be null");
+        contents.add(element);
+      }
+      return this;
+    }
+

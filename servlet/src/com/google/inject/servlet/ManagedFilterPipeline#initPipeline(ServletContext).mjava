@@ -6,7 +6,7 @@
       return;
 
     // Used to prevent duplicate initialization.
-    Set<Filter> initializedSoFar = Sets.newIdentityHashSet(ReferenceType.STRONG);
+    Set<Filter> initializedSoFar = Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap());
 
     for (FilterDefinition filterDefinition : filterDefinitions) {
       filterDefinition.init(servletContext, injector, initializedSoFar);

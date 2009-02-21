@@ -1,0 +1,4 @@
+      Values(V singleValue) {
+        this.singleValue = singleValue;
+      }
+

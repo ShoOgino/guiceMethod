@@ -1,0 +1,19 @@
+  /**
+   * Returns a string containing the {@code tokens}, converted to strings if
+   * necessary, separated by {@code delimiter}. If {@code tokens} is empty, it
+   * returns an empty string.
+   *
+   * <p>Each token will be converted to a {@link CharSequence} using
+   * {@link String#valueOf(Object)}, if it isn't a {@link CharSequence} already.
+   * Note that this implies that null tokens will be appended as the
+   * four-character string {@code "null"}.
+   *
+   * @param delimiter a string to append between every element, but not at the
+   *     beginning or end
+   * @param tokens objects to append
+   * @return a string consisting of the joined elements
+   */
+  public static String join(String delimiter, Iterable<?> tokens) {
+    return join(delimiter, tokens.iterator());
+  }
+

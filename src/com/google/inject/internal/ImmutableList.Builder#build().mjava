@@ -1,0 +1,8 @@
+    /**
+     * Returns a newly-created {@code ImmutableList} based on the contents of
+     * the {@code Builder}.
+     */
+    public ImmutableList<E> build() {
+      return copyOf(contents);
+    }
+

@@ -1,0 +1,28 @@
+  /**
+   * Returns an immutable set containing the given elements, in order. Repeated
+   * occurrences of an element (according to {@link Object#equals}) after the
+   * first are ignored (but too many of these may result in the set being
+   * sized inappropriately). This method iterates over {@code elements} at most
+   * once.
+   *
+   * <p>Note that if {@code s} is a {@code Set<String>}, then {@code
+   * ImmutableSet.copyOf(s)} returns an {@code ImmutableSet<String>} containing
+   * each of the strings in {@code s}, while {@code ImmutableSet.of(s)} returns
+   * a {@code ImmutableSet<Set<String>>} containing one element (the given set
+   * itself).
+   *
+   * <p><b>Note:</b> Despite what the method name suggests, if {@code elements}
+   * is an {@code ImmutableSet} (but not an {@code ImmutableSortedSet}), no copy
+   * will actually be performed, and the given set itself will be returned.
+   *
+   * @throws NullPointerException if any of {@code elements} is null
+   */
+  public static <E> ImmutableSet<E> copyOf(Iterable<? extends E> elements) {
+    if (elements instanceof ImmutableSet) {
+      @SuppressWarnings("unchecked") // all supported methods are covariant
+      ImmutableSet<E> set = (ImmutableSet<E>) elements;
+      return set;
+    }
+    return copyOfInternal(Collections2.toCollection(elements));
+  }
+

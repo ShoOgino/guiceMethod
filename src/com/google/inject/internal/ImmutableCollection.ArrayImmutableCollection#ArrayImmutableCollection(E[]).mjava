@@ -1,0 +1,4 @@
+    ArrayImmutableCollection(E[] elements) {
+      this.elements = elements;
+    }
+

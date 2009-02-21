@@ -1,0 +1,21 @@
+  /**
+   * Appends each of the {@code tokens} to {@code appendable}, separated by
+   * {@code delimiter}.
+   *
+   * <p>Each token will be converted to a {@link CharSequence} using
+   * {@link String#valueOf(Object)}, if it isn't a {@link CharSequence} already.
+   * Note that this implies that null tokens will be appended as the
+   * four-character string {@code "null"}.
+   *
+   * @param appendable the object to append the results to
+   * @param delimiter a string to append between every element, but not at the
+   *     beginning or end
+   * @param tokens objects to append
+   * @return the same {@code Appendable} instance that was passed in
+   * @throws JoinException if an {@link IOException} occurs
+   */
+  public static <T extends Appendable> T join(
+      T appendable, String delimiter, Iterable<?> tokens) {
+    return join(appendable, delimiter, tokens.iterator());
+  }
+

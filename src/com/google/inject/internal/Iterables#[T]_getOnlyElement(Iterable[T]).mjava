@@ -1,0 +1,11 @@
+  /**
+   * Returns the single element contained in {@code iterable}.
+   *
+   * @throws NoSuchElementException if the iterable is empty
+   * @throws IllegalArgumentException if the iterable contains multiple
+   *     elements
+   */
+  public static <T> T getOnlyElement(Iterable<T> iterable) {
+    return Iterators.getOnlyElement(iterable.iterator());
+  }
+

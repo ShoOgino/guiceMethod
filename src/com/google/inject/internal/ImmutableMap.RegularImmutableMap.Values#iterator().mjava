@@ -1,0 +1,14 @@
+      @Override public UnmodifiableIterator<V> iterator() {
+        Iterator<V> iterator = new AbstractIterator<V>() {
+          int index = 0;
+          @Override protected V computeNext() {
+            return (index < map.entries.length)
+                ? map.entries[index++].getValue()
+                : endOfData();
+          }
+        };
+        // Though the AbstractIterator is unmodifiable, it isn't an
+        // UnmodifiableIterator.
+        return Iterators.unmodifiableIterator(iterator);
+      }
+

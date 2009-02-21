@@ -1,0 +1,4 @@
+  @Override Object writeReplace() {
+    return new SerializedForm(toArray());
+  }
+

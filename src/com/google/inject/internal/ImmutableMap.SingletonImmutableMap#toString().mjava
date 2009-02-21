@@ -1,0 +1,10 @@
+    @Override public String toString() {
+      return new StringBuilder()
+          .append('{')
+          .append(singleKey.toString())
+          .append('=')
+          .append(singleValue.toString())
+          .append('}')
+          .toString();
+    }
+

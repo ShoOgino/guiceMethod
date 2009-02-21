@@ -1,0 +1,4 @@
+    @Override public UnmodifiableIterator<Object> iterator() {
+      return EMPTY_ITERATOR;
+    }
+

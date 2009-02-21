@@ -1,0 +1,9 @@
+  /**
+   * Returns an immutable map containing the given entries, in order.
+   *
+   * @throws IllegalArgumentException if duplicate keys are added
+   */
+  public static <K, V> ImmutableMap<K, V> of(K k1, V v1, K k2, V v2) {
+    return new RegularImmutableMap<K, V>(entryOf(k1, v1), entryOf(k2, v2));
+  }
+

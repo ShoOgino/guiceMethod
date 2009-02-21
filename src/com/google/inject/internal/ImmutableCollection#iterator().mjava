@@ -1,0 +1,5 @@
+  /**
+   * Returns an unmodifiable iterator across the elements in this collection.
+   */
+  public abstract UnmodifiableIterator<E> iterator();
+

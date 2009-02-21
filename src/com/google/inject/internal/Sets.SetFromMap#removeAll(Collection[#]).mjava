@@ -1,0 +1,4 @@
+    @Override public boolean removeAll(Collection<?> c) {
+      return s.removeAll(c);
+    }
+

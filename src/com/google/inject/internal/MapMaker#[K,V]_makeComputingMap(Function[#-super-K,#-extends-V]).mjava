@@ -2,8 +2,7 @@
   // we don't expose this implementation detail.
   /**
    * See {@link CustomConcurrentHashMap.Builder#buildComputingMap(
-   * CustomConcurrentHashMap.ComputingStrategy,
-   * com.google.inject.internal.Function)}.
+   * CustomConcurrentHashMap.ComputingStrategy, Function)}.
    *
    * <p>If {@link java.util.Map#put} is called before a computation
    * completes, other threads waiting on the computation will wake up and

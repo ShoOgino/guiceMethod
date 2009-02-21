@@ -34,7 +34,8 @@
 
     replay(servletContext);
 
-    filterDef.init(servletContext, injector, Sets.<Filter>newIdentityHashSet(ReferenceType.STRONG));
+    filterDef.init(servletContext, injector,
+        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
 
     final FilterConfig filterConfig = mockFilter.getConfig();
     assert null != filterConfig;

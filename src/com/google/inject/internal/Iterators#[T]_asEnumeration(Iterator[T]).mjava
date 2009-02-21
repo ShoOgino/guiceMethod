@@ -1,0 +1,17 @@
+  /**
+   * Adapts an {@code Iterator} to the {@code Enumeration} interface.
+   *
+   * @see Collections#enumeration(Collection)
+   */
+  public static <T> Enumeration<T> asEnumeration(final Iterator<T> iterator) {
+    Preconditions.checkNotNull(iterator);
+    return new Enumeration<T>() {
+      public boolean hasMoreElements() {
+        return iterator.hasNext();
+      }
+      public T nextElement() {
+        return iterator.next();
+      }
+    };
+  }
+

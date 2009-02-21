@@ -1,0 +1,5 @@
+    @Override public ImmutableSet<K> keySet() {
+      ImmutableSet<K> ks = keySet;
+      return (ks == null) ? (keySet = ImmutableSet.of(singleKey)) : ks;
+    }
+

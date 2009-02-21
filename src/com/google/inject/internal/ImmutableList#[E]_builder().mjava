@@ -1,0 +1,8 @@
+  /**
+   * Returns a new builder. The generated builder is equivalent to the builder
+   * created by the {@link Builder} constructor.
+   */
+  public static <E> Builder<E> builder() {
+    return new Builder<E>();
+  }
+

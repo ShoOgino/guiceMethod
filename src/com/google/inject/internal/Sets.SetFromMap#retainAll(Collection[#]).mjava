@@ -1,0 +1,4 @@
+    @Override public boolean retainAll(Collection<?> c) {
+      return s.retainAll(c);
+    }
+

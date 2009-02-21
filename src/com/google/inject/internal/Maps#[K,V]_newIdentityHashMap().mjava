@@ -1,0 +1,9 @@
+  /**
+   * Creates an {@code IdentityHashMap} instance.
+   *
+   * @return a new, empty {@code IdentityHashMap}
+   */
+  public static <K, V> IdentityHashMap<K, V> newIdentityHashMap() {
+    return new IdentityHashMap<K, V>();
+  }
+

@@ -1,0 +1,4 @@
+    public ListIterator<Object> listIterator() {
+      return Iterators.emptyListIterator();
+    }
+

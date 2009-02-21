@@ -1,0 +1,15 @@
+  /**
+   * Creates an empty {@code HashSet} instance.
+   *
+   * <p><b>Note:</b> if {@code E} is an {@link Enum} type, use {@link
+   * EnumSet#noneOf} instead.
+   *
+   * <p><b>Note:</b> if you need an <i>immutable</i> empty Set, use {@link
+   * Collections#emptySet} instead.
+   *
+   * @return a newly created, empty {@code HashSet}
+   */
+  public static <E> HashSet<E> newHashSet() {
+    return new HashSet<E>();
+  }
+

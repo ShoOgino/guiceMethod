@@ -1,0 +1,4 @@
+    @Override public boolean containsAll(Collection<?> c) {
+      return s.containsAll(c);
+    }
+

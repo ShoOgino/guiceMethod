@@ -1,0 +1,9 @@
+  /**
+   * Creates an empty {@code LinkedHashSet} instance.
+   *
+   * @return a newly created, empty {@code LinkedHashSet}
+   */
+  public static <E> LinkedHashSet<E> newLinkedHashSet() {
+    return new LinkedHashSet<E>();
+  }
+

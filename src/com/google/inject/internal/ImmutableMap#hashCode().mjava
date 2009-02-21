@@ -1,0 +1,6 @@
+  @Override public int hashCode() {
+    // not caching hash code since it could change if map values are mutable
+    // in a way that modifies their hash codes
+    return entrySet().hashCode();
+  }
+

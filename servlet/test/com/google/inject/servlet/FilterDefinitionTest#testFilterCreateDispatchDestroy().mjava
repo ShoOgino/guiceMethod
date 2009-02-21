@@ -22,7 +22,7 @@
 
     //should fire on mockfilter now
     filterDef.init(createMock(ServletContext.class), injector,
-        Sets.<Filter>newIdentityHashSet(ReferenceType.STRONG));
+        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
 
     assert mockFilter.isInit() : "Init did not fire";
 
@@ -37,7 +37,7 @@
 
     assertTrue("Filter did not proceed down chain", proceed[0]);
 
-    filterDef.destroy(Sets.<Filter>newIdentityHashSet(ReferenceType.STRONG));
+    filterDef.destroy(Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
     assertTrue("Destroy did not fire", mockFilter.isDestroy());
 
     verify(injector, request);

@@ -1,0 +1,5 @@
+    @Override public ImmutableSet<Entry<K, V>> entrySet() {
+      ImmutableSet<Entry<K, V>> es = entrySet;
+      return (es == null) ? (entrySet = ImmutableSet.of(entry())) : es;
+    }
+

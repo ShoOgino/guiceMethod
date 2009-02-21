@@ -1,0 +1,14 @@
+  @Override public String toString() {
+    StringBuilder sb = new StringBuilder(size() * 16);
+    sb.append('[');
+    Iterator<E> i = iterator();
+    if (i.hasNext()) {
+      sb.append(i.next());
+    }
+    while (i.hasNext()) {
+      sb.append(", ");
+      sb.append(i.next());
+    }
+    return sb.append(']').toString();
+  }
+

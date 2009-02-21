@@ -1,0 +1,4 @@
+      @Override public UnmodifiableIterator<V> iterator() {
+        return Iterators.singletonIterator(singleValue);
+      }
+

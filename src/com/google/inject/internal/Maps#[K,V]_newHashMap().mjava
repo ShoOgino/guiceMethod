@@ -1,0 +1,12 @@
+  /**
+   * Creates a {@code HashMap} instance.
+   *
+   * <p><b>Note:</b> if you don't actually need the resulting map to be mutable,
+   * use {@link Collections#emptyMap} instead.
+   *
+   * @return a new, empty {@code HashMap}
+   */
+  public static <K, V> HashMap<K, V> newHashMap() {
+    return new HashMap<K, V>();
+  }
+

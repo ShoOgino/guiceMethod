@@ -1,5 +1,6 @@
   public void destroy() {
-    Set<HttpServlet> destroyedSoFar = Sets.newIdentityHashSet(ReferenceType.STRONG);
+    Set<HttpServlet> destroyedSoFar
+        = Sets.newSetFromMap(Maps.<HttpServlet, Boolean>newIdentityHashMap());
     for (ServletDefinition servletDefinition : servletDefinitions) {
       servletDefinition.destroy(destroyedSoFar);
     }

@@ -1,0 +1,5 @@
+    TransformedImmutableSet(D[] source, int hashCode) {
+      this.source = source;
+      this.hashCode = hashCode;
+    }
+

@@ -3,6 +3,6 @@
    * @since 2.0
    */
   protected final FilterKeyBindingBuilder filterRegex(String regex, String... regexes) {
-    return filtersModuleBuilder.filterRegex(Lists.asList(regex, regexes));
+    return filtersModuleBuilder.filterRegex(Lists.newArrayList(regex, regexes));
   }
 

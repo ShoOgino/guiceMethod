@@ -1,0 +1,6 @@
+    @Override public Object[] toArray() {
+      Object[] newArray = new Object[size()];
+      System.arraycopy(array, offset, newArray, 0, size);
+      return newArray;
+    }
+

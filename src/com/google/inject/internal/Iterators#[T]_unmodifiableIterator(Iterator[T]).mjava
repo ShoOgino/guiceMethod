@@ -1,0 +1,14 @@
+  /** Returns an unmodifiable view of {@code iterator}. */
+  public static <T> UnmodifiableIterator<T> unmodifiableIterator(
+      final Iterator<T> iterator) {
+    Preconditions.checkNotNull(iterator);
+    return new UnmodifiableIterator<T>() {
+      public boolean hasNext() {
+        return iterator.hasNext();
+      }
+      public T next() {
+        return iterator.next();
+      }
+    };
+  }
+

@@ -1,0 +1,4 @@
+  // This declaration is needed to make List.iterator() and
+  // ImmutableCollection.iterator() consistent.
+  @Override public abstract UnmodifiableIterator<E> iterator();
+

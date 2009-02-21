@@ -1,0 +1,6 @@
+    Object readResolve() {
+      return elements.length == 0
+          ? EMPTY_IMMUTABLE_COLLECTION
+          : new ArrayImmutableCollection<Object>(elements.clone());
+    }
+

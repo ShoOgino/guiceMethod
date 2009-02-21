@@ -1,0 +1,9 @@
+  /**
+   * Returns an immutable list containing the given elements, in order.
+   *
+   * @throws NullPointerException if any element is null
+   */
+  public static <E> ImmutableList<E> of(E e1, E e2) {
+    return new RegularImmutableList<E>(copyIntoArray(e1, e2));
+  }
+

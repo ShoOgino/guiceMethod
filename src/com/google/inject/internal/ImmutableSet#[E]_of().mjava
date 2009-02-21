@@ -1,0 +1,11 @@
+  /**
+   * Returns the empty immutable set. This set behaves and performs comparably
+   * to {@link Collections#emptySet}, and is preferable mainly for consistency
+   * and maintainability of your code.
+   */
+  // Casting to any type is safe because the set will never hold any elements.
+  @SuppressWarnings({"unchecked"})
+  public static <E> ImmutableSet<E> of() {
+    return (ImmutableSet<E>) EMPTY_IMMUTABLE_SET;
+  }
+

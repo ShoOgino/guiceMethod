@@ -3,6 +3,6 @@
    * @since 2.0
    */
   protected final ServletKeyBindingBuilder serve(String urlPattern, String... morePatterns) {
-    return servletsModuleBuilder.serve(Lists.asList(urlPattern, morePatterns));
+    return servletsModuleBuilder.serve(Lists.newArrayList(urlPattern, morePatterns));
   }
 

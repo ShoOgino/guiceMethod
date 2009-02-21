@@ -1,0 +1,8 @@
+  private static void appendOneEntry(
+      Appendable appendable, String keyValueSeparator, Map.Entry<?, ?> entry)
+      throws IOException {
+    appendOneToken(appendable, entry.getKey());
+    appendable.append(keyValueSeparator);
+    appendOneToken(appendable, entry.getValue());
+  }
+

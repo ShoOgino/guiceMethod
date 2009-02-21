@@ -1,0 +1,9 @@
+    /**
+     * Associates {@code key} with {@code value} in the built map. Duplicate
+     * keys are not allowed, and will cause {@link #build} to fail.
+     */
+    public Builder<K, V> put(K key, V value) {
+      entries.add(entryOf(key, value));
+      return this;
+    }
+

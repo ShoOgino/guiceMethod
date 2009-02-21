@@ -1,0 +1,14 @@
+    @Override public UnmodifiableIterator<E> iterator() {
+      Iterator<E> iterator = new AbstractIterator<E>() {
+        int index = 0;
+        @Override protected E computeNext() {
+          return index < source.length
+              ? transform(source[index++])
+              : endOfData();
+        }
+      };
+      // Though the AbstractIterator is unmodifiable, it isn't an
+      // UnmodifiableIterator.
+      return Iterators.unmodifiableIterator(iterator);
+    }
+

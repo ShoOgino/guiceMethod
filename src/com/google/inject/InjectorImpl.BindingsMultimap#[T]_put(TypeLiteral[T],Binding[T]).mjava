@@ -1,4 +1,9 @@
     <T> void put(TypeLiteral<T> type, Binding<T> binding) {
-      multimap.put(type, binding);
+      List<Binding<?>> bindingsForType = multimap.get(type);
+      if (bindingsForType == null) {
+        bindingsForType = Lists.newArrayList();
+        multimap.put(type, bindingsForType);
+      }
+      bindingsForType.add(binding);
     }
 

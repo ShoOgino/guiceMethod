@@ -1,0 +1,19 @@
+  /**
+   * Returns an iterable that applies {@code function} to each element of {@code
+   * fromIterable}.
+   *
+   * <p>The returned iterable's iterator supports {@code remove()} if the
+   * provided iterator does. After a successful {@code remove()} call,
+   * {@code fromIterable} no longer contains the corresponding element.
+   */
+  public static <F, T> Iterable<T> transform(final Iterable<F> fromIterable,
+      final Function<? super F, ? extends T> function) {
+    Preconditions.checkNotNull(fromIterable);
+    Preconditions.checkNotNull(function);
+    return new IterableWithToString<T>() {
+      public Iterator<T> iterator() {
+        return Iterators.transform(fromIterable.iterator(), function);
+      }
+    };
+  }
+

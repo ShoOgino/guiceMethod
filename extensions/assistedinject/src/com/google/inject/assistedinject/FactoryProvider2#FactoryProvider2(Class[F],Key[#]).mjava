@@ -9,7 +9,8 @@
     Errors errors = new Errors();
     try {
       ImmutableMap.Builder<Method, Key<?>> returnTypesBuilder = ImmutableMap.builder();
-      ImmutableMultimap.Builder<Method, Key<?>> paramTypesBuilder = ImmutableMultimap.builder();
+      ImmutableMap.Builder<Method, ImmutableList<Key<?>>> paramTypesBuilder
+          = ImmutableMap.builder();
       // TODO: also grab methods from superinterfaces
       for (Method method : factoryType.getMethods()) {
         Key<?> returnType = getKey(TypeLiteral.get(method.getGenericReturnType()),
@@ -18,10 +19,12 @@
         Type[] params = method.getGenericParameterTypes();
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
         int p = 0;
+        List<Key<?>> keys = Lists.newArrayList();
         for (Type param : params) {
           Key<?> paramKey = getKey(TypeLiteral.get(param), method, paramAnnotations[p++], errors);
-          paramTypesBuilder.put(method, assistKey(method, paramKey, errors));
+          keys.add(assistKey(method, paramKey, errors));
         }
+        paramTypesBuilder.put(method, ImmutableList.copyOf(keys));
       }
       returnTypesByMethod = returnTypesBuilder.build();
       paramTypes = paramTypesBuilder.build();

@@ -1,0 +1,11 @@
+    @Override public int lastIndexOf(Object target) {
+      if (target != null) {
+        for (int i = offset + size - 1; i >= offset; i--) {
+          if (array[i].equals(target)) {
+            return i - offset;
+          }
+        }
+      }
+      return -1;
+    }
+

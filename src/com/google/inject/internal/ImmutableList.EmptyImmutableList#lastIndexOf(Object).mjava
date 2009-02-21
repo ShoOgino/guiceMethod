@@ -1,0 +1,4 @@
+    @Override public int lastIndexOf(Object target) {
+      return -1;
+    }
+

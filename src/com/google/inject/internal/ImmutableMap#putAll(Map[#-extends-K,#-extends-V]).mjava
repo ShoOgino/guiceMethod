@@ -1,0 +1,9 @@
+  /**
+   * Guaranteed to throw an exception and leave the map unmodified.
+   *
+   * @throws UnsupportedOperationException always
+   */
+  public final void putAll(Map<? extends K, ? extends V> map) {
+    throw new UnsupportedOperationException();
+  }
+

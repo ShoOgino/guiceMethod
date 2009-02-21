@@ -1,0 +1,6 @@
+    SetFromMap(Map<E, Boolean> map) {
+      Preconditions.checkArgument(map.isEmpty(), "Map is non-empty");
+      m = map;
+      s = map.keySet();
+    }
+

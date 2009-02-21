@@ -1,0 +1,4 @@
+    @Override public ImmutableCollection<Object> values() {
+      return ImmutableCollection.EMPTY_IMMUTABLE_COLLECTION;
+    }
+

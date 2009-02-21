@@ -1,0 +1,10 @@
+  /**
+   * Returns an immutable set containing a single element. This set behaves and
+   * performs comparably to {@link Collections#singleton}, but will not accept
+   * a null element. It is preferable mainly for consistency and
+   * maintainability of your code.
+   */
+  public static <E> ImmutableSet<E> of(E element) {
+    return new SingletonImmutableSet<E>(element, element.hashCode());
+  }
+

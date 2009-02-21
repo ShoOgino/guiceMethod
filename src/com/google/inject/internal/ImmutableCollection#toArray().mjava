@@ -1,0 +1,5 @@
+  public Object[] toArray() {
+    Object[] newArray = new Object[size()];
+    return toArray(newArray);
+  }
+

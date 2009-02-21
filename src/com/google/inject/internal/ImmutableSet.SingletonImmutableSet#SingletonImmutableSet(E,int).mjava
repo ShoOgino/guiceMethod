@@ -1,0 +1,5 @@
+    SingletonImmutableSet(E element, int hashCode) {
+      this.element = element;
+      this.hashCode = hashCode;
+    }
+

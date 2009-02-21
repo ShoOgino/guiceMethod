@@ -1,9 +1,14 @@
   public void checkInjector(Module module, ElementVisitor<?>... visitors) {
     Injector injector = Guice.createInjector(module);
 
-    List<Binding<?>> bindings = Lists.newArrayList(
-        Iterables.filter(injector.getBindings().values(), isUserBinding));
-    orderByKey.sort(bindings);
+    List<Binding<?>> bindings = Lists.newArrayList(injector.getBindings().values());
+    for (Iterator<Binding<?>> i = bindings.iterator(); i.hasNext(); ) {
+      if (BUILT_IN_BINDINGS.contains(i.next().getKey())) {
+        i.remove();
+      }
+    }
+
+    Collections.sort(bindings, orderByKey);
 
     assertEquals(bindings.size(), visitors.length);
 

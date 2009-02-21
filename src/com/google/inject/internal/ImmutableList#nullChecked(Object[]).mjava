@@ -1,0 +1,15 @@
+  /**
+   * Checks that all the array elements are non-null.
+   *
+   * @return the argument array
+   * @throws NullPointerException if any element is null
+   */
+  private static Object[] nullChecked(Object[] array) {
+    for (int i = 0, len = array.length; i < len; i++) {
+      if (array[i] == null) {
+        throw new NullPointerException("at index " + i);
+      }
+    }
+    return array;
+  }
+

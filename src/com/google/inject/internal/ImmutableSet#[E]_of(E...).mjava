@@ -1,0 +1,19 @@
+  /**
+   * Returns an immutable set containing the given elements, in order. Repeated
+   * occurrences of an element (according to {@link Object#equals}) after the
+   * first are ignored (but too many of these may result in the set being
+   * sized inappropriately).
+   *
+   * @throws NullPointerException if any of {@code elements} is null
+   */
+  public static <E> ImmutableSet<E> of(E... elements) {
+    switch (elements.length) {
+      case 0:
+        return of();
+      case 1:
+        return of(elements[0]);
+      default:
+        return create(Arrays.asList(elements), elements.length);
+    }
+  }
+

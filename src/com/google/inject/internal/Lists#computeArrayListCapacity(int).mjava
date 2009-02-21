@@ -1,0 +1,7 @@
+  static int computeArrayListCapacity(int arraySize) {
+    Preconditions.checkArgument(arraySize >= 0);
+
+    // TODO: Figure out the right behavior, and document it
+    return (int) Math.min(5L + arraySize + (arraySize / 10), Integer.MAX_VALUE);
+  }
+

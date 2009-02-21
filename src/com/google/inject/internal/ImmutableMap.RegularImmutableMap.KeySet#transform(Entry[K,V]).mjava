@@ -1,0 +1,4 @@
+      @Override K transform(Entry<K, V> element) {
+        return element.getKey();
+      }
+

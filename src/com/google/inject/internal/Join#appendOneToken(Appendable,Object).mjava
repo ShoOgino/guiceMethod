@@ -1,0 +1,5 @@
+  private static void appendOneToken(Appendable appendable, Object token)
+      throws IOException {
+    appendable.append(toCharSequence(token));
+  }
+

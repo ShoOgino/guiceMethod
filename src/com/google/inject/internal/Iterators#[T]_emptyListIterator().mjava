@@ -1,0 +1,7 @@
+  /** Returns the empty {@code ListIterator}. */
+  // Casting to any type is safe since there are no actual elements.
+  @SuppressWarnings("unchecked")
+  public static <T> ListIterator<T> emptyListIterator() {
+    return (ListIterator<T>) EMPTY_LIST_ITERATOR;
+  }
+
