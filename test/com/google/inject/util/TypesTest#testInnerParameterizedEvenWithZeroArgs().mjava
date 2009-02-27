@@ -1,0 +1,10 @@
+  public void testInnerParameterizedEvenWithZeroArgs() {
+    TypeLiteral<Outer<String>.Inner> type = new TypeLiteral<Outer<String>.Inner>() {};
+    assertEqualsBothWays(outerInner, type.getType());
+
+    ParameterizedType parameterizedType = (ParameterizedType) type.getType();
+    assertEquals(0, parameterizedType.getActualTypeArguments().length);
+    assertEquals(new TypeLiteral<Outer<String>>() {}.getType(), parameterizedType.getOwnerType());
+    assertEquals(Outer.Inner.class, parameterizedType.getRawType());
+  }
+

@@ -6,5 +6,6 @@
     listString = (ParameterizedType) getClass().getDeclaredField("d").getGenericType();
     setString = (ParameterizedType) getClass().getDeclaredField("e").getGenericType();
     stringArray = (GenericArrayType) listStringArray.getActualTypeArguments()[0];
+    outerInner = (ParameterizedType) getClass().getDeclaredField("f").getGenericType();
   }
 
