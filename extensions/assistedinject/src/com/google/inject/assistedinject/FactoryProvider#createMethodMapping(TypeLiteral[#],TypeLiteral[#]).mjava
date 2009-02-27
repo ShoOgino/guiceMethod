@@ -1,11 +1,13 @@
-  @SuppressWarnings({"unchecked"})
   private static Map<Method, AssistedConstructor<?>> createMethodMapping(
-      Class<?> factoryType, Class<?> implementationType) {
+      TypeLiteral<?> factoryType, TypeLiteral<?> implementationType) {
     List<AssistedConstructor<?>> constructors = Lists.newArrayList();
 
-    for (Constructor<?> c : implementationType.getDeclaredConstructors()) {
-      if (c.getAnnotation(AssistedInject.class) != null) {
-        constructors.add(new AssistedConstructor(c));
+    for (Constructor<?> constructor : implementationType.getRawType().getDeclaredConstructors()) {
+      if (constructor.getAnnotation(AssistedInject.class) != null) {
+        @SuppressWarnings("unchecked") // the constructor type and implementation type agree
+        AssistedConstructor assistedConstructor = new AssistedConstructor(
+            constructor, implementationType.getParameterTypes(constructor));
+        constructors.add(assistedConstructor);
       }
     }
 
@@ -13,10 +15,12 @@
       return ImmutableMap.of();
     }
 
-    if (constructors.size() != factoryType.getMethods().length) {
+    Method[] factoryMethods = factoryType.getRawType().getMethods();
+
+    if (constructors.size() != factoryMethods.length) {
       throw newConfigurationException("Constructor mismatch: %s has %s @AssistedInject "
-          + "constructors, factory %s has %s creation methods", implementationType.getSimpleName(),
-          constructors.size(), factoryType.getSimpleName(), factoryType.getMethods().length);
+          + "constructors, factory %s has %s creation methods", implementationType,
+          constructors.size(), factoryType, factoryMethods.length);
     }
 
     Map<ParameterListKey, AssistedConstructor> paramsToConstructor = Maps.newHashMap();
@@ -29,13 +33,17 @@
     }
 
     Map<Method, AssistedConstructor<?>> result = Maps.newHashMap();
-    for (Method method : factoryType.getMethods()) {
-      if (!method.getReturnType().isAssignableFrom(implementationType)) {
-        throw new RuntimeException(String.format("Return type of method \"%s\""
-            + " is not assignable from class \"%s\"", method,
-            implementationType.getName()));
+    for (Method method : factoryMethods) {
+      if (!method.getReturnType().isAssignableFrom(implementationType.getRawType())) {
+        throw newConfigurationException("Return type of method %s is not assignable from %s",
+            method, implementationType);
       }
-      ParameterListKey methodParams = new ParameterListKey(method.getGenericParameterTypes());
+
+      List<Type> parameterTypes = Lists.newArrayList();
+      for (TypeLiteral<?> parameterType : factoryType.getParameterTypes(method)) {
+        parameterTypes.add(parameterType.getType());
+      }
+      ParameterListKey methodParams = new ParameterListKey(parameterTypes);
 
       if (!paramsToConstructor.containsKey(methodParams)) {
         throw newConfigurationException("%s has no @AssistInject constructor that takes the "

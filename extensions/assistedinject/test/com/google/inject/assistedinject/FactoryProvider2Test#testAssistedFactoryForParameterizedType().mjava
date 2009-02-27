@@ -1,0 +1,35 @@
+  public void testAssistedFactoryForParameterizedType() {
+    final TypeLiteral<InsuranceFactory<Mustang>> mustangInsuranceFactoryType =
+        new TypeLiteral<InsuranceFactory<Mustang>>() {};
+    final TypeLiteral<InsuranceFactory<Camaro>> camaroInsuranceFactoryType =
+        new TypeLiteral<InsuranceFactory<Camaro>>() {};
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
+        bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
+        bind(mustangInsuranceFactoryType).toProvider(FactoryProvider.newFactory(
+            mustangInsuranceFactoryType, TypeLiteral.get(MustangInsurance.class)));
+        bind(camaroInsuranceFactoryType).toProvider(FactoryProvider.newFactory(
+            camaroInsuranceFactoryType, TypeLiteral.get(CamaroInsurance.class)));
+      }
+    });
+
+    InsuranceFactory<Mustang> mustangInsuranceFactory = 
+        injector.getInstance(Key.get(mustangInsuranceFactoryType));
+    InsuranceFactory<Camaro> camaroInsuranceFactory = 
+        injector.getInstance(Key.get(camaroInsuranceFactoryType));
+
+    Mustang mustang = new Mustang(5000d, Color.BLACK);
+    MustangInsurance mustangPolicy = 
+        (MustangInsurance) mustangInsuranceFactory.create(mustang, 800.0d);
+    assertEquals(800.0d, mustangPolicy.premium);
+    assertEquals(50000.0d, mustangPolicy.limit);
+
+    Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
+    CamaroInsurance camaroPolicy = (CamaroInsurance) camaroInsuranceFactory.create(camaro, 800.0d);
+    assertEquals(800.0d, camaroPolicy.premium);
+    assertEquals(100000.0d, camaroPolicy.limit);
+  }
+

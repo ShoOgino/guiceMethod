@@ -1,0 +1,8 @@
+    @AssistedInject
+    public CamaroInsurance(@Named("highLimit") double limit, @Assisted Camaro car,
+        @Assisted double premium) {
+      this.premium = premium;
+      this.limit = limit;
+      this.car = car;
+    }
+

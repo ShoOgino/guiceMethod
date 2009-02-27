@@ -1,12 +1,5 @@
   public static <F> Provider<F> newFactory(
       Class<F> factoryType, Class<?> implementationType){
-    Map<Method, AssistedConstructor<?>> factoryMethodToConstructor
-        = createMethodMapping(factoryType, implementationType);
-
-    if (!factoryMethodToConstructor.isEmpty()) {
-      return new FactoryProvider<F>(factoryType, factoryMethodToConstructor);
-    } else {
-      return new FactoryProvider2<F>(factoryType, Key.get(implementationType));
-    }
+    return newFactory(TypeLiteral.get(factoryType), TypeLiteral.get(implementationType));
   }
 

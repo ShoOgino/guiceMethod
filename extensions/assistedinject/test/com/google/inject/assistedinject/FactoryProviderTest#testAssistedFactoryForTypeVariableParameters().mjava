@@ -1,0 +1,23 @@
+  public void testAssistedFactoryForTypeVariableParameters() {
+    final TypeLiteral<InsuranceFactory<Camaro>> camaroInsuranceFactoryType =
+        new TypeLiteral<InsuranceFactory<Camaro>>() {};
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Double.class).toInstance(50000.0d);
+        bind(camaroInsuranceFactoryType).toProvider(FactoryProvider.newFactory(
+            camaroInsuranceFactoryType, new TypeLiteral<AutoInsurance<Camaro>>() {}));
+      }
+    });
+
+    InsuranceFactory<Camaro> camaroInsuranceFactory =
+        injector.getInstance(Key.get(camaroInsuranceFactoryType));
+
+    Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
+    AutoInsurance camaroPolicy = (AutoInsurance) camaroInsuranceFactory.create(camaro, 800.0d);
+    assertEquals(800.0d, camaroPolicy.premium);
+    assertEquals(50000.0d, camaroPolicy.limit);
+    assertEquals(camaro, camaroPolicy.car);
+  }
+

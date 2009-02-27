@@ -1,0 +1,7 @@
+    @Inject
+    public AutoInsurance(double limit, @Assisted T car, @Assisted double premium) {
+      this.limit = limit;
+      this.car = car;
+      this.premium = premium;
+    }
+

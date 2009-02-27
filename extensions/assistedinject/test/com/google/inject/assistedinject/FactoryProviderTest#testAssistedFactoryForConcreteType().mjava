@@ -1,0 +1,31 @@
+  public void testAssistedFactoryForConcreteType() {
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
+        bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
+        bind(MustangInsuranceFactory.class).toProvider(
+            FactoryProvider.newFactory(MustangInsuranceFactory.class, MustangInsurance.class));
+        bind(CamaroInsuranceFactory.class).toProvider(
+            FactoryProvider.newFactory(CamaroInsuranceFactory.class, CamaroInsurance.class));
+      }
+    });
+
+    MustangInsuranceFactory mustangInsuranceFactory =
+        injector.getInstance(MustangInsuranceFactory.class);
+    CamaroInsuranceFactory camaroInsuranceFactory =
+        injector.getInstance(CamaroInsuranceFactory.class);
+
+    Mustang mustang = new Mustang(5000d, Color.BLACK);
+    MustangInsurance mustangPolicy =
+        (MustangInsurance) mustangInsuranceFactory.create(mustang, 800.0d);
+    assertEquals(800.0d, mustangPolicy.premium);
+    assertEquals(50000.0d, mustangPolicy.limit);
+
+    Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
+    CamaroInsurance camaroPolicy = (CamaroInsurance) camaroInsuranceFactory.create(camaro, 800.0d);
+    assertEquals(800.0d, camaroPolicy.premium);
+    assertEquals(100000.0d, camaroPolicy.limit);
+  }
+

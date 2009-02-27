@@ -33,7 +33,9 @@
       }
     };
 
-    return factoryType.cast(Proxy.newProxyInstance(factoryType.getClassLoader(),
-        new Class[] {factoryType}, invocationHandler));
+    @SuppressWarnings("unchecked") // we imprecisely treat the class literal of T as a Class<T>
+    Class<F> factoryRawType = (Class) factoryType.getRawType();
+    return factoryRawType.cast(Proxy.newProxyInstance(factoryRawType.getClassLoader(),
+        new Class[] { factoryRawType }, invocationHandler));
   }
 

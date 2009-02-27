@@ -1,4 +1,4 @@
-  private FactoryProvider(Class<F> factoryType,
+  private FactoryProvider(TypeLiteral<F> factoryType,
       Map<Method, AssistedConstructor<?>> factoryMethodToConstructor) {
     this.factoryType = factoryType;
     this.factoryMethodToConstructor = factoryMethodToConstructor;
