@@ -1,4 +1,6 @@
     public void install(Module module) {
+      checkNotNull(module, "module");
+
       if (modules.add(module)) {
         Binder binder = this;
         if (module instanceof PrivateModule) {
