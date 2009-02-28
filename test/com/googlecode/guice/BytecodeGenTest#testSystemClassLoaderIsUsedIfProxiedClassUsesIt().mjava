@@ -5,6 +5,12 @@
       }
     }).getInstance(ProxyTest.class);
 
-    assertSame(testProxy.getClass().getClassLoader(), ClassLoader.getSystemClassLoader());
+    // unforunately, the expected classloader depends on which class loader loaded this test.
+    if (ProxyTest.class.getClassLoader() == systemClassLoader) {
+      assertSame(testProxy.getClass().getClassLoader(), systemClassLoader);
+    } else {
+      assertNotSame(testProxy.getClass().getClassLoader(), ProxyTest.class.getClassLoader());
+      assertNotSame(testProxy.getClass().getClassLoader(), systemClassLoader);
+    }
   }
 

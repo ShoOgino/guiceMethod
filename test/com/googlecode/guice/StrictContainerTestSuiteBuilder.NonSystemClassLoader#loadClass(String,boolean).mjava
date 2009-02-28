@@ -1,0 +1,25 @@
+    @Override
+    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+      // check our local cache to avoid duplicates
+      synchronized (this) {
+        Class<?> clazz = findLoadedClass(name);
+        if (clazz != null) {
+          return clazz;
+        }
+      }
+
+      if (name.startsWith("java.")
+          || name.startsWith("javax.")
+          || name.startsWith("junit.")
+          || name.startsWith("sun.")
+          || name.startsWith("com.sun.")) {
+        return super.loadClass(name, resolve);
+      }
+
+      Class<?> clazz = findClass(name);
+      if (resolve) {
+        resolveClass(clazz);
+      }
+      return clazz;
+    }
+

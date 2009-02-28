@@ -1,0 +1,4 @@
+    public void run(TestResult testResult) {
+      testResult.addError(this, cause);
+    }
+

@@ -1,0 +1,9 @@
+  public void add(String testClassName) {
+    try {
+      Class<?> testClass = classLoader.loadClass(testClassName);
+      testSuite.addTest(new SecurityManagedTest(new TestSuite(testClass)));
+    } catch (Exception e) {
+      testSuite.addTest(new SuiteConstructionError(testClassName, e));
+    }
+  }
+

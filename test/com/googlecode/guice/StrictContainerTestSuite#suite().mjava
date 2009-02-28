@@ -1,0 +1,25 @@
+  public static Test suite() {
+    SecurityManager securityManager = new SecurityManager() {
+      @Override public void checkPermission(Permission permission) {
+        if (permission instanceof FilePermission) {
+          return;
+        }
+
+        if (permission instanceof RuntimePermission
+            && permission.getName().equals("getClassLoader")
+            && Arrays.toString(new Throwable().getStackTrace()).contains(".getSystemClassLoader(")) {
+          throw new SecurityException("StrictContainerTestSuite forbids this!");
+        }
+      }
+
+      @Override public void checkPermission(Permission permission, Object context) {
+        checkPermission(permission);
+      }
+    };
+
+    StrictContainerTestSuiteBuilder builder = new StrictContainerTestSuiteBuilder(securityManager);
+    builder.add(BytecodeGenTest.class.getName());
+    builder.addSuite(MapMakerTestSuite.class.getName());
+    return builder.build();
+  }
+

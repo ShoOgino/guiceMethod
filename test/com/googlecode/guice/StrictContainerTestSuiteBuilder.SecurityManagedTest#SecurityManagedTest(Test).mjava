@@ -1,0 +1,4 @@
+    public SecurityManagedTest(Test delegate) {
+      super(delegate);
+    }
+

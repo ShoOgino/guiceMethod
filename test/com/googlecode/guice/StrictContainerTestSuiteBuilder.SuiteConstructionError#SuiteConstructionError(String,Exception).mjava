@@ -1,0 +1,5 @@
+    public SuiteConstructionError(String className, Exception cause) {
+      this.className = className;
+      this.cause = cause;
+    }
+

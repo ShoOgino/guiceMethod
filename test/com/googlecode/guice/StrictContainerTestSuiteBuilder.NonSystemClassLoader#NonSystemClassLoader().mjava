@@ -1,0 +1,18 @@
+    public NonSystemClassLoader() {
+      super(new URL[0]);
+
+      for (final String element : System.getProperty("java.class.path").split(File.pathSeparator)) {
+        try {
+          // is it a remote/local URL?
+          addURL(new URL(element));
+        } catch (MalformedURLException e1) {
+          // nope - perhaps it's a filename?
+          try {
+            addURL(new File(element).toURI().toURL());
+          } catch (MalformedURLException e2) {
+            throw new RuntimeException(e1);
+          }
+        }
+      }
+    }
+

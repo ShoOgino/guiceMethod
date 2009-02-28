@@ -1,10 +1,11 @@
   /**
    * For class loaders, {@code null}, is always an alias to the
-   * {@link ClassLoader#getSystemClassLoader() system class loader}.
+   * {@link ClassLoader#getSystemClassLoader() system class loader}. This method
+   * will not return null.
    */
   private static ClassLoader canonicalize(ClassLoader classLoader) {
     return classLoader != null
         ? classLoader
-        : ClassLoader.getSystemClassLoader();
+        : checkNotNull(getSystemClassLoaderOrNull(), "Couldn't get a ClassLoader");
   }
 

@@ -1,0 +1,10 @@
+  public void addSuite(String suiteClassname) {
+    try {
+      Class<?> suiteClass = classLoader.loadClass(suiteClassname);
+      Test testSuite = (Test) suiteClass.getMethod("suite").invoke(null);
+      this.testSuite.addTest(new SecurityManagedTest(testSuite));
+    } catch (Exception e) {
+      testSuite.addTest(new SuiteConstructionError(suiteClassname, e));
+    }
+  }
+

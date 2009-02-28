@@ -2,7 +2,7 @@
     delegate = canonicalize(delegate);
 
     // if the application is running in the System classloader, assume we can run there too
-    if (delegate == ClassLoader.getSystemClassLoader()) {
+    if (delegate == getSystemClassLoaderOrNull()) {
       return delegate;
     }
 
