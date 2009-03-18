@@ -1,0 +1,5 @@
+  /**
+   * Unsupported. Always throws {@link UnsupportedOperationException}.
+   */
+  void applyTo(Binder binder);
+

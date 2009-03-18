@@ -5,6 +5,11 @@
    * <p>Whenever Guice creates an instance, it performs this injection automatically (after first
    * performing constructor injection), so if you're able to let Guice create all your objects for
    * you, you'll never need to use this method.
+   *
+   * @param instance to inject members on
+   *
+   * @see Binder#getMembersInjector(Class) for a preferred alternative that supports checks before
+   *  run time
    */
   void injectMembers(Object instance);
 

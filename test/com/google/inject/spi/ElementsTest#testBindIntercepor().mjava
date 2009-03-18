@@ -17,7 +17,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitInterceptorBinding(InterceptorBinding command) {
+          @Override public Void visit(InterceptorBinding command) {
             assertSame(classMatcher, command.getClassMatcher());
             assertSame(methodMatcher, command.getMethodMatcher());
             assertEquals(Arrays.asList(methodInterceptor), command.getInterceptors());

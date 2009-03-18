@@ -1,6 +1,0 @@
-    public void requestInjection(Object... instances) {
-      for (Object instance : instances) {
-        elements.add(new InjectionRequest(getSource(), instance));
-      }
-    }
-

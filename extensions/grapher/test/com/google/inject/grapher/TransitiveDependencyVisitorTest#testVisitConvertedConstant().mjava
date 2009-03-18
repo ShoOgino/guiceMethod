@@ -1,7 +1,7 @@
   public void testVisitConvertedConstant() {
     Binding<?> binding = getBinding(Key.get(Integer.class, Names.named("number")),
         new ConvertedConstantModule());
-    Collection<Key<?>> dependencies = visitor.visitConvertedConstant(
+    Collection<Key<?>> dependencies = visitor.visit(
         (ConvertedConstantBinding<?>) binding);
     
     assertDependencies(dependencies, Key.get(String.class, Names.named("number")));

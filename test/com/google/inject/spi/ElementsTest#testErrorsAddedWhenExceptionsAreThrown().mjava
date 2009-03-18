@@ -13,7 +13,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message command) {
+          @Override public Void visit(Message command) {
             assertEquals("Throwing RuntimeException in AbstractModule.configure().",
                 command.getCause().getMessage());
             return null;
@@ -21,7 +21,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message command) {
+          @Override public Void visit(Message command) {
             assertEquals("Code after the exception still gets executed",
                 command.getMessage());
             return null;

@@ -21,7 +21,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitProviderLookup(ProviderLookup command) {
+          @Override public Void visit(ProviderLookup command) {
             assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
             assertNull(command.getDelegate());
             return null;
@@ -29,7 +29,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitProviderLookup(ProviderLookup command) {
+          @Override public Void visit(ProviderLookup command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertNull(command.getDelegate());
             return null;

@@ -1,5 +1,0 @@
-  /**
-   * Visit a collection of configuration elements for a private environment.
-   */
-  V visitPrivateElements(PrivateElements privateElements);
-

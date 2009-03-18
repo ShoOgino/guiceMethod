@@ -1,0 +1,4 @@
+  InjectableTypeListenerBindingProcessor(Errors errors) {
+    super(errors);
+  }
+

@@ -1,7 +1,0 @@
-  /*if[AOP]*/
-  public Boolean visitInterceptorBinding(
-      com.google.inject.spi.InterceptorBinding interceptorBinding) {
-    return false;
-  }
-  /*end[AOP]*/
-

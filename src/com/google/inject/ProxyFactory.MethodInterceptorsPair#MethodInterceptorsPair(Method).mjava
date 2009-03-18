@@ -1,4 +1,4 @@
-    public MethodInterceptorsPair(Method method) {
+    MethodInterceptorsPair(Method method) {
       this.method = method;
     }
 

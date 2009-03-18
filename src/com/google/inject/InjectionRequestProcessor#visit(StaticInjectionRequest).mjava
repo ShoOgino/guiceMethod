@@ -1,0 +1,5 @@
+  @Override public Boolean visit(StaticInjectionRequest request) {
+    staticInjections.add(new StaticInjection(injector, request));
+    return true;
+  }
+

@@ -3,10 +3,11 @@
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     aspects.add(new MethodAspect(only(Bar.class), annotatedWith(Intercept.class), interceptor));
-    ProxyFactory factory = new ProxyFactory(aspects);
 
-    ConstructionProxy<Foo> fooFactory = factory.get(InjectionPoint.forConstructorOf(Foo.class));
-    ConstructionProxy<Bar> barFactory = factory.get(InjectionPoint.forConstructorOf(Bar.class));
+    ConstructionProxy<Foo> fooFactory
+        = new ProxyFactory<Foo>(InjectionPoint.forConstructorOf(Foo.class), aspects).create();
+    ConstructionProxy<Bar> barFactory
+        = new ProxyFactory<Bar>(InjectionPoint.forConstructorOf(Bar.class), aspects).create();
 
     Foo foo = fooFactory.newInstance();
     Bar bar = barFactory.newInstance();

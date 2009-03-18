@@ -1,8 +1,0 @@
-  /**
-   * @see Binder#requestInjection(Object[])
-   * @since 2.0
-   */
-  protected void requestInjection(Object... objects) {
-    binder.requestInjection(objects);
-  }
-

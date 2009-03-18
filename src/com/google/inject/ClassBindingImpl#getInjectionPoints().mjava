@@ -1,4 +1,0 @@
-  public Set<InjectionPoint> getInjectionPoints() {
-    return injectionPoints;
-  }
-

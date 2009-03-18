@@ -1,4 +1,0 @@
-  public Boolean visitTypeConverterBinding(TypeConverterBinding typeConverterBinding) {
-    return false;
-  }
-

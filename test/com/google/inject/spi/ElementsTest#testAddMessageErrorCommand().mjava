@@ -7,7 +7,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message command) {
+          @Override public Void visit(Message command) {
             assertEquals("Message A 5 C", command.getMessage());
             assertNull(command.getCause());
             assertContains(command.getSources().toString(),

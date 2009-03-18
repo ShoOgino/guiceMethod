@@ -1,6 +1,6 @@
   public void testBindKeysNoAnnotations() {
     FailingElementVisitor keyChecker = new FailingElementVisitor() {
-      @Override public <T> Void visitBinding(Binding<T> command) {
+      @Override public <T> Void visit(Binding<T> command) {
         assertEquals(Key.get(String.class), command.getKey());
         return null;
       }

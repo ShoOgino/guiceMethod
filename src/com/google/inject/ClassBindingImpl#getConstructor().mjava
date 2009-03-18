@@ -1,4 +1,0 @@
-  public Constructor<? extends T> getConstructor() {
-    return lateBoundConstructor.getConstructor();
-  }
-

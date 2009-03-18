@@ -1,0 +1,7 @@
+  /**
+   * @see Binder#getMembersInjector(Class)
+   */
+  protected <T> MembersInjector<T> getMembersInjector(Class<T> type) {
+    return binder.getMembersInjector(type);
+  }
+

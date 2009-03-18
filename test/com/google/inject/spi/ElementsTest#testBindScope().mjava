@@ -7,7 +7,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitScopeBinding(ScopeBinding command) {
+          @Override public Void visit(ScopeBinding command) {
             assertSame(SampleAnnotation.class, command.getAnnotationType());
             assertSame(Scopes.NO_SCOPE, command.getScope());
             return null;

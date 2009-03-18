@@ -13,7 +13,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitTypeConverterBinding(TypeConverterBinding command) {
+          @Override public Void visit(TypeConverterBinding command) {
             assertSame(typeConverter, command.getTypeConverter());
             assertSame(Matchers.any(), command.getTypeMatcher());
             return null;

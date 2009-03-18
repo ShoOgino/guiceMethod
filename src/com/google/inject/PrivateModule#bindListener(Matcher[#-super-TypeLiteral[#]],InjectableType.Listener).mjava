@@ -1,0 +1,8 @@
+  /**
+   * @see Binder#bindListener(com.google.inject.matcher.Matcher, com.google.inject.spi.InjectableType.Listener)
+   */
+  protected void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
+      InjectableType.Listener listener) {
+    binder.bindListener(typeMatcher, listener);
+  }
+

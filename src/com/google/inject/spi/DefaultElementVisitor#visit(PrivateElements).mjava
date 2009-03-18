@@ -1,0 +1,4 @@
+  public V visit(PrivateElements privateElements) {
+    return visitOther(privateElements);
+  }
+

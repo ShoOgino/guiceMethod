@@ -9,13 +9,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
+          @Override public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message message) {
+          @Override public Void visit(Message message) {
             assertEquals("Constant value is set more than once.", message.getMessage());
             assertNull(message.getCause());
             assertContains(message.getSource(), "ElementsTest.java");

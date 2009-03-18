@@ -1,0 +1,9 @@
+  /**
+   * Writes this module element to the given binder (optional operation).
+   *
+   * @param binder to apply configuration element to
+   * @throws UnsupportedOperationException if the {@code applyTo} method is not supported by this
+   *     element.
+   */
+  void applyTo(Binder binder);
+

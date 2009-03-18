@@ -1,0 +1,37 @@
+  public void testInstallingInjectionListener() {
+    final List<Object> injectees = Lists.newArrayList();
+    final InjectionListener<Object> injectionListener = new InjectionListener<Object>() {
+      public void afterInjection(Object injectee) {
+        injectees.add(injectee);
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindListener(any(), new InjectableType.Listener() {
+          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+            encounter.register(injectionListener);
+          }
+        });
+        bind(A.class);
+      }
+    });
+
+    assertEquals(ImmutableList.of(), injectees);
+
+    Object a1 = injector.getInstance(A.class);
+    assertEquals(ImmutableList.of(a1), injectees);
+
+    Object a2 = injector.getInstance(A.class);
+    assertEquals(ImmutableList.of(a1, a2), injectees);
+
+    Object b1 = injector.getInstance(B.class);
+    assertEquals(ImmutableList.of(a1, a2, b1), injectees);
+
+    Provider<A> aProvider = injector.getProvider(A.class);
+    assertEquals(ImmutableList.of(a1, a2, b1), injectees);
+    A a3 = aProvider.get();
+    A a4 = aProvider.get();
+    assertEquals(ImmutableList.of(a1, a2, b1, a3, a4), injectees);
+  }
+

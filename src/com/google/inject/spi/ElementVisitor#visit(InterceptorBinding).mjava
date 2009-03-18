@@ -1,0 +1,7 @@
+  /*if[AOP]*/
+  /**
+   * Visit a registration of interceptors for matching methods of matching classes.
+   */
+  V visit(InterceptorBinding binding);
+  /*end[AOP]*/
+

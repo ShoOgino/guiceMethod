@@ -1,4 +1,0 @@
-  public V visitProviderInstance(ProviderInstanceBinding<? extends T> providerInstanceBinding) {
-    return visitOther(providerInstanceBinding);
-  }
-

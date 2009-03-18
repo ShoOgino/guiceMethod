@@ -1,4 +1,0 @@
-  public Boolean visitPrivateElements(PrivateElements privateElements) {
-    return false;
-  }
-

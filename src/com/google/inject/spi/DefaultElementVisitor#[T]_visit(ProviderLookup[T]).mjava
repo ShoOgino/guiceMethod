@@ -1,0 +1,4 @@
+  public <T> V visit(ProviderLookup<T> providerLookup) {
+    return visitOther(providerLookup);
+  }
+

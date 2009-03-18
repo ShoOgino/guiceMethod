@@ -15,6 +15,10 @@
       @Override public String toString() {
         return scope.toString();
       }
+
+      public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
+        scopedBindingBuilder.in(scope);
+      }
     };
   }
 

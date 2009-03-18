@@ -1,0 +1,13 @@
+    @SuppressWarnings("unchecked") // the constructor promises to construct 'T's
+    ProxyConstructor(Enhancer enhancer, InjectionPoint injectionPoint, Callback[] callbacks,
+        ImmutableMap<Method, List<MethodInterceptor>> methodInterceptors) {
+      this.enhanced = enhancer.createClass(); // this returns a cached class if possible
+      this.injectionPoint = injectionPoint;
+      this.constructor = (Constructor<T>) injectionPoint.getMember();
+      this.callbacks = callbacks;
+      this.methodInterceptors = methodInterceptors;
+
+      FastClass fastClass = newFastClass(enhanced, BytecodeGen.Visibility.forMember(constructor));
+      this.fastConstructor = fastClass.getConstructor(constructor.getParameterTypes());
+    }
+

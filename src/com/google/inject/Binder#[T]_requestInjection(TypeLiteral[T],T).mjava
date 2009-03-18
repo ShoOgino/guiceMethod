@@ -1,0 +1,10 @@
+  /**
+   * Upon successful creation, the {@link Injector} will inject instance fields
+   * and methods of the given object.
+   *
+   * @param type of instance
+   * @param instance for which members will be injected
+   * @since 2.0
+   */
+  <T> void requestInjection(TypeLiteral<T> type, T instance);
+

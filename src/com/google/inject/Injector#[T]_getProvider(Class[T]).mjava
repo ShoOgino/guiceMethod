@@ -3,6 +3,7 @@
    * using this method, in favor of having Guice inject your dependencies ahead of time.
    *
    * @throws ConfigurationException if this injector cannot find or create the provider.
+   * @see Binder#getProvider(Class) for an alternative that offers up front error detection
    */
   <T> Provider<T> getProvider(Class<T> type);
 

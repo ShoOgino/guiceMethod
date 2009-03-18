@@ -1,0 +1,6 @@
+  /**
+   * Visit a binding to a {@link com.google.inject.Provider} that delegates to the binding for the
+   * provided type. This target is found only on injector bindings.
+   */
+  V visit(ProviderBinding<? extends T> binding);
+

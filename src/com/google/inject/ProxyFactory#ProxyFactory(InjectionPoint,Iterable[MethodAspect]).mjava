@@ -1,0 +1,74 @@
+  ProxyFactory(InjectionPoint injectionPoint, Iterable<MethodAspect> methodAspects) {
+    this.injectionPoint = injectionPoint;
+
+    @SuppressWarnings("unchecked") // the member of injectionPoint is always a Constructor<T>
+        Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
+    declaringClass = constructor.getDeclaringClass();
+
+    // Find applicable aspects. Bow out if none are applicable to this class.
+    List<MethodAspect> applicableAspects = Lists.newArrayList();
+    for (MethodAspect methodAspect : methodAspects) {
+      if (methodAspect.matches(declaringClass)) {
+        applicableAspects.add(methodAspect);
+      }
+    }
+
+    if (applicableAspects.isEmpty()) {
+      interceptors = ImmutableMap.of();
+      methods = ImmutableList.of();
+      callbacks = null;
+      return;
+    }
+
+    // Get list of methods from cglib.
+    methods = Lists.newArrayList();
+    Enhancer.getMethods(declaringClass, null, methods);
+
+    // Create method/interceptor holders and record indices.
+    List<MethodInterceptorsPair> methodInterceptorsPairs = Lists.newArrayList();
+    for (Method method : methods) {
+      methodInterceptorsPairs.add(new MethodInterceptorsPair(method));
+    }
+
+    // Iterate over aspects and add interceptors for the methods they apply to
+    boolean anyMatched = false;
+    for (MethodAspect methodAspect : applicableAspects) {
+      for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
+        if (methodAspect.matches(pair.method)) {
+          visibility = visibility.and(BytecodeGen.Visibility.forMember(pair.method));
+          pair.addAll(methodAspect.interceptors());
+          anyMatched = true;
+        }
+      }
+    }
+
+    if (!anyMatched) {
+      interceptors = ImmutableMap.of();
+      callbacks = null;
+      return;
+    }
+
+    ImmutableMap.Builder<Method, List<MethodInterceptor>> interceptorsMapBuilder = null; // lazy
+
+    callbacks = new Callback[methods.size()];
+    for (int i = 0; i < methods.size(); i++) {
+      MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
+
+      if (!pair.hasInterceptors()) {
+        callbacks[i] = NO_OP_METHOD_INTERCEPTOR;
+        continue;
+      }
+
+      if (interceptorsMapBuilder == null) {
+        interceptorsMapBuilder = ImmutableMap.builder();
+      }
+
+      interceptorsMapBuilder.put(pair.method, ImmutableList.copyOf(pair.interceptors));
+      callbacks[i] = new InterceptorStackCallback(pair.method, pair.interceptors);
+    }
+
+    interceptors = interceptorsMapBuilder != null
+        ? interceptorsMapBuilder.build()
+        : ImmutableMap.<Method, List<MethodInterceptor>>of();
+  }
+

@@ -1,0 +1,4 @@
+  public V visit(Message message) {
+    return visitOther(message);
+  }
+

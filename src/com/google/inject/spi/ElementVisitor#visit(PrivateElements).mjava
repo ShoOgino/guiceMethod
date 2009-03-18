@@ -1,0 +1,6 @@
+  /**
+   * Visit a collection of configuration elements for a {@linkplain com.google.inject.PrivateBinder
+   * private binder}.
+   */
+  V visit(PrivateElements elements);
+

@@ -1,0 +1,4 @@
+    public String buzz() {
+      return "buzz";
+    }
+

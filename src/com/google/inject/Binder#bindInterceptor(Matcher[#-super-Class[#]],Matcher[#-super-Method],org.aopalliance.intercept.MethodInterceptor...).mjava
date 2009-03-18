@@ -1,7 +1,13 @@
   /*if[AOP]*/
   /**
-   * Binds a method interceptor to methods matched by class and method
-   * matchers.
+   * Binds method interceptor[s] to methods matched by class and method matchers. A method is
+   * eligible for interception if:
+   *
+   * <ul>
+   *  <li>Guice created the instance the method is on</li>
+   *  <li>Neither the enclosing type nor the method is final</li>
+   *  <li>And the method is package-private, protected, or public</li>
+   * </ul>
    *
    * @param classMatcher matches classes the interceptor should apply to. For
    *     example: {@code only(Runnable.class)}.

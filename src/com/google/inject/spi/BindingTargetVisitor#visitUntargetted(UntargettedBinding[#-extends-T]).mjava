@@ -1,6 +1,0 @@
-  /**
-   * Visit an untargetted binding. This target is found only on module bindings. It indicates
-   * that the injector should use its implicit binding strategies to resolve injections.
-   */
-  V visitUntargetted(UntargettedBinding<? extends T> binding);
-

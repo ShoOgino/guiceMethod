@@ -1,0 +1,5 @@
+  /**
+   * Visit an injectable type listener binding.
+   */
+  V visit(InjectableTypeListenerBinding binding);
+

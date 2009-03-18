@@ -1,4 +1,0 @@
-  public V visitConvertedConstant(ConvertedConstantBinding<? extends T> convertedConstantBinding) {
-    return visitOther(convertedConstantBinding);
-  }
-

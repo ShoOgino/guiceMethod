@@ -1,4 +1,0 @@
-  public Collection<Key<?>> visitLinkedKey(LinkedKeyBinding<?> binding) {
-    return ImmutableSet.<Key<?>>of(binding.getLinkedKey());
-  }
-

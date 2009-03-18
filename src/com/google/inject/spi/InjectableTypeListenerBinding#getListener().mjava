@@ -1,0 +1,5 @@
+  /** Returns the registered listener. */
+  public InjectableType.Listener getListener() {
+    return listener;
+  }
+

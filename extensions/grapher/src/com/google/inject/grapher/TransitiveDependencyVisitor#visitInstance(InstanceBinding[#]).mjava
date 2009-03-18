@@ -1,4 +1,0 @@
-  public Collection<Key<?>> visitInstance(InstanceBinding<?> binding) {
-    return visitHasDependencies(binding);
-  }
-

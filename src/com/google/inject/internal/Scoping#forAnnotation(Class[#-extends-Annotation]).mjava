@@ -15,6 +15,10 @@
       @Override public String toString() {
         return scopingAnnotation.getName();
       }
+
+      public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
+        scopedBindingBuilder.in(scopingAnnotation);
+      }
     };
   }
 

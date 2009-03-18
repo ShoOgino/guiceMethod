@@ -1,9 +1,0 @@
-  @Override public Boolean visitPrivateElements(PrivateElements privateElements) {
-    InjectorShell.Builder builder = new InjectorShell.Builder()
-        .parent(injector)
-        .stage(stage)
-        .privateElements(privateElements);
-    injectorShellBuilders.add(builder);
-    return true;
-  }
-

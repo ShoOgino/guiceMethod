@@ -1,4 +1,0 @@
-  public <T> V visitProviderLookup(ProviderLookup<T> providerLookup) {
-    return visitElement(providerLookup);
-  }
-

@@ -1,0 +1,25 @@
+  public void testTypeListenersAreFired() throws NoSuchMethodException {
+    final Constructor<A> aConstructor = A.class.getDeclaredConstructor();
+    final AtomicInteger firedCount = new AtomicInteger();
+
+    final InjectableType.Listener typeListener = new InjectableType.Listener() {
+      public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+        assertEquals(new TypeLiteral<A>() {}, injectableType.getType());
+        assertEquals(aConstructor, injectableType.getInjectableConstructor().getMember());
+        assertEquals(2, injectableType.getInjectableMembers().size());
+        assertEquals(ImmutableMap.<Method, List<MethodInterceptor>>of(),
+            injectableType.getMethodInterceptors());
+        firedCount.incrementAndGet();
+      }
+    };
+
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindListener(any(), typeListener);
+        bind(A.class);
+      }
+    });
+
+    assertEquals(1, firedCount.get());
+  }
+

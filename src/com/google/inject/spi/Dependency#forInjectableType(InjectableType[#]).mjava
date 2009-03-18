@@ -1,0 +1,14 @@
+  /**
+   * Returns the dependencies from the given injectable type.
+   */
+  public static Set<Dependency<?>> forInjectableType(InjectableType<?> injectableType) {
+    List<Dependency<?>> dependencies = Lists.newArrayList();
+    if (injectableType.getInjectableConstructor() != null) {
+      dependencies.addAll(injectableType.getInjectableConstructor().getDependencies());
+    }
+    for (InjectionPoint injectionPoint : injectableType.getInjectableMembers()) {
+      dependencies.addAll(injectionPoint.getDependencies());
+    }
+    return ImmutableSet.copyOf(dependencies);
+  }
+

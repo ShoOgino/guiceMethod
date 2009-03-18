@@ -1,0 +1,4 @@
+  public Collection<Key<?>> visit(ConvertedConstantBinding<?> binding) {
+    return visitHasDependencies(binding);
+  }
+

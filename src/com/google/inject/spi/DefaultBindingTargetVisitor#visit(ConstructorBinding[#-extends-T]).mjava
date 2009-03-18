@@ -1,0 +1,4 @@
+  public V visit(ConstructorBinding<? extends T> constructorBinding) {
+    return visitOther(constructorBinding);
+  }
+

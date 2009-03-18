@@ -1,7 +1,7 @@
   public void testVisitProviderInstance() {
     Binding<?> binding = getBinding(Key.get(ConstructedClass.class),
         new ProviderInstanceModule());
-    Collection<Key<?>> dependencies = visitor.visitProviderInstance(
+    Collection<Key<?>> dependencies = visitor.visit(
         (ProviderInstanceBinding<?>) binding);
     
     // Dependencies will only be on the field- and method-injected classes.

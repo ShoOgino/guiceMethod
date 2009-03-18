@@ -1,0 +1,4 @@
+  public <R> R acceptVisitor(ElementVisitor<R> visitor) {
+    return visitor.visit(this);
+  }
+

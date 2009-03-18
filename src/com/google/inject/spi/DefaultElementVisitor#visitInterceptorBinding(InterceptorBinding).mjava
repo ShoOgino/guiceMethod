@@ -1,6 +1,0 @@
-  /*if[AOP]*/
-  public V visitInterceptorBinding(InterceptorBinding interceptorBinding) {
-    return visitElement(interceptorBinding);
-  }
-  /*end[AOP]*/
-

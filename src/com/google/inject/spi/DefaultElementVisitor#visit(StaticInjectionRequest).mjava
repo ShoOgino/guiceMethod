@@ -1,0 +1,4 @@
+  public V visit(StaticInjectionRequest staticInjectionRequest) {
+    return visitOther(staticInjectionRequest);
+  }
+

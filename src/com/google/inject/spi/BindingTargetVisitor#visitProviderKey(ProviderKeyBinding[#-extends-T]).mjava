@@ -1,7 +1,0 @@
-  /**
-   * Visit a provider key binding. To resolve injections, the provider key is first resolved, then
-   * that provider's {@code get} method is invoked. This target is found in both module and injector
-   * bindings.
-   */
-  V visitProviderKey(ProviderKeyBinding<? extends T> binding);
-

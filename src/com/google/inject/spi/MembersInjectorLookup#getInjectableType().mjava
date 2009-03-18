@@ -1,0 +1,7 @@
+  /**
+   * Gets the injectable type containing the members to be injected.
+   */
+  public InjectableType<T> getInjectableType() {
+    return injectableType;
+  }
+

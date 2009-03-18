@@ -1,0 +1,4 @@
+  public <T> V visit(Binding<T> binding) {
+    return visitOther(binding);
+  }
+

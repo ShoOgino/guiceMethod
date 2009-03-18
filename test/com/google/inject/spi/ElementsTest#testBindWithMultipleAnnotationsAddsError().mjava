@@ -9,13 +9,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
+          @Override public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message command) {
+          @Override public Void visit(Message command) {
             assertEquals("More than one annotation is specified for this binding.",
                 command.getMessage());
             assertNull(command.getCause());

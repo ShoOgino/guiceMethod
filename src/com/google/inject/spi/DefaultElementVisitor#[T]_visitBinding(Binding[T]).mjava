@@ -1,4 +1,0 @@
-  public <T> V visitBinding(Binding<T> binding) {
-    return visitElement(binding);
-  }
-

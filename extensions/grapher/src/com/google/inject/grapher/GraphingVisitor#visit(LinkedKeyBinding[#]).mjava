@@ -1,0 +1,17 @@
+  /**
+   * Visitor for {@link LinkedKeyBinding}. This is the standard {@link Binding}
+   * you get from binding an interface class to an implementation class. We
+   * create an {@link InterfaceNode}, then draw a {@link BindingEdge} to the
+   * node of the implementing class.
+   * 
+   * @see #newInterfaceNode(Binding)
+   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   */
+  public Void visit(LinkedKeyBinding<?> binding) {
+    newInterfaceNode(binding);
+    newBindingEdge(getClassNodeId(binding), idFactory.getClassNodeId(binding.getLinkedKey()), 
+        BindingEdge.Type.NORMAL);
+
+    return null;
+  }
+

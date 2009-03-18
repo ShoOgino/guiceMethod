@@ -1,0 +1,4 @@
+  public Collection<Key<?>> visit(ProviderInstanceBinding<?> binding) {
+    return visitHasDependencies(binding);
+  }
+

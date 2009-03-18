@@ -1,0 +1,4 @@
+  public V visit(ExposedBinding<? extends T> exposedBinding) {
+    return visitOther(exposedBinding);
+  }
+

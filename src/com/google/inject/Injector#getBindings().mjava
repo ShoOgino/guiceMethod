@@ -7,7 +7,6 @@
    * the order in which bindings appear in user Modules.
    *
    * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
-   *
    */
   Map<Key<?>, Binding<?>> getBindings();
 

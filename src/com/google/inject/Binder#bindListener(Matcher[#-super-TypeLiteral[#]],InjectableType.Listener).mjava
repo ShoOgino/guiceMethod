@@ -1,0 +1,11 @@
+  /**
+   * Registers a listener for injectable types. Guice will notify the listener when it encounters
+   * injectable types matched by the given type matcher.
+   *
+   * @param typeMatcher that matches injectable types the listener should be notified of
+   * @param listener for injectable types matched by typeMatcher
+   * @since 2.0
+   */
+  void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
+      InjectableType.Listener listener);
+

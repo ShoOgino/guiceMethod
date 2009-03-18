@@ -1,0 +1,5 @@
+    public <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> typeLiteral) {
+      throw new UnsupportedOperationException(
+        "Injector.getMembersInjector(TypeLiteral<T>) is not supported in Stage.TOOL");
+    }
+

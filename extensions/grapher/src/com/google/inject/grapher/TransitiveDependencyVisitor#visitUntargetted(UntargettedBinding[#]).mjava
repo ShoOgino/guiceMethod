@@ -1,5 +1,0 @@
-  public Collection<Key<?>> visitUntargetted(UntargettedBinding<?> binding) {
-    // TODO(phopkins): Figure out if this is needed for graphing.
-    return null;
-  }
-

@@ -1,0 +1,4 @@
+    public Set<InjectionPoint> getInjectableMembers() throws ConfigurationException {
+      return injectableMembers;
+    }
+

@@ -5,19 +5,20 @@
     checkModule(
         new AbstractModule() {
           protected void configure() {
-            requestInjection(firstObject, secondObject);
+            requestInjection(firstObject);
+            requestInjection(secondObject);
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitInjectionRequest(InjectionRequest command) {
+          @Override public Void visit(InjectionRequest command) {
             assertEquals(firstObject, command.getInstance());
             return null;
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitInjectionRequest(InjectionRequest command) {
+          @Override public Void visit(InjectionRequest command) {
             assertEquals(secondObject, command.getInstance());
             return null;
           }

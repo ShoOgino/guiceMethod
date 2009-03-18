@@ -1,4 +1,0 @@
-  @Override protected Void visitElement(Element element) {
-    throw new AssertionFailedError();
-  }
-

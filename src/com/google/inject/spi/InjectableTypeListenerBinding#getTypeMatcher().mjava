@@ -1,0 +1,5 @@
+  /** Returns the type matcher which chooses which types the listener should be notified of. */
+  public Matcher<? super TypeLiteral<?>> getTypeMatcher() {
+    return typeMatcher;
+  }
+

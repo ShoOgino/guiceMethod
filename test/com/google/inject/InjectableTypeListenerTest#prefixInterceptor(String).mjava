@@ -1,0 +1,8 @@
+  private static MethodInterceptor prefixInterceptor(final String prefix) {
+    return new MethodInterceptor() {
+      public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        return prefix + methodInvocation.proceed();
+      }
+    };
+  }
+

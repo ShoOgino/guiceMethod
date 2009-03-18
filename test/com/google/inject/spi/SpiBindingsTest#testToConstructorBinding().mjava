@@ -7,12 +7,12 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> binding) {
+          @Override public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof ConstructorBinding);
             assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(D.class), binding.getKey());
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visitConstructor(ConstructorBinding<? extends T> binding) {
+              @Override public Void visit(ConstructorBinding<? extends T> binding) {
                 Constructor<?> expected = D.class.getDeclaredConstructors()[0];
                 assertEquals(expected, binding.getConstructor());
                 return null;

@@ -1,0 +1,8 @@
+  /**
+   * @see Binder#requestInjection(Object)
+   * @since 2.0
+   */
+  protected void requestInjection(Object instance) {
+    binder.requestInjection(instance);
+  }
+

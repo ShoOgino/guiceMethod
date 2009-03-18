@@ -1,5 +1,0 @@
-  @SuppressWarnings("unchecked") // the constructed T is the same as the injection point's T
-  public <T> ConstructionProxy<T> get(InjectionPoint injectionPoint) {
-    return (ConstructionProxy<T>) constructionProxies.get(injectionPoint);
-  }
-

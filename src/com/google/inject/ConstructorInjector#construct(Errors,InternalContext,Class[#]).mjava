@@ -39,6 +39,10 @@
         injector.inject(errors, context, t);
       }
 
+      for (InjectionListener<? super T> injectionListener : injectionListeners) {
+        injectionListener.afterInjection(t); // TODO: handle user exceptions here
+      }
+
       return t;
     } catch (InvocationTargetException userException) {
       Throwable cause = userException.getCause() != null

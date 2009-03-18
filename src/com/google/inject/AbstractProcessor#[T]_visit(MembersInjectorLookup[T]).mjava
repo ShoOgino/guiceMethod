@@ -1,0 +1,4 @@
+  public <T> Boolean visit(MembersInjectorLookup<T> lookup) {
+    return false;
+  }
+

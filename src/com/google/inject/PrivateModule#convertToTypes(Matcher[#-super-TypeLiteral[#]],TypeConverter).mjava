@@ -1,3 +1,6 @@
+  /**
+   * @see Binder#convertToTypes(com.google.inject.matcher.Matcher, com.google.inject.spi.TypeConverter)
+   */
   protected final void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter) {
     binder.convertToTypes(typeMatcher, converter);

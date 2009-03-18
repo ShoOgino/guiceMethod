@@ -1,6 +1,6 @@
   public void testVisitProviderBinding() {
     Binding<?> binding = getBinding(Key.get(new TypeLiteral<Provider<ConstructedClass>>() {}));
-    Collection<Key<?>> dependencies = visitor.visitProviderBinding((ProviderBinding<?>) binding);
+    Collection<Key<?>> dependencies = visitor.visit((ProviderBinding<?>) binding);
     
     assertDependencies(dependencies, Key.get(ConstructedClass.class));
   }

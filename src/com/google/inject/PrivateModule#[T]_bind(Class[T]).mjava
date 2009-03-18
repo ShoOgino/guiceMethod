@@ -1,3 +1,6 @@
+  /**
+   * @see Binder#bind(Class)  
+   */
   protected final <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
     return binder.bind(clazz);
   }

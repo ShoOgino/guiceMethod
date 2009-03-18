@@ -1,0 +1,4 @@
+  public <T> V visit(MembersInjectorLookup<T> lookup) {
+    return visitOther(lookup);
+  }
+

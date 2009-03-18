@@ -1,0 +1,12 @@
+  /**
+   * Returns the members injector used to inject dependencies into methods and fields on instances
+   * of the given type {@code T}. When feasible, use {@link Binder#getMembersInjector(TypeLiteral)}
+   * instead to get increased up front error detection.
+   *
+   * @param type type to get members injector for
+   * @see Binder#getMembersInjector(Class) for an alternative that offers up front error
+   *  detection
+   * @since 2.0
+   */
+  <T> MembersInjector<T> getMembersInjector(Class<T> type);
+

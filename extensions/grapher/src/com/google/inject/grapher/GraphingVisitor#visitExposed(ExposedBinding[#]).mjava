@@ -1,8 +1,0 @@
-  /**
-   * Currently not displayed on the graph.
-   */
-  public Void visitExposed(ExposedBinding<?> binding) {
-    // TODO(phopkins): Decide if this is needed for graphing.
-    return null;
-  }
-

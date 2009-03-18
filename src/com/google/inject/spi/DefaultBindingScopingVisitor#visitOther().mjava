@@ -1,3 +1,6 @@
+  /**
+   * Default visit implementation. Returns {@code null}.
+   */
   protected V visitOther() {
     return null;
   }

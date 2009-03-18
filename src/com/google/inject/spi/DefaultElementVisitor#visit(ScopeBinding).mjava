@@ -1,0 +1,4 @@
+  public V visit(ScopeBinding scopeBinding) {
+    return visitOther(scopeBinding);
+  }
+

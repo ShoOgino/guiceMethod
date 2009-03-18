@@ -1,6 +1,6 @@
   public void testVisitInstance() {
     Binding<?> binding = getBinding(Key.get(ConstructedClass.class), new InstanceModule());
-    Collection<Key<?>> dependencies = visitor.visitInstance(
+    Collection<Key<?>> dependencies = visitor.visit(
         (InstanceBinding<?>) binding);
     
     // Dependencies will only be on the field- and method-injected classes.

@@ -1,3 +1,6 @@
+  /**
+   * @see Binder#bind(Key)
+   */
   protected final <T> LinkedBindingBuilder<T> bind(Key<T> key) {
     return binder.bind(key);
   }

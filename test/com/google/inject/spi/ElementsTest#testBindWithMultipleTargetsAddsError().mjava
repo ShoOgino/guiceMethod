@@ -9,13 +9,13 @@
         },
 
         new FailingElementVisitor() {
-          @Override public <T> Void visitBinding(Binding<T> command) {
+          @Override public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visitMessage(Message command) {
+          @Override public Void visit(Message command) {
             assertEquals("Implementation is set more than once.", command.getMessage());
             assertNull(command.getCause());
             assertContains(command.getSource(), "ElementsTest.java");

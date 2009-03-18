@@ -1,0 +1,6 @@
+  public ConstructorInjectorStore(InjectorImpl injector,
+      List<InjectableTypeListenerBinding> injectableTypeListenerBindings) {
+    this.injector = injector;
+    this.injectableTypeListenerBindings = ImmutableList.copyOf(injectableTypeListenerBindings);
+  }
+

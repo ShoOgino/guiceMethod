@@ -1,6 +1,5 @@
   /**
-   * Returns the {@link com.google.inject.Inject annotated} or default constructor that is invoked
-   * for creating values.
+   * Gets the constructor this binding injects.
    */
-  Constructor<? extends T> getConstructor();
+  Constructor<?> getConstructor();
 

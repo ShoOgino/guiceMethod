@@ -1,6 +1,0 @@
-  /*if[AOP]*/
-  public Map<Method, List<org.aopalliance.intercept.MethodInterceptor>> getMethodInterceptors() {
-    return lateBoundConstructor.constructorInjector.constructionProxy.getMethodInterceptors();
-  }
-  /*end[AOP]*/
-

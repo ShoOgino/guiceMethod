@@ -1,0 +1,13 @@
+  /**
+   * Sets the actual members injector.
+   *
+   * @param delegate members injector
+   * @throws IllegalStateException if the delegate is already set
+   * @throws NullPointerException if the delegate is null
+   */
+  public void initializeDelegate(MembersInjector<T> delegate) {
+    checkState(this.delegate == null, "delegate already initialized");
+    checkNotNull(delegate, "delegate");
+    this.delegate = delegate;
+  }
+

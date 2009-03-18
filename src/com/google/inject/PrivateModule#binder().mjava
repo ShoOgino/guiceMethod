@@ -1,3 +1,6 @@
+  /**
+   * Returns the current binder.
+   */
   protected final PrivateBinder binder() {
     return binder;
   }

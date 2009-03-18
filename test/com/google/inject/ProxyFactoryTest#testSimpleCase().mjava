@@ -1,12 +1,12 @@
   public void testSimpleCase()
       throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
+    InjectionPoint injectionPoint = InjectionPoint.forConstructorOf(Simple.class);
 
     aspects.add(new MethodAspect(any(), any(), interceptor));
-    ProxyFactory factory = new ProxyFactory(aspects);
+    ProxyFactory<Simple> factory = new ProxyFactory<Simple>(injectionPoint, aspects);
 
-    ConstructionProxy<Simple> constructionProxy = factory.createConstructionProxy(
-        InjectionPoint.forConstructorOf(Simple.class));
+    ConstructionProxy<Simple> constructionProxy = factory.create();
 
     Simple simple = constructionProxy.newInstance();
     simple.invoke();

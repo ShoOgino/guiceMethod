@@ -1,0 +1,5 @@
+  @Override public Boolean visit(InjectableTypeListenerBinding binding) {
+    injector.state.addInjectableTypeListener(binding);
+    return true;
+  }
+

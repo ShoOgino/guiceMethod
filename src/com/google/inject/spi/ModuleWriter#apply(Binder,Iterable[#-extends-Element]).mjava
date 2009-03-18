@@ -7,49 +7,57 @@
 
     ElementVisitor<Void> visitor = new ElementVisitor<Void>() {
 
-      public Void visitMessage(Message message) {
+      public Void visit(Message message) {
         writeMessage(binder, message);
         return null;
       }
 
       /*if[AOP]*/
-      public Void visitInterceptorBinding(InterceptorBinding element) {
+      public Void visit(InterceptorBinding element) {
         writeBindInterceptor(binder, element);
         return null;
       }
       /*end[AOP]*/
 
-      public Void visitScopeBinding(ScopeBinding element) {
+      public Void visit(ScopeBinding element) {
         writeBindScope(binder, element);
         return null;
       }
 
-      public Void visitInjectionRequest(InjectionRequest element) {
+      public Void visit(InjectionRequest element) {
         writeRequestInjection(binder, element);
         return null;
       }
 
-      public Void visitStaticInjectionRequest(StaticInjectionRequest element) {
+      public Void visit(StaticInjectionRequest element) {
         writeRequestStaticInjection(binder, element);
         return null;
       }
 
-      public Void visitTypeConverterBinding(TypeConverterBinding element) {
+      public Void visit(TypeConverterBinding element) {
         writeConvertToTypes(binder, element);
         return null;
       }
 
-      public <T> Void visitBinding(Binding<T> element) {
+      public <T> Void visit(Binding<T> element) {
         writeBind(binder, element);
         return null;
       }
 
-      public <T> Void visitProviderLookup(ProviderLookup<T> element) {
+      public <T> Void visit(ProviderLookup<T> element) {
         writeGetProvider(binder, element);
         return null;
       }
 
-      public Void visitPrivateElements(PrivateElements privateElements) {
+      public <T> Void visit(MembersInjectorLookup<T> lookup) {
+        throw new UnsupportedOperationException("TODO");
+      }
+
+      public Void visit(InjectableTypeListenerBinding binding) {
+        throw new UnsupportedOperationException("TODO");
+      }
+
+      public Void visit(PrivateElements privateElements) {
         writePrivateElements(binder, privateElements);
         return null;
       }
