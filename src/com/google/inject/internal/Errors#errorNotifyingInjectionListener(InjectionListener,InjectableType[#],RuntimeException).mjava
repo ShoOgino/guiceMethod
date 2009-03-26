@@ -1,0 +1,6 @@
+  public Errors errorNotifyingInjectionListener(
+      InjectionListener listener, InjectableType<?> injectableType, RuntimeException cause) {
+    return errorInUserCode(cause, "Error notifying InjectionListener %s of %s.%n"
+        + " Reason: %s", listener, injectableType, cause);
+  }
+

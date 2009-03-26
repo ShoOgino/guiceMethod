@@ -1,0 +1,8 @@
+  public Errors errorNotifyingTypeListener(InjectableTypeListenerBinding listener,
+      InjectableType<?> injectableType, Throwable cause) {
+    return errorInUserCode(cause,
+        "Error notifying InjectableType.Listener %s (bound at %s) of %s.%n"
+        + " Reason: %s",
+        listener.getListener(), convert(listener.getSource()), injectableType, cause);
+  }
+

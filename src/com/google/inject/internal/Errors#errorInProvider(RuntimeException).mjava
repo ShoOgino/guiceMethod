@@ -1,4 +1,4 @@
   public Errors errorInProvider(RuntimeException runtimeException) {
-    return errorInUserCode("Error in custom provider, %s", runtimeException);
+    return errorInUserCode(runtimeException, "Error in custom provider, %s", runtimeException);
   }
 

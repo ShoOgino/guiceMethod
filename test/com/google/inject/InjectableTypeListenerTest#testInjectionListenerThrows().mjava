@@ -1,0 +1,58 @@
+  public void testInjectionListenerThrows() {
+    final InjectionListener<Object> injectionListener = new InjectionListener<Object>() {
+      int failures = 0;
+
+      public void afterInjection(Object injectee) {
+        throw new ClassCastException("whoops, failure #" + (++failures));
+      }
+
+      @Override public String toString() {
+        return "goofy";
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindListener(any(), new InjectableType.Listener() {
+          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+            encounter.register(injectionListener);
+          }
+        });
+        bind(B.class);
+      }
+    });
+
+    try {
+      injector.getInstance(A.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "1) Error notifying InjectionListener goofy of " + A.class.getName(),
+          " Reason: java.lang.ClassCastException: whoops, failure #1");
+    }
+
+    // second time through should be a new cause (#2)
+    try {
+      injector.getInstance(A.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "1) Error notifying InjectionListener goofy of " + A.class.getName(),
+          " Reason: java.lang.ClassCastException: whoops, failure #2");
+    }
+
+    // we should get errors for all types, but only on getInstance()
+    Provider<B> bProvider = injector.getProvider(B.class);
+    try {
+      bProvider.get();
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "1) Error notifying InjectionListener goofy of " + B.class.getName(),
+          " Reason: java.lang.ClassCastException: whoops, failure #3");
+    }
+
+    // non-constructed types do not participate
+    assertSame(Stage.DEVELOPMENT, injector.getInstance(Stage.class));
+  }
+

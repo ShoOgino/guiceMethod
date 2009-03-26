@@ -1,10 +1,10 @@
-  public Errors errorInUserCode(String message, Throwable cause) {
+  public Errors errorInUserCode(Throwable cause, String messageFormat, Object... arguments) {
     Collection<Message> messages = getMessagesFromThrowable(cause);
 
     if (!messages.isEmpty()) {
       return merge(messages);
     } else {
-      return addMessage(cause, message, cause);
+      return addMessage(cause, messageFormat, arguments);
     }
   }
 
