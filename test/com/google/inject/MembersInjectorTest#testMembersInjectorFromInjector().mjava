@@ -21,5 +21,8 @@
     B anotherInjectableB = new B();
     bMembersInjector.injectMembers(anotherInjectableB);
     assertSame(myFavouriteC, anotherInjectableB.c);
+
+    assertEquals("MembersInjector<java.lang.String>",
+        injector.getMembersInjector(String.class).toString());
   }
 

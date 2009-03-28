@@ -1,0 +1,12 @@
+  public void testGettingAnnotatedMembersInjector() {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(new Key<MembersInjector<String>>(Names.named("foo")) {});
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "1) No implementation for com.google.inject.MembersInjector<java.lang.String> "
+              + "annotated with @com.google.inject.name.Named(value=foo) was bound.");
+    }
+  }
+

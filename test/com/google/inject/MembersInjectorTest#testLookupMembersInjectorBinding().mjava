@@ -1,0 +1,18 @@
+  public void testLookupMembersInjectorBinding() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(C.class).toInstance(myFavouriteC);
+      }
+    });
+    MembersInjector<A<C>> membersInjector =
+        injector.getInstance(new Key<MembersInjector<A<C>>>() {});
+
+    A<C> a = new A<C>();
+    membersInjector.injectMembers(a);
+    assertSame(myFavouriteC, a.t);
+    assertSame(myFavouriteC, a.b.c);
+
+    assertEquals("MembersInjector<java.lang.String>",
+        injector.getInstance(new Key<MembersInjector<String>>() {}).toString());
+  }
+

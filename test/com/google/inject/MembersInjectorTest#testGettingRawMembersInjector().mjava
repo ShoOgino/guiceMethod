@@ -1,0 +1,11 @@
+  public void testGettingRawMembersInjector() {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(MembersInjector.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "Cannot inject a MembersInjector that has no type parameter");
+    }
+  }
+

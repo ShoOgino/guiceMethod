@@ -27,6 +27,9 @@
         aMembersInjectorReference.set(aMembersInjector);
         bMembersInjectorReference.set(bMembersInjector);
 
+        assertEquals("MembersInjector<java.lang.String>",
+            getMembersInjector(String.class).toString());
+
         bind(C.class).toInstance(myFavouriteC);
       }
     });

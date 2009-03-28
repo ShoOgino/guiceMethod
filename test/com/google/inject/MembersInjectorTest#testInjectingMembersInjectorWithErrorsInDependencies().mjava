@@ -1,0 +1,15 @@
+  public void testInjectingMembersInjectorWithErrorsInDependencies() {
+    try {
+      Guice.createInjector().getInstance(InjectsBrokenMembersInjector.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "1) No implementation for " + Unimplemented.class.getName() + " was bound.",
+          "while locating " + Unimplemented.class.getName(),
+          "for field at " + A.class.getName() + ".t(MembersInjectorTest.java:",
+          "while locating com.google.inject.MembersInjector<",
+          "for field at " + InjectsBrokenMembersInjector.class.getName() + ".aMembersInjector(",
+          "while locating " + InjectsBrokenMembersInjector.class.getName());
+    }
+  }
+

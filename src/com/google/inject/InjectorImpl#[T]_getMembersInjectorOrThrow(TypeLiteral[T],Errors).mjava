@@ -1,4 +1,4 @@
-  <T> MembersInjector<T> getMembersInjectorOrThrow(TypeLiteral<T> type, final Errors errors)
+  <T> MembersInjector<T> getMembersInjectorOrThrow(final TypeLiteral<T> type, final Errors errors)
       throws ErrorsException {
     final ImmutableList<SingleMemberInjector> memberInjectors = injectors.get(type, errors);
 
@@ -11,6 +11,10 @@
         }
 
         errors.throwProvisionExceptionIfErrorsExist();
+      }
+
+      @Override public String toString() {
+        return "MembersInjector<" + type + ">";
       }
     };
   }

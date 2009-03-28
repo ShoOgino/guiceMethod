@@ -1,0 +1,13 @@
+  public void testInjectingMembersInjector() {
+    InjectsMembersInjector injectsMembersInjector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(C.class).toInstance(myFavouriteC);
+      }
+    }).getInstance(InjectsMembersInjector.class);
+
+    A<C> a = new A<C>();
+    injectsMembersInjector.aMembersInjector.injectMembers(a);
+    assertSame(myFavouriteC, a.t);
+    assertSame(myFavouriteC, a.b.c);
+  }
+

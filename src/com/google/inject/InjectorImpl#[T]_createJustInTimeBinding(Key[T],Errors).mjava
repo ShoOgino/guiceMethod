@@ -25,6 +25,15 @@
       return binding;
     }
 
+    // Handle cases where T is a MembersInjector<?>
+    if (isMembersInjector(key)) {
+      // These casts are safe. T extends MembersInjector<X> and that given Key<MembersInjector<X>>,
+      // createMembersInjectorBinding() will return BindingImpl<MembersInjector<X>>.
+      @SuppressWarnings("unchecked")
+      BindingImpl binding = createMembersInjectorBinding((Key) key, errors);
+      return binding;
+    }
+
     // Try to convert a constant string binding to the requested type.
     BindingImpl<T> convertedBinding = convertConstantStringBinding(key, errors);
     if (convertedBinding != null) {

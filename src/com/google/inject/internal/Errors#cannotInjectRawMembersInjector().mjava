@@ -1,0 +1,4 @@
+  public Errors cannotInjectRawMembersInjector() {
+    return addMessage("Cannot inject a MembersInjector that has no type parameter");
+  }
+
