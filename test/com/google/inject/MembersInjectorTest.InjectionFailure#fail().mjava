@@ -1,0 +1,4 @@
+    @Inject void fail() {
+      throw new ClassCastException("whoops, failure #" + (++failures));
+    }
+

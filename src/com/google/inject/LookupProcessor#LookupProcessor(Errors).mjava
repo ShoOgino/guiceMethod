@@ -1,0 +1,4 @@
+  LookupProcessor(Errors errors) {
+    super(errors);
+  }
+

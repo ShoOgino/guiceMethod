@@ -1,4 +1,9 @@
   public <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> typeLiteral) {
-    throw new UnsupportedOperationException("TODO");
+    Errors errors = new Errors(typeLiteral);
+    try {
+      return getMembersInjectorOrThrow(typeLiteral, errors);
+    } catch (ErrorsException e) {
+      throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
+    }
   }
 

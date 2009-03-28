@@ -5,6 +5,8 @@
    *
    * @return a possibly empty map
    */
-  Map<Method, List<MethodInterceptor>> getMethodInterceptors();
+  public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
+    return methodInterceptors;
+  }
   /*end[AOP]*/
 

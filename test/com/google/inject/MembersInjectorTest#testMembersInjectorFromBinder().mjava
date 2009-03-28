@@ -1,0 +1,47 @@
+  public void testMembersInjectorFromBinder() {
+    final AtomicReference<MembersInjector<A<C>>> aMembersInjectorReference
+        = new AtomicReference<MembersInjector<A<C>>>();
+    final AtomicReference<MembersInjector<B>> bMembersInjectorReference
+        = new AtomicReference<MembersInjector<B>>();
+
+    Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        MembersInjector<A<C>> aMembersInjector = getMembersInjector(new TypeLiteral<A<C>>() {});
+        try {
+          aMembersInjector.injectMembers(uninjectableA);
+          fail();
+        } catch (IllegalStateException expected) {
+          assertContains(expected.getMessage(),
+              "This MembersInjector cannot be used until the Injector has been created.");
+        }
+
+        MembersInjector<B> bMembersInjector = getMembersInjector(B.class);
+        try {
+          bMembersInjector.injectMembers(uninjectableB);
+          fail();
+        } catch (IllegalStateException expected) {
+          assertContains(expected.getMessage(),
+              "This MembersInjector cannot be used until the Injector has been created.");
+        }
+
+        aMembersInjectorReference.set(aMembersInjector);
+        bMembersInjectorReference.set(bMembersInjector);
+
+        bind(C.class).toInstance(myFavouriteC);
+      }
+    });
+
+    A<C> injectableA = new A<C>();
+    aMembersInjectorReference.get().injectMembers(injectableA);
+    assertSame(myFavouriteC, injectableA.t);
+    assertSame(myFavouriteC, injectableA.b.c);
+
+    B injectableB = new B();
+    bMembersInjectorReference.get().injectMembers(injectableB);
+    assertSame(myFavouriteC, injectableB.c);
+
+    B anotherInjectableB = new B();
+    bMembersInjectorReference.get().injectMembers(anotherInjectableB);
+    assertSame(myFavouriteC, anotherInjectableB.c);
+  }
+

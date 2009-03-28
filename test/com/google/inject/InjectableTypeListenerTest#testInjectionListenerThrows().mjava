@@ -1,21 +1,9 @@
   public void testInjectionListenerThrows() {
-    final InjectionListener<Object> injectionListener = new InjectionListener<Object>() {
-      int failures = 0;
-
-      public void afterInjection(Object injectee) {
-        throw new ClassCastException("whoops, failure #" + (++failures));
-      }
-
-      @Override public String toString() {
-        return "goofy";
-      }
-    };
-
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bindListener(any(), new InjectableType.Listener() {
           public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
-            encounter.register(injectionListener);
+            encounter.register(failingInjectionListener);
           }
         });
         bind(B.class);

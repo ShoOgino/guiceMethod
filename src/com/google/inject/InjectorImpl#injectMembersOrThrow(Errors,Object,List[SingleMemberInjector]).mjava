@@ -1,13 +1,14 @@
-  public void injectMembersOrThrow(final Errors errors, final Object o,
-      final List<SingleMemberInjector> injectors)
-      throws ErrorsException {
-    if (o == null) {
+  public void injectMembersOrThrow(final Errors errors, final Object instance,
+      final List<SingleMemberInjector> injectors) throws ErrorsException {
+    if (instance == null) {
       return;
     }
 
     callInContext(new ContextualCallable<Void>() {
       public Void call(InternalContext context) throws ErrorsException {
-        injectMembers(errors, o, context, injectors);
+        for (SingleMemberInjector injector : injectors) {
+          injector.inject(errors, context, instance);
+        }
         return null;
       }
     });

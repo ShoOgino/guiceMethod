@@ -22,7 +22,7 @@
 
     ProxyFactory<T> proxyFactory = new ProxyFactory<T>(injectionPoint, injector.methodAspects);
     EncounterImpl<T> encounter = new EncounterImpl<T>();
-    InjectableType<T> injectableType = new InjectableTypeImpl<T>(
+    InjectableType<T> injectableType = new InjectableType<T>(
         injectionPoint, type, injectableMembers, proxyFactory.getInterceptors());
 
     for (InjectableTypeListenerBinding typeListener : injectableTypeListenerBindings) {
@@ -39,7 +39,7 @@
     if (encounter.hasAddedAspects()) {
       proxyFactory = new ProxyFactory<T>(
           injectionPoint, concat(injector.methodAspects, encounter.aspects));
-      injectableType = new InjectableTypeImpl<T>(
+      injectableType = new InjectableType<T>(
           injectionPoint, type, injectableMembers, proxyFactory.getInterceptors());
     }
 

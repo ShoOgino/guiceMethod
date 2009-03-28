@@ -1,0 +1,6 @@
+  protected <T> void writeGetMembersInjector(Binder binder, MembersInjectorLookup<T> element) {
+    MembersInjector<T> membersInjector
+        = binder.withSource(element.getSource()).getMembersInjector(element.getTypeLiteral());
+    element.initializeDelegate(membersInjector);
+  }
+

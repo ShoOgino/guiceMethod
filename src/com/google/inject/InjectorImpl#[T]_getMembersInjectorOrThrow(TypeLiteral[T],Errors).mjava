@@ -1,0 +1,17 @@
+  <T> MembersInjector<T> getMembersInjectorOrThrow(TypeLiteral<T> type, final Errors errors)
+      throws ErrorsException {
+    final ImmutableList<SingleMemberInjector> memberInjectors = injectors.get(type, errors);
+
+    return new MembersInjector<T>() {
+      public void injectMembers(T instance) {
+        try {
+          injectMembersOrThrow(errors, instance, memberInjectors);
+        } catch (ErrorsException e) {
+          errors.merge(e.getErrors());
+        }
+
+        errors.throwProvisionExceptionIfErrorsExist();
+      }
+    };
+  }
+

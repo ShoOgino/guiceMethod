@@ -1,0 +1,9 @@
+  public InjectableType(InjectionPoint injectableConstructor, TypeLiteral<T> type,
+      Set<InjectionPoint> injectableMembers,
+      Map<Method, List<MethodInterceptor>> methodInterceptors) {
+    this.injectableConstructor = injectableConstructor;
+    this.type = type;
+    this.injectableMembers = injectableMembers;
+    this.methodInterceptors = ImmutableMap.copyOf(methodInterceptors);
+  }
+

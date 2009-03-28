@@ -1,7 +1,7 @@
     /**
      * Returns the provider used to obtain instances for the given injection key. The returned
-     * provider will not be valid until the {@link Injector} has been created. The provider will
-     * throw an {@code IllegalStateException} if you try to use it beforehand.
+     * provider will not be valid until the injector has been created. The provider will throw an
+     * {@code IllegalStateException} if you try to use it beforehand.
      */
     <T> Provider<T> getProvider(Key<T> key);
 

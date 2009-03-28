@@ -1,11 +1,11 @@
     public <T> Provider<T> getProvider(final Key<T> key) {
-      final ProviderLookup<T> command = new ProviderLookup<T>(getSource(), key);
-      elements.add(command);
+      final ProviderLookup<T> element = new ProviderLookup<T>(getSource(), key);
+      elements.add(element);
       return new Provider<T>() {
         public T get() {
-          Provider<T> delegate = command.getDelegate();
+          Provider<T> delegate = element.getDelegate();
           checkState(delegate != null,
-              "This provider cannot be used until the Injector has been created.");
+              "This Provider cannot be used until the Injector has been created.");
           return delegate.get();
         }
 

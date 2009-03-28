@@ -1,6 +1,0 @@
-    /*if[AOP]*/
-    public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
-      return methodInterceptors;
-    }
-    /*end[AOP]*/
-

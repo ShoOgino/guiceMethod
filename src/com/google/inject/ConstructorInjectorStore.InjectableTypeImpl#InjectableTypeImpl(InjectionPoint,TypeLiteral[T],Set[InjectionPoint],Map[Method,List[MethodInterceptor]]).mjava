@@ -1,9 +1,0 @@
-    InjectableTypeImpl(InjectionPoint injectionPoint, TypeLiteral<T> type,
-        Set<InjectionPoint> injectableMembers,
-        Map<Method, List<MethodInterceptor>> methodInterceptors) {
-      this.injectionPoint = injectionPoint;
-      this.type = type;
-      this.injectableMembers = injectableMembers;
-      this.methodInterceptors = methodInterceptors;
-    }
-

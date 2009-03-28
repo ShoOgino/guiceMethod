@@ -1,8 +1,8 @@
     /**
      * Returns the members injector used to inject dependencies into methods and fields on instances
      * of the given type {@code T}. The returned members injector will not be valid until the main
-     * {@link Injector} has been created. The members injector will throw an {@code
-     * IllegalStateException} if you try to use it beforehand.
+     * injector has been created. The members injector will throw an {@code IllegalStateException}
+     * if you try to use it beforehand.
      *
      * @param type type to get members injector for
      */

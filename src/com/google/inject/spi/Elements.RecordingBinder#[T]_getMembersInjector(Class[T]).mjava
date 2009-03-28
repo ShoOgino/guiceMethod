@@ -1,4 +1,4 @@
     public <T> MembersInjector<T> getMembersInjector(Class<T> type) {
-      throw new UnsupportedOperationException("TODO");
+      return getMembersInjector(TypeLiteral.get(type));
     }
 

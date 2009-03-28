@@ -2,11 +2,12 @@
     checkModule(
         new AbstractModule() {
           protected void configure() {
-            Provider<String> keyGetProvider = getProvider(Key.get(String.class, SampleAnnotation.class));
+            Provider<String> keyGetProvider
+                = getProvider(Key.get(String.class, SampleAnnotation.class));
             try {
               keyGetProvider.get();
             } catch (IllegalStateException e) {
-              assertEquals("This provider cannot be used until the Injector has been created.",
+              assertEquals("This Provider cannot be used until the Injector has been created.",
                   e.getMessage());
             }
 
@@ -14,14 +15,14 @@
             try {
               typeGetProvider.get();
             } catch (IllegalStateException e) {
-              assertEquals("This provider cannot be used until the Injector has been created.",
+              assertEquals("This Provider cannot be used until the Injector has been created.",
                   e.getMessage());
             }
           }
         },
 
         new FailingElementVisitor() {
-          @Override public Void visit(ProviderLookup command) {
+          @Override public <T> Void visit(ProviderLookup<T> command) {
             assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
             assertNull(command.getDelegate());
             return null;
@@ -29,7 +30,7 @@
         },
 
         new FailingElementVisitor() {
-          @Override public Void visit(ProviderLookup command) {
+          @Override public <T> Void visit(ProviderLookup<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertNull(command.getDelegate());
             return null;

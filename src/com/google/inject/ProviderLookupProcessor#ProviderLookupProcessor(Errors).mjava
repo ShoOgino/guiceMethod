@@ -1,4 +1,0 @@
-  ProviderLookupProcessor(Errors errors) {
-    super(errors);
-  }
-

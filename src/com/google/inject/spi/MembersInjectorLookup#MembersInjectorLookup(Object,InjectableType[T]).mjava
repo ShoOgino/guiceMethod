@@ -1,5 +1,0 @@
-  MembersInjectorLookup(Object source, InjectableType<T> injectableType) {
-    this.source = checkNotNull(source, "source");
-    this.injectableType = checkNotNull(injectableType, "injectableType");
-  }
-

@@ -1,0 +1,5 @@
+  MembersInjectorLookup(Object source, TypeLiteral<T> typeLiteral) {
+    this.source = checkNotNull(source, "source");
+    this.typeLiteral = checkNotNull(typeLiteral, "typeLiteral");
+  }
+

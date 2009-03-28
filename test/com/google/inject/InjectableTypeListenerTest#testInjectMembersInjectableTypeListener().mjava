@@ -1,0 +1,14 @@
+  public void testInjectMembersInjectableTypeListener() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          getMembersInjector(A.class);
+          bindListener(any(), failingInjectableTypeListener);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "foo");
+    }
+  }
+

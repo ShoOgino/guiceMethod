@@ -1,0 +1,7 @@
+  public void testInjectionAppliesToSpecifiedType() {
+    Injector injector = Guice.createInjector();
+
+    MembersInjector<Object> membersInjector = injector.getMembersInjector(Object.class);
+    membersInjector.injectMembers(new InjectionFailure());
+  }
+

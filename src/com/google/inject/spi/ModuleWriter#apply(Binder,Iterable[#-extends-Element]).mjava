@@ -49,8 +49,9 @@
         return null;
       }
 
-      public <T> Void visit(MembersInjectorLookup<T> lookup) {
-        throw new UnsupportedOperationException("TODO");
+      public <T> Void visit(MembersInjectorLookup<T> element) {
+        writeGetMembersInjector(binder, element);
+        return null;
       }
 
       public Void visit(InjectableTypeListenerBinding binding) {

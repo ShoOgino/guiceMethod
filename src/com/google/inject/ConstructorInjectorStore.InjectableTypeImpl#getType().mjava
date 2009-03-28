@@ -1,4 +1,0 @@
-    public TypeLiteral<T> getType() {
-      return type;
-    }
-

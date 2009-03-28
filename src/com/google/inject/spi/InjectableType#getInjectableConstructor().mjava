@@ -2,5 +2,7 @@
    * Returns the injection point representing the contructor or {@code null} if no injectable
    * constructor is present
    */
-  InjectionPoint getInjectableConstructor();
+  public InjectionPoint getInjectableConstructor() {
+    return injectableConstructor;
+  }
 

@@ -1,4 +1,18 @@
-    public <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> typeLiteral) {
-      throw new UnsupportedOperationException("TODO");
+    public <T> MembersInjector<T> getMembersInjector(final TypeLiteral<T> typeLiteral) {
+      final MembersInjectorLookup<T> element
+          = new MembersInjectorLookup<T>(getSource(), typeLiteral);
+      elements.add(element);
+      return new MembersInjector<T>() {
+        public void injectMembers(T instance) {
+          MembersInjector<T> delegate = element.getDelegate();
+          checkState(delegate != null,
+              "This MembersInjector cannot be used until the Injector has been created.");
+          delegate.injectMembers(instance);
+        }
+
+        @Override public String toString() {
+          return "MembersInjector<" + typeLiteral + ">";
+        }
+      };
     }
 

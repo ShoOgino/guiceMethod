@@ -1,0 +1,25 @@
+  public void testMembersInjectorFromInjector() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(C.class).toInstance(myFavouriteC);
+      }
+    });
+
+    MembersInjector<A<C>> aMembersInjector
+        = injector.getMembersInjector(new TypeLiteral<A<C>>() {});
+    MembersInjector<B> bMembersInjector = injector.getMembersInjector(B.class);
+
+    A<C> injectableA = new A<C>();
+    aMembersInjector.injectMembers(injectableA);
+    assertSame(myFavouriteC, injectableA.t);
+    assertSame(myFavouriteC, injectableA.b.c);
+
+    B injectableB = new B();
+    bMembersInjector.injectMembers(injectableB);
+    assertSame(myFavouriteC, injectableB.c);
+
+    B anotherInjectableB = new B();
+    bMembersInjector.injectMembers(anotherInjectableB);
+    assertSame(myFavouriteC, anotherInjectableB.c);
+  }
+

@@ -1,4 +1,0 @@
-    public InjectionPoint getInjectableConstructor() {
-      return injectionPoint;
-    }
-
