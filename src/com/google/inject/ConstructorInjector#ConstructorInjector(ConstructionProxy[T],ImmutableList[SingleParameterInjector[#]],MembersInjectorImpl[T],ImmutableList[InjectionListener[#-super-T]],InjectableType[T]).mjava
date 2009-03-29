@@ -1,12 +1,12 @@
   ConstructorInjector(ConstructionProxy<T> constructionProxy,
       ImmutableList<SingleParameterInjector<?>> parameterInjectors,
-      ImmutableList<SingleMemberInjector> memberInjectors,
+      MembersInjectorImpl<T> membersInjector,
       ImmutableList<InjectionListener<? super T>> injectionListeners,
       InjectableType<T> injectableType)
       throws ErrorsException {
     this.constructionProxy = constructionProxy;
     this.parameterInjectors = parameterInjectors;
-    this.memberInjectors = memberInjectors;
+    this.membersInjector = membersInjector;
     this.injectionListeners = injectionListeners;
     this.injectableType = injectableType;
   }

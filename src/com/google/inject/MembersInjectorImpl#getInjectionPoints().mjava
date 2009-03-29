@@ -1,0 +1,8 @@
+  public ImmutableSet<InjectionPoint> getInjectionPoints() {
+    ImmutableSet.Builder<InjectionPoint> builder = ImmutableSet.builder();
+    for (SingleMemberInjector memberInjector : memberInjectors) {
+      builder.add(memberInjector.getInjectionPoint());
+    }
+    return builder.build();
+  }
+

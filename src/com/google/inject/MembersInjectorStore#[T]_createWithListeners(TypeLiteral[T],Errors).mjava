@@ -1,0 +1,34 @@
+  /**
+   * Creates a new members injector and attaches injection listeners.
+   */
+  private <T> MembersInjectorImpl<T> createWithListeners(TypeLiteral<T> type, Errors errors)
+      throws ErrorsException {
+    int numErrorsBefore = errors.size();
+
+    MembersInjectorImpl<T> membersInjector = createWithoutListeners(type, errors);
+
+    InjectableType<T> injectableType = new InjectableType<T>(null, type,
+        membersInjector.getInjectionPoints());
+
+    EncounterImpl<T> encounter = new EncounterImpl<T>() {
+      @Override public void bindInterceptor(Matcher<? super Method> methodMatcher,
+          MethodInterceptor... interceptors) {
+        throw new UnsupportedOperationException("TODO");
+        // TODO: add an error here
+      }
+    };
+
+    for (InjectableTypeListenerBinding typeListener : injectableTypeListenerBindings) {
+      if (typeListener.getTypeMatcher().matches(type)) {
+        try {
+          typeListener.getListener().hear(injectableType, encounter);
+        } catch (RuntimeException e) {
+          errors.errorNotifyingTypeListener(typeListener, injectableType, e);
+        }
+      }
+    }
+
+    errors.throwIfNewErrors(numErrorsBefore);
+    return membersInjector.withListeners(encounter.getInjectionListeners());
+  }
+

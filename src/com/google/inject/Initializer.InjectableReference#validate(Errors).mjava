@@ -1,5 +1,6 @@
     public void validate(Errors errors) throws ErrorsException {
-      injectors = injector.injectors.get(
-          TypeLiteral.get(instance.getClass()), errors.withSource(source));
+      @SuppressWarnings("unchecked") // the type of 'T' is a TypeLiteral<T>
+      TypeLiteral<T> type = TypeLiteral.get((Class<T>) instance.getClass());
+      membersInjector = injector.membersInjectorStore.get(type, errors.withSource(source));
     }
 

@@ -1,0 +1,4 @@
+  public void addError(Throwable t) {
+    throw new UnsupportedOperationException("TODO");
+  }
+

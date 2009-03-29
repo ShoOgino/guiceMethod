@@ -1,0 +1,11 @@
+  public void injectMembers(T instance) {
+    Errors errors = new Errors(typeLiteral);
+    try {
+      injectMembers(instance, errors);
+    } catch (ErrorsException e) {
+      errors.merge(e.getErrors());
+    }
+
+    errors.throwProvisionExceptionIfErrorsExist();
+  }
+

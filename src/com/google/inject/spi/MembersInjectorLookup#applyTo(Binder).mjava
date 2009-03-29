@@ -1,4 +1,4 @@
   public void applyTo(Binder binder) {
-    binder.withSource(getSource()).getMembersInjector(typeLiteral);
+    binder.withSource(getSource()).getMembersInjector(type);
   }
 

@@ -12,13 +12,10 @@
 
     ImmutableList<SingleParameterInjector<?>> constructorParameterInjectors
         = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
-    ImmutableList<SingleMemberInjector> memberInjectors = injector.injectors.get(type, errors);
+    MembersInjectorImpl<T> membersInjector
+        = injector.membersInjectorStore.createWithoutListeners(type, errors);
 
-    ImmutableSet.Builder<InjectionPoint> injectableMembersBuilder = ImmutableSet.builder();
-    for (SingleMemberInjector memberInjector : memberInjectors) {
-      injectableMembersBuilder.add(memberInjector.getInjectionPoint());
-    }
-    ImmutableSet<InjectionPoint> injectableMembers = injectableMembersBuilder.build();
+    ImmutableSet<InjectionPoint> injectableMembers = membersInjector.getInjectionPoints();
 
     ProxyFactory<T> proxyFactory = new ProxyFactory<T>(injectionPoint, injector.methodAspects);
     EncounterImpl<T> encounter = new EncounterImpl<T>();
@@ -38,7 +35,7 @@
     // rebuild the proxy factory and injectable type if new interceptors were added
     if (encounter.hasAddedAspects()) {
       proxyFactory = new ProxyFactory<T>(
-          injectionPoint, concat(injector.methodAspects, encounter.aspects));
+          injectionPoint, concat(injector.methodAspects, encounter.getAspects()));
       injectableType = new InjectableType<T>(
           injectionPoint, type, injectableMembers, proxyFactory.getInterceptors());
     }
@@ -46,6 +43,6 @@
     errors.throwIfNewErrors(numErrorsBefore);
 
     return new ConstructorInjector<T>(proxyFactory.create(), constructorParameterInjectors,
-        memberInjectors, encounter.getInjectionListeners(), injectableType);
+        membersInjector, encounter.getInjectionListeners(), injectableType);
   }
 

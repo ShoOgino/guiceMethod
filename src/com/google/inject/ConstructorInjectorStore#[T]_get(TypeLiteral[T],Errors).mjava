@@ -1,0 +1,8 @@
+  /**
+   * Returns a new complete constructor injector with injection listeners registered.
+   */
+  @SuppressWarnings("unchecked") // the ConstructorInjector type always agrees with the passed type
+  public <T> ConstructorInjector<T> get(TypeLiteral<T> key, Errors errors) throws ErrorsException {
+    return (ConstructorInjector<T>) cache.get(key, errors);
+  }
+

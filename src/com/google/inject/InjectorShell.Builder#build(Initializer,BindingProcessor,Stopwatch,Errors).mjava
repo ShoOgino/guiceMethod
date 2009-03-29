@@ -37,8 +37,10 @@
 
       new InjectableTypeListenerBindingProcessor(errors).process(injector, elements);
       stopwatch.resetAndLog("InjectableType listeners creation");
-      injector.constructors = new ConstructorInjectorStore(
-          injector, injector.state.getInjectableTypeListenerBindings());
+      List<InjectableTypeListenerBinding> listenerBindings
+          = injector.state.getInjectableTypeListenerBindings();
+      injector.constructors = new ConstructorInjectorStore(injector, listenerBindings);
+      injector.membersInjectorStore = new MembersInjectorStore(injector, listenerBindings);
 
       new ScopeBindingProcessor(errors).process(injector, elements);
       stopwatch.resetAndLog("Scopes creation");

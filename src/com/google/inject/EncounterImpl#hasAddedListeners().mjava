@@ -1,0 +1,4 @@
+  public boolean hasAddedListeners() {
+    return injectionListeners != null;
+  }
+

@@ -1,3 +1,0 @@
-    SingleMemberInjector create(InjectorImpl injector, M member, Errors errors)
-        throws ErrorsException;
-

@@ -1,4 +1,0 @@
-    public <T> MembersInjector<T> getMembersInjector(Class<T> type) {
-      throw new UnsupportedOperationException("TODO");
-    }
-

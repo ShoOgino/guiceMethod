@@ -1,0 +1,10 @@
+  public void bindInterceptor(Matcher<? super Method> methodMatcher,
+      MethodInterceptor... interceptors) {
+    // make sure the applicable aspects is mutable
+    if (aspects == null) {
+      aspects = Lists.newArrayList();
+    }
+
+    aspects.add(new MethodAspect(Matchers.any(), methodMatcher, interceptors));
+  }
+

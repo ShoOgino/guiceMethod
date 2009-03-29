@@ -1,7 +1,7 @@
   /**
    * Gets the type containing the members to be injected.
    */
-  public TypeLiteral<T> getTypeLiteral() {
-    return typeLiteral;
+  public TypeLiteral<T> getType() {
+    return type;
   }
 

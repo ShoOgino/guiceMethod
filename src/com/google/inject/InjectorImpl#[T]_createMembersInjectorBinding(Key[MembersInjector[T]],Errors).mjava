@@ -8,7 +8,7 @@
     @SuppressWarnings("unchecked") // safe because T came from Key<MembersInjector<T>>
     TypeLiteral<T> instanceType = (TypeLiteral<T>) TypeLiteral.get(
         ((ParameterizedType) membersInjectorType).getActualTypeArguments()[0]);
-    MembersInjector<T> membersInjector = getMembersInjectorOrThrow(instanceType, errors);
+    MembersInjector<T> membersInjector = membersInjectorStore.get(instanceType, errors);
 
     InternalFactory<MembersInjector<T>> factory = new ConstantFactory<MembersInjector<T>>(
         Initializables.of(membersInjector));

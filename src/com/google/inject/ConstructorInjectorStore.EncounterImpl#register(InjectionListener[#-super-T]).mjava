@@ -1,8 +1,0 @@
-    public void register(InjectionListener<? super T> injectionListener) {
-      if (injectionListeners == null) {
-        injectionListeners = Lists.newArrayList();
-      }
-
-      injectionListeners.add(injectionListener);
-    }
-

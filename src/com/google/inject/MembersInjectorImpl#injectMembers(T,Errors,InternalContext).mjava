@@ -1,0 +1,6 @@
+  void injectMembers(T t, Errors errors, InternalContext context) {
+    for (SingleMemberInjector injector : memberInjectors) {
+      injector.inject(errors, context, t);
+    }
+  }
+

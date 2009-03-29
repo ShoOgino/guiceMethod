@@ -1,0 +1,22 @@
+  void injectMembers(final T instance, final Errors errors) throws ErrorsException {
+    if (instance == null) {
+      return;
+    }
+
+    injector.callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) throws ErrorsException {
+        injectMembers(instance, errors, context);
+        return null;
+      }
+    });
+
+    for (InjectionListener<? super T> injectionListener : injectionListeners) {
+      try {
+        injectionListener.afterInjection(instance);
+      } catch (RuntimeException e) {
+        throw errors.errorNotifyingInjectionListener(
+            injectionListener, typeLiteral, e).toException();
+      }
+    }
+  }
+

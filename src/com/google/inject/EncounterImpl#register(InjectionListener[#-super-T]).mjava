@@ -1,0 +1,9 @@
+  @SuppressWarnings("unchecked") // an InjectionListener<? super T> is an InjectionListener<T>
+  public void register(InjectionListener<? super T> injectionListener) {
+    if (injectionListeners == null) {
+      injectionListeners = Lists.newArrayList();
+    }
+
+    injectionListeners.add((InjectionListener<T>) injectionListener);
+  }
+
