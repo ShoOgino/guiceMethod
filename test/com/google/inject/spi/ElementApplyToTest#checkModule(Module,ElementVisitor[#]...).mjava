@@ -1,0 +1,22 @@
+  protected void checkModule(Module module, ElementVisitor<?>... visitors) {
+    // get some elements to apply
+    final List<Element> elements = Elements.getElements(module);
+
+    // apply the elements, and extract them again!
+    List<Element> rewrittenElements = Elements.getElements(new AbstractModule() {
+      protected void configure() {
+        for (Element element : elements) {
+          element.applyTo(binder());
+        }
+      }
+    });
+
+    // verify that the replayed elements are as expected
+    assertEquals(rewrittenElements.size(), visitors.length);
+    for (int i = 0; i < visitors.length; i++) {
+      ElementVisitor<?> visitor = visitors[i];
+      Element element = rewrittenElements.get(i);
+      element.acceptVisitor(visitor);
+    }
+  }
+
