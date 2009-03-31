@@ -1,5 +1,5 @@
   public void testAddingInterceptors() throws NoSuchMethodException {
-    final Matcher<Object> buzz = Matchers.only(C.class.getMethod("buzz"));
+    final Matcher<Object> buzz = only(C.class.getMethod("buzz"));
 
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {

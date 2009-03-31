@@ -4,6 +4,6 @@
       injectionListeners = Lists.newArrayList();
     }
 
-    injectionListeners.add((InjectionListener<T>) injectionListener);
+    injectionListeners.add(injectionListener);
   }
 

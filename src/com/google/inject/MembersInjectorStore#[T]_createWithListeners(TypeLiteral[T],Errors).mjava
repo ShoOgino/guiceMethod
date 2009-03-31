@@ -10,13 +10,7 @@
     InjectableType<T> injectableType = new InjectableType<T>(null, type,
         membersInjector.getInjectionPoints());
 
-    EncounterImpl<T> encounter = new EncounterImpl<T>() {
-      @Override public void bindInterceptor(Matcher<? super Method> methodMatcher,
-          MethodInterceptor... interceptors) {
-        throw new UnsupportedOperationException("TODO");
-        // TODO: add an error here
-      }
-    };
+    EncounterImpl<T> encounter = new EncounterImpl<T>(errors, injector.lookups);
 
     for (InjectableTypeListenerBinding typeListener : injectableTypeListenerBindings) {
       if (typeListener.getTypeMatcher().matches(type)) {

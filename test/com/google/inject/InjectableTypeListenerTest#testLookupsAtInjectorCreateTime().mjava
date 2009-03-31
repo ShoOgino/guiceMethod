@@ -1,0 +1,43 @@
+  public void testLookupsAtInjectorCreateTime() {
+    final AtomicReference<Provider<B>> bProviderReference = new AtomicReference<Provider<B>>();
+    final AtomicReference<MembersInjector<A>> aMembersInjectorReference
+        = new AtomicReference<MembersInjector<A>>();
+
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindListener(only(TypeLiteral.get(C.class)), new InjectableType.Listener() {
+          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+            Provider<B> bProvider = encounter.getProvider(B.class);
+            try {
+              bProvider.get();
+              fail();
+            } catch (IllegalStateException expected) {
+              assertEquals("This Provider cannot be used until the Injector has been created.",
+                  expected.getMessage());
+            }
+            bProviderReference.set(bProvider);
+
+            MembersInjector<A> aMembersInjector = encounter.getMembersInjector(A.class);
+            try {
+              aMembersInjector.injectMembers(new A());
+              fail();
+            } catch (IllegalStateException expected) {
+              assertEquals(
+                  "This MembersInjector cannot be used until the Injector has been created.",
+                  expected.getMessage());
+            }
+            aMembersInjectorReference.set(aMembersInjector);
+          }
+        });
+
+        bind(C.class);
+      }
+    });
+
+    assertNotNull(bProviderReference.get().get());
+
+    A a = new A();
+    aMembersInjectorReference.get().injectMembers(a);
+    assertNotNull(a.injector);
+  }
+

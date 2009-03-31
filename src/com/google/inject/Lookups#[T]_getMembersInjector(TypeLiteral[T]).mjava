@@ -1,0 +1,2 @@
+  <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> type);
+

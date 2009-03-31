@@ -1,4 +1,4 @@
   public <T> Provider<T> getProvider(Class<T> type) {
-    throw new UnsupportedOperationException("TODO");
+    return getProvider(Key.get(type));
   }
 

@@ -1,4 +1,4 @@
   public void addError(Throwable t) {
-    throw new UnsupportedOperationException("TODO");
+    errors.errorInUserCode(t, "An exception was caught and reported. Message: %s", t.getMessage());
   }
 

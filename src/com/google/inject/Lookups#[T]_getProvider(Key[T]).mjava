@@ -1,0 +1,2 @@
+  <T> Provider<T> getProvider(Key<T> key);
+
