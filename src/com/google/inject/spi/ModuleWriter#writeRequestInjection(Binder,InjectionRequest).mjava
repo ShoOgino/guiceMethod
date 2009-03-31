@@ -1,4 +1,4 @@
-  protected void writeRequestInjection(Binder binder, InjectionRequest command) {
-    binder.withSource(command.getSource()).requestInjection(command.getInstance());
+  protected void writeRequestInjection(Binder binder, InjectionRequest element) {
+    binder.withSource(element.getSource()).requestInjection(element.getInstance());
   }
 

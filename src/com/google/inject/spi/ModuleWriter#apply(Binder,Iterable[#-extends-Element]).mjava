@@ -54,8 +54,9 @@
         return null;
       }
 
-      public Void visit(InjectableTypeListenerBinding binding) {
-        throw new UnsupportedOperationException("TODO");
+      public Void visit(InjectableTypeListenerBinding element) {
+        writeBindListener(binder, element);
+        return null;
       }
 
       public Void visit(PrivateElements privateElements) {
