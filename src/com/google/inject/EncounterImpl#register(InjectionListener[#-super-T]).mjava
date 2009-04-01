@@ -1,5 +1,7 @@
   @SuppressWarnings("unchecked") // an InjectionListener<? super T> is an InjectionListener<T>
   public void register(InjectionListener<? super T> injectionListener) {
+    checkState(valid, "Encounters may not be used after hear() returns.");
+
     if (injectionListeners == null) {
       injectionListeners = Lists.newArrayList();
     }

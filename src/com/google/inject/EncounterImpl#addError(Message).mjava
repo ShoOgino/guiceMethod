@@ -1,4 +1,5 @@
   public void addError(Message message) {
+    checkState(valid, "Encounters may not be used after hear() returns.");
     errors.addMessage(message);
   }
 
