@@ -3,6 +3,16 @@
     final AtomicReference<MembersInjector<A>> aMembersInjectorReference
         = new AtomicReference<MembersInjector<A>>();
 
+    final InjectionListener<Object> lookupsTester = new InjectionListener<Object>() {
+      public void afterInjection(Object injectee) {
+        assertNotNull(bProviderReference.get().get());
+
+        A a = new A();
+        aMembersInjectorReference.get().injectMembers(a);
+        assertNotNull(a.injector);
+      }
+    };
+
     Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bindListener(only(TypeLiteral.get(C.class)), new InjectableType.Listener() {
@@ -27,17 +37,16 @@
                   expected.getMessage());
             }
             aMembersInjectorReference.set(aMembersInjector);
+
+            encounter.register(lookupsTester);
           }
         });
 
-        bind(C.class);
+        // this ensures the type listener fires, and also the afterInjection() listener
+        bind(C.class).asEagerSingleton();
       }
     });
 
-    assertNotNull(bProviderReference.get().get());
-
-    A a = new A();
-    aMembersInjectorReference.get().injectMembers(a);
-    assertNotNull(a.injector);
+    lookupsTester.afterInjection(null);
   }
 
