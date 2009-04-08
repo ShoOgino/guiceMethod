@@ -1,0 +1,8 @@
+  /**
+   * Returns true if any type listeners are installed. Other code may take shortcuts when there
+   * aren't any type listeners.
+   */
+  public boolean hasTypeListeners() {
+    return !injectableTypeListenerBindings.isEmpty();
+  }
+

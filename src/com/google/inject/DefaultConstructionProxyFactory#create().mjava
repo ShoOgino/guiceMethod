@@ -21,7 +21,7 @@
         public Constructor<T> getConstructor() {
           return constructor;
         }
-        public Map<Method, List<org.aopalliance.intercept.MethodInterceptor>>
+        public ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>>
             getMethodInterceptors() {
           return ImmutableMap.of();
         }
@@ -48,7 +48,7 @@
         return constructor;
       }
       /*if[AOP]*/
-      public Map<Method, List<org.aopalliance.intercept.MethodInterceptor>>
+      public ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>>
           getMethodInterceptors() {
         return ImmutableMap.of();
       }

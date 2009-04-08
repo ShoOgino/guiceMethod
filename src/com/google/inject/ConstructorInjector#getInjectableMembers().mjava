@@ -1,0 +1,4 @@
+  public ImmutableSet<InjectionPoint> getInjectableMembers() {
+    return injectableMembers;
+  }
+

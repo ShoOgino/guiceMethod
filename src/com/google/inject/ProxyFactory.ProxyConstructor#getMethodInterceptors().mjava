@@ -1,4 +1,4 @@
-    public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
+    public ImmutableMap<Method, List<MethodInterceptor>> getMethodInterceptors() {
       return methodInterceptors;
     }
 

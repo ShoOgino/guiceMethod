@@ -1,0 +1,9 @@
+  /**
+   * Registers an injection listener for type {@code I}. Guice will notify the listener after
+   * injecting an instance of {@code I}. The order in which Guice will invoke listeners is
+   * unspecified.
+   *
+   * @param listener for injections into instances of type {@code I}
+   */
+  void register(InjectionListener<? super I> listener);
+

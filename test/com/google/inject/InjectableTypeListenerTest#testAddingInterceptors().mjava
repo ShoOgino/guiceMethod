@@ -6,8 +6,8 @@
         bindInterceptor(any(), buzz, prefixInterceptor("ka"));
         bindInterceptor(any(), any(), prefixInterceptor("fe"));
 
-        bindListener(any(), new InjectableType.Listener() {
-          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+        bindListener(onlyAbc, new TypeListener() {
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounter.bindInterceptor(any(), prefixInterceptor("li"));
             encounter.bindInterceptor(buzz, prefixInterceptor("no"));
           }

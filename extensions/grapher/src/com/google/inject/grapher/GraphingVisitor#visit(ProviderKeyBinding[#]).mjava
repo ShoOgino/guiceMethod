@@ -3,7 +3,7 @@
    * {@link BindingEdge} is {@link BindingEdge.Type#PROVIDER}.
    * 
    * @see #newInterfaceNode(Binding)
-   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    */
   public Void visit(ProviderKeyBinding<?> binding) {
     newInterfaceNode(binding);

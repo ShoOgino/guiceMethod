@@ -1,4 +1,7 @@
   public Set<Dependency<?>> getDependencies() {
-    return Dependency.forInjectableType(injectableType);
+    return Dependency.forInjectionPoints(new ImmutableSet.Builder<InjectionPoint>()
+        .add(getConstructor())
+        .addAll(getInjectableMembers())
+        .build());
   }
 

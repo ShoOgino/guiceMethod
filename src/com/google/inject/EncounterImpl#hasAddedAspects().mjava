@@ -1,4 +1,0 @@
-  public boolean hasAddedAspects() {
-    return aspects != null;
-  }
-

@@ -1,4 +1,0 @@
-  public InjectableType<T> getInjectableType() {
-    return injectableType;
-  }
-

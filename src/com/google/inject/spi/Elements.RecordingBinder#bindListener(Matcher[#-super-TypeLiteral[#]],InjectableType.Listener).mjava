@@ -1,5 +1,0 @@
-    public void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
-        InjectableType.Listener listener) {
-      elements.add(new InjectableTypeListenerBinding(getSource(), listener, typeMatcher));
-    }
-

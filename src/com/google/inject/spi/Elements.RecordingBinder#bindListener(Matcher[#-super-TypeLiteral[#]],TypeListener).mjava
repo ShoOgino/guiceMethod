@@ -1,0 +1,4 @@
+    public void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher, TypeListener listener) {
+      elements.add(new InjectableTypeListenerBinding(getSource(), listener, typeMatcher));
+    }
+

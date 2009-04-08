@@ -1,6 +1,5 @@
-  @SuppressWarnings("unchecked") // our injectable type always has a constructor of type T
-  public Constructor<? extends T> getConstructor() {
-    checkState(factory.constructorInjector != null, "Constructor is not ready");
-    return (Constructor<? extends T>) injectableType.getInjectableConstructor().getMember();
+  public InjectionPoint getConstructor() {
+    checkState(factory.constructorInjector != null, "Binding is not ready");
+    return factory.constructorInjector.getConstructionProxy().getInjectionPoint();
   }
 

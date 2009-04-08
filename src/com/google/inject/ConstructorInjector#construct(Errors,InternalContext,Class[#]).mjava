@@ -30,21 +30,11 @@
         constructionContext.finishConstruction();
       }
 
-      // Store reference. If an injector re-enters this factory, they'll
-      // get the same reference.
+      // Store reference. If an injector re-enters this factory, they'll get the same reference.
       constructionContext.setCurrentReference(t);
 
-      // Inject fields and methods.
       membersInjector.injectMembers(t, errors, context);
-
-      for (InjectionListener<? super T> injectionListener : injectionListeners) {
-        try {
-          injectionListener.afterInjection(t);
-        } catch (RuntimeException e) {
-          throw errors.errorNotifyingInjectionListener(
-              injectionListener, injectableType.getType(), e).toException();
-        }
-      }
+      membersInjector.notifyListeners(t, errors);
 
       return t;
     } catch (InvocationTargetException userException) {

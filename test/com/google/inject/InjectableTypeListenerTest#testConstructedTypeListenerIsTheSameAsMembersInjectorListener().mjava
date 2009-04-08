@@ -1,0 +1,55 @@
+  public void testConstructedTypeListenerIsTheSameAsMembersInjectorListener() {
+    final AtomicInteger typeEncounters = new AtomicInteger();
+    final AtomicInteger injections = new AtomicInteger();
+
+    final InjectionListener<A> listener = new InjectionListener<A>() {
+      public void afterInjection(A injectee) {
+        injections.incrementAndGet();
+        assertNotNull(injectee.injector);
+      }
+    };
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindListener(onlyAbc, new TypeListener() {
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+            typeEncounters.incrementAndGet();
+            encounter.register((InjectionListener) listener);
+          }
+        });
+
+        bind(A.class);
+        getMembersInjector(A.class);
+      }
+    });
+
+    // creating the injector shouldn't trigger injections
+    assertEquals(0, injections.getAndSet(0));
+
+    // constructing an A should trigger an injection
+    injector.getInstance(A.class);
+    assertEquals(1, injections.getAndSet(0));
+
+    // injecting an A should trigger an injection
+    injector.injectMembers(new A());
+    assertEquals(1, injections.getAndSet(0));
+
+    // getting a provider shouldn't
+    Provider<A> aProvider = injector.getProvider(A.class);
+    MembersInjector<A> aMembersInjector = injector.getMembersInjector(A.class);
+    assertEquals(0, injections.getAndSet(0));
+
+    // exercise the provider
+    aProvider.get();
+    aProvider.get();
+    assertEquals(2, injections.getAndSet(0));
+
+    // exercise the members injector
+    aMembersInjector.injectMembers(new A());
+    aMembersInjector.injectMembers(new A());
+    assertEquals(2, injections.getAndSet(0));
+
+    // we should only have encountered one type
+    assertEquals(1, typeEncounters.getAndSet(0));
+  }
+

@@ -4,13 +4,12 @@
    * {@link ImplementationNode} for the class, then add edges to everything
    * that it depends on to be instantiated.
    *
-   * @see #newClassImplementationNode(Binding)
-   * @see #newDependencyEdges(ImplementationNode, Collection, Collection)
+   * @see #newClassImplementationNode(Binding, InjectionPoint, Collection)
+   * @see #newDependencyEdges(Object, ImplementationNode, Collection)
    */
   public Void visit(ConstructorBinding<?> binding) {
-    InjectableType<?> injectableType = binding.getInjectableType();
-    M node = newClassImplementationNode(binding, injectableType.getInjectableConstructor(),
-        injectableType.getInjectableMembers());
+    M node = newClassImplementationNode(binding, binding.getConstructor(),
+        binding.getInjectableMembers());
     newDependencyEdges(getClassNodeId(binding), node, binding.getDependencies());
 
     return null;

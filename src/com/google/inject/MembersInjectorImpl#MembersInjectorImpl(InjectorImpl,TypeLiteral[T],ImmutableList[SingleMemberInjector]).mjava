@@ -1,5 +1,0 @@
-  MembersInjectorImpl(InjectorImpl injector, TypeLiteral<T> typeLiteral,
-      ImmutableList<SingleMemberInjector> memberInjectors) {
-    this(injector, typeLiteral, memberInjectors, ImmutableList.<InjectionListener<? super T>>of());
-  }
-

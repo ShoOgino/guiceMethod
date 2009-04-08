@@ -1,10 +1,10 @@
   public void testEncounterCannotBeUsedAfterHearReturns() {
-    final AtomicReference<Encounter<?>> encounterReference = new AtomicReference<Encounter<?>>();
+    final AtomicReference<TypeEncounter<?>> encounterReference = new AtomicReference<TypeEncounter<?>>();
 
     Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(any(), new InjectableType.Listener() {
-          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+        bindListener(any(), new TypeListener() {
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounterReference.set(encounter);
           }
         });
@@ -12,7 +12,7 @@
         bind(C.class);
       }
     });
-    Encounter<?> encounter = encounterReference.get();
+    TypeEncounter<?> encounter = encounterReference.get();
 
     try {
       encounter.register(new InjectionListener<Object>() {

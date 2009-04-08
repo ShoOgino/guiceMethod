@@ -1,0 +1,11 @@
+  ConstructorInjector(ImmutableSet<InjectionPoint> injectableMembers,
+      ConstructionProxy<T> constructionProxy,
+      ImmutableList<SingleParameterInjector<?>> parameterInjectors,
+      MembersInjectorImpl<T> membersInjector)
+      throws ErrorsException {
+    this.injectableMembers = injectableMembers;
+    this.constructionProxy = constructionProxy;
+    this.parameterInjectors = parameterInjectors;
+    this.membersInjector = membersInjector;
+  }
+

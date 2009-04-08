@@ -2,7 +2,7 @@
     try {
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
-          bindListener(any(), failingInjectableTypeListener);
+          bindListener(onlyAbc, failingInjectableTypeListener);
           bind(B.class);
           bind(C.class);
         }
@@ -10,11 +10,11 @@
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
-          "1) Error notifying InjectableType.Listener clumsy (bound at " + getClass().getName(),
+          "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(InjectableTypeListenerTest.java:",
           "of " + B.class.getName(), 
           "Reason: java.lang.ClassCastException: whoops, failure #1",
-          "2) Error notifying InjectableType.Listener clumsy (bound at " + getClass().getName(),
+          "2) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(InjectableTypeListenerTest.java:",
           "of " + C.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #2");
@@ -22,7 +22,7 @@
     
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(any(), failingInjectableTypeListener);
+        bindListener(onlyAbc, failingInjectableTypeListener);
       }
     });
     try {
@@ -30,7 +30,7 @@
       fail();
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
-          "1) Error notifying InjectableType.Listener clumsy (bound at " + getClass().getName(),
+          "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(InjectableTypeListenerTest.java:",
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");
@@ -42,7 +42,7 @@
       fail();
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
-          "1) Error notifying InjectableType.Listener clumsy (bound at " + getClass().getName(),
+          "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(InjectableTypeListenerTest.java:",
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");

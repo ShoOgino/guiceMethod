@@ -1,5 +1,5 @@
   /**
    * Gets the constructor this binding injects.
    */
-  Constructor<?> getConstructor();
+  InjectionPoint getConstructor();
 

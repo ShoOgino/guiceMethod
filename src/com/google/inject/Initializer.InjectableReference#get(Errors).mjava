@@ -20,7 +20,7 @@
 
       // toInject needs injection, do it right away. we only do this once, even if it fails
       if (pendingInjection.remove(instance) != null) {
-        membersInjector.injectMembers(instance, errors.withSource(source));
+        membersInjector.injectAndNotify(instance, errors.withSource(source));
       }
 
       return instance;

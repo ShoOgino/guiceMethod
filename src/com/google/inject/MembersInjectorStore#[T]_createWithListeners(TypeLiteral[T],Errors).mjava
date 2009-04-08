@@ -1,29 +1,34 @@
   /**
-   * Creates a new members injector and attaches injection listeners.
+   * Creates a new members injector and attaches both injection listeners and method aspects.
    */
   private <T> MembersInjectorImpl<T> createWithListeners(TypeLiteral<T> type, Errors errors)
       throws ErrorsException {
     int numErrorsBefore = errors.size();
 
-    MembersInjectorImpl<T> membersInjector = createWithoutListeners(type, errors);
-
-    InjectableType<T> injectableType = new InjectableType<T>(null, type,
-        membersInjector.getInjectionPoints());
+    Set<InjectionPoint> injectionPoints;
+    try {
+      injectionPoints = InjectionPoint.forInstanceMethodsAndFields(type);
+    } catch (ConfigurationException e) {
+      errors.merge(e.getErrorMessages());
+      injectionPoints = e.getPartialValue();
+    }
+    ImmutableList<SingleMemberInjector> injectors = getInjectors(injectionPoints, errors);
+    errors.throwIfNewErrors(numErrorsBefore);
 
     EncounterImpl<T> encounter = new EncounterImpl<T>(errors, injector.lookups);
-
     for (InjectableTypeListenerBinding typeListener : injectableTypeListenerBindings) {
       if (typeListener.getTypeMatcher().matches(type)) {
         try {
-          typeListener.getListener().hear(injectableType, encounter);
+          typeListener.getListener().hear(type, encounter);
         } catch (RuntimeException e) {
-          errors.errorNotifyingTypeListener(typeListener, injectableType, e);
+          errors.errorNotifyingTypeListener(typeListener, type, e);
         }
       }
     }
     encounter.invalidate();
-
     errors.throwIfNewErrors(numErrorsBefore);
-    return membersInjector.withListeners(encounter.getInjectionListeners());
+
+    return new MembersInjectorImpl<T>(injector, type, injectors, encounter.getInjectionListeners(),
+        encounter.getAspects());
   }
 

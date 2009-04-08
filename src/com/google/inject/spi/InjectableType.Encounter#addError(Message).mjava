@@ -1,5 +1,0 @@
-    /**
-     * Records an error message to be presented to the user at a later time.
-     */
-    void addError(Message message);
-

@@ -1,0 +1,4 @@
+  ConstructionProxy<T> getConstructionProxy() {
+    return constructionProxy;
+  }
+

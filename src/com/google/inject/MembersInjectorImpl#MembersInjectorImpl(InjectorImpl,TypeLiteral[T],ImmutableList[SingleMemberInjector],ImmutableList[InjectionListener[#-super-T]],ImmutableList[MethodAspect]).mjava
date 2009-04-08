@@ -1,0 +1,11 @@
+  MembersInjectorImpl(InjectorImpl injector, TypeLiteral<T> typeLiteral,
+      ImmutableList<SingleMemberInjector> memberInjectors,
+      ImmutableList<InjectionListener<? super T>> injectionListeners,
+      ImmutableList<MethodAspect> addedAspects) {
+    this.injector = injector;
+    this.typeLiteral = typeLiteral;
+    this.memberInjectors = memberInjectors;
+    this.injectionListeners = injectionListeners;
+    this.addedAspects = addedAspects;
+  }
+

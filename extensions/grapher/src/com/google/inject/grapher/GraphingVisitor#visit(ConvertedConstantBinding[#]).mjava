@@ -10,7 +10,7 @@
    * with a {@link BindingEdge} to the {@link String} instance.
    * 
    * @see #newInterfaceNode(Binding)
-   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    */
   public Void visit(ConvertedConstantBinding<?> binding) {
     newInterfaceNode(binding);

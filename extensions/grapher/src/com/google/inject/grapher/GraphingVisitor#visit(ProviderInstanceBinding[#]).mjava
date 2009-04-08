@@ -3,9 +3,9 @@
    * {@link BindingEdge} is {@link BindingEdge.Type#PROVIDER}.
    * 
    * @see #newInterfaceNode(Binding)
-   * @see #newBindingEdge(InterfaceNode, Object, BindingEdge.Type)
+   * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    * @see #newInstanceImplementationNode(Binding, Object)
-   * @see #newDependencyEdges(ImplementationNode, Collection, Collection)
+   * @see #newDependencyEdges(Object, ImplementationNode, java.util.Collection)
    */
   public Void visit(ProviderInstanceBinding<?> binding) {
     newInterfaceNode(binding);

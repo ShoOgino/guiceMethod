@@ -1,7 +1,0 @@
-  /**
-   * Returns the type literal.
-   */
-  public TypeLiteral<T> getType() {
-    return type;
-  }
-

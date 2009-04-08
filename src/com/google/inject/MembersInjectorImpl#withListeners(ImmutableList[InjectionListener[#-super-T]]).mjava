@@ -1,7 +1,0 @@
-  MembersInjectorImpl<T> withListeners(
-      ImmutableList<InjectionListener<? super T>> injectionListeners) {
-    return injectionListeners.isEmpty()
-        ? this
-        : new MembersInjectorImpl<T>(injector, typeLiteral, memberInjectors, injectionListeners);
-  }
-

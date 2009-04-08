@@ -1,8 +1,8 @@
   public void testInjectionListenerThrows() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(any(), new InjectableType.Listener() {
-          public <I> void hear(InjectableType<I> injectableType, Encounter<I> encounter) {
+        bindListener(onlyAbc, new TypeListener() {
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounter.register(failingInjectionListener);
           }
         });

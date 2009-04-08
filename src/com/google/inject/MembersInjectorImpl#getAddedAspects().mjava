@@ -1,0 +1,4 @@
+  public ImmutableList<MethodAspect> getAddedAspects() {
+    return addedAspects;
+  }
+

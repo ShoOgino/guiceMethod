@@ -1,0 +1,15 @@
+  void injectAndNotify(final T instance, final Errors errors) throws ErrorsException {
+    if (instance == null) {
+      return;
+    }
+
+    injector.callInContext(new ContextualCallable<Void>() {
+      public Void call(InternalContext context) throws ErrorsException {
+        injectMembers(instance, errors, context);
+        return null;
+      }
+    });
+
+    notifyListeners(instance, errors);
+  }
+
