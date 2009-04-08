@@ -1,8 +1,8 @@
-  public void testInjectableTypeListenerThrows() {
+  public void testTypeListenerThrows() {
     try {
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
-          bindListener(onlyAbc, failingInjectableTypeListener);
+          bindListener(onlyAbcd, failingTypeListener);
           bind(B.class);
           bind(C.class);
         }
@@ -11,18 +11,18 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(InjectableTypeListenerTest.java:",
+          ".configure(TypeListenerTest.java:",
           "of " + B.class.getName(), 
           "Reason: java.lang.ClassCastException: whoops, failure #1",
           "2) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(InjectableTypeListenerTest.java:",
+          ".configure(TypeListenerTest.java:",
           "of " + C.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #2");
     }
     
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(onlyAbc, failingInjectableTypeListener);
+        bindListener(onlyAbcd, failingTypeListener);
       }
     });
     try {
@@ -31,7 +31,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(InjectableTypeListenerTest.java:",
+          ".configure(TypeListenerTest.java:",
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");
     }
@@ -43,12 +43,12 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(InjectableTypeListenerTest.java:",
+          ".configure(TypeListenerTest.java:",
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");
     }
 
-    // non-constructed types do not participate
+    // non-injected types do not participate
     assertSame(Stage.DEVELOPMENT, injector.getInstance(Stage.class));
   }
 

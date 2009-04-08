@@ -1,4 +1,0 @@
-  public V visit(InjectableTypeListenerBinding binding) {
-    return visitOther(binding);
-  }
-

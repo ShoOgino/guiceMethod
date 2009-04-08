@@ -1,9 +1,0 @@
-  public List<InjectableTypeListenerBinding> getInjectableTypeListenerBindings() {
-    List<InjectableTypeListenerBinding> parentBindings = parent.getInjectableTypeListenerBindings();
-    List<InjectableTypeListenerBinding> result
-        = new ArrayList<InjectableTypeListenerBinding>(parentBindings.size() + 1);
-    result.addAll(parentBindings);
-    result.addAll(listenerBindings);
-    return result;
-  }
-

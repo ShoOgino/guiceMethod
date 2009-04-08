@@ -16,7 +16,7 @@
     errors.throwIfNewErrors(numErrorsBefore);
 
     EncounterImpl<T> encounter = new EncounterImpl<T>(errors, injector.lookups);
-    for (InjectableTypeListenerBinding typeListener : injectableTypeListenerBindings) {
+    for (TypeListenerBinding typeListener : typeListenerBindings) {
       if (typeListener.getTypeMatcher().matches(type)) {
         try {
           typeListener.getListener().hear(type, encounter);
@@ -28,7 +28,7 @@
     encounter.invalidate();
     errors.throwIfNewErrors(numErrorsBefore);
 
-    return new MembersInjectorImpl<T>(injector, type, injectors, encounter.getInjectionListeners(),
-        encounter.getAspects());
+    return new MembersInjectorImpl<T>(injector, type, injectors, encounter.getMembersInjectors(),
+        encounter.getInjectionListeners(), encounter.getAspects());
   }
 

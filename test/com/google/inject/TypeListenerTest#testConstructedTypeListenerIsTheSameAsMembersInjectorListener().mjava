@@ -11,7 +11,7 @@
 
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(onlyAbc, new TypeListener() {
+        bindListener(onlyAbcd, new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             typeEncounters.incrementAndGet();
             encounter.register((InjectionListener) listener);

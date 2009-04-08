@@ -1,4 +1,4 @@
-  public Errors errorNotifyingTypeListener(InjectableTypeListenerBinding listener,
+  public Errors errorNotifyingTypeListener(TypeListenerBinding listener,
       TypeLiteral<?> type, Throwable cause) {
     return errorInUserCode(cause,
         "Error notifying TypeListener %s (bound at %s) of %s.%n"

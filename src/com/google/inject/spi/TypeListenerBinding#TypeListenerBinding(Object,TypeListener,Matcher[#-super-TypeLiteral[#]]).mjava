@@ -1,4 +1,4 @@
-  InjectableTypeListenerBinding(Object source, TypeListener listener,
+  TypeListenerBinding(Object source, TypeListener listener,
       Matcher<? super TypeLiteral<?>> typeMatcher) {
     this.source = source;
     this.listener = listener;

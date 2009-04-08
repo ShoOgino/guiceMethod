@@ -3,6 +3,6 @@
    * aren't any type listeners.
    */
   public boolean hasTypeListeners() {
-    return !injectableTypeListenerBindings.isEmpty();
+    return !typeListenerBindings.isEmpty();
   }
 

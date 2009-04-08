@@ -1,7 +1,7 @@
   public void testInjectionListenerThrows() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(onlyAbc, new TypeListener() {
+        bindListener(onlyAbcd, new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounter.register(failingInjectionListener);
           }
@@ -40,7 +40,7 @@
           " Reason: java.lang.ClassCastException: whoops, failure #3");
     }
 
-    // non-constructed types do not participate
+    // non-injected types do not participate
     assertSame(Stage.DEVELOPMENT, injector.getInstance(Stage.class));
   }
 

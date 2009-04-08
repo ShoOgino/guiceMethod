@@ -10,7 +10,7 @@
 
     Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindListener(onlyAbc, typeListener);
+        bindListener(onlyAbcd, typeListener);
         bind(A.class);
       }
     });

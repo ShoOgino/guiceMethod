@@ -1,0 +1,4 @@
+  TypeListenerBindingProcessor(Errors errors) {
+    super(errors);
+  }
+

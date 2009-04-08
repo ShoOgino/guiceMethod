@@ -1,4 +1,0 @@
-  public void addInjectableTypeListener(InjectableTypeListenerBinding listenerBinding) {
-    listenerBindings.add(listenerBinding);
-  }
-

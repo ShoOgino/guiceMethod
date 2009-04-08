@@ -1,16 +1,16 @@
-  public void testInjectMembersInjectableTypeListenerFails() {
+  public void testInjectMembersTypeListenerFails() {
     try {
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
           getMembersInjector(A.class);
-          bindListener(onlyAbc, failingInjectableTypeListener);
+          bindListener(onlyAbcd, failingTypeListener);
         }
       });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at ",
-          InjectableTypeListenerTest.class.getName(), ".configure(InjectableTypeListenerTest.java:",
+          TypeListenerTest.class.getName(), ".configure(TypeListenerTest.java:",
           "of " + A.class.getName(),
           " Reason: java.lang.ClassCastException: whoops, failure #1");
     }

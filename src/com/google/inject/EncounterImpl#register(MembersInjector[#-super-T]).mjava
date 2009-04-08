@@ -1,0 +1,10 @@
+  public void register(MembersInjector<? super T> membersInjector) {
+    checkState(valid, "Encounters may not be used after hear() returns.");
+
+    if (membersInjectors == null) {
+      membersInjectors = Lists.newArrayList();
+    }
+
+    membersInjectors.add(membersInjector);
+  }
+

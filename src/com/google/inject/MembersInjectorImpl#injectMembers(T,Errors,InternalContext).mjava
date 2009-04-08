@@ -2,5 +2,13 @@
     for (SingleMemberInjector injector : memberInjectors) {
       injector.inject(errors, context, t);
     }
+
+    for (MembersInjector<? super T> userMembersInjector : userMembersInjectors) {
+      try {
+        userMembersInjector.injectMembers(t);
+      } catch (RuntimeException e) {
+        errors.errorInUserInjector(userMembersInjector, typeLiteral, e);
+      }
+    }
   }
 

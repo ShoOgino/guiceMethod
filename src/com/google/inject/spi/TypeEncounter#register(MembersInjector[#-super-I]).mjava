@@ -1,0 +1,6 @@
+  /**
+   * Registers a members injector for type {@code I}. Guice will use the members injector after its
+   * performed its own injections on an instance of {@code I}.
+   */
+  void register(MembersInjector<? super I> membersInjector);
+

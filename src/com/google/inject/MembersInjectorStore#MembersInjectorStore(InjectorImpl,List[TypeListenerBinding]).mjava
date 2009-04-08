@@ -1,0 +1,6 @@
+  MembersInjectorStore(InjectorImpl injector,
+      List<TypeListenerBinding> typeListenerBindings) {
+    this.injector = injector;
+    this.typeListenerBindings = ImmutableList.copyOf(typeListenerBindings);
+  }
+

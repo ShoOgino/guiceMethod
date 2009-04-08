@@ -6,7 +6,7 @@
         bindInterceptor(any(), buzz, prefixInterceptor("ka"));
         bindInterceptor(any(), any(), prefixInterceptor("fe"));
 
-        bindListener(onlyAbc, new TypeListener() {
+        bindListener(onlyAbcd, new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounter.bindInterceptor(any(), prefixInterceptor("li"));
             encounter.bindInterceptor(buzz, prefixInterceptor("no"));

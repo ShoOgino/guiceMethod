@@ -1,0 +1,6 @@
+    void assertAllCounts(int expected) {
+      assertEquals(expected, guiceInjected);
+      assertEquals(expected, userInjected);
+      assertEquals(expected, listenersNotified);
+    }
+

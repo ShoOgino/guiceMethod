@@ -1,0 +1,4 @@
+    @Inject void guiceInjected() {
+      guiceInjected++;
+    }
+

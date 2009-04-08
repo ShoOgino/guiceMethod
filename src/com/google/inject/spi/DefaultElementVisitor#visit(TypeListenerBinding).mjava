@@ -1,0 +1,4 @@
+  public V visit(TypeListenerBinding binding) {
+    return visitOther(binding);
+  }
+

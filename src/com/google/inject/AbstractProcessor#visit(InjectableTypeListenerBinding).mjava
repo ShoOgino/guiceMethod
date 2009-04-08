@@ -1,4 +1,0 @@
-  public Boolean visit(InjectableTypeListenerBinding binding) {
-    return false;
-  }
-

@@ -54,7 +54,7 @@
         return null;
       }
 
-      public Void visit(InjectableTypeListenerBinding element) {
+      public Void visit(TypeListenerBinding element) {
         writeBindListener(binder, element);
         return null;
       }
