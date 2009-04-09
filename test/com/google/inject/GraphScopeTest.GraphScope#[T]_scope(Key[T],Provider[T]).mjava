@@ -1,0 +1,19 @@
+    public <T> Provider<T> scope(Key<T> key, final Provider<T> unscoped) {
+
+      final Map<List<Integer>, Object> cache = new ConcurrentHashMap<List<Integer>, Object>();
+      final List<Integer> whatIsMyGraph = ImmutableList.copyOf(ids.get());
+
+      return new Provider<T>() {
+        public T get() {
+          Object alreadyCached = cache.get(whatIsMyGraph);
+          if (alreadyCached != null) {
+            return (T) alreadyCached;
+          } else {
+            T created = unscoped.get();
+            cache.put(whatIsMyGraph, created);
+            return created;
+          }
+        }
+      };
+    }
+

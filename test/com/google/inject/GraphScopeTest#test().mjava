@@ -1,0 +1,24 @@
+  public void test() {
+    final GraphScope graphScope = new GraphScope();
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(A.class).in(graphScope);
+        bind(B.class).in(graphScope);
+        bind(C.class).in(graphScope);
+      }
+    });
+
+    graphScope.beginNewGraph();
+    A graphOne = injector.getInstance(A.class);
+    graphScope.endCurrentGraph();
+
+    graphScope.beginNewGraph();
+    A graphTwo = injector.getInstance(A.class);
+    graphScope.endCurrentGraph();
+
+    assertSame(graphOne.b.c , graphOne.b.cProvider.get());
+    assertSame(graphTwo.b.c , graphTwo.b.cProvider.get());
+    assertNotSame(graphOne.b.c, graphTwo.b.c);
+  }
+

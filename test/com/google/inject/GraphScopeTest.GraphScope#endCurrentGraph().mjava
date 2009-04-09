@@ -1,0 +1,5 @@
+    void endCurrentGraph() {
+      List<Integer> ids = this.ids.get();
+      ids.remove(ids.size() - 1);
+    }
+
