@@ -1,8 +1,8 @@
-    public String extractPath(String pattern) {
-      if (pattern.startsWith("*")) {
+    public String extractPath(String path) {
+      if (patternKind == Kind.PREFIX) {
         return null;
-      } else if (pattern.endsWith("*")) {
-        String extract = pattern.substring(0, pattern.length() - 1);
+      } else if (patternKind == Kind.SUFFIX) {
+        String extract = pattern;
 
         //trim the trailing '/'
         if (extract.endsWith("/")) {
@@ -13,6 +13,6 @@
       }
 
       //else treat as literal
-      return pattern;
+      return path;
     }
 
