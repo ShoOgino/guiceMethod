@@ -1,0 +1,12 @@
+  MembersInjectorImpl(InjectorImpl injector, TypeLiteral<T> typeLiteral,
+      EncounterImpl<T> encounter, ImmutableList<SingleMemberInjector> memberInjectors) {
+    this.injector = injector;
+    this.typeLiteral = typeLiteral;
+    this.memberInjectors = memberInjectors;
+    this.userMembersInjectors = encounter.getMembersInjectors();
+    this.injectionListeners = encounter.getInjectionListeners();
+    /*if[AOP]*/
+    this.addedAspects = encounter.getAspects();
+    /*end[AOP]*/
+  }
+

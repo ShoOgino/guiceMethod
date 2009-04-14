@@ -1,4 +1,0 @@
-  void setupProxyFactory(InjectorImpl injector) {
-    injector.methodAspects = ImmutableList.copyOf(injector.state.getMethodAspects());
-  }
-

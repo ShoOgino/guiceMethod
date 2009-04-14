@@ -20,4 +20,5 @@
     assertEquals("kafelinobuzz", c.buzz());
     assertEquals("felibeep", c.beep());
   }
+  /*end[AOP]*/
 

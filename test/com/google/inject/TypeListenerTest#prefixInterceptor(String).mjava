@@ -1,6 +1,9 @@
-  private static MethodInterceptor prefixInterceptor(final String prefix) {
-    return new MethodInterceptor() {
-      public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+  /*if[AOP]*/
+  private static org.aopalliance.intercept.MethodInterceptor prefixInterceptor(
+      final String prefix) {
+    return new org.aopalliance.intercept.MethodInterceptor() {
+      public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
+          throws Throwable {
         return prefix + methodInvocation.proceed();
       }
     };

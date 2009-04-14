@@ -1,4 +1,6 @@
+  /*if[AOP]*/
   public ImmutableList<MethodAspect> getAddedAspects() {
     return addedAspects;
   }
+  /*end[AOP]*/
 

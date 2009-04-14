@@ -1,3 +1,4 @@
+  /*if[AOP]*/
   public ImmutableList<MethodAspect> getAspects() {
     return aspects == null
         ? ImmutableList.<MethodAspect>of()

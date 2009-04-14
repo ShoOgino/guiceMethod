@@ -1,5 +1,5 @@
   public void bindInterceptor(Matcher<? super Method> methodMatcher,
-      MethodInterceptor... interceptors) {
+      org.aopalliance.intercept.MethodInterceptor... interceptors) {
     checkState(valid, "Encounters may not be used after hear() returns.");
 
     // make sure the applicable aspects is mutable
@@ -9,4 +9,5 @@
 
     aspects.add(new MethodAspect(Matchers.any(), methodMatcher, interceptors));
   }
+  /*end[AOP]*/
 

@@ -1,4 +1,0 @@
-  public ImmutableMap<Method, List<MethodInterceptor>> getMethodInterceptors() {
-    return constructionProxy.getMethodInterceptors();
-  }
-

@@ -1,5 +1,0 @@
-  public void testEquality() {
-    assertEquals(new BigDecimal("123.00"), new BigDecimal("123"));
-    assertEquals("123", new BigDecimal("123.00").toString());
-  }
-

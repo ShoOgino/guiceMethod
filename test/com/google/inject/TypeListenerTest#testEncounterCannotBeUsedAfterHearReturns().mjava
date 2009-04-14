@@ -22,15 +22,18 @@
     } catch (IllegalStateException expected) {
     }
 
+    /*if[AOP]*/
     try {
-      encounter.bindInterceptor(any(), new MethodInterceptor() {
-        public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+      encounter.bindInterceptor(any(), new org.aopalliance.intercept.MethodInterceptor() {
+        public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
+            throws Throwable {
           return methodInvocation.proceed();
         }
       });
       fail();
     } catch (IllegalStateException expected) {
     }
+    /*end[AOP]*/
 
     try {
       encounter.addError(new Exception());
