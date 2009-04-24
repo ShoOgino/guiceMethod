@@ -3,7 +3,7 @@
   protected void configure() {
     // Bind these filter definitions to a unique random key. Doesn't matter what it is,
     // coz it's never used.
-    bind(Key.get(new TypeLiteral<List<FilterDefinition>>() {}, named(UUID.randomUUID().toString())))
+    bind(Key.get(new TypeLiteral<List<FilterDefinition>>() {}, UniqueAnnotations.create()))
         .toInstance(filterDefinitions);
   }
 
