@@ -1,0 +1,3 @@
+    @Inject
+    public E(A a, B b) {}
+
