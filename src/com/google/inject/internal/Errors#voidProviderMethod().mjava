@@ -1,0 +1,4 @@
+  public Errors voidProviderMethod() {
+    return addMessage("Provider methods must return a value. Do not return void.");
+  }
+

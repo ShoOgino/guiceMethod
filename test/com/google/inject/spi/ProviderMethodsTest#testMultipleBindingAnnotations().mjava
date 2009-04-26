@@ -10,7 +10,7 @@
       });
       fail();
     } catch (CreationException expected) {
-      Asserts.assertContains(expected.getMessage(),
+      assertContains(expected.getMessage(),
           "more than one annotation annotated with @BindingAnnotation:", "Named", "Blue",
           "at " + getClass().getName(), ".provideString(ProviderMethodsTest.java:");
     }
