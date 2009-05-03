@@ -1,0 +1,4 @@
+    public int getHash(SimpleInternalEntry<K, V> entry) {
+      return entry.hash;
+    }
+

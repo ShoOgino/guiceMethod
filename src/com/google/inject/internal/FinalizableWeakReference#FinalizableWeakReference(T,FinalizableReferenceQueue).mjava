@@ -7,5 +7,6 @@
   protected FinalizableWeakReference(T referent,
       FinalizableReferenceQueue queue) {
     super(referent, queue.queue);
+    queue.cleanUp();
   }
 

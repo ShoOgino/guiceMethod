@@ -1,4 +1,0 @@
-  static <K, V> Map.Entry<K, V> entry(K key, V value) {
-    return new SimpleEntry<K, V>(key, value);
-  }
-

@@ -1,0 +1,4 @@
+    public int hashKey(Object key) {
+      return key.hashCode();
+    }
+

@@ -1,7 +1,7 @@
     /**
      * Removes all of the mappings from this map.
      */
-    public void clear() {
+    @Override public void clear() {
       for (Segment segment : segments) {
         segment.clear();
       }

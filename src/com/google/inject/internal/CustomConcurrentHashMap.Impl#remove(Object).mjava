@@ -7,7 +7,7 @@
      *         if there was no mapping for {@code key}
      * @throws NullPointerException if the specified key is null
      */
-    public V remove(Object key) {
+    @Override public V remove(Object key) {
       if (key == null) {
         throw new NullPointerException("key");
       }

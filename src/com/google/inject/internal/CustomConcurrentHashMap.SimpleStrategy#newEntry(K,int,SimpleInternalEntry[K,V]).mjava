@@ -1,0 +1,5 @@
+    public SimpleInternalEntry<K, V> newEntry(
+        K key, int hash, SimpleInternalEntry<K, V> next) {
+      return new SimpleInternalEntry<K, V>(key, hash, null, next);
+    }
+

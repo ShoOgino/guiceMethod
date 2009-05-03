@@ -1,6 +1,7 @@
     public void testExpiringGetForStrong() {
       ConcurrentMap<String, Integer> cache = new MapMaker()
-          .expiration(10, TimeUnit.MILLISECONDS).makeComputingMap(WATCHED_CREATOR);
+          .expiration(10, TimeUnit.MILLISECONDS)
+          .makeComputingMap(WATCHED_CREATOR);
 
       runExpirationTest(cache);
     }

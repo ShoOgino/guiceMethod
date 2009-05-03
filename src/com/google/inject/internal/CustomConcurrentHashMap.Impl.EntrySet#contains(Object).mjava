@@ -1,4 +1,4 @@
-      public boolean contains(Object o) {
+      @Override public boolean contains(Object o) {
         if (!(o instanceof Entry)) {
           return false;
         }

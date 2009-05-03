@@ -1,4 +1,4 @@
-      public boolean isEmpty() {
+      @Override public boolean isEmpty() {
         return Impl.this.isEmpty();
       }
 

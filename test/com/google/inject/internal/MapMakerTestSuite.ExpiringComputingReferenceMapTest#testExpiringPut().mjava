@@ -1,6 +1,7 @@
     public void testExpiringPut() {
       ConcurrentMap<String, Integer> cache = new MapMaker()
-          .expiration(50, TimeUnit.MILLISECONDS).makeComputingMap(WATCHED_CREATOR);
+          .expiration(50, TimeUnit.MILLISECONDS)
+          .makeComputingMap(WATCHED_CREATOR);
 
       for (int i = 0; i < 10; i++) {
         cache.put(KEY_PREFIX + i, i + VALUE_SUFFIX);

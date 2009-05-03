@@ -5,7 +5,7 @@
      *
      * @return the number of key-value mappings in this map
      */
-    public int size() {
+    @Override public int size() {
       final Segment[] segments = this.segments;
       long sum = 0;
       long check = 0;

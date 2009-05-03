@@ -1,4 +1,4 @@
-      public boolean remove(Object o) {
+      @Override public boolean remove(Object o) {
         return Impl.this.remove(o) != null;
       }
 

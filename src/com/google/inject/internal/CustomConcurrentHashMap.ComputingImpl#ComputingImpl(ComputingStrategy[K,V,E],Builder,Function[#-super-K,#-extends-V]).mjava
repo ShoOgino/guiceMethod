@@ -5,7 +5,7 @@
     ComputingImpl(ComputingStrategy<K, V, E> strategy, Builder builder,
         Function<? super K, ? extends V> computer) {
       super(strategy, builder);
-      this.strategy = strategy;
+      this.computingStrategy = strategy;
       this.computer = computer;
     }
 

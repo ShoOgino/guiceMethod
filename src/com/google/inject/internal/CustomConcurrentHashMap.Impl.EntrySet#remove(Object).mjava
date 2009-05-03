@@ -1,4 +1,4 @@
-      public boolean remove(Object o) {
+      @Override public boolean remove(Object o) {
         if (!(o instanceof Entry)) {
           return false;
         }

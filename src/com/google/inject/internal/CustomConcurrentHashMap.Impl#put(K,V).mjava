@@ -11,7 +11,7 @@
      *         if there was no mapping for {@code key}
      * @throws NullPointerException if the specified key or value is null
      */
-    public V put(K key, V value) {
+    @Override public V put(K key, V value) {
       if (key == null) {
         throw new NullPointerException("key");
       }

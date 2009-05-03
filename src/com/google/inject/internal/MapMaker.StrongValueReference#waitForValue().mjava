@@ -1,4 +1,4 @@
-    public V waitForValue() throws InterruptedException {
+    public V waitForValue() {
       return get();
     }
 

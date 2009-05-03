@@ -7,5 +7,5 @@
      *
      * @throws NullPointerException if entry is null
      */
-    boolean removeEntry(E entry, V value);
+    boolean removeEntry(E entry, @Nullable V value);
 

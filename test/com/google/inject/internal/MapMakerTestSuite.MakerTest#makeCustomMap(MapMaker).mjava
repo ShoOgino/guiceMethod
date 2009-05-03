@@ -2,7 +2,7 @@
       // Use makeComputingMap() to force it to return CCHM.Impl, not
       // ConcurrentHashMap.
       return (Impl<?, ?, ?>) maker.makeComputingMap(new Function<Object, Object>() {
-        public Object apply(Object from) {
+        public Object apply(@Nullable Object from) {
           return from;
         }
       });

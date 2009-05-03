@@ -1,5 +1,5 @@
     public void testInitialCapacity_large() {
-      MapMaker maker = new MapMaker().initialCapacity(Integer.MAX_VALUE);
+      new MapMaker().initialCapacity(Integer.MAX_VALUE);
       // that the maker didn't blow up is enough;
       // don't actually create this monster!
     }

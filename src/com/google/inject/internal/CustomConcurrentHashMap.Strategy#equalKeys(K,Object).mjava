@@ -4,7 +4,7 @@
      *
      * @param a key from inside the map
      * @param b key passed from caller, not necesarily of type K
-     * 
+     *
      * @see Object#equals the same contractual obligations apply here
      */
     boolean equalKeys(K a, Object b);

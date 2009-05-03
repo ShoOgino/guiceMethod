@@ -6,13 +6,12 @@
        * removed in which case the put will re-establish). We do not and
        * cannot guarantee more.
        */
-      @Override
-      public V setValue(V value) {
+      @Override public V setValue(V value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        V v = super.setValue(value);
-        Impl.this.put(getKey(), value);
-        return v;
+        V oldValue = Impl.this.put(getKey(), value);
+        this.value = value;
+        return oldValue;
       }
 

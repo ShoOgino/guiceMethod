@@ -4,9 +4,9 @@
       Integer key1 = new Integer(12357);
       Integer key2 = new Integer(12357);
       map.put(key1, "a");
-      assertFalse(map.entrySet().remove(entry(key2, "a")));
+      assertFalse(map.entrySet().remove(Maps.immutableEntry(key2, "a")));
       assertEquals(1, map.size());
-      assertTrue(map.entrySet().remove(entry(key1, "a")));
+      assertTrue(map.entrySet().remove(Maps.immutableEntry(key1, "a")));
       assertEquals(0, map.size());
     }
 

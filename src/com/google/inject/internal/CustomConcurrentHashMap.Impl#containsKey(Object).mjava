@@ -7,7 +7,7 @@
      *         {@code false} otherwise.
      * @throws NullPointerException if the specified key is null
      */
-    public boolean containsKey(Object key) {
+    @Override public boolean containsKey(Object key) {
       if (key == null) {
         throw new NullPointerException("key");
       }

@@ -3,7 +3,7 @@
      *
      * @return {@code true} if this map contains no key-value mappings
      */
-    public boolean isEmpty() {
+    @Override public boolean isEmpty() {
       final Segment[] segments = this.segments;
       /*
        * We keep track of per-segment modCounts to avoid ABA

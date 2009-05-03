@@ -4,7 +4,8 @@
 
       for (int i = 0; i < 10; i++) {
         map.putIfAbsent(KEY_PREFIX + i, VALUE_PREFIX + i);
-        assertEquals(Integer.valueOf(VALUE_PREFIX + i), map.get(KEY_PREFIX + i));
+        assertEquals(Integer.valueOf(VALUE_PREFIX + i),
+            map.get(KEY_PREFIX + i));
       }
 
       runTasks();
