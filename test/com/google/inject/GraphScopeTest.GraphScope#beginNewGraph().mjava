@@ -1,4 +1,0 @@
-    void beginNewGraph() {
-      ids.get().add(nextId.incrementAndGet());
-    }
-
