@@ -1,0 +1,9 @@
+  public void release() {
+    checkState(acquired > 0);
+    acquired--;
+    if (acquired == 0) {
+      constructionContexts.clear();
+      dependency = null;
+    }
+  }
+

@@ -1,4 +1,4 @@
   public boolean hasErrors() {
-    return !errors.isEmpty();
+    return root.errors != null;
   }
 

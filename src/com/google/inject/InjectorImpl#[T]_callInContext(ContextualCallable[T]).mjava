@@ -1,18 +1,11 @@
   /** Looks up thread local context. Creates (and removes) a new context if necessary. */
   <T> T callInContext(ContextualCallable<T> callable) throws ErrorsException {
-    InternalContext[] reference = localContext.get();
-    if (reference[0] == null) {
-      reference[0] = new InternalContext();
-      try {
-        return callable.call(reference[0]);
-      } finally {
-        // Only remove the context if this call created it.
-        localContext.remove();
-      }
-    }
-    else {
-      // Someone else will clean up this context.
-      return callable.call(reference[0]);
+    InternalContext reference = localContext.get();
+    reference.acquire();
+    try {
+      return callable.call(reference);
+    } finally {
+      reference.release();
     }
   }
 

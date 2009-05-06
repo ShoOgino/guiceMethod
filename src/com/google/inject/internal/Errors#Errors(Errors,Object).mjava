@@ -1,5 +1,5 @@
   private Errors(Errors parent, Object source) {
-    this.errors = parent.errors;
+    this.root = parent.root;
     this.parent = parent;
     this.source = source;
   }

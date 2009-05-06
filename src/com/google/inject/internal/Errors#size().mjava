@@ -1,4 +1,4 @@
   public int size() {
-    return errors.size();
+    return root.errors == null ? 0 : root.errors.size();
   }
 

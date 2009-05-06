@@ -1,19 +1,11 @@
   @SuppressWarnings("unchecked")
   public <T> ConstructionContext<T> getConstructionContext(Object key) {
-    if (constructionContexts == null) {
-      constructionContexts = new HashMap<Object, ConstructionContext<?>>();
-      ConstructionContext<T> constructionContext = new ConstructionContext<T>();
+    ConstructionContext<T> constructionContext
+        = (ConstructionContext<T>) constructionContexts.get(key);
+    if (constructionContext == null) {
+      constructionContext = new ConstructionContext<T>();
       constructionContexts.put(key, constructionContext);
-      return constructionContext;
     }
-    else {
-      ConstructionContext<T> constructionContext
-          = (ConstructionContext<T>) constructionContexts.get(key);
-      if (constructionContext == null) {
-        constructionContext = new ConstructionContext<T>();
-        constructionContexts.put(key, constructionContext);
-      }
-      return constructionContext;
-    }
+    return constructionContext;
   }
 

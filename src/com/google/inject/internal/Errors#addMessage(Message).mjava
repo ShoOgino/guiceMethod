@@ -1,5 +1,8 @@
   public Errors addMessage(Message message) {
-    errors.add(message);
+    if (root.errors == null) {
+      root.errors = Lists.newArrayList();
+    }
+    root.errors.add(message);
     return this;
   }
 

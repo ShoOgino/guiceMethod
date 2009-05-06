@@ -1,6 +1,6 @@
   public Errors merge(Collection<Message> messages) {
     for (Message message : messages) {
-      errors.add(merge(message));
+      addMessage(merge(message));
     }
     return this;
   }

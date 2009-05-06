@@ -1,9 +1,9 @@
   public Errors merge(Errors moreErrors) {
-    if (moreErrors.errors == errors) {
+    if (moreErrors.root == root || moreErrors.root.errors == null) {
       return this;
     }
 
-    merge(moreErrors.errors);
+    merge(moreErrors.root.errors);
     return this;
   }
 
