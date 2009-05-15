@@ -1,0 +1,6 @@
+  public ExposureBuilder(Binder binder, Object source, Key<T> key) {
+    this.binder = binder;
+    this.source = source;
+    this.key = key;
+  }
+

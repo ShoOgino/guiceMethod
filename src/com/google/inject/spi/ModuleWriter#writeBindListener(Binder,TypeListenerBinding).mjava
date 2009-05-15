@@ -1,5 +1,0 @@
-  protected void writeBindListener(Binder binder, TypeListenerBinding element) {
-    binder.withSource(element.getSource())
-        .bindListener(element.getTypeMatcher(), element.getListener());
-  }
-

@@ -1,6 +1,0 @@
-  protected <T> void writeBind(Binder binder, Binding<T> element) {
-    ScopedBindingBuilder sbb
-        = bindKeyToTarget(element, binder.withSource(element.getSource()), element.getKey());
-    applyScoping(element, sbb);
-  }
-

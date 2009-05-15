@@ -1,4 +1,0 @@
-    public void annotatedWith(Class<? extends Annotation> annotationType) {
-      binding = bindingBuilder.annotatedWithInternal(annotationType);
-    }
-

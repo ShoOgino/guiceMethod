@@ -1,0 +1,4 @@
+    ModuleWriter(Binder binder) {
+      this.binder = binder;
+    }
+

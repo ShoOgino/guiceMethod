@@ -8,10 +8,7 @@
         };
       }
 
-      BindingBuilder<T> exposeBinding = new BindingBuilder<T>(
-          this, parent.elements, getSource(), key);
-
-      BindingBuilder.ExposureBuilder<T> builder = exposeBinding.usingKeyFrom(privateElements);
+      ExposureBuilder<T> builder = new ExposureBuilder<T>(this, getSource(), key);
       privateElements.addExposureBuilder(builder);
       return builder;
     }

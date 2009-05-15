@@ -113,12 +113,7 @@
       }
 
       public Void visit(ExposedBinding<? extends T> binding) {
-        PrivateElements privateElements = binding.getPrivateElements();
-        ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<T>(key, privateElements);
-        creationListeners.add(exposedKeyFactory);
-        putBinding(new ExposedBindingImpl<T>(
-            injector, source, key, exposedKeyFactory, privateElements));
-        return null;
+        throw new IllegalArgumentException("Cannot apply a non-module element");
       }
 
       public Void visit(ConvertedConstantBinding<? extends T> binding) {

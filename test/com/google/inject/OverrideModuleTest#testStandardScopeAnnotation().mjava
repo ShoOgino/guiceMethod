@@ -1,0 +1,15 @@
+  public void testStandardScopeAnnotation() {
+    final SingleUseScope scope = new SingleUseScope();
+
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bindScope(TestScopeAnnotation.class, scope);
+        bind(String.class).in(TestScopeAnnotation.class);
+      }
+    };
+    assertFalse(scope.used);
+
+    Guice.createInjector(module);
+    assertTrue(scope.used);
+  }
+

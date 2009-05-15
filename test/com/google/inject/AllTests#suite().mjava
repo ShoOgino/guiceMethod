@@ -56,10 +56,10 @@
     // spi
     suite.addTestSuite(BindingTargetVisitorTest.class);
     suite.addTestSuite(ElementsTest.class);
+    suite.addTestSuite(ElementApplyToTest.class);
     suite.addTestSuite(HasDependenciesTest.class);
     suite.addTestSuite(InjectionPointTest.class);
     suite.addTestSuite(ModuleRewriterTest.class);
-    suite.addTestSuite(ModuleWriterTest.class);
     suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(SpiBindingsTest.class);
 
@@ -67,6 +67,7 @@
     // suite.addTestSuite(JmxTest.class); not a testcase
 
     // util
+    suite.addTestSuite(NoopOverrideTest.class);
     suite.addTestSuite(ProvidersTest.class);
     suite.addTestSuite(TypesTest.class);
 

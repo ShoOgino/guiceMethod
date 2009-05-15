@@ -1,4 +1,0 @@
-  protected void writeMessage(Binder binder, Message element) {
-    binder.addError(element);
-  }
-

@@ -1,0 +1,21 @@
+  public void testOverrideModuleAndPrivateModule() {
+    Module exposes5 = new PrivateModule() {
+      protected void configure() {
+        bind(Integer.class).toInstance(5);
+        expose(Integer.class);
+      }
+    };
+
+    Module binds15 = new AbstractModule() {
+      protected void configure() {
+        bind(Integer.class).toInstance(15);
+      }
+    };
+
+    Injector injector = Guice.createInjector(Modules.override(exposes5).with(binds15));
+    assertEquals(15, injector.getInstance(Integer.class).intValue());
+
+    Injector reverse = Guice.createInjector(Modules.override(binds15).with(exposes5));
+    assertEquals(5, reverse.getInstance(Integer.class).intValue());
+  }
+

@@ -25,7 +25,7 @@
 
     // and it should also work fine if we rewrite it
     List<Element> elements = Elements.getElements(module);
-    Module replayed = new ModuleWriter().create(elements);
+    Module replayed = Elements.getModule(elements);
     Injector replayedInjector = Guice.createInjector(replayed);
     assertEquals("A", replayedInjector.getInstance(Key.get(String.class, Names.named("2"))));
   }
