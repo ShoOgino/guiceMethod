@@ -1,3 +1,4 @@
+  /** @since 2.0 */
   public void applyTo(Binder binder) {
     binder.withSource(getSource()).addError(this);
   }

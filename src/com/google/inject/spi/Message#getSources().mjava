@@ -1,6 +1,4 @@
-  /**
-   * @since 2.0
-   */
+  /** @since 2.0 */
   public List<Object> getSources() {
     return sources;
   }
