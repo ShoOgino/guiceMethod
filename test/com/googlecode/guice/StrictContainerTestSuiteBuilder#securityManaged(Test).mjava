@@ -1,0 +1,31 @@
+  /**
+   * Returns a test that sets up and tears down a security manager while it's run.
+   */
+  public Test securityManaged(Test test) {
+    if (test instanceof TestSuite) {
+      TestSuite suite = (TestSuite) test;
+      TestSuite result = new TestSuite(suite.getName());
+
+      @SuppressWarnings("unchecked") // a test suite's elements are tests
+      Enumeration<Test> children = (Enumeration<Test>) suite.tests();
+      for (Test child : Collections.list(children)) {
+        result.addTest(securityManaged(child));
+      }
+      return result;
+
+    } else {
+      return new TestDecorator(test) {
+        public void run(TestResult testResult) {
+          SecurityManager originalSecurityManager = System.getSecurityManager();
+          System.setSecurityManager(securityManager);
+          try {
+            basicRun(testResult);
+          } finally {
+            testResult.endTest(this);
+            System.setSecurityManager(originalSecurityManager);
+          }
+        }
+      };
+    }
+  }
+

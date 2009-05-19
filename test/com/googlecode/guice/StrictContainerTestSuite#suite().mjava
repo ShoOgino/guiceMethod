@@ -23,6 +23,7 @@
     builder.add(BytecodeGenTest.class.getName());
     /*end[AOP]*/
     builder.addSuite(MapMakerTestSuite.class.getName());
-    return builder.build();
+
+    return AllTests.removeSuppressedTests(builder.build(), SUPPRESSED_TEST_NAMES);
   }
 

@@ -79,6 +79,6 @@
     suite.addTest(com.googlecode.guice.StrictContainerTestSuite.suite());
     /*end[AOP]*/
 
-    return suite;
+    return removeSuppressedTests(suite, SUPPRESSED_TEST_NAMES);
   }
 
