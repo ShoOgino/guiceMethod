@@ -6,7 +6,7 @@
     assertEquals(-1, dependency.getParameterIndex());
     assertEquals(Key.get(String.class, named("d")), dependency.getKey());
     assertEquals(true, dependency.isNullable());
-    assertSimilarWhenReserialized(dependency);
+    assertNotSerializable(dependency);
     assertEqualsBothWays(dependency, Dependency.get(Key.get(String.class, named("d"))));
   }
 

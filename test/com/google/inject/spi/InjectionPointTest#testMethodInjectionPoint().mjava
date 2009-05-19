@@ -7,7 +7,7 @@
     assertFalse(injectionPoint.isOptional());
     assertEquals(getClass().getName() + ".bar()", injectionPoint.toString());
     assertEqualsBothWays(injectionPoint, new InjectionPoint(typeLiteral, barMethod));
-    assertSimilarWhenReserialized(injectionPoint);
+    assertNotSerializable(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
     assertEquals("Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=b)]@"
@@ -16,7 +16,7 @@
     assertEquals(0, dependency.getParameterIndex());
     assertEquals(Key.get(String.class, named("b")), dependency.getKey());
     assertEquals(false, dependency.isNullable());
-    assertSimilarWhenReserialized(dependency);
+    assertNotSerializable(dependency);
     assertEqualsBothWays(dependency,
         getOnlyElement(new InjectionPoint(typeLiteral, barMethod).getDependencies()));
   }
