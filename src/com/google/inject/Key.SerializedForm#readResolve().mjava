@@ -1,6 +1,0 @@
-    final Object readResolve() {
-      return annotationInstance != null ? Key.get(type, annotationInstance)
-          : annotationType != null ? Key.get(type, annotationType)
-          : Key.get(type);
-    }
-
