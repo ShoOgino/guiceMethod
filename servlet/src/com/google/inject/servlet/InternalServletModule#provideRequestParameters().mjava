@@ -1,0 +1,5 @@
+  @SuppressWarnings({"unchecked"})
+  @Provides @RequestScoped @RequestParameters Map<String, String[]> provideRequestParameters() {
+    return GuiceFilter.getRequest().getParameterMap();
+  }
+

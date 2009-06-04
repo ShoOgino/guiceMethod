@@ -1,0 +1,4 @@
+  @Provides HttpSession provideHttpSession() {
+    return GuiceFilter.getRequest().getSession();
+  }
+
