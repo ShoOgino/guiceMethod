@@ -8,7 +8,7 @@
         (Collection) injector.state.getExplicitBindingsThisLevel().values(),
         injector.jitBindings.values()));
     for (final BindingImpl<?> binding : candidateBindings) {
-      if (binding.getScoping().isEagerSingleton(stage)) {
+      if (isEagerSingleton(injector, binding, stage)) {
         try {
           injector.callInContext(new ContextualCallable<Void>() {
             Dependency<?> dependency = Dependency.get(binding.getKey());

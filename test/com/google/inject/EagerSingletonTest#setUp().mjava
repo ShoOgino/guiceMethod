@@ -1,0 +1,6 @@
+  @Override public void setUp() {
+    A.instanceCount = 0;
+    B.instanceCount = 0;
+    C.instanceCount = 0;
+  }
+

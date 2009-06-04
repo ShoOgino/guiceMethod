@@ -1,0 +1,11 @@
+  public void testChildEagerSingletons() {
+    Injector parent = Guice.createInjector(Stage.PRODUCTION);
+    parent.createChildInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(D.class).to(C.class);
+      }
+    });
+
+    assertEquals(1, C.instanceCount);
+  }
+

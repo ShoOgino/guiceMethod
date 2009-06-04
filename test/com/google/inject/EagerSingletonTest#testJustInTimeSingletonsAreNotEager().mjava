@@ -1,0 +1,6 @@
+  public void testJustInTimeSingletonsAreNotEager() {
+    Injector injector = Guice.createInjector(Stage.PRODUCTION);
+    injector.getProvider(B.class);
+    assertEquals(0, B.instanceCount);
+  }
+

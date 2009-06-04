@@ -1,7 +1,4 @@
   public void testJustInTimeEagerSingletons() {
-    A.instanceCount = 0;
-    B.instanceCount = 0;
-    C.instanceCount = 0;
     Guice.createInjector(Stage.PRODUCTION, new AbstractModule() {
       protected void configure() {
         // create a just-in-time binding for A
