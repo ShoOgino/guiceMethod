@@ -1,6 +1,0 @@
-  public ExposedBindingImpl(Object source, Key<T> key, Scoping scoping,
-      PrivateElements privateElements) {
-    super(source, key, scoping);
-    this.privateElements = privateElements;
-  }
-

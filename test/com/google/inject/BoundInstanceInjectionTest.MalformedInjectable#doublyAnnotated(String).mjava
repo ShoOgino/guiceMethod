@@ -1,0 +1,2 @@
+    @Inject void doublyAnnotated(@Named("a") @Another String unused) {}
+

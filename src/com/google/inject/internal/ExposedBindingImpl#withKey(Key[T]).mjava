@@ -1,4 +1,0 @@
-  public ExposedBindingImpl<T> withKey(Key<T> key) {
-    return new ExposedBindingImpl<T>(getSource(), key, getScoping(), privateElements);
-  }
-

@@ -1,4 +1,0 @@
-  private PrivateElements getPrivateElements() {
-    return privateElements;
-  }
-

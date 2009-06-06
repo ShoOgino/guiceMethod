@@ -1,0 +1,16 @@
+  public void testUserReportedErrorsAreAlsoLogged() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          addError(new Message(ImmutableList.of(), "Whoops!", new IllegalArgumentException()));
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+    }
+
+    LogRecord logRecord = Iterables.getOnlyElement(this.logRecords);
+    assertContains(logRecord.getMessage(),
+        "An exception was caught and reported. Message: java.lang.IllegalArgumentException");
+  }
+

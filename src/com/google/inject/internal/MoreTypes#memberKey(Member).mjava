@@ -2,10 +2,7 @@
     checkNotNull(member, "member");
 
     /*if[AOP]*/
-    if (member instanceof MemberImpl) {
-      return ((MemberImpl) member).memberKey;
-
-    } else if (member instanceof Field) {
+    if (member instanceof Field) {
       return member.getName();
 
     } else if (member instanceof Method) {

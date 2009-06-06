@@ -4,10 +4,7 @@
   public static Class<? extends Member> memberType(Member member) {
     checkNotNull(member, "member");
 
-    if (member instanceof MemberImpl) {
-      return ((MemberImpl) member).memberType;
-
-    } else if (member instanceof Field) {
+    if (member instanceof Field) {
       return Field.class;
 
     } else if (member instanceof Method) {
