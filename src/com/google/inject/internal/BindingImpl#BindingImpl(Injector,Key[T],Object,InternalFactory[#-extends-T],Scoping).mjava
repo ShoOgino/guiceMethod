@@ -1,9 +1,0 @@
-  public BindingImpl(Injector injector, Key<T> key, Object source,
-      InternalFactory<? extends T> internalFactory, Scoping scoping) {
-    this.injector = injector;
-    this.key = key;
-    this.source = source;
-    this.internalFactory = internalFactory;
-    this.scoping = scoping;
-  }
-

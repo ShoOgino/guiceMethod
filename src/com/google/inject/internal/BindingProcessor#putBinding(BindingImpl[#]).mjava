@@ -1,0 +1,20 @@
+  private void putBinding(BindingImpl<?> binding) {
+    Key<?> key = binding.getKey();
+
+    Class<?> rawType = key.getTypeLiteral().getRawType();
+    if (FORBIDDEN_TYPES.contains(rawType)) {
+      errors.cannotBindToGuiceType(rawType.getSimpleName());
+      return;
+    }
+
+    Binding<?> original = injector.state.getExplicitBinding(key);
+    if (original != null && !isOkayDuplicate(original, binding)) {
+      errors.bindingAlreadySet(key, original.getSource());
+      return;
+    }
+
+    // prevent the parent from creating a JIT binding for this key
+    injector.state.parent().blacklist(key);
+    injector.state.putBinding(key, binding);
+  }
+

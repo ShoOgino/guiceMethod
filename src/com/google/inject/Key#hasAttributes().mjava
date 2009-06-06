@@ -1,7 +1,7 @@
   /**
    * Returns true if this key has annotation attributes.
    */
-  boolean hasAttributes() {
+  public boolean hasAttributes() {
     return annotationStrategy.hasAttributes();
   }
 

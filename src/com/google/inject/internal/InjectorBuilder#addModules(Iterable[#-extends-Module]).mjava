@@ -1,0 +1,5 @@
+  public InjectorBuilder addModules(Iterable<? extends Module> modules) {
+    shellBuilder.addModules(modules);
+    return this;
+  }
+

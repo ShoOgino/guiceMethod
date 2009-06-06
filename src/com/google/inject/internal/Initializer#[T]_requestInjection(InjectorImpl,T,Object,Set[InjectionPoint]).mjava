@@ -1,0 +1,22 @@
+  /**
+   * Registers an instance for member injection when that step is performed.
+   *
+   * @param instance an instance that optionally has members to be injected (each annotated with
+   *      @Inject).
+   * @param source the source location that this injection was requested
+   */
+  <T> Initializable<T> requestInjection(InjectorImpl injector, T instance, Object source,
+      Set<InjectionPoint> injectionPoints) {
+    checkNotNull(source);
+
+    // short circuit if the object has no injections
+    if (instance == null
+        || (injectionPoints.isEmpty() && !injector.membersInjectorStore.hasTypeListeners())) {
+      return Initializables.of(instance);
+    }
+
+    InjectableReference<T> initializable = new InjectableReference<T>(injector, instance, source);
+    pendingInjection.put(instance, initializable);
+    return initializable;
+  }
+

@@ -1,0 +1,66 @@
+  /**
+   * Returns a new just-in-time binding created by resolving {@code key}. The strategies used to
+   * create just-in-time bindings are:
+   * <ol>
+   *   <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
+   *     to the binding for {@code T}.
+   *   <li>Converting constants.
+   *   <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
+   *   <li>The constructor of the raw type. Only for unannotated keys.
+   * </ol>
+   *
+   * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
+   */
+  private <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors)
+      throws ErrorsException {
+    int numErrorsBefore = errors.size();
+
+    if (state.isBlacklisted(key)) {
+      throw errors.childBindingAlreadySet(key).toException();
+    }
+
+    // Handle cases where T is a Provider<?>.
+    if (isProvider(key)) {
+      // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
+      // createProviderBinding() will return BindingImpl<Provider<X>>.
+      @SuppressWarnings("unchecked")
+      BindingImpl<T> binding = (BindingImpl<T>) createProviderBinding((Key) key, errors);
+      return binding;
+    }
+
+    // Handle cases where T is a MembersInjector<?>
+    if (isMembersInjector(key)) {
+      // These casts are safe. T extends MembersInjector<X> and that given Key<MembersInjector<X>>,
+      // createMembersInjectorBinding() will return BindingImpl<MembersInjector<X>>.
+      @SuppressWarnings("unchecked")
+      BindingImpl<T> binding = (BindingImpl<T>) createMembersInjectorBinding((Key) key, errors);
+      return binding;
+    }
+
+    // Try to convert a constant string binding to the requested type.
+    BindingImpl<T> convertedBinding = convertConstantStringBinding(key, errors);
+    if (convertedBinding != null) {
+      return convertedBinding;
+    }
+
+    // If the key has an annotation...
+    if (key.getAnnotationType() != null) {
+      // Look for a binding without annotation attributes or return null.
+      if (key.hasAttributes()) {
+        try {
+          Errors ignored = new Errors();
+          return getBindingOrThrow(key.withoutAttributes(), ignored);
+        } catch (ErrorsException ignored) {
+          // throw with a more appropriate message below
+        }
+      }
+      throw errors.missingImplementation(key).toException();
+    }
+
+    Object source = key.getTypeLiteral().getRawType();
+    BindingImpl<T> binding = createUnitializedBinding(key, Scoping.UNSCOPED, source, errors);
+    errors.throwIfNewErrors(numErrorsBefore);
+    initializeBinding(binding, errors);
+    return binding;
+  }
+

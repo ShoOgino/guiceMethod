@@ -1,4 +1,0 @@
-  public DeferredLookups(InjectorImpl injector) {
-    this.injector = injector;
-  }
-

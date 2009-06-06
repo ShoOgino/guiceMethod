@@ -1,5 +1,0 @@
-  public ExposedKeyFactory(Key<T> key, PrivateElements privateElements) {
-    this.key = key;
-    this.privateElements = privateElements;
-  }
-

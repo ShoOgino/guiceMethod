@@ -1,0 +1,4 @@
+  public V visit(InjectionRequest<?> injectionRequest) {
+    return visitOther(injectionRequest);
+  }
+

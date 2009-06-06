@@ -1,0 +1,6 @@
+  ImmutableList<InjectionListener<? super T>> getInjectionListeners() {
+    return injectionListeners == null
+        ? ImmutableList.<InjectionListener<? super T>>of()
+        : ImmutableList.copyOf(injectionListeners);
+  }
+

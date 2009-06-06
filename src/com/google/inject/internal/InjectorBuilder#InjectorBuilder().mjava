@@ -1,0 +1,5 @@
+  public InjectorBuilder() {
+    injectionRequestProcessor = new InjectionRequestProcessor(errors, initializer);
+    bindingProcesor = new BindingProcessor(errors, initializer);
+  }
+

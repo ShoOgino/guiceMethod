@@ -1,0 +1,47 @@
+  /** Creates a binding for a type annotated with @ProvidedBy. */
+  <T> BindingImpl<T> createProvidedByBinding(Key<T> key, Scoping scoping,
+      ProvidedBy providedBy, Errors errors) throws ErrorsException {
+    final Class<?> rawType = key.getTypeLiteral().getRawType();
+    final Class<? extends Provider<?>> providerType = providedBy.value();
+
+    // Make sure it's not the same type. TODO: Can we check for deeper loops?
+    if (providerType == rawType) {
+      throw errors.recursiveProviderType().toException();
+    }
+
+    // Assume the provider provides an appropriate type. We double check at runtime.
+    @SuppressWarnings("unchecked")
+    final Key<? extends Provider<T>> providerKey
+        = (Key<? extends Provider<T>>) Key.get(providerType);
+    final BindingImpl<? extends Provider<?>> providerBinding
+        = getBindingOrThrow(providerKey, errors);
+
+    InternalFactory<T> internalFactory = new InternalFactory<T>() {
+      public T get(Errors errors, InternalContext context, Dependency dependency)
+          throws ErrorsException {
+        errors = errors.withSource(providerKey);
+        Provider<?> provider = providerBinding.getInternalFactory().get(
+            errors, context, dependency);
+        try {
+          Object o = provider.get();
+          if (o != null && !rawType.isInstance(o)) {
+            throw errors.subtypeNotProvided(providerType, rawType).toException();
+          }
+          @SuppressWarnings("unchecked") // protected by isInstance() check above
+          T t = (T) o;
+          return t;
+        } catch (RuntimeException e) {
+          throw errors.errorInProvider(e).toException();
+        }
+      }
+    };
+
+    return new LinkedProviderBindingImpl<T>(
+        this,
+        key,
+        rawType /* source */,
+        Scoping.<T>scope(key, this, internalFactory, scoping),
+        scoping,
+        providerKey);
+  }
+

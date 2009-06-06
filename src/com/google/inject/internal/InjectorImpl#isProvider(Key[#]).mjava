@@ -1,0 +1,5 @@
+  /** Returns true if the key type is Provider (but not a subclass of Provider). */
+  private static boolean isProvider(Key<?> key) {
+    return key.getTypeLiteral().getRawType().equals(Provider.class);
+  }
+

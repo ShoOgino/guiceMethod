@@ -1,0 +1,6 @@
+  private ConstructorBindingImpl(InjectorImpl injector, Key<T> key, Object source,
+      InternalFactory<? extends T> scopedFactory, Scoping scoping, Factory<T> factory) {
+    super(injector, key, source, scopedFactory, scoping);
+    this.factory = factory;
+  }
+

@@ -1,4 +1,0 @@
-  private <T> void validateKey(Object source, Key<T> key) {
-    Annotations.checkForMisplacedScopeAnnotations(key.getRawType(), source, errors);
-  }
-

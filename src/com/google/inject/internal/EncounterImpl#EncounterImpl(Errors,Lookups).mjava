@@ -1,0 +1,5 @@
+  EncounterImpl(Errors errors, Lookups lookups) {
+    this.errors = errors;
+    this.lookups = lookups;
+  }
+

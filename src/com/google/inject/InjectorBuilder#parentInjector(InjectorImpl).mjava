@@ -1,9 +1,0 @@
-  /**
-   * Sets the parent of the injector to-be-constructed. As a side effect, this sets this injector's
-   * stage to the stage of {@code parent}.
-   */
-  InjectorBuilder parentInjector(InjectorImpl parent) {
-    shellBuilder.parent(parent);
-    return stage(parent.getInstance(Stage.class));
-  }
-

@@ -1,4 +1,0 @@
-  public Boolean visit(InjectionRequest injectionRequest) {
-    return false;
-  }
-

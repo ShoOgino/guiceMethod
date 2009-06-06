@@ -1,0 +1,8 @@
+  SingleMethodInjector(InjectorImpl injector, InjectionPoint injectionPoint, Errors errors)
+      throws ErrorsException {
+    this.injectionPoint = injectionPoint;
+    final Method method = (Method) injectionPoint.getMember();
+    methodInvoker = createMethodInvoker(method);
+    parameterInjectors = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
+  }
+
