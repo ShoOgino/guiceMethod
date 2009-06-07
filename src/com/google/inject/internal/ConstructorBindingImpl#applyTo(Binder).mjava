@@ -1,4 +1,5 @@
   public void applyTo(Binder binder) {
-    throw new UnsupportedOperationException("This element represents a synthetic binding.");
+    getScoping().applyTo(binder.withSource(getSource())
+        .bind(getKey()).toConstructor((Constructor) getConstructor().getMember()));
   }
 

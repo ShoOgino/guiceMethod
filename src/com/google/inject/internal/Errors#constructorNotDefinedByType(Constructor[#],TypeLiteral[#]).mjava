@@ -1,0 +1,4 @@
+  public Errors constructorNotDefinedByType(Constructor<?> constructor, TypeLiteral<?> type) {
+    return addMessage("%s does not define %s", type, constructor);
+  }
+

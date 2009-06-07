@@ -1,0 +1,6 @@
+  private void copyErrorsToBinder(ConfigurationException e) {
+    for (Message message : e.getErrorMessages()) {
+      binder.addError(message);
+    }
+  }
+

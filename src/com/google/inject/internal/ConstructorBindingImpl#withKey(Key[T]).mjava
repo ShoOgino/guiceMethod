@@ -1,0 +1,5 @@
+  @Override protected BindingImpl<T> withKey(Key<T> key) {
+    return new ConstructorBindingImpl<T>(
+        null, key, getSource(), factory, getScoping(), factory);
+  }
+

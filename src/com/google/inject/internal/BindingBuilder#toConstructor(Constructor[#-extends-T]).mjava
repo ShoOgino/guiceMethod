@@ -1,0 +1,31 @@
+  public ScopedBindingBuilder toConstructor(Constructor<? extends T> constructor) {
+    checkNotNull(constructor, "constructor");
+    checkNotTargetted();
+
+    BindingImpl<T> base = getBinding();
+    TypeLiteral<T> keyType = base.getKey().getTypeLiteral();
+    TypeLiteral<? extends T> toConstruct = (constructor.getDeclaringClass() == keyType.getRawType())
+        ? keyType
+        : TypeLiteral.get(constructor.getDeclaringClass());
+
+    Set<InjectionPoint> injectionPoints;
+    try {
+      injectionPoints = InjectionPoint.forInstanceMethodsAndFields(toConstruct);
+    } catch (ConfigurationException e) {
+      copyErrorsToBinder(e);
+      injectionPoints = e.getPartialValue();
+    }
+
+    try {
+      @SuppressWarnings("unchecked") // safe; constructor is a subtype of toConstruct
+      InjectionPoint constructorPoint = InjectionPoint.forConstructor((Constructor) constructor,
+          toConstruct);
+      setBinding(new ConstructorBindingImpl<T>(base.getKey(), base.getSource(), base.getScoping(),
+          constructorPoint, injectionPoints));
+    } catch (ConfigurationException e) {
+      copyErrorsToBinder(e);
+    }
+
+    return this;
+  }
+

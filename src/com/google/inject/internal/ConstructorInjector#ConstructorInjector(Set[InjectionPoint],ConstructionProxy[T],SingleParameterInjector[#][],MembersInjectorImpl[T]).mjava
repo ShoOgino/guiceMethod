@@ -1,9 +1,8 @@
-  ConstructorInjector(ImmutableSet<InjectionPoint> injectableMembers,
+  ConstructorInjector(Set<InjectionPoint> injectableMembers,
       ConstructionProxy<T> constructionProxy,
       SingleParameterInjector<?>[] parameterInjectors,
-      MembersInjectorImpl<T> membersInjector)
-      throws ErrorsException {
-    this.injectableMembers = injectableMembers;
+      MembersInjectorImpl<T> membersInjector) {
+    this.injectableMembers = ImmutableSet.copyOf(injectableMembers);
     this.constructionProxy = constructionProxy;
     this.parameterInjectors = parameterInjectors;
     this.membersInjector = membersInjector;

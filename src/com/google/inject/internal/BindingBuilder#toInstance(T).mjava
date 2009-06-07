@@ -7,9 +7,7 @@
       try {
         injectionPoints = InjectionPoint.forInstanceMethodsAndFields(instance.getClass());
       } catch (ConfigurationException e) {
-        for (Message message : e.getErrorMessages()) {
-          binder.addError(message);
-        }
+        copyErrorsToBinder(e);
         injectionPoints = e.getPartialValue();
       }
     } else {

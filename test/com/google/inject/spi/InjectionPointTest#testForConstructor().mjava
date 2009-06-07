@@ -1,0 +1,26 @@
+  public void testForConstructor() throws NoSuchMethodException {
+    Constructor<HashSet> constructor = HashSet.class.getConstructor();
+    TypeLiteral<HashSet<String>> hashSet = new TypeLiteral<HashSet<String>>() {};
+
+    InjectionPoint injectionPoint = InjectionPoint.forConstructor(constructor, hashSet);
+    assertSame(constructor, injectionPoint.getMember());
+    assertEquals(ImmutableList.<Dependency>of(), injectionPoint.getDependencies());
+    assertFalse(injectionPoint.isOptional());
+
+    try {
+      InjectionPoint.forConstructor(constructor, new TypeLiteral<LinkedHashSet<String>>() {});
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), "java.util.LinkedHashSet<java.lang.String>",
+          " does not define java.util.HashSet.<init>()",
+          "  while locating java.util.LinkedHashSet<java.lang.String>");
+    }
+
+    try {
+      InjectionPoint.forConstructor((Constructor) constructor, new TypeLiteral<Set<String>>() {});
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(), "java.util.Set<java.lang.String>",
+          " does not define java.util.HashSet.<init>()",
+          "  while locating java.util.Set<java.lang.String>");
+    }
+  }
+
