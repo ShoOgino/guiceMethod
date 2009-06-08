@@ -1,5 +1,5 @@
-  public void testToInstanceBinding() {
-    checkInjector(
+  public void testBindToInstanceScope() {
+    checkModule(
         new AbstractModule() {
           protected void configure() {
             bind(String.class).toInstance("A");
@@ -8,15 +8,7 @@
 
         new FailingElementVisitor() {
           @Override public <T> Void visit(Binding<T> binding) {
-            assertTrue(binding instanceof InstanceBinding);
-            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
             assertEquals(Key.get(String.class), binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(InstanceBinding<? extends T> binding) {
-                assertEquals("A", binding.getInstance());
-                return null;
-              }
-            });
             binding.acceptScopingVisitor(new FailingBindingScopingVisitor() {
               public Void visitEagerSingleton() {
                 return null;
@@ -25,6 +17,6 @@
             return null;
           }
         }
-    );
+      );
   }
 

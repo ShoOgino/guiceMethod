@@ -17,6 +17,6 @@
 
     BindingImpl<T> base = getBinding();
     setBinding(new InstanceBindingImpl<T>(
-        base.getSource(), base.getKey(), base.getScoping(), injectionPoints, instance));
+        base.getSource(), base.getKey(), Scoping.EAGER_SINGLETON, injectionPoints, instance));
   }
 
