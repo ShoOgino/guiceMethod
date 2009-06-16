@@ -3,7 +3,7 @@
     inits = 0;
     doFilters = 0;
     destroys = 0;
-
+    control = EasyMock.createControl();
     GuiceFilter.reset();
   }
 
