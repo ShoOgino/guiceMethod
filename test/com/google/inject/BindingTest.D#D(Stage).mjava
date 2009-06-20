@@ -1,4 +1,4 @@
-    public C(Stage stage) {
+    public D(Stage stage) {
       this.stage = stage;
     }
 
