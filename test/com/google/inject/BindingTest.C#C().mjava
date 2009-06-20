@@ -1,0 +1,4 @@
+    @Inject C() {
+      this.stage = null;
+    }
+

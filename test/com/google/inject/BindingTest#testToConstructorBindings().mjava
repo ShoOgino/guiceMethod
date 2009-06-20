@@ -1,0 +1,12 @@
+  public void testToConstructorBindings() throws NoSuchMethodException {
+    final Constructor<C> constructor = C.class.getConstructor(Stage.class);
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(C.class).toConstructor(constructor);
+      }
+    });
+    
+    assertEquals(Stage.DEVELOPMENT, injector.getInstance(C.class).stage);
+  }
+

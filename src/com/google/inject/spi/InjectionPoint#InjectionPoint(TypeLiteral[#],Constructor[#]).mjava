@@ -1,6 +1,8 @@
-  InjectionPoint(TypeLiteral<?> type, Constructor<?> constructor) {
+  InjectionPoint(TypeLiteral<?> declaringType, Constructor<?> constructor) {
     this.member = constructor;
+    this.declaringType = declaringType;
     this.optional = false;
-    this.dependencies = forMember(constructor, type, constructor.getParameterAnnotations());
+    this.dependencies = forMember(
+        constructor, declaringType, constructor.getParameterAnnotations());
   }
 

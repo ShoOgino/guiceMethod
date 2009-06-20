@@ -1,0 +1,4 @@
+    public C(Stage stage) {
+      this.stage = stage;
+    }
+

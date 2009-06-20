@@ -1,9 +1,10 @@
   public ConstructorBindingImpl(Key<T> key, Object source, Scoping scoping,
-      InjectionPoint constructorInjector, Set<InjectionPoint> injectionPoints) {
+      InjectionPoint constructorInjectionPoint, Set<InjectionPoint> injectionPoints) {
     super(source, key, scoping);
     this.factory = new Factory<T>();
     ConstructionProxy<T> constructionProxy
-        = new DefaultConstructionProxyFactory<T>(constructorInjector).create();
+        = new DefaultConstructionProxyFactory<T>(constructorInjectionPoint).create();
+    this.constructorInjectionPoint = constructorInjectionPoint;
     factory.constructorInjector = new ConstructorInjector<T>(
         injectionPoints, constructionProxy, null, null);
   }

@@ -1,0 +1,9 @@
+  /**
+   * Returns the generic type that defines this injection point. If the member exists on a
+   * parameterized type, the result will include more type information than the member's {@link
+   * Member#getDeclaringClass() raw declaring class}.
+   */
+  public TypeLiteral<?> getDeclaringType() {
+    return declaringType;
+  }
+

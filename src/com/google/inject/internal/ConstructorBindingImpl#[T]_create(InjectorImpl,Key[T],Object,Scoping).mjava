@@ -1,9 +1,0 @@
-  static <T> ConstructorBindingImpl<T> create(
-      InjectorImpl injector, Key<T> key, Object source, Scoping scoping) {
-    Factory<T> factoryFactory = new Factory<T>();
-    InternalFactory<? extends T> scopedFactory
-        = Scoping.scope(key, injector, factoryFactory, scoping);
-    return new ConstructorBindingImpl<T>(
-        injector, key, source, scopedFactory, scoping, factoryFactory);
-  }
-

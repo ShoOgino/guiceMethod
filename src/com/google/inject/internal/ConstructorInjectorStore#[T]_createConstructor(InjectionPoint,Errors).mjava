@@ -1,18 +1,13 @@
-  private <T> ConstructorInjector<T> createConstructor(TypeLiteral<T> type, Errors errors)
+  private <T> ConstructorInjector<T> createConstructor(InjectionPoint injectionPoint, Errors errors)
       throws ErrorsException {
     int numErrorsBefore = errors.size();
 
-    InjectionPoint injectionPoint;
-    try {
-      injectionPoint = InjectionPoint.forConstructorOf(type);
-    } catch (ConfigurationException e) {
-      errors.merge(e.getErrorMessages());
-      throw errors.toException();
-    }
-
     SingleParameterInjector<?>[] constructorParameterInjectors
         = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
-    MembersInjectorImpl<T> membersInjector = injector.membersInjectorStore.get(type, errors);
+
+    @SuppressWarnings("unchecked") // the injector type agrees with the injection point type
+    MembersInjectorImpl<T> membersInjector = (MembersInjectorImpl<T>) injector.membersInjectorStore
+        .get(injectionPoint.getDeclaringType(), errors);
 
     /*if[AOP]*/
     ImmutableList<MethodAspect> injectorAspects = injector.state.getMethodAspects();

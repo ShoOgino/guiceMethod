@@ -12,7 +12,6 @@
           .throwConfigurationExceptionIfErrorsExist();
     }
 
-    // TODO: verify that constructor is valid? (defined on a non-abstract class, etc.)
     return new InjectionPoint(type, constructor);
   }
 
