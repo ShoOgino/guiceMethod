@@ -1,0 +1,24 @@
+  public void testToConstructorAndScopes() throws NoSuchMethodException {
+    final Constructor<F> constructor = F.class.getConstructor(Stage.class);
+
+    final Key<Object> d = Key.get(Object.class, named("D")); // default scoping
+    final Key<Object> s = Key.get(Object.class, named("S")); // singleton
+    final Key<Object> n = Key.get(Object.class, named("N")); // "N" instances
+    final Key<Object> r = Key.get(Object.class, named("R")); // a regular binding
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(d).toConstructor(constructor);
+        bind(s).toConstructor(constructor).in(Singleton.class);
+        bind(n).toConstructor(constructor).in(Scopes.NO_SCOPE);
+        bind(r).to(F.class);
+      }
+    });
+
+    assertDistinct(injector, 1, d, d, d, d);
+    assertDistinct(injector, 1, s, s, s, s);
+    assertDistinct(injector, 4, n, n, n, n);
+    assertDistinct(injector, 1, r, r, r, r);
+    assertDistinct(injector, 4, d, d, r, r, s, s, n);
+  }
+

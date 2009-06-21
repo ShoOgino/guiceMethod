@@ -1,0 +1,4 @@
+    @Inject public F(Stage stage) {
+      this.stage = stage;
+    }
+

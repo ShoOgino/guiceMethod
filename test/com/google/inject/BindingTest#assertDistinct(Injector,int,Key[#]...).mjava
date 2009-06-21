@@ -1,0 +1,8 @@
+  public void assertDistinct(Injector injector, int expectedCount, Key<?>... keys) {
+    ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
+    for (Key<?> k : keys) {
+      builder.add(injector.getInstance(k));
+    }
+    assertEquals(expectedCount, builder.build().size());
+  }
+

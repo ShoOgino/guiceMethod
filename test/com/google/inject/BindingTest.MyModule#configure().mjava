@@ -16,13 +16,13 @@
 
       // Provider.
       bind(Foo.class)
-          .annotatedWith(Names.named("provider"))
+          .annotatedWith(named("provider"))
           .toProvider(FooProvider.class);
 
       // Class.
       bind(Bar.class).in(Scopes.SINGLETON);
 
       // Constant.
-      bindConstant().annotatedWith(Names.named("name")).to("Bob");
+      bindConstant().annotatedWith(named("name")).to("Bob");
     }
 

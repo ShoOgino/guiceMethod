@@ -1,0 +1,4 @@
+    private E(Stage stage) {
+      this.stage = stage;
+    }
+
