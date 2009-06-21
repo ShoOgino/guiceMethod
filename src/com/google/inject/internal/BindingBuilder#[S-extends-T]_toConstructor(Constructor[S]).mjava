@@ -1,0 +1,4 @@
+  public <S extends T> ScopedBindingBuilder toConstructor(Constructor<S> constructor) {
+    return toConstructor(constructor, TypeLiteral.get(constructor.getDeclaringClass()));
+  }
+

@@ -11,6 +11,8 @@
     Key<?> key = null;
     try {
       key = Annotations.getKey(declaringType.getFieldType(field), field, annotations, errors);
+    } catch (ConfigurationException e) {
+      errors.merge(e.getErrorMessages());
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }

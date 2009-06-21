@@ -1,0 +1,23 @@
+  public void testToConstructorBindingsOnParameterizedTypes() throws NoSuchMethodException {
+    final Constructor<C> constructor = C.class.getConstructor(Stage.class, Object.class);
+    final Key<Object> s = new Key<Object>(named("s")) {};
+    final Key<Object> i = new Key<Object>(named("i")) {};
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(s).toConstructor(constructor, new TypeLiteral<C<Stage>>() {});
+        bind(i).toConstructor(constructor, new TypeLiteral<C<Injector>>() {});
+      }
+    });
+
+    C<Stage> one = (C<Stage>) injector.getInstance(s);
+    assertEquals(Stage.DEVELOPMENT, one.stage);
+    assertEquals(Stage.DEVELOPMENT, one.t);
+    assertEquals(Stage.DEVELOPMENT, one.anotherT);
+
+    C<Injector> two = (C<Injector>) injector.getInstance(i);
+    assertEquals(Stage.DEVELOPMENT, two.stage);
+    assertEquals(injector, two.t);
+    assertEquals(injector, two.anotherT);
+  }
+

@@ -1,0 +1,5 @@
+  /**
+   * See the EDSL examples at {@link com.google.inject.Binder}.
+   */
+  <S extends T> ScopedBindingBuilder toConstructor(Constructor<S> constructor);
+

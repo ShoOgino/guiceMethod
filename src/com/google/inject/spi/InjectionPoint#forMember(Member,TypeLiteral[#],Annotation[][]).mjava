@@ -12,6 +12,8 @@
         Key<?> key = Annotations.getKey(parameterType, member, parameterAnnotations, errors);
         dependencies.add(newDependency(key, Nullability.allowsNull(parameterAnnotations), index));
         index++;
+      } catch (ConfigurationException e) {
+        errors.merge(e.getErrorMessages());
       } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
