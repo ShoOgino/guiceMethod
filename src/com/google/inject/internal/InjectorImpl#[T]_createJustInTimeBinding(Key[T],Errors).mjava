@@ -58,7 +58,7 @@
     }
 
     Object source = key.getTypeLiteral().getRawType();
-    BindingImpl<T> binding = createUnitializedBinding(key, Scoping.UNSCOPED, source, errors);
+    BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors);
     errors.throwIfNewErrors(numErrorsBefore);
     initializeBinding(binding, errors);
     return binding;
