@@ -1,0 +1,9 @@
+    public <T> Provider<T> scope(Key<T> key, final Provider<T> unscoped) {
+      return new Provider<T>() {
+        public T get() {
+          bProvider.get();
+          return unscoped.get();
+        }
+      };
+    }
+
