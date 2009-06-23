@@ -2,7 +2,7 @@
       Set<HttpServlet> initializedSoFar) throws ServletException {
 
     // This absolutely must be a singleton, and so is only initialized once.
-    if (!isSingletonBinding(injector.getBinding(servletKey))) {
+    if (!Scopes.isSingleton(injector.getBinding(servletKey))) {
       throw new ServletException("Servlets must be bound as singletons. "
         + servletKey + " was not bound in singleton scope.");
     }

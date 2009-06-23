@@ -1,0 +1,11 @@
+  ImmutableMap<Key<?>, Binding<?>> indexBindings(Iterable<Element> elements) {
+    ImmutableMap.Builder<Key<?>, Binding<?>> builder = ImmutableMap.builder();
+    for (Element element : elements) {
+      if (element instanceof Binding) {
+        Binding<?> binding = (Binding<?>) element;
+        builder.put(binding.getKey(), binding);
+      }
+    }
+    return builder.build();
+  }
+
