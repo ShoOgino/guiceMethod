@@ -1,0 +1,5 @@
+    public MapBinder<K, V> permitDuplicates() {
+      entrySetBinder.permitDuplicates();
+      return this;
+    }
+

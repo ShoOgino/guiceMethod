@@ -1,0 +1,9 @@
+  /**
+   * Configures the bound map to silently discard duplicate entries. When multiple equal keys are
+   * bound, the value that gets included is arbitrary. When multible modules contribute elements to
+   * the map, this configuration option impacts all of them.
+   *
+   * @return this map binder
+   */
+  public abstract MapBinder<K, V> permitDuplicates();
+

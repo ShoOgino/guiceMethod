@@ -11,12 +11,14 @@
         private Map<K, Provider<V>> providerMap;
 
         @SuppressWarnings("unused")
-        @Inject void initialize() {
+        @Inject void initialize(Injector injector) {
           RealMapBinder.this.binder = null;
+          boolean permitDuplicates = entrySetBinder.permitsDuplicates(injector);
 
           Map<K, Provider<V>> providerMapMutable = new LinkedHashMap<K, Provider<V>>();
           for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
-            checkConfiguration(providerMapMutable.put(entry.getKey(), entry.getValue()) == null,
+            Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
+            checkConfiguration(previous == null || permitDuplicates,
                 "Map injection failed due to duplicated key \"%s\"", entry.getKey());
           }
 

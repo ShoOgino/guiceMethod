@@ -1,0 +1,9 @@
+  /**
+   * Configures the bound set to silently discard duplicate elements. When multiple equal values are
+   * bound, the one that gets included is arbitrary. When multible modules contribute elements to
+   * the set, this configuration option impacts all of them.
+   *
+   * @return this multibinder
+   */
+  public abstract Multibinder<T> permitDuplicates();
+

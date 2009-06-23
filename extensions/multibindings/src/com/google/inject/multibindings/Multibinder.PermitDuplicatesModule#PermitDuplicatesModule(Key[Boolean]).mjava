@@ -1,0 +1,4 @@
+    PermitDuplicatesModule(Key<Boolean> key) {
+      this.key = key;
+    }
+

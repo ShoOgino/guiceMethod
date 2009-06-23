@@ -17,6 +17,7 @@
       }
 
       this.dependencies = ImmutableSet.copyOf(dependencies);
+      this.permitDuplicates = permitsDuplicates(injector);
       this.binder = null;
     }
 
