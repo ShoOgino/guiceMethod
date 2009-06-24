@@ -1,17 +1,20 @@
   public final void testFilterInitAndConfig() throws ServletException {
 
     Injector injector = createMock(Injector.class);
+    Binding binding = createMock(Binding.class);
 
     final MockFilter mockFilter = new MockFilter();
 
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
+        .andReturn(true);
     expect(injector.getBinding(Key.get(Filter.class)))
-        .andReturn(createMock(Binding.class));
+        .andReturn(binding);
 
     expect(injector.getInstance(Key.get(Filter.class)))
         .andReturn(mockFilter)
         .anyTimes();
 
-    replay(injector);
+    replay(binding, injector);
 
     //some init params
     //noinspection SSBasedInspection

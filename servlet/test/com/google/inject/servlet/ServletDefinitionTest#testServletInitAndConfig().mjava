@@ -1,15 +1,18 @@
   public final void testServletInitAndConfig() throws ServletException {
     Injector injector = createMock(Injector.class);
+    Binding binding = createMock(Binding.class);
 
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
+        .andReturn(true);
     expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(createMock(Binding.class));
+        .andReturn(binding);
     final HttpServlet mockServlet = new HttpServlet() {
     };
     expect(injector.getInstance(Key.get(HttpServlet.class)))
         .andReturn(mockServlet)
         .anyTimes();
 
-    replay(injector);
+    replay(injector, binding);
 
     //some init params
     //noinspection SSBasedInspection

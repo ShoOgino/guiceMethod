@@ -5,6 +5,7 @@
         new HashMap<String, String>());
 
     final Injector injector = createMock(Injector.class);
+    final Binding binding = createMock(Binding.class);
     final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
 
     expect(mockRequest.getAttribute(A_KEY))
@@ -21,8 +22,10 @@
       }
     };
 
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
+        .andReturn(true);
     expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(createMock(Binding.class));
+        .andReturn(binding);
     expect(injector.getInstance(HTTP_SERLVET_KEY))
         .andReturn(mockServlet);
 
@@ -38,7 +41,7 @@
     expect(injector.getInstance(servetDefsKey))
         .andReturn(ImmutableList.of(servletDefinition));
 
-    replay(injector, mockRequest, mockBinding);
+    replay(injector, binding, mockRequest, mockBinding);
 
     // Have to init the Servlet before we can dispatch to it.
     servletDefinition.init(null, injector,
