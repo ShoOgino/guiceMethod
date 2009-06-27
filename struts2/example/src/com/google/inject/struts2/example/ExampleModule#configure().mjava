@@ -1,4 +1,0 @@
-  protected void configure() {
-    bind(Service.class).to(ServiceImpl.class);
-  }
-

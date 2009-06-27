@@ -1,0 +1,5 @@
+  Interceptor superBuildInterceptor(InterceptorConfig interceptorConfig,
+      Map interceptorRefParams) throws ConfigurationException {
+    return super.buildInterceptor(interceptorConfig, interceptorRefParams);
+  }
+
