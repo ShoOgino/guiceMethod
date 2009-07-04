@@ -1,0 +1,31 @@
+  public void testGetAllBindings() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(D.class).toInstance(new D(Stage.PRODUCTION));
+        bind(Object.class).to(D.class);
+        getProvider(new Key<C<Stage>>() {});
+      }
+    });
+
+    Map<Key<?>,Binding<?>> bindings = injector.getAllBindings();
+    assertEquals(ImmutableSet.of(Key.get(Injector.class), Key.get(Stage.class), Key.get(D.class),
+        Key.get(Logger.class), Key.get(Object.class), new Key<C<Stage>>() {}),
+        bindings.keySet());
+
+    // add a JIT binding
+    injector.getInstance(F.class);
+
+    Map<Key<?>,Binding<?>> bindings2 = injector.getAllBindings();
+    assertEquals(ImmutableSet.of(Key.get(Injector.class), Key.get(Stage.class), Key.get(D.class),
+        Key.get(Logger.class), Key.get(Object.class), new Key<C<Stage>>() {}, Key.get(F.class)),
+        bindings2.keySet());
+
+    // the original map shouldn't have changed
+    assertEquals(ImmutableSet.of(Key.get(Injector.class), Key.get(Stage.class), Key.get(D.class),
+        Key.get(Logger.class), Key.get(Object.class), new Key<C<Stage>>() {}),
+        bindings.keySet());
+
+    // check the bindings' values
+    assertEquals(injector, bindings.get(Key.get(Injector.class)).getProvider().get());
+  }
+

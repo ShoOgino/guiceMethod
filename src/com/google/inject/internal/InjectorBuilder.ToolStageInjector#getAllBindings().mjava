@@ -1,0 +1,4 @@
+    public Map<Key<?>, Binding<?>> getAllBindings() {
+      return this.delegateInjector.getAllBindings();
+    }
+

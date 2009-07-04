@@ -1,0 +1,13 @@
+  /**
+   * Returns a snapshot of this injector's bindings, <strong>both explicit and
+   * just-in-time</strong>. The returned map is immutable; it contains only the bindings that were
+   * present when {@code getAllBindings()} was invoked. Subsequent calls may return a map with
+   * additional just-in-time bindings.
+   *
+   * <p>The returned map does not include bindings inherited from a {@link #getParent() parent
+   * injector}, should one exist.
+   *
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
+   */
+  Map<Key<?>, Binding<?>> getAllBindings();
+
