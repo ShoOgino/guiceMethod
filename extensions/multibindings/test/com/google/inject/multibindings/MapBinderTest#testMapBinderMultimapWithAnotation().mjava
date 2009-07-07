@@ -1,0 +1,28 @@
+  public void testMapBinderMultimapWithAnotation() {
+    Injector injector = Guice.createInjector(
+        new AbstractModule() {
+          @Override protected void configure() {
+            MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+                binder(), String.class, String.class, Abc.class);
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B1");
+          }
+        },
+        new AbstractModule() {
+          @Override protected void configure() {
+            MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+                binder(), String.class, String.class, Abc.class);
+            multibinder.addBinding("b").toInstance("B2");
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        });
+
+    assertEquals(mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
+        injector.getInstance(Key.get(mapOfSetOfString, Abc.class)));
+    try {
+      injector.getInstance(Key.get(mapOfSetOfString));
+      fail();
+    } catch (ConfigurationException expected) {}
+  }
+

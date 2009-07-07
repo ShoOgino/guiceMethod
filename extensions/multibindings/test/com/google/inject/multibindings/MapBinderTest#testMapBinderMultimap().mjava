@@ -1,0 +1,25 @@
+  public void testMapBinderMultimap() {
+    Injector injector = Guice.createInjector(
+        new AbstractModule() {
+          @Override protected void configure() {
+            MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+                binder(), String.class, String.class);
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B1");
+            multibinder.addBinding("c").toInstance("C");
+          }
+        },
+        new AbstractModule() {
+          @Override protected void configure() {
+            MapBinder<String, String> multibinder = MapBinder.newMapBinder(
+                binder(), String.class, String.class);
+            multibinder.addBinding("b").toInstance("B2");
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        });
+
+    assertEquals(mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
+        injector.getInstance(Key.get(mapOfSetOfString)));
+  }
+

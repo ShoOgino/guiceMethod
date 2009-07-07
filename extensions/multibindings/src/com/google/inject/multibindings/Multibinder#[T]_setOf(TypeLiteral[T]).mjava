@@ -1,5 +1,5 @@
   @SuppressWarnings("unchecked") // wrapping a T in a Set safely returns a Set<T>
-  private static <T> TypeLiteral<Set<T>> setOf(TypeLiteral<T> elementType) {
+  static <T> TypeLiteral<Set<T>> setOf(TypeLiteral<T> elementType) {
     Type type = Types.setOf(elementType.getType());
     return (TypeLiteral<Set<T>>) TypeLiteral.get(type);
   }

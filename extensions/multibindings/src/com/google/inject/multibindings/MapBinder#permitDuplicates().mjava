@@ -1,7 +1,16 @@
   /**
-   * Configures the bound map to silently discard duplicate entries. When multiple equal keys are
-   * bound, the value that gets included is arbitrary. When multible modules contribute elements to
-   * the map, this configuration option impacts all of them.
+   * Configures the {@code MapBinder} to handle duplicate entries.
+   * <ul>
+   * <li>When multiple equal keys are bound, the value that gets included in the map is
+   * arbitrary.</li>
+   * <li>In addition to the {@code Map<K, V>} and {@code Map<K, Provider<V>>}
+   * maps that are normally bound, a {@code Map<K, Set<V>>} and
+   * {@code Map<K, Set<Provider<V>>>} are <em>also</em> bound, which contain
+   * all values bound to each key.</li>
+   * </ul>
+   * <p>
+   * When multiple modules contribute elements to the map, this configuration
+   * option impacts all of them.
    *
    * @return this map binder
    */

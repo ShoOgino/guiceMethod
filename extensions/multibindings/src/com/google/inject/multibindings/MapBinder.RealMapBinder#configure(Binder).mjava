@@ -4,7 +4,7 @@
       final ImmutableSet<Dependency<?>> dependencies
           = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
 
-      // binds a Map<K, Provider<V>> from a collection of Map<Entry<K, Provider<V>>
+      // Binds a Map<K, Provider<V>> from a collection of Map<Entry<K, Provider<V>>.
       final Provider<Set<Entry<K, Provider<V>>>> entrySetProvider = binder
           .getProvider(entrySetBinder.getSetKey());
       binder.bind(providerMapKey).toProvider(new ProviderWithDependencies<Map<K, Provider<V>>>() {
@@ -46,6 +46,67 @@
             map.put(key, value);
           }
           return Collections.unmodifiableMap(map);
+        }
+
+        public Set<Dependency<?>> getDependencies() {
+          return dependencies;
+        }
+      });
+
+      // Binds a Map<K, Set<Provider<V>>> from a collection of Map<Entry<K, Provider<V>> if
+      // permitDuplicates was called.
+      binder.bind(providerMultimapKey).toProvider(
+          new ProviderWithDependencies<Map<K, Set<Provider<V>>>>() {
+            private Map<K, Set<Provider<V>>> providerMultimap;
+
+            @SuppressWarnings("unused")
+            @Inject void initialize(Injector injector) {
+              if (entrySetBinder.permitsDuplicates(injector)) {
+                Map<K, Set<Provider<V>>> providerMultimapMutable = new LinkedHashMap<K, Set<Provider<V>>>();
+                for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
+                  if (!providerMultimapMutable.containsKey(entry.getKey())) {
+                    providerMultimapMutable.put(entry.getKey(), new LinkedHashSet<Provider<V>>());
+                  }
+                  providerMultimapMutable.get(entry.getKey()).add(entry.getValue());
+                }
+
+                for (Entry<K, Set<Provider<V>>> entry : providerMultimapMutable.entrySet()) {
+                  entry.setValue(Collections.unmodifiableSet(entry.getValue()));
+                }
+                providerMultimap = Collections.unmodifiableMap(providerMultimapMutable);
+              }
+            }
+
+            public Map<K, Set<Provider<V>>> get() {
+              if (providerMultimap == null) {
+                throw new ProvisionException("no binding for " + providerMultimapKey
+                    + " because permitDuplicates was never called");
+              }
+              return providerMultimap;
+            }
+
+            public Set<Dependency<?>> getDependencies() {
+              return dependencies;
+            }
+          });
+
+      final Provider<Map<K, Set<Provider<V>>>> multimapProvider =
+          binder.getProvider(providerMultimapKey);
+      binder.bind(multimapKey).toProvider(new ProviderWithDependencies<Map<K, Set<V>>>() {
+        public Map<K, Set<V>> get() {
+          Map<K,Set<V>> multimap = new LinkedHashMap<K, Set<V>>();
+          for (Entry<K, Set<Provider<V>>> entry : multimapProvider.get().entrySet()) {
+            K key = entry.getKey();
+            Set<V> values = new LinkedHashSet<V>();
+            for (Provider<V> valueProvider : entry.getValue()) {
+              V value = valueProvider.get();
+              checkConfiguration(value != null,
+                  "Multimap injection failed due to null value for key \"%s\"", key);
+              values.add(value);
+            }
+            multimap.put(key, Collections.unmodifiableSet(values));
+          }
+          return Collections.unmodifiableMap(multimap);
         }
 
         public Set<Dependency<?>> getDependencies() {
