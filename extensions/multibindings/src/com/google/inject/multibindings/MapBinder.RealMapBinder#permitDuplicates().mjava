@@ -1,6 +1,8 @@
     @Override
     public MapBinder<K, V> permitDuplicates() {
       entrySetBinder.permitDuplicates();
+      binder.install(new MultimapBinder<K, V>(
+          multimapKey, providerMultimapKey, entrySetBinder.getSetKey()));
       return this;
     }
 

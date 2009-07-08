@@ -2,6 +2,6 @@
   private static <K, V> TypeLiteral<Map<K, Provider<V>>> mapOfProviderOf(
       TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
     return (TypeLiteral<Map<K, Provider<V>>>) TypeLiteral.get(
-        Types.mapOf(keyType.getType(), newParameterizedType(Provider.class, valueType.getType())));
+        Types.mapOf(keyType.getType(), Types.providerOf(valueType.getType())));
   }
 
