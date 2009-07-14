@@ -1,0 +1,20 @@
+  public void testCircularlyDependentSingletonsWithProviders() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Chicken.class).in(Singleton.class);
+      }
+
+      @Provides @Singleton Egg provideEgg(Chicken chicken) {
+        Egg egg = new Egg();
+        egg.source = chicken;
+        return egg;
+      }
+    });
+
+    injector.getInstance(Egg.class);
+    injector.getInstance(Chicken.class);
+
+    assertEquals(1, Chicken.nextInstanceId);
+    assertEquals(1, Egg.nextInstanceId);
+  }
+
