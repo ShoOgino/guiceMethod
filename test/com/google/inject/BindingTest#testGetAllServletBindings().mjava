@@ -1,0 +1,9 @@
+  public void testGetAllServletBindings() throws Exception {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(F.class); // an explicit binding that uses a JIT binding for a constructor
+      }
+    });
+    injector.getAllBindings();
+  }
+

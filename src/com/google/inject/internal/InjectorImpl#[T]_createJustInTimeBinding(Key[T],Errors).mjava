@@ -60,7 +60,7 @@
     Object source = key.getTypeLiteral().getRawType();
     BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors);
     errors.throwIfNewErrors(numErrorsBefore);
-    initializeBinding(binding, errors);
+    initializeJitBinding(binding, errors);
     return binding;
   }
 
