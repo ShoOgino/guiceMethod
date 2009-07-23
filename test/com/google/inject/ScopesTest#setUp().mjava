@@ -7,5 +7,6 @@
     NotASingleton.nextInstanceId = 0;
     Implementation.nextInstanceId = 0;
     ProvidedBySingleton.nextInstanceId = 0;
+    ThrowingSingleton.nextInstanceId = 0;
   }
 

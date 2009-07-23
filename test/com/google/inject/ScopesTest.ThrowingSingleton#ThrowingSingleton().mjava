@@ -1,0 +1,6 @@
+    ThrowingSingleton() {
+      if (instanceId == 0) {
+        throw new RuntimeException();
+      }
+    }
+
