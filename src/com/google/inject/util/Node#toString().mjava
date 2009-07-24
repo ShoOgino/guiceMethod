@@ -1,0 +1,6 @@
+  @Override public String toString() {
+    return appliedScopeAnnotation != null
+        ? Errors.convert(key) + " in @" + appliedScopeAnnotation.getSimpleName()
+        : Errors.convert(key).toString();
+  }
+

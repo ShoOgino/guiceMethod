@@ -1,0 +1,13 @@
+  public void testDependingOnUnscoped() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(Style.class);
+        bind(SleeveLenth.class);
+        bind(Shirt.class).in(Daily.class);
+      }
+    };
+
+    ScopeChecker scopeChecker = new ScopeChecker(Guice.createInjector(scopesModule, module));
+    scopeChecker.check(Annually.class, Seasonally.class, Daily.class);
+  }
+

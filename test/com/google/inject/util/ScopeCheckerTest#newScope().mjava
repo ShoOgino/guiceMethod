@@ -1,0 +1,8 @@
+  private Scope newScope() {
+    return new Scope() {
+      public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+        return unscoped;
+      }
+    };
+  }
+

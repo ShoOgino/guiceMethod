@@ -1,0 +1,7 @@
+  /**
+   * Returns true if this node has no dependency whose scope is narrower than itself.
+   */
+  boolean isScopedCorrectly() {
+    return appliedScope >= effectiveScope;
+  }
+

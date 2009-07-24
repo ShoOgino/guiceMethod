@@ -1,0 +1,4 @@
+  public ScopeChecker(Injector injector) {
+    this.injector = injector;
+  }
+

@@ -1,0 +1,12 @@
+  public void testDirectDependencyOnProvider() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(Style.class).in(Daily.class);
+        bind(Pants.class).in(Seasonally.class);
+      }
+    };
+
+    ScopeChecker scopeChecker = new ScopeChecker(Guice.createInjector(scopesModule, module));
+    scopeChecker.check(Annually.class, Seasonally.class, Daily.class);
+  }
+

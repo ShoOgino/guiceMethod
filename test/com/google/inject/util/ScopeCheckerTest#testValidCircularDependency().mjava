@@ -1,0 +1,12 @@
+  public void testValidCircularDependency() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(Chicken.class).in(Daily.class);
+        bind(Egg.class).in(Daily.class);
+      }
+    };
+
+    ScopeChecker scopeChecker = new ScopeChecker(Guice.createInjector(scopesModule, module));
+    scopeChecker.check(Annually.class, Seasonally.class, Daily.class);
+  }
+

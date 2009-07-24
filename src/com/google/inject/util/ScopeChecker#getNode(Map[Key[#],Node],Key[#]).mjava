@@ -1,0 +1,9 @@
+  private Node getNode(Map<Key<?>, Node> nodes, Key<?> key) {
+    Node node = nodes.get(key);
+    if (node == null) {
+      node = new Node(key);
+      nodes.put(key, node);
+    }
+    return node;
+  }
+

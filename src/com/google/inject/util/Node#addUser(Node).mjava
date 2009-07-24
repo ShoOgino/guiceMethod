@@ -1,0 +1,10 @@
+  /**
+   * Mark this as a dependency of {@code node}.
+   */
+  public void addUser(Node node) {
+    if (users.isEmpty()) {
+      users = Sets.newHashSet();
+    }
+    users.add(node);
+  }
+

@@ -1,0 +1,9 @@
+  /**
+   * Pushes the narrowness of this node's effective scope to everyone that depends on this node.
+   */
+  void pushScopeToUsers() {
+    for (Node user : users) {
+      user.setEffectiveScope(effectiveScope, this);
+    }
+  }
+

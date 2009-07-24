@@ -1,0 +1,4 @@
+    public Scope visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
+      throw new AssertionError();
+    }
+

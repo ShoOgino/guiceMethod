@@ -1,0 +1,19 @@
+  public void testInvalidCircularDependency() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        bind(Chicken.class).in(Seasonally.class);
+        bind(Egg.class).in(Daily.class);
+      }
+    };
+
+    ScopeChecker scopeChecker = new ScopeChecker(Guice.createInjector(scopesModule, module));
+    try {
+      scopeChecker.check(Annually.class, Seasonally.class, Daily.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Illegal scoped dependency: " + Chicken.class.getName() + " in @Seasonally",
+          "  depends on " + Egg.class.getName() + " in @Daily");
+    }
+  }
+

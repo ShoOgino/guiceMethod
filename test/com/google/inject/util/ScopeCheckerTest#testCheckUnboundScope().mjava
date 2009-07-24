@@ -1,0 +1,13 @@
+  public void testCheckUnboundScope() {
+    Injector injector = Guice.createInjector();
+    ScopeChecker scopeChecker = new ScopeChecker(injector);
+
+    try {
+      scopeChecker.check(Singleton.class, Daily.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+      assertContains(expected.getMessage(),
+          "No scope binding for " + Daily.class);
+    }
+  }
+

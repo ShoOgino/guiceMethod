@@ -1,0 +1,4 @@
+    public Scope visitNoScoping() {
+      return Scopes.NO_SCOPE;
+    }
+
