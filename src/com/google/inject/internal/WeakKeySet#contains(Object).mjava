@@ -1,4 +1,6 @@
   public boolean contains(Object o) {
-    return o instanceof Key && backingSet.contains(o.toString());
+    // avoid calling key.toString() if the backing set is empty. toString is expensive in aggregate,
+    // and most WeakKeySets are empty in practice (because they're used by top-level injectors)
+    return backingSet != null && o instanceof Key && backingSet.contains(o.toString());
   }
 

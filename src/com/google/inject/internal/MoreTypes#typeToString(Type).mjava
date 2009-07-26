@@ -1,0 +1,4 @@
+  public static String typeToString(Type type) {
+    return type instanceof Class ? ((Class) type).getName() : type.toString();
+  }
+

@@ -1,4 +1,10 @@
     @Override public String toString() {
-      return MoreTypes.toString(this);
+      if (lowerBound != null) {
+        return "? super " + typeToString(lowerBound);
+      } else if (upperBound == Object.class) {
+        return "?";
+      } else {
+        return "? extends " + typeToString(upperBound);
+      }
     }
 

@@ -1,4 +1,4 @@
   @Override public final String toString() {
-    return MoreTypes.toString(type);
+    return MoreTypes.typeToString(type);
   }
 

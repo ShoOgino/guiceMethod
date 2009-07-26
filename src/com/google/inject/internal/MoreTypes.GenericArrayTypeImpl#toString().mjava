@@ -1,4 +1,4 @@
     @Override public String toString() {
-      return MoreTypes.toString(this);
+      return typeToString(componentType) + "[]";
     }
 

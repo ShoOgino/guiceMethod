@@ -1,7 +1,4 @@
   @Override public final String toString() {
-    return new ToStringBuilder(Key.class)
-        .add("type", typeLiteral)
-        .add("annotation", annotationStrategy)
-        .toString();
+    return "Key[type=" + typeLiteral + ", annotation=" + annotationStrategy + "]";
   }
 

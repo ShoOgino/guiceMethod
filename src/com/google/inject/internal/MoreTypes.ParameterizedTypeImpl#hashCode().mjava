@@ -1,4 +1,6 @@
     @Override public int hashCode() {
-      return MoreTypes.hashCode(this);
+      return Arrays.hashCode(typeArguments)
+          ^ rawType.hashCode()
+          ^ hashCodeOrZero(ownerType);
     }
 
