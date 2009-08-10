@@ -36,11 +36,12 @@
       }
     };
 
+    Object source = rawType;
     return new LinkedProviderBindingImpl<T>(
         this,
         key,
-        rawType /* source */,
-        Scoping.<T>scope(key, this, internalFactory, scoping),
+        source,
+        Scoping.<T>scope(key, this, internalFactory, source, scoping),
         scoping,
         providerKey);
   }

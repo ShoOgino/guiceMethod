@@ -30,11 +30,12 @@
       }
     };
 
+    Object source = rawType;
     return new LinkedBindingImpl<T>(
         this,
         key,
-        rawType /* source */,
-        Scoping.<T>scope(key, this, internalFactory, scoping),
+        source,
+        Scoping.<T>scope(key, this, internalFactory, source, scoping),
         scoping,
         targetKey);
   }
