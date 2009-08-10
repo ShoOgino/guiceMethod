@@ -2,7 +2,7 @@
     Module module = new AbstractModule() {
       protected void configure() {
         bind(Style.class).in(Annually.class);
-        bind(SleeveLenth.class).in(Seasonally.class);
+        bind(SleeveLength.class).in(Seasonally.class);
         bind(Shirt.class).in(Annually.class);
       }
     };
@@ -14,7 +14,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Illegal scoped dependency: " + Shirt.class.getName() + " in @Annually",
-          "  depends on " + SleeveLenth.class.getName() + " in @Seasonally");
+          "  depends on " + SleeveLength.class.getName() + " in @Seasonally");
     }
   }
 

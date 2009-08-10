@@ -2,7 +2,7 @@
     Module module = new AbstractModule() {
       protected void configure() {
         bind(Style.class).in(Annually.class);
-        bind(SleeveLenth.class).in(Seasonally.class);
+        bind(SleeveLength.class).in(Seasonally.class);
         bind(Shirt.class).in(Daily.class);
       }
     };

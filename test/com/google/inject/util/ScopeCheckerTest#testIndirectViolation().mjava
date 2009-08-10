@@ -13,7 +13,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Illegal scoped dependency: " + Shirt.class.getName() + " in @Annually",
-          "  depends on " + SleeveLenth.class.getName(),
+          "  depends on " + SleeveLength.class.getName(),
           "  depends on " + Style.class.getName() + " in @Seasonally");
     }
   }
