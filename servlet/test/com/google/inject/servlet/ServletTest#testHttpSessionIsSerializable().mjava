@@ -1,38 +1,37 @@
-  public void testNewSessionObject()
-      throws CreationException, IOException, ServletException {
+  public void testHttpSessionIsSerializable()
+      throws IOException, ClassNotFoundException, ServletException {
     final Injector injector = createInjector();
 
     GuiceFilter filter = new GuiceFilter();
 
     final HttpServletRequest request = createMock(HttpServletRequest.class);
-    final HttpSession session = createMock(HttpSession.class);
+    final HttpSession session = newFakeHttpSession();
 
     String inSessionKey = IN_SESSION_KEY.toString();
     String inSessionNullKey = IN_SESSION_NULL_KEY.toString();
 
     expect(request.getSession()).andReturn(session).times(2);
-    expect(session.getAttribute(inSessionKey)).andReturn(null);
-    session.setAttribute(eq(inSessionKey), isA(InSession.class));
-
-    expect(session.getAttribute(inSessionNullKey)).andReturn(null);
-    session.setAttribute(eq(inSessionNullKey), eq(NullObject.INSTANCE));
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
       public void doFilter(ServletRequest servletRequest,
           ServletResponse servletResponse) {
         invoked[0] = true;
-//        assertSame(request, servletRequest);
         assertNotNull(injector.getInstance(InSession.class));
         assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
       }
     };
 
-    replay(request, session);
+    replay(request);
 
     filter.doFilter(request, null, filterChain);
 
-    verify(request, session);
+    verify(request);
     assertTrue(invoked[0]);
+
+    HttpSession deserializedSession = reserialize(session);
+
+    assertTrue(deserializedSession.getAttribute(inSessionKey) instanceof InSession);
+    assertEquals(NullObject.INSTANCE, deserializedSession.getAttribute(inSessionNullKey));
   }
 

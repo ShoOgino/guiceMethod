@@ -7,11 +7,14 @@
     final HttpServletRequest request = createMock(HttpServletRequest.class);
     final HttpSession session = createMock(HttpSession.class);
 
-    String name = Key.get(InSession.class).toString();
+    String inSessionKey = IN_SESSION_KEY.toString();
+    String inSessionNullKey = IN_SESSION_NULL_KEY.toString();
 
     final InSession inSession = new InSession();
-    expect(request.getSession()).andReturn(session).times(2);
-    expect(session.getAttribute(name)).andReturn(inSession).times(2);
+    expect(request.getSession()).andReturn(session).times(4);
+    expect(session.getAttribute(inSessionKey)).andReturn(inSession).times(2);
+    
+    expect(session.getAttribute(inSessionNullKey)).andReturn(NullObject.INSTANCE).times(2);
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
@@ -22,6 +25,9 @@
 
         assertSame(inSession, injector.getInstance(InSession.class));
         assertSame(inSession, injector.getInstance(InSession.class));
+
+        assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
+        assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
       }
     };
 

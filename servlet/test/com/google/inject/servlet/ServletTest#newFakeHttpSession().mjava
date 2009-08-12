@@ -1,0 +1,8 @@
+  /**
+   * Returns a fake, serializable HttpSession which stores attributes in a HashMap.
+   */
+  private HttpSession newFakeHttpSession() {
+    return (HttpSession) Proxy.newProxyInstance(HttpSession.class.getClassLoader(),
+        new Class[] { HttpSession.class }, new FakeHttpSessionHandler());
+  }
+

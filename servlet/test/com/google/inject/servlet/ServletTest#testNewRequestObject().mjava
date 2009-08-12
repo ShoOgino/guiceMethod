@@ -6,9 +6,13 @@
 
     final HttpServletRequest request = createMock(HttpServletRequest.class);
 
-    String name = Key.get(InRequest.class).toString();
-    expect(request.getAttribute(name)).andReturn(null);
-    request.setAttribute(eq(name), isA(InRequest.class));
+    String inRequestKey = IN_REQUEST_KEY.toString();
+    expect(request.getAttribute(inRequestKey)).andReturn(null);
+    request.setAttribute(eq(inRequestKey), isA(InRequest.class));
+    
+    String inRequestNullKey = IN_REQUEST_NULL_KEY.toString();
+    expect(request.getAttribute(inRequestNullKey)).andReturn(null);
+    request.setAttribute(eq(inRequestNullKey), eq(NullObject.INSTANCE));
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
@@ -17,6 +21,7 @@
         invoked[0] = true;
 //        assertSame(request, servletRequest);
         assertNotNull(injector.getInstance(InRequest.class));
+        assertNull(injector.getInstance(IN_REQUEST_NULL_KEY));
       }
     };
 

@@ -7,8 +7,11 @@
     final HttpServletRequest request = createMock(HttpServletRequest.class);
 
     final InRequest inRequest = new InRequest();
-    String name = Key.get(InRequest.class).toString();
-    expect(request.getAttribute(name)).andReturn(inRequest).times(2);
+    String inRequestKey = IN_REQUEST_KEY.toString();
+    expect(request.getAttribute(inRequestKey)).andReturn(inRequest).times(2);
+    
+    String inRequestNullKey = IN_REQUEST_NULL_KEY.toString();
+    expect(request.getAttribute(inRequestNullKey)).andReturn(NullObject.INSTANCE).times(2);
 
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
@@ -18,6 +21,9 @@
         
         assertSame(inRequest, injector.getInstance(InRequest.class));
         assertSame(inRequest, injector.getInstance(InRequest.class));
+
+        assertNull(injector.getInstance(IN_REQUEST_NULL_KEY));
+        assertNull(injector.getInstance(IN_REQUEST_NULL_KEY));
       }
     };
 
