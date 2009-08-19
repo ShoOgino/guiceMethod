@@ -12,13 +12,13 @@
       }
     });
 
-    MustangInsuranceFactory mustangInsuranceFactory = 
+    MustangInsuranceFactory mustangInsuranceFactory =
         injector.getInstance(MustangInsuranceFactory.class);
-    CamaroInsuranceFactory camaroInsuranceFactory = 
+    CamaroInsuranceFactory camaroInsuranceFactory =
         injector.getInstance(CamaroInsuranceFactory.class);
 
     Mustang mustang = new Mustang(5000d, Color.BLACK);
-    MustangInsurance mustangPolicy = 
+    MustangInsurance mustangPolicy =
         (MustangInsurance) mustangInsuranceFactory.create(mustang, 800.0d);
     assertEquals(800.0d, mustangPolicy.premium);
     assertEquals(50000.0d, mustangPolicy.limit);

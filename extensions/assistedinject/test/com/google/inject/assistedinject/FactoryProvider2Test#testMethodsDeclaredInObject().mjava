@@ -10,7 +10,5 @@
     ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
 
     assertEqualsBothWays(carFactory, carFactory);
-    assertEquals(ColoredCarFactory.class.getName() + " for " + Mustang.class.getName(),
-        carFactory.toString());
   }
 

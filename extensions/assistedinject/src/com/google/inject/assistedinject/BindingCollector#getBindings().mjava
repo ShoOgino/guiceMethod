@@ -1,0 +1,4 @@
+  public Map<Key<?>, TypeLiteral<?>> getBindings() {
+    return Collections.unmodifiableMap(bindings);
+  }
+

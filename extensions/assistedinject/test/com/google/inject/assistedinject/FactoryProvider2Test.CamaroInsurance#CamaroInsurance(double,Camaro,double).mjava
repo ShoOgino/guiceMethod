@@ -1,5 +1,5 @@
     @Inject
-    public CamaroInsurance(@Named("highLimit") double limit, @Assisted Camaro car, 
+    public CamaroInsurance(@Named("highLimit") double limit, @Assisted Camaro car,
         @Assisted double premium) {
       this.premium = premium;
       this.limit = limit;

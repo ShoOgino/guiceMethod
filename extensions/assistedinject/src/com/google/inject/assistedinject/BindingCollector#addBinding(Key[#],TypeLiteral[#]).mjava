@@ -1,0 +1,11 @@
+  public BindingCollector addBinding(Key<?> key, TypeLiteral<?> target) {
+    if (bindings.containsKey(key)) {
+      throw new ConfigurationException(Collections.singleton(
+          new Message("Only one implementation can be specified for " + key)));
+    }
+
+    bindings.put(key, target);
+
+    return this;
+  }
+

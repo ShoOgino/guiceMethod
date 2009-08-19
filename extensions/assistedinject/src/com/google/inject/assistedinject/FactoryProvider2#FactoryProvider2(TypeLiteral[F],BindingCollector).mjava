@@ -1,10 +1,10 @@
   /**
    * @param factoryType a Java interface that defines one or more create methods.
-   * @param producedType a concrete type that is assignable to the return types of all factory
-   *      methods.
+   * @param collector binding configuration that maps method return types to
+   *    implementation types.
    */
-  FactoryProvider2(TypeLiteral<F> factoryType, Key<?> producedType) {
-    this.producedType = producedType;
+  FactoryProvider2(TypeLiteral<F> factoryType, BindingCollector collector) {
+    this.collector = collector;
 
     Errors errors = new Errors();
 

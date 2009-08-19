@@ -1,0 +1,14 @@
+  public void testExplicitForwardingAssistedBinding() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(Volkswagen.class).to(Golf.class);
+        install(new FactoryModuleBuilder()
+            .implement(Car.class, Volkswagen.class)
+            .build(ColoredCarFactory.class));
+      }
+    });
+
+    ColoredCarFactory factory = injector.getInstance(ColoredCarFactory.class);
+    assertTrue(factory.create(Color.BLUE) instanceof Golf);
+  }
+

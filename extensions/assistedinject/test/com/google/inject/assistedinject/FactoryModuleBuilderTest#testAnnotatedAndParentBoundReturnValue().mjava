@@ -1,0 +1,19 @@
+  public void testAnnotatedAndParentBoundReturnValue() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(Car.class).to(Golf.class);
+
+        bind(Integer.class).toInstance(911);
+        bind(Double.class).toInstance(5.0d);
+        install(new FactoryModuleBuilder()
+            .implement(Car.class, Names.named("german"), Beetle.class)
+            .implement(Car.class, Names.named("american"), Mustang.class)
+            .build(AnnotatedVersatileCarFactory.class));
+      }
+    });
+
+    AnnotatedVersatileCarFactory factory = injector.getInstance(AnnotatedVersatileCarFactory.class);
+    assertTrue(factory.getGermanCar(Color.BLACK) instanceof Beetle);
+    assertTrue(injector.getInstance(Car.class) instanceof Golf);
+  }
+

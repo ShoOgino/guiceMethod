@@ -1,0 +1,5 @@
+    @Inject
+    public Mustang(@Assisted Color color) {
+      this.color = color;
+    }
+

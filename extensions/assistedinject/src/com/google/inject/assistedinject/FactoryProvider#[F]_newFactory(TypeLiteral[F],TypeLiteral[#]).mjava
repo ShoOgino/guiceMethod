@@ -6,7 +6,28 @@
     if (!factoryMethodToConstructor.isEmpty()) {
       return new FactoryProvider<F>(factoryType, factoryMethodToConstructor);
     } else {
-      return new FactoryProvider2<F>(factoryType, Key.get(implementationType));
+      BindingCollector collector = new BindingCollector();
+
+      // Preserving backwards-compatibility:  Map all return types in a factory
+      // interface to the passed implementation type.
+      Errors errors = new Errors();
+      Key implementationKey = Key.get(implementationType);
+
+      if (implementationType != null) {
+        try {
+          for (Method method : factoryType.getRawType().getMethods()) {
+            Key<?> returnType = getKey(factoryType.getReturnType(method), method,
+                method.getAnnotations(), errors);
+            if (!implementationKey.equals(returnType)) {
+              collector.addBinding(returnType, implementationType);
+            }
+          }
+        } catch (ErrorsException e) {
+          throw new ConfigurationException(e.getErrors().getMessages());
+        }
+      }
+
+      return new FactoryProvider2<F>(factoryType, collector);
     }
   }
 

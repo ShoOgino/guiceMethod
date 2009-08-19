@@ -7,6 +7,9 @@
 
     final Key<?> returnType = returnTypesByMethod.get(method);
 
+    // We ignore any pre-existing binding annotation.
+    final Key<?> assistedReturnType = Key.get(returnType.getTypeLiteral(), Assisted.class);
+
     Module assistedModule = new AbstractModule() {
       @SuppressWarnings("unchecked") // raw keys are necessary for the args array and return value
       protected void configure() {
@@ -18,15 +21,15 @@
           binder.bind((Key) paramKey).toProvider(Providers.of(args[p++]));
         }
 
-        if (producedType != null && !returnType.equals(producedType)) {
-          binder.bind(returnType).to((Key) producedType);
+        if (collector.getBindings().containsKey(returnType)) {
+          binder.bind(assistedReturnType).to((TypeLiteral) collector.getBindings().get(returnType));
         } else {
-          binder.bind(returnType);
+          binder.bind(assistedReturnType).to((Key) returnType);
         }
       }
     };
 
     Injector forCreate = injector.createChildInjector(assistedModule);
-    return forCreate.getBinding(returnType);
+    return forCreate.getBinding(assistedReturnType);
   }
 

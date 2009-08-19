@@ -1,0 +1,14 @@
+  public void testNoBindingAssistedInject() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new FactoryModuleBuilder().build(MustangFactory.class));
+      }
+    });
+
+    MustangFactory factory = injector.getInstance(MustangFactory.class);
+
+    Mustang mustang = factory.create(Color.BLUE);
+    assertEquals(Color.BLUE, mustang.color);
+  }
+

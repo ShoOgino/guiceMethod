@@ -1,0 +1,18 @@
+  public void testMultipleReturnTypes() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Double.class).toInstance(5.0d);
+        install(new FactoryModuleBuilder().build(VersatileCarFactory.class));
+      }
+    });
+
+    VersatileCarFactory factory = injector.getInstance(VersatileCarFactory.class);
+
+    Mustang mustang = factory.getMustang(Color.RED);
+    assertEquals(Color.RED, mustang.color);
+
+    Beetle beetle = factory.getBeetle(Color.GREEN);
+    assertEquals(Color.GREEN, beetle.color);
+  }
+

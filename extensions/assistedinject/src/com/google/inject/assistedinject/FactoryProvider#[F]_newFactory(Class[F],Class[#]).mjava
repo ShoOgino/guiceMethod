@@ -1,5 +1,4 @@
-  public static <F> Provider<F> newFactory(
-      Class<F> factoryType, Class<?> implementationType){
+  public static <F> Provider<F> newFactory(Class<F> factoryType, Class<?> implementationType){
     return newFactory(TypeLiteral.get(factoryType), TypeLiteral.get(implementationType));
   }
 
