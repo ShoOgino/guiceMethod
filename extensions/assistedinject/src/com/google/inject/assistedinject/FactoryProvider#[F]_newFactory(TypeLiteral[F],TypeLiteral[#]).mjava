@@ -11,7 +11,7 @@
       // Preserving backwards-compatibility:  Map all return types in a factory
       // interface to the passed implementation type.
       Errors errors = new Errors();
-      Key implementationKey = Key.get(implementationType);
+      Key<?> implementationKey = Key.get(implementationType);
 
       if (implementationType != null) {
         try {
