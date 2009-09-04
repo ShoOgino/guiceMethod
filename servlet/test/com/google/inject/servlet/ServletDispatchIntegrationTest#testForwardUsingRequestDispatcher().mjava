@@ -1,0 +1,24 @@
+  public void testForwardUsingRequestDispatcher() throws IOException, ServletException {
+    Guice.createInjector(new ServletModule() {
+      @Override
+      protected void configureServlets() {
+        serve("/*").with(ForwardingServlet.class);
+        serve("/blah.jsp").with(ForwardedServlet.class);
+      }
+    });
+
+    final HttpServletRequest requestMock = createMock(HttpServletRequest.class);
+    HttpServletResponse responseMock = createMock(HttpServletResponse.class);
+    expect(requestMock.getServletPath())
+        .andReturn("/")
+        .anyTimes();
+
+    expect(responseMock.isCommitted()).andReturn(false);
+
+    replay(requestMock, responseMock);
+
+    new GuiceFilter()
+        .doFilter(requestMock, responseMock,
+            createMock(FilterChain.class));
+  }
+

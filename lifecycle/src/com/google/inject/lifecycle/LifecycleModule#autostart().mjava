@@ -1,0 +1,8 @@
+  protected void autostart() {
+    this.autostart = true;
+
+    // This is a cool method that will execute after injector creating
+    // completes, and thus much better than the eager singleton hack.
+    throw new UnsupportedOperationException("Asplode!");
+  }
+

@@ -1,0 +1,29 @@
+  public <T> T broadcast(Class<T> clazz, Matcher<? super T> matcher) {
+    final List<T> ts = Lists.newArrayList();
+    for (Key<?> key : callableKeys.get(clazz)) {
+      // Should this get instancing happen during method call?
+      @SuppressWarnings("unchecked") // Guarded by getInstance
+          T t = (T) injector.getInstance(key);
+
+      if (matcher.matches(t)) {
+        ts.add(t);
+      }
+    }
+
+    @SuppressWarnings("unchecked") T caster = (T) Proxy
+        .newProxyInstance(clazz.getClassLoader(), new Class[] { clazz }, new InvocationHandler() {
+          public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
+
+            // propagate the method call with the same arg list to all instances.
+            for (T t : ts) {
+              method.invoke(t, objects);
+            }
+
+            // We can't return from multiple instances, so just return null.
+            return null;
+          }
+        });
+
+    return caster;
+  }
+

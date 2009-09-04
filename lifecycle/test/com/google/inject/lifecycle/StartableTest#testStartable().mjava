@@ -1,0 +1,15 @@
+  public final void testStartable() {
+    started = false;
+    Guice.createInjector(new LifecycleModule() {
+
+      @Override
+      protected void configureLifecycle() {
+        bind(AClass.class).in(Singleton.class);
+      }
+
+    }).getInstance(Lifecycle.class)
+      .start();
+
+    assertTrue(started);
+  }
+

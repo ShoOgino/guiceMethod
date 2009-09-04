@@ -1,0 +1,21 @@
+  public final void testCallable() {
+    called = 0;
+    Lifecycle lifecycle = Guice.createInjector(new LifecycleModule() {
+
+      @Override
+      protected void configureLifecycle() {
+        bind(Runnable.class).to(AClass.class).in(Singleton.class);
+        bind(AClass.class).in(Singleton.class);
+
+        callable(Runnable.class);
+      }
+
+    }).getInstance(Lifecycle.class);
+
+    lifecycle
+      .broadcast(Runnable.class)
+      .run();
+
+    assertEquals(2, called);
+  }
+

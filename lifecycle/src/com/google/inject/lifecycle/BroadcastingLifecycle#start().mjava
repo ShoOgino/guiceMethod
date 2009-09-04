@@ -1,0 +1,62 @@
+  public void start() {
+    if (started) {
+      // throw? log warning?
+      return;
+    }
+
+    // OK to start the startables now.
+    // Guaranteed to return in order of module binding..
+    Map<Key<?>, Binding<?>> allBindings = injector.getBindings();
+
+    List<Binding<Startable>> startables = Lists.newArrayList();
+    Map<Class<?>, List<Key<?>>> callableKeys = Maps.newLinkedHashMap();
+
+    // Do not collapse into loop below (in synchronized block). Time complexity is still linear.
+    for (Binding<?> binding : allBindings.values()) {
+
+      Class<?> bindingType = binding.getKey().getTypeLiteral().getRawType();
+
+      // inner loop N*M complexity
+      for (Class<?> callable : callableClasses) {
+        if (callable.isAssignableFrom(bindingType)) {
+
+          // we don't want to instantiate these right now...
+          List<Key<?>> list = callableKeys.get(callable);
+
+          // Multimap put.
+          if (null == list) {
+            list = Lists.newArrayList();
+            callableKeys.put(callable, list);
+          }
+
+          list.add(binding.getKey());
+        }
+      }
+
+      // check startables now.
+      if (Startable.class.isAssignableFrom(bindingType)) {
+
+        // First make sure this is a singleton.
+        Preconditions.checkState(Scopes.isSingleton(binding),
+            "Egregious error, all Startables must be scopes as singletons!");
+
+        //noinspection unchecked
+        startables.add((Binding<Startable>) binding);
+      }
+    }
+
+    synchronized (this) {
+      for (Binding<Startable> binding : startables) {
+
+        // Go go zilla go! (sequential startup)
+        injector.getInstance(binding.getKey()).start();
+      }
+
+      // Safely publish keymap.
+      this.callableKeys = callableKeys;
+
+      // success!
+      started = true;
+    }
+  }
+

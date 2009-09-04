@@ -1,0 +1,7 @@
+    public void service(ServletRequest servletRequest, ServletResponse servletResponse)
+        throws IOException, ServletException {
+      final HttpServletRequest request = (HttpServletRequest) servletRequest;
+
+      System.out.println(request.getRequestURI());
+ }
+
