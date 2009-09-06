@@ -1,14 +1,5 @@
   public <T> T broadcast(Class<T> clazz, Matcher<? super T> matcher) {
-    final List<T> ts = Lists.newArrayList();
-    for (Key<?> key : callableKeys.get(clazz)) {
-      // Should this get instancing happen during method call?
-      @SuppressWarnings("unchecked") // Guarded by getInstance
-          T t = (T) injector.getInstance(key);
-
-      if (matcher.matches(t)) {
-        ts.add(t);
-      }
-    }
+    final List<T> ts = instantiateForBroadcast(clazz, matcher);
 
     @SuppressWarnings("unchecked") T caster = (T) Proxy
         .newProxyInstance(clazz.getClassLoader(), new Class[] { clazz }, new InvocationHandler() {

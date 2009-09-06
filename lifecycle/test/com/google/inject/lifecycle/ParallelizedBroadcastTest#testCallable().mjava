@@ -1,0 +1,29 @@
+  public final void testCallable() throws InterruptedException {
+    called.set(0);
+    Lifecycle lifecycle = Guice.createInjector(new LifecycleModule() {
+
+      @Override
+      protected void configureLifecycle() {
+        bind(Runnable.class).to(AClass.class);
+
+        // Does not get called because the key does not expose the callable.
+        bind(Object.class).to(AClass.class);
+
+        bind(BaseClass.class).to(AClass.class);
+
+        callable(Runnable.class);
+      }
+
+    }).getInstance(Lifecycle.class);
+
+    final ExecutorService executorService = Executors.newFixedThreadPool(3);
+    lifecycle
+      .broadcast(Runnable.class, executorService)
+      .run();
+
+    executorService.shutdown();
+    executorService.awaitTermination(5L, TimeUnit.SECONDS);
+
+    assertEquals(2, called.get());
+  }
+
