@@ -79,6 +79,10 @@
     suite.addTest(com.googlecode.guice.StrictContainerTestSuite.suite());
     /*end[AOP]*/
 
+    // googlecode.guice
+    suite.addTestSuite(BytecodeGenTest.class);
+    suite.addTestSuite(Jsr330Test.class);
+
     return removeSuppressedTests(suite, SUPPRESSED_TEST_NAMES);
   }
 

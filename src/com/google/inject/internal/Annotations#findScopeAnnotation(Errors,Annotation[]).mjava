@@ -3,11 +3,12 @@
     Class<? extends Annotation> found = null;
 
     for (Annotation annotation : annotations) {
-      if (annotation.annotationType().isAnnotationPresent(ScopeAnnotation.class)) {
+      Class<? extends Annotation> annotationType = annotation.annotationType();
+      if (isScopeAnnotation(annotationType)) {
         if (found != null) {
-          errors.duplicateScopeAnnotations(found, annotation.annotationType());
+          errors.duplicateScopeAnnotations(found, annotationType);
         } else {
-          found = annotation.annotationType();
+          found = annotationType;
         }
       }
     }

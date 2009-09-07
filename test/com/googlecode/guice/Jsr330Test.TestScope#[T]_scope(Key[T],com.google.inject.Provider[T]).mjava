@@ -1,0 +1,16 @@
+    public <T> com.google.inject.Provider<T> scope(Key<T> key,
+        final com.google.inject.Provider<T> unscoped) {
+      return new com.google.inject.Provider<T>() {
+        private T value;
+        private int snapshotTime = -1;
+
+        public T get() {
+          if (snapshotTime != now) {
+            value = unscoped.get();
+            snapshotTime = now;
+          }
+          return value;
+        }
+      };
+    }
+

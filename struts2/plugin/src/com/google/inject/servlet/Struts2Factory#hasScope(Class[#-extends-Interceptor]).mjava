@@ -1,11 +1,9 @@
   /**
    * Returns true if the given class has a scope annotation.
    */
-  private static boolean hasScope(
-      Class<? extends Interceptor> interceptorClass) {
+  private static boolean hasScope(Class<? extends Interceptor> interceptorClass) {
     for (Annotation annotation : interceptorClass.getAnnotations()) {
-      if (annotation.annotationType()
-          .isAnnotationPresent(ScopeAnnotation.class)) {
+      if (Annotations.isScopeAnnotation(annotation.annotationType())) {
         return true;
       }
     }

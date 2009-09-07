@@ -1,4 +1,5 @@
   public static boolean isScopeAnnotation(Class<? extends Annotation> annotationType) {
-    return annotationType.isAnnotationPresent(ScopeAnnotation.class);
+    return annotationType.isAnnotationPresent(ScopeAnnotation.class) 
+        || annotationType.isAnnotationPresent(javax.inject.Scope.class);
   }
 

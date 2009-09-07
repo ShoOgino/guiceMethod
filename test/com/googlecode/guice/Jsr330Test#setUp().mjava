@@ -1,0 +1,5 @@
+  @Override protected void setUp() throws Exception {
+    J.nextInstanceId = 0;
+    K.nextInstanceId = 0;
+  }
+

@@ -1,0 +1,30 @@
+  public void testScopeAnnotation() {
+    final TestScope scope = new TestScope();
+
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(B.class).in(scope);
+        bind(C.class).in(TestScoped.class);
+        bindScope(TestScoped.class, scope);
+      }
+    });
+
+    B b = injector.getInstance(B.class);
+    assertSame(b, injector.getInstance(B.class));
+    assertSame(b, injector.getInstance(B.class));
+
+    C c = injector.getInstance(C.class);
+    assertSame(c, injector.getInstance(C.class));
+    assertSame(c, injector.getInstance(C.class));
+
+    H h = injector.getInstance(H.class);
+    assertSame(h, injector.getInstance(H.class));
+    assertSame(h, injector.getInstance(H.class));
+
+    scope.reset();
+
+    assertNotSame(b, injector.getInstance(B.class));
+    assertNotSame(c, injector.getInstance(C.class));
+    assertNotSame(h, injector.getInstance(H.class));
+  }
+

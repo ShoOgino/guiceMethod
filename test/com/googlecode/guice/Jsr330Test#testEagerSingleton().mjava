@@ -1,0 +1,12 @@
+  public void testEagerSingleton() {
+    Guice.createInjector(Stage.PRODUCTION, new AbstractModule() {
+      protected void configure() {
+        bind(J.class);
+        bind(K.class).in(Singleton.class);
+      }
+    });
+
+    assertEquals(1, J.nextInstanceId);
+    assertEquals(1, K.nextInstanceId);
+  }
+

@@ -1,0 +1,12 @@
+  public void testScopesIsSingleton() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(J.class);
+        bind(K.class).in(Singleton.class);
+      }
+    });
+
+    assertTrue(Scopes.isSingleton(injector.getBinding(J.class)));
+    assertTrue(Scopes.isSingleton(injector.getBinding(K.class)));
+  }
+
