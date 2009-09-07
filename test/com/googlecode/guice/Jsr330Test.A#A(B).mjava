@@ -1,0 +1,4 @@
+    @Inject A(B b) {
+      this.b = b;
+    }
+

@@ -1,0 +1,4 @@
+  public static Named named(String name) {
+    return new NamedImpl(name);
+  }
+

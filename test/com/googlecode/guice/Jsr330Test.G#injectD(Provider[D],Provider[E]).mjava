@@ -1,0 +1,5 @@
+    @Inject void injectD(@Red Provider<D> dProvider, Provider<E> eProvider) {
+      this.dProvider = dProvider;
+      this.eProvider = eProvider;
+    }
+

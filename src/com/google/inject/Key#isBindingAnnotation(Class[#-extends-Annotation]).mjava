@@ -1,5 +1,0 @@
-  static boolean isBindingAnnotation(
-      Class<? extends Annotation> annotationType) {
-    return annotationType.isAnnotationPresent(BindingAnnotation.class);
-  }
-

@@ -1,9 +1,7 @@
-  InjectionPoint(TypeLiteral<?> declaringType, Field field) {
+  InjectionPoint(TypeLiteral<?> declaringType, Field field, boolean optional) {
     this.member = field;
     this.declaringType = declaringType;
-
-    Inject inject = field.getAnnotation(Inject.class);
-    this.optional = inject.optional();
+    this.optional = optional;
 
     Annotation[] annotations = field.getAnnotations();
 

@@ -2,11 +2,11 @@
     TypeLiteral<?> typeLiteral = TypeLiteral.get(getClass());
 
     Method barMethod = getClass().getMethod("bar", String.class);
-    InjectionPoint injectionPoint = new InjectionPoint(typeLiteral, barMethod);
+    InjectionPoint injectionPoint = new InjectionPoint(typeLiteral, barMethod, false);
     assertSame(barMethod, injectionPoint.getMember());
     assertFalse(injectionPoint.isOptional());
     assertEquals(getClass().getName() + ".bar()", injectionPoint.toString());
-    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeLiteral, barMethod));
+    assertEqualsBothWays(injectionPoint, new InjectionPoint(typeLiteral, barMethod, false));
     assertNotSerializable(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
@@ -18,6 +18,6 @@
     assertEquals(false, dependency.isNullable());
     assertNotSerializable(dependency);
     assertEqualsBothWays(dependency,
-        getOnlyElement(new InjectionPoint(typeLiteral, barMethod).getDependencies()));
+        getOnlyElement(new InjectionPoint(typeLiteral, barMethod, false).getDependencies()));
   }
 

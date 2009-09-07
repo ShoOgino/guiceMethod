@@ -6,10 +6,10 @@
     Annotation found = null;
 
     for (Annotation annotation : annotations) {
-      if (annotation.annotationType().isAnnotationPresent(BindingAnnotation.class)) {
+      Class<? extends Annotation> annotationType = annotation.annotationType();
+      if (isBindingAnnotation(annotationType)) {
         if (found != null) {
-          errors.duplicateBindingAnnotations(member,
-              found.annotationType(), annotation.annotationType());
+          errors.duplicateBindingAnnotations(member, found.annotationType(), annotationType);
         } else {
           found = annotation;
         }

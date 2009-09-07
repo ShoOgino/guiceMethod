@@ -1,0 +1,5 @@
+    @Inject void injectD(@Red D d, @Named("jesse") E e) {
+      this.d = d;
+      this.e = e;
+    }
+

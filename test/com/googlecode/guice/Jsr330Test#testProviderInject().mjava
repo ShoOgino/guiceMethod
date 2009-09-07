@@ -1,0 +1,18 @@
+  public void testProviderInject() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(B.class).annotatedWith(Jsr330.named("jodie")).toInstance(b);
+        bind(C.class).toInstance(c);
+        bind(D.class).annotatedWith(RED).toInstance(d);
+        bind(E.class).toInstance(e);
+        bind(G.class);
+      }
+    });
+
+    G g = injector.getInstance(G.class);
+    assertSame(b, g.bProvider.get());
+    assertSame(c, g.cProvider.get());
+    assertSame(d, g.dProvider.get());
+    assertSame(e, g.eProvider.get());
+  }
+

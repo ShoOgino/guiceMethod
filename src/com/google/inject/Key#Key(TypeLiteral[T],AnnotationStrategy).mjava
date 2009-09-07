@@ -1,7 +1,7 @@
   /** Constructs a key from a manually specified type. */
   private Key(TypeLiteral<T> typeLiteral, AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;
-    this.typeLiteral = MoreTypes.makeKeySafe(typeLiteral);
+    this.typeLiteral = MoreTypes.canonicalizeForKey(typeLiteral);
     this.hashCode = computeHashCode();
   }
 

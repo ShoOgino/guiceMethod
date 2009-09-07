@@ -6,15 +6,22 @@
         continue;
       }
 
-      Inject inject = member.getAnnotation(Inject.class);
-      if (inject == null) {
-        continue;
+      boolean optional;
+      Inject guiceInject = member.getAnnotation(Inject.class);
+      if (guiceInject == null) {
+        javax.inject.Inject javaxInject = member.getAnnotation(javax.inject.Inject.class);
+        if (javaxInject == null) {
+          continue;
+        }
+        optional = javaxInject.optional();
+      } else {
+        optional = guiceInject.optional();
       }
 
       try {
-        injectionPoints.add(factory.create(typeLiteral, member, errors));
+        injectionPoints.add(factory.create(typeLiteral, member, optional, errors));
       } catch (ConfigurationException ignorable) {
-        if (!inject.optional()) {
+        if (!optional) {
           errors.merge(ignorable.getErrorMessages());
         }
       }

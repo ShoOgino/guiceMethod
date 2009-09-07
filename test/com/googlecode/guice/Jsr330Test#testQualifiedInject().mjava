@@ -1,0 +1,18 @@
+  public void testQualifiedInject() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(B.class).annotatedWith(Jsr330.named("jodie")).toInstance(b);
+        bind(C.class).annotatedWith(Red.class).toInstance(c);
+        bind(D.class).annotatedWith(RED).toInstance(d);
+        bind(E.class).annotatedWith(Jsr330.named("jesse")).toInstance(e);
+        bind(F.class);
+      }
+    });
+
+    F f = injector.getInstance(F.class);
+    assertSame(b, f.b);
+    assertSame(c, f.c);
+    assertSame(d, f.d);
+    assertSame(e, f.e);
+  }
+

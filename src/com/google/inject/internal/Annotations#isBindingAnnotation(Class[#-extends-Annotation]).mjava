@@ -1,0 +1,8 @@
+  /**
+   * Returns true if annotations of the specified type are binding annotations.
+   */
+  public static boolean isBindingAnnotation(Class<? extends Annotation> annotationType) {
+    return annotationType.isAnnotationPresent(BindingAnnotation.class) 
+          || annotationType.isAnnotationPresent(Qualifier.class);
+  }
+

@@ -1,0 +1,4 @@
+    @Inject G(@Named("jodie") Provider<B> bProvider) {
+      this.bProvider = bProvider;
+    }
+

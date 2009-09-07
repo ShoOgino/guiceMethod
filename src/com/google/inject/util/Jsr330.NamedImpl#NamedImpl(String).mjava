@@ -1,0 +1,4 @@
+    NamedImpl(String value) {
+      this.value = checkNotNull(value, "name");
+    }
+

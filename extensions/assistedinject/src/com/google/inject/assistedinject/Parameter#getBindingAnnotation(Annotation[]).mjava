@@ -6,11 +6,11 @@
    */
   private Annotation getBindingAnnotation(Annotation[] annotations) {
     Annotation bindingAnnotation = null;
-    for (Annotation a : annotations) {
-      if (a.annotationType().getAnnotation(BindingAnnotation.class) != null) {
+    for (Annotation annotation : annotations) {
+      if (Annotations.isBindingAnnotation(annotation.annotationType())) {
         checkArgument(bindingAnnotation == null,
-            "Parameter has multiple binding annotations: %s and %s", bindingAnnotation, a);
-        bindingAnnotation = a;
+            "Parameter has multiple binding annotations: %s and %s", bindingAnnotation, annotation);
+        bindingAnnotation = annotation;
       }
     }
     return bindingAnnotation;

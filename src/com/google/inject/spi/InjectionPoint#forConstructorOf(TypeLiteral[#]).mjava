@@ -13,19 +13,29 @@
 
     Constructor<?> injectableConstructor = null;
     for (Constructor<?> constructor : rawType.getDeclaredConstructors()) {
-      Inject inject = constructor.getAnnotation(Inject.class);
-      if (inject != null) {
-        if (inject.optional()) {
-          errors.optionalConstructor(constructor);
-        }
 
-        if (injectableConstructor != null) {
-          errors.tooManyConstructors(rawType);
+      boolean optional;
+      Inject guiceInject = constructor.getAnnotation(Inject.class);
+      if (guiceInject == null) {
+        javax.inject.Inject javaxInject = constructor.getAnnotation(javax.inject.Inject.class);
+        if (javaxInject == null) {
+          continue;
         }
-
-        injectableConstructor = constructor;
-        checkForMisplacedBindingAnnotations(injectableConstructor, errors);
+        optional = javaxInject.optional();
+      } else {
+        optional = guiceInject.optional();
       }
+
+      if (optional) {
+        errors.optionalConstructor(constructor);
+      }
+
+      if (injectableConstructor != null) {
+        errors.tooManyConstructors(rawType);
+      }
+
+      injectableConstructor = constructor;
+      checkForMisplacedBindingAnnotations(injectableConstructor, errors);
     }
 
     errors.throwConfigurationExceptionIfErrorsExist();

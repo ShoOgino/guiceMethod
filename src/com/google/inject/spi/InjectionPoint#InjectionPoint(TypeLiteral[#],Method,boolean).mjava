@@ -1,10 +1,7 @@
-  InjectionPoint(TypeLiteral<?> declaringType, Method method) {
+  InjectionPoint(TypeLiteral<?> declaringType, Method method, boolean optional) {
     this.member = method;
     this.declaringType = declaringType;
-
-    Inject inject = method.getAnnotation(Inject.class);
-    this.optional = inject.optional();
-
+    this.optional = optional;
     this.dependencies = forMember(method, declaringType, method.getParameterAnnotations());
   }
 
