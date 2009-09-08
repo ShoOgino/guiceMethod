@@ -3,5 +3,5 @@
    * injector using {@link com.google.inject.Injector#getBinding(Key)
    * Injector.getBinding(providerKey)}
    */
-  Key<? extends Provider<? extends T>> getProviderKey();
+  Key<? extends javax.inject.Provider<? extends T>> getProviderKey();
 

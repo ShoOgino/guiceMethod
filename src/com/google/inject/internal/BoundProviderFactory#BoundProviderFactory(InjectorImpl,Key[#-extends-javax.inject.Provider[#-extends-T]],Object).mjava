@@ -1,6 +1,6 @@
   BoundProviderFactory(
       InjectorImpl injector,
-      Key<? extends Provider<? extends T>> providerKey,
+      Key<? extends javax.inject.Provider<? extends T>> providerKey,
       Object source) {
     this.injector = injector;
     this.providerKey = providerKey;

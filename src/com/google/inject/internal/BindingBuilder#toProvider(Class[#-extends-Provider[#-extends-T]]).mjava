@@ -1,4 +1,0 @@
-  public BindingBuilder<T> toProvider(Class<? extends Provider<? extends T>> providerType) {
-    return toProvider(Key.get(providerType));
-  }
-

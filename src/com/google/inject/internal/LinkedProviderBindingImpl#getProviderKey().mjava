@@ -1,4 +1,4 @@
-  public Key<? extends Provider<? extends T>> getProviderKey() {
+  public Key<? extends javax.inject.Provider<? extends T>> getProviderKey() {
     return providerKey;
   }
 
