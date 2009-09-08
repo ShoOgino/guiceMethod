@@ -1,0 +1,14 @@
+  public void testInjectingAbstractMethodsIsForbidden() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(M.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) Injected method " + AbstractM.class.getName() + ".setB() cannot be abstract.");
+    }
+  }
+

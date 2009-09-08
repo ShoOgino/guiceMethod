@@ -1,0 +1,4 @@
+  public Errors cannotInjectFinalField(Field field) {
+    return addMessage("Injected field %s cannot be final.", field);
+  }
+

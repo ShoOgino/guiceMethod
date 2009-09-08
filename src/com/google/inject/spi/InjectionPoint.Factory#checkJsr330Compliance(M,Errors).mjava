@@ -1,0 +1,7 @@
+    /**
+     * Checks if the member conforms to JSR 330's tight constraints.
+     *
+     * @return true if the member is conformant.
+     */
+    boolean checkJsr330Compliance(M member, Errors errors);
+

@@ -1,0 +1,14 @@
+  public void testInjectingMethodsWithTypeParametersIsForbidden() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(N.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "1) Injected method " + N.class.getName()
+          + ".setB() cannot declare type parameters of its own.");
+    }
+  }
+

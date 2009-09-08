@@ -1,0 +1,2 @@
+    @Inject <T> void setB(B b) {}
+

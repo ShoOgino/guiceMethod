@@ -7,14 +7,17 @@
       }
 
       boolean optional;
-      Inject guiceInject = member.getAnnotation(Inject.class);
-      if (guiceInject == null) {
-        javax.inject.Inject javaxInject = member.getAnnotation(javax.inject.Inject.class);
-        if (javaxInject == null) {
+      javax.inject.Inject javaxInject = member.getAnnotation(javax.inject.Inject.class);
+      if (javaxInject != null) {
+        optional = javaxInject.optional();
+        if (!factory.checkJsr330Compliance(member, errors)) {
+          continue; // don't bother to inject noncompliant members
+        }
+      } else {
+        Inject guiceInject = member.getAnnotation(Inject.class);
+        if (guiceInject == null) {
           continue;
         }
-        optional = javaxInject.optional();
-      } else {
         optional = guiceInject.optional();
       }
 

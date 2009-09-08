@@ -1,0 +1,4 @@
+  public Errors cannotInjectMethodWithTypeParameters(Method method) {
+    return addMessage("Injected method %s cannot declare type parameters of its own.", method);
+  }
+

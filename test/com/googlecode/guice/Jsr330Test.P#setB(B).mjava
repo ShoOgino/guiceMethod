@@ -1,0 +1,4 @@
+    @Inject B setB(B b) {
+      return b;
+    }
+

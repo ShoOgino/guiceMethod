@@ -1,0 +1,2 @@
+    @Inject abstract void setB(B b);
+
