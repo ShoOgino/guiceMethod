@@ -1,0 +1,5 @@
+  public static void main(String[] args) throws IllegalAccessException,
+      InstantiationException, ClassNotFoundException {
+    Tck.main(new String[] { GuiceCandidate.class.getName() });
+  }
+
