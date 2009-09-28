@@ -1,4 +1,14 @@
   public static Test suite() {
-    return new GuiceTck();
+    return Tck.testsFor(Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Car.class).to(Convertible.class);
+        bind(Seat.class).annotatedWith(Drivers.class).to(DriversSeat.class);
+        bind(Engine.class).to(V8Engine.class);
+        bind(Tire.class).annotatedWith(Jsr330.named("spare")).to(SpareTire.class);
+        bind(Cupholder.class);
+        bind(Tire.class);
+        bind(FuelTank.class);
+      }
+    }).getInstance(Car.class));
   }
 
