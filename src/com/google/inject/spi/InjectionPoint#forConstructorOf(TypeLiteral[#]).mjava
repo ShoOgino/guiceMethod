@@ -21,7 +21,7 @@
         if (javaxInject == null) {
           continue;
         }
-        optional = javaxInject.optional();
+        optional = false;
       } else {
         optional = guiceInject.optional();
       }
