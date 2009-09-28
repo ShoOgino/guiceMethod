@@ -1,5 +1,5 @@
-  public GuiceCandidate() {
-    this.injector = Guice.createInjector(new AbstractModule() {
+  protected Car getCar() {
+    return Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bind(Car.class).to(Convertible.class);
         bind(Seat.class).annotatedWith(Drivers.class).to(DriversSeat.class);
@@ -9,6 +9,6 @@
         bind(Tire.class);
         bind(FuelTank.class);
       }
-    });
+    }).getInstance(Car.class);
   }
 

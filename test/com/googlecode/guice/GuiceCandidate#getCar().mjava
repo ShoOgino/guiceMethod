@@ -1,4 +1,0 @@
-  public Car getCar() {
-    return injector.getInstance(Car.class);
-  }
-
