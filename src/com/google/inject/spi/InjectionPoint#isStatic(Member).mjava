@@ -1,4 +1,0 @@
-  private static boolean isStatic(Member member) {
-    return Modifier.isStatic(member.getModifiers());
-  }
-

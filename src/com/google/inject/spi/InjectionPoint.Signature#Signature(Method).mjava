@@ -1,0 +1,12 @@
+    Signature(Method method) {
+      this.name = method.getName();
+      this.parameterTypes = method.getParameterTypes();
+
+      int h = name.hashCode();
+      h = h * 31 + parameterTypes.length;
+      for (Class parameterType : parameterTypes) {
+        h = h * 31 + parameterType.hashCode();
+      }
+      this.hash = h;
+    }
+

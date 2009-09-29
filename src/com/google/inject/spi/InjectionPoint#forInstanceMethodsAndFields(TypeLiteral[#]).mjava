@@ -10,14 +10,8 @@
    *      of the valid injection points.
    */
   public static Set<InjectionPoint> forInstanceMethodsAndFields(TypeLiteral<?> type) {
-    List<InjectionPoint> sink = Lists.newArrayList();
     Errors errors = new Errors();
-
-    // TODO (crazybob): Filter out overridden members.
-    addInjectionPoints(type, Factory.FIELDS, false, sink, errors);
-    addInjectionPoints(type, Factory.METHODS, false, sink, errors);
-
-    ImmutableSet<InjectionPoint> result = ImmutableSet.copyOf(sink);
+    Set<InjectionPoint> result = getInjectionPoints(type, false, errors);
     if (errors.hasErrors()) {
       throw new ConfigurationException(errors.getMessages()).withPartialValue(result);
     }

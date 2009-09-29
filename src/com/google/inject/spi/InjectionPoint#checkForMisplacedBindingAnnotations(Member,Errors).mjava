@@ -1,8 +1,8 @@
-  private static void checkForMisplacedBindingAnnotations(Member member, Errors errors) {
+  private static boolean checkForMisplacedBindingAnnotations(Member member, Errors errors) {
     Annotation misplacedBindingAnnotation = Annotations.findBindingAnnotation(
         errors, member, ((AnnotatedElement) member).getAnnotations());
     if (misplacedBindingAnnotation == null) {
-      return;
+      return false;
     }
 
     // don't warn about misplaced binding annotations on methods when there's a field with the same
@@ -10,12 +10,13 @@
     if (member instanceof Method) {
       try {
         if (member.getDeclaringClass().getDeclaredField(member.getName()) != null) {
-          return;
+          return false;
         }
       } catch (NoSuchFieldException ignore) {
       }
     }
 
     errors.misplacedBindingAnnotation(member, misplacedBindingAnnotation);
+    return true;
   }
 

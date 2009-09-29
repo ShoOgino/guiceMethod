@@ -1,0 +1,4 @@
+    InjectionPoint toInjectionPoint(Errors errors) {
+      return new InjectionPoint(declaringType, field, optional);
+    }
+

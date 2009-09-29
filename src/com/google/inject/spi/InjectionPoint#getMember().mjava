@@ -2,6 +2,7 @@
    * Returns the injected constructor, field, or method.
    */
   public Member getMember() {
+    // TODO: Don't expose the original member (which probably has setAccessible(true)).
     return member;
   }
 

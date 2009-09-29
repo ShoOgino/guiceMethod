@@ -1,0 +1,5 @@
+    InjectableField(TypeLiteral<?> declaringType, Field field) {
+      super(declaringType, field);
+      this.field = field;
+    }
+

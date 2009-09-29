@@ -10,13 +10,9 @@
    *      of the valid injection points.
    */
   public static Set<InjectionPoint> forStaticMethodsAndFields(TypeLiteral type) {
-    List<InjectionPoint> sink = Lists.newArrayList();
     Errors errors = new Errors();
 
-    addInjectionPoints(type, Factory.FIELDS, true, sink, errors);
-    addInjectionPoints(type, Factory.METHODS, true, sink, errors);
-
-    ImmutableSet<InjectionPoint> result = ImmutableSet.copyOf(sink);
+    Set<InjectionPoint> result = getInjectionPoints(type, true, errors);
     if (errors.hasErrors()) {
       throw new ConfigurationException(errors.getMessages()).withPartialValue(result);
     }

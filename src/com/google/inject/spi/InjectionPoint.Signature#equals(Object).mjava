@@ -1,0 +1,23 @@
+    @Override public boolean equals(Object o) {
+      if (!(o instanceof Signature)) {
+        return false;
+      }
+
+      Signature other = (Signature) o;
+      if (!name.equals(other.name)) {
+        return false;
+      }
+
+      if (parameterTypes.length != other.parameterTypes.length) {
+        return false;
+      }
+
+      for (int i = 0; i < parameterTypes.length; i++) {
+        if (parameterTypes[i] != other.parameterTypes[i]) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
