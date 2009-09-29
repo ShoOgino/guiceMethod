@@ -4,11 +4,14 @@
         bind(Car.class).to(Convertible.class);
         bind(Seat.class).annotatedWith(Drivers.class).to(DriversSeat.class);
         bind(Engine.class).to(V8Engine.class);
-        bind(Tire.class).annotatedWith(Jsr330.named("spare")).to(SpareTire.class);
         bind(Cupholder.class);
         bind(Tire.class);
         bind(FuelTank.class);
         requestStaticInjection(Convertible.class, SpareTire.class);
+      }
+
+      @Provides @Named("spare") Tire provideSpareTire(SpareTire spare) {
+        return spare;
       }
     }).getInstance(Car.class));
   }
