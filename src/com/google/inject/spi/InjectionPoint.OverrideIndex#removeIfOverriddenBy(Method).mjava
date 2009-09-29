@@ -1,6 +1,6 @@
     void removeIfOverriddenBy(Method method) {
-      if (!hasMethods || position == Position.TOP) {
-        // There's nothing to remove.
+      if (position == Position.TOP) {
+        // If we're at the top of the hierarchy, there's nothing to override.
         return;
       }
 

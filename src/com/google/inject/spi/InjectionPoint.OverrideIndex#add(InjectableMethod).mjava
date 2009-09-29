@@ -1,5 +1,4 @@
     void add(InjectableMethod injectableMethod) {
-      hasMethods = true;
       injectableMembers.add(injectableMethod);
       if (position == Position.BOTTOM
           || injectableMethod.isFinal()) {
