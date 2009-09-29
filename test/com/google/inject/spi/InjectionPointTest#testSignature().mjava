@@ -1,0 +1,14 @@
+  public void testSignature() throws Exception {
+    Signature fooA = new Signature(Foo.class.getDeclaredMethod(
+        "a", String.class, int.class));
+    Signature fooB = new Signature(Foo.class.getDeclaredMethod("b"));
+    Signature barA = new Signature(Bar.class.getDeclaredMethod(
+        "a", String.class, int.class));
+    Signature barB = new Signature(Bar.class.getDeclaredMethod("b"));
+
+    assertEquals(fooA.hashCode(), barA.hashCode());
+    assertEquals(fooB.hashCode(), barB.hashCode());
+    assertEquals(fooA, barA);
+    assertEquals(fooB, barB);
+  }
+
