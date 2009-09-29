@@ -1,3 +1,6 @@
+    /**
+     * Removes a method overridden by the given method, if present.
+     */
     void removeIfOverriddenBy(Method method) {
       if (position == Position.TOP) {
         // If we're at the top of the hierarchy, there's nothing to override.
