@@ -1,5 +1,0 @@
-    InjectionPoint toInjectionPoint(Errors errors) {
-      checkForMisplacedBindingAnnotations(method, errors);
-      return new InjectionPoint(declaringType, method, optional);
-    }
-

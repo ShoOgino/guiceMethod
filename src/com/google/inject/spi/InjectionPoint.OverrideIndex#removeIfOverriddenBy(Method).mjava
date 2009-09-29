@@ -1,0 +1,36 @@
+    void removeIfOverriddenBy(Method method) {
+      if (!hasMethods || position == Position.TOP) {
+        // There's nothing to remove.
+        return;
+      }
+
+      if (bySignature == null) {
+        // We encountered a method in a subclass. Time to index the
+        // methods in the parent class.
+        bySignature = new HashMap<Signature, List<InjectableMethod>>();
+        for (InjectableMember member = injectableMembers.head; member != null;
+            member = member.next) {
+          if (!(member instanceof InjectableMethod)) continue;
+          InjectableMethod im = (InjectableMethod) member;
+          if (im.isFinal()) continue;
+          List<InjectableMethod> methods = new ArrayList<InjectableMethod>();
+          methods.add(im);
+          bySignature.put(new Signature(im.method), methods);
+        }
+      }
+
+      lastMethod = method;
+      Signature signature = lastSignature = new Signature(method);
+      List<InjectableMethod> methods = bySignature.get(signature);
+      if (methods != null) {
+        for (Iterator<InjectableMethod> iterator = methods.iterator();
+            iterator.hasNext();) {
+          InjectableMethod possiblyOverridden = iterator.next();
+          if (overrides(method, possiblyOverridden.method)) {
+            iterator.remove();
+            injectableMembers.remove(possiblyOverridden);
+          }
+        }
+      }
+    }
+

@@ -1,0 +1,13 @@
+    InjectableMember(TypeLiteral<?> declaringType, Annotation atInject) {
+      this.declaringType = declaringType;
+
+      if (atInject.annotationType() == javax.inject.Inject.class) {
+        optional = false;
+        jsr330 = true;
+        return;
+      }
+
+      jsr330 = false;
+      optional = ((Inject) atInject).optional();
+    }
+

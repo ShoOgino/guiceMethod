@@ -1,0 +1,5 @@
+  static Annotation getAtInject(AnnotatedElement member) {
+    Annotation a = member.getAnnotation(javax.inject.Inject.class);
+    return a == null ? member.getAnnotation(Inject.class) : a;
+  }
+

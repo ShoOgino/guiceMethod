@@ -1,12 +1,10 @@
   private static List<TypeLiteral<?>> hierarchyFor(TypeLiteral<?> type) {
-    // Construct type hierarchy from Object.class down.
     List<TypeLiteral<?>> hierarchy = new ArrayList<TypeLiteral<?>>();
     TypeLiteral<?> current = type;
     while (current.getRawType() != Object.class) {
       hierarchy.add(current);
       current = current.getSupertype(current.getRawType().getSuperclass());
     }
-    Collections.reverse(hierarchy);
     return hierarchy;
   }
 

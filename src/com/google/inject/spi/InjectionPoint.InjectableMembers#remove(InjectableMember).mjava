@@ -1,0 +1,15 @@
+    void remove(InjectableMember member) {
+      if (member.previous != null) {
+        member.previous.next = member.next;
+      }
+      if (member.next != null) {
+        member.next.previous = member.previous;
+      }
+      if (head == member) {
+        head = member.next;
+      }
+      if (tail == member) {
+        tail = member.previous;
+      }
+    }
+

@@ -1,0 +1,6 @@
+    InjectableMethod(TypeLiteral<?> declaringType, Method method,
+        Annotation atInject) {
+      super(declaringType, atInject);
+      this.method = method;
+    }
+

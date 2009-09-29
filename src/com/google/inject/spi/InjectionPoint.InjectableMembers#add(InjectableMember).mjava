@@ -1,0 +1,10 @@
+    void add(InjectableMember member) {
+      if (head == null) {
+        head = tail = member;
+      } else {
+        member.previous = tail;
+        tail.next = member;
+        tail = member;
+      }
+    }
+

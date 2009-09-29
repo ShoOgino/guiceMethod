@@ -1,0 +1,17 @@
+  private static boolean isValidMethod(InjectableMethod injectableMethod,
+      Errors errors) {
+    boolean result = true;
+    if (injectableMethod.jsr330) {
+      Method method = injectableMethod.method;
+      if (Modifier.isAbstract(method.getModifiers())) {
+        errors.cannotInjectAbstractMethod(method);
+        result = false;
+      }
+      if (method.getTypeParameters().length > 0) {
+        errors.cannotInjectMethodWithTypeParameters(method);
+        result = false;
+      }
+    }
+    return result;
+  }
+

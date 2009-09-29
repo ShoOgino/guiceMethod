@@ -1,2 +1,0 @@
-    abstract InjectionPoint toInjectionPoint(Errors errors);
-

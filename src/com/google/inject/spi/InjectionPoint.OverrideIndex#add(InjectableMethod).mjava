@@ -1,0 +1,21 @@
+    void add(InjectableMethod injectableMethod) {
+      hasMethods = true;
+      injectableMembers.add(injectableMethod);
+      if (position == Position.BOTTOM
+          || injectableMethod.isFinal()) {
+        // This method can't be overridden, so there's no need to index it.
+        return;
+      }
+      if (bySignature != null) {
+        // Try to reuse the signature we created during removal
+        Signature signature = injectableMethod.method == lastMethod
+            ? lastSignature : new Signature(injectableMethod.method);
+        List<InjectableMethod> methods = bySignature.get(signature);
+        if (methods == null) {
+          methods = new ArrayList<InjectableMethod>();
+          bySignature.put(signature, methods);
+        }
+        methods.add(injectableMethod);
+      }
+    }
+

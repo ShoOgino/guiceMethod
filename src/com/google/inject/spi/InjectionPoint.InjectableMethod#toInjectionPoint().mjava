@@ -1,0 +1,4 @@
+    InjectionPoint toInjectionPoint() {
+      return new InjectionPoint(declaringType, method, optional);
+    }
+

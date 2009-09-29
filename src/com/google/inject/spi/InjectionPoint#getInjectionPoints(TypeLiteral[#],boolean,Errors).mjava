@@ -1,76 +1,55 @@
   private static Set<InjectionPoint> getInjectionPoints(final TypeLiteral<?> type,
       boolean statics, Errors errors) {
-    // TODO: Turn InjectableMember into an identity wrapper. Use it as the key in
-    // injectableMembers and the values in bySignature. This will be a lot faster than
-    // hashing the Method objects.
-    LinkedHashMap<Member, InjectableMember> injectableMembers
-        = new LinkedHashMap<Member, InjectableMember>();
-    HashMap<Signature, List<Method>> bySignature = null;
+    InjectableMembers injectableMembers = new InjectableMembers();
+    OverrideIndex overrideIndex = null;
 
-    for (TypeLiteral<?> current : hierarchyFor(type)) {
+    List<TypeLiteral<?>> hierarchy = hierarchyFor(type);
+    int topIndex = hierarchy.size() - 1;
+    for (int i = topIndex; i >= 0; i--) {
+      if (overrideIndex != null && i < topIndex) {
+        // Knowing the position within the hierarchy helps us make optimizations.
+        if (i == 0) {
+          overrideIndex.position = Position.BOTTOM;
+        } else {
+          overrideIndex.position = Position.MIDDLE;
+        }
+      }
+
+      TypeLiteral<?> current = hierarchy.get(i);
+
       for (Field field : current.getRawType().getDeclaredFields()) {
         if (Modifier.isStatic(field.getModifiers()) == statics) {
-          InjectableField injectableField = new InjectableField(current, field);
-          if (injectableField.injectable) {
+          Annotation atInject = getAtInject(field);
+          if (atInject != null) {
+            InjectableField injectableField = new InjectableField(current, field, atInject);
             if (injectableField.jsr330 && Modifier.isFinal(field.getModifiers())) {
               errors.cannotInjectFinalField(field);
-              continue;
             }
-            injectableMembers.put(field, injectableField);
+            injectableMembers.add(injectableField);
           }
         }
       }
 
       for (Method method : current.getRawType().getDeclaredMethods()) {
-        boolean isStatic = Modifier.isStatic(method.getModifiers());
-        if (isStatic == statics) {
-          InjectableMethod injectableMethod = new InjectableMethod(current, method);
-
-          if (injectableMethod.injectable) {
-            boolean result = true;
-            if (injectableMethod.jsr330) {
-              if (Modifier.isAbstract(method.getModifiers())) {
-                errors.cannotInjectAbstractMethod(method);
-                result = false;
-              }
-              if (method.getTypeParameters().length > 0) {
-                errors.cannotInjectMethodWithTypeParameters(method);
-                result = false;
-              }
-            }
-            if (!result) {
+        if (Modifier.isStatic(method.getModifiers()) == statics) {
+          if (overrideIndex != null) {
+            overrideIndex.removeIfOverriddenBy(method);
+          }
+          Annotation atInject = getAtInject(method);
+          if (atInject != null) {
+            InjectableMethod injectableMethod = new InjectableMethod(
+                current, method, atInject);
+            if (checkForMisplacedBindingAnnotations(method, errors)
+                | !isValidMethod(injectableMethod, errors)) {
               continue;
             }
-            if (isStatic && statics) {
-              injectableMembers.put(method, injectableMethod);
-            }
-          }
-
-          if (!isStatic) {
-            // Remove overridden method if present.
-            List<Method> possibleOverrides = null;
-            Signature signature = new Signature(method);
-            if (bySignature == null) {
-              // Lazily initialize the bySignature map.
-              bySignature = new HashMap<Signature, List<Method>>();
+            if (statics) {
+              injectableMembers.add(injectableMethod);
             } else {
-              possibleOverrides = bySignature.get(signature);
-              if (possibleOverrides != null) {
-                Method overridden = removeOverriddenMethod(method, possibleOverrides);
-                if (overridden != null) {
-                  injectableMembers.remove(overridden);
-                }
+              if (overrideIndex == null) {
+                overrideIndex = new OverrideIndex(injectableMembers);
               }
-            }
-
-            if (injectableMethod.injectable) {
-              // Keep track of this method in case it gets overridden.
-              if (possibleOverrides == null) {
-                possibleOverrides = new ArrayList<Method>();
-                bySignature.put(signature, possibleOverrides);
-              }
-              possibleOverrides.add(method);
-              injectableMembers.put(method, injectableMethod);
+              overrideIndex.add(injectableMethod);
             }
           }
         }
@@ -82,11 +61,12 @@
     }
 
     ImmutableSet.Builder<InjectionPoint> builder = ImmutableSet.builder();
-    for (InjectableMember injectableMember : injectableMembers.values()) {
+    for (InjectableMember im = injectableMembers.head; im != null;
+        im = im.next) {
       try {
-        builder.add(injectableMember.toInjectionPoint(errors));
+        builder.add(im.toInjectionPoint());
       } catch (ConfigurationException ignorable) {
-        if (!injectableMember.optional) {
+        if (!im.optional) {
           errors.merge(ignorable.getErrorMessages());
         }
       }
