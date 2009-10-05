@@ -1,4 +1,0 @@
-    void setDelegate(T delegate) {
-      this.delegate = delegate;
-    }
-

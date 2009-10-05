@@ -1,0 +1,4 @@
+    @Inject RealG(F f) {
+      this.f = f;
+    }
+

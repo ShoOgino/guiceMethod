@@ -1,0 +1,13 @@
+  public void testCircularDependencyProxyDelegateNeverInitialized() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(F.class).to(RealF.class);
+        bind(G.class).to(RealG.class);
+      }
+    });
+    F f = injector.getInstance(F.class);
+    assertEquals("F", f.g().f().toString());
+    assertEquals("G", f.g().f().g().toString());
+
+  }
+

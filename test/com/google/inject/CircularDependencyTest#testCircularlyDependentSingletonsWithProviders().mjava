@@ -11,10 +11,14 @@
       }
     });
 
-    injector.getInstance(Egg.class);
-    injector.getInstance(Chicken.class);
-
-    assertEquals(1, Chicken.nextInstanceId);
-    assertEquals(1, Egg.nextInstanceId);
+    try {
+      injector.getInstance(Egg.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "Provider was reentrant while creating a singleton",
+          " at " + CircularDependencyTest.class.getName(), "provideEgg(",
+          " while locating " + Egg.class.getName());
+    }
   }
 
