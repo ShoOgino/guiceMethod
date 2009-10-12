@@ -6,7 +6,9 @@
 
       if (suppressedTestNames.contains(test.toString())) {
         continue;
-      } else if (test instanceof TestSuite) {
+      }
+
+      if (test instanceof TestSuite) {
         result.addTest(removeSuppressedTests((TestSuite) test, suppressedTestNames));
       } else {
         result.addTest(test);
