@@ -5,7 +5,7 @@
    * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
    * that preserves insertion order in entry-set iterators.
    */
-  private List<ServletDefinition> collectServletDefinitions(Injector injector) {
+  private ServletDefinition[] collectServletDefinitions(Injector injector) {
     List<ServletDefinition> servletDefinitions = Lists.newArrayList();
     for (Binding<?> entry : injector.findBindingsByType(SERVLET_DEFS)) {
 
@@ -14,6 +14,7 @@
         servletDefinitions.addAll(injector.getInstance(defsKey));
     }
 
-    return servletDefinitions;
+    // Copy to a fixed size array for speed.
+    return servletDefinitions.toArray(new ServletDefinition[servletDefinitions.size()]);
   }
 

@@ -5,7 +5,7 @@
    * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
    * that preserves insertion order in entry-set iterators.
    */
-  private List<FilterDefinition> collectFilterDefinitions(Injector injector) {
+  private FilterDefinition[] collectFilterDefinitions(Injector injector) {
     List<FilterDefinition> filterDefinitions = Lists.newArrayList();
     for (Binding<?> entry : injector.findBindingsByType(FILTER_DEFS)) {
 
@@ -14,6 +14,7 @@
       filterDefinitions.addAll(injector.getInstance(defsKey));
     }
 
-    return filterDefinitions;
+    // Convert to a fixed size array for speed.
+    return filterDefinitions.toArray(new FilterDefinition[filterDefinitions.size()]);
   }
 

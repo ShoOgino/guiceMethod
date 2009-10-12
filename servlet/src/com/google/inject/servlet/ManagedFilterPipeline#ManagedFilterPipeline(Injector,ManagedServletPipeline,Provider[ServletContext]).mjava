@@ -5,6 +5,6 @@
     this.servletPipeline = servletPipeline;
     this.servletContext = servletContext;
 
-    this.filterDefinitions = Collections.unmodifiableList(collectFilterDefinitions(injector));
+    this.filterDefinitions = collectFilterDefinitions(injector);
   }
 
