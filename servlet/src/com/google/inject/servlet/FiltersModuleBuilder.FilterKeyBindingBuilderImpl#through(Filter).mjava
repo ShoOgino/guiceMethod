@@ -1,0 +1,4 @@
+    public void through(Filter filter) {
+      through(filter, new HashMap<String, String>());
+    }
+

@@ -41,10 +41,12 @@
    *     protected void configureServlets() {
    *       filter("/*").through(MyFilter.class);
    *       filter("*.css").through(MyCssFilter.class);
+   *       filter("*.jpg").through(new MyJpgFilter());
    *       // etc..
    *
    *       serve("*.html").with(MyServlet.class);
    *       serve("/my/*").with(MyServlet.class);
+   *       serve("*.jpg").with(new MyServlet());
    *       // etc..
    *      }
    *    }

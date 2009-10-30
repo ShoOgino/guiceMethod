@@ -1,0 +1,7 @@
+    public void through(Filter filter,
+        Map<String, String> contextParams) {
+      Key<Filter> filterKey = Key.get(Filter.class, UniqueAnnotations.create());
+      filterInstanceEntries.add(new FilterInstanceBindingEntry(filterKey, filter));
+      through(filterKey, contextParams);
+    }
+
