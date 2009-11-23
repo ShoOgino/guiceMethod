@@ -1,5 +1,5 @@
     @Override public String toString() {
-      return new ToStringBuilder(ProviderKeyBinding.class)
+      return new ToStringBuilder(ProviderBinding.class)
           .add("key", getKey())
           .add("providedKey", getProvidedKey())
           .toString();
