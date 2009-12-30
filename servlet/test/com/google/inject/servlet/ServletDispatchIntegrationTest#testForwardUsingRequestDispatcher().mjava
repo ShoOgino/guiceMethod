@@ -2,7 +2,7 @@
     Guice.createInjector(new ServletModule() {
       @Override
       protected void configureServlets() {
-        serve("/*").with(ForwardingServlet.class);
+        serve("/").with(ForwardingServlet.class);
         serve("/blah.jsp").with(ForwardedServlet.class);
       }
     });
@@ -13,12 +13,20 @@
         .andReturn("/")
         .anyTimes();
 
+    requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);
+    expect(requestMock.getAttribute(REQUEST_DISPATCHER_REQUEST)).andReturn(true);
+    requestMock.removeAttribute(REQUEST_DISPATCHER_REQUEST);
+
     expect(responseMock.isCommitted()).andReturn(false);
+    responseMock.resetBuffer();
 
     replay(requestMock, responseMock);
 
     new GuiceFilter()
         .doFilter(requestMock, responseMock,
             createMock(FilterChain.class));
+
+    assertEquals("Incorrect number of forwards", 1, ForwardedServlet.forwardedTo);
+    verify(requestMock, responseMock);
   }
 

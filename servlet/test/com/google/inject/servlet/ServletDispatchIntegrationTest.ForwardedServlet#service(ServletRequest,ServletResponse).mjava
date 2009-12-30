@@ -2,6 +2,7 @@
         throws IOException, ServletException {
       final HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-      System.out.println(request.getRequestURI());
- }
+      assertTrue((Boolean) request.getAttribute(REQUEST_DISPATCHER_REQUEST));
+      forwardedTo++;
+    }
 

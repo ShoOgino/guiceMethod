@@ -50,6 +50,8 @@
     expect(request.getContextPath())
         .andReturn(contextPath);
 
+    expect(request.getAttribute(REQUEST_DISPATCHER_REQUEST)).andReturn(null);
+
     replay(injector, binding, request);
 
     ServletDefinition servletDefinition = new ServletDefinition(mapping, Key.get(HttpServlet.class),

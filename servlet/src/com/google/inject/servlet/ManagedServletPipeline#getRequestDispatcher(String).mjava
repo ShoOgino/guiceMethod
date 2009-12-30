@@ -22,12 +22,7 @@
 
             ServletRequest requestToProcess;
             if (servletRequest instanceof HttpServletRequest) {
-               requestToProcess =
-                   new HttpServletRequestWrapper((HttpServletRequest) servletRequest) {
-                     public String getRequestURI() {
-                       return newRequestUri;
-                     }
-                   };
+               requestToProcess = new RequestDispatcherRequestWrapper(servletRequest, newRequestUri);
             } else {
               // This should never happen, but instead of throwing an exception
               // we will allow a happy case pass thru for maximum tolerance to
@@ -35,15 +30,26 @@
               requestToProcess = servletRequest;
             }
 
+            servletRequest.setAttribute(REQUEST_DISPATCHER_REQUEST, Boolean.TRUE);
+
             // now dispatch to the servlet
-            servletDefinition.doService(requestToProcess, servletResponse);
+            try {
+              servletDefinition.doService(requestToProcess, servletResponse);
+            } finally {
+              servletRequest.removeAttribute(REQUEST_DISPATCHER_REQUEST);
+            }
           }
 
           public void include(ServletRequest servletRequest, ServletResponse servletResponse)
               throws ServletException, IOException {
+            servletRequest.setAttribute(REQUEST_DISPATCHER_REQUEST, Boolean.TRUE);
 
             // route to the target servlet
-            servletDefinition.doService(servletRequest, servletResponse);
+            try {
+              servletDefinition.doService(servletRequest, servletResponse);
+            } finally {
+              servletRequest.removeAttribute(REQUEST_DISPATCHER_REQUEST);
+            }
           }
         };
       }

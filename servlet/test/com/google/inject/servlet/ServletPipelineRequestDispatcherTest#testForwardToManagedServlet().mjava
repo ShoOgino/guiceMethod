@@ -6,11 +6,15 @@
 
     final Injector injector = createMock(Injector.class);
     final Binding binding = createMock(Binding.class);
-    final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
+    final HttpServletRequest requestMock = createMock(HttpServletRequest.class);
     final HttpServletResponse mockResponse = createMock(HttpServletResponse.class);
 
-    expect(mockRequest.getAttribute(A_KEY))
+    expect(requestMock.getAttribute(A_KEY))
         .andReturn(A_VALUE);
+
+
+    requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);
+    requestMock.removeAttribute(REQUEST_DISPATCHER_REQUEST);
 
     expect(mockResponse.isCommitted())
         .andReturn(false);
@@ -48,7 +52,7 @@
     expect(injector.getInstance(servetDefsKey))
         .andReturn(ImmutableList.of(servletDefinition));
 
-    replay(injector, binding, mockRequest, mockResponse, mockBinding);
+    replay(injector, binding, requestMock, mockResponse, mockBinding);
 
     // Have to init the Servlet before we can dispatch to it.
     servletDefinition.init(null, injector,
@@ -58,10 +62,10 @@
         .getRequestDispatcher(pattern);
 
     assertNotNull(dispatcher);
-    dispatcher.forward(mockRequest, mockResponse);
+    dispatcher.forward(requestMock, mockResponse);
 
     assertTrue("Include did not dispatch to our servlet!", paths.contains(pattern));
 
-    verify(injector, mockRequest, mockResponse, mockBinding);
+    verify(injector, requestMock, mockResponse, mockBinding);
   }
 

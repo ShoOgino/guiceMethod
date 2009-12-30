@@ -29,6 +29,9 @@
             .andReturn("/index.html")
             .anyTimes();
 
+    requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);
+    requestMock.removeAttribute(REQUEST_DISPATCHER_REQUEST);
+
     HttpServletResponse responseMock = control.createMock(HttpServletResponse.class);
     expect(responseMock.isCommitted())
         .andReturn(false)
