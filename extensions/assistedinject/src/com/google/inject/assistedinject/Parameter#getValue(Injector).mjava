@@ -12,6 +12,6 @@
       }
     }
 
-    return provider.get();
+    return isProvider ? provider : provider.get();
   }
 
