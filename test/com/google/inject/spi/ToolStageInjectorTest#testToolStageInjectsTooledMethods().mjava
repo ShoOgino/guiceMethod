@@ -1,0 +1,15 @@
+  public void testToolStageInjectsTooledMethods() {
+    final Tooled tooled = new Tooled();
+    Guice.createInjector(Stage.TOOL, new AbstractModule() {
+      @Override
+      protected void configure() {
+        requestStaticInjection(Tooled.class);
+        bind(Object.class).toProvider(tooled);
+      }
+    });
+    assertNull(Tooled.s);
+    assertNotNull(Tooled.sm);
+    assertNull(tooled.f);
+    assertNotNull(tooled.m);
+  }
+

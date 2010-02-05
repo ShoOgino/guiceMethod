@@ -1,0 +1,2 @@
+    @Toolable @SuppressWarnings("unused") @Inject static void staticMethod(SM sm) { Tooled.sm = sm; }
+

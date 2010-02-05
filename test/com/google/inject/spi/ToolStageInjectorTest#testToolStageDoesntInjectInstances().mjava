@@ -1,0 +1,15 @@
+  public void testToolStageDoesntInjectInstances() {
+    final Foo foo = new Foo();
+    Guice.createInjector(Stage.TOOL, new AbstractModule() {
+      @Override
+      protected void configure() {
+        requestStaticInjection(Foo.class);
+        requestInjection(foo);
+      }
+    });
+    assertNull(Foo.s);
+    assertNull(Foo.sm);
+    assertNull(foo.f);
+    assertNull(foo.m);
+  }
+
