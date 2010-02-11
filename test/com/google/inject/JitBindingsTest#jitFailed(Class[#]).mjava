@@ -1,0 +1,4 @@
+  private String jitFailed(Class<?> clazz) {
+    return jitFailed(TypeLiteral.get(clazz));
+  }
+

@@ -1,0 +1,5 @@
+    Factory(boolean failIfNotLinked, Key<?> key) {
+      this.failIfNotLinked = failIfNotLinked;
+      this.key = key;
+    }
+

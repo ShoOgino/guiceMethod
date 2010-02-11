@@ -7,7 +7,7 @@
    */
   public static Injector createInjector(Stage stage,
       Iterable<? extends Module> modules) {
-    return new InjectorBuilder()
+    return new InjectorBuilderImpl()
         .stage(stage)
         .addModules(modules)
         .build();

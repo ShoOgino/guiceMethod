@@ -3,7 +3,7 @@
 
     Dependency previous = context.setDependency(dependency);
     try {
-      Object value = factory.get(errors, context, dependency);
+      Object value = factory.get(errors, context, dependency, false);
       field.set(o, value);
     } catch (ErrorsException e) {
       errors.withSource(injectionPoint).merge(e.getErrors());

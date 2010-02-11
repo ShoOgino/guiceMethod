@@ -1,0 +1,14 @@
+  public void testLinkedProviderBindingWorks() {
+    Injector injector = Guice.createInjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Foo.class).toProvider(FooProvider.class);
+      }
+    }).build();
+    // Foo was explicitly bound
+    ensureWorks(injector, Foo.class);
+    // FooImpl was not bound at all (even implicitly), it is an error
+    // to call getInstance, getProvider, or getBinding.
+    ensureFails(injector, false, FooImpl.class);
+  }
+

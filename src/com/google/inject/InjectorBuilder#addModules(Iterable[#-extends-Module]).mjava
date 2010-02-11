@@ -1,0 +1,3 @@
+  /** Adds more modules that will be used when the Injector is created. */
+  InjectorBuilder addModules(Iterable<? extends Module> modules);
+

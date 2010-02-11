@@ -1,0 +1,39 @@
+  private void ensureFails(Injector injector, boolean allowGetBinding, Class<?>... classes) {
+    for(int i = 0; i < classes.length; i++) {      
+      try { 
+        injector.getInstance(classes[i]);
+        fail("should have failed");
+      } catch(ConfigurationException expected) {
+        Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      }
+      
+      try { 
+        injector.getProvider(classes[i]);
+        fail("should have failed");
+      } catch(ConfigurationException expected) {
+        Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      }
+      
+      if(allowGetBinding) {
+        Binding<?> binding = injector.getBinding(classes[i]);
+        try {
+          binding.getProvider();
+          fail("should have failed");
+        } catch(ConfigurationException expected) {
+          Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+          assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+        }
+      } else {
+        try {
+          injector.getBinding(classes[i]);
+          fail("should have failed");          
+        } catch(ConfigurationException expected) {
+          Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+          assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+        }
+      }
+    }
+  }  
+

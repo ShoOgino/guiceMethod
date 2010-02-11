@@ -3,7 +3,7 @@
    * none is specified.
    */
   <T> BindingImpl<T> createUninitializedBinding(Key<T> key, Scoping scoping, Object source,
-      Errors errors) throws ErrorsException {
+      Errors errors, boolean jitBinding) throws ErrorsException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
 
     // Don't try to inject arrays, or enums.
@@ -33,6 +33,7 @@
       return createProvidedByBinding(key, scoping, providedBy, errors);
     }
 
-    return ConstructorBindingImpl.create(this, key, null, source, scoping, errors);
+    
+    return ConstructorBindingImpl.create(this, key, null, source, scoping, errors, jitBinding && jitDisabled);
   }
 

@@ -1,5 +1,7 @@
   <T> Provider<T> getProviderOrThrow(final Key<T> key, Errors errors) throws ErrorsException {
-    final InternalFactory<? extends T> factory = getInternalFactory(key, errors);
+    
+    
+    final InternalFactory<? extends T> factory = getInternalFactory(key, errors, JitLimitation.NO_JIT);
     final Dependency<T> dependency = Dependency.get(key);
 
     return new Provider<T>() {
@@ -10,7 +12,7 @@
             public T call(InternalContext context) throws ErrorsException {
               Dependency previous = context.setDependency(dependency);
               try {
-                return factory.get(errors, context, dependency);
+                return factory.get(errors, context, dependency, false);
               } finally {
                 context.setDependency(previous);
               }

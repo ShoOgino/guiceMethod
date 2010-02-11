@@ -1,5 +1,5 @@
   public Injector createChildInjector(Iterable<? extends Module> modules) {
-    return new InjectorBuilder()
+    return new InjectorBuilderImpl()
         .parentInjector(this)
         .addModules(modules)
         .build();

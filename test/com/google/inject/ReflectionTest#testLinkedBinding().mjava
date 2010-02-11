@@ -1,5 +1,4 @@
   public void testLinkedBinding() throws CreationException {
-    InjectorBuilder builder = new InjectorBuilder();
     final Bar bar = new Bar();
 
     Injector injector = Guice.createInjector(new AbstractModule() {

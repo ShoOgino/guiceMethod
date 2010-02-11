@@ -1,0 +1,7 @@
+  /**
+   * Creates an InjectorBuilder for a child injector.
+   *
+   * @since 2.1
+   */
+  InjectorBuilder createChildInjectorBuilder();
+

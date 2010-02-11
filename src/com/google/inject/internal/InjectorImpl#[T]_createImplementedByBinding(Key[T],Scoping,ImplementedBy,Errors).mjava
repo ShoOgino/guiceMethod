@@ -20,13 +20,13 @@
 
     // Look up the target binding.
     final Key<? extends T> targetKey = Key.get(subclass);
-    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(targetKey, errors);
+    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(targetKey, errors, JitLimitation.NEW_OR_EXISTING_JIT);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+      public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
           throws ErrorsException {
         return targetBinding.getInternalFactory().get(
-            errors.withSource(targetKey), context, dependency);
+            errors.withSource(targetKey), context, dependency, true);
       }
     };
 

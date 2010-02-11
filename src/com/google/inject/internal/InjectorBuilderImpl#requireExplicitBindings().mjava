@@ -1,0 +1,5 @@
+  public InjectorBuilder requireExplicitBindings() {
+    shellBuilder.jitDisabled(true);
+    return this;
+  }  
+

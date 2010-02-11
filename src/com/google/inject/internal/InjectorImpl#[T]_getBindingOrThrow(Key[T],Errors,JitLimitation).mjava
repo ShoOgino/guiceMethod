@@ -4,7 +4,7 @@
    * checks for an explicit binding. If no explicit binding is found, it looks for a just-in-time
    * binding.
    */
-  <T> BindingImpl<T> getBindingOrThrow(Key<T> key, Errors errors)
+  <T> BindingImpl<T> getBindingOrThrow(Key<T> key, Errors errors, JitLimitation jitType)
       throws ErrorsException {
     // Check explicit bindings, i.e. bindings created by modules.
     BindingImpl<T> binding = state.getExplicitBinding(key);
@@ -13,6 +13,6 @@
     }
 
     // Look for an on-demand binding.
-    return getJustInTimeBinding(key, errors);
+    return getJustInTimeBinding(key, errors, jitType);
   }
 

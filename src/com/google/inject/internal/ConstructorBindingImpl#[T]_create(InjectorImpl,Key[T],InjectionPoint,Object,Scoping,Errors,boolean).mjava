@@ -1,8 +1,11 @@
   /**
    * @param constructorInjector the constructor to use, or {@code null} to use the default.
+   * @param failIfNotLinked true if this ConstructorBindingImpl's InternalFactory should
+   *                             only succeed if retrieved from a linked binding
    */
   static <T> ConstructorBindingImpl<T> create(InjectorImpl injector, Key<T> key, 
-      InjectionPoint constructorInjector, Object source, Scoping scoping, Errors errors)
+      InjectionPoint constructorInjector, Object source, Scoping scoping, Errors errors,
+      boolean failIfNotLinked)
       throws ErrorsException {
     int numErrors = errors.size();
 
@@ -44,7 +47,7 @@
 
     errors.throwIfNewErrors(numErrors);
 
-    Factory<T> factoryFactory = new Factory<T>();
+    Factory<T> factoryFactory = new Factory<T>(failIfNotLinked, key);
     InternalFactory<? extends T> scopedFactory
         = Scoping.scope(key, injector, factoryFactory, source, scoping);
 

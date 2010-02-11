@@ -9,7 +9,7 @@
       checkState(privateElements == null || parent != null, "PrivateElements with no parent");
       checkState(state != null, "no state. Did you remember to lock() ?");
 
-      InjectorImpl injector = new InjectorImpl(parent, state, stage);
+      InjectorImpl injector = new InjectorImpl(parent, state, stage, jitDisabled);
       if (privateElements != null) {
         privateElements.initInjector(injector);
       }

@@ -1,0 +1,11 @@
+  public void testProvidedBy() {
+    Injector injector = Guice.createInjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(ProvBy.class);
+      }
+    }).build();
+    ensureWorks(injector, ProvBy.class);
+    ensureFails(injector, true, ProvByProvider.class);
+  }
+

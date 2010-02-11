@@ -1,4 +1,4 @@
-    public Logger get(Errors errors, InternalContext context, Dependency<?> dependency) {
+    public Logger get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked) {
       InjectionPoint injectionPoint = dependency.getInjectionPoint();
       return injectionPoint == null
           ? Logger.getAnonymousLogger()

@@ -14,14 +14,14 @@
     final Key<? extends Provider<T>> providerKey
         = (Key<? extends Provider<T>>) Key.get(providerType);
     final BindingImpl<? extends Provider<?>> providerBinding
-        = getBindingOrThrow(providerKey, errors);
+        = getBindingOrThrow(providerKey, errors, JitLimitation.NEW_OR_EXISTING_JIT);
 
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, Dependency dependency)
+      public T get(Errors errors, InternalContext context, Dependency dependency, boolean linked)
           throws ErrorsException {
         errors = errors.withSource(providerKey);
         Provider<?> provider = providerBinding.getInternalFactory().get(
-            errors, context, dependency);
+            errors, context, dependency, true);
         try {
           Object o = provider.get();
           if (o != null && !rawType.isInstance(o)) {

@@ -49,7 +49,7 @@
       if (key.hasAttributes()) {
         try {
           Errors ignored = new Errors();
-          return getBindingOrThrow(key.withoutAttributes(), ignored);
+          return getBindingOrThrow(key.withoutAttributes(), ignored, JitLimitation.NO_JIT);
         } catch (ErrorsException ignored) {
           // throw with a more appropriate message below
         }
@@ -58,7 +58,7 @@
     }
 
     Object source = key.getTypeLiteral().getRawType();
-    BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors);
+    BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors, true);
     errors.throwIfNewErrors(numErrorsBefore);
     initializeJitBinding(binding, errors);
     return binding;

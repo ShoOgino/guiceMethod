@@ -1,6 +1,6 @@
   public void notify(Errors errors) {
     try {
-      providerFactory = injector.getInternalFactory(providerKey, errors.withSource(source));
+      providerFactory = injector.getInternalFactory(providerKey, errors.withSource(source), JitLimitation.NEW_OR_EXISTING_JIT);
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }

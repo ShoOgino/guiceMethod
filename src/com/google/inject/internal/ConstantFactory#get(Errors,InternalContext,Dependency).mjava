@@ -1,5 +1,0 @@
-  public T get(Errors errors, InternalContext context, Dependency dependency)
-      throws ErrorsException {
-    return initializable.get(errors);
-  }
-

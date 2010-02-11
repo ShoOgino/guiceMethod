@@ -1,7 +1,11 @@
     @SuppressWarnings("unchecked")
-    public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+    public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
         throws ErrorsException {
       checkState(constructorInjector != null, "Constructor not ready");
+      
+      if(failIfNotLinked && !linked) {
+        throw errors.jitDisabled(key).toException();
+      }
 
       // This may not actually be safe because it could return a super type of T (if that's all the
       // client needs), but it should be OK in practice thanks to the wonders of erasure.

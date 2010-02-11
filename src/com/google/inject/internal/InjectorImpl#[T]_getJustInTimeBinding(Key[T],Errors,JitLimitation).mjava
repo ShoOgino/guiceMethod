@@ -3,8 +3,14 @@
    *
    * @throws ErrorsException if the binding could not be created.
    */
-  private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors)
+  private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors, JitLimitation jitType)
       throws ErrorsException {
+
+
+    if(jitDisabled && jitType == JitLimitation.NO_JIT && !isProvider(key)) {
+      throw errors.jitDisabled(key).toException();
+    }
+    
     synchronized (state.lock()) {
       // first try to find a JIT binding that we've already created
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
@@ -15,8 +21,12 @@
           return binding;
         }
       }
-
-      return createJustInTimeBindingRecursive(key, errors);
+      
+      if(jitDisabled && jitType != JitLimitation.NEW_OR_EXISTING_JIT && !isProvider(key)) {
+        throw errors.jitDisabled(key).toException();
+      } else {
+        return createJustInTimeBindingRecursive(key, errors);
+      }
     }
   }
 

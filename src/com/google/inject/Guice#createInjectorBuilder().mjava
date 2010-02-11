@@ -1,0 +1,9 @@
+  /** 
+   * Creates an {@link InjectorBuilder} which can be used to create an injector.
+   *
+   * @since 2.1
+   */
+  public static InjectorBuilder createInjectorBuilder() {
+    return new InjectorBuilderImpl().stage(Stage.DEVELOPMENT);
+  }
+

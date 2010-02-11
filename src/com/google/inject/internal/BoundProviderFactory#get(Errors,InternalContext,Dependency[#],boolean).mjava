@@ -1,7 +1,7 @@
-  public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+  public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
       throws ErrorsException {
     errors = errors.withSource(providerKey);
-    javax.inject.Provider<? extends T> provider = providerFactory.get(errors, context, dependency);
+    javax.inject.Provider<? extends T> provider = providerFactory.get(errors, context, dependency, true);
     try {
       return errors.checkForNull(provider.get(), source, dependency);
     } catch(RuntimeException userException) {

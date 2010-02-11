@@ -1,0 +1,5 @@
+    public Injector get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
+        throws ErrorsException {
+      return injector;
+    }
+

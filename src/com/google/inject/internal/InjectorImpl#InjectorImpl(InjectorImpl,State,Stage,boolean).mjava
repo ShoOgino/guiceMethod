@@ -1,7 +1,8 @@
-  InjectorImpl(@Nullable InjectorImpl parent, State state, Stage stage) {
+  InjectorImpl(@Nullable InjectorImpl parent, State state, Stage stage, boolean jitDisabled) {
     this.parent = parent;
     this.state = state;
     this.stage = stage;
+    this.jitDisabled = jitDisabled;
 
     if (parent != null) {
       localContext = parent.localContext;

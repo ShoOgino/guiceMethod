@@ -5,7 +5,7 @@
   private <T> BindingImpl<T> createJustInTimeBindingRecursive(Key<T> key, Errors errors)
       throws ErrorsException {
     // ask the parent to create the JIT binding
-    if (parent != null) {
+    if (parent != null && !parent.jitDisabled) {
       try {
         return parent.createJustInTimeBindingRecursive(key, new Errors());
       } catch (ErrorsException ignored) {

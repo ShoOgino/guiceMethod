@@ -16,7 +16,7 @@
     @SuppressWarnings("unchecked") // safe because T came from Key<Provider<T>>
     Key<T> providedKey = (Key<T>) key.ofType(entryType);
 
-    BindingImpl<T> delegate = getBindingOrThrow(providedKey, errors);
+    BindingImpl<T> delegate = getBindingOrThrow(providedKey, errors, JitLimitation.NO_JIT);
     return new ProviderBindingImpl<T>(this, key, delegate);
   }
 

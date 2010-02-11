@@ -1,5 +1,4 @@
   public void testNormalBinding() throws CreationException {
-    InjectorBuilder builder = new InjectorBuilder();
     final Foo foo = new Foo();
 
     Injector injector = Guice.createInjector(new AbstractModule() {

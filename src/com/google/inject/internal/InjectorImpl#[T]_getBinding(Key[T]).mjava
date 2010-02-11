@@ -2,7 +2,7 @@
   public <T> BindingImpl<T> getBinding(Key<T> key) {
     Errors errors = new Errors(key);
     try {
-      BindingImpl<T> result = getBindingOrThrow(key, errors);
+      BindingImpl<T> result = getBindingOrThrow(key, errors, JitLimitation.EXISTING_JIT);
       errors.throwConfigurationExceptionIfErrorsExist();
       return result;
     } catch (ErrorsException e) {
