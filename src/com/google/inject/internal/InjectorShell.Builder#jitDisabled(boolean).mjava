@@ -1,5 +1,0 @@
-    Builder jitDisabled(boolean jitDisabled) {
-      this.jitDisabled = jitDisabled;
-      return this;
-    }
-

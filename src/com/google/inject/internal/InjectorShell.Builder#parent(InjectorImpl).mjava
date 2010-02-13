@@ -1,6 +1,7 @@
     Builder parent(InjectorImpl parent) {
       this.parent = parent;
       this.state = new InheritingState(parent.state);
+      this.options = parent.options;
       return this;
     }
 

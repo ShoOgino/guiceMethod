@@ -1,4 +1,4 @@
-  public InjectorBuilderImpl() {
+  public InternalInjectorCreator() {
     injectionRequestProcessor = new InjectionRequestProcessor(errors, initializer);
     bindingProcesor = new BindingProcessor(errors, initializer);
   }

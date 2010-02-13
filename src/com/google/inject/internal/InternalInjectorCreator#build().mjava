@@ -14,7 +14,7 @@
 
     injectDynamically();
 
-    if (stage == Stage.TOOL) {
+    if (shellBuilder.getInjectorOptions().stage == Stage.TOOL) {
       // wrap the primaryInjector in a ToolStageInjector
       // to prevent non-tool-friendy methods from being called.
       return new ToolStageInjector(primaryInjector());

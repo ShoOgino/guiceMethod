@@ -1,3 +1,6 @@
   /** Adds more modules that will be used when the Injector is created. */
-  InjectorBuilder addModules(Module... modules);
+  InjectorBuilder addModules(Module... modules) {
+    creator.addModules(Arrays.asList(modules));
+    return this;
+  }
 

@@ -1,6 +1,6 @@
   public void testJitProviderInjectionFails() {
     try {
-      Guice.createInjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
         @Override
         protected void configure() {
           bind(Foo.class).to(FooImpl.class);
@@ -9,7 +9,7 @@
       }).build();
       fail("should have failed");
     } catch (CreationException expected) {
-      Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));
+      assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));
       assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
     }
   }

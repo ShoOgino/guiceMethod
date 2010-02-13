@@ -1,5 +1,5 @@
   public void testImplementedBy() {
-    Injector injector = Guice.createInjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+    Injector injector = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
       @Override
       protected void configure() {
         bind(ImplBy.class);

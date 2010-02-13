@@ -4,7 +4,7 @@
         injector.getInstance(classes[i]);
         fail("should have failed");
       } catch(ConfigurationException expected) {
-        Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+        assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
         assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
       }
       
@@ -12,7 +12,7 @@
         injector.getProvider(classes[i]);
         fail("should have failed");
       } catch(ConfigurationException expected) {
-        Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+        assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
         assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
       }
       
@@ -22,7 +22,7 @@
           binding.getProvider();
           fail("should have failed");
         } catch(ConfigurationException expected) {
-          Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+          assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
           assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
         }
       } else {
@@ -30,7 +30,7 @@
           injector.getBinding(classes[i]);
           fail("should have failed");          
         } catch(ConfigurationException expected) {
-          Asserts.assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
+          assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
           assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
         }
       }

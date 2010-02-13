@@ -1,0 +1,8 @@
+  public void testProviderMethods() {
+    Injector injector = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      @Override protected void configure() {}
+      @SuppressWarnings("unused") @Provides Foo foo() { return new FooImpl(); }
+    }).build();
+    ensureWorks(injector, Foo.class);
+  }
+

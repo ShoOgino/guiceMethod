@@ -1,0 +1,5 @@
+  public InternalInjectorCreator injectorOptions(InjectorOptions options) {
+    shellBuilder.setInjectorOptions(options);
+    return this;
+  }  
+

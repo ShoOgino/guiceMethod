@@ -7,7 +7,7 @@
       throws ErrorsException {
 
 
-    if(jitDisabled && jitType == JitLimitation.NO_JIT && !isProvider(key)) {
+    if(options.jitDisabled && jitType == JitLimitation.NO_JIT && !isProvider(key)) {
       throw errors.jitDisabled(key).toException();
     }
     
@@ -22,7 +22,7 @@
         }
       }
       
-      if(jitDisabled && jitType != JitLimitation.NEW_OR_EXISTING_JIT && !isProvider(key)) {
+      if(options.jitDisabled && jitType != JitLimitation.NEW_OR_EXISTING_JIT && !isProvider(key)) {
         throw errors.jitDisabled(key).toException();
       } else {
         return createJustInTimeBindingRecursive(key, errors);

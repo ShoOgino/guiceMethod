@@ -1,4 +1,0 @@
-    public InjectorBuilder createChildInjectorBuilder() {
-      return delegateInjector.createChildInjectorBuilder();
-    }
-

@@ -1,0 +1,5 @@
+    Builder setInjectorOptions(InjectorOptions options) {
+      this.options = options;
+      return this;
+    }
+

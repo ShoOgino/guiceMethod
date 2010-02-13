@@ -1,6 +1,9 @@
   /**
-   * Sets the stage for the created injector. If the stage is {@link Stage#PRODUCTION}, 
-   * singletons will be eagerly loaded in when the Injector is built.
+   * Sets the stage for the injector. If the stage is {@link Stage#PRODUCTION}, 
+   * singletons will be eagerly loaded when the Injector is built.
    */
-  InjectorBuilder stage(Stage stage);
+  public InjectorBuilder stage(Stage stage) {
+    this.stage = stage;
+    return this;
+  }
 

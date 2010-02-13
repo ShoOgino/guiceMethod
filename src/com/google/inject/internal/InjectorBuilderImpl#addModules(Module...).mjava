@@ -1,6 +1,0 @@
-  @Override
-  public InjectorBuilder addModules(Module... modules) {
-    shellBuilder.addModules(Arrays.asList(modules));
-    return this;
-  }
-

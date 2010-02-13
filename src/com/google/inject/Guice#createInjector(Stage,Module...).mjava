@@ -3,8 +3,11 @@
    * stage.
    *
    * @throws CreationException if one or more errors occur during Injector
-   *     creation
+   *     creation.
+   *     
+   * @deprecated Use {@link InjectorBuilder} for advanced Injector creation.
    */
+  @Deprecated
   public static Injector createInjector(Stage stage, Module... modules) {
     return createInjector(stage, Arrays.asList(modules));
   }
