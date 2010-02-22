@@ -11,7 +11,7 @@
    * 
    * By default, explicit bindings are not required.
    */
-  InjectorBuilder requireExplicitBindings() {
+  public InjectorBuilder requireExplicitBindings() {
     this.jitDisabled = true;
     return this;
   }
