@@ -61,6 +61,7 @@
     suite.addTestSuite(ElementApplyToTest.class);
     suite.addTestSuite(HasDependenciesTest.class);
     suite.addTestSuite(InjectionPointTest.class);
+    suite.addTestSuite(InjectorSpiTest.class);
     suite.addTestSuite(ModuleRewriterTest.class);
     suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(SpiBindingsTest.class);

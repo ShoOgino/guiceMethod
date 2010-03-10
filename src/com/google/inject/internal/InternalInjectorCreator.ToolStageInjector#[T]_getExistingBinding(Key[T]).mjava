@@ -1,0 +1,4 @@
+    public <T> Binding<T> getExistingBinding(Key<T> key) {
+      return this.delegateInjector.getExistingBinding(key);
+    }
+
