@@ -7,8 +7,18 @@
       return method.invoke(this, args);
     }
 
-    Provider<?> provider = getBindingFromNewInjector(method, args).getProvider();
+    AssistData data = assistDataByMethod.get(method);
+    Provider<?> provider;
+    if(data.cachedBinding != null) { // Try to get optimized form...
+      provider = data.cachedBinding.getProvider();
+    } else {
+      provider = getBindingFromNewInjector(method, args, data).getProvider();
+    }
     try {
+      int p = 0;
+      for(ThreadLocalProvider tlp : data.providers) {
+        tlp.set(args[p++]);
+      }
       return provider.get();
     } catch (ProvisionException e) {
       // if this is an exception declared by the factory method, throw it as-is
@@ -20,6 +30,10 @@
         }
       }
       throw e;
+    } finally {
+      for(ThreadLocalProvider tlp : data.providers) {
+        tlp.remove();
+      }
     }
   }
 

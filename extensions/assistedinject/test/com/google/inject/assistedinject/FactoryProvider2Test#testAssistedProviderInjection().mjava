@@ -1,0 +1,22 @@
+  public void testAssistedProviderInjection() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(String.class).toInstance("trans am");
+        bind(ColoredCarFactory.class).toProvider(
+            FactoryProvider.newFactory(ColoredCarFactory.class, Flamingbird.class));
+      }
+    });
+    ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
+
+    Flamingbird flamingbird = (Flamingbird) carFactory.create(Color.BLACK);
+    assertEquals(Color.BLACK, flamingbird.colorProvider.get());
+    assertEquals("trans am", flamingbird.modifiersProvider.get());
+    
+    Flamingbird flamingbird2 = (Flamingbird) carFactory.create(Color.RED);
+    assertEquals(Color.RED, flamingbird2.colorProvider.get());
+    assertEquals("trans am", flamingbird2.modifiersProvider.get());
+    // Make sure the original flamingbird is black still.
+    assertEquals(Color.BLACK, flamingbird.colorProvider.get());
+  }  
+

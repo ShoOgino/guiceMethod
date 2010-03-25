@@ -11,10 +11,17 @@
 
     this.injector = injector;
 
-    for (Method method : returnTypesByMethod.keySet()) {
-      Object[] args = new Object[method.getParameterTypes().length];
-      Arrays.fill(args, "dummy object for validating Factories");
-      getBindingFromNewInjector(method, args); // throws if the binding isn't properly configured
+    for (Map.Entry<Method, AssistData> entry : assistDataByMethod.entrySet()) {
+      Method method = entry.getKey();
+      AssistData data = entry.getValue();
+      Object[] args;
+      if(!data.optimized) {
+        args = new Object[method.getParameterTypes().length];
+        Arrays.fill(args, "dummy object for validating Factories");
+      } else {
+        args = null; // won't be used -- instead will bind to data.providers.
+      }
+      getBindingFromNewInjector(method, args, data); // throws if the binding isn't properly configured
     }
   }
 

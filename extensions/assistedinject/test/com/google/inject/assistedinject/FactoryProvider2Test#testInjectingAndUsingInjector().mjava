@@ -1,0 +1,19 @@
+  public void testInjectingAndUsingInjector() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(ColoredCarFactory.class).toProvider(
+            FactoryProvider.newFactory(ColoredCarFactory.class, Segway.class));
+      }
+    });
+
+    ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
+    Segway green = (Segway)carFactory.create(Color.GREEN);
+    assertSame(Color.GREEN, green.getColor());
+    assertSame(Color.GREEN, green.getColor());
+    
+    Segway pink = (Segway)carFactory.create(Color.PINK);
+    assertSame(Color.PINK, pink.getColor());
+    assertSame(Color.PINK, pink.getColor());
+    assertSame(Color.GREEN, green.getColor());
+  }
+

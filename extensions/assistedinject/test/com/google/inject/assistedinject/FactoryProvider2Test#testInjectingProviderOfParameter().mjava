@@ -11,5 +11,12 @@
 
     assertSame(Color.RED, subaru.colorProvider.get());
     assertSame(Color.RED, subaru.colorProvider.get());
+    
+    Subaru sedan  = (Subaru) carFactory.create(Color.BLUE);
+    assertSame(Color.BLUE, sedan.colorProvider.get());
+    assertSame(Color.BLUE, sedan.colorProvider.get());
+    
+    // and make sure the subaru is still red
+    assertSame(Color.RED, subaru.colorProvider.get());
   }
 

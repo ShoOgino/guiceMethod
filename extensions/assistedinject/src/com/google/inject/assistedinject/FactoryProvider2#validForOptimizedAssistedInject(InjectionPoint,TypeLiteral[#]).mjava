@@ -1,0 +1,28 @@
+  /**
+   * Returns true if the implementation & constructor are suitable for an
+   * optimized version of AssistedInject. The optimized version caches the
+   * binding & uses a ThreadLocal Provider, so can only be applied if the
+   * assisted bindings are immediately provided. This looks for hints that the
+   * values may be lazily retrieved, by looking for injections of Injector or a
+   * Provider for the assisted values.
+   */
+  private boolean validForOptimizedAssistedInject(InjectionPoint ctorPoint, TypeLiteral<?> implementation) {
+    if(ctorPoint != null) {
+      for(Dependency<?> dep : ctorPoint.getDependencies()) {
+        if(isInjectorOrAssistedProvider(dep)) {
+          return false;
+        }
+      }
+    }
+    if(!implementation.getRawType().isInterface()) {
+      for(InjectionPoint ip : InjectionPoint.forInstanceMethodsAndFields(implementation)) {
+        for(Dependency<?> dep : ip.getDependencies()) {
+          if(isInjectorOrAssistedProvider(dep)) {
+            return false;
+          }        
+        }
+      }
+    }
+    return true;
+  }
+

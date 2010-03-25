@@ -1,0 +1,6 @@
+    @Inject
+    public Flamingbird(Provider<String> modifiersProvider, @Assisted Provider<Color> colorProvider) {
+      this.modifiersProvider = modifiersProvider;
+      this.colorProvider = colorProvider;
+    }
+

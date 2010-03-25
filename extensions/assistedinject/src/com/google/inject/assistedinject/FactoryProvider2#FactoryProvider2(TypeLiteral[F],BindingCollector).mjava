@@ -12,14 +12,11 @@
     Class<F> factoryRawType = (Class) factoryType.getRawType();
 
     try {
-      ImmutableMap.Builder<Method, Key<?>> returnTypesBuilder = ImmutableMap.builder();
-      ImmutableMap.Builder<Method, ImmutableList<Key<?>>> paramTypesBuilder
-          = ImmutableMap.builder();
+      ImmutableMap.Builder<Method, AssistData> assistDataBuilder = ImmutableMap.builder();
       // TODO: also grab methods from superinterfaces
       for (Method method : factoryRawType.getMethods()) {
         Key<?> returnType = getKey(
             factoryType.getReturnType(method), method, method.getAnnotations(), errors);
-        returnTypesBuilder.put(method, returnType);
         List<TypeLiteral<?>> params = factoryType.getParameterTypes(method);
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
         int p = 0;
@@ -28,14 +25,60 @@
           Key<?> paramKey = getKey(param, method, paramAnnotations[p++], errors);
           keys.add(assistKey(method, paramKey, errors));
         }
-        paramTypesBuilder.put(method, ImmutableList.copyOf(keys));
+        ImmutableList<Key<?>> immutableParamList = ImmutableList.copyOf(keys);
+        
+        // try to match up the method to the constructor
+        TypeLiteral<?> implementation = collector.getBindings().get(returnType);
+        if(implementation == null) {
+          implementation = returnType.getTypeLiteral();
+        }
+        // TODO: Support finding the proper constructor per method...
+        // Right now, this will fail later on if it's the wrong constructor, because it will
+        // be missing necessary bindings.
+        InjectionPoint ctorInjectionPoint = null;
+        Constructor<?> constructor = null;
+        try {
+          ctorInjectionPoint = InjectionPoint.forConstructorOf(implementation);
+        } catch(ConfigurationException ce) {
+          // There are two reasons this could throw.
+          // 1) The implementation is an interface and is forwarded (explicitly or implicitly)
+          //    to another binding (see FactoryModuleBuildTest.test[Implicit|Explicit]ForwardingAssistedBinding.
+          //    In this case, things are OK and the exception is right to be ignored.
+          // 2) The implementation has something wrong with its constructors (two @injects, invalid ctor, etc..)
+          //    In this case, by having a null constructor we let the proper exception be recreated later on.
+        }
+        if(ctorInjectionPoint != null) {
+          constructor = (Constructor)ctorInjectionPoint.getMember();
+        }
+        
+        List<ThreadLocalProvider> providers = Collections.emptyList();
+        boolean optimized = false;
+        // Now go through all dependencies of the implementation and see if it is OK to
+        // use an optimized form of assistedinject2.  The optimized form requires that
+        // all injections directly inject the object itself (and not a Provider of the object,
+        // or an Injector), because it caches a single child injector and mutates the Provider
+        // of the arguments in a ThreadLocal.
+        if(validForOptimizedAssistedInject(ctorInjectionPoint, implementation)) {
+          ImmutableList.Builder<ThreadLocalProvider> providerListBuilder = ImmutableList.builder();
+          for(int i = 0; i < params.size(); i++) {
+            providerListBuilder.add(new ThreadLocalProvider());
+          }
+          providers = providerListBuilder.build();
+          optimized = true;
+        }
+        assistDataBuilder.put(method, new AssistData(constructor, returnType, immutableParamList, optimized, providers));
       }
-      returnTypesByMethod = returnTypesBuilder.build();
-      paramTypes = paramTypesBuilder.build();
+
+      // If we generated any errors (from finding matching constructors, for instance), throw an exception.
+      if(errors.hasErrors()) {
+        throw errors.toException();
+      }
+
+      assistDataByMethod = assistDataBuilder.build();
     } catch (ErrorsException e) {
       throw new ConfigurationException(e.getErrors().getMessages());
     }
-
+    
     factory = factoryRawType.cast(Proxy.newProxyInstance(factoryRawType.getClassLoader(),
         new Class[] { factoryRawType }, this));
   }
