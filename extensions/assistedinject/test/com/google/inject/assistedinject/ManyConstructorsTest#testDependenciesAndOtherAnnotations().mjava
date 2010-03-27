@@ -1,0 +1,20 @@
+  public void testDependenciesAndOtherAnnotations() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new FactoryModuleBuilder().build(FamilyFarmFactory.class));
+      }
+    });
+    
+    FamilyFarmFactory factory = injector.getInstance(FamilyFarmFactory.class);
+    Farm pops = factory.popsFarm("Pop");
+    assertEquals("Pop", pops.pop);
+    assertEquals(null, pops.mom);
+    Farm moms = factory.momsFarm("Mom");
+    assertEquals(null, moms.pop);
+    assertEquals("Mom", moms.mom);
+    Farm momAndPop = factory.momAndPopsFarm("Mom", "Pop");
+    assertEquals("Pop", momAndPop.pop);
+    assertEquals("Mom", momAndPop.mom);
+  }
+

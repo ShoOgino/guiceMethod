@@ -1,0 +1,2 @@
+    Foo create(String name, int idx);
+

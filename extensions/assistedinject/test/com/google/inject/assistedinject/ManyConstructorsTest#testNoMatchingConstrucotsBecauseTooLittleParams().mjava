@@ -1,0 +1,16 @@
+  public void testNoMatchingConstrucotsBecauseTooLittleParams() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          install(new FactoryModuleBuilder().build(NullFactory.class));
+        }
+      });
+      fail("should have failed");
+    } catch (CreationException expected) {
+      Asserts.assertContains(expected.getMessage(), "1) " + Foo.class.getName()
+          + " has @AssistedInject constructors, but none of them match the parameters in method "
+          + NullFactory.class.getName());
+    }
+  }
+

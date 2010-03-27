@@ -1,0 +1,24 @@
+  public void testUsingOneConstructor() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new FactoryModuleBuilder().build(SimpleFactory.class));
+      }
+    });
+    SimpleFactory factory = injector.getInstance(SimpleFactory.class);
+    Foo noIndex = factory.create("no index");
+    assertEquals("no index", noIndex.name);
+    assertEquals(null, noIndex.index);
+    
+    injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new FactoryModuleBuilder().build(SimpleFactory2.class));
+      }
+    });
+    SimpleFactory2 factory2 = injector.getInstance(SimpleFactory2.class);
+    Foo index = factory2.create("index", 1);
+    assertEquals("index", index.name);
+    assertEquals(1, index.index.intValue());
+  }
+

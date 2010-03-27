@@ -1,0 +1,18 @@
+  public void testTooManyMatchingConstructors() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          install(new FactoryModuleBuilder()
+            .implement(Foo.class, TooManyMatches.class)
+            .build(SimpleFactory2.class));
+        }
+      });
+      fail("should have failed");
+    } catch (CreationException expected) {
+      Asserts.assertContains(expected.getMessage(), "1) " + TooManyMatches.class.getName()
+          + " has more than one constructor annotated with @AssistedInject that "
+          + "matches the parameters in method " + SimpleFactory2.class.getName());
+    }
+  }
+

@@ -1,0 +1,3 @@
+    @AssistedInject TooManyMatches(@Assisted int index, @Assisted String name) {
+    }    
+

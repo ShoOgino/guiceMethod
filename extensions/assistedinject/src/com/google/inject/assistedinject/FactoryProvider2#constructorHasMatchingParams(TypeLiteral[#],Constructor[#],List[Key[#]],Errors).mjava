@@ -1,0 +1,35 @@
+  /**
+   * Matching logic for constructors annotated with AssistedInject.
+   * This returns true if and only if all @Assisted parameters in the
+   * constructor exactly match (in any order) all @Assisted parameters
+   * the method's parameter.
+   */
+  private boolean constructorHasMatchingParams(TypeLiteral<?> type,
+      Constructor<?> constructor, List<Key<?>> paramList, Errors errors)
+      throws ErrorsException {
+    List<TypeLiteral<?>> params = type.getParameterTypes(constructor);
+    Annotation[][] paramAnnotations = constructor.getParameterAnnotations();
+    int p = 0;
+    List<Key<?>> constructorKeys = Lists.newArrayList();
+    for (TypeLiteral<?> param : params) {
+      Key<?> paramKey = getKey(param, constructor, paramAnnotations[p++],
+          errors);
+      constructorKeys.add(paramKey);
+    }
+    // Require that every key exist in the constructor to match up exactly.
+    for (Key<?> key : paramList) {
+      // If it didn't exist in the constructor set, we can't use it.
+      if (!constructorKeys.remove(key)) {
+        return false;
+      }
+    }
+    // If any keys remain and their annotation is Assisted, we can't use it.
+    for (Key<?> key : constructorKeys) {
+      if (key.getAnnotationType() == Assisted.class) {
+        return false;
+      }
+    }
+    // All @Assisted params match up to the method's parameters.
+    return true;
+  }
+

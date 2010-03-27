@@ -32,22 +32,17 @@
         if(implementation == null) {
           implementation = returnType.getTypeLiteral();
         }
-        // TODO: Support finding the proper constructor per method...
-        // Right now, this will fail later on if it's the wrong constructor, because it will
-        // be missing necessary bindings.
-        InjectionPoint ctorInjectionPoint = null;
+        InjectionPoint ctorInjectionPoint = findMatchingConstructorInjectionPoint(method, implementation, immutableParamList, errors);
         Constructor<?> constructor = null;
-        try {
-          ctorInjectionPoint = InjectionPoint.forConstructorOf(implementation);
-        } catch(ConfigurationException ce) {
-          // There are two reasons this could throw.
+        if(ctorInjectionPoint != null) {
+          // There are three reasons this could be null:
           // 1) The implementation is an interface and is forwarded (explicitly or implicitly)
           //    to another binding (see FactoryModuleBuildTest.test[Implicit|Explicit]ForwardingAssistedBinding.
           //    In this case, things are OK and the exception is right to be ignored.
           // 2) The implementation has something wrong with its constructors (two @injects, invalid ctor, etc..)
           //    In this case, by having a null constructor we let the proper exception be recreated later on.
-        }
-        if(ctorInjectionPoint != null) {
+          // 3) findMatchingConstructor added errors to the Errors object and returned null, in which case
+          //    this method will appropriately throw an exception later on.
           constructor = (Constructor)ctorInjectionPoint.getMember();
         }
         
