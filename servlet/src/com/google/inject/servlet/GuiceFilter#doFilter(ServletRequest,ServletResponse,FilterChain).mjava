@@ -3,7 +3,9 @@
       throws IOException, ServletException {
 
     Context previous = localContext.get();
-    FilterPipeline filterPipeline = pipeline;
+
+    // Prefer the injected pipeline, but fall back on the static one for web.xml users.
+    FilterPipeline filterPipeline = null != injectedPipeline ? injectedPipeline : pipeline;
 
     try {
       localContext.set(new Context((HttpServletRequest) servletRequest,

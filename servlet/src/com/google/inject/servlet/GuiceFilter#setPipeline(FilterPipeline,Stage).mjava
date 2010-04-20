@@ -3,14 +3,15 @@
   static void setPipeline(FilterPipeline pipeline, Stage stage) {
 
     // Multiple injectors with Servlet pipelines?!
-    // We don't throw an exception in DEVELOPMENT stage, to allow for legacy
-    // tests that don't have a tearDown that calls GuiceFilter#destroy().
+    // We don't throw an exception, to allow for legacy
+    // tests that don't have a tearDown that calls GuiceFilter#destroy(),
+    // and so we don't force people to use the static filter pipeline
+    // (e.g. Jetty/OpenGSE filters constructed in Guice, rather than via web.xml)
     if (GuiceFilter.pipeline instanceof ManagedFilterPipeline) {
-      if (Stage.PRODUCTION.equals(stage)) {
-        throw new RuntimeException(MULTIPLE_INJECTORS_ERROR);
-      } else {
         Logger.getLogger(GuiceFilter.class.getName()).warning(MULTIPLE_INJECTORS_ERROR);
-      }
+
+        // TODO(dhanji): should we return early here and refuse to overwrite
+        // the existing pipleine? That may break some broken apps =)
     }
 
     // We overwrite the default pipeline

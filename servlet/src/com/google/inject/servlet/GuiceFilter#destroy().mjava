@@ -2,7 +2,8 @@
 
     try {
       // Destroy all registered filters & servlets in that order
-      pipeline.destroyPipeline();
+      FilterPipeline filterPipeline = null != injectedPipeline ? injectedPipeline : pipeline;
+      filterPipeline.destroyPipeline();
 
     } finally {
       reset();

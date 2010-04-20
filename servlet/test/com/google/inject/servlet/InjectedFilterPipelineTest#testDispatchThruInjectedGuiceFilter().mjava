@@ -1,0 +1,67 @@
+  public final void testDispatchThruInjectedGuiceFilter() throws ServletException, IOException {
+
+    //create mocks
+    FilterConfig filterConfig = createMock(FilterConfig.class);
+    ServletContext servletContext = createMock(ServletContext.class);
+    HttpServletRequest request = createMock(HttpServletRequest.class);
+    FilterChain proceedingFilterChain = createMock(FilterChain.class);
+
+    //begin mock script ***
+
+    expect(filterConfig.getServletContext())
+        .andReturn(servletContext)
+        .once();
+
+    expect(request.getServletPath())
+        .andReturn("/public/login.jsp")
+        .anyTimes();
+
+    //at the end, proceed down webapp's normal filter chain
+    proceedingFilterChain.doFilter(isA(HttpServletRequest.class), (ServletResponse) isNull());
+    expectLastCall().once();
+
+    //run mock script ***
+    replay(filterConfig, servletContext, request, proceedingFilterChain);
+
+    GuiceFilter webFilter = injector1.getInstance(GuiceFilter.class);
+
+    webFilter.init(filterConfig);
+    webFilter.doFilter(request, null, proceedingFilterChain);
+    webFilter.destroy();
+
+    //assert expectations
+    verify(filterConfig, servletContext, request, proceedingFilterChain);
+
+
+
+
+
+    
+    // reset mocks and run them against the other injector
+    reset(filterConfig, servletContext, request, proceedingFilterChain);
+
+    // Create a second proceeding filter chain
+    FilterChain proceedingFilterChain2 = createMock(FilterChain.class);
+
+    //begin mock script ***
+
+    expect(filterConfig.getServletContext())
+        .andReturn(servletContext)
+        .once();
+    expect(request.getServletPath())
+            .andReturn("/non-jsp/thing.html")
+            .anyTimes();
+
+    // Never fire on this pipeline
+    replay(filterConfig, servletContext, request, proceedingFilterChain2, proceedingFilterChain);
+
+    webFilter = injector2.getInstance(GuiceFilter.class);
+
+    webFilter.init(filterConfig);
+    webFilter.doFilter(request, null, proceedingFilterChain2);
+    webFilter.destroy();
+
+    // Verify that we have not crossed the streams, Venkman!
+    verify(filterConfig, servletContext, request, proceedingFilterChain, proceedingFilterChain2);
+  }
+
