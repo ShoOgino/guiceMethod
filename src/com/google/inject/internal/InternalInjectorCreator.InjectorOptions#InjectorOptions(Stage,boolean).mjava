@@ -1,5 +1,0 @@
-    public InjectorOptions(Stage stage, boolean jitDisabled) {
-      this.stage = stage;
-      this.jitDisabled = jitDisabled;
-    }
-

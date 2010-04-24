@@ -1,6 +1,6 @@
   /** Builds the injector. */
   public Injector build() {
-    creator.injectorOptions(new InternalInjectorCreator.InjectorOptions(stage, jitDisabled));
+    creator.injectorOptions(new InternalInjectorCreator.InjectorOptions(stage, jitDisabled, allowCircularProxy));
     return creator.build();
   }
 
