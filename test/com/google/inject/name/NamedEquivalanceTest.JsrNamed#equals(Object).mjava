@@ -1,0 +1,9 @@
+    public boolean equals(Object o) {
+      if (!(o instanceof javax.inject.Named)) {
+        return false;
+      }
+
+      javax.inject.Named other = (javax.inject.Named) o;
+      return value.equals(other.value());
+    }
+

@@ -1,4 +1,4 @@
     public Class<? extends Annotation> annotationType() {
-      return Named.class;
+      return javax.inject.Named.class;
     }
 

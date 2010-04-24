@@ -1,0 +1,6 @@
+  public void testKeysCreatedWithDifferentTypesAreEqual() {
+    assertEquals(keyForAnnotation(new GuiceNamed("foo")), keyForAnnotation(new JsrNamed("foo")));
+    assertEquals(keyForAnnotation(Names.named("foo")), keyForAnnotation(new GuiceNamed("foo")));
+    assertEquals(keyForAnnotation(Names.named("foo")), keyForAnnotation(new JsrNamed("foo")));
+  }
+

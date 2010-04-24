@@ -1,0 +1,4 @@
+  public void testBindingWithNamesCanInjectBothTypes() {
+    assertInjectionsSucceed(GUICE_BINDING_MODULE);
+  }
+

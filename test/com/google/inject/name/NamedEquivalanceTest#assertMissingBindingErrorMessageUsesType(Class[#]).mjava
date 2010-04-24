@@ -1,0 +1,10 @@
+  private static void assertMissingBindingErrorMessageUsesType(Class<?> clientType) {
+    try {
+      Guice.createInjector().getInstance(clientType);
+      fail("should have thrown ConfigurationException");
+    } catch (ConfigurationException e) {
+      assertContains(e.getMessage(),
+          "No implementation for java.lang.String annotated with @com.google.inject.name.Named(value=foo) was bound.");
+    }
+  }
+

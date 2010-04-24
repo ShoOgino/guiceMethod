@@ -1,7 +1,7 @@
   public void testProviderInject() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bind(B.class).annotatedWith(Jsr330.named("jodie")).toInstance(b);
+        bind(B.class).annotatedWith(Names.named("jodie")).toInstance(b);
         bind(C.class).toInstance(c);
         bind(D.class).annotatedWith(RED).toInstance(d);
         bind(E.class).toInstance(e);

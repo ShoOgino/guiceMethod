@@ -7,10 +7,10 @@
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);
 
-    if (annotationType.getDeclaredMethods().length == 0) {
+    if (isMarker(annotationType)) {
       return new AnnotationTypeStrategy(annotationType, annotation);
     }
 
-    return new AnnotationInstanceStrategy(annotation);
+    return new AnnotationInstanceStrategy(Annotations.canonicalizeIfNamed(annotation));
   }
 

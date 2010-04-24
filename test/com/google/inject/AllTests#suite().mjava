@@ -54,6 +54,7 @@
 
     // names
     suite.addTestSuite(NamesTest.class);
+    suite.addTestSuite(NamedEquivalanceTest.class);
 
     // spi
     suite.addTestSuite(BindingTargetVisitorTest.class);

@@ -1,0 +1,4 @@
+  public void testBindingWithGuiceNamedAnnotatedProviderMethodCanInjectBothTypes() {
+    assertInjectionsSucceed(GUICE_PROVIDER_METHOD_MODULE);
+  }
+

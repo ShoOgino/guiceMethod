@@ -1,0 +1,9 @@
+    public boolean equals(Object o) {
+      if (!(o instanceof com.google.inject.name.Named)) {
+        return false;
+      }
+
+      com.google.inject.name.Named other = (com.google.inject.name.Named) o;
+      return value.equals(other.value());
+    }
+

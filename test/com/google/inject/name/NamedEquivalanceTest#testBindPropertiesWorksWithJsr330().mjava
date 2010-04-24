@@ -1,0 +1,10 @@
+  public void testBindPropertiesWorksWithJsr330() {
+    assertInjectionsSucceed(new AbstractModule() {
+      @Override protected void configure() {
+        Properties properties = new Properties();
+        properties.put("foo", "bar");
+        Names.bindProperties(binder(), properties);
+      }
+    });
+  }
+

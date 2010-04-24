@@ -1,0 +1,4 @@
+  public void testMissingBindingForGuiceNamedUsesSameTypeInErrorMessage() {
+    assertMissingBindingErrorMessageUsesType(GuiceNamedClient.class);
+  }
+

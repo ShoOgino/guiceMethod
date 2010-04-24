@@ -1,0 +1,4 @@
+    public String toString() {
+      return "@" + com.google.inject.name.Named.class.getName() + "(value=" + value + ")";
+    }
+

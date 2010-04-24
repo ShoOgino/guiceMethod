@@ -1,0 +1,4 @@
+    public JsrNamed(String value) {
+      this.value = value;
+    }
+

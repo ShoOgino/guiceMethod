@@ -1,0 +1,4 @@
+  private static Key<String> keyForAnnotation(Annotation annotation) {
+    return Key.get(String.class, annotation);
+  }
+

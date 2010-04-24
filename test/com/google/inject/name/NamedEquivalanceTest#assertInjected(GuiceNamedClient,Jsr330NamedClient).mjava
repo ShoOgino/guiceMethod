@@ -1,0 +1,5 @@
+  private static void assertInjected(GuiceNamedClient guiceClient, Jsr330NamedClient jsr330Client) {
+    assertEquals("bar", guiceClient.foo);
+    assertEquals("bar", jsr330Client.foo);
+  }
+

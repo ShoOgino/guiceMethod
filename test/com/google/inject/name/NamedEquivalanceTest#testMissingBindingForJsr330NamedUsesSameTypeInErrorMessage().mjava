@@ -1,0 +1,4 @@
+  public void testMissingBindingForJsr330NamedUsesSameTypeInErrorMessage() {
+    assertMissingBindingErrorMessageUsesType(Jsr330NamedClient.class);
+  }
+

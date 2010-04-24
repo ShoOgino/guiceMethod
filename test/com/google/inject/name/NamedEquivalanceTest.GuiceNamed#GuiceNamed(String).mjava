@@ -1,0 +1,4 @@
+    public GuiceNamed(String value) {
+      this.value = value;
+    }
+

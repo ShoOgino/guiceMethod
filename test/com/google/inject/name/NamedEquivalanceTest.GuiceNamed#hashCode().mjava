@@ -1,4 +1,4 @@
-    @Override public int hashCode() {
+    public int hashCode() {
       // This is specified in java.lang.Annotation.
       return (127 * "value".hashCode()) ^ value.hashCode();
     }

@@ -1,0 +1,4 @@
+  public void testBindingWithJsr330NamedAnnotatedProviderMethodCanInjectBothTypes() {
+    assertInjectionsSucceed(JSR330_PROVIDER_METHOD_MODULE);
+  }
+

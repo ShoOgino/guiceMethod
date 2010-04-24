@@ -1,0 +1,4 @@
+  public void testBindingWithJsr330AnnotationCanInjectBothTypes() {
+    assertInjectionsSucceed(JSR330_BINDING_MODULE);
+  }
+

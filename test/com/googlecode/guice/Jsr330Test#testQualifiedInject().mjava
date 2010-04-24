@@ -1,10 +1,10 @@
   public void testQualifiedInject() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bind(B.class).annotatedWith(Jsr330.named("jodie")).toInstance(b);
+        bind(B.class).annotatedWith(Names.named("jodie")).toInstance(b);
         bind(C.class).annotatedWith(Red.class).toInstance(c);
         bind(D.class).annotatedWith(RED).toInstance(d);
-        bind(E.class).annotatedWith(Jsr330.named("jesse")).toInstance(e);
+        bind(E.class).annotatedWith(Names.named("jesse")).toInstance(e);
         bind(F.class);
       }
     });
