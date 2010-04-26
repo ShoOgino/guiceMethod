@@ -47,6 +47,7 @@
     suite.addTestSuite(Jsr166HashMapTest.class);
     suite.addTestSuite(LineNumbersTest.class);
     suite.addTest(MapMakerTestSuite.suite());
+    suite.addTestSuite(MoreTypesTest.class);
     suite.addTestSuite(UniqueAnnotationsTest.class);
 
     // matcher

@@ -1,0 +1,16 @@
+  public void testParameterizedTypeToString() {
+    TypeLiteral<Inner<String>> innerString = new TypeLiteral<Inner<String>>(){};
+    assertEquals("com.google.inject.internal.MoreTypesTest$Inner<java.lang.String>",
+        MoreTypes.typeToString(innerString.getType()));
+
+    TypeLiteral<Set<Inner<Integer>>> mapInnerInteger = new TypeLiteral<Set<Inner<Integer>>>() {};
+    assertEquals("java.util.Set<com.google.inject.internal.MoreTypesTest$Inner<java.lang.Integer>>",
+        MoreTypes.typeToString(mapInnerInteger.getType()));
+
+    TypeLiteral<Map<Inner<Long>, Set<Inner<Long>>>> mapInnerLongToSetInnerLong =
+        new TypeLiteral<Map<Inner<Long>, Set<Inner<Long>>>>() {};
+    assertEquals("java.util.Map<com.google.inject.internal.MoreTypesTest$Inner<java.lang.Long>, "
+            + "java.util.Set<com.google.inject.internal.MoreTypesTest$Inner<java.lang.Long>>>",
+        MoreTypes.typeToString(mapInnerLongToSetInnerLong.getType()));
+  }
+
