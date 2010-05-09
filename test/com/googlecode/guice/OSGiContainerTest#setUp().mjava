@@ -1,0 +1,34 @@
+  // dynamically build test bundles
+  @Override protected void setUp()
+      throws Exception {
+
+    // verify properties
+    assertTrue(failMsg(), new File(BUILD_DIR).isDirectory());
+    assertTrue(failMsg(), new File(GUICE_JAR).isFile());
+
+    assertTrue(failMsg(), new File(AOPALLIANCE_JAR).isFile());
+    assertTrue(failMsg(), new File(JAVAX_INJECT_JAR).isFile());
+
+    Properties instructions = new Properties();
+
+    // aopalliance is an API bundle --> export the full API
+    instructions.setProperty("Export-Package", "org.aopalliance.*");
+    buildBundle("aopalliance", instructions, AOPALLIANCE_JAR);
+    instructions.clear();
+
+    // javax.inject is an API bundle --> export the full API
+    instructions.setProperty("Export-Package", "javax.inject.*");
+    buildBundle("javax.inject", instructions, JAVAX_INJECT_JAR);
+    instructions.clear();
+
+    // strict imports to make sure test bundle only has access to these packages
+    instructions.setProperty("Import-Package", "org.osgi.framework,org.aopalliance.intercept,"
+        + "com.google.inject(|.binder|.matcher|.name)");
+
+    // test bundle should only contain the local test classes, nothing else
+    instructions.setProperty("Bundle-Activator", OSGiTestActivator.class.getName());
+    instructions.setProperty("Private-Package", OSGiTestActivator.class.getPackage().getName());
+    buildBundle("osgitests", instructions, BUILD_TEST_DIR);
+    instructions.clear();
+  }
+

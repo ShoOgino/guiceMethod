@@ -1,0 +1,14 @@
+  // build an OSGi bundle at runtime
+  private static void buildBundle(String name, Properties instructions, String classpath)
+      throws IOException {
+
+    // write BND instructions to temporary test directory
+    String bndFileName = BUILD_TEST_DIR + '/' + name + ".bnd";
+    OutputStream os = new BufferedOutputStream(new FileOutputStream(bndFileName));
+    instructions.store(os, "BND instructions");
+    os.close();
+
+    // assemble bundle, use -failok switch to avoid early exit
+    bnd.main(new String[]{"-failok", "build", "-classpath", classpath, bndFileName});
+  }
+

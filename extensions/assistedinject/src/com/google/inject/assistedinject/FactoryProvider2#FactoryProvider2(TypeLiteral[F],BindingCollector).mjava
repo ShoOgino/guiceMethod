@@ -74,7 +74,7 @@
       throw new ConfigurationException(e.getErrors().getMessages());
     }
     
-    factory = factoryRawType.cast(Proxy.newProxyInstance(factoryRawType.getClassLoader(),
+    factory = factoryRawType.cast(Proxy.newProxyInstance(BytecodeGen.getClassLoader(factoryRawType),
         new Class[] { factoryRawType }, this));
   }
 

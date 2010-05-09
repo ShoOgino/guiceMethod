@@ -1,11 +1,8 @@
   /**
-   * For class loaders, {@code null}, is always an alias to the
-   * {@link ClassLoader#getSystemClassLoader() system class loader}. This method
-   * will not return null.
+   * Attempts to canonicalize null references to the system class loader.
+   * May return null if for some reason the system loader is unavailable.
    */
   private static ClassLoader canonicalize(ClassLoader classLoader) {
-    return classLoader != null
-        ? classLoader
-        : checkNotNull(getSystemClassLoaderOrNull(), "Couldn't get a ClassLoader");
+    return classLoader != null ? classLoader : SystemBridgeHolder.SYSTEM_BRIDGE.getParent();
   }
 

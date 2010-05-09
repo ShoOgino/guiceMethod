@@ -1,0 +1,6 @@
+    // make the classic delegating loadClass method visible
+    Class<?> classicLoadClass(String name, boolean resolve)
+      throws ClassNotFoundException {
+      return super.loadClass(name, resolve);
+    }
+

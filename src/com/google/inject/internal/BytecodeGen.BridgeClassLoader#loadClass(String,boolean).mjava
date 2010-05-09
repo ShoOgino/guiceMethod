@@ -1,19 +1,27 @@
     @Override protected Class<?> loadClass(String name, boolean resolve)
         throws ClassNotFoundException {
 
-      // delegate internal requests to Guice class space
+      if (name.startsWith("sun.reflect")) {
+        // these reflection classes must be loaded from bootstrap class loader
+        return SystemBridgeHolder.SYSTEM_BRIDGE.classicLoadClass(name, resolve);
+      }
+
       if (name.startsWith(GUICE_INTERNAL_PACKAGE) || name.startsWith(CGLIB_PACKAGE)) {
+        if (null == GUICE_CLASS_LOADER) {
+          // use special system bridge to load classes from bootstrap class loader
+          return SystemBridgeHolder.SYSTEM_BRIDGE.classicLoadClass(name, resolve);
+        }
         try {
           Class<?> clazz = GUICE_CLASS_LOADER.loadClass(name);
           if (resolve) {
             resolveClass(clazz);
           }
           return clazz;
-        } catch (Exception e) {
-          // fall back to classic delegation
+        } catch (Throwable e) {
+          // fall-back to classic delegation
         }
       }
 
-      return super.loadClass(name, resolve);
+      return classicLoadClass(name, resolve);
     }
 

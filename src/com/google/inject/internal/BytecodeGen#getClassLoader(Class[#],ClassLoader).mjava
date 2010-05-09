@@ -1,20 +1,27 @@
   private static ClassLoader getClassLoader(Class<?> type, ClassLoader delegate) {
+
+    // simple case: do nothing!
+    if (!CUSTOM_LOADER_ENABLED) {
+      return delegate;
+    }
+
     delegate = canonicalize(delegate);
 
-    // if the application is running in the System classloader, assume we can run there too
-    if (delegate == getSystemClassLoaderOrNull()) {
+    // no need for a bridge if using same class loader, or it's already a bridge
+    if (delegate == GUICE_CLASS_LOADER || delegate instanceof BridgeClassLoader) {
       return delegate;
     }
 
-    // Don't bother bridging existing bridge classloaders
-    if (delegate instanceof BridgeClassLoader) {
-      return delegate;
+    // don't try bridging private types as it won't work
+    if (Visibility.forType(type) == Visibility.PUBLIC) {
+      if (delegate != SystemBridgeHolder.SYSTEM_BRIDGE.getParent()) {
+        // delegate guaranteed to be non-null here
+        return CLASS_LOADER_CACHE.get(delegate);
+      }
+      // delegate may or may not be null here
+      return SystemBridgeHolder.SYSTEM_BRIDGE;
     }
 
-    if (HOOK_ENABLED && Visibility.forType(type) == Visibility.PUBLIC) {
-      return CLASS_LOADER_CACHE.get(delegate);
-    }
-
-    return delegate;
+    return delegate; // last-resort: do nothing!
   }
 

@@ -1,0 +1,29 @@
+  //This test may fail if it is not run from ant, or if it is not run after ant has
+  //compiled & built jars. This is because the test is validating that the Guice jar
+  //is properly setup to load in an OSGi container
+  public void testGuiceWorksInOSGiContainer()
+      throws Throwable {
+
+    // ask framework to clear cache on startup
+    Properties properties = new Properties();
+    properties.setProperty("org.osgi.framework.storage", BUILD_TEST_DIR + "/bundle.cache");
+    properties.setProperty("org.osgi.framework.storage.clean", "onFirstInit");
+
+    // test each available OSGi framework in turn
+    Iterator<FrameworkFactory> f = ServiceRegistry.lookupProviders(FrameworkFactory.class);
+    while (f.hasNext()) {
+      Framework framework = f.next().newFramework(properties);
+
+      framework.start();
+      BundleContext systemContext = framework.getBundleContext();
+
+      // load all the necessary bundles and start the OSGi test bundle
+      systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/aopalliance.jar");
+      systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/javax.inject.jar");
+      systemContext.installBundle("reference:file:" + GUICE_JAR);
+      systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/osgitests.jar").start();
+
+      framework.stop();
+    }
+  }
+
