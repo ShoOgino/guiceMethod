@@ -1,0 +1,2 @@
+    @Inject Foo(@Assisted Bar bar, Baz<E> baz) {}
+
