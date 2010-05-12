@@ -1,10 +1,10 @@
     /**
      * Removes a method overridden by the given method, if present.
      */
-    void removeIfOverriddenBy(Method method) {
+    boolean removeIfOverriddenBy(Method method) {
       if (position == Position.TOP) {
         // If we're at the top of the hierarchy, there's nothing to override.
-        return;
+        return false;
       }
 
       if (bySignature == null) {
@@ -25,15 +25,18 @@
       lastMethod = method;
       Signature signature = lastSignature = new Signature(method);
       List<InjectableMethod> methods = bySignature.get(signature);
+      boolean removed = false;
       if (methods != null) {
         for (Iterator<InjectableMethod> iterator = methods.iterator();
             iterator.hasNext();) {
           InjectableMethod possiblyOverridden = iterator.next();
           if (overrides(method, possiblyOverridden.method)) {
+            removed = true;
             iterator.remove();
             injectableMembers.remove(possiblyOverridden);
           }
         }
       }
+      return removed;
     }
 
