@@ -1,0 +1,4 @@
+    public FooModule(AtomicReference<Logger> loggerRef) {
+      this.loggerRef = loggerRef;
+    }
+

@@ -1,0 +1,6 @@
+    @SuppressWarnings("unused")
+    @Provides Integer foo(Logger logger) {
+      loggerRef.set(logger);
+      return 42;
+    }
+

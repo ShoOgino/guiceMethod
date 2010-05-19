@@ -1,0 +1,6 @@
+  public void testLoggerInConstructor() {
+    Injector injector = Guice.createInjector();
+    Foo foo = injector.getInstance(Foo.class);
+    assertEquals("com.google.inject.LoggerInjectionTest$Foo", foo.logger.getName());
+  }
+

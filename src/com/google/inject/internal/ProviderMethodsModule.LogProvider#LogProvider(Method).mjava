@@ -1,0 +1,4 @@
+    public LogProvider(Method method) {
+      this.name = method.getDeclaringClass().getName() + "." + method.getName();
+    }
+

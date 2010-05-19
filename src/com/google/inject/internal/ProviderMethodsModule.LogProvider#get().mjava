@@ -1,0 +1,4 @@
+    public Logger get() {
+      return Logger.getLogger(name);
+    }
+
