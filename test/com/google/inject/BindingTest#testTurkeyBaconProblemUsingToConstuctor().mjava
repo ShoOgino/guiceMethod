@@ -1,0 +1,24 @@
+  public void testTurkeyBaconProblemUsingToConstuctor() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @SuppressWarnings("unchecked")
+      @Override
+      public void configure() {
+        bind(Bacon.class).to(UncookedBacon.class);
+        bind(Bacon.class).annotatedWith(named("Turkey")).to(TurkeyBacon.class);
+        bind(Bacon.class).annotatedWith(named("Cooked")).toConstructor(
+            (Constructor)InjectionPoint.forConstructorOf(Bacon.class).getMember());
+      }
+    });
+    Bacon bacon = injector.getInstance(Bacon.class);
+    assertEquals(Food.PORK, bacon.getMaterial());
+    assertFalse(bacon.isCooked());
+    
+    Bacon turkeyBacon = injector.getInstance(Key.get(Bacon.class, named("Turkey")));
+    assertEquals(Food.TURKEY, turkeyBacon.getMaterial());
+    assertTrue(turkeyBacon.isCooked());
+    
+    Bacon cookedBacon = injector.getInstance(Key.get(Bacon.class, named("Cooked")));
+    assertEquals(Food.PORK, cookedBacon.getMaterial());
+    assertTrue(cookedBacon.isCooked());    
+  }
+
