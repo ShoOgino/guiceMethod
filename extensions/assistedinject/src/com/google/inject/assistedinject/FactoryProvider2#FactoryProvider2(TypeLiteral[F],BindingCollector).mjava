@@ -15,8 +15,19 @@
       ImmutableMap.Builder<Method, AssistData> assistDataBuilder = ImmutableMap.builder();
       // TODO: also grab methods from superinterfaces
       for (Method method : factoryRawType.getMethods()) {
-        Key<?> returnType = getKey(
-            factoryType.getReturnType(method), method, method.getAnnotations(), errors);
+        TypeLiteral<?> returnTypeLiteral = factoryType.getReturnType(method);
+        Key<?> returnType;
+        try {
+          returnType = getKey(returnTypeLiteral, method, method.getAnnotations(), errors);
+        } catch(ConfigurationException ce) {
+          // If this was an error due to returnTypeLiteral not being specified, rephrase
+          // it as our factory not being specified, so it makes more sense to users.
+          if(isTypeNotSpecified(returnTypeLiteral, ce)) {
+            throw errors.keyNotFullySpecified(TypeLiteral.get(factoryRawType)).toException();
+          } else {
+            throw ce;
+          }
+        }
         List<TypeLiteral<?>> params = factoryType.getParameterTypes(method);
         Annotation[][] paramAnnotations = method.getParameterAnnotations();
         int p = 0;

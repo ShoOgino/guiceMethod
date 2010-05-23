@@ -1,0 +1,18 @@
+  public void testGenericErrorMessageMakesSense() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+         install(new FactoryModuleBuilder().build(Key.get(Foo.Factory.class))); 
+        }
+      });
+      fail();
+    } catch(CreationException ce ) {
+      // Assert not only that it's the correct message, but also that it's the *only* message.
+      Collection<Message> messages = ce.getErrorMessages();
+      assertEquals(
+          Foo.Factory.class.getName() + " cannot be used as a key; It is not fully specified.", 
+          Iterables.getOnlyElement(messages).getMessage());
+    }
+  }
+
