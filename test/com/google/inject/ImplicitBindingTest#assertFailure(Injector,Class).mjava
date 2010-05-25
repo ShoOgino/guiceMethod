@@ -1,0 +1,16 @@
+  @SuppressWarnings("unchecked")
+  private void assertFailure(Injector injector, Class clazz) {
+    try {
+      injector.getBinding(clazz);
+      fail("Shouldn't have been able to get binding of: " + clazz);
+    } catch(ConfigurationException expected) {
+      List<Object> sources = Iterables.getOnlyElement(expected.getErrorMessages()).getSources();
+      // Assert that the first item in the sources if the key for the class we're looking up,
+      // ensuring that each lookup is "new".
+      assertEquals(Key.get(clazz).toString(), sources.get(0).toString());
+      // Assert that the last item in each lookup contains the InvalidInterface class
+      Asserts.assertContains(sources.get(sources.size()-1).toString(),
+          Key.get(InvalidInterface.class).toString());
+    }
+  }
+

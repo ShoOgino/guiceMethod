@@ -1,0 +1,5 @@
+  /** True if this binding has been initialized and is ready for use. */
+  boolean isInitialized() {
+    return factory.constructorInjector != null;
+  }
+

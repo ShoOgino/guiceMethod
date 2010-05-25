@@ -2,20 +2,40 @@
    * When we're building the binding for A, we temporarily insert that binding to support circular
    * dependencies. And so we can successfully create a binding for B. But later, when the binding
    * for A ultimately fails, we need to clean up the dependent binding for B.
+   * 
+   * The test loops through linked bindings & bindings with constructor & member injections,
+   * to make sure that all are cleaned up and traversed.  It also makes sure we don't touch
+   * explicit bindings.
    */
   public void testCircularJitBindingsLeaveNoResidue() {
-    Injector injector = Guice.createInjector();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Valid.class);
+        bind(Valid2.class);
+      }
+    });
+    
+    // Capture good bindings.
+    Binding v1 = injector.getBinding(Valid.class);
+    Binding v2 = injector.getBinding(Valid2.class);
+    Binding jv1 = injector.getBinding(JitValid.class);
+    Binding jv2 = injector.getBinding(JitValid2.class);
 
-    try {
-      injector.getBinding(A.class);
-      fail();
-    } catch (ConfigurationException expected) {
-    }
-
-    try {
-      injector.getBinding(B.class);
-      fail();
-    } catch (ConfigurationException expected) {
-    }
+    // Then validate that a whole series of invalid bindings are erased.
+    assertFailure(injector, Invalid.class);
+    assertFailure(injector, InvalidLinked.class);
+    assertFailure(injector, InvalidLinkedImpl.class);
+    assertFailure(injector, InvalidLinked2.class);
+    assertFailure(injector, InvalidLinked2Impl.class);
+    assertFailure(injector, Invalid2.class);
+    
+    // Validate we didn't do anything to the valid explicit bindings.
+    assertSame(v1, injector.getBinding(Valid.class));
+    assertSame(v2, injector.getBinding(Valid2.class));
+    
+    // Validate that we didn't erase the valid JIT bindings
+    assertSame(jv1, injector.getBinding(JitValid.class));
+    assertSame(jv2, injector.getBinding(JitValid2.class));
   }
 

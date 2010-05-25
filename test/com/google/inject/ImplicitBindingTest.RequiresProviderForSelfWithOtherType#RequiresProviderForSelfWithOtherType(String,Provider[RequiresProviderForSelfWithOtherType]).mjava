@@ -1,0 +1,9 @@
+    @Inject    
+    RequiresProviderForSelfWithOtherType(
+        String providedStringValue,
+        Provider<RequiresProviderForSelfWithOtherType> selfProvider
+        ) {
+      this.providedStringValue = providedStringValue;
+      this.selfProvider = selfProvider;      
+    }
+

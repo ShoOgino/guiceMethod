@@ -1,0 +1,2 @@
+    @Inject InvalidLinked2Impl(Invalid2 a) {}
+

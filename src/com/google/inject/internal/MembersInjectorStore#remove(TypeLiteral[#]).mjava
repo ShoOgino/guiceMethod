@@ -1,0 +1,13 @@
+  /**
+   * Purges a type literal from the cache. Use this only if the type is not actually valid for
+   * binding and needs to be purged. (See issue 319 and
+   * ImplicitBindingTest#testCircularJitBindingsLeaveNoResidue and
+   * #testInstancesRequestingProvidersForThemselvesWithChildInjectors for examples of when this is
+   * necessary.)
+   * 
+   * Returns true if the type was stored in the cache, false otherwise.
+   */
+  boolean remove(TypeLiteral<?> type) {
+    return cache.remove(type);
+  }
+

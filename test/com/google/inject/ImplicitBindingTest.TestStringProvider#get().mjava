@@ -1,0 +1,4 @@
+    public String get() {
+      return TEST_VALUE;
+    }    
+
