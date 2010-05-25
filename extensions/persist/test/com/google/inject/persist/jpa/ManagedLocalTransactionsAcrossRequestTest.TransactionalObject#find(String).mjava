@@ -1,0 +1,5 @@
+    @Finder(query = "from JpaTestEntity where text = :text")
+    public JpaTestEntity find(@Named("text") String text) {
+      return null;
+    }
+

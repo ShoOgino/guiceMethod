@@ -1,0 +1,11 @@
+  /**
+   * writes to a chm (used to provide copy-on-write but this is bettah!)
+   *
+   * @param method The key
+   * @param finderDescriptor The descriptor to cache
+   */
+  private void cacheFinderDescriptor(Method method, FinderDescriptor finderDescriptor) {
+    //write to concurrent map
+    finderCache.put(method, finderDescriptor);
+  }
+

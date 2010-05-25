@@ -1,0 +1,25 @@
+  public void disabled_testSimpleTransactionWithMergeAndDF() {
+    EntityManager emOrig = injector.getInstance(EntityManager.class);
+    JpaTestEntity entity = injector.getInstance(TransactionalObject.class)
+        .runOperationInTxnWithMergeForDf();
+
+    EntityManager em = injector.getInstance(EntityManager.class);
+    assertFalse("txn was not closed by transactional service", em.getTransaction().isActive());
+
+    //test that the data has been stored
+    assertTrue("Em was closed after txn!", em.isOpen());
+    assertEquals("Em was not kept open across txns", emOrig, em);
+    assertTrue("Merge did not store state or did not return persistent copy", em.contains(entity));
+
+    Object result = injector.getInstance(TransactionalObject.class).find(UNIQUE_TEXT_MERGE_FORDF);
+    injector.getInstance(WorkManager.class).end();
+
+    assertNotNull(result);
+    assertTrue(result instanceof JpaTestEntity);
+
+    assertEquals("queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT_MERGE_FORDF, ((JpaTestEntity) result).getText());
+    injector.getInstance(WorkManager.class).end();
+
+  }
+

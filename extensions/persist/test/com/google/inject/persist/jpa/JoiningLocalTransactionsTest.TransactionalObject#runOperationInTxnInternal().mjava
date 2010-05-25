@@ -1,0 +1,7 @@
+    @Transactional(rollbackOn = IOException.class)
+    public void runOperationInTxnInternal() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(UNIQUE_TEXT);
+      em.persist(entity);
+    }
+

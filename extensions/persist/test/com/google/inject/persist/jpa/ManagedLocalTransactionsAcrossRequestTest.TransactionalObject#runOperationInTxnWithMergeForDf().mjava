@@ -1,0 +1,7 @@
+    @Transactional
+    public JpaTestEntity runOperationInTxnWithMergeForDf() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(UNIQUE_TEXT_MERGE_FORDF);
+      return em.merge(entity);
+    }
+

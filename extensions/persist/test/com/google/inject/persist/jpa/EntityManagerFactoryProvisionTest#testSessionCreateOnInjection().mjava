@@ -1,0 +1,13 @@
+  public void testSessionCreateOnInjection() {
+
+    assertTrue("SINGLETON VIOLATION " + PersistenceService.class.getName(),
+        injector.getInstance(PersistenceService.class)
+        .equals(injector.getInstance(PersistenceService.class)));
+
+    //startup persistence
+    injector.getInstance(PersistenceService.class).start();
+
+    //obtain em
+    assertTrue(injector.getInstance(EntityManager.class).isOpen());
+  }
+

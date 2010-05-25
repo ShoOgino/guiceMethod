@@ -1,0 +1,9 @@
+    @Transactional
+    private void runOperationInTxnThrowingCheckedInternal() throws IOException {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(TRANSIENT_UNIQUE_TEXT);
+      em.persist(entity);
+
+      throw new IOException();
+    }
+

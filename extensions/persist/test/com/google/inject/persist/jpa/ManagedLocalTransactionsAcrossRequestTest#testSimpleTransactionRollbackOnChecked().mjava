@@ -1,0 +1,24 @@
+  public void testSimpleTransactionRollbackOnChecked() {
+    try {
+      injector.getInstance(TransactionalObject.class).runOperationInTxnThrowingChecked();
+    } catch (IOException e) {
+      //ignore
+      injector.getInstance(WorkManager.class).end();
+    }
+
+    EntityManager em = injector.getInstance(EntityManager.class);
+
+    assertFalse("Previous EM was not closed by transactional service (rollback didnt happen?)",
+        em.getTransaction().isActive());
+
+    //test that the data has been stored
+    try {
+      Object result = em.createQuery("from JpaTestEntity where text = :text")
+          .setParameter("text", TRANSIENT_UNIQUE_TEXT).getSingleResult();
+      injector.getInstance(WorkManager.class).end();
+      fail();
+    } catch (NoResultException e) {}
+
+    injector.getInstance(WorkManager.class).end();
+  }
+

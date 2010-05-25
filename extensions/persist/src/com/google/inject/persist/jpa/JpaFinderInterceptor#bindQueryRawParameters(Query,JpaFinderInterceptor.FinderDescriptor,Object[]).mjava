@@ -1,0 +1,18 @@
+  private void bindQueryRawParameters(Query jpaQuery,
+      JpaFinderInterceptor.FinderDescriptor descriptor, Object[] arguments) {
+    for (int i = 0, index = 1; i < arguments.length; i++) {
+      Object argument = arguments[i];
+      Object annotation = descriptor.parameterAnnotations[i];
+
+      if (null == annotation) {
+        //bind it as a raw param (1-based index, yes I know its different from Hibernate, blargh)
+        jpaQuery.setParameter(index, argument);
+        index++;
+      } else if (annotation instanceof FirstResult) {
+        jpaQuery.setFirstResult((Integer) argument);
+      } else if (annotation instanceof MaxResults) {
+        jpaQuery.setMaxResults((Integer) argument);
+      }
+    }
+  }
+

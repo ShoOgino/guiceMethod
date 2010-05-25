@@ -1,0 +1,8 @@
+    public void runOperationInTxnThrowingCheckedExcepting() throws IOException {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(UNIQUE_TEXT_2);
+      session.persist(entity);
+
+      throw new FileNotFoundException();
+    }
+

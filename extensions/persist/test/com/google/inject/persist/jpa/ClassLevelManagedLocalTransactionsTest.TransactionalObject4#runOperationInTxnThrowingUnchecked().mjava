@@ -1,0 +1,9 @@
+    @Transactional
+    public void runOperationInTxnThrowingUnchecked() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(TRANSIENT_UNIQUE_TEXT);
+      session.persist(entity);
+
+      throw new IllegalStateException();
+    }
+

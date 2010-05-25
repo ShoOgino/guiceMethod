@@ -1,0 +1,7 @@
+  //cleanup entitymanager in case some of the rollback tests left it in an open state
+  @Override
+  public final void tearDown() {
+    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(EntityManagerFactory.class).close();
+  }
+

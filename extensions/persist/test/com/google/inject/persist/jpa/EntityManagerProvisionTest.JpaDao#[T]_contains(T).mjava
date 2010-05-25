@@ -1,0 +1,5 @@
+    @Transactional
+    public <T> boolean contains(T t) {
+      return em.contains(t);
+    }
+

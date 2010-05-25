@@ -1,0 +1,9 @@
+    @Transactional
+    public void runOperationInTxnError() {
+
+      JpaTestEntity testEntity = new JpaTestEntity();
+
+      testEntity.setText(UNIQUE_TEXT_3 + "transient never in db!" + hashCode());
+      em.persist(testEntity);
+    }
+

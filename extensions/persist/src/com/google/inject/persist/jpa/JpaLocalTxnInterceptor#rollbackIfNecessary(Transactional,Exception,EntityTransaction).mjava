@@ -1,0 +1,40 @@
+  /**
+   * @param transactional The metadata annotaiton of the method
+   * @param e The exception to test for rollback
+   * @param txn A JPA Transaction to issue rollbacks on
+   * @return returns True if rollback DID NOT HAPPEN (i.e. if commit should continue).
+   */
+  private boolean rollbackIfNecessary(Transactional transactional, Exception e,
+      EntityTransaction txn) {
+    boolean commit = true;
+
+    //check rollback clauses
+    for (Class<? extends Exception> rollBackOn : transactional.rollbackOn()) {
+
+      //if one matched, try to perform a rollback
+      if (rollBackOn.isInstance(e)) {
+        commit = false;
+
+        //check exceptOn clauses (supercedes rollback clause)
+        for (Class<? extends Exception> exceptOn : transactional.exceptOn()) {
+          //An exception to the rollback clause was found, DON'T rollback
+          // (i.e. commit and throw anyway)
+          if (exceptOn.isInstance(e)) {
+            commit = true;
+            break;
+          }
+        }
+
+        //rollback only if nothing matched the exceptOn check
+        if (!commit) {
+          txn.rollback();
+        }
+        //otherwise continue to commit
+
+        break;
+      }
+    }
+
+    return commit;
+  }
+

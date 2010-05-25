@@ -1,0 +1,5 @@
+  public void tearDown() {
+    injector.getInstance(PersistenceService.class).shutdown();
+    injector = null;
+  }
+

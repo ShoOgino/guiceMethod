@@ -1,0 +1,9 @@
+  /**
+   * Starts a Unit Of Work. Underneath, causes a session to the data layer to be opened. If there
+   * is already one open, the invocation will do nothing. In this way, you can define arbitrary
+   * units-of-work that nest within one another safely.
+   *
+   * Transaction semantics are not affected.
+   */
+  void begin();
+

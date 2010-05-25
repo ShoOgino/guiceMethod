@@ -1,0 +1,29 @@
+  public void testSimpleCrossTxnWork() {
+    injector.getInstance(WorkManager.class).begin();
+
+    //pretend that the request was started here
+    EntityManager em = injector.getInstance(EntityManager.class);
+
+    JpaTestEntity entity = injector.getInstance(TransactionalObject.class).runOperationInTxn();
+    injector.getInstance(TransactionalObject.class).runOperationInTxn2();
+
+    //persisted entity should remain in the same em (which should still be open)
+    assertTrue("EntityManager  appears to have been closed across txns!",
+        injector.getInstance(EntityManager.class).contains(entity));
+    assertTrue("EntityManager  appears to have been closed across txns!", em.contains(entity));
+    assertTrue("EntityManager appears to have been closed across txns!", em.isOpen());
+
+    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(WorkManager.class).begin();
+
+    //try to query them back out
+    em = injector.getInstance(EntityManager.class);
+    assertNotNull(em.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", UNIQUE_TEXT).getSingleResult());
+    assertNotNull(em.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", UNIQUE_TEXT_2).getSingleResult());
+    em.close();
+
+    assertFalse(em.isOpen());
+  }
+

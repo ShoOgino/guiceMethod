@@ -1,0 +1,20 @@
+  public void testSimpleTransactionWithMerge() {
+    JpaTestEntity entity = injector.getInstance(TransactionalObject.class)
+        .runOperationInTxnWithMerge();
+
+    EntityManager em = injector.getInstance(EntityManager.class);
+    assertFalse("txn was not closed by transactional service", em.getTransaction().isActive());
+
+    //test that the data has been stored
+    assertTrue("Em was closed after txn!", em.isOpen());
+
+    Object result = em.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", UNIQUE_TEXT_MERGE).getSingleResult();
+    injector.getInstance(WorkManager.class).end();
+
+    assertTrue(result instanceof JpaTestEntity);
+
+    assertEquals("queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT_MERGE, ((JpaTestEntity) result).getText());
+  }
+

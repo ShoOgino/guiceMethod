@@ -1,0 +1,19 @@
+  public static Test suite() {
+    TestSuite suite = new TestSuite();
+
+    suite.addTestSuite(EdslTest.class);
+    suite.addTestSuite(ClassLevelManagedLocalTransactionsTest.class);
+    suite.addTestSuite(CustomPropsEntityManagerFactoryProvisionTest.class);
+    suite.addTestSuite(EntityManagerFactoryProvisionTest.class);
+    suite.addTestSuite(EntityManagerPerRequestProvisionTest.class);
+    suite.addTestSuite(EntityManagerProvisionTest.class);
+    suite.addTestSuite(JoiningLocalTransactionsTest.class);
+    suite.addTestSuite(JpaWorkManagerTest.class);
+    suite.addTestSuite(ManagedLocalTransactionsAcrossRequestTest.class);
+    suite.addTestSuite(ManagedLocalTransactionsTest.class);
+    suite.addTestSuite(ManualLocalTransactionsTest.class);
+    suite.addTestSuite(ManualLocalTransactionsWithCustomMatcherTest.class);
+
+    return suite;
+  }
+

@@ -1,0 +1,4 @@
+    Query createQuery(EntityManager em) {
+      return isKeyedQuery ? em.createNamedQuery(name) : em.createQuery(query);
+    }
+

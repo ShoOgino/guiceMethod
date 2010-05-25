@@ -1,0 +1,3 @@
+    @Finder(query = "from JpaTestEntity")
+    public List<JpaTestEntity> listAll() { return null; }
+

@@ -1,0 +1,4 @@
+    public void setChildren(List<JpaTestEntity> children) {
+        this.children = children;
+    }
+

@@ -1,0 +1,4 @@
+  protected void configurePersistence() {
+    // For users to override
+  }
+

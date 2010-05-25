@@ -1,0 +1,69 @@
+  private JpaFinderInterceptor.FinderDescriptor getFinderDescriptor(MethodInvocation invocation) {
+    Method method = invocation.getMethod();
+    JpaFinderInterceptor.FinderDescriptor finderDescriptor = finderCache.get(method);
+    if (null != finderDescriptor) {
+      return finderDescriptor;
+    }
+
+    //otherwise reflect and cache finder info...
+    finderDescriptor = new JpaFinderInterceptor.FinderDescriptor();
+
+    //determine return type
+    finderDescriptor.returnClass = invocation.getMethod().getReturnType();
+    finderDescriptor.returnType = determineReturnType(finderDescriptor.returnClass);
+
+    //determine finder query characteristics
+    Finder finder = invocation.getMethod().getAnnotation(Finder.class);
+    String query = finder.query();
+    if (!"".equals(query.trim())) {
+      finderDescriptor.setQuery(query);
+    } else {
+      finderDescriptor.setNamedQuery(finder.namedQuery());
+    }
+
+    //determine parameter annotations
+    Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+    Object[] discoveredAnnotations = new Object[parameterAnnotations.length];
+    for (int i = 0; i < parameterAnnotations.length; i++) {
+      Annotation[] annotations = parameterAnnotations[i];
+      //each annotation per param
+      for (Annotation annotation : annotations) {
+        //discover the named, first or max annotations then break out
+        Class<? extends Annotation> annotationType = annotation.annotationType();
+        if (Named.class.equals(annotationType)) {
+          discoveredAnnotations[i] = annotation;
+          finderDescriptor.isBindAsRawParameters = false;
+          break;
+        } else if (FirstResult.class.equals(annotationType)) {
+          discoveredAnnotations[i] = annotation;
+          break;
+        } else if (MaxResults.class.equals(annotationType)) {
+          discoveredAnnotations[i] = annotation;
+          break;
+        }   //leave as null for no binding
+      }
+    }
+
+    //set the discovered set to our finder cache object
+    finderDescriptor.parameterAnnotations = discoveredAnnotations;
+
+    //discover the returned collection implementation if this finder returns a collection
+    if (JpaFinderInterceptor.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
+      finderDescriptor.returnCollectionType = finder.returnAs();
+      try {
+        finderDescriptor.returnCollectionTypeConstructor = finderDescriptor.returnCollectionType
+            .getConstructor();
+        finderDescriptor.returnCollectionTypeConstructor.setAccessible(true);   //UGH!
+      } catch (NoSuchMethodException e) {
+        throw new RuntimeException(
+            "Finder's collection return type specified has no default constructor! returnAs: "
+                + finderDescriptor.returnCollectionType, e);
+      }
+    }
+
+    //cache it
+    cacheFinderDescriptor(method, finderDescriptor);
+
+    return finderDescriptor;
+  }
+

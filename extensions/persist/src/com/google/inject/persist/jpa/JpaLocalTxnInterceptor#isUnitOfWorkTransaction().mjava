@@ -1,0 +1,4 @@
+  private boolean isUnitOfWorkTransaction() {
+    return this.unitOfWork == UnitOfWork.TRANSACTION;
+  }
+

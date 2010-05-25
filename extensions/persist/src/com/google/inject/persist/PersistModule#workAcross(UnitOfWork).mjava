@@ -1,0 +1,5 @@
+  protected final PersistenceProviderBinder workAcross(UnitOfWork unitOfWork) {
+    this.unitOfWork = unitOfWork;
+    return this;
+  }
+

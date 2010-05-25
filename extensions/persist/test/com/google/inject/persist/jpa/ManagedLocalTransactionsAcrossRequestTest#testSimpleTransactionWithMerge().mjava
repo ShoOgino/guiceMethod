@@ -1,0 +1,27 @@
+  public void testSimpleTransactionWithMerge() {
+    EntityManager emOrig = injector.getInstance(EntityManager.class);
+    JpaTestEntity entity = injector.getInstance(TransactionalObject.class)
+        .runOperationInTxnWithMerge();
+
+    assertNotNull("Entity was not given an id (was not persisted correctly?)", entity.getId());
+
+    EntityManager em = injector.getInstance(EntityManager.class);
+    assertFalse(em.getTransaction().isActive());
+
+    //test that the data has been stored
+    assertTrue("Em was closed after txn!", em.isOpen());
+    assertEquals("Em was not kept open across txns", emOrig, em);
+    assertTrue("Merge did not store state or did not return persistent copy", em.contains(entity));
+
+    Object result = em.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", UNIQUE_TEXT_MERGE).getSingleResult();
+    injector.getInstance(WorkManager.class).end();
+
+    assertTrue(result instanceof JpaTestEntity);
+
+    assertEquals("queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT_MERGE, ((JpaTestEntity) result).getText());
+    injector.getInstance(WorkManager.class).end();
+
+  }
+

@@ -1,0 +1,9 @@
+    @Transactional
+    public JpaTestEntity runOperationInTxn() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(UNIQUE_TEXT);
+      em.persist(entity);
+
+      return entity;
+    }
+

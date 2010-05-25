@@ -1,0 +1,5 @@
+  @Inject
+  public EntityManagerProvider(Provider<EntityManagerFactory> emFactoryProvider) {
+    this.emFactoryProvider = emFactoryProvider;
+  }
+

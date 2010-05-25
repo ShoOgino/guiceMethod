@@ -1,0 +1,14 @@
+  @Override
+  public void setUp() {
+    injector = Guice.createInjector(new PersistModule() {
+
+      @Override
+      protected void configurePersistence() {
+        workAcross(UnitOfWork.REQUEST).usingJpa("testUnit");
+      }
+    });
+
+    //startup persistence
+    injector.getInstance(PersistenceService.class).start();
+  }
+

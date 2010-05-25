@@ -1,0 +1,53 @@
+  public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+
+    // Should we start a unit of work?
+    if (!emProvider.isWorking() && UnitOfWork.TRANSACTION.equals(unitOfWork)) {
+      emProvider.begin();
+    }
+
+    Transactional transactional = readTransactionMetadata(methodInvocation);
+    EntityManager em = this.emProvider.get();
+
+    // Allow joining of transactions if there is an enclosing @Transactional method.
+    if (em.getTransaction().isActive()) {
+      return methodInvocation.proceed();
+    }
+
+    //start txn
+    final EntityTransaction txn = em.getTransaction();
+    txn.begin();
+
+    Object result;
+    try {
+      result = methodInvocation.proceed();
+
+    } catch (Exception e) {
+      //commit transaction only if rollback didnt occur
+      if (rollbackIfNecessary(transactional, e, txn)) {
+        txn.commit();
+      }
+
+      //propagate whatever exception is thrown anyway
+      throw e;
+    } finally {
+      // Close the em if necessary (guarded so this code doesn't run unless catch fired).
+      if (isUnitOfWorkTransaction() && !txn.isActive()) {
+        workManager.end();
+      }
+    }
+
+    //everything was normal so commit the txn (do not move into try block above as it
+    //  interferes with the advised method's throwing semantics)
+    try {
+      txn.commit();
+    } finally {
+      //close the em if necessary
+      if (isUnitOfWorkTransaction()) {
+        workManager.end();
+      }
+    }
+
+    //or return result
+    return result;
+  }
+

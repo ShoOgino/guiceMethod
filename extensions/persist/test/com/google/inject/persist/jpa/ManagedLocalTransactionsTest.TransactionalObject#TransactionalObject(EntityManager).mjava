@@ -1,0 +1,5 @@
+    @Inject
+    public TransactionalObject(EntityManager em) {
+      this.em = em;
+    }
+

@@ -1,0 +1,17 @@
+  public void testSimpleTransaction() {
+    injector.getInstance(TransactionalObject.class).runOperationInTxn();
+
+    EntityManager em = injector.getInstance(EntityManager.class);
+    assertFalse("txn was not closed by transactional service", em.getTransaction().isActive());
+
+    //test that the data has been stored
+    Object result = em.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", UNIQUE_TEXT).getSingleResult();
+    injector.getInstance(WorkManager.class).end();
+
+    assertTrue("odd result returned fatal", result instanceof JpaTestEntity);
+
+    assertEquals("queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT, ((JpaTestEntity) result).getText());
+  }
+

@@ -1,0 +1,6 @@
+  public InternalJpaModule(UnitOfWork unitOfWork, String jpaUnit, Properties properties) {
+    this.unitOfWork = unitOfWork;
+    this.jpaUnit = jpaUnit;
+    this.properties = properties;
+  }
+

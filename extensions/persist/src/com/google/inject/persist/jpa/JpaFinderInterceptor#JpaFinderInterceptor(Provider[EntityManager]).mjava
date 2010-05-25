@@ -1,0 +1,4 @@
+  public JpaFinderInterceptor(Provider<EntityManager> emProvider) {
+    this.emProvider = emProvider;
+  }
+

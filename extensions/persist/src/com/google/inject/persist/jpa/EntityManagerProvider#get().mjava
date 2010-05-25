@@ -1,0 +1,13 @@
+  public EntityManager get() {
+    if (!isWorking()) {
+      begin();
+    }
+
+    EntityManager em = entityManager.get();
+    Preconditions.checkState(null != em, "Requested EntityManager outside work unit. "
+        + "Try calling WorkManager.begin() first, or use a PersistenceFilter if you "
+        + "are inside a servlet environment.");
+
+    return em;
+  }
+

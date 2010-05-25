@@ -1,0 +1,4 @@
+  public void usingJpa(String unitName) {
+    this.jpaUnit = unitName;
+  }
+

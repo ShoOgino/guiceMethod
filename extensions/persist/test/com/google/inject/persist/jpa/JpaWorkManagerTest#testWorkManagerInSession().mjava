@@ -1,0 +1,31 @@
+  public void testWorkManagerInSession() {
+    injector.getInstance(WorkManager.class).begin();
+    try {
+      injector.getInstance(TransactionalObject.class).runOperationInTxn();
+    } finally {
+      injector.getInstance(WorkManager.class).end();
+
+    }
+
+    injector.getInstance(WorkManager.class).begin();
+    injector.getInstance(EntityManager.class).getTransaction().begin();
+    try {
+      final Query query = injector.getInstance(EntityManager.class)
+          .createQuery("select e from JpaTestEntity as e where text = :text");
+
+      query.setParameter("text", UNIQUE_TEXT_3);
+      final Object o = query.getSingleResult();
+
+      assert null != o : "no result!!";
+      assert o instanceof JpaTestEntity : "Unknown type returned " + o.getClass();
+      JpaTestEntity ent = (JpaTestEntity) o;
+
+      assert UNIQUE_TEXT_3.equals(ent.getText()) :
+          "Incorrect result returned or not persisted properly" + ent.getText();
+
+    } finally {
+      injector.getInstance(EntityManager.class).getTransaction().commit();
+      injector.getInstance(WorkManager.class).end();
+    }
+  }
+

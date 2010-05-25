@@ -1,0 +1,6 @@
+    public void runOperationInTxn() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(UNIQUE_TEXT);
+      session.persist(entity);
+    }
+

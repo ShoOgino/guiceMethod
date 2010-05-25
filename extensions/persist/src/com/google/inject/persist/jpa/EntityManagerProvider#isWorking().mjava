@@ -1,0 +1,4 @@
+  public boolean isWorking() {
+    return entityManager.get() != null;
+  }
+

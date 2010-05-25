@@ -1,0 +1,8 @@
+    public void runOperationInTxnThrowingChecked() throws IOException {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(TRANSIENT_UNIQUE_TEXT);
+      session.persist(entity);
+
+      throw new IOException();
+    }
+

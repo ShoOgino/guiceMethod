@@ -1,0 +1,11 @@
+  public synchronized void start() {
+    Preconditions.checkState(null == emFactory, "Persistence service was already initialized.");
+
+    if (null != persistenceProperties) {
+      this.emFactory = Persistence
+          .createEntityManagerFactory(persistenceUnitName, persistenceProperties);
+    } else {
+      this.emFactory = Persistence.createEntityManagerFactory(persistenceUnitName);
+    }
+  }
+

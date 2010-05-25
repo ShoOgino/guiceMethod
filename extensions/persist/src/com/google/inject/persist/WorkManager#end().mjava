@@ -1,0 +1,9 @@
+  /**
+   * Declares an end to the current Unit of Work. Underneath, causes any open session to the data
+   * layer to close. If there is no Unit of work open, then the call returns silently. You can
+   * safely invoke end() repeatedly.
+   *
+   * Transaction semantics are not affected.
+   */
+  void end();
+

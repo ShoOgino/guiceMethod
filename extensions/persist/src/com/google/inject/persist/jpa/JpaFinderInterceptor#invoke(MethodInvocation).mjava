@@ -1,0 +1,28 @@
+  public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+    EntityManager em = emProvider.get();
+
+    //obtain a cached finder descriptor (or create a new one)
+    JpaFinderInterceptor.FinderDescriptor finderDescriptor = getFinderDescriptor(methodInvocation);
+
+    Object result = null;
+
+    //execute as query (named params or otherwise)
+    Query jpaQuery = finderDescriptor.createQuery(em);
+    if (finderDescriptor.isBindAsRawParameters) {
+      bindQueryRawParameters(jpaQuery, finderDescriptor, methodInvocation.getArguments());
+    } else {
+      bindQueryNamedParameters(jpaQuery, finderDescriptor, methodInvocation.getArguments());
+    }
+
+    //depending upon return type, decorate or return the result as is
+    if (JpaFinderInterceptor.ReturnType.PLAIN.equals(finderDescriptor.returnType)) {
+      result = jpaQuery.getSingleResult();
+    } else if (JpaFinderInterceptor.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
+      result = getAsCollection(finderDescriptor, jpaQuery.getResultList());
+    } else if (JpaFinderInterceptor.ReturnType.ARRAY.equals(finderDescriptor.returnType)) {
+      result = jpaQuery.getResultList().toArray();
+    }
+
+    return result;
+  }
+

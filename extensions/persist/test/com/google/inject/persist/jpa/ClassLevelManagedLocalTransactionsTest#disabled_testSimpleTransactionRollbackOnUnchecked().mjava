@@ -1,0 +1,21 @@
+  public void disabled_testSimpleTransactionRollbackOnUnchecked() {
+    try {
+      injector.getInstance(TransactionalObject4.class).runOperationInTxnThrowingUnchecked();
+    } catch (RuntimeException re) {
+      //ignore
+    }
+
+    EntityManager session = injector.getInstance(EntityManager.class);
+    assert !session.getTransaction().isActive() :
+        "EntityManager was not closed by transactional service (rollback didnt happen?)";
+
+    //test that the data has been stored
+    session.getTransaction().begin();
+    List<?> result = session.createQuery("from JpaTestEntity where text = :text")
+        .setParameter("text", TRANSIENT_UNIQUE_TEXT).getResultList();
+
+    session.getTransaction().commit();
+
+    assert result.isEmpty() : "a result was returned! rollback sure didnt happen!!!";
+  }
+

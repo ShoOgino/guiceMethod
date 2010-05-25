@@ -1,0 +1,9 @@
+    @Transactional(rollbackOn = IOException.class)
+    public void runOperationInTxnThrowingUncheckedInternal() {
+      JpaTestEntity entity = new JpaTestEntity();
+      entity.setText(TRANSIENT_UNIQUE_TEXT);
+      em.persist(entity);
+
+      throw new IllegalStateException();
+    }
+

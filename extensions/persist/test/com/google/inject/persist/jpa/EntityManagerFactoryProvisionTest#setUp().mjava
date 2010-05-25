@@ -1,0 +1,10 @@
+  public void setUp() {
+    injector = Guice.createInjector(new PersistModule() {
+
+      protected void configurePersistence() {
+        //tell Warp the name of the jpa persistence unit
+        workAcross(UnitOfWork.TRANSACTION).usingJpa("testUnit");
+      }
+    });
+  }
+

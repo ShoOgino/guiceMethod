@@ -1,0 +1,23 @@
+  @Override
+  protected final void configure() {
+    configurePersistence();
+
+    // Really post conditions, but whatevah.
+    Preconditions.checkArgument(null != unitOfWork,
+        "Must specify a unit of work in the PersistModule.");
+    Preconditions.checkArgument(null != jpaUnit,
+        "Must specify the name of a JPA unit in the PersistModule.");
+
+    install(new InternalJpaModule(unitOfWork, jpaUnit, properties));
+
+    // Servlet functionality requested.
+    if (UnitOfWork.REQUEST.equals(unitOfWork)) {
+      install(new ServletModule() {
+        @Override
+        protected void configureServlets() {
+          filter("/*").through(PersistenceFilter.class);
+        }
+      });
+    }
+  }
+

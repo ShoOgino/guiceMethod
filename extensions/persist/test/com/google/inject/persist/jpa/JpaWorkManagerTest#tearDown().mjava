@@ -1,0 +1,5 @@
+  @Override
+  public void tearDown() {
+    injector.getInstance(EntityManagerFactory.class).close();
+  }
+

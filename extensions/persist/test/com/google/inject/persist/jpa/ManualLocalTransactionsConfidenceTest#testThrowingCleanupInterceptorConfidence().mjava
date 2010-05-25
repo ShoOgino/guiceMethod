@@ -1,0 +1,21 @@
+  public void testThrowingCleanupInterceptorConfidence() {
+    Exception e = null;
+    try {
+      System.out.println(
+          "\n\n******************************* EXPECTED EXCEPTION NORMAL TEST BEHAVIOR **********");
+      injector.getInstance(TransactionalObject.class).runOperationInTxn();
+      fail();
+    } catch (RuntimeException re) {
+      e = re;
+      System.out.println(
+          "\n\n******************************* EXPECTED EXCEPTION NORMAL TEST BEHAVIOR **********");
+      re.printStackTrace(System.out);
+      System.out.println(
+          "\n\n**********************************************************************************");
+    }
+
+    assertNotNull("No exception was thrown!", e);
+    assertTrue("Exception thrown was not what was expected (i.e. commit-time)",
+        e instanceof PersistenceException);
+  }
+

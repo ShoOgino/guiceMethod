@@ -1,0 +1,4 @@
+    public boolean isKeyedQuery() {
+      return isKeyedQuery;
+    }
+

@@ -1,0 +1,16 @@
+    @Transactional
+    public void runOperationInTxn() {
+      JpaParentTestEntity entity = new JpaParentTestEntity();
+      JpaTestEntity child = new JpaTestEntity();
+
+      child.setText(UNIQUE_TEXT_3);
+      em.persist(child);
+
+      entity.getChildren().add(child);
+      em.persist(entity);
+
+      entity = new JpaParentTestEntity();
+      entity.getChildren().add(child);
+      em.persist(entity);
+    }
+

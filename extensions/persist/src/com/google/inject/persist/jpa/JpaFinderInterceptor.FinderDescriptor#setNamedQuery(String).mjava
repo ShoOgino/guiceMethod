@@ -1,0 +1,5 @@
+    void setNamedQuery(String name) {
+      this.name = name;
+      isKeyedQuery = true;
+    }
+
