@@ -1,9 +1,8 @@
-    private RealMultibinder(Binder binder, TypeLiteral<T> elementType,
-        String setName, Key<Set<T>> setKey) {
+    private RealMultibinder(Binder binder, TypeLiteral<T> elementType, Key<Set<T>> setKey) {
       this.binder = checkNotNull(binder, "binder");
       this.elementType = checkNotNull(elementType, "elementType");
-      this.setName = checkNotNull(setName, "setName");
       this.setKey = checkNotNull(setKey, "setKey");
+      this.setName = nameOf(setKey);
       this.permitDuplicatesKey = Key.get(Boolean.class, named(toString() + " permits duplicates"));
     }
 

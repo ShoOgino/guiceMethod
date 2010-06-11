@@ -32,5 +32,5 @@
     assertEquals(ImmutableSet.of("A", "B", "C", "D", "E", "F"),
         injector.getInstance(Key.get(setOfString)));
 
-  }  
+  }
 

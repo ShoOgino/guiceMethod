@@ -7,7 +7,7 @@
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);
 
-    if (isMarker(annotationType)) {
+    if (Annotations.isMarker(annotationType)) {
       return new AnnotationTypeStrategy(annotationType, annotation);
     }
 
