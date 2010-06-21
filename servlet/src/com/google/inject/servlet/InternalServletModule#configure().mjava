@@ -9,6 +9,7 @@
     // Unfortunate staticness... =(
     requestStaticInjection(GuiceFilter.class);
 
+    bind(ManagedFilterPipeline.class);
     bind(ManagedServletPipeline.class);
     bind(FilterPipeline.class).to(ManagedFilterPipeline.class).asEagerSingleton();
   }
