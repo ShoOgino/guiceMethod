@@ -1,0 +1,11 @@
+  public void testImplementedBySomethingThatIsAnnotated() {
+    Injector injector = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(ImplByScoped.class);
+      }
+    }).build();
+    ensureWorks(injector, ImplByScoped.class);
+    ensureFails(injector, true, ImplByScopedImpl.class);    
+  }
+
