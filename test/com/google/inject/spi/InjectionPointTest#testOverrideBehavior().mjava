@@ -1,0 +1,26 @@
+  public void testOverrideBehavior() {
+	  Set<InjectionPoint> points;
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(JsrAnnotated.class);
+	  assertEquals(1, points.size());
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(ExtendsJsrAnnoated.class);
+	  assertEquals(0, points.size());
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(GuiceAnnotated.class);
+	  assertEquals(1, points.size());
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(ExtendsGuiceAnnotated.class);
+	  assertEquals(1, points.size());
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(DoubleGuiceInject.class);
+    assertEquals(1, points.size());	  
+	  
+    points = InjectionPoint.forInstanceMethodsAndFields(GuiceExtendsJsrAnnotated.class);
+	  assertEquals(1, points.size());
+	  
+	  points = InjectionPoint.forInstanceMethodsAndFields(ExtendsGuiceExtendsJsrAnnotated.class);
+	  assertEquals(1, points.size());
+	  
+  }
+

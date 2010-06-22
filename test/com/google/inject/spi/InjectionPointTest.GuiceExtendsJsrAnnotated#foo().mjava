@@ -1,0 +1,2 @@
+	  @Override @Inject public void foo() {}
+

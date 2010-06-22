@@ -1,7 +1,10 @@
     /**
      * Removes a method overridden by the given method, if present.
+     * In order to remain backwards compatible with prior Guice versions,
+     * this will *not* remove overridden methods if 'alwaysRemove' is false
+     * and the overriden signature was annotated with a com.google.inject.Inject.
      */
-    boolean removeIfOverriddenBy(Method method) {
+    boolean removeIfOverriddenBy(Method method, boolean alwaysRemove) {
       if (position == Position.TOP) {
         // If we're at the top of the hierarchy, there's nothing to override.
         return false;
@@ -30,10 +33,18 @@
         for (Iterator<InjectableMethod> iterator = methods.iterator();
             iterator.hasNext();) {
           InjectableMethod possiblyOverridden = iterator.next();
+          if(!possiblyOverridden.jsr330) {
+            signature.hadGuiceInject = true;
+          }
           if (overrides(method, possiblyOverridden.method)) {
-            removed = true;
-            iterator.remove();
-            injectableMembers.remove(possiblyOverridden);
+            // Only actually remove the methods if we want to force
+            // remove or if the signature never specified @com.google.inject.Inject
+            // somewhere.
+            if(alwaysRemove || !signature.hadGuiceInject) {
+              removed = true;
+              iterator.remove();
+              injectableMembers.remove(possiblyOverridden);
+            }
           }
         }
       }
