@@ -1,0 +1,2 @@
+	  @com.google.inject.Inject public void gInject() {}
+

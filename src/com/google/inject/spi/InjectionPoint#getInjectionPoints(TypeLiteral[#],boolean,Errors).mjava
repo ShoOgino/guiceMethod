@@ -47,7 +47,7 @@
             if (checkForMisplacedBindingAnnotations(method, errors)
                 | !isValidMethod(injectableMethod, errors)) {
               if (overrideIndex != null) {
-                boolean removed = overrideIndex.removeIfOverriddenBy(method, false);
+                boolean removed = overrideIndex.removeIfOverriddenBy(method, false, injectableMethod);
                 if(removed) {
                   logger.log(Level.WARNING, "Method: {0} is not a valid injectable method ("
                       + "because it either has misplaced binding annotations "
@@ -72,16 +72,16 @@
               } else {
                 // Forcibly remove the overriden method, otherwise we'll inject
                 // it twice.
-                overrideIndex.removeIfOverriddenBy(method, true);
+                overrideIndex.removeIfOverriddenBy(method, true, injectableMethod);
               }
               overrideIndex.add(injectableMethod);
             }
           } else {
             if(overrideIndex != null) {
-              boolean removed = overrideIndex.removeIfOverriddenBy(method, false);
+              boolean removed = overrideIndex.removeIfOverriddenBy(method, false, null);
               if(removed) {
                 logger.log(Level.WARNING, "Method: {0} is not annotated with @Inject but "
-                    + "is overriding a method that is annotated with @Inject.  Because "
+                    + "is overriding a method that is annotated with @javax.inject.Inject.  Because "
                     + "it is not annotated with @Inject, the method will not be injected. "
                     + "To fix this, annotate the method with @Inject.", method);
               }
