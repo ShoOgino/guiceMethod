@@ -1,0 +1,7 @@
+  public void testSameScopeAnnotationIgnored() {
+    Guice.createInjector(
+        new AnnotatedScopeModule(Singleton.class, foo, pFoo, pclFoo, clFoo, cFoo),
+        new AnnotatedScopeModule(Singleton.class, foo, pFoo, pclFoo, clFoo, cFoo)
+    );
+  }
+

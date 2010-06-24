@@ -1,0 +1,6 @@
+  private void removeBasicBindings(Collection<Key<?>> bindings) {
+    bindings.remove(Key.get(Injector.class));
+    bindings.remove(Key.get(Logger.class));
+    bindings.remove(Key.get(Stage.class));
+  }
+

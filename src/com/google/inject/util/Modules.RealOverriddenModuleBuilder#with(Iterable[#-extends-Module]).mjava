@@ -2,7 +2,8 @@
       return new AbstractModule() {
         @Override
         public void configure() {
-          final List<Element> elements = Elements.getElements(baseModules);
+          final LinkedHashSet<Element> elements =
+            new LinkedHashSet<Element>(Elements.getElements(baseModules));
           final List<Element> overrideElements = Elements.getElements(overrides);
 
           final Set<Key<?>> overriddenKeys = Sets.newHashSet();

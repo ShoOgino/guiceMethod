@@ -1,0 +1,10 @@
+    @Override
+    protected void configure() {
+      bind(Foo.class).toInstance(new Foo() {
+        @Override
+        public boolean equals(Object obj) {
+          throw new RuntimeException("Boo!");
+        }
+      });
+    }
+

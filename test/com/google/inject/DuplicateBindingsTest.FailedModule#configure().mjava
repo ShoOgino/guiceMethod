@@ -1,0 +1,17 @@
+    protected void configure() {
+      // InstanceBinding
+      bind(Foo.class).toInstance(foo);
+      
+      // ProviderInstanceBinding
+      bind(Foo.class).toProvider(pFoo);
+      
+      // ProviderKeyBinding
+      bind(Foo.class).toProvider(pclFoo);
+      
+      // LinkedKeyBinding
+      bind(Foo.class).to(clFoo);
+      
+      // ConstructorBinding
+      bind(Foo.class).toConstructor(cFoo);
+    }
+

@@ -1,5 +1,5 @@
   public void testBindingDifferentTypesWithSameValueIsAnErrorWithProviderMethods() {
-    assertDuplicateBinding(GUICE_PROVIDER_METHOD_MODULE, JSR330_PROVIDER_METHOD_MODULE);
-    assertDuplicateBinding(JSR330_PROVIDER_METHOD_MODULE, GUICE_PROVIDER_METHOD_MODULE);
+    assertDuplicateBinding(GUICE_PROVIDER_METHOD_MODULE, JSR330_PROVIDER_METHOD_MODULE, true);
+    assertDuplicateBinding(JSR330_PROVIDER_METHOD_MODULE, GUICE_PROVIDER_METHOD_MODULE, true);
   }
 

@@ -1,0 +1,23 @@
+  public void testChildInjectorDuplicateParentFail() {
+    Injector injector = Guice.createInjector(
+        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
+    );
+    
+    try {
+      injector.createChildInjector(
+          new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
+      );
+      fail("expected exception");
+    } catch(CreationException ce) {
+      assertContains(ce.getMessage(), 
+          "A binding to " + Foo.class.getName() + " annotated with " + named("pInstance") + " was already configured at " + SimpleModule.class.getName(),
+          "at " + SimpleModule.class.getName(), 
+          "A binding to " + Foo.class.getName() + " annotated with " + named("pKey") + " was already configured at " + SimpleModule.class.getName(),
+          "at " + SimpleModule.class.getName(), 
+          "A binding to " + Foo.class.getName() + " annotated with " + named("linkedKey") + " was already configured at " + SimpleModule.class.getName(),
+          "at " + SimpleModule.class.getName(),
+          "A binding to " + Foo.class.getName() + " annotated with " + named("constructor") + " was already configured at " + SimpleModule.class.getName(),
+          "at " + SimpleModule.class.getName());
+    } 
+  }
+

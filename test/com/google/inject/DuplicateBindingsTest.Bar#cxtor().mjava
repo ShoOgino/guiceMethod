@@ -1,0 +1,10 @@
+    private static Constructor<Bar> cxtor() {
+      try {
+        return Bar.class.getConstructor();
+      } catch (SecurityException e) {
+        throw new RuntimeException(e);
+      } catch (NoSuchMethodException e) {
+        throw new RuntimeException(e);
+      }
+    }
+

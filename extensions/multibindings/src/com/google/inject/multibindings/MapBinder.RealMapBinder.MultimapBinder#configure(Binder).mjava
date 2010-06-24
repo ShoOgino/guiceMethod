@@ -7,7 +7,7 @@
         // Binds a Map<K, Set<Provider<V>>> from a collection of Map<Entry<K, Provider<V>> if
         // permitDuplicates was called.
         binder.bind(providerMultimapKey).toProvider(
-            new ProviderWithDependencies<Map<K, Set<Provider<V>>>>() {
+            new RealMapBinderProviderWithDependencies<Map<K, Set<Provider<V>>>>(multimapKey) {
               private Map<K, Set<Provider<V>>> providerMultimap;
 
               @SuppressWarnings("unused")
@@ -42,7 +42,7 @@
 
         final Provider<Map<K, Set<Provider<V>>>> multimapProvider =
             binder.getProvider(providerMultimapKey);
-        binder.bind(multimapKey).toProvider(new ProviderWithDependencies<Map<K, Set<V>>>() {
+        binder.bind(multimapKey).toProvider(new RealMapBinderProviderWithDependencies<Map<K, Set<V>>>(multimapKey) {
 
           public Map<K, Set<V>> get() {
             ImmutableMap.Builder<K, Set<V>> multimapBuilder = ImmutableMap.builder();

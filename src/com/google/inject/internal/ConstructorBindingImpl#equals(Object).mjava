@@ -1,0 +1,12 @@
+  @Override
+  public boolean equals(Object obj) {
+    if(obj instanceof ConstructorBindingImpl) {
+      ConstructorBindingImpl<?> o = (ConstructorBindingImpl<?>)obj;
+      return getKey().equals(o.getKey())
+        && getScoping().equals(o.getScoping())
+        && Objects.equal(constructorInjectionPoint, o.constructorInjectionPoint);
+    } else {
+      return false;
+    }
+  }
+

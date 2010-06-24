@@ -24,8 +24,8 @@
     try {
       Guice.createInjector(new AbstractModule() {
         protected void configure() {
-          bind(String[].class).toInstance(strings);
-          bind(new TypeLiteral<String[]>() {}).toInstance(strings);
+          bind(String[].class).toInstance(new String[] { "A" });
+          bind(new TypeLiteral<String[]>() {}).toInstance(new String[] { "B" });
         }
       });
       fail();
@@ -35,5 +35,16 @@
           "at " + getClass().getName(), ".configure(BinderTest.java:");
       assertContains(expected.getMessage(), "1 error");
     }
+    
+    // passes because duplicates are ignored
+    injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String[].class).toInstance(strings);
+        bind(new TypeLiteral<String[]>() {}).toInstance(strings);
+      }
+    });
+    assertSame(strings, injector.getInstance(Key.get(new TypeLiteral<String[]>() {})));
+    assertSame(strings, injector.getInstance(new Key<String[]>() {}));
+    assertSame(strings, injector.getInstance(String[].class));
   }
 

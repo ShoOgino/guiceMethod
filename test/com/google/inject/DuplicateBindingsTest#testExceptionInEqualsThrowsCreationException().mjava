@@ -1,0 +1,12 @@
+  public void testExceptionInEqualsThrowsCreationException() {
+    try {
+      Guice.createInjector(new ThrowingModule(), new ThrowingModule());
+      fail("expected exception");
+    } catch(CreationException ce) {
+      assertContains(ce.getMessage(),
+          "A binding to " + Foo.class.getName() + " was already configured at " + ThrowingModule.class.getName(),
+          "and an error was thrown while checking duplicate bindings.  Error: java.lang.RuntimeException: Boo!",
+          "at " + ThrowingModule.class.getName());
+    }
+  }
+

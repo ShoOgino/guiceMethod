@@ -1,0 +1,10 @@
+  public void testJitBindingsAreCheckedAfterConversions() {
+    Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+       bind(A.class);
+       bind(A.class).to(RealA.class);
+      }
+    });
+  }
+

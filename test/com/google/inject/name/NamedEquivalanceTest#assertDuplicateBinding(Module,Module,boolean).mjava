@@ -1,0 +1,16 @@
+  private static void assertDuplicateBinding(Module a, Module b, boolean fails) {
+    try {
+      Guice.createInjector(a, b);
+      if(fails) {
+        fail("should have thrown CreationException");
+      }
+    } catch (CreationException e) {
+      if(fails) {
+        assertContains(e.getMessage(),
+            "A binding to java.lang.String annotated with @com.google.inject.name.Named(value=foo) was already configured");
+      } else {
+        throw e;
+      }
+    }
+  }
+

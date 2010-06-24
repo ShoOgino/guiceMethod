@@ -1,0 +1,7 @@
+  public void testMixedAnnotationAndScopeForSingletonIgnored() {
+    Guice.createInjector(
+        new ScopedModule(Scopes.SINGLETON, foo, pFoo, pclFoo, clFoo, cFoo),
+        new AnnotatedScopeModule(Singleton.class, foo, pFoo, pclFoo, clFoo, cFoo)
+    );
+  }
+

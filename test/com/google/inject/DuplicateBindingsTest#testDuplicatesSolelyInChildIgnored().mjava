@@ -1,0 +1,8 @@
+  public void testDuplicatesSolelyInChildIgnored() {
+    Injector injector = Guice.createInjector();
+    injector.createChildInjector(
+        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
+        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
+    );
+  }
+

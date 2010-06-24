@@ -1,5 +1,5 @@
   public void testBindingDifferentTypesWithSameValueIsAnErrorMixed() {
-    assertDuplicateBinding(GUICE_BINDING_MODULE, JSR330_PROVIDER_METHOD_MODULE);
-    assertDuplicateBinding(JSR330_BINDING_MODULE, GUICE_PROVIDER_METHOD_MODULE);
+    assertDuplicateBinding(GUICE_BINDING_MODULE, JSR330_PROVIDER_METHOD_MODULE, true);
+    assertDuplicateBinding(JSR330_BINDING_MODULE, GUICE_PROVIDER_METHOD_MODULE, true);
   }
 

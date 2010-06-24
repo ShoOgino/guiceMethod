@@ -1,0 +1,9 @@
+  public void testElementsDeduplicate() {
+    List<Element> elements = Elements.getElements(
+        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
+        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
+    );
+    assertEquals(12, elements.size());
+    assertEquals(6, new LinkedHashSet<Element>(elements).size());
+  }
+

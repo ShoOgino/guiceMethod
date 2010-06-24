@@ -1,0 +1,20 @@
+    protected void configure() {
+      // InstanceBinding
+      bind(Foo.class).annotatedWith(named("instance")).toInstance(foo);
+      
+      // ProviderInstanceBinding
+      bind(Foo.class).annotatedWith(named("pInstance")).toProvider(pFoo);
+      
+      // ProviderKeyBinding
+      bind(Foo.class).annotatedWith(named("pKey")).toProvider(pclFoo);
+      
+      // LinkedKeyBinding
+      bind(Foo.class).annotatedWith(named("linkedKey")).to(clFoo);
+      
+      // UntargettedBinding / ConstructorBinding
+      bind(FooImpl.class);
+      
+      // ConstructorBinding
+      bind(Foo.class).annotatedWith(named("constructor")).toConstructor(cFoo);
+    }
+
