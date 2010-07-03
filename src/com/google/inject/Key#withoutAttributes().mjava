@@ -1,6 +1,8 @@
   /**
    * Returns this key without annotation attributes, i.e. with only the
    * annotation type.
+   * 
+   * @since 3.0
    */
   public Key<T> withoutAttributes() {
     return new Key<T>(typeLiteral, annotationStrategy.withoutAttributes());

@@ -8,6 +8,8 @@
    * injector}, should one exist.
    *
    * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
+   * 
+   * @since 3.0
    */
   Map<Key<?>, Binding<?>> getAllBindings();
 

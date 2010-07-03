@@ -4,6 +4,8 @@
    * type literal.
    *
    * @param constructor any single constructor present on {@code type}.
+   * 
+   * @since 3.0
    */
   public static <T> InjectionPoint forConstructor(Constructor<T> constructor) {
     return new InjectionPoint(TypeLiteral.get(constructor.getDeclaringClass()), constructor);

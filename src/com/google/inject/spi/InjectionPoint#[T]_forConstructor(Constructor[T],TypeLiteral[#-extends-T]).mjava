@@ -3,6 +3,8 @@
    *
    * @param constructor any single constructor present on {@code type}.
    * @param type the concrete type that defines {@code constructor}.
+   * 
+   * @since 3.0
    */
   public static <T> InjectionPoint forConstructor(
       Constructor<T> constructor, TypeLiteral<? extends T> type) {
