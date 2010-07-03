@@ -1,4 +1,0 @@
-    public com.google.inject.Scope visitScope(com.google.inject.Scope scope) {
-      return scope;
-    }
-

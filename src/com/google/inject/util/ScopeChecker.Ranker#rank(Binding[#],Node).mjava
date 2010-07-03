@@ -1,8 +1,0 @@
-    public void rank(Binding<?> binding, Node node) {
-      Scope scope = binding.acceptScopingVisitor(this);
-      Integer rank = scopeToRank.get(scope);
-      if (rank != null) {
-        node.setScopeRank(rank, scopeAnnotations.get(rank));
-      }
-    }
-
