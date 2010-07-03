@@ -10,7 +10,7 @@
 
     if (!type.isArray()) {
       InputStream in = type.getResourceAsStream("/" + type.getName().replace('.', '/') + ".class");
-      checkArgument(in != null, "Cannot find bytecode for %s", type);
+      Preconditions.checkArgument(in != null, "Cannot find bytecode for %s", type);
       new ClassReader(in).accept(new LineNumberReader(), ClassReader.SKIP_FRAMES);
     }
   }

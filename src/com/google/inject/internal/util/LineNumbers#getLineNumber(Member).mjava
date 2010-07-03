@@ -7,7 +7,7 @@
    * construction
    */
   public Integer getLineNumber(Member member) {
-    checkArgument(type == member.getDeclaringClass(),
+    Preconditions.checkArgument(type == member.getDeclaringClass(),
         "Member %s belongs to %s, not %s", member, member.getDeclaringClass(), type);
     return lines.get(MoreTypes.memberKey(member));
   }

@@ -18,9 +18,9 @@
    */
   public static <T extends Appendable> T join(T appendable,
       String keyValueSeparator, String entryDelimiter, Map<?, ?> map) {
-    checkNotNull(appendable);
-    checkNotNull(keyValueSeparator);
-    checkNotNull(entryDelimiter);
+    Preconditions.checkNotNull(appendable);
+    Preconditions.checkNotNull(keyValueSeparator);
+    Preconditions.checkNotNull(entryDelimiter);
     Iterator<? extends Map.Entry<?, ?>> entries = map.entrySet().iterator();
     if (entries.hasNext()) {
       try {

@@ -17,7 +17,7 @@
    */
   public static <T extends Appendable> T join(T appendable, String delimiter,
       @Nullable Object firstToken, Object... otherTokens) {
-    checkNotNull(otherTokens);
+    Preconditions.checkNotNull(otherTokens);
     return join(appendable, delimiter, Lists.newArrayList(firstToken, otherTokens));
   }
 

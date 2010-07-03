@@ -1,5 +1,5 @@
   public void annotatedWith(Annotation annotation) {
-    com.google.inject.internal.Preconditions.checkNotNull(annotation, "annotation");
+    Preconditions.checkNotNull(annotation, "annotation");
     checkNotAnnotated();
     key = Key.get(key.getTypeLiteral(), annotation);
   }

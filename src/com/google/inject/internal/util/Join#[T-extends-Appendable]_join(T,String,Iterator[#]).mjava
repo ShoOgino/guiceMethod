@@ -19,8 +19,8 @@
 
     /* This method is the workhorse of the class */
 
-    checkNotNull(appendable);
-    checkNotNull(delimiter);
+    Preconditions.checkNotNull(appendable);
+    Preconditions.checkNotNull(delimiter);
     if (tokens.hasNext()) {
       try {
         appendOneToken(appendable, tokens.next());
