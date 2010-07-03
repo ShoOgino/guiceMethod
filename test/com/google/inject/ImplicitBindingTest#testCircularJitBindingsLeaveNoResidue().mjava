@@ -28,6 +28,10 @@
     assertFailure(injector, InvalidLinkedImpl.class);
     assertFailure(injector, InvalidLinked2.class);
     assertFailure(injector, InvalidLinked2Impl.class);
+    assertFailure(injector, InvalidProvidedBy.class);
+    assertFailure(injector, InvalidProvidedByProvider.class);
+    assertFailure(injector, InvalidProvidedBy2.class);
+    assertFailure(injector, InvalidProvidedBy2Provider.class);
     assertFailure(injector, Invalid2.class);
     
     // Validate we didn't do anything to the valid explicit bindings.
