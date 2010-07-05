@@ -1,0 +1,5 @@
+    // This setter is called by the GuiceServletContextListener
+    void set(ServletContext injectedServletContext) {
+      this.injectedServletContext = injectedServletContext;
+    }
+

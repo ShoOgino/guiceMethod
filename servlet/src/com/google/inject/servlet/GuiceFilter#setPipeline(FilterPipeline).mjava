@@ -1,0 +1,14 @@
+  //VisibleForTesting
+  @Inject
+  static void setPipeline(FilterPipeline pipeline) {
+
+    // This can happen if you create many injectors and they all have their own
+    // servlet module. This is legal, caveat a small warning.
+    if (GuiceFilter.pipeline instanceof ManagedFilterPipeline) {
+        Logger.getLogger(GuiceFilter.class.getName()).warning(MULTIPLE_INJECTORS_WARNING);
+    }
+
+    // We overwrite the default pipeline
+    GuiceFilter.pipeline = pipeline;
+  }
+

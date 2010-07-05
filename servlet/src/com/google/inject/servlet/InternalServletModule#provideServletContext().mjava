@@ -1,4 +1,0 @@
-  @Provides ServletContext provideServletContext() {
-    return GuiceFilter.getServletContext();
-  }
-
