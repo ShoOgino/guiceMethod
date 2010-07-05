@@ -37,7 +37,7 @@
         } else if (FirstResult.class.equals(annotationType)) {
           discoveredAnnotations[i] = annotation;
           break;
-        } else if (MaxResults.class.equals(annotationType)) {
+        } else if (NumResults.class.equals(annotationType)) {
           discoveredAnnotations[i] = annotation;
           break;
         }   //leave as null for no binding

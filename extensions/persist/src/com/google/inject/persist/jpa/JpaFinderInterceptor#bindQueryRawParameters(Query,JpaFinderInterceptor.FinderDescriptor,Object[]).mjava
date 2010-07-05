@@ -10,7 +10,7 @@
         index++;
       } else if (annotation instanceof FirstResult) {
         jpaQuery.setFirstResult((Integer) argument);
-      } else if (annotation instanceof MaxResults) {
+      } else if (annotation instanceof NumResults) {
         jpaQuery.setMaxResults((Integer) argument);
       }
     }

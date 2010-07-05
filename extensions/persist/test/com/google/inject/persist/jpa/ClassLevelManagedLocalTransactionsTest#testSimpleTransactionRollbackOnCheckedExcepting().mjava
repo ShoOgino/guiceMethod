@@ -18,7 +18,7 @@
 
     session.getTransaction().commit();
 
-    assertNotNull("a result was not returned! rollback happened anyway (exceptOn failed)!!!",
+    assertNotNull("a result was not returned! rollback happened anyway (ignore failed)!!!",
         result);
   }
 

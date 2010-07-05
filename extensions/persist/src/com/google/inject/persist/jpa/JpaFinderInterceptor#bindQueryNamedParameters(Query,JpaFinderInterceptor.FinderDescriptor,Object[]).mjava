@@ -13,7 +13,7 @@
         hibernateQuery.setParameter(named.value(), argument);
       } else if (annotation instanceof FirstResult) {
         hibernateQuery.setFirstResult((Integer) argument);
-      } else if (annotation instanceof MaxResults) {
+      } else if (annotation instanceof NumResults) {
         hibernateQuery.setMaxResults((Integer) argument);
       }
     }
