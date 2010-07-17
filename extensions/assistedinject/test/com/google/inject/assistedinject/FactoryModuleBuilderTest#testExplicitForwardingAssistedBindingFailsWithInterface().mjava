@@ -1,0 +1,23 @@
+  public void testExplicitForwardingAssistedBindingFailsWithInterface() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bind(Volkswagen.class).to(Golf.class);
+          install(new FactoryModuleBuilder()
+            .implement(Car.class, Volkswagen.class)
+            .build(ColoredCarFactory.class));
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertContains(
+          ce.getMessage(), "1) " + Volkswagen.class.getName() + " is an interface, not a concrete class.",
+          "Unable to create AssistedInject factory.",
+          "while locating " + Volkswagen.class.getName(),
+          "while locating " + Car.class.getName(),
+          "at " + ColoredCarFactory.class.getName() + ".create(");
+      assertEquals(1, ce.getErrorMessages().size());
+    }
+  }
+

@@ -43,20 +43,16 @@
         if(implementation == null) {
           implementation = returnType.getTypeLiteral();
         }
-        InjectionPoint ctorInjectionPoint = findMatchingConstructorInjectionPoint(method, implementation, immutableParamList, errors);
-        Constructor<?> constructor = null;
-        if(ctorInjectionPoint != null) {
-          // There are three reasons this could be null:
-          // 1) The implementation is an interface and is forwarded (explicitly or implicitly)
-          //    to another binding (see FactoryModuleBuildTest.test[Implicit|Explicit]ForwardingAssistedBinding.
-          //    In this case, things are OK and the exception is right to be ignored.
-          // 2) The implementation has something wrong with its constructors (two @injects, invalid ctor, etc..)
-          //    In this case, by having a null constructor we let the proper exception be recreated later on.
-          // 3) findMatchingConstructor added errors to the Errors object and returned null, in which case
-          //    this method will appropriately throw an exception later on.
-          constructor = (Constructor)ctorInjectionPoint.getMember();
+        InjectionPoint ctorInjectionPoint;
+        try {
+          ctorInjectionPoint = 
+            findMatchingConstructorInjectionPoint(method, returnType, implementation, immutableParamList);
+        } catch(ErrorsException ee) {
+          errors.merge(ee.getErrors());
+          continue;
         }
         
+        Constructor<?> constructor = (Constructor)ctorInjectionPoint.getMember();
         List<ThreadLocalProvider> providers = Collections.emptyList();
         boolean optimized = false;
         // Now go through all dependencies of the implementation and see if it is OK to

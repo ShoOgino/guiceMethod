@@ -1,0 +1,2 @@
+    AbstractCar create(Color color);
+

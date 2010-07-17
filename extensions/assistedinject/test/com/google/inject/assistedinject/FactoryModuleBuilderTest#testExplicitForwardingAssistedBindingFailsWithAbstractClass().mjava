@@ -1,0 +1,23 @@
+  public void testExplicitForwardingAssistedBindingFailsWithAbstractClass() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bind(AbstractCar.class).to(ArtCar.class);
+          install(new FactoryModuleBuilder()
+            .implement(Car.class, AbstractCar.class)
+            .build(ColoredCarFactory.class));
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertContains(
+          ce.getMessage(), "1) " + AbstractCar.class.getName() + " is abstract, not a concrete class.",
+          "Unable to create AssistedInject factory.",
+          "while locating " + AbstractCar.class.getName(),
+          "while locating " + Car.class.getName(),
+          "at " + ColoredCarFactory.class.getName() + ".create(");
+      assertEquals(1, ce.getErrorMessages().size());
+    }
+  }
+

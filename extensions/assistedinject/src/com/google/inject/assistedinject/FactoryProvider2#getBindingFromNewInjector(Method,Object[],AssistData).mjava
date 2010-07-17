@@ -27,30 +27,17 @@
             binder.bind((Key) paramKey).toProvider(data.providers.get(p++));
           }
         }
-
                 
-        Constructor<?> constructor = data.constructor;
-        // If the injector already has a binding for the return type, don't
-        // bother binding to a specific constructor. Otherwise, there could be
-        // bugs where an implicit binding isn't used (or an explicitly forwarded
-        // binding isn't used)
-        if (injector.getExistingBinding(returnType) != null) {
-          constructor = null;
-        }
-        
-        TypeLiteral<?> implementation = collector.getBindings().get(returnType);
-        if (implementation != null) {
-          if(constructor == null) {
-            binder.bind(assistedReturnType).to((TypeLiteral)implementation);
+        Constructor constructor = data.constructor;
+        // Constructor *should* always be non-null here,
+        // but if it isn't, we'll end up throwing a fairly good error
+        // message for the user.
+        if(constructor != null) {
+          TypeLiteral implementation = collector.getBindings().get(returnType);
+          if (implementation != null) {
+            binder.bind(assistedReturnType).toConstructor(constructor, implementation);
           } else {
-            binder.bind(assistedReturnType).toConstructor((Constructor)constructor, (TypeLiteral)implementation);
-          }
-        } else {
-          // no implementation, but need to bind from assisted key to actual key.
-          if(constructor == null) {
-            binder.bind(assistedReturnType).to((Key)returnType);
-          } else {
-            binder.bind(assistedReturnType).toConstructor((Constructor)constructor, (TypeLiteral)returnType.getTypeLiteral());
+            binder.bind(assistedReturnType).toConstructor(constructor, (TypeLiteral) returnType.getTypeLiteral());
           }
         }
       }
