@@ -26,10 +26,6 @@
       put("ahsd124124", "as124124124dasdok");
     }};
 
-    String pattern = "/*";
-    final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET, pattern), initParams);
-    assert filterDef.getFilter() instanceof MockFilter;
 
     ServletContext servletContext = createMock(ServletContext.class);
     final String contextName = "thing__!@@44";
@@ -37,20 +33,26 @@
 
     replay(servletContext);
 
+    String pattern = "/*";
+    final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
+    		UriPatternType.get(UriPatternType.SERVLET, pattern), initParams);
     filterDef.init(servletContext, injector,
         Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
 
+    assertTrue(filterDef.getFilter() instanceof MockFilter);
     final FilterConfig filterConfig = mockFilter.getConfig();
-    assert null != filterConfig;
-    assert contextName.equals(filterConfig.getServletContext().getServletContextName());
-    assert Key.get(Filter.class).toString().equals(filterConfig.getFilterName());
+    assertTrue(null != filterConfig);
+    assertTrue(contextName.equals(filterConfig.getServletContext().getServletContextName()));
+    assertTrue(Key.get(Filter.class).toString().equals(filterConfig.getFilterName()));
 
     final Enumeration names = filterConfig.getInitParameterNames();
     while (names.hasMoreElements()) {
       String name = (String) names.nextElement();
 
-      assert initParams.containsKey(name);
-      assert initParams.get(name).equals(filterConfig.getInitParameter(name));
+      assertTrue(initParams.containsKey(name));
+      assertTrue(initParams.get(name).equals(filterConfig.getInitParameter(name)));
     }
+    
+    verify(binding, injector, servletContext);
   }
 

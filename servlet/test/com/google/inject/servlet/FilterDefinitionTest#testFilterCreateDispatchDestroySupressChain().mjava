@@ -30,13 +30,13 @@
     String pattern = "/*";
     final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
         UriPatternType.get(UriPatternType.SERVLET, pattern), new HashMap<String, String>());
-    assert filterDef.getFilter() instanceof MockFilter;
-
     //should fire on mockfilter now
     filterDef.init(createMock(ServletContext.class), injector,
-        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    		Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    assertTrue(filterDef.getFilter() instanceof MockFilter);
 
-    assert mockFilter.isInit() : "Init did not fire";
+
+    assertTrue("init did not fire", mockFilter.isInit());
 
     final boolean proceed[] = new boolean[1];
     filterDef.doFilter(request, null, new FilterChainInvocation(null, null, null) {
@@ -46,10 +46,10 @@
       }
     });
 
-    assert !proceed[0] : "Filter did not suppress chain";
+    assertTrue("filter did not suppress chain", !proceed[0]);
 
     filterDef.destroy(Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
-    assert mockFilter.isDestroy() : "Destroy did not fire";
+    assertTrue("destroy did not fire", mockFilter.isDestroy());
 
     verify(injector, request);
 

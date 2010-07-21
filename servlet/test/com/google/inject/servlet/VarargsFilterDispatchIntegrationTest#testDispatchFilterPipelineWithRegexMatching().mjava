@@ -29,8 +29,9 @@
 
     verify(requestMock);
 
-    assert inits == 3 && doFilters == 2 && destroys == 3 : "lifecycle states did not fire "
-        + "correct number of times-- inits: " + inits + "; dos: " + doFilters
-        + "; destroys: " + destroys;
+    assertTrue("lifecycle states did not fire "
+	    + "correct number of times-- inits: " + inits + "; dos: " + doFilters
+	    + "; destroys: " + destroys,
+    		inits == 1 && doFilters == 2 && destroys == 1);
   }
 

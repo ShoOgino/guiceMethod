@@ -40,6 +40,8 @@
     servletDefinition.doService(request, response);
 
     assertTrue("Servlet did not run!", run[0]);
+    
+    verify(injector, binding, request);
 
   }
 

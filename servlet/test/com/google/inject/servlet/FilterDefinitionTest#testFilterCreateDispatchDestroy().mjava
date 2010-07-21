@@ -20,14 +20,13 @@
 
     String pattern = "/*";
     final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET, pattern), new HashMap<String, String>());
-    assert filterDef.getFilter() instanceof MockFilter;
-
+    		UriPatternType.get(UriPatternType.SERVLET, pattern), new HashMap<String, String>());
     //should fire on mockfilter now
     filterDef.init(createMock(ServletContext.class), injector,
         Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    assertTrue(filterDef.getFilter() instanceof MockFilter);
 
-    assert mockFilter.isInit() : "Init did not fire";
+    assertTrue("Init did not fire", mockFilter.isInit());
 
     final boolean proceed[] = new boolean[1];
     filterDef.doFilter(request, null, new FilterChainInvocation(null, null, null) {

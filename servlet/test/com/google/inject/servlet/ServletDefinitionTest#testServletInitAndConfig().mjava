@@ -52,5 +52,7 @@
       assertTrue(initParams.containsKey(name));
       assertEquals(initParams.get(name), servletConfig.getInitParameter(name));
     }
+    
+    verify(injector, binding, servletContext);
   }
 
