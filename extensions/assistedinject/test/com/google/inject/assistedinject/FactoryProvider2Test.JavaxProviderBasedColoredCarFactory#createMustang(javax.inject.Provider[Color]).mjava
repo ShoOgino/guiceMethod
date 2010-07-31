@@ -1,0 +1,2 @@
+    Mustang createMustang(@Assisted("color") javax.inject.Provider<Color> colorProvider);
+

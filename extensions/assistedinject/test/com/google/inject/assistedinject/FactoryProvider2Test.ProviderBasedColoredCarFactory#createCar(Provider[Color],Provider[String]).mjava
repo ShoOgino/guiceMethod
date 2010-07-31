@@ -1,0 +1,2 @@
+    Car createCar(Provider<Color> colorProvider, Provider<String> stringProvider);
+

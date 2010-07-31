@@ -11,7 +11,7 @@
     final Key<?> assistedReturnType = Key.get(returnType.getTypeLiteral(), Assisted.class);
 
     Module assistedModule = new AbstractModule() {
-      @SuppressWarnings("unchecked") // raw keys are necessary for the args array and return value
+      @Override @SuppressWarnings("unchecked") // raw keys are necessary for the args array and return value
       protected void configure() {
         Binder binder = binder().withSource(method);
 

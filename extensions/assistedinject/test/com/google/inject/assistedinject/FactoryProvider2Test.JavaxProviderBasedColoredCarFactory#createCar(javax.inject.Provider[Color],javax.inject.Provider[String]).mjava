@@ -1,0 +1,2 @@
+    Car createCar(javax.inject.Provider<Color> colorProvider, javax.inject.Provider<String> stringProvider);
+
