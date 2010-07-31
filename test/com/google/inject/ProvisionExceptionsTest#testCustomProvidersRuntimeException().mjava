@@ -1,0 +1,25 @@
+  public void testCustomProvidersRuntimeException() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Exploder.class).toProvider(new Provider<Exploder>() {
+          public Exploder get() {
+            return Explosion.createRuntime();
+          }
+        });
+        bind(Tracer.class).to(TracerImpl.class);        
+      }
+    });
+    try {
+      injector.getInstance(Tracer.class);
+      fail();
+    } catch(ProvisionException pe) {
+      // Make sure our initial error message gives the user exception.
+      Asserts.assertContains(pe.getMessage(),
+          "1) Error in custom provider", "java.lang.IllegalStateException: boom!");
+      assertEquals(1, pe.getErrorMessages().size());
+      assertEquals(IllegalStateException.class, pe.getCause().getClass());
+      assertEquals(IllegalStateException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+    }
+  }
+

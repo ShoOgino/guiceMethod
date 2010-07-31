@@ -1,0 +1,4 @@
+    public static Explosion createChecked() throws IOException {
+      return new Explosion(false);
+    }
+

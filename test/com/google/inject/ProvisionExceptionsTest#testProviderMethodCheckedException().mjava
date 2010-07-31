@@ -1,0 +1,24 @@
+  public void testProviderMethodCheckedException() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Tracer.class).to(TracerImpl.class);        
+      }
+      @Provides Exploder exploder() throws IOException {
+        return Explosion.createChecked();
+      }
+    });
+    try {
+      injector.getInstance(Tracer.class);
+      fail();
+    } catch(ProvisionException pe) {
+      pe.printStackTrace();
+      // Make sure our initial error message gives the user exception.
+      Asserts.assertContains(pe.getMessage(),
+          "1) Error in custom provider", "java.io.IOException: boom!");
+      assertEquals(1, pe.getErrorMessages().size());
+      assertEquals(IOException.class, pe.getCause().getClass());
+      assertEquals(IOException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+    }
+  }
+

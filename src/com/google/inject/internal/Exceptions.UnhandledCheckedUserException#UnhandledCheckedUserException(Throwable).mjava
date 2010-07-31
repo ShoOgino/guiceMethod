@@ -1,0 +1,4 @@
+    public UnhandledCheckedUserException(Throwable cause) {
+      super(cause);
+    }
+

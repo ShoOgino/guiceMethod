@@ -1,0 +1,22 @@
+  public void testConstructorCheckedException() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindConstant().annotatedWith(Names.named("runtime")).to(false);
+        bind(Exploder.class).to(Explosion.class);
+        bind(Tracer.class).to(TracerImpl.class);        
+      }
+    });
+    try {
+      injector.getInstance(Tracer.class);
+      fail();
+    } catch(ProvisionException pe) {
+      // Make sure our initial error message gives the user exception.
+      Asserts.assertContains(pe.getMessage(),
+          "1) Error injecting constructor", "java.io.IOException: boom!");
+      assertEquals(1, pe.getErrorMessages().size());
+      assertEquals(IOException.class, pe.getCause().getClass());
+      assertEquals(IOException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+    }
+  }
+
