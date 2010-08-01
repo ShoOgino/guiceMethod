@@ -1,4 +1,4 @@
-  public static String memberKey(Member member) {
+  private String memberKey(Member member) {
     checkNotNull(member, "member");
 
     /*if[AOP]*/
@@ -23,5 +23,5 @@
     /*if[NO_AOP]
     return "<NO_MEMBER_KEY>";
     end[NO_AOP]*/
-  }
+  }  
 
