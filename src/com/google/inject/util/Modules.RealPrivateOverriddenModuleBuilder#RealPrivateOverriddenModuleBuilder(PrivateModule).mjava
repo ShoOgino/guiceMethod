@@ -1,0 +1,4 @@
+    private RealPrivateOverriddenModuleBuilder(PrivateModule privateModule) {
+      this.baseModule = privateModule;
+    }
+

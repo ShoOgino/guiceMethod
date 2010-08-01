@@ -1,0 +1,13 @@
+    public PrivateModule with(final Iterable<? extends Module> overrides) {
+      return new PrivateModule() {
+        @Override
+        public void configure() {
+          PrivateElements privateElements = (PrivateElements)Iterables.getOnlyElement(Elements.getElements(baseModule));
+          override(Elements.getModule(privateElements.getElements())).with(overrides).configure(binder());
+          for(Key exposed : privateElements.getExposedKeys()) {
+            binder().withSource(privateElements.getExposedSource(exposed)).expose(exposed);
+          }
+        }
+      };
+    }
+
