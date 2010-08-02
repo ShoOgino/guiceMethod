@@ -1,4 +1,0 @@
-    public PrivateModule with(Module... overrides) {
-      return with(Arrays.asList(overrides));
-    }
-

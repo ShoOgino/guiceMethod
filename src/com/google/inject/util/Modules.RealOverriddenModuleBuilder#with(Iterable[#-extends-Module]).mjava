@@ -2,15 +2,34 @@
       return new AbstractModule() {
         @Override
         public void configure() {
-          final LinkedHashSet<Element> elements =
-            new LinkedHashSet<Element>(Elements.getElements(baseModules));
+          Binder baseBinder = binder();
+          List<Element> baseElements = Elements.getElements(baseModules);
+
+          // If the sole element was a PrivateElements, we want to override
+          // the private elements within that -- so refocus our elements
+          // and binder.
+          if(baseElements.size() == 1) {
+            Element element = Iterables.getOnlyElement(baseElements);
+            if(element instanceof PrivateElements) {
+              PrivateElements privateElements = (PrivateElements)element;
+              PrivateBinder privateBinder = baseBinder.newPrivateBinder().withSource(privateElements.getSource());
+              for(Key exposed : privateElements.getExposedKeys()) {
+                privateBinder.withSource(privateElements.getExposedSource(exposed)).expose(exposed);
+              }
+              baseBinder = privateBinder;
+              baseElements = privateElements.getElements();
+            }
+          }
+          
+          final Binder binder = baseBinder;
+          final LinkedHashSet<Element> elements = new LinkedHashSet<Element>(baseElements);
           final List<Element> overrideElements = Elements.getElements(overrides);
 
           final Set<Key<?>> overriddenKeys = Sets.newHashSet();
           final Set<Class<? extends Annotation>> overridesScopeAnnotations = Sets.newHashSet();
 
           // execute the overrides module, keeping track of which keys and scopes are bound
-          new ModuleWriter(binder()) {
+          new ModuleWriter(binder) {
             @Override public <T> Void visit(Binding<T> binding) {
               overriddenKeys.add(binding.getKey());
               return super.visit(binding);
@@ -32,7 +51,7 @@
           // multiple times.
           final Map<Scope, Object> scopeInstancesInUse = Maps.newHashMap();
           final List<ScopeBinding> scopeBindings = Lists.newArrayList();
-          new ModuleWriter(binder()) {
+          new ModuleWriter(binder) {
             @Override public <T> Void visit(Binding<T> binding) {
               if (!overriddenKeys.remove(binding.getKey())) {
                 super.visit(binding);
@@ -87,14 +106,14 @@
 
           // execute the scope bindings, skipping scopes that have been overridden. Any scope that
           // is overridden and in active use will prompt an error
-          new ModuleWriter(binder()) {
+          new ModuleWriter(binder) {
             @Override public Void visit(ScopeBinding scopeBinding) {
               if (!overridesScopeAnnotations.remove(scopeBinding.getAnnotationType())) {
                 super.visit(scopeBinding);
               } else {
                 Object source = scopeInstancesInUse.get(scopeBinding.getScope());
                 if (source != null) {
-                  binder().withSource(source).addError(
+                  binder.withSource(source).addError(
                       "The scope for @%s is bound directly and cannot be overridden.",
                       scopeBinding.getAnnotationType().getSimpleName());
                 }

@@ -1,5 +1,0 @@
-    /**
-     * See the EDSL example at {@link Modules#override(PrivateModule) override()}.
-     */
-    PrivateModule with(Iterable<? extends Module> overrides);
-

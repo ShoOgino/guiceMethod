@@ -1,7 +1,10 @@
   /**
    * Returns a builder that creates a module that overlays override modules over the given
    * modules. If a key is bound in both sets of modules, only the binding from the override modules
-   * is kept. This can be used to replace the bindings of a production module with test bindings:
+   * is kept. If a single {@link PrivateModule} is supplied or all elements are from
+   * a single {@link PrivateBinder}, then this will overwrite the private bindings.
+   * Otherwise, private bindings will not be overwritten unless they are exposed. 
+   * This can be used to replace the bindings of a production module with test bindings:
    * <pre>
    * Module functionalTestModule
    *     = Modules.override(new ProductionModule()).with(new TestModule());
