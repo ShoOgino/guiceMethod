@@ -9,15 +9,5 @@
         "Must specify the name of a JPA unit in the PersistModule.");
 
     install(new InternalJpaModule(unitOfWork, jpaUnit, properties));
-
-    // Servlet functionality requested.
-    if (UnitOfWork.REQUEST.equals(unitOfWork)) {
-      install(new ServletModule() {
-        @Override
-        protected void configureServlets() {
-          filter("/*").through(PersistenceFilter.class);
-        }
-      });
-    }
   }
 

@@ -6,7 +6,7 @@
           workAcross(UnitOfWork.REQUEST).usingJpa("myunit");
         }
 
-      }).stage(Stage.TOOL)
+      }).stage(Stage.PRODUCTION)
         .requireExplicitBindings()
         .build();
   }

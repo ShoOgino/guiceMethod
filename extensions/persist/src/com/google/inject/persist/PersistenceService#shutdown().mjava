@@ -1,7 +1,7 @@
   /**
-   * Stops the underlying persistence engine. For instance, with Hibernate, it closes the
-   * SessionFactory. If already stopped, calling this method does nothing. If not yet started, it
-   * also does nothing.
+   * Stops the underlying persistence engine. For instance, with JPA, it
+   * closes the {@code EntityManagerFactory}. If already stopped, calling this
+   * method does nothing. If not yet started, it also does nothing.
    */
   public abstract void shutdown();
 

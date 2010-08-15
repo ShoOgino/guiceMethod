@@ -2,8 +2,8 @@
     injector.getInstance(TransactionalObject.class).runOperationInTxn();
 
     EntityManager session = injector.getInstance(EntityManager.class);
-    assert !session.getTransaction().isActive() :
-        "EntityManager was not closed by transactional service";
+    assertFalse("EntityManager was not closed by transactional service",
+        session.getTransaction().isActive());
 
     //test that the data has been stored
     session.getTransaction().begin();

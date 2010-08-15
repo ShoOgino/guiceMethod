@@ -1,0 +1,10 @@
+  /**
+   * Tests if {@code method} is a dynamic finder method.
+   *
+   * @param method a method you want to test as a dynamic finder
+   * @return {@code true} if the method is annotated {@code @Finder}
+   */
+  public static boolean isFinder(Method method) {
+    return method.isAnnotationPresent(Finder.class);
+  }
+
