@@ -1,0 +1,5 @@
+    @Override
+    protected String visitOther(Binding<? extends T> binding) {
+      throw new AssertionFailedError();
+    }
+
