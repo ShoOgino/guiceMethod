@@ -1,10 +1,10 @@
     private void through(Key<? extends Filter> filterKey,
-        Map<String, String> contextParams,
+        Map<String, String> initParams,
         Filter filterInstance) {
       for (String pattern : uriPatterns) {
         filterDefinitions.add(
             new FilterDefinition(pattern, filterKey, UriPatternType.get(uriPatternType, pattern),
-                contextParams, filterInstance));
+                initParams, filterInstance));
       }
     }
 

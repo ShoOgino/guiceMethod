@@ -1,2 +1,2 @@
-    void through(Key<? extends Filter> dummyFilterClass, Map<String, String> contextParams);
+    void through(Key<? extends Filter> filterKey, Map<String, String> initParams);
 

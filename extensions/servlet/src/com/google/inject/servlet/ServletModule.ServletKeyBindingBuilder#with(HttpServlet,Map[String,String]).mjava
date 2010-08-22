@@ -1,2 +1,2 @@
-    void with(HttpServlet servlet, Map<String, String> contextParams);
+    void with(HttpServlet servlet, Map<String, String> initParams);
 

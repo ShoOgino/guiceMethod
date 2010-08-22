@@ -1,2 +1,2 @@
-    void with(Key<? extends HttpServlet> servletKey, Map<String, String> contextParams);
+    void with(Key<? extends HttpServlet> servletKey, Map<String, String> initParams);
 

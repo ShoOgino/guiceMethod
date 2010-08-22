@@ -1,2 +1,2 @@
-    void through(Filter filter, Map<String, String> contextParams);
+    void through(Filter filter, Map<String, String> initParams);
 

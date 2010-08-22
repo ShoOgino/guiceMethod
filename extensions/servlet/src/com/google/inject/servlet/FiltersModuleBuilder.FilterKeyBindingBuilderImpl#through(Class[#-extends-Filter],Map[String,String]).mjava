@@ -1,7 +1,7 @@
     public void through(Class<? extends Filter> filterKey,
-        Map<String, String> contextParams) {
+        Map<String, String> initParams) {
       
       // Careful you don't accidentally make this method recursive, thank you IntelliJ IDEA!
-      through(Key.get(filterKey), contextParams);
+      through(Key.get(filterKey), initParams);
     }
 

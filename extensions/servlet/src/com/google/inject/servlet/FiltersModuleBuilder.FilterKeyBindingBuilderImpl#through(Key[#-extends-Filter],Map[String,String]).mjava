@@ -1,5 +1,5 @@
     public void through(Key<? extends Filter> filterKey,
-        Map<String, String> contextParams) {
-      through(filterKey, contextParams, null);
+        Map<String, String> initParams) {
+      through(filterKey, initParams, null);
     }
 

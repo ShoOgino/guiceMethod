@@ -1,5 +1,5 @@
     public void with(Class<? extends HttpServlet> servletKey,
-        Map<String, String> contextParams) {
-      with(Key.get(servletKey), contextParams);
+        Map<String, String> initParams) {
+      with(Key.get(servletKey), initParams);
     }
 
