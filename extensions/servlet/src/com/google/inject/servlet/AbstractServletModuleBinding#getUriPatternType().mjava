@@ -1,0 +1,4 @@
+  public UriPatternType getUriPatternType() {
+    return patternType;
+  }
+

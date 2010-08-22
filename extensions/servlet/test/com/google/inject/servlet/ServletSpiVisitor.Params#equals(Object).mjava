@@ -1,0 +1,13 @@
+    @Override
+    public boolean equals(Object obj) {
+      if(obj instanceof Params) {
+        Params o = (Params)obj;
+        return Objects.equal(pattern, o.pattern)
+            && Objects.equal(keyOrInstance, o.keyOrInstance)
+            && Objects.equal(params, o.params)
+            && Objects.equal(patternType, o.patternType);
+      } else {
+        return false;
+      }
+    }
+

@@ -1,4 +1,4 @@
-  public static UriPatternMatcher get(UriPatternType type, String pattern) {
+  static UriPatternMatcher get(UriPatternType type, String pattern) {
     switch (type) {
       case SERVLET:
         return new ServletStyleUriPatternMatcher(pattern);

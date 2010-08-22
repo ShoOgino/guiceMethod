@@ -1,0 +1,5 @@
+  LinkedFilterBindingImpl(Map<String, String> initParams, String pattern,
+      Key<? extends Filter> target, UriPatternType patternType) {
+    super(initParams, pattern, target, patternType);
+  }
+

@@ -14,13 +14,9 @@
             + servletDefinition.getPattern());
       }
       else {
+        bind(Key.get(ServletDefinition.class, UniqueAnnotations.create())).toProvider(servletDefinition);
         servletUris.add(servletDefinition.getPattern());
       }
     }
-
-    // Bind these servlet definitions to a unique random key. Doesn't matter what it is,
-    // coz it's never used.
-    bind(Key.get(new TypeLiteral<List<ServletDefinition>>() {}, UniqueAnnotations.create()))
-        .toInstance(servletDefinitions);
   }
 

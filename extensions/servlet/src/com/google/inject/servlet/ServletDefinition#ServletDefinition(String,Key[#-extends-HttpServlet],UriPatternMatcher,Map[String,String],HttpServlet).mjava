@@ -1,8 +1,9 @@
   public ServletDefinition(String pattern, Key<? extends HttpServlet> servletKey,
-      UriPatternMatcher patternMatcher, Map<String, String> initParams) {
+      UriPatternMatcher patternMatcher, Map<String, String> initParams, HttpServlet servletInstance) {
     this.pattern = pattern;
     this.servletKey = servletKey;
     this.patternMatcher = patternMatcher;
     this.initParams = Collections.unmodifiableMap(new HashMap<String, String>(initParams));
+    this.servletInstance = servletInstance;
   }
 

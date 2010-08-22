@@ -1,0 +1,4 @@
+  public Key<? extends HttpServlet> getLinkedKey() {
+    return getTarget();
+  }
+

@@ -1,0 +1,3 @@
+  /** Returns any context params supplied when creating the binding. */
+  Map<String, String> getInitParams();
+

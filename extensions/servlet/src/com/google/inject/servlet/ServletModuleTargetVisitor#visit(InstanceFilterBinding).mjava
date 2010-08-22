@@ -1,0 +1,8 @@
+  /**
+   * Visits a filter binding created by {@link ServletModule#filter} where
+   * {@link FilterKeyBindingBuilder#through} is called with a {@link Filter}.
+   * 
+   * If multiple patterns were specified, this will be called multiple times. 
+   */
+  V visit(InstanceFilterBinding binding);
+

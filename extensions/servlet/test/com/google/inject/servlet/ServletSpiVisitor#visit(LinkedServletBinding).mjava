@@ -1,0 +1,5 @@
+  public Integer visit(LinkedServletBinding binding) {
+    actual.add(new Params(binding.getPattern(), binding.getLinkedKey(), binding.getInitParams(), binding.getUriPatternType()));
+    return currentCount++;
+  }
+

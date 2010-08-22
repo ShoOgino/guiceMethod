@@ -1,0 +1,9 @@
+  @Override
+  protected Integer visitOther(Binding<? extends Object> binding) {
+    if(!allowedClasses.contains(binding.getKey().getTypeLiteral().getRawType())) {
+      throw new AssertionFailedError("invalid other binding: " + binding);
+    }
+    otherCount++;
+    return currentCount++;
+  }
+

@@ -2,6 +2,6 @@
         Map<String, String> contextParams) {
       Key<HttpServlet> servletKey = Key.get(HttpServlet.class, UniqueAnnotations.create());
       servletInstanceEntries.add(new ServletInstanceBindingEntry(servletKey, servlet));
-      with(servletKey, contextParams);
+      with(servletKey, contextParams, servlet);
     }
 

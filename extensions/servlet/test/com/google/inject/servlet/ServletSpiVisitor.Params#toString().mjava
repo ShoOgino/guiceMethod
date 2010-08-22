@@ -1,0 +1,10 @@
+    @Override
+    public String toString() {
+      return new ToStringBuilder(Params.class)
+        .add("pattern", pattern)
+        .add("keyOrInstance", keyOrInstance)
+        .add("initParams", params)
+        .add("patternType", patternType)
+        .toString();
+    }
+

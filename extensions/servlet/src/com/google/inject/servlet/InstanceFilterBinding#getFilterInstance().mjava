@@ -1,0 +1,3 @@
+  /** Returns the filter instance that will be used. */
+  Filter getFilterInstance();
+

@@ -1,0 +1,9 @@
+  /**
+   * Returns the pattern type that this servlet binding was created with.
+   * This will be {@link UriPatternType#REGEX} if the binding was created with
+   * {@link ServletModule#serveRegex(String, String...)}, and
+   * {@link UriPatternType#SERVLET} if it was created with
+   * {@link ServletModule#serve(String, String...)}.
+   */
+  UriPatternType getUriPatternType();
+

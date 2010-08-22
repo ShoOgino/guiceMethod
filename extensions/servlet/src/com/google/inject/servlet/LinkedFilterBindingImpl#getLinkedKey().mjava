@@ -1,0 +1,4 @@
+  public Key<? extends Filter> getLinkedKey() {
+    return getTarget();
+  }
+

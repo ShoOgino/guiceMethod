@@ -1,0 +1,5 @@
+  InstanceFilterBindingImpl(Map<String, String> initParams, String pattern,
+      Filter target, UriPatternType patternType) {
+    super(initParams, pattern, target, patternType);
+  }
+

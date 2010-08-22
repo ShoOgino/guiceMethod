@@ -1,0 +1,5 @@
+  public Integer visit(InstanceServletBinding binding) {
+    actual.add(new Params(binding.getPattern(), binding.getServletInstance(), binding.getInitParams(), binding.getUriPatternType()));
+    return currentCount++;
+  }
+
