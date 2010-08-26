@@ -1,0 +1,4 @@
+  private static boolean isTypeLiteral(Key<?> key) {
+    return key.getTypeLiteral().getRawType().equals(TypeLiteral.class);
+  }
+
