@@ -1,0 +1,20 @@
+  @Override protected void configurePersistence() {
+    bindConstant().annotatedWith(PersistModule.Persist.class).to(jpaUnit);
+
+    if (null != properties) {
+      bind(Properties.class).annotatedWith(PersistModule.Persist.class).toInstance(properties);
+    } else {
+      bind(Properties.class).annotatedWith(PersistModule.Persist.class)
+          .toProvider(Providers.<Properties>of(null));
+    }
+
+    bind(EntityManagerProvider.class).in(Singleton.class);
+    bind(EntityManagerProvider.EntityManagerFactoryProvider.class).in(Singleton.class);
+
+    bind(EntityManager.class).toProvider(EntityManagerProvider.class);
+    bind(EntityManagerFactory.class)
+        .toProvider(EntityManagerProvider.EntityManagerFactoryProvider.class);
+
+    requestInjection(transactionInterceptor);
+  }
+

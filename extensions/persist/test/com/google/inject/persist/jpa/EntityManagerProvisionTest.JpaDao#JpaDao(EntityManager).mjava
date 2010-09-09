@@ -1,5 +1,0 @@
-    @Inject
-    public JpaDao(EntityManager em) {
-      JpaDao.em = em;
-    }
-

@@ -1,0 +1,5 @@
+    @Inject
+    public JpaDao(Provider<EntityManager> em) {
+     this.em = em;
+    }
+

@@ -2,12 +2,21 @@
   protected final void configure() {
     configurePersistence();
 
-    // Really post conditions, but whatevah.
-    Preconditions.checkArgument(null != unitOfWork,
-        "Must specify a unit of work in the PersistModule.");
-    Preconditions.checkArgument(null != jpaUnit,
-        "Must specify the name of a JPA unit in the PersistModule.");
+    if (null == unitOfWork) {
+      // We bind this as the "Default" work manager if no custom unit of work is used.
+      bind(WorkManager.class).to(getWorkManager());
+      unitOfWork = UnitOfWork.class;
+    }
+    if (null == transactional) {
+      transactional = Transactional.class;
+    }
 
-    install(new InternalJpaModule(unitOfWork, jpaUnit, properties));
+    // NOTE(dhanji): Bind work-specific work manager + transaction interceptors.
+    // We permit the default work manager to be bound to both the default work
+    // annotation @UnitOfWork, and without any annotation. Default is defined as
+    // any persistence module without a custom unit of work annotation. In a single
+    // module system, the single module would be the default (most typical apps).
+    bind(WorkManager.class).annotatedWith(unitOfWork).to(getWorkManager());
+    bindInterceptor(any(), annotatedWith(transactional), getTransactionInterceptor());
   }
 

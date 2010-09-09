@@ -1,19 +1,21 @@
   public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 
     // Should we start a unit of work?
-    if (!emProvider.isWorking() && UnitOfWork.TRANSACTION.equals(unitOfWork)) {
+    if (!emProvider.isWorking()) {
       emProvider.begin();
+      didWeStartWork.set(true);
     }
 
+    // TODO(dhanji): Should we make this work with other annotations?
+    // TODO(dhanji): Cache this result by method?
     Transactional transactional = readTransactionMetadata(methodInvocation);
     EntityManager em = this.emProvider.get();
 
-    // Allow joining of transactions if there is an enclosing @Transactional method.
+    // Allow 'joining' of transactions if there is an enclosing @Transactional method.
     if (em.getTransaction().isActive()) {
       return methodInvocation.proceed();
     }
 
-    //start txn
     final EntityTransaction txn = em.getTransaction();
     txn.begin();
 
@@ -31,7 +33,8 @@
       throw e;
     } finally {
       // Close the em if necessary (guarded so this code doesn't run unless catch fired).
-      if (isUnitOfWorkTransaction() && !txn.isActive()) {
+      if (null != didWeStartWork.get() && !txn.isActive()) {
+        didWeStartWork.remove();
         workManager.end();
       }
     }
@@ -42,7 +45,8 @@
       txn.commit();
     } finally {
       //close the em if necessary
-      if (isUnitOfWorkTransaction()) {
+      if (null != didWeStartWork.get() ) {
+        didWeStartWork.remove();
         workManager.end();
       }
     }

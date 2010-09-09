@@ -1,7 +1,7 @@
   public void end() {
     EntityManager em = entityManager.get();
 
-    // Let's not penalize users for calling end multiple times.
+    // Let's not penalize users for calling end() multiple times.
     if (null == em) {
       return;
     }

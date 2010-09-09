@@ -1,9 +1,10 @@
     @Transactional
     public <T> void persist(T t) {
-      assertTrue("em is not open!", em.isOpen());
-      assertTrue("no active txn!", em.getTransaction().isActive());
-      em.persist(t);
+      lastEm = em.get();
+      assertTrue("em is not open!", lastEm.isOpen());
+      assertTrue("no active txn!", lastEm.getTransaction().isActive());
+      lastEm.persist(t);
 
-      assertTrue("Persisting object failed", em.contains(t));
+      assertTrue("Persisting object failed", lastEm.contains(t));
     }
 

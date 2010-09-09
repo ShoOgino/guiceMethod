@@ -1,0 +1,5 @@
+  public JpaPersistModule(String jpaUnit, Class<? extends Annotation> unitOfWork) {
+    this(jpaUnit);
+    setUnitOfWork(unitOfWork);
+  }
+

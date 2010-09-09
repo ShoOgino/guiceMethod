@@ -1,4 +1,4 @@
-  public synchronized void start() {
+  public synchronized void startPersistence() {
     Preconditions.checkState(null == emFactory, "Persistence service was already initialized.");
 
     if (null != persistenceProperties) {

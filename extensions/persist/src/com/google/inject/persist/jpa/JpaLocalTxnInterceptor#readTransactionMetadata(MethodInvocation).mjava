@@ -1,14 +1,15 @@
+  // TODO(dhanji): Cache this method's results.
   private Transactional readTransactionMetadata(MethodInvocation methodInvocation) {
     Transactional transactional;
     Method method = methodInvocation.getMethod();
     Class<?> targetClass = methodInvocation.getThis().getClass();
 
-    if (method.isAnnotationPresent(Transactional.class)) {
-      transactional = method.getAnnotation(Transactional.class);
-    } else if (targetClass.isAnnotationPresent(Transactional.class)) {
+    transactional = method.getAnnotation(Transactional.class);
+    if (null == transactional) {
       // If none on method, try the class.
       transactional = targetClass.getAnnotation(Transactional.class);
-    } else {
+    }
+    if (null == transactional) {
       // If there is no transactional annotation present, use the default
       transactional = Internal.class.getAnnotation(Transactional.class);
     }

@@ -1,4 +1,2 @@
-  protected void configurePersistence() {
-    // For users to override
-  }
+  protected abstract void configurePersistence();
 

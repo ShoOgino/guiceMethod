@@ -1,5 +1,0 @@
-  /**
-   * @param unitName The name of the JPA unit you specified in persistence.xml
-   */
-  void usingJpa(String unitName);
-

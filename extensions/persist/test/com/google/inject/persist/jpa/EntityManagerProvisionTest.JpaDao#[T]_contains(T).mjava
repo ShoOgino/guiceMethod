@@ -1,5 +1,8 @@
     @Transactional
     public <T> boolean contains(T t) {
-      return em.contains(t);
+      if (null == lastEm) {
+        lastEm = em.get();
+      }
+      return lastEm.contains(t);
     }
 

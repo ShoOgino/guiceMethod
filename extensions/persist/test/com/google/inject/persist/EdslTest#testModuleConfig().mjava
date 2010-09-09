@@ -1,12 +1,7 @@
   public void testModuleConfig() throws Exception {
-    new InjectorBuilder().addModules(
-      new PersistModule() {
-        @Override
-        protected void configurePersistence() {
-          workAcross(UnitOfWork.REQUEST).usingJpa("myunit");
-        }
-
-      }).stage(Stage.PRODUCTION)
+    new InjectorBuilder()
+        .addModules(new JpaPersistModule("myunit"))
+        .stage(Stage.PRODUCTION)
         .requireExplicitBindings()
         .build();
   }

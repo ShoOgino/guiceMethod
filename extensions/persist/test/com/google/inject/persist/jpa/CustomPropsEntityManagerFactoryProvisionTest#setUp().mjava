@@ -1,12 +1,8 @@
   @Override
   public void setUp() {
-    injector = Guice.createInjector(new PersistModule() {
+    Properties props = new Properties();
+    props.put("blah", "blah");
 
-      protected void configurePersistence() {
-        Properties props = new Properties();
-        props.put("blah", "blah");
-        workAcross(UnitOfWork.TRANSACTION).usingJpa("testUnit", props);
-      }
-    });
+    injector = Guice.createInjector(new JpaPersistModule("testUnit").properties(props));
   }
 

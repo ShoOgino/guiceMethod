@@ -1,11 +1,11 @@
   public void testSessionCreateOnInjection() {
 
-    assertEquals("SINGLETON VIOLATION " + PersistenceService.class.getName(),
-        injector.getInstance(PersistenceService.class),
-        injector.getInstance(PersistenceService.class));
+    assertEquals("SINGLETON VIOLATION " + WorkManager.class.getName(),
+        injector.getInstance(WorkManager.class),
+        injector.getInstance(WorkManager.class));
 
     //startup persistence
-    injector.getInstance(PersistenceService.class).start();
+    injector.getInstance(WorkManager.class).startPersistence();
 
     //obtain em
     assertTrue(injector.getInstance(EntityManager.class).isOpen());

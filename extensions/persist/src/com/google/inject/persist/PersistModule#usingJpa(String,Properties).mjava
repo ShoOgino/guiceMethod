@@ -1,5 +1,0 @@
-  public void usingJpa(String unitName, Properties properties) {
-    this.jpaUnit = unitName;
-    this.properties = properties;
-  }
-

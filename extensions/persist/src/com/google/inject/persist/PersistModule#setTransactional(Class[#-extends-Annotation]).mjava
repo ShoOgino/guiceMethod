@@ -1,0 +1,6 @@
+  protected final void setTransactional(Class<? extends Annotation> transactional) {
+    Preconditions.checkArgument(null != unitOfWork,
+        "Must specify a non-null transactional annotation.");
+    this.transactional = transactional;
+  }
+

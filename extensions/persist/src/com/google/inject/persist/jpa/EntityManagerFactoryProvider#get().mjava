@@ -1,5 +1,0 @@
-  public EntityManagerFactory get() {
-    assert null != emFactory;
-    return emFactory;
-  }
-

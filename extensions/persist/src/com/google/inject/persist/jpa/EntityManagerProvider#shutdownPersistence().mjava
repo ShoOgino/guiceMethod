@@ -1,4 +1,4 @@
-  public synchronized void shutdown() {
+  public synchronized void shutdownPersistence() {
     Preconditions.checkState(emFactory.isOpen(), "Persistence service was already shut down.");
     emFactory.close();
   }

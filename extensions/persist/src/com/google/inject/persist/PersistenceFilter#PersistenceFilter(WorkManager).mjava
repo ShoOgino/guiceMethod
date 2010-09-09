@@ -1,0 +1,5 @@
+  @Inject
+  public PersistenceFilter(WorkManager workManager) {
+    this.workManager = workManager;
+  }
+
