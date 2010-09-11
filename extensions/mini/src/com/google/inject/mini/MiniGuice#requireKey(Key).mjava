@@ -1,0 +1,11 @@
+  private void requireKey(Key key) {
+    if (key.type instanceof ParameterizedType
+        && (((ParameterizedType) key.type).getRawType() == Provider.class
+        || ((ParameterizedType) key.type).getRawType() == javax.inject.Provider.class)) {
+      Type type = ((ParameterizedType) key.type).getActualTypeArguments()[0];
+      key = new Key(type, key.annotation);
+    }
+
+    requiredKeys.add(key);
+  }
+

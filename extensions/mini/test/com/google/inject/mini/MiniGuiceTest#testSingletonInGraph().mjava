@@ -1,0 +1,16 @@
+  public void testSingletonInGraph() {
+    M m = MiniGuice.inject(M.class, new Object() {
+      @Provides @Singleton F provideF() {
+        return new F();
+      }
+    });
+
+    assertSame(m.f1, m.f2);
+    assertSame(m.f1, m.n1.f1);
+    assertSame(m.f1, m.n1.f2);
+    assertSame(m.f1, m.n2.f1);
+    assertSame(m.f1, m.n2.f2);
+    assertSame(m.f1, m.n1.fProvider.get());
+    assertSame(m.f1, m.n2.fProvider.get());
+  }
+

@@ -1,0 +1,9 @@
+    @Override public boolean equals(Object o) {
+      if (o instanceof ParameterizedType) {
+        ParameterizedType that = (ParameterizedType) o;
+        return Arrays.equals(getActualTypeArguments(), that.getActualTypeArguments())
+            && that.getRawType() == rawType;
+      }
+      return false;
+    }
+

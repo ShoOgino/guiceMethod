@@ -1,0 +1,18 @@
+  public void testSingletonBindingAnnotationAndProvider() {
+    final AtomicReference<A> a1 = new AtomicReference<A>();
+    final AtomicReference<A> a2 = new AtomicReference<A>();
+
+    L l = MiniGuice.inject(L.class, new Object() {
+      @Provides @Singleton @Named("one") F provideF(Provider<A> aProvider) {
+        a1.set(aProvider.get());
+        a2.set(aProvider.get());
+        return new F();
+      }
+    });
+
+    assertNotNull(a1.get());
+    assertNotNull(a2.get());
+    assertNotSame(a1.get(), a2.get());
+    assertSame(l, l.lProvider.get());
+  }
+

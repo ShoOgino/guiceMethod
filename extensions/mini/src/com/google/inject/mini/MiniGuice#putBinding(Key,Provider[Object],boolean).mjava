@@ -1,0 +1,19 @@
+  private void putBinding(Key key, Provider<Object> provider, boolean singleton) {
+    if (singleton) {
+      final Provider<Object> unscoped = provider;
+      provider = new Provider<Object>() {
+        private Object onlyInstance = UNINITIALIZED;
+        public Object get() {
+          if (onlyInstance == UNINITIALIZED) {
+            onlyInstance = unscoped.get();
+          }
+          return onlyInstance;
+        }
+      };
+    }
+
+    if (bindings.put(key, provider) != null) {
+      throw new IllegalArgumentException("Duplicate binding " + key);
+    }
+  }
+

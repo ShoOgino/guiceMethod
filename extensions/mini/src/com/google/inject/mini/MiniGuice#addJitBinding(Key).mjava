@@ -1,0 +1,79 @@
+  private void addJitBinding(Key key) {
+    Class<?> type = (Class<?>) key.type;
+
+    /*
+     * Lookup the injectable fields and their corresponding keys.
+     */
+    final List<Field> injectedFields = new ArrayList<Field>();
+    List<Object> fieldKeysList = new ArrayList<Object>();
+    for (Class<?> c = type; c != Object.class; c = c.getSuperclass()) {
+      for (Field field : type.getDeclaredFields()) {
+        if (field.getAnnotation(com.google.inject.Inject.class) == null
+            && field.getAnnotation(javax.inject.Inject.class) == null) {
+          continue;
+        }
+        injectedFields.add(field);
+        Key fieldKey = key(field, field.getGenericType(), field.getAnnotations());
+        fieldKeysList.add(fieldKey);
+        requireKey(fieldKey);
+      }
+    }
+    final Key[] fieldKeys = fieldKeysList.toArray(new Key[fieldKeysList.size()]);
+
+    /*
+     * Lookup @Inject-annotated constructors. If there's no @Inject-annotated
+     * constructor, use a default constructor if the class has other injections.
+     */
+    Constructor<?> injectedConstructor = null;
+    for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+      if (constructor.getAnnotation(com.google.inject.Inject.class) == null
+          && constructor.getAnnotation(javax.inject.Inject.class) == null) {
+        continue;
+      }
+      if (injectedConstructor != null) {
+        throw new IllegalArgumentException("Too many injectable constructors on " + type);
+      }
+      injectedConstructor = constructor;
+    }
+    if (injectedConstructor == null) {
+      if (fieldKeys.length == 0) {
+        throw new IllegalArgumentException("No injectable constructor on " + type);
+      }
+      try {
+        injectedConstructor = type.getConstructor();
+      } catch (NoSuchMethodException e) {
+        throw new IllegalArgumentException("No injectable constructor on " + type);
+      }
+    }
+
+    /*
+     * Create a provider that invokes the constructor and sets its fields.
+     */
+    final Constructor<?> constructor = injectedConstructor;
+    final Key[] parameterKeys = parametersToKeys(
+        constructor, constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
+    final Provider<Object> unscoped = new Provider<Object>() {
+      public Object get() {
+        Object[] constructorParameters = keysToValues(parameterKeys);
+        try {
+          Object result = constructor.newInstance(constructorParameters);
+          Object[] fieldValues = keysToValues(fieldKeys);
+          for (int i = 0; i < fieldValues.length; i++) {
+            injectedFields.get(i).set(result, fieldValues[i]);
+          }
+          return result;
+        } catch (IllegalAccessException e) {
+          throw new RuntimeException(e.getCause());
+        } catch (InvocationTargetException e) {
+          throw new RuntimeException(e.getCause());
+        } catch (InstantiationException e) {
+          throw new RuntimeException(e);
+        }
+      }
+    };
+
+    boolean singleton = type.getAnnotation(com.google.inject.Singleton.class) != null
+        || type.getAnnotation(javax.inject.Singleton.class) != null;
+    putBinding(new Key(type, null), unscoped, singleton);
+  }
+

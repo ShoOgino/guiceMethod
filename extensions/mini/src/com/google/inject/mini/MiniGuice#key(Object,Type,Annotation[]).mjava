@@ -1,0 +1,15 @@
+  public Key key(Object subject, Type type, Annotation[] annotations) {
+    Annotation bindingAnnotation = null;
+    for (Annotation a : annotations) {
+      if (a.annotationType().getAnnotation(javax.inject.Qualifier.class) == null
+          && a.annotationType().getAnnotation(com.google.inject.BindingAnnotation.class) == null) {
+        continue;
+      }
+      if (bindingAnnotation != null) {
+        throw new IllegalArgumentException("Too many binding annotations on " + subject);
+      }
+      bindingAnnotation = a;
+    }
+    return new Key(type, bindingAnnotation);
+  }
+

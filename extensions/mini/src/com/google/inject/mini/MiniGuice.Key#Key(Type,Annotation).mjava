@@ -1,0 +1,5 @@
+    Key(Type type, Annotation annotation) {
+      this.type = type;
+      this.annotation = annotation;
+    }
+

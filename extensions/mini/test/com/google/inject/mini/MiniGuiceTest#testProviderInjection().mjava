@@ -1,0 +1,7 @@
+  public void testProviderInjection() {
+    H h = MiniGuice.inject(H.class);
+    assertNotNull(h.aProvider.get());
+    assertNotNull(h.aProvider.get());
+    assertNotSame(h.aProvider.get(), h.aProvider.get());
+  }
+

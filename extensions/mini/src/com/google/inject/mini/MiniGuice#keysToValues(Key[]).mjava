@@ -1,0 +1,8 @@
+  private Object[] keysToValues(Key[] parameterKeys) {
+    Object[] parameters = new Object[parameterKeys.length];
+    for (int i = 0; i < parameterKeys.length; i++) {
+      parameters[i] = bindings.get(parameterKeys[i]).get();
+    }
+    return parameters;
+  }
+

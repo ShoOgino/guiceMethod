@@ -1,0 +1,16 @@
+  public void install(Object module) {
+    boolean hasProvidesMethods = false;
+    for (Class<?> c = module.getClass(); c != Object.class; c = c.getSuperclass()) {
+      for (Method method : c.getDeclaredMethods()) {
+        if (method.getAnnotation(com.google.inject.Provides.class) != null) {
+          Key key = key(method, method.getGenericReturnType(), method.getAnnotations());
+          addProviderMethodBinding(key, module, method);
+          hasProvidesMethods = true;
+        }
+      }
+    }
+    if (!hasProvidesMethods) {
+      throw new IllegalArgumentException("No @Provides methods on " + module);
+    }
+  }
+

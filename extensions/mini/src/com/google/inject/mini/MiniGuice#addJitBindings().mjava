@@ -1,0 +1,13 @@
+  private void addJitBindings() {
+    Key requiredKey;
+    while ((requiredKey = requiredKeys.poll()) != null) {
+      if (bindings.containsKey(requiredKey)) {
+        continue;
+      }
+      if (!(requiredKey.type instanceof Class)) {
+        throw new IllegalArgumentException("No binding for " + requiredKey);
+      }
+      addJitBinding(requiredKey);
+    }
+  }
+

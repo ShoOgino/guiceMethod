@@ -1,0 +1,40 @@
+  /**
+   * Creates an injector defined by {@code modules} and immediately uses it to
+   * create an instance of {@code type}. The modules can be of any type, and
+   * must contain {@code @Provides} methods.
+   *
+   * <p>The following injection features are supported:
+   * <ul>
+   *   <li>Field injection. A class may have any number of field injections, and
+   *       fields may be of any visibility. Static fields will be injected each
+   *       time an instance is injected.
+   *   <li>Constructor injection. A class may have a single {@code
+   *       @Inject}-annotated constructor. Classes that have fields injected
+   *       may omit the {@link @Inject} annotation if they have a public
+   *       no-arguments constructor.
+   *   <li>Injection of {@code @Provides} method parameters.
+   *   <li>{@code @Provides} methods annotated {@code @Singleton}.
+   *   <li>Constructor-injected classes annotated {@code @Singleton}.
+   *   <li>Injection of {@link Provider}s.
+   *   <li>Binding annotations on injected parameters and fields.
+   *   <li>Guice annotations.
+   *   <li>JSR 330 annotations.
+   *   <li>Eager loading of singletons.
+   * </ul>
+   *
+   * <p><strong>Note that method injection is not supported.</strong>
+   */
+  public static <T> T inject(Class<T> type, Object... modules) {
+    Key key = new Key(type, null);
+    MiniGuice miniGuice = new MiniGuice();
+    for (Object module : modules) {
+      miniGuice.install(module);
+    }
+    miniGuice.requireKey(key);
+    miniGuice.addJitBindings();
+    miniGuice.addProviderBindings();
+    miniGuice.eagerlyLoadSingletons();
+    Provider<?> provider = miniGuice.bindings.get(key);
+    return type.cast(provider.get());
+  }
+
