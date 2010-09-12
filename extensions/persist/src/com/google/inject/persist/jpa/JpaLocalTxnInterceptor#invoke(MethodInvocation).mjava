@@ -6,8 +6,6 @@
       didWeStartWork.set(true);
     }
 
-    // TODO(dhanji): Should we make this work with other annotations?
-    // TODO(dhanji): Cache this result by method?
     Transactional transactional = readTransactionMetadata(methodInvocation);
     EntityManager em = this.emProvider.get();
 
@@ -35,7 +33,7 @@
       // Close the em if necessary (guarded so this code doesn't run unless catch fired).
       if (null != didWeStartWork.get() && !txn.isActive()) {
         didWeStartWork.remove();
-        workManager.end();
+        unitOfWork.end();
       }
     }
 
@@ -47,7 +45,7 @@
       //close the em if necessary
       if (null != didWeStartWork.get() ) {
         didWeStartWork.remove();
-        workManager.end();
+        unitOfWork.end();
       }
     }
 

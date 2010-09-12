@@ -1,8 +1,8 @@
   public void testCloseMoreThanOnce() {
-    injector.getInstance(WorkManager.class).shutdownPersistence();
+    injector.getInstance(PersistService.class).stop();
 
     try {
-      injector.getInstance(WorkManager.class).shutdownPersistence();
+      injector.getInstance(PersistService.class).stop();
       fail();
     } catch (IllegalStateException e) {
       // Ignored.

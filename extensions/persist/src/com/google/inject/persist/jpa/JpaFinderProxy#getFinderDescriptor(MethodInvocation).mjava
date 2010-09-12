@@ -1,12 +1,12 @@
-  private JpaFinderInterceptor.FinderDescriptor getFinderDescriptor(MethodInvocation invocation) {
+  private JpaFinderProxy.FinderDescriptor getFinderDescriptor(MethodInvocation invocation) {
     Method method = invocation.getMethod();
-    JpaFinderInterceptor.FinderDescriptor finderDescriptor = finderCache.get(method);
+    JpaFinderProxy.FinderDescriptor finderDescriptor = finderCache.get(method);
     if (null != finderDescriptor) {
       return finderDescriptor;
     }
 
     //otherwise reflect and cache finder info...
-    finderDescriptor = new JpaFinderInterceptor.FinderDescriptor();
+    finderDescriptor = new JpaFinderProxy.FinderDescriptor();
 
     //determine return type
     finderDescriptor.returnClass = invocation.getMethod().getReturnType();
@@ -37,7 +37,7 @@
         } else if (FirstResult.class.equals(annotationType)) {
           discoveredAnnotations[i] = annotation;
           break;
-        } else if (NumResults.class.equals(annotationType)) {
+        } else if (MaxResults.class.equals(annotationType)) {
           discoveredAnnotations[i] = annotation;
           break;
         }   //leave as null for no binding
@@ -48,7 +48,7 @@
     finderDescriptor.parameterAnnotations = discoveredAnnotations;
 
     //discover the returned collection implementation if this finder returns a collection
-    if (JpaFinderInterceptor.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
+    if (JpaFinderProxy.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
       finderDescriptor.returnCollectionType = finder.returnAs();
       try {
         finderDescriptor.returnCollectionTypeConstructor = finderDescriptor.returnCollectionType

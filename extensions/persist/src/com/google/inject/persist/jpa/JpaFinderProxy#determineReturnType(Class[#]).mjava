@@ -1,0 +1,10 @@
+  private JpaFinderProxy.ReturnType determineReturnType(Class<?> returnClass) {
+    if (Collection.class.isAssignableFrom(returnClass)) {
+      return JpaFinderProxy.ReturnType.COLLECTION;
+    } else if (returnClass.isArray()) {
+      return JpaFinderProxy.ReturnType.ARRAY;
+    }
+
+    return JpaFinderProxy.ReturnType.PLAIN;
+  }
+

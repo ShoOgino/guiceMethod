@@ -1,7 +1,0 @@
-  @Inject
-  public EntityManagerProvider(@PersistModule.Persist String persistenceUnitName,
-      @Nullable @PersistModule.Persist Properties persistenceProperties) {
-    this.persistenceUnitName = persistenceUnitName;
-    this.persistenceProperties = persistenceProperties;
-  }
-

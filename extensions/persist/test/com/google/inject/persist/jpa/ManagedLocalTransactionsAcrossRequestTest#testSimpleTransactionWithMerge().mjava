@@ -15,13 +15,13 @@
 
     Object result = em.createQuery("from JpaTestEntity where text = :text")
         .setParameter("text", UNIQUE_TEXT_MERGE).getSingleResult();
-    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(UnitOfWork.class).end();
 
     assertTrue(result instanceof JpaTestEntity);
 
     assertEquals("queried entity did not match--did automatic txn fail?",
         UNIQUE_TEXT_MERGE, ((JpaTestEntity) result).getText());
-    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(UnitOfWork.class).end();
 
   }
 

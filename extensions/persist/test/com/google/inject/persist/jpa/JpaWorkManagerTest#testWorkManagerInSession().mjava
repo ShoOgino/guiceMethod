@@ -1,13 +1,13 @@
   public void testWorkManagerInSession() {
-    injector.getInstance(WorkManager.class).begin();
+    injector.getInstance(UnitOfWork.class).begin();
     try {
       injector.getInstance(TransactionalObject.class).runOperationInTxn();
     } finally {
-      injector.getInstance(WorkManager.class).end();
+      injector.getInstance(UnitOfWork.class).end();
 
     }
 
-    injector.getInstance(WorkManager.class).begin();
+    injector.getInstance(UnitOfWork.class).begin();
     injector.getInstance(EntityManager.class).getTransaction().begin();
     try {
       final Query query = injector.getInstance(EntityManager.class)
@@ -25,7 +25,7 @@
 
     } finally {
       injector.getInstance(EntityManager.class).getTransaction().commit();
-      injector.getInstance(WorkManager.class).end();
+      injector.getInstance(UnitOfWork.class).end();
     }
   }
 

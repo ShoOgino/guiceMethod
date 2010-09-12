@@ -1,0 +1,5 @@
+    @Inject
+    public EntityManagerFactoryProvider(JpaPersistService emProvider) {
+      this.emProvider = emProvider;
+    }
+

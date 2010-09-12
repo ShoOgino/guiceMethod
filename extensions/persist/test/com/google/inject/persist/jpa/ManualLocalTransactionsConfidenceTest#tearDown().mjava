@@ -1,5 +1,5 @@
   @Override
   public final void tearDown() {
-    injector.getInstance(WorkManager.class).shutdownPersistence();
+    injector.getInstance(PersistService.class).stop();
   }
 

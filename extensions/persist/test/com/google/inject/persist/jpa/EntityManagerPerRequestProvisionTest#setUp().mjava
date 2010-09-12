@@ -3,8 +3,8 @@
     injector = Guice.createInjector(new JpaPersistModule("testUnit"));
 
     //startup persistence
-    injector.getInstance(WorkManager.class).startPersistence();
+    injector.getInstance(PersistService.class).start();
 
-    injector.getInstance(WorkManager.class).begin();
+    injector.getInstance(UnitOfWork.class).begin();
   }
 

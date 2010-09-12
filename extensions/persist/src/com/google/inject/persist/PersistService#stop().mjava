@@ -3,5 +3,5 @@
    * closes the {@code EntityManagerFactory}. If already stopped, calling this
    * method does nothing. If not yet started, it also does nothing.
    */
-  void shutdownPersistence();
+  void stop();
 

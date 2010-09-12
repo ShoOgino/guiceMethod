@@ -1,4 +1,4 @@
-  private Object getAsCollection(JpaFinderInterceptor.FinderDescriptor finderDescriptor,
+  private Object getAsCollection(JpaFinderProxy.FinderDescriptor finderDescriptor,
       List results) {
     Collection<?> collection;
     try {

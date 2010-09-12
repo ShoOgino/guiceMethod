@@ -1,6 +1,0 @@
-  protected final void setUnitOfWork(Class<? extends Annotation> unitOfWork) {
-    Preconditions.checkArgument(null != unitOfWork,
-        "Must specify a non-null unit of work.");
-    this.unitOfWork = unitOfWork;
-  }
-

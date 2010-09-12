@@ -1,4 +1,0 @@
-  @Override protected Class<? extends WorkManager> getWorkManager() {
-    return EntityManagerProvider.class;
-  }
-

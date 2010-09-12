@@ -12,14 +12,14 @@
     assertTrue("Merge did not store state or did not return persistent copy", em.contains(entity));
 
     Object result = injector.getInstance(TransactionalObject.class).find(UNIQUE_TEXT_MERGE_FORDF);
-    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(UnitOfWork.class).end();
 
     assertNotNull(result);
     assertTrue(result instanceof JpaTestEntity);
 
     assertEquals("queried entity did not match--did automatic txn fail?",
         UNIQUE_TEXT_MERGE_FORDF, ((JpaTestEntity) result).getText());
-    injector.getInstance(WorkManager.class).end();
+    injector.getInstance(UnitOfWork.class).end();
 
   }
 

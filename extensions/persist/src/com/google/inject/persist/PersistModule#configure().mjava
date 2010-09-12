@@ -2,21 +2,8 @@
   protected final void configure() {
     configurePersistence();
 
-    if (null == unitOfWork) {
-      // We bind this as the "Default" work manager if no custom unit of work is used.
-      bind(WorkManager.class).to(getWorkManager());
-      unitOfWork = UnitOfWork.class;
-    }
-    if (null == transactional) {
-      transactional = Transactional.class;
-    }
-
-    // NOTE(dhanji): Bind work-specific work manager + transaction interceptors.
-    // We permit the default work manager to be bound to both the default work
-    // annotation @UnitOfWork, and without any annotation. Default is defined as
-    // any persistence module without a custom unit of work annotation. In a single
-    // module system, the single module would be the default (most typical apps).
-    bind(WorkManager.class).annotatedWith(unitOfWork).to(getWorkManager());
-    bindInterceptor(any(), annotatedWith(transactional), getTransactionInterceptor());
+    requireBinding(PersistService.class);
+    requireBinding(UnitOfWork.class);
+    bindInterceptor(any(), annotatedWith(Transactional.class), getTransactionInterceptor());
   }
 

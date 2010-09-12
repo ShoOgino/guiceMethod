@@ -2,7 +2,7 @@
     EntityManager em = emProvider.get();
 
     //obtain a cached finder descriptor (or create a new one)
-    JpaFinderInterceptor.FinderDescriptor finderDescriptor = getFinderDescriptor(methodInvocation);
+    JpaFinderProxy.FinderDescriptor finderDescriptor = getFinderDescriptor(methodInvocation);
 
     Object result = null;
 
@@ -15,11 +15,11 @@
     }
 
     //depending upon return type, decorate or return the result as is
-    if (JpaFinderInterceptor.ReturnType.PLAIN.equals(finderDescriptor.returnType)) {
+    if (JpaFinderProxy.ReturnType.PLAIN.equals(finderDescriptor.returnType)) {
       result = jpaQuery.getSingleResult();
-    } else if (JpaFinderInterceptor.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
+    } else if (JpaFinderProxy.ReturnType.COLLECTION.equals(finderDescriptor.returnType)) {
       result = getAsCollection(finderDescriptor, jpaQuery.getResultList());
-    } else if (JpaFinderInterceptor.ReturnType.ARRAY.equals(finderDescriptor.returnType)) {
+    } else if (JpaFinderProxy.ReturnType.ARRAY.equals(finderDescriptor.returnType)) {
       result = jpaQuery.getResultList().toArray();
     }
 

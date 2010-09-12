@@ -1,7 +1,0 @@
-  public JpaPersistModule(String jpaUnit, Class<? extends Annotation> unitOfWork,
-      Class<? extends Annotation> transactional) {
-    this(jpaUnit);
-    setUnitOfWork(unitOfWork);
-    setTransactional(transactional);
-  }
-

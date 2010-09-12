@@ -1,5 +1,5 @@
   private void bindQueryNamedParameters(Query hibernateQuery,
-      JpaFinderInterceptor.FinderDescriptor descriptor, Object[] arguments) {
+      JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
     for (int i = 0; i < arguments.length; i++) {
       Object argument = arguments[i];
       Object annotation = descriptor.parameterAnnotations[i];
@@ -13,7 +13,7 @@
         hibernateQuery.setParameter(named.value(), argument);
       } else if (annotation instanceof FirstResult) {
         hibernateQuery.setFirstResult((Integer) argument);
-      } else if (annotation instanceof NumResults) {
+      } else if (annotation instanceof MaxResults) {
         hibernateQuery.setMaxResults((Integer) argument);
       }
     }

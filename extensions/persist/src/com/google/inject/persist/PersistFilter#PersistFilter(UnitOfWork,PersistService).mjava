@@ -1,0 +1,6 @@
+  @Inject
+  public PersistFilter(UnitOfWork unitOfWork, PersistService persistService) {
+    this.unitOfWork = unitOfWork;
+    this.persistService = persistService;
+  }
+

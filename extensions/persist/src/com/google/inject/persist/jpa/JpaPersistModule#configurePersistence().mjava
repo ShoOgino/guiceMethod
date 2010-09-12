@@ -1,20 +1,22 @@
   @Override protected void configurePersistence() {
-    bindConstant().annotatedWith(PersistModule.Persist.class).to(jpaUnit);
+    bindConstant().annotatedWith(Jpa.class).to(jpaUnit);
 
     if (null != properties) {
-      bind(Properties.class).annotatedWith(PersistModule.Persist.class).toInstance(properties);
+      bind(Properties.class).annotatedWith(Jpa.class).toInstance(properties);
     } else {
-      bind(Properties.class).annotatedWith(PersistModule.Persist.class)
+      bind(Properties.class).annotatedWith(Jpa.class)
           .toProvider(Providers.<Properties>of(null));
     }
 
-    bind(EntityManagerProvider.class).in(Singleton.class);
-    bind(EntityManagerProvider.EntityManagerFactoryProvider.class).in(Singleton.class);
+    bind(JpaPersistService.class).in(Singleton.class);
 
-    bind(EntityManager.class).toProvider(EntityManagerProvider.class);
+    bind(PersistService.class).to(JpaPersistService.class);
+    bind(UnitOfWork.class).to(JpaPersistService.class);
+    bind(EntityManager.class).toProvider(JpaPersistService.class);
     bind(EntityManagerFactory.class)
-        .toProvider(EntityManagerProvider.EntityManagerFactoryProvider.class);
+        .toProvider(JpaPersistService.EntityManagerFactoryProvider.class);
 
+    transactionInterceptor = new JpaLocalTxnInterceptor();
     requestInjection(transactionInterceptor);
   }
 
