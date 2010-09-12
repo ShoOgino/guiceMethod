@@ -1,9 +1,0 @@
-  @Inject
-  public BroadcastingLifecycle(Injector injector, @ListOfMatchers List<Class<?>> callableClasses) {
-    this.injector = injector;
-    this.callableClasses = callableClasses;
-
-    // Self start. Eventually we may want to move this to a hook-in from Guice-core.
-    start();
-  }
-

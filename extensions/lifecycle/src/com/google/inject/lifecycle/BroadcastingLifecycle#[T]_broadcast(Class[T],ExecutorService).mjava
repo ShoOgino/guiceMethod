@@ -1,4 +1,0 @@
-  public <T> T broadcast(Class<T> clazz, final ExecutorService executorService) {
-    return broadcast(clazz, executorService, any());
-  }
-

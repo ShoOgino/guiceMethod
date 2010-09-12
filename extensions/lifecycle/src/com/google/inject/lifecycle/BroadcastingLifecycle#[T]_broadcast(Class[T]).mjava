@@ -1,4 +1,0 @@
-  public <T> T broadcast(Class<T> clazz) {
-    return broadcast(clazz, any());
-  }
-

@@ -1,4 +1,0 @@
-  protected void callable(Class<?> type) {
-    callables.add(type);
-  }
-

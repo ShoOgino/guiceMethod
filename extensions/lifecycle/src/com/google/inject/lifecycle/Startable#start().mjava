@@ -1,7 +1,0 @@
-  /**
-   * Called once the injector has been created completely.
-   * In PRODUCTION mode, this means when all singletons
-   * have been instantiated.
-   */
-  void start();
-

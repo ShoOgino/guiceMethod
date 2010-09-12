@@ -1,2 +1,0 @@
-  <T> T broadcast(Class<T> clazz);
-
