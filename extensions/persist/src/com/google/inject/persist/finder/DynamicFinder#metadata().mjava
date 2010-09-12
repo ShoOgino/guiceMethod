@@ -1,0 +1,4 @@
+  public Finder metadata() {
+    return finder;
+  }
+

@@ -18,5 +18,10 @@
 
     transactionInterceptor = new JpaLocalTxnInterceptor();
     requestInjection(transactionInterceptor);
+
+    // Bind dynamic finders.
+    for (Class<?> finder : dynamicFinders) {
+      bindFinder(finder);
+    }
   }
 

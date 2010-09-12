@@ -1,0 +1,7 @@
+  public void setUp() {
+    injector = Guice.createInjector(new JpaPersistModule("testUnit").addFinder(JpaFinder.class));
+
+    //startup persistence
+    injector.getInstance(PersistService.class).start();
+  }
+

@@ -1,0 +1,4 @@
+  public final void tearDown() {
+    injector.getInstance(PersistService.class).stop();
+  }
+

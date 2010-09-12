@@ -1,0 +1,9 @@
+  /**
+   * Returns some metadata if the method is annotated {@code @Finder} or null.
+   *
+   * @param method a method you want to test as a dynamic finder
+   */
+  public static DynamicFinder from(Method method) {
+    return method.isAnnotationPresent(Finder.class) ? new DynamicFinder(method) : null;
+  }
+

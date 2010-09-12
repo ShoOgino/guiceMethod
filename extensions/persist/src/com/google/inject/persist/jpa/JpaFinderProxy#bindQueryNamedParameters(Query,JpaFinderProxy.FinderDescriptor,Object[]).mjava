@@ -1,4 +1,4 @@
-  private void bindQueryNamedParameters(Query hibernateQuery,
+  private void bindQueryNamedParameters(Query jpaQuery,
       JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
     for (int i = 0; i < arguments.length; i++) {
       Object argument = arguments[i];
@@ -10,11 +10,11 @@
         continue;   //skip param as it's not bindable
       } else if (annotation instanceof Named) {
         Named named = (Named) annotation;
-        hibernateQuery.setParameter(named.value(), argument);
+        jpaQuery.setParameter(named.value(), argument);
       } else if (annotation instanceof FirstResult) {
-        hibernateQuery.setFirstResult((Integer) argument);
+        jpaQuery.setFirstResult((Integer) argument);
       } else if (annotation instanceof MaxResults) {
-        hibernateQuery.setMaxResults((Integer) argument);
+        jpaQuery.setMaxResults((Integer) argument);
       }
     }
   }

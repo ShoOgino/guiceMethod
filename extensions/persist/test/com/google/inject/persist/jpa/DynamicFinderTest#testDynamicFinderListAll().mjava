@@ -1,0 +1,21 @@
+  public void testDynamicFinderListAll() {
+    //obtain em
+    JpaDao dao = injector.getInstance(JpaDao.class);
+
+    //obtain same em again (bound to txn)
+    JpaTestEntity te = new JpaTestEntity();
+    te.setText("HIAjsOKAOSD" + new Date() + UUID.randomUUID().toString());
+
+    dao.persist(te);
+
+    //im not sure this hack works...
+    assertFalse("Duplicate entity managers crossing-scope",
+        dao.lastEm.equals(injector.getInstance(EntityManager.class)));
+
+    List<JpaTestEntity> list = injector.getInstance(JpaFinder.class).listAll();
+    assertNotNull(list);
+    assertFalse(list.isEmpty());
+    assertEquals(1, list.size());
+    assertEquals(te, list.get(0));
+  }
+

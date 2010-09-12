@@ -1,6 +1,5 @@
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
+  @Id @GeneratedValue
+  public Long getId() {
+    return id;
+  }
 
