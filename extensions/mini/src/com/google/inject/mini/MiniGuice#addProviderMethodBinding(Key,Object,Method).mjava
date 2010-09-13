@@ -1,6 +1,7 @@
   private void addProviderMethodBinding(Key key, final Object instance, final Method method) {
     final Key[] parameterKeys = parametersToKeys(
         method, method.getGenericParameterTypes(), method.getParameterAnnotations());
+    method.setAccessible(true);
     final Provider<Object> unscoped = new Provider<Object>() {
       public Object get() {
         Object[] parameters = keysToValues(parameterKeys);
@@ -14,8 +15,7 @@
       }
     };
 
-    boolean singleton = method.getAnnotation(com.google.inject.Singleton.class) != null
-        || method.getAnnotation(javax.inject.Singleton.class) != null;
+    boolean singleton = method.getAnnotation(javax.inject.Singleton.class) != null;
     putBinding(key, unscoped, singleton);
   }
 

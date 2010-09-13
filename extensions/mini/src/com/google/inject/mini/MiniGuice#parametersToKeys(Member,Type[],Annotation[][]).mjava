@@ -1,8 +1,9 @@
   private Key[] parametersToKeys(Member member, Type[] types, Annotation[][] annotations) {
     final Key[] parameterKeys = new Key[types.length];
     for (int i = 0; i < parameterKeys.length; i++) {
-      parameterKeys[i] = key(member + " parameter " + i, types[i], annotations[i]);
-      requireKey(parameterKeys[i]);
+      String name = member + " parameter " + i;
+      parameterKeys[i] = key(name, types[i], annotations[i]);
+      requireKey(parameterKeys[i], name);
     }
     return parameterKeys;
   }

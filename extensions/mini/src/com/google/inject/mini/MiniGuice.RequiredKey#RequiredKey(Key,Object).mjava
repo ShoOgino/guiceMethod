@@ -1,0 +1,5 @@
+    private RequiredKey(Key key, Object requiredBy) {
+      this.key = key;
+      this.requiredBy = requiredBy;
+    }
+

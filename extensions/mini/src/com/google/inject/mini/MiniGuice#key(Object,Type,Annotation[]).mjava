@@ -1,8 +1,7 @@
   public Key key(Object subject, Type type, Annotation[] annotations) {
     Annotation bindingAnnotation = null;
     for (Annotation a : annotations) {
-      if (a.annotationType().getAnnotation(javax.inject.Qualifier.class) == null
-          && a.annotationType().getAnnotation(com.google.inject.BindingAnnotation.class) == null) {
+      if (a.annotationType().getAnnotation(javax.inject.Qualifier.class) == null) {
         continue;
       }
       if (bindingAnnotation != null) {

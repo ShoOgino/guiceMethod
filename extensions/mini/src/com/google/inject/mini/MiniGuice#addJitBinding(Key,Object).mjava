@@ -1,4 +1,4 @@
-  private void addJitBinding(Key key) {
+  private void addJitBinding(Key key, Object requiredBy) {
     Class<?> type = (Class<?>) key.type;
 
     /*
@@ -7,15 +7,15 @@
     final List<Field> injectedFields = new ArrayList<Field>();
     List<Object> fieldKeysList = new ArrayList<Object>();
     for (Class<?> c = type; c != Object.class; c = c.getSuperclass()) {
-      for (Field field : type.getDeclaredFields()) {
-        if (field.getAnnotation(com.google.inject.Inject.class) == null
-            && field.getAnnotation(javax.inject.Inject.class) == null) {
+      for (Field field : c.getDeclaredFields()) {
+        if (field.getAnnotation(javax.inject.Inject.class) == null) {
           continue;
         }
+        field.setAccessible(true);
         injectedFields.add(field);
         Key fieldKey = key(field, field.getGenericType(), field.getAnnotations());
         fieldKeysList.add(fieldKey);
-        requireKey(fieldKey);
+        requireKey(fieldKey, field);
       }
     }
     final Key[] fieldKeys = fieldKeysList.toArray(new Key[fieldKeysList.size()]);
@@ -26,23 +26,25 @@
      */
     Constructor<?> injectedConstructor = null;
     for (Constructor<?> constructor : type.getDeclaredConstructors()) {
-      if (constructor.getAnnotation(com.google.inject.Inject.class) == null
-          && constructor.getAnnotation(javax.inject.Inject.class) == null) {
+      if (constructor.getAnnotation(javax.inject.Inject.class) == null) {
         continue;
       }
       if (injectedConstructor != null) {
         throw new IllegalArgumentException("Too many injectable constructors on " + type);
       }
+      constructor.setAccessible(true);
       injectedConstructor = constructor;
     }
     if (injectedConstructor == null) {
       if (fieldKeys.length == 0) {
-        throw new IllegalArgumentException("No injectable constructor on " + type);
+        throw new IllegalArgumentException("No injectable constructor on "
+            + type + " required by " + requiredBy);
       }
       try {
         injectedConstructor = type.getConstructor();
       } catch (NoSuchMethodException e) {
-        throw new IllegalArgumentException("No injectable constructor on " + type);
+        throw new IllegalArgumentException("No injectable constructor on "
+            + type + " required by " + requiredBy);
       }
     }
 
@@ -72,8 +74,7 @@
       }
     };
 
-    boolean singleton = type.getAnnotation(com.google.inject.Singleton.class) != null
-        || type.getAnnotation(javax.inject.Singleton.class) != null;
+    boolean singleton = type.getAnnotation(javax.inject.Singleton.class) != null;
     putBinding(new Key(type, null), unscoped, singleton);
   }
 

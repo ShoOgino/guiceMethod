@@ -30,7 +30,7 @@
     for (Object module : modules) {
       miniGuice.install(module);
     }
-    miniGuice.requireKey(key);
+    miniGuice.requireKey(key, "root injection");
     miniGuice.addJitBindings();
     miniGuice.addProviderBindings();
     miniGuice.eagerlyLoadSingletons();

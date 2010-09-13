@@ -1,0 +1,8 @@
+  public void testNoJitBindingsForAnnotations() {
+    try {
+      MiniGuice.inject(O.class);
+      fail();
+    } catch (IllegalArgumentException expected) {
+    }
+  }
+

@@ -1,4 +1,4 @@
-  private void requireKey(Key key) {
+  private void requireKey(Key key, Object requiredBy) {
     if (key.type instanceof ParameterizedType
         && (((ParameterizedType) key.type).getRawType() == Provider.class
         || ((ParameterizedType) key.type).getRawType() == javax.inject.Provider.class)) {
@@ -6,6 +6,6 @@
       key = new Key(type, key.annotation);
     }
 
-    requiredKeys.add(key);
+    requiredKeys.add(new RequiredKey(key, requiredBy));
   }
 
