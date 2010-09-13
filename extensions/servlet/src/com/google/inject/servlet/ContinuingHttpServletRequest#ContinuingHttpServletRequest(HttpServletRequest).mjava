@@ -1,0 +1,4 @@
+  public ContinuingHttpServletRequest(HttpServletRequest request) {
+    super(request);
+  }
+

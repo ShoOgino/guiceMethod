@@ -1,0 +1,4 @@
+  @Override public HttpSession getSession() {
+    throw new OutOfScopeException("Cannot access the session in a continued request");
+  }
+
