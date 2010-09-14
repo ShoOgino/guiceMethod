@@ -1,0 +1,6 @@
+    public String call() throws Exception {
+      assertNull(response.get());
+
+      return value = request.get().getParameter(PARAM_NAME);
+    }
+

@@ -1,0 +1,38 @@
+  public final void testRequestContinuesInOtherThread()
+      throws ServletException, IOException, InterruptedException {
+    executor = Executors.newSingleThreadExecutor();
+
+    Injector injector = Guice.createInjector(new ServletModule() {
+      @Override protected void configureServlets() {
+        serve("/*").with(ContinuingServlet.class);
+
+        bind(ExecutorService.class).toInstance(executor);
+      }
+    });
+
+    FilterConfig filterConfig = createMock(FilterConfig.class);
+    expect(filterConfig.getServletContext()).andReturn(createMock(ServletContext.class));
+    
+    GuiceFilter guiceFilter = injector.getInstance(GuiceFilter.class);
+
+    HttpServletRequest request = createMock(HttpServletRequest.class);
+
+    expect(request.getRequestURI()).andReturn("/");
+    expect(request.getServletPath()).andReturn("/");
+    expect(request.getMethod()).andReturn("GET");
+
+    FilterChain filterChain = createMock(FilterChain.class);
+    expect(request.getParameter(PARAM_NAME)).andReturn(PARAM_VALUE);
+
+    replay(request, filterConfig, filterChain);
+
+    guiceFilter.init(filterConfig);
+    guiceFilter.doFilter(request, null, filterChain);
+
+    // join.
+    executor.shutdown();
+    executor.awaitTermination(10, TimeUnit.SECONDS);
+
+    assertEquals(PARAM_VALUE, injector.getInstance(OffRequestCallable.class).value);
+  }
+
