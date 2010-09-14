@@ -27,7 +27,6 @@
     request.setAttribute(eq("Key[type=javax.servlet.http.HttpServletRequest, annotation=[none]]"),
         anyObject());
 
-    expect(request.getRequestURI()).andReturn("/");
     expect(request.getServletPath()).andReturn("/");
     expect(request.getMethod()).andReturn("GET");
 
@@ -44,5 +43,7 @@
     executor.awaitTermination(10, TimeUnit.SECONDS);
 
     assertEquals(PARAM_VALUE, injector.getInstance(OffRequestCallable.class).value);
+
+    verify(request, filterConfig, filterChain);
   }
 
