@@ -1,0 +1,5 @@
+  @Inject
+  CompositeService(Injector injector) {
+    this.injector = injector;
+  }
+

@@ -1,0 +1,9 @@
+  /**
+   * Called back when this service must do its start work. Typically occurs
+   * in a background thread. The result of this method is returned to the
+   * original caller of {@link Service#start()} and can thus be used to
+   * return a status message after start completes (or fails as the case
+   * may be).
+   */
+  protected abstract void onStart();
+

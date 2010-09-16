@@ -1,0 +1,19 @@
+  /**
+   * Returns a runnable that when run will get() the given future and
+   * update {@link #state} to FAILED if there was an exception thrown.
+   */
+  private Callable<State> futureGet(final Future<State> task) {
+    return new Callable<State>() {
+      public State call() {
+        try {
+          System.out.println("FutureGEtting");
+          return task.get();
+        } catch (InterruptedException e) {
+          return state = State.FAILED;
+        } catch (ExecutionException e) {
+          return state = State.FAILED;
+        }
+      }
+    };
+  }
+

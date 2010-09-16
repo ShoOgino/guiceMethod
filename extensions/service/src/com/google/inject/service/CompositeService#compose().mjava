@@ -1,0 +1,33 @@
+  public Service compose() {
+    Preconditions.checkState(!composed,
+        "Cannot reuse a CompositeService after it has been compose()d. Please create a new one.");
+    composed = true;
+
+    // Defensive copy.
+    final List<Key<? extends Service>> services = ImmutableList.copyOf(this.services);
+
+    return new Service() {
+      public Future<State> start() {
+        final List<Future<State>> tasks = Lists.newArrayList();
+        for (Key<? extends Service> service : services) {
+          tasks.add(injector.getInstance(service).start());
+        }
+
+        return futureGet(tasks, State.STARTED);
+      }
+
+      public Future<State> stop() {
+        final List<Future<State>> tasks = Lists.newArrayList();
+        for (Key<? extends Service> service : services) {
+          tasks.add(injector.getInstance(service).stop());
+        }
+
+        return futureGet(tasks, State.STOPPED);
+      }
+
+      public State state() {
+        return compositeState;
+      }
+    };
+  }
+

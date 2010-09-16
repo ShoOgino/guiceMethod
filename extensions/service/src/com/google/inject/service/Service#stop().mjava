@@ -1,0 +1,13 @@
+  /**
+   * If the service is {@link State#STARTED} initiates service shutdown and
+   * returns immediately. If the service has already been stopped, this
+   * method returns immediately without taking action.
+   *
+   * @return a future for the shutdown result, regardless of whether this call
+   *     initiated shutdown. Calling {@link Future#get} will block until the
+   *     service has finished shutting down, and either returns {@link
+   *     State#STOPPED} or throws an {@link ExecutionException}. If it has
+   *     already finished stopping, {@link Future#get} returns immediately.
+   */
+  Future<State> stop();
+

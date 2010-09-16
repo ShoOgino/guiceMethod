@@ -1,0 +1,10 @@
+  public CompositeService add(Key<? extends Service> service) {
+    Preconditions.checkState(!composed,
+        "Cannot reuse a CompositeService after it has been compose()d. Please create a new one.");
+    // Verify that the binding exists. Throws an exception if not.
+    injector.getBinding(service);
+
+    services.add(service);
+    return this;
+  }
+

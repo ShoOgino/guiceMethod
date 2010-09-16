@@ -1,0 +1,22 @@
+  public final void testAsyncServiceBlockingLifecycle()
+      throws InterruptedException, ExecutionException, TimeoutException {
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+
+    final AtomicInteger integer = new AtomicInteger(2);
+    AsyncService service = new AsyncService(executor) {
+      @Override protected void onStart() {
+        assertEquals(2, integer.getAndDecrement());
+      }
+
+      @Override protected void onStop() {
+        assertEquals(1, integer.getAndDecrement());
+      }
+    };
+
+    service.start().get(2, TimeUnit.SECONDS);
+    service.stop().get(2, TimeUnit.SECONDS);
+
+    executor.shutdown();
+    assertEquals(0, integer.get());
+  }
+

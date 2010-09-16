@@ -1,0 +1,4 @@
+  public CompositeService add(Class<? extends Service> service) {
+    return add(Key.get(service));
+  }
+

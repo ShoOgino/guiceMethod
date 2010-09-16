@@ -1,0 +1,13 @@
+  /**
+   * If the service has already been started, this method returns
+   * immediately without taking action. A stopped service may not be restarted.
+   *
+   * @return a future for the startup result, regardless of whether this call
+   *     initiated startup. Calling {@link Future#get} will block until the
+   *     service has finished starting, and returns the resultant state. If
+   *     the service fails to start, {@link Future#get} will throw an {@link
+   *     ExecutionException}. If it has already finished starting,
+   *     {@link Future#get} returns immediately.
+   */
+  Future<State> start();
+

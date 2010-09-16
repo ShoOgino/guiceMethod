@@ -1,0 +1,21 @@
+  public synchronized final Future<State> start() {
+    Preconditions.checkState(state != State.STOPPED,
+        "Cannot restart a service that has been stopped");
+
+    // Starts are idempotent.
+    if (state == State.STARTED) {
+      return new FutureTask<State>(NOOP, State.STARTED);
+    }
+
+    final Future<State> task = executor.submit(new Callable<State>() {
+      public State call() {
+        onStart();
+        return state = State.STARTED;
+      }
+    });
+
+    return task;
+    // Wrap it in another future to catch failures.
+//    return new FutureTask<State>(futureGet(task));
+  }
+

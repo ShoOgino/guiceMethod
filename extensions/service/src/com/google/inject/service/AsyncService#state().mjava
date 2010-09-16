@@ -1,0 +1,4 @@
+  public final State state() {
+    return state;
+  }
+
