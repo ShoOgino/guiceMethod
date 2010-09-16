@@ -6,17 +6,11 @@
       return new FutureTask<State>(NOOP, State.STOPPED);
     }
 
-    // TODO Should we bother doing the wrap, or is it enough to return
-    // this future as is?
-    final Future<State> task = executor.submit(new Callable<State>() {
+    return executor.submit(new Callable<State>() {
       public State call() {
         onStop();
         return state = State.STOPPED;
       }
     });
-
-    // Wrap it in another future to catch failures.
-    return task;
-//    return new FutureTask<State>(futureGet(task));
   }
 
