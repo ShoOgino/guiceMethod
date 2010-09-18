@@ -1,4 +1,8 @@
     public Set<Dependency<?>> getDependencies() {
-      return dependencies;
+      if (!isInitialized()) {
+        return ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
+      } else {
+        return dependencies;
+      }
     }
 
