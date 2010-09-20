@@ -1,0 +1,5 @@
+    MapResult(K k, BindResult<V> v) {
+      this.k = k;
+      this.v = v;
+    }
+

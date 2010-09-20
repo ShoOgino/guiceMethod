@@ -1,5 +1,5 @@
   public void testMapBinderMapIsLazy() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+    Module module = new AbstractModule() {
       @Override protected void configure() {
         MapBinder.newMapBinder(binder(), String.class, Integer.class)
             .addBinding("num").toProvider(new Provider<Integer>() {
@@ -9,10 +9,13 @@
           }
         });
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
     assertEquals(mapOf("num", 1), injector.getInstance(Key.get(mapOfInteger)));
     assertEquals(mapOf("num", 2), injector.getInstance(Key.get(mapOfInteger)));
     assertEquals(mapOf("num", 3), injector.getInstance(Key.get(mapOfInteger)));
+    assertMapVisitor(Key.get(mapOfInteger), stringType, intType, setOf(module), BOTH, false, 0,
+        providerInstance("num", 1));
   }
 

@@ -1,0 +1,11 @@
+    @SuppressWarnings("unchecked")
+    public <V, B> V acceptExtensionVisitor(
+        BindingTargetVisitor<B, V> visitor,
+        ProviderInstanceBinding<? extends B> binding) {
+      if(visitor instanceof MultibindingsTargetVisitor) {
+        return ((MultibindingsTargetVisitor<Set<T>, V>)visitor).visit(this);
+      } else {
+        return visitor.visit(binding);
+      }
+    }
+

@@ -1,0 +1,3 @@
+  /** Returns the key for the set. */
+  Key<T> getSetKey();
+

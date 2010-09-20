@@ -1,0 +1,102 @@
+  @SuppressWarnings("unchecked")
+  private static <T> void mapModuleTest(Key<T> mapKey, TypeLiteral<?> keyType,
+      TypeLiteral<?> valueType, Iterable<? extends Module> modules, boolean allowDuplicates,
+      int expectedMapBindings, MapResult... results) {
+    List<Element> elements = Elements.getElements(modules);
+    Visitor<T> visitor = new Visitor<T>();
+    MapBinderBinding<T> mapbinder = null;
+    for(Element element : elements) {
+      if(element instanceof Binding && ((Binding)element).getKey().equals(mapKey)) {
+        mapbinder = (MapBinderBinding<T>)((Binding)element).acceptTargetVisitor(visitor);
+        break;
+      }
+    }
+    assertNotNull(mapbinder);
+    
+    assertEquals(keyType, mapbinder.getKeyTypeLiteral());
+    assertEquals(valueType, mapbinder.getValueTypeLiteral());
+    List<MapResult> mapResults = Lists.newArrayList(results);
+    
+    Key<?> mapOfProvider = adapt(mapKey, mapOfProviderOf(keyType, valueType));
+    Key<?> mapOfSetOfProvider = adapt(mapKey, mapOfSetOfProviderOf(keyType, valueType));
+    Key<?> mapOfSet = adapt(mapKey, mapOf(keyType, setOf(valueType)));
+    Key<?> setOfEntry = adapt(mapKey, setOf(entryOfProviderOf(keyType, valueType)));    
+    boolean entrySetMatch = false;
+    boolean mapProviderMatch = false;
+    boolean mapSetMatch = false; 
+    boolean mapSetProviderMatch = false;
+    List<Object> otherMapBindings = Lists.newArrayList();
+    List<Element> otherMatches = Lists.newArrayList();
+    List<Element> otherElements = Lists.newArrayList();
+    for(Element element : elements) {
+      boolean contains = mapbinder.containsElement(element);
+      if(!contains) {
+        otherElements.add(element);
+      }
+      boolean matched = false;
+      Key key = null;
+      Binding b = null;
+      if(element instanceof Binding) {
+        b = (Binding)element;
+        key = b.getKey();
+        Object visited = b.acceptTargetVisitor(visitor);
+        if(visited instanceof MapBinderBinding) {
+          matched = true;
+          if(visited.equals(mapbinder)) {
+            assertTrue(contains);
+          } else {
+            otherMapBindings.add(visited);
+          }
+        }
+      } else if(element instanceof ProviderLookup) {
+        key = ((ProviderLookup)element).getKey();
+      }
+      
+      if(!matched && key != null) {
+        if(key.equals(mapOfProvider)) {
+          matched = true;
+          assertTrue(contains);
+          mapProviderMatch = true;
+        } else if(key.equals(mapOfSet)) {
+          matched = true;
+          assertTrue(contains);
+          mapSetMatch = true;
+        } else if(key.equals(mapOfSetOfProvider)) {
+          matched = true;
+          assertTrue(contains);
+          mapSetProviderMatch = true;
+        } else if(key.equals(setOfEntry)) {
+          matched = true;
+          assertTrue(contains);
+          entrySetMatch = true;
+          // Validate that this binding is also a MultibinderBinding.
+          if(b != null) {
+            assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
+          }
+        }
+      }
+      
+      if(!matched && contains) {
+        otherMatches.add(element);
+      }
+    }
+    
+    int otherMatchesSize = otherMatches.size();
+    if(allowDuplicates) {
+      otherMatchesSize--; // allow for 1 duplicate binding
+    }
+    otherMatchesSize = otherMatchesSize / 3; // value, ProviderLookup per value, Map.Entry per value
+    assertEquals("incorrect number of contains, leftover matches: " + otherMatches, mapResults
+        .size(), otherMatchesSize);
+
+    assertTrue(entrySetMatch);
+    assertTrue(mapProviderMatch);
+    assertEquals(allowDuplicates, mapSetMatch);
+    assertEquals(allowDuplicates, mapSetProviderMatch);
+    assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,
+        otherMapBindings.size());
+    
+     // Validate that we can construct an injector out of the remaining bindings.
+    Guice.createInjector(Elements.getModule(otherElements));
+  }
+

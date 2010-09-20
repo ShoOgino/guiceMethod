@@ -4,18 +4,18 @@
      * contents are only evaluated when get() is invoked.
      */
     @Toolable @Inject void initialize(Injector injector) {
-      providers = Lists.newArrayList();
+      List<Binding<T>> bindings = Lists.newArrayList();
       List<Dependency<?>> dependencies = Lists.newArrayList();
       for (Binding<?> entry : injector.findBindingsByType(elementType)) {
-
         if (keyMatches(entry.getKey())) {
           @SuppressWarnings("unchecked") // protected by findBindingsByType()
           Binding<T> binding = (Binding<T>) entry;
-          providers.add(binding.getProvider());
+          bindings.add(binding);
           dependencies.add(Dependency.get(binding.getKey()));
         }
       }
 
+      this.bindings = ImmutableList.copyOf(bindings);
       this.dependencies = ImmutableSet.copyOf(dependencies);
       this.permitDuplicates = permitsDuplicates(injector);
       this.binder = null;

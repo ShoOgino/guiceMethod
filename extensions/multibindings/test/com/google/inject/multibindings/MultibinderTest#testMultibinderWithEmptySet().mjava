@@ -1,11 +1,13 @@
   public void testMultibinderWithEmptySet() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+    Module module = new AbstractModule() {
       protected void configure() {
         Multibinder.newSetBinder(binder(), String.class);
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
     Set<String> set = injector.getInstance(Key.get(setOfString));
     assertEquals(Collections.emptySet(), set);
+    assertSetVisitor(Key.get(setOfString), stringType, setOf(module), BOTH, false, 0);
   }
 

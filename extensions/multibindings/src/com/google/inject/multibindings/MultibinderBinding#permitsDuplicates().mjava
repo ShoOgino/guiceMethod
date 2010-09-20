@@ -1,0 +1,7 @@
+  /**
+   * Returns true if the multibinder permits duplicates. This is only supported on bindings returned
+   * from an injector. This will throw {@link UnsupportedOperationException} if it is called on a
+   * MultibinderBinding retrieved from {@link Elements#getElements}.
+   */
+  boolean permitsDuplicates();
+

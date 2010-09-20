@@ -1,5 +1,5 @@
   public void testMapBinderAggregationForAnnotationType() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+    Module module = new AbstractModule() {
       @Override protected void configure() {
         MapBinder<String, String> multibinder = MapBinder.newMapBinder(
             binder(), String.class, String.class, Abc.class);
@@ -10,9 +10,13 @@
             binder(), String.class, String.class, Abc.class);
         multibinder.addBinding("c").toInstance("C");
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
-    Map<String, String> abc = injector.getInstance(Key.get(mapOfString, Abc.class));
+    Key<Map<String, String>> key = Key.get(mapOfString, Abc.class);
+    Map<String, String> abc = injector.getInstance(key);
     assertEquals(mapOf("a", "A", "b", "B", "c", "C"), abc);
+    assertMapVisitor(key, stringType, stringType, setOf(module), BOTH, false, 0,
+        instance("a", "A"), instance("b", "B"), instance("c", "C"));
   }
 

@@ -1,0 +1,31 @@
+  /**
+   * Asserts that MapBinderBinding visitors for work correctly.
+   * 
+   * @param <T> The type of the binding
+   * @param mapKey The key the map belongs to.
+   * @param keyType the TypeLiteral of the key of the map
+   * @param valueType the TypeLiteral of the value of the map
+   * @param modules The modules that define the mapbindings
+   * @param visitType The kind of test we should perform.  A live Injector, a raw Elements (Module) test, or both.
+   * @param allowDuplicates If duplicates are allowed.
+   * @param expectedMapBindings The number of other mapbinders we expect to see.
+   * @param results The kind of bindings contained in the mapbinder.
+   */
+  static <T> void assertMapVisitor(Key<T> mapKey, TypeLiteral<?> keyType, TypeLiteral<?> valueType,
+      Iterable<? extends Module> modules, VisitType visitType, boolean allowDuplicates,
+      int expectedMapBindings, MapResult... results) {
+    if(visitType == null) {
+      fail("must test something");
+    }
+
+    if (visitType == BOTH || visitType == INJECTOR) {
+      mapInjectorTest(mapKey, keyType, valueType, modules, allowDuplicates, expectedMapBindings,
+          results);
+    }
+
+    if (visitType == BOTH || visitType == MODULE) {
+      mapModuleTest(mapKey, keyType, valueType, modules, allowDuplicates, expectedMapBindings,
+          results);
+    }
+  }
+

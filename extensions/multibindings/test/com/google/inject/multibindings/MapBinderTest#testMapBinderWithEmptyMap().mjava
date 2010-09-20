@@ -1,11 +1,13 @@
   public void testMapBinderWithEmptyMap() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+    Module module = new AbstractModule() {
       @Override protected void configure() {
         MapBinder.newMapBinder(binder(), String.class, String.class);
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
     Map<String, String> map = injector.getInstance(Key.get(mapOfString));
     assertEquals(Collections.emptyMap(), map);
+    assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(module), BOTH, false, 0);
   }
 

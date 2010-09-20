@@ -29,5 +29,7 @@
     assertEquals(ImmutableSet.of("A", "B", "C", "D", "E", "F"),
         injector.getInstance(Key.get(setOfString)));
 
+    assertSetVisitor(Key.get(setOfString), stringType, setOf(abcd, ef), BOTH, false, 0,
+        instance("A"), instance("B"), instance("C"), instance("D"), instance("E"), instance("F"));
   }
 

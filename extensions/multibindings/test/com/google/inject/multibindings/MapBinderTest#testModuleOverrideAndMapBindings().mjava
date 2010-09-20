@@ -28,6 +28,8 @@
     Injector injector = Guice.createInjector(abcd, ef);
     assertEquals(mapOf("a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F"),
         injector.getInstance(Key.get(mapOfString)));
-
+    assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(abcd, ef), BOTH, false, 0,
+        instance("a", "A"), instance("b", "B"), instance("c", "C"), instance("d", "D"), instance(
+            "e", "E"), instance("f", "F"));
   }
 

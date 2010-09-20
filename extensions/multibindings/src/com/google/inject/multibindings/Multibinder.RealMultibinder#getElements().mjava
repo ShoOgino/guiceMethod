@@ -1,0 +1,9 @@
+    @SuppressWarnings("unchecked")
+    public List<Binding<?>> getElements() {
+      if(isInitialized()) {
+        return (List)bindings; // safe because bindings is immutable.
+      } else {
+        throw new UnsupportedOperationException("getElements() not supported for module bindings");
+      }
+    }
+

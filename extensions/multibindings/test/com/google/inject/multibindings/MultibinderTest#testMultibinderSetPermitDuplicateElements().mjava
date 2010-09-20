@@ -1,21 +1,23 @@
   public void testMultibinderSetPermitDuplicateElements() {
-    Injector injector = Guice.createInjector(
-        new AbstractModule() {
-          protected void configure() {
-            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-            multibinder.addBinding().toInstance("A");
-            multibinder.addBinding().toInstance("B");
-          }
-        },
-        new AbstractModule() {
-          protected void configure() {
-            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-            multibinder.permitDuplicates();
-            multibinder.addBinding().toInstance("B");
-            multibinder.addBinding().toInstance("C");
-          }
-        });
+    Module ab = new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toInstance("B");
+      }
+    };
+    Module bc = new AbstractModule() {
+      protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.permitDuplicates();
+        multibinder.addBinding().toInstance("B");
+        multibinder.addBinding().toInstance("C");
+      }
+    };
+    Injector injector = Guice.createInjector(ab, bc);
 
     assertEquals(setOf("A", "B", "C"), injector.getInstance(Key.get(setOfString)));
+    assertSetVisitor(Key.get(setOfString), stringType, setOf(ab, bc), BOTH, true, 0,
+        instance("A"), instance("B"), instance("B"), instance("C"));
   }
 

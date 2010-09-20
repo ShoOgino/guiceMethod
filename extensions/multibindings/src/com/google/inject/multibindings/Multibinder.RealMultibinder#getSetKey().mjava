@@ -1,4 +1,4 @@
-    Key<Set<T>> getSetKey() {
+    public Key<Set<T>> getSetKey() {
       return setKey;
     }
 

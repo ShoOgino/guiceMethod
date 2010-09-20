@@ -1,0 +1,4 @@
+  static <T> BindResult providerInstance(T t) {
+    return new BindResult<T>(PROVIDER_INSTANCE, t, null);
+  }
+

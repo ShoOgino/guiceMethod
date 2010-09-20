@@ -1,0 +1,13 @@
+  /**
+   * Returns true if this MapBinder contains the given Element in order to build the map or uses the
+   * given Element in order to support building and injecting the map. This will work for
+   * MapBinderBindings retrieved from an injector and {@link Elements#getElements}. Usually this is
+   * only necessary if you are working with elements retrieved from modules (without an Injector),
+   * otherwise {@link #getEntries} and {@link #permitsDuplicates} are better options.
+   * <p>
+   * If you need to introspect the details of the map, such as the keys, values or if it permits
+   * duplicates, it is necessary to pass the elements through an Injector and use
+   * {@link #getEntries()} and {@link #permitsDuplicates()}.
+   */
+  boolean containsElement(Element element);
+

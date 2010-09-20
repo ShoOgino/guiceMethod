@@ -1,5 +1,5 @@
   public void testMultibinderWithMultipleAnnotationValueSets() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+    Module module = new AbstractModule() {
       protected void configure() {
         Multibinder<String> abcMultibinder
             = Multibinder.newSetBinder(binder(), String.class, named("abc"));
@@ -12,11 +12,19 @@
         deMultibinder.addBinding().toInstance("D");
         deMultibinder.addBinding().toInstance("E");
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
-    Set<String> abc = injector.getInstance(Key.get(setOfString, named("abc")));
-    Set<String> de = injector.getInstance(Key.get(setOfString, named("de")));
-    assertEquals(setOf("A", "B", "C"), abc);
-    assertEquals(setOf("D", "E"), de);
+    Key<Set<String>> abcSetKey = Key.get(setOfString, named("abc"));
+    Set<String> abc = injector.getInstance(abcSetKey);
+    Key<Set<String>> deSetKey = Key.get(setOfString, named("de"));
+    Set<String> de = injector.getInstance(deSetKey);
+    Set<String> abcResults = setOf("A", "B", "C");
+    assertEquals(abcResults, abc);
+    Set<String> deResults = setOf("D", "E");
+    assertEquals(deResults, de);
+    assertSetVisitor(abcSetKey, stringType, setOf(module), BOTH, false, 1, instance("A"),
+        instance("B"), instance("C"));
+    assertSetVisitor(deSetKey, stringType, setOf(module), BOTH, false, 1, instance("D"), instance("E"));
   }
 

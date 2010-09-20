@@ -4,25 +4,30 @@
       final ImmutableSet<Dependency<?>> dependencies
           = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
 
-      // Binds a Map<K, Provider<V>> from a collection of Map<Entry<K, Provider<V>>.
+      // Binds a Map<K, Provider<V>> from a collection of Set<Entry<K, Provider<V>>.
       final Provider<Set<Entry<K, Provider<V>>>> entrySetProvider = binder
           .getProvider(entrySetBinder.getSetKey());
       binder.bind(providerMapKey).toProvider(new RealMapBinderProviderWithDependencies<Map<K, Provider<V>>>(mapKey) {
         private Map<K, Provider<V>> providerMap;
 
-        @SuppressWarnings("unused")
-        @Inject void initialize(Injector injector) {
+        @SuppressWarnings({ "unused", "unchecked" })
+        @Toolable @Inject void initialize(Injector injector) {
           RealMapBinder.this.binder = null;
-          boolean permitDuplicates = entrySetBinder.permitsDuplicates(injector);
+          permitDuplicates = entrySetBinder.permitsDuplicates(injector);
 
           Map<K, Provider<V>> providerMapMutable = new LinkedHashMap<K, Provider<V>>();
+          List<Map.Entry<K, Binding<V>>> bindingsMutable = Lists.newArrayList();
           for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
             Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
             checkConfiguration(previous == null || permitDuplicates,
                 "Map injection failed due to duplicated key \"%s\"", entry.getKey());
+            Key<V> valueKey = (Key<V>)((MapEntry)entry).getValueKey();
+            bindingsMutable.add(new MapEntry(entry.getKey(),
+                injector.getBinding(valueKey), valueKey));
           }
 
           providerMap = ImmutableMap.copyOf(providerMapMutable);
+          mapBindings = ImmutableList.copyOf(bindingsMutable);
         }
 
         public Map<K, Provider<V>> get() {
@@ -35,7 +40,7 @@
       });
 
       final Provider<Map<K, Provider<V>>> mapProvider = binder.getProvider(providerMapKey);
-      binder.bind(mapKey).toProvider(new RealMapBinderProviderWithDependencies<Map<K, V>>(mapKey) {
+      binder.bind(mapKey).toProvider(new RealMapWithExtensionProvider<Map<K, V>>(mapKey) {        
         public Map<K, V> get() {
           Map<K, V> map = new LinkedHashMap<K, V>();
           for (Entry<K, Provider<V>> entry : mapProvider.get().entrySet()) {
@@ -50,6 +55,67 @@
 
         public Set<Dependency<?>> getDependencies() {
           return dependencies;
+        }
+
+        @SuppressWarnings("unchecked")
+        public <R, B> R acceptExtensionVisitor(BindingTargetVisitor<B, R> visitor,
+            ProviderInstanceBinding<? extends B> binding) {
+          if (visitor instanceof MultibindingsTargetVisitor) {
+            return ((MultibindingsTargetVisitor<Map<K, V>, R>)visitor).visit(this);
+          } else {
+            return visitor.visit(binding);
+          }
+        }
+
+        public Key<Map<K, V>> getMapKey() {
+          return mapKey;
+        }
+
+        public TypeLiteral<?> getKeyTypeLiteral() {
+          return keyType;
+        }
+
+        public TypeLiteral<?> getValueTypeLiteral() {
+          return valueType;
+        }
+
+        @SuppressWarnings("unchecked")
+        public List<Entry<?, Binding<?>>> getEntries() {
+          if (isInitialized()) {
+            return (List)mapBindings; // safe because mapBindings is immutable
+          } else {
+            throw new UnsupportedOperationException("getElements() not supported for module bindings");   
+          }
+        }
+
+        public boolean permitsDuplicates() {
+          if (isInitialized()) {
+            return permitDuplicates;
+          } else {
+            throw new UnsupportedOperationException("permitsDuplicates() not supported for module bindings");   
+          }
+        }
+
+        public boolean containsElement(com.google.inject.spi.Element element) {
+          if (entrySetBinder.containsElement(element)) {
+            return true;
+          } else {
+            Key<?> key;
+            if (element instanceof Binding) {
+              key = ((Binding)element).getKey();
+            } else if (element instanceof ProviderLookup) {
+              key = ((ProviderLookup)element).getKey();
+            } else {
+              return false; // cannot match;
+            }
+
+            return key.equals(mapKey) 
+                || key.equals(providerMapKey)
+                || key.equals(multimapKey)
+                || key.equals(providerMultimapKey)
+                || key.equals(entrySetBinder.getSetKey())
+                || matchesValueKey(key);
+            }
         }
       });
     }

@@ -1,0 +1,11 @@
+  /** Adapts a key, keeping the original annotation, using the new type literal. */
+  private static Key<?> adapt(Key<?> mapKey, TypeLiteral<?> resultType) {
+    if(mapKey.getAnnotation() != null) {
+      return Key.get(resultType, mapKey.getAnnotation());
+    } else if(mapKey.getAnnotationType() != null) {
+      return Key.get(resultType, mapKey.getAnnotationType());
+    } else {
+      return Key.get(resultType);
+    }
+  }
+

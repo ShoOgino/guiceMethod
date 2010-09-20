@@ -1,0 +1,111 @@
+  @SuppressWarnings("unchecked")
+  private static <T> void mapInjectorTest(Key<T> mapKey, TypeLiteral<?> keyType,
+      TypeLiteral<?> valueType, Iterable<? extends Module> modules, boolean allowDuplicates,
+      int expectedMapBindings, MapResult... results) {
+    Injector injector = Guice.createInjector(modules);
+    Visitor<T> visitor = new Visitor<T>();
+    Binding<T> mapBinding = injector.getBinding(mapKey);
+    MapBinderBinding<T> mapbinder = (MapBinderBinding<T>)mapBinding.acceptTargetVisitor(visitor);
+    assertNotNull(mapbinder);
+    assertEquals(keyType, mapbinder.getKeyTypeLiteral());
+    assertEquals(valueType, mapbinder.getValueTypeLiteral());
+    assertEquals(allowDuplicates, mapbinder.permitsDuplicates());
+    List<Map.Entry<?, Binding<?>>> entries = Lists.newArrayList(mapbinder.getEntries());
+    List<MapResult> mapResults = Lists.newArrayList(results);
+    assertEquals("wrong entries, expected: " + mapResults + ", but was: " + entries,
+        mapResults.size(), entries.size());
+
+    for(MapResult result : mapResults) {
+      Map.Entry<?, Binding<?>> found = null;
+      for(Map.Entry<?, Binding<?>> entry : entries) {
+        Object key = entry.getKey();
+        Binding<?> value = entry.getValue();
+        if(!key.equals(result.k)) {
+          continue;
+        }
+        switch (result.v.type) {
+          case INSTANCE:
+            if (value instanceof InstanceBinding
+                && ((InstanceBinding) value).getInstance().equals(result.v.instance)) {
+              found = entry;
+          }
+          break;
+        case LINKED:
+          if (value instanceof LinkedKeyBinding
+              && ((LinkedKeyBinding) value).getKey().equals(result.v.key)) {
+            found = entry;
+          }
+          break;
+        case PROVIDER_INSTANCE:
+          if (value instanceof ProviderInstanceBinding
+              && ((ProviderInstanceBinding) value).getProviderInstance().get().equals(
+                  result.v.instance)) {
+            found = entry;
+          }
+          break;
+        }
+      }
+      if(found == null) {
+        fail("Could not find entry: " + result + " in remaining entries: " + entries);
+      } else {
+        assertTrue(mapbinder.containsElement(found.getValue()));
+        entries.remove(found);
+      }
+    }
+    
+    if(!entries.isEmpty()) {
+      fail("Found all entries of: " + mapResults + ", but more were left over: " + entries);
+    }
+    
+    Key<?> mapOfProvider = adapt(mapKey, mapOfProviderOf(keyType, valueType));
+    Key<?> mapOfSetOfProvider = adapt(mapKey, mapOfSetOfProviderOf(keyType, valueType));
+    Key<?> mapOfSet = adapt(mapKey, mapOf(keyType, setOf(valueType)));
+    Key<?> setOfEntry = adapt(mapKey, setOf(entryOfProviderOf(keyType, valueType)));
+    boolean entrySetMatch = false;
+    boolean mapProviderMatch = false;
+    boolean mapSetMatch = false; 
+    boolean mapSetProviderMatch = false;
+    List<Object> otherMapBindings = Lists.newArrayList();
+    List<Binding> otherMatches = Lists.newArrayList();
+    for(Binding b : injector.getAllBindings().values()) {
+      boolean contains = mapbinder.containsElement(b);      
+      Object visited = b.acceptTargetVisitor(visitor);
+      if(visited instanceof MapBinderBinding) {
+        if(visited.equals(mapbinder)) {
+          assertTrue(contains);
+        } else {
+          otherMapBindings.add(visited);
+        }
+      } else if(b.getKey().equals(mapOfProvider)) {
+        assertTrue(contains);
+        mapProviderMatch = true;
+      } else if(b.getKey().equals(mapOfSet)) {
+        assertTrue(contains);
+        mapSetMatch = true;
+      } else if(b.getKey().equals(mapOfSetOfProvider)) {
+        assertTrue(contains);
+        mapSetProviderMatch = true;
+      } else if(b.getKey().equals(setOfEntry)) {
+        assertTrue(contains);
+        entrySetMatch = true;
+        // Validate that this binding is also a MultibinderBinding.
+        assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
+      } else if (contains) {
+        otherMatches.add(b);
+      }
+    }
+    
+    int sizeOfOther = otherMatches.size();
+    if(allowDuplicates) {
+      sizeOfOther--; // account for 1 duplicate binding
+    }
+    sizeOfOther = sizeOfOther / 2; // account for 1 value & 1 Map.Entry of each expected binding.
+    assertEquals("Incorrect other matches: " + otherMatches, mapResults.size(), sizeOfOther);
+    assertTrue(entrySetMatch);
+    assertTrue(mapProviderMatch);
+    assertEquals(allowDuplicates, mapSetMatch);
+    assertEquals(allowDuplicates, mapSetProviderMatch);
+    assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,
+        otherMapBindings.size());
+  }
+

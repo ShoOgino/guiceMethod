@@ -1,0 +1,4 @@
+  static <T> BindResult linked(Key<? extends T> key) {
+    return new BindResult<T>(LINKED, null, key);
+  }
+

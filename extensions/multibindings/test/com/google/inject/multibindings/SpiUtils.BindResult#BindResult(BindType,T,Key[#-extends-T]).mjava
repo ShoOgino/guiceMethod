@@ -1,0 +1,6 @@
+    private BindResult(BindType type, T instance, Key<? extends T> key) {
+      this.type = type;
+      this.instance = instance;
+      this.key = key;
+    }
+

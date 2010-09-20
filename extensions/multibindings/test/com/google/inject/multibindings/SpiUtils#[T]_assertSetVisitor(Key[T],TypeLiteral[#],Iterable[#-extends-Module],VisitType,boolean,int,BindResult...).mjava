@@ -1,0 +1,28 @@
+  /**
+   * Asserts that MultibinderBinding visitors work correctly.
+   * 
+   * @param <T> The type of the binding
+   * @param setKey The key the set belongs to.
+   * @param elementType the TypeLiteral of the element
+   * @param modules The modules that define the multibindings
+   * @param visitType The kind of test we should perform.  A live Injector, a raw Elements (Module) test, or both.
+   * @param allowDuplicates If duplicates are allowed.
+   * @param expectedMultibindings The number of other multibinders we expect to see.
+   * @param results The kind of bindings contained in the multibinder.
+   */
+  static <T> void assertSetVisitor(Key<T> setKey, TypeLiteral<?> elementType,
+      Iterable<? extends Module> modules, VisitType visitType, boolean allowDuplicates,
+      int expectedMultibindings, BindResult... results) {
+    if(visitType == null) {
+      fail("must test something");
+    }
+    
+    if(visitType == BOTH || visitType == INJECTOR) {
+      setInjectorTest(setKey, elementType, modules, allowDuplicates, expectedMultibindings, results);
+    }
+    
+    if(visitType == BOTH || visitType == MODULE) {
+      setModuleTest(setKey, elementType, modules, allowDuplicates, expectedMultibindings, results);
+    }
+  }
+

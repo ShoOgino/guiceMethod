@@ -1,0 +1,57 @@
+  @SuppressWarnings("unchecked")
+  private static <T> void setModuleTest(Key<T> setKey, TypeLiteral<?> elementType,
+      Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
+      BindResult... results) {
+    List<BindResult> bindResults = Lists.newArrayList(results);
+    List<Element> elements = Elements.getElements(modules);
+    Visitor<T> visitor = new Visitor<T>();
+    MultibinderBinding<T> multibinder = null;
+    for(Element element : elements) {
+      if(element instanceof Binding && ((Binding)element).getKey().equals(setKey)) {
+        multibinder = (MultibinderBinding<T>)((Binding)element).acceptTargetVisitor(visitor);
+        break;
+      }
+    }
+    assertNotNull(multibinder);
+
+    assertEquals(elementType, multibinder.getElementTypeLiteral());
+    List<Object> otherMultibinders = Lists.newArrayList();
+    Set<Element> otherContains = new HashSet<Element>();
+    List<Element> otherElements = Lists.newArrayList();
+    for(Element element : elements) {
+      boolean contains = multibinder.containsElement(element);
+      if(!contains) {
+        otherElements.add(element);
+      }
+      boolean matched = false;
+      if(element instanceof Binding) {
+        Binding binding = (Binding)element;
+        Object visited = binding.acceptTargetVisitor(visitor);
+        if(visited != null) {
+          matched = true;
+          if(visited.equals(multibinder)) {
+            assertTrue(contains);
+          } else {
+            otherMultibinders.add(visited);
+          }
+        }
+      }
+      
+      if(!matched && contains) {
+        otherContains.add(element);
+      }
+    }
+    
+    if(allowDuplicates) {
+      assertEquals("wrong contained elements: " + otherContains, bindResults.size() + 1, otherContains.size());
+    } else {
+      assertEquals("wrong contained elements: " + otherContains, bindResults.size(), otherContains.size());
+    }
+     
+    assertEquals("other multibindings found: " + otherMultibinders, otherMultibindings,
+        otherMultibinders.size());
+    
+    // Validate that we can construct an injector out of the remaining bindings.
+    Guice.createInjector(Elements.getModule(otherElements));
+  }
+

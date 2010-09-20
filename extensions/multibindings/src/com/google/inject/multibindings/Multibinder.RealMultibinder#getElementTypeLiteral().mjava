@@ -1,0 +1,4 @@
+    public TypeLiteral<?> getElementTypeLiteral() {
+      return elementType;
+    }
+
