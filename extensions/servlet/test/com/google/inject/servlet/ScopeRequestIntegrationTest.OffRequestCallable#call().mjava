@@ -1,9 +1,10 @@
     public String call() throws Exception {
-      assertNull(response.get());
-
       // Inside this request, we should always get the same instance.
       assertSame(someObject.get(), someObject.get());
 
-      return value = request.get().getParameter(PARAM_NAME);
+      value = someObject.get().value;
+      assertFalse(SHOULDNEVERBESEEN.equals(value));
+
+      return value;
     }
 

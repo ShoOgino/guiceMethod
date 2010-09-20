@@ -22,22 +22,32 @@
    * @throws OutOfScopeException if this method is called from a non-request
    *     thread, or if the request has completed.
    */
-  public static <T> Callable<T> continueRequest(final Callable<T> callable) {
+  public static <T> Callable<T> continueRequest(final Callable<T> callable,
+      final Map<Key<?>, Object> seedMap) {
+    Preconditions.checkArgument(null != seedMap,
+        "Seed map cannot be null, try passing in Collections.emptyMap() instead.");
+    
+    // Snapshot the seed map and add all the instances to our continuing HTTP request.
+    final ContinuingHttpServletRequest continuingRequest =
+        new ContinuingHttpServletRequest(GuiceFilter.getRequest());
+    for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
+      continuingRequest.setAttribute(entry.getKey().toString(), entry.getValue());
+    }
+
     return new Callable<T>() {
-      private HttpServletRequest request =
-          new ContinuingHttpServletRequest(GuiceFilter.getRequest());
+      private HttpServletRequest request = continuingRequest;
 
       public T call() throws Exception {
         GuiceFilter.Context context = GuiceFilter.localContext.get();
-        if (null == context) {
-          // Only set up the request continuation if we're running in a
-          // new vanilla thread.
-          GuiceFilter.localContext.set(new GuiceFilter.Context(request, null));
-        }
+        Preconditions.checkState(null == context,
+            "Cannot continue request in the same thread as a HTTP request!");
+
+        // Only set up the request continuation if we're running in a
+        // new vanilla thread.
+        GuiceFilter.localContext.set(new GuiceFilter.Context(request, null));
         try {
           return callable.call();
         } finally {
-
           // Clear the copied context if we set one up.
           if (null == context) {
             GuiceFilter.localContext.remove();

@@ -2,7 +2,7 @@
       throws ServletException, IOException, InterruptedException {
     executor = Executors.newSingleThreadExecutor();
 
-    Injector injector = Guice.createInjector(new ServletModule() {
+    injector = Guice.createInjector(new ServletModule() {
       @Override protected void configureServlets() {
         serve("/*").with(ContinuingServlet.class);
 

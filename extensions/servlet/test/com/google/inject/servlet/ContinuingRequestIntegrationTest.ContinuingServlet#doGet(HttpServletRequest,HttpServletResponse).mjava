@@ -1,6 +1,11 @@
     @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-      Callable<String> task = ServletScopes.continueRequest(callable);
+      assertNull(someObject);
+
+      // Seed with someobject.
+      someObject = new SomeObject();
+      Callable<String> task = ServletScopes.continueRequest(callable,
+          ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), someObject));
 
       executorService.submit(task);
     }

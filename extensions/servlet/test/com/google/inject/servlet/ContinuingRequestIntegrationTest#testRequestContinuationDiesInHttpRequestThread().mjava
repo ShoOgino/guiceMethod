@@ -1,11 +1,13 @@
-  public final void testRequestContinuesInSameThread()
+  public final void testRequestContinuationDiesInHttpRequestThread()
       throws ServletException, IOException, InterruptedException {
-    executor = SAME_THREAD_EXECUTOR;
-    Injector injector = Guice.createInjector(new ServletModule() {
+    executor = sameThreadExecutor;
+    injector = Guice.createInjector(new ServletModule() {
       @Override protected void configureServlets() {
         serve("/*").with(ContinuingServlet.class);
 
         bind(ExecutorService.class).toInstance(executor);
+
+        bind(SomeObject.class);
       }
     });
 
@@ -16,23 +18,10 @@
 
     HttpServletRequest request = createMock(HttpServletRequest.class);
 
-    // this time it will try to get it from the scope, because its same-thread.
-    // This is part of Isaac's patch that enabled request-scoping of the request.
-    expect(request.getAttribute("Key[type=javax.servlet.http.HttpServletResponse, annotation=[none]]"))
-        .andReturn(null);
-    request.setAttribute(eq("Key[type=javax.servlet.http.HttpServletResponse, annotation=[none]]"),
-        anyObject());
-    expect(request.getAttribute("Key[type=javax.servlet.http.HttpServletRequest, annotation=[none]]"))
-        .andReturn(null);
-    request.setAttribute(eq("Key[type=javax.servlet.http.HttpServletRequest, annotation=[none]]"),
-        anyObject());
-
     expect(request.getServletPath()).andReturn("/");
     expect(request.getMethod()).andReturn("GET");
-
     FilterChain filterChain = createMock(FilterChain.class);
-    expect(request.getParameter(PARAM_NAME)).andReturn(PARAM_VALUE);
-
+    
     replay(request, filterConfig, filterChain);
 
     guiceFilter.init(filterConfig);
@@ -42,7 +31,8 @@
     executor.shutdown();
     executor.awaitTermination(10, TimeUnit.SECONDS);
 
-    assertEquals(PARAM_VALUE, injector.getInstance(OffRequestCallable.class).value);
+    assertTrue(failed.get());
+    assertFalse(PARAM_VALUE.equals(injector.getInstance(OffRequestCallable.class).value));
 
     verify(request, filterConfig, filterChain);
   }

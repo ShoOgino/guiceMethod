@@ -1,0 +1,5 @@
+    @Inject
+    public SomeObject(@Named(INVALID) String value) {
+      this.value = value;
+    }
+
