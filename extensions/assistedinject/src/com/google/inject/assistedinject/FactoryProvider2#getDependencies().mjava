@@ -1,0 +1,8 @@
+  public Set<Dependency<?>> getDependencies() {
+    Set<Dependency<?>> combinedDeps = new HashSet<Dependency<?>>();
+    for(AssistData data : assistDataByMethod.values()) {
+      combinedDeps.addAll(data.dependencies);
+    }
+    return ImmutableSet.copyOf(combinedDeps);
+  }
+

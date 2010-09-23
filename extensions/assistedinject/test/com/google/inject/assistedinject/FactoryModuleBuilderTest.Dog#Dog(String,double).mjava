@@ -1,0 +1,2 @@
+    @Inject Dog(@Assisted String a, double b) {}
+

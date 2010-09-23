@@ -1,0 +1,2 @@
+    @Inject void register(@Named("dog") String a) {}
+

@@ -1,0 +1,2 @@
+    @AssistedInject Cat(@Assisted byte a, @Named("catfail") String b) {} // not a dependency!
+

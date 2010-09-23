@@ -1,0 +1,52 @@
+  public void testFactoryBindingDependencies() {
+    // validate dependencies work in all stages & as a raw element,
+    // and that dependencies work for methods, fields, constructors,
+    // and for @AssistedInject constructors too.
+    Module module = new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Integer.class).toInstance(42);
+        bind(Double.class).toInstance(4.2d);
+        bind(Float.class).toInstance(4.2f);
+        bind(String.class).annotatedWith(named("dog")).toInstance("dog");
+        bind(String.class).annotatedWith(named("cat1")).toInstance("cat1");
+        bind(String.class).annotatedWith(named("cat2")).toInstance("cat2");
+        bind(String.class).annotatedWith(named("cat3")).toInstance("cat3");
+        bind(String.class).annotatedWith(named("arbitrary")).toInstance("fail!");
+        install(new FactoryModuleBuilder()
+                .implement(Animal.class, Dog.class)
+                .build(AnimalHouse.class));
+      }
+    };
+
+    Set<Key<?>> expectedKeys = ImmutableSet.<Key<?>>of(
+        Key.get(Integer.class),
+        Key.get(Double.class),
+        Key.get(Float.class),
+        Key.get(String.class, named("dog")),
+        Key.get(String.class, named("cat1")),
+        Key.get(String.class, named("cat2")),
+        Key.get(String.class, named("cat3"))
+    );
+    
+    Injector injector = Guice.createInjector(module);
+    validateDependencies(expectedKeys, injector.getBinding(AnimalHouse.class));
+    
+    injector = Guice.createInjector(Stage.TOOL, module);
+    validateDependencies(expectedKeys, injector.getBinding(AnimalHouse.class));
+    
+    List<Element> elements = Elements.getElements(module);
+    boolean found = false;
+    for(Element element : elements) {
+      if(element instanceof Binding) {
+        Binding binding = (Binding)element;
+        if(binding.getKey().equals(Key.get(AnimalHouse.class))) {
+          found = true;
+          validateDependencies(expectedKeys, binding);
+          break;
+        }
+      }
+    }
+    assertTrue(found);
+  }
+
