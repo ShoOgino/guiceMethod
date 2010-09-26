@@ -1,0 +1,9 @@
+  @Override public String toString() {
+    return new ToStringBuilder(InstanceServletBinding.class)
+      .add("pattern", getPattern())
+      .add("initParams", getInitParams())
+      .add("uriPatternType", getUriPatternType())
+      .add("servletInstance", getServletInstance())
+      .toString();
+  }
+
