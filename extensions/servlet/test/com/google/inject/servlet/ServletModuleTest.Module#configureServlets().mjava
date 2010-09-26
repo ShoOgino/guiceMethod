@@ -1,0 +1,6 @@
+    @Override
+    protected void configureServlets() {
+      serve("/sam/*").with(new DummyServlet());
+      filter("/tara/*").through(new DummyFilterImpl());
+    }
+
