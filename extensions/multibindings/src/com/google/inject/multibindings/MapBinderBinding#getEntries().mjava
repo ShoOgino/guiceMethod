@@ -6,8 +6,8 @@
    * {@link Elements#getElements}.
    * <p>
    * The elements will always match the type Map's generic type. For example, if getMapKey returns a
-   * key of <code>Map{@literal<}String, Snack></code>, then this will always return a list of type
-   * <code>List{@literal<}Map.Entry{@literal<}String, Binding{@literal<}Snack>>></code>.
+   * key of <code>Map&lt;String, Snack></code>, then this will always return a list of type
+   * <code>List&lt;Map.Entry&lt;String, Binding&lt;Snack>>></code>.
    */
   List<Map.Entry<?, Binding<?>>> getEntries();
 

@@ -2,8 +2,8 @@
    * Returns the TypeLiteral describing the values of the map.
    * <p>
    * The TypeLiteral will always match the type Map's generic type. For example, if getMapKey
-   * returns a key of <code>Map{@literal<}String, Snack></code>, then this will always return a
-   * <code>TypeLiteral{@literal<}Snack></code>.
+   * returns a key of <code>Map&lt;String, Snack></code>, then this will always return a
+   * <code>TypeLiteral&lt;Snack></code>.
    */
   TypeLiteral<?> getValueTypeLiteral();
 

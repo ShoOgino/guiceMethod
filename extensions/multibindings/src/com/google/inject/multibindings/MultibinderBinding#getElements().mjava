@@ -4,8 +4,8 @@
    * retrieved from {@link Elements#getElements}.
    * <p>
    * The elements will always match the type Set's generic type. For example, if getSetKey returns a
-   * key of <code>Set{@literal<}String></code>, then this will always return a list of type
-   * <code>List{@literal<}Binding{@literal<}String>></code>.
+   * key of <code>Set&lt;String></code>, then this will always return a list of type
+   * <code>List&lt;Binding&lt;String>></code>.
    */
   List<Binding<?>> getElements();
 
