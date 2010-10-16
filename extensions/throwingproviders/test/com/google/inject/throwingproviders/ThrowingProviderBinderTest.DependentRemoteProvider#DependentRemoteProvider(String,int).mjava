@@ -1,0 +1,3 @@
+    @Inject public DependentRemoteProvider(String foo, int bar) {
+    }
+

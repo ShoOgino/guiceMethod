@@ -1,0 +1,34 @@
+  public void testDependencies() {
+    injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(String.class).toInstance("Foo");
+        bind(Integer.class).toInstance(5);
+        bind(Double.class).toInstance(5d);
+        bind(Long.class).toInstance(5L);
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, String.class)
+            .to(DependentRemoteProvider.class);
+      }
+    });
+    
+    HasDependencies hasDependencies =
+        (HasDependencies)injector.getBinding(Key.get(remoteProviderOfString));
+    hasDependencies = 
+        (HasDependencies)injector.getBinding(
+            Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey());
+    // Make sure that that is dependent on DependentRemoteProvider.
+    assertEquals(Dependency.get(Key.get(DependentRemoteProvider.class)), 
+        Iterables.getOnlyElement(hasDependencies.getDependencies()));
+    // And make sure DependentRemoteProvider has the proper dependencies.
+    hasDependencies = (HasDependencies)injector.getBinding(DependentRemoteProvider.class);
+    Set<Key<?>> dependencyKeys = ImmutableSet.copyOf(
+        Iterables.transform(hasDependencies.getDependencies(),
+          new Function<Dependency<?>, Key<?>>() {
+            public Key<?> apply(Dependency<?> from) {
+              return from.getKey();
+            }
+          }));
+    assertEquals(ImmutableSet.<Key<?>>of(Key.get(String.class), Key.get(Integer.class),
+        Key.get(Long.class), Key.get(Double.class)), dependencyKeys);
+  }
+
