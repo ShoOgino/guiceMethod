@@ -1,0 +1,2 @@
+    Animal createAStrangeCatAsAnimal(String owner);
+

@@ -1,0 +1,9 @@
+  private void validateCreateCatWithNonAssistedDependencies(AssistedMethod assistedMethod) {
+    List<Key<?>> dependencyKeys = ImmutableList.<Key<?>>of(
+        Key.get(String.class, named("catName1")),
+        Key.get(String.class, named("petName")),        
+        Key.get(Integer.class, named("age")));
+    validateAssistedMethod(assistedMethod, "createCatWithNonAssistedDependencies",
+      ExplodingCat.class, dependencyKeys);
+  }
+

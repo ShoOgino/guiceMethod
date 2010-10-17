@@ -1,0 +1,2 @@
+    @Inject Cat(@Assisted String owner) {}
+

@@ -1,0 +1,2 @@
+    @Named("SimpleCat") Animal createASimpleCatAsAnimal(String owner);
+

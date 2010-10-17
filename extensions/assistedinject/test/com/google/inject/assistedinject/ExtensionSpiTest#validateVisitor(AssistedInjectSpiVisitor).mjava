@@ -1,0 +1,20 @@
+  private void validateVisitor(AssistedInjectSpiVisitor visitor) throws Exception {
+    assertEquals(1, visitor.assistedBindingCount);
+    List<AssistedMethod> assistedMethods =
+        Lists.newArrayList(Iterables.getOnlyElement(
+            visitor.assistedInjectBindings).getAssistedMethods());
+    assertEquals(7, assistedMethods.size());
+    assertEquals(1, visitor.assistedBindingCount);
+    assertEquals(1, visitor.assistedInjectBindings.size());
+
+    // Validate for each of the methods in AnimalFactory
+    validateCreateAStrangeCatAsAnimal(assistedMethods.get(0));
+    validatecreateStrangeCatWithConstructorForOwner(assistedMethods.get(1));
+    validatecreateStrangeCatWithConstructorForAge(assistedMethods.get(2));
+    validateCreateCatWithANonAssistedDependency(assistedMethods.get(3));
+    validateCreateCat(assistedMethods.get(4));
+    validateCreateASimpleCatAsAnimal(assistedMethods.get(5));
+    validateCreateCatWithNonAssistedDependencies(assistedMethods.get(6));
+
+  }
+

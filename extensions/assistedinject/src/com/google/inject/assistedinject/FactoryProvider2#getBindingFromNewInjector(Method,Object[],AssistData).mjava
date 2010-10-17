@@ -27,18 +27,14 @@
             binder.bind((Key) paramKey).toProvider(data.providers.get(p++));
           }
         }
-                
+
         Constructor constructor = data.constructor;
         // Constructor *should* always be non-null here,
         // but if it isn't, we'll end up throwing a fairly good error
         // message for the user.
         if(constructor != null) {
-          TypeLiteral implementation = collector.getBindings().get(returnType);
-          if (implementation != null) {
-            binder.bind(assistedReturnType).toConstructor(constructor, implementation);
-          } else {
-            binder.bind(assistedReturnType).toConstructor(constructor, (TypeLiteral) returnType.getTypeLiteral());
-          }
+          binder.bind(assistedReturnType).toConstructor(
+              constructor, (TypeLiteral)data.implementationType);
         }
       }
     };
@@ -47,7 +43,7 @@
     Binding binding = forCreate.getBinding(assistedReturnType);
     // If we have providers cached in data, cache the binding for future optimizations.
     if(data.optimized) {
-      data.cachedBinding = binding; 
+      data.cachedBinding = binding;
     }
     return binding;
   }

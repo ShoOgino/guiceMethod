@@ -1,0 +1,5 @@
+  private void validatecreateStrangeCatWithConstructorForOwner(AssistedMethod assistedMethod) {
+    validateAssistedMethod(assistedMethod, "createStrangeCatWithConstructorForOwner",
+      StrangeCat.class, ImmutableList.<Key<?>>of());
+  }
+

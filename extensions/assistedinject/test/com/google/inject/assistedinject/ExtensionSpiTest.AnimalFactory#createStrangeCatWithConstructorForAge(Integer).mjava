@@ -1,0 +1,2 @@
+    StrangeCat createStrangeCatWithConstructorForAge(Integer age);
+

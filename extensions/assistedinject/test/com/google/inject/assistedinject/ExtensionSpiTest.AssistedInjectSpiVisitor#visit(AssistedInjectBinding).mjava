@@ -1,0 +1,6 @@
+    public Integer visit(AssistedInjectBinding assistedInjectBinding) {
+      assistedInjectBindings.add(assistedInjectBinding);
+      assistedBindingCount++;
+      return currentCount++;
+    }
+

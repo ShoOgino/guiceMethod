@@ -1,0 +1,5 @@
+  /**
+   * Returns the factory method that is being assisted.
+   */
+  Method getFactoryMethod();
+

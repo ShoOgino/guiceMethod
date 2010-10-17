@@ -1,0 +1,6 @@
+  /**
+   * Returns all non-assisted dependencies required to construct and inject
+   * the implementation.
+   */
+  Set<Dependency<?>> getDependencies();
+

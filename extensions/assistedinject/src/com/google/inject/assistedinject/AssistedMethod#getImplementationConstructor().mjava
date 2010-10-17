@@ -1,0 +1,6 @@
+  /**
+   * Returns the constructor that will be used to construct instances of the 
+   * implementation.
+   */
+  Constructor<?> getImplementationConstructor();
+

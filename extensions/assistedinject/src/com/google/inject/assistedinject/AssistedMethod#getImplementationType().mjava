@@ -1,0 +1,6 @@
+  /**
+   * Returns the implementation type that will be created when the method is
+   * used.
+   */
+  TypeLiteral<?> getImplementationType();
+

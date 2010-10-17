@@ -4,11 +4,12 @@
         .add("ctor", constructor)
         .add("return type", returnType)
         .add("param type", paramTypes)
+        .add("implementation type", implementationType)
+        .add("dependencies", dependencies)
+        .add("factory method", factoryMethod)
         .add("optimized", optimized)
         .add("providers", providers)
         .add("cached binding", cachedBinding)
-        .add("dependencies", dependencies)
         .toString();
-      
     }
 

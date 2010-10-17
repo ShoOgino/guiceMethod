@@ -1,0 +1,4 @@
+    public Method getFactoryMethod() {
+      return factoryMethod;
+    }
+

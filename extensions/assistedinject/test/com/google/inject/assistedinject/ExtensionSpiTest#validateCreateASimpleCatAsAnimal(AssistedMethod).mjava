@@ -1,0 +1,5 @@
+  private void validateCreateASimpleCatAsAnimal(AssistedMethod assistedMethod) {
+    validateAssistedMethod(assistedMethod, "createASimpleCatAsAnimal", SimpleCat.class,
+        ImmutableList.<Key<?>>of());
+  }
+

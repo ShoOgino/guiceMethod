@@ -3,9 +3,10 @@
    * @param collector binding configuration that maps method return types to
    *    implementation types.
    */
-  FactoryProvider2(TypeLiteral<F> factoryType, BindingCollector collector) {
-    this.collector = collector;
-
+  FactoryProvider2(Key<F> factoryKey, BindingCollector collector) {
+    this.factoryKey = factoryKey;
+    
+    TypeLiteral<F> factoryType = factoryKey.getTypeLiteral();
     Errors errors = new Errors();
 
     @SuppressWarnings("unchecked") // we imprecisely treat the class literal of T as a Class<T>
@@ -18,7 +19,7 @@
         TypeLiteral<?> returnTypeLiteral = factoryType.getReturnType(method);
         Key<?> returnType;
         try {
-          returnType = getKey(returnTypeLiteral, method, method.getAnnotations(), errors);
+          returnType = Annotations.getKey(returnTypeLiteral, method, method.getAnnotations(), errors);
         } catch(ConfigurationException ce) {
           // If this was an error due to returnTypeLiteral not being specified, rephrase
           // it as our factory not being specified, so it makes more sense to users.
@@ -33,7 +34,7 @@
         int p = 0;
         List<Key<?>> keys = Lists.newArrayList();
         for (TypeLiteral<?> param : params) {
-          Key<?> paramKey = getKey(param, method, paramAnnotations[p++], errors);
+          Key<?> paramKey = Annotations.getKey(param, method, paramAnnotations[p++], errors);
           Class<?> underlylingType = paramKey.getTypeLiteral().getRawType();
           if (underlylingType.equals(Provider.class)
               || underlylingType.equals(javax.inject.Provider.class)) {
@@ -44,7 +45,7 @@
           keys.add(assistKey(method, paramKey, errors));
         }
         ImmutableList<Key<?>> immutableParamList = ImmutableList.copyOf(keys);
-        
+
         // try to match up the method to the constructor
         TypeLiteral<?> implementation = collector.getBindings().get(returnType);
         if(implementation == null) {
@@ -52,13 +53,13 @@
         }
         InjectionPoint ctorInjectionPoint;
         try {
-          ctorInjectionPoint = 
+          ctorInjectionPoint =
             findMatchingConstructorInjectionPoint(method, returnType, implementation, immutableParamList);
         } catch(ErrorsException ee) {
           errors.merge(ee.getErrors());
           continue;
         }
-        
+
         Constructor<?> constructor = (Constructor)ctorInjectionPoint.getMember();
         List<ThreadLocalProvider> providers = Collections.emptyList();
         Set<Dependency<?>> deps = getDependencies(ctorInjectionPoint, implementation);
@@ -77,8 +78,8 @@
           optimized = true;
         }
         assistDataBuilder.put(method,
-            new AssistData(constructor, returnType, immutableParamList,
-                optimized, providers, removeAssistedDeps(deps)));
+            new AssistData(constructor, returnType, immutableParamList, implementation,
+                method, removeAssistedDeps(deps), optimized, providers));
       }
 
       // If we generated any errors (from finding matching constructors, for instance), throw an exception.
@@ -90,7 +91,7 @@
     } catch (ErrorsException e) {
       throw new ConfigurationException(e.getErrors().getMessages());
     }
-    
+
     factory = factoryRawType.cast(Proxy.newProxyInstance(BytecodeGen.getClassLoader(factoryRawType),
         new Class[] { factoryRawType }, this));
   }

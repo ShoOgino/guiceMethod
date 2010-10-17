@@ -1,0 +1,4 @@
+  private void validateCreateCat(AssistedMethod assistedMethod) throws Exception {
+    validateAssistedMethod(assistedMethod, "createCat", Cat.class, ImmutableList.<Key<?>>of());
+  }
+

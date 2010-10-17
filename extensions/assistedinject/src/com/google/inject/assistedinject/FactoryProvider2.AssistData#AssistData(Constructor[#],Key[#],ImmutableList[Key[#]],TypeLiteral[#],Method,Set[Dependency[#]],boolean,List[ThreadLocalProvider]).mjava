@@ -1,0 +1,14 @@
+    AssistData(Constructor<?> constructor, Key<?> returnType, ImmutableList<Key<?>> paramTypes,
+        TypeLiteral<?> implementationType, Method factoryMethod,
+        Set<Dependency<?>> dependencies,
+        boolean optimized, List<ThreadLocalProvider> providers) {
+      this.constructor = constructor;
+      this.returnType = returnType;
+      this.paramTypes = paramTypes;
+      this.implementationType = implementationType;
+      this.factoryMethod = factoryMethod;
+      this.dependencies = dependencies;
+      this.optimized = optimized;
+      this.providers = providers;
+    }
+

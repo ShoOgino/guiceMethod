@@ -1,0 +1,4 @@
+    public TypeLiteral<?> getImplementationType() {
+      return implementationType;
+    }
+

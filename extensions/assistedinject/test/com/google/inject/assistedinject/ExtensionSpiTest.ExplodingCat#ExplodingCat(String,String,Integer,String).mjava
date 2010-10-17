@@ -1,0 +1,3 @@
+    @Inject public ExplodingCat(@Named("catName1") String name, @Assisted String owner,
+                                @Named("age") Integer age, @Named("petName") String petName) {}
+

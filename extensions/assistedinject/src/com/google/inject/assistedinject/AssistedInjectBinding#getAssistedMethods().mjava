@@ -1,0 +1,3 @@
+  /** Returns an {@link AssistedMethod} for each method in the factory. */
+  Collection<AssistedMethod> getAssistedMethods();
+

@@ -1,0 +1,4 @@
+    public Constructor<?> getImplementationConstructor() {
+      return constructor;
+    }
+

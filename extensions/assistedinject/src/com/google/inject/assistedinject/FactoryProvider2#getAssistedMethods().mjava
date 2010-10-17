@@ -1,0 +1,6 @@
+  // safe cast because values are typed to AssistedData, which is an AssistedMethod
+  @SuppressWarnings("unchecked")
+  public Collection<AssistedMethod> getAssistedMethods() {
+    return (Collection)assistDataByMethod.values();
+  }
+

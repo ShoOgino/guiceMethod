@@ -12,7 +12,7 @@
     int p = 0;
     List<Key<?>> constructorKeys = Lists.newArrayList();
     for (TypeLiteral<?> param : params) {
-      Key<?> paramKey = getKey(param, constructor, paramAnnotations[p++],
+      Key<?> paramKey = Annotations.getKey(param, constructor, paramAnnotations[p++],
           errors);
       constructorKeys.add(paramKey);
     }

@@ -14,7 +14,7 @@
     } else {
       errors = errors.withSource(returnType).withSource(implementation);
     }
-    
+
     Class<?> rawType = implementation.getRawType();
     if (Modifier.isInterface(rawType.getModifiers())) {
       errors.addMessage(
@@ -30,7 +30,7 @@
       errors.cannotInjectInnerClass(rawType);
       throw errors.toException();
     }
-    
+
     Constructor<?> matchingConstructor = null;
     boolean anyAssistedInjectConstructors = false;
     // Look for AssistedInject constructors...
@@ -51,7 +51,7 @@
         }
       }
     }
-    
+
     if(!anyAssistedInjectConstructors) {
       // If none existed, use @Inject.
       try {
