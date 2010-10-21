@@ -53,7 +53,7 @@
         return constructor;
       }
       /*if[AOP]*/
-      public ImmutableMap<Method, List<MethodInterceptor>>
+      public ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>>
           getMethodInterceptors() {
         return ImmutableMap.of();
       }

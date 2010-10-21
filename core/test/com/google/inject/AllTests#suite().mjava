@@ -79,7 +79,7 @@
     suite.addTestSuite(TypesTest.class);
 
     /*if[AOP]*/
-    suite.addTestSuite(ProxyFactoryTest.class);
+    suite.addTestSuite(com.google.inject.internal.ProxyFactoryTest.class);
     suite.addTestSuite(IntegrationTest.class);
     suite.addTestSuite(MethodInterceptionTest.class);
     suite.addTestSuite(com.googlecode.guice.BytecodeGenTest.class);

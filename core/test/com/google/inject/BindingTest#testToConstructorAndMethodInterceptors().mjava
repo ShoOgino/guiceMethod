@@ -1,3 +1,4 @@
+/*if[AOP]*/
   public void testToConstructorAndMethodInterceptors() throws NoSuchMethodException {
     final Constructor<D> constructor = D.class.getConstructor(Stage.class);
     final AtomicInteger count = new AtomicInteger();
@@ -20,4 +21,5 @@
     d.hashCode();
     assertEquals(2, count.get());
   }
+/*end[AOP]*/
 
