@@ -1,0 +1,22 @@
+  public void testWrongThrowingProviderType() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.install(this, binder());
+        }
+        
+        @SuppressWarnings("unused")
+        @ThrowingProvides(WrongThrowingProviderType.class)
+        String foo() {
+            return null;
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals(WrongThrowingProviderType.class.getName() 
+          + " does not properly extend ThrowingProvider, the first type parameter of ThrowingProvider "
+          + "(java.lang.String) is not a generic type",
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }    
+  }
+

@@ -1,0 +1,22 @@
+  public void testProviderMethodWithSuperclassFails() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.install(this, binder());
+        }
+        
+        @SuppressWarnings("unused")
+        @ThrowingProvides(RemoteProvider.class)
+        String foo() throws IOException {
+            return null;
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals(IOException.class.getName() + " is not compatible with the exception ("
+          + RemoteException.class.getName() + ") declared in the ThrowingProvider interface ("
+          + RemoteProvider.class.getName() + ")",
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }
+  }
+

@@ -1,7 +1,10 @@
-    private void checkArgument(boolean condition,
+    private boolean checkArgument(boolean condition,
         String messageFormat, Object... args) {
       if (!condition) {
-        throw new IllegalArgumentException(String.format(messageFormat, args));
+        binder.addError(messageFormat, args);
+        return false;
+      } else {
+        return true;
       }
     }
 

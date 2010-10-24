@@ -1,0 +1,8 @@
+    ScopedBindingBuilder toProviderMethod(ThrowingProviderMethod<?> target) {
+      Key<ThrowingProviderMethod> targetKey =
+        Key.get(ThrowingProviderMethod.class, UniqueAnnotations.create());
+      binder.bind(targetKey).toInstance(target);
+      
+      return toInternal(targetKey);
+    }
+

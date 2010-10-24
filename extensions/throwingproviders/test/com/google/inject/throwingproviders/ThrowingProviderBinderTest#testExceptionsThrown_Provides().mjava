@@ -1,0 +1,4 @@
+  public void testExceptionsThrown_Provides() {
+    tExceptionsThrown(providesInjector);
+  }
+

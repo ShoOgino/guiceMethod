@@ -1,0 +1,4 @@
+  public static void install(Module module, Binder binder) {
+    binder.install(ThrowingProviderMethodsModule.forModule(module));
+  }
+

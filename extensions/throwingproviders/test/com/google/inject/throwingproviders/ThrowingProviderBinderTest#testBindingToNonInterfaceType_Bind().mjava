@@ -1,0 +1,16 @@
+  public void testBindingToNonInterfaceType_Bind() throws RemoteException {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(MockRemoteProvider.class, String.class)
+              .to(mockRemoteProvider);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertEquals(MockRemoteProvider.class.getName() + " must be an interface",
+          Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
+    }
+  }
+

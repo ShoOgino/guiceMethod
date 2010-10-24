@@ -1,10 +1,7 @@
-  public void testAnnotations() throws RemoteException {
+  public void testAnnotations_Bind() throws RemoteException {
     final MockRemoteProvider<String> mockRemoteProviderA = new MockRemoteProvider<String>();
-    mockRemoteProviderA.setNextToReturn("A");
     final MockRemoteProvider<String> mockRemoteProviderB = new MockRemoteProvider<String>();
-    mockRemoteProviderB.setNextToReturn("B");
-
-    injector = Guice.createInjector(new AbstractModule() {
+    bindInjector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         ThrowingProviderBinder.create(binder())
             .bind(RemoteProvider.class, String.class)
@@ -16,12 +13,6 @@
             .to(mockRemoteProviderB);
       }
     });
-
-    assertEquals("A", 
-        injector.getInstance(Key.get(remoteProviderOfString, Names.named("a"))).get());
-
-    assertEquals("B", 
-        injector.getInstance(Key.get(remoteProviderOfString)).get());
-
+    tAnnotations(bindInjector, mockRemoteProviderA, mockRemoteProviderB);
   }
 

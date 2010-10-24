@@ -1,4 +1,4 @@
-  public void testExceptionsScoped() {
+  private void tExceptionsScoped(Injector injector) {
     RemoteProvider<String> remoteProvider = 
         injector.getInstance(Key.get(remoteProviderOfString));
 

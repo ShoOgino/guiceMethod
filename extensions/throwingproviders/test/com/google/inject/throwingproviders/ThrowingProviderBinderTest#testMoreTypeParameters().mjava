@@ -1,0 +1,20 @@
+  public void testMoreTypeParameters() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.install(this, binder());
+        }
+        
+        @SuppressWarnings("unused")
+        @ThrowingProvides(TooManyTypeParameters.class)
+        String foo() {
+            return null;
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals(TooManyTypeParameters.class.getName() + " has more than one generic type parameter: [T, P]",
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }    
+  }
+

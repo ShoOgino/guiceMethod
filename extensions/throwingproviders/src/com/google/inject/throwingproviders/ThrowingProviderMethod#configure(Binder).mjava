@@ -1,0 +1,40 @@
+  public void configure(Binder binder) {
+    binder = binder.withSource(method);
+
+    SecondaryBinder<?> sbinder = 
+      ThrowingProviderBinder.create(binder)
+        .bind(throwingProvider, key.getTypeLiteral().getType());
+    if(key.getAnnotation() != null) {
+      sbinder = sbinder.annotatedWith(key.getAnnotation());
+    } else if(key.getAnnotationType() != null) {
+      sbinder = sbinder.annotatedWith(key.getAnnotationType());
+    } 
+    ScopedBindingBuilder sbbuilder = sbinder.toProviderMethod(this);
+    if(scopeAnnotation != null) {
+      sbbuilder.in(scopeAnnotation);
+    }
+
+    if (exposed) {
+      // the cast is safe 'cause the only binder we have implements PrivateBinder. If there's a
+      // misplaced @Exposed, calling this will add an error to the binder's error queue
+      ((PrivateBinder) binder).expose(key);
+    }
+
+    // Validate the exceptions in the method match the exceptions
+    // in the ThrowingProvider.
+    for(TypeLiteral<?> exType : exceptionTypes) {
+      // Ignore runtime exceptions.
+      if(RuntimeException.class.isAssignableFrom(exType.getRawType())) {
+        continue;
+      }
+      
+      if(sbinder.getExceptionType() != null) {
+        if (!sbinder.getExceptionType().isAssignableFrom(exType.getRawType())) {
+          binder.addError(
+              "%s is not compatible with the exception (%s) declared in the ThrowingProvider interface (%s)",
+              exType.getRawType(), sbinder.getExceptionType(), throwingProvider);
+        }
+      }
+    }
+  }
+

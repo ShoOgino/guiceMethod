@@ -1,0 +1,21 @@
+  public void testIncorrectPredefinedType_Provides() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.install(this, binder());
+        }
+        
+        @SuppressWarnings("unused")
+        @ThrowingProvides(StringRemoteProvider.class)
+        Integer foo() {
+            return null;
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals(StringRemoteProvider.class.getName() 
+          + " expects the value type to be java.lang.String, but it was java.lang.Integer",
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }
+  }
+

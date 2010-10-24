@@ -1,0 +1,4 @@
+  public void testExceptionsThrown_Bind() {
+    tExceptionsThrown(bindInjector);
+  }
+

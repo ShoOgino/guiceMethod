@@ -1,0 +1,12 @@
+  /**
+   * Returns a module which creates bindings for provider methods from the given module.
+   */
+  static Module forModule(Module module) {
+    // avoid infinite recursion, since installing a module always installs itself
+    if (module instanceof ThrowingProviderMethodsModule) {
+      return Modules.EMPTY_MODULE;
+    }
+
+    return new ThrowingProviderMethodsModule(module);
+  }
+

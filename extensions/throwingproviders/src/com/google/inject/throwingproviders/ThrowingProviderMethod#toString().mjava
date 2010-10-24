@@ -1,0 +1,4 @@
+  @Override public String toString() {
+    return "@ThrowingProvides " + StackTraceElements.forMember(method).toString();
+  }
+

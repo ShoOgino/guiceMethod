@@ -1,0 +1,4 @@
+  public void testExceptionsScoped_Bind() {
+    tExceptionsScoped(bindInjector);
+  }
+

@@ -1,0 +1,4 @@
+  public void testExceptionsScoped_Provides() {
+    tExceptionsScoped(providesInjector);
+  }
+

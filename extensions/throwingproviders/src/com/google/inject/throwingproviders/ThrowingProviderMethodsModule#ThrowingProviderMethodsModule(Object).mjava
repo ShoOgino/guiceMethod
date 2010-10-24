@@ -1,0 +1,5 @@
+  private ThrowingProviderMethodsModule(Object delegate) {
+    this.delegate = checkNotNull(delegate, "delegate");
+    this.typeLiteral = TypeLiteral.get(this.delegate.getClass());
+  }
+
