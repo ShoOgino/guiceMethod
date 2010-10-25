@@ -1,0 +1,21 @@
+  public void testInterceptingFinalClass() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.any(), new MethodInterceptor() {
+          public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+            return methodInvocation.proceed();
+          }
+        });
+      }
+    });
+    try {
+      injector.getInstance(NotInterceptable.class);
+      fail();
+    } catch(ConfigurationException ce) {
+      assertEquals("Unable to method intercept: " + NotInterceptable.class.getName(),
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage().toString());
+      assertEquals("Cannot subclass final class class " + NotInterceptable.class.getName(),
+          ce.getCause().getMessage());
+    }
+  }
+

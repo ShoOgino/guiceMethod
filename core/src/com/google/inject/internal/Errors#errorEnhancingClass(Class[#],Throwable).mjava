@@ -1,0 +1,4 @@
+  public Errors errorEnhancingClass(Class<?> clazz, Throwable cause) {
+    return errorInUserCode(cause, "Unable to method intercept: %s", clazz);
+  }
+
