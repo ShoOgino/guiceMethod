@@ -1,0 +1,4 @@
+  public void to(final byte value) {
+    toConstant(Byte.class, value);
+  }  
+
