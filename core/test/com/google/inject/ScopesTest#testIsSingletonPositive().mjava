@@ -7,6 +7,7 @@
     final Key<String> f = Key.get(String.class, named("F"));
     final Key<String> g = Key.get(String.class, named("G"));
     final Key<Object> h = Key.get(Object.class, named("H"));
+    final Key<String> i = Key.get(String.class, named("I"));
 
     Module singletonBindings = new AbstractModule() {
       protected void configure() {
@@ -17,6 +18,13 @@
         bind(e).toProvider(Providers.of("e")).asEagerSingleton();
         bind(f).toProvider(Providers.of("f")).in(Singleton.class);
         bind(h).to(AnnotatedSingleton.class);
+        install(new PrivateModule() {          
+          @Override
+          protected void configure() {
+            bind(i).toProvider(Providers.of("i")).in(Singleton.class);
+            expose(i);
+          }
+        });
       }
 
       @Provides @Named("G") @Singleton String provideG() {
@@ -35,6 +43,7 @@
     assertTrue(Scopes.isSingleton(map.get(f)));
     assertTrue(Scopes.isSingleton(map.get(g)));
     assertFalse(Scopes.isSingleton(map.get(h))); // annotated classes are not followed by modules
+    assertTrue(Scopes.isSingleton(map.get(i)));
 
     Injector injector = Guice.createInjector(singletonBindings);
     assertTrue(Scopes.isSingleton(injector.getBinding(a)));
@@ -45,5 +54,6 @@
     assertTrue(Scopes.isSingleton(injector.getBinding(f)));
     assertTrue(Scopes.isSingleton(injector.getBinding(g)));
     assertTrue(Scopes.isSingleton(injector.getBinding(h)));
+    assertTrue(Scopes.isSingleton(injector.getBinding(i)));
   }
 
