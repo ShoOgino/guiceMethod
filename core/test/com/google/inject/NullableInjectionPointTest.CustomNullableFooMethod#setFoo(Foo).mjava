@@ -1,0 +1,4 @@
+    @Inject void setFoo(@Namespace.Nullable Foo foo) {
+      this.foo = foo;
+    }
+

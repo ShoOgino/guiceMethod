@@ -9,6 +9,7 @@
       }
     });
     assertNull(injector.getInstance(NullableFooField.class).foo);
+    assertNull(injector.getInstance(CustomNullableFooField.class).foo);
 
     try {
       injector.getInstance(FooField.class);
