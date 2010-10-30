@@ -3,8 +3,8 @@
    * {@code java.util.ArrayList<init>()} or {@code java.util.List.remove()}.
    */
   public static String toString(Member member) {
-    Class<? extends Member> memberType = memberType(member);
-
+    Class<? extends Member> memberType = Classes.memberType(member);
+  
     if (memberType == Method.class) {
       return member.getDeclaringClass().getName() + "." + member.getName() + "()";
     } else if (memberType == Field.class) {

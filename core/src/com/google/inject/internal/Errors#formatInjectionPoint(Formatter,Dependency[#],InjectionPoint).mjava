@@ -1,7 +1,7 @@
   public static void formatInjectionPoint(Formatter formatter, Dependency<?> dependency,
       InjectionPoint injectionPoint) {
     Member member = injectionPoint.getMember();
-    Class<? extends Member> memberType = MoreTypes.memberType(member);
+    Class<? extends Member> memberType = Classes.memberType(member);
 
     if (memberType == Field.class) {
       dependency = injectionPoint.getDependencies().get(0);

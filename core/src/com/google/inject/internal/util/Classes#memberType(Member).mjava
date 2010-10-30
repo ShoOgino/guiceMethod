@@ -3,16 +3,16 @@
    */
   public static Class<? extends Member> memberType(Member member) {
     checkNotNull(member, "member");
-
+  
     if (member instanceof Field) {
       return Field.class;
-
+  
     } else if (member instanceof Method) {
       return Method.class;
-
+  
     } else if (member instanceof Constructor) {
       return Constructor.class;
-
+  
     } else {
       throw new IllegalArgumentException(
           "Unsupported implementation class for Member, " + member.getClass());
