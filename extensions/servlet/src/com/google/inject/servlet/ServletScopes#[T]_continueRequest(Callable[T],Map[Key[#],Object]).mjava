@@ -21,6 +21,8 @@
    *     context available to it.
    * @throws OutOfScopeException if this method is called from a non-request
    *     thread, or if the request has completed.
+   * 
+   * @since 3.0
    */
   public static <T> Callable<T> continueRequest(final Callable<T> callable,
       final Map<Key<?>, Object> seedMap) {
