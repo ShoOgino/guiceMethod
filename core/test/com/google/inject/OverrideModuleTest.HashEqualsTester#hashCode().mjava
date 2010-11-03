@@ -1,0 +1,9 @@
+    @Override
+    public int hashCode() {
+      if(throwOnHashcode) {
+        throw new RuntimeException();
+      } else {
+        return super.hashCode();
+      }
+    }
+

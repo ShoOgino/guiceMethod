@@ -1,0 +1,19 @@
+    @Override
+    public boolean equals(Object obj) {
+      if (throwOnEquals) {
+        throw new RuntimeException();
+      } else if (obj instanceof HashEqualsTester) {
+        HashEqualsTester o = (HashEqualsTester)obj;
+        if(o.throwOnEquals) {
+          throw new RuntimeException();
+        }
+        if(equality == null && o.equality == null) {
+          return this == o;
+        } else {
+          return Objects.equal(equality, o.equality);
+        }
+      } else {
+        return false;
+      }
+    }
+

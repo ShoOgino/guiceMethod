@@ -1,0 +1,12 @@
+  public void testEqualsNotCalledByDefaultOnInstance() {
+    final HashEqualsTester a = new HashEqualsTester();
+    a.throwOnEquals = true;
+    Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+       bind(String.class);
+       bind(HashEqualsTester.class).toInstance(a);
+      }
+    });
+  }
+
