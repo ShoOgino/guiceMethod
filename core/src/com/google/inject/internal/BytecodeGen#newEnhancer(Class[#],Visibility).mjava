@@ -5,7 +5,7 @@
     if (visibility == Visibility.PUBLIC) {
       enhancer.setClassLoader(getClassLoader(type));
     }
-    enhancer.setNamingPolicy(NAMING_POLICY);
+    enhancer.setNamingPolicy(ENHANCER_NAMING_POLICY);
     logger.fine("Loading " + type + " Enhancer with " + enhancer.getClassLoader());
     return enhancer;
   }

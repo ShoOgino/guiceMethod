@@ -1,0 +1,7 @@
+  public void testEnhancerNaming() {
+    Injector injector = Guice.createInjector(interceptorModule, new PackageVisibilityTestModule());
+    PublicUserOfPackagePrivate pupp = injector.getInstance(PublicUserOfPackagePrivate.class);
+    assertTrue(pupp.getClass().getName().startsWith(
+        PublicUserOfPackagePrivate.class.getName() + "$$EnhancerByGuice$$"));
+  }
+

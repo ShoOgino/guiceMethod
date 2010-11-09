@@ -7,7 +7,7 @@
     if (visibility == Visibility.PUBLIC) {
       generator.setClassLoader(getClassLoader(type));
     }
-    generator.setNamingPolicy(NAMING_POLICY);
+    generator.setNamingPolicy(FASTCLASS_NAMING_POLICY);
     logger.fine("Loading " + type + " FastClass with " + generator.getClassLoader());
     return generator.create();
   }
