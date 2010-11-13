@@ -1,4 +1,4 @@
   public UriPatternType getUriPatternType() {
-    return patternType;
+    return patternMatcher.getPatternType();
   }
 

@@ -1,0 +1,5 @@
+  InstanceServletBindingImpl(Map<String, String> initParams, String pattern,
+      HttpServlet target, UriPatternMatcher patternMatcher) {
+    super(initParams, pattern, target, patternMatcher);
+  }
+

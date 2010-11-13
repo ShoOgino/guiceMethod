@@ -1,8 +1,8 @@
   AbstractServletModuleBinding(Map<String, String> initParams, String pattern, T target,
-      UriPatternType patternType) {
+      UriPatternMatcher patternMatcher) {
     this.initParams = initParams;
     this.pattern = pattern;
     this.target = target;
-    this.patternType = patternType;
+    this.patternMatcher = patternMatcher;
   }
 

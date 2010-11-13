@@ -1,9 +1,0 @@
-  /**
-   * Returns the pattern type that this filter binding was created with.
-   * This will be {@link UriPatternType#REGEX} if the binding was created with
-   * {@link ServletModule#filterRegex(String, String...)}, and
-   * {@link UriPatternType#SERVLET} if it was created with
-   * {@link ServletModule#filter(String, String...)}.
-   */
-  UriPatternType getUriPatternType();
-

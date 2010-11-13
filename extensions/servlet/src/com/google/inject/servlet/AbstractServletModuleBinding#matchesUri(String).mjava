@@ -1,0 +1,4 @@
+  public boolean matchesUri(String uri) {
+    return patternMatcher.matches(uri);
+  }
+

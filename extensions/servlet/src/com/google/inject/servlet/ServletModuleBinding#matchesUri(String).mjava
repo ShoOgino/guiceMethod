@@ -1,0 +1,3 @@
+  /** Returns true if the given URI will match this binding. */
+  boolean matchesUri(String uri);
+
