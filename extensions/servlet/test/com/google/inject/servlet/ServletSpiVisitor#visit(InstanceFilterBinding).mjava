@@ -1,5 +1,5 @@
   public Integer visit(InstanceFilterBinding binding) {
-    actual.add(new Params(binding.getPattern(), binding.getFilterInstance(), binding.getInitParams(), binding.getUriPatternType()));
+    actual.add(new Params(binding, binding.getFilterInstance()));
     return currentCount++;
   }
 

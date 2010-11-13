@@ -1,0 +1,7 @@
+    Params(ServletModuleBinding binding, Object keyOrInstance) {
+      this.pattern = binding.getPattern();
+      this.keyOrInstance = keyOrInstance;
+      this.params = binding.getInitParams();
+      this.patternType = binding.getUriPatternType();
+    }
+

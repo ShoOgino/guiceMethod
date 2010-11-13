@@ -1,5 +1,5 @@
   public Integer visit(LinkedFilterBinding binding) {
-    actual.add(new Params(binding.getPattern(), binding.getLinkedKey(), binding.getInitParams(), binding.getUriPatternType()));
+    actual.add(new Params(binding, binding.getLinkedKey()));
     return currentCount++;
   }
 
