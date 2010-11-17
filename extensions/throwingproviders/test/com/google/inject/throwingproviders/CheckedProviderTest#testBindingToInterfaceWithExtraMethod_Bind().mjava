@@ -1,0 +1,16 @@
+  public void testBindingToInterfaceWithExtraMethod_Bind() throws Exception {
+    try {
+      bindInjector = Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(RemoteProviderWithExtraMethod.class, String.class);
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertEquals(RemoteProviderWithExtraMethod.class.getName() + " may not declare any new methods, but declared " 
+          + RemoteProviderWithExtraMethod.class.getDeclaredMethods()[0].toGenericString(),
+          Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
+    }
+  }
+

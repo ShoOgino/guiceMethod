@@ -1,0 +1,5 @@
+  public <P extends CheckedProvider> SecondaryBinder<P> 
+      bind(final Class<P> interfaceType, final Type valueType) {
+    return new SecondaryBinder<P>(interfaceType, valueType);
+  }
+

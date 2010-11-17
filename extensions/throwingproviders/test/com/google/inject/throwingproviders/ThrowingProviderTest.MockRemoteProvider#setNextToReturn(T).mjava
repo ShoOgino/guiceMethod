@@ -1,0 +1,4 @@
+    public void setNextToReturn(T nextToReturn) {
+      this.nextToReturn = nextToReturn;
+    }
+

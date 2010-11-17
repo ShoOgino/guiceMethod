@@ -1,0 +1,4 @@
+    public void throwOnNextGet(Exception nextToThrow) {
+      this.nextToThrow = nextToThrow;
+    }
+

@@ -1,0 +1,18 @@
+  public void testEarlyBindingError() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(StringRemoteProvider.class, String.class)
+              .to(FailingProvider.class);
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals("Could not find a suitable constructor in " + FailingProvider.class.getName()
+          + ". Classes must have either one (and only one) constructor annotated with @Inject"
+          + " or a zero-argument constructor that is not private.",
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }
+  }
+

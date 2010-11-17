@@ -1,0 +1,6 @@
+  public void testResultSerializes() throws Exception {
+    Result result = Result.forValue("foo");
+    result = Asserts.reserialize(result);
+    assertEquals("foo", result.getOrThrow());
+  }
+

@@ -1,0 +1,18 @@
+  public void testAnnotations_Bind() throws Exception {
+    final MockRemoteProvider<String> mockRemoteProviderA = new MockRemoteProvider<String>();
+    final MockRemoteProvider<String> mockRemoteProviderB = new MockRemoteProvider<String>();
+    bindInjector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, String.class)
+            .annotatedWith(Names.named("a"))
+            .to(mockRemoteProviderA);
+
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, String.class)
+            .to(mockRemoteProviderB);
+      }
+    });
+    tAnnotations(bindInjector, mockRemoteProviderA, mockRemoteProviderB);
+  }
+

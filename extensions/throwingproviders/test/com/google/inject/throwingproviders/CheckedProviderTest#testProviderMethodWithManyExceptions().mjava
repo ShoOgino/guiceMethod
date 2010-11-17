@@ -1,0 +1,37 @@
+  public void testProviderMethodWithManyExceptions() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          install(ThrowingProviderBinder.forModule(this));
+        }
+        
+        @SuppressWarnings("unused")
+        @CheckedProvides(RemoteProvider.class)
+        String foo() throws InterruptedException, RuntimeException, RemoteException, 
+                            AccessException, TooManyListenersException,
+                            BindException, SubBindException {
+            return null;
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      // The only two that should fail are Interrupted & TooManyListeners.. the rest are OK.
+      List<Message> errors = ImmutableList.copyOf(ce.getErrorMessages());
+      assertEquals(InterruptedException.class.getName()
+          + " is not compatible with the exceptions (["
+          + RemoteException.class + ", " + BindException.class
+          + "]) declared in the CheckedProvider interface ("
+          + RemoteProvider.class.getName()
+          + ")", 
+          errors.get(0).getMessage());
+      assertEquals(TooManyListenersException.class.getName()
+          + " is not compatible with the exceptions (["
+          + RemoteException.class + ", " + BindException.class
+          + "]) declared in the CheckedProvider interface ("
+          + RemoteProvider.class.getName()
+          + ")", 
+          errors.get(1).getMessage());
+      assertEquals(2, errors.size());
+    }
+  }
+

@@ -1,0 +1,21 @@
+  private void tExceptionsScoped(Injector injector) throws Exception {
+    RemoteProvider<String> remoteProvider = 
+        injector.getInstance(Key.get(remoteProviderOfString));
+
+    mockRemoteProvider.throwOnNextGet(new RemoteException("A"));
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertEquals("A", expected.getMessage());
+    }
+    
+    mockRemoteProvider.throwOnNextGet(new RemoteException("B"));
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertEquals("A", expected.getMessage());
+    }
+  }
+

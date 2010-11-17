@@ -1,0 +1,25 @@
+  public void testProviderMethodWithSubclassOfExceptionIsOk() throws Exception {
+    providesInjector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        install(ThrowingProviderBinder.forModule(this));
+      }
+      
+      @SuppressWarnings("unused")
+      @CheckedProvides(RemoteProvider.class)
+      String foo() throws AccessException {
+        throw new AccessException("boo!");
+      }
+    });
+    
+    RemoteProvider<String> remoteProvider = 
+      providesInjector.getInstance(Key.get(remoteProviderOfString));
+
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertTrue(expected instanceof AccessException);
+      assertEquals("boo!", expected.getMessage());
+    }
+  }
+

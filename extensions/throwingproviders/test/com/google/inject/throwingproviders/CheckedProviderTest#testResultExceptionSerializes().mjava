@@ -1,0 +1,11 @@
+  public void testResultExceptionSerializes() throws Exception {
+    Result result = Result.forException(new Exception("boo"));
+    result = Asserts.reserialize(result);
+    try {
+      result.getOrThrow();
+      fail();
+    } catch(Exception ex) {
+      assertEquals("boo", ex.getMessage());
+    }
+  }
+

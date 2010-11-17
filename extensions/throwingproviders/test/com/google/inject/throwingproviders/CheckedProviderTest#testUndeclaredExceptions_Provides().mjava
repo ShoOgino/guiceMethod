@@ -1,0 +1,4 @@
+  public void testUndeclaredExceptions_Provides() throws Exception {
+    tUndeclaredExceptions(providesInjector);
+  }
+

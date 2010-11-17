@@ -1,0 +1,16 @@
+  public void testThrowingProviderSubclassing() throws Exception {
+    final SubMockRemoteProvider aProvider = new SubMockRemoteProvider();
+    aProvider.setNextToReturn("A");
+
+    bindInjector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, String.class)
+            .to(aProvider);
+      }
+    });
+
+    assertEquals("A",
+        bindInjector.getInstance(Key.get(remoteProviderOfString)).get());
+  }
+

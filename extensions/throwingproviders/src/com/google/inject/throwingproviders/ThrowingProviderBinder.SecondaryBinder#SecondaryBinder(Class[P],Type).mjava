@@ -2,11 +2,11 @@
       this.interfaceType = checkNotNull(interfaceType, "interfaceType");
       this.valueType = checkNotNull(valueType, "valueType");
       if(checkInterface()) {
-        this.exceptionType = getExceptionType(interfaceType);
+        this.exceptionTypes = getExceptionType(interfaceType);
         valid = true;
       } else {
         valid = false;
-        this.exceptionType = null;
+        this.exceptionTypes = ImmutableList.of();
       }
     }
 

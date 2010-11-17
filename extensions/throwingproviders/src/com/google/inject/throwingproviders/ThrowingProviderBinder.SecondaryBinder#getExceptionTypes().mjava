@@ -1,0 +1,4 @@
+    List<Class<? extends Throwable>> getExceptionTypes() {
+      return exceptionTypes;
+    }
+

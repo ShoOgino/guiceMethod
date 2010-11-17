@@ -4,14 +4,18 @@
         return false;
       }
       if(!checkArgument(interfaceType.getGenericInterfaces().length == 1,
-          "%s must extend ThrowingProvider (and only ThrowingProvider)",
+          "%s must extend CheckedProvider (and only CheckedProvider)",
           interfaceType)) {
         return false;
       }
-      if(!checkArgument(interfaceType.getInterfaces()[0] == ThrowingProvider.class,
-          "%s must extend ThrowingProvider (and only ThrowingProvider)",
-          interfaceType)) {
-        return false;
+      
+      boolean tpMode = interfaceType.getInterfaces()[0] == ThrowingProvider.class;      
+      if(!tpMode) {
+        if(!checkArgument(interfaceType.getInterfaces()[0] == CheckedProvider.class,
+            "%s must extend CheckedProvider (and only CheckedProvider)",
+            interfaceType)) {
+          return false;
+        }
       }
 
       // Ensure that T is parameterized and unconstrained.
@@ -21,12 +25,12 @@
         String returnTypeName = interfaceType.getTypeParameters()[0].getName();
         Type returnType = genericThrowingProvider.getActualTypeArguments()[0];
         if(!checkArgument(returnType instanceof TypeVariable,
-            "%s does not properly extend ThrowingProvider, the first type parameter of ThrowingProvider (%s) is not a generic type",
+            "%s does not properly extend CheckedProvider, the first type parameter of CheckedProvider (%s) is not a generic type",
             interfaceType, returnType)) {
           return false;
         }
         if(!checkArgument(returnTypeName.equals(((TypeVariable) returnType).getName()),
-            "The generic type (%s) of %s does not match the generic type of ThrowingProvider (%s)",
+            "The generic type (%s) of %s does not match the generic type of CheckedProvider (%s)",
             returnTypeName, interfaceType, ((TypeVariable)returnType).getName())) {
           return false;
         }
@@ -43,11 +47,13 @@
         }
       }
 
-      Type exceptionType = genericThrowingProvider.getActualTypeArguments()[1];
-      if(!checkArgument(exceptionType instanceof Class,
-          "%s has the wrong Exception generic type (%s) when extending ThrowingProvider",
-          interfaceType, exceptionType)) {
-        return false;
+      if(tpMode) { // only validate exception in ThrowingProvider mode.
+        Type exceptionType = genericThrowingProvider.getActualTypeArguments()[1];
+        if(!checkArgument(exceptionType instanceof Class,
+            "%s has the wrong Exception generic type (%s) when extending CheckedProvider",
+            interfaceType, exceptionType)) {
+          return false;
+        }
       }
       
       if (interfaceType.getDeclaredMethods().length == 1) {

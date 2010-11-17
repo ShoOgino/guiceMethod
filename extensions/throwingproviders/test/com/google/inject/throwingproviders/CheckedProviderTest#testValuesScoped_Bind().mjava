@@ -1,0 +1,4 @@
+  public void testValuesScoped_Bind() throws Exception  {
+    tValuesScoped(bindInjector);
+  }
+

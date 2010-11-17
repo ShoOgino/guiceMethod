@@ -1,0 +1,4 @@
+  public void testValuesScoped_Provides() throws Exception  {
+    tValuesScoped(providesInjector);
+  }
+
