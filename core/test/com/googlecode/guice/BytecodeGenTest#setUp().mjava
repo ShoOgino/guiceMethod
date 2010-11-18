@@ -2,7 +2,7 @@
   protected void setUp() throws Exception {
     super.setUp();
 
-    ClassLoader testClassLoader = new TestVisibilityClassLoader();
+    ClassLoader testClassLoader = new TestVisibilityClassLoader(true);
     proxyTestClass = (Class<ProxyTest>) testClassLoader.loadClass(ProxyTest.class.getName());
     realClass = (Class<ProxyTestImpl>) testClassLoader.loadClass(ProxyTestImpl.class.getName());
 

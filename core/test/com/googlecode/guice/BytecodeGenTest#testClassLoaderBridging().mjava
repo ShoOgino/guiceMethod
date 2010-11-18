@@ -1,0 +1,22 @@
+  public void testClassLoaderBridging() throws Exception {
+    ClassLoader testClassLoader = new TestVisibilityClassLoader(false);
+
+    Class hiddenMethodReturnClass = testClassLoader.loadClass(HiddenMethodReturn.class.getName());
+    Class hiddenMethodParameterClass = testClassLoader.loadClass(HiddenMethodParameter.class.getName());
+
+    Injector injector = Guice.createInjector(noopInterceptorModule);
+
+    Class hiddenClass = testClassLoader.loadClass(Hidden.class.getName());
+    Constructor ctor = hiddenClass.getDeclaredConstructor();
+
+    ctor.setAccessible(true);
+
+    // don't use bridging for proxies with private parameters
+    Object o1 = injector.getInstance(hiddenMethodParameterClass);
+    o1.getClass().getDeclaredMethod("method", hiddenClass).invoke(o1, ctor.newInstance());
+
+    // don't use bridging for proxies with private return types
+    Object o2 = injector.getInstance(hiddenMethodReturnClass);
+    o2.getClass().getDeclaredMethod("method").invoke(o2);
+  }
+

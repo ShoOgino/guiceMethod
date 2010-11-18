@@ -36,6 +36,9 @@
       }
 
       // hide internal non-test classes
-      throw new ClassNotFoundException();
+      if (hideInternals) {
+        throw new ClassNotFoundException();
+      }
+      return super.loadClass(name, resolve);
     }
 

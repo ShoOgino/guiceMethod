@@ -1,0 +1,4 @@
+    public Hidden method() {
+      return new Hidden();
+    }
+

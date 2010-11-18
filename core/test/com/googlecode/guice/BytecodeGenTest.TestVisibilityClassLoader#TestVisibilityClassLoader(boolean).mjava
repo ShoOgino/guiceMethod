@@ -1,5 +1,7 @@
-    public TestVisibilityClassLoader() {
+    public TestVisibilityClassLoader(boolean hideInternals) {
       super(new URL[0]);
+
+      this.hideInternals = hideInternals;
 
       final String[] classpath = System.getProperty("java.class.path").split(File.pathSeparator);
       for (final String element : classpath) {
