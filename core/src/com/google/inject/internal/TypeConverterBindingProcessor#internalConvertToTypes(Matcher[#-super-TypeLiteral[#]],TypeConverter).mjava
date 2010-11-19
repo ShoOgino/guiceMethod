@@ -1,6 +1,6 @@
   private void internalConvertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter) {
     injector.state.addConverter(
-        new MatcherAndConverter(typeMatcher, converter, SourceProvider.UNKNOWN_SOURCE));
+        new TypeConverterBinding(SourceProvider.UNKNOWN_SOURCE, typeMatcher, converter));
   }
 

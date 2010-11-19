@@ -1,7 +1,0 @@
-  public MatcherAndConverter(Matcher<? super TypeLiteral<?>> typeMatcher,
-      TypeConverter typeConverter, Object source) {
-    this.typeMatcher = checkNotNull(typeMatcher, "type matcher");
-    this.typeConverter = checkNotNull(typeConverter, "converter");
-    this.source = source;
-  }
-

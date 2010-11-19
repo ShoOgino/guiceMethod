@@ -1,4 +1,4 @@
-  TypeConverterBinding(Object source, Matcher<? super TypeLiteral<?>> typeMatcher,
+  public TypeConverterBinding(Object source, Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter typeConverter) {
     this.source = checkNotNull(source, "source");
     this.typeMatcher = checkNotNull(typeMatcher, "typeMatcher");

@@ -1,4 +1,0 @@
-  public TypeConverter getTypeConverter() {
-    return typeConverter;
-  }
-

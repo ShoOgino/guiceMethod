@@ -1,4 +1,4 @@
   public Map<Class<? extends Annotation>, Scope> getScopeBindings() {
-    return state.getScopes();
+    return ImmutableMap.copyOf(state.getScopes());
   }
 

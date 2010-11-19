@@ -1,0 +1,4 @@
+    public Set<TypeConverterBinding> getTypeConverterBindings() {
+      return delegateInjector.getTypeConverterBindings();
+    }
+

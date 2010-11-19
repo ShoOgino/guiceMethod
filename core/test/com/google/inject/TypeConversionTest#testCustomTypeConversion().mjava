@@ -10,5 +10,13 @@
     });
 
     assertSame(result, injector.getInstance(DateHolder.class).date);
+
+    Binding<Date> binding = injector.getBinding(Key.get(Date.class, NumericValue.class));
+    assertTrue(binding instanceof ConvertedConstantBinding<?>);
+
+    TypeConverterBinding converterBinding = ((ConvertedConstantBinding<?>)binding).getTypeConverterBinding();
+    assertEquals("CustomConverter", converterBinding.getTypeConverter().toString());
+
+    assertTrue(injector.getTypeConverterBindings().contains(converterBinding));
   }
 

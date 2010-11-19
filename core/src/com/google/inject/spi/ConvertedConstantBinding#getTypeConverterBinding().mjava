@@ -1,0 +1,5 @@
+  /**
+   * Returns the type converter binding used to convert the constant.
+   */
+  TypeConverterBinding getTypeConverterBinding();
+

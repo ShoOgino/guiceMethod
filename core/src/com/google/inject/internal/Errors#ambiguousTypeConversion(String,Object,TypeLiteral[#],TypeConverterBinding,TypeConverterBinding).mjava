@@ -1,5 +1,5 @@
   public Errors ambiguousTypeConversion(String stringValue, Object source, TypeLiteral<?> type,
-      MatcherAndConverter a, MatcherAndConverter b) {
+      TypeConverterBinding a, TypeConverterBinding b) {
     return addMessage("Multiple converters can convert '%s' (bound at %s) to %s:%n"
         + " %s and%n"
         + " %s.%n"

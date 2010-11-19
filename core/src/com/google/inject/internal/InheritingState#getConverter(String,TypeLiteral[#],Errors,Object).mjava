@@ -1,8 +1,8 @@
-  public MatcherAndConverter getConverter(
+  public TypeConverterBinding getConverter(
       String stringValue, TypeLiteral<?> type, Errors errors, Object source) {
-    MatcherAndConverter matchingConverter = null;
+    TypeConverterBinding matchingConverter = null;
     for (State s = this; s != State.NONE; s = s.parent()) {
-      for (MatcherAndConverter converter : s.getConvertersThisLevel()) {
+      for (TypeConverterBinding converter : s.getConvertersThisLevel()) {
         if (converter.getTypeMatcher().matches(type)) {
           if (matchingConverter != null) {
             errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);
