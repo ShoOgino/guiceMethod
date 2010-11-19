@@ -1,4 +1,4 @@
-  public List<TypeConverterBinding> getConvertersThisLevel() {
+  public Iterable<TypeConverterBinding> getConvertersThisLevel() {
     return converters;
   }
 
