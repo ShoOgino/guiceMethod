@@ -1,5 +1,0 @@
-  @Inject(value = "struts.devMode", required = false)
-  void setDevelopmentMode(String developmentMode) {
-    this.developmentMode = developmentMode.trim().equals("true");
-  }
-

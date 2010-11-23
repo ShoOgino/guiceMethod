@@ -1,5 +1,0 @@
-  @Override
-  public boolean isNoArgConstructorRequired() {
-    return false;
-  }
-

@@ -1,4 +1,0 @@
-    public String intercept(ActionInvocation invocation) throws Exception {
-      return delegate.intercept(invocation);
-    }
-

@@ -1,4 +1,0 @@
-    void inject() {
-      delegate = superBuildInterceptor(config, params);
-    }
-
