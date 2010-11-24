@@ -17,6 +17,9 @@
    *
    * @param callable code to be executed in another thread, which depends on
    *     the request scope.
+   * @param seedMap the initial set of scoped instances for Guice to seed the
+   *     request scope with.  To seed with null, use either a null
+   *     value or a value of {@link #nullObject()}.
    * @return a callable that will invoke the given callable, making the request
    *     context available to it.
    * @throws OutOfScopeException if this method is called from a non-request
@@ -33,7 +36,8 @@
     final ContinuingHttpServletRequest continuingRequest =
         new ContinuingHttpServletRequest(GuiceFilter.getRequest());
     for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
-      continuingRequest.setAttribute(entry.getKey().toString(), entry.getValue());
+      Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
+      continuingRequest.setAttribute(entry.getKey().toString(), value);
     }
 
     return new Callable<T>() {
