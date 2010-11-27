@@ -1,4 +1,4 @@
-  public void configure(Binder binder) {
+  void configure(Binder binder) {
     binder = binder.withSource(method);
 
     SecondaryBinder<?> sbinder = 
@@ -17,7 +17,7 @@
     if (exposed) {
       // the cast is safe 'cause the only binder we have implements PrivateBinder. If there's a
       // misplaced @Exposed, calling this will add an error to the binder's error queue
-      ((PrivateBinder) binder).expose(key);
+      ((PrivateBinder) binder).expose(sbinder.getKey());
     }
 
     // Validate the exceptions in the method match the exceptions

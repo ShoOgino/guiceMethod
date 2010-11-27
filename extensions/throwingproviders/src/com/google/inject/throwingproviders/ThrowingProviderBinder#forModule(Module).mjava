@@ -4,6 +4,6 @@
    * @since 3.0
    */
   public static Module forModule(Module module) {
-    return ThrowingProviderMethodsModule.forModule(module);
+    return CheckedProviderMethodsModule.forModule(module);
   }
 

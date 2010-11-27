@@ -1,0 +1,15 @@
+  public void testWithThrownException() {
+    TestModule testModule = new TestModule();
+    Injector injector = Guice.createInjector(testModule);
+    RpcProvider<Float> provider = injector
+        .getInstance(Key.get(rpcProviderOfFloat));
+    try {
+      provider.get();
+      fail();
+    } catch (RemoteException e) {
+      fail();
+    } catch (BindException e) {
+      // good
+    }
+  }
+

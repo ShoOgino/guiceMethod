@@ -1,0 +1,13 @@
+  public void testWithScope() throws BindException, RemoteException {
+    TestModule testModule = new TestModule();
+    Injector injector = Guice.createInjector(testModule);
+    RpcProvider<Integer> provider = injector
+        .getInstance(Key.get(rpcProviderOfInteger));
+
+    assertEquals((Integer)100, provider.get());
+    testModule.setNextIntToReturn(120);
+    assertEquals((Integer)100, provider.get());
+    testScope.beginNewScope();
+    assertEquals((Integer)120, provider.get());
+  }
+

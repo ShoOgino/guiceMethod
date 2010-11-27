@@ -1,0 +1,5 @@
+    @CheckedProvides(RpcProvider.class)
+    Pair<Double, String> getSomePair(Double input) {
+      return new Pair<Double, String>(input * 2, "foo");
+    }
+

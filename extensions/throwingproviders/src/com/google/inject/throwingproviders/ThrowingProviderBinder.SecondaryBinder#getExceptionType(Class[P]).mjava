@@ -2,7 +2,6 @@
      * Returns the exception type declared to be thrown by the get method of
      * {@code interfaceType}.
      */
-    @SuppressWarnings({"unchecked"})
     private List<Class<? extends Throwable>> getExceptionType(Class<P> interfaceType) {
       try {
         Method getMethod = interfaceType.getMethod("get");

@@ -1,0 +1,7 @@
+  public void testNoAnnotationNoScope() throws BindException, RemoteException {
+    Injector injector = Guice.createInjector(new TestModule());
+    RpcProvider<String> provider = injector
+        .getInstance(Key.get(rpcProviderOfString));
+    assertEquals("Works", provider.get());
+  }
+

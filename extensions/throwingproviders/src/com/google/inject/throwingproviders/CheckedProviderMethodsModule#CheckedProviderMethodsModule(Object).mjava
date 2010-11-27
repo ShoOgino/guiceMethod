@@ -1,4 +1,4 @@
-  private ThrowingProviderMethodsModule(Object delegate) {
+  private CheckedProviderMethodsModule(Object delegate) {
     this.delegate = checkNotNull(delegate, "delegate");
     this.typeLiteral = TypeLiteral.get(this.delegate.getClass());
   }

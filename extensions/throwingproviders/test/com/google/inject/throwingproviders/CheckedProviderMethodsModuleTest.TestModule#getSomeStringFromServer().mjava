@@ -1,0 +1,5 @@
+    @CheckedProvides(RpcProvider.class)
+    String getSomeStringFromServer() {
+      return "Works";
+    }
+

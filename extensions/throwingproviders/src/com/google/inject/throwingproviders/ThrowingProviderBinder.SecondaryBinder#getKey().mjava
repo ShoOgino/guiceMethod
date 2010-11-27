@@ -1,0 +1,4 @@
+    Key<P> getKey() {
+    	return interfaceKey;
+    }
+

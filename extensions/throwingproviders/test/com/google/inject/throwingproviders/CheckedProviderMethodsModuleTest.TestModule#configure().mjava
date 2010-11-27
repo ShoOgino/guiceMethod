@@ -1,0 +1,7 @@
+    @Override
+    protected void configure() {
+      bindScope(TestScope.Scoped.class, testScope);
+      install(ThrowingProviderBinder.forModule(this));
+      install(new TestPrivateModule());
+    }
+

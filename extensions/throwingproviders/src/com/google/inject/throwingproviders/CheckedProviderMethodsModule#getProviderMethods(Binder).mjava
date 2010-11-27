@@ -1,5 +1,5 @@
-  List<ThrowingProviderMethod<?>> getProviderMethods(Binder binder) {
-    List<ThrowingProviderMethod<?>> result = Lists.newArrayList();
+  List<CheckedProviderMethod<?>> getProviderMethods(Binder binder) {
+    List<CheckedProviderMethod<?>> result = Lists.newArrayList();
     for (Class<?> c = delegate.getClass(); c != Object.class; c = c.getSuperclass()) {
       for (Method method : c.getDeclaredMethods()) {
         CheckedProvides checkedProvides =

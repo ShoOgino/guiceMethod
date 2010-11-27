@@ -1,0 +1,9 @@
+  public void testExposedMethod() throws BindException, RemoteException {
+    TestModule testModule = new TestModule();
+    Injector injector = Guice.createInjector(testModule);
+    RpcProvider<String> provider = injector
+        .getInstance(Key.get(rpcProviderOfString, Names.named("fruit")));
+    assertEquals("apple", provider.get());
+
+  }
+

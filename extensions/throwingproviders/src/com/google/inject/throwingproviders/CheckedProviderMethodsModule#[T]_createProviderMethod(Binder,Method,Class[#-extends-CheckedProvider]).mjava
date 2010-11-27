@@ -1,4 +1,4 @@
-  <T> ThrowingProviderMethod<T> createProviderMethod(Binder binder, final Method method,
+  <T> CheckedProviderMethod<T> createProviderMethod(Binder binder, final Method method,
       Class<? extends CheckedProvider> throwingProvider) {
     binder = binder.withSource(method);
     Errors errors = new Errors(method);
@@ -34,7 +34,7 @@
       binder.addError(message);
     }
 
-    return new ThrowingProviderMethod<T>(key, method, delegate, ImmutableSet.copyOf(dependencies),
+    return new CheckedProviderMethod<T>(key, method, delegate, ImmutableSet.copyOf(dependencies),
         parameterProviders, scopeAnnotation, throwingProvider, exceptionTypes);
   }
 

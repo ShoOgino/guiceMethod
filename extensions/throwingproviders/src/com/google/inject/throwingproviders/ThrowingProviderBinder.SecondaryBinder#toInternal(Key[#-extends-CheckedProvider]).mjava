@@ -1,12 +1,12 @@
     private ScopedBindingBuilder toInternal(final Key<? extends CheckedProvider> targetKey) {
       final Key<Result> resultKey = Key.get(Result.class, UniqueAnnotations.create());
-      final Key<P> key = createKey();      
       final Provider<Result> resultProvider = binder.getProvider(resultKey);
       final Provider<? extends CheckedProvider> targetProvider = binder.getProvider(targetKey);
+      interfaceKey = createKey();
 
       // don't bother binding the proxy type if this is in an invalid state.
       if(valid) {
-        binder.bind(key).toProvider(new ProviderWithDependencies<P>() {
+        binder.bind(interfaceKey).toProvider(new ProviderWithDependencies<P>() {
           private final P instance = interfaceType.cast(Proxy.newProxyInstance(
               interfaceType.getClassLoader(), new Class<?>[] { interfaceType },
               new InvocationHandler() {

@@ -1,4 +1,4 @@
-  ThrowingProviderMethod(
+  CheckedProviderMethod(
       Key<T> key,
       Method method,
       Object instance,

@@ -1,5 +1,5 @@
   public synchronized void configure(Binder binder) {
-    for (ThrowingProviderMethod<?> throwingProviderMethod : getProviderMethods(binder)) {
+    for (CheckedProviderMethod<?> throwingProviderMethod : getProviderMethods(binder)) {
       throwingProviderMethod.configure(binder);
     }
   }

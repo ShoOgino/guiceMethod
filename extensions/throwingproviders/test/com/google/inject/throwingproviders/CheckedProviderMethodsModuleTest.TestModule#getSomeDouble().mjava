@@ -1,0 +1,5 @@
+    @Provides
+    double getSomeDouble() {
+      return 2.0d;
+    }
+

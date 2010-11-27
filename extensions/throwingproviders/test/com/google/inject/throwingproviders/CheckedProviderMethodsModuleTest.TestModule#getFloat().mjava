@@ -1,0 +1,5 @@
+    @CheckedProvides(RpcProvider.class)
+    float getFloat() throws BindException {
+      throw new BindException("foo");
+    }
+
