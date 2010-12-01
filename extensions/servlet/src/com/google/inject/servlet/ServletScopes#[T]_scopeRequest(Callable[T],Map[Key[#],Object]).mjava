@@ -8,8 +8,8 @@
    * @param callable code to be executed which depends on the request scope.
    *     Typically in another thread, but not necessarily so.
    * @param seedMap the initial set of scoped instances for Guice to seed the
-   *     request scope with.  To seed with null, use either a null
-   *     value or a value of {@link #nullObject()}.
+   *     request scope with.  To seed a key with null, use {@code null} as
+   *     the value.
    * @return a callable that when called will run inside the a request scope
    *     that exposes the instances in the {@code seedMap} as scoped keys.
    * @since 3.0
