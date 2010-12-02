@@ -1,0 +1,17 @@
+  @SuppressWarnings("unchecked")
+  public Interceptor buildInterceptor(InterceptorConfig interceptorConfig,
+      Map interceptorRefParams) throws ConfigurationException {
+    // Ensure the interceptor class is present.
+    Class<? extends Interceptor> interceptorClass;
+    try {
+      interceptorClass = getClassInstance(interceptorConfig.getClassName());
+    } catch (ClassNotFoundException e) {
+      throw new RuntimeException(e);
+    }
+
+    ProvidedInterceptor providedInterceptor = new ProvidedInterceptor(
+        interceptorConfig, interceptorRefParams, interceptorClass);
+    interceptors.add(providedInterceptor);
+    return providedInterceptor;
+  }
+

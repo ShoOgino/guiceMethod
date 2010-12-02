@@ -1,0 +1,13 @@
+  @SuppressWarnings("unchecked")
+  public Object buildBean(Class clazz, Map extraContext) {
+    if (strutsInjector == null) {
+      synchronized (this) {
+        if (strutsInjector == null) {
+          createInjector();
+        }
+      }
+    }
+
+    return strutsInjector.getInstance(clazz);
+  }
+

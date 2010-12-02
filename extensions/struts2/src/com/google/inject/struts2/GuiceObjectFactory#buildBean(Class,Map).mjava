@@ -1,0 +1,13 @@
+  @SuppressWarnings("unchecked")
+  public Object buildBean(Class clazz, Map extraContext) {
+    if (injector == null) {
+      synchronized (this) {
+        if (injector == null) {
+          createInjector();
+        }
+      }
+    }
+
+    return injector.getInstance(clazz);
+  }
+

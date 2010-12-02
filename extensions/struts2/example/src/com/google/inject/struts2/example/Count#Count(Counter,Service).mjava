@@ -1,0 +1,6 @@
+  @Inject
+  public Count(Counter counter, Service service) {
+    this.counter = counter;
+    this.service = service;
+  }
+
