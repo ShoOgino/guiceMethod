@@ -1,4 +1,4 @@
-    ProvidedInterceptor(InterceptorConfig config, Map params,
+    ProvidedInterceptor(InterceptorConfig config, Map<String, String> params,
         Class<? extends Interceptor> interceptorClass) {
       this.config = config;
       this.params = params;

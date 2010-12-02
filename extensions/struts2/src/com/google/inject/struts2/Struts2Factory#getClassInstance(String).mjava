@@ -1,4 +1,4 @@
-  public Class getClassInstance(String name) throws ClassNotFoundException {
+  public Class<?> getClassInstance(String name) throws ClassNotFoundException {
     Class<?> clazz = super.getClassInstance(name);
 
     synchronized (this) {

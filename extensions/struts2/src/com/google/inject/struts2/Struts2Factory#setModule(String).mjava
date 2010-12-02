@@ -1,0 +1,7 @@
+  @Inject(value = "guice.module", required = false)
+  void setModule(String moduleClassName) {
+    throw new RuntimeException("The struts2 plugin no longer supports"
+        + " specifying a module via the 'guice.module' property in XML."
+        + " Please install your module via a GuiceServletContextListener instead.");
+  }
+

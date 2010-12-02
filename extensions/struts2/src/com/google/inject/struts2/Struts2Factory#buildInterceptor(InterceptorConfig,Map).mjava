@@ -4,7 +4,8 @@
     // Ensure the interceptor class is present.
     Class<? extends Interceptor> interceptorClass;
     try {
-      interceptorClass = getClassInstance(interceptorConfig.getClassName());
+      interceptorClass = (Class<? extends Interceptor>)
+          getClassInstance(interceptorConfig.getClassName());
     } catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
