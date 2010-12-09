@@ -3,17 +3,17 @@
    * JSR-330 {@code javax.inject.Provider}. The converse method is unnecessary,
    * since Guice providers directly implement the JSR-330 interface.
    */
-  public static <T> com.google.inject.Provider<T> guicify(Provider<T> provider) {
-    if (provider instanceof com.google.inject.Provider) {
-      return (com.google.inject.Provider<T>) provider;
+  public static <T> Provider<T> guicify(javax.inject.Provider<T> provider) {
+    if (provider instanceof Provider) {
+      return (Provider<T>) provider;
     }
-
-    final Provider<T> delegate = checkNotNull(provider, "provider");
-    return new com.google.inject.Provider<T>() {
+  
+    final javax.inject.Provider<T> delegate = checkNotNull(provider, "provider");
+    return new Provider<T>() {
       public T get() {
         return delegate.get();
       }
-
+  
       @Override public String toString() {
         return "guicified(" + delegate + ")";
       }
