@@ -1,0 +1,4 @@
+  PrivateElementProcessor(Errors errors) {
+    super(errors);
+  }
+

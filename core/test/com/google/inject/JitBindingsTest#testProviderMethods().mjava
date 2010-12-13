@@ -1,8 +1,10 @@
   public void testProviderMethods() {
-    Injector injector = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
-      @Override protected void configure() {}
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        binder().requireExplicitBindings();
+      }
       @SuppressWarnings("unused") @Provides Foo foo() { return new FooImpl(); }
-    }).build();
+    });
     ensureWorks(injector, Foo.class);
   }
 

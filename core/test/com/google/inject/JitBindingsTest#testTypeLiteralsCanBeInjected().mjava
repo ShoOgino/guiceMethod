@@ -1,13 +1,11 @@
   public void testTypeLiteralsCanBeInjected() {
-    Injector injector = new InjectorBuilder()
-      .requireExplicitBindings()
-      .addModules(new AbstractModule() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
         @Override protected void configure() {
+          binder().requireExplicitBindings();
           bind(new TypeLiteral<WantsTypeLiterals<String>>() {});
           bind(new TypeLiteral<Set<String>>() {}).toInstance(of("bar"));
         }
-      })
-      .build();
+      });
 
     WantsTypeLiterals<String> foo = injector.getInstance(new Key<WantsTypeLiterals<String>>() {});
     assertEquals(foo.literal.getRawType(), String.class);

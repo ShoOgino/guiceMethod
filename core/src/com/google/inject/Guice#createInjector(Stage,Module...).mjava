@@ -1,6 +1,6 @@
   /**
    * Creates an injector for the given set of modules, in a given development
-   * stage. Use {@link InjectorBuilder} for advanced injector creation.
+   * stage.
    *
    * @throws CreationException if one or more errors occur during injector
    *     creation.

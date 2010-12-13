@@ -1,4 +1,0 @@
-    InjectorOptions getInjectorOptions() {
-      return options;
-    }
-

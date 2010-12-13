@@ -1,0 +1,4 @@
+  public V visit(DisableCircularProxiesOption option) {
+    return visitOther(option);
+  }
+

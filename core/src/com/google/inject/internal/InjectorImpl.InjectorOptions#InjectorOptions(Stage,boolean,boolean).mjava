@@ -1,0 +1,6 @@
+    InjectorOptions(Stage stage, boolean jitDisabled, boolean disableCircularProxies) {
+      this.stage = stage;
+      this.jitDisabled = jitDisabled;
+      this.disableCircularProxies = disableCircularProxies;
+    }
+

@@ -1,0 +1,24 @@
+  public void testPrivateModuleSiblingsDontShareOption() {
+    Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(Foo.class).to(FooImpl.class);
+
+        install(new PrivateModule() {
+          public void configure() {
+            binder().requireExplicitBindings();
+          }
+        });
+
+        // This works, even though Bar is JIT,
+        // because the requireExplicitBindings isn't shared
+        // between sibling private modules.
+        install(new PrivateModule() {
+          public void configure() {
+            bind(FooBar.class);
+            expose(FooBar.class);
+          }
+        });
+      }
+    });
+  }  
+

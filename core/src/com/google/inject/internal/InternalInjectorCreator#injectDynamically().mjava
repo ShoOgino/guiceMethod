@@ -11,9 +11,9 @@
     stopwatch.resetAndLog("Instance injection");
     errors.throwCreationExceptionIfErrorsExist();
 
-    if(shellBuilder.getInjectorOptions().stage != Stage.TOOL) {
+    if(shellBuilder.getStage() != Stage.TOOL) {
       for (InjectorShell shell : shells) {
-        loadEagerSingletons(shell.getInjector(), shellBuilder.getInjectorOptions().stage, errors);
+        loadEagerSingletons(shell.getInjector(), shellBuilder.getStage(), errors);
       }
       stopwatch.resetAndLog("Preloading singletons");
     }

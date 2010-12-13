@@ -1,7 +1,6 @@
   @Override public Boolean visit(PrivateElements privateElements) {
     InjectorShell.Builder builder = new InjectorShell.Builder()
         .parent(injector)
-        .setInjectorOptions(options)
         .privateElements(privateElements);
     injectorShellBuilders.add(builder);
     return true;

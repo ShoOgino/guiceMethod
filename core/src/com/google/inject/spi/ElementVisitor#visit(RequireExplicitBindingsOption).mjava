@@ -1,0 +1,7 @@
+  /**
+   * Visit a require explicit bindings command.
+   * 
+   * @since 3.0
+   */
+  V visit(RequireExplicitBindingsOption option);
+

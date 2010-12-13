@@ -1,6 +1,0 @@
-  /** Adds more modules that will be used when the Injector is created. */
-  public InjectorBuilder addModules(Iterable<? extends Module> modules) {
-    creator.addModules(modules);
-    return this;
-  }
-

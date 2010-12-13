@@ -1,0 +1,16 @@
+  InjectorOptions getOptions(Stage stage, InjectorOptions parentOptions) {
+    checkNotNull(stage, "stage must be set");
+    if(parentOptions == null) {
+      return new InjectorOptions(
+          stage,
+          jitDisabled,
+          disableCircularProxies);
+    } else {
+      checkState(stage == parentOptions.stage, "child & parent stage don't match");
+      return new InjectorOptions(
+          stage,
+          jitDisabled || parentOptions.jitDisabled,
+          disableCircularProxies || parentOptions.disableCircularProxies); 
+    }
+  }
+

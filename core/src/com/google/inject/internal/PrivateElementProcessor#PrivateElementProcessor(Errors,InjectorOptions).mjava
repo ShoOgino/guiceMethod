@@ -1,5 +1,0 @@
-  PrivateElementProcessor(Errors errors, InjectorOptions options) {
-    super(errors);
-    this.options = options;
-  }
-

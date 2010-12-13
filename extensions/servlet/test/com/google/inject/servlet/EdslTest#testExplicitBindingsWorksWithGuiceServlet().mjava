@@ -1,11 +1,16 @@
   public final void testExplicitBindingsWorksWithGuiceServlet() {
-    Injector injector = new InjectorBuilder().requireExplicitBindings()
-        .addModules(new ServletModule() {
+    Injector injector = Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            binder().requireExplicitBindings();
+          }
+        }, new ServletModule() {
           @Override protected void configureServlets() {
             bind(DummyServlet.class).in(Singleton.class);
             serve("/*").with(DummyServlet.class);
           }
-        }).build();
+        });
 
     assertNotNull(injector.getInstance(DummyServlet.class));
   }

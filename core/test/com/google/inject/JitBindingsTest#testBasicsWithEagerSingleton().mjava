@@ -1,17 +1,18 @@
   public void testBasicsWithEagerSingleton() {
-    Injector injector = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
       @Override
       protected void configure() {
+        binder().requireExplicitBindings();
         bind(Foo.class).to(FooImpl.class).asEagerSingleton();
         bind(Bar.class);
         bind(FooBar.class);
       }
-    }).build();
+    });
     // Foo, Bar & FooBar was explicitly bound    
     ensureWorks(injector, FooBar.class, Bar.class, Foo.class);
     // FooImpl was implicitly bound, it is an error to call getInstance or getProvider,
     // It is OK to call getBinding for introspection, but an error to get the provider
     // of the binding    
-    ensureFails(injector, true,  FooImpl.class);    
+    ensureFails(injector, ALLOW_BINDING,  FooImpl.class);    
   }  
 

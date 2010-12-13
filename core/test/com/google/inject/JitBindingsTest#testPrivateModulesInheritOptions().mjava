@@ -1,7 +1,8 @@
-  public void testPrivateModules() {
+  public void testPrivateModulesInheritOptions() {
     try {
-      new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+      Guice.createInjector(new AbstractModule() {
         protected void configure() {
+          binder().requireExplicitBindings();
           bind(Foo.class).to(FooImpl.class);
   
           install(new PrivateModule() {
@@ -11,7 +12,7 @@
             }
           });
         }
-      }).build();
+      });
       fail("should have failed");
     } catch(CreationException expected) {
       assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));

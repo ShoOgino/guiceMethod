@@ -1,8 +1,8 @@
-  private void ensureFails(Injector injector, boolean allowGetBinding, Class<?>... classes) {
+  private void ensureFails(Injector injector, GetBindingCheck getBinding, Class<?>... classes) {
     for(int i = 0; i < classes.length; i++) {      
       try { 
         injector.getInstance(classes[i]);
-        fail("should have failed");
+        fail("should have failed tring to retrieve class: " + classes[i]);
       } catch(ConfigurationException expected) {
         assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
         assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
@@ -10,25 +10,31 @@
       
       try { 
         injector.getProvider(classes[i]);
-        fail("should have failed");
+        fail("should have failed tring to retrieve class: " + classes[i]);
       } catch(ConfigurationException expected) {
         assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
         assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
       }
       
-      if(allowGetBinding) {
+      if (getBinding == GetBindingCheck.ALLOW_BINDING
+          || getBinding == GetBindingCheck.ALLOW_BINDING_PROVIDER) {
         Binding<?> binding = injector.getBinding(classes[i]);
         try {
           binding.getProvider();
-          fail("should have failed");
+          if (getBinding != GetBindingCheck.ALLOW_BINDING_PROVIDER) {
+            fail("should have failed trying to retrieve class: " + classes[i]);
+          }
         } catch(ConfigurationException expected) {
+          if (getBinding == GetBindingCheck.ALLOW_BINDING_PROVIDER) {
+            throw expected;
+          }
           assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
           assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
         }
       } else {
         try {
           injector.getBinding(classes[i]);
-          fail("should have failed");          
+          fail("should have failed tring to retrieve class: " + classes[i]);          
         } catch(ConfigurationException expected) {
           assertContains(expected.getMessage(), "1) " + jitFailed(classes[i]));
           assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));

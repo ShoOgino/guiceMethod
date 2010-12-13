@@ -1,0 +1,4 @@
+    public void disableCircularProxies() {
+      elements.add(new DisableCircularProxiesOption(getSource()));
+    }
+

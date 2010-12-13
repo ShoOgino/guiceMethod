@@ -1,4 +1,0 @@
-  public <T> Boolean visit(Binding<T> binding) {
-    return false;
-  }
-

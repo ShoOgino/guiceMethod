@@ -2,6 +2,7 @@
       this.parent = parent;
       this.state = new InheritingState(parent.state);
       this.options = parent.options;
+      this.stage = options.stage;
       return this;
     }
 

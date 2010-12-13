@@ -1,0 +1,4 @@
+    Stage getStage() {
+      return options.stage;
+    }
+

@@ -1,0 +1,67 @@
+  public void testChildInjectorAddsOption() {
+    Injector parent = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Bar.class);
+      }
+    });
+    int totalParentBindings = parent.getAllBindings().size();
+    
+    try {
+      parent.createChildInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          binder().requireExplicitBindings();
+          bind(FooBar.class);
+        }
+      });
+      fail("should have failed");
+    } catch(CreationException expected) {
+      assertContains(expected.getMessage(), "1) " + jitFailed(Foo.class));
+      assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+    }
+    assertEquals(totalParentBindings, parent.getAllBindings().size());
+    
+    Injector child = parent.createChildInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        binder().requireExplicitBindings();
+        bind(Foo.class).to(FooImpl.class);
+      }
+    });
+    totalParentBindings++; // creating this child added FooImpl to the parent.
+    assertEquals(totalParentBindings, parent.getAllBindings().size());
+    ensureWorks(child, Foo.class, Bar.class);
+    ensureFails(child, ALLOW_BINDING_PROVIDER, FooImpl.class);
+    // Make extra certain that if something tries to inject a FooImpl from child
+    // that it fails, even if calling getBinding().getProvider works.. because
+    // the binding is built with the parent injector.
+    try {
+      child.injectMembers(new Object() {
+        @SuppressWarnings("unused")
+        @Inject
+        void inject(FooImpl fooImpl) {}
+      });
+      fail();
+    } catch(ConfigurationException expected) {
+      assertContains(expected.getMessage(), "1) " + jitFailed(FooImpl.class));
+      assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+    }
+    
+    Injector grandchild = child.createChildInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(FooBar.class);
+      }
+    });
+    assertEquals(totalParentBindings, parent.getAllBindings().size());    
+    ensureWorks(grandchild, FooBar.class, Foo.class, Bar.class);
+    ensureFails(grandchild, ALLOW_BINDING_PROVIDER, FooImpl.class);
+    ensureFails(child, ALLOW_BINDING_PROVIDER, FooImpl.class);
+    
+    // Make sure siblings of children don't inherit each others settings...
+    // a new child should be able to get FooImpl.
+    child = parent.createChildInjector();
+    ensureWorks(child, FooImpl.class);
+  }
+

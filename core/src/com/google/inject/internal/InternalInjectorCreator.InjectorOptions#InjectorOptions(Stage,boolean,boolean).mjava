@@ -1,6 +1,0 @@
-    public InjectorOptions(Stage stage, boolean jitDisabled, boolean allowCircularProxy) {
-      this.stage = stage;
-      this.jitDisabled = jitDisabled;
-      this.allowCircularProxy = allowCircularProxy;
-    }
-

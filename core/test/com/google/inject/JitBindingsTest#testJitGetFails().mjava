@@ -1,6 +1,11 @@
   public void testJitGetFails() {
     try {
-      new InjectorBuilder().requireExplicitBindings().build().getInstance(Bar.class);
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+         binder().requireExplicitBindings(); 
+        }
+      }).getInstance(Bar.class);
       fail("should have failed");
     } catch(ConfigurationException expected) {
       assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));

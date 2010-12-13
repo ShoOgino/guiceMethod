@@ -1,12 +1,13 @@
-  public void testChildInjectors() {
-    Injector parent = new InjectorBuilder().requireExplicitBindings().addModules(new AbstractModule() {
+  public void testChildInjectorInheritsOption() {
+    Injector parent = Guice.createInjector(new AbstractModule() {
       @Override
       protected void configure() {
+        binder().requireExplicitBindings();
         bind(Bar.class);
       }
-    }).build();
+    });
     ensureWorks(parent, Bar.class);
-    ensureFails(parent, false, FooImpl.class, FooBar.class, Foo.class);
+    ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class);
     
     try {
       parent.createChildInjector(new AbstractModule() {
@@ -28,8 +29,8 @@
       }
     });
     ensureWorks(child, Foo.class, Bar.class);
-    ensureFails(child, true, FooImpl.class);
-    ensureFails(parent, false, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these
+    ensureFails(child, ALLOW_BINDING, FooImpl.class);
+    ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these
     
     Injector grandchild = child.createChildInjector(new AbstractModule() {
       @Override
@@ -38,8 +39,8 @@
       }
     });
     ensureWorks(grandchild, FooBar.class, Foo.class, Bar.class);
-    ensureFails(grandchild, true, FooImpl.class);
-    ensureFails(child, true, FooImpl.class);
-    ensureFails(parent, false, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these    
+    ensureFails(grandchild, ALLOW_BINDING, FooImpl.class);
+    ensureFails(child, ALLOW_BINDING, FooImpl.class);
+    ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these    
   }
 

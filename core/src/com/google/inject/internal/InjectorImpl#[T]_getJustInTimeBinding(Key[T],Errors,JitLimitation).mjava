@@ -6,7 +6,6 @@
   private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors, JitLimitation jitType)
       throws ErrorsException {
 
-
     boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);
     if(options.jitDisabled && jitType == JitLimitation.NO_JIT && !jitOverride) {
       throw errors.jitDisabled(key).toException();

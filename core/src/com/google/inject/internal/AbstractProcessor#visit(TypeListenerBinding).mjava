@@ -1,4 +1,0 @@
-  public Boolean visit(TypeListenerBinding binding) {
-    return false;
-  }
-

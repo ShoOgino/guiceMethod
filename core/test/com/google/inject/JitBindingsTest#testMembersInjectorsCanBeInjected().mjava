@@ -1,8 +1,7 @@
   public void testMembersInjectorsCanBeInjected() {
-    Injector injector = new InjectorBuilder()
-    .requireExplicitBindings()
-    .addModules(new AbstractModule() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
       @Override protected void configure() {
+        binder().requireExplicitBindings();
       }
       
       @Provides String data(MembersInjector<String> mi) {
@@ -10,8 +9,7 @@
         mi.injectMembers(data);
         return data;
       }
-    })
-    .build();
+    });
 
     String data = injector.getInstance(String.class);
     assertEquals("foo", data);

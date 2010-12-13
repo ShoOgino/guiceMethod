@@ -1,0 +1,7 @@
+  /**
+   * Visit a disable circular proxies command.
+   * 
+   * @since 3.0
+   */
+  V visit(DisableCircularProxiesOption option);
+

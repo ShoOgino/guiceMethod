@@ -1,0 +1,9 @@
+    @Override
+    public String toString() {
+      return new ToStringBuilder(getClass())
+          .add("stage", stage)
+          .add("jitDisabled", jitDisabled)
+          .add("disableCircularProxies", disableCircularProxies)
+          .toString();
+    }
+

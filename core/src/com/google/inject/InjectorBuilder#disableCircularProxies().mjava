@@ -1,9 +1,0 @@
-  /**
-   * Prevents Guice from constructing a {@link Proxy} when a circular dependency
-   * is found.
-   */
-  public InjectorBuilder disableCircularProxies() {
-    this.allowCircularProxy = false;
-    return this;
-  }
-

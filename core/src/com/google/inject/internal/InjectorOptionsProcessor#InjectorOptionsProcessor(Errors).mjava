@@ -1,0 +1,4 @@
+  InjectorOptionsProcessor(Errors errors) {
+    super(errors);
+  }
+
