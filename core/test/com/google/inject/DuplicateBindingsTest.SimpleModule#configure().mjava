@@ -16,5 +16,10 @@
       
       // ConstructorBinding
       bind(Foo.class).annotatedWith(named("constructor")).toConstructor(cFoo);
+
+      // ProviderMethod
+      // (reconstructed from an Element to ensure it doesn't get filtered out
+      //  by deduplicating Modules)
+      install(Elements.getModule(Elements.getElements(new SimpleProviderModule())));
     }
 

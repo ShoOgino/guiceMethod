@@ -1,7 +1,9 @@
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof ProviderMethod) {
-      return method.equals(((ProviderMethod)obj).method);
+      ProviderMethod o = (ProviderMethod)obj;
+      return method.equals(o.method)
+         && instance.equals(o.instance);
     } else {
       return false;
     }
