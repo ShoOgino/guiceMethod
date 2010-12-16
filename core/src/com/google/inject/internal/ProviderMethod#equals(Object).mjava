@@ -1,0 +1,9 @@
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof ProviderMethod) {
+      return method.equals(((ProviderMethod)obj).method);
+    } else {
+      return false;
+    }
+  }
+

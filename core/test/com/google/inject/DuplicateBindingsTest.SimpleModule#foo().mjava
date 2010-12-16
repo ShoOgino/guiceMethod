@@ -1,0 +1,4 @@
+    @Provides @Named("providerMethod") Foo foo() {
+      return null;
+    }
+

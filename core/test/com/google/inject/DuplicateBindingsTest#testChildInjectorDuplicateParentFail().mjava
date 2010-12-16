@@ -17,7 +17,12 @@
           "A binding to " + Foo.class.getName() + " annotated with " + named("linkedKey") + " was already configured at " + SimpleModule.class.getName(),
           "at " + SimpleModule.class.getName(),
           "A binding to " + Foo.class.getName() + " annotated with " + named("constructor") + " was already configured at " + SimpleModule.class.getName(),
-          "at " + SimpleModule.class.getName());
+          "at " + SimpleModule.class.getName(),
+          "A binding to " + Foo.class.getName() + " annotated with " + named("providerMethod") + " was already configured at " + SimpleModule.class.getName(),
+          "at " + SimpleModule.class.getName()
+          );
     } 
+    
+    
   }
 

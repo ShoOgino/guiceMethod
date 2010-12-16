@@ -14,6 +14,7 @@
     assertTrue(bindings.remove(Key.get(FooImpl.class)));
     assertTrue(bindings.remove(Key.get(Foo.class, named("constructor"))));
     assertTrue(bindings.remove(Key.get(FooProvider.class))); // JIT binding
+    assertTrue(bindings.remove(Key.get(Foo.class, named("providerMethod"))));
     
     assertEquals(bindings.toString(), 0, bindings.size());
   }
