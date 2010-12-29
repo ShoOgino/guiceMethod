@@ -11,6 +11,9 @@
       } else if (annotation instanceof Named) {
         Named named = (Named) annotation;
         jpaQuery.setParameter(named.value(), argument);
+      } else if (annotation instanceof javax.inject.Named) {
+        javax.inject.Named named = (javax.inject.Named) annotation;
+        jpaQuery.setParameter(named.value(), argument);
       } else if (annotation instanceof FirstResult) {
         jpaQuery.setFirstResult((Integer) argument);
       } else if (annotation instanceof MaxResults) {

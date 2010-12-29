@@ -30,7 +30,7 @@
       for (Annotation annotation : annotations) {
         //discover the named, first or max annotations then break out
         Class<? extends Annotation> annotationType = annotation.annotationType();
-        if (Named.class.equals(annotationType)) {
+        if (Named.class.equals(annotationType) || javax.inject.Named.class.equals(annotationType)) {
           discoveredAnnotations[i] = annotation;
           finderDescriptor.isBindAsRawParameters = false;
           break;
@@ -50,7 +50,6 @@
     //discover the returned collection implementation if this finder returns a collection
     if (JpaFinderProxy.ReturnType.COLLECTION.equals(finderDescriptor.returnType)
         && finderDescriptor.returnClass != Collection.class) {
-      System.out.println("-----" + finderDescriptor.returnClass);
       finderDescriptor.returnCollectionType = finder.returnAs();
       try {
         finderDescriptor.returnCollectionTypeConstructor = finderDescriptor.returnCollectionType
