@@ -1,0 +1,21 @@
+  public void testInterceptedMethodThrows() throws Exception {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
+        bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
+      }
+    });
+
+    Interceptable interceptable = injector.getInstance(Interceptable.class);
+    try {
+      interceptable.explode();
+      fail();
+    } catch (Exception e) {
+      StackTraceElement[] stackTraceElement = e.getStackTrace();
+      assertEquals("explode", stackTraceElement[0].getMethodName());
+      assertEquals("invoke", stackTraceElement[1].getMethodName());
+      assertEquals("invoke", stackTraceElement[2].getMethodName());
+      assertEquals("testInterceptedMethodThrows", stackTraceElement[3].getMethodName());
+    }
+  }
+

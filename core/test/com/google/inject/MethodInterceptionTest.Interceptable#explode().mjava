@@ -1,0 +1,4 @@
+    public String explode() throws Exception {
+      throw new Exception("kaboom!");
+    }
+

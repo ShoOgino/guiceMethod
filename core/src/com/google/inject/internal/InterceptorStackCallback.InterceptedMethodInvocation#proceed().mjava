@@ -4,8 +4,10 @@
         return index == interceptors.length
             ? methodProxy.invokeSuper(proxy, arguments)
             : interceptors[index].invoke(this);
-      }
-      finally {
+      } catch (Throwable t) {
+        pruneStacktrace(t);
+        throw t;
+      } finally {
         index--;
       }
     }

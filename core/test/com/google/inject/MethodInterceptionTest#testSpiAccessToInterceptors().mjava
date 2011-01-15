@@ -1,7 +1,9 @@
   public void testSpiAccessToInterceptors() throws NoSuchMethodException {
+    final MethodInterceptor countingInterceptor = new CountingInterceptor();
+    final MethodInterceptor returnNullInterceptor = new ReturnNullInterceptor();
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class)),
+        bindInterceptor(Matchers.any(),Matchers.returns(only(Foo.class)),
             countingInterceptor);
         bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class).or(only(Bar.class))),
             returnNullInterceptor);

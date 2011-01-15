@@ -1,0 +1,16 @@
+  /**
+   * Removes stacktrace elements related to AOP internal mechanics from the
+   * throwable's stack trace.
+   */
+  private void pruneStacktrace(Throwable throwable) {
+    StackTraceElement[] stackTrace = throwable.getStackTrace();
+    List<StackTraceElement> pruned = Lists.newArrayList();
+    for (StackTraceElement element : stackTrace) {
+      String className = element.getClassName();
+      if (!AOP_INTERNAL_CLASSES.contains(className) && !className.contains("$EnhancerByGuice$")) {
+        pruned.add(element);
+      }
+    }
+    throwable.setStackTrace(pruned.toArray(new StackTraceElement[pruned.size()]));
+  }
+
