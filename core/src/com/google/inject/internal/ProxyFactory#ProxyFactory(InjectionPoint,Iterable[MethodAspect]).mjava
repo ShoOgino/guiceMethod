@@ -55,7 +55,7 @@
       MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
 
       if (!pair.hasInterceptors()) {
-        callbacks[i] = NO_OP_METHOD_INTERCEPTOR;
+        callbacks[i] = net.sf.cglib.proxy.NoOp.INSTANCE;
         continue;
       }
 

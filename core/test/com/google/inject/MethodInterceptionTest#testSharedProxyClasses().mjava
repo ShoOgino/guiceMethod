@@ -6,29 +6,26 @@
       }
     });
 
-    Injector nullFoosInjector = injector.createChildInjector(new AbstractModule() {
+    Injector childOne = injector.createChildInjector(new AbstractModule() {
       protected void configure() {
         bind(Interceptable.class);
       }
     });
 
-    Interceptable nullFoos = nullFoosInjector.getInstance(Interceptable.class);
-    assertNotNull(nullFoos.bar());
-    assertNull(nullFoos.foo());
+    Interceptable nullFoosOne = childOne.getInstance(Interceptable.class);
+    assertNotNull(nullFoosOne.bar());
+    assertNull(nullFoosOne.foo());
 
-    Injector nullFoosAndBarsInjector = injector.createChildInjector(new AbstractModule() {
+    Injector childTwo = injector.createChildInjector(new AbstractModule() {
       protected void configure() {
         bind(Interceptable.class);
-        bindInterceptor(Matchers.any(), Matchers.returns(only(Bar.class)),
-            new ReturnNullInterceptor());
       }
     });
 
-    Interceptable bothNull = nullFoosAndBarsInjector.getInstance(Interceptable.class);
-    assertNull(bothNull.bar());
-    assertNull(bothNull.foo());
+    Interceptable nullFoosTwo = childTwo.getInstance(Interceptable.class);
+    assertNull(nullFoosTwo.foo());
 
     assertSame("Child injectors should share proxy classes, otherwise memory leaks!",
-        nullFoos.getClass(), bothNull.getClass());
+        nullFoosOne.getClass(), nullFoosTwo.getClass());
   }
 

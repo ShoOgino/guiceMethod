@@ -1,4 +1,5 @@
     public String explode() throws Exception {
+      lastElements = Thread.currentThread().getStackTrace();
       throw new Exception("kaboom!");
     }
 

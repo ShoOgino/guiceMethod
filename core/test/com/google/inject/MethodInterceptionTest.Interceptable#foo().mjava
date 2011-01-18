@@ -1,4 +1,5 @@
     public Foo foo() {
+      lastElements = Thread.currentThread().getStackTrace();
       return new Foo() {};
     }
 
