@@ -1,0 +1,2 @@
+    AssistedSingleton create(String string);
+

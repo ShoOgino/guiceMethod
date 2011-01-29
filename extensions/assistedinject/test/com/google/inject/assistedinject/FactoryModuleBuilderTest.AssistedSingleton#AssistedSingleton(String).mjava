@@ -1,0 +1,4 @@
+    @Inject
+    public AssistedSingleton(@Assisted String string) {      
+    }
+
