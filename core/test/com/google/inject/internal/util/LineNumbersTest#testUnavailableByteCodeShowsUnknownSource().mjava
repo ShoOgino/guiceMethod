@@ -1,0 +1,16 @@
+  public void testUnavailableByteCodeShowsUnknownSource() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          bind(new GeneratingClassLoader().generate());
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "1) No implementation for " + B.class.getName() + " was bound.",
+          "for parameter 0 at " + GeneratingClassLoader.name + ".<init>(Unknown Source)",
+          "at " + LineNumbersTest.class.getName(), ".configure(LineNumbersTest.java:");
+    }
+  }
+

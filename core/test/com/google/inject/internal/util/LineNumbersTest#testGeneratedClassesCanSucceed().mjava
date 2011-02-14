@@ -1,0 +1,12 @@
+  public void testGeneratedClassesCanSucceed() {
+    final Class<?> generated = new GeneratingClassLoader().generate();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bind(generated);
+        bind(B.class).toInstance(new B() {});
+      }
+    });
+    Object instance = injector.getInstance(generated);
+    assertEquals(instance.getClass(), generated);
+  }
+

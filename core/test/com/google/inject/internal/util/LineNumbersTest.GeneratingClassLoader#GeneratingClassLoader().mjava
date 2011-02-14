@@ -1,0 +1,4 @@
+    GeneratingClassLoader() {
+      super(B.class.getClassLoader());
+    }
+
