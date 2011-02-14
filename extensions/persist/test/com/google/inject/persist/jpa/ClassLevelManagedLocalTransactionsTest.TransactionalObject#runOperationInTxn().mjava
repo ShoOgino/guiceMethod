@@ -1,4 +1,5 @@
     public void runOperationInTxn() {
+      assertTrue(session.getTransaction().isActive());
       JpaTestEntity entity = new JpaTestEntity();
       entity.setText(UNIQUE_TEXT);
       session.persist(entity);

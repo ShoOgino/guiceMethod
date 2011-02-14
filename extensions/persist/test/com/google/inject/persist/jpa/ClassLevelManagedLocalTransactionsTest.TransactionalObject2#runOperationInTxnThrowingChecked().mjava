@@ -1,4 +1,5 @@
     public void runOperationInTxnThrowingChecked() throws IOException {
+      assertTrue(session.getTransaction().isActive());
       JpaTestEntity entity = new JpaTestEntity();
       entity.setText(TRANSIENT_UNIQUE_TEXT);
       session.persist(entity);

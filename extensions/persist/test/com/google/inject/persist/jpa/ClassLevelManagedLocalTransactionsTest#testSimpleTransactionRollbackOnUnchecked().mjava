@@ -1,7 +1,7 @@
-  public void disabled_testSimpleTransactionRollbackOnChecked() {
+  public void testSimpleTransactionRollbackOnUnchecked() {
     try {
-      injector.getInstance(TransactionalObject2.class).runOperationInTxnThrowingChecked();
-    } catch (IOException e) {
+      injector.getInstance(TransactionalObject4.class).runOperationInTxnThrowingUnchecked();
+    } catch (RuntimeException re) {
       //ignore
     }
 
@@ -16,6 +16,7 @@
 
     session.getTransaction().commit();
 
-    assertTrue("a result was returned! rollback sure didnt happen!!!", result.isEmpty());
+    assertTrue("a result was returned! rollback sure didnt happen!!!",
+        result.isEmpty());
   }
 
