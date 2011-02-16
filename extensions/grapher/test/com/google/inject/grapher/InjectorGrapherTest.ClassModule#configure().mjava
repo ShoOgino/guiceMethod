@@ -1,0 +1,5 @@
+    @Override protected void configure() {
+      bind(D.class).toInstance(new D());
+      bind(E.class).toInstance(new E());
+    }
+

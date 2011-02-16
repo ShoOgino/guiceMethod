@@ -1,0 +1,9 @@
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+
+    graphingVisitor = new FakeGraphingVisitor();
+    injector = Guice.createInjector(new ClassModule());
+    grapher = new InjectorGrapher(keyVisitor, graphingVisitor, renderer);
+  }
+

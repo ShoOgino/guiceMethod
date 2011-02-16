@@ -1,0 +1,4 @@
+    public Void visit(UntargettedBinding<?> binding) {
+      return record(binding);
+    }
+

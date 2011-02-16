@@ -1,0 +1,4 @@
+    @Provides B provideB(D d, E e) {
+      return new B();
+    }
+

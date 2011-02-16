@@ -1,0 +1,4 @@
+    public Void visit(LinkedKeyBinding<?> binding) {
+      return record(binding);
+    }
+

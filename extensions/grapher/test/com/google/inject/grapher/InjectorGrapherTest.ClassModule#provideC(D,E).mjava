@@ -1,0 +1,4 @@
+    @Provides @Named("test") C provideC(D d, E e) {
+      return new C();
+    }
+

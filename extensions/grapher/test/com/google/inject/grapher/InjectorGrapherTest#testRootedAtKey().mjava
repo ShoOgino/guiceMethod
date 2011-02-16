@@ -1,0 +1,12 @@
+  /** Tests making a graph rooted at a {@link Key}. */
+  public void testRootedAtKey() throws Exception {
+    Key cKey = Key.get(C.class, Names.named("test"));
+    grapher.of(injector)
+        .rootedAt(cKey)
+        .graph();
+    assertEquals(ImmutableSet.of(
+        cKey,
+        Key.get(D.class),
+        Key.get(E.class)), graphingVisitor.getKeys());
+  }
+

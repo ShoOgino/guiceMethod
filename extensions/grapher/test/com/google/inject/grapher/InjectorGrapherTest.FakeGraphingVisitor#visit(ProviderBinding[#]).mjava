@@ -1,0 +1,4 @@
+    public Void visit(ProviderBinding<?> binding) {
+      return record(binding);
+    }
+

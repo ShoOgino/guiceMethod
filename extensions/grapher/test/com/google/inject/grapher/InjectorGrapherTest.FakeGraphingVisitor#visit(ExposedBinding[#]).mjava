@@ -1,0 +1,4 @@
+    public Void visit(ExposedBinding<?> binding) {
+      return record(binding);
+    }
+
