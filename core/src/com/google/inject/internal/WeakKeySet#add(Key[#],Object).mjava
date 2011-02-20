@@ -1,0 +1,7 @@
+  public void add(Key<?> key, Object source) {
+    if (backingSet == null) {
+      backingSet = Maps.newHashMap();
+    }
+    backingSet.put(key.toString(), source);
+  }
+

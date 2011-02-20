@@ -1,0 +1,14 @@
+  public void testParentBindsSomethingInPrivate() {
+    try {
+      Guice.createInjector(new FailingModule());
+      fail();
+    } catch(CreationException expected) {
+      assertEquals(1, expected.getErrorMessages().size());
+      assertContains(expected.toString(),
+          "A binding to java.util.List was already configured at",
+          FailingPrivateModule.class.getName() + ".configure(",
+          "(If it was in a PrivateModule, did you forget to expose the binding?)",
+          "at " + FailingModule.class.getName() + ".configure(");
+    }
+  }
+

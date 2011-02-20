@@ -2,6 +2,6 @@
     return addMessage(
         "A binding to %s was already configured at %s and an error was thrown " 
       + "while checking duplicate bindings.  Error: %s",
-        key, source, t);
+        key, convert(source), t);
   }
 

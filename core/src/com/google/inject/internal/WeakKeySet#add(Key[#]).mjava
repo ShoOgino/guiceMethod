@@ -1,7 +1,0 @@
-  public boolean add(Key<?> key) {
-    if (backingSet == null) {
-      backingSet = Sets.newHashSet();
-    }
-    return backingSet.add(key.toString());
-  }
-
