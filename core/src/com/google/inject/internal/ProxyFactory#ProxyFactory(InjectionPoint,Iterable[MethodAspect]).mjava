@@ -35,6 +35,13 @@
     for (MethodAspect methodAspect : applicableAspects) {
       for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
         if (methodAspect.matches(pair.method)) {
+          if(pair.method.isSynthetic()) {
+            logger.log(Level.WARNING,
+                "Method [{0}] is synthetic and is being intercepted by {1}."
+              + " This could indicate a bug.  The method may be intercepted twice,"
+              + " or may not be intercepted at all.",
+                new Object[] { pair.method, methodAspect.interceptors() });
+          }
           visibility = visibility.and(BytecodeGen.Visibility.forMember(pair.method));
           pair.addAll(methodAspect.interceptors());
           anyMatched = true;
