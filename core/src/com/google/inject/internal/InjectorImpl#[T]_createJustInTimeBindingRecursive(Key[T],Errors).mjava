@@ -13,8 +13,8 @@
     }
 
     if (state.isBlacklisted(key)) {
-      Object source = state.getSourceForBlacklistedKey(key);
-      throw errors.childBindingAlreadySet(key, source).toException();
+      Set<Object> sources = state.getSourcesForBlacklistedKey(key);
+      throw errors.childBindingAlreadySet(key, sources).toException();
     }
 
     BindingImpl<T> binding = createJustInTimeBinding(key, errors);

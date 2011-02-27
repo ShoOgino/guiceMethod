@@ -1,0 +1,3 @@
+  /** Returns the source of a blacklisted key. */
+  Set<Object> getSourcesForBlacklistedKey(Key<?> key);
+

@@ -1,0 +1,16 @@
+  public void testParentBindingToPrivateJitBinding() {
+    Injector injector = Guice.createInjector(new ManyPrivateModules());
+    try {
+      injector.getBinding(PrivateFoo.class);
+      fail();
+    } catch(ConfigurationException expected) {
+      assertEquals(1, expected.getErrorMessages().size());
+      assertContains(expected.toString(),
+          "Unable to create binding for " + PrivateFoo.class.getName(),
+          "It was already configured on one or more child injectors or private modules",
+          "(bound by a just-in-time binding)",
+          "If it was in a PrivateModule, did you forget to expose the binding?",
+          "while locating " + PrivateFoo.class.getName());
+    }
+  }
+

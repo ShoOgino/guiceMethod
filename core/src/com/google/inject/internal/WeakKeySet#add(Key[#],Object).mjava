@@ -2,6 +2,17 @@
     if (backingSet == null) {
       backingSet = Maps.newHashMap();
     }
-    backingSet.put(key.toString(), source);
+    // if it's an instanceof Class, it was a JIT binding, which we don't
+    // want to retain.
+    if (source instanceof Class || source == SourceProvider.UNKNOWN_SOURCE) {
+      source = null;
+    }
+    String k = key.toString();
+    Set<Object> sources = backingSet.get(k);
+    if (sources == null) {
+      sources = Sets.newLinkedHashSet();
+      backingSet.put(k, sources);
+    }
+    sources.add(Errors.convert(source));
   }
 

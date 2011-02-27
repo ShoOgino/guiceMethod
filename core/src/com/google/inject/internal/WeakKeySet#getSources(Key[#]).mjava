@@ -1,4 +1,4 @@
-  public Object getSource(Key<?> key) {
+  public Set<Object> getSources(Key<?> key) {
     return backingSet.get(key.toString());
   }
 

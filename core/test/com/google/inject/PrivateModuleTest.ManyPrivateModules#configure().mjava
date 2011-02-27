@@ -1,0 +1,9 @@
+    @Override
+    protected void configure() {
+      // make sure duplicate sources are collapsed
+      install(new FailingPrivateModule());
+      install(new FailingPrivateModule());
+      // but additional sources are listed
+      install(new SecondFailingPrivateModule());
+    }
+

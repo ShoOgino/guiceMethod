@@ -1,0 +1,18 @@
+  public Errors childBindingAlreadySet(Key<?> key, Set<Object> sources) {
+    Formatter allSources = new Formatter();
+    for (Object source : sources) {
+      if (source == null) {
+        allSources.format("%n    (bound by a just-in-time binding)");
+      } else {
+        allSources.format("%n    bound at %s", source);
+      }
+    }
+    Errors errors = addMessage(
+        "Unable to create binding for %s."
+      + " It was already configured on one or more child injectors or private modules"
+      + "%s%n"
+      + "  If it was in a PrivateModule, did you forget to expose the binding?",
+        key, allSources.out());
+    return errors;
+  }
+

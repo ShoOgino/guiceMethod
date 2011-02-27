@@ -1,0 +1,4 @@
+  public Set<Object> getSourcesForBlacklistedKey(Key<?> key) {
+    return blacklistedKeys.getSources(key);
+  }
+
