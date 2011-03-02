@@ -6,11 +6,7 @@
   private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors, JitLimitation jitType)
       throws ErrorsException {
 
-    boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);
-    if(options.jitDisabled && jitType == JitLimitation.NO_JIT && !jitOverride) {
-      throw errors.jitDisabled(key).toException();
-    }
-    
+    boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);    
     synchronized (state.lock()) {
       // first try to find a JIT binding that we've already created
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
@@ -18,15 +14,20 @@
         BindingImpl<T> binding = (BindingImpl<T>) injector.jitBindings.get(key);
 
         if (binding != null) {
-          return binding;
+          // If we found a JIT binding and we don't allow them,
+          // fail.  (But allow bindings created through TypeConverters.)
+          if (options.jitDisabled
+              && jitType == JitLimitation.NO_JIT
+              && !jitOverride
+              && !(binding instanceof ConvertedConstantBindingImpl)) {
+            throw errors.jitDisabled(key).toException();
+          } else {
+            return binding;
+          }
         }
       }
       
-      if(options.jitDisabled && jitType != JitLimitation.NEW_OR_EXISTING_JIT && !jitOverride) {
-        throw errors.jitDisabled(key).toException();
-      } else {
-        return createJustInTimeBindingRecursive(key, errors);
-      }
+      return createJustInTimeBindingRecursive(key, errors, options.jitDisabled, jitType);
     }
   }
 

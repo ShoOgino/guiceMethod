@@ -11,8 +11,8 @@
    *
    * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
    */
-  private <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors)
-      throws ErrorsException {
+  private <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors,
+      boolean jitDisabled, JitLimitation jitType) throws ErrorsException {
     int numErrorsBefore = errors.size();
 
     if (state.isBlacklisted(key)) {
@@ -42,6 +42,12 @@
     BindingImpl<T> convertedBinding = convertConstantStringBinding(key, errors);
     if (convertedBinding != null) {
       return convertedBinding;
+    }
+    
+    if (!isTypeLiteral(key) 
+        && jitDisabled
+        && jitType != JitLimitation.NEW_OR_EXISTING_JIT) {
+      throw errors.jitDisabled(key).toException();
     }
 
     // If the key has an annotation...

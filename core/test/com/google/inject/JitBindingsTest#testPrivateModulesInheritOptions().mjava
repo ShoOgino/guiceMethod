@@ -18,5 +18,19 @@
       assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));
       assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
     }
+    
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        binder().requireExplicitBindings();
+
+        install(new PrivateModule() {
+          public void configure() {
+            bind(Foo.class).to(FooImpl.class);
+            expose(Foo.class);
+          }
+        });
+      }
+    });
+    ensureInChild(injector, FooImpl.class);
   }
 

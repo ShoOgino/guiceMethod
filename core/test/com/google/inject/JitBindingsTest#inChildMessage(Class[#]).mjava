@@ -1,0 +1,6 @@
+  private String inChildMessage(Class<?> clazz) {
+    return "Unable to create binding for "
+        + clazz.getName()
+        + ". It was already configured on one or more child injectors or private modules";
+  }
+

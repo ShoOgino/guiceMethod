@@ -1,0 +1,28 @@
+  private void ensureInChild(Injector injector, Class<?>... classes) {
+    for(int i = 0; i < classes.length; i++) {      
+      try { 
+        injector.getInstance(classes[i]);
+        fail("should have failed tring to retrieve class: " + classes[i]);
+      } catch(ConfigurationException expected) {
+        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
+        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      }
+      
+      try { 
+        injector.getProvider(classes[i]);
+        fail("should have failed tring to retrieve class: " + classes[i]);
+      } catch(ConfigurationException expected) {
+        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
+        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      }
+      
+      try {
+        injector.getBinding(classes[i]);
+        fail("should have failed tring to retrieve class: " + classes[i]);          
+      } catch(ConfigurationException expected) {
+        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
+        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      }
+    }
+  }
+

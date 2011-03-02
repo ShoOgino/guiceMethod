@@ -30,7 +30,7 @@
     });
     ensureWorks(child, Foo.class, Bar.class);
     ensureFails(child, ALLOW_BINDING, FooImpl.class);
-    ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these
+    ensureInChild(parent, FooImpl.class, FooBar.class, Foo.class);
     
     Injector grandchild = child.createChildInjector(new AbstractModule() {
       @Override
@@ -41,6 +41,6 @@
     ensureWorks(grandchild, FooBar.class, Foo.class, Bar.class);
     ensureFails(grandchild, ALLOW_BINDING, FooImpl.class);
     ensureFails(child, ALLOW_BINDING, FooImpl.class);
-    ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class); // parent still doesn't have these    
+    ensureInChild(parent, FooImpl.class, FooBar.class, Foo.class);    
   }
 
