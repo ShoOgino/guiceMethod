@@ -1,0 +1,5 @@
+  BindingProcessor(Errors errors, Initializer initializer, ProcessedBindingData bindingData) {
+    super(errors, bindingData);
+    this.initializer = initializer;
+  }
+

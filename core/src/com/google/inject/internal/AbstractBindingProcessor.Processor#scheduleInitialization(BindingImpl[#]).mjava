@@ -1,0 +1,12 @@
+    protected void scheduleInitialization(final BindingImpl<?> binding) {
+      bindingData.addUninitializedBinding(new Runnable() {
+        public void run() {
+          try {
+            binding.getInjector().initializeBinding(binding, errors.withSource(source));
+          } catch (ErrorsException e) {
+            errors.merge(e.getErrors());
+          }
+        }
+      });
+    }
+

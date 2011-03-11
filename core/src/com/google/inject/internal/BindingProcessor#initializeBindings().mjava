@@ -1,6 +1,0 @@
-  public void initializeBindings() {
-    for (Runnable initializer : uninitializedBindings) {
-      initializer.run();
-    }
-  }
-

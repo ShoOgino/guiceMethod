@@ -1,0 +1,3 @@
+  /** Notifies that creation should happen. */
+  void notify(Errors errors);
+

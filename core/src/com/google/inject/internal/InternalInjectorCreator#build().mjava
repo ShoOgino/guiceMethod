@@ -6,7 +6,7 @@
     // Synchronize while we're building up the bindings and other injector state. This ensures that
     // the JIT bindings in the parent injector don't change while we're being built
     synchronized (shellBuilder.lock()) {
-      shells = shellBuilder.build(bindingProcesor, stopwatch, errors);
+      shells = shellBuilder.build(initializer, bindingData, stopwatch, errors);
       stopwatch.resetAndLog("Injector construction");
 
       initializeStatically();

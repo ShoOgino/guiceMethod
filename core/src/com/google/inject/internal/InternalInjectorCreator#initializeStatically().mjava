@@ -1,6 +1,6 @@
   /** Initialize and validate everything. */
   private void initializeStatically() {
-    bindingProcesor.initializeBindings();
+    bindingData.initializeBindings();
     stopwatch.resetAndLog("Binding initialization");
 
     for (InjectorShell shell : shells) {
@@ -11,7 +11,7 @@
     injectionRequestProcessor.process(shells);
     stopwatch.resetAndLog("Collecting injection requests");
 
-    bindingProcesor.runCreationListeners();
+    bindingData.runCreationListeners(errors);
     stopwatch.resetAndLog("Binding validation");
 
     injectionRequestProcessor.validate();

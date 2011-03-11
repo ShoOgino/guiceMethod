@@ -1,0 +1,7 @@
+    Processor(BindingImpl<T> binding) {
+      source = binding.getSource();
+      key = binding.getKey();
+      rawType = key.getTypeLiteral().getRawType();
+      scoping = binding.getScoping();
+    }
+

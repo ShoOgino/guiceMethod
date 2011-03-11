@@ -1,0 +1,4 @@
+  void addUninitializedBinding(Runnable runnable) {
+    uninitializedBindings.add(runnable);
+  }
+

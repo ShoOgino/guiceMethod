@@ -1,0 +1,5 @@
+    protected void prepareBinding() {      
+      validateKey(source, key);
+      scoping = Scoping.makeInjectable(scoping, injector, errors);
+    }
+

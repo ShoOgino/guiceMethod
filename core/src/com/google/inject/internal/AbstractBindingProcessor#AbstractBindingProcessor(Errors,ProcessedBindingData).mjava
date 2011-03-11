@@ -1,0 +1,5 @@
+  AbstractBindingProcessor(Errors errors, ProcessedBindingData bindingData) {
+    super(errors);
+    this.bindingData = bindingData;
+  }
+

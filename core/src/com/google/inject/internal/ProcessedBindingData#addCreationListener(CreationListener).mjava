@@ -1,0 +1,4 @@
+  void addCreationListener(CreationListener listener) {
+    creationListeners.add(listener);
+  }
+

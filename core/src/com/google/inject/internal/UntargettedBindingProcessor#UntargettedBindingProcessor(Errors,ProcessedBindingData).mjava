@@ -1,0 +1,4 @@
+  UntargettedBindingProcessor(Errors errors, ProcessedBindingData bindingData) {
+    super(errors, bindingData);
+  }
+
