@@ -1,0 +1,23 @@
+  /**
+   * Binding an @ImplementedBy thing to something else should also fail.
+   */
+  public void testSettingAtImplementedByTwice() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bind(HasImplementedBy1.class);
+          bind(HasImplementedBy1.class).toInstance(new HasImplementedBy1() {});
+        }
+      });
+      fail();
+    } catch(CreationException expected) {
+      expected.printStackTrace();
+      assertContains(expected.getMessage(),
+        "1) A binding to " + HasImplementedBy1.class.getName()
+        + " was already configured at " + getClass().getName(),
+        "at " + getClass().getName(), ".configure(BinderTest.java:");
+      assertContains(expected.getMessage(), "1 error");
+    }
+  }
+

@@ -1,4 +1,10 @@
   @Override public Boolean visit(PrivateElements privateElements) {
+    // Because we do two passes, we have to ignore the PrivateElements in the second
+    // pass.  Otherwise we end up calling bindExposed twice for each one.
+    if (phase == Phase.PASS_TWO) {
+      return false;
+    }
+    
     for (Key<?> key : privateElements.getExposedKeys()) {
       bindExposed(privateElements, key);
     }

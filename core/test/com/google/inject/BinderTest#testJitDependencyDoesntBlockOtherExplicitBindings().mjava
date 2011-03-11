@@ -1,0 +1,17 @@
+  /**
+   * See issue 614, Problem One
+   * http://code.google.com/p/google-guice/issues/detail?id=614
+   */
+  public void testJitDependencyDoesntBlockOtherExplicitBindings() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(HasImplementedByThatNeedsAnotherImplementedBy.class);
+        bind(HasImplementedBy1.class).toInstance(new HasImplementedBy1() {});
+      }
+    });
+    injector.getAllBindings(); // just validate it doesn't throw.
+    // Also validate that we're using the explicit (and not @ImplementedBy) implementation
+    assertFalse(injector.getInstance(HasImplementedBy1.class) instanceof ImplementsHasImplementedBy1);
+  }
+

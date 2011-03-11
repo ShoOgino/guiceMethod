@@ -1,0 +1,14 @@
+  /**
+   * See issue 614, Problem Two
+   * http://code.google.com/p/google-guice/issues/detail?id=614
+   */
+  public void testJitDependencyCanUseExplicitDependencies() {
+    Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(HasImplementedByThatWantsExplicit.class);
+        bind(JustAnInterface.class).toInstance(new JustAnInterface() {});
+      }
+    });
+  }
+

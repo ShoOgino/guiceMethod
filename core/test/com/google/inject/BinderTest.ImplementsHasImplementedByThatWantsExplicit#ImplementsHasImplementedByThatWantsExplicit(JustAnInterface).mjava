@@ -1,0 +1,2 @@
+    @Inject ImplementsHasImplementedByThatWantsExplicit(JustAnInterface jai) {}
+

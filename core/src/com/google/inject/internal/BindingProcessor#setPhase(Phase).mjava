@@ -1,0 +1,4 @@
+  void setPhase(Phase phase) {
+    this.phase = phase;
+  }
+
