@@ -1,0 +1,22 @@
+  public void testSimple() throws Exception {
+    IMocksControl testControl = createControl();
+    TestFilterChain testFilterChain = new TestFilterChain();
+    HttpServletRequest req = testControl.createMock(HttpServletRequest.class);
+    HttpServletResponse res = testControl.createMock(HttpServletResponse.class);
+
+    expect(req.getMethod()).andReturn("GET").anyTimes();
+    expect(req.getRequestURI()).andReturn("/bar/foo").anyTimes();
+    expect(req.getServletPath()).andReturn("/bar/foo").anyTimes();
+    expect(req.getContextPath()).andReturn("").anyTimes();
+
+    testControl.replay();
+
+    guiceFilter.doFilter(req, res, testFilterChain);
+
+    assertFalse(testFilterChain.isTriggered());
+    assertFalse(fooServlet.isTriggered());
+    assertTrue(barServlet.isTriggered());
+
+    testControl.verify();
+  }
+

@@ -1,0 +1,34 @@
+  @Override
+  public final void setUp() throws Exception {
+    injector = Guice.createInjector(new ServletModule() {
+      @Override
+      protected void configureServlets() {
+        bind(TestServlet.class).annotatedWith(Names.named("foo"))
+            .to(TestServlet.class).in(Scopes.SINGLETON);
+        bind(TestServlet.class).annotatedWith(Names.named("bar"))
+            .to(TestServlet.class).in(Scopes.SINGLETON);
+        serve("/foo/*").with(Key.get(TestServlet.class, Names.named("foo")));
+        serve("/bar/*").with(Key.get(TestServlet.class, Names.named("bar")));
+        // TODO: add a filter(..) call and validate it is correct
+      }
+    });
+    injector.injectMembers(this);
+
+    assertNotNull(fooServlet);
+    assertNotNull(barServlet);
+    assertNotSame(fooServlet, barServlet);
+
+    globalControl = createControl();
+    servletContext = globalControl.createMock(ServletContext.class);
+    filterConfig = globalControl.createMock(FilterConfig.class);
+
+    expect(servletContext.getAttribute(GuiceServletContextListener.INJECTOR_NAME))
+        .andReturn(injector).anyTimes();
+    expect(filterConfig.getServletContext()).andReturn(servletContext).anyTimes();
+
+    globalControl.replay();
+
+    guiceFilter = new GuiceFilter();
+    guiceFilter.init(filterConfig);
+  }
+

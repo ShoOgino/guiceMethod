@@ -9,8 +9,11 @@
 
     final HttpServletRequest requestMock = createMock(HttpServletRequest.class);
     HttpServletResponse responseMock = createMock(HttpServletResponse.class);
-    expect(requestMock.getServletPath())
+    expect(requestMock.getRequestURI())
         .andReturn("/")
+        .anyTimes();
+    expect(requestMock.getContextPath())
+        .andReturn("")
         .anyTimes();
 
     requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);

@@ -1,0 +1,12 @@
+  // Web app located at /webtest, using explicit backing servlet mounted at /*
+  public void testWebtestExplicit() throws Exception {
+    // fetching /. Should go up the filter chain (only mappings on /foo/* and /bar/*).
+    runTest("/webtest/", "", "/webtest", true, false, false);
+    // fetching /bar/. Should hit the bar servlet
+    runTest("/webtest/bar/", "", "/webtest", false, false, true);
+    // fetching /foo/xxx. Should hit the foo servlet
+    runTest("/webtest/foo/xxx", "", "/webtest", false, true, false);
+    // fetching /xxx. Should go up the chain
+    runTest("/webtest/xxx", "", "/webtest", true, false, false);
+  }
+

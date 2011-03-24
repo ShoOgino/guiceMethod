@@ -1,0 +1,12 @@
+  // Web app located at /webtest, using Tomcat default servlet
+  public void testWebtestDefault() throws Exception {
+    // fetching /. Should go up the filter chain (only mappings on /foo/* and /bar/*).
+    runTest("/webtest/", "/", "/webtest", true, false, false);
+    // fetching /bar/. Should hit the bar servlet
+    runTest("/webtest/bar/", "/bar/", "/webtest", false, false, true);
+    // fetching /foo/xxx. Should hit the foo servlet
+    runTest("/webtest/foo/xxx", "/foo/xxx", "/webtest", false, true, false);
+    // fetching /xxx. Should go up the chain
+    runTest("/webtest/xxx", "/xxx", "/webtest", true, false, false);
+  }
+

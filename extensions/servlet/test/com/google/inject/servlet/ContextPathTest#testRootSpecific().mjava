@@ -1,0 +1,12 @@
+  // ROOT Web app, using two backing servlets, mounted at /bar/* and /foo/*
+  public void testRootSpecific() throws Exception {
+    // fetching /. Should go up the filter chain (only mappings on /foo/* and /bar/*).
+    runTest("/", "/", "", true, false, false);
+    // fetching /bar/. Should hit the bar servlet
+    runTest("/bar/", "/bar", "", false, false, true);
+    // fetching /foo/xxx. Should hit the foo servlet
+    runTest("/foo/xxx", "/foo", "", false, true, false);
+    // fetching /xxx. Should go up the chain
+    runTest("/xxx", "/xxx", "", true, false, false);
+  }
+

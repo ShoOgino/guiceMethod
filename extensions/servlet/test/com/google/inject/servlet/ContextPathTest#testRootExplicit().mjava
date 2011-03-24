@@ -1,0 +1,12 @@
+  // ROOT Web app, using explicit backing servlet mounted at /*
+  public void testRootExplicit() throws Exception {
+    // fetching /. Should go up the filter chain (only mappings on /foo/* and /bar/*).
+    runTest("/", "", "", true, false, false);
+    // fetching /bar/. Should hit the bar servlet
+    runTest("/bar/", "", "", false, false, true);
+    // fetching /foo/xxx. Should hit the foo servlet
+    runTest("/foo/xxx", "", "", false, true, false);
+    // fetching /xxx. Should go up the chain
+    runTest("/xxx", "", "", true, false, false);
+  }
+

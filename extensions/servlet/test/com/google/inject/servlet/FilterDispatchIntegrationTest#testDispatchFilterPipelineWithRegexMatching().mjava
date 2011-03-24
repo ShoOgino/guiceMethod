@@ -18,9 +18,12 @@
     //create ourselves a mock request with test URI
     HttpServletRequest requestMock = control.createMock(HttpServletRequest.class);
 
-    expect(requestMock.getServletPath())
+    expect(requestMock.getRequestURI())
             .andReturn("/index")
             .anyTimes();
+    expect(requestMock.getContextPath())
+        .andReturn("")
+        .anyTimes();
 
     // dispatch request
     FilterChain filterChain = control.createMock(FilterChain.class);
