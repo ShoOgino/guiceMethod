@@ -1,0 +1,18 @@
+  public void testInterceptingNonBridgeWorks() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(Interface.class).to(Impl.class);
+        bindInterceptor(Matchers.any(), new AbstractMatcher<Method>() {
+          public boolean matches(Method t) {
+            return !t.isBridge() && t.getDeclaringClass() != Object.class;
+          }
+        }, new CountingInterceptor());
+      }
+    });
+    Interface intf = injector.getInstance(Interface.class);
+    assertEquals(0, count.get());
+    intf.aMethod(null);
+    assertEquals(1, count.get());
+  }
+
