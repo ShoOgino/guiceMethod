@@ -1,0 +1,5 @@
+    NamedInterceptor(String name, List<String> callList) {
+      this.name = name;
+      this.called = callList;
+    }
+
