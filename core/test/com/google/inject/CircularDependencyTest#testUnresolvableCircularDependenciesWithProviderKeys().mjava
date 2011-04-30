@@ -1,0 +1,16 @@
+  public void testUnresolvableCircularDependenciesWithProviderKeys() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(C2.class).toProvider(C2P.class);
+          bind(D2.class).toProvider(D2P.class);
+        }
+      }).getInstance(C2.class);
+      fail();
+    } catch (ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "Tried proxying " + C2.class.getName() + " to support a circular dependency, ",
+          "but it is not an interface.");
+    }
+  }
+

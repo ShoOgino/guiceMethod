@@ -1,0 +1,4 @@
+    public A get() {
+      return new AImpl(bp.get());
+    }
+

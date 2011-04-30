@@ -1,0 +1,7 @@
+    public A get() {
+      if (a == null) {
+        a = new AImpl(bp.get());
+      }
+      return a;
+    }
+

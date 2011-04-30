@@ -1,9 +1,10 @@
   BoundProviderFactory(
       InjectorImpl injector,
       Key<? extends javax.inject.Provider<? extends T>> providerKey,
-      Object source) {
+      Object source,
+      boolean allowProxy) {
+    super(source, allowProxy);
     this.injector = injector;
     this.providerKey = providerKey;
-    this.source = source;
   }
 

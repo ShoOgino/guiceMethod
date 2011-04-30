@@ -1,6 +1,6 @@
-  @Override protected void setUp() throws Exception {
-    super.setUp();
-    Chicken.nextInstanceId = 0;
-    Egg.nextInstanceId = 0;
+  @Override
+  protected void setUp() throws Exception {
+    AImpl.nextId = 0;
+    BImpl.nextId = 0;
   }
 

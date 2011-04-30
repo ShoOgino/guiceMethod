@@ -1,0 +1,30 @@
+  protected T circularGet(Provider<? extends T> provider, Errors errors,
+      InternalContext context, Dependency<?> dependency, boolean linked)
+      throws ErrorsException {    
+    Class<?> expectedType = dependency.getKey().getTypeLiteral().getRawType();
+    // we do not use 'this' as the key because for JIT provider bindings,
+    // 'this' is recreated on failures... the key suffices.
+    ConstructionContext<T> constructionContext = context.getConstructionContext(dependency.getKey());
+    
+    // We have a circular reference between constructors. Return a proxy.
+    if (constructionContext.isConstructing()) {
+      if (!allowProxy) {
+        throw errors.circularProxiesDisabled(expectedType).toException();
+      } else {
+        // TODO: if we can't proxy this object, can we proxy the other object?
+        @SuppressWarnings("unchecked")
+        T proxyType = (T) constructionContext.createProxy(errors, expectedType);
+        return proxyType;
+      }
+    }
+    // First time through...
+    constructionContext.startConstruction();
+    try {
+      T t = errors.checkForNull(provider.get(), source, dependency);
+      constructionContext.setProxyDelegates(t);
+      return t;
+    } finally {
+      constructionContext.finishConstruction();
+    }
+  }
+

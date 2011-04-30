@@ -1,0 +1,11 @@
+  private void assertCircularDependencies(Injector injector) {
+    A a = injector.getInstance(A.class);
+    assertNotNull(a.getB().getA());
+    assertEquals(0, a.id());
+    assertEquals(a.id(), a.getB().getA().id());
+    assertEquals(0, a.getB().id());
+    assertEquals(1, AImpl.nextId);
+    assertEquals(1, BImpl.nextId);
+    assertSame(a, injector.getInstance(A.class));
+  }
+

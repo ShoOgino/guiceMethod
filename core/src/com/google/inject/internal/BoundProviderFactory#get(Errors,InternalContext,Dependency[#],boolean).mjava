@@ -3,9 +3,9 @@
     errors = errors.withSource(providerKey);
     javax.inject.Provider<? extends T> provider = providerFactory.get(errors, context, dependency, true);
     try {
-      return errors.checkForNull(provider.get(), source, dependency);
+      return circularGet(provider, errors, context, dependency, linked);
     } catch(RuntimeException userException) {
       throw errors.errorInProvider(userException).toException();
-    }
+    } 
   }
 

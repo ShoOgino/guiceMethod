@@ -1,0 +1,4 @@
+    public B get() {
+      return new BImpl(ap.get());
+    }
+
