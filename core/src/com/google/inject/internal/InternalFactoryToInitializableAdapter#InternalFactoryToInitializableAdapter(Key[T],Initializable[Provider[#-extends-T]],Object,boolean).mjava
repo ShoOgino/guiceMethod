@@ -1,0 +1,7 @@
+  public InternalFactoryToInitializableAdapter(
+      Key<T> key, Initializable<Provider<? extends T>> initializable,
+      Object source, boolean allowProxy) {
+    super(key, source, allowProxy);
+    this.initializable = checkNotNull(initializable, "provider");
+  }
+
