@@ -1,6 +1,6 @@
   <T> void initializeBinding(BindingImpl<T> binding, Errors errors) throws ErrorsException {
-    if (binding instanceof ConstructorBindingImpl<?>) {
-      ((ConstructorBindingImpl) binding).initialize(this, errors);
+    if (binding instanceof DelayedInitialize) {
+      ((DelayedInitialize) binding).initialize(this, errors);
     }
   }
 

@@ -1,0 +1,11 @@
+  ProvidedByInternalFactory(
+      Class<?> rawType,
+      Class<? extends Provider<?>> providerType,
+      Key<? extends Provider<T>> providerKey,
+      boolean allowProxy) {
+    super(providerKey, allowProxy);
+    this.rawType = rawType;
+    this.providerType = providerType; 
+    this.providerKey = providerKey;
+  }
+

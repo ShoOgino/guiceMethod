@@ -1,0 +1,3 @@
+  /** Initializes this binding, throwing any errors if necessary. */
+  void initialize(InjectorImpl injector, Errors errors) throws ErrorsException;
+

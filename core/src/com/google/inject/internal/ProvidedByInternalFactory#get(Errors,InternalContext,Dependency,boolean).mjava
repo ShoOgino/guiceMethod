@@ -1,0 +1,21 @@
+  public T get(Errors errors, InternalContext context, Dependency dependency, boolean linked)
+      throws ErrorsException {
+    checkState(providerBinding != null, "not initialized");
+    
+    errors = errors.withSource(providerKey);
+    Provider provider = providerBinding.getInternalFactory().get(
+        errors, context, dependency, true);
+    try {
+      @SuppressWarnings("unchecked") // type is not checked within circularGet
+      Object o = circularGet(provider, errors, context, dependency, linked);
+      if (o != null && !rawType.isInstance(o)) {
+        throw errors.subtypeNotProvided(providerType, rawType).toException();
+      }
+      @SuppressWarnings("unchecked") // protected by isInstance() check above
+      T t = (T) o;
+      return t;
+    } catch (RuntimeException e) {
+      throw errors.errorInProvider(e).toException();
+    }
+  }
+

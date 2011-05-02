@@ -1,0 +1,6 @@
+  public void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+    if (delayedInitializer != null) {
+      delayedInitializer.initialize(injector, errors);
+    }
+  }
+
