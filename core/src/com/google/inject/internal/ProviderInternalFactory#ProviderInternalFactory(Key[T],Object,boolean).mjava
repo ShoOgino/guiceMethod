@@ -1,6 +1,0 @@
-  ProviderInternalFactory(Key<T> key, Object source, boolean allowProxy) {
-    this.key = key;
-    this.source = checkNotNull(source, "source");
-    this.allowProxy = allowProxy;
-  }
-

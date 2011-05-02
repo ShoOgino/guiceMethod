@@ -1,0 +1,4 @@
+    @Inject BP(Provider<A> ap) {
+      this.ap = ap;
+    }
+

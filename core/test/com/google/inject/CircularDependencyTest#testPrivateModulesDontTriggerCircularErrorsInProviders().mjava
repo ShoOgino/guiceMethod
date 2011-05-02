@@ -1,0 +1,30 @@
+  public void testPrivateModulesDontTriggerCircularErrorsInProviders() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new PrivateModule() {
+          @Override
+          protected void configure() {
+            bind(Foo.class);
+            expose(Foo.class);
+          }
+          @Provides String provideString(Bar bar) {
+            return new String("private 1, " + bar.string);
+          }
+        });
+        install(new PrivateModule() {
+          @Override
+          protected void configure() {
+            bind(Bar.class);
+            expose(Bar.class);
+          }
+          @Provides String provideString() {
+            return new String("private 2");
+          }
+        });
+      }
+    });
+    Foo foo = injector.getInstance(Foo.class);
+    assertEquals("private 1, private 2", foo.string);
+  }
+

@@ -1,6 +1,0 @@
-  public void testCircularlyDependentConstructorsWithProvidedBy()
-      throws CreationException {
-    Injector injector = Guice.createInjector();
-    assertCircularDependencies(injector);
-  }
-
