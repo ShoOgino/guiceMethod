@@ -1,0 +1,46 @@
+  public void testRequestAndResponseBindings() throws Exception {
+    final Injector injector = createInjector();
+    final HttpServletRequest request = createMock(HttpServletRequest.class);
+    final HttpServletResponse response = createMock(HttpServletResponse.class);
+    final Map<String, String[]> params = Maps.newHashMap();
+    String httpReqKey = HTTP_REQ_KEY.toString();
+    expect(request.getAttribute(httpReqKey)).andReturn(null);
+    request.setAttribute(httpReqKey, request);
+    expect(request.getAttribute(httpReqKey)).andReturn(request).anyTimes();
+
+    String httpRespKey = HTTP_RESP_KEY.toString();
+    expect(request.getAttribute(httpRespKey)).andReturn(null);
+    request.setAttribute(httpRespKey, response);
+    expect(request.getAttribute(httpRespKey)).andReturn(response).anyTimes();
+
+    String reqParamsKey = REQ_PARAMS_KEY.toString();
+    expect(request.getAttribute(reqParamsKey)).andReturn(null);
+    expect(request.getParameterMap()).andStubReturn(params);
+    request.setAttribute(reqParamsKey, params);
+    expect(request.getAttribute(reqParamsKey)).andReturn(params).anyTimes();
+    replay(request, response);
+
+    final boolean[] invoked = new boolean[1];
+    GuiceFilter filter = new GuiceFilter();
+    FilterChain filterChain = new FilterChain() {
+      @Override public void doFilter(ServletRequest servletRequest,
+          ServletResponse servletResponse) {
+        invoked[0] = true;
+        assertSame(request, servletRequest);
+        assertSame(request, injector.getInstance(ServletRequest.class));
+        assertSame(request, injector.getInstance(HTTP_REQ_KEY));
+
+        assertSame(response, servletResponse);
+        assertSame(response, injector.getInstance(ServletResponse.class));
+        assertSame(response, injector.getInstance(HTTP_RESP_KEY));
+
+        assertSame(params, servletRequest.getParameterMap());
+        assertSame(params, injector.getInstance(REQ_PARAMS_KEY));
+      }
+    };
+    filter.doFilter(request, response, filterChain);
+
+    assertTrue(invoked[0]);
+    verify(request, response);
+  }
+

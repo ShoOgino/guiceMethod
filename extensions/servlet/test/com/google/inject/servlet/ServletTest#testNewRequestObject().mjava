@@ -19,7 +19,6 @@
       public void doFilter(ServletRequest servletRequest,
           ServletResponse servletResponse) {
         invoked[0] = true;
-//        assertSame(request, servletRequest);
         assertNotNull(injector.getInstance(InRequest.class));
         assertNull(injector.getInstance(IN_REQUEST_NULL_KEY));
       }

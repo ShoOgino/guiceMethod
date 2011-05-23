@@ -1,0 +1,6 @@
+  @SuppressWarnings("unchecked") // defined by getParameterMap()
+  @Provides @RequestScoped @RequestParameters Map<String, String[]> provideRequestParameters(
+      ServletRequest req) {
+    return req.getParameterMap();
+  }
+
