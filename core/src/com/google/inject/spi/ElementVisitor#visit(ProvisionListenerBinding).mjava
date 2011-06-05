@@ -1,0 +1,5 @@
+  /**
+   * Visit a provision listener binding.
+   */
+  V visit(ProvisionListenerBinding binding);
+

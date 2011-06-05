@@ -1,0 +1,4 @@
+  public boolean hasListeners() {
+    return listeners.length > 0;
+  }
+

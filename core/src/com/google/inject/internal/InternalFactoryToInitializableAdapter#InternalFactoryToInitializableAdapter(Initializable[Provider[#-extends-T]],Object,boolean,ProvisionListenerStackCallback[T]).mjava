@@ -1,7 +1,8 @@
   public InternalFactoryToInitializableAdapter(
       Initializable<Provider<? extends T>> initializable,
-      Object source, boolean allowProxy) {
-    super(source, allowProxy);
+      Object source, boolean allowProxy,
+      ProvisionListenerStackCallback<T> provisionCallback) {
+    super(source, allowProxy, provisionCallback);
     this.initializable = checkNotNull(initializable, "provider");
   }
 

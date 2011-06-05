@@ -1,0 +1,5 @@
+  /** Returns the key matcher which chooses which keys the listener should be notified of. */
+  public Matcher<? super Key<?>> getKeyMatcher() {
+    return keyMatcher;
+  }
+

@@ -1,0 +1,20 @@
+  public void testExceptionInProvisionAutomaticallyCalled() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindListener(Matchers.any(), new NoProvision());
+      }
+    });
+    try {
+      injector.getInstance(FooBomb.class);
+      fail();
+    } catch(ProvisionException pe) {
+      assertEquals(1, pe.getErrorMessages().size());
+      assertContains(pe.getMessage(),
+          "1) Error injecting constructor, java.lang.RuntimeException: Retry, Abort, Fail",
+          " at " + FooBomb.class.getName(),
+          " while locating " + FooBomb.class.getName());
+      assertEquals("Retry, Abort, Fail", pe.getCause().getMessage());
+    }
+  }
+

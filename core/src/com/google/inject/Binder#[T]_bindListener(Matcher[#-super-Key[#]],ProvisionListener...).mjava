@@ -1,0 +1,14 @@
+  /**
+   * Registers listeners for provisioned objects. Guice will notify the
+   * listeners just before and after the object is provisioned. Provisioned
+   * objects that are also injectable (everything except objects provided
+   * through Providers) can also be notified through TypeListeners registered in
+   * {@link #bindListener}.
+   * 
+   * @param keyMatcher that matches keys of provisioned objects the listener
+   *          should be notified of
+   * @param listeners for provisioned objects matched by keyMatcher   * 
+   * @since 4.0
+   */
+  <T> void bindListener(Matcher<? super Key<?>> keyMatcher, ProvisionListener... listeners);
+

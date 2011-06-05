@@ -1,0 +1,3 @@
+    /** Returns the Key which will be provisioned. */
+    public abstract Key<T> getKey();
+

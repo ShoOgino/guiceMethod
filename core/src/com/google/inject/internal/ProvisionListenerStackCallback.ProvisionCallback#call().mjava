@@ -1,0 +1,2 @@
+    public T call() throws ErrorsException;
+

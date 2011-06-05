@@ -1,0 +1,21 @@
+  public void testExceptionInListenerBeforeProvisioning() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindListener(Matchers.any(), new FailBeforeProvision());
+      }
+    });
+    try {
+      injector.getInstance(Foo.class);
+      fail();
+    } catch(ProvisionException pe) {
+      assertEquals(1, pe.getErrorMessages().size());
+      assertContains(pe.getMessage(),
+          "1) Error notifying ProvisionListener " + FailBeforeProvision.class.getName()
+          + " of " + Foo.class.getName(),
+          "Reason: java.lang.RuntimeException: boo",
+          "while locating " + Foo.class.getName());
+      assertEquals("boo", pe.getCause().getMessage());
+    }
+  }
+

@@ -1,0 +1,7 @@
+  ProviderInternalFactory(Object source, boolean allowProxy,
+      ProvisionListenerStackCallback<T> provisionCallback) {
+    this.provisionCallback = checkNotNull(provisionCallback, "provisionCallback");
+    this.source = checkNotNull(source, "source");
+    this.allowProxy = allowProxy;
+  }
+

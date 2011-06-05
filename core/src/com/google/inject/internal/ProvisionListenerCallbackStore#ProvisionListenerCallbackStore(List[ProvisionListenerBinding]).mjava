@@ -1,0 +1,4 @@
+  ProvisionListenerCallbackStore(List<ProvisionListenerBinding> listenerBindings) {
+    this.listenerBindings = ImmutableList.copyOf(listenerBindings);
+  }
+

@@ -1,0 +1,9 @@
+  public List<ProvisionListenerBinding> getProvisionListenerBindings() {
+    List<ProvisionListenerBinding> parentBindings = parent.getProvisionListenerBindings();
+    List<ProvisionListenerBinding> result
+        = new ArrayList<ProvisionListenerBinding>(parentBindings.size() + 1);
+    result.addAll(parentBindings);
+    result.addAll(provisionListenerBindings);
+    return result;
+  }
+

@@ -1,0 +1,6 @@
+    public <T> void onProvision(ProvisionInvocation<T> provision) {
+      keys.add(provision.getKey());
+      T provisioned = provision.provision();
+      assertEquals(provision.getKey().getTypeLiteral().getRawType(), provisioned.getClass());
+    }
+

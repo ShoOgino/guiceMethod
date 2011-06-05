@@ -1,0 +1,4 @@
+    FooBomb() {
+      throw new RuntimeException("Retry, Abort, Fail");
+    }
+

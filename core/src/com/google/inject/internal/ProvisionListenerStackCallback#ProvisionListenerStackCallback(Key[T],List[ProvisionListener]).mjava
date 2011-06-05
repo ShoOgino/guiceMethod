@@ -1,0 +1,9 @@
+  public ProvisionListenerStackCallback(Key<T> key, List<ProvisionListener> listeners) {
+    this.key = key;
+    if (listeners.isEmpty()) {
+      this.listeners = EMPTY_LISTENER;
+    } else {
+      this.listeners = listeners.toArray(new ProvisionListener[listeners.size()]);
+    }
+  }
+

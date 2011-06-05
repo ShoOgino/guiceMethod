@@ -2,8 +2,9 @@
       InjectorImpl injector,
       Key<? extends javax.inject.Provider<? extends T>> providerKey,
       Object source,
-      boolean allowProxy) {
-    super(source, allowProxy);
+      boolean allowProxy,
+      ProvisionListenerStackCallback<T> provisionCallback) {
+    super(source, allowProxy, provisionCallback);
     this.injector = injector;
     this.providerKey = providerKey;
   }

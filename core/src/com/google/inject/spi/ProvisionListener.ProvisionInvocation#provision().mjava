@@ -1,0 +1,3 @@
+    /** Performs the provision, returning the object provisioned. */
+    public abstract T provision();
+

@@ -1,8 +1,8 @@
-  protected T circularGet(Provider<? extends T> provider, Errors errors,
-      InternalContext context, Dependency<?> dependency, boolean linked)
+  protected T circularGet(final Provider<? extends T> provider, final Errors errors,
+      InternalContext context, final Dependency<?> dependency, boolean linked)
       throws ErrorsException {    
     Class<?> expectedType = dependency.getKey().getTypeLiteral().getRawType();
-    ConstructionContext<T> constructionContext = context.getConstructionContext(this);
+    final ConstructionContext<T> constructionContext = context.getConstructionContext(this);
     
     // We have a circular reference between constructors. Return a proxy.
     if (constructionContext.isConstructing()) {
@@ -15,14 +15,16 @@
         return proxyType;
       }
     }
-    // First time through...
-    constructionContext.startConstruction();
-    try {
-      T t = errors.checkForNull(provider.get(), source, dependency);
-      constructionContext.setProxyDelegates(t);
-      return t;
-    } finally {
-      constructionContext.finishConstruction();
+
+    // Optimization: Don't go through the callback stack if no one's listening.
+    if (!provisionCallback.hasListeners()) {
+      return provision(provider, errors, dependency, constructionContext);
+    } else {
+      return provisionCallback.provision(errors, new ProvisionCallback<T>() {
+        public T call() throws ErrorsException {
+          return provision(provider, errors, dependency, constructionContext);
+        }
+      });
     }
   }
 

@@ -1,0 +1,7 @@
+  /** Returns a new {@link ProvisionListenerStackCallback} for the key.
+   */
+  @SuppressWarnings("unchecked") // the ProvisionListenerStackCallback type always agrees with the passed type
+  public <T> ProvisionListenerStackCallback<T> get(Key<T> key) {
+    return (ProvisionListenerStackCallback<T>) cache.get(key);
+  }
+

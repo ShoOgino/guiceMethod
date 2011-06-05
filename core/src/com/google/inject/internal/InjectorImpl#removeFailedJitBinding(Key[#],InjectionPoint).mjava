@@ -2,6 +2,7 @@
   private void removeFailedJitBinding(Key<?> key, InjectionPoint ip) {
     jitBindings.remove(key);
     membersInjectorStore.remove(key.getTypeLiteral());
+    provisionListenerStore.remove(key);
     if(ip != null) {
       constructors.remove(ip);
     }

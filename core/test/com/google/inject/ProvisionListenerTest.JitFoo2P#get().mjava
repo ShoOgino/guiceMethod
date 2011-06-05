@@ -1,0 +1,4 @@
+    public JitFoo2 get() {
+      return new JitFoo2();
+    }
+

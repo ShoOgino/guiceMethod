@@ -1,0 +1,53 @@
+  public void testNotifiedKeysOfAllBindTypes() {
+    final Capturer capturer = new Capturer();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindListener(Matchers.any(), capturer);
+        bind(Foo.class).annotatedWith(named("pk")).toProvider(FooP.class);
+        try {
+          bind(Foo.class).annotatedWith(named("cxtr")).toConstructor(Foo.class.getDeclaredConstructor());
+        } catch (Exception ex) {
+          throw new RuntimeException(ex);
+        }
+        bind(LinkedFoo.class).to(Foo.class);
+      }
+      
+      @Provides @Named("pi") Foo provideFooBar() {
+        return new Foo();
+      }
+    });
+    
+    // simple binding
+    assertNotNull(injector.getInstance(Foo.class));
+    assertEquals(of(Key.get(Foo.class)), capturer.getAndClear());
+    
+    // provider key binding -- notifies about provider & the object, always
+    assertNotNull(injector.getInstance(Key.get(Foo.class, named("pk"))));
+    assertEquals(of(Key.get(FooP.class), Key.get(Foo.class, named("pk"))), capturer.getAndClear());
+    assertNotNull(injector.getInstance(Key.get(Foo.class, named("pk"))));
+    assertEquals(of(Key.get(FooP.class), Key.get(Foo.class, named("pk"))), capturer.getAndClear());
+    
+    // JIT provider key binding -- notifies about provider & the object, always
+    assertNotNull(injector.getInstance(JitFoo2.class));
+    assertEquals(of(Key.get(JitFoo2P.class), Key.get(JitFoo2.class)), capturer.getAndClear());
+    assertNotNull(injector.getInstance(JitFoo2.class));
+    assertEquals(of(Key.get(JitFoo2P.class), Key.get(JitFoo2.class)), capturer.getAndClear());
+    
+    // provider instance binding -- just the object (not the provider)
+    assertNotNull(injector.getInstance(Key.get(Foo.class, named("pi"))));
+    assertEquals(of(Key.get(Foo.class, named("pi"))), capturer.getAndClear());
+    
+    // toConstructor binding
+    assertNotNull(injector.getInstance(Key.get(Foo.class, named("cxtr"))));
+    assertEquals(of(Key.get(Foo.class, named("cxtr"))), capturer.getAndClear());
+    
+    // linked binding -- notifies about the target (that's what's provisioned), not the link
+    assertNotNull(injector.getInstance(LinkedFoo.class));
+    assertEquals(of(Key.get(Foo.class)), capturer.getAndClear());
+
+    // JIT linked binding -- notifies about the target (that's what's provisioned), not the link
+    assertNotNull(injector.getInstance(JitFoo.class));
+    assertEquals(of(Key.get(Foo.class)), capturer.getAndClear());
+  }
+

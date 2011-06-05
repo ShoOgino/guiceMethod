@@ -1,0 +1,28 @@
+    @Override
+    public T provision() {
+      index++;
+      if (index == listeners.length) {
+        try {
+          result = callable.call();
+        } catch(ErrorsException ee) {
+          exceptionDuringProvision = ee;
+          throw new ProvisionException(errors.merge(ee.getErrors()).getMessages());
+        }
+      } else if (index < listeners.length) {
+        int currentIdx = index;
+        try {
+          listeners[index].onProvision(this);
+        } catch(RuntimeException re) {
+          erredListener = listeners[currentIdx];
+          throw re;
+        }
+        if (currentIdx == index) {
+          // Our listener didn't provision -- do it for them.
+          provision();
+        }
+      } else {
+        throw new IllegalStateException("Already provisioned in this listener.");
+      }
+      return result;
+    }
+

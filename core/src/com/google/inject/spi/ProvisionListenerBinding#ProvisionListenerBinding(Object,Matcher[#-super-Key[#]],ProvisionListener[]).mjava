@@ -1,0 +1,8 @@
+  ProvisionListenerBinding(Object source,
+      Matcher<? super Key<?>> typeMatcher,
+      ProvisionListener[] listeners) {
+    this.source = source;
+    this.keyMatcher = typeMatcher;
+    this.listeners = ImmutableList.of(listeners);
+  }
+

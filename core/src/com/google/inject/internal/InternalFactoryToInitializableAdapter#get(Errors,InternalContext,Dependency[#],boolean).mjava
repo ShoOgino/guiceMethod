@@ -1,9 +1,5 @@
   public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
       throws ErrorsException {
-    try {
-      return circularGet(initializable.get(errors), errors, context, dependency, linked);
-    } catch(RuntimeException userException) {
-      throw errors.withSource(source).errorInProvider(userException).toException();
-    }
+    return circularGet(initializable.get(errors), errors, context, dependency, linked);
   }
 
