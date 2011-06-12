@@ -10,5 +10,5 @@
    * @param listeners for provisioned objects matched by keyMatcher   * 
    * @since 4.0
    */
-  <T> void bindListener(Matcher<? super Key<?>> keyMatcher, ProvisionListener... listeners);
+  void bindListener(Matcher<? super Key<?>> keyMatcher, ProvisionListener... listeners);
 
