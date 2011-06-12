@@ -1,0 +1,2 @@
+    @Inject A(B b) {}
+

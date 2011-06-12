@@ -1,0 +1,5 @@
+  /** Adds to the state without setting the dependency. */
+  public void pushState(Key<?> key, Object source) {
+    state.addLast(new DependencyAndSource(key == null ? null : Dependency.get(key), source));
+  }
+

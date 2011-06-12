@@ -1,0 +1,15 @@
+  /**
+   * Returns a string describing where this dependency was bound. If the binding
+   * was just-in-time, there is no valid binding source, so this describes the
+   * class in question.
+   */
+  public String getBindingSource() {
+    if (source instanceof Class) {
+      return StackTraceElements.forType((Class) source).toString();
+    } else if (source instanceof Member) {
+      return StackTraceElements.forMember((Member) source).toString();
+    } else {
+      return source.toString();
+    }
+  }
+

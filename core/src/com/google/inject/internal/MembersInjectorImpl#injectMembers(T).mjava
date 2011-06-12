@@ -1,7 +1,7 @@
   public void injectMembers(T instance) {
     Errors errors = new Errors(typeLiteral);
     try {
-      injectAndNotify(instance, errors, false);
+      injectAndNotify(instance, errors, null, typeLiteral, false);
     } catch (ErrorsException e) {
       errors.merge(e.getErrors());
     }

@@ -25,8 +25,13 @@
     InternalFactory<T> internalFactory = new InternalFactory<T>() {
       public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
           throws ErrorsException {
-        return targetBinding.getInternalFactory().get(
-            errors.withSource(targetKey), context, dependency, true);
+        context.pushState(targetKey, targetBinding.getSource());
+        try {
+          return targetBinding.getInternalFactory().get(
+              errors.withSource(targetKey), context, dependency, true);
+        } finally {
+          context.popState();
+        }
       }
     };
 

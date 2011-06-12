@@ -1,5 +1,6 @@
-  public T provision(Errors errors, ProvisionCallback<T> callable) throws ErrorsException {
-    Provision provision = new Provision(errors, callable);
+  public T provision(Errors errors, InternalContext context, ProvisionCallback<T> callable)
+      throws ErrorsException {
+    Provision provision = new Provision(errors, context, callable);
     RuntimeException caught = null;
     try {
       provision.provision();

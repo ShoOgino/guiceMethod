@@ -6,6 +6,6 @@
 
     // Ewwwww...
     field.setAccessible(true);
-    factory = injector.getInternalFactory(dependency.getKey(), errors, JitLimitation.NO_JIT);
+    binding = injector.getBindingOrThrow(dependency.getKey(), errors, JitLimitation.NO_JIT);
   }
 

@@ -1,0 +1,5 @@
+  public DependencyAndSource(Dependency<?> dependency, Object source) {
+    this.dependency = dependency;
+    this.source = source;
+  }
+

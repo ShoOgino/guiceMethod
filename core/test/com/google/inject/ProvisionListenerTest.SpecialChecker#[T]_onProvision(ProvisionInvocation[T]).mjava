@@ -1,0 +1,14 @@
+    public <T> void onProvision(ProvisionInvocation<T> provision) {
+      notified.set(true);
+      assertEquals(notifyType, provision.getKey().getRawType());            
+      assertEquals(2, provision.getDependencyChain().size());
+      
+      assertEquals(null, provision.getDependencyChain().get(0).getDependency());
+      assertContains(provision.getDependencyChain().get(0).getBindingSource(), firstSource);
+      
+      assertEquals(notifyType,
+          provision.getDependencyChain().get(1).getDependency().getKey().getRawType());
+      assertContains(provision.getDependencyChain().get(1).getBindingSource(),
+          notifyType.getName() + ".class(");
+    }
+

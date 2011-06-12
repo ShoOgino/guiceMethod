@@ -1,11 +1,18 @@
-  void injectAndNotify(final T instance, final Errors errors, final boolean toolableOnly) throws ErrorsException {
+  void injectAndNotify(final T instance, final Errors errors,
+      final Key<T> key, final Object source, final boolean toolableOnly)
+      throws ErrorsException {
     if (instance == null) {
       return;
     }
 
     injector.callInContext(new ContextualCallable<Void>() {
       public Void call(InternalContext context) throws ErrorsException {
-        injectMembers(instance, errors, context, toolableOnly);
+        context.pushState(key, source);
+        try {
+          injectMembers(instance, errors, context, toolableOnly);
+        } finally {
+          context.popState();
+        }
         return null;
       }
     });

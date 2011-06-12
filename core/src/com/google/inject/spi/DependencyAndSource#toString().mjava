@@ -1,0 +1,11 @@
+  @Override
+  public String toString() {
+    Dependency<?> dep = getDependency();
+    Object source = getBindingSource();
+    if (dep != null) {
+      return "Dependency: " + dep + ", source: " + source;
+    } else {
+      return "Source: " + source;
+    }
+  }
+

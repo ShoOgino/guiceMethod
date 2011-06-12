@@ -1,0 +1,5 @@
+    public ChainAsserter(List<Class<?>> provisionList, Iterable<Class<?>> expected) {
+      this.provisionList = provisionList;
+      this.expected = ImmutableList.copyOf(expected);
+    }
+

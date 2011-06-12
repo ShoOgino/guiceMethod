@@ -1,0 +1,5 @@
+  /** Returns the current dependency chain (all the state). */
+  public List<DependencyAndSource> getDependencyChain() {
+    return ImmutableList.copyOf(state);
+  }
+

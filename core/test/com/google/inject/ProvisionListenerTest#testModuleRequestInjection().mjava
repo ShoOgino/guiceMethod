@@ -1,0 +1,15 @@
+  public void testModuleRequestInjection() {
+    final AtomicBoolean notified = new AtomicBoolean();    
+    Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        requestInjection(new Object() {
+          @Inject Foo foo;
+        });
+        bindListener(Matchers.any(),
+            new SpecialChecker(Foo.class, getClass().getName() + ".configure(", notified));
+      }
+    });
+    assertTrue(notified.get());
+  }
+

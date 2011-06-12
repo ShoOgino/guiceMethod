@@ -1,6 +1,0 @@
-  public Dependency setDependency(Dependency dependency) {
-    Dependency previous = this.dependency;
-    this.dependency = dependency;
-    return previous;
-  }
-

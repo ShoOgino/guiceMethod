@@ -1,0 +1,5 @@
+  /** Pops from the state without setting a dependency. */
+  public void popState() {
+    state.removeLast();
+  }
+

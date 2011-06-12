@@ -1,0 +1,6 @@
+    public SpecialChecker(Class<?> notifyType, String firstSource, AtomicBoolean notified) {
+      this.notifyType = notifyType;
+      this.firstSource = firstSource;
+      this.notified = notified;
+    }
+
