@@ -24,6 +24,6 @@
     /*end[AOP]*/
     builder.addSuite(MapMakerTestSuite.class.getName());
 
-    return AllTests.removeSuppressedTests(builder.build(), SUPPRESSED_TEST_NAMES);
+    return SuiteUtils.removeSuppressedTests(builder.build(), SUPPRESSED_TEST_NAMES);
   }
 
