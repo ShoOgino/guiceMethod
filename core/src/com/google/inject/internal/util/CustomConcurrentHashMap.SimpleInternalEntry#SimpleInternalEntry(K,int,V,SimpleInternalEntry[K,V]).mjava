@@ -1,8 +1,0 @@
-    SimpleInternalEntry(
-        K key, int hash, @Nullable V value, SimpleInternalEntry<K, V> next) {
-      this.key = key;
-      this.hash = hash;
-      this.value = value;
-      this.next = next;
-    }
-

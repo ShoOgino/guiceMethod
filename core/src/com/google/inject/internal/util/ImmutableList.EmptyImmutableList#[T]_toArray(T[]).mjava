@@ -1,7 +1,0 @@
-    @Override public <T> T[] toArray(T[] a) {
-      if (a.length > 0) {
-        a[0] = null;
-      }
-      return a;
-    }
-

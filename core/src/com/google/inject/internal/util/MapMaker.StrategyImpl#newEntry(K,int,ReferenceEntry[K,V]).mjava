@@ -1,5 +1,0 @@
-    public ReferenceEntry<K, V> newEntry(
-        K key, int hash, ReferenceEntry<K, V> next) {
-      return keyStrength.newEntry(internals, key, hash, next);
-    }
-

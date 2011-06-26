@@ -1,6 +1,0 @@
-    public Object get(int index) {
-      // guaranteed to fail, but at least we get a consistent message
-      Preconditions.checkElementIndex(index, 0);
-      throw new AssertionError("unreachable");
-    }
-

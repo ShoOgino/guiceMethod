@@ -1,8 +1,0 @@
-    public void testInitialCapacity_smallest() {
-      MapMaker maker = new MapMaker().initialCapacity(0);
-      Impl<?, ?, ?> map = makeCustomMap(maker);
-
-      // 1 is as low as it goes, not 0. it feels dirty to know this/test this.
-      assertEquals(1, map.segments[0].table.length());
-    }
-

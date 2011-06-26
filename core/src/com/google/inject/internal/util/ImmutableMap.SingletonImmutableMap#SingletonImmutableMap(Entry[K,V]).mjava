@@ -1,6 +1,0 @@
-    private SingletonImmutableMap(Entry<K, V> entry) {
-      this.entry = entry;
-      this.singleKey = entry.getKey();
-      this.singleValue = entry.getValue();
-    }
-

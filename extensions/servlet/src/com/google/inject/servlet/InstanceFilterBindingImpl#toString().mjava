@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(InstanceFilterBinding.class)
+    return Objects.toStringHelper(InstanceFilterBinding.class)
       .add("pattern", getPattern())
       .add("initParams", getInitParams())
       .add("uriPatternType", getUriPatternType())

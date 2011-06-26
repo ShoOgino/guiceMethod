@@ -1,8 +1,0 @@
-    /**
-     * putIfAbsent does not add the pair if the key is already present
-     */
-    public void testPutIfAbsent2() {
-        Jsr166HashMap map = map5();
-        assertEquals("A", map.putIfAbsent(one, "Z"));
-    }
-

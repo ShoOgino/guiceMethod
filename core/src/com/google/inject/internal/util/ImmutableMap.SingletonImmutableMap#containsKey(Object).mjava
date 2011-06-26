@@ -1,4 +1,0 @@
-    @Override public boolean containsKey(Object key) {
-      return singleKey.equals(key);
-    }
-

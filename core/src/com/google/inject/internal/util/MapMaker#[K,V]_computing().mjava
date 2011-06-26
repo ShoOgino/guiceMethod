@@ -1,9 +1,0 @@
-  /**
-   * Singleton placeholder that indicates a value is being computed.
-   */
-  @SuppressWarnings("unchecked")
-  // Safe because impl never uses a parameter or returns any non-null value
-  private static <K, V> ValueReference<K, V> computing() {
-    return (ValueReference<K, V>) COMPUTING;
-  }
-

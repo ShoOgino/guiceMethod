@@ -1,4 +1,0 @@
-      public K next() {
-        return super.nextEntry().getKey();
-      }
-

@@ -1,9 +1,0 @@
-  /**
-   * Returns an immutable list containing the given elements, in order.
-   *
-   * @throws NullPointerException if any of {@code elements} is null
-   */
-  public static <E> ImmutableList<E> copyOf(Iterator<? extends E> elements) {
-    return copyOfInternal(Lists.newArrayList(elements));
-  }
-

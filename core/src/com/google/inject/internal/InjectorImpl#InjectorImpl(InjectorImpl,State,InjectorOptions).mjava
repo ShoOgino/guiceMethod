@@ -1,4 +1,4 @@
-  InjectorImpl(@Nullable InjectorImpl parent, State state, InjectorOptions injectorOptions) {
+  InjectorImpl(InjectorImpl parent, State state, InjectorOptions injectorOptions) {
     this.parent = parent;
     this.state = state;
     this.options = injectorOptions;

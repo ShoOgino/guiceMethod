@@ -1,7 +1,0 @@
-    private void runTasks() {
-      for (TimerTask task : tasks) {
-        task.run();
-      }
-      tasks.clear();
-    }
-

@@ -1,8 +1,0 @@
-    /**
-     * Returns a newly-created {@code ImmutableSet} based on the contents of
-     * the {@code Builder}.
-     */
-    public ImmutableSet<E> build() {
-      return copyOf(contents);
-    }
-

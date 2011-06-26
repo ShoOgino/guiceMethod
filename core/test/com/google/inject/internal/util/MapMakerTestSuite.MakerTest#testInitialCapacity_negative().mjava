@@ -1,9 +1,0 @@
-    public void testInitialCapacity_negative() {
-      MapMaker maker = new MapMaker();
-      try {
-        maker.initialCapacity(-1);
-        fail();
-      } catch (IllegalArgumentException expected) {
-      }
-    }
-

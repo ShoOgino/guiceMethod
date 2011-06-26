@@ -1,4 +1,0 @@
-  // This declaration is needed to make Set.iterator() and
-  // ImmutableCollection.iterator() consistent.
-  @Override public abstract UnmodifiableIterator<E> iterator();
-

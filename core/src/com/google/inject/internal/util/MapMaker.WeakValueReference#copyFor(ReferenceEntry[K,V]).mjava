@@ -1,5 +1,0 @@
-    public ValueReference<K, V> copyFor(
-        ReferenceEntry<K, V> entry) {
-      return new WeakValueReference<K, V>(get(), entry);
-    }
-

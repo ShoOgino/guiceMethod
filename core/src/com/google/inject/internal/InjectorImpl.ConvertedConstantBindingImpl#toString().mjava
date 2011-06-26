@@ -1,5 +1,5 @@
     @Override public String toString() {
-      return new ToStringBuilder(ConvertedConstantBinding.class)
+      return Objects.toStringHelper(ConvertedConstantBinding.class)
           .add("key", getKey())
           .add("sourceKey", getSourceKey())
           .add("value", value)

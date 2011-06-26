@@ -1,4 +1,0 @@
-    StrongValueReference(V referent) {
-      this.referent = referent;
-    }
-

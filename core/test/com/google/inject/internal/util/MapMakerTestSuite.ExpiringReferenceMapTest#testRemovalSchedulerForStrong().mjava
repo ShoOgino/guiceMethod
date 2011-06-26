@@ -1,7 +1,0 @@
-    public void testRemovalSchedulerForStrong() {
-      ConcurrentMap<String, Integer> map = new MapMaker()
-          .expiration(EXPIRING_TIME, TimeUnit.MILLISECONDS).makeMap();
-
-      runRemovalScheduler(map, KEY_PREFIX, EXPIRING_TIME);
-    }
-

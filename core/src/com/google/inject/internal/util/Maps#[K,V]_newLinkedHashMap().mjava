@@ -1,9 +1,0 @@
-  /**
-   * Creates an insertion-ordered {@code LinkedHashMap} instance.
-   *
-   * @return a new, empty {@code LinkedHashMap}
-   */
-  public static <K, V> LinkedHashMap<K, V> newLinkedHashMap() {
-    return new LinkedHashMap<K, V>();
-  }
-

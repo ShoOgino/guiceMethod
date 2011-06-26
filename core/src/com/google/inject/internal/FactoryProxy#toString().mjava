@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(FactoryProxy.class)
+    return Objects.toStringHelper(FactoryProxy.class)
         .add("key", key)
         .add("provider", targetFactory)
         .toString();

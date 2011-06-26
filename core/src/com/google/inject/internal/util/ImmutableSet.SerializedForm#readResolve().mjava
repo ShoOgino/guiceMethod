@@ -1,4 +1,0 @@
-    Object readResolve() {
-      return of(elements);
-    }
-

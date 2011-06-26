@@ -1,4 +1,0 @@
-    SerializedForm(Object[] elements) {
-      this.elements = elements;
-    }
-

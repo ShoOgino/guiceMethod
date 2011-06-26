@@ -1,5 +1,0 @@
-    /**
-     * Gets the value reference from this entry.
-     */
-    ValueReference<K, V> getValueReference();
-

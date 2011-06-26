@@ -1,5 +1,0 @@
-    public ListIterator<Object> listIterator(int start) {
-      Preconditions.checkPositionIndex(start, 0);
-      return Iterators.emptyListIterator();
-    }
-

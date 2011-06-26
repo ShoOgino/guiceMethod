@@ -1,5 +1,0 @@
-      EntrySet(RegularImmutableMap<K, V> map) {
-        super(map.entries);
-        this.map = map;
-      }
-

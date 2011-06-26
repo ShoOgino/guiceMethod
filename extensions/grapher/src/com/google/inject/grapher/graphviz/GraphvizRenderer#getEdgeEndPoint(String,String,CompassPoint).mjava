@@ -9,6 +9,6 @@
       portStrings.add(compassPoint.toString());
     }
     
-    return Join.join(":", portStrings);
+    return Joiner.on(":").join(portStrings);
   }
 

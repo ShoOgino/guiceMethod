@@ -1,3 +1,0 @@
-    public void setInternals(CustomConcurrentHashMap.Internals<K, V,
-        InternalEntry<K, V>> internals) {} // ignored
-

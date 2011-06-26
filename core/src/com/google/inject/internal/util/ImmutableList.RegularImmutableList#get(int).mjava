@@ -1,7 +1,0 @@
-    // The fake cast to E is safe because the creation methods only allow E's
-    @SuppressWarnings("unchecked")
-    public E get(int index) {
-      Preconditions.checkElementIndex(index, size);
-      return (E) array[index + offset];
-    }
-

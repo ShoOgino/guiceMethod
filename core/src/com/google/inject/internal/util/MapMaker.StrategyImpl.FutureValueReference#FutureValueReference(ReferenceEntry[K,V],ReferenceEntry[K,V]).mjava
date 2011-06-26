@@ -1,6 +1,0 @@
-      FutureValueReference(
-          ReferenceEntry<K, V> original, ReferenceEntry<K, V> newEntry) {
-        this.original = original;
-        this.newEntry = newEntry;
-      }
-

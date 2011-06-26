@@ -1,9 +1,0 @@
-    public void testRemovalSchedulerForSoft() {
-      String keyPrefix = "TRSOFT_";
-      int ttl = 300;
-      ConcurrentMap<String, Integer> cache = new MapMaker()
-          .expiration(ttl, TimeUnit.MILLISECONDS).softValues()
-          .makeComputingMap(new WatchedCreatorFunction(keyPrefix));
-      runRemovalScheduler(cache, keyPrefix, ttl);
-    }
-

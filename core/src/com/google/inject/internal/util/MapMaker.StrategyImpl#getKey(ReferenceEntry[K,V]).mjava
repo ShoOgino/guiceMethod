@@ -1,4 +1,0 @@
-    public K getKey(ReferenceEntry<K, V> entry) {
-      return entry.getKey();
-    }
-

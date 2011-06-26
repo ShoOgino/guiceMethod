@@ -1,6 +1,0 @@
-  /**
-   * Returns an immutable collection of the values in this map. The values are
-   * in the same order as the parameters used to build this map.
-   */
-  public abstract ImmutableCollection<V> values();
-

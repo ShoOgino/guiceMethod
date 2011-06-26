@@ -1,6 +1,0 @@
-    // The fake cast to E is safe because the creation methods only allow E's
-    @SuppressWarnings("unchecked")
-    @Override public UnmodifiableIterator<E> iterator() {
-      return (UnmodifiableIterator<E>) Iterators.forArray(array, offset, size);
-    }
-

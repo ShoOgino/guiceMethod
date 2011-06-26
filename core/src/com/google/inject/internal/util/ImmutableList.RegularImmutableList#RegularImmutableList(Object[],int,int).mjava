@@ -1,6 +1,0 @@
-    private RegularImmutableList(Object[] array, int offset, int size) {
-      this.offset = offset;
-      this.size = size;
-      this.array = array;
-    }
-

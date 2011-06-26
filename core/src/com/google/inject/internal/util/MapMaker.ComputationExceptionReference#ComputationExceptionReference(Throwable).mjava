@@ -1,4 +1,0 @@
-    ComputationExceptionReference(Throwable t) {
-      this.t = t;
-    }
-

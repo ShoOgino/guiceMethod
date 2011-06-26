@@ -1,2 +1,0 @@
-    public K getKey(InternalEntry<K, V> entry) { return entry.key; }
-

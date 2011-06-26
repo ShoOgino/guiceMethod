@@ -1,2 +1,0 @@
-    abstract E transform(D element);
-

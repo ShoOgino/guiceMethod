@@ -1,8 +1,0 @@
-    public void testRemovalSchedulerForSoft() {
-      ConcurrentMap<String, Integer> map = new MapMaker()
-          .softValues().expiration(EXPIRING_TIME, TimeUnit.MILLISECONDS)
-          .makeMap();
-
-      runRemovalScheduler(map, KEY_PREFIX, EXPIRING_TIME);
-    }
-

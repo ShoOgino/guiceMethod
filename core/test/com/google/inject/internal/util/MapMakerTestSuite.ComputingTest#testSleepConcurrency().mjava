@@ -1,6 +1,0 @@
-    public void testSleepConcurrency() throws InterruptedException {
-      ConcurrentMap<String, Integer> cache = new MapMaker()
-          .weakKeys().weakValues().makeComputingMap(new SleepFunction());
-      assertConcurrency(cache, false);
-    }
-

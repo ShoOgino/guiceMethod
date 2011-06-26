@@ -1,4 +1,0 @@
-    MockReference(FinalizableReferenceQueue frq) {
-      super(new Object(), frq);
-    }
-

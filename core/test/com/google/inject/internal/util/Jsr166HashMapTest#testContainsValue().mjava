@@ -1,9 +1,0 @@
-    /**
-     * containsValue returns true for held values
-     */
-    public void testContainsValue() {
-        Jsr166HashMap map = map5();
-        assertTrue(map.containsValue("A"));
-        assertFalse(map.containsValue("Z"));
-    }
-

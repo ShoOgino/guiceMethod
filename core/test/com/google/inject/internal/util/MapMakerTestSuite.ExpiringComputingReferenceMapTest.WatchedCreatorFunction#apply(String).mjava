@@ -1,5 +1,0 @@
-      public Integer apply(String s) {
-        wasCalled = true;
-        return Integer.parseInt(s.substring(prefix.length())) + VALUE_SUFFIX;
-      }
-

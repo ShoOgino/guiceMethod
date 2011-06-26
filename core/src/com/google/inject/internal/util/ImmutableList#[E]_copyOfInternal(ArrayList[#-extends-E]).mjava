@@ -1,7 +1,0 @@
-  private static <E> ImmutableList<E> copyOfInternal(
-      ArrayList<? extends E> list) {
-    return (list.isEmpty())
-        ? ImmutableList.<E>of()
-        : new RegularImmutableList<E>(nullChecked(list.toArray()));
-  }
-

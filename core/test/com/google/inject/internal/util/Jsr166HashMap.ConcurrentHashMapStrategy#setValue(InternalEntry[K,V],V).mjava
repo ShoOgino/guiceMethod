@@ -1,4 +1,0 @@
-    public void setValue(InternalEntry<K, V> entry, V value) {
-      entry.value = value;
-    }
-

@@ -1,5 +1,0 @@
-    @Override public ImmutableList<Object> subList(int fromIndex, int toIndex) {
-      Preconditions.checkPositionIndexes(fromIndex, toIndex, 0);
-      return this;
-    }
-

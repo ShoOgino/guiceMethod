@@ -1,4 +1,0 @@
-    @Override public UnmodifiableIterator<Object> iterator() {
-      return Iterators.emptyIterator();
-    }
-

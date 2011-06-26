@@ -1,4 +1,0 @@
-  public StrictContainerTestSuiteBuilder(SecurityManager securityManager) {
-    this.securityManager = securityManager;
-  }
-

@@ -1,9 +1,0 @@
-    /**
-     * Used by CustomConcurrentHashMap to retrieve values. Returns null
-     * instead of blocking or throwing an exception.
-     */
-    public V getValue(ReferenceEntry<K, V> entry) {
-      ValueReference<K, V> valueReference = entry.getValueReference();
-      return valueReference.get();
-    }
-

@@ -1,5 +1,0 @@
-        public Object apply(Object key) {
-          count++;
-          return Value.valueOf(key.toString());
-        }
-

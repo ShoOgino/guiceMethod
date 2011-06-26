@@ -13,7 +13,7 @@
    * @return The newly-created and added {@link DependencyEdge}.
    */
   protected D newDependencyEdge(K nodeId,
-      @Nullable InjectionPoint injectionPoint, Dependency<?> dependency) {
+      InjectionPoint injectionPoint, Dependency<?> dependency) {
     K toId = idFactory.getClassNodeId(dependency.getKey());
     return dependencyEdgeFactory.newDependencyEdge(nodeId, injectionPoint, toId);
   }

@@ -1,5 +1,0 @@
-    public InternalEntry<K, V> copyEntry(K key,
-        InternalEntry<K, V> original, InternalEntry<K, V> next) {
-      return new InternalEntry<K, V>(key, original.hash, original.value, next);
-    }
-

@@ -1,6 +1,0 @@
-    public void testReplace() {
-      ConcurrentMap<Object, Object> map =
-          new MapMaker().makeMap();
-      assertNull(map.replace("one", 1));
-    }
-

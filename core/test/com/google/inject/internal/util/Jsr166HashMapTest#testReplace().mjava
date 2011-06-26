@@ -1,9 +1,0 @@
-    /**
-     * replace fails when the given key is not present
-     */
-    public void testReplace() {
-        Jsr166HashMap map = map5();
-        assertNull(map.replace(six, "Z"));
-        assertFalse(map.containsKey(six));
-    }
-

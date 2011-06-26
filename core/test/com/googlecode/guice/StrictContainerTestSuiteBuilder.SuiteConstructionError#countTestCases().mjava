@@ -1,4 +1,0 @@
-    public int countTestCases() {
-      return 1;
-    }
-

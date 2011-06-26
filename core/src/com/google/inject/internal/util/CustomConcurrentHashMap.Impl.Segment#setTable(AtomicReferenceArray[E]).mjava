@@ -1,9 +1,0 @@
-      /**
-       * Sets table to new HashEntry array. Call only while holding lock or in
-       * constructor.
-       */
-      void setTable(AtomicReferenceArray<E> newTable) {
-        this.threshold = (int) (newTable.length() * loadFactor);
-        this.table = newTable;
-      }
-

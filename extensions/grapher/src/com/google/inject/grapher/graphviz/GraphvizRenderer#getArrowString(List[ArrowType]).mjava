@@ -4,6 +4,6 @@
    * them.
    */
   protected String getArrowString(List<ArrowType> arrows) {
-    return Join.join("", arrows);
+    return Joiner.on("").join(arrows);
   }
 

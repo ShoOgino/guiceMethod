@@ -1,9 +1,0 @@
-      V get(Object key, int hash) {
-        E entry = getEntry(key, hash);
-        if (entry == null) {
-          return null;
-        }
-
-        return strategy.getValue(entry);
-      }
-

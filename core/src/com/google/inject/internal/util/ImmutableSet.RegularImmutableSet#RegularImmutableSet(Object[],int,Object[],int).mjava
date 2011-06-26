@@ -1,8 +1,0 @@
-    RegularImmutableSet(Object[] elements, int hashCode,
-        Object[] table, int mask) {
-      super(elements);
-      this.table = table;
-      this.mask = mask;
-      this.hashCode = hashCode;
-    }
-

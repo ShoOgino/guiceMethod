@@ -1,9 +1,0 @@
-    /**
-     * containsKey returns true for contained key
-     */
-    public void testContainsKey() {
-        Jsr166HashMap map = map5();
-        assertTrue(map.containsKey(one));
-        assertFalse(map.containsKey(zero));
-    }
-

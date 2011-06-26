@@ -1,6 +1,6 @@
     @Override
     public String toString() {
-      return new ToStringBuilder(getClass())
+      return Objects.toStringHelper(getClass())
         .add("ctor", constructor)
         .add("return type", returnType)
         .add("param type", paramTypes)

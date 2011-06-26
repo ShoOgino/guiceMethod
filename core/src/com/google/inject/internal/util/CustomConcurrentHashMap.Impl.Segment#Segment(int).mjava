@@ -1,4 +1,0 @@
-      Segment(int initialCapacity) {
-        setTable(newEntryArray(initialCapacity));
-      }
-

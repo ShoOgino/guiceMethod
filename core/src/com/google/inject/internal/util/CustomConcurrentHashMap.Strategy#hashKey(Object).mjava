@@ -1,7 +1,0 @@
-    /**
-     * Returns a hash code for the given key.
-     *
-     * @see Object#hashCode the same contractual obligations apply here
-     */
-    int hashKey(Object key);
-

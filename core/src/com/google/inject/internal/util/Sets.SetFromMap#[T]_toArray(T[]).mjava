@@ -1,4 +1,0 @@
-    @Override public <T> T[] toArray(T[] a) {
-      return s.toArray(a);
-    }
-

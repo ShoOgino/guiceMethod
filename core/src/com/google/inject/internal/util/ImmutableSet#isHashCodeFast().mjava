@@ -1,5 +1,0 @@
-  /** Returns {@code true} if the {@code hashCode()} method runs quickly. */
-  boolean isHashCodeFast() {
-    return false;
-  }
-

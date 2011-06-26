@@ -1,4 +1,0 @@
-      public ValueReference<K, V> copyFor(ReferenceEntry<K, V> entry) {
-        return new FutureValueReference(original, entry);
-      }
-

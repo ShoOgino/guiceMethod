@@ -1,9 +1,0 @@
-    public void testLoadFactor_zero() {
-      MapMaker maker = new MapMaker();
-      try {
-        maker.loadFactor(0);
-        fail();
-      } catch (IllegalArgumentException expected) {
-      }
-    }
-

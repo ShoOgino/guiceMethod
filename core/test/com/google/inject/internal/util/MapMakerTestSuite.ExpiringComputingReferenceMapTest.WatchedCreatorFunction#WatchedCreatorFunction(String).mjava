@@ -1,4 +1,0 @@
-      public WatchedCreatorFunction(String prefix) {
-        setPrefix(prefix);
-      }
-

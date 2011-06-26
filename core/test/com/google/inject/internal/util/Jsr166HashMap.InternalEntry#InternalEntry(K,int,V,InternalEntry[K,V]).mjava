@@ -1,7 +1,0 @@
-    InternalEntry(K key, int hash, V value, InternalEntry<K, V> next) {
-      this.key = key;
-      this.hash = hash;
-      this.value = value;
-      this.next = next;
-    }
-

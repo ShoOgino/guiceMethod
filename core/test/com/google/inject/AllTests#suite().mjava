@@ -45,10 +45,7 @@
     suite.addTestSuite(TypeLiteralTypeResolutionTest.class);
 
     // internal
-    suite.addTestSuite(FinalizableReferenceQueueTest.class);
-    suite.addTestSuite(Jsr166HashMapTest.class);
     suite.addTestSuite(LineNumbersTest.class);
-    suite.addTest(MapMakerTestSuite.suite());
     suite.addTestSuite(MoreTypesTest.class);
     suite.addTestSuite(UniqueAnnotationsTest.class);
 
@@ -87,7 +84,6 @@
     /*end[AOP]*/
 
     // googlecode.guice
-    suite.addTest(com.googlecode.guice.StrictContainerTestSuite.suite());
     suite.addTestSuite(com.googlecode.guice.OSGiContainerTest.class);
     suite.addTestSuite(Jsr330Test.class);
 

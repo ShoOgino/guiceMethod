@@ -1,3 +1,0 @@
-    /** Gets the key for this entry. */
-    public K getKey();
-

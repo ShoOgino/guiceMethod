@@ -1,5 +1,0 @@
-    /**
-     * Hashes a key according to this strategy.
-     */
-    abstract int hash(Object o);
-

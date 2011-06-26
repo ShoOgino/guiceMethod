@@ -1,4 +1,0 @@
-      Values(RegularImmutableMap<?, V> map) {
-        this.map = map;
-      }
-

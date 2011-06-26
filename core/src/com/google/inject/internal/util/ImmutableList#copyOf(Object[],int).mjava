@@ -1,8 +1,0 @@
-  // Avoid using Arrays.copyOf(), which is not present until JDK6.
-  private static Object[] copyOf(Object[] oldArray, int newSize) {
-    Object[] newArray = new Object[newSize];
-    System.arraycopy(oldArray, 0, newArray, 0,
-        Math.min(oldArray.length, newSize));
-    return newArray;
-  }
-

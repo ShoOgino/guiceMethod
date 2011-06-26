@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(ExposedBinding.class)
+    return Objects.toStringHelper(ExposedBinding.class)
         .add("key", getKey())
         .add("source", getSource())
         .add("privateElements", privateElements)

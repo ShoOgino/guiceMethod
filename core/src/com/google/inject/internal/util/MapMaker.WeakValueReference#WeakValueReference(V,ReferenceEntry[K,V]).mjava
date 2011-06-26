@@ -1,5 +1,0 @@
-    WeakValueReference(V referent, ReferenceEntry<K, V> entry) {
-      super(referent, QueueHolder.queue);
-      this.entry = entry;
-    }
-

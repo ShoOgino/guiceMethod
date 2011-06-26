@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(InstanceServletBinding.class)
+    return Objects.toStringHelper(InstanceServletBinding.class)
       .add("pattern", getPattern())
       .add("initParams", getInitParams())
       .add("uriPatternType", getUriPatternType())

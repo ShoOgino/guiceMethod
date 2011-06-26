@@ -1,9 +1,0 @@
-    /**
-     * replace succeeds if the key is already present
-     */
-    public void testReplace2() {
-        Jsr166HashMap map = map5();
-        assertNotNull(map.replace(one, "Z"));
-        assertEquals("Z", map.get(one));
-    }
-

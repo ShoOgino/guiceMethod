@@ -1,2 +1,0 @@
-  @Override protected abstract Collection<E> delegate();
-

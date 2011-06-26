@@ -1,7 +1,0 @@
-    /**
-     * Gets the value of an entry using volatile semantics.
-     *
-     * @param entry to get the value from
-     */
-    V getValue(E entry);
-

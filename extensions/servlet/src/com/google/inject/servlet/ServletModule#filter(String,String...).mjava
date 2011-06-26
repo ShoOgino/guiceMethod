@@ -3,6 +3,6 @@
    * @since 2.0
    */
   protected final FilterKeyBindingBuilder filter(String urlPattern, String... morePatterns) {
-    return filtersModuleBuilder.filter(Lists.newArrayList(urlPattern, morePatterns));
+    return filtersModuleBuilder.filter(ImmutableList.<String>builder().add(urlPattern).add(morePatterns).build());
   }
 

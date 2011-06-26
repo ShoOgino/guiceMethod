@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(ConstructorBinding.class)
+    return Objects.toStringHelper(ConstructorBinding.class)
         .add("key", getKey())
         .add("source", getSource())
         .add("scope", getScoping())

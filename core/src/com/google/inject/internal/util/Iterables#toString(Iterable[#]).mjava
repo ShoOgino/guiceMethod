@@ -1,8 +1,0 @@
-  /**
-   * Returns a string representation of {@code iterable}, with the format
-   * {@code [e1, e2, ..., en]}.
-   */
-  public static String toString(Iterable<?> iterable) {
-    return Iterators.toString(iterable.iterator());
-  }
-

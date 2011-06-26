@@ -1,4 +1,0 @@
-      @Override public String getName() {
-        return super.getName() + "For" + keyOption + valueOption;
-      }
-

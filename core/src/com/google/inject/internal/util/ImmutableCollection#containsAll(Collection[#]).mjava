@@ -1,9 +1,0 @@
-  public boolean containsAll(Collection<?> targets) {
-    for (Object target : targets) {
-      if (!contains(target)) {
-        return false;
-      }
-    }
-    return true;
-  }
-

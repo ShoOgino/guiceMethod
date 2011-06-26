@@ -1,7 +1,0 @@
-    public void testExpiringGetForStrong() {
-      ConcurrentMap<String, Integer> map = new MapMaker()
-          .expiration(EXPIRING_TIME, TimeUnit.MILLISECONDS).makeMap();
-
-      runExpirationTest(map);
-    }
-

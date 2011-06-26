@@ -1,5 +1,5 @@
   public String toString() {
-    return new ToStringBuilder(ConstantFactory.class)
+    return Objects.toStringHelper(ConstantFactory.class)
         .add("value", initializable)
         .toString();
   }

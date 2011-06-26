@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return new ToStringBuilder(LinkedFilterBinding.class)
+    return Objects.toStringHelper(LinkedFilterBinding.class)
       .add("pattern", getPattern())
       .add("initParams", getInitParams())
       .add("uriPatternType", getUriPatternType())

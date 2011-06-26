@@ -1,7 +1,0 @@
-  /** Returns the empty {@code Iterator}. */
-  // Casting to any type is safe since there are no actual elements.
-  @SuppressWarnings("unchecked")
-  public static <T> UnmodifiableIterator<T> emptyIterator() {
-    return (UnmodifiableIterator<T>) EMPTY_ITERATOR;
-  }
-

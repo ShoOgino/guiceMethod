@@ -1,4 +1,0 @@
-    @Override public ImmutableSet<Entry<Object, Object>> entrySet() {
-      return ImmutableSet.of();
-    }
-

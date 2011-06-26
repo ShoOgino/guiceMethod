@@ -9,6 +9,6 @@
       }
     }
     
-    return "[" + Join.join(", ", attrList) + "]";
+    return "[" + Joiner.on(", ").join(attrList) + "]";
   }
 

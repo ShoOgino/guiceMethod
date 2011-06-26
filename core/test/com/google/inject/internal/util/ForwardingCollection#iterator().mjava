@@ -1,4 +1,0 @@
-  public Iterator<E> iterator() {
-    return delegate().iterator();
-  }
-

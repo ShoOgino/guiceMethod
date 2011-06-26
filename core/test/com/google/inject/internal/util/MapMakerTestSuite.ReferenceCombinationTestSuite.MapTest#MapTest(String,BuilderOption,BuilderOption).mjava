@@ -1,8 +1,0 @@
-      public MapTest(String name,
-          BuilderOption keyOption,
-          BuilderOption valueOption) {
-        super(name);
-        this.keyOption = keyOption;
-        this.valueOption = valueOption;
-      }
-

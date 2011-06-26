@@ -1,4 +1,0 @@
-    @Override public Object[] toArray() {
-      return new Object[] { element };
-    }
-

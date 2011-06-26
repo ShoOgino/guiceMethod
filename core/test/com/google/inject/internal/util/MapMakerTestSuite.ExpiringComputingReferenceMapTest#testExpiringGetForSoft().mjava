@@ -1,8 +1,0 @@
-    public void testExpiringGetForSoft() {
-      ConcurrentMap<String, Integer> cache = new MapMaker()
-          .expiration(5, TimeUnit.MILLISECONDS)
-          .softValues().makeComputingMap(WATCHED_CREATOR);
-
-      runExpirationTest(cache);
-    }
-

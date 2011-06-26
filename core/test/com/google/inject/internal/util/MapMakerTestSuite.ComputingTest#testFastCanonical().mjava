@@ -1,6 +1,0 @@
-    public void testFastCanonical() throws InterruptedException {
-      ConcurrentMap<String, Integer> cache = new MapMaker()
-          .softValues().makeComputingMap(new SomeFunction());
-      assertConcurrency(cache, true);
-    }
-

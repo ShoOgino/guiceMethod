@@ -1,4 +1,0 @@
-    public V waitForValue() {
-      throw new AsynchronousComputationException(t);
-    }
-

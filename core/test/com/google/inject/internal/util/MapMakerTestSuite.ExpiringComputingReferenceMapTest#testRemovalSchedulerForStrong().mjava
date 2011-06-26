@@ -1,9 +1,0 @@
-    public void testRemovalSchedulerForStrong() {
-      String keyPrefix = "TRSTRONG_";
-      int ttl = 300;
-      ConcurrentMap<String, Integer> cache = new MapMaker()
-          .expiration(ttl, TimeUnit.MILLISECONDS)
-          .makeComputingMap(new WatchedCreatorFunction(keyPrefix));
-      runRemovalScheduler(cache, keyPrefix, ttl);
-    }
-

@@ -1,4 +1,0 @@
-  public boolean remove(Object key, Object value) {
-    return delegate().remove(key, value);
-  }
-

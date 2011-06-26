@@ -1,8 +1,0 @@
-    /**
-     * Removes this entry from the map if its value reference hasn't
-     * changed.  Used to clean up after values. The value reference can
-     * just call this method on the entry so it doesn't have to keep
-     * its own reference to the map.
-     */
-    void valueReclaimed();
-

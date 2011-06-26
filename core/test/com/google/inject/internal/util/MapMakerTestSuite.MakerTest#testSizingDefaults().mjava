@@ -1,7 +1,0 @@
-    public void testSizingDefaults() {
-      Impl<?, ?, ?> map = makeCustomMap(new MapMaker());
-      assertEquals(16, map.segments.length); // concurrency level
-      assertEquals(1, map.segments[0].table.length()); // capacity / conc level
-      assertEquals(0.75f, map.loadFactor);
-    }
-

@@ -1,4 +1,0 @@
-      public Iterator<Entry<K, V>> iterator() {
-        return new EntryIterator();
-      }
-

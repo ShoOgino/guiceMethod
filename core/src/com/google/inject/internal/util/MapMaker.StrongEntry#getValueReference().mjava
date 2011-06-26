@@ -1,4 +1,0 @@
-    public ValueReference<K, V> getValueReference() {
-      return valueReference;
-    }
-

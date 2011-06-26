@@ -1,4 +1,0 @@
-    private JoinException(IOException cause) {
-      super(cause);
-    }
-

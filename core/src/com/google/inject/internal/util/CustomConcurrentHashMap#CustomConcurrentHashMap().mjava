@@ -1,3 +1,0 @@
-  /** Prevents instantiation. */
-  private CustomConcurrentHashMap() {}
-

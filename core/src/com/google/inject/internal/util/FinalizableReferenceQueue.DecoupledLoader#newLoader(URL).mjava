@@ -1,5 +1,0 @@
-    /** Creates a class loader with the given base URL as its classpath. */
-    URLClassLoader newLoader(URL base) {
-      return new URLClassLoader(new URL[] { base });
-    }
-

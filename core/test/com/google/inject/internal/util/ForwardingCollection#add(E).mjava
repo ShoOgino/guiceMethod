@@ -1,4 +1,0 @@
-  public boolean add(E element) {
-    return delegate().add(element);
-  }
-

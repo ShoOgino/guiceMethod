@@ -1,7 +1,0 @@
-    public void testValueCleanupWithSoftKey() {
-      ConcurrentMap<Object, Object> map =
-          new MapMaker().softKeys().makeMap();
-      map.put(new Object(), new Object());
-      assertCleanup(map);
-    }
-

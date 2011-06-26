@@ -1,8 +1,0 @@
-  /**
-   * Verifies that {@code key} and {@code value} are non-null, and returns a new
-   * entry with those values.
-   */
-  private static <K, V> Entry<K, V> entryOf(K key, V value) {
-    return Maps.immutableEntry(Preconditions.checkNotNull(key), Preconditions.checkNotNull(value));
-  }
-

@@ -1,4 +1,0 @@
-      AtomicReferenceArray<E> newEntryArray(int size) {
-        return new AtomicReferenceArray<E>(size);
-      }
-

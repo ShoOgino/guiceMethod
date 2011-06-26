@@ -1,5 +1,0 @@
-    private SingletonImmutableMap(K singleKey, V singleValue) {
-      this.singleKey = singleKey;
-      this.singleValue = singleValue;
-    }
-

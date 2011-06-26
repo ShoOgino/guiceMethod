@@ -1,9 +1,0 @@
-  /**
-   * Creates a new, empty map with a default initial capacity (16), load
-   * factor (0.75) and concurrencyLevel (16).
-   */
-  public Jsr166HashMap() {
-    this(DEFAULT_INITIAL_CAPACITY, DEFAULT_LOAD_FACTOR,
-        DEFAULT_CONCURRENCY_LEVEL);
-  }
-

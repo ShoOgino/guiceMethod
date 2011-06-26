@@ -1,5 +1,0 @@
-    /**
-     * Gets the value. Does not block or throw exceptions.
-     */
-    V get();
-

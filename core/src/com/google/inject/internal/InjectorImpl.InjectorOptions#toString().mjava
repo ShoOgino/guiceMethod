@@ -1,6 +1,6 @@
     @Override
     public String toString() {
-      return new ToStringBuilder(getClass())
+      return Objects.toStringHelper(getClass())
           .add("stage", stage)
           .add("jitDisabled", jitDisabled)
           .add("disableCircularProxies", disableCircularProxies)

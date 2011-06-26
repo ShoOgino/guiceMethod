@@ -1,5 +1,0 @@
-      KeySet(RegularImmutableMap<K, V> map) {
-        super(map.entries, map.keySetHashCode);
-        this.map = map;
-      }
-

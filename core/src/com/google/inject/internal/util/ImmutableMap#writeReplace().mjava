@@ -1,4 +1,0 @@
-  Object writeReplace() {
-    return new SerializedForm(this);
-  }
-

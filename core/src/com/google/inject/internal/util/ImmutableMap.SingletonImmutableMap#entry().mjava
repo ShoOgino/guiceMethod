@@ -1,6 +1,0 @@
-    private Entry<K, V> entry() {
-      Entry<K, V> e = entry;
-      return (e == null)
-          ? (entry = Maps.immutableEntry(singleKey, singleValue)) : e;
-    }
-

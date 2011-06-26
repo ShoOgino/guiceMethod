@@ -4,7 +4,7 @@
       paramStrings.add(paramType.getSimpleName());
     }
 
-    String paramString = Join.join(", ", paramStrings);
+    String paramString = Joiner.on(", ").join(paramStrings);
     return "#" + method.getName() + "(" + paramString + ")";
   }
 

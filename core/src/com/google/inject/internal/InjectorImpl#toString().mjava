@@ -1,5 +1,5 @@
   public String toString() {
-    return new ToStringBuilder(Injector.class)
+    return Objects.toStringHelper(Injector.class)
         .add("bindings", state.getExplicitBindingsThisLevel().values())
         .toString();
   }

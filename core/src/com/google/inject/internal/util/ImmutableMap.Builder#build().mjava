@@ -1,9 +1,0 @@
-    /**
-     * Returns a newly-created immutable map.
-     *
-     * @throws IllegalArgumentException if duplicate keys were added
-     */
-    public ImmutableMap<K, V> build() {
-      return fromEntryList(entries);
-    }
-

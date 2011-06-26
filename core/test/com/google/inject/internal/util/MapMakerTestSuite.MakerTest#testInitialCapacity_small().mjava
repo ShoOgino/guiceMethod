@@ -1,7 +1,0 @@
-    public void testInitialCapacity_small() {
-      MapMaker maker = new MapMaker().initialCapacity(17);
-      Impl<?, ?, ?> map = makeCustomMap(maker);
-
-      assertEquals(2, map.segments[0].table.length());
-    }
-

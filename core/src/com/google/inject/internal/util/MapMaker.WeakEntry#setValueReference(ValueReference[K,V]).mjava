@@ -1,5 +1,0 @@
-    public void setValueReference(
-        ValueReference<K, V> valueReference) {
-      this.valueReference = valueReference;
-    }
-

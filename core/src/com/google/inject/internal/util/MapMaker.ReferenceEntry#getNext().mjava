@@ -1,3 +1,0 @@
-    /** Gets the next entry in the chain. */
-    ReferenceEntry<K, V> getNext();
-

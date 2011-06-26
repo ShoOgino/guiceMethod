@@ -1,7 +1,0 @@
-  /**
-   * This method is not supported.
-   */
-  public void remove() {
-    throw new UnsupportedOperationException();
-  }
-

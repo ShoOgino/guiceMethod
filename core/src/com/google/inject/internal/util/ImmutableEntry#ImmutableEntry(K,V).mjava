@@ -1,5 +1,0 @@
-  ImmutableEntry(@Nullable K key, @Nullable V value) {
-    this.key = key;
-    this.value = value;
-  }
-

@@ -1,4 +1,0 @@
-  public ToStringBuilder(Class type) {
-    this.name = type.getSimpleName();
-  }
-

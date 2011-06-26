@@ -1,4 +1,0 @@
-    public SimpleInternalEntry<K, V> getNext(SimpleInternalEntry<K, V> entry) {
-      return entry.next;
-    }
-

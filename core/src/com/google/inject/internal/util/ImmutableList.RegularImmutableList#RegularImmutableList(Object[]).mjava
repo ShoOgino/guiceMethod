@@ -1,4 +1,0 @@
-    private RegularImmutableList(Object[] array) {
-      this(array, 0, array.length);
-    }
-

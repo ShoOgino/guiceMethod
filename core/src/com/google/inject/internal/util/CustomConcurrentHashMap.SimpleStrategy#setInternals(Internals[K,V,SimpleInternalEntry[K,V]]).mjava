@@ -1,5 +1,0 @@
-    public void setInternals(
-        Internals<K, V, SimpleInternalEntry<K, V>> internals) {
-      // ignore?
-    }
-

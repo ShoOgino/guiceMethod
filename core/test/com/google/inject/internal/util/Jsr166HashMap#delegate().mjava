@@ -1,4 +1,0 @@
-  protected ConcurrentMap<K, V> delegate() {
-    return delegate;
-  }
-

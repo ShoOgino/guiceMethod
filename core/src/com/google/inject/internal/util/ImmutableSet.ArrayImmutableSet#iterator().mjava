@@ -1,9 +1,0 @@
-    /*
-     * The cast is safe because the only way to create an instance is via the
-     * create() method above, which only permits elements of type E.
-     */
-    @SuppressWarnings("unchecked")
-    @Override public UnmodifiableIterator<E> iterator() {
-      return (UnmodifiableIterator<E>) Iterators.forArray(elements);
-    }
-

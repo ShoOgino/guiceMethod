@@ -1,4 +1,0 @@
-      public Entry<K, V> next() {
-        return nextEntry();
-      }
-
