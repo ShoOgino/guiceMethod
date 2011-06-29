@@ -1,7 +1,7 @@
   /**
    * Helper method to return the instance node ID for the {@link Binding}'s
    * {@link Key}.
-   *
+   * 
    * @see NodeIdFactory#getInstanceNodeId(Key)
    */
   protected final K getInstanceNodeId(Binding<?> binding) {

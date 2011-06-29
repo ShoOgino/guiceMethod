@@ -8,7 +8,7 @@
    * will start at the {@link Member}.
    *
    * @see #newDependencyEdge(Object, InjectionPoint, Dependency)
-   *
+   * 
    * @param nodeId ID of the node that should be the tail of the
    *     {@link DependencyEdge}s.
    * @param node An {@link ImplementationNode} to add {@link Member}s to.

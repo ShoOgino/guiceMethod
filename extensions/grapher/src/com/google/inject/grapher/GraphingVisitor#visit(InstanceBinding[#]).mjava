@@ -8,7 +8,7 @@
    * which come either from {@link InjectionPoint}s (method and field) on the
    * instance, or on {@link Dependency}s the instance declares through the
    * {@link HasDependencies} interface.
-   *
+   * 
    * @see #newInterfaceNode(Binding)
    * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    * @see #newInstanceImplementationNode(Binding, Object)

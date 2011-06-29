@@ -7,7 +7,7 @@
     } catch(RuntimeException t) {
       caught = t;
     }
-
+    
     if (provision.exceptionDuringProvision != null) {
       throw provision.exceptionDuringProvision;
     } else if (caught != null) {
