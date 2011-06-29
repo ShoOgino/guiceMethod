@@ -1,7 +1,7 @@
   /**
    * Same as {@link #visit(LinkedKeyBinding)}, but the
    * {@link BindingEdge} is {@link BindingEdge.Type#PROVIDER}.
-   * 
+   *
    * @see #newInterfaceNode(Binding)
    * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    */

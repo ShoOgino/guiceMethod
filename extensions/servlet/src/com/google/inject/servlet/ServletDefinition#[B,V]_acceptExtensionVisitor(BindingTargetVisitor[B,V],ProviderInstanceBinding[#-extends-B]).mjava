@@ -6,7 +6,7 @@
             new InstanceServletBindingImpl(initParams,
                 pattern,
                 servletInstance,
-                patternMatcher));        
+                patternMatcher));
       } else {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new LinkedServletBindingImpl(initParams,

@@ -36,7 +36,7 @@
         return pathInfo;
       }
 
-      // NOTE(dhanji): These two are a bit of a hack to help ensure that request dipatcher-sent
+      // NOTE(user): These two are a bit of a hack to help ensure that request dipatcher-sent
       // requests don't use the same path info that was memoized for the original request.
       private boolean isPathInfoComputed() {
         return pathInfoComputed

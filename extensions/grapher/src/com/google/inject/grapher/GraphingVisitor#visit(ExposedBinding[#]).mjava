@@ -2,7 +2,7 @@
    * Currently not displayed on the graph.
    */
   public Void visit(ExposedBinding<?> binding) {
-    // TODO(phopkins): Decide if this is needed for graphing.
+    // TODO(user): Decide if this is needed for graphing.
     return null;
   }
 

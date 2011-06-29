@@ -8,7 +8,7 @@
    * {@link BindingEdge} to the source {@link Key}. That will then be rendered
    * by {@link #visit(InstanceBinding)} as an {@link InterfaceNode}
    * with a {@link BindingEdge} to the {@link String} instance.
-   * 
+   *
    * @see #newInterfaceNode(Binding)
    * @see #newBindingEdge(Object, Object, com.google.inject.grapher.BindingEdge.Type)
    */

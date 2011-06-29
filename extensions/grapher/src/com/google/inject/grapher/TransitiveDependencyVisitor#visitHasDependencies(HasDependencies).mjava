@@ -1,6 +1,6 @@
   private Collection<Key<?>> visitHasDependencies(HasDependencies hasDependencies) {
     Set<Key<?>> dependencies = Sets.newHashSet();
-    
+
     for (Dependency<?> dependency : hasDependencies.getDependencies()) {
       dependencies.add(dependency.getKey());
     }
