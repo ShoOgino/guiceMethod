@@ -4,7 +4,7 @@
           new Struts2GuicePluginModule(),
           new ServletModule() {
             @Override
-            protected void configureServlets() {      
+            protected void configureServlets() {
               // Struts 2 setup
               bind(StrutsPrepareAndExecuteFilter.class).in(Singleton.class);
               filter("/*").through(StrutsPrepareAndExecuteFilter.class);
