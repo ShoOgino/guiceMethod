@@ -8,7 +8,7 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "A binding to java.awt.Color annotated with @"
+      assertContains(expected.getMessage(), "A binding to " + Color.class.getName() + " annotated with @"
           + Assisted.class.getName() + "(value=paint) was already configured at");
     }
   }

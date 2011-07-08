@@ -1,6 +1,6 @@
   public void testUnscopedProviderWorksOutsideOfRequestedScope() {
     final RememberProviderScope scope = new RememberProviderScope();
-    
+
     Injector injector = Guice.createInjector(new AbstractModule() {
       protected void configure() {
         bindScope(CustomScoped.class, scope);

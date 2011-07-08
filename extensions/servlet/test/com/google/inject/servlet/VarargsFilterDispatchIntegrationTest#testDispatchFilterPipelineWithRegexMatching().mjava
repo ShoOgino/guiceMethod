@@ -33,8 +33,8 @@
     verify(requestMock);
 
     assertTrue("lifecycle states did not fire "
-	    + "correct number of times-- inits: " + inits + "; dos: " + doFilters
-	    + "; destroys: " + destroys,
-    		inits == 1 && doFilters == 2 && destroys == 1);
+        + "correct number of times-- inits: " + inits + "; dos: " + doFilters
+        + "; destroys: " + destroys,
+        inits == 1 && doFilters == 2 && destroys == 1);
   }
 

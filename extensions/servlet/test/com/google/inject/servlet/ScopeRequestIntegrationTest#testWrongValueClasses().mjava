@@ -5,7 +5,7 @@
         bind(SomeObject.class).in(RequestScoped.class);
       }
     });
-    
+
     OffRequestCallable offRequestCallable = injector.getInstance(OffRequestCallable.class);
     try {
       ServletScopes.scopeRequest(offRequestCallable,

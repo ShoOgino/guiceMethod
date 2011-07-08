@@ -16,7 +16,7 @@
       injector.getInstance(UnitOfWork.class).end();
       fail();
     } catch (NoResultException e) {}
-    
+
     injector.getInstance(UnitOfWork.class).end();
   }
 

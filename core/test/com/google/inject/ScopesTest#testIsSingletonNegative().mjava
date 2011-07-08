@@ -13,7 +13,7 @@
         bind(c).toProvider(Providers.of("c")).in(Scopes.NO_SCOPE);
         bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
         bindScope(CustomScoped.class, Scopes.NO_SCOPE);
-        install(new PrivateModule() {          
+        install(new PrivateModule() {
           @Override
           protected void configure() {
             bind(f).toProvider(Providers.of("f")).in(CustomScoped.class);

@@ -11,7 +11,7 @@
       assertContains(expected.getMessage(),
           "1) A Provider may not be a type in a factory method of an AssistedInject."
             + "\n  Offending instance is parameter [1] with key"
-            + " [com.google.inject.Provider<java.awt.Color>] on method ["
+            + " [com.google.inject.Provider<" + Color.class.getName() + ">] on method ["
             + JavaxProviderBasedColoredCarFactory.class.getName() + ".createCar()]",
           "2) A Provider may not be a type in a factory method of an AssistedInject."
             + "\n  Offending instance is parameter [2] with key"
@@ -19,7 +19,7 @@
             + JavaxProviderBasedColoredCarFactory.class.getName() + ".createCar()]",
           "3) A Provider may not be a type in a factory method of an AssistedInject."
             + "\n  Offending instance is parameter [1] with key"
-            + " [com.google.inject.Provider<java.awt.Color>"
+            + " [com.google.inject.Provider<" + Color.class.getName() + ">"
             + " annotated with @com.google.inject.assistedinject.Assisted(value=color)]"
             + " on method [" + JavaxProviderBasedColoredCarFactory.class.getName() + ".createMustang()]"
       );

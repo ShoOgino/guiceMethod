@@ -1,12 +1,12 @@
   public void testOverrideBehavior() {
-	  Set<InjectionPoint> points;
-	  
-	  points = InjectionPoint.forInstanceMethodsAndFields(Super.class);
-	  assertEquals(points.toString(), 6, points.size());
-	  assertPoints(points, Super.class, "atInject", "gInject", "privateAtAndPublicG",
-	      "privateGAndPublicAt", "atFirstThenG", "gFirstThenAt");
-	  
-	  points = InjectionPoint.forInstanceMethodsAndFields(Sub.class);
+    Set<InjectionPoint> points;
+
+    points = InjectionPoint.forInstanceMethodsAndFields(Super.class);
+    assertEquals(points.toString(), 6, points.size());
+    assertPoints(points, Super.class, "atInject", "gInject", "privateAtAndPublicG",
+        "privateGAndPublicAt", "atFirstThenG", "gFirstThenAt");
+
+    points = InjectionPoint.forInstanceMethodsAndFields(Sub.class);
     assertEquals(points.toString(), 7, points.size());
     // Superclass will always have is private members injected,
     // and 'gInject' was last @Injected in Super, so that remains the owner

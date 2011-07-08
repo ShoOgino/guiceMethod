@@ -12,7 +12,7 @@
 
     FilterConfig filterConfig = createMock(FilterConfig.class);
     expect(filterConfig.getServletContext()).andReturn(createMock(ServletContext.class));
-    
+
     GuiceFilter guiceFilter = injector.getInstance(GuiceFilter.class);
 
     HttpServletRequest request = createMock(HttpServletRequest.class);

@@ -18,7 +18,7 @@
         bind(e).toProvider(Providers.of("e")).asEagerSingleton();
         bind(f).toProvider(Providers.of("f")).in(Singleton.class);
         bind(h).to(AnnotatedSingleton.class);
-        install(new PrivateModule() {          
+        install(new PrivateModule() {
           @Override
           protected void configure() {
             bind(i).toProvider(Providers.of("i")).in(Singleton.class);

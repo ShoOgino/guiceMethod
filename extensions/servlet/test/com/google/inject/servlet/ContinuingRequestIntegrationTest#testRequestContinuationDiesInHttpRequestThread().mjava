@@ -25,7 +25,7 @@
 
     expect(request.getMethod()).andReturn("GET");
     FilterChain filterChain = createMock(FilterChain.class);
-    
+
     replay(request, filterConfig, filterChain);
 
     guiceFilter.init(filterConfig);

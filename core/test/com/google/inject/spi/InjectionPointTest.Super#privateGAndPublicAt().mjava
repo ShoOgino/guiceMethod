@@ -1,2 +1,2 @@
-	  @com.google.inject.Inject private void privateGAndPublicAt() {}
+    @com.google.inject.Inject private void privateGAndPublicAt() {}
 

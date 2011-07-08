@@ -35,6 +35,6 @@
     assertTrue("lifecycle states did not"
         + " fire correct number of times-- inits: " + inits + "; dos: " + doFilters
         + "; destroys: " + destroys,
-    		inits == 1 && doFilters == 3 && destroys == 1);
+        inits == 1 && doFilters == 3 && destroys == 1);
   }
 

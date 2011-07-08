@@ -22,7 +22,7 @@
         }
       }
     };
-    
+
     Guice.createInjector(new AbstractModule() {
       protected void configure() {
         requestInjection(createsAThread);
