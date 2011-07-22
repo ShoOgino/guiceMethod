@@ -1,0 +1,16 @@
+  public void testGraphWithGivenRoot() throws Exception {
+    grapher.graph(Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          bind(IA.class).to(A.class);
+          bind(IA.class).annotatedWith(Ann.class).to(A.class);
+          bind(String.class).toInstance(TEST_STRING);
+        }
+    }), ImmutableSet.<Key<?>>of(Key.get(String.class)));
+
+    Set<Node> expectedNodes = ImmutableSet.<Node>of(stringNode, stringInstanceNode);
+    Set<Edge> expectedEdges = ImmutableSet.<Edge>of(
+        new BindingEdge(stringNode.getId(), stringInstanceNode.getId(), BindingEdge.Type.NORMAL));
+    assertEquals(expectedNodes, grapher.nodes);
+    assertEquals(expectedEdges, grapher.edges);
+  }
+

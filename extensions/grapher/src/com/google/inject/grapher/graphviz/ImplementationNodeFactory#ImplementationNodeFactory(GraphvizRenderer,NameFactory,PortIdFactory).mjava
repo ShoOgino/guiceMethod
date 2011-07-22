@@ -1,8 +1,0 @@
-  @Inject
-  public ImplementationNodeFactory(GraphvizRenderer renderer, NameFactory nameFactory,
-      PortIdFactory portIdFactory) {
-    this.renderer = renderer;
-    this.nameFactory = nameFactory;
-    this.portIdFactory = portIdFactory;
-  }
-

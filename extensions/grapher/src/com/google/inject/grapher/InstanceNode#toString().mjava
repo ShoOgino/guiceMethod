@@ -1,0 +1,5 @@
+  @Override public String toString() {
+    return "InstanceNode{id=" + getId() + " source=" + getSource() + " instance=" + instance
+        + " members=" + members + "}";
+  }
+

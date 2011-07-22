@@ -1,4 +1,0 @@
-  protected GraphvizEdgeAdaptor newAdaptor(GraphvizEdge edge) {
-    return new GraphvizEdgeAdaptor(edge);
-  }
-

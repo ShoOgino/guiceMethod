@@ -1,4 +1,0 @@
-    public Set<Dependency<?>> getDependencies() {
-      return ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Integer.class)));
-    }
-

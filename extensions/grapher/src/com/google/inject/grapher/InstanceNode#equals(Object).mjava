@@ -1,0 +1,9 @@
+  @Override public boolean equals(Object obj) {
+    if (!(obj instanceof InstanceNode)) {
+      return false;
+    }
+    InstanceNode other = (InstanceNode) obj;
+    return super.equals(other) && Objects.equal(instance, other.instance)
+        && Objects.equal(members, other.members);
+  }
+

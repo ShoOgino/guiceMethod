@@ -1,0 +1,9 @@
+    /**
+     * Same as {@link #visit(InstanceBinding)}, but the binding edge is
+     * {@link BindingEdgeType#PROVIDER}.
+     */
+    @Override public Collection<Node> visit(ProviderInstanceBinding<?> binding) {
+      return ImmutableList.<Node>of(newInterfaceNode(binding), newInstanceNode(binding,
+          binding.getProviderInstance()));
+    }
+

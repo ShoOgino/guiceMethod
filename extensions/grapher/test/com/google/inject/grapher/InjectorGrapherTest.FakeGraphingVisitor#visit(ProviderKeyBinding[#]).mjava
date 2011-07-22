@@ -1,4 +1,0 @@
-    public Void visit(ProviderKeyBinding<?> binding) {
-      return record(binding);
-    }
-

@@ -1,4 +1,0 @@
-    public Void visit(ConvertedConstantBinding<?> binding) {
-      return record(binding);
-    }
-

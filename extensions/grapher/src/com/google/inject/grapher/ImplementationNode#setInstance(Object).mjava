@@ -1,6 +1,0 @@
-  /**
-   * Sets the {@link Object} that's the already-created instance. Used when
-   * this node is represeting the instance instead of a class.
-   */
-  void setInstance(Object instance);
-

@@ -1,2 +1,0 @@
-    @Inject void setInteger(Integer integer) {}
-

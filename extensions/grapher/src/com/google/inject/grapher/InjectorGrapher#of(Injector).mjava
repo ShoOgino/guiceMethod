@@ -1,8 +1,0 @@
-  /**
-   * Sets the {@link Injector} to graph.
-   */
-  public InjectorGrapher of(Injector injector) {
-    this.injector = injector;
-    return this;
-  }
-

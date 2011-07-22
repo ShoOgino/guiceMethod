@@ -1,0 +1,19 @@
+  private void createNodes(Iterable<Node> nodes, Map<NodeId, NodeId> aliases) throws IOException {
+    for (Node node : nodes) {
+      NodeId originalId = node.getId();
+      NodeId resolvedId = resolveAlias(aliases, originalId);
+      node = node.copy(resolvedId);
+
+      // Only render nodes that aren't aliased to some other node.
+      if (resolvedId.equals(originalId)) {
+        if (node instanceof InterfaceNode) {
+          newInterfaceNode((InterfaceNode) node);
+        } else if (node instanceof ImplementationNode) {
+          newImplementationNode((ImplementationNode) node);
+        } else {
+          newInstanceNode((InstanceNode) node);
+        }
+      }
+    }
+  }
+

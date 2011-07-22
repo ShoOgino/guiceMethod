@@ -1,0 +1,11 @@
+  @Override public Set<Key<?>> getRootKeys(Injector injector) {
+    Set<Key<?>> root = Sets.newHashSet();
+    for (Key<?> key : injector.getBindings().keySet()) {
+      if (key.getTypeLiteral().getRawType().getPackage() != Guice.class.getPackage()
+        && !loggerKey.equals(key)) {
+        root.add(key);
+      }
+    }
+    return root;
+  }
+

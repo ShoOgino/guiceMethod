@@ -1,6 +1,0 @@
-  @Inject
-  public DependencyEdgeFactory(GraphvizRenderer renderer, PortIdFactory portIdFactory) {
-    this.renderer = renderer;
-    this.portIdFactory = portIdFactory;
-  }
-

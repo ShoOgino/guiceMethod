@@ -1,4 +1,0 @@
-  public String getClassNodeId(Key<?> key) {
-    return "k_" + Integer.toHexString(key.hashCode());
-  }
-

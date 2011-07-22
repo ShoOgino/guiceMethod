@@ -1,7 +1,0 @@
-    public GraphvizEdgeAdaptor(GraphvizEdge edge) {
-      this.edge = edge;
-
-      this.edge.setArrowHead(ImmutableList.of(ArrowType.NORMAL));
-      this.edge.setTailCompassPoint(CompassPoint.EAST);
-    }
-

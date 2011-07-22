@@ -1,6 +1,0 @@
-  /**
-   * Makes edges that would point to {@code fromId} point to
-   * {@code toId} instead.
-   */
-  void newAlias(K fromId, K toId);
-

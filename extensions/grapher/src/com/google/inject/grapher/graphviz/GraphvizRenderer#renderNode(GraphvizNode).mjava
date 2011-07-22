@@ -1,5 +1,0 @@
-  protected void renderNode(GraphvizNode node) {
-    Map<String, String> attrs = getNodeAttributes(node);
-    out.println(node.getNodeId() + " " + getAttrString(attrs));       
-  }
-

@@ -1,0 +1,3 @@
+  /** Adds a new dependency edge to the graph. */
+  protected abstract void newDependencyEdge(DependencyEdge edge) throws IOException;
+

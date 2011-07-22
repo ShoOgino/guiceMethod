@@ -1,0 +1,10 @@
+  @Override public final void graph(Injector injector, Set<Key<?>> root) throws IOException {
+    reset();
+
+    Iterable<Binding<?>> bindings = getBindings(injector, root);
+    Map<NodeId, NodeId> aliases = resolveAliases(aliasCreator.createAliases(bindings));
+    createNodes(nodeCreator.getNodes(bindings), aliases);
+    createEdges(edgeCreator.getEdges(bindings), aliases);
+    postProcess();
+  }
+

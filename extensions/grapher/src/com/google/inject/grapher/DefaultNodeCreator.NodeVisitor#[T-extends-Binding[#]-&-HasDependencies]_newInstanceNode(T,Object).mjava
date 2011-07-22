@@ -1,0 +1,21 @@
+    /**
+     * Returns a new instance node for the given {@link Binding}.
+     *
+     * @param binding binding for the node to create
+     * @param instance value of the instance
+     * @return instance node for the given binding
+     */
+    private <T extends Binding<?> & HasDependencies> InstanceNode newInstanceNode(T binding,
+        Object instance) {
+      Collection<Member> members = Lists.newArrayList();
+      for (Dependency<?> dependency : binding.getDependencies()) {
+        InjectionPoint injectionPoint = dependency.getInjectionPoint();
+
+        if (injectionPoint != null) {
+          members.add(injectionPoint.getMember());
+        }
+      }
+      return new InstanceNode(NodeId.newInstanceId(binding.getKey()), binding.getSource(), instance,
+          members);
+    }
+

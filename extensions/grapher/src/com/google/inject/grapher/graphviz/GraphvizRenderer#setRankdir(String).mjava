@@ -1,5 +1,0 @@
-  public GraphvizRenderer setRankdir(String rankdir) {
-    this.rankdir = rankdir;
-    return this;
-  }
-

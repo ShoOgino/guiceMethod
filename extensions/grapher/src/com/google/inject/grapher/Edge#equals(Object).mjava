@@ -1,0 +1,8 @@
+  @Override public boolean equals(Object obj) {
+    if (!(obj instanceof Edge)) {
+      return false;
+    }
+    Edge other = (Edge) obj;
+    return Objects.equal(fromId, other.fromId) && Objects.equal(toId, other.toId);
+  }
+

@@ -1,5 +1,0 @@
-  public Collection<Key<?>> visit(ExposedBinding<?> binding) {
-    // TODO(phopkins): Figure out if this is needed for graphing.
-    return ImmutableSet.of();
-  }
-

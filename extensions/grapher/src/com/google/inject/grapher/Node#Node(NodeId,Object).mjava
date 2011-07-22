@@ -1,0 +1,5 @@
+  protected Node(NodeId id, Object source) {
+    this.id = id;
+    this.source = source;
+  }
+

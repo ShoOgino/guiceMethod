@@ -1,0 +1,5 @@
+    public GrapherParameters setNodeCreator(NodeCreator nodeCreator) {
+      this.nodeCreator = nodeCreator;
+      return this;
+    }
+

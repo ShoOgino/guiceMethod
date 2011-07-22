@@ -1,0 +1,4 @@
+  public void setOut(PrintWriter out) {
+    this.out = out;
+  }
+

@@ -1,0 +1,6 @@
+  /**
+   * Graphs the guice dependency graph for the given injector using the given starting keys and
+   * their transitive dependencies.
+   */
+  void graph(Injector injector, Set<Key<?>> root) throws IOException;
+

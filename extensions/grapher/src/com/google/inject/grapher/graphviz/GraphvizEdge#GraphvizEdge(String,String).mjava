@@ -1,5 +1,0 @@
-  public GraphvizEdge(String tailNodeId, String headNodeId) {
-    this.tailNodeId = tailNodeId;
-    this.headNodeId = headNodeId;
-  }
-

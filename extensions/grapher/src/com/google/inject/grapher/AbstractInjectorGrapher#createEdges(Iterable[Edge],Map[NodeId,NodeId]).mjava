@@ -1,0 +1,14 @@
+  private void createEdges(Iterable<Edge> edges, Map<NodeId, NodeId> aliases) throws IOException {
+    for (Edge edge : edges) {
+      edge = edge.copy(resolveAlias(aliases, edge.getFromId()),
+          resolveAlias(aliases, edge.getToId()));
+      if (!edge.getFromId().equals(edge.getToId())) {
+        if (edge instanceof BindingEdge) {
+          newBindingEdge((BindingEdge) edge);
+        } else {
+          newDependencyEdge((DependencyEdge) edge);
+        }
+      }
+    }
+  }
+

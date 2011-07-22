@@ -1,4 +1,0 @@
-    public void setSource(Object source) {
-      node.addSubtitle(0, nameFactory.getSourceName(source));
-    }
-

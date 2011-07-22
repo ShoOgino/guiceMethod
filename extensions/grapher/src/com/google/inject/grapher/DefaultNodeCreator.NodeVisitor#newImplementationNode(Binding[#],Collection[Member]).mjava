@@ -1,0 +1,13 @@
+    /**
+     * Returns a new implementation node for the given binding.
+     *
+     * @param binding binding for the node to create
+     * @param members members to add to the node
+     * @return implementation node for the given binding
+     */
+    private ImplementationNode newImplementationNode(Binding<?> binding,
+        Collection<Member> members) {
+      return new ImplementationNode(NodeId.newTypeId(binding.getKey()), binding.getSource(),
+          members);
+    }
+

@@ -1,5 +1,0 @@
-  public GraphvizRenderer setOut(PrintWriter out) {
-    this.out = out;
-    return this;
-  }
-

@@ -1,6 +1,0 @@
-  @Inject
-  public InterfaceNodeFactory(GraphvizRenderer renderer, NameFactory nameFactory) {
-    this.renderer = renderer;
-    this.nameFactory = nameFactory;
-  }
-

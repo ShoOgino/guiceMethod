@@ -1,0 +1,8 @@
+    /**
+     * Visitor for {@link ConstructorBinding}s. These are for classes that Guice will instantiate to
+     * satisfy injection requests.
+     */
+    @Override public Collection<Edge> visit(ConstructorBinding<?> binding) {
+      return newDependencyEdges(NodeId.newTypeId(binding.getKey()), binding);
+    }
+

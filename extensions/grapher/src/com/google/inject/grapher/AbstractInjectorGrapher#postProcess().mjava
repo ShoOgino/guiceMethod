@@ -1,0 +1,3 @@
+  /** Performs any post processing required after all nodes and edges have been added. */
+  protected abstract void postProcess() throws IOException;
+

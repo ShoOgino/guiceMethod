@@ -1,0 +1,3 @@
+  /** Returns edges for the given dependency graph. */
+  Iterable<Edge> getEdges(Iterable<Binding<?>> bindings);
+

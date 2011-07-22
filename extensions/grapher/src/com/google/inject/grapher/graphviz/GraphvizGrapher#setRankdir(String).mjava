@@ -1,0 +1,4 @@
+  public void setRankdir(String rankdir) {
+    this.rankdir = rankdir;
+  }
+

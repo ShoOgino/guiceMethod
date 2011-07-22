@@ -1,0 +1,3 @@
+  /** Returns nodes for the given dependency graph. */
+  Iterable<Node> getNodes(Iterable<Binding<?>> bindings);
+

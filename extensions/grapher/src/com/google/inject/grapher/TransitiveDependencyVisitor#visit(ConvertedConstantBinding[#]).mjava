@@ -1,4 +1,4 @@
-  public Collection<Key<?>> visit(ConvertedConstantBinding<?> binding) {
+  @Override public Collection<Key<?>> visit(ConvertedConstantBinding<?> binding) {
     return visitHasDependencies(binding);
   }
 

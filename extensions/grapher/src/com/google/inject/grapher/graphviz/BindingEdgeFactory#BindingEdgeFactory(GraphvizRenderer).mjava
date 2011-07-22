@@ -1,5 +1,0 @@
-  @Inject
-  public BindingEdgeFactory(GraphvizRenderer renderer) {
-    this.renderer = renderer;
-  }
-

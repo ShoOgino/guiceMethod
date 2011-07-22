@@ -1,0 +1,6 @@
+  @Inject GraphvizGrapher(@Graphviz NameFactory nameFactory,
+      @Graphviz PortIdFactory portIdFactory) {
+    this.nameFactory = nameFactory;
+    this.portIdFactory = portIdFactory;
+  }
+

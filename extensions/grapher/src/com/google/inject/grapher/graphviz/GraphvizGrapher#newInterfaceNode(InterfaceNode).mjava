@@ -1,0 +1,13 @@
+  @Override protected void newInterfaceNode(InterfaceNode node) {
+    // TODO(phopkins): Show the Module on the graph, which comes from the
+    // class name when source is a StackTraceElement.
+
+    NodeId nodeId = node.getId();
+    GraphvizNode gnode = new GraphvizNode(nodeId);
+    gnode.setStyle(NodeStyle.DASHED);
+    Key<?> key = nodeId.getKey();
+    gnode.setTitle(nameFactory.getClassName(key));
+    gnode.addSubtitle(0, nameFactory.getAnnotationName(key));
+    addNode(gnode);
+  }
+

@@ -1,0 +1,4 @@
+  public InterfaceNode(NodeId id, Object source) {
+    super(id, source);
+  }
+

@@ -1,6 +1,0 @@
-    public void setInstance(Object instance) {
-      node.setHeaderBackgroundColor("#aaaaaa");
-      node.setHeaderTextColor("#ffffff");
-      node.setTitle(nameFactory.getInstanceName(instance));
-    }
-

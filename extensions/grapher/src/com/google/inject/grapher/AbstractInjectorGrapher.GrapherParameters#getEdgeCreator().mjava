@@ -1,0 +1,4 @@
+    public EdgeCreator getEdgeCreator() {
+      return edgeCreator;
+    }
+

@@ -1,0 +1,34 @@
+  /**
+   * Transitively resolves aliases. Given aliases (X to Y) and (Y to Z), it will return mappings
+   * (X to Z) and (Y to Z).
+   */
+  private Map<NodeId, NodeId> resolveAliases(Iterable<Alias> aliases) {
+    Map<NodeId, NodeId> resolved = Maps.newHashMap();
+    Map<NodeId, Set<NodeId>> inverse = Maps.newHashMap();
+
+    for (Alias alias : aliases) {
+      NodeId from = alias.getFromId();
+      NodeId to = alias.getToId();
+      if (resolved.containsKey(to)) {
+        to = resolved.get(to);
+      }
+      resolved.put(from, to);
+      if (inverse.get(to) == null) {
+        inverse.put(to, Sets.<NodeId>newHashSet());
+      }
+      inverse.get(to).add(from);
+
+      Set<NodeId> prev = inverse.get(from);
+      if (prev != null) {
+        for (NodeId id : prev) {
+          resolved.remove(id);
+          inverse.get(from).remove(id);
+          resolved.put(id, to);
+          inverse.get(to).add(id);
+        }
+      }
+    }
+
+    return resolved;
+  }
+

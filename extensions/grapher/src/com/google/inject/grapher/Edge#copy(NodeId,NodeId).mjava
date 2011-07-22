@@ -1,0 +1,9 @@
+  /**
+   * Returns a copy of the edge with new node IDs.
+   *
+   * @param fromId new ID of the 'from' node
+   * @param toId new ID of the 'to' node
+   * @return copy of the edge with the new node IDs
+   */
+  public abstract Edge copy(NodeId fromId, NodeId toId);
+

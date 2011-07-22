@@ -1,0 +1,7 @@
+  public AbstractInjectorGrapher(GrapherParameters options) {
+    this.rootKeySetCreator = options.getRootKeySetCreator();
+    this.aliasCreator = options.getAliasCreator();
+    this.nodeCreator = options.getNodeCreator();
+    this.edgeCreator = options.getEdgeCreator();
+  }
+

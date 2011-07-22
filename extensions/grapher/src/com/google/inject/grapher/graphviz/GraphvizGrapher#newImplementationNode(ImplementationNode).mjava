@@ -1,0 +1,16 @@
+  @Override protected void newImplementationNode(ImplementationNode node) {
+    NodeId nodeId = node.getId();
+    GraphvizNode gnode = new GraphvizNode(nodeId);
+    gnode.setStyle(NodeStyle.INVISIBLE);
+
+    gnode.setHeaderBackgroundColor("#000000");
+    gnode.setHeaderTextColor("#ffffff");
+    gnode.setTitle(nameFactory.getClassName(nodeId.getKey()));
+
+    for (Member member : node.getMembers()) {
+      gnode.addField(portIdFactory.getPortId(member), nameFactory.getMemberName(member));
+    }
+
+    addNode(gnode);
+  }
+

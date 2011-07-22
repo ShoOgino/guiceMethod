@@ -1,0 +1,14 @@
+    /**
+     * Visitor for {@link ConstructorBinding}s. These are for classes that Guice will instantiate to
+     * satisfy injection requests.
+     */
+    @Override public Collection<Node> visit(ConstructorBinding<?> binding) {
+      Collection<Member> members = Lists.newArrayList();
+      members.add(binding.getConstructor().getMember());
+      for (InjectionPoint injectionPoint : binding.getInjectableMembers()) {
+        members.add(injectionPoint.getMember());
+      }
+
+      return ImmutableList.<Node>of(newImplementationNode(binding, members));
+    }
+

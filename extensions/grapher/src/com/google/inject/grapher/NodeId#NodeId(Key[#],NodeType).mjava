@@ -1,0 +1,5 @@
+  private NodeId(Key<?> key, NodeType nodeType) {
+    this.key = key;
+    this.nodeType = nodeType;
+  }
+

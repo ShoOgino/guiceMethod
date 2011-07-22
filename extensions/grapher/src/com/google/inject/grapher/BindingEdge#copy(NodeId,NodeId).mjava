@@ -1,0 +1,4 @@
+  @Override public Edge copy(NodeId fromId, NodeId toId) {
+    return new BindingEdge(fromId, toId, type);
+  }
+

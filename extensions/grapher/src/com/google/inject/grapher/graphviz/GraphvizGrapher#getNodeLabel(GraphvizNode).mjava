@@ -1,0 +1,39 @@
+  /**
+   * Creates the "label" for a node. This is a string of HTML that defines a
+   * table with a heading at the top and (in the case of
+   * {@link ImplementationNode}s) rows for each of the member fields.
+   */
+  protected String getNodeLabel(GraphvizNode node) {
+    String cellborder = node.getStyle() == NodeStyle.INVISIBLE ? "1" : "0";
+    
+    StringBuilder html = new StringBuilder();
+    html.append("<");
+    html.append("<table cellspacing=\"0\" cellpadding=\"5\" cellborder=\"");
+    html.append(cellborder).append("\" border=\"0\">");
+    
+    html.append("<tr>").append("<td align=\"left\" port=\"header\" ");
+    html.append("bgcolor=\"" + node.getHeaderBackgroundColor() + "\">");
+    
+    String subtitle = Joiner.on("<br align=\"left\"/>").join(node.getSubtitles());
+    if (subtitle.length() != 0) {
+      html.append("<font color=\"").append(node.getHeaderTextColor());
+      html.append("\" point-size=\"10\">");
+      html.append(subtitle).append("<br align=\"left\"/>").append("</font>");
+    }
+
+    html.append("<font color=\"" + node.getHeaderTextColor() + "\">");
+    html.append(htmlEscape(node.getTitle())).append("<br align=\"left\"/>");
+    html.append("</font>").append("</td>").append("</tr>");
+
+    for (Map.Entry<String, String> field : node.getFields().entrySet()) {
+      html.append("<tr>");
+      html.append("<td align=\"left\" port=\"").append(htmlEscape(field.getKey())).append("\">");
+      html.append(htmlEscape(field.getValue()));
+      html.append("</td>").append("</tr>");
+    }
+
+    html.append("</table>");
+    html.append(">");
+    return html.toString();
+  }
+

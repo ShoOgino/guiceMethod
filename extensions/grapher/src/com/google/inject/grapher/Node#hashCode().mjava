@@ -1,0 +1,4 @@
+  @Override public int hashCode() {
+    return ignoreSourceInComparisons ? id.hashCode() : Objects.hashCode(id, source);
+  }
+

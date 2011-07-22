@@ -1,0 +1,8 @@
+  protected List<String> htmlEscape(List<String> elements) {
+    List<String> escaped = Lists.newArrayList();
+    for (String element : elements) {
+      escaped.add(htmlEscape(element));
+    }
+    return escaped;
+  }
+

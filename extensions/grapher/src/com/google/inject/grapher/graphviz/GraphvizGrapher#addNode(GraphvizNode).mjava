@@ -1,0 +1,5 @@
+  private void addNode(GraphvizNode node) {
+    node.setIdentifier("x" + nodes.size());
+    nodes.put(node.getNodeId(), node);
+  }
+

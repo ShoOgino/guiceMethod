@@ -1,0 +1,4 @@
+  public AbstractInjectorGrapher() {
+    this(new GrapherParameters());
+  }
+

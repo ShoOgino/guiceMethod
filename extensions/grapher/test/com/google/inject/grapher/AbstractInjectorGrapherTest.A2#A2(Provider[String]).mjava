@@ -1,0 +1,2 @@
+    @Inject public A2(Provider<String> strProvider) {}
+

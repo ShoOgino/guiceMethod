@@ -1,0 +1,14 @@
+  @Override protected void newDependencyEdge(DependencyEdge edge) {
+    GraphvizEdge gedge = new GraphvizEdge(edge.getFromId(), edge.getToId());
+    InjectionPoint fromPoint = edge.getInjectionPoint();
+    if (fromPoint == null) {
+      gedge.setTailPortId("header");
+    } else {
+      gedge.setTailPortId(portIdFactory.getPortId(fromPoint.getMember()));
+    }
+    gedge.setArrowHead(ImmutableList.of(ArrowType.NORMAL));
+    gedge.setTailCompassPoint(CompassPoint.EAST);
+
+    edges.add(gedge);
+  }
+

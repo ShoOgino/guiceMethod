@@ -1,7 +1,0 @@
-  public InterfaceNode<String> newInterfaceNode(String nodeId) {
-    GraphvizNode node = new GraphvizNode(nodeId);
-
-    renderer.addNode(node);
-    return newAdaptor(node);
-  }
-

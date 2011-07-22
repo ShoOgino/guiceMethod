@@ -1,8 +1,0 @@
-  protected String resolveAlias(String id) {
-    while (aliases.containsKey(id)) {
-      id = aliases.get(id);
-    }
-    
-    return id;
-  }
-

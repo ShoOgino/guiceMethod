@@ -1,0 +1,10 @@
+    /**
+     * Visitor for {@link InstanceBinding}. We render two nodes in this case: an interface node for
+     * the binding's {@link Key}, and then an implementation node for the instance {@link Object}
+     * itself.
+     */
+    @Override public Collection<Node> visit(InstanceBinding<?> binding) {
+      return ImmutableList.<Node>of(newInterfaceNode(binding), newInstanceNode(binding,
+          binding.getInstance()));
+    }
+

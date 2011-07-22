@@ -1,7 +1,0 @@
-    public DependencyEdge<String> newDependencyEdge(String fromId,
-        InjectionPoint fromPoint, String toId) {
-      @SuppressWarnings("unchecked")
-      DependencyEdge<String> edge = createMock(DependencyEdge.class);
-      return edge;
-    }
-

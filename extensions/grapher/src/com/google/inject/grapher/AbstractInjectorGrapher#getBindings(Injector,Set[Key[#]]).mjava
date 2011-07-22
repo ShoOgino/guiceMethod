@@ -1,0 +1,22 @@
+  /** Returns the bindings for the root keys and their transitive dependencies. */
+  private Iterable<Binding<?>> getBindings(Injector injector, Set<Key<?>> root) {
+    Set<Key<?>> keys = Sets.newHashSet(root);
+    Set<Key<?>> visitedKeys = Sets.newHashSet();
+    List<Binding<?>> bindings = Lists.newArrayList();
+    TransitiveDependencyVisitor keyVisitor = new TransitiveDependencyVisitor();
+
+    while (!keys.isEmpty()) {
+      Iterator<Key<?>> iterator = keys.iterator();
+      Key<?> key = iterator.next();
+      iterator.remove();
+
+      if (!visitedKeys.contains(key)) {
+        Binding<?> binding = injector.getBinding(key);
+        bindings.add(binding);
+        visitedKeys.add(key);
+        keys.addAll(binding.acceptTargetVisitor(keyVisitor));
+      }
+    }
+    return bindings;
+  }
+

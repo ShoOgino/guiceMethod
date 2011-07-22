@@ -1,4 +1,4 @@
-  public Collection<Key<?>> visit(InstanceBinding<?> binding) {
+  @Override public Collection<Key<?>> visit(InstanceBinding<?> binding) {
     return visitHasDependencies(binding);
   }
 

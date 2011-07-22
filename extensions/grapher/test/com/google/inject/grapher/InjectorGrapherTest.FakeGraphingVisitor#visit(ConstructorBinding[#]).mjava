@@ -1,4 +1,0 @@
-    public Void visit(ConstructorBinding<?> binding) {
-      return record(binding);
-    }
-

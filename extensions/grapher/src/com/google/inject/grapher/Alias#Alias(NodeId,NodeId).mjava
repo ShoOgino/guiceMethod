@@ -1,0 +1,5 @@
+  public Alias(NodeId fromId, NodeId toId) {
+    this.fromId = fromId;
+    this.toId = toId;
+  }
+

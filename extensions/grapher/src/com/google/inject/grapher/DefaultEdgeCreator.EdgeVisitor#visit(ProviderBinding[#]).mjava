@@ -1,0 +1,9 @@
+    /**
+     * Visitor for {@link ProviderBinding}. These {@link Binding}s arise from an
+     * {@link InjectionPoint} for the {@link Provider} interface.
+     */
+    @Override public Collection<Edge> visit(ProviderBinding<?> binding) {
+      return ImmutableList.<Edge>of(new BindingEdge(NodeId.newTypeId(binding.getKey()),
+          NodeId.newTypeId(binding.getProvidedKey()), BindingEdge.Type.PROVIDER));
+    }
+

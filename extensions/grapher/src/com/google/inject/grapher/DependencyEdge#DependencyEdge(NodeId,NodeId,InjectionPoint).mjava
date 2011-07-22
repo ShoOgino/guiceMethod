@@ -1,0 +1,5 @@
+  public DependencyEdge(NodeId fromId, NodeId toId, InjectionPoint injectionPoint) {
+    super(fromId, toId);
+    this.injectionPoint = injectionPoint;
+  }
+

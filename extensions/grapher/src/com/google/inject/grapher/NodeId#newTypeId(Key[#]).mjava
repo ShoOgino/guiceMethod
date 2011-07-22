@@ -1,0 +1,4 @@
+  public static NodeId newTypeId(Key<?> key) {
+    return new NodeId(key, NodeType.TYPE);
+  }
+

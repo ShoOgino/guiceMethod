@@ -1,4 +1,4 @@
-  public String getNodeId() {
+  public NodeId getNodeId() {
     return nodeId;
   }
 

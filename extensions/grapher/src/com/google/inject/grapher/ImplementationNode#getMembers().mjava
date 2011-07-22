@@ -1,0 +1,4 @@
+  public Collection<Member> getMembers() {
+    return members;
+  }
+

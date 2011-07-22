@@ -1,0 +1,4 @@
+  @Override public String toString() {
+    return "BindingEdge{fromId=" + getFromId() + " toId=" + getToId() + " type=" + type + "}";
+  }
+

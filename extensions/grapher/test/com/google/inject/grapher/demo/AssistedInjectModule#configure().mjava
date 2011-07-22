@@ -1,6 +1,7 @@
   @Override
   protected void configure() {
-    bind(DancePartyFactory.class).toProvider(
-        FactoryProvider.newFactory(DancePartyFactory.class, DancePartyImpl.class));
+    install(new FactoryModuleBuilder()
+        .implement(DanceParty.class, DancePartyImpl.class)
+        .build(DancePartyFactory.class));
   }
 

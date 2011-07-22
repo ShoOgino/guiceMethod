@@ -1,0 +1,4 @@
+  public NodeId getFromId() {
+    return fromId;
+  }
+

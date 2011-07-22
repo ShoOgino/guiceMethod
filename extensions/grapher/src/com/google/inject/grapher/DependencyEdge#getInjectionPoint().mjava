@@ -1,0 +1,4 @@
+  public InjectionPoint getInjectionPoint() {
+    return injectionPoint;
+  }
+

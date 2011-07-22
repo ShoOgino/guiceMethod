@@ -1,4 +1,0 @@
-    @Provides A provideA(B b, @Named("test") C c) {
-      return new A();
-    }
-

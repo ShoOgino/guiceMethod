@@ -1,0 +1,4 @@
+  public static NodeId newInstanceId(Key<?> key) {
+    return new NodeId(key, NodeType.INSTANCE);
+  }
+

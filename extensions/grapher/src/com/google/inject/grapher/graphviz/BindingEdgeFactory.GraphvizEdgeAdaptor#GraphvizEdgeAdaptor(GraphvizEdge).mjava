@@ -1,6 +1,0 @@
-    public GraphvizEdgeAdaptor(GraphvizEdge edge) {
-      this.edge = edge;
-
-      this.edge.setStyle(EdgeStyle.DASHED);
-    }
-

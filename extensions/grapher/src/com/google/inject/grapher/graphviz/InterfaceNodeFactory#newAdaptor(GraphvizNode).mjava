@@ -1,4 +1,0 @@
-  private GraphvizNodeAdaptor newAdaptor(GraphvizNode node) {
-    return new GraphvizNodeAdaptor(node);
-  }
-

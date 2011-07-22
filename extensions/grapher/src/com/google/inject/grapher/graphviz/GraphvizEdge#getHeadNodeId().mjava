@@ -1,4 +1,4 @@
-  public String getHeadNodeId() {
+  public NodeId getHeadNodeId() {
     return headNodeId;
   }
 

@@ -1,0 +1,11 @@
+    /**
+     * Visitor for {@link LinkedKeyBinding}. This is the standard {@link Binding} you get from
+     * binding an interface class to an implementation class. We  draw a {@link BindingEdge} from
+     * the interface node to the node of the implementing class.
+     */
+    @Override public Collection<Edge> visit(LinkedKeyBinding<?> binding) {
+      return ImmutableList.<Edge>of(new BindingEdge(NodeId.newTypeId(binding.getKey()),
+          NodeId.newTypeId(binding.getLinkedKey()),
+          BindingEdge.Type.NORMAL));
+    }
+

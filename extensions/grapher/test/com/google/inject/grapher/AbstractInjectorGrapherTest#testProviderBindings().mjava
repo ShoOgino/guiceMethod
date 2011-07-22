@@ -1,0 +1,24 @@
+  public void testProviderBindings() throws Exception {
+    final Wrapper<Provider<A2>> wrapper = new Wrapper<Provider<A2>>();
+    grapher.graph(Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          wrapper.value = getProvider(A2.class);
+          bind(IA.class).toProvider(wrapper.value);
+          bind(A2.class);
+          bind(String.class).toInstance(TEST_STRING);
+        }
+    }));
+
+    Node a2ProviderNode = new InstanceNode(NodeId.newInstanceId(Key.get(IA.class)), null,
+        wrapper.value, ImmutableList.<Member>of());
+    Set<Node> expectedNodes =
+        ImmutableSet.<Node>of(iaNode, stringNode, a2Node, stringInstanceNode, a2ProviderNode);
+    Set<Edge> expectedEdges = ImmutableSet.<Edge>of(
+        new BindingEdge(stringNode.getId(), stringInstanceNode.getId(), BindingEdge.Type.NORMAL),
+        new BindingEdge(iaNode.getId(), a2ProviderNode.getId(), BindingEdge.Type.PROVIDER),
+        new DependencyEdge(a2Node.getId(), stringNode.getId(),
+            InjectionPoint.forConstructor(A2.class.getConstructor(Provider.class))));
+    assertEquals(expectedNodes, grapher.nodes);
+    assertEquals(expectedEdges, grapher.edges);
+  }
+

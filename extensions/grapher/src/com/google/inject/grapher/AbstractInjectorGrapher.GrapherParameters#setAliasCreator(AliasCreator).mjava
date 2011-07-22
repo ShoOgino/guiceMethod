@@ -1,0 +1,5 @@
+    public GrapherParameters setAliasCreator(AliasCreator aliasCreator) {
+      this.aliasCreator = aliasCreator;
+      return this;
+    }
+

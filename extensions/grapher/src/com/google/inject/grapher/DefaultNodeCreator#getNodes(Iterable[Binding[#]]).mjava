@@ -1,0 +1,9 @@
+  @Override public Iterable<Node> getNodes(Iterable<Binding<?>> bindings) {
+    List<Node> nodes = Lists.newArrayList();
+    NodeVisitor visitor = new NodeVisitor();
+    for (Binding<?> binding : bindings) {
+      nodes.addAll(binding.acceptTargetVisitor(visitor));
+    }
+    return nodes;
+  }
+

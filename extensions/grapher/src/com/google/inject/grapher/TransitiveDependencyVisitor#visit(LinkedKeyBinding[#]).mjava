@@ -1,4 +1,4 @@
-  public Collection<Key<?>> visit(LinkedKeyBinding<?> binding) {
+  @Override public Collection<Key<?>> visit(LinkedKeyBinding<?> binding) {
     return ImmutableSet.<Key<?>>of(binding.getLinkedKey());
   }
 

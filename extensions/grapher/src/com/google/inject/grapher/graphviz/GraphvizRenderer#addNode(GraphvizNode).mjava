@@ -1,4 +1,0 @@
-  public void addNode(GraphvizNode node) {
-    nodes.add(node);
-  }
-

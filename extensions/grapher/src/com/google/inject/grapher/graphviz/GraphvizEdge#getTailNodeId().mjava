@@ -1,4 +1,4 @@
-  public String getTailNodeId() {
+  public NodeId getTailNodeId() {
     return tailNodeId;
   }
 

@@ -1,0 +1,4 @@
+  @Override public Node copy(NodeId id) {
+    return new InterfaceNode(id, getSource());
+  }
+

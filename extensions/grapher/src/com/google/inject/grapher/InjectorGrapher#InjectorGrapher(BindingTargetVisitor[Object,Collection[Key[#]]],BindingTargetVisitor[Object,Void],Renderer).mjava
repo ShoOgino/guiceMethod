@@ -1,8 +1,0 @@
-  @Inject
-  public InjectorGrapher(BindingTargetVisitor<Object, Collection<Key<?>>> keyVisitor,
-      BindingTargetVisitor<Object, Void> graphingVisitor, Renderer renderer) {
-    this.keyVisitor = keyVisitor;
-    this.graphingVisitor = graphingVisitor;
-    this.renderer = renderer;
-  }
-

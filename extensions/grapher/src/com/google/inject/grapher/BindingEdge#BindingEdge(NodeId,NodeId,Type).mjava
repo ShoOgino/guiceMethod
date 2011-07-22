@@ -1,0 +1,5 @@
+  public BindingEdge(NodeId fromId, NodeId toId, Type type) {
+    super(fromId, toId);
+    this.type = type;
+  }
+

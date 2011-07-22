@@ -1,5 +1,0 @@
-  private <T> T recordMock(T mock) {
-    mocks.add(mock);
-    return mock;
-  }
-

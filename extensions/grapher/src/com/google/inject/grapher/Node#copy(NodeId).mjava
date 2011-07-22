@@ -1,0 +1,8 @@
+  /**
+   * Returns a copy of the node with a new ID.
+   *
+   * @param id new ID of the node
+   * @return copy of the node with a new ID
+   */
+  public abstract Node copy(NodeId id);
+

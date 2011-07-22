@@ -1,0 +1,6 @@
+  public InstanceNode(NodeId id, Object source, Object instance, Iterable<Member> members) {
+    super(id, source);
+    this.instance = instance;
+    this.members = members;
+  }
+

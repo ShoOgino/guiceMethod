@@ -1,0 +1,2 @@
+    @Inject public A(String str) {}
+

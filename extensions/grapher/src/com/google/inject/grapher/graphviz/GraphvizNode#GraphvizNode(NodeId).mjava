@@ -1,0 +1,4 @@
+  public GraphvizNode(NodeId nodeId) {
+    this.nodeId = nodeId;
+  }
+
