@@ -3,6 +3,6 @@
       ProvisionListener[] listeners) {
     this.source = source;
     this.keyMatcher = typeMatcher;
-    this.listeners = ImmutableList.of(listeners);
+    this.listeners = ImmutableList.copyOf(listeners);
   }
 
