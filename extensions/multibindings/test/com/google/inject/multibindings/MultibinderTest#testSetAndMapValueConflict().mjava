@@ -1,0 +1,14 @@
+  public void testSetAndMapValueConflict() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        Multibinder.newSetBinder(binder(), String.class)
+            .addBinding().toInstance("A");
+
+        MapBinder.newMapBinder(binder(), String.class, String.class)
+            .addBinding("B").toInstance("b");
+      }
+    });
+
+    assertEquals(ImmutableSet.<String>of("A"), injector.getInstance(Key.get(setOfString)));
+  }
+

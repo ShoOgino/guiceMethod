@@ -10,7 +10,7 @@
       injector.getInstance(Key.get(setOfString));
       fail();
     } catch(ProvisionException expected) {
-      assertContains(expected.getMessage(), 
+      assertContains(expected.getMessage(),
           "1) Set injection failed due to null element");
     }
   }
