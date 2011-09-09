@@ -1,28 +1,16 @@
   public void testExistingSessionObject()
       throws CreationException, IOException, ServletException {
     final Injector injector = createInjector();
+    final HttpServletRequest request = newFakeHttpServletRequest();
 
     GuiceFilter filter = new GuiceFilter();
-
-    final HttpServletRequest request = createMock(HttpServletRequest.class);
-    final HttpSession session = createMock(HttpSession.class);
-
-    String inSessionKey = IN_SESSION_KEY.toString();
-    String inSessionNullKey = IN_SESSION_NULL_KEY.toString();
-
-    final InSession inSession = new InSession();
-    expect(request.getSession()).andReturn(session).times(4);
-    expect(session.getAttribute(inSessionKey)).andReturn(inSession).times(2);
-    
-    expect(session.getAttribute(inSessionNullKey)).andReturn(NullObject.INSTANCE).times(2);
-
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
       public void doFilter(ServletRequest servletRequest,
           ServletResponse servletResponse) {
         invoked[0] = true;
 
-        assertSame(inSession, injector.getInstance(InSession.class));
+        InSession inSession = injector.getInstance(InSession.class);
         assertSame(inSession, injector.getInstance(InSession.class));
 
         assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
@@ -30,11 +18,8 @@
       }
     };
 
-    replay(request, session);
-
     filter.doFilter(request, null, filterChain);
 
-    verify(request, session);
     assertTrue(invoked[0]);
   }
 

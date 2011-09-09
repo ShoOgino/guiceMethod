@@ -1,0 +1,38 @@
+  /**
+   * Returns a fake, HttpServletRequest which stores attributes in a HashMap.
+   */
+  private HttpServletRequest newFakeHttpServletRequest() {
+    HttpServletRequest delegate = (HttpServletRequest) Proxy.newProxyInstance(
+        HttpServletRequest.class.getClassLoader(),
+        new Class[] { HttpServletRequest.class }, new ThrowingInvocationHandler());
+    
+    return new HttpServletRequestWrapper(delegate) {
+      final Map<String, Object> attributes = Maps.newHashMap(); 
+      final HttpSession session = newFakeHttpSession();
+
+      @Override public Object getAttribute(String name) {
+        return attributes.get(name);
+      }
+      
+      @Override public void setAttribute(String name, Object value) {
+        attributes.put(name, value);
+      }
+      
+      @Override public Map getParameterMap() {
+        return ImmutableMap.of();
+      }
+      
+      @Override public String getRequestURI() {
+        return "/";
+      }
+      
+      @Override public String getContextPath() {
+        return "";
+      }
+      
+      @Override public HttpSession getSession() {
+        return session;
+      }
+    };
+  }
+

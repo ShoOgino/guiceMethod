@@ -1,22 +1,9 @@
   public void testNewSessionObject()
       throws CreationException, IOException, ServletException {
     final Injector injector = createInjector();
+    final HttpServletRequest request = newFakeHttpServletRequest();
 
     GuiceFilter filter = new GuiceFilter();
-
-    final HttpServletRequest request = createMock(HttpServletRequest.class);
-    final HttpSession session = createMock(HttpSession.class);
-
-    String inSessionKey = IN_SESSION_KEY.toString();
-    String inSessionNullKey = IN_SESSION_NULL_KEY.toString();
-
-    expect(request.getSession()).andReturn(session).times(2);
-    expect(session.getAttribute(inSessionKey)).andReturn(null);
-    session.setAttribute(eq(inSessionKey), isA(InSession.class));
-
-    expect(session.getAttribute(inSessionNullKey)).andReturn(null);
-    session.setAttribute(eq(inSessionNullKey), eq(NullObject.INSTANCE));
-
     final boolean[] invoked = new boolean[1];
     FilterChain filterChain = new FilterChain() {
       public void doFilter(ServletRequest servletRequest,
@@ -27,11 +14,8 @@
       }
     };
 
-    replay(request, session);
-
     filter.doFilter(request, null, filterChain);
 
-    verify(request, session);
     assertTrue(invoked[0]);
   }
 
