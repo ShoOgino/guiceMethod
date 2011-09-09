@@ -1,4 +1,4 @@
-  public final void testSpiOnElements() {    
+  public final void testSpiOnElements() {
     ServletSpiVisitor visitor = new ServletSpiVisitor(false);
     int count = 0;
     for(Element element : Elements.getElements(new Module())) {

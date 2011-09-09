@@ -1,6 +1,6 @@
   private void validateVisitor(ServletSpiVisitor visitor) {
     assertEquals(48, visitor.currentCount - visitor.otherCount);
-    
+
     // This is the expected param list, in order..
     List<Params> expected = ImmutableList.of(
         new Params("/class", Key.get(DummyFilterImpl.class), ImmutableMap.of(), SERVLET),
@@ -15,7 +15,7 @@
         new Params("/key/keyvalues/2", Key.get(DummyFilterImpl.class, Names.named("foo")), ImmutableMap.of("key", "value"), SERVLET),
         new Params("/instance/keyvalues", dummyFilter2, ImmutableMap.of("key", "value"), SERVLET),
         new Params("/instance/keyvalues/2", dummyFilter2, ImmutableMap.of("key", "value"), SERVLET),
-        
+
         new Params("/class[0-9]", Key.get(DummyFilterImpl.class), ImmutableMap.of(), REGEX),
         new Params("/class[0-9]/2", Key.get(DummyFilterImpl.class), ImmutableMap.of(), REGEX),
         new Params("/key[0-9]", Key.get(DummyFilterImpl.class, Names.named("foo")), ImmutableMap.of(), REGEX),
@@ -28,7 +28,7 @@
         new Params("/key[0-9]/keyvalues/2", Key.get(DummyFilterImpl.class, Names.named("foo")), ImmutableMap.of("key", "value"), REGEX),
         new Params("/instance[0-9]/keyvalues", dummyFilter4, ImmutableMap.of("key", "value"), REGEX),
         new Params("/instance[0-9]/keyvalues/2", dummyFilter4, ImmutableMap.of("key", "value"), REGEX),
-        
+
         new Params("/class", Key.get(DummyServlet.class), ImmutableMap.of(), SERVLET),
         new Params("/class/2", Key.get(DummyServlet.class), ImmutableMap.of(), SERVLET),
         new Params("/key", Key.get(DummyServlet.class, Names.named("foo")), ImmutableMap.of(), SERVLET),
@@ -41,7 +41,7 @@
         new Params("/key/keyvalues/2", Key.get(DummyServlet.class, Names.named("foo")), ImmutableMap.of("key", "value"), SERVLET),
         new Params("/instance/keyvalues", dummyServlet2, ImmutableMap.of("key", "value"), SERVLET),
         new Params("/instance/keyvalues/2", dummyServlet2, ImmutableMap.of("key", "value"), SERVLET),
-        
+
         new Params("/class[0-9]", Key.get(DummyServlet.class), ImmutableMap.of(), REGEX),
         new Params("/class[0-9]/2", Key.get(DummyServlet.class), ImmutableMap.of(), REGEX),
         new Params("/key[0-9]", Key.get(DummyServlet.class, Names.named("foo")), ImmutableMap.of(), REGEX),
@@ -55,7 +55,7 @@
         new Params("/instance[0-9]/keyvalues", dummyServlet4, ImmutableMap.of("key", "value"), REGEX),
         new Params("/instance[0-9]/keyvalues/2", dummyServlet4, ImmutableMap.of("key", "value"), REGEX)
     );
-    
+
     assertEquals(expected.size(), visitor.actual.size());
     Iterator<Params> actualIterator = visitor.actual.iterator();
     int i = 0;

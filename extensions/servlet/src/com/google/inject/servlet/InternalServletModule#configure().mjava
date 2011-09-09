@@ -15,5 +15,6 @@
     bind(FilterPipeline.class).to(ManagedFilterPipeline.class).asEagerSingleton();
 
     bind(ServletContext.class).toProvider(BackwardsCompatibleServletContextProvider.class);
+    bind(BackwardsCompatibleServletContextProvider.class);
   }
 

@@ -1,5 +1,7 @@
     @Override
     protected void configureServlets() {
+      binder().requireExplicitBindings();
+
       filter("/class", "/class/2").through(DummyFilterImpl.class);
       filter("/key", "/key/2").through(
           Key.get(DummyFilterImpl.class, Names.named("foo")));
