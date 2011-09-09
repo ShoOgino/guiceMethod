@@ -7,7 +7,7 @@
       });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "No implementation for java.lang.Integer",
+      assertContains(expected.getMessage(), "No implementation for java.lang.Integer", 
           "at " + getClass().getName());
     }
   }

@@ -1,0 +1,4 @@
+  public Errors staticInjectionOnInterface(Class<?> clazz) {
+    return addMessage("%s is an interface, but interfaces have no static injection points.", clazz);
+  }
+

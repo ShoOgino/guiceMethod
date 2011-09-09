@@ -1,0 +1,19 @@
+  public void testInjectStaticInterface() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        protected void configure() {
+          requestStaticInjection(Interface.class);
+        }
+      });
+      fail();
+    } catch(CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      Asserts.assertContains(
+          ce.getMessage(),
+          "1) " + Interface.class.getName()
+              + " is an interface, but interfaces have no static injection points.",
+          "at " + InjectorTest.class.getName(),
+          "configure");
+    }
+  }
+
