@@ -9,7 +9,7 @@
     assertEquals(HasTypeParameters.class, bTv.getGenericDeclaration());
     assertEquals("B", bTv.getName());
     assertEquals(ImmutableList.<Type>of(Types.listOf(typeVariables[0]), Runnable.class),
-        ImmutableList.of(bTv.getBounds()));
+        ImmutableList.copyOf(bTv.getBounds()));
     assertEquals("B", bTv.toString());
     assertEqualsBothWays(bTl, TypeLiteral.get(HasTypeParameters.class.getTypeParameters()[1]));
   }

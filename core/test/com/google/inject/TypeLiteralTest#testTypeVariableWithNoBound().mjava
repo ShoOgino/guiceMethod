@@ -8,7 +8,7 @@
     TypeVariable<?> aTv = (TypeVariable) aTl.getType();
     assertEquals(HasTypeParameters.class, aTv.getGenericDeclaration());
     assertEquals("A", aTv.getName());
-    assertEquals(ImmutableList.<Type>of(Object.class), ImmutableList.of(aTv.getBounds()));
+    assertEquals(ImmutableList.<Type>of(Object.class), ImmutableList.copyOf(aTv.getBounds()));
     assertEquals("A", aTv.toString());
     assertEqualsBothWays(aTl, TypeLiteral.get(HasTypeParameters.class.getTypeParameters()[0]));
   }
