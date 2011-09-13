@@ -6,7 +6,7 @@
   private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors, JitLimitation jitType)
       throws ErrorsException {
 
-    boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);    
+    boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);
     synchronized (state.lock()) {
       // first try to find a JIT binding that we've already created
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
@@ -27,7 +27,24 @@
         }
       }
       
+      // If we previously failed creating this JIT binding and our Errors has
+      // already recorded an error, then just directly throw that error.
+      // We need to do this because it's possible we already cleaned up the
+      // entry in jitBindings (during cleanup), and we may be trying
+      // to create it again (in the case of a recursive JIT binding).
+      // We need both of these guards for different reasons
+      // failedJitBindings.contains: We want to continue processing if we've never
+      //   failed before, so that our initial error message contains
+      //   as much useful information as possible about what errors exist.
+      // errors.hasErrors: If we haven't already failed, then it's OK to
+      //   continue processing, to make sure the ultimate error message
+      //   is the correct one.
+      // See: ImplicitBindingsTest#testRecursiveJitBindingsCleanupCorrectly
+      // for where this guard compes into play.
+      if (failedJitBindings.contains(key) && errors.hasErrors()) {
+        throw errors.toException();
+      }
       return createJustInTimeBindingRecursive(key, errors, options.jitDisabled, jitType);
-    }
+    } // end synchronized(state.lock())
   }
 

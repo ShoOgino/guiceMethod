@@ -1,6 +1,7 @@
   public void testMissingDependency() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         public void configure() {
           bind(NeedsRunnable.class);
         }

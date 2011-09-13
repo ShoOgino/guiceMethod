@@ -1,6 +1,7 @@
   public void testMissingBindings() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         public void configure() {
           getProvider(Runnable.class);
           bind(Comparator.class);

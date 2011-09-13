@@ -8,6 +8,7 @@
     final Integer[] integers = new Integer[] { 1 };
     
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(String[].class).toInstance(strings);
         bind(new TypeLiteral<Integer[]>() {}).toInstance(integers);
@@ -23,6 +24,7 @@
 
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           bind(String[].class).toInstance(new String[] { "A" });
           bind(new TypeLiteral<String[]>() {}).toInstance(new String[] { "B" });
@@ -38,6 +40,7 @@
     
     // passes because duplicates are ignored
     injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(String[].class).toInstance(strings);
         bind(new TypeLiteral<String[]>() {}).toInstance(strings);

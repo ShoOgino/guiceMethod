@@ -1,0 +1,2 @@
+    @Inject public C(A a, D d, E e) {}
+

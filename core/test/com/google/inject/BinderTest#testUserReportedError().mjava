@@ -2,6 +2,7 @@
     final Message message = new Message(getClass(), "Whoops!");
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           addError(message);
         }

@@ -3,6 +3,7 @@
 
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           bind(AbstractModule.class).annotatedWith(red)
               .toProvider(Providers.<AbstractModule>of(null));

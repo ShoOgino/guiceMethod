@@ -1,5 +1,6 @@
   public void testBindingOverridesImplementedBy() {
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(I.class).to(AlternateImpl.class);
       }

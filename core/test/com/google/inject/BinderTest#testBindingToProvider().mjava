@@ -1,6 +1,7 @@
   public void testBindingToProvider() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           bind(new TypeLiteral<Provider<String>>() {}).toInstance(Providers.of("A"));
         }

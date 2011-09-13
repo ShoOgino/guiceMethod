@@ -5,6 +5,7 @@
    */
   public void testUntargettedBinding() {
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(HasProvidedBy1.class);
         bind(HasImplementedBy1.class);
