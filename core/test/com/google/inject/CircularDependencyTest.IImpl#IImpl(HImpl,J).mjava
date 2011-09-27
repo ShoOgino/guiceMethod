@@ -1,0 +1,2 @@
+     @Inject IImpl(HImpl i, J j) {}
+

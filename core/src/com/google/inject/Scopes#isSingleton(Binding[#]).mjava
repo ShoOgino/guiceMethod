@@ -33,7 +33,7 @@
 
       if (binding instanceof LinkedBindingImpl) {
         LinkedBindingImpl<?> linkedBinding = (LinkedBindingImpl) binding;
-        Injector injector = (Injector) linkedBinding.getInjector();
+        Injector injector = linkedBinding.getInjector();
         if (injector != null) {
           binding = injector.getBinding(linkedBinding.getLinkedKey());
           continue;
