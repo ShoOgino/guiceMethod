@@ -1,0 +1,7 @@
+    Context(HttpServletRequest originalRequest, HttpServletRequest request,
+        HttpServletResponse response) {
+      this.originalRequest = originalRequest;
+      this.request = request;
+      this.response = response;
+    }
+

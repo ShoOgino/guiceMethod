@@ -1,4 +1,4 @@
-  static Context getContext() {
+  private static Context getContext() {
     Context context = localContext.get();
     if (context == null) {
       throw new OutOfScopeException("Cannot access scoped object. Either we"

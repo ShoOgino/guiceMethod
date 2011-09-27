@@ -2,7 +2,6 @@
     final Injector injector = createInjector();
     final HttpServletRequest request = newFakeHttpServletRequest();
     final HttpServletResponse response = newFakeHttpServletResponse();
-    final Map<String, String[]> params = Maps.newHashMap();
 
     final boolean[] invoked = new boolean[1];
     GuiceFilter filter = new GuiceFilter();

@@ -1,0 +1,13 @@
+  private void doServiceImpl(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    GuiceFilter.Context previous = GuiceFilter.localContext.get();
+    HttpServletRequest originalRequest
+        = (previous != null) ? previous.getOriginalRequest() : request;
+    GuiceFilter.localContext.set(new GuiceFilter.Context(originalRequest, request, response));
+    try {
+      httpServlet.get().service(request, response);
+    } finally {
+      GuiceFilter.localContext.set(previous);
+    }
+  }
+

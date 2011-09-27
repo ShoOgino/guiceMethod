@@ -2,18 +2,18 @@
       ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
 
-    Context previous = localContext.get();
-
     // Prefer the injected pipeline, but fall back on the static one for web.xml users.
     FilterPipeline filterPipeline = null != injectedPipeline ? injectedPipeline : pipeline;
 
+    Context previous = GuiceFilter.localContext.get();
+    HttpServletRequest request = (HttpServletRequest) servletRequest;
+    HttpServletResponse response = (HttpServletResponse) servletResponse;
+    HttpServletRequest originalRequest
+        = (previous != null) ? previous.getOriginalRequest() : request;
+    localContext.set(new Context(originalRequest, request, response));
     try {
-      localContext.set(new Context((HttpServletRequest) servletRequest,
-          (HttpServletResponse) servletResponse));
-
       //dispatch across the servlet pipeline, ensuring web.xml's filterchain is honored
       filterPipeline.dispatch(servletRequest, servletResponse, filterChain);
-
     } finally {
       localContext.set(previous);
     }

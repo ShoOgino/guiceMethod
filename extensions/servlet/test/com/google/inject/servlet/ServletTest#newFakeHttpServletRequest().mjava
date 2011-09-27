@@ -10,6 +10,10 @@
       final Map<String, Object> attributes = Maps.newHashMap(); 
       final HttpSession session = newFakeHttpSession();
 
+      @Override public String getMethod() {
+        return "GET";
+      }
+
       @Override public Object getAttribute(String name) {
         return attributes.get(name);
       }

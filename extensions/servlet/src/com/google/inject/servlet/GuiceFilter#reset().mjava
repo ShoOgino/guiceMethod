@@ -1,5 +1,6 @@
   //VisibleForTesting
   static void reset() {
     pipeline = new DefaultFilterPipeline();
+    localContext.remove();
   }
 

@@ -1,0 +1,4 @@
+    HttpServletRequest getOriginalRequest() {
+      return originalRequest;
+    }
+
