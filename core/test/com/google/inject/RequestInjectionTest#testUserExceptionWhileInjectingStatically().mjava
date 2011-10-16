@@ -1,6 +1,7 @@
   public void testUserExceptionWhileInjectingStatically() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           requestStaticInjection(BlowsUpOnInject.class);
         }

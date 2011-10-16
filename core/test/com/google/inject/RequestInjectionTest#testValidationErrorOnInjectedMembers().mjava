@@ -1,6 +1,7 @@
   public void testValidationErrorOnInjectedMembers() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           requestInjection(new NeedsRunnable());
         }

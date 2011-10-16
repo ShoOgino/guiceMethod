@@ -16,7 +16,8 @@
       return Initializables.of(instance);
     }
 
-    InjectableReference<T> initializable = new InjectableReference<T>(injector, instance, key, source);
+    InjectableReference<T> initializable =
+        new InjectableReference<T>(injector, instance, key, source);
     pendingInjection.put(instance, initializable);
     return initializable;
   }

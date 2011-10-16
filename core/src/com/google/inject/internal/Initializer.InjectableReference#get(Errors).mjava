@@ -20,6 +20,13 @@
 
       // toInject needs injection, do it right away. we only do this once, even if it fails
       if (pendingInjection.remove(instance) != null) {
+        // safe because we only insert a members injector for the appropriate instance
+        @SuppressWarnings("unchecked")
+        MembersInjectorImpl<T> membersInjector =
+            (MembersInjectorImpl<T>)pendingMembersInjectors.remove(instance);
+        Preconditions.checkState(membersInjector != null,
+            "No membersInjector available for instance: " + instance + ", from key: " + key);
+        
         // if in Stage.TOOL, we only want to inject & notify toolable injection points.
         // (otherwise we'll inject all of them)
         membersInjector.injectAndNotify(instance, errors.withSource(source), key, source, 

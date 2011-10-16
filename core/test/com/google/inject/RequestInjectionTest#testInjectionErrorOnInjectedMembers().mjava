@@ -1,6 +1,7 @@
   public void testInjectionErrorOnInjectedMembers() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           bind(Runnable.class).toProvider(new Provider<Runnable>() {
             public Runnable get() {
