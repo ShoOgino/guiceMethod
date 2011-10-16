@@ -1,4 +1,4 @@
-  public final void testAsyncServiceLifecycle() throws InterruptedException {
+  public final void testAsyncServiceLifecycle() throws Exception {
     ExecutorService executor = Executors.newSingleThreadExecutor();
 
     final CountDownLatch startLatch = new CountDownLatch(1);
@@ -19,9 +19,14 @@
       }
     };
 
-    service.start();
-    // This should not pass!
+    Future<?> future = service.start();
+    // This should not pass!  TODO(sameb): Why?  Looks like it should to me
     assertTrue(startLatch.await(2, TimeUnit.SECONDS));
+    // onStart() is called before the state is set to STARTED, so we need
+    // to wait until the Future finishes to guarantee it really was started.
+    // This still manages to test what we want because the startLatch check
+    // is before this.
+    future.get(1, TimeUnit.SECONDS);
 
     service.stop();
     assertTrue(stopLatch.await(2, TimeUnit.SECONDS));
