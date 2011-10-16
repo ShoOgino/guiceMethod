@@ -2,8 +2,7 @@
       ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {
 
-    // Prefer the injected pipeline, but fall back on the static one for web.xml users.
-    FilterPipeline filterPipeline = null != injectedPipeline ? injectedPipeline : pipeline;
+    FilterPipeline filterPipeline = getFilterPipeline();
 
     Context previous = GuiceFilter.localContext.get();
     HttpServletRequest request = (HttpServletRequest) servletRequest;

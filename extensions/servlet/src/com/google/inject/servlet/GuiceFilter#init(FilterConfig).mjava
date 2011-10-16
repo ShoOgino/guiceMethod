@@ -7,7 +7,7 @@
     // In the default pipeline, this is a noop. However, if replaced
     // by a managed pipeline, a lazy init will be triggered the first time
     // dispatch occurs.
-    FilterPipeline filterPipeline = null != injectedPipeline ? injectedPipeline : pipeline;
+    FilterPipeline filterPipeline = getFilterPipeline();
     filterPipeline.initPipeline(servletContext);
   }
 

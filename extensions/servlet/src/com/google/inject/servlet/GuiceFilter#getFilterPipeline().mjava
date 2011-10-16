@@ -1,0 +1,5 @@
+  private FilterPipeline getFilterPipeline() {
+    // Prefer the injected pipeline, but fall back on the static one for web.xml users.
+    return (null != injectedPipeline) ? injectedPipeline : pipeline;
+  }
+

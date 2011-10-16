@@ -1,0 +1,4 @@
+  @Provides @Singleton @ScopingOnly GuiceFilter provideScopingOnlyGuiceFilter() {
+    return new GuiceFilter(new DefaultFilterPipeline());
+  }
+
