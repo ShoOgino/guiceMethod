@@ -3,6 +3,6 @@
    * @since 2.0
    */
   protected Stage currentStage() {
-    return binder.currentStage();
+    return binder().currentStage();
   }
 

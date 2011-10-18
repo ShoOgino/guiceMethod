@@ -2,6 +2,6 @@
    * @see Binder#requestStaticInjection(Class[])
    */
   protected void requestStaticInjection(Class<?>... types) {
-    binder.requestStaticInjection(types);
+    binder().requestStaticInjection(types);
   }
 

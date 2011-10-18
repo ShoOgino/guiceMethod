@@ -5,6 +5,6 @@
    */
   protected void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeListener listener) {
-    binder.bindListener(typeMatcher, listener);
+    binder().bindListener(typeMatcher, listener);
   }
 

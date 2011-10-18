@@ -2,6 +2,6 @@
    * Instructs Guice to require a binding to the given key.
    */
   protected final void requireBinding(Key<?> key) {
-    binder.getProvider(key);
+    binder().getProvider(key);
   }
 

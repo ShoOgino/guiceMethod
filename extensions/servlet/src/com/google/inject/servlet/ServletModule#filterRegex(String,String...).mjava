@@ -3,6 +3,7 @@
    * @since 2.0
    */
   protected final FilterKeyBindingBuilder filterRegex(String regex, String... regexes) {
-    return filtersModuleBuilder.filterRegex(ImmutableList.<String>builder().add(regex).add(regexes).build());
+    return getFiltersModuleBuilder()
+        .filterRegex(ImmutableList.<String>builder().add(regex).add(regexes).build());
   }
 

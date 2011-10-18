@@ -3,6 +3,7 @@
    * @since 2.0
    */
   protected final ServletKeyBindingBuilder serveRegex(String regex, String... regexes) {
-    return servletsModuleBuilder.serveRegex(ImmutableList.<String>builder().add(regex).add(regexes).build());
+    return getServletModuleBuilder()
+        .serveRegex(ImmutableList.<String>builder().add(regex).add(regexes).build());
   }
 

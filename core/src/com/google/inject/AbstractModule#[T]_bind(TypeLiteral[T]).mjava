@@ -2,6 +2,6 @@
    * @see Binder#bind(TypeLiteral)
    */
   protected <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
-    return binder.bind(typeLiteral);
+    return binder().bind(typeLiteral);
   }
 

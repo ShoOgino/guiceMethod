@@ -4,6 +4,6 @@
    */
   protected void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
       TypeConverter converter) {
-    binder.convertToTypes(typeMatcher, converter);
+    binder().convertToTypes(typeMatcher, converter);
   }
 

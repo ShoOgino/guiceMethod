@@ -1,0 +1,6 @@
+  private FiltersModuleBuilder getFiltersModuleBuilder() {
+    checkState(filtersModuleBuilder != null,
+        "This method can only be used inside configureServlets()");
+    return filtersModuleBuilder;
+  }
+

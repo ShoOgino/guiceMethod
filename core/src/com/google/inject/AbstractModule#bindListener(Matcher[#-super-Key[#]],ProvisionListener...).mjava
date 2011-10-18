@@ -4,6 +4,6 @@
    */
   protected void bindListener(Matcher<? super Key<?>> keyMatcher,
       ProvisionListener... listener) {
-    binder.bindListener(keyMatcher, listener);
+    binder().bindListener(keyMatcher, listener);
   }
 

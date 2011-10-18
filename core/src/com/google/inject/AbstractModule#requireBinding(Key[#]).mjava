@@ -7,6 +7,6 @@
    * @since 2.0
    */
   protected void requireBinding(Key<?> key) {
-    binder.getProvider(key);
+    binder().getProvider(key);
   }
 

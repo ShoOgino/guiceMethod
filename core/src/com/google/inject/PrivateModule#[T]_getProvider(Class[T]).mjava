@@ -2,6 +2,6 @@
    * @see Binder#getProvider(Class)
    */
   protected final <T> Provider<T> getProvider(Class<T> type) {
-    return binder.getProvider(type);
+    return binder().getProvider(type);
   }
 

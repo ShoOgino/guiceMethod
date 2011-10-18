@@ -2,6 +2,7 @@
    * Gets direct access to the underlying {@code Binder}.
    */
   protected Binder binder() {
+    checkState(binder != null, "The binder can only be used inside configure()");
     return binder;
   }
 

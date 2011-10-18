@@ -3,6 +3,6 @@
    * @since 2.0
    */
   protected void addError(Message message) {
-    binder.addError(message);
+    binder().addError(message);
   }
 

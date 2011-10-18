@@ -3,6 +3,7 @@
    * @since 2.0
    */
   protected final ServletKeyBindingBuilder serve(String urlPattern, String... morePatterns) {
-    return servletsModuleBuilder.serve(ImmutableList.<String>builder().add(urlPattern).add(morePatterns).build());
+    return getServletModuleBuilder()
+        .serve(ImmutableList.<String>builder().add(urlPattern).add(morePatterns).build());
   }
 

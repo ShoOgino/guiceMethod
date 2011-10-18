@@ -4,6 +4,6 @@
    * binding annotation.
    */
   protected final AnnotatedElementBuilder expose(Class<?> type) {
-    return binder.expose(type);
+    return binder().expose(type);
   }
 

@@ -2,6 +2,6 @@
    * @see Binder#addError(String, Object[])
    */
   protected final void addError(String message, Object... arguments) {
-    binder.addError(message, arguments);
+    binder().addError(message, arguments);
   }
 

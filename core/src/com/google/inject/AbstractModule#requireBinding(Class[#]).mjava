@@ -7,6 +7,6 @@
    * @since 2.0
    */
   protected void requireBinding(Class<?> type) {
-    binder.getProvider(type);
+    binder().getProvider(type);
   }
 

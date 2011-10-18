@@ -2,6 +2,7 @@
    * Returns the current binder.
    */
   protected final PrivateBinder binder() {
+    checkState(binder != null, "The binder can only be used inside configure()");
     return binder;
   }
 

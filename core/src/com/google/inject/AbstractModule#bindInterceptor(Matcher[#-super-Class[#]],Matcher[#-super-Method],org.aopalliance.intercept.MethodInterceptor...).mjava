@@ -7,7 +7,7 @@
   protected void bindInterceptor(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
       org.aopalliance.intercept.MethodInterceptor... interceptors) {
-    binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
+    binder().bindInterceptor(classMatcher, methodMatcher, interceptors);
   }
   /*end[AOP]*/
 

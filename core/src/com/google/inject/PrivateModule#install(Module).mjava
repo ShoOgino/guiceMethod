@@ -2,6 +2,6 @@
    * @see Binder#install(Module)
    */
   protected final void install(Module module) {
-    binder.install(module);
+    binder().install(module);
   }
 

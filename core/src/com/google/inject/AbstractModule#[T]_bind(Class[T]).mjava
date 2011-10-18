@@ -2,6 +2,6 @@
    * @see Binder#bind(Class)
    */
   protected <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
-    return binder.bind(clazz);
+    return binder().bind(clazz);
   }
 
