@@ -1,0 +1,6 @@
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws ServletException {
+      throw new ServletException("we failed!");
+    }
+

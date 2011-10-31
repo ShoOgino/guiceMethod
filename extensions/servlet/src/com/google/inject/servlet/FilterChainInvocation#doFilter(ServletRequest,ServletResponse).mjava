@@ -21,6 +21,17 @@
           proceedingChain.doFilter(servletRequest, servletResponse);
         }
       }
+    } catch (Throwable t) {
+      // Only clean on the first pass through -- one exception deep in a filter
+      // will propogate upward & hit this catch clause multiple times.  We don't
+      // want to iterate through the stack elements for every filter.
+      if (!cleanedStacks) {
+        cleanedStacks = true;
+        pruneStacktrace(t);
+      }
+      Throwables.propagateIfInstanceOf(t, ServletException.class);
+      Throwables.propagateIfInstanceOf(t, IOException.class);
+      throw Throwables.propagate(t);
     } finally {
       GuiceFilter.localContext.set(previous);
     }

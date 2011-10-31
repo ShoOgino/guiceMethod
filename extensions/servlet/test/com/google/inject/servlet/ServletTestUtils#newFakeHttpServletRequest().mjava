@@ -1,7 +1,7 @@
   /**
    * Returns a fake, HttpServletRequest which stores attributes in a HashMap.
    */
-  private HttpServletRequest newFakeHttpServletRequest() {
+  public static HttpServletRequest newFakeHttpServletRequest() {
     HttpServletRequest delegate = (HttpServletRequest) Proxy.newProxyInstance(
         HttpServletRequest.class.getClassLoader(),
         new Class[] { HttpServletRequest.class }, new ThrowingInvocationHandler());
