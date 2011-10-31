@@ -1,10 +1,14 @@
-    private void with(Key<? extends HttpServlet> servletKey,
-        Map<String, String> initParams,
+    private void with(Key<? extends HttpServlet> servletKey, Map<String, String> initParams,
         HttpServlet servletInstance) {
       for (String pattern : uriPatterns) {
-        servletDefinitions.add(
-            new ServletDefinition(pattern, servletKey, UriPatternType.get(uriPatternType, pattern),
-                initParams, servletInstance));
+        // Ensure two servlets aren't bound to the same pattern.
+        if (!servletUris.add(pattern)) {
+          binder.addError("More than one servlet was mapped to the same URI pattern: " + pattern);
+        } else {
+          binder.bind(Key.get(ServletDefinition.class, UniqueAnnotations.create())).toProvider(
+              new ServletDefinition(pattern, servletKey, UriPatternType
+                  .get(uriPatternType, pattern), initParams, servletInstance));
+        }
       }
     }
 

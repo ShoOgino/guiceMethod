@@ -1,6 +1,6 @@
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp)
-        throws ServletException, IOException {
+        throws ServletException {
       throw new ServletException("failure!");
     }
 

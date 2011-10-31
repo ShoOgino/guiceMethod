@@ -23,7 +23,8 @@
 
     String pattern = "/*";
     final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET, pattern), new HashMap<String, String>(), null);
+        UriPatternType.get(UriPatternType.SERVLET, pattern),
+        new HashMap<String, String>(), null);
     //should fire on mockfilter now
     filterDef.init(createMock(ServletContext.class), injector,
         Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
@@ -33,9 +34,8 @@
 
     final boolean proceed[] = new boolean[1];
     filterDef.doFilter(request, null, new FilterChainInvocation(null, null, null) {
-      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse)
-          throws IOException, ServletException {
-
+      @Override
+      public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse) {
         proceed[0] = true;
       }
     });

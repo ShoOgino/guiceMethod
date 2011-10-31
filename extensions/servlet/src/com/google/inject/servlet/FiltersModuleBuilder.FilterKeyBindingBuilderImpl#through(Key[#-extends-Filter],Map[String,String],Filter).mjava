@@ -2,7 +2,7 @@
         Map<String, String> initParams,
         Filter filterInstance) {
       for (String pattern : uriPatterns) {
-        filterDefinitions.add(
+        binder.bind(FilterDefinition.class).annotatedWith(UniqueAnnotations.create()).toProvider(
             new FilterDefinition(pattern, filterKey, UriPatternType.get(uriPatternType, pattern),
                 initParams, filterInstance));
       }

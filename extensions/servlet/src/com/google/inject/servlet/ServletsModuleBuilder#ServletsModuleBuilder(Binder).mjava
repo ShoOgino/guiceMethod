@@ -1,0 +1,4 @@
+  public ServletsModuleBuilder(Binder binder) {
+    this.binder = binder;
+  }
+

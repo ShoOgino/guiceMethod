@@ -1,4 +1,0 @@
-    protected void setRun(boolean run) {
-      this.run = run;
-    }
-

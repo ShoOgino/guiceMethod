@@ -1,0 +1,9 @@
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws ServletException, IOException {
+      if (calledAt != -1) {
+        fail("not expecting to be called twice");
+      }
+      calledAt = counter.getAndIncrement();
+      chain.doFilter(request, response);
+    }
+

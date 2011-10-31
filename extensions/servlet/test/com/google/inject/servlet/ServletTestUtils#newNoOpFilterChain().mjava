@@ -1,0 +1,10 @@
+  /**
+   * Returns a FilterChain that does nothing.
+   */
+  public static FilterChain newNoOpFilterChain() {
+    return new FilterChain() {
+      public void doFilter(ServletRequest request, ServletResponse response) {
+      }
+    };
+  }
+

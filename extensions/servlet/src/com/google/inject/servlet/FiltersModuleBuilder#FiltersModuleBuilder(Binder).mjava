@@ -1,0 +1,4 @@
+  public FiltersModuleBuilder(Binder binder) {
+    this.binder = binder;
+  }
+

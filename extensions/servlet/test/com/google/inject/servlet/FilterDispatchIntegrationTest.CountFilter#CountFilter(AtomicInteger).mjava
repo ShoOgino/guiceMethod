@@ -1,0 +1,4 @@
+    public CountFilter(AtomicInteger counter) {
+      this.counter = counter;
+    }
+

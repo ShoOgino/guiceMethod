@@ -1,7 +1,7 @@
     public void through(Filter filter,
         Map<String, String> initParams) {
       Key<Filter> filterKey = Key.get(Filter.class, UniqueAnnotations.create());
-      filterInstanceEntries.add(new FilterInstanceBindingEntry(filterKey, filter));
+      binder.bind(filterKey).toInstance(filter);
       through(filterKey, initParams, filter);
     }
 

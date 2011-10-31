@@ -1,5 +1,0 @@
-    FilterInstanceBindingEntry(Key<Filter> key, Filter filter) {
-      this.key = key;
-      this.filter = filter;
-    }
-
