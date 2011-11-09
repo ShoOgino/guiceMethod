@@ -1,10 +1,10 @@
   public void testToString() {
     Assert.assertEquals("java.lang.String", MoreTypes.typeToString(String.class));
-    assertEquals("java.lang.String[][]", MoreTypes.typeToString(stringArray));
+    assertEquals("java.util.Set<java.lang.String>[][]", MoreTypes.typeToString(setStringArray));
     assertEquals("java.util.Map<java.lang.String, java.lang.Integer>",
         MoreTypes.typeToString(mapStringInteger));
-    assertEquals("java.util.List<java.lang.String[][]>",
-        MoreTypes.typeToString(listStringArray));
+    assertEquals("java.util.List<java.util.Set<java.lang.String>[][]>",
+        MoreTypes.typeToString(listSetStringArray));
     assertEquals(innerFloatDouble.toString(),
         MoreTypes.typeToString(innerFloatDouble));
   }

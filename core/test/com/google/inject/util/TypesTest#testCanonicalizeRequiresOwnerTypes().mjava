@@ -2,7 +2,7 @@
    * Ensure that owning types are required when necessary, and forbidden
    * otherwise.
    */
-  public void testCanonicalizeRequiresOwnerTypes() throws NoSuchFieldException {
+  public void testCanonicalizeRequiresOwnerTypes() {
     try {
       Types.newParameterizedType(Owning.class, String.class);
       fail();

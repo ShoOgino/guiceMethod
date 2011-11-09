@@ -4,9 +4,9 @@
     assertEqualsBothWays(mapStringInteger, parameterizedType);
     assertEquals(mapStringInteger.toString(), parameterizedType.toString());
 
-    GenericArrayType genericArrayType = Types.arrayOf(
-        Types.arrayOf(String.class));
-    assertEqualsBothWays(stringArray, genericArrayType);
-    assertEquals(stringArray.toString(), genericArrayType.toString());
+    GenericArrayType genericArrayType = Types.arrayOf(Types.arrayOf(
+        Types.newParameterizedType(Set.class, String.class)));
+    assertEqualsBothWays(setStringArray, genericArrayType);
+    assertEquals(setStringArray.toString(), genericArrayType.toString());
   }
 

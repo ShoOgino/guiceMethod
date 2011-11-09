@@ -1,11 +1,12 @@
+  @Override
   protected void setUp() throws Exception {
     super.setUp();
     mapStringInteger = (ParameterizedType) getClass().getDeclaredField("a").getGenericType();
     innerFloatDouble = (ParameterizedType) getClass().getDeclaredField("b").getGenericType();
-    listStringArray = (ParameterizedType) getClass().getDeclaredField("c").getGenericType();
+    listSetStringArray = (ParameterizedType) getClass().getDeclaredField("c").getGenericType();
     listString = (ParameterizedType) getClass().getDeclaredField("d").getGenericType();
     setString = (ParameterizedType) getClass().getDeclaredField("e").getGenericType();
-    stringArray = (GenericArrayType) listStringArray.getActualTypeArguments()[0];
     outerInner = (ParameterizedType) getClass().getDeclaredField("f").getGenericType();
+    setStringArray = (GenericArrayType) listSetStringArray.getActualTypeArguments()[0];
   }
 
