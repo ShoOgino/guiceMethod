@@ -1,0 +1,17 @@
+  private ImmutableMap<Key<?>, Binding<?>> indexBindings(Iterable<Element> elements) {
+    ImmutableMap.Builder<Key<?>, Binding<?>> builder = ImmutableMap.builder();
+    for (Element element : elements) {
+      if (element instanceof Binding) {
+        Binding<?> binding = (Binding<?>) element;
+        builder.put(binding.getKey(), binding);
+      } else if (element instanceof PrivateElements) {
+        PrivateElements privateElements = (PrivateElements) element;
+        Map<Key<?>, Binding<?>> privateBindings = indexBindings(privateElements.getElements());
+        for (Key<?> exposed : privateElements.getExposedKeys()) {
+          builder.put(exposed, privateBindings.get(exposed));
+        }
+      }
+    }
+    return builder.build();
+  }
+

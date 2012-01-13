@@ -1,0 +1,57 @@
+  public void testIsRequestScopedPositive() {
+    final Key<String> a = Key.get(String.class, named("A"));
+    final Key<String> b = Key.get(String.class, named("B"));
+    final Key<String> c = Key.get(String.class, named("C"));
+    final Key<String> d = Key.get(String.class, named("D"));
+    final Key<Object> e = Key.get(Object.class, named("E"));
+    final Key<String> f = Key.get(String.class, named("F"));
+    final Key<String> g = Key.get(String.class, named("G"));
+
+    Module requestScopedBindings = new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(a).to(b);
+        bind(b).to(c);
+        bind(c).toProvider(Providers.of("c")).in(ServletScopes.REQUEST);
+        bind(d).toProvider(Providers.of("d")).in(RequestScoped.class);
+        bind(e).to(AnnotatedRequestScopedClass.class);
+        install(new PrivateModule() {
+          @Override
+          protected void configure() {
+            bind(f).toProvider(Providers.of("f")).in(RequestScoped.class);
+            expose(f);
+          }
+        });
+      }
+
+      @Provides
+      @Named("G")
+      @RequestScoped
+      String provideG() {
+        return "g";
+      }
+    };
+
+    @SuppressWarnings("unchecked") // we know the module contains only bindings
+    List<Element> moduleBindings = Elements.getElements(requestScopedBindings);
+    ImmutableMap<Key<?>, Binding<?>> map = indexBindings(moduleBindings);
+    // linked bindings are not followed by modules
+    assertFalse(ServletScopes.isRequestScoped(map.get(a)));
+    assertFalse(ServletScopes.isRequestScoped(map.get(b)));
+    assertTrue(ServletScopes.isRequestScoped(map.get(c)));
+    assertTrue(ServletScopes.isRequestScoped(map.get(d)));
+    // annotated classes are not followed by modules
+    assertFalse(ServletScopes.isRequestScoped(map.get(e)));
+    assertTrue(ServletScopes.isRequestScoped(map.get(f)));
+    assertTrue(ServletScopes.isRequestScoped(map.get(g)));
+
+    Injector injector = Guice.createInjector(requestScopedBindings, new ServletModule());
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(a)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(b)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(c)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(d)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(e)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(f)));
+    assertTrue(ServletScopes.isRequestScoped(injector.getBinding(g)));
+  }
+
