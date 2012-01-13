@@ -8,25 +8,7 @@
    */
   public static boolean isSingleton(Binding<?> binding) {
     do {
-      boolean singleton = binding.acceptScopingVisitor(new BindingScopingVisitor<Boolean>() {
-        public Boolean visitNoScoping() {
-          return false;
-        }
-
-        public Boolean visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
-          return scopeAnnotation == Singleton.class
-              || scopeAnnotation == javax.inject.Singleton.class;
-        }
-
-        public Boolean visitScope(Scope scope) {
-          return scope == Scopes.SINGLETON;
-        }
-
-        public Boolean visitEagerSingleton() {
-          return true;
-        }
-      });
-
+      boolean singleton = binding.acceptScopingVisitor(IS_SINGLETON_VISITOR);
       if (singleton) {
         return true;
       }
