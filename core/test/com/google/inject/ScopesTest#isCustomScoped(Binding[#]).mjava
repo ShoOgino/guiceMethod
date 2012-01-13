@@ -1,0 +1,4 @@
+  private boolean isCustomScoped(Binding<?> binding) {
+    return Scopes.isScoped(binding, CUSTOM_SCOPE, CustomScoped.class);
+  }
+

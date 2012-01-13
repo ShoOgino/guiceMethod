@@ -1,0 +1,52 @@
+  public void testIsScopedPositive() {
+    final Key<String> a = Key.get(String.class, named("A"));
+    final Key<String> b = Key.get(String.class, named("B"));
+    final Key<String> c = Key.get(String.class, named("C"));
+    final Key<String> d = Key.get(String.class, named("D"));
+    final Key<String> e = Key.get(String.class, named("E"));
+    final Key<Object> f = Key.get(Object.class, named("F"));
+    final Key<String> g = Key.get(String.class, named("G"));
+
+    Module customBindings = new AbstractModule() {
+      protected void configure() {
+        bindScope(CustomScoped.class, CUSTOM_SCOPE);
+        bind(a).to(b);
+        bind(b).to(c);
+        bind(c).toProvider(Providers.of("c")).in(CUSTOM_SCOPE);
+        bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
+        bind(f).to(AnnotatedCustomScoped.class);
+        install(new PrivateModule() {
+          @Override
+          protected void configure() {
+            bind(g).toProvider(Providers.of("g")).in(CustomScoped.class);
+            expose(g);
+          }
+        });
+      }
+
+      @Provides @Named("E") @CustomScoped String provideE() {
+        return "e";
+      }
+    };
+
+    @SuppressWarnings("unchecked") // we know the module contains only bindings
+    List<Element> moduleBindings = Elements.getElements(customBindings);
+    ImmutableMap<Key<?>, Binding<?>> map = indexBindings(moduleBindings);
+    assertFalse(isCustomScoped(map.get(a))); // linked bindings are not followed by modules
+    assertFalse(isCustomScoped(map.get(b)));
+    assertTrue(isCustomScoped(map.get(c)));
+    assertTrue(isCustomScoped(map.get(d)));
+    assertTrue(isCustomScoped(map.get(e)));
+    assertFalse(isCustomScoped(map.get(f))); // annotated classes are not followed by modules
+    assertTrue(isCustomScoped(map.get(g)));
+
+    Injector injector = Guice.createInjector(customBindings);
+    assertTrue(isCustomScoped(injector.getBinding(a)));
+    assertTrue(isCustomScoped(injector.getBinding(b)));
+    assertTrue(isCustomScoped(injector.getBinding(c)));
+    assertTrue(isCustomScoped(injector.getBinding(d)));
+    assertTrue(isCustomScoped(injector.getBinding(e)));
+    assertTrue(isCustomScoped(injector.getBinding(f)));
+    assertTrue(isCustomScoped(injector.getBinding(g)));
+  }
+
