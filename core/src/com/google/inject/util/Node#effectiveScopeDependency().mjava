@@ -1,8 +1,0 @@
-  /**
-   * Returns the most narrowly scoped dependency. If multiple such dependencies exist, the selection
-   * of which is returned is arbitrary.
-   */
-  Node effectiveScopeDependency() {
-    return effectiveScopeDependency;
-  }
-

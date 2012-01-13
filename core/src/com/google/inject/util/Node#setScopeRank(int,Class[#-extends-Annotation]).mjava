@@ -1,9 +1,0 @@
-  /**
-   * Initialize the scope ranks for this node. Called at most once per node.
-   */
-  void setScopeRank(int rank, Class<? extends Annotation> annotation) {
-    this.appliedScope = rank;
-    this.effectiveScope = rank;
-    this.appliedScopeAnnotation = annotation;
-  }
-
