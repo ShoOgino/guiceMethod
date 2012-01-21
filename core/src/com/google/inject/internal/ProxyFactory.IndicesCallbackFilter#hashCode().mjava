@@ -1,4 +1,4 @@
     @Override public int hashCode() {
-      return declaringClass.hashCode();
+      return hashCode;
     }
 
