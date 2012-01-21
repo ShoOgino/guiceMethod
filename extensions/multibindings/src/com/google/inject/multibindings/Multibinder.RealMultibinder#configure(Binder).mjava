@@ -1,4 +1,3 @@
-    @SuppressWarnings("unchecked")
     public void configure(Binder binder) {
       checkConfiguration(!isInitialized(), "Multibinder was already initialized");
 

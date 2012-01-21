@@ -1,6 +1,6 @@
     @Override public LinkedBindingBuilder<T> addBinding() {
       checkConfiguration(!isInitialized(), "Multibinder was already initialized");
 
-      return binder.bind(Key.get(elementType, new RealElement(setName)));
+      return binder.bind(Key.get(elementType, new RealElement(setName, MULTIBINDER)));
     }
 

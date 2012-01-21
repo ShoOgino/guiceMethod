@@ -1,0 +1,6 @@
+    @Override
+    public Object visit(MapBinderBinding<? extends Object> mapbinding) {
+      this.mapbinding = mapbinding;
+      return null;
+    }
+

@@ -1,6 +1,7 @@
   @Override public boolean equals(Object o) {
     return o instanceof Element
         && ((Element) o).setName().equals(setName())
-        && ((Element) o).uniqueId() == uniqueId();
+        && ((Element) o).uniqueId() == uniqueId()
+        && ((Element) o).type() == type();
   }
 

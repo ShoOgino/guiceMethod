@@ -2,6 +2,7 @@
     private boolean matchesValueKey(Key key) {
       return key.getAnnotation() instanceof Element
           && ((Element) key.getAnnotation()).setName().equals(entrySetBinder.getSetName())
+          && ((Element) key.getAnnotation()).type() == MAPBINDER
           && key.getTypeLiteral().equals(valueType);
     }
 
