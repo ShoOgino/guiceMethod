@@ -17,7 +17,7 @@
     // to this injector. Otherwise, the proxies for each injector will waste PermGen memory
     try {
     Enhancer enhancer = BytecodeGen.newEnhancer(declaringClass, visibility);
-    enhancer.setCallbackFilter(new IndicesCallbackFilter(methods));
+    enhancer.setCallbackFilter(new IndicesCallbackFilter(declaringClass, methods));
     enhancer.setCallbackTypes(callbackTypes);
     return new ProxyConstructor<T>(enhancer, injectionPoint, callbacks, interceptors);
     } catch (Throwable e) {

@@ -1,4 +1,4 @@
   public Type type() {
-	  return type;
+    return type;
   }
 

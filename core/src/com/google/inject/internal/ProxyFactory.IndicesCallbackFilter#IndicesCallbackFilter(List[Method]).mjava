@@ -1,9 +1,0 @@
-    IndicesCallbackFilter(List<Method> methods) {
-      final Map<Object, Integer> indices = Maps.newHashMap();
-      for (int i = 0; i < methods.size(); i++) {
-        indices.put(MethodWrapper.create(methods.get(i)), i);
-      }
-      this.indices = indices;
-      this.hashCode = indices.hashCode();
-    }
-
