@@ -1,5 +1,5 @@
     @Override public boolean equals(Object o) {
       return o instanceof IndicesCallbackFilter &&
-          ((IndicesCallbackFilter) o).declaringClass == declaringClass;
+          ((IndicesCallbackFilter) o).indices.equals(indices);
     }
 
