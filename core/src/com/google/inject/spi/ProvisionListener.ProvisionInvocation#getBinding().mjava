@@ -1,0 +1,8 @@
+    /**
+     * Returns the Binding this is provisioning.
+     * <p>
+     * You must not call {@link Provider#get()} on the provider returned by
+     * {@link Binding#getProvider}, otherwise you will get confusing error messages.
+     */
+    public abstract Binding<T> getBinding();
+

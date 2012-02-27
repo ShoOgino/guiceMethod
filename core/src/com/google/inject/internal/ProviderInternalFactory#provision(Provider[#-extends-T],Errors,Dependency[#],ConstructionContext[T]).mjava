@@ -4,13 +4,8 @@
    */
   protected T provision(Provider<? extends T> provider, Errors errors, Dependency<?> dependency,
       ConstructionContext<T> constructionContext) throws ErrorsException {
-    constructionContext.startConstruction();
-    try {
-      T t = errors.checkForNull(provider.get(), source, dependency);
-      constructionContext.setProxyDelegates(t);
-      return t;
-    } finally {
-      constructionContext.finishConstruction();
-    }
+    T t = errors.checkForNull(provider.get(), source, dependency);
+    constructionContext.setProxyDelegates(t);
+    return t;
   }
 

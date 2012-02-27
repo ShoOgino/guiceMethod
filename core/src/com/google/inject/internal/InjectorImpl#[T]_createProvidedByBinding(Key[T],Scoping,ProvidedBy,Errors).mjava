@@ -14,10 +14,9 @@
     Key<? extends Provider<T>> providerKey = (Key<? extends Provider<T>>) Key.get(providerType);
     ProvidedByInternalFactory<T> internalFactory =
         new ProvidedByInternalFactory<T>(rawType, providerType,
-            providerKey, !options.disableCircularProxies,
-            provisionListenerStore.get(key));
+            providerKey, !options.disableCircularProxies);
     Object source = rawType;
-    return LinkedProviderBindingImpl.createWithInitializer(
+    BindingImpl<T> binding = LinkedProviderBindingImpl.createWithInitializer(
         this,
         key,
         source,
@@ -25,5 +24,7 @@
         scoping,
         providerKey,
         internalFactory);
+    internalFactory.setProvisionListenerCallback(provisionListenerStore.get(binding));
+    return binding;
   }
 

@@ -4,7 +4,8 @@
       Object source,
       boolean allowProxy,
       ProvisionListenerStackCallback<T> provisionCallback) {
-    super(source, allowProxy, provisionCallback);
+    super(source, allowProxy);
+    this.provisionCallback = checkNotNull(provisionCallback, "provisionCallback");
     this.injector = injector;
     this.providerKey = providerKey;
   }

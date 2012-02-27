@@ -1,0 +1,28 @@
+  public void testCallingBindingDotGetProviderDotGet() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindListener(Matchers.any(), new ProvisionListener() {
+          @Override
+          public <T> void onProvision(ProvisionInvocation<T> provision) {
+            provision.getBinding().getProvider().get(); // AGH!
+          }
+        });
+      }
+    });
+    
+    try {
+      injector.getInstance(Sole.class);
+      fail();
+    } catch(ProvisionException expected) {
+      // We don't really care what kind of error you get, we only care you get an error.
+    }
+    
+    try {
+      injector.getInstance(Many.class);
+      fail();
+    } catch(ProvisionException expected) {
+      // We don't really care what kind of error you get, we only care you get an error.
+    }
+  }
+

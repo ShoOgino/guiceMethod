@@ -1,5 +1,5 @@
-  public ProvisionListenerStackCallback(Key<T> key, List<ProvisionListener> listeners) {
-    this.key = key;
+  public ProvisionListenerStackCallback(Binding<T> binding, List<ProvisionListener> listeners) {
+    this.binding = binding;
     if (listeners.isEmpty()) {
       this.listeners = EMPTY_LISTENER;
     } else {

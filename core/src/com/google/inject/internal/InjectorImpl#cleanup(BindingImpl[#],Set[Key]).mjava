@@ -22,7 +22,7 @@
             }
           }
           if(failed) {
-            removeFailedJitBinding(depKey, ip);
+            removeFailedJitBinding(depBinding, ip);
             bindingFailed = true;
           }
         } else if(state.getExplicitBinding(depKey) == null) {

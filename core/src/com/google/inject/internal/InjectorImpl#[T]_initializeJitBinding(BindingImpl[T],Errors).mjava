@@ -15,7 +15,7 @@
           // We do not pass cb.getInternalConstructor as the second parameter
           // so that cached exceptions while constructing it get stored.
           // See TypeListenerTest#testTypeListenerThrows
-          removeFailedJitBinding(key, null);
+          removeFailedJitBinding(binding, null);
           cleanup(binding, new HashSet<Key>());
         }
       }

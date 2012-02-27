@@ -1,3 +1,4 @@
+  @Override
   protected T provision(javax.inject.Provider<? extends T> provider, Errors errors,
       Dependency<?> dependency, ConstructionContext<T> constructionContext)
       throws ErrorsException {

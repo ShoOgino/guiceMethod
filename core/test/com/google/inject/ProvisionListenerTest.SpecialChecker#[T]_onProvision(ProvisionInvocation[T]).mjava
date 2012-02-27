@@ -1,6 +1,6 @@
     public <T> void onProvision(ProvisionInvocation<T> provision) {
       notified.set(true);
-      assertEquals(notifyType, provision.getKey().getRawType());            
+      assertEquals(notifyType, provision.getBinding().getKey().getRawType());            
       assertEquals(2, provision.getDependencyChain().size());
       
       assertEquals(null, provision.getDependencyChain().get(0).getDependency());

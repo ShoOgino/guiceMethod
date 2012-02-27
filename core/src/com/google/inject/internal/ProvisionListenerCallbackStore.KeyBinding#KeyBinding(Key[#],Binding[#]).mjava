@@ -1,0 +1,5 @@
+    KeyBinding(Key<?> key, Binding<?> binding) {
+      this.key = key;
+      this.binding = binding;
+    }
+

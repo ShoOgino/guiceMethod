@@ -15,7 +15,7 @@
           provision.erredListener.getClass() : "(unknown)";
       throw errors
           .errorInUserCode(caught, "Error notifying ProvisionListener %s of %s.%n"
-              + " Reason: %s", listener, key, caught)
+              + " Reason: %s", listener, binding.getKey(), caught)
           .toException();
     } else {
       return provision.result;

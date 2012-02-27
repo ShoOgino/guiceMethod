@@ -1,0 +1,8 @@
+    @Override
+    public Binding<T> getBinding() {
+      // TODO(sameb): Because so many places cast directly to BindingImpl & subclasses,
+      // we can't decorate this to prevent calling getProvider().get(), which means
+      // if someone calls that they'll get strange errors.
+      return binding;
+    }
+

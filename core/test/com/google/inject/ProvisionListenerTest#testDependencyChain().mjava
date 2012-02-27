@@ -11,7 +11,7 @@
         
         bindListener(Matchers.any(), new ProvisionListener() {
           public <T> void onProvision(ProvisionInvocation<T> provision) {
-            totalList.add(provision.getKey().getRawType());
+            totalList.add(provision.getBinding().getKey().getRawType());
           }
         });
         

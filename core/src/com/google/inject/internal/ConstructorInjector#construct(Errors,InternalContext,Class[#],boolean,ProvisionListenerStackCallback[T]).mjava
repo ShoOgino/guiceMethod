@@ -25,6 +25,7 @@
       return t;
     }
 
+    constructionContext.startConstruction();
     try {
       // Optimization: Don't go through the callback stack if we have no listeners.
       if (!provisionCallback.hasListeners()) {
@@ -38,6 +39,7 @@
       }
     } finally {
       constructionContext.removeCurrentReference();
+      constructionContext.finishConstruction();
     }
   }
 

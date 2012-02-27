@@ -1,6 +1,6 @@
     public <T> void onProvision(ProvisionInvocation<T> provision) {
-      keys.add(provision.getKey());
+      keys.add(provision.getBinding().getKey());
       T provisioned = provision.provision();
-      assertEquals(provision.getKey().getRawType(), provisioned.getClass());
+      assertEquals(provision.getBinding().getKey().getRawType(), provisioned.getClass());
     }
 

@@ -1,4 +1,9 @@
-  private static Matcher<Object> keyMatcher(Class<?> clazz) {
-    return Matchers.only(Key.get(clazz));
+  private static Matcher<Binding<?>> keyMatcher(final Class<?> clazz) {
+    return new AbstractMatcher<Binding<?>>() {
+      @Override
+      public boolean matches(Binding<?> t) {
+        return t.getKey().equals(Key.get(clazz));
+      }
+    };
   }
 

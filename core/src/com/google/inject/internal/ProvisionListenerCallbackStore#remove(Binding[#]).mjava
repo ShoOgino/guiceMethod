@@ -7,7 +7,7 @@
    * 
    * Returns true if the type was stored in the cache, false otherwise.
    */
-  boolean remove(Key<?> type) {
+  boolean remove(Binding<?> type) {
     return cache.remove(type) != null;
   }
 

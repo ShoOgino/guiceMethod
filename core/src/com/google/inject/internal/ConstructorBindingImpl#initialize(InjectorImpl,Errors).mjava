@@ -4,6 +4,6 @@
     factory.constructorInjector =
         (ConstructorInjector<T>) injector.constructors.get(constructorInjectionPoint, errors);
     factory.provisionCallback =
-      injector.provisionListenerStore.get(getKey());
+      injector.provisionListenerStore.get(this);
   }
 

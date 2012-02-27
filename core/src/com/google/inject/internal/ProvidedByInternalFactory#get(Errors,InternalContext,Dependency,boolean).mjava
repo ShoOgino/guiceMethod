@@ -8,7 +8,7 @@
       errors = errors.withSource(providerKey);
       Provider provider = providerBinding.getInternalFactory().get(
           errors, context, dependency, true);
-      return circularGet(provider, errors, context, dependency, linked);
+      return circularGet(provider, errors, context, dependency, linked, provisionCallback);
     } finally {
       context.popState();
     }

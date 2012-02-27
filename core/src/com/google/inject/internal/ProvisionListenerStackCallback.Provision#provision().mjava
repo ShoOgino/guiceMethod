@@ -11,6 +11,7 @@
       } else if (index < listeners.length) {
         int currentIdx = index;
         try {
+
           listeners[index].onProvision(this);
         } catch(RuntimeException re) {
           erredListener = listeners[currentIdx];

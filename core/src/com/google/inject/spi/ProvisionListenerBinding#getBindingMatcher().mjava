@@ -1,0 +1,7 @@
+  /**
+   * Returns the binding matcher which chooses which bindings the listener should be notified of.
+   */  
+  public Matcher<? super Binding<?>> getBindingMatcher() {
+    return bindingMatcher;
+  }
+

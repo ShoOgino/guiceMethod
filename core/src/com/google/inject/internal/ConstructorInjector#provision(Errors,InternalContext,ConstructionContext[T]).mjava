@@ -2,7 +2,6 @@
   private T provision(Errors errors, InternalContext context,
       ConstructionContext<T> constructionContext) throws ErrorsException {
     try {
-      constructionContext.startConstruction();
       T t;
       try {
         Object[] parameters = SingleParameterInjector.getAll(errors, context, parameterInjectors);
