@@ -1,4 +1,4 @@
-    public T get() throws RemoteException {
+    public T get() {
       return null;
     }
 

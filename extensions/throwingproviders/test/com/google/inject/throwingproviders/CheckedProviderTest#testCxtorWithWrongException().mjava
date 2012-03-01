@@ -1,19 +1,16 @@
-  public void testProviderMethodWithSuperclassFails() {
+  public void testCxtorWithWrongException() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(RemoteProvider.class)
-        String foo() throws IOException {
-            return null;
+          ThrowingProviderBinder.create(binder())
+              .bind(RemoteProvider.class, Foo.class)
+              .providing(WrongExceptionFoo.class);
         }
       });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(IOException.class.getName()
+    } catch (CreationException ce) {
+      assertEquals(InterruptedException.class.getName()
           + " is not compatible with the exceptions (["
           + RemoteException.class + ", " + BindException.class
           + "]) declared in the CheckedProvider interface ("

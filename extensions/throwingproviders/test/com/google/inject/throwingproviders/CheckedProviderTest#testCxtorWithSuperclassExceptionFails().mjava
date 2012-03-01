@@ -1,0 +1,22 @@
+  public void testCxtorWithSuperclassExceptionFails() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          ThrowingProviderBinder.create(binder())
+              .bind(RemoteProvider.class, Foo.class)
+              .providing(SuperclassExceptionFoo.class);
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(IOException.class.getName()
+          + " is not compatible with the exceptions (["
+          + RemoteException.class + ", " + BindException.class
+          + "]) declared in the CheckedProvider interface ("
+          + RemoteProvider.class.getName()
+          + ")", 
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+    }
+  }
+

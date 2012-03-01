@@ -1,9 +1,10 @@
   public void testBindingToNonInterfaceType_Bind() throws Exception {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           ThrowingProviderBinder.create(binder())
-              .bind(MockRemoteProvider.class, String.class)
+              .bind(MockRemoteProvider.class, Foo.class)
               .to(mockRemoteProvider);
         }
       });

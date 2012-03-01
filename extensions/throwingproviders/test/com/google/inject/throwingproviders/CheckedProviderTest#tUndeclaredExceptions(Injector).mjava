@@ -1,7 +1,8 @@
   private void tUndeclaredExceptions(Injector injector) throws Exception { 
-    RemoteProvider<String> remoteProvider = 
-        injector.getInstance(Key.get(remoteProviderOfString));
+    RemoteProvider<Foo> remoteProvider = 
+        injector.getInstance(Key.get(remoteProviderOfFoo));
     mockRemoteProvider.throwOnNextGet(new IndexOutOfBoundsException("A"));
+    MockFoo.nextToThrow = new IndexOutOfBoundsException("A");
     try {
       remoteProvider.get();
       fail();
@@ -11,6 +12,7 @@
 
     // undeclared exceptions shouldn't be scoped
     mockRemoteProvider.throwOnNextGet(new IndexOutOfBoundsException("B"));
+    MockFoo.nextToThrow = new IndexOutOfBoundsException("B");
     try {
       remoteProvider.get();
       fail();

@@ -1,9 +1,10 @@
   public void testBindingToSubSubInterface_Bind() throws Exception {
     try {
       bindInjector = Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           ThrowingProviderBinder.create(binder())
-              .bind(SubRemoteProvider.class, String.class);
+              .bind(SubRemoteProvider.class, Foo.class);
         }
       });
       fail();

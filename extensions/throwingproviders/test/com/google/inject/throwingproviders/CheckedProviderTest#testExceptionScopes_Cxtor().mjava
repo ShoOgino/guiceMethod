@@ -1,0 +1,4 @@
+  public void testExceptionScopes_Cxtor() throws Exception {
+    tExceptionsScoped(cxtorInjector);
+  }
+

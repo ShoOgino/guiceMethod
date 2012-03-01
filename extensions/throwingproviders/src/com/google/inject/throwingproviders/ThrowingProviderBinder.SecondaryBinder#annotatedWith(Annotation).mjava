@@ -1,6 +1,6 @@
-    public SecondaryBinder<P> annotatedWith(Annotation annotation) {
+    public SecondaryBinder<P, T> annotatedWith(Annotation annotation) {
       if (!(this.annotationType == null && this.annotation == null)) {
-        throw new IllegalStateException();
+        throw new IllegalStateException("Cannot set annotation twice");
       }
       this.annotation = annotation;
       return this;

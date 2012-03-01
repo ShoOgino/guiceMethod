@@ -1,11 +1,12 @@
   public void testIncorrectPredefinedType_Bind() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           ThrowingProviderBinder.create(binder())
               .bind(StringRemoteProvider.class, Integer.class)
               .to(new StringRemoteProvider() {
-                public String get() throws RemoteException {
+                public String get() {
                   return "A";
                 }
               });

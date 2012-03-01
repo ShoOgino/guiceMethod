@@ -1,0 +1,3 @@
+    @Inject public DependentMockFoo(String foo, int bar) {
+    }
+

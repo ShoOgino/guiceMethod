@@ -1,6 +1,7 @@
   public void testManyMethods() {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           install(ThrowingProviderBinder.forModule(this));
         }

@@ -1,0 +1,11 @@
+  private void tAnnotations(Injector injector, MockRemoteProvider<Foo> mockA,
+      MockRemoteProvider<Foo> mockB) throws Exception {
+    mockA.setNextToReturn(new SimpleFoo("A"));
+    mockB.setNextToReturn(new SimpleFoo("B"));
+    assertEquals("A", 
+        injector.getInstance(Key.get(remoteProviderOfFoo, Names.named("a"))).get().s());
+
+    assertEquals("B", 
+        injector.getInstance(Key.get(remoteProviderOfFoo)).get().s());
+  }
+

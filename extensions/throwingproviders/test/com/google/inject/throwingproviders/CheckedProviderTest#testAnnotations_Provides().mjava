@@ -1,7 +1,8 @@
   public void testAnnotations_Provides() throws Exception {
-    final MockRemoteProvider<String> mockRemoteProviderA = new MockRemoteProvider<String>();
-    final MockRemoteProvider<String> mockRemoteProviderB = new MockRemoteProvider<String>();
+    final MockRemoteProvider<Foo> mockRemoteProviderA = new MockRemoteProvider<Foo>();
+    final MockRemoteProvider<Foo> mockRemoteProviderB = new MockRemoteProvider<Foo>();
     providesInjector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         install(ThrowingProviderBinder.forModule(this));
        }
@@ -9,13 +10,13 @@
        @SuppressWarnings("unused")
        @CheckedProvides(RemoteProvider.class)
        @Named("a")
-       String throwOrGet() throws RemoteException, BindException {
+       Foo throwOrGet() throws RemoteException, BindException {
          return mockRemoteProviderA.get();
        }
        
        @SuppressWarnings("unused")
        @CheckedProvides(RemoteProvider.class)
-       String throwOrGet2() throws RemoteException, BindException {
+       Foo throwOrGet2() throws RemoteException, BindException {
          return mockRemoteProviderB.get();
        }
     });

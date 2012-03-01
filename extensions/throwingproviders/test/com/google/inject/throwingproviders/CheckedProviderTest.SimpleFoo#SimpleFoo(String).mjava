@@ -1,0 +1,4 @@
+    SimpleFoo(String s) {
+      this.s = s;
+    }
+

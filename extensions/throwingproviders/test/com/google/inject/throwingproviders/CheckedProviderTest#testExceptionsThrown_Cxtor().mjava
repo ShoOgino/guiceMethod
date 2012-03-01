@@ -1,0 +1,4 @@
+  public void testExceptionsThrown_Cxtor() throws Exception {
+    tExceptionsThrown(cxtorInjector);
+  }
+

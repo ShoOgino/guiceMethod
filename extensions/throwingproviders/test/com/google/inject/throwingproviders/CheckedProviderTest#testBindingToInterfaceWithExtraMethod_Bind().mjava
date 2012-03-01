@@ -1,9 +1,10 @@
   public void testBindingToInterfaceWithExtraMethod_Bind() throws Exception {
     try {
       bindInjector = Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           ThrowingProviderBinder.create(binder())
-              .bind(RemoteProviderWithExtraMethod.class, String.class);
+              .bind(RemoteProviderWithExtraMethod.class, Foo.class);
         }
       });
       fail();

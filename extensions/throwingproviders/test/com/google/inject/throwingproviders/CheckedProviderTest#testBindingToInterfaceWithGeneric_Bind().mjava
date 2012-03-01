@@ -1,10 +1,12 @@
+  @SuppressWarnings("deprecation")
   public void testBindingToInterfaceWithGeneric_Bind() throws Exception {
     bindInjector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         ThrowingProviderBinder.create(binder())
             .bind(RemoteProvider.class, new TypeLiteral<List<String>>() { }.getType())
             .to(new RemoteProvider<List<String>>() {
-              public List<String> get() throws RemoteException {
+              public List<String> get() {
                 return Arrays.asList("A", "B");
               }
             });

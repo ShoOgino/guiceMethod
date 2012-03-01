@@ -1,14 +1,14 @@
   private void tValuesScoped(Injector injector) throws Exception {
-    RemoteProvider<String> remoteProvider = 
-      injector.getInstance(Key.get(remoteProviderOfString));
+    RemoteProvider<Foo> remoteProvider = 
+      injector.getInstance(Key.get(remoteProviderOfFoo));
 
-    mockRemoteProvider.setNextToReturn("A");
-    assertEquals("A", remoteProvider.get());
+    mockRemoteProvider.setNextToReturn(new SimpleFoo("A"));
+    assertEquals("A", remoteProvider.get().s());
 
-    mockRemoteProvider.setNextToReturn("B");
-    assertEquals("A", remoteProvider.get());
+    mockRemoteProvider.setNextToReturn(new SimpleFoo("B"));
+    assertEquals("A", remoteProvider.get().s());
 
     testScope.beginNewScope();
-    assertEquals("B", remoteProvider.get());
+    assertEquals("B", remoteProvider.get().s());
   }
 

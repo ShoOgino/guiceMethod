@@ -1,0 +1,11 @@
+    @SuppressWarnings("unused")
+    public ManyExceptionFoo()
+        throws InterruptedException,
+        RuntimeException,
+        RemoteException,
+        AccessException,
+        TooManyListenersException,
+        BindException,
+        SubBindException {
+    }
+

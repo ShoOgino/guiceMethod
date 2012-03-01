@@ -1,13 +1,14 @@
   public void testBindingToSubSubInterface_Provides() throws Exception {
     try {
       Guice.createInjector(new AbstractModule() {
+        @Override
         protected void configure() {
           install(ThrowingProviderBinder.forModule(this));
         }
           
         @SuppressWarnings("unused")
         @CheckedProvides(SubRemoteProvider.class)
-        String foo() {
+        Foo foo() {
           return null;
         }
       });

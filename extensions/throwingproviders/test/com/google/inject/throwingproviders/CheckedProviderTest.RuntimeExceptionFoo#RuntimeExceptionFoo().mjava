@@ -1,0 +1,4 @@
+    public RuntimeExceptionFoo() throws RuntimeException {
+      throw new RuntimeException("boo!");
+    }
+

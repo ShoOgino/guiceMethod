@@ -1,5 +1,9 @@
-  public <P extends CheckedProvider> SecondaryBinder<P> 
-      bind(final Class<P> interfaceType, final Type valueType) {
-    return new SecondaryBinder<P>(interfaceType, valueType);
+  /**
+   * @deprecated Use {@link #bind(Class, Class)} or {@link #bind(Class, TypeLiteral)} instead. 
+   */
+  @Deprecated
+  public <P extends CheckedProvider> SecondaryBinder<P, ?> 
+      bind(Class<P> interfaceType, Type clazz) {
+    return new SecondaryBinder<P, Object>(interfaceType, clazz);
   }
 

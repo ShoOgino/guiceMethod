@@ -1,18 +1,19 @@
   public void testProviderMethodWithRuntimeExceptionsIsOk() throws Exception {
     providesInjector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         install(ThrowingProviderBinder.forModule(this));
       }
       
       @SuppressWarnings("unused")
       @CheckedProvides(RemoteProvider.class)
-      String foo() throws RuntimeException {
+      Foo foo() throws RuntimeException {
         throw new RuntimeException("boo!");
       }
     });
     
-    RemoteProvider<String> remoteProvider = 
-      providesInjector.getInstance(Key.get(remoteProviderOfString));
+    RemoteProvider<Foo> remoteProvider = 
+      providesInjector.getInstance(Key.get(remoteProviderOfFoo));
 
     try {
       remoteProvider.get();

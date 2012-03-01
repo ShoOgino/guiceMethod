@@ -1,8 +1,9 @@
   private void tExceptionsThrown(Injector injector) throws Exception {
-    RemoteProvider<String> remoteProvider = 
-      injector.getInstance(Key.get(remoteProviderOfString));
+    RemoteProvider<Foo> remoteProvider = 
+      injector.getInstance(Key.get(remoteProviderOfFoo));
 
     mockRemoteProvider.throwOnNextGet(new BindException("kaboom!"));
+    MockFoo.nextToThrow = new BindException("kaboom!");
     try {
       remoteProvider.get();
       fail();

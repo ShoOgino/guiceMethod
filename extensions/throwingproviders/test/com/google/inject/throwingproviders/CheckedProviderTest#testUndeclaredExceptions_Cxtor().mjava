@@ -1,0 +1,4 @@
+  public void testUndeclaredExceptions_Cxtor() throws Exception {
+    tUndeclaredExceptions(cxtorInjector);
+  }
+

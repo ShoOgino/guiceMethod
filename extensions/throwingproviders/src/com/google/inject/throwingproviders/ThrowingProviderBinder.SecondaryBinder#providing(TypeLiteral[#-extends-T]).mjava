@@ -1,0 +1,59 @@
+    @SuppressWarnings("unchecked") // safe because this is the cxtor of the literal
+    public ScopedBindingBuilder providing(TypeLiteral<? extends T> cxtorLiteral) {     
+      // Find the injection point of the class we want to create & get its constructor.
+      InjectionPoint ip = null;
+      try {
+        ip = InjectionPoint.forConstructorOf(cxtorLiteral);
+      } catch (ConfigurationException ce) {
+        for (Message message : ce.getErrorMessages()) {
+          binder.addError(message);
+        }
+      }
+
+      final Provider<T> typeProvider;
+      final Key<? extends T> typeKey;
+      // If we found an injection point, then bind the cxtor to a unique key
+      if (ip != null) {
+        Constructor<? extends T> cxtor = (Constructor<? extends T>) ip.getMember();
+        // Validate the exceptions are consistent with the CheckedProvider interface.
+        CheckedProvideUtils.validateExceptions(
+            binder, cxtorLiteral.getExceptionTypes(cxtor), exceptionTypes, interfaceType);
+        
+        typeKey = Key.get(cxtorLiteral, UniqueAnnotations.create());
+        binder.bind(typeKey).toConstructor((Constructor) cxtor).in(Scopes.NO_SCOPE);
+        typeProvider = binder.getProvider((Key<T>) typeKey);
+      } else {
+        // never used, but need it assigned.
+        typeProvider = null;
+        typeKey = null;
+      }
+        
+      // Create a CheckedProvider that calls our cxtor
+      CheckedProvider<T> checkedProvider = new CheckedProviderWithDependencies<T>() {
+        @Override
+        public T get() throws Exception {
+          try {
+            return typeProvider.get();
+          } catch (ProvisionException pe) {
+            // Rethrow the provision cause as the actual exception
+            if (pe.getCause() instanceof Exception) {
+              throw (Exception) pe.getCause();
+            } else if (pe.getCause() instanceof Error) {
+              throw (Error) pe.getCause();
+            } else {
+              throw new AssertionError(pe.getCause()); // Impossible!
+            }
+          }
+        }
+        
+        @Override
+        public Set<Dependency<?>> getDependencies() {
+          return ImmutableSet.<Dependency<?>>of(Dependency.get(typeKey));
+        }
+      };
+      
+      Key<CheckedProvider> targetKey = Key.get(CheckedProvider.class, UniqueAnnotations.create());
+      binder.bind(targetKey).toInstance(checkedProvider);
+      return toInternal(targetKey);
+    }
+

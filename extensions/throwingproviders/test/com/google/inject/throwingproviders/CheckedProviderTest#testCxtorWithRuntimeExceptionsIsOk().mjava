@@ -1,0 +1,21 @@
+  public void testCxtorWithRuntimeExceptionsIsOk() throws Exception {
+    cxtorInjector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, Foo.class)
+            .providing(RuntimeExceptionFoo.class);
+      }
+    });
+    
+    RemoteProvider<Foo> remoteProvider = 
+        cxtorInjector.getInstance(Key.get(remoteProviderOfFoo));
+
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RuntimeException expected) {
+      assertEquals("boo!", expected.getCause().getMessage());
+    }
+  }
+
