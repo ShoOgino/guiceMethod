@@ -1,7 +1,5 @@
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse)
       throws IOException, ServletException {
-    index++;
-
     GuiceFilter.Context previous = GuiceFilter.localContext.get();
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -9,9 +7,12 @@
         = (previous != null) ? previous.getOriginalRequest() : request;
     GuiceFilter.localContext.set(new GuiceFilter.Context(originalRequest, request, response));
     try {
-      //dispatch down the chain while there are more filters
-      if (index < filterDefinitions.length) {
-        filterDefinitions[index].doFilter(servletRequest, servletResponse, this);
+      Filter filter = findNextFilter(servletRequest, servletResponse);
+      if (filter != null) {
+        // call to the filter, which can either consume the request or
+        // recurse back into this method. (in which case we will go to find the next filter,
+        // or dispatch to the servlet if no more filters are left)
+        filter.doFilter(servletRequest, servletResponse, this);
       } else {
         //we've reached the end of the filterchain, let's try to dispatch to a servlet
         final boolean serviced = servletPipeline.service(servletRequest, servletResponse);
