@@ -1,0 +1,12 @@
+  private static <T> Callable<T> transferHttpRequest(final Callable<T> callable) {
+    final GuiceFilter.Context context = GuiceFilter.localContext.get();
+    if (context == null) {
+      throw new OutOfScopeException("Not in a request scope");
+    }
+    return new Callable<T>() {
+      public T call() throws Exception {
+        return context.call(callable);
+      }
+    };
+  }
+

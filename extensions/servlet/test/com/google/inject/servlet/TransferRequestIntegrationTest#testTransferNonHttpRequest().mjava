@@ -1,0 +1,30 @@
+  public void testTransferNonHttpRequest() throws Exception {
+    final Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bindScope(RequestScoped.class, ServletScopes.REQUEST);
+      }
+
+      @Provides @RequestScoped Object provideObject() {
+        return new Object();
+      }
+    });
+
+    Callable<Callable<Boolean>> callable = new Callable<Callable<Boolean>>() {
+      @Override public Callable<Boolean> call() {
+        final Object original = injector.getInstance(Object.class);
+        return ServletScopes.transferRequest(new Callable<Boolean>() {
+          @Override public Boolean call() {
+            return original == injector.getInstance(Object.class);
+          }
+        });
+      }
+    };
+
+    ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
+    Callable<Boolean> transfer = ServletScopes.scopeRequest(callable, seedMap).call();
+
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    assertTrue(executor.submit(transfer).get());
+    executor.shutdownNow();
+  }
+

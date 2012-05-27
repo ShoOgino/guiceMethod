@@ -20,10 +20,10 @@
         "Seed map cannot be null, try passing in Collections.emptyMap() instead.");
 
     // Copy the seed values into our local scope map.
-    final Map<String, Object> scopeMap = Maps.newHashMap();
+    final Context context = new Context();
     for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
       Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
-      scopeMap.put(entry.getKey().toString(), value);
+      context.map.put(entry.getKey().toString(), value);
     }
 
     return new Callable<T>() {
@@ -32,14 +32,7 @@
             "An HTTP request is already in progress, cannot scope a new request in this thread.");
         Preconditions.checkState(null == requestScopeContext.get(),
             "A request scope is already in progress, cannot scope a new request in this thread.");
-
-        requestScopeContext.set(scopeMap);
-
-        try {
-          return callable.call();
-        } finally {
-          requestScopeContext.remove();
-        }
+        return context.call(callable);
       }
     };
   }
