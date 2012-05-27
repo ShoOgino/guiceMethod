@@ -4,7 +4,7 @@
       protected void configure() {
         ThrowingProviderBinder.create(binder())
         .bind(RemoteProvider.class, new TypeLiteral<List<String>>() {})
-        .providing(new TypeLiteral<ArrayList<String>>() {});
+        .providing(new TypeLiteral<ThrowingArrayList<String>>() {});
       }
     });
 

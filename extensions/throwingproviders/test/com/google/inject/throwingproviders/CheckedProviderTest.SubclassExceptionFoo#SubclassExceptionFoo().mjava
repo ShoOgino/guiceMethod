@@ -1,3 +1,4 @@
+    @ThrowingInject
     public SubclassExceptionFoo() throws AccessException {
       throw new AccessException("boo!");
     }

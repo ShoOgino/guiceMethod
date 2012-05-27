@@ -1,3 +1,4 @@
+    @ThrowingInject
     AnotherMockFoo() throws RemoteException, BindException {
       if (nextToThrow instanceof RemoteException) {
         throw (RemoteException) nextToThrow;

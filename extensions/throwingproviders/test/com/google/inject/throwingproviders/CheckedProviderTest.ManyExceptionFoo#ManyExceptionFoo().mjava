@@ -1,4 +1,5 @@
     @SuppressWarnings("unused")
+    @ThrowingInject
     public ManyExceptionFoo()
         throws InterruptedException,
         RuntimeException,
