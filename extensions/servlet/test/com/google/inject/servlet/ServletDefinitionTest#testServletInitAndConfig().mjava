@@ -16,15 +16,9 @@
 
     //some init params
     //noinspection SSBasedInspection
-    final Map<String, String> initParams = new HashMap<String, String>() {
-      {
-        put("ahsd", "asdas24dok");
-        put("ahssd", "asdasd124ok");
-        put("ahfsasd", "asda124sdok");
-        put("ahsasgd", "a124sdasdok");
-        put("ahsd124124", "as124124124dasdok");
-      }
-    };
+    final Map<String, String> initParams = new ImmutableMap.Builder<String, String>()
+      .put("ahsd", "asdas24dok")
+      .put("ahssd", "asdasd124ok").build();
 
     String pattern = "/*";
     final ServletDefinition servletDefinition = new ServletDefinition(pattern,
@@ -52,7 +46,7 @@
       assertTrue(initParams.containsKey(name));
       assertEquals(initParams.get(name), servletConfig.getInitParameter(name));
     }
-    
+
     verify(injector, binding, servletContext);
   }
 

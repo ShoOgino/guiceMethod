@@ -1,0 +1,10 @@
+  public void testGetContextRelativePathWithRootPath() {
+    HttpServletRequest servletRequest = createMock(HttpServletRequest.class);
+    expect(servletRequest.getContextPath()).andReturn("/a_context_path");
+    expect(servletRequest.getRequestURI()).andReturn("/a_context_path");
+    replay(servletRequest);
+    String path = ServletUtils.getContextRelativePath(servletRequest);
+    assertEquals("/", path);
+    verify(servletRequest);
+  }
+

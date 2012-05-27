@@ -1,7 +1,6 @@
   public Filter getFilterIfMatching(HttpServletRequest request) {
 
-    final String path = request.getRequestURI().substring(request.getContextPath().length());
-
+    final String path = ServletUtils.getContextRelativePath(request);
     if (shouldFilter(path)) {
       return filter.get();
     } else {

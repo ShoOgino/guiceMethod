@@ -18,14 +18,9 @@
 
     //some init params
     //noinspection SSBasedInspection
-    final Map<String, String> initParams = new HashMap<String, String>() {{
-      put("ahsd", "asdas24dok");
-      put("ahssd", "asdasd124ok");
-      put("ahfsasd", "asda124sdok");
-      put("ahsasgd", "a124sdasdok");
-      put("ahsd124124", "as124124124dasdok");
-    }};
-
+    final Map<String, String> initParams = new ImmutableMap.Builder<String, String>()
+      .put("ahsd", "asdas24dok")
+      .put("ahssd", "asdasd124ok").build();
 
     ServletContext servletContext = createMock(ServletContext.class);
     final String contextName = "thing__!@@44";
@@ -52,7 +47,7 @@
       assertTrue(initParams.containsKey(name));
       assertTrue(initParams.get(name).equals(filterConfig.getInitParameter(name)));
     }
-    
+
     verify(binding, injector, servletContext);
   }
 

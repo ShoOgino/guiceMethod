@@ -1,0 +1,21 @@
+  public void testServiceWithContextPath() throws IOException, ServletException   {
+    String pattern = "/*";
+    //some init params
+    Map<String, String> initParams = new ImmutableMap.Builder<String, String>()
+        .put("ahsd", "asdas24dok")
+        .put("ahssd", "asdasd124ok")
+        .build();
+
+    final ServletDefinition servletDefinition = new ServletDefinition(pattern,
+        Key.get(HttpServlet.class), UriPatternType.get(UriPatternType.SERVLET, pattern),
+        initParams, null);
+    HttpServletResponse servletResponse = createMock(HttpServletResponse.class);
+    HttpServletRequest servletRequest = createMock(HttpServletRequest.class);
+
+    expect(servletRequest.getContextPath()).andReturn("/a_context_path");
+    expect(servletRequest.getRequestURI()).andReturn("/test.html");
+    replay(servletRequest, servletResponse);
+    servletDefinition.service(servletRequest, servletResponse);
+    verify(servletRequest, servletResponse);
+  }
+

@@ -6,7 +6,7 @@
             new InstanceFilterBindingImpl(initParams,
                 pattern,
                 filterInstance,
-                patternMatcher));        
+                patternMatcher));
       } else {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new LinkedFilterBindingImpl(initParams,

@@ -1,7 +1,7 @@
   public void destroy(Set<Filter> destroyedSoFar) {
     // filters are always singletons
     Filter reference = filter.get();
-    
+
     // Do nothing if this Filter was invalid (usually due to not being scoped
     // properly), or was already destroyed. According to Servlet Spec: it is
     // "out of service", and does not need to be destroyed.
