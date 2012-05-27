@@ -34,7 +34,11 @@
             } else if (pe.getCause() instanceof Error) {
               throw (Error) pe.getCause();
             } else {
-              throw new AssertionError(pe); // Impossible!
+              // If this failed because of multiple reasons (ie, more than
+              // one dependency failed due to scoping errors), then
+              // the ProvisionException won't have a cause, so we need
+              // to rethrow it as-is.
+              throw pe;
             }
           }
         }
