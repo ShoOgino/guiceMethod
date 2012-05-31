@@ -1,0 +1,19 @@
+  public void testManyConstructorsButNoneWithAtInject() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bind(ManyConstructors.class);
+          binder().requireAtInjectOnConstructors();
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      Asserts.assertContains(ce.getMessage(),
+          "1) Explicit @Inject annotations are required on constructors, but "
+          + ManyConstructors.class.getName() + " has no constructors annotated with @Inject",
+          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$", "configure");
+    }
+  }
+

@@ -1,0 +1,6 @@
+  /** Returns true if the inject annotation is on the constructor. */
+  private static boolean hasAtInject(Constructor cxtor) {
+    return cxtor.isAnnotationPresent(Inject.class)
+        || cxtor.isAnnotationPresent(javax.inject.Inject.class);
+  }
+

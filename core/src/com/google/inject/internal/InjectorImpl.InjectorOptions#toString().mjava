@@ -4,6 +4,7 @@
           .add("stage", stage)
           .add("jitDisabled", jitDisabled)
           .add("disableCircularProxies", disableCircularProxies)
+          .add("atInjectRequired", atInjectRequired)
           .toString();
     }
 

@@ -36,6 +36,7 @@
     // ProxyFactoryTest is AOP-only
     suite.addTestSuite(ReflectionTest.class);
     suite.addTestSuite(RequestInjectionTest.class);
+    suite.addTestSuite(RequireAtInjectOnConstructorsTest.class);
     suite.addTestSuite(ScopesTest.class);
     suite.addTestSuite(SerializationTest.class);
     suite.addTestSuite(SuperclassTest.class);

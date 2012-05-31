@@ -4,13 +4,15 @@
       return new InjectorOptions(
           stage,
           jitDisabled,
-          disableCircularProxies);
+          disableCircularProxies,
+          atInjectRequired);
     } else {
       checkState(stage == parentOptions.stage, "child & parent stage don't match");
       return new InjectorOptions(
           stage,
           jitDisabled || parentOptions.jitDisabled,
-          disableCircularProxies || parentOptions.disableCircularProxies); 
+          disableCircularProxies || parentOptions.disableCircularProxies,
+          atInjectRequired || parentOptions.atInjectRequired); 
     }
   }
 

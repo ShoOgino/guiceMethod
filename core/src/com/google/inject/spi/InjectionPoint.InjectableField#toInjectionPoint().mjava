@@ -1,3 +1,4 @@
+    @Override
     InjectionPoint toInjectionPoint() {
       return new InjectionPoint(declaringType, field, optional);
     }

@@ -34,6 +34,13 @@
     }
 
     
-    return ConstructorBindingImpl.create(this, key, null, source, scoping, errors, jitBinding && options.jitDisabled);
+    return ConstructorBindingImpl.create(this,
+        key,
+        null, /* use default constructor */
+        source,
+        scoping,
+        errors,
+        jitBinding && options.jitDisabled,
+        options.atInjectRequired);
   }
 

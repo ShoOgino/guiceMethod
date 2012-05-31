@@ -24,7 +24,7 @@
     if (isProvider(key)) {
       // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
       // createProviderBinding() will return BindingImpl<Provider<X>>.
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({"unchecked", "cast"})
       BindingImpl<T> binding = (BindingImpl<T>) createProviderBinding((Key) key, errors);
       return binding;
     }
@@ -33,7 +33,7 @@
     if (isMembersInjector(key)) {
       // These casts are safe. T extends MembersInjector<X> and that given Key<MembersInjector<X>>,
       // createMembersInjectorBinding() will return BindingImpl<MembersInjector<X>>.
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({"unchecked", "cast"})
       BindingImpl<T> binding = (BindingImpl<T>) createMembersInjectorBinding((Key) key, errors);
       return binding;
     }

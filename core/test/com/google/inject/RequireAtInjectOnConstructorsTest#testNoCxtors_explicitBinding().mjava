@@ -1,0 +1,19 @@
+  public void testNoCxtors_explicitBinding() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bind(NoCxtors.class);
+          binder().requireAtInjectOnConstructors();
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      Asserts.assertContains(ce.getMessage(),
+          "1) Explicit @Inject annotations are required on constructors, but "
+          + NoCxtors.class.getName() + " has no constructors annotated with @Inject",
+          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$", "configure");
+    }
+  }
+

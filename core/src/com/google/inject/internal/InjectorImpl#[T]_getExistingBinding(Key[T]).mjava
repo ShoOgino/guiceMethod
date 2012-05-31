@@ -20,7 +20,7 @@
     if(isProvider(key)) {
       try {
         // This is safe because isProvider above ensures that T is a Provider<?>
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({"unchecked", "cast"})
         Key<?> providedKey = (Key<?>)getProvidedKey((Key)key, new Errors());
         if(getExistingBinding(providedKey) != null) {
           return getBinding(key);

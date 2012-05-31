@@ -1,0 +1,4 @@
+  public V visit(RequireAtInjectOnConstructorsOption option) {
+    return visitOther(option);
+  }
+
