@@ -1,0 +1,6 @@
+  private static void checkScopingState(boolean condition, String msg) {
+    if (!condition) {
+      throw new ScopingException(msg);
+    }
+  }
+

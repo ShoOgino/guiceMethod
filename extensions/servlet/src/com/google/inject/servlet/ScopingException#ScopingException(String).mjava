@@ -1,0 +1,4 @@
+  public ScopingException(String message) {
+    super(message);
+  }
+

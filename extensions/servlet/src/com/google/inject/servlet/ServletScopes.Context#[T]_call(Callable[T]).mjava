@@ -1,7 +1,7 @@
     <T> T call(Callable<T> callable) throws Exception {
       Thread oldOwner = owner;
       Thread newOwner = Thread.currentThread();
-      Preconditions.checkState(oldOwner == null || oldOwner == newOwner,
+      checkScopingState(oldOwner == null || oldOwner == newOwner,
           "Trying to transfer request scope but original scope is still active");
       owner = newOwner;
       Context previous = requestScopeContext.get();

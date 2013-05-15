@@ -14,6 +14,9 @@
    * words, do not use this method to propagate the current request scope to
    * worker threads that may run concurrently with the current thread.
    *
+   * <p>The returned callable will throw a {@link ScopingException} when called
+   * if the request scope being transferred is still active on a different
+   * thread.
    *
    * @param callable code to be executed in another thread, which depends on
    *     the request scope.

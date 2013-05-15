@@ -15,6 +15,9 @@
    *      are not available.</li>
    * </ul>
    *
+   * <p>The returned callable will throw a {@link ScopingException} when called
+   * if the HTTP request scope is still active on the current thread.
+   *
    * @param callable code to be executed in another thread, which depends on
    *     the request scope.
    * @param seedMap the initial set of scoped instances for Guice to seed the
@@ -42,7 +45,7 @@
 
     return new Callable<T>() {
       public T call() throws Exception {
-        Preconditions.checkState(null == GuiceFilter.localContext.get(),
+        checkScopingState(null == GuiceFilter.localContext.get(),
             "Cannot continue request in the same thread as a HTTP request!");
         return new GuiceFilter.Context(continuingRequest, continuingRequest, null)
             .call(callable);

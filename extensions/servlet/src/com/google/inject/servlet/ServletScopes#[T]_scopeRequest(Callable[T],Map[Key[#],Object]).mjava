@@ -5,6 +5,9 @@
    * in non-HTTP requests (for example: RPC requests) as well as in HTTP
    * request threads.
    *
+   * <p>The returned callable will throw a {@link ScopingException} when called
+   * if there is a request scope already active on the current thread.
+   *
    * @param callable code to be executed which depends on the request scope.
    *     Typically in another thread, but not necessarily so.
    * @param seedMap the initial set of scoped instances for Guice to seed the
@@ -28,9 +31,9 @@
 
     return new Callable<T>() {
       public T call() throws Exception {
-        Preconditions.checkState(null == GuiceFilter.localContext.get(),
+        checkScopingState(null == GuiceFilter.localContext.get(),
             "An HTTP request is already in progress, cannot scope a new request in this thread.");
-        Preconditions.checkState(null == requestScopeContext.get(),
+        checkScopingState(null == requestScopeContext.get(),
             "A request scope is already in progress, cannot scope a new request in this thread.");
         return context.call(callable);
       }
