@@ -1,0 +1,9 @@
+    public InjectableReference(InjectorImpl injector, T instance, Key<T> key,
+        ProvisionListenerStackCallback<T> provisionCallback, Object source) {
+      this.injector = injector;
+      this.key = key; // possibly null!
+      this.provisionCallback = provisionCallback; // possibly null!
+      this.instance = checkNotNull(instance, "instance");
+      this.source = checkNotNull(source, "source");
+    }
+

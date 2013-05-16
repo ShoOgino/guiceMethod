@@ -17,8 +17,10 @@
         
         // Build up a list of asserters for our dependency chains.
         ImmutableList.Builder<Class<?>> chain = ImmutableList.builder();
+        chain.add(Instance.class);
+        bindListener(keyMatcher(Instance.class), new ChainAsserter(pList, chain.build()));
         
-        chain.add(Instance.class).add(A.class);
+        chain.add(A.class);
         bindListener(keyMatcher(A.class), new ChainAsserter(pList, chain.build()));
         
         chain.add(B.class).add(BImpl.class);
@@ -45,7 +47,8 @@
     });
     Instance instance = injector.getInstance(Instance.class);
     // make sure we're checking all of the chain asserters..
-    assertEquals(of(A.class, BImpl.class, C.class, DP.class, D.class, E.class, F.class),
+    assertEquals(
+        of(Instance.class, A.class, BImpl.class, C.class, DP.class, D.class, E.class, F.class),
         pList);
     // and make sure that nothing else was notified that we didn't expect.
     assertEquals(totalList, pList);

@@ -1,0 +1,16 @@
+  public void testBindToInjectorWithListeningGivesSaneException() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          bindListener(Matchers.any(), new Counter());
+          bind(Injector.class).toProvider(Providers.<Injector>of(null));
+        }
+      });
+      fail();
+    } catch (CreationException ce) {
+      assertContains(
+          ce.getMessage(), "Binding to core guice framework type is not allowed: Injector.");
+    }
+  }
+

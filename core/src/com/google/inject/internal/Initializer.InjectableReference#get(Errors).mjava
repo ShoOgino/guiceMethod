@@ -29,7 +29,11 @@
         
         // if in Stage.TOOL, we only want to inject & notify toolable injection points.
         // (otherwise we'll inject all of them)
-        membersInjector.injectAndNotify(instance, errors.withSource(source), key, source, 
+        membersInjector.injectAndNotify(instance,
+            errors.withSource(source),
+            key,
+            provisionCallback,
+            source,
             injector.options.stage == Stage.TOOL);
       }
 

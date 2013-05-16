@@ -12,8 +12,10 @@
         listeners.addAll(provisionBinding.getListeners());
       }
     }
-    if (listeners == null) {
-      listeners = ImmutableList.of();
+    if (listeners == null || listeners.isEmpty()) {
+      // Optimization: don't bother constructing the callback if there are
+      // no listeners.
+      return ProvisionListenerStackCallback.emptyListener();
     }
     return new ProvisionListenerStackCallback<T>(binding, listeners);
   }

@@ -1,0 +1,5 @@
+  @SuppressWarnings("unchecked")
+  public static <T> ProvisionListenerStackCallback<T> emptyListener() {
+    return (ProvisionListenerStackCallback<T>) EMPTY_CALLBACK;
+  }
+

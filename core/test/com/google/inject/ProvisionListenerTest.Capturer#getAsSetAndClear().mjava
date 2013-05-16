@@ -1,0 +1,6 @@
+    Set<Key> getAsSetAndClear() {
+      Set<Key> copy = ImmutableSet.copyOf(keys);
+      keys.clear();
+      return copy;
+    }
+

@@ -18,7 +18,6 @@
       }
     });
     
-    assertEquals(ImmutableSet.of(TypeLiteral.get(Stage.class), TypeLiteral.get(D.class)),
-        heardTypes);
+    assertEquals(ImmutableSet.of(TypeLiteral.get(D.class)), heardTypes);
   }
 

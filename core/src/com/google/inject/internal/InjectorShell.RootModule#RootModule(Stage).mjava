@@ -1,4 +1,0 @@
-    private RootModule(Stage stage) {
-      this.stage = checkNotNull(stage, "stage");
-    }
-

@@ -12,9 +12,9 @@
       checkState(privateElements == null || parent != null, "PrivateElements with no parent");
       checkState(state != null, "no state. Did you remember to lock() ?");
 
-      // bind Stage and Singleton if this is a top-level injector
+      // bind Singleton if this is a top-level injector
       if (parent == null) {
-        modules.add(0, new RootModule(stage));
+        modules.add(0, new RootModule());
       }
       elements.addAll(Elements.getElements(stage, modules));
       
@@ -57,6 +57,7 @@
       new TypeConverterBindingProcessor(errors).process(injector, elements);
       stopwatch.resetAndLog("Converters creation");
 
+      bindStage(injector, stage);
       bindInjector(injector);
       bindLogger(injector);
       

@@ -11,12 +11,19 @@
           throw new RuntimeException(ex);
         }
         bind(LinkedFoo.class).to(Foo.class);
+        bind(Interface.class).toInstance(new Implementation());
+        bindConstant().annotatedWith(named("constant")).to("MyConstant");
       }
       
       @Provides @Named("pi") Foo provideFooBar() {
         return new Foo();
       }
     });
+    
+    // toInstance & constant bindings are notified in random order, at the very beginning.
+    assertEquals(
+        ImmutableSet.of(Key.get(Interface.class), Key.get(String.class, named("constant"))),
+        capturer.getAsSetAndClear());
     
     // simple binding
     assertNotNull(injector.getInstance(Foo.class));
