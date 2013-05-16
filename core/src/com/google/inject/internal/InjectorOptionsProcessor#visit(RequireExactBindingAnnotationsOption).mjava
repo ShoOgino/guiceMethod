@@ -1,0 +1,6 @@
+  @Override
+  public Boolean visit(RequireExactBindingAnnotationsOption option) {
+    exactBindingAnnotationsRequired = true;
+    return true;
+  }
+

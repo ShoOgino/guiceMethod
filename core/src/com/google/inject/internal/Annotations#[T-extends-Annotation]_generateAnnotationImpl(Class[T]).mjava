@@ -1,0 +1,24 @@
+  private static <T extends Annotation> T generateAnnotationImpl(final Class<T> annotationType) {
+    final Map<String, Object> members = resolveMembers(annotationType);
+    return annotationType.cast(Proxy.newProxyInstance(
+        annotationType.getClassLoader(),
+        new Class<?>[] { annotationType },
+        new InvocationHandler() {
+          @Override
+          public Object invoke(Object proxy, Method method, Object[] args) throws Exception {
+            String name = method.getName();
+            if (name.equals("annotationType")) {
+              return annotationType;
+            } else if (name.equals("toString")) {
+              return annotationToString(annotationType, members);
+            } else if (name.equals("hashCode")) {
+              return annotationHashCode(annotationType, members);
+            } else if (name.equals("equals")) {
+              return annotationEquals(annotationType, members, args[0]);
+            } else {
+              return members.get(name);
+            }
+          }
+        }));
+  }
+

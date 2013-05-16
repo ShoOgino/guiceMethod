@@ -1,0 +1,12 @@
+  public void testReturnValueMatchesParamValue() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      public void configure() {
+        install(new FactoryModuleBuilder().build(Delegater.Factory.class));
+      }
+    });
+    Delegater delegate = new Delegater();
+    Delegater user = injector.getInstance(Delegater.Factory.class).create(delegate);
+    assertSame(delegate, user.delegate);
+  }
+

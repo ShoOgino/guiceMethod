@@ -1,0 +1,4 @@
+    Delegater() {
+      this.delegate = null;
+    }
+

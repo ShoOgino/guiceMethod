@@ -1,17 +1,17 @@
-  public void testAnnotationWithValueThatDoesntMatch() {
+  public void testRequireExactAnnotationsRequireAllOptionals() {
     try {
       Guice.createInjector(new AbstractModule() {
         @Override
         protected void configure() {
-          bindConstant().annotatedWith(createBlue(6)).to("six");
-          bind(String.class).toInstance("bar");
-          bind(BlueFoo.class);
+          binder().requireExactBindingAnnotations();
+          bindConstant().annotatedWith(Color.class).to("foo");
+          bind(ColorFoo.class);
         }
       });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(), "No implementation for java.lang.String annotated with",
-          "BindingAnnotationTest$Blue(value=5) was bound",
+          "BindingAnnotationTest$Color",
           "at " + BindingAnnotationTest.class.getName(), ".configure(BindingAnnotationTest.java:");
     }
   }

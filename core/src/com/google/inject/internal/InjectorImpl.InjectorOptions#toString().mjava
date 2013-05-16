@@ -5,6 +5,7 @@
           .add("jitDisabled", jitDisabled)
           .add("disableCircularProxies", disableCircularProxies)
           .add("atInjectRequired", atInjectRequired)
+          .add("exactBindingAnnotationsRequired", exactBindingAnnotationsRequired)
           .toString();
     }
 

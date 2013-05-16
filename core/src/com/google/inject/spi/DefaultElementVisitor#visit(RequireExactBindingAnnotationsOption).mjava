@@ -1,0 +1,4 @@
+  public V visit(RequireExactBindingAnnotationsOption option) {
+    return visitOther(option);
+  }
+

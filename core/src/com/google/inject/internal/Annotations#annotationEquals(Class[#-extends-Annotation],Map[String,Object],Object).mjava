@@ -1,0 +1,16 @@
+  /** Implements {@link Annotation#equals}. */
+  private static boolean annotationEquals(Class<? extends Annotation> type,
+      Map<String, Object> members, Object other) throws Exception {
+    if (!type.isInstance(other)) {
+      return false;
+    }
+    for (Method method : type.getDeclaredMethods()) {
+      String name = method.getName();
+      if (!Arrays.deepEquals(
+          new Object[] {method.invoke(other)}, new Object[] {members.get(name)})) {
+        return false;
+      }
+    }
+    return true;
+  }
+

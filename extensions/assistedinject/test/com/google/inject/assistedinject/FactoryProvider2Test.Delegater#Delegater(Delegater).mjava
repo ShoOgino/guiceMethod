@@ -1,0 +1,4 @@
+    @Inject Delegater(@Assisted Delegater delegater) {
+      this.delegate = delegater;
+    }
+

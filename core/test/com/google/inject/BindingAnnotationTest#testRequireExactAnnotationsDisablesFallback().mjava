@@ -1,10 +1,10 @@
-  public void testAnnotationWithValueThatDoesntMatch() {
+  public void testRequireExactAnnotationsDisablesFallback() {
     try {
       Guice.createInjector(new AbstractModule() {
         @Override
         protected void configure() {
-          bindConstant().annotatedWith(createBlue(6)).to("six");
-          bind(String.class).toInstance("bar");
+          binder().requireExactBindingAnnotations();
+          bindConstant().annotatedWith(Blue.class).to("foo");
           bind(BlueFoo.class);
         }
       });

@@ -5,14 +5,16 @@
           stage,
           jitDisabled,
           disableCircularProxies,
-          atInjectRequired);
+          atInjectRequired,
+          exactBindingAnnotationsRequired);
     } else {
       checkState(stage == parentOptions.stage, "child & parent stage don't match");
       return new InjectorOptions(
           stage,
           jitDisabled || parentOptions.jitDisabled,
           disableCircularProxies || parentOptions.disableCircularProxies,
-          atInjectRequired || parentOptions.atInjectRequired); 
+          atInjectRequired || parentOptions.atInjectRequired,
+          exactBindingAnnotationsRequired || parentOptions.exactBindingAnnotationsRequired);
     }
   }
 

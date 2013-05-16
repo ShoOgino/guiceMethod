@@ -2,10 +2,15 @@
    * Gets the strategy for an annotation type.
    */
   static AnnotationStrategy strategyFor(Class<? extends Annotation> annotationType) {
+    annotationType = Annotations.canonicalizeIfNamed(annotationType);
+    if (isAllDefaultMethods(annotationType)) {
+      return strategyFor(generateAnnotation(annotationType));
+    }
+    
     checkNotNull(annotationType, "annotation type");
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);
-    return new AnnotationTypeStrategy(Annotations.canonicalizeIfNamed(annotationType), null);
+    return new AnnotationTypeStrategy(annotationType, null);
 
   }
 

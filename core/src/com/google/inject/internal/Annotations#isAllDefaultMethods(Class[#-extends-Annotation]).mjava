@@ -1,0 +1,11 @@
+  public static boolean isAllDefaultMethods(Class<? extends Annotation> annotationType) {
+    boolean hasMethods = false;
+    for (Method m : annotationType.getDeclaredMethods()) {
+      hasMethods = true;
+      if (m.getDefaultValue() == null) {
+        return false;
+      }
+    }
+    return hasMethods;
+  }
+

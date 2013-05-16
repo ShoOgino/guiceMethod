@@ -53,7 +53,7 @@
     // If the key has an annotation...
     if (key.getAnnotationType() != null) {
       // Look for a binding without annotation attributes or return null.
-      if (key.hasAttributes()) {
+      if (key.hasAttributes() && !options.exactBindingAnnotationsRequired) {
         try {
           Errors ignored = new Errors();
           return getBindingOrThrow(key.withoutAttributes(), ignored, JitLimitation.NO_JIT);

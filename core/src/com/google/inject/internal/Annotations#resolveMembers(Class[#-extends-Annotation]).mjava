@@ -1,0 +1,9 @@
+  private static ImmutableMap<String, Object> resolveMembers(
+      Class<? extends Annotation> annotationType) {
+    ImmutableMap.Builder<String, Object> result = ImmutableMap.builder();
+    for (Method method : annotationType.getDeclaredMethods()) {
+      result.put(method.getName(), method.getDefaultValue());
+    }
+    return result.build();
+  }
+
