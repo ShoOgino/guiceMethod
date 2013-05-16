@@ -8,7 +8,7 @@
     final Key<?> returnType = data.returnType;
 
     // We ignore any pre-existing binding annotation.
-    final Key<?> returnKey = Key.get(returnType.getTypeLiteral(), UniqueAnnotations.create());
+    final Key<?> returnKey = Key.get(returnType.getTypeLiteral(), RETURN_ANNOTATION);
 
     Module assistedModule = new AbstractModule() {
       @Override @SuppressWarnings("unchecked") // raw keys are necessary for the args array and return value
