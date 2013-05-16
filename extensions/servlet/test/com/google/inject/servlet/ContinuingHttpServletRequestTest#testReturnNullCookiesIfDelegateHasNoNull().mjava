@@ -1,0 +1,11 @@
+  public void testReturnNullCookiesIfDelegateHasNoNull() {
+    HttpServletRequest delegate = createMock(HttpServletRequest.class);
+    expect(delegate.getCookies()).andStubReturn(null);
+
+    replay(delegate);
+
+    assertNull(new ContinuingHttpServletRequest(delegate).getCookies());
+
+    verify(delegate);
+  }
+

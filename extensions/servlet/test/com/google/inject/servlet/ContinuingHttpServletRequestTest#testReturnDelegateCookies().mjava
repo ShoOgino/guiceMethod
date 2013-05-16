@@ -1,0 +1,16 @@
+  public void testReturnDelegateCookies() {
+    Cookie[] cookies = new Cookie[]{
+        new Cookie("testName1", "testValue1"),
+        new Cookie("testName2", "testValue2")
+    };
+    HttpServletRequest delegate = createMock(HttpServletRequest.class);
+    expect(delegate.getCookies()).andStubReturn(cookies);
+
+    replay(delegate);
+
+    assertTrue(Arrays.equals(cookies,
+        new ContinuingHttpServletRequest(delegate).getCookies()));
+
+    verify(delegate);
+  }
+
