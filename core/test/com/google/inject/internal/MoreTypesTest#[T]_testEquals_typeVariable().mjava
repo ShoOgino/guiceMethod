@@ -1,0 +1,5 @@
+  public <T> void testEquals_typeVariable() throws Exception {
+    Type type = getClass().getMethod("testEquals_typeVariable").getTypeParameters()[0];
+    assertTrue(MoreTypes.equals(new TypeLiteral<T>() {}.getType(), type));
+  }
+
