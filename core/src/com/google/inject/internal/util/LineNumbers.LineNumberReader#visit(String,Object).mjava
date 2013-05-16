@@ -1,3 +1,0 @@
-    public void visit(String name, Object value) {
-    }
-

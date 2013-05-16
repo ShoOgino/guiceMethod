@@ -1,0 +1,4 @@
+    LineNumberReader() {
+      super(Opcodes.ASM4);
+    }
+

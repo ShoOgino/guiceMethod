@@ -1,3 +1,0 @@
-    public void visitOuterClass(String owner, String name, String desc) {
-    }
-

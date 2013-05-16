@@ -5,6 +5,6 @@
       }
       pendingMethod = name + desc;
       line = -1;
-      return this;
+      return new LineNumberMethodVisitor();
     }
 

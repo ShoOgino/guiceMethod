@@ -1,0 +1,4 @@
+      public AnnotationVisitor visitAnnotationDefault() {
+        return new LineNumberAnnotationVisitor();
+    }
+

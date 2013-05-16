@@ -1,0 +1,4 @@
+      LineNumberMethodVisitor() {
+        super(Opcodes.ASM4);
+    }
+
