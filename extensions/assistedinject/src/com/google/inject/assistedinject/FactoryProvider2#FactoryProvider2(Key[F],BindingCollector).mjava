@@ -83,7 +83,7 @@
         // all injections directly inject the object itself (and not a Provider of the object,
         // or an Injector), because it caches a single child injector and mutates the Provider
         // of the arguments in a ThreadLocal.
-        if(isValidForOptimizedAssistedInject(deps)) {
+        if(isValidForOptimizedAssistedInject(deps, implementation.getRawType(), factoryType)) {
           ImmutableList.Builder<ThreadLocalProvider> providerListBuilder = ImmutableList.builder();
           for(int i = 0; i < params.size(); i++) {
             providerListBuilder.add(new ThreadLocalProvider());
