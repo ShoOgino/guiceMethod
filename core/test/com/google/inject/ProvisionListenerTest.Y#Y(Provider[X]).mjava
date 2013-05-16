@@ -1,0 +1,4 @@
+    @Inject Y(Provider<X> xProvider) {
+      this.xProvider = xProvider;
+    }
+

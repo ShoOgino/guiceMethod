@@ -24,6 +24,8 @@
           : userException;
       throw errors.withSource(constructionProxy.getInjectionPoint())
           .errorInjectingConstructor(cause).toException();
+    } finally {
+      constructionContext.removeCurrentReference();
     }
   }
 

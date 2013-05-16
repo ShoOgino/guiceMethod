@@ -1,0 +1,6 @@
+    void init() {
+      if (createY) {
+        this.y = yProvider.get();
+      }
+    }
+
