@@ -5,7 +5,8 @@
   public StackTraceElement get() {
     for (final StackTraceElement element : new Throwable().getStackTrace()) {
       String className = element.getClassName();
-      if (!classNamesToSkip.contains(className)) {
+      
+      if (!shouldBeSkipped(className)) {
         return element;
       }
     }

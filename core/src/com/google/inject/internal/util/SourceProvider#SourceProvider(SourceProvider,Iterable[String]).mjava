@@ -1,0 +1,12 @@
+  private SourceProvider(SourceProvider parent, Iterable<String> classesToSkip) {
+    this.parent = parent;
+    
+    ImmutableSet.Builder<String> classNamesToSkipBuilder = ImmutableSet.builder();
+    for (String classToSkip : classesToSkip) {
+      if (parent == null || !parent.shouldBeSkipped(classToSkip)) {
+        classNamesToSkipBuilder.add(classToSkip);
+      }
+    }
+    this.classNamesToSkip = classNamesToSkipBuilder.build();
+  }
+

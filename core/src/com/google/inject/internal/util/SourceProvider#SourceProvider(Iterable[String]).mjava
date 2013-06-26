@@ -1,4 +1,4 @@
   private SourceProvider(Iterable<String> classesToSkip) {
-    this.classNamesToSkip = ImmutableSet.copyOf(classesToSkip);
+    this(null, classesToSkip);
   }
 
