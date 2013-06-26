@@ -1,0 +1,9 @@
+  /** Sets the new current dependency & adds it to the state. */
+  public Dependency<?> pushDependency(Dependency<?> dependency, Object source) {
+    Dependency<?> previous = this.dependency;
+    this.dependency = dependency;
+    state.add(dependency);
+    state.add(source);
+    return previous;
+  }
+

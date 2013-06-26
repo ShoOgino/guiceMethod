@@ -1,4 +1,4 @@
-  public Dependency getDependency() {
+  public Dependency<?> getDependency() {
     return dependency;
   }
 
