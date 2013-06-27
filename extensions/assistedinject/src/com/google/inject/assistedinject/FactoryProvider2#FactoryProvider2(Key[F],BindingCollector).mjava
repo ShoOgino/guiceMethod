@@ -5,7 +5,7 @@
    */
   FactoryProvider2(Key<F> factoryKey, BindingCollector collector) {
     this.factoryKey = factoryKey;
-    
+
     TypeLiteral<F> factoryType = factoryKey.getTypeLiteral();
     Errors errors = new Errors();
 

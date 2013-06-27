@@ -1,4 +1,4 @@
       public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
         return new LineNumberAnnotationVisitor();
-    }
+      }
 

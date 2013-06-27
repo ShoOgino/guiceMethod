@@ -8,5 +8,5 @@
         ImmutableSet.<InjectionPoint>of(),
         stage);
     injector.state.putBinding(key, stageBinding);
-    }
+  }
 

@@ -43,7 +43,7 @@
     if (convertedBinding != null) {
       return convertedBinding;
     }
-    
+
     if (!isTypeLiteral(key) 
         && jitDisabled
         && jitType != JitLimitation.NEW_OR_EXISTING_JIT) {

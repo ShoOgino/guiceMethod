@@ -2,5 +2,5 @@
   public Boolean visit(RequireAtInjectOnConstructorsOption option) {
     atInjectRequired = true;
     return true;    
-  }  
+  }
 
