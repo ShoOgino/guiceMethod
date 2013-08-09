@@ -1,15 +1,13 @@
     public Set<T> get() {
       checkConfiguration(isInitialized(), "Multibinder is not initialized");
 
-      Map<T, Binding<T>> result = new LinkedHashMap<T, Binding<T>>();
+      Set<T> result = new LinkedHashSet<T>();
       for (Binding<T> binding : bindings) {
         final T newValue = binding.getProvider().get();
         checkConfiguration(newValue != null, "Set injection failed due to null element");
-        Binding<T> duplicateBinding = result.put(newValue, binding);
-        if (!permitDuplicates && duplicateBinding != null) {
-          throw newDuplicateValuesException(result, binding, newValue, duplicateBinding);
-        }
+        checkConfiguration(result.add(newValue) || permitDuplicates,
+            "Set injection failed due to duplicated element \"%s\"", newValue);
       }
-      return Collections.unmodifiableSet(result.keySet());
+      return Collections.unmodifiableSet(result);
     }
 
