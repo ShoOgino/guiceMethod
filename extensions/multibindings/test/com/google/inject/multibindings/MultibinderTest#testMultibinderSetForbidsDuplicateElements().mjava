@@ -1,23 +1,30 @@
   public void testMultibinderSetForbidsDuplicateElements() {
-    Module module = new AbstractModule() {
+    Module module1 = new AbstractModule() {
       protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
+      }
+    };
+    Module module2 = new AbstractModule() {
+      protected void configure() {
+        final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
       }
     };
-    Injector injector = Guice.createInjector(module);
+    Injector injector = Guice.createInjector(module1, module2);
 
     try {
       injector.getInstance(Key.get(setOfString));
       fail();
-    } catch(ProvisionException expected) {
+    } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "1) Set injection failed due to duplicated element \"A\"");
+          "1) Set injection failed due to duplicated element \"A\"",
+          "Bound at " + module1.getClass().getName(),
+          "Bound at " + module2.getClass().getName());
     }
 
     // But we can still visit the module!
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(module), MODULE, false, 0,
+    assertSetVisitor(Key.get(setOfString), stringType, setOf(module1, module2), MODULE, false, 0,
         instance("A"), instance("A"));
   }
 

@@ -1,0 +1,26 @@
+  public void testMultibinderSetIsSerializable() throws IOException, ClassNotFoundException {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        Multibinder.newSetBinder(binder(), String.class)
+            .addBinding().toInstance("A");
+      }
+    });
+
+    Set<String> set = injector.getInstance(Key.get(setOfString));
+    ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+    ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteStream);
+    try {
+      objectOutputStream.writeObject(set);
+    } finally {
+      objectOutputStream.close();
+    }
+    ObjectInputStream objectInputStream = new ObjectInputStream(
+        new ByteArrayInputStream(byteStream.toByteArray()));
+    try {
+      Object setCopy = objectInputStream.readObject();
+      assertEquals(set, setCopy);
+    } finally {
+      objectInputStream.close();
+    }
+  }
+
