@@ -1,2 +1,4 @@
-    @Inject abstract void setB(B b);
+    @SuppressWarnings("InjectJavaxInjectOnAbstractMethod")
+    @Inject
+    abstract void setB(B b);
 
