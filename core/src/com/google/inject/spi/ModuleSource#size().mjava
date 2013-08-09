@@ -1,0 +1,11 @@
+  /**
+   * Returns the size of {@link ModuleSource ModuleSources} chain (all parents) that ends at this 
+   * object.
+   */
+  int size() {
+    if (parent == null) {
+      return 1;
+    }
+    return parent.size() + 1;
+  }
+

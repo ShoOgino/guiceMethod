@@ -1,0 +1,9 @@
+  public void testThreeModules() {
+    ModuleSource moduleSource = createWithSizeThree();
+    checkSizeThree(moduleSource);
+    moduleSource = moduleSource.getParent();
+    checkSizeTwo(moduleSource);
+    moduleSource = moduleSource.getParent();
+    checkSizeOne(moduleSource);
+  }
+

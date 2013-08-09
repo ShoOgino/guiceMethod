@@ -1,6 +1,0 @@
-    protected Object getSource() {
-      return sourceProvider != null
-          ? sourceProvider.get()
-          : source;
-    }
-

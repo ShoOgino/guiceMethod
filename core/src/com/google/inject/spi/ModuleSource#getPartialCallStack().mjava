@@ -1,0 +1,12 @@
+  /**
+   * Returns the chunk of call stack that starts from the parent module {@link 
+   * Module#configure(Binder) configure(Binder)} call and ends just before the module {@link 
+   * Module#configure(Binder) configure(Binder)} method invocation
+   */
+  StackTraceElement[] getPartialCallStack() {
+    int chunkSize = partialCallStack.length;
+    StackTraceElement[] callStack = new StackTraceElement[chunkSize];
+    System.arraycopy(partialCallStack, 0, callStack, 0, chunkSize);
+    return callStack;
+  }
+

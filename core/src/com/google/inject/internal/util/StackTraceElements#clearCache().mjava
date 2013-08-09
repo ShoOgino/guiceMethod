@@ -1,0 +1,7 @@
+  /**
+   * Clears the internal cache for {@link StackTraceElement StackTraceElements}.
+   */
+  public static void clearCache() {
+    cache.clear();
+  }
+

@@ -1,0 +1,8 @@
+  private void checkSizeOne(ModuleSource moduleSource) {
+    assertEquals(1, moduleSource.size());
+    assertEquals(1, moduleSource.getStackTraceSize());
+    // Check call stack
+    StackTraceElement[] callStack = moduleSource.getStackTrace();
+    assertEquals(BINDER_INSTALL, callStack[0]);    
+  }
+

@@ -1,0 +1,4 @@
+    InMemoryStackTraceElement(StackTraceElement ste) {
+      this(ste.getClassName(), ste.getMethodName(), ste.getLineNumber());
+    }
+

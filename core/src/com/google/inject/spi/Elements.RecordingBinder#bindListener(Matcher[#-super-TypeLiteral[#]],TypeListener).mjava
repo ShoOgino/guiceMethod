@@ -1,4 +1,4 @@
     public void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher, TypeListener listener) {
-      elements.add(new TypeListenerBinding(getSource(), listener, typeMatcher));
+      elements.add(new TypeListenerBinding(getElementSource(), listener, typeMatcher));
     }
 

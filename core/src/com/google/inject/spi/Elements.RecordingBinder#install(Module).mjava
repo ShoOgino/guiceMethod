@@ -1,10 +1,13 @@
     public void install(Module module) {
       if (modules.add(module)) {
         Binder binder = this;
+        // Update the module source for the new module
+        if (!(module instanceof ProviderMethodsModule)) {
+          moduleSource = getModuleSource(module);
+        }
         if (module instanceof PrivateModule) {
           binder = binder.newPrivateBinder();
         }
-
         try {
           module.configure(binder);
         } catch (RuntimeException e) {
@@ -16,6 +19,10 @@
           }
         }
         binder.install(ProviderMethodsModule.forModule(module));
+        // We are done with this module, so undo module source change
+        if (!(module instanceof ProviderMethodsModule)) {
+          moduleSource = moduleSource.getParent();
+        }
       }
     }
 

@@ -1,0 +1,8 @@
+  /**
+   * Returns {@code getDeclaringSource().toString()} value.
+   */
+  @Override
+  public String toString() {
+    return getDeclaringSource().toString();
+  }
+

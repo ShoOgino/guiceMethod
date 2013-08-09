@@ -1,0 +1,31 @@
+  /**
+   * Returns the position of {@link Module#configure(Binder) configure(Binder)} method call in the 
+   * {@link #getStackTrace() stack trace} for modules that their classes returned by 
+   * {@link #getModuleClassNames()}. For example, if the stack trace looks like the following:
+   * <p>
+   * {@code
+   *  0 - Binder.bind(),
+   *  1 - ModuleTwo.configure(),
+   *  2 - Binder.install(),
+   *  3 - ModuleOne.configure(),
+   *  4 - theRest(). 
+   * }
+   * <p>
+   * 1 and 3 are returned.   
+   */
+  public List<Integer> getModuleConfigurePositionsInStackTrace() {
+    int size = moduleSource.size();
+    Integer[] positions = new Integer[size];
+    int position = partialCallStack.length;
+    positions[0] = position;
+    ModuleSource current = moduleSource;
+    int cursor = 1;
+    while (cursor < size) {
+      position += current.getPartialCallStack().length;
+      positions[cursor] = position;
+      current = current.getParent();
+      cursor++;
+    }
+    return ImmutableList.<Integer>copyOf(positions);
+  }
+

@@ -8,7 +8,7 @@
         };
       }
 
-      ExposureBuilder<T> builder = new ExposureBuilder<T>(this, getSource(), key);
+      ExposureBuilder<T> builder = new ExposureBuilder<T>(this, getElementSource(), key);
       privateElements.addExposureBuilder(builder);
       return builder;
     }

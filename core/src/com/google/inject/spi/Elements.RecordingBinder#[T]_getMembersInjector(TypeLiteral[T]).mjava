@@ -1,6 +1,6 @@
     public <T> MembersInjector<T> getMembersInjector(final TypeLiteral<T> typeLiteral) {
       final MembersInjectorLookup<T> element
-          = new MembersInjectorLookup<T>(getSource(), typeLiteral);
+          = new MembersInjectorLookup<T>(getElementSource(), typeLiteral);
       elements.add(element);
       return element.getMembersInjector();
     }

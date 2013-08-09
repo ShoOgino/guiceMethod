@@ -1,4 +1,4 @@
     public void requireAtInjectOnConstructors() {
-      elements.add(new RequireAtInjectOnConstructorsOption(getSource()));
+      elements.add(new RequireAtInjectOnConstructorsOption(getElementSource()));
     }
 

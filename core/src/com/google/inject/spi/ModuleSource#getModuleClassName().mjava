@@ -1,0 +1,9 @@
+  /** 
+   * Returns the corresponding module class name. The value can be null.
+   *
+   * @see Class#getName()
+   */
+  String getModuleClassName() {
+    return moduleClassName;
+  }
+

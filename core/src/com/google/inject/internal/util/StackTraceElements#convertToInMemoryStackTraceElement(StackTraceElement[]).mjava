@@ -1,0 +1,14 @@
+  /**
+   * Returns encoded in-memory version of {@link StackTraceElement StackTraceElements}.
+   */
+  public static InMemoryStackTraceElement[] convertToInMemoryStackTraceElement(
+      StackTraceElement[] stackTraceElements) {
+    InMemoryStackTraceElement[] inMemoryStackTraceElements = 
+        new InMemoryStackTraceElement[stackTraceElements.length];
+    for (int i = 0; i < stackTraceElements.length; i++) {
+      inMemoryStackTraceElements[i] = 
+          weakIntern(new InMemoryStackTraceElement(stackTraceElements[i]));
+    }
+    return inMemoryStackTraceElements;
+  }
+

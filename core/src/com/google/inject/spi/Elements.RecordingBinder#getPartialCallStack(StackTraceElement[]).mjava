@@ -1,0 +1,18 @@
+    /**
+     * Removes the {@link #moduleSource} call stack from the beginning of current call stack. It
+     * also removes the last two elements in order to make {@link #install(Module)} the last call
+     * in the call stack.
+     */
+    private StackTraceElement[] getPartialCallStack(StackTraceElement[] callStack) {
+      int toSkip = 0;
+      if (moduleSource != null) {
+        toSkip = moduleSource.getStackTraceSize();
+      }
+      // -1 for skipping 'getModuleSource' and 'getElementSource' calls
+      int chunkSize = callStack.length - toSkip - 1;
+
+      StackTraceElement[] partialCallStack = new StackTraceElement[chunkSize];
+      System.arraycopy(callStack, 1, partialCallStack, 0, chunkSize);
+      return partialCallStack;
+    }
+

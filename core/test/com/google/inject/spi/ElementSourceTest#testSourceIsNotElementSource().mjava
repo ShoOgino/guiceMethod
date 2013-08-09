@@ -1,0 +1,14 @@
+  public void testSourceIsNotElementSource() {
+    List<Element> elements = Elements.getElements(new A());
+    for (Element element : elements) {
+      if (element instanceof Binding) {
+        Binding<?> binding = (Binding<?>) element;
+        Class<? extends Annotation> annotationType = binding.getKey().getAnnotationType();
+        if (annotationType != null && annotationType.equals(SampleAnnotation.class)) {
+          assertFalse("Source can not be an ElementSource.", 
+              binding.getSource() instanceof ElementSource);
+        }
+      }
+    }
+  }  
+

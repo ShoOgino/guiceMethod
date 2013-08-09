@@ -1,0 +1,6 @@
+  private ModuleSource createWithSizeOne() {
+    StackTraceElement[] partialCallStack = new StackTraceElement[1];
+    partialCallStack[0] = BINDER_INSTALL;    
+    return new ModuleSource(new A(), partialCallStack);
+  }
+

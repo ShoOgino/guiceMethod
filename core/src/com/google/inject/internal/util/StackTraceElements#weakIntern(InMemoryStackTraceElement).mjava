@@ -1,0 +1,15 @@
+  private static InMemoryStackTraceElement weakIntern(
+      InMemoryStackTraceElement inMemoryStackTraceElement) {
+    InMemoryStackTraceElement cached = 
+        (InMemoryStackTraceElement) cache.get(inMemoryStackTraceElement);
+    if (cached != null) {
+      return cached;
+    }
+    inMemoryStackTraceElement = new InMemoryStackTraceElement(
+        weakIntern(inMemoryStackTraceElement.getClassName()), 
+        weakIntern(inMemoryStackTraceElement.getMethodName()), 
+        inMemoryStackTraceElement.getLineNumber());
+    cache.put(inMemoryStackTraceElement, inMemoryStackTraceElement);
+    return inMemoryStackTraceElement;
+  }
+

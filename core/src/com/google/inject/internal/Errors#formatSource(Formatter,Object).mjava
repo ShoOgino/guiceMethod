@@ -1,4 +1,8 @@
   public static void formatSource(Formatter formatter, Object source) {
+    if (source instanceof ElementSource) {
+      source = ((ElementSource) source).getDeclaringSource();
+    }
+
     if (source instanceof Dependency) {
       Dependency<?> dependency = (Dependency<?>) source;
       InjectionPoint injectionPoint = dependency.getInjectionPoint();

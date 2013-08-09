@@ -1,0 +1,6 @@
+    InMemoryStackTraceElement(String declaringClass, String methodName, int lineNumber) {
+      this.declaringClass = declaringClass;
+      this.methodName = methodName;
+      this.lineNumber = lineNumber;
+    }
+

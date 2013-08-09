@@ -1,4 +1,4 @@
     public <T> void requestInjection(TypeLiteral<T> type, T instance) {
-      elements.add(new InjectionRequest<T>(getSource(), type, instance));
+      elements.add(new InjectionRequest<T>(getElementSource(), type, instance));
     }
 

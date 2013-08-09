@@ -1,4 +1,4 @@
     public void requireExactBindingAnnotations() {
-      elements.add(new RequireExactBindingAnnotationsOption(getSource()));
+      elements.add(new RequireExactBindingAnnotationsOption(getElementSource()));
     }
 

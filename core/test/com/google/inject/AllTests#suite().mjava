@@ -68,6 +68,8 @@
     suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(SpiBindingsTest.class);
     suite.addTestSuite(ToolStageInjectorTest.class);
+    suite.addTestSuite(ModuleSourceTest.class);
+    suite.addTestSuite(ElementSourceTest.class);
 
     // tools
     // suite.addTestSuite(JmxTest.class); not a testcase

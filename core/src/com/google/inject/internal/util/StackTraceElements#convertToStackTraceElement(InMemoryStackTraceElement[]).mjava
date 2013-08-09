@@ -1,0 +1,17 @@
+  /**
+   * Decodes in-memory stack trace elements to regular {@link StackTraceElement StackTraceElements}.
+   */
+  public static StackTraceElement[] convertToStackTraceElement(
+      InMemoryStackTraceElement[] inMemoryStackTraceElements) {
+    StackTraceElement[] stackTraceElements = 
+        new StackTraceElement[inMemoryStackTraceElements.length];
+    for (int i = 0; i < inMemoryStackTraceElements.length; i++) {
+      String declaringClass = inMemoryStackTraceElements[i].getClassName();
+      String methodName = inMemoryStackTraceElements[i].getMethodName();
+      int lineNumber = inMemoryStackTraceElements[i].getLineNumber();
+      stackTraceElements[i] = 
+          new StackTraceElement(declaringClass, methodName, UNKNOWN_SOURCE, lineNumber);
+    }
+    return stackTraceElements;
+  }
+

@@ -1,0 +1,11 @@
+  private ModuleSource createWithSizeThree() {
+    ModuleSource moduleSource = createWithSizeTwo();
+    StackTraceElement[] partialCallStack = new StackTraceElement[4];
+    partialCallStack[0] = BINDER_INSTALL;
+    partialCallStack[1] = new StackTraceElement("class1", "method1", "Class1.java", 1);
+    partialCallStack[2] = new StackTraceElement("class2", "method2", "Class2.java", 2);
+    partialCallStack[3] = new StackTraceElement(
+        "com.google.inject.spi.moduleSourceTest$B", "configure", "moduleSourceTest.java", 200);
+    return moduleSource.createChild(new C(), partialCallStack);
+  }
+

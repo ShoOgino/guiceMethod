@@ -1,4 +1,4 @@
     public AnnotatedConstantBindingBuilder bindConstant() {
-      return new ConstantBindingBuilderImpl<Void>(this, elements, getSource());
+      return new ConstantBindingBuilderImpl<Void>(this, elements, getElementSource());
     }
 

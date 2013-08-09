@@ -4,6 +4,7 @@
       this.modules = Sets.newHashSet();
       this.elements = privateElements.getElementsMutable();
       this.source = parent.source;
+      this.moduleSource = parent.moduleSource;
       this.sourceProvider = parent.sourceProvider;
       this.parent = parent;
       this.privateElements = privateElements;

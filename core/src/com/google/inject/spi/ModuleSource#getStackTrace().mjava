@@ -1,0 +1,19 @@
+  /**
+   * Returns the full call stack that ends just before the module {@link Module#configure(Binder) 
+   * configure(Binder)} method invocation. 
+   */
+  StackTraceElement[] getStackTrace() {
+    StackTraceElement[] callStack = new StackTraceElement[getStackTraceSize()];
+    int cursor = 0; // Index 0 stores the top Module.configure() 
+    ModuleSource current = this;
+    while (current != null) {
+      StackTraceElement[] chunk = 
+          StackTraceElements.convertToStackTraceElement(current.partialCallStack);
+      int chunkSize = chunk.length;
+      System.arraycopy(chunk, 0, callStack, cursor, chunkSize);
+      current = current.parent;
+      cursor = cursor + chunkSize;
+    }
+    return callStack;
+  }
+

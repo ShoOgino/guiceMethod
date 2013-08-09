@@ -1,4 +1,4 @@
     public void requireExplicitBindings() {
-      elements.add(new RequireExplicitBindingsOption(getSource()));     
+      elements.add(new RequireExplicitBindingsOption(getElementSource()));
     }
 

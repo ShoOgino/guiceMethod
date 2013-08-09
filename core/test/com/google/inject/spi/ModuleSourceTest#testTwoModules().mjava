@@ -1,0 +1,7 @@
+  public void testTwoModules() {
+    ModuleSource moduleSource = createWithSizeTwo();
+    checkSizeTwo(moduleSource);
+    moduleSource = moduleSource.getParent();
+    checkSizeOne(moduleSource);
+  }
+

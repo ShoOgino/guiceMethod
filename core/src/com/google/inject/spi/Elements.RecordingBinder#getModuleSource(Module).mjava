@@ -1,0 +1,13 @@
+    private ModuleSource getModuleSource(Module module) {
+      StackTraceElement[] partialCallStack;
+      if (!collectCompleteStackTrace()) {
+        partialCallStack = new StackTraceElement[0];
+      } else {
+        partialCallStack = getPartialCallStack(new Throwable().getStackTrace());
+      }
+      if (moduleSource == null) {
+        return new ModuleSource(module, partialCallStack);
+      }
+      return moduleSource.createChild(module, partialCallStack);
+    }
+

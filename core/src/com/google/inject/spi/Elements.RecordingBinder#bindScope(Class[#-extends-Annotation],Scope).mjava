@@ -1,4 +1,4 @@
     public void bindScope(Class<? extends Annotation> annotationType, Scope scope) {
-      elements.add(new ScopeBinding(getSource(), annotationType, scope));
+      elements.add(new ScopeBinding(getElementSource(), annotationType, scope));
     }
 

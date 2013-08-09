@@ -1,0 +1,30 @@
+    private ElementSource getElementSource() {
+      Object declaringSource = source;
+      // Full call stack
+      StackTraceElement[] callStack;
+      // The call stack starts from current top module configure and ends at this method caller
+      StackTraceElement[] partialCallStack;
+      if (!collectCompleteStackTrace()) {
+        callStack = null;
+        partialCallStack = new StackTraceElement[0];
+      } else {
+        callStack = new Throwable().getStackTrace();
+        partialCallStack = getPartialCallStack(callStack);
+      }
+      if (declaringSource == null) {
+        // TODO(salmanmir): can we avoid getting the full stack trace by using modules stack?
+        if (callStack == null) {
+          callStack = new Throwable().getStackTrace();
+        }
+        declaringSource = sourceProvider.get(callStack);
+      }
+      ElementSource originalSource = null;
+      if (declaringSource instanceof ElementSource) {
+        originalSource = (ElementSource) declaringSource;
+        declaringSource = originalSource.getDeclaringSource();
+      }
+      // Build the binding call stack
+      return new ElementSource(
+          originalSource, declaringSource, moduleSource, partialCallStack);
+    }
+

@@ -1,0 +1,5 @@
+    @Override
+    public void configure() {
+      install(new B());
+    }
+

@@ -1,5 +1,5 @@
     public void bindListener(Matcher<? super Binding<?>> bindingMatcher,
         ProvisionListener... listeners) {
-      elements.add(new ProvisionListenerBinding(getSource(), bindingMatcher, listeners));
+      elements.add(new ProvisionListenerBinding(getElementSource(), bindingMatcher, listeners));
     }
 

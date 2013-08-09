@@ -1,0 +1,21 @@
+  /**
+   * Returns the class names of modules involved in creating this {@link Element}.  The first
+   * element (index 0) is the class name of module that defined the element, and the last element
+   * is the class name of root module. In the cases where the class name is null an empty string
+   * is returned.
+   */
+  public List<String> getModuleClassNames() {
+    String[] classNames = new String[moduleSource.size()];
+    ModuleSource current = moduleSource;
+    int cursor = 0;
+    while (current != null) {
+      classNames[cursor] = current.getModuleClassName();
+      if (classNames[cursor] == null) {
+          classNames[cursor] = "";
+      }
+      current = current.getParent();
+      cursor++;
+    }
+    return ImmutableList.<String>copyOf(classNames);
+  }
+
