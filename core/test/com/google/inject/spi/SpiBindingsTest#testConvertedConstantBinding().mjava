@@ -7,7 +7,7 @@
 
     Binding<Integer> binding = injector.getBinding(Key.get(Integer.class, Names.named("one")));
     assertEquals(Key.get(Integer.class, Names.named("one")), binding.getKey());
-    assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    checkBindingSource(binding);
     assertTrue(binding instanceof ConvertedConstantBinding);
     binding.acceptTargetVisitor(new FailingTargetVisitor<Integer>() {
       @Override public Void visit(

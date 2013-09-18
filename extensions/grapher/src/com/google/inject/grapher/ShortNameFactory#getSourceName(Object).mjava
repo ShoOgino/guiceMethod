@@ -4,6 +4,9 @@
    * or a {@link Method} when a provider method is used.
    */
   public String getSourceName(Object source) {
+    if (source instanceof ElementSource) {
+      source = ((ElementSource) source).getDeclaringSource();
+    }
     if (source instanceof Method) {
       source = StackTraceElements.forMember((Method) source);
     }

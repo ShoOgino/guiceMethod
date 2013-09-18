@@ -1,0 +1,5 @@
+  @Override
+  protected void tearDown() throws Exception {
+    System.clearProperty("guice_include_stack_traces");
+  }
+

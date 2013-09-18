@@ -10,7 +10,8 @@
 
     Binding<Foo> fooBinding = injector.getBinding(Key.get(Foo.class));
     assertSame(bar, fooBinding.getProvider().get());
-    assertNotNull(fooBinding.getSource());
+    ElementSource source = (ElementSource) fooBinding.getSource();
+    assertNotNull(source.getDeclaringSource());
     assertEquals(Key.get(Foo.class), fooBinding.getKey());
   }
 

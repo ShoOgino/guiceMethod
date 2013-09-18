@@ -2,6 +2,12 @@
     for (int i = 0; i < visitors.length; i++) {
       ElementVisitor<?> visitor = visitors[i];
       Element element = elements.get(i);
+      if (!(element instanceof Message)) {
+          ElementSource source = (ElementSource) element.getSource();
+          assertTrue(source.getModuleClassNames().size() > 0);
+          assertFalse(source.isStackTraceRetained()) ;
+          assertEquals(0, source.getStackTrace().length);
+      }
       if (!(visitor instanceof ExternalFailureVisitor)) {
         assertContains(element.getSource().toString(), "ElementsTest.java");
       }

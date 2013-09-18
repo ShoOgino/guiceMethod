@@ -31,7 +31,7 @@
     Key<Provider<String>> providerOfStringKey = new Key<Provider<String>>() {};
     Binding<Provider<String>> providerBinding = injector.getBinding(providerOfStringKey);
     assertEquals(providerOfStringKey, providerBinding.getKey());
-    assertContains(providerBinding.getSource().toString(), "SpiBindingsTest.java");
+    checkBindingSource(providerBinding);
     assertTrue("binding: " + providerBinding, providerBinding instanceof ProviderBinding);
     providerBinding.acceptTargetVisitor(new FailingTargetVisitor<Provider<String>>() {
       @Override public Void visit(ProviderBinding<? extends Provider<String>> binding) {
@@ -43,7 +43,7 @@
     // Check for String binding -- that one is ProviderInstanceBinding, and gets hooked
     Binding<String> binding = injector.getBinding(String.class);
     assertEquals(Key.get(String.class), binding.getKey());
-    assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    checkBindingSource(binding);
     assertTrue(binding instanceof ProviderInstanceBinding);
     assertEquals("visited", binding.acceptTargetVisitor(new FailingSpiTargetVisitor<String>()));
   }

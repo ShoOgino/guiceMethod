@@ -1,0 +1,8 @@
+  public void checkBindingSource(Binding binding) {
+    assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    ElementSource source = (ElementSource) binding.getSource();
+    assertTrue(source.getModuleClassNames().size() > 0);
+    assertFalse(source.isStackTraceRetained()) ;
+    assertEquals(0, source.getStackTrace().length);
+  }
+

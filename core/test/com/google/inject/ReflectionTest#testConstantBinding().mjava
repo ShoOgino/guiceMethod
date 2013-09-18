@@ -7,7 +7,8 @@
 
     Binding<?> i = injector.getBinding(Key.get(int.class, I.class));
     assertEquals(5, i.getProvider().get());
-    assertNotNull(i.getSource());
+    ElementSource source = (ElementSource) i.getSource();
+    assertNotNull(source.getDeclaringSource());
     assertEquals(Key.get(int.class, I.class), i.getKey());
   }
 

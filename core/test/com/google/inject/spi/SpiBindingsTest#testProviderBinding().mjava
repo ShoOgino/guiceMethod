@@ -8,7 +8,7 @@
     Key<Provider<String>> providerOfStringKey = new Key<Provider<String>>() {};
     Binding<Provider<String>> binding = injector.getBinding(providerOfStringKey);
     assertEquals(providerOfStringKey, binding.getKey());
-    assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+    checkBindingSource(binding);
     assertTrue(binding instanceof ProviderBinding);
     binding.acceptTargetVisitor(new FailingTargetVisitor<Provider<String>>() {
       @Override public Void visit(

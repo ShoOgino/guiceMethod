@@ -13,7 +13,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof LinkedKeyBinding);
-            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+            checkBindingSource(binding);
             assertEquals(aKey, binding.getKey());
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
               @Override public Void visit(LinkedKeyBinding<? extends T> binding) {

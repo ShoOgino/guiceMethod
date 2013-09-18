@@ -11,18 +11,24 @@
    *  4 - theRest(). 
    * }
    * <p>
-   * 1 and 3 are returned.   
+   * 1 and 3 are returned.
+   * <p>
+   * In the cases where stack trace is not available (i.e.,the stack trace was not collected), 
+   * it returns an empty array.
    */
   public List<Integer> getModuleConfigurePositionsInStackTrace() {
+    if (!isStackTraceRetained()) {
+      return ImmutableList.<Integer>of();
+    }
     int size = moduleSource.size();
     Integer[] positions = new Integer[size];
     int position = partialCallStack.length;
-    positions[0] = position;
+    positions[0] = position - 1;
     ModuleSource current = moduleSource;
     int cursor = 1;
     while (cursor < size) {
       position += current.getPartialCallStack().length;
-      positions[cursor] = position;
+      positions[cursor] = position - 1;
       current = current.getParent();
       cursor++;
     }

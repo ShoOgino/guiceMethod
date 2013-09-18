@@ -9,7 +9,7 @@
         new FailingElementVisitor() {
           @Override public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof InstanceBinding);
-            assertContains(binding.getSource().toString(), "SpiBindingsTest.java");
+            checkBindingSource(binding);
             assertEquals(Key.get(Integer.class, Names.named("one")), binding.getKey());
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
               @Override public Void visit(InstanceBinding<? extends T> binding) {

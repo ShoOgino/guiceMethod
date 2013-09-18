@@ -1,5 +1,5 @@
   private static boolean collectCompleteStackTrace() {
     return IncludeStackTraceFlagValues.COMPLETE.name().equals(
-        guice_include_stack_traces_property);
+        System.getProperty("guice_include_stack_traces"));
   }
 
