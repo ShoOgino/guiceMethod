@@ -2,13 +2,13 @@
     Module module1 = new AbstractModule() {
       protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toProvider(Providers.of("A"));
       }
     };
     Module module2 = new AbstractModule() {
       protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().toProvider(Providers.of("A"));
       }
     };
     Injector injector = Guice.createInjector(module1, module2);

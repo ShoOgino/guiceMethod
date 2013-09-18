@@ -1,4 +1,4 @@
-  public Type type() {
+  public Element.Type type() {
     return type;
   }
 

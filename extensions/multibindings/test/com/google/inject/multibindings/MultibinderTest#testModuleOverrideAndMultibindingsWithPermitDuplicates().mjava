@@ -34,6 +34,6 @@
         injector.getInstance(Key.get(setOfString)));
 
     assertSetVisitor(Key.get(setOfString), stringType, setOf(abcd, ef), BOTH, true, 0,
-        instance("A"), instance("B"), instance("C"), instance("C"), instance("D"), instance("E"), instance("F"));
+        instance("A"), instance("B"), instance("C"), instance("D"), instance("E"), instance("F"));
   }
 

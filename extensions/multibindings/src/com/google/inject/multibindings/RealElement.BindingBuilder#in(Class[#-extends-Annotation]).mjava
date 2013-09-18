@@ -1,0 +1,5 @@
+    public void in(Class<? extends Annotation> scopeAnnotation) {
+      delegate.in(scopeAnnotation);
+      annotation.scope = scopeAnnotation;
+    }
+

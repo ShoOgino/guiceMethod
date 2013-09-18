@@ -1,0 +1,8 @@
+    public <S extends T> ScopedBindingBuilder toConstructor(
+        Constructor<S> constructor, TypeLiteral<? extends S> type) {
+      delegate.toConstructor(constructor, type);
+      annotation.targetType = TargetType.CONSTRUCTOR;
+      annotation.target = InjectionPoint.forConstructor(constructor, type);
+      return this;
+    }
+

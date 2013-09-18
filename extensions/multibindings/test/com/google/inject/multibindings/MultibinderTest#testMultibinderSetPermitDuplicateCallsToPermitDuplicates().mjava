@@ -19,6 +19,6 @@
 
     assertEquals(setOf("A", "B", "C"), injector.getInstance(Key.get(setOfString)));
     assertSetVisitor(Key.get(setOfString), stringType, setOf(ab, bc), BOTH, true, 0,
-        instance("A"), instance("B"), instance("B"), instance("C"));
+        instance("A"), instance("B"), instance("C"));
   }
 

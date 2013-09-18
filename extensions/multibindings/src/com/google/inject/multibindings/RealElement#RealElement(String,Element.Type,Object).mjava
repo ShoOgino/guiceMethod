@@ -1,0 +1,7 @@
+  private RealElement(String setName, Element.Type type, Object mapKey) {
+    this.uniqueId = nextUniqueId.incrementAndGet();
+    this.setName = setName;
+    this.type = type;
+    this.mapKey = mapKey;
+  }
+

@@ -1,0 +1,30 @@
+  /** Ensure there are no initialization race conditions in provider multimap injection. */
+  public void testProviderMultimapDependencyInjection() {
+    final AtomicReference<Map<String, Set<Provider<String>>>> injectedMultimap =
+        new AtomicReference<Map<String, Set<Provider<String>>>>();
+    final Object anObject = new Object() {
+      @Inject void initialize(Map<String, Set<Provider<String>>> multimap) {
+        injectedMultimap.set(multimap);
+      }
+    };
+    Module abc = new AbstractModule() {
+      protected void configure() {
+        requestInjection(anObject);
+        MapBinder<String, String> multibinder =
+            MapBinder.newMapBinder(binder(), String.class, String.class);
+        multibinder.permitDuplicates();
+        multibinder.addBinding("a").toInstance("A");
+        multibinder.addBinding("b").toInstance("B");
+        multibinder.addBinding("c").toInstance("C");
+      }
+    };
+    Guice.createInjector(abc);
+    Map<String, String> map = Maps.transformValues(injectedMultimap.get(),
+        new Function<Set<Provider<String>>, String>() {
+          public String apply(Set<Provider<String>> stringProvidersSet) {
+            return Iterables.getOnlyElement(stringProvidersSet).get();
+          }
+        });
+    assertEquals(mapOf("a", "A", "b", "B", "c", "C"), map);
+  }
+

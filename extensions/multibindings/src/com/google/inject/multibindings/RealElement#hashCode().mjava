@@ -1,6 +1,21 @@
+  /**
+   * Returns the hash code of this annotation. This depends on the binding the annotation is in.
+   * It is guaranteed, however, that the hash code will not change once the binding has been
+   * built.
+   * 
+   * <p>This <b>does not</b> match the definition of {@link Annotation#hashCode}. However, as
+   * these annotations will only ever be used within Guice, and {@link Element} itself is package
+   * private and will never be used as an annotation, this should not cause problems.
+   */
   @Override public int hashCode() {
-    return 127 * ("setName".hashCode() ^ setName.hashCode())
-        + 127 * ("uniqueId".hashCode() ^ uniqueId)
-        + 127 * ("type".hashCode() ^ type.hashCode());
+    switch (targetType) {
+      case INSTANCE:
+      case PROVIDER_INSTANCE:
+        // Target is mutable; don't include it in the hash.
+        return Objects.hashCode(setName, type, mapKey, scope, targetType);
+        
+      default:
+        return Objects.hashCode(setName, type, mapKey, scope, targetType, target);
+    }
   }
 

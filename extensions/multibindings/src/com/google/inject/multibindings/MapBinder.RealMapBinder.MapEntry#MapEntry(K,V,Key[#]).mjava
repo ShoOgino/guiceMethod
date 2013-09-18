@@ -1,6 +1,0 @@
-      private MapEntry(K key, V value, Key<?> valueKey) {
-        this.key = key;
-        this.value = value;
-        this.valueKey = valueKey;
-      }
-

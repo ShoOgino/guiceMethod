@@ -1,0 +1,11 @@
+      /**
+       * We don't follow the normal rules for Map.Entry equality, but that's okay, because
+       * the providers we return will never compare equal to anything else anyway. By defining
+       * equality this way, we let Guice remove duplicate bindings.
+       */
+      @Override public boolean equals(Object obj) {
+        return obj instanceof ProviderMapEntry
+            && key.equals(((ProviderMapEntry<?, ?>) obj).getKey())
+            && valueKey.equals(((ProviderMapEntry<?, ?>) obj).getValueKey());
+      }
+

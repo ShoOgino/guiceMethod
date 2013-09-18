@@ -1,8 +1,9 @@
     public boolean permitsDuplicates() {
-      if(isInitialized()) {
+      if (isInitialized()) {
         return permitDuplicates;
       } else {
-        throw new UnsupportedOperationException("permitsDuplicates() not supported for module bindings");   
+        throw new UnsupportedOperationException(
+            "permitsDuplicates() not supported for module bindings");   
       }
     }
 

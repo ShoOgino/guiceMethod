@@ -1,0 +1,7 @@
+    public void toInstance(T instance) {
+      delegate.toInstance(instance);
+      annotation.scope = EAGER_SINGLETON;
+      annotation.targetType = TargetType.INSTANCE;
+      annotation.target = instance;
+    }
+

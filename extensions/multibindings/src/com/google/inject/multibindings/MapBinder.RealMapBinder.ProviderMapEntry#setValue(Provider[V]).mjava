@@ -1,4 +1,4 @@
-      public V setValue(V value) {
+      public Provider<V> setValue(Provider<V> value) {
         throw new UnsupportedOperationException();
       }
 

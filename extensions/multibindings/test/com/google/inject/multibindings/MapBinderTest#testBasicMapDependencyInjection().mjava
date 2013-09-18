@@ -1,0 +1,23 @@
+  /** Ensure there are no initialization race conditions in basic map injection. */
+  public void testBasicMapDependencyInjection() {
+    final AtomicReference<Map<String, String>> injectedMap =
+        new AtomicReference<Map<String, String>>();
+    final Object anObject = new Object() {
+      @Inject void initialize(Map<String, String> map) {
+        injectedMap.set(map);
+      }
+    };
+    Module abc = new AbstractModule() {
+      protected void configure() {
+        requestInjection(anObject);
+        MapBinder<String, String> multibinder =
+            MapBinder.newMapBinder(binder(), String.class, String.class);
+        multibinder.addBinding("a").toInstance("A");
+        multibinder.addBinding("b").toInstance("B");
+        multibinder.addBinding("c").toInstance("C");
+      }
+    };
+    Guice.createInjector(abc);
+    assertEquals(mapOf("a", "A", "b", "B", "c", "C"), injectedMap.get());
+  } 
+

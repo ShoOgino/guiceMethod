@@ -1,0 +1,18 @@
+  /**
+   * Adds a new map value binding to a multibindings collection, returning its
+   * {@link BindingBuilder}.
+   * 
+   * @param binder the current Guice binder
+   * @param mapKey the key used to fetch the element from the map
+   * @param elementType the type of element stored in the collection
+   * @param setName the string used internally to identify the collection
+   */
+  static <T> BindingBuilder<T> addMapBinding(
+      Binder binder, Object mapKey, TypeLiteral<T> elementType, String setName) {
+    RealElement annotation = new RealElement(setName, Element.Type.MAPBINDER, mapKey);
+    LinkedBindingBuilder<T> delegate = binder
+        .skipSources(RealElement.class)
+        .bind(Key.get(elementType, annotation));
+    return new BindingBuilder<T>(annotation, delegate);
+  }
+

@@ -1,0 +1,5 @@
+    BindingBuilder(RealElement annotation, LinkedBindingBuilder<T> delegate) {
+      this.annotation = annotation;
+      this.delegate = delegate;
+    }
+

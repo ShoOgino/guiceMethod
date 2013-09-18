@@ -22,6 +22,6 @@
     assertEquals(mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
         injector.getInstance(Key.get(mapOfSetOfString)));
     assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(ab1c, b2c), BOTH, true, 0,
-        instance("a", "A"), instance("b", "B1"), instance("b", "B2"), instance("c", "C"), instance("c", "C"));
+        instance("a", "A"), instance("b", "B1"), instance("b", "B2"), instance("c", "C"));
   }
 

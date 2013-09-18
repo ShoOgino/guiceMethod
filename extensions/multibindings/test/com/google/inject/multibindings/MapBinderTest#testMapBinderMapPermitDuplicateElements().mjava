@@ -17,21 +17,10 @@
         multibinder.permitDuplicates();
       }
     };
-    final Set<Key<?>> allBindings = new HashSet<Key<?>>();
-    for (Element element : Elements.getElements(ab, bc)) {
-      element.acceptVisitor(new DefaultElementVisitor<Void>() {
-            @Override public <T> Void visit(Binding<T> binding) {
-              Key<?> key = binding.getKey();
-              assertTrue(String.format("Duplicate binding for %s", key),
-                  allBindings.add(binding.getKey()));
-              return null;
-            }
-          });
-    }
     Injector injector = Guice.createInjector(ab, bc);
 
     assertEquals(mapOf("a", "A", "b", "B", "c", "C"), injector.getInstance(Key.get(mapOfString)));
     assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(ab, bc), BOTH, true, 0,
-        instance("a", "A"), instance("b", "B"), instance("b", "B"), instance("c", "C"));
+        instance("a", "A"), instance("b", "B"), instance("c", "C"));
   }
 

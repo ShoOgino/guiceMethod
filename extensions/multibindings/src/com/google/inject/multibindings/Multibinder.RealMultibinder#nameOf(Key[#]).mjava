@@ -5,12 +5,12 @@
      * or just an annotation type, we use the annotation's name. Otherwise,
      * the name is the empty string.
      */
-    private String nameOf(Key<?> key) {
+    private static String nameOf(Key<?> setKey) {
       Annotation annotation = setKey.getAnnotation();
       Class<? extends Annotation> annotationType = setKey.getAnnotationType();      
       if (annotation != null && !Annotations.isMarker(annotationType)) {
         return setKey.getAnnotation().toString();
-      } else if(setKey.getAnnotationType() != null) {
+      } else if (setKey.getAnnotationType() != null) {
         return "@" + setKey.getAnnotationType().getName();
       } else {
         return "";
