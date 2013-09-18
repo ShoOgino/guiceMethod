@@ -2,7 +2,7 @@
     public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
         throws ErrorsException {
       checkState(constructorInjector != null, "Constructor not ready");
-      
+
       if(failIfNotLinked && !linked) {
         throw errors.jitDisabled(key).toException();
       }

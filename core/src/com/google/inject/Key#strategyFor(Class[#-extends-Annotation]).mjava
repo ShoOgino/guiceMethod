@@ -6,7 +6,7 @@
     if (isAllDefaultMethods(annotationType)) {
       return strategyFor(generateAnnotation(annotationType));
     }
-    
+
     checkNotNull(annotationType, "annotation type");
     ensureRetainedAtRuntime(annotationType);
     ensureIsBindingAnnotation(annotationType);

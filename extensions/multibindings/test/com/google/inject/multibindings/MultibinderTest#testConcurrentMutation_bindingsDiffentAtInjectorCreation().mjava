@@ -1,0 +1,44 @@
+  /*
+   * Verify through gratuitous mutation that key hashCode snapshots and whatnot happens at the right
+   * times, by binding two lists that are different at injector creation, but compare equal when the
+   * module is configured *and* when the set is instantiated.
+   */
+  public void testConcurrentMutation_bindingsDiffentAtInjectorCreation() {
+    // We initially bind two equal lists
+    final List<String> list1 = Lists.newArrayList();
+    final List<String> list2 = Lists.newArrayList();
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        Multibinder<List<String>> multibinder = Multibinder.newSetBinder(binder(), listOfStrings);
+        multibinder.addBinding().toInstance(list1);
+        multibinder.addBinding().toInstance(list2);
+      }
+    };
+    List<Element> elements = Elements.getElements(module);
+
+    // Now we change the lists so they no longer match, and create the injector.
+    list1.add("A");
+    list2.add("B");
+    Injector injector = Guice.createInjector(Elements.getModule(elements));
+
+    // Now we change the lists so they compare equal again, and create the set.
+    list1.add(1, "B");
+    list2.add(0, "A");
+    try {
+      injector.getInstance(Key.get(setOfListOfStrings));
+      fail();
+    } catch (ProvisionException e) {
+      assertEquals(1, e.getErrorMessages().size());
+      assertContains(
+          Iterables.getOnlyElement(e.getErrorMessages()).getMessage().toString(),
+          "Set injection failed due to duplicated element \"[A, B]\"");
+    }
+
+    // Finally, we change the lists again so they are once more different, and ensure the set
+    // contains both.
+    list1.remove("A");
+    list2.remove("B");
+    Set<List<String>> set = injector.getInstance(Key.get(setOfListOfStrings));
+    assertEquals(ImmutableSet.of(ImmutableList.of("A"), ImmutableList.of("B")), set);
+  }
+

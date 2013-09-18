@@ -1,0 +1,34 @@
+  /*
+   * Verify through gratuitous mutation that key hashCode snapshots and whatnot happen at the right
+   * times, by binding two lists that compare equal at injector creation, but are different when the
+   * module is configured *and* when the set is instantiated.
+   */
+  public void testConcurrentMutation_bindingsSameAtInjectorCreation() {
+    // We initially bind two distinct lists
+    final List<String> list1 = Lists.newArrayList("A");
+    final List<String> list2 = Lists.newArrayList("B");
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        Multibinder<List<String>> multibinder = Multibinder.newSetBinder(binder(), listOfStrings);
+        multibinder.addBinding().toInstance(list1);
+        multibinder.addBinding().toInstance(list2);
+      }
+    };
+    List<Element> elements = Elements.getElements(module);
+
+    // Now we change the lists so they compare equal, and create the injector.
+    list1.add(1, "B");
+    list2.add(0, "A");
+    Injector injector = Guice.createInjector(Elements.getModule(elements));
+
+    // Now we change the lists again so they are once more different, and create the set.
+    list1.remove("A");
+    list2.remove("B");
+    Set<List<String>> set = injector.getInstance(Key.get(setOfListOfStrings));
+
+    // The set will contain just one of the two lists.
+    // (In fact, it will be the first one we bound, but we don't promise that, so we won't test it.)
+    assertTrue(ImmutableSet.of(ImmutableList.of("A")).equals(set)
+        || ImmutableSet.of(ImmutableList.of("B")).equals(set));
+  }
+

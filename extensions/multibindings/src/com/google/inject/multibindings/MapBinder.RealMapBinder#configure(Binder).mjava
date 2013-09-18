@@ -39,7 +39,7 @@
       });
 
       final Provider<Map<K, Provider<V>>> mapProvider = binder.getProvider(providerMapKey);
-      binder.bind(mapKey).toProvider(new RealMapWithExtensionProvider<Map<K, V>>(mapKey) {        
+      binder.bind(mapKey).toProvider(new RealMapWithExtensionProvider<Map<K, V>>(mapKey) {
         public Map<K, V> get() {
           Map<K, V> map = new LinkedHashMap<K, V>();
           for (Entry<K, Provider<V>> entry : mapProvider.get().entrySet()) {
@@ -83,7 +83,7 @@
           if (isInitialized()) {
             return (List)mapBindings; // safe because mapBindings is immutable
           } else {
-            throw new UnsupportedOperationException("getElements() not supported for module bindings");   
+            throw new UnsupportedOperationException("getElements() not supported for module bindings");
           }
         }
 
@@ -91,7 +91,7 @@
           if (isInitialized()) {
             return permitDuplicates;
           } else {
-            throw new UnsupportedOperationException("permitsDuplicates() not supported for module bindings");   
+            throw new UnsupportedOperationException("permitsDuplicates() not supported for module bindings");
           }
         }
 
@@ -108,7 +108,7 @@
               return false; // cannot match;
             }
 
-            return key.equals(mapKey) 
+            return key.equals(mapKey)
                 || key.equals(providerMapKey)
                 || key.equals(multimapKey)
                 || key.equals(providerMultimapKey)

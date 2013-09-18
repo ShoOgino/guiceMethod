@@ -1,4 +1,11 @@
       public Key<V> getValueKey() {
-        return valueKey;
+        // Every time, check if the value key needs rehashing.
+        // If so, update the field as an optimization for next time.
+        Key<V> currentValueKey = valueKey;
+        if (needsRehashing(currentValueKey)) {
+          currentValueKey = rehash(currentValueKey);
+          valueKey = currentValueKey;
+        }
+        return currentValueKey;
       }
 

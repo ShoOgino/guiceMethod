@@ -1,0 +1,5 @@
+  public void testRehash_noAnnotation() {
+    Key<?> key = Key.get(Integer.class);
+    assertSame(key, rehash(key));
+  }
+

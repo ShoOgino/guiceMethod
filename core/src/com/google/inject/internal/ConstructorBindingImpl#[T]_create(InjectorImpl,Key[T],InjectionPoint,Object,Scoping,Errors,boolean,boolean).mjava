@@ -3,14 +3,14 @@
    * @param failIfNotLinked true if this ConstructorBindingImpl's InternalFactory should
    *                             only succeed if retrieved from a linked binding
    */
-  static <T> ConstructorBindingImpl<T> create(InjectorImpl injector, Key<T> key, 
+  static <T> ConstructorBindingImpl<T> create(InjectorImpl injector, Key<T> key,
       InjectionPoint constructorInjector, Object source, Scoping scoping, Errors errors,
       boolean failIfNotLinked, boolean failIfNotExplicit)
       throws ErrorsException {
     int numErrors = errors.size();
 
     @SuppressWarnings("unchecked") // constructorBinding guarantees type is consistent
-    Class<? super T> rawType = constructorInjector == null 
+    Class<? super T> rawType = constructorInjector == null
         ? key.getTypeLiteral().getRawType()
         : (Class) constructorInjector.getDeclaringType().getRawType();
 

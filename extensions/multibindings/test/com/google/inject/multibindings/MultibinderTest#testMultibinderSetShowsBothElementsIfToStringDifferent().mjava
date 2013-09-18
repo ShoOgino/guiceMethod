@@ -21,7 +21,7 @@
         return String.format("ValueType(%d,%d)", a, b);
       }
     }
-    
+
     Module module1 = new AbstractModule() {
       protected void configure() {
         final Multibinder<ValueType> multibinder =

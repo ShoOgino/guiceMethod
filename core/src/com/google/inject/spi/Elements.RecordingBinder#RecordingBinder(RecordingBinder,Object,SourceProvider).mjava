@@ -6,6 +6,7 @@
       this.stage = prototype.stage;
       this.modules = prototype.modules;
       this.elements = prototype.elements;
+      this.rehashables = prototype.rehashables;
       this.source = source;
       this.moduleSource = prototype.moduleSource;
       this.sourceProvider = sourceProvider;

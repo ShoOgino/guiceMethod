@@ -6,6 +6,6 @@
       @Override public boolean equals(Object obj) {
         return obj instanceof ProviderMapEntry
             && key.equals(((ProviderMapEntry<?, ?>) obj).getKey())
-            && valueKey.equals(((ProviderMapEntry<?, ?>) obj).getValueKey());
+            && getValueKey().equals(((ProviderMapEntry<?, ?>) obj).getValueKey());
       }
 

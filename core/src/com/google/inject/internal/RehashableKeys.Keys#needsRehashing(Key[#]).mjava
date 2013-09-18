@@ -1,0 +1,12 @@
+    /**
+     * Returns true if the cached hashcode for the given key is out-of-date. This will only occur
+     * if the key contains a mutable annotation.
+     */
+    public static boolean needsRehashing(Key<?> key) {
+      if (!key.hasAttributes()) {
+        return false;
+      }
+      int newHashCode = key.getTypeLiteral().hashCode() * 31 + key.getAnnotation().hashCode();
+      return (key.hashCode() != newHashCode);
+    }
+

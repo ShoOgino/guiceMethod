@@ -1,0 +1,14 @@
+  public BindingImpl<T> withRehashedKeys() {
+    boolean keyNeedsRehashing = needsRehashing(getKey());
+    boolean providerKeyNeedsRehashing = needsRehashing(providerKey);
+    if (keyNeedsRehashing || providerKeyNeedsRehashing) {
+      return new LinkedProviderBindingImpl<T>(
+          getSource(),
+          keyNeedsRehashing ? rehash(getKey()) : getKey(),
+          getScoping(),
+          providerKeyNeedsRehashing ? rehash(providerKey) : providerKey);
+    } else {
+      return this;
+    }
+  }
+

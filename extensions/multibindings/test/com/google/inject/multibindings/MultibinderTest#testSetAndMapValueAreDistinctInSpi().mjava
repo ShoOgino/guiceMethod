@@ -13,11 +13,11 @@
     Binding<Map<String, String>> mapbinding = injector.getBinding(Key.get(mapOfStringString));
     mapbinding.acceptTargetVisitor(collector);
     assertNotNull(collector.mapbinding);
-    
+
     Binding<Set<String>> setbinding = injector.getBinding(Key.get(setOfString));
     setbinding.acceptTargetVisitor(collector);
     assertNotNull(collector.setbinding);
-    
+
     // Capture the value bindings and assert we have them right --
     // they'll always be in the right order because we preserve
     // binding order.
@@ -27,12 +27,12 @@
     Binding<String> b = bindings.get(1);
     assertEquals("A", ((InstanceBinding<String>)a).getInstance());
     assertEquals("b", ((InstanceBinding<String>)b).getInstance());
-    
+
     // Now make sure "A" belongs only to the set binding,
     // and "b" only belongs to the map binding.
     assertFalse(collector.mapbinding.containsElement(a));
     assertTrue(collector.mapbinding.containsElement(b));
-    
+
     assertTrue(collector.setbinding.containsElement(a));
     assertFalse(collector.setbinding.containsElement(b));
   }

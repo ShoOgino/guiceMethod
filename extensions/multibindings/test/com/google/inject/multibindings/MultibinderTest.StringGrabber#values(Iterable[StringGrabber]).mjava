@@ -1,0 +1,8 @@
+    static Set<String> values(Iterable<StringGrabber> grabbers) {
+      Set<String> result = new HashSet<String>();
+      for (StringGrabber grabber : grabbers) {
+        result.add(grabber.string);
+      }
+      return result;
+    }
+

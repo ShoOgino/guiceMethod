@@ -1,0 +1,4 @@
+  public void rehashKeys() {
+    setBinding(getBinding().withRehashedKeys());
+  }
+

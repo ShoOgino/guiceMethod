@@ -1,19 +1,19 @@
-  /**
-   * Doubly-installed modules should not conflict, even when one is overridden.
-   */
-  public void testModuleOverrideRepeatedInstallsAndMultibindings() {
+  public void testModuleOverrideRepeatedInstallsAndMultibindings_toProviderInstance() {
+    // Providers#of() does not redefine equals/hashCode, so use the same one both times.
+    final Provider<String> aProvider = Providers.of("A");
+    final Provider<String> bProvider = Providers.of("B");
     Module ab = new AbstractModule() {
       @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().toInstance("B");
+        multibinder.addBinding().toProvider(aProvider);
+        multibinder.addBinding().toProvider(bProvider);
       }
     };
-    
+
     // Guice guarantees this assertion, as the same module cannot be installed twice.
     assertEquals(ImmutableSet.of("A", "B"),
         Guice.createInjector(ab, ab).getInstance(Key.get(setOfString)));
-    
+
     // Guice will only guarantee this assertion if Multibinder ensures the bindings match.
     Injector injector = Guice.createInjector(ab, Modules.override(ab).with(ab));
     assertEquals(ImmutableSet.of("A", "B"),

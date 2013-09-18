@@ -1,6 +1,6 @@
   /**
    * Unscoped bindings should not conflict, whether they were bound with no explicit scope, or
-   * explicitly bound in {@link Scopes.NO_SCOPE}.
+   * explicitly bound in {@link Scopes#NO_SCOPE}.
    */
   public void testDuplicateUnscopedBindings() {
     Module singleBinding = new AbstractModule() {
@@ -8,7 +8,7 @@
         bind(Integer.class).to(Key.get(Integer.class, named("A")));
         bind(Integer.class).to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
       }
-      
+
       @Provides @Named("A")
       int provideInteger() {
         return 5;
@@ -21,7 +21,7 @@
         multibinder.addBinding().to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
       }
     };
-    
+
     assertEquals(5,
         (int) Guice.createInjector(singleBinding).getInstance(Integer.class));
     assertEquals(ImmutableSet.of(5),

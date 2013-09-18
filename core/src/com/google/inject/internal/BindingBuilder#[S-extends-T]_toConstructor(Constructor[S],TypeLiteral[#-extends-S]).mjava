@@ -15,7 +15,6 @@
     }
 
     try {
-      @SuppressWarnings("unchecked") // safe; constructor is a subtype of toConstruct
       InjectionPoint constructorPoint = InjectionPoint.forConstructor(constructor, type);
       setBinding(new ConstructorBindingImpl<T>(base.getKey(), base.getSource(), base.getScoping(),
           constructorPoint, injectionPoints));

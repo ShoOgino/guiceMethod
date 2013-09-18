@@ -1,4 +1,6 @@
     public <T> AnnotatedBindingBuilder<T> bind(Key<T> key) {
-      return new BindingBuilder<T>(this, elements, getElementSource(), key);
+      BindingBuilder<T> builder = new BindingBuilder<T>(this, elements, getElementSource(), key);
+      rehashables.add(builder);
+      return builder;
     }
 

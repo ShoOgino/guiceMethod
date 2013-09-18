@@ -1,5 +1,8 @@
+      /**
+       * Again, we are not following the normal rules for Map.Entry, this time to avoid
+       * our hashCode changing if our {@link #valueKey} does.
+       */
       @Override public int hashCode() {
-        return 127 * ("key".hashCode() ^ key.hashCode())
-            + 127 * ("valueKey".hashCode() ^ valueKey.hashCode());
+        return key.hashCode();
       }
 

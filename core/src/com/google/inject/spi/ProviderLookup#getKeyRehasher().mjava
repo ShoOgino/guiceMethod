@@ -1,0 +1,10 @@
+  RehashableKeys getKeyRehasher() {
+    return new RehashableKeys() {
+      @Override public void rehashKeys() {
+        if (needsRehashing(key)) {
+          key = rehash(key);
+        }
+      }
+    };
+  }
+

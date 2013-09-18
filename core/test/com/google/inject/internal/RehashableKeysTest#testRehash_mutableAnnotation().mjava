@@ -1,0 +1,20 @@
+  public void testRehash_mutableAnnotation() {
+    MutableTestAnnotation annotation = new MutableTestAnnotation(100);
+    Key<?> key = Key.get(Integer.class, annotation);
+    Key<?> keyCopy = rehash(key);
+    assertTrue(key.equals(keyCopy));
+    assertTrue(key.hashCode() == keyCopy.hashCode());
+
+    annotation.setValue(101);
+    Key<?> keyCopy2 = rehash(key);
+    assertTrue(key.equals(keyCopy2));
+    assertFalse(key.hashCode() == keyCopy2.hashCode());
+
+    annotation.setValue(100);
+    Key<?> keyCopy3 = rehash(keyCopy2);
+    assertTrue(key.equals(keyCopy3));
+    assertTrue(key.hashCode() == keyCopy3.hashCode());
+    assertTrue(keyCopy2.equals(keyCopy3));
+    assertFalse(keyCopy2.hashCode() == keyCopy3.hashCode());
+  }
+

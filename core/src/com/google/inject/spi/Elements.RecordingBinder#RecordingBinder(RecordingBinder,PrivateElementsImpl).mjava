@@ -3,6 +3,7 @@
       this.stage = parent.stage;
       this.modules = Sets.newHashSet();
       this.elements = privateElements.getElementsMutable();
+      this.rehashables = Lists.newArrayList();
       this.source = parent.source;
       this.moduleSource = parent.moduleSource;
       this.sourceProvider = parent.sourceProvider;

@@ -12,7 +12,7 @@
       builder.add(getConstructor())
              .addAll(getInjectableMembers());
     }
-    
-    return Dependency.forInjectionPoints(builder.build());   
+
+    return Dependency.forInjectionPoints(builder.build());
   }
 

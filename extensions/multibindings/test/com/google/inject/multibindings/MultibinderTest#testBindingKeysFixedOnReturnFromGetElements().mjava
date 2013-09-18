@@ -1,0 +1,26 @@
+  /**
+   * Ensure bindings do not rehash their keys once returned from {@link Elements#getElements}.
+   */
+  public void testBindingKeysFixedOnReturnFromGetElements() {
+    final List<String> list = Lists.newArrayList();
+    Module ab = new AbstractModule() {
+      @Override protected void configure() {
+        Multibinder<List<String>> multibinder = Multibinder.newSetBinder(binder(), listOfStrings);
+        multibinder.addBinding().toInstance(list);
+        list.add("A");
+        list.add("B");
+      }
+    };
+
+    InstanceBinding<?> binding = Iterables.getOnlyElement(
+        Iterables.filter(Elements.getElements(ab), InstanceBinding.class));
+    Key<?> keyBefore = binding.getKey();
+    assertEquals(listOfStrings, keyBefore.getTypeLiteral());
+    assertFalse(RehashableKeys.Keys.needsRehashing(keyBefore));
+
+    list.add("C");
+    Key<?> keyAfter = binding.getKey();
+    assertSame(keyBefore, keyAfter);
+    assertTrue(RehashableKeys.Keys.needsRehashing(keyAfter));
+  }
+

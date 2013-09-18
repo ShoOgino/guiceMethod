@@ -1,0 +1,5 @@
+  public void testNeedsRehashing_immutableAnnotation() {
+    Key<?> key = Key.get(Integer.class, Names.named("testy"));
+    assertFalse(needsRehashing(key));
+  }
+

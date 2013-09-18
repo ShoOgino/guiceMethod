@@ -1,0 +1,10 @@
+    /** Returns a copy of the given key with an up-to-date hashcode. */
+    public static <T> Key<T> rehash(Key<T> key) {
+      if (key.hasAttributes()) {
+        // This will recompute the hashcode for us.
+        return Key.get(key.getTypeLiteral(), key.getAnnotation());
+      } else {
+        return key;
+      }
+    }
+

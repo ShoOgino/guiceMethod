@@ -1,7 +1,7 @@
   /**
    * Returns a new key of the specified type with the same annotation as this
    * key.
-   * 
+   *
    * @since 3.0
    */
   public <T> Key<T> ofType(Class<T> type) {
