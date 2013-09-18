@@ -1,0 +1,4 @@
+  private static <T> TypeLiteral<T> createTypeLiteral() {
+    return new TypeLiteral<T>() {};
+  }
+

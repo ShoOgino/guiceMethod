@@ -1,0 +1,10 @@
+  public void testCannotCreateKeySubclassesWithUnspecifiedTypeVariables() {
+    try {
+      KeyTest.<Integer>createKey();
+      fail("Guice should not allow keys for T");
+    } catch (ConfigurationException e) {
+      assertContains(e.getMessage(),
+          "T cannot be used as a key; It is not fully specified.");
+    }
+  }
+

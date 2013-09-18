@@ -1,0 +1,4 @@
+  private static <T> Key<T> createKey() {
+    return new Key<T>() {};
+  }
+

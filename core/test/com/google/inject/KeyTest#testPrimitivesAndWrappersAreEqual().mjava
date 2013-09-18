@@ -24,7 +24,7 @@
       assertEquals(wrappers[t], primitiveKey.getTypeLiteral().getType());
       assertEquals(wrappers[t], wrapperKey.getTypeLiteral().getType());
     }
-    
+
     Key<Integer> integerKey = Key.get(Integer.class);
     Key<Integer> integerKey2 = Key.get(Integer.class, Named.class);
     Key<Integer> integerKey3 = Key.get(Integer.class, Names.named("int"));
