@@ -2,6 +2,6 @@
      * Returns true if the given type has one of the desired annotations.
      */
     boolean hasAnnotations(Class<? extends Annotation> annotated) {
-      return cache.get(annotated);
+      return cache.getUnchecked(annotated);
     }
 

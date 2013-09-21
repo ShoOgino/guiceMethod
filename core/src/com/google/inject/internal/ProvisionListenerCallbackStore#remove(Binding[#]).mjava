@@ -8,6 +8,6 @@
    * Returns true if the type was stored in the cache, false otherwise.
    */
   boolean remove(Binding<?> type) {
-    return cache.remove(type) != null;
+    return cache.asMap().remove(type) != null;
   }
 

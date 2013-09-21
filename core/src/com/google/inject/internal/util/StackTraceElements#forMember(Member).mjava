@@ -6,7 +6,7 @@
     Class declaringClass = member.getDeclaringClass();
 
     /*if[AOP]*/
-    LineNumbers lineNumbers = lineNumbersCache.get(declaringClass);
+    LineNumbers lineNumbers = lineNumbersCache.getUnchecked(declaringClass);
     String fileName = lineNumbers.getSource();
     Integer lineNumberOrNull = lineNumbers.getLineNumber(member);
     int lineNumber = lineNumberOrNull == null ? lineNumbers.getFirstLine() : lineNumberOrNull;

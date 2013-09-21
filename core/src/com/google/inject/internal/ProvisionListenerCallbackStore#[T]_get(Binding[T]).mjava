@@ -4,7 +4,7 @@
   public <T> ProvisionListenerStackCallback<T> get(Binding<T> binding) {
     // Never notify any listeners for internal bindings.
     if (!INTERNAL_BINDINGS.contains(binding.getKey())) {
-      return (ProvisionListenerStackCallback<T>) cache.get(
+      return (ProvisionListenerStackCallback<T>) cache.getUnchecked(
           new KeyBinding(binding.getKey(), binding));
     }
     return ProvisionListenerStackCallback.emptyListener();

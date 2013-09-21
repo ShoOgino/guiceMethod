@@ -5,6 +5,6 @@
   public static <T extends Annotation> T generateAnnotation(Class<T> annotationType) {
     Preconditions.checkState(
         isAllDefaultMethods(annotationType), "%s is not all default methods", annotationType);
-    return (T)cache.get(annotationType);
+    return (T)cache.getUnchecked(annotationType);
   }
 

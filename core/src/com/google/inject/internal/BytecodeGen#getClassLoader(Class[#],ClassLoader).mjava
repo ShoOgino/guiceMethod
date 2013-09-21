@@ -4,7 +4,7 @@
     if (!CUSTOM_LOADER_ENABLED) {
       return delegate;
     }
-    
+
     // java.* types can be seen everywhere
     if (type.getName().startsWith("java.")) {
       return GUICE_CLASS_LOADER;
@@ -21,7 +21,7 @@
     if (Visibility.forType(type) == Visibility.PUBLIC) {
       if (delegate != SystemBridgeHolder.SYSTEM_BRIDGE.getParent()) {
         // delegate guaranteed to be non-null here
-        return CLASS_LOADER_CACHE.get(delegate);
+        return CLASS_LOADER_CACHE.getUnchecked(delegate);
       }
       // delegate may or may not be null here
       return SystemBridgeHolder.SYSTEM_BRIDGE;

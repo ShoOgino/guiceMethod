@@ -1,6 +1,6 @@
   public static Object forType(Class<?> implementation) {
     /*if[AOP]*/
-    LineNumbers lineNumbers = lineNumbersCache.get(implementation);
+    LineNumbers lineNumbers = lineNumbersCache.getUnchecked(implementation);
     int lineNumber = lineNumbers.getFirstLine();
     String fileName = lineNumbers.getSource();
     /*end[AOP]*/
