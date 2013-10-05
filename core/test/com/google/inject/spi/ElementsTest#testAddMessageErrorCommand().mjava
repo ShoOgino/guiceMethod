@@ -1,7 +1,7 @@
   public void testAddMessageErrorCommand() {
     checkModule(
         new AbstractModule() {
-          protected void configure() {
+          @Override protected void configure() {
             addError("Message %s %d %s", "A", 5, "C");
           }
         },

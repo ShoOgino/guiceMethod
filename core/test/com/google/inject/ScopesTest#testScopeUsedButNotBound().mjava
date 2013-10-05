@@ -1,7 +1,7 @@
   public void testScopeUsedButNotBound() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           bind(B.class).in(CustomScoped.class);
           bind(C.class);
         }

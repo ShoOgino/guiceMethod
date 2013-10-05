@@ -1,8 +1,8 @@
   public void testPrivateModulesAndProvidesMethods() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         install(new PrivateModule() {
-          public void configure() {
+          @Override public void configure() {
             expose(String.class).annotatedWith(named("a"));
           }
 
@@ -16,7 +16,7 @@
         });
 
         install(new PrivateModule() {
-          public void configure() {}
+          @Override public void configure() {}
 
           @Provides @Named("c") String providePrivateC() {
             return "private";

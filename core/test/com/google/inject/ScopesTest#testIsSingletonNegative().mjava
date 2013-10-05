@@ -7,15 +7,14 @@
     final Key<String> f = Key.get(String.class, named("F"));
 
     Module singletonBindings = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(a).to(b);
         bind(b).to(c);
         bind(c).toProvider(Providers.of("c")).in(Scopes.NO_SCOPE);
         bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
         bindScope(CustomScoped.class, Scopes.NO_SCOPE);
         install(new PrivateModule() {
-          @Override
-          protected void configure() {
+          @Override protected void configure() {
             bind(f).toProvider(Providers.of("f")).in(CustomScoped.class);
             expose(f);
           }

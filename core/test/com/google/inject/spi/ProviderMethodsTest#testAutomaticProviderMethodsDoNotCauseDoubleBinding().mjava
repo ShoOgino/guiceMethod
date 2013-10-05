@@ -4,7 +4,7 @@
    */
   public void testAutomaticProviderMethodsDoNotCauseDoubleBinding() {
     Module installsSelf = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         install(this);
         bind(Integer.class).toInstance(5);
       }

@@ -1,0 +1,4 @@
+  public Errors missingRuntimeRetention(Class<? extends Annotation> annotation) {
+    return addMessage(format("Please annotate %s with @Retention(RUNTIME).", annotation));
+  }
+

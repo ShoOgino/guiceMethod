@@ -1,0 +1,30 @@
+  public void testOverridesDoesntFixTwiceBoundInOriginal() {
+    Module original = new AbstractModule() {
+      @Override protected void configure() {
+        bind(String.class).toInstance("A");
+        bind(String.class).toInstance("B");
+      }
+    };
+
+    Module replacements = new AbstractModule() {
+      @Override protected void configure() {
+        bind(String.class).toInstance("C");
+      }
+    };
+
+    Module module = Modules.override(original).with(replacements);
+    try {
+      createInjector(module);
+      fail();
+    } catch (CreationException expected) {
+      // The replacement comes first because we replace A with C,
+      // then we encounter B and freak out.
+      assertContains(expected.getMessage(),
+          "1) A binding to java.lang.String was already configured at "
+              + replacements.getClass().getName(),
+          asModuleChain(Modules.OverrideModule.class, replacements.getClass()),
+          "at " + original.getClass().getName(),
+          asModuleChain(Modules.OverrideModule.class, original.getClass()));
+    }
+  }
+

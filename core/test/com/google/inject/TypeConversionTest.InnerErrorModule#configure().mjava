@@ -1,0 +1,4 @@
+    @Override protected void configure() {
+      bindConstant().annotatedWith(NumericValue.class).to("invalid");
+    }
+

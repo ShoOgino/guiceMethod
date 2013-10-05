@@ -1,0 +1,4 @@
+    @Override protected void configure() {
+      bindScope(Deprecated.class, Scopes.NO_SCOPE);
+    }
+

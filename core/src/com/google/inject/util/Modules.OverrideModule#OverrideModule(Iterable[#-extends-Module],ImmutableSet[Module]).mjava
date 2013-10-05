@@ -1,0 +1,5 @@
+    OverrideModule(Iterable<? extends Module> overrides, ImmutableSet<Module> baseModules) {
+      this.overrides = ImmutableSet.copyOf(overrides);
+      this.baseModules = baseModules;
+    }
+

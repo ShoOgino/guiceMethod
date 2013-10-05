@@ -1,6 +1,6 @@
   public void testConstantInjectionWithExplicitBindingsRequired() throws CreationException {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         binder().requireExplicitBindings();
         bind(Foo.class);
         bindConstant().annotatedWith(NumericValue.class).to("5");

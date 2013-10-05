@@ -14,7 +14,7 @@
     };
 
     Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(only(TypeLiteral.get(C.class)), new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             Provider<B> bProvider = encounter.getProvider(B.class);

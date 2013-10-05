@@ -6,12 +6,12 @@
     try {
       Guice.createInjector(
           new PrivateModule() {
-            public void configure() {
+            @Override public void configure() {
               bind(C.class);
             }
           },
           new PrivateModule() {
-            public void configure() {
+            @Override public void configure() {
               bind(AB.class);
             }
           }

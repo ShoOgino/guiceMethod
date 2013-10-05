@@ -1,10 +1,10 @@
   public void testBasicUsage() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).annotatedWith(named("a")).toInstance("public");
 
         install(new PrivateModule() {
-          public void configure() {
+          @Override public void configure() {
             bind(String.class).annotatedWith(named("b")).toInstance("i");
 
             bind(AB.class).annotatedWith(named("one")).to(AB.class);
@@ -13,7 +13,7 @@
         });
 
         install(new PrivateModule() {
-          public void configure() {
+          @Override public void configure() {
             bind(String.class).annotatedWith(named("b")).toInstance("ii");
 
             bind(AB.class).annotatedWith(named("two")).to(AB.class);

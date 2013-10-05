@@ -1,0 +1,4 @@
+    ConstantModule(String constant) {
+      this.constant = constant;
+    }
+

@@ -1,12 +1,12 @@
   public void testExposeButNoBind() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           bind(String.class).annotatedWith(named("a")).toInstance("a");
           bind(String.class).annotatedWith(named("b")).toInstance("b");
 
           install(new PrivateModule() {
-            public void configure() {
+            @Override public void configure() {
               expose(AB.class);
             }
           });

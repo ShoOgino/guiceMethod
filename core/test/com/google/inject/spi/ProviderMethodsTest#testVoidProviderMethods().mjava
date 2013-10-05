@@ -1,7 +1,7 @@
   public void testVoidProviderMethods() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {}
+        @Override protected void configure() {}
 
         @Provides void provideFoo() {}
       });

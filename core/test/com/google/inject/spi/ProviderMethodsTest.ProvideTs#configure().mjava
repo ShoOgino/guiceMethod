@@ -1,2 +1,2 @@
-    protected void configure() {}
+    @Override protected void configure() {}
 

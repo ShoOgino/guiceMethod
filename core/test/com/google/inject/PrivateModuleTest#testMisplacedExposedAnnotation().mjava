@@ -1,7 +1,7 @@
   public void testMisplacedExposedAnnotation() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {}
+        @Override protected void configure() {}
 
         @Provides @Exposed
         String provideString() {

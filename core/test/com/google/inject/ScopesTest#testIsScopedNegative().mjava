@@ -9,14 +9,13 @@
     final Key<String> h = Key.get(String.class, named("H"));
 
     Module customBindings = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(a).to(b);
         bind(b).to(c);
         bind(c).toProvider(Providers.of("c")).in(Scopes.NO_SCOPE);
         bind(d).toProvider(Providers.of("d")).in(Singleton.class);
         install(new PrivateModule() {
-          @Override
-          protected void configure() {
+          @Override protected void configure() {
             bind(f).toProvider(Providers.of("f")).in(Singleton.class);
             expose(f);
           }

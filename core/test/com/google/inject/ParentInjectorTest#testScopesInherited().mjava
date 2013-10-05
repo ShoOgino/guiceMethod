@@ -1,6 +1,6 @@
   public void testScopesInherited() {
     Injector parent = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindScope(MyScope.class, Scopes.SINGLETON);
       }
     });

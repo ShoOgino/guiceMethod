@@ -1,0 +1,4 @@
+    @Override protected void configure() {
+      bindScope(CustomScoped.class, Scopes.NO_SCOPE);
+    }
+

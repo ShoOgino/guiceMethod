@@ -1,7 +1,7 @@
   public void testDependenciesBetweenPrivateAndPublic() {
     Injector injector = Guice.createInjector(
         new PrivateModule() {
-          protected void configure() {}
+          @Override protected void configure() {}
 
           @Provides @Exposed @Named("a") String provideA() {
             return "A";
@@ -12,7 +12,7 @@
           }
         },
         new AbstractModule() {
-          protected void configure() {}
+          @Override protected void configure() {}
 
           @Provides @Named("ab") String provideAb(@Named("a") String a) {
             return a + "B";

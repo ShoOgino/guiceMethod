@@ -3,18 +3,14 @@
    */
   public void testSettingBindingTwice() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(String.class).toInstance("foo");
-          bind(String.class).toInstance("bar");
-        }
-      });
+      Guice.createInjector(new ParentModule());
       fail();
     } catch(CreationException expected) {
       assertContains(expected.getMessage(),
-        "1) A binding to java.lang.String was already configured at " + getClass().getName(),
-        "at " + getClass().getName(), ".configure(BinderTest.java:");
+        "1) A binding to java.lang.String was already configured at " + ConstantModule.class.getName(),
+        asModuleChain(ParentModule.class, FooModule.class, ConstantModule.class),
+        "at " + ConstantModule.class.getName(), ".configure(BinderTest.java:",
+        asModuleChain(ParentModule.class, BarModule.class, ConstantModule.class));
       assertContains(expected.getMessage(), "1 error");
     }
   }

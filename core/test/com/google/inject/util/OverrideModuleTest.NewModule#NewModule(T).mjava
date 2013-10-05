@@ -1,0 +1,4 @@
+    NewModule(T bound) {
+      this.bound = bound;
+    }
+

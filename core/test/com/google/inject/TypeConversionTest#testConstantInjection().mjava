@@ -1,6 +1,6 @@
   public void testConstantInjection() throws CreationException {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindConstant().annotatedWith(NumericValue.class).to("5");
         bindConstant().annotatedWith(BooleanValue.class).to("true");
         bindConstant().annotatedWith(EnumValue.class).to("TEE");

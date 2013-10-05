@@ -8,7 +8,7 @@
     final Key<String> g = Key.get(String.class, named("G"));
 
     Module customBindings = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindScope(CustomScoped.class, CUSTOM_SCOPE);
         bind(a).to(b);
         bind(b).to(c);
@@ -16,8 +16,7 @@
         bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
         bind(f).to(AnnotatedCustomScoped.class);
         install(new PrivateModule() {
-          @Override
-          protected void configure() {
+          @Override protected void configure() {
             bind(g).toProvider(Providers.of("g")).in(CustomScoped.class);
             expose(g);
           }

@@ -1,0 +1,9 @@
+  private static Object appendModules(Object source, ElementSource elementSource) {
+    String modules = moduleSourceString(elementSource);
+    if (modules.length() == 0) {
+      return source;
+    } else {
+      return source + modules;
+    }
+  }
+

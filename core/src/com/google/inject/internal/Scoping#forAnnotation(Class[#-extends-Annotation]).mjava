@@ -5,7 +5,7 @@
     }
 
     return new Scoping() {
-      public <V> V acceptVisitor(BindingScopingVisitor<V> visitor) {
+      @Override public <V> V acceptVisitor(BindingScopingVisitor<V> visitor) {
         return visitor.visitScopeAnnotation(scopingAnnotation);
       }
 
@@ -17,7 +17,7 @@
         return scopingAnnotation.getName();
       }
 
-      public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
+      @Override public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
         scopedBindingBuilder.in(scopingAnnotation);
       }
     };

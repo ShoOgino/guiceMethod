@@ -1,17 +1,16 @@
   public void testInvalidInteger() throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindConstant().annotatedWith(NumericValue.class).to("invalid");
-      }
-    });
-
+    Injector injector = Guice.createInjector(new OuterErrorModule());
     try {
       injector.getInstance(InvalidInteger.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(), "Error converting 'invalid'");
-      assertContains(expected.getMessage(), "bound at " + getClass().getName());
-      assertContains(expected.getMessage(), "to java.lang.Integer");
+      assertContains(expected.getMessage(),
+          "Error converting 'invalid' (bound at " + InnerErrorModule.class.getName()
+              + ".configure(" + TypeConversionTest.class.getSimpleName() + ".java:",
+          asModuleChain(OuterErrorModule.class, InnerErrorModule.class),
+          "using TypeConverter<Integer> which matches identicalTo(class java.lang.Integer)"
+              + " (bound at [unknown source]).",
+          "Reason: java.lang.RuntimeException: For input string: \"invalid\"");
     }
   }
 

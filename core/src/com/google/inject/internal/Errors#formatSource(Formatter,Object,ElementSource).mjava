@@ -1,0 +1,32 @@
+  public static void formatSource(Formatter formatter, Object source, ElementSource elementSource) {
+    String modules = moduleSourceString(elementSource);
+    if (source instanceof Dependency) {
+      Dependency<?> dependency = (Dependency<?>) source;
+      InjectionPoint injectionPoint = dependency.getInjectionPoint();
+      if (injectionPoint != null) {
+        formatInjectionPoint(formatter, dependency, injectionPoint, elementSource);
+      } else {
+        formatSource(formatter, dependency.getKey(), elementSource);
+      }
+
+    } else if (source instanceof InjectionPoint) {
+      formatInjectionPoint(formatter, null, (InjectionPoint) source, elementSource);
+
+    } else if (source instanceof Class) {
+      formatter.format("  at %s%s%n", StackTraceElements.forType((Class<?>) source), modules);
+
+    } else if (source instanceof Member) {
+      formatter.format("  at %s%s%n", StackTraceElements.forMember((Member) source), modules);
+
+    } else if (source instanceof TypeLiteral) {
+      formatter.format("  while locating %s%s%n", source, modules);
+
+    } else if (source instanceof Key) {
+      Key<?> key = (Key<?>) source;
+      formatter.format("  while locating %s%n", convert(key, elementSource));
+
+    } else {
+      formatter.format("  at %s%s%n", source, modules);
+    }
+  }
+

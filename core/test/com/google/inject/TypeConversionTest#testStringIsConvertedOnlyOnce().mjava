@@ -11,7 +11,7 @@
     };
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), converter);
         bindConstant().annotatedWith(NumericValue.class).to("unused");
       }

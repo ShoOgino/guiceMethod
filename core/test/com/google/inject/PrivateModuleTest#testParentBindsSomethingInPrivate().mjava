@@ -8,7 +8,10 @@
           "Unable to create binding for java.util.List.",
           "It was already configured on one or more child injectors or private modules",
           "bound at " + FailingPrivateModule.class.getName() + ".configure(",
+          asModuleChain(FailingModule.class, ManyPrivateModules.class, FailingPrivateModule.class),
           "bound at " + SecondFailingPrivateModule.class.getName() + ".configure(",
+          asModuleChain(
+              FailingModule.class, ManyPrivateModules.class, SecondFailingPrivateModule.class),
           "If it was in a PrivateModule, did you forget to expose the binding?",
           "at " + FailingModule.class.getName() + ".configure(");
     }

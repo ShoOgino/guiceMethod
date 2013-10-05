@@ -1,0 +1,20 @@
+  public static void formatInjectionPoint(Formatter formatter, Dependency<?> dependency,
+      InjectionPoint injectionPoint, ElementSource elementSource) {
+    Member member = injectionPoint.getMember();
+    Class<? extends Member> memberType = Classes.memberType(member);
+
+    if (memberType == Field.class) {
+      dependency = injectionPoint.getDependencies().get(0);
+      formatter.format("  while locating %s%n", convert(dependency.getKey(), elementSource));
+      formatter.format("    for field at %s%n", StackTraceElements.forMember(member));
+
+    } else if (dependency != null) {
+      formatter.format("  while locating %s%n", convert(dependency.getKey(), elementSource));
+      formatter.format("    for parameter %s at %s%n",
+          dependency.getParameterIndex(), StackTraceElements.forMember(member));
+
+    } else {
+      formatSource(formatter, injectionPoint.getMember());
+    }
+  }
+

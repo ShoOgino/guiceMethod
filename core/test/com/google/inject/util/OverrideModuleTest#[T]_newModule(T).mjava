@@ -1,0 +1,4 @@
+  private static <T> Module newModule(final T bound) {
+    return new NewModule<T>(bound);
+  }
+

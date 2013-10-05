@@ -1,5 +1,4 @@
-    @Override
-    protected void configure() {
+    @Override protected void configure() {
       bind(List.class).toInstance(new ArrayList());
       
       // Add the Provider<List> binding, created just-in-time,

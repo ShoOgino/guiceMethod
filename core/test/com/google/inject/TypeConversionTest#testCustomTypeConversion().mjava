@@ -2,7 +2,7 @@
     final Date result = new Date();
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         convertToTypes(Matchers.only(TypeLiteral.get(Date.class)) , mockTypeConverter(result));
         bindConstant().annotatedWith(NumericValue.class).to("Today");
         bind(DateHolder.class);

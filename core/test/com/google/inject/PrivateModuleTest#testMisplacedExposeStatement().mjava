@@ -1,7 +1,7 @@
   public void testMisplacedExposeStatement() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           ((PrivateBinder) binder()).expose(String.class).annotatedWith(named("a"));
         }
       });

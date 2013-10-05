@@ -1,6 +1,6 @@
   public void testWithoutPrivateModules() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         PrivateBinder bindA = binder().newPrivateBinder();
         bindA.bind(String.class).annotatedWith(named("a")).toInstance("i");
         bindA.expose(String.class).annotatedWith(named("a"));

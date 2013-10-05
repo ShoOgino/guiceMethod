@@ -1,0 +1,2 @@
+  ScopeBinding getScopeBinding(Class<? extends Annotation> scopingAnnotation);
+

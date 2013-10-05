@@ -2,7 +2,7 @@
     final Matcher<Object> buzz = only(C.class.getMethod("buzz"));
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindInterceptor(any(), buzz, prefixInterceptor("ka"));
         bindInterceptor(any(), any(), prefixInterceptor("fe"));
 

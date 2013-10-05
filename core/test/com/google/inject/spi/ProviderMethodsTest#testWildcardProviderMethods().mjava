@@ -3,7 +3,7 @@
     final List<Number> numbers = ImmutableList.<Number>of(1, 2, 3);
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         @SuppressWarnings("unchecked")
         Key<List<? super Integer>> listOfSupertypesOfInteger = (Key<List<? super Integer>>)
             Key.get(Types.listOf(Types.supertypeOf(Integer.class)));

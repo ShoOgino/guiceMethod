@@ -1,0 +1,32 @@
+  private static String moduleSourceString(ElementSource elementSource) {
+    // if we only have one module (or don't know what they are), then don't bother
+    // reporting it, because the source already is going to report exactly that module.
+    if (elementSource == null) {
+      return "";
+    }
+    List<String> modules = Lists.newArrayList(elementSource.getModuleClassNames());
+    // Insert any original element sources w/ module info into the path.
+    while(elementSource.getOriginalElementSource() != null) {
+      elementSource = elementSource.getOriginalElementSource();
+      modules.addAll(0, elementSource.getModuleClassNames());
+    }
+    if (modules.size() <= 1) {
+      return "";
+    }
+
+    // Ideally we'd do:
+    //    return Joiner.on(" -> ")
+    //        .appendTo(new StringBuilder(" (via modules: "), Lists.reverse(modules))
+    //        .append(")").toString();
+    // ... but for some reason we can't find Lists.reverse, so do it the boring way.
+    StringBuilder builder = new StringBuilder(" (via modules: ");
+    for (int i = modules.size() - 1; i >= 0; i--) {
+      builder.append(modules.get(i));
+      if (i != 0) {
+        builder.append(" -> ");
+      }
+    }
+    builder.append(")");
+    return builder.toString();
+  }
+

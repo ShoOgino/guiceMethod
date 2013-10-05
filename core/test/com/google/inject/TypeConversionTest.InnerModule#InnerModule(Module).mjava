@@ -1,0 +1,4 @@
+    InnerModule(Module converterModule) {
+      this.converterModule = converterModule;
+    }
+

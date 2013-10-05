@@ -1,13 +1,13 @@
   public void testNestedPrivateModulesWithSomeKeysUnexposed() {
     Injector injector = Guice.createInjector(new PrivateModule() {
-      public void configure() {
+      @Override public void configure() {
         bind(String.class).annotatedWith(named("bound outer, exposed outer")).toInstance("boeo");
         expose(String.class).annotatedWith(named("bound outer, exposed outer"));
         bind(String.class).annotatedWith(named("bound outer, exposed none")).toInstance("boen");
         expose(String.class).annotatedWith(named("bound inner, exposed both"));
 
         install(new PrivateModule() {
-          public void configure() {
+          @Override public void configure() {
             bind(String.class).annotatedWith(named("bound inner, exposed both")).toInstance("bieb");
             expose(String.class).annotatedWith(named("bound inner, exposed both"));
             bind(String.class).annotatedWith(named("bound inner, exposed none")).toInstance("bien");

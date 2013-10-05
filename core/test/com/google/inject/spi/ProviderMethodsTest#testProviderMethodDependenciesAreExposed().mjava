@@ -1,6 +1,6 @@
   public void testProviderMethodDependenciesAreExposed() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(Integer.class).toInstance(50);
         bindConstant().annotatedWith(Names.named("units")).to("Kg");
       }

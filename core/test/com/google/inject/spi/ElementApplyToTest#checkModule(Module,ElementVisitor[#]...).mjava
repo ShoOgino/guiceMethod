@@ -1,3 +1,4 @@
+  @Override
   protected void checkModule(Module module, ElementVisitor<?>... visitors) {
     // convert from module to elements and back
     super.checkModule(Elements.getModule(Elements.getElements(module)), visitors);

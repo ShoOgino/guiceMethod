@@ -1,0 +1,8 @@
+    private Scope getScopeInstanceOrNull(Binding<?> binding) {
+      return binding.acceptScopingVisitor(new DefaultBindingScopingVisitor<Scope>() {
+        @Override public Scope visitScope(Scope scope) {
+          return scope;
+        }
+      });
+    }
+

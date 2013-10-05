@@ -1,0 +1,4 @@
+    ElementsAsModule(Iterable<? extends Element> elements) {
+      this.elements = elements;
+    }
+

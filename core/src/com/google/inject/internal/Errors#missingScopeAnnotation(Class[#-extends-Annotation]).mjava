@@ -1,0 +1,4 @@
+  public Errors missingScopeAnnotation(Class<? extends Annotation> annotation) {
+    return addMessage(format("Please annotate %s with @ScopeAnnotation.", annotation));
+  }
+

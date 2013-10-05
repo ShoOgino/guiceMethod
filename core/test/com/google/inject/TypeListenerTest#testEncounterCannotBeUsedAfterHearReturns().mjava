@@ -2,7 +2,7 @@
     final AtomicReference<TypeEncounter<?>> encounterReference = new AtomicReference<TypeEncounter<?>>();
 
     Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(any(), new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             encounterReference.set(encounter);

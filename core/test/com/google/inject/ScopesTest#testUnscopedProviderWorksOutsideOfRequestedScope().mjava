@@ -2,7 +2,7 @@
     final RememberProviderScope scope = new RememberProviderScope();
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindScope(CustomScoped.class, scope);
         bind(List.class).to(ArrayList.class).in(CustomScoped.class);
       }

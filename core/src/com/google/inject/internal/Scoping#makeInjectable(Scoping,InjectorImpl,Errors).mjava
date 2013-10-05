@@ -9,9 +9,9 @@
       return scoping;
     }
 
-    Scope scope = injector.state.getScope(scopeAnnotation);
+    ScopeBinding scope = injector.state.getScopeBinding(scopeAnnotation);
     if (scope != null) {
-      return forInstance(scope);
+      return forInstance(scope.getScope());
     }
 
     errors.scopeNotFound(scopeAnnotation);

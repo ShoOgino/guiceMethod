@@ -1,6 +1,6 @@
   public void testDuplicateScopeAnnotations() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindScope(CustomScoped.class, Scopes.NO_SCOPE);
       }
     });

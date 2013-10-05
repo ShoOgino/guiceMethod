@@ -1,6 +1,6 @@
   public void testAutomaticProviderMethods() {
     Injector injector = Guice.createInjector((Module) new AbstractModule() {
-      protected void configure() { }
+      @Override protected void configure() { }
       private int next = 1;
 
       @Provides @Named("count")

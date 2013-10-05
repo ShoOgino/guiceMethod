@@ -1,6 +1,6 @@
   public void testCannotConvertUnannotatedBindings() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(String.class).toInstance("55");
       }
     });

@@ -1,0 +1,4 @@
+    @Override protected void configure() {
+      convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), mockTypeConverter(-1));
+    }
+

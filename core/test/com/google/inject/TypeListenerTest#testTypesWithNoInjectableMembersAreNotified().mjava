@@ -7,7 +7,7 @@
     final AtomicInteger notificationCount = new AtomicInteger();
 
     Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(onlyAbcd, new TypeListener() {
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             notificationCount.incrementAndGet();

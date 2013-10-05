@@ -1,27 +1,23 @@
   public void testTypeListenerThrows() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bindListener(onlyAbcd, failingTypeListener);
-          bind(B.class);
-          bind(C.class);
-        }
-      });
+      Guice.createInjector(new OuterThrowsModule());
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(TypeListenerTest.java:",
+          asModuleChain(OuterThrowsModule.class, InnerThrowsModule.class),
           "of " + B.class.getName(), 
           "Reason: java.lang.ClassCastException: whoops, failure #1",
           "2) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           ".configure(TypeListenerTest.java:",
+          asModuleChain(OuterThrowsModule.class, InnerThrowsModule.class),
           "of " + C.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #2");
     }
     
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(onlyAbcd, failingTypeListener);
       }
     });

@@ -1,16 +1,16 @@
   public void testCannotBindAKeyExportedByASibling() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           install(new PrivateModule() {
-            public void configure() {
+            @Override public void configure() {
               bind(String.class).toInstance("public");
               expose(String.class);
             }
           });
 
           install(new PrivateModule() {
-            public void configure() {
+            @Override public void configure() {
               bind(String.class).toInstance("private");
             }
           });

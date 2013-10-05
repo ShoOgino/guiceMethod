@@ -1,7 +1,7 @@
   public void testScopeBoundInChildInjectorOnly() {
     Injector parent = Guice.createInjector();
     Injector child = parent.createChildInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindScope(MyScope.class, Scopes.SINGLETON);
       }
     });

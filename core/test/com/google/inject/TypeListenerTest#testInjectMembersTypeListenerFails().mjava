@@ -1,7 +1,7 @@
   public void testInjectMembersTypeListenerFails() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           getMembersInjector(A.class);
           bindListener(onlyAbcd, failingTypeListener);
         }

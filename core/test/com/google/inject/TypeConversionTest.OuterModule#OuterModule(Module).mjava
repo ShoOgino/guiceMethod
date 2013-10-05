@@ -1,0 +1,4 @@
+    OuterModule(Module converterModule) {
+      this.converterModule = converterModule;
+    }
+

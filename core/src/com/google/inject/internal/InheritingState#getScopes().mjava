@@ -1,4 +1,8 @@
   public Map<Class<? extends Annotation>, Scope> getScopes() {
-    return scopes;
+    ImmutableMap.Builder<Class<? extends Annotation>, Scope> builder = ImmutableMap.builder();
+    for (Map.Entry<Class<? extends Annotation>, ScopeBinding> entry : scopes.entrySet()) {
+      builder.put(entry.getKey(), entry.getValue().getScope());
+    }
+    return builder.build();
   }
 

@@ -10,8 +10,9 @@
     };
 
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(onlyAbcd, new TypeListener() {
+          @SuppressWarnings("unchecked")
           public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
             typeEncounters.incrementAndGet();
             encounter.register((InjectionListener) listener);

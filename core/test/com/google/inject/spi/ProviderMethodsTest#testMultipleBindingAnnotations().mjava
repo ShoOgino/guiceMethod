@@ -1,7 +1,7 @@
   public void testMultipleBindingAnnotations() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {}
+        @Override protected void configure() {}
 
         @Provides @Named("A") @Blue
         public String provideString() {

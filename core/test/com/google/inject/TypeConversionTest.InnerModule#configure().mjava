@@ -1,0 +1,6 @@
+    @Override protected void configure() {
+      install(converterModule);
+      bindConstant().annotatedWith(NumericValue.class).to("foo");
+      bind(DateHolder.class);
+    }
+

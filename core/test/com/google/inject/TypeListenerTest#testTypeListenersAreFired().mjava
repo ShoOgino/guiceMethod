@@ -1,4 +1,4 @@
-  public void testTypeListenersAreFired() throws NoSuchMethodException {
+  public void testTypeListenersAreFired() {
     final AtomicInteger firedCount = new AtomicInteger();
 
     final TypeListener typeListener = new TypeListener() {
@@ -9,7 +9,7 @@
     };
 
     Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bindListener(onlyAbcd, typeListener);
         bind(A.class);
       }

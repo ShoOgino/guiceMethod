@@ -1,12 +1,9 @@
   public static Object convert(Object o) {
+    ElementSource source = null;
     if (o instanceof ElementSource) {
-      o = ((ElementSource) o).getDeclaringSource();
+      source = (ElementSource)o;
+      o = source.getDeclaringSource();
     }
-    for (Converter<?> converter : converters) {
-      if (converter.appliesTo(o)) {
-        return converter.convert(o);
-      }
-    }
-    return o;
+    return convert(o, source);
   }
 

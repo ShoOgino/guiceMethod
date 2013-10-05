@@ -10,7 +10,7 @@
     final Key<String> i = Key.get(String.class, named("I"));
 
     Module singletonBindings = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(a).to(b);
         bind(b).to(c);
         bind(c).toProvider(Providers.of("c")).in(Scopes.SINGLETON);
@@ -19,8 +19,7 @@
         bind(f).toProvider(Providers.of("f")).in(Singleton.class);
         bind(h).to(AnnotatedSingleton.class);
         install(new PrivateModule() {
-          @Override
-          protected void configure() {
+          @Override protected void configure() {
             bind(i).toProvider(Providers.of("i")).in(Singleton.class);
             expose(i);
           }
