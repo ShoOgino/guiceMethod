@@ -6,7 +6,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "Error converting 'invalid' (bound at " + InnerErrorModule.class.getName()
-              + ".configure(" + TypeConversionTest.class.getSimpleName() + ".java:",
+              + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterErrorModule.class, InnerErrorModule.class),
           "using TypeConverter<Integer> which matches identicalTo(class java.lang.Integer)"
               + " (bound at [unknown source]).",

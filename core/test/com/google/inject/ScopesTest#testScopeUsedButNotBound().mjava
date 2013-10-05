@@ -10,7 +10,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) No scope is bound to " + CustomScoped.class.getName(),
-          "at " + getClass().getName(), ".configure(ScopesTest.java:",
+          "at " + getClass().getName(), getDeclaringSourcePart(getClass()),
           "2) No scope is bound to " + CustomScoped.class.getName(),
           "at " + C.class.getName() + ".class");
     }

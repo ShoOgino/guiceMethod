@@ -11,7 +11,7 @@
             assertEquals("A", command.getCause().getMessage());
             assertEquals(command.getMessage(),
                 "An exception was caught and reported. Message: A");
-            assertContains(command.getSource(), "ElementsTest.java");
+            assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
         }

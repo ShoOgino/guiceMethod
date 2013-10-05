@@ -6,10 +6,8 @@
     for (Module module : modules) {
       binder.install(module);
     }
-    if (collectCompleteStackTrace()) {
-      // Free the memory consumed by the stack trace elements cache
-      StackTraceElements.clearCache();
-    }
+    // Free the memory consumed by the stack trace elements cache
+    StackTraceElements.clearCache();
     binder.rehashKeys();
     return Collections.unmodifiableList(binder.elements);
   }

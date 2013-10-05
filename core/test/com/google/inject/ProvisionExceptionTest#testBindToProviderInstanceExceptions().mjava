@@ -10,7 +10,8 @@
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
       assertContains(e.getMessage(),
           "1) Error in custom provider, java.lang.UnsupportedOperationException",
-          "at " + ProvisionExceptionTest.class.getName(), ".configure(ProvisionExceptionTest.java");
+          "at " + ProvisionExceptionTest.class.getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

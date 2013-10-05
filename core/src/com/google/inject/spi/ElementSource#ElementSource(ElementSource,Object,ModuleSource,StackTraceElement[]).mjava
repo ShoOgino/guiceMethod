@@ -1,6 +1,6 @@
   /**
    * Creates a new {@ElementSource} from the given parameters. 
-   * @param originalElementSource The source of element that this element created from (if there is 
+   * @param originalElementSource The source of element that this element created from (if there is
    * any), otherwise {@code null}.
    * @param declaringSource the source (in)directly declared the element.
    * @param moduleSource the moduleSource when the element is bound
@@ -9,12 +9,12 @@
    */
   ElementSource(/* @Nullable */ ElementSource originalSource, Object declaringSource, 
       ModuleSource moduleSource, StackTraceElement[] partialCallStack) {
+    Preconditions.checkNotNull(declaringSource, "declaringSource cannot be null.");
     Preconditions.checkNotNull(moduleSource, "moduleSource cannot be null.");
     Preconditions.checkNotNull(partialCallStack, "partialCallStack cannot be null.");
-    Preconditions.checkNotNull(declaringSource, "declaringSource cannot be null.");
     this.originalElementSource = originalSource;
+    this.declaringSource = declaringSource;
     this.moduleSource = moduleSource;
     this.partialCallStack = StackTraceElements.convertToInMemoryStackTraceElement(partialCallStack);
-    this.declaringSource = declaringSource;
   }
 

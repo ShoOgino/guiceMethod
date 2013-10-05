@@ -19,7 +19,7 @@
             assertEquals("Setting the scope is not permitted when binding to a single instance.",
                 command.getMessage());
             assertNull(command.getCause());
-            assertContains(command.getSource(), "ElementsTest.java");
+            assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
         }

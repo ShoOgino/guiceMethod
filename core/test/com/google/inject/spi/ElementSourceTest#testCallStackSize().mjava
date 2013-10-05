@@ -10,5 +10,5 @@
     ElementSource elementSource = new ElementSource(
         null /* No original element source */, "" /* Don't care */, moduleSource, bindingCallStack);
     assertEquals(10 /* call stack size */, elementSource.getStackTrace().length);
-  }
+  }  
 

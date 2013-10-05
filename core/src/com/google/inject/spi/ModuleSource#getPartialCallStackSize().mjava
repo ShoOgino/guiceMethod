@@ -1,5 +1,5 @@
   /**
-   * Returns the size of partial call stack.
+   * Returns the size of partial call stack if stack trace collection is on otherwise zero.
    */
   int getPartialCallStackSize() {
     return partialCallStack.length;

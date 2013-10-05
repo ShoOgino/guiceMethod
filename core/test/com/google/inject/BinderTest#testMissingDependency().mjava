@@ -11,7 +11,7 @@
       assertContains(e.getMessage(),
           "No implementation for java.lang.Runnable was bound.",
           "for field at " + NeedsRunnable.class.getName(), ".runnable(BinderTest.java:",
-          "at " + getClass().getName(), ".configure(BinderTest.java:");
+          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
     }
   }
 

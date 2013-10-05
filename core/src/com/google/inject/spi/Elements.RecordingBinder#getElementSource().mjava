@@ -1,27 +1,35 @@
     private ElementSource getElementSource() {
-      Object declaringSource = source;
       // Full call stack
-      StackTraceElement[] callStack;
+      StackTraceElement[] callStack = null;
       // The call stack starts from current top module configure and ends at this method caller
-      StackTraceElement[] partialCallStack;
-      if (!collectCompleteStackTrace()) {
-        callStack = null;
-        partialCallStack = new StackTraceElement[0];
-      } else {
-        callStack = new Throwable().getStackTrace();
-        partialCallStack = getPartialCallStack(callStack);
-      }
-      if (declaringSource == null) {
-        // TODO(salmanmir): can we avoid getting the full stack trace by using modules stack?
-        if (callStack == null) {
-          callStack = new Throwable().getStackTrace();
-        }
-        declaringSource = sourceProvider.get(callStack);
-      }
+      StackTraceElement[] partialCallStack = new StackTraceElement[0];
+      // The element original source
       ElementSource originalSource = null;
+      // The element declaring source
+      Object declaringSource = source;
       if (declaringSource instanceof ElementSource) {
         originalSource = (ElementSource) declaringSource;
         declaringSource = originalSource.getDeclaringSource();
+      }
+      IncludeStackTraceOption stackTraceOption = getIncludeStackTraceOption();
+      if (stackTraceOption == IncludeStackTraceOption.COMPLETE ||
+          (stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE 
+          && declaringSource == null)) {
+        callStack = new Throwable().getStackTrace();
+      }
+      if (stackTraceOption == IncludeStackTraceOption.COMPLETE) {
+        partialCallStack = getPartialCallStack(callStack);
+      }
+      if (declaringSource == null) {
+        // So 'source' and 'originalSource' are null otherwise declaringSource has some value
+        if (stackTraceOption == IncludeStackTraceOption.COMPLETE ||
+            stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE) {
+          // With the above conditions and assignments 'callStack' is non-null
+          declaringSource = sourceProvider.get(callStack);
+        } else { // or if (stackTraceOption == IncludeStackTraceOptions.OFF)
+          // As neither 'declaring source' nor 'call stack' is available use 'module source'
+          declaringSource = sourceProvider.getFromClassNames(moduleSource.getModuleClassNames());
+        }
       }
       // Build the binding call stack
       return new ElementSource(

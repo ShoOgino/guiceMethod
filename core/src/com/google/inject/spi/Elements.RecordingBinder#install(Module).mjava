@@ -7,7 +7,7 @@
         }
         if (module instanceof PrivateModule) {
           binder = binder.newPrivateBinder();
-        }
+        }      
         try {
           module.configure(binder);
         } catch (RuntimeException e) {

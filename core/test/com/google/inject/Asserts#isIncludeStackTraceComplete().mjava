@@ -1,0 +1,8 @@
+  /**
+   * Returns true if {@link #getIncludeStackTraceOption()} returns {@link
+   * IncludeStackTraceOption#COMPLETE}.
+   */
+  public static boolean isIncludeStackTraceComplete() {
+    return getIncludeStackTraceOption() == IncludeStackTraceOption.COMPLETE;
+  }
+

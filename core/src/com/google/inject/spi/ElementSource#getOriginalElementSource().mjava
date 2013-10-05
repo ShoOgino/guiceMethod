@@ -1,5 +1,5 @@
   /**
-   * Returns the {@link ElementSource} of the element this was created or copied from.  If this was 
+   * Returns the {@link ElementSource} of the element this was created or copied from. If this was
    * not created or copied from another element, returns {@code null}.
    */
   public ElementSource getOriginalElementSource() {

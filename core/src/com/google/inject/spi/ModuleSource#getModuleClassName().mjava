@@ -1,5 +1,5 @@
   /** 
-   * Returns the corresponding module class name. The value can be null.
+   * Returns the corresponding module class name.
    *
    * @see Class#getName()
    */

@@ -18,7 +18,7 @@
           @Override public Void visit(Message message) {
             assertEquals("Constant value is set more than once.", message.getMessage());
             assertNull(message.getCause());
-            assertContains(message.getSource(), "ElementsTest.java");
+            assertContains(message.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
         }

@@ -11,8 +11,9 @@
             assertEquals("Message A 5 C", command.getMessage());
             assertNull(command.getCause());
             assertContains(command.getSources().toString(),
-                ElementsTest.class.getName(), ".configure(ElementsTest.java:");
-            assertContains(command.getSource(), "ElementsTest.java");
+                ElementsTest.class.getName(),
+                getDeclaringSourcePart(ElementsTest.class));
+            assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
         }

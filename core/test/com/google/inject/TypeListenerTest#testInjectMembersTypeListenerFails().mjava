@@ -10,7 +10,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at ",
-          TypeListenerTest.class.getName(), ".configure(TypeListenerTest.java:",
+          TypeListenerTest.class.getName(), getDeclaringSourcePart(getClass()),
           "of " + A.class.getName(),
           " Reason: java.lang.ClassCastException: whoops, failure #1");
     }

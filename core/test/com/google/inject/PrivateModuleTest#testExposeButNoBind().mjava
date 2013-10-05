@@ -16,7 +16,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "Could not expose() " + AB.class.getName() + ", it must be explicitly bound",
-          ".configure(PrivateModuleTest.java:");
+          getDeclaringSourcePart(getClass()));
     }
   }
 

@@ -16,7 +16,7 @@
       assertContains(expected.getMessage(),
         "1) A binding to " + HasImplementedBy1.class.getName()
         + " was already configured at " + getClass().getName(),
-        "at " + getClass().getName(), ".configure(BinderTest.java:");
+        "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
       assertContains(expected.getMessage(), "1 error");
     }
   }

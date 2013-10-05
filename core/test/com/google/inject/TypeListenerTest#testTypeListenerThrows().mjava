@@ -5,12 +5,12 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(TypeListenerTest.java:",
+          getDeclaringSourcePart(getClass()),
           asModuleChain(OuterThrowsModule.class, InnerThrowsModule.class),
           "of " + B.class.getName(), 
           "Reason: java.lang.ClassCastException: whoops, failure #1",
           "2) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(TypeListenerTest.java:",
+          getDeclaringSourcePart(getClass()),
           asModuleChain(OuterThrowsModule.class, InnerThrowsModule.class),
           "of " + C.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #2");
@@ -27,7 +27,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(TypeListenerTest.java:",
+          getDeclaringSourcePart(getClass()),
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");
     }
@@ -39,7 +39,7 @@
     } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
-          ".configure(TypeListenerTest.java:",
+          getDeclaringSourcePart(getClass()),
           "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #3");
     }

@@ -1,9 +1,9 @@
     private ModuleSource getModuleSource(Module module) {
       StackTraceElement[] partialCallStack;
-      if (!collectCompleteStackTrace()) {
-        partialCallStack = new StackTraceElement[0];
-      } else {
+      if (getIncludeStackTraceOption() == IncludeStackTraceOption.COMPLETE) {
         partialCallStack = getPartialCallStack(new Throwable().getStackTrace());
+      } else {
+        partialCallStack = new StackTraceElement[0];
       }
       if (moduleSource == null) {
         return new ModuleSource(module, partialCallStack);

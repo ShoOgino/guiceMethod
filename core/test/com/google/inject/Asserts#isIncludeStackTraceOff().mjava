@@ -1,0 +1,8 @@
+  /**
+   * Returns true if {@link #getIncludeStackTraceOption()} returns {@link
+   * IncludeStackTraceOption#OFF}.
+   */
+  public static boolean isIncludeStackTraceOff() {
+    return getIncludeStackTraceOption() == IncludeStackTraceOption.OFF;
+  }
+

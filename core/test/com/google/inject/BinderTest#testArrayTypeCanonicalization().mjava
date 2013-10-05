@@ -34,7 +34,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) A binding to java.lang.String[] was already configured at " + getClass().getName(),
-          "at " + getClass().getName(), ".configure(BinderTest.java:");
+          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
       assertContains(expected.getMessage(), "1 error");
     }
     

@@ -9,7 +9,7 @@
   public StackTraceElement[] getStackTrace() {
     int modulesCallStackSize = moduleSource.getStackTraceSize();
     int chunkSize = partialCallStack.length;
-    int size = moduleSource.getStackTraceSize() + partialCallStack.length;
+    int size = moduleSource.getStackTraceSize() + chunkSize;
     StackTraceElement[] callStack = new StackTraceElement[size];
     System.arraycopy(
         StackTraceElements.convertToStackTraceElement(partialCallStack), 0, callStack, 0, 

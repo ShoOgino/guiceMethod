@@ -12,7 +12,7 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "Binding to null instances is not allowed.",
-          "at " + getClass().getName(), ".configure(NullableInjectionPointTest.java:");
+          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
     }
   }
 

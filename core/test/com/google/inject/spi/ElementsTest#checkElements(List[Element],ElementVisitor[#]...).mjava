@@ -5,11 +5,14 @@
       if (!(element instanceof Message)) {
           ElementSource source = (ElementSource) element.getSource();
           assertTrue(source.getModuleClassNames().size() > 0);
-          assertFalse(source.isStackTraceRetained()) ;
-          assertEquals(0, source.getStackTrace().length);
+          if (isIncludeStackTraceComplete()) {
+            assertTrue(source.getStackTrace().length > 0);
+          } else {
+            assertEquals(0, source.getStackTrace().length);
+          }
       }
       if (!(visitor instanceof ExternalFailureVisitor)) {
-        assertContains(element.getSource().toString(), "ElementsTest.java");
+        assertContains(element.getSource().toString(), getDeclaringSourcePart(ElementsTest.class));
       }
       element.acceptVisitor(visitor);
     }

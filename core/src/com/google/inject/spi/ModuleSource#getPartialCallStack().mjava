@@ -1,7 +1,8 @@
   /**
-   * Returns the chunk of call stack that starts from the parent module {@link 
-   * Module#configure(Binder) configure(Binder)} call and ends just before the module {@link 
-   * Module#configure(Binder) configure(Binder)} method invocation
+   * Returns the chunk of call stack that starts from the parent module {@link
+   * Module#configure(Binder) configure(Binder)} call and ends just before the module {@link
+   * Module#configure(Binder) configure(Binder)} method invocation. The return array is non-empty
+   * only if stack trace collection is on.
    */
   StackTraceElement[] getPartialCallStack() {
     return StackTraceElements.convertToStackTraceElement(partialCallStack);

@@ -5,18 +5,18 @@
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
           "1) Multiple converters can convert 'foo' (bound at ", getClass().getName(),
-          ".configure(TypeConversionTest.java:",
+          getDeclaringSourcePart(getClass()),
           asModuleChain(OuterAmbiguousModule.class, InnerAmbiguousModule.class),
           "to java.util.Date:",
           "CustomConverter which matches only(java.util.Date) (bound at "
               + Ambiguous1Module.class.getName()
-              + ".configure(" + TypeConversionTest.class.getSimpleName() + ".java:",
+              + getDeclaringSourcePart(getClass()),
           asModuleChain(
               OuterAmbiguousModule.class, InnerAmbiguousModule.class, Ambiguous1Module.class),
           "and",
           "CustomConverter which matches only(java.util.Date) (bound at "
               + Ambiguous2Module.class.getName()
-              + ".configure(" + TypeConversionTest.class.getSimpleName() + ".java:",
+              + getDeclaringSourcePart(getClass()),
           asModuleChain(
               OuterAmbiguousModule.class, InnerAmbiguousModule.class, Ambiguous2Module.class),
           "Please adjust your type converter configuration to avoid overlapping matches.",

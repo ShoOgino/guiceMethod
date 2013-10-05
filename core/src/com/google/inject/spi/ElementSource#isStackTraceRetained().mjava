@@ -1,7 +1,0 @@
-  /**
-   * Returns true if stack trace was collected.
-   */ 
-  public boolean isStackTraceRetained() {
-    return (partialCallStack.length > 0);
-  }
-

@@ -6,7 +6,7 @@
       assertContains(expected.getMessage(),
           "1) Please annotate " + NotRuntimeRetainedScoped.class.getName()
               + " with @Retention(RUNTIME).",
-          "at " + InnerRuntimeModule.class.getName() + ".configure(ScopesTest.java:",
+          "at " + InnerRuntimeModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterRuntimeModule.class, InnerRuntimeModule.class));
     }
   }

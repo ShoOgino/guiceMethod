@@ -15,8 +15,8 @@
             one.expose(Collection.class).annotatedWith(SampleAnnotation.class);
             one.bind(List.class).to(ArrayList.class);
 
-            PrivateBinder two = binder().withSource("1 ElementsTest.java")
-                .newPrivateBinder().withSource("2 ElementsTest.java");
+            PrivateBinder two = binder().withSource("1 FooBar")
+                .newPrivateBinder().withSource("2 FooBar");
             two.expose(String.class).annotatedWith(Names.named("a"));
             two.expose(b);
             two.bind(List.class).to(ArrayList.class);
@@ -38,14 +38,14 @@
           }
         },
 
-        new FailingElementVisitor() {
+        new ExternalFailureVisitor() {
           @Override public Void visit(PrivateElements two) {
             assertEquals(ab, two.getExposedKeys());
-            assertEquals("1 ElementsTest.java", two.getSource().toString());
+            assertEquals("1 FooBar", two.getSource().toString());
             checkElements(two.getElements(),
-                new FailingElementVisitor() {
+                new ExternalFailureVisitor() {
                   @Override public <T> Void visit(Binding<T> binding) {
-                    assertEquals("2 ElementsTest.java", binding.getSource().toString());
+                    assertEquals("2 FooBar", binding.getSource().toString());
                     assertEquals(Key.get(List.class), binding.getKey());
                     return null;
                   }

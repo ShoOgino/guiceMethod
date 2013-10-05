@@ -1,11 +1,11 @@
   /**
    * Returns the size of call stack that ends just before the module {@link Module#configure(Binder)
-   * configure(Binder)} method invocation (see {@link #getStackTrace()}). 
+   * configure(Binder)} method invocation (see {@link #getStackTrace()}).
    */
   int getStackTraceSize() {
     if (parent == null) {
       return partialCallStack.length;
     }
-    return parent.getStackTraceSize() + partialCallStack.length;  
-  }  
+    return parent.getStackTraceSize() + partialCallStack.length;
+  }
 

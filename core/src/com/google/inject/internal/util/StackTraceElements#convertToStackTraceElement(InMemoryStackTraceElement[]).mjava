@@ -3,6 +3,9 @@
    */
   public static StackTraceElement[] convertToStackTraceElement(
       InMemoryStackTraceElement[] inMemoryStackTraceElements) {
+    if (inMemoryStackTraceElements.length == 0) {
+      return EMPTY_STACK_TRACE;
+    }
     StackTraceElement[] stackTraceElements = 
         new StackTraceElement[inMemoryStackTraceElements.length];
     for (int i = 0; i < inMemoryStackTraceElements.length; i++) {

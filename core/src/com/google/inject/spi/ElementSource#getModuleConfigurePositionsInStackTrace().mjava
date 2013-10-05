@@ -1,6 +1,6 @@
   /**
-   * Returns the position of {@link Module#configure(Binder) configure(Binder)} method call in the 
-   * {@link #getStackTrace() stack trace} for modules that their classes returned by 
+   * Returns the position of {@link Module#configure(Binder) configure(Binder)} method call in the
+   * {@link #getStackTrace() stack trace} for modules that their classes returned by
    * {@link #getModuleClassNames()}. For example, if the stack trace looks like the following:
    * <p>
    * {@code
@@ -13,24 +13,19 @@
    * <p>
    * 1 and 3 are returned.
    * <p>
-   * In the cases where stack trace is not available (i.e.,the stack trace was not collected), 
-   * it returns an empty array.
+   * In the cases where stack trace is not available (i.e., the stack trace was not collected),
+   * it returns -1 for all module positions.
    */
   public List<Integer> getModuleConfigurePositionsInStackTrace() {
-    if (!isStackTraceRetained()) {
-      return ImmutableList.<Integer>of();
-    }
     int size = moduleSource.size();
     Integer[] positions = new Integer[size];
-    int position = partialCallStack.length;
-    positions[0] = position - 1;
+    int chunkSize = partialCallStack.length;
+    positions[0] = chunkSize - 1;
     ModuleSource current = moduleSource;
-    int cursor = 1;
-    while (cursor < size) {
-      position += current.getPartialCallStack().length;
-      positions[cursor] = position - 1;
+    for (int cursor = 1; cursor < size; cursor++) {
+      chunkSize = current.getPartialCallStackSize();
+      positions[cursor] = positions[cursor - 1] + chunkSize;
       current = current.getParent();
-      cursor++;
     }
     return ImmutableList.<Integer>copyOf(positions);
   }

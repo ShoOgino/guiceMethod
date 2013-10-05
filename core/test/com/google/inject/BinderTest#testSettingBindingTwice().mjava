@@ -9,7 +9,7 @@
       assertContains(expected.getMessage(),
         "1) A binding to java.lang.String was already configured at " + ConstantModule.class.getName(),
         asModuleChain(ParentModule.class, FooModule.class, ConstantModule.class),
-        "at " + ConstantModule.class.getName(), ".configure(BinderTest.java:",
+        "at " + ConstantModule.class.getName(), getDeclaringSourcePart(getClass()),
         asModuleChain(ParentModule.class, BarModule.class, ConstantModule.class));
       assertContains(expected.getMessage(), "1 error");
     }

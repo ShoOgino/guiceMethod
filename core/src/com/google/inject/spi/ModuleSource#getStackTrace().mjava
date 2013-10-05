@@ -1,10 +1,12 @@
   /**
-   * Returns the full call stack that ends just before the module {@link Module#configure(Binder) 
-   * configure(Binder)} method invocation. 
+   * Returns the full call stack that ends just before the module {@link Module#configure(Binder)
+   * configure(Binder)} method invocation. The return array is non-empty if stack trace collection
+   * on.
    */
   StackTraceElement[] getStackTrace() {
-    StackTraceElement[] callStack = new StackTraceElement[getStackTraceSize()];
-    int cursor = 0; // Index 0 stores the top Module.configure() 
+    int stackTraceSize = getStackTraceSize();
+    StackTraceElement[] callStack = new StackTraceElement[stackTraceSize];
+    int cursor = 0;
     ModuleSource current = this;
     while (current != null) {
       StackTraceElement[] chunk = 

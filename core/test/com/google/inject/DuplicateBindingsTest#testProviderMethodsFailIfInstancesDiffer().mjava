@@ -4,7 +4,8 @@
       fail("should have failed");
     } catch(CreationException ce) {
       assertContains(ce.getMessage(),
-          "A binding to " + Foo.class.getName() + " was already configured at " + FailingProviderModule.class.getName(),
+          "A binding to " + Foo.class.getName() + " was already configured " +
+          "at " + FailingProviderModule.class.getName(),
           "at " + FailingProviderModule.class.getName()
           );
     }

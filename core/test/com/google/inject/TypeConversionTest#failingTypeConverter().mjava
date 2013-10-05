@@ -1,4 +1,4 @@
-  private TypeConverter failingTypeConverter() {
+  private static TypeConverter failingTypeConverter() {
     return new TypeConverter() {
       public Object convert(String value, TypeLiteral<?> toType) {
         throw new UnsupportedOperationException("Cannot convert");
