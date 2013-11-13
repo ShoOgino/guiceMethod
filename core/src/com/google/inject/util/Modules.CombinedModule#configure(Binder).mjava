@@ -1,0 +1,7 @@
+    public void configure(Binder binder) {
+      binder = binder.skipSources(getClass());
+      for (Module module : modulesSet) {
+        binder.install(module);
+      }
+    }
+

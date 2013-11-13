@@ -1,0 +1,4 @@
+    CombinedModule(Iterable<? extends Module> modules) {
+      this.modulesSet = ImmutableSet.copyOf(modules);
+    }
+
