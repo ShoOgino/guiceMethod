@@ -26,7 +26,7 @@
     final Context context = new Context();
     for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
       Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
-      context.map.put(entry.getKey().toString(), value);
+      context.map.put(entry.getKey(), value);
     }
 
     return new Callable<T>() {
