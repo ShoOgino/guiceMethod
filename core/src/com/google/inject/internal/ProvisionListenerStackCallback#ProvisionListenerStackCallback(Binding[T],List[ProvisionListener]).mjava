@@ -3,7 +3,8 @@
     if (listeners.isEmpty()) {
       this.listeners = EMPTY_LISTENER;
     } else {
-      this.listeners = listeners.toArray(new ProvisionListener[listeners.size()]);
+      Set<ProvisionListener> deDuplicated = Sets.newLinkedHashSet(listeners);
+      this.listeners = deDuplicated.toArray(new ProvisionListener[deDuplicated.size()]);
     }
   }
 

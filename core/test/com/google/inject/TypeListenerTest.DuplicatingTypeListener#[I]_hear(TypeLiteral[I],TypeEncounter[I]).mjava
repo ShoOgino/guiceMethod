@@ -1,0 +1,13 @@
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+      ++count;
+
+      MembersInjector membersInjector = new CountingMembersInjector();
+      encounter.register(membersInjector);
+      encounter.register(membersInjector);
+
+      InjectionListener injectionListener = new CountingInjectionListener();
+      encounter.register(injectionListener);
+      encounter.register(injectionListener);
+    }
+

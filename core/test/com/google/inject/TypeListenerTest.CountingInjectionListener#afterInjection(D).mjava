@@ -1,0 +1,4 @@
+    public void afterInjection(D injectee) {
+      ++injectee.listenersNotified;
+    }
+

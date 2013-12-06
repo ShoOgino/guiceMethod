@@ -70,8 +70,10 @@
         interceptorsMapBuilder = ImmutableMap.builder();
       }
 
-      interceptorsMapBuilder.put(pair.method, ImmutableList.copyOf(pair.interceptors));
-      callbacks[i] = new InterceptorStackCallback(pair.method, pair.interceptors);
+      ImmutableList<MethodInterceptor> deDuplicated =
+          ImmutableSet.copyOf(pair.interceptors).asList();
+      interceptorsMapBuilder.put(pair.method, deDuplicated);
+      callbacks[i] = new InterceptorStackCallback(pair.method, deDuplicated);
     }
 
     interceptors = interceptorsMapBuilder != null
