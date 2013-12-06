@@ -7,7 +7,9 @@
       // Binds a Map<K, Provider<V>> from a collection of Set<Entry<K, Provider<V>>.
       final Provider<Set<Entry<K, Provider<V>>>> entrySetProvider = binder
           .getProvider(entrySetBinder.getSetKey());
-      binder.bind(providerMapKey).toProvider(new RealMapBinderProviderWithDependencies<Map<K, Provider<V>>>(mapKey) {
+      
+      binder.bind(providerMapKey).toProvider(
+          new RealMapBinderProviderWithDependencies<Map<K, Provider<V>>>(mapKey) {
         private Map<K, Provider<V>> providerMap;
 
         @Toolable @Inject void initialize(Injector injector) {
@@ -37,6 +39,13 @@
           return dependencies;
         }
       });
+      
+      // The map this exposes is internally an ImmutableMap, so it's OK to massage
+      // the guice Provider to javax Provider in the value (since Guice provider
+      // implements javax Provider).
+      @SuppressWarnings("unchecked")
+      Key massagedProviderMapKey = (Key)providerMapKey;
+      binder.bind(javaxProviderMapKey).to(massagedProviderMapKey);
 
       final Provider<Map<K, Provider<V>>> mapProvider = binder.getProvider(providerMapKey);
       binder.bind(mapKey).toProvider(new RealMapWithExtensionProvider<Map<K, V>>(mapKey) {
@@ -110,6 +119,7 @@
 
             return key.equals(mapKey)
                 || key.equals(providerMapKey)
+                || key.equals(javaxProviderMapKey)
                 || key.equals(multimapKey)
                 || key.equals(providerMultimapKey)
                 || key.equals(entrySetBinder.getSetKey())

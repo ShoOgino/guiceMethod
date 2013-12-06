@@ -25,5 +25,11 @@
         instance("a", "A"), instance("b", "B"), instance("c", "C"));
     assertMapVisitor(deKey, stringType, stringType, setOf(module), BOTH, false, 1,
         instance("d", "D"), instance("e", "E"));
+    
+    // just make sure these succeed
+    injector.getInstance(Key.get(mapOfStringProvider, Abc.class));
+    injector.getInstance(Key.get(mapOfStringJavaxProvider, Abc.class));
+    injector.getInstance(Key.get(mapOfStringProvider, De.class));
+    injector.getInstance(Key.get(mapOfStringJavaxProvider, De.class));
   }
 

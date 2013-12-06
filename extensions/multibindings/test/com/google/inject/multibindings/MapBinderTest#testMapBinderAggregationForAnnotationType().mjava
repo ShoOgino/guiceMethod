@@ -18,5 +18,9 @@
     assertEquals(mapOf("a", "A", "b", "B", "c", "C"), abc);
     assertMapVisitor(key, stringType, stringType, setOf(module), BOTH, false, 0,
         instance("a", "A"), instance("b", "B"), instance("c", "C"));
+    
+    // just make sure these succeed
+    injector.getInstance(Key.get(mapOfStringProvider, Abc.class));
+    injector.getInstance(Key.get(mapOfStringJavaxProvider, Abc.class));
   }
 

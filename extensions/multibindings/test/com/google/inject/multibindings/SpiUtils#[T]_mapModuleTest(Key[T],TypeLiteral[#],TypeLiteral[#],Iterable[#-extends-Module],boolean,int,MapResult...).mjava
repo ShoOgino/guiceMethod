@@ -17,10 +17,10 @@
     assertEquals(valueType, mapbinder.getValueTypeLiteral());
     List<MapResult> mapResults = Lists.newArrayList(results);
     
-    Key<?> mapOfProvider = adapt(mapKey, mapOfProviderOf(keyType, valueType));
-    Key<?> mapOfSetOfProvider = adapt(mapKey, mapOfSetOfProviderOf(keyType, valueType));
-    Key<?> mapOfSet = adapt(mapKey, mapOf(keyType, setOf(valueType)));
-    Key<?> setOfEntry = adapt(mapKey, setOf(entryOfProviderOf(keyType, valueType)));    
+    Key<?> mapOfProvider = mapKey.ofType(mapOfProviderOf(keyType, valueType));
+    Key<?> mapOfSetOfProvider = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+    Key<?> mapOfSet = mapKey.ofType(mapOf(keyType, setOf(valueType)));
+    Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));    
     boolean entrySetMatch = false;
     boolean mapProviderMatch = false;
     boolean mapSetMatch = false; 

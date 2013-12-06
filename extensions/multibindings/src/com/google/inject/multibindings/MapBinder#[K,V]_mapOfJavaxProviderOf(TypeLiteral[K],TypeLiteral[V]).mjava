@@ -1,0 +1,9 @@
+  // provider map <K, V> is safely a Map<K, javax.inject.Provider<V>>>
+  @SuppressWarnings("unchecked")
+  static <K, V> TypeLiteral<Map<K, javax.inject.Provider<V>>> mapOfJavaxProviderOf(
+      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+    return (TypeLiteral<Map<K, javax.inject.Provider<V>>>) TypeLiteral.get(
+        Types.mapOf(keyType.getType(),
+            newParameterizedType(javax.inject.Provider.class, valueType.getType())));
+  }
+

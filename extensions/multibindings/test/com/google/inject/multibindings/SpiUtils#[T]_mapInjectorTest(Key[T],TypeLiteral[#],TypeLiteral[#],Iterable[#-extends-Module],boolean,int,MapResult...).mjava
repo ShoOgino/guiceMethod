@@ -57,11 +57,13 @@
       fail("Found all entries of: " + mapResults + ", but more were left over: " + entries);
     }
     
-    Key<?> mapOfProvider = adapt(mapKey, mapOfProviderOf(keyType, valueType));
-    Key<?> mapOfSetOfProvider = adapt(mapKey, mapOfSetOfProviderOf(keyType, valueType));
-    Key<?> mapOfSet = adapt(mapKey, mapOf(keyType, setOf(valueType)));
-    Key<?> setOfEntry = adapt(mapKey, setOf(entryOfProviderOf(keyType, valueType)));
+    Key<?> mapOfJavaxProvider = mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType));
+    Key<?> mapOfProvider = mapKey.ofType(mapOfProviderOf(keyType, valueType));
+    Key<?> mapOfSetOfProvider = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+    Key<?> mapOfSet = mapKey.ofType(mapOf(keyType, setOf(valueType)));
+    Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));
     boolean entrySetMatch = false;
+    boolean mapJavaxProviderMatch = false;
     boolean mapProviderMatch = false;
     boolean mapSetMatch = false; 
     boolean mapSetProviderMatch = false;
@@ -79,6 +81,9 @@
       } else if(b.getKey().equals(mapOfProvider)) {
         assertTrue(contains);
         mapProviderMatch = true;
+      } else if (b.getKey().equals(mapOfJavaxProvider)) {
+        assertTrue(contains);
+        mapJavaxProviderMatch = true;
       } else if(b.getKey().equals(mapOfSet)) {
         assertTrue(contains);
         mapSetMatch = true;
@@ -103,6 +108,7 @@
     assertEquals("Incorrect other matches: " + otherMatches, mapResults.size(), sizeOfOther);
     assertTrue(entrySetMatch);
     assertTrue(mapProviderMatch);
+    assertTrue(mapJavaxProviderMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
     assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,
