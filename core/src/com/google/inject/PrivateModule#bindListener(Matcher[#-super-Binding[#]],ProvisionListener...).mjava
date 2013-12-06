@@ -1,0 +1,8 @@
+  /**
+   * @see Binder#bindListener(Matcher, ProvisionListener...)
+   */
+  protected void bindListener(Matcher<? super Binding<?>> bindingMatcher,
+      ProvisionListener... listeners) {
+    binder().bindListener(bindingMatcher, listeners);
+  }
+
