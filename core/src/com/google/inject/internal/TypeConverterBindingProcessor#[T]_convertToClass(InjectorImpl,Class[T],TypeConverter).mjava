@@ -1,0 +1,5 @@
+  private static <T> void convertToClass(InjectorImpl injector, Class<T> type,
+      TypeConverter converter) {
+    convertToClasses(injector, Matchers.identicalTo(type), converter);
+  }
+
