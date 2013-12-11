@@ -1,14 +1,12 @@
     public Object proceed() throws Throwable {
       try {
-        index++;
         return index == interceptors.length
             ? methodProxy.invokeSuper(proxy, arguments)
-            : interceptors[index].invoke(this);
+            : interceptors[index].invoke(
+                new InterceptedMethodInvocation(proxy, methodProxy, arguments, index + 1));
       } catch (Throwable t) {
         pruneStacktrace(t);
         throw t;
-      } finally {
-        index--;
       }
     }
 

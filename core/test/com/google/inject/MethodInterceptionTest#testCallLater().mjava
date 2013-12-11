@@ -1,0 +1,17 @@
+  public void testCallLater() {
+    final Queue<Runnable> queue = Lists.newLinkedList();
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.any(), new CallLaterInterceptor(queue));
+      }
+    });
+
+    Interceptable interceptable = injector.getInstance(Interceptable.class);
+    interceptable.foo();
+    assertNull(interceptable.lastElements);
+    assertEquals(1, queue.size());
+
+    queue.remove().run();
+    assertNotNull(interceptable.lastElements);
+  }
+
