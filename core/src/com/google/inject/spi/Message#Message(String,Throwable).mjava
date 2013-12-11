@@ -1,0 +1,7 @@
+  /**
+   * @since 4.0
+   */
+  public Message(String message, Throwable cause) {
+    this(ImmutableList.of(), message, cause);
+  }
+

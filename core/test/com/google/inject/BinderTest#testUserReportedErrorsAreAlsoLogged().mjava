@@ -3,7 +3,7 @@
       Guice.createInjector(new AbstractModule() {
         @Override
         protected void configure() {
-          addError(new Message(ImmutableList.of(), "Whoops!", new IllegalArgumentException()));
+          addError(new Message("Whoops!", new IllegalArgumentException()));
         }
       });
       fail();

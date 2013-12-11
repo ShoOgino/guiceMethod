@@ -1,4 +1,4 @@
-    @Inject 
+    @Inject
     ImplementsHasImplementedByThatNeedsAnotherImplementedBy(
-        HasImplementedBy1 h1n1) {}                             
+        HasImplementedBy1 h1n1) {}
 

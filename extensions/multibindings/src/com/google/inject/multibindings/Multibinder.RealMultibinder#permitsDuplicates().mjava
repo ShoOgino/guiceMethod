@@ -3,7 +3,7 @@
         return permitDuplicates;
       } else {
         throw new UnsupportedOperationException(
-            "permitsDuplicates() not supported for module bindings");   
+            "permitsDuplicates() not supported for module bindings");
       }
     }
 

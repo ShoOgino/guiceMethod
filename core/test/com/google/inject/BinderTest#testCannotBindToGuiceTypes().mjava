@@ -7,43 +7,43 @@
           "Binding to core guice framework type is not allowed: AbstractModule.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Binder.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Binding.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Injector.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Key.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Module.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to Provider is not allowed.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Scope.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Stage.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: TypeLiteral.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class),
-          
+
           "Binding to core guice framework type is not allowed: Key.",
           "at " + InnerCoreModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterCoreModule.class, InnerCoreModule.class));

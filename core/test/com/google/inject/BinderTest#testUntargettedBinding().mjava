@@ -14,7 +14,7 @@
         bind(JustAClass.class);
       }
     });
-    
+
     assertNotNull(injector.getInstance(HasProvidedBy1.class));
     assertNotNull(injector.getInstance(HasImplementedBy1.class));
     assertNotSame(HasProvidedBy2.class,

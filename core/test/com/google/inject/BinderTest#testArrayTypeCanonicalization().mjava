@@ -6,7 +6,7 @@
   public void testArrayTypeCanonicalization() {
     final String[] strings = new String[] { "A" };
     final Integer[] integers = new Integer[] { 1 };
-    
+
     Injector injector = Guice.createInjector(new AbstractModule() {
       @Override
       protected void configure() {
@@ -37,7 +37,7 @@
           "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
       assertContains(expected.getMessage(), "1 error");
     }
-    
+
     // passes because duplicates are ignored
     injector = Guice.createInjector(new AbstractModule() {
       @Override
