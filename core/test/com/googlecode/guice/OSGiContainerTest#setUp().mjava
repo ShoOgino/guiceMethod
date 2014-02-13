@@ -10,6 +10,7 @@
     assertTrue(failMsg(), new File(AOPALLIANCE_JAR).isFile());
 /*end[AOP]*/
     assertTrue(failMsg(), new File(JAVAX_INJECT_JAR).isFile());
+    assertTrue(failMsg(), new File(GUAVA_JAR).isFile());
 
     Properties instructions = new Properties();
 
@@ -23,6 +24,12 @@
     // javax.inject is an API bundle --> export the full API
     instructions.setProperty("Export-Package", "javax.inject.*");
     buildBundle("javax.inject", instructions, JAVAX_INJECT_JAR);
+    instructions.clear();
+
+    // early versions of guava did not ship with OSGi metadata
+    instructions.setProperty("Export-Package", "com.google.common.*");
+    instructions.setProperty("Import-Package", "*;resolution:=optional");
+    buildBundle("guava", instructions, GUAVA_JAR);
     instructions.clear();
 
     // strict imports to make sure test bundle only has access to these packages

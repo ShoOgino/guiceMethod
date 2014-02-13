@@ -22,6 +22,7 @@
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/aopalliance.jar");
 /*end[AOP]*/
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/javax.inject.jar");
+      systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/guava.jar");
       systemContext.installBundle("reference:file:" + GUICE_JAR);
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/osgitests.jar").start();
 
