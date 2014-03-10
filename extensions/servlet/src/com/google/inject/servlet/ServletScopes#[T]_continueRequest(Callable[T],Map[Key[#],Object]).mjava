@@ -37,7 +37,8 @@
 
     // Snapshot the seed map and add all the instances to our continuing HTTP request.
     final ContinuingHttpServletRequest continuingRequest =
-        new ContinuingHttpServletRequest(GuiceFilter.getRequest());
+        new ContinuingHttpServletRequest(
+            GuiceFilter.getRequest(Key.get(HttpServletRequest.class)));
     for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
       Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
       continuingRequest.setAttribute(entry.getKey().toString(), value);

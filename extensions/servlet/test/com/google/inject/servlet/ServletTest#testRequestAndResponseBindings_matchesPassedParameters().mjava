@@ -1,7 +1,7 @@
   public void testRequestAndResponseBindings_matchesPassedParameters() throws Exception {
     final int[] filterInvoked = new int[1];
     final boolean[] servletInvoked = new boolean[1];
-    final Injector injector = createInjector(new ServletModule() {
+    createInjector(new ServletModule() {
       @Override protected void configureServlets() {
         final HttpServletRequest[] previousReq = new HttpServletRequest[1];
         final HttpServletResponse[] previousResp = new HttpServletResponse[1];

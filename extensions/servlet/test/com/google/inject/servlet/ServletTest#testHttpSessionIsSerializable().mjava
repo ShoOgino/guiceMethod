@@ -1,5 +1,4 @@
-  public void testHttpSessionIsSerializable()
-      throws IOException, ClassNotFoundException, ServletException {
+  public void testHttpSessionIsSerializable() throws Exception {
     final Injector injector = createInjector();
     final HttpServletRequest request = newFakeHttpServletRequest();
     final HttpSession session = request.getSession();

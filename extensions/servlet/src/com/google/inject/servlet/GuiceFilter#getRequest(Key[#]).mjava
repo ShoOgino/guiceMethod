@@ -1,0 +1,4 @@
+  static HttpServletRequest getRequest(Key<?> key) {
+    return getContext(key).getRequest();
+  }
+
