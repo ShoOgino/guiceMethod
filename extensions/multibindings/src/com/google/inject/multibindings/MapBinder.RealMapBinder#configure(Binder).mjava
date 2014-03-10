@@ -18,13 +18,38 @@
 
           Map<K, Provider<V>> providerMapMutable = new LinkedHashMap<K, Provider<V>>();
           List<Map.Entry<K, Binding<V>>> bindingsMutable = Lists.newArrayList();
+          Set<K> duplicateKeys = null;
           for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
             Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
-            checkConfiguration(previous == null || permitDuplicates,
-                "Map injection failed due to duplicated key \"%s\"", entry.getKey());
+            if (previous != null && !permitDuplicates) {
+              if (duplicateKeys == null) {
+                duplicateKeys = Sets.newHashSet();
+              }
+              duplicateKeys.add(entry.getKey());
+            }
             ProviderMapEntry<K, V> providerEntry = (ProviderMapEntry<K, V>) entry;
             Key<V> valueKey = providerEntry.getValueKey();
             bindingsMutable.add(Maps.immutableEntry(entry.getKey(), injector.getBinding(valueKey)));
+          }
+          if (duplicateKeys != null) {
+            Multimap<K, String> dups = LinkedHashMultimap.create();
+            for (Map.Entry<K, Binding<V>> entry : bindingsMutable) {
+              if (duplicateKeys.contains(entry.getKey())) {
+                dups.put(entry.getKey(), "\t" + Errors.convert(entry.getValue().getSource()));
+              }
+            }
+            StringBuilder sb = new StringBuilder("Map injection failed due to duplicated key ");
+            boolean first = true;
+            for (K key : dups.keySet()) {
+              if (first) {
+                first = false;
+                sb.append("\"" + key + "\", from bindings at:\n");
+              } else {
+                sb.append("\n and key: \"" + key + "\", from bindings at:\n");
+              }
+              Joiner.on('\n').appendTo(sb, dups.get(key)).append("\n");
+            }
+            checkConfiguration(false, sb.toString());
           }
 
           providerMap = ImmutableMap.copyOf(providerMapMutable);
