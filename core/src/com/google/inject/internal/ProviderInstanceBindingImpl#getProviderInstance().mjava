@@ -1,4 +1,4 @@
   public Provider<? extends T> getProviderInstance() {
-    return providerInstance;
+    return Providers.guicify(providerInstance);
   }
 

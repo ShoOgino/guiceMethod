@@ -1,0 +1,7 @@
+    public ScopedBindingBuilder toProvider(javax.inject.Provider<? extends T> provider) {
+      delegate.toProvider(provider);
+      annotation.targetType = TargetType.PROVIDER_INSTANCE;
+      annotation.target = provider;
+      return this;
+    }
+

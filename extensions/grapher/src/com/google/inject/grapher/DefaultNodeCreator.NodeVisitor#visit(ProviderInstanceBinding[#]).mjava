@@ -4,6 +4,6 @@
      */
     @Override public Collection<Node> visit(ProviderInstanceBinding<?> binding) {
       return ImmutableList.<Node>of(newInterfaceNode(binding), newInstanceNode(binding,
-          binding.getProviderInstance()));
+          binding.getUserSuppliedProvider()));
     }
 

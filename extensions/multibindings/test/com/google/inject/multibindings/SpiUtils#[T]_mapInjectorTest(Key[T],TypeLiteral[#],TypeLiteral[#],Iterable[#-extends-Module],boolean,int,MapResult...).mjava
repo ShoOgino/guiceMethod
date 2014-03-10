@@ -38,7 +38,7 @@
           break;
         case PROVIDER_INSTANCE:
           if (value instanceof ProviderInstanceBinding
-              && ((ProviderInstanceBinding) value).getProviderInstance().get().equals(
+              && ((ProviderInstanceBinding) value).getUserSuppliedProvider().get().equals(
                   result.v.instance)) {
             found = entry;
           }

@@ -16,7 +16,7 @@
             binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
               @Override public Void visit(
                   ProviderInstanceBinding<? extends T> binding) {
-                assertSame(stringProvider, binding.getProviderInstance());
+                assertSame(stringProvider, binding.getUserSuppliedProvider());
                 return null;
               }
             });

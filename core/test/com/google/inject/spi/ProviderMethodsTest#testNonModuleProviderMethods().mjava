@@ -25,8 +25,9 @@
         element instanceof ProviderInstanceBinding);
 
     ProviderInstanceBinding binding = (ProviderInstanceBinding) element;
-    Provider provider = binding.getProviderInstance();    
+    javax.inject.Provider provider = binding.getUserSuppliedProvider();    
     assertEquals(ProviderMethod.class, provider.getClass());
-    assertEquals(methodsObject, ((ProviderMethod) provider).getInstance());
+    assertEquals(methodsObject, ((ProviderMethod) provider).getInstance());    
+    assertSame(provider, binding.getProviderInstance());
   }
 

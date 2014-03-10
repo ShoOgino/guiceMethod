@@ -1,0 +1,4 @@
+  public javax.inject.Provider<? extends T> getUserSuppliedProvider() {
+    return providerInstance;
+  }
+

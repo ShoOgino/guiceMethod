@@ -1,5 +1,5 @@
   public InternalFactoryToInitializableAdapter(
-      Initializable<Provider<? extends T>> initializable,
+      Initializable<? extends javax.inject.Provider<? extends T>> initializable,
       Object source, boolean allowProxy,
       ProvisionListenerStackCallback<T> provisionCallback) {
     super(source, allowProxy);
