@@ -1,0 +1,3 @@
+  /** Returns the instance of the object the method is defined in. */
+  Object getEnclosingInstance();
+

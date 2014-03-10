@@ -1,0 +1,34 @@
+  public void testSpi() throws Exception {
+    Module m1 = new AbstractModule() {
+      @Override protected void configure() {}
+      @Provides @Named("foo") String provideFoo(Integer dep) { return "foo"; }
+    };
+    Module m2 = new AbstractModule() {
+      @Override protected void configure() {}
+      @Provides Integer provideInt(@Named("foo") String dep) { return 42; }
+    };
+    Injector injector = Guice.createInjector(m1, m2);
+    
+    Binding<String> stringBinding =
+        injector.getBinding(Key.get(String.class, Names.named("foo")));
+    ProvidesMethodBinding<String> stringMethod =
+        stringBinding.acceptTargetVisitor(new BindingCapturer<String>());
+    assertEquals(m1, stringMethod.getEnclosingInstance());
+    assertEquals(m1.getClass().getDeclaredMethod("provideFoo", Integer.class),
+        stringMethod.getMethod());
+    assertEquals(((HasDependencies) stringBinding).getDependencies(),
+        stringMethod.getDependencies());
+    assertEquals(Key.get(String.class, Names.named("foo")), stringMethod.getKey());
+    
+    Binding<Integer> intBinding = injector.getBinding(Integer.class);
+    ProvidesMethodBinding<Integer> intMethod =
+        intBinding.acceptTargetVisitor(new BindingCapturer<Integer>());
+    assertEquals(m2, intMethod.getEnclosingInstance());
+    assertEquals(m2.getClass().getDeclaredMethod("provideInt", String.class),
+        intMethod.getMethod());
+    assertEquals(((HasDependencies) intBinding).getDependencies(),
+        intMethod.getDependencies());
+    assertEquals(Key.get(Integer.class), intMethod.getKey());
+    
+  }
+

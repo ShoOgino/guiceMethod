@@ -1,0 +1,5 @@
+  /**
+   * Visits an {@link ProvidesMethodBinding} created with an {@literal @}{@link Provides} method.
+   */
+  V visit(ProvidesMethodBinding<? extends T> providesMethodBinding);
+
