@@ -32,7 +32,9 @@
             bindingsMutable.add(Maps.immutableEntry(entry.getKey(), injector.getBinding(valueKey)));
           }
           if (duplicateKeys != null) {
-            Multimap<K, String> dups = LinkedHashMultimap.create();
+            // Must use a ListMultimap in case more than one binding has the same source
+            // and is listed multiple times.
+            Multimap<K, String> dups = newLinkedKeyArrayValueMultimap();
             for (Map.Entry<K, Binding<V>> entry : bindingsMutable) {
               if (duplicateKeys.contains(entry.getKey())) {
                 dups.put(entry.getKey(), "\t at " + Errors.convert(entry.getValue().getSource()));
