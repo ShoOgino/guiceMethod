@@ -1,4 +1,4 @@
   @Override public final String toString() {
-    return "Key[type=" + typeLiteral + ", annotation=" + annotationStrategy + "]";
+    return toStringSupplier.get();
   }
 

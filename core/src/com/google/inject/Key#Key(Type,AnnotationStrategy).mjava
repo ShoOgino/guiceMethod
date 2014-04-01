@@ -6,5 +6,6 @@
     this.annotationStrategy = annotationStrategy;
     this.typeLiteral = MoreTypes.canonicalizeForKey((TypeLiteral<T>) TypeLiteral.get(type));
     this.hashCode = computeHashCode();
+    this.toStringSupplier = createToStringSupplier();
   }
 

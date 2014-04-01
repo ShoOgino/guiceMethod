@@ -3,5 +3,6 @@
     this.annotationStrategy = annotationStrategy;
     this.typeLiteral = MoreTypes.canonicalizeForKey(typeLiteral);
     this.hashCode = computeHashCode();
+    this.toStringSupplier = createToStringSupplier();
   }
 

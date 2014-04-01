@@ -3,5 +3,6 @@
     Key<?> keyCopy = rehash(key);
     assertEquals(key, keyCopy);
     assertEquals(key.hashCode(), keyCopy.hashCode());
+    assertEquals(key.toString(), keyCopy.toString());
   }
 
