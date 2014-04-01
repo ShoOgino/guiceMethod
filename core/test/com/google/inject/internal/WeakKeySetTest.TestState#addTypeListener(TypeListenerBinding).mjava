@@ -1,0 +1,4 @@
+    public void addTypeListener(TypeListenerBinding typeListenerBinding) {
+      throw new UnsupportedOperationException();
+    }
+

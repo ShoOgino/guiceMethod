@@ -1,0 +1,4 @@
+    public List<TypeListenerBinding> getTypeListenerBindings() {
+      return ImmutableList.of();
+    }
+

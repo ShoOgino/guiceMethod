@@ -1,0 +1,4 @@
+    public void putScopeBinding(Class<? extends Annotation> annotationType, ScopeBinding scope) {
+      throw new UnsupportedOperationException();
+    }
+

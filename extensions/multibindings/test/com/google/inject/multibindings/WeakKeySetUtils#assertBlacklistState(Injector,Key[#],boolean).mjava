@@ -1,0 +1,10 @@
+  private static void assertBlacklistState(Injector injector, Key<?> key, boolean isBlacklisted) {
+    try {
+      TestCase.assertEquals(
+          isBlacklisted,
+          ((Boolean) isBlacklistedMethod.invoke(stateField.get(injector), key)).booleanValue());
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+

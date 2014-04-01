@@ -1,0 +1,4 @@
+  static void assertBlacklisted(Injector injector, Key<?> key) {
+    assertBlacklistState(injector, key, true);
+  }
+

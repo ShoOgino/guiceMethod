@@ -45,6 +45,7 @@
     suite.addTestSuite(TypeLiteralInjectionTest.class);
     suite.addTestSuite(TypeLiteralTest.class);
     suite.addTestSuite(TypeLiteralTypeResolutionTest.class);
+    suite.addTestSuite(WeakKeySetTest.class);
 
     // internal
     suite.addTestSuite(LineNumbersTest.class);
