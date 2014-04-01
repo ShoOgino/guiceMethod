@@ -1,0 +1,9 @@
+  /**
+   * Returns a binding builder used to set the default value that will be injected.
+   * The binding set by this method will be ignored if {@link #setBinding} is called.
+   * 
+   * <p>It is an error to call this method without also calling one of the {@code to}
+   * methods on the returned binding builder. 
+   */
+  public abstract LinkedBindingBuilder<T> setDefault();
+

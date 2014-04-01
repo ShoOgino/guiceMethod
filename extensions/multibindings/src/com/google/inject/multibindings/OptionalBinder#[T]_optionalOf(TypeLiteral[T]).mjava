@@ -1,0 +1,7 @@
+  @SuppressWarnings("unchecked")
+  static <T> TypeLiteral<Optional<T>> optionalOf(
+      TypeLiteral<T> type) {
+    return (TypeLiteral<Optional<T>>) TypeLiteral.get(
+        Types.newParameterizedType(Optional.class,  type.getType()));
+  }
+

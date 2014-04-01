@@ -1,0 +1,29 @@
+  public void testModuleOverrideRepeatedInstalls_toConstructor() {
+    Module m = new AbstractModule() {
+      @Override protected void configure() {
+        Key<String> aKey = Key.get(String.class, Names.named("A_string"));
+        Key<String> bKey = Key.get(String.class, Names.named("B_string"));
+        bind(aKey).toInstance("A");
+        bind(bKey).toInstance("B");
+        bind(Integer.class).toInstance(0);  // used to disambiguate constructors
+
+
+        OptionalBinder<StringGrabber> b =
+            OptionalBinder.newOptionalBinder(binder(), StringGrabber.class);
+        try {
+          b.setDefault().toConstructor(
+              StringGrabber.class.getConstructor(String.class));
+          b.setBinding().toConstructor(
+              StringGrabber.class.getConstructor(String.class, int.class));
+        } catch (NoSuchMethodException e) {
+          fail("No such method: " + e.getMessage());
+        }
+      }
+    };
+
+    assertEquals("B", Guice.createInjector(m, m).getInstance(Key.get(StringGrabber.class)).string);
+
+    Injector injector = Guice.createInjector(m, Modules.override(m).with(m));
+    assertEquals("B", injector.getInstance(Key.get(StringGrabber.class)).string);
+  }
+

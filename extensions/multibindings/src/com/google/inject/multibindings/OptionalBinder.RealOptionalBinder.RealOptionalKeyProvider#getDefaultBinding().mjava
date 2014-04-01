@@ -1,0 +1,9 @@
+      public Binding<?> getDefaultBinding() {
+        if (isInitialized()) {
+          return defaultBinding;
+        } else {
+          throw new UnsupportedOperationException(
+              "getDefaultBinding() not supported from Elements.getElements, requires an Injector.");
+        }
+      }
+

@@ -1,0 +1,25 @@
+  public void testSetDefault() {
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
+      }
+    };
+    Injector injector = Guice.createInjector(module);
+    assertEquals("a", injector.getInstance(String.class));
+    
+    Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
+    assertTrue(optional.isPresent());
+    assertEquals("a", optional.get());
+    
+    Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
+    assertTrue(optionalP.isPresent());
+    assertEquals("a", optionalP.get().get());
+    
+    Optional<javax.inject.Provider<String>> optionalJxP =
+        injector.getInstance(Key.get(optionalOfJavaxProviderString));
+    assertTrue(optionalJxP.isPresent());
+    assertEquals("a", optionalJxP.get().get());
+
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, instance("a"), null);
+  }
+

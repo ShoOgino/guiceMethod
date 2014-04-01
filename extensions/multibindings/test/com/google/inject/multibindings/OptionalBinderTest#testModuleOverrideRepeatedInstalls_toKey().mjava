@@ -1,0 +1,27 @@
+  public void testModuleOverrideRepeatedInstalls_toKey() {
+    final Key<String> aKey = Key.get(String.class, Names.named("A_string"));
+    final Key<String> bKey = Key.get(String.class, Names.named("B_string"));
+    Module m = new AbstractModule() {
+      @Override protected void configure() {
+        bind(aKey).toInstance("A");
+        bind(bKey).toInstance("B");
+
+        OptionalBinder<String> b = OptionalBinder.newOptionalBinder(binder(), String.class);
+        b.setDefault().to(aKey);
+        b.setBinding().to(bKey);
+      }
+    };
+
+    assertEquals("B", Guice.createInjector(m, m).getInstance(Key.get(String.class)));
+
+    Injector injector = Guice.createInjector(m, Modules.override(m).with(m));
+    assertEquals("B", injector.getInstance(Key.get(String.class)));
+
+    assertOptionalVisitor(stringKey,
+        setOf(m, Modules.override(m).with(m)),
+        VisitType.BOTH,
+        0,
+        linked(aKey),
+        linked(bKey));
+  }
+

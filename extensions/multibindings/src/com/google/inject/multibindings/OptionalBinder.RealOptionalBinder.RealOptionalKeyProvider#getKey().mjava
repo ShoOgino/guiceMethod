@@ -1,0 +1,4 @@
+      public Key<Optional<T>> getKey() {
+        return optionalKey;
+      }
+

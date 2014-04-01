@@ -1,0 +1,14 @@
+  private Set<String> recurseForDependencies(Injector injector, HasDependencies hasDependencies) {
+    Set<String> elements = Sets.newHashSet();
+    for (Dependency<?> dependency : hasDependencies.getDependencies()) {
+      Binding<?> binding = injector.getBinding(dependency.getKey());
+      HasDependencies deps = (HasDependencies) binding;
+      if (binding instanceof InstanceBinding) {
+        elements.add((String) ((InstanceBinding) binding).getInstance());
+      } else {
+        elements.addAll(recurseForDependencies(injector, deps));
+      }
+    }    
+    return elements;
+  }
+

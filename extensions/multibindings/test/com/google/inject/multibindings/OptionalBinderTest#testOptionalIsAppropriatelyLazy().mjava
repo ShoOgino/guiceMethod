@@ -1,0 +1,36 @@
+  public void testOptionalIsAppropriatelyLazy() {
+    Module module = new AbstractModule() {
+      int nextValue = 1;
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), Integer.class)
+            .setDefault().to(Key.get(Integer.class, Names.named("foo")));
+      }
+      @Provides @Named("foo") int provideInt() {
+        return nextValue++;
+      }
+    };
+    Injector injector = Guice.createInjector(module);
+
+    Optional<Provider<Integer>> optionalP =
+        injector.getInstance(Key.get(optionalOfProviderInteger));
+    Optional<javax.inject.Provider<Integer>> optionalJxP =
+        injector.getInstance(Key.get(optionalOfJavaxProviderInteger));
+    
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    assertEquals(2, injector.getInstance(Integer.class).intValue());
+    
+    // Calling .get() on an Optional<Integer> multiple times will keep giving the same thing
+    Optional<Integer> optional = injector.getInstance(Key.get(optionalOfInteger));
+    assertEquals(3, optional.get().intValue());
+    assertEquals(3, optional.get().intValue());
+    // But getting another Optional<Integer> will give a new one.
+    assertEquals(4, injector.getInstance(Key.get(optionalOfInteger)).get().intValue());
+    
+    // And the Optional<Provider> will return a provider that gives a new value each time.
+    assertEquals(5, optionalP.get().get().intValue());
+    assertEquals(6, optionalP.get().get().intValue());
+    
+    assertEquals(7, optionalJxP.get().get().intValue());
+    assertEquals(8, optionalJxP.get().get().intValue());
+  }
+

@@ -1,0 +1,13 @@
+    @Override public LinkedBindingBuilder<T> setBinding() {
+      checkConfiguration(!isInitialized(), "already initialized");
+      
+      addDirectTypeBinding(binder);
+
+      RealElement.BindingBuilder<T> valueBinding = RealElement.addBinding(binder,
+          Element.Type.OPTIONALBINDER, typeKey.getTypeLiteral(), RealElement.nameOf(typeKey));
+      Key<T> valueKey = Key.get(typeKey.getTypeLiteral(), valueBinding.getAnnotation());
+      mapBinder.addBinding(Source.ACTUAL).toProvider(
+          new ValueProvider<T>(valueKey, binder.getProvider(valueKey)));
+      return valueBinding;
+    }
+

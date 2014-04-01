@@ -1,0 +1,4 @@
+  static <T> BindResult<T> providerKey(Key<T> key) {
+    return new BindResult<T>(PROVIDER_KEY, null, key);
+  }
+

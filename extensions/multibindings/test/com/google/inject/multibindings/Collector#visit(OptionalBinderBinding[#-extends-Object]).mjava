@@ -1,0 +1,6 @@
+  @Override
+  public Object visit(OptionalBinderBinding<? extends Object> optionalbinding) {
+    this.optionalbinding = optionalbinding;
+    return null;
+  }
+

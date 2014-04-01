@@ -7,6 +7,8 @@
         return "linkedKey[" + key + "]";
       case PROVIDER_INSTANCE:
         return "providerInstance[" + instance + "]";
+      case PROVIDER_KEY:
+        return "providerKey[" + key + "]";
       }
       return null;
     }

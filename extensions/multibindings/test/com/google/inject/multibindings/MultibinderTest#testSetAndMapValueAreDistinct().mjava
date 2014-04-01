@@ -7,9 +7,16 @@
 
         MapBinder.newMapBinder(binder(), String.class, String.class)
             .addBinding("B").toInstance("b");
+
+        OptionalBinder.newOptionalBinder(binder(), String.class)
+            .setDefault().toInstance("C");
+        OptionalBinder.newOptionalBinder(binder(), String.class)
+            .setBinding().toInstance("D");
       }
     });
 
-    assertEquals(ImmutableSet.<String>of("A"), injector.getInstance(Key.get(setOfString)));
+    assertEquals(ImmutableSet.of("A"), injector.getInstance(Key.get(setOfString)));
+    assertEquals(ImmutableMap.of("B", "b"), injector.getInstance(Key.get(mapOfStringString)));
+    assertEquals(Optional.of("D"), injector.getInstance(Key.get(optionalOfString)));
   }
 

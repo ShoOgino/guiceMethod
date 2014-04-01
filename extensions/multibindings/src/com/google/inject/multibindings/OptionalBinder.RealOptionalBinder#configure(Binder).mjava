@@ -1,0 +1,53 @@
+    public void configure(Binder binder) {
+      checkConfiguration(!isInitialized(), "OptionalBinder was already initialized");
+
+      final Provider<Map<Source, Provider<T>>> mapProvider = binder.getProvider(mapKey);
+      binder.bind(optionalProviderKey).toProvider(
+          new RealOptionalBinderProviderWithDependencies<Optional<Provider<T>>>(typeKey) {
+        private Optional<Provider<T>> optional;
+
+        @Toolable @Inject void initialize(Injector injector) {
+          RealOptionalBinder.this.binder = null;
+          Map<Source, Provider<T>> map = mapProvider.get();
+          // Map might be null if duplicates prevented MapBinder from initializing
+          if (map != null) {
+            if (map.containsKey(Source.ACTUAL)) {
+              // TODO(sameb): Consider exposing an option that will allow
+              // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
+              // Right now, an ACTUAL binding can convert from present -> absent
+              // if it's bound to a provider that returns null.
+              optional = Optional.fromNullable(map.get(Source.ACTUAL)); 
+            } else if (map.containsKey(Source.DEFAULT)) {
+              optional = Optional.fromNullable(map.get(Source.DEFAULT));
+            } else {
+              optional = Optional.absent();
+            }
+            
+            // Also set up the bindings for the SPI.
+            if (map.containsKey(Source.ACTUAL)) {
+              actualBinding = getBindingFromMapProvider(injector, map.get(Source.ACTUAL));
+            }
+            if (map.containsKey(Source.DEFAULT)) {
+              defaultBinding = getBindingFromMapProvider(injector, map.get(Source.DEFAULT));
+            }
+          }
+        }
+        
+        public Optional<Provider<T>> get() {
+          return optional;
+        }
+
+        public Set<Dependency<?>> getDependencies() {
+          return dependencies;
+        }
+      });
+      
+      // Optional is immutable, so it's safe to expose Optional<Provider<T>> as
+      // Optional<javax.inject.Provider<T>> (since Guice provider implements javax Provider).
+      @SuppressWarnings({"unchecked", "cast"})
+      Key massagedOptionalProviderKey = (Key) optionalProviderKey;
+      binder.bind(optionalJavaxProviderKey).to(massagedOptionalProviderKey);
+
+      binder.bind(optionalKey).toProvider(new RealOptionalKeyProvider());
+    }
+

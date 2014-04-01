@@ -1,0 +1,14 @@
+  public void testMultipleDifferentOptionals() {
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
+        OptionalBinder.newOptionalBinder(binder(), Integer.class).setDefault().toInstance(1);
+      }
+    };
+    Injector injector = Guice.createInjector(module);
+    assertEquals("a", injector.getInstance(String.class));
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 1, instance("a"), null);
+  }
+

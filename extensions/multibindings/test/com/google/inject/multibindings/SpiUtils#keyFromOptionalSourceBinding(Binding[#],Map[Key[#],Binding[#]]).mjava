@@ -1,0 +1,14 @@
+  private static Key<?> keyFromOptionalSourceBinding(Binding<?> binding,
+      Map<Key<?>, Binding<?>> elements) {
+    // Flow is:
+    //  binding == ProviderInstanceBinding<Map.Entry<Source, Provider<String>>
+    //   dependency on: Provider<String> that maps to ProviderInstanceBinding<String> in MapBinder
+    //      dependency on: Provider<String> of user set value.
+    Key<?> mapKey =
+        genericOf(getOnlyElement(((HasDependencies) binding).getDependencies()).getKey());
+    Binding<?> mapBinding = elements.get(mapKey);
+    Key<?> userKey =
+        genericOf(getOnlyElement(((HasDependencies) mapBinding).getDependencies()).getKey());
+    return userKey;
+  }
+

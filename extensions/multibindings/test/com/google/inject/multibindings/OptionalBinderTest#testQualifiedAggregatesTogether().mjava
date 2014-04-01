@@ -1,0 +1,47 @@
+  public void testQualifiedAggregatesTogether() {
+    Module module1 = new AbstractModule() {
+      @Override
+      protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), Key.get(String.class, Names.named("foo")));
+      }
+    };
+    Module module2 = new AbstractModule() {
+      @Override
+      protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), Key.get(String.class, Names.named("foo")))
+            .setDefault().toInstance("a");
+      }
+    };
+    Module module3 = new AbstractModule() {
+      @Override
+      protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), Key.get(String.class, Names.named("foo")))
+            .setBinding().toInstance("b");
+      }
+    };
+
+    Injector injector = Guice.createInjector(module1, module2, module3);
+    assertEquals("b", injector.getInstance(Key.get(String.class, Names.named("foo"))));
+
+    Optional<String> optional = injector.getInstance(Key.get(optionalOfString, Names.named("foo")));
+    assertTrue(optional.isPresent());
+    assertEquals("b", optional.get());
+
+    Optional<Provider<String>> optionalP =
+        injector.getInstance(Key.get(optionalOfProviderString, Names.named("foo")));
+    assertTrue(optionalP.isPresent());
+    assertEquals("b", optionalP.get().get());
+
+    Optional<javax.inject.Provider<String>> optionalJxP =
+        injector.getInstance(Key.get(optionalOfJavaxProviderString, Names.named("foo")));
+    assertTrue(optionalJxP.isPresent());
+    assertEquals("b", optionalJxP.get().get());
+    
+    assertOptionalVisitor(Key.get(String.class, Names.named("foo")),
+        setOf(module1, module2, module3),
+        VisitType.BOTH,
+        0,
+        instance("a"),
+        instance("b"));
+  }
+

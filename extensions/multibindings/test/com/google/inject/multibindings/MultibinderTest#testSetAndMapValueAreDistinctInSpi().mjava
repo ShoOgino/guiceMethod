@@ -7,6 +7,9 @@
 
         MapBinder.newMapBinder(binder(), String.class, String.class)
             .addBinding("B").toInstance("b");
+        
+        OptionalBinder.newOptionalBinder(binder(), String.class)
+            .setDefault().toInstance("C");
       }
     });
     Collector collector = new Collector();
@@ -18,22 +21,36 @@
     setbinding.acceptTargetVisitor(collector);
     assertNotNull(collector.setbinding);
 
-    // Capture the value bindings and assert we have them right --
-    // they'll always be in the right order because we preserve
-    // binding order.
-    List<Binding<String>> bindings = injector.findBindingsByType(stringType);
-    assertEquals(2, bindings.size());
+    Binding<Optional<String>> optionalbinding = injector.getBinding(Key.get(optionalOfString));
+    optionalbinding.acceptTargetVisitor(collector);
+    assertNotNull(collector.optionalbinding);
+
+    // There should only be three instance bindings for string types
+    // (but because of the OptionalBinder, there's 2 ProviderInstanceBindings also).
+    // We also know the InstanceBindings will be in the order: A, b, C because that's
+    // how we bound them, and binding order is preserved.
+    List<Binding<String>> bindings = FluentIterable.from(injector.findBindingsByType(stringType))
+        .filter(Predicates.instanceOf(InstanceBinding.class))
+        .toList();
+    assertEquals(bindings.toString(), 3, bindings.size());
     Binding<String> a = bindings.get(0);
     Binding<String> b = bindings.get(1);
-    assertEquals("A", ((InstanceBinding<String>)a).getInstance());
-    assertEquals("b", ((InstanceBinding<String>)b).getInstance());
+    Binding<String> c = bindings.get(2);
+    assertEquals("A", ((InstanceBinding<String>) a).getInstance());
+    assertEquals("b", ((InstanceBinding<String>) b).getInstance());
+    assertEquals("C", ((InstanceBinding<String>) c).getInstance());
 
-    // Now make sure "A" belongs only to the set binding,
-    // and "b" only belongs to the map binding.
+    // Make sure the correct elements belong to their own sets.
     assertFalse(collector.mapbinding.containsElement(a));
     assertTrue(collector.mapbinding.containsElement(b));
+    assertFalse(collector.mapbinding.containsElement(c));
 
     assertTrue(collector.setbinding.containsElement(a));
     assertFalse(collector.setbinding.containsElement(b));
+    assertFalse(collector.setbinding.containsElement(c));
+    
+    assertFalse(collector.optionalbinding.containsElement(a));
+    assertFalse(collector.optionalbinding.containsElement(b));
+    assertTrue(collector.optionalbinding.containsElement(c));
   }
 

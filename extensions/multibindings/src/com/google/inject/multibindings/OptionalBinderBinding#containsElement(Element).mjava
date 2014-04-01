@@ -1,0 +1,10 @@
+  /**
+   * Returns true if this OptionalBinder contains the given Element in order to build the optional
+   * binding or uses the given Element in order to support building and injecting its data. This
+   * will work for OptionalBinderBinding retrieved from an injector and
+   * {@link Elements#getElements}. Usually this is only necessary if you are working with elements
+   * retrieved from modules (without an Injector), otherwise {@link #getDefaultBinding} and
+   * {@link #getActualBinding} are better options.
+   */
+  boolean containsElement(Element element);
+

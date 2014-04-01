@@ -1,4 +1,4 @@
-  static <T> BindResult instance(T t) {
+  static <T> BindResult<T> instance(T t) {
     return new BindResult<T>(INSTANCE, t, null);
   }
 

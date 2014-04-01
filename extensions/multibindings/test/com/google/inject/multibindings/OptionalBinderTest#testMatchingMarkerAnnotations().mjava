@@ -1,0 +1,27 @@
+  @Marker
+  public void testMatchingMarkerAnnotations() throws Exception {
+    Method m = OptionalBinderTest.class.getDeclaredMethod("testMatchingMarkerAnnotations");
+    assertNotNull(m);
+    final Annotation marker = m.getAnnotation(Marker.class);
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override public void configure() {
+        OptionalBinder<Integer> mb1 =
+            OptionalBinder.newOptionalBinder(binder(), Key.get(Integer.class, Marker.class));
+        OptionalBinder<Integer> mb2 =
+            OptionalBinder.newOptionalBinder(binder(), Key.get(Integer.class, marker));
+        mb1.setDefault().toInstance(1);
+        mb2.setBinding().toInstance(2);
+
+        // This assures us that the two binders are equivalent, so we expect the instance added to
+        // each to have been added to one set.
+        assertEquals(mb1, mb2);
+      }
+    });
+    Integer i1 = injector.getInstance(Key.get(Integer.class, Marker.class));
+    Integer i2 = injector.getInstance(Key.get(Integer.class, marker));
+
+    // These must be identical, because the marker annotations collapsed to the same thing.
+    assertSame(i1, i2);
+    assertEquals(2, i2.intValue());
+  }
+

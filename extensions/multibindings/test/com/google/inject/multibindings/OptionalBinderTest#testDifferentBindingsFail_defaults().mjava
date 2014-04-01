@@ -1,0 +1,21 @@
+  public void testDifferentBindingsFail_defaults() {
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
+        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("b");
+      }
+    };
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(ce.getMessage(), 1, ce.getErrorMessages().size());
+      assertContains(ce.getMessage(),
+          "1) OptionalBinder for java.lang.String called with different setDefault values, " 
+              + "from bindings:",
+          "at " + module.getClass().getName() + ".configure(",
+          "at " + module.getClass().getName() + ".configure(",
+          "at " + MapBinder.RealMapBinder.class.getName());
+    }
+  }  
+

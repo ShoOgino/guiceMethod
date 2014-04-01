@@ -17,25 +17,8 @@
     for(BindResult result : bindResults) {
       Binding found = null;
       for(Binding item : elements) {
-        switch (result.type) {
-        case INSTANCE:
-          if (item instanceof InstanceBinding
-              && ((InstanceBinding) item).getInstance().equals(result.instance)) {
-            found = item;
-          }
-          break;
-        case LINKED:
-          if (item instanceof LinkedKeyBinding
-              && ((LinkedKeyBinding) item).getKey().equals(result.key)) {
-            found = item;
-          }
-          break;
-        case PROVIDER_INSTANCE:
-          if (item instanceof ProviderInstanceBinding
-              && ((ProviderInstanceBinding) item).getUserSuppliedProvider().get().equals(
-                  result.instance)) {
-            found = item;
-          }
+        if (matches(item, result)) {
+          found = item;
           break;
         }
       }

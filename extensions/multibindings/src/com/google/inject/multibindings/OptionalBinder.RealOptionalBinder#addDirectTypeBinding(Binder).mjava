@@ -1,0 +1,23 @@
+    /**
+     * Adds a binding for T. Multiple calls to this are safe, and will be collapsed as duplicate
+     * bindings.
+     */
+    private void addDirectTypeBinding(Binder binder) {
+      binder.bind(typeKey).toProvider(new RealOptionalBinderProviderWithDependencies<T>(typeKey) {
+        public T get() {
+          Optional<Provider<T>> optional = optionalProviderT.get();
+          if (optional.isPresent()) {
+            return optional.get().get();
+          }
+          // Let Guice handle blowing up if the injection point doesn't have @Nullable
+          // (If it does have @Nullable, that's fine.  This would only happen if
+          //  setBinding/setDefault themselves were bound to 'null').
+          return null; 
+        }
+
+        public Set<Dependency<?>> getDependencies() {
+          return dependencies;
+        }
+      });
+    }
+

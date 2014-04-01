@@ -1,0 +1,24 @@
+  public void testAbsentWithUserBoundValue() {
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), String.class);
+      }
+      @Provides String provideString() { return "foo"; }
+    };
+
+    Injector injector = Guice.createInjector(module);
+    assertEquals("foo", injector.getInstance(String.class));
+    
+    Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
+    assertFalse(optional.isPresent());
+    
+    Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
+    assertFalse(optionalP.isPresent());
+    
+    Optional<javax.inject.Provider<String>> optionalJxP =
+        injector.getInstance(Key.get(optionalOfJavaxProviderString));
+    assertFalse(optionalJxP.isPresent());
+    
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null);
+  }
+

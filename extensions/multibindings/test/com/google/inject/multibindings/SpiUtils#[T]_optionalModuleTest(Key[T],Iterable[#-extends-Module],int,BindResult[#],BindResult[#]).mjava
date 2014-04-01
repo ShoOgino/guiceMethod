@@ -1,0 +1,129 @@
+  @SuppressWarnings("unchecked")
+  private static <T> void optionalModuleTest(Key<T> keyType, Iterable<? extends Module> modules,
+      int expectedOtherOptionalBindings, BindResult<?> expectedDefault,
+      BindResult<?> expectedActual) {
+    Set<Element> elements = ImmutableSet.copyOf(Elements.getElements(modules));
+    Map<Key<?>, Binding<?>> indexed = index(elements);
+    Key<Optional<T>> optionalKey =
+        keyType.ofType(OptionalBinder.optionalOf(keyType.getTypeLiteral()));
+    Key<Map<Source, T>> sourceMapKey =
+        keyType.ofType(mapOf(TypeLiteral.get(Source.class), keyType.getTypeLiteral()));
+    Visitor<Optional<T>> visitor = new Visitor<Optional<T>>();
+    OptionalBinderBinding<T> optionalBinder = null;
+    MapBinderBinding<Map<Source, T>> mapbinderBinding = null;
+    Key<?> defaultKey = null;
+    Key<?> actualKey = null;
+
+    Binding optionalBinding = indexed.get(optionalKey);
+    optionalBinder = (OptionalBinderBinding<T>) optionalBinding.acceptTargetVisitor(visitor);
+    Binding mapBinding = indexed.get(sourceMapKey);
+    mapbinderBinding = (MapBinderBinding<Map<Source, T>>) mapBinding.acceptTargetVisitor(visitor);
+
+    // Locate the defaultKey & actualKey
+    for (Element element : elements) {
+      if (optionalBinder.containsElement(element) && element instanceof Binding) {
+        Binding binding = (Binding) element;
+        if (isSourceEntry(binding, Source.DEFAULT)) {
+          defaultKey = keyFromOptionalSourceBinding(binding, indexed);
+        } else if (isSourceEntry(binding, Source.ACTUAL)) {
+          actualKey = keyFromOptionalSourceBinding(binding, indexed);
+        }
+      }
+    }
+    assertNotNull(optionalBinder);
+    assertEquals(expectedDefault == null, defaultKey == null);
+    assertEquals(expectedActual == null, actualKey == null);
+
+    Key<Optional<javax.inject.Provider<T>>> optionalJavaxProviderKey =
+        keyType.ofType(optionalOfJavaxProvider(keyType.getTypeLiteral()));
+    Key<Optional<Provider<T>>> optionalProviderKey =
+        keyType.ofType(optionalOfProvider(keyType.getTypeLiteral()));
+    boolean keyMatch = false;
+    boolean optionalKeyMatch = false;
+    boolean optionalJavaxProviderKeyMatch = false;
+    boolean optionalProviderKeyMatch = false;
+    boolean mapBindingMatch = false;
+    boolean defaultMatch = false;
+    boolean actualMatch = false;
+    List<Object> otherOptionalElements = Lists.newArrayList();
+    List<Element> otherContains = Lists.newArrayList();
+    List<Element> nonContainedElements = Lists.newArrayList();
+    for (Element element : elements) {
+      boolean contains = optionalBinder.containsElement(element);
+      if (!contains) {
+        nonContainedElements.add(element);
+      }
+      Key key = null;
+      Binding b = null;
+      if (element instanceof Binding) {
+        b = (Binding) element;
+        key = b.getKey();
+        Object visited = b.acceptTargetVisitor(visitor);
+        if (visited instanceof OptionalBinderBinding) {
+          if (visited.equals(optionalBinder)) {
+            assertTrue(contains);
+          } else {
+            otherOptionalElements.add(visited);
+          }
+        }
+      } else if (element instanceof ProviderLookup) {
+        key = ((ProviderLookup) element).getKey();
+      }
+
+      if (key != null && key.equals(keyType)) {
+        // keyType might match because a user bound it
+        // (which is possible in a purely absent OptionalBinder)
+        assertEquals(expectedDefault != null || expectedActual != null, contains);
+        if (contains) {
+          keyMatch = true;
+        }
+      } else if (key != null && key.equals(optionalKey)) {
+        assertTrue(contains);
+        optionalKeyMatch = true;
+      } else if (key != null && key.equals(optionalJavaxProviderKey)) {
+        assertTrue(contains);
+        optionalJavaxProviderKeyMatch = true;
+      } else if (key != null && key.equals(optionalProviderKey)) {
+        assertTrue(contains);
+        optionalProviderKeyMatch = true;
+      } else if (key != null && key.equals(sourceMapKey)) {
+        assertTrue(contains);
+        mapBindingMatch = true;
+        // Validate that this binding is also a MapBinding.
+        assertEquals(mapbinderBinding, b.acceptTargetVisitor(visitor));
+      } else if (key != null && key.equals(defaultKey)) {
+        assertTrue(contains);
+        if (b != null) { // otherwise it might just be a ProviderLookup into it
+          assertTrue("expected: " + expectedDefault + ", but was: " + b,
+              matches(b, expectedDefault));
+          defaultMatch = true;
+        }
+      } else if (key != null && key.equals(actualKey)) {
+        assertTrue(contains);
+        if (b != null) { // otherwise it might just be a ProviderLookup into it
+          assertTrue("expected: " + expectedActual + ", but was: " + b, matches(b, expectedActual));
+          actualMatch = true;
+        }
+      } else if (mapbinderBinding.containsElement(element)) {
+        assertTrue(contains);
+      } else if (contains) {
+        otherContains.add(element);
+      }
+    }
+    
+    // only expect a keymatch if either default or actual are set
+    assertEquals(expectedDefault != null || expectedActual != null, keyMatch);
+    assertTrue(optionalKeyMatch);
+    assertTrue(optionalJavaxProviderKeyMatch);
+    assertTrue(optionalProviderKeyMatch);
+    assertTrue(mapBindingMatch);
+    assertEquals(expectedDefault != null, defaultMatch);
+    assertEquals(expectedActual != null, actualMatch);
+    assertEquals(otherContains.toString(), 0, otherContains.size());
+    assertEquals("other OptionalBindings found: " + otherOptionalElements,
+        expectedOtherOptionalBindings, otherOptionalElements.size());
+    
+     // Validate that we can construct an injector out of the remaining bindings.
+    Guice.createInjector(Elements.getModule(nonContainedElements));
+  }
+

@@ -1,0 +1,4 @@
+    public Object visit(OptionalBinderBinding<? extends T> optionalbinding) {
+      return optionalbinding;
+    }
+

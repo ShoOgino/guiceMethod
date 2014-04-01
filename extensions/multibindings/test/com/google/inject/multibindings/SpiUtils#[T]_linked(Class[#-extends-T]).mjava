@@ -1,4 +1,4 @@
-  static <T> BindResult linked(Class<? extends T> clazz) {
+  static <T> BindResult<T> linked(Class<? extends T> clazz) {
     return new BindResult<T>(LINKED, null, Key.get(clazz));
   }
 

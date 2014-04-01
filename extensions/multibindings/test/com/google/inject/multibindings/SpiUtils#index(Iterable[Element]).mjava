@@ -1,0 +1,11 @@
+  /** Returns the subset of elements that have keys, indexed by them. */
+  private static Map<Key<?>, Binding<?>> index(Iterable<Element> elements) {
+    ImmutableMap.Builder<Key<?>, Binding<?>> builder = ImmutableMap.builder();
+    for (Element element : elements) {
+      if (element instanceof Binding) {
+        builder.put(((Binding) element).getKey(), (Binding) element);
+      }
+    }
+    return builder.build();
+  }
+

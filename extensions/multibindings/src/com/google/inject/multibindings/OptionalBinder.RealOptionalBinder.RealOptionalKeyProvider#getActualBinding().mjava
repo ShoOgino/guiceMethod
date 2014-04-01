@@ -1,0 +1,9 @@
+      public Binding<?> getActualBinding() {
+        if (isInitialized()) {
+          return actualBinding;
+        } else {
+          throw new UnsupportedOperationException(
+              "getActualBinding() not supported from Elements.getElements, requires an Injector.");
+        }
+      }
+

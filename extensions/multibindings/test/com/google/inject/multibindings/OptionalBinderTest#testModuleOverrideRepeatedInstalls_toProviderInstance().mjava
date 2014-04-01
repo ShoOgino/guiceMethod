@@ -1,0 +1,25 @@
+  public void testModuleOverrideRepeatedInstalls_toProviderInstance() {
+    // Providers#of() does not redefine equals/hashCode, so use the same one both times.
+    final Provider<String> aProvider = Providers.of("A");
+    final Provider<String> bProvider = Providers.of("B");
+    Module m = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder<String> b = OptionalBinder.newOptionalBinder(binder(), String.class);
+        b.setDefault().toProvider(aProvider);
+        b.setBinding().toProvider(bProvider);
+      }
+    };
+
+    assertEquals("B", Guice.createInjector(m, m).getInstance(Key.get(String.class)));
+
+    Injector injector = Guice.createInjector(m, Modules.override(m).with(m));
+    assertEquals("B", injector.getInstance(Key.get(String.class)));
+
+    assertOptionalVisitor(stringKey,
+        setOf(m, Modules.override(m).with(m)),
+        VisitType.BOTH,
+        0,
+        providerInstance("A"),
+        providerInstance("B"));
+  }
+
