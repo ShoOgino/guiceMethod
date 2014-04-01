@@ -16,5 +16,8 @@
     Key<?> setKey = new Key<Set<Map.Entry<Integer, Provider<String>>>>() {};
     assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(setKey)),
         withDependencies.getDependencies());
+    Set<String> elements = Sets.newHashSet();
+    elements.addAll(recurseForDependencies(injector, withDependencies));
+    assertEquals(ImmutableSet.of("A", "B"), elements);
   }
 

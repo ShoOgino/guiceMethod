@@ -23,7 +23,8 @@
     RealElement other = (RealElement) obj;
     return (setName.equals(other.setName)
         && type.equals(other.type)
-        && Objects.equal(mapKey, other.mapKey)
+        && Objects.equal(mapKeyType, other.mapKeyType)
+        && Objects.equal(mapEntryKey, other.mapEntryKey)
         && scope.equals(other.scope)
         && targetType.equals(other.targetType)
         && Objects.equal(target, other.target));

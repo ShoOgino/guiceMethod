@@ -11,5 +11,6 @@
       this.providerMultimapKey = providerMultimapKey;
       this.entrySetBinder = (RealMultibinder<Entry<K, Provider<V>>>) entrySetBinder;
       this.binder = binder;
+      this.duplicateKeyErrorMessages = Maps.newHashMap();
     }
 

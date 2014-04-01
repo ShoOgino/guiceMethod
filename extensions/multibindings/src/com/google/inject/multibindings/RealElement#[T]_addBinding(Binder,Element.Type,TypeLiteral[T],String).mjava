@@ -8,7 +8,7 @@
    */
   static <T> BindingBuilder<T> addBinding(
       Binder binder, Element.Type type, TypeLiteral<T> elementType, String setName) {
-    RealElement annotation = new RealElement(setName, type, null);
+    RealElement annotation = new RealElement(setName, type, null, null);
     LinkedBindingBuilder<T> delegate = binder
         .skipSources(RealElement.class)
         .bind(Key.get(elementType, annotation));

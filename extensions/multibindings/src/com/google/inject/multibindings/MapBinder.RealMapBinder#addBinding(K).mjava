@@ -7,9 +7,9 @@
       checkConfiguration(!isInitialized(), "MapBinder was already initialized");
 
       RealElement.BindingBuilder<V> valueBinding = RealElement.addMapBinding(
-          binder, key, valueType, entrySetBinder.getSetName());
+          binder, key, keyType, valueType, entrySetBinder.getSetName());
       Key<V> valueKey = Key.get(valueType, valueBinding.getAnnotation());
-      entrySetBinder.addBinding().toInstance(new ProviderMapEntry<K, V>(
+      entrySetBinder.addBinding().toProvider(new ProviderMapEntry<K, V>(
           key, binder.getProvider(valueKey), valueKey));
       return valueBinding;
     }

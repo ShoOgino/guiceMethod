@@ -36,10 +36,10 @@
       fail();
     } catch(CreationException ce) {
       assertContains(ce.getMessage(),
-          "Map injection failed due to duplicated key \"a\", from bindings at:",
+          "Map injection failed due to duplicated key \"a\", from bindings:",
           asModuleChain(Main.class, Module1.class),
           asModuleChain(Main.class, Module2.class),
-          "and key: \"b\", from bindings at:",
+          "and key: \"b\", from bindings:",
           asModuleChain(Main.class, Module2.class),
           asModuleChain(Main.class, Module3.class),
           "at " + Main.class.getName() + ".configure(",

@@ -35,7 +35,7 @@
             Multimap<K, String> dups = LinkedHashMultimap.create();
             for (Map.Entry<K, Binding<V>> entry : bindingsMutable) {
               if (duplicateKeys.contains(entry.getKey())) {
-                dups.put(entry.getKey(), "\t" + Errors.convert(entry.getValue().getSource()));
+                dups.put(entry.getKey(), "\t at " + Errors.convert(entry.getValue().getSource()));
               }
             }
             StringBuilder sb = new StringBuilder("Map injection failed due to duplicated key ");
@@ -43,9 +43,18 @@
             for (K key : dups.keySet()) {
               if (first) {
                 first = false;
-                sb.append("\"" + key + "\", from bindings at:\n");
+                if (duplicateKeyErrorMessages.containsKey(key)) {
+                  sb.setLength(0);
+                  sb.append(duplicateKeyErrorMessages.get(key));
+                } else {
+                  sb.append("\"" + key + "\", from bindings:\n");
+                }
               } else {
-                sb.append("\n and key: \"" + key + "\", from bindings at:\n");
+                if (duplicateKeyErrorMessages.containsKey(key)) {
+                  sb.append("\n and " + duplicateKeyErrorMessages.get(key));
+                } else {
+                  sb.append("\n and key: \"" + key + "\", from bindings:\n");
+                }
               }
               Joiner.on('\n').appendTo(sb, dups.get(key)).append("\n");
             }
@@ -130,26 +139,7 @@
         }
 
         public boolean containsElement(com.google.inject.spi.Element element) {
-          if (entrySetBinder.containsElement(element)) {
-            return true;
-          } else {
-            Key<?> key;
-            if (element instanceof Binding) {
-              key = ((Binding<?>)element).getKey();
-            } else if (element instanceof ProviderLookup) {
-              key = ((ProviderLookup<?>)element).getKey();
-            } else {
-              return false; // cannot match;
-            }
-
-            return key.equals(mapKey)
-                || key.equals(providerMapKey)
-                || key.equals(javaxProviderMapKey)
-                || key.equals(multimapKey)
-                || key.equals(providerMultimapKey)
-                || key.equals(entrySetBinder.getSetKey())
-                || matchesValueKey(key);
-            }
+          return RealMapBinder.this.containsElement(element);
         }
       });
     }

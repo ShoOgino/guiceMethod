@@ -6,6 +6,6 @@
    * private and will never be used as an annotation, this should not cause problems.
    */
   @Override public int hashCode() {
-    return Objects.hashCode(setName, type, mapKey, scope, targetType, target);
+    return Objects.hashCode(setName, type, mapEntryKey, scope, targetType, target, mapKeyType);
   }
 

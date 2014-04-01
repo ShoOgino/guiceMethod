@@ -1,0 +1,36 @@
+  public void testTwoMapBindersAreDistinct() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {  
+        MapBinder.newMapBinder(binder(), String.class, String.class)
+            .addBinding("A").toInstance("a");
+        
+        MapBinder.newMapBinder(binder(), Integer.class, String.class)
+            .addBinding(1).toInstance("b");
+      }
+    });
+    Collector collector = new Collector();
+    Binding<Map<String, String>> map1 = injector.getBinding(Key.get(mapOfString));
+    map1.acceptTargetVisitor(collector);
+    assertNotNull(collector.mapbinding);
+    MapBinderBinding<?> map1Binding = collector.mapbinding;
+  
+    Binding<Map<Integer, String>> map2 = injector.getBinding(Key.get(mapOfIntString));
+    map2.acceptTargetVisitor(collector);
+    assertNotNull(collector.mapbinding);
+    MapBinderBinding<?> map2Binding = collector.mapbinding;
+  
+    List<Binding<String>> bindings = injector.findBindingsByType(stringType);
+    assertEquals("should have two elements: " + bindings.toString(), 2, bindings.size());
+    Binding<String> a = bindings.get(0);
+    Binding<String> b = bindings.get(1);
+    assertEquals("a", ((InstanceBinding<String>) a).getInstance());
+    assertEquals("b", ((InstanceBinding<String>) b).getInstance());
+    
+    // Make sure the correct elements belong to their own sets.
+    assertTrue(map1Binding.containsElement(a));
+    assertFalse(map1Binding.containsElement(b));
+  
+    assertFalse(map2Binding.containsElement(a));
+    assertTrue(map2Binding.containsElement(b));
+  }
+
