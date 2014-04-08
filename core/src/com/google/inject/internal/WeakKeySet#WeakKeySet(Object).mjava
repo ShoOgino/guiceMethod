@@ -1,4 +1,0 @@
-  WeakKeySet(Object lock) {
-    this.lock = lock;
-  }
-

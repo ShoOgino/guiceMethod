@@ -19,7 +19,7 @@
     }
 
     BindingImpl<T> binding = createJustInTimeBinding(key, errors, jitDisabled, jitType);
-    state.parent().blacklist(key, state, binding.getSource());
+    state.parent().blacklist(key, binding.getSource());
     jitBindings.put(key, binding);
     return binding;
   }

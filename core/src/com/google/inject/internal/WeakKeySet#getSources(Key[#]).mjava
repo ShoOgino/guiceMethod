@@ -1,6 +1,4 @@
   public Set<Object> getSources(Key<?> key) {
-    evictionCache.cleanUp();
-    Multiset<Object> sources = backingSet.get(key);
-    return (sources == null) ? null : sources.elementSet();
+    return backingSet.get(key.toString());
   }
 

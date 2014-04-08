@@ -1,4 +1,0 @@
-    public <T> BindingImpl<T> getExplicitBinding(Key<T> key) {
-      return null;
-    }
-

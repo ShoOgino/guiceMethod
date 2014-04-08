@@ -1,4 +1,0 @@
-    public Map<Key<?>, Binding<?>> getExplicitBindingsThisLevel() {
-      throw new UnsupportedOperationException();
-    }
-

@@ -1,4 +1,0 @@
-    public boolean isBlacklisted(Key<?> key) {
-      return true;
-    }
-

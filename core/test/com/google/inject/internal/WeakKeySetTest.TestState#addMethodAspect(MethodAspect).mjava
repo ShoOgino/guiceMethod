@@ -1,5 +1,0 @@
-    /*if[AOP]*/
-    public void addMethodAspect(MethodAspect methodAspect) {
-      throw new UnsupportedOperationException();
-    }
-
