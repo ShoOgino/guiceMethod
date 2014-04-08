@@ -1,0 +1,35 @@
+  public void testWeakKeySet_integration_multipleChildren_overlappingKeys() {
+    Injector parentInjector = Guice.createInjector(new AbstractModule() {
+          @Override protected void configure() {
+            bind(Integer.class).toInstance(4);
+          }
+        });
+    assertNotBlacklisted(parentInjector, Key.get(String.class));
+
+    Injector childInjector1 = parentInjector.createChildInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(String.class).toInstance("foo");
+      }
+    });
+    WeakReference<Injector> weakRef1 = new WeakReference<Injector>(childInjector1);
+    assertBlacklisted(parentInjector, Key.get(String.class));
+    
+    Injector childInjector2 = parentInjector.createChildInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(String.class).toInstance("bar");
+      }
+    });
+    WeakReference<Injector> weakRef2 = new WeakReference<Injector>(childInjector2);
+    assertBlacklisted(parentInjector, Key.get(String.class));
+    
+    // Clear ref1, GC, and ensure that we still blacklist.
+    childInjector1 = null;
+    GcFinalization.awaitClear(weakRef1);
+    assertBlacklisted(parentInjector, Key.get(String.class));
+
+    // Clear the ref, GC, and ensure that we are no longer blacklisting.
+    childInjector2 = null;
+    GcFinalization.awaitClear(weakRef2);
+    assertNotBlacklisted(parentInjector, Key.get(String.class));
+  }
+

@@ -1,0 +1,22 @@
+  public void testWeakKeySet_integration() {
+    Injector parentInjector = Guice.createInjector(new AbstractModule() {
+          @Override protected void configure() {
+            bind(Integer.class).toInstance(4);
+          }
+        });
+    assertNotBlacklisted(parentInjector, Key.get(String.class));
+
+    Injector childInjector = parentInjector.createChildInjector(new AbstractModule() {
+      @Override protected void configure() {
+        bind(String.class).toInstance("bar");
+      }
+    });
+    WeakReference<Injector> weakRef = new WeakReference<Injector>(childInjector);
+    assertBlacklisted(parentInjector, Key.get(String.class));
+    
+    // Clear the ref, GC, and ensure that we are no longer blacklisting.
+    childInjector = null;
+    GcFinalization.awaitClear(weakRef);
+    assertNotBlacklisted(parentInjector, Key.get(String.class));
+  }
+

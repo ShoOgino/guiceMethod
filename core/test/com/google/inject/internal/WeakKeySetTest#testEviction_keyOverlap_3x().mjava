@@ -1,0 +1,74 @@
+  public void testEviction_keyOverlap_3x() {
+    TestState state1 = new TestState();
+    TestState state2 = new TestState();
+    TestState state3 = new TestState();
+    Key<Integer> key1 = Key.get(Integer.class);
+    Key<Integer> key2 = Key.get(Integer.class);
+    Key<Integer> key3 = Key.get(Integer.class);
+    Object source1 = new Object();
+    Object source2 = new Object();
+    Object source3 = new Object();
+
+    set.add(key1, state1, source1);
+    assertTrue(set.contains(key1));
+    assertEquals(1, set.getSources(key1).size());
+    assertTrue(set.getSources(key1).contains(source1));
+
+    set.add(key2, state2, source2);
+    assertTrue(set.contains(key2));
+    assertEquals(2, set.getSources(key2).size());
+    assertTrue(set.getSources(key1).containsAll(Arrays.asList(source1, source2)));
+
+    set.add(key3, state3, source3);
+    assertTrue(set.contains(key3));
+    assertEquals(3, set.getSources(key3).size());
+    assertTrue(set.getSources(key1).containsAll(Arrays.asList(source1, source2, source3)));
+
+    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<Key<Integer>>(key1);
+    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<Key<Integer>>(key2);
+    WeakReference<Key<Integer>> weakKey3Ref = new WeakReference<Key<Integer>>(key3);
+    WeakReference<Object> weakSource1Ref = new WeakReference<Object>(source1);
+    WeakReference<Object> weakSource2Ref = new WeakReference<Object>(source2);
+    WeakReference<Object> weakSource3Ref = new WeakReference<Object>(source3);
+
+    Key<Integer> key = key1 = key2 = key3 = Key.get(Integer.class);
+    state1 = null;
+
+    GcFinalization.awaitFullGc();
+
+    assertTrue(set.contains(key));
+    assertEquals(2, set.getSources(key).size());
+    assertTrue(set.getSources(key).containsAll(Arrays.asList(source2, source3)));
+
+    source1 = null;
+    // Key1 will be referenced as the key in the sources backingSet and won't be
+    // GC'd.
+    GcFinalization.awaitClear(weakSource1Ref);
+
+    state2 = null;
+    GcFinalization.awaitFullGc();
+
+    assertTrue(set.contains(key));
+    assertEquals(1, set.getSources(key).size());
+    assertTrue(set.getSources(key).contains(source3));
+
+    GcFinalization.awaitClear(weakKey2Ref);
+    
+    source2 = null;
+    GcFinalization.awaitClear(weakSource2Ref);
+    // Key1 will be referenced as the key in the sources backingSet and won't be
+    // GC'd.
+
+    state3 = null;
+    GcFinalization.awaitFullGc();
+
+    assertFalse(set.contains(Key.get(Integer.class)));
+    assertNull(set.getSources(Key.get(Integer.class)));
+
+    GcFinalization.awaitClear(weakKey3Ref);
+    source3 = null;
+    GcFinalization.awaitClear(weakSource3Ref);
+    // Now that the backing set is emptied, key1 is released.
+    GcFinalization.awaitClear(weakKey1Ref);
+  }
+

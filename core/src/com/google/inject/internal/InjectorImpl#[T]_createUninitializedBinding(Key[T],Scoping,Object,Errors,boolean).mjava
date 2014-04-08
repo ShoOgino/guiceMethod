@@ -33,7 +33,7 @@
       return createProvidedByBinding(key, scoping, providedBy, errors);
     }
 
-    
+
     return ConstructorBindingImpl.create(this,
         key,
         null, /* use default constructor */

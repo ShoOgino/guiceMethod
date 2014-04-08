@@ -1,0 +1,4 @@
+    public Object lock() {
+      throw new UnsupportedOperationException();
+    }
+

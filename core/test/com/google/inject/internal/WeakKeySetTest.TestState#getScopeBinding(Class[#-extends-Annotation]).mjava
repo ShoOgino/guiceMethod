@@ -1,0 +1,4 @@
+    public ScopeBinding getScopeBinding(Class<? extends Annotation> scopingAnnotation) {
+      return null;
+    }
+

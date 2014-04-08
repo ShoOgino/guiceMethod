@@ -1,0 +1,19 @@
+  /**
+   * There may be multiple child injectors blacklisting a certain key so only remove the source
+   * that's relevant.
+   */
+  private void cleanUpForCollectedState(Set<KeyAndSource> keysAndSources) {
+    synchronized (lock) {
+      
+      for (KeyAndSource keyAndSource : keysAndSources) {
+        Multiset<Object> set = backingSet.get(keyAndSource.mapKey);
+        if (set != null) {
+          set.remove(keyAndSource.source);
+          if (set.isEmpty()) {
+            backingSet.remove(keyAndSource.mapKey);
+          }
+        }
+      }
+    }
+  }
+

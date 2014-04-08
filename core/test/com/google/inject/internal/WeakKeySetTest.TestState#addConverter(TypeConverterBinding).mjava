@@ -1,0 +1,4 @@
+    public void addConverter(TypeConverterBinding typeConverterBinding) {
+      throw new UnsupportedOperationException();
+    }
+

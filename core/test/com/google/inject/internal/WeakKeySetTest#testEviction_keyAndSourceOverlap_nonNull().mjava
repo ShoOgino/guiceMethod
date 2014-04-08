@@ -1,0 +1,54 @@
+  public void testEviction_keyAndSourceOverlap_nonNull() {
+    TestState state1 = new TestState();
+    TestState state2 = new TestState();
+    Key<Integer> key1 = Key.get(Integer.class);
+    Key<Integer> key2 = Key.get(Integer.class);
+    Object source = new Object();
+
+    set.add(key1, state1, source);
+    assertTrue(set.contains(key1));
+    assertEquals(1, set.getSources(key1).size());
+    assertTrue(set.getSources(key1).contains(source));
+
+    set.add(key2, state2, source);
+    assertTrue(set.contains(key2));
+
+    // Same source so still only one value.
+    assertEquals(1, set.getSources(key2).size());
+    assertTrue(set.getSources(key1).contains(source));
+
+    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<Key<Integer>>(key1);
+    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<Key<Integer>>(key2);
+    WeakReference<Object> weakSourceRef = new WeakReference<Object>(source);
+
+    Key<Integer> key = key1 = key2 = Key.get(Integer.class);
+    state1 = null;
+
+    GcFinalization.awaitFullGc();
+
+    assertTrue(set.contains(key));
+
+    // Should still have a single source.
+    assertEquals(1, set.getSources(key).size());
+    assertTrue(set.getSources(key1).contains(source));
+    
+    source = null;
+
+    GcFinalization.awaitFullGc();
+    assertNotNull(weakSourceRef.get());
+    // Key1 will be referenced as the key in the sources backingSet and won't be
+    // GC'd.
+
+    state2 = null;
+
+    GcFinalization.awaitFullGc();
+
+    assertFalse(set.contains(key));
+    assertNull(set.getSources(key));
+
+    GcFinalization.awaitClear(weakKey2Ref);
+    GcFinalization.awaitClear(weakSourceRef);
+    // Now that the backing set is emptied, key1 is released.
+    GcFinalization.awaitClear(weakKey1Ref);
+  }
+

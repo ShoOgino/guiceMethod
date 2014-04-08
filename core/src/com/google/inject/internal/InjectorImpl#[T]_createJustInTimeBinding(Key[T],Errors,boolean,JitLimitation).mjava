@@ -15,8 +15,12 @@
       boolean jitDisabled, JitLimitation jitType) throws ErrorsException {
     int numErrorsBefore = errors.size();
 
+    // Retrieve the sources before checking for blacklisting to guard against sources becoming null
+    // due to a full GC happening after calling state.isBlacklisted and
+    // state.getSourcesForBlacklistedKey.
+    // TODO(user): Consolidate these two APIs.
+    Set<Object> sources = state.getSourcesForBlacklistedKey(key);
     if (state.isBlacklisted(key)) {
-      Set<Object> sources = state.getSourcesForBlacklistedKey(key);
       throw errors.childBindingAlreadySet(key, sources).toException();
     }
 
@@ -44,7 +48,7 @@
       return convertedBinding;
     }
 
-    if (!isTypeLiteral(key) 
+    if (!isTypeLiteral(key)
         && jitDisabled
         && jitType != JitLimitation.NEW_OR_EXISTING_JIT) {
       throw errors.jitDisabled(key).toException();
