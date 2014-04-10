@@ -1,0 +1,24 @@
+  public void testCanReuseBindingAnnotationsWithDifferentValues() {
+    final Integer testValue1 = 1024, testValue2 = 2048;
+    final String name1 = "foo", name2 = "bar";
+    Object instance = new Object() {
+      @Bind
+      @Named(name1)
+      private Integer anInt = testValue1;
+
+      @Bind
+      @Named(name2)
+      private Integer anotherInt = testValue2;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(
+        testValue1,
+        injector.getInstance(Key.get(Integer.class, Names.named(name1))));
+    assertEquals(
+        testValue2,
+        injector.getInstance(Key.get(Integer.class, Names.named(name2))));
+  }
+

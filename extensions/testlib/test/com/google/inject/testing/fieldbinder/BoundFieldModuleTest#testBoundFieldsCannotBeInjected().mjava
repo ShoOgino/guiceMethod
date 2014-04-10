@@ -1,0 +1,18 @@
+  public void testBoundFieldsCannotBeInjected() {
+    Object instance = new Object() {
+      @Bind
+      @Inject
+      Integer anInt = 0;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+    } catch (CreationException e) {
+      assertContains(
+          e.getMessage(),
+          "Fields annotated with both @Bind and @Inject are illegal.");
+    }
+  }
+

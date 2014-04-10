@@ -1,0 +1,20 @@
+  public void testIncrementingProvider() {
+    final Integer testBaseValue = 1024;
+    Object instance = new Object() {
+      @Bind private Provider<Integer> anIntProvider = new Provider<Integer>() {
+        private int value = testBaseValue;
+
+        @Override public Integer get() {
+          return value++;
+        }
+      };
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testBaseValue, injector.getInstance(Integer.class));
+    assertEquals((Integer) (testBaseValue + 1), injector.getInstance(Integer.class));
+    assertEquals((Integer) (testBaseValue + 2), injector.getInstance(Integer.class));
+  }
+

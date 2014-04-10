@@ -1,0 +1,9 @@
+  public void testSuperTypeBinding() {
+    FieldBindableSubclass instance = new FieldBindableSubclass(1024);
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(instance.anInt, injector.getInstance(Integer.class));
+  }
+

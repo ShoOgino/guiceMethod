@@ -1,0 +1,12 @@
+  public void testBoundValueDoesntChange() {
+    Integer testValue = 1024;
+    FieldBindableClass instance = new FieldBindableClass(testValue);
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testValue, injector.getInstance(Integer.class));
+    instance.anInt++;
+    assertEquals(testValue, injector.getInstance(Integer.class));
+  }
+

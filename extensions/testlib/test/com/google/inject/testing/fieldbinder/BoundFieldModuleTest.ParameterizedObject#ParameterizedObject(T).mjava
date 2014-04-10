@@ -1,0 +1,4 @@
+    ParameterizedObject(T instance) {
+      this.instance = instance;
+    }
+

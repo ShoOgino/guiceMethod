@@ -1,0 +1,23 @@
+  @Override
+  public void configure(Binder binder) {
+    binder = binder.skipSources(BoundFieldModule.class);
+    this.binder = binder;
+
+    TypeLiteral<?> currentClassType = TypeLiteral.get(instance.getClass());
+    while (currentClassType.getRawType() != Object.class) {
+      for (Field field : currentClassType.getRawType().getDeclaredFields()) {
+        try {
+          Optional<BoundFieldInfo> fieldInfoOpt =
+              getBoundFieldInfo(currentClassType, field);
+          if (fieldInfoOpt.isPresent()) {
+            bindField(fieldInfoOpt.get());
+          }
+        } catch (BoundFieldException e) {
+          // addErrorAndThrow already called addError, so do nothing
+        }
+      }
+      currentClassType = currentClassType.getSupertype(
+          currentClassType.getRawType().getSuperclass());
+    }
+  }
+

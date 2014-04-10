@@ -1,0 +1,4 @@
+  private BoundFieldModule(Object instance) {
+    this.instance = instance;
+  }
+

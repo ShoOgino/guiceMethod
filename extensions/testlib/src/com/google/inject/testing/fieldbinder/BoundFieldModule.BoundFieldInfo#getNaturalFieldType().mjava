@@ -1,0 +1,26 @@
+    /**
+     * Retrieves the type this field binds to naturally.
+     *
+     * <p>A field's "natural" type specifically ignores the to() method on the @Bind annotation, is
+     * the parameterized type if the field's actual type is a parameterized {@link Provider}, is
+     * {@link Optional#absent()} if this field is a non-parameterized {@link Provider} and otherwise
+     * is the field's actual type.
+     *
+     * @return the type this field binds to naturally, or {@link Optional#absent()} if this field is
+     * a non-parameterized {@link Provider}.
+     */
+    private Optional<TypeLiteral<?>> getNaturalFieldType() {
+      if (isTransparentProvider(type.getRawType())) {
+        Type providerType = type.getType();
+        if (providerType instanceof Class) {
+          return Optional.absent();
+        }
+        Preconditions.checkState(providerType instanceof ParameterizedType);
+        Type[] providerTypeArguments = ((ParameterizedType) providerType).getActualTypeArguments();
+        Preconditions.checkState(providerTypeArguments.length == 1);
+        return Optional.<TypeLiteral<?>>of(TypeLiteral.get(providerTypeArguments[0]));
+      } else {
+        return Optional.<TypeLiteral<?>>of(type);
+      }
+    }
+

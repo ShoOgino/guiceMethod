@@ -1,0 +1,5 @@
+  private static boolean hasInject(Field field) {
+    return field.isAnnotationPresent(javax.inject.Inject.class)
+        || field.isAnnotationPresent(com.google.inject.Inject.class);
+  }
+

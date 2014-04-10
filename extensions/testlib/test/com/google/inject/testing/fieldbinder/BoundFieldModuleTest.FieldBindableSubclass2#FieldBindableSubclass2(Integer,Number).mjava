@@ -1,0 +1,5 @@
+    FieldBindableSubclass2(Integer anInt, Number aNumber) {
+      super(anInt);
+      this.aNumber = aNumber;
+    }
+

@@ -1,0 +1,4 @@
+    FieldBindableClass(Integer anInt) {
+      this.anInt = anInt;
+    }
+

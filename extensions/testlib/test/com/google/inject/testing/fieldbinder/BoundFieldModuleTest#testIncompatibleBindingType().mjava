@@ -1,0 +1,18 @@
+  public void testIncompatibleBindingType() {
+    final Integer testInt = 1024;
+    Object instance = new Object() {
+      @Bind(to = String.class) private Integer anInt = testInt;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(),
+          "Requested binding type \"java.lang.String\" is not assignable from field binding type "
+          + "\"java.lang.Integer\"");
+    }
+  }
+

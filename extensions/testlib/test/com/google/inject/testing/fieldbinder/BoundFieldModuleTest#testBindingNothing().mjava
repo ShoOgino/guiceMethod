@@ -1,0 +1,9 @@
+  public void testBindingNothing() {
+    Object instance = new Object() {};
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Guice.createInjector(module);
+
+    // If we didn't throw an exception, we succeeded.
+  }
+

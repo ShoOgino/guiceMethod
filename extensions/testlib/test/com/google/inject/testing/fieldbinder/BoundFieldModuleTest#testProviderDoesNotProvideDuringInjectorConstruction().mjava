@@ -1,0 +1,15 @@
+  public void testProviderDoesNotProvideDuringInjectorConstruction() {
+    Object instance = new Object() {
+      @Bind private Provider<Integer> myIntProvider = new Provider<Integer>() {
+        @Override public Integer get() {
+          throw new UnsupportedOperationException();
+        }
+      };
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Guice.createInjector(module);
+
+    // If we don't throw an exception, we succeeded.
+  }
+

@@ -1,0 +1,4 @@
+    IntegerProvider(Integer value) {
+      this.value = value;
+    }
+

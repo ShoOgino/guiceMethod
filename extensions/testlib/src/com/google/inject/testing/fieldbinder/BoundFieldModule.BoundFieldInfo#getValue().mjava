@@ -1,0 +1,10 @@
+    Object getValue() {
+      try {
+        return field.get(instance);
+      } catch (IllegalAccessException e) {
+        // Since we called setAccessible(true) on this field in the constructor, this is a
+        // programming error if it occurs.
+        throw new AssertionError(e);
+      }
+    }
+

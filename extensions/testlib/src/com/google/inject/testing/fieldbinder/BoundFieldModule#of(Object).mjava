@@ -1,0 +1,10 @@
+  /**
+   * Create a BoundFieldModule which binds the {@link Bind} annotated fields of {@code instance}.
+   *
+   * @param instance the instance whose fields will be bound.
+   * @return a module which will bind the {@link Bind} annotated fields of {@code instance}.
+   */
+  public static BoundFieldModule of(Object instance) {
+    return new BoundFieldModule(instance);
+  }
+

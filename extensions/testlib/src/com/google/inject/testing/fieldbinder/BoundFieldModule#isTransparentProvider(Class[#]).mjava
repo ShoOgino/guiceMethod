@@ -1,0 +1,16 @@
+  /**
+   * Determines if {@code clazz} is a "transparent provider".
+   *
+   * <p>A transparent provider is a {@link com.google.inject.Provider} or
+   * {@link javax.inject.Provider} which binds to it's parameterized type when used as the argument
+   * to {@link Binder#bind}.
+   *
+   * <p>A {@link Provider} is transparent if the base class of that object is {@link Provider}. In
+   * other words, subclasses of {@link Provider} are not transparent. As a special case, if a
+   * {@link Provider} has no parameterized type but is otherwise transparent, then it is considered
+   * transparent.
+   */
+  private static boolean isTransparentProvider(Class<?> clazz) {
+    return com.google.inject.Provider.class == clazz || javax.inject.Provider.class == clazz;
+  }
+

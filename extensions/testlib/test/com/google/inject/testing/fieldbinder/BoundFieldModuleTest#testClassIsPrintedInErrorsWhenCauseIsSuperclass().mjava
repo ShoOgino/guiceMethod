@@ -1,0 +1,15 @@
+  public void testClassIsPrintedInErrorsWhenCauseIsSuperclass() {
+    Object instance = new InvalidBindableSubclass();
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+    } catch (CreationException e) {
+      assertContains(
+          e.getMessage(),
+          "Requested binding type \"java.lang.String\" is not assignable from field binding type "
+          + "\"java.lang.Integer\"");
+    }
+  }
+

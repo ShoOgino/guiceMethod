@@ -1,0 +1,4 @@
+    FieldBindableSubclass(Integer anInt) {
+      super(anInt);
+    }
+

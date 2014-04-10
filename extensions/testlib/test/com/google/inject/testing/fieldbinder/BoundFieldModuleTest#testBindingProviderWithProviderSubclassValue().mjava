@@ -1,0 +1,12 @@
+  public void testBindingProviderWithProviderSubclassValue() {
+    final Integer testValue = 1024;
+    Object instance = new Object() {
+      @Bind private Provider<Integer> anIntProvider = new IntegerProvider(testValue);
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testValue, injector.getInstance(Integer.class));
+  }
+

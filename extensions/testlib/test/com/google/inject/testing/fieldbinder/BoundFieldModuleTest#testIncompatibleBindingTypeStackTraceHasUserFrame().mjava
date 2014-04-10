@@ -1,0 +1,13 @@
+  public void testIncompatibleBindingTypeStackTraceHasUserFrame() {
+    Object instance = new InvalidBindableClass();
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), "at " + InvalidBindableClass.class.getName() + " field anInt");
+    }
+  }
+

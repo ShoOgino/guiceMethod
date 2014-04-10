@@ -1,0 +1,22 @@
+  public void testRawProviderCannotBeBound() {
+    final Integer testValue = 1024;
+    Object instance = new Object() {
+      @Bind private Provider anIntProvider = new Provider() {
+        @Override public Object get() {
+          return testValue;
+        }
+      };
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(),
+          "Non parameterized Provider fields must have an "
+          + "explicit binding class via @Bind(to = Foo.class)");
+    }
+  }
+

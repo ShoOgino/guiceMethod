@@ -1,0 +1,13 @@
+  public void testBoundProvidersAreInjected() {
+    final Integer testValue = 1024;
+    Object instance = new Object() {
+      @Bind private Integer anInt = testValue;
+      @Bind private Provider<Number> aNumberProvider = new InjectedNumberProvider();
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testValue, injector.getInstance(Number.class));
+  }
+

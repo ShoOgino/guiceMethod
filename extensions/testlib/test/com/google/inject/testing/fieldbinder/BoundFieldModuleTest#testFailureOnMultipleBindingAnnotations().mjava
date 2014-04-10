@@ -1,0 +1,18 @@
+  public void testFailureOnMultipleBindingAnnotations() {
+    final Integer testInt = 1024;
+    Object instance = new Object() {
+      @Bind
+      @Named("a")
+      @SomeBindingAnnotation
+      private Integer anInt = testInt;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), "More than one annotation is specified for this binding.");
+    }
+  }
+

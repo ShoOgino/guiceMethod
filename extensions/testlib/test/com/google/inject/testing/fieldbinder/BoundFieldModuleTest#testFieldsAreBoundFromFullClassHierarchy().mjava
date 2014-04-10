@@ -1,0 +1,11 @@
+  public void testFieldsAreBoundFromFullClassHierarchy() {
+    final Integer testValue1 = 1024, testValue2 = 2048;
+    FieldBindableSubclass2 instance = new FieldBindableSubclass2(testValue1, testValue2);
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testValue1, injector.getInstance(Integer.class));
+    assertEquals(testValue2, injector.getInstance(Number.class));
+  }
+

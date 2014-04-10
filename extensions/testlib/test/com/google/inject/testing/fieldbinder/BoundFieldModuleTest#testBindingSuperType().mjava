@@ -1,0 +1,12 @@
+  public void testBindingSuperType() {
+    final Integer testValue = 1024;
+    Object instance = new Object() {
+      @Bind(to = Number.class) private Integer anInt = testValue;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(testValue, injector.getInstance(Number.class));
+  }
+

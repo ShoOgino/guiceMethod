@@ -1,0 +1,17 @@
+  public void testProviderSubclassesDoNotBindParameterizedType() {
+    final Integer testValue = 1024;
+    Object instance = new Object() {
+      @Bind private IntegerProvider anIntProvider = new IntegerProvider(testValue);
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    try {
+      injector.getInstance(Integer.class);
+      fail();
+    } catch (ConfigurationException e) {
+      assertContains(e.getMessage(), "Could not find a suitable constructor in java.lang.Integer.");
+    }
+  }
+

@@ -1,0 +1,4 @@
+    BoundFieldException(String message) {
+      super(message);
+    }
+
