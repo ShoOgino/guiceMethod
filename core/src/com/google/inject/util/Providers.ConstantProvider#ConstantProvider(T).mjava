@@ -1,0 +1,4 @@
+    private ConstantProvider(T instance) {
+      this.instance = instance;
+    }
+

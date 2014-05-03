@@ -8,7 +8,7 @@
     Module module2 = new AbstractModule() {
       protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toProvider(Providers.of("A"));
+        multibinder.addBinding().toInstance("A");
       }
     };
     Injector injector = Guice.createInjector(module1, module2);

@@ -8,14 +8,6 @@
    *     life a Guice-supplied Provider will never return null.
    */
   public static <T> Provider<T> of(final T instance) {
-    return new Provider<T>() {
-      public T get() {
-        return instance;
-      }
-
-      @Override public String toString() {
-        return "of(" + instance + ")";
-      }
-    };
+    return new ConstantProvider<T>(instance);
   }
 

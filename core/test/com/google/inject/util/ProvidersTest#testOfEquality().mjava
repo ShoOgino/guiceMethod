@@ -1,0 +1,11 @@
+  public void testOfEquality() {
+    new EqualsTester()
+        .addEqualityGroup(
+            Providers.of(null),
+            Providers.of(null))
+        .addEqualityGroup(
+            Providers.of("Hello"),
+            Providers.of("Hello"))
+        .testEquals();
+  }
+

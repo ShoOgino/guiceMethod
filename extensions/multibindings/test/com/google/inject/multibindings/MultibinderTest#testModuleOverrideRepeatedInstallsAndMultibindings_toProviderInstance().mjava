@@ -1,12 +1,9 @@
   public void testModuleOverrideRepeatedInstallsAndMultibindings_toProviderInstance() {
-    // Providers#of() does not redefine equals/hashCode, so use the same one both times.
-    final Provider<String> aProvider = Providers.of("A");
-    final Provider<String> bProvider = Providers.of("B");
     Module ab = new AbstractModule() {
       @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toProvider(aProvider);
-        multibinder.addBinding().toProvider(bProvider);
+        multibinder.addBinding().toProvider(Providers.of("A"));
+        multibinder.addBinding().toProvider(Providers.of("B"));
       }
     };
 
