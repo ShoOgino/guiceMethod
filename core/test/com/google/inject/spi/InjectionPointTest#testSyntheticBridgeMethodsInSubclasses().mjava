@@ -1,0 +1,28 @@
+  /**
+   * This test serves two purposes:
+   *   1) It makes sure that the bridge methods javax generates don't stop
+   *   us from injecting superclass methods in the case of javax.inject.Inject.
+   *   This would happen prior to java8 (where javac didn't copy annotations
+   *   from the superclass into the subclass method when it generated the
+   *   bridge methods).
+   *   
+   *   2) It makes sure that the methods we're going to inject have the correct
+   *   generic types.  Java8 copies the annotations from super to subclasses,
+   *   but it doesn't copy the generic type information.  Guice would naively
+   *   consider the subclass an injectable method and eject the superclass
+   *   from the 'overrideIndex', leaving only a class with improper generic types.
+   */
+  public void testSyntheticBridgeMethodsInSubclasses() {
+    Set<InjectionPoint> points;
+    
+    points = InjectionPoint.forInstanceMethodsAndFields(RestrictedSuper.class);
+    assertPointDependencies(points, new TypeLiteral<Provider<String>>() {});
+    assertEquals(points.toString(), 2, points.size());
+    assertPoints(points, RestrictedSuper.class, "jInject", "gInject");
+    
+    points = InjectionPoint.forInstanceMethodsAndFields(ExposedSub.class);
+    assertPointDependencies(points, new TypeLiteral<Provider<String>>() {});
+    assertEquals(points.toString(), 2, points.size());
+    assertPoints(points, RestrictedSuper.class, "jInject", "gInject");
+  }
+

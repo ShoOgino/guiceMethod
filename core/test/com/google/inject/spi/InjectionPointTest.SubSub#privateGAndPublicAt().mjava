@@ -1,2 +1,2 @@
-    public void privateGAndPublicAt() {}
+    @Override public void privateGAndPublicAt() {}
 

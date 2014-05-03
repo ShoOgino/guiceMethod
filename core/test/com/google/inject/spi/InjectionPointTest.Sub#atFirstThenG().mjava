@@ -1,2 +1,4 @@
-    @com.google.inject.Inject public void atFirstThenG() {}
+    @com.google.inject.Inject
+    @Override 
+    public void atFirstThenG() {}
 

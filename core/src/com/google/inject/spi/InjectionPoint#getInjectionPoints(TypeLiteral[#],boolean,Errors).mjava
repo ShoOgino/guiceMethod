@@ -39,7 +39,7 @@
       }
 
       for (Method method : current.getRawType().getDeclaredMethods()) {
-        if (Modifier.isStatic(method.getModifiers()) == statics) {
+        if (isEligibleForInjection(method, statics)) {
           Annotation atInject = getAtInject(method);
           if (atInject != null) {
             InjectableMethod injectableMethod = new InjectableMethod(
