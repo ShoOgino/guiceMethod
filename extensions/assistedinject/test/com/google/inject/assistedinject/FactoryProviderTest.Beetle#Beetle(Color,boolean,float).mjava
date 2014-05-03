@@ -1,4 +1,5 @@
     @AssistedInject
+    @SuppressWarnings("unused")
     public Beetle(@Assisted Color color, @Assisted boolean isConvertable, float maxMph) {
       throw new IllegalStateException("Conflicting constructors");
     }

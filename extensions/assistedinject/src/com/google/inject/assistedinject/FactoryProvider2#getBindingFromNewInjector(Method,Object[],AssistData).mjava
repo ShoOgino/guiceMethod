@@ -1,7 +1,8 @@
   /**
    * Creates a child injector that binds the args, and returns the binding for the method's result.
    */
-  public Binding<?> getBindingFromNewInjector(final Method method, final Object[] args, final AssistData data) {
+  public Binding<?> getBindingFromNewInjector(
+      final Method method, final Object[] args, final AssistData data) {
     checkState(injector != null,
         "Factories.create() factories cannot be used until they're initialized by Guice.");
 
@@ -11,7 +12,9 @@
     final Key<?> returnKey = Key.get(returnType.getTypeLiteral(), RETURN_ANNOTATION);
 
     Module assistedModule = new AbstractModule() {
-      @Override @SuppressWarnings("unchecked") // raw keys are necessary for the args array and return value
+      @Override
+      @SuppressWarnings({
+        "unchecked", "rawtypes"}) // raw keys are necessary for the args array and return value
       protected void configure() {
         Binder binder = binder().withSource(method);
 
@@ -41,7 +44,7 @@
     };
 
     Injector forCreate = injector.createChildInjector(assistedModule);
-    Binding binding = forCreate.getBinding(returnKey);
+    Binding<?> binding = forCreate.getBinding(returnKey);
     // If we have providers cached in data, cache the binding for future optimizations.
     if(data.optimized) {
       data.cachedBinding = binding;

@@ -1,3 +1,4 @@
+    @SuppressWarnings("unused")
     public Corvette(@Assisted Color color, @Assisted boolean isConvertable) {
       throw new IllegalStateException("Not an @AssistedInject constructor");
     }

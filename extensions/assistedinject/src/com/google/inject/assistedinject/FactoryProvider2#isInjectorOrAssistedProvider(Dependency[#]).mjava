@@ -3,7 +3,7 @@
    * is a {@link Provider} for a parameter that is {@literal @}{@link Assisted}.
    */
   private boolean isInjectorOrAssistedProvider(Dependency<?> dependency) {
-    Class annotationType = dependency.getKey().getAnnotationType();
+    Class<?> annotationType = dependency.getKey().getAnnotationType();
     if (annotationType != null && annotationType.equals(Assisted.class)) { // If it's assisted..
       if (dependency.getKey().getTypeLiteral().getRawType().equals(Provider.class)) { // And a Provider...
         return true;

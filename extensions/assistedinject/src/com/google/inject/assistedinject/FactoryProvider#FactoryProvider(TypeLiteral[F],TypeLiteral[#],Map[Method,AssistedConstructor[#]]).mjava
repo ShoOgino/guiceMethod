@@ -1,6 +1,8 @@
   private FactoryProvider(TypeLiteral<F> factoryType,
+      TypeLiteral<?> implementationType,
       Map<Method, AssistedConstructor<?>> factoryMethodToConstructor) {
     this.factoryType = factoryType;
+    this.implementationType = implementationType;
     this.factoryMethodToConstructor = factoryMethodToConstructor;
     checkDeclaredExceptionsMatch();
   }

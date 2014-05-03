@@ -15,7 +15,8 @@
         injector.getInstance(Key.get(camaroInsuranceFactoryType));
 
     Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
-    AutoInsurance camaroPolicy = (AutoInsurance) camaroInsuranceFactory.create(camaro, 800.0d);
+    AutoInsurance<?> camaroPolicy =
+        (AutoInsurance<?>) camaroInsuranceFactory.create(camaro, 800.0d);
     assertEquals(800.0d, camaroPolicy.premium);
     assertEquals(50000.0d, camaroPolicy.limit);
     assertEquals(camaro, camaroPolicy.car);
