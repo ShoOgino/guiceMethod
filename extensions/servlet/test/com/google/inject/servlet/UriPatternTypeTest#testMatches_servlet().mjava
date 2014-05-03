@@ -1,0 +1,26 @@
+  public void testMatches_servlet() {
+    UriPatternMatcher pattern = UriPatternType.get(UriPatternType.SERVLET, "/foo/*");
+    assertTrue(pattern.matches("/foo/asdf"));
+    assertTrue(pattern.matches("/foo/asdf?val=1"));
+    assertFalse(pattern.matches("/path/file.bar"));
+    assertFalse(pattern.matches("/path/file.bar?val=1"));
+    assertFalse(pattern.matches("/asdf"));
+    assertFalse(pattern.matches("/asdf?val=1"));
+
+    pattern = UriPatternType.get(UriPatternType.SERVLET, "*.bar");
+    assertFalse(pattern.matches("/foo/asdf"));
+    assertFalse(pattern.matches("/foo/asdf?val=1"));
+    assertTrue(pattern.matches("/path/file.bar"));
+    assertTrue(pattern.matches("/path/file.bar?val=1"));
+    assertFalse(pattern.matches("/asdf"));
+    assertFalse(pattern.matches("/asdf?val=1"));
+
+    pattern = UriPatternType.get(UriPatternType.SERVLET, "/asdf");
+    assertFalse(pattern.matches("/foo/asdf"));
+    assertFalse(pattern.matches("/foo/asdf?val=1"));
+    assertFalse(pattern.matches("/path/file.bar"));
+    assertFalse(pattern.matches("/path/file.bar?val=1"));
+    assertTrue(pattern.matches("/asdf"));
+    assertTrue(pattern.matches("/asdf?val=1"));
+  }
+

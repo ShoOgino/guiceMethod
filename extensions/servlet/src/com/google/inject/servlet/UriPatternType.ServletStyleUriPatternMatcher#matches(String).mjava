@@ -3,6 +3,7 @@
         return false;
       }
 
+      uri = getUri(uri);
       if (patternKind == Kind.PREFIX) {
         return uri.endsWith(pattern);
       } else if (patternKind == Kind.SUFFIX) {

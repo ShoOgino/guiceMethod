@@ -1,0 +1,10 @@
+  public void testMatches_regex() {
+    UriPatternMatcher pattern = UriPatternType.get(UriPatternType.REGEX, "/.*/foo");
+    assertFalse(pattern.matches("/foo/asdf"));
+    assertFalse(pattern.matches("/foo/asdf?val=1"));
+    assertTrue(pattern.matches("/path/foo"));
+    assertTrue(pattern.matches("/path/foo?val=1"));
+    assertFalse(pattern.matches("/foo"));
+    assertFalse(pattern.matches("/foo?val=1"));
+  }
+

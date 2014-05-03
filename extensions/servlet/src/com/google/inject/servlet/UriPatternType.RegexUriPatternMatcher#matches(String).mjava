@@ -1,4 +1,4 @@
     public boolean matches(String uri) {
-      return null != uri && this.pattern.matcher(uri).matches();
+      return null != uri && this.pattern.matcher(getUri(uri)).matches();
     }
 

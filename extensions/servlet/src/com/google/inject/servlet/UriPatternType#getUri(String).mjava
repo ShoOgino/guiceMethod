@@ -1,0 +1,9 @@
+  private static String getUri(String uri) {
+    // Strip out the query, if it existed in the URI.  See issue 379.
+    int queryIdx = uri.indexOf('?');
+    if (queryIdx != -1) {
+      uri = uri.substring(0, queryIdx);
+    }
+    return uri;
+  }
+
