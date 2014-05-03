@@ -1,5 +1,5 @@
     @Inject
-    public DefectiveCar() throws ExplosionException, FireException {
+    public DefectiveCar() throws ExplosionException {
       throw new ExplosionException();
     }
 

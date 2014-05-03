@@ -1,5 +1,6 @@
     @AssistedInject
-    public MultipleConstructorDefectiveCar(@Assisted Color c) throws FireException {
+    public MultipleConstructorDefectiveCar(@SuppressWarnings("unused") @Assisted Color c)
+        throws FireException {
       throw new FireException();
     }
 

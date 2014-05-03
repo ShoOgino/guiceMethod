@@ -1,0 +1,19 @@
+  public void testDuplicateBindings() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        install(new FactoryModuleBuilder()
+            .implement(Car.class, Mustang.class)
+            .build(ColoredCarFactory.class));
+        install(new FactoryModuleBuilder()
+            .implement(Car.class, Mustang.class)
+            .build(ColoredCarFactory.class));
+      }
+    });
+
+    ColoredCarFactory factory = injector.getInstance(ColoredCarFactory.class);
+
+    Mustang mustang = (Mustang) factory.create(Color.BLUE);
+    assertEquals(Color.BLUE, mustang.color);
+  }
+

@@ -1,4 +1,8 @@
-  @Override public boolean equals(Object o) {
-    return o == this || o == factory;
+  @Override public boolean equals(Object obj) {
+    if (!(obj instanceof FactoryProvider2)) {
+      return false;
+    }
+    FactoryProvider2<?> other = (FactoryProvider2<?>) obj;
+    return factoryKey.equals(other.factoryKey) && Objects.equal(collector, other.collector);
   }
 

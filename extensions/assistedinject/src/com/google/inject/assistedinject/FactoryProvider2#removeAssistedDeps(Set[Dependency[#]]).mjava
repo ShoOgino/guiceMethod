@@ -2,7 +2,7 @@
   private Set<Dependency<?>> removeAssistedDeps(Set<Dependency<?>> deps) {
     ImmutableSet.Builder<Dependency<?>> builder = ImmutableSet.builder();
     for(Dependency<?> dep : deps) {
-      Class annotationType = dep.getKey().getAnnotationType();
+      Class<?> annotationType = dep.getKey().getAnnotationType();
       if (annotationType == null || !annotationType.equals(Assisted.class)) {
         builder.add(dep);
       }

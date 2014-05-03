@@ -1,4 +1,4 @@
     @Inject
-    public AssistedSingleton(@Assisted String string) {      
+    public AssistedSingleton(@SuppressWarnings("unused") @Assisted String string) {
     }
 

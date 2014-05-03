@@ -1,5 +1,6 @@
   public void testFactoryBuildingConcreteTypes() {
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(double.class).toInstance(5.0d);
         // note there is no 'thatMakes()' call here:

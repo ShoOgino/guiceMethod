@@ -39,7 +39,7 @@
     boolean found = false;
     for(Element element : elements) {
       if(element instanceof Binding) {
-        Binding binding = (Binding)element;
+        Binding<?> binding = (Binding<?>) element;
         if(binding.getKey().equals(Key.get(AnimalHouse.class))) {
           found = true;
           validateDependencies(expectedKeys, binding);

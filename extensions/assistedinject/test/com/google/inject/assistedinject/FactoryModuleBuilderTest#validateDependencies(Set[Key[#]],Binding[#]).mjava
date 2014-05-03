@@ -1,7 +1,7 @@
   private void validateDependencies(Set<Key<?>> expectedKeys, Binding<?> binding) {
     Set<Dependency<?>> dependencies = ((HasDependencies)binding).getDependencies();
     Set<Key<?>> actualKeys = new HashSet<Key<?>>();
-    for(Dependency dependency : dependencies) {
+    for (Dependency<?> dependency : dependencies) {
       actualKeys.add(dependency.getKey());
     }
     assertEquals(expectedKeys, actualKeys);

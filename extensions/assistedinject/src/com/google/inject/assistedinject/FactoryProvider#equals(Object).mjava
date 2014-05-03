@@ -1,0 +1,10 @@
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof FactoryProvider)) {
+      return false;
+    }
+    FactoryProvider<?> other = (FactoryProvider<?>) obj;
+    return factoryType.equals(other.factoryType)
+        && implementationType.equals(other.implementationType);
+  }
+

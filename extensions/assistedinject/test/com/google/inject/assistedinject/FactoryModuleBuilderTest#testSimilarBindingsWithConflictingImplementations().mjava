@@ -1,0 +1,22 @@
+  public void testSimilarBindingsWithConflictingImplementations() {
+    try {
+      Injector injector = Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          install(new FactoryModuleBuilder()
+              .implement(Car.class, Mustang.class)
+              .build(ColoredCarFactory.class));
+          install(new FactoryModuleBuilder()
+              .implement(Car.class, Golf.class)
+              .build(ColoredCarFactory.class));
+        }
+      });
+      injector.getInstance(ColoredCarFactory.class);
+      fail();
+    } catch (CreationException ce) {
+      assertContains(ce.getMessage(),
+          "A binding to " + ColoredCarFactory.class.getName() + " was already configured");
+      assertEquals(1, ce.getErrorMessages().size());
+    }
+  }
+
