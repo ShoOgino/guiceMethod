@@ -4,7 +4,6 @@
    */
   private void cleanUpForCollectedState(Set<KeyAndSource> keysAndSources) {
     synchronized (lock) {
-      
       for (KeyAndSource keyAndSource : keysAndSources) {
         Multiset<Object> set = backingSet.get(keyAndSource.mapKey);
         if (set != null) {
