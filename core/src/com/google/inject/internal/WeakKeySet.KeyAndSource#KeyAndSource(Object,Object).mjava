@@ -1,5 +1,0 @@
-    KeyAndSource(Object mapKey, Object source) {
-      this.mapKey = mapKey;
-      this.source = source;
-    }
-

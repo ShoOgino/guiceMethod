@@ -1,17 +1,17 @@
   public void add(Key<?> key, State state, Object source) {
-    if (backingSet == null) {
-      backingSet = Maps.newHashMap();
+    if (backingMap == null) {
+      backingMap = Maps.newHashMap();
     }
     // if it's an instanceof Class, it was a JIT binding, which we don't
     // want to retain.
     if (source instanceof Class || source == SourceProvider.UNKNOWN_SOURCE) {
       source = null;
     }
-    Object mapKey = toMapKey(key);
-    Multiset<Object> sources = backingSet.get(mapKey);
+    BlacklistKey blacklistKey = new BlacklistKey(key);
+    Multiset<Object> sources = backingMap.get(blacklistKey);
     if (sources == null) {
       sources = LinkedHashMultiset.create();
-      backingSet.put(mapKey, sources);
+      backingMap.put(blacklistKey, sources);
     }
     Object convertedSource = Errors.convert(source);
     sources.add(convertedSource);
@@ -22,7 +22,7 @@
       if (keyAndSources == null) {
         evictionCache.put(state, keyAndSources = Sets.newHashSet());
       }
-      keyAndSources.add(new KeyAndSource(mapKey, convertedSource));
+      keyAndSources.add(new KeyAndSource(blacklistKey, convertedSource));
     }
   }
 

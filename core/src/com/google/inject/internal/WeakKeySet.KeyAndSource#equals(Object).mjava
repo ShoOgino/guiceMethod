@@ -9,7 +9,7 @@
       }
 
       KeyAndSource other = (KeyAndSource) obj;
-      return Objects.equal(mapKey, other.mapKey)
+      return Objects.equal(blacklistKey, other.blacklistKey)
           && Objects.equal(source, other.source);
     }
 

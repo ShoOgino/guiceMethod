@@ -1,0 +1,8 @@
+    public boolean equals(Object obj) {
+      if (obj instanceof BlacklistKey) {
+        return delegate.equals(((BlacklistKey) obj).delegate);
+      } else {
+        return false;
+      }
+    }
+

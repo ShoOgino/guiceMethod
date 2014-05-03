@@ -1,0 +1,5 @@
+    KeyAndSource(BlacklistKey blacklistKey, Object source) {
+      this.blacklistKey = blacklistKey;
+      this.source = source;
+    }
+
