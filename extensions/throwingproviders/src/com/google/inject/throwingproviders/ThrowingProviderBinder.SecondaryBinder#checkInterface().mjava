@@ -56,8 +56,15 @@
         }
       }
       
-      if (interfaceType.getDeclaredMethods().length == 1) {
-        Method method = interfaceType.getDeclaredMethods()[0];
+      // Skip synthetic/bridge methods because java8 generates
+      // a default method on the interface w/ the superinterface type that
+      // just delegates directly to the overridden method.
+      List<Method> declaredMethods = FluentIterable
+          .from(Arrays.asList(interfaceType.getDeclaredMethods()))
+          .filter(NotSyntheticOrBridgePredicate.INSTANCE)
+          .toList();
+      if (declaredMethods.size() == 1) {
+        Method method = declaredMethods.get(0);
         if(!checkArgument(method.getName().equals("get"),
             "%s may not declare any new methods, but declared %s",
             interfaceType, method)) {
@@ -69,7 +76,7 @@
           return false;
         }
       } else {
-        if(!checkArgument(interfaceType.getDeclaredMethods().length == 0,
+        if(!checkArgument(declaredMethods.isEmpty(),
             "%s may not declare any new methods, but declared %s",
             interfaceType, Arrays.asList(interfaceType.getDeclaredMethods()))) {
           return false;
