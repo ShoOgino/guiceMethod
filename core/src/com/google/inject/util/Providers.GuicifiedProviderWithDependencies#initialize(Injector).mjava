@@ -1,0 +1,6 @@
+    @SuppressWarnings("unused")
+    @Inject
+    void initialize(Injector injector) {
+      injector.injectMembers(delegate);
+    }
+

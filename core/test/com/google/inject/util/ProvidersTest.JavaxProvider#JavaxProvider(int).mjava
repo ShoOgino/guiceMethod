@@ -1,0 +1,4 @@
+    public JavaxProvider(int value) {
+      this.value = value;
+    }
+

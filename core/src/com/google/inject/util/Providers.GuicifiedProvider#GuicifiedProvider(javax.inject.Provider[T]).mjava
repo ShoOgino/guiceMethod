@@ -1,0 +1,4 @@
+    private GuicifiedProvider(javax.inject.Provider<T> delegate) {
+      this.delegate = delegate;
+    }
+
