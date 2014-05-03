@@ -1,7 +1,6 @@
-  // Safe cast because values are typed to AssistedData, which is an AssistedMethod, and
-  // the collection is immutable.
+  // safe cast because values are typed to AssistedData, which is an AssistedMethod
   @SuppressWarnings("unchecked")
   public Collection<AssistedMethod> getAssistedMethods() {
-    return (Collection<AssistedMethod>) (Collection<?>) assistDataByMethod.values();
+    return (Collection)assistDataByMethod.values();
   }
 

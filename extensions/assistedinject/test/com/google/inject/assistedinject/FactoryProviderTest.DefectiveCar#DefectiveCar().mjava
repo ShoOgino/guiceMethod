@@ -1,5 +1,5 @@
     @AssistedInject
-    public DefectiveCar() throws ExplosionException {
+    public DefectiveCar() throws ExplosionException, FireException {
       throw new ExplosionException();
     }
 

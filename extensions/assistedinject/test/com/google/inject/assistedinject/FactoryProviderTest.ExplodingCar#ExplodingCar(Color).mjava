@@ -1,5 +1,5 @@
     @AssistedInject
-    public ExplodingCar(@SuppressWarnings("unused") @Assisted Color color) {
+    public ExplodingCar(@Assisted Color color) {
       throw new IllegalStateException("kaboom!");
     }
 

@@ -5,8 +5,8 @@
    * {@link AssistedInject} constructors exist, this will default to looking for an
    * {@literal @}{@link Inject} constructor.
    */
-  private <T> InjectionPoint findMatchingConstructorInjectionPoint(
-      Method method, Key<?> returnType, TypeLiteral<T> implementation, List<Key<?>> paramList)
+  private InjectionPoint findMatchingConstructorInjectionPoint(
+      Method method, Key<?> returnType, TypeLiteral<?> implementation, List<Key<?>> paramList)
       throws ErrorsException {
     Errors errors = new Errors(method);
     if(returnType.getTypeLiteral().equals(implementation)) {
@@ -42,8 +42,7 @@
             errors
                 .addMessage(
                     "%s has more than one constructor annotated with @AssistedInject"
-                        + " that matches the parameters in method %s.  Unable to create "
-                        + "AssistedInject factory.",
+                        + " that matches the parameters in method %s.  Unable to create AssistedInject factory.",
                     implementation, method);
             throw errors.toException();
           } else {
@@ -67,7 +66,7 @@
           // safe because we got the constructor from this implementation.
           @SuppressWarnings("unchecked")
           InjectionPoint ip = InjectionPoint.forConstructor(
-              (Constructor<? super T>) matchingConstructor, implementation);
+              (Constructor)matchingConstructor, implementation);
           return ip;
       } else {
         errors.addMessage(

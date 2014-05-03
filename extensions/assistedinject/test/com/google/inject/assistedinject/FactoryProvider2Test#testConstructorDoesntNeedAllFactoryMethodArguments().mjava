@@ -1,6 +1,5 @@
   public void testConstructorDoesntNeedAllFactoryMethodArguments() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
       protected void configure() {
         bind(SummerCarFactory.class).toProvider(
             FactoryProvider.newFactory(SummerCarFactory.class, Beetle.class));

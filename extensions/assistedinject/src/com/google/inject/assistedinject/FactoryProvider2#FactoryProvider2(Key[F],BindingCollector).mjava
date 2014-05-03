@@ -1,19 +1,16 @@
   /**
-   * @param factoryKey a key for a Java interface that defines one or more create methods.
-   * @param implementationType the implementation type, or null if FactoryModuleBuilder was used
+   * @param factoryType a Java interface that defines one or more create methods.
    * @param collector binding configuration that maps method return types to
    *    implementation types.
    */
-  FactoryProvider2(
-      Key<F> factoryKey, TypeLiteral<?> implementationType, BindingCollector collector) {
+  FactoryProvider2(Key<F> factoryKey, BindingCollector collector) {
     this.factoryKey = factoryKey;
-    this.implementationType = implementationType;
 
     TypeLiteral<F> factoryType = factoryKey.getTypeLiteral();
     Errors errors = new Errors();
 
     @SuppressWarnings("unchecked") // we imprecisely treat the class literal of T as a Class<T>
-    Class<F> factoryRawType = (Class<F>) (Class<?>) factoryType.getRawType();
+    Class<F> factoryRawType = (Class) factoryType.getRawType();
 
     try {
       if(!factoryRawType.isInterface()) {
@@ -77,7 +74,7 @@
           continue;
         }
 
-        Constructor<?> constructor = (Constructor<?>) ctorInjectionPoint.getMember();
+        Constructor<?> constructor = (Constructor)ctorInjectionPoint.getMember();
         List<ThreadLocalProvider> providers = Collections.emptyList();
         Set<Dependency<?>> deps = getDependencies(ctorInjectionPoint, implementation);
         boolean optimized = false;

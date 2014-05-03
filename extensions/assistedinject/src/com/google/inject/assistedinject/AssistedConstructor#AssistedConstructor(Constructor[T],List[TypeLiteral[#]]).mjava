@@ -1,4 +1,5 @@
-  private AssistedConstructor(Constructor<T> constructor, List<TypeLiteral<?>> parameterTypes) {
+  @SuppressWarnings("unchecked")
+  public AssistedConstructor(Constructor<T> constructor, List<TypeLiteral<?>> parameterTypes) {
     this.constructor = constructor;
 
     Annotation[][] annotations = constructor.getParameterAnnotations();

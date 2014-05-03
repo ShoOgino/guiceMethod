@@ -4,7 +4,7 @@
         = createMethodMapping(factoryType, implementationType);
 
     if (!factoryMethodToConstructor.isEmpty()) {
-      return new FactoryProvider<F>(factoryType, implementationType, factoryMethodToConstructor);
+      return new FactoryProvider<F>(factoryType, factoryMethodToConstructor);
     } else {
       BindingCollector collector = new BindingCollector();
 
@@ -13,19 +13,21 @@
       Errors errors = new Errors();
       Key<?> implementationKey = Key.get(implementationType);
 
-      try {
-        for (Method method : factoryType.getRawType().getMethods()) {
-          Key<?> returnType = getKey(factoryType.getReturnType(method), method,
-              method.getAnnotations(), errors);
-          if (!implementationKey.equals(returnType)) {
-            collector.addBinding(returnType, implementationType);
+      if (implementationType != null) {
+        try {
+          for (Method method : factoryType.getRawType().getMethods()) {
+            Key<?> returnType = getKey(factoryType.getReturnType(method), method,
+                method.getAnnotations(), errors);
+            if (!implementationKey.equals(returnType)) {
+              collector.addBinding(returnType, implementationType);
+            }
           }
-      }
-      } catch (ErrorsException e) {
-        throw new ConfigurationException(e.getErrors().getMessages());
+        } catch (ErrorsException e) {
+          throw new ConfigurationException(e.getErrors().getMessages());
+        }
       }
 
-      return new FactoryProvider2<F>(Key.get(factoryType), implementationType, collector);
+      return new FactoryProvider2<F>(Key.get(factoryType), collector);
     }
   }
 

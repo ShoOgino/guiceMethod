@@ -1,6 +1,0 @@
-      @AssistedInject
-      public Impl(double sigma, @Assisted ComparisonMethod comparisonMethod) {
-        this.sigma = sigma;
-        this.comparisonMethod = comparisonMethod;
-      }
-

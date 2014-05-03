@@ -2,7 +2,7 @@
    * Returns true if the ConfigurationException is due to an error of TypeLiteral not being fully
    * specified.
    */
-  private boolean isTypeNotSpecified(TypeLiteral<?> typeLiteral, ConfigurationException ce) {
+  private boolean isTypeNotSpecified(TypeLiteral typeLiteral, ConfigurationException ce) {
     Collection<Message> messages = ce.getErrorMessages();
     if (messages.size() == 1) {
       Message msg = Iterables.getOnlyElement(

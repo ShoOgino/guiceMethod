@@ -4,7 +4,8 @@
 
     for (Constructor<?> constructor : implementationType.getRawType().getDeclaredConstructors()) {
       if (constructor.getAnnotation(AssistedInject.class) != null) {
-        AssistedConstructor<?> assistedConstructor = AssistedConstructor.create(
+        @SuppressWarnings("unchecked") // the constructor type and implementation type agree
+        AssistedConstructor assistedConstructor = new AssistedConstructor(
             constructor, implementationType.getParameterTypes(constructor));
         constructors.add(assistedConstructor);
       }
@@ -22,9 +23,9 @@
           constructors.size(), factoryType, factoryMethods.length);
     }
 
-    Map<ParameterListKey, AssistedConstructor<?>> paramsToConstructor = Maps.newHashMap();
+    Map<ParameterListKey, AssistedConstructor> paramsToConstructor = Maps.newHashMap();
 
-    for (AssistedConstructor<?> c : constructors) {
+    for (AssistedConstructor c : constructors) {
       if (paramsToConstructor.containsKey(c.getAssistedParameters())) {
         throw new RuntimeException("Duplicate constructor, " + c);
       }
@@ -62,7 +63,7 @@
         }
       }
 
-      AssistedConstructor<?> matchingConstructor = paramsToConstructor.remove(methodParams);
+      AssistedConstructor matchingConstructor = paramsToConstructor.remove(methodParams);
 
       result.put(method, matchingConstructor);
     }

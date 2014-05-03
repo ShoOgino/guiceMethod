@@ -1,5 +1,0 @@
-  public static <T> AssistedConstructor<T> create(
-      Constructor<T> constructor, List<TypeLiteral<?>> parameterTypes) {
-    return new AssistedConstructor<T>(constructor, parameterTypes);
-  }
-

@@ -6,6 +6,6 @@
             .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Prius.class));
       }
     });
-    injector.getInstance(ColoredCarFactory.class).create(Color.ORANGE);
+    Car car = injector.getInstance(ColoredCarFactory.class).create(Color.ORANGE);
   }
 
