@@ -1,15 +1,11 @@
-    <T> T call(Callable<T> callable) throws Exception {
-      Thread oldOwner = owner;
-      Thread newOwner = Thread.currentThread();
-      Preconditions.checkState(oldOwner == null || oldOwner == newOwner,
-          "Trying to transfer request scope but original scope is still active");
-      owner = newOwner;
+    // Synchronized to prevent two threads from using the same request
+    // scope concurrently.
+    synchronized <T> T call(Callable<T> callable) throws Exception {
       Context previous = localContext.get();
       localContext.set(this);
       try {
         return callable.call();
       } finally {
-        owner = oldOwner;
         localContext.set(previous);
       }
     }
