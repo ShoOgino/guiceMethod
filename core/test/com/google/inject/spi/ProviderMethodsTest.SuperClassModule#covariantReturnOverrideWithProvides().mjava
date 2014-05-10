@@ -1,0 +1,4 @@
+    @Provides CharSequence covariantReturnOverrideWithProvides() {
+      return "base";
+    }
+

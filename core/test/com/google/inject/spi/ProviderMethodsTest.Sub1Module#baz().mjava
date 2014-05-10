@@ -1,0 +1,4 @@
+    @Provides Double baz() {
+      return 42D;
+    }
+

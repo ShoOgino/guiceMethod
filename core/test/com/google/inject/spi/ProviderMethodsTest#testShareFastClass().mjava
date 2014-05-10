@@ -1,0 +1,8 @@
+  /*if[AOP]*/
+  public void testShareFastClass() {
+    CallerInspecterModule module = new CallerInspecterModule();
+    Guice.createInjector(Stage.PRODUCTION, module);
+    assertEquals(module.fooCallerClass, module.barCallerClass);
+    assertTrue(module.fooCallerClass.contains("$$FastClassByGuice$$"));
+  }
+

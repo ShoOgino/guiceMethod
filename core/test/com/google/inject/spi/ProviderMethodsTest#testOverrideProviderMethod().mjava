@@ -1,0 +1,43 @@
+  // Test the behavior of provider methods when they are overridden
+  public void testOverrideProviderMethod() {
+    try {
+      Guice.createInjector(new SuperClassModule() {
+        @Override
+        @Provides
+        Double normalOverrideWithProvides() {
+          return 2D;
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(),
+          "A binding to java.lang.Double was already configured");
+    }
+
+    Injector injector = Guice.createInjector(Stage.PRODUCTION, new SuperClassModule() {
+      @Override Long normalOverrideWithoutProvides() {
+        return 2L;
+      }
+    });
+    assertEquals(2L, injector.getInstance(Long.class).longValue());
+    
+    injector = Guice.createInjector(Stage.PRODUCTION, new SuperClassModule() {
+      @Override ImmutableSet<String> covariantReturnOverrideWithoutProvides() {
+        return ImmutableSet.of("subset");
+      }
+    });
+    assertEquals(ImmutableSet.of("subset"), 
+        injector.getInstance(new Key<Collection<String>>() {}));
+    // This is super weird since two keys get bound to the same method.
+    // TODO(sameb): make this throw an exception at configure() time!
+    injector = Guice.createInjector(Stage.PRODUCTION, new SuperClassModule() {
+      @Override
+      @Provides
+      String covariantReturnOverrideWithProvides() {
+        return "sub";
+      }
+    });
+    assertEquals("sub", injector.getInstance(String.class));
+    assertEquals("sub", injector.getInstance(CharSequence.class));
+  }
+

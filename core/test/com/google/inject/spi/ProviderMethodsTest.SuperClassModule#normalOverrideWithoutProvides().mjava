@@ -1,0 +1,4 @@
+    @Provides Long normalOverrideWithoutProvides() {
+      return 1L;
+    }
+

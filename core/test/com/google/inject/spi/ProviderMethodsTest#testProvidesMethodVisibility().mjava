@@ -1,0 +1,9 @@
+  public void testProvidesMethodVisibility() {
+    Injector injector = Guice.createInjector(new VisibilityModule());
+
+    assertEquals(42, injector.getInstance(Integer.class).intValue());
+    assertEquals(42L, injector.getInstance(Long.class).longValue());
+    assertEquals(42D, injector.getInstance(Double.class).doubleValue());
+    assertEquals(42F, injector.getInstance(Float.class).floatValue());
+  }
+

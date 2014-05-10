@@ -1,0 +1,5 @@
+    @SuppressWarnings("unused")
+    @Provides public Float quux() {
+      return 42F;
+    }
+

@@ -5,9 +5,8 @@
     }
 
     try {
-      // We know this cast is safe becase T is the method's return type.
       @SuppressWarnings({ "unchecked", "UnnecessaryLocalVariable" })
-      T result = (T) method.invoke(instance, parameters);
+      T result = (T) doProvision(parameters);
       return result;
     } catch (IllegalAccessException e) {
       throw new AssertionError(e);

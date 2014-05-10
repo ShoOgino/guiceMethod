@@ -1,0 +1,4 @@
+    @Provides Integer foo() {
+      return 42;
+    }
+

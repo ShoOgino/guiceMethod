@@ -1,0 +1,4 @@
+    @Provides Float quux() {
+      return 42F;
+    }
+

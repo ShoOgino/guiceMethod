@@ -1,7 +1,7 @@
   /**
    * @param method the method to invoke. It's return type must be the same type as {@code key}.
    */
-  ProviderMethod(Key<T> key, Method method, Object instance,
+  private ProviderMethod(Key<T> key, Method method, Object instance,
       ImmutableSet<Dependency<?>> dependencies, List<Provider<?>> parameterProviders,
       Class<? extends Annotation> scopeAnnotation) {
     this.key = key;
@@ -11,7 +11,5 @@
     this.method = method;
     this.parameterProviders = parameterProviders;
     this.exposed = method.isAnnotationPresent(Exposed.class);
-
-    method.setAccessible(true);
   }
 

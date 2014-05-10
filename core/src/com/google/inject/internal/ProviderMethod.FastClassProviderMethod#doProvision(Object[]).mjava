@@ -1,0 +1,5 @@
+    @Override public Object doProvision(Object[] parameters)
+        throws IllegalAccessException, InvocationTargetException {
+      return fastClass.invoke(methodIndex, instance, parameters);
+    }
+
