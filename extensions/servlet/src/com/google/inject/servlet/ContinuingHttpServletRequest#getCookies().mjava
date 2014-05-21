@@ -1,8 +1,9 @@
   @Override public Cookie[] getCookies() {
-    if (super.getCookies() == null) {
-      return null;
-    }
-    // TODO(dhanji): Cookies themselves are mutable. Is this a problem?
-    return super.getCookies().clone();
+    // NOTE(dhanji): Cookies themselves are mutable. However a ContinuingHttpServletRequest
+    // snapshots the original set of cookies it received and imprisons them in immutable
+    // form. Unfortunately, the cookie array itself is mutable and there is no way for us
+    // to avoid this. At worst, however, mutation effects are restricted within the scope
+    // of a single request. Continued requests are not affected after snapshot time.
+    return cookies;
   }
 

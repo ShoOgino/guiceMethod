@@ -1,0 +1,4 @@
+    @Override public void setVersion(int v) {
+      throw new UnsupportedOperationException("Cannot modify cookies on a continued request");
+    }
+

@@ -1,4 +1,23 @@
   public ContinuingHttpServletRequest(HttpServletRequest request) {
     super(request);
+
+    Cookie[] originalCookies = request.getCookies();
+    if (originalCookies != null) {
+      int numberOfCookies = originalCookies.length;
+      cookies = new Cookie[numberOfCookies];
+      for (int i = 0; i < numberOfCookies; i++) {
+        Cookie originalCookie = originalCookies[i];
+
+        // Snapshot each cookie + freeze.
+        // No snapshot is required if this is a snapshot of a snapshot(!)
+        if (originalCookie instanceof ImmutableCookie) {
+          cookies[i] = originalCookie;
+        } else {
+          cookies[i] = new ImmutableCookie(originalCookie);
+        }
+      }
+    } else {
+      cookies = null;
+    }
   }
 

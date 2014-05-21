@@ -1,0 +1,4 @@
+    @Override public void setComment(String purpose) {
+      throw new UnsupportedOperationException("Cannot modify cookies on a continued request");
+    }
+

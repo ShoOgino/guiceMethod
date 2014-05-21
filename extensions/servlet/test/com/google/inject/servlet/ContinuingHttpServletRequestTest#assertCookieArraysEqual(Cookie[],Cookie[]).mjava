@@ -1,0 +1,8 @@
+  private static void assertCookieArraysEqual(Cookie[] one, Cookie[] two) {
+    assertEquals(one.length, two.length);
+    for (int i = 0; i < one.length; i++) {
+      Cookie cookie = one[i];
+      assertCookiequality(cookie, two[i]);
+    }
+  }
+

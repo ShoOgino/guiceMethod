@@ -1,0 +1,4 @@
+    @Override public void setDomain(String pattern) {
+      throw new UnsupportedOperationException("Cannot modify cookies on a continued request");
+    }
+

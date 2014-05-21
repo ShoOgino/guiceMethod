@@ -1,0 +1,15 @@
+    public ImmutableCookie(Cookie original) {
+      super(original.getName(), original.getValue());
+
+      super.setMaxAge(original.getMaxAge());
+      super.setPath(original.getPath());
+      super.setComment(original.getComment());
+      super.setSecure(original.getSecure());
+      super.setValue(original.getValue());
+      super.setVersion(original.getVersion());
+
+      if (original.getDomain() != null) {
+        super.setDomain(original.getDomain());
+      }
+    }
+

@@ -1,0 +1,10 @@
+  private static void assertCookiequality(Cookie one, Cookie two) {
+    assertEquals(one.getName(), two.getName());
+    assertEquals(one.getComment(), two.getComment());
+    assertEquals(one.getDomain(), two.getDomain());
+    assertEquals(one.getPath(), two.getPath());
+    assertEquals(one.getValue(), two.getValue());
+    assertEquals(one.getMaxAge(), two.getMaxAge());
+    assertEquals(one.getSecure(), two.getSecure());
+  }
+
