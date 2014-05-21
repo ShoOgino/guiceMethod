@@ -1,6 +1,6 @@
   public void testReturnDelegateCookies() {
     Cookie[] cookies = new Cookie[]{
-        new Cookie("testName1", "testValue1"),
+        new Cookie("testName1", TEST_VALUE_1),
         new Cookie("testName2", "testValue2")
     };
     HttpServletRequest delegate = createMock(HttpServletRequest.class);
@@ -24,6 +24,11 @@
     } catch (AssertionFailedError e) {
       // Expected.
     }
+
+    // Verify that they remain equal to the original values.
+    assertEquals(TEST_VALUE_1, continuingRequest.getCookies()[0].getValue());
+    assertEquals(TEST_VALUE_2, continuingRequest.getCookies()[1].getValue());
+    assertEquals(DEFAULT_MAX_AGE, continuingRequest.getCookies()[1].getMaxAge());
 
     // Perform a snapshot of the snapshot.
     ContinuingHttpServletRequest furtherContinuingRequest = new ContinuingHttpServletRequest(

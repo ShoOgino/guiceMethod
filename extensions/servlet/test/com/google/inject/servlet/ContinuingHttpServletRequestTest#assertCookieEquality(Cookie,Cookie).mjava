@@ -1,4 +1,4 @@
-  private static void assertCookiequality(Cookie one, Cookie two) {
+  private static void assertCookieEquality(Cookie one, Cookie two) {
     assertEquals(one.getName(), two.getName());
     assertEquals(one.getComment(), two.getComment());
     assertEquals(one.getDomain(), two.getDomain());

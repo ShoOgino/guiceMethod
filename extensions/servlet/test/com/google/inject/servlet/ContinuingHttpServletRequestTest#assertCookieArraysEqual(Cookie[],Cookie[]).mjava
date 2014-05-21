@@ -2,7 +2,7 @@
     assertEquals(one.length, two.length);
     for (int i = 0; i < one.length; i++) {
       Cookie cookie = one[i];
-      assertCookiequality(cookie, two[i]);
+      assertCookieEquality(cookie, two[i]);
     }
   }
 
