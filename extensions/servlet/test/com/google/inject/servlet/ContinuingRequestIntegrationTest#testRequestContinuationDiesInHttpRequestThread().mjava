@@ -24,6 +24,7 @@
         .anyTimes();
 
     expect(request.getMethod()).andReturn("GET");
+    expect(request.getCookies()).andReturn(new Cookie[0]);
     FilterChain filterChain = createMock(FilterChain.class);
 
     replay(request, filterConfig, filterChain);

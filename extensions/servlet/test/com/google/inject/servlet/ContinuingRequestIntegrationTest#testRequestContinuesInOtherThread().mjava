@@ -22,6 +22,7 @@
         .andReturn("")
         .anyTimes();
     expect(request.getMethod()).andReturn("GET");
+    expect(request.getCookies()).andReturn(new Cookie[0]);
 
     FilterChain filterChain = createMock(FilterChain.class);
     expect(request.getParameter(PARAM_NAME)).andReturn(PARAM_VALUE);
