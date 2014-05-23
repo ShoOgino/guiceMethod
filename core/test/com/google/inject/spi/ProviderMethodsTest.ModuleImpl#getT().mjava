@@ -1,0 +1,4 @@
+    @Provides public String getT() {
+      return "string";
+    }
+

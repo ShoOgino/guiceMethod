@@ -1,0 +1,4 @@
+  public void testIgnoreSyntheticBridgeMethods() {
+    Guice.createInjector(new ModuleImpl());
+  }
+

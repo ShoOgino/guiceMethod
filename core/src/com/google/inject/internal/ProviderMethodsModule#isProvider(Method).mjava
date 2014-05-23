@@ -1,0 +1,12 @@
+  /**
+   * Returns true if the method is a provider.
+   *
+   * Synthetic bridge methods are excluded. Starting with JDK 8, javac copies annotations onto
+   * bridge methods (which always have erased signatures).
+   */
+  private static boolean isProvider(Method method) {
+    return !method.isBridge()
+        && !method.isSynthetic()
+        && method.isAnnotationPresent(Provides.class);
+  }
+
