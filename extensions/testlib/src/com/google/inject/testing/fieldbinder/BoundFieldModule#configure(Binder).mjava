@@ -16,8 +16,8 @@
           // addErrorAndThrow already called addError, so do nothing
         }
       }
-      currentClassType = currentClassType.getSupertype(
-          currentClassType.getRawType().getSuperclass());
+      currentClassType =
+          currentClassType.getSupertype(currentClassType.getRawType().getSuperclass());
     }
   }
 

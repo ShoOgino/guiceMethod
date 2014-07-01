@@ -16,9 +16,10 @@
           field,
           "Fields annotated with both @Bind and @Inject are illegal.");
     }
-    return Optional.of(new BoundFieldInfo(
-        field,
-        bindAnnotation,
-        containingClassType.getFieldType(field)));
+    return Optional.of(
+        new BoundFieldInfo(
+            field,
+            bindAnnotation,
+            containingClassType.getFieldType(field)));
   }
 
