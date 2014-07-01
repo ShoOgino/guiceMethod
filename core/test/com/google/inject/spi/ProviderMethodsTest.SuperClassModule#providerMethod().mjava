@@ -1,0 +1,4 @@
+    @Provides Number providerMethod() {
+      return 1D;
+    }
+

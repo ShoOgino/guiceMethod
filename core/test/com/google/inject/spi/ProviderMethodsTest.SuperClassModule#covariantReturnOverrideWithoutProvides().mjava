@@ -1,4 +1,0 @@
-    @Provides Collection<String> covariantReturnOverrideWithoutProvides() {
-      return ImmutableList.of("baselist");
-    }
-

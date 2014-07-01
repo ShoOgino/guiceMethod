@@ -1,0 +1,23 @@
+  // This is a tricky case where signatures don't match, but it is an override (facilitated via a
+  // bridge method)
+  public void testOverrideProviderMethod_erasureBasedOverrides() {
+    class SubClassModule extends GenericSuperModule<Integer> {
+      @Override String provide(Integer thing) {
+        return thing.toString();
+      }
+
+      @Override protected void configure() {
+        bind(Integer.class).toInstance(3);
+      }
+    }
+    try {
+      Guice.createInjector(new SubClassModule());
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(),
+          "Overriding @Provides methods is not allowed.",
+          "@Provides method: " + GenericSuperModule.class.getName() + ".provide()",
+          "overridden by: " + SubClassModule.class.getName() + ".provide()");
+    }
+  }
+

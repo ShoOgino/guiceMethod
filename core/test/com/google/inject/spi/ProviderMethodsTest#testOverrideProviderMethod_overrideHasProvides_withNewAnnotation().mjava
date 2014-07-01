@@ -1,0 +1,17 @@
+  public void testOverrideProviderMethod_overrideHasProvides_withNewAnnotation() {
+    class SubClassModule extends SuperClassModule {
+      @Override @Provides @Named("foo") Number providerMethod() {
+        return 2D;
+      }
+    }
+    try {
+      Guice.createInjector(new SubClassModule());
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), 
+          "Overriding @Provides methods is not allowed.",
+          "@Provides method: " + SuperClassModule.class.getName() + ".providerMethod()",
+          "overridden by: " + SubClassModule.class.getName() + ".providerMethod()");
+    }
+  }
+

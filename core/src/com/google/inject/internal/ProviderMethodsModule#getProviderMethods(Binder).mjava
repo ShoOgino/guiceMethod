@@ -1,9 +1,41 @@
   public List<ProviderMethod<?>> getProviderMethods(Binder binder) {
     List<ProviderMethod<?>> result = Lists.newArrayList();
+    Multimap<Signature, Method> methodsBySignature = HashMultimap.create();
     for (Class<?> c = delegate.getClass(); c != Object.class; c = c.getSuperclass()) {
       for (Method method : c.getDeclaredMethods()) {
+        // private/static methods cannot override or be overridden by other methods, so there is no
+        // point in indexing them.
+        // Skip synthetic methods and bridge methods since java will automatically generate
+        // synthetic overrides in some cases where we don't want to generate an error (e.g.
+        // increasing visibility of a subclass).
+        if (((method.getModifiers() & (Modifier.PRIVATE | Modifier.STATIC)) == 0)
+            && !method.isBridge() && !method.isSynthetic()) {
+          methodsBySignature.put(new Signature(method), method);
+        }
         if (isProvider(method)) {
           result.add(createProviderMethod(binder, method));
+        }
+      }
+    }
+    // we have found all the providers and now need to identify if any were overridden
+    // In the worst case this will have O(n^2) in the number of @Provides methods, but that is only
+    // assuming that every method is an override, in general it should be very quick.
+    for (ProviderMethod<?> provider : result) {
+      Method method = provider.getMethod();
+      for (Method matchingSignature : methodsBySignature.get(new Signature(method))) {
+        // matching signature is in the same class or a super class, therefore method cannot be
+        // overridding it.
+        if (matchingSignature.getDeclaringClass().isAssignableFrom(method.getDeclaringClass())) {
+          continue;
+        }
+        // now we know matching signature is in a subtype of method.getDeclaringClass()
+        if (overrides(matchingSignature, method)) {
+          binder.addError(
+              "Overriding @Provides methods is not allowed."
+                  + "\n\t@Provides method: %s\n\toverridden by: %s",
+              method,
+              matchingSignature);
+          break;
         }
       }
     }

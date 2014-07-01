@@ -1,4 +1,4 @@
-  <T> ProviderMethod<T> createProviderMethod(Binder binder, final Method method) {
+  private <T> ProviderMethod<T> createProviderMethod(Binder binder, Method method) {
     binder = binder.withSource(method);
     Errors errors = new Errors(method);
 

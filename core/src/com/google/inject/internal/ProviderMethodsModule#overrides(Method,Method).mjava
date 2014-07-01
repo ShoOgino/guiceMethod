@@ -1,0 +1,14 @@
+  /** Returns true if a overrides b, assumes that the signatures match */
+  private static boolean overrides(Method a, Method b) {
+    // See JLS section 8.4.8.1
+    int modifiers = b.getModifiers();
+    if (Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers)) {
+      return true;
+    }
+    if (Modifier.isPrivate(modifiers)) {
+      return false;
+    }
+    // b must be package-private
+    return a.getDeclaringClass().getPackage().equals(b.getDeclaringClass().getPackage());
+  }
+

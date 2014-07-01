@@ -1,0 +1,8 @@
+    @Override public boolean equals(Object obj) {
+      if (obj instanceof Signature) {
+        Signature other = (Signature) obj;
+        return other.name.equals(name) && Arrays.equals(parameters, other.parameters);
+      }
+      return false;
+    }
+

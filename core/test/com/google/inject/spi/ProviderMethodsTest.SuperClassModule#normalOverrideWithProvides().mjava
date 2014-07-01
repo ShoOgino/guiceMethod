@@ -1,4 +1,0 @@
-    @Provides Double normalOverrideWithProvides() {
-      return 1D;
-    }
-

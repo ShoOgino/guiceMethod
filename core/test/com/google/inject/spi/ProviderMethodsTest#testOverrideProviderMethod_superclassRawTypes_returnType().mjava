@@ -1,0 +1,18 @@
+  public void testOverrideProviderMethod_superclassRawTypes_returnType() {
+    class SubClassModule extends SuperClassModule {
+      // remove the rawtype from the override
+      @Override List<String> rawProvider(List<String> f) {
+        return f;
+      }
+    }
+    try {
+      Guice.createInjector(new SubClassModule());
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), 
+          "Overriding @Provides methods is not allowed.",
+          "@Provides method: " + SuperClassModule.class.getName() + ".rawProvider()",
+          "overridden by: " + SubClassModule.class.getName() + ".rawProvider()");
+    }
+  }
+

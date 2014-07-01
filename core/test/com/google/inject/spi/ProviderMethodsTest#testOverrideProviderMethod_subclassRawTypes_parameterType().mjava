@@ -1,0 +1,19 @@
+  public void testOverrideProviderMethod_subclassRawTypes_parameterType() {
+    class SubClassModule extends SuperClassModule {
+      @Override Collection<String> annotatedGenericParameterProviderMethod(List foo) {
+        return super.annotatedGenericParameterProviderMethod(foo);
+      }
+    }
+    try {
+      Guice.createInjector(new SubClassModule());
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), 
+          "Overriding @Provides methods is not allowed.",
+          "@Provides method: " + SuperClassModule.class.getName() 
+              + ".annotatedGenericParameterProviderMethod()",
+          "overridden by: " + SubClassModule.class.getName() 
+              + ".annotatedGenericParameterProviderMethod()");
+    }
+  }
+

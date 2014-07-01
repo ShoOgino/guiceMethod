@@ -1,0 +1,16 @@
+    Signature(Method method) {
+      this.name = method.getName();
+      // We need to 'resolve' the parameters against the actual class type in case this method uses
+      // type parameters.  This is so we can detect overrides of generic superclass methods where
+      // the subclass specifies the type parameter.  javac implements these kinds of overrides via
+      // bridge methods, but we don't want to give errors on bridge methods (but rather the target
+      // of the bridge).
+      List<TypeLiteral<?>> resolvedParameterTypes = typeLiteral.getParameterTypes(method);
+      this.parameters = new Class<?>[resolvedParameterTypes.size()];
+      int i = 0;
+      for (TypeLiteral<?> type : resolvedParameterTypes) {
+        parameters[i] = type.getRawType();
+      }
+      this.hashCode = name.hashCode() + 31 * Arrays.hashCode(parameters);
+    }
+

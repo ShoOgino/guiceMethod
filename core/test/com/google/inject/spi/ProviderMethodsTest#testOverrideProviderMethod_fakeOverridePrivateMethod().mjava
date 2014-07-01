@@ -1,0 +1,10 @@
+  public void testOverrideProviderMethod_fakeOverridePrivateMethod() {
+    class SubClassModule extends SuperClassModule {
+      // not actually an override, just looks like it
+      String privateProviderMethod() {
+        return "sub";
+      }
+    }
+    assertEquals("hello", Guice.createInjector(new SubClassModule()).getInstance(String.class));
+  }
+
