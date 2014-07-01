@@ -27,8 +27,7 @@
     expect(servletRequest.getRequestURI()).andReturn("/test.html");
 
     replay(servletRequest, binding, injector);
-    filterDef.init(servletContext, injector,
-        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    filterDef.init(servletContext, injector, Sets.<Filter>newIdentityHashSet());
     Filter filter = filterDef.getFilterIfMatching(servletRequest);
     assertNull(filter);
     verify(servletRequest, binding, injector);

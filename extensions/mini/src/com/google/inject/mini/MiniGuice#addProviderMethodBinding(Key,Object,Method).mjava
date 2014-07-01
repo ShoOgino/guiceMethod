@@ -15,7 +15,7 @@
       }
     };
 
-    boolean singleton = method.getAnnotation(javax.inject.Singleton.class) != null;
+    boolean singleton = method.isAnnotationPresent(javax.inject.Singleton.class);
     putBinding(key, unscoped, singleton);
   }
 

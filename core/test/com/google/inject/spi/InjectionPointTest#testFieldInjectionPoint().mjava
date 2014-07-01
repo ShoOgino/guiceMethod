@@ -14,8 +14,8 @@
         + getClass().getName() + ".foo", dependency.toString());
     assertEquals(fooField, dependency.getInjectionPoint().getMember());
     assertEquals(-1, dependency.getParameterIndex());
-    Assert.assertEquals(Key.get(String.class, named("a")), dependency.getKey());
-    assertEquals(false, dependency.isNullable());
+    assertEquals(Key.get(String.class, named("a")), dependency.getKey());
+    assertFalse(dependency.isNullable());
     assertNotSerializable(dependency);
     assertEqualsBothWays(dependency,
         getOnlyElement(new InjectionPoint(typeLiteral, fooField, false).getDependencies()));

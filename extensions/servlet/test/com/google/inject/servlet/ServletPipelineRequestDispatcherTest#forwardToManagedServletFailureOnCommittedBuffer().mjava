@@ -44,8 +44,7 @@
     replay(injector, binding, mockRequest, mockResponse, mockBinding);
 
     // Have to init the Servlet before we can dispatch to it.
-    servletDefinition.init(null, injector,
-        Sets.newSetFromMap(Maps.<HttpServlet, Boolean>newIdentityHashMap()));
+    servletDefinition.init(null, injector, Sets.<HttpServlet>newIdentityHashSet());
 
     final RequestDispatcher dispatcher = new ManagedServletPipeline(injector)
         .getRequestDispatcher(pattern);

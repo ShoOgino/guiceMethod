@@ -15,7 +15,7 @@
     assertEquals(barMethod, dependency.getInjectionPoint().getMember());
     assertEquals(0, dependency.getParameterIndex());
     assertEquals(Key.get(String.class, named("b")), dependency.getKey());
-    assertEquals(false, dependency.isNullable());
+    assertFalse(dependency.isNullable());
     assertNotSerializable(dependency);
     assertEqualsBothWays(dependency,
         getOnlyElement(new InjectionPoint(typeLiteral, barMethod, false).getDependencies()));

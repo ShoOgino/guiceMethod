@@ -1,6 +1,6 @@
   private <T> Set<T> setOf(T... elements) {
     Set<T> result = Sets.newHashSet();
-    result.addAll(Arrays.asList(elements));
+    Collections.addAll(result, elements);
     return result;
   }
 

@@ -3,7 +3,7 @@
     servletPipeline.destroy();
 
     //go down chain and destroy all our filters
-    Set<Filter> destroyedSoFar = Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap());
+    Set<Filter> destroyedSoFar = Sets.newIdentityHashSet();
     for (FilterDefinition filterDefinition : filterDefinitions) {
       filterDefinition.destroy(destroyedSoFar);
     }

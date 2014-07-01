@@ -3,13 +3,11 @@
       return ImmutableList.of();
     }
 
-    List<Message> result = Lists.newArrayList(root.errors);
-    Collections.sort(result, new Comparator<Message>() {
+    return new Ordering<Message>() {
+      @Override
       public int compare(Message a, Message b) {
         return a.getSource().compareTo(b.getSource());
       }
-    });
-
-    return result;
+    }.sortedCopy(root.errors);
   }
 

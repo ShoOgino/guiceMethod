@@ -26,8 +26,7 @@
         UriPatternType.get(UriPatternType.SERVLET, pattern),
         new HashMap<String, String>(), null);
     //should fire on mockfilter now
-    filterDef.init(createMock(ServletContext.class), injector,
-        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    filterDef.init(createMock(ServletContext.class), injector, Sets.<Filter>newIdentityHashSet());
     assertTrue(filterDef.getFilter() instanceof MockFilter);
 
     assertTrue("Init did not fire", mockFilter.isInit());
@@ -45,7 +44,7 @@
 
     assertTrue("Filter did not proceed down chain", proceed[0]);
 
-    filterDef.destroy(Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    filterDef.destroy(Sets.<Filter>newIdentityHashSet());
     assertTrue("Destroy did not fire", mockFilter.isDestroy());
 
     verify(injector, request);

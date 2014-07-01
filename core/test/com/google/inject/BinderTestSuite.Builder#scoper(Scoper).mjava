@@ -1,5 +1,5 @@
     private Builder scoper(Scoper scoper) {
-      name(name + " in " + scoper.toString());
+      name(name + " in " + scoper);
       scoper.apply(this);
       return this;
     }

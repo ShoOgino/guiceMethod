@@ -31,21 +31,20 @@
     String pattern = "/*";
     final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
         UriPatternType.get(UriPatternType.SERVLET, pattern), initParams, null);
-    filterDef.init(servletContext, injector,
-        Sets.newSetFromMap(Maps.<Filter, Boolean>newIdentityHashMap()));
+    filterDef.init(servletContext, injector, Sets.<Filter>newIdentityHashSet());
 
     assertTrue(filterDef.getFilter() instanceof MockFilter);
     final FilterConfig filterConfig = mockFilter.getConfig();
     assertTrue(null != filterConfig);
-    assertTrue(contextName.equals(filterConfig.getServletContext().getServletContextName()));
-    assertTrue(Key.get(Filter.class).toString().equals(filterConfig.getFilterName()));
+    assertEquals(filterConfig.getServletContext().getServletContextName(), contextName);
+    assertEquals(filterConfig.getFilterName(), Key.get(Filter.class).toString());
 
     final Enumeration names = filterConfig.getInitParameterNames();
     while (names.hasMoreElements()) {
       String name = (String) names.nextElement();
 
       assertTrue(initParams.containsKey(name));
-      assertTrue(initParams.get(name).equals(filterConfig.getInitParameter(name)));
+      assertEquals(filterConfig.getInitParameter(name), initParams.get(name));
     }
 
     verify(binding, injector, servletContext);

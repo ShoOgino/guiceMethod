@@ -57,8 +57,7 @@
     ServletDefinition servletDefinition = new ServletDefinition(mapping, Key.get(HttpServlet.class),
         UriPatternType.get(UriPatternType.SERVLET, mapping), new HashMap<String, String>(), null);
 
-    servletDefinition.init(null, injector,
-        Sets.newSetFromMap(Maps.<HttpServlet, Boolean>newIdentityHashMap()));
+    servletDefinition.init(null, injector, Sets.<HttpServlet>newIdentityHashSet());
     servletDefinition.doService(request, response);
 
     assertTrue("Servlet did not run!", run[0]);

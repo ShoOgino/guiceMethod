@@ -8,7 +8,7 @@
     SimpleFactory factory = injector.getInstance(SimpleFactory.class);
     Foo noIndex = factory.create("no index");
     assertEquals("no index", noIndex.name);
-    assertEquals(null, noIndex.index);
+    assertNull(noIndex.index);
     
     injector = Guice.createInjector(new AbstractModule() {
       @Override

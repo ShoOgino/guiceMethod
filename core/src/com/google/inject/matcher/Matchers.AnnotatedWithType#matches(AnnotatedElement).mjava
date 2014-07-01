@@ -1,4 +1,4 @@
     public boolean matches(AnnotatedElement element) {
-      return element.getAnnotation(annotationType) != null;
+      return element.isAnnotationPresent(annotationType);
     }
 

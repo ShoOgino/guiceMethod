@@ -4,7 +4,7 @@
 
     // Starts are idempotent.
     if (state == State.STARTED) {
-      return new FutureTask<State>(NOOP, State.STARTED);
+      return new FutureTask<State>(Runnables.doNothing(), State.STARTED);
     }
 
     return executor.submit(new Callable<State>() {

@@ -1,6 +1,6 @@
     private <T> Builder expectedValues(T... values) {
       this.expectedValues.clear();
-      this.expectedValues.addAll(Arrays.asList(values));
+      Collections.addAll(this.expectedValues, values);
       return this;
     }
 

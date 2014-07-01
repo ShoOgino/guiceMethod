@@ -1,7 +1,7 @@
   public Key key(Object subject, Type type, Annotation[] annotations) {
     Annotation bindingAnnotation = null;
     for (Annotation a : annotations) {
-      if (a.annotationType().getAnnotation(javax.inject.Qualifier.class) == null) {
+      if (!a.annotationType().isAnnotationPresent(javax.inject.Qualifier.class)) {
         continue;
       }
       if (bindingAnnotation != null) {

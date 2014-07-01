@@ -2,7 +2,7 @@
     boolean hasProvidesMethods = false;
     for (Class<?> c = module.getClass(); c != Object.class; c = c.getSuperclass()) {
       for (Method method : c.getDeclaredMethods()) {
-        if (method.getAnnotation(com.google.inject.Provides.class) != null) {
+        if (method.isAnnotationPresent(com.google.inject.Provides.class)) {
           Key key = key(method, method.getGenericReturnType(), method.getAnnotations());
           addProviderMethodBinding(key, module, method);
           hasProvidesMethods = true;

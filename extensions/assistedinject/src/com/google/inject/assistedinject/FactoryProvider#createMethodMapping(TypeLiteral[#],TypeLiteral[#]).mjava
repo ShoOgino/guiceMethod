@@ -3,7 +3,7 @@
     List<AssistedConstructor<?>> constructors = Lists.newArrayList();
 
     for (Constructor<?> constructor : implementationType.getRawType().getDeclaredConstructors()) {
-      if (constructor.getAnnotation(AssistedInject.class) != null) {
+      if (constructor.isAnnotationPresent(AssistedInject.class)) {
         AssistedConstructor<?> assistedConstructor = AssistedConstructor.create(
             constructor, implementationType.getParameterTypes(constructor));
         constructors.add(assistedConstructor);

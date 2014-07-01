@@ -8,7 +8,7 @@
     OtherFactory factory = injector.getInstance(OtherFactory.class);
     Foo noIndex = factory.create("no index");
     assertEquals("no index", noIndex.name);
-    assertEquals(null, noIndex.index);
+    assertNull(noIndex.index);
     Foo index = factory.create(1, "index");
     assertEquals("index", index.name);
     assertEquals(1, index.index.intValue());

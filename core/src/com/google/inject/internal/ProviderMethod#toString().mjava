@@ -1,4 +1,4 @@
   @Override public String toString() {
-    return "@Provides " + StackTraceElements.forMember(method).toString();
+    return "@Provides " + StackTraceElements.forMember(method);
   }
 
