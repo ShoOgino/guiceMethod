@@ -6,7 +6,7 @@
     if (parent != null) {
       localContext = parent.localContext;
     } else {
-      localContext = new LocalContextThreadLocal();
+      localContext = new ThreadLocal<Object[]>();
     }
   }
 

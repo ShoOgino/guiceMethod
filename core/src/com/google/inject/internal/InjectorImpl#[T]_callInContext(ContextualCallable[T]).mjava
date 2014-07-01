@@ -1,6 +1,10 @@
   /** Looks up thread local context. Creates (and removes) a new context if necessary. */
   <T> T callInContext(ContextualCallable<T> callable) throws ErrorsException {
     Object[] reference = localContext.get();
+    if (reference == null) {
+      reference = new Object[1];
+      localContext.set(reference);
+    }
     if (reference[0] == null) {
       reference[0] = new InternalContext();
       try {
