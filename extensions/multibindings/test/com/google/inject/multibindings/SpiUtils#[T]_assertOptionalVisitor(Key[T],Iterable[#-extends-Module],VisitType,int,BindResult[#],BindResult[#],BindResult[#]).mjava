@@ -9,25 +9,28 @@
    * @param expectedOtherOptionalBindings the # of other optional bindings we expect to see.
    * @param expectedDefault the expected default binding, or null if none
    * @param expectedActual the expected actual binding, or null if none
+   * @param expectedUserLinkedActual the user binding that is the actual binding, used if
+   *        neither the default nor actual are set and a user binding existed for the type.
    */
   static <T> void assertOptionalVisitor(Key<T> keyType,
       Iterable<? extends Module> modules,
       VisitType visitType,
       int expectedOtherOptionalBindings,
       BindResult<?> expectedDefault,
-      BindResult<?> expectedActual) {
+      BindResult<?> expectedActual,
+      BindResult<?> expectedUserLinkedActual) {
     if (visitType == null) {
       fail("must test something");
     }
 
     if (visitType == BOTH || visitType == INJECTOR) {
       optionalInjectorTest(keyType, modules, expectedOtherOptionalBindings, expectedDefault,
-          expectedActual);
+          expectedActual, expectedUserLinkedActual);
     }
 
     if (visitType == BOTH || visitType == MODULE) {
       optionalModuleTest(keyType, modules, expectedOtherOptionalBindings, expectedDefault,
-          expectedActual);
+          expectedActual, expectedUserLinkedActual);
     }
   }
 

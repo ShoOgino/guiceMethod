@@ -1,4 +1,4 @@
-    public void configure(Binder binder) {
+    @Override public void configure(Binder binder) {
       checkConfiguration(!isInitialized(), "OptionalBinder was already initialized");
 
       binder.bind(optionalProviderKey).toProvider(
@@ -9,6 +9,7 @@
           RealOptionalBinder.this.binder = null;
           actualBinding = injector.getExistingBinding(actualKey);
           defaultBinding = injector.getExistingBinding(defaultKey);
+          Binding<T> userBinding = injector.getExistingBinding(typeKey);
           Binding<T> binding = null;
           if (actualBinding != null) {
             // TODO(sameb): Consider exposing an option that will allow
@@ -18,6 +19,12 @@
             binding = actualBinding;
           } else if (defaultBinding != null) {
             binding = defaultBinding;
+          } else if (userBinding != null) {
+            // If neither the actual or default is set, then we fallback
+            // to the value bound to the type itself and consider that the
+            // "actual binding" for the SPI.
+            binding = userBinding;
+            actualBinding = userBinding;
           }
           
           if (binding != null) {
@@ -33,11 +40,11 @@
           }
         }
         
-        public Optional<Provider<T>> get() {
+        @Override public Optional<Provider<T>> get() {
           return optional;
         }
 
-        public Set<Dependency<?>> getDependencies() {
+        @Override public Set<Dependency<?>> getDependencies() {
           return providerDependencies;
         }
       });

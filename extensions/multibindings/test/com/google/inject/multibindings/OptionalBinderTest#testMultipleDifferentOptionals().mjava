@@ -16,9 +16,9 @@
     assertEquals("b", injector.getInstance(bKey));
     assertEquals("c", injector.getInstance(cKey));
     
-    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 3, instance("a"), null);
-    assertOptionalVisitor(intKey, setOf(module), VisitType.BOTH, 3, instance(1), null);
-    assertOptionalVisitor(bKey, setOf(module), VisitType.BOTH, 3, instance("b"), null);
-    assertOptionalVisitor(cKey, setOf(module), VisitType.BOTH, 3, instance("c"), null);
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 3, instance("a"), null, null);
+    assertOptionalVisitor(intKey, setOf(module), VisitType.BOTH, 3, instance(1), null, null);
+    assertOptionalVisitor(bKey, setOf(module), VisitType.BOTH, 3, instance("b"), null, null);
+    assertOptionalVisitor(cKey, setOf(module), VisitType.BOTH, 3, instance("c"), null, null);
   }
 

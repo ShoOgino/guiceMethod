@@ -1,4 +1,4 @@
-      public boolean containsElement(Element element) {
+      @Override public boolean containsElement(Element element) {
         Key<?> elementKey;
         if (element instanceof Binding) {
           elementKey = ((Binding<?>) element).getKey();

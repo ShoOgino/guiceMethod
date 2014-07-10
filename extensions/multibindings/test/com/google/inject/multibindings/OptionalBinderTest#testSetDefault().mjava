@@ -20,6 +20,6 @@
     assertTrue(optionalJxP.isPresent());
     assertEquals("a", optionalJxP.get().get());
 
-    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, instance("a"), null);
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, instance("a"), null, null);
   }
 

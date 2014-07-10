@@ -4,7 +4,7 @@
      */
     private void addDirectTypeBinding(Binder binder) {
       binder.bind(typeKey).toProvider(new RealOptionalBinderProviderWithDependencies<T>(typeKey) {
-        public T get() {
+        @Override public T get() {
           Optional<Provider<T>> optional = optionalProviderT.get();
           if (optional.isPresent()) {
             return optional.get().get();
@@ -15,7 +15,7 @@
           return null; 
         }
 
-        public Set<Dependency<?>> getDependencies() {
+        @Override public Set<Dependency<?>> getDependencies() {
           return dependencies;
         }
       });

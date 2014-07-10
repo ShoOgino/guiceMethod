@@ -1,7 +1,14 @@
   @SuppressWarnings("unchecked")
-  private static <T> void optionalModuleTest(Key<T> keyType, Iterable<? extends Module> modules,
-      int expectedOtherOptionalBindings, BindResult<?> expectedDefault,
-      BindResult<?> expectedActual) {
+  private static <T> void optionalModuleTest(Key<T> keyType,
+      Iterable<? extends Module> modules,
+      int expectedOtherOptionalBindings,
+      BindResult<?> expectedDefault,
+      BindResult<?> expectedActual,
+      BindResult<?> expectedUserLinkedActual) {
+    if (expectedUserLinkedActual != null) {
+      assertNull("cannot have actual if expecting user binding", expectedActual);
+      assertNull("cannot have default if expecting user binding", expectedDefault);
+    }
     Set<Element> elements = ImmutableSet.copyOf(Elements.getElements(modules));
     Map<Key<?>, Binding<?>> indexed = index(elements);
     Key<Optional<T>> optionalKey =

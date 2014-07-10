@@ -25,6 +25,7 @@
         VisitType.BOTH,
         0,
         null,
-        SpiUtils.<String>providerInstance(null));
+        SpiUtils.<String>providerInstance(null),
+        null);
   }
 
