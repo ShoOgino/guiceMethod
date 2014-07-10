@@ -1,4 +1,4 @@
-  static void awaitFullGc() {
+  public static void awaitFullGc() {
     // GcFinalization *should* do it, but doesn't work well in practice...
     // so we put a second latch and wait for a ReferenceQueue to tell us.
     ReferenceQueue<Object> queue = new ReferenceQueue<Object>();

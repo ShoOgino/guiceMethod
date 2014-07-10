@@ -1,0 +1,13 @@
+  private static void assertBlacklistState(Injector injector, Key<?> key, boolean isBlacklisted) {
+    // if we're expecting it to not be blacklisted, loop around and wait for threads to run.
+    if (!isBlacklisted) {
+      for (int i = 0; i < 10; i++) {
+        if (!((InjectorImpl) injector).state.isBlacklisted(key)) {
+          break;
+        }
+        sleep();
+      }
+    }
+    assertEquals(isBlacklisted, ((InjectorImpl) injector).state.isBlacklisted(key));
+  }
+

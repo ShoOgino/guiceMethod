@@ -1,4 +1,0 @@
-  private static void assertBlacklistState(Injector injector, Key<?> key, boolean isBlacklisted) {
-    assertEquals(isBlacklisted, ((InjectorImpl) injector).state.isBlacklisted(key));
-  }
-

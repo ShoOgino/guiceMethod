@@ -1,4 +1,4 @@
-  static void awaitClear(WeakReference<?> ref) {
+  public static void awaitClear(WeakReference<?> ref) {
     // GcFinalization *should* do it, but doesn't work well in practice...
     // so we put a second latch and wait for a ReferenceQueue to tell us.
     Object data = ref.get();
