@@ -1,0 +1,4 @@
+      public Set<Dependency<?>> getDependencies() {
+        return ((HasDependencies) provider).getDependencies();
+      }
+

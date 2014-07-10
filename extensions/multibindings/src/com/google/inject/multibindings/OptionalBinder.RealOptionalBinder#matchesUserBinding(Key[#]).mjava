@@ -1,0 +1,8 @@
+    /** Returns true if the key indicates this is a user bound value for the optional binder. */
+    private boolean matchesUserBinding(Key<?> elementKey) {
+      return elementKey.getAnnotation() instanceof Element
+          && ((Element) elementKey.getAnnotation()).setName().equals(RealElement.nameOf(typeKey))
+          && ((Element) elementKey.getAnnotation()).type() == Type.OPTIONALBINDER
+          && elementKey.getTypeLiteral().equals(typeKey.getTypeLiteral());
+    }
+

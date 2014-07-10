@@ -33,11 +33,16 @@
         keyType.ofType(optionalOfJavaxProvider(keyType.getTypeLiteral()));
     Key<Optional<Provider<T>>> optionalProviderKey =
         keyType.ofType(optionalOfProvider(keyType.getTypeLiteral()));
+    Binding<Map<Source, T>> mapBinding = injector.getBinding(
+        keyType.ofType(mapOf(TypeLiteral.get(Source.class), keyType.getTypeLiteral())));
+    MapBinderBinding<Map<Source, T>> mapbinderBinding = (MapBinderBinding<
+        Map<Source, T>>) mapBinding.acceptTargetVisitor(new Visitor<Map<Source, T>>());
 
     boolean keyMatch = false;
     boolean optionalKeyMatch = false;
     boolean optionalJavaxProviderKeyMatch = false;
     boolean optionalProviderKeyMatch = false;
+    boolean mapBindingMatch = false;
     boolean defaultMatch = false;
     boolean actualMatch = false;
     List<Object> otherOptionalBindings = Lists.newArrayList();
@@ -68,12 +73,19 @@
       } else if (b.getKey().equals(optionalProviderKey)) {
         assertTrue(contains);
         optionalProviderKeyMatch = true;
+      } else if (b.getKey().equals(mapBinding.getKey())) {
+        assertTrue(contains);
+        mapBindingMatch = true;
+        // Validate that this binding is also a MapBinding.
+        assertEquals(mapbinderBinding, b.acceptTargetVisitor(visitor));
       } else if (expectedDefault != null && matches(b, expectedDefault)) {
         assertTrue(contains);
         defaultMatch = true;
       } else if (expectedActual != null && matches(b, expectedActual)) {
         assertTrue(contains);
         actualMatch = true;
+      } else if (mapbinderBinding.containsElement(b)) {
+        assertTrue(contains);
       } else if (contains) {
         otherMatches.add(b);
       }
@@ -85,6 +97,7 @@
     assertTrue(optionalKeyMatch);
     assertTrue(optionalJavaxProviderKeyMatch);
     assertTrue(optionalProviderKeyMatch);
+    assertTrue(mapBindingMatch);
     assertEquals(expectedDefault != null, defaultMatch);
     assertEquals(expectedActual != null, actualMatch);
     assertEquals("other OptionalBindings found: " + otherOptionalBindings,

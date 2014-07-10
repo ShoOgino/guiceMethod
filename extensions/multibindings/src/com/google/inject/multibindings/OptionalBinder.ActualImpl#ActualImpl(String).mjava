@@ -1,4 +1,0 @@
-    public ActualImpl(String value) {
-      super(Actual.class, value);
-    }
-

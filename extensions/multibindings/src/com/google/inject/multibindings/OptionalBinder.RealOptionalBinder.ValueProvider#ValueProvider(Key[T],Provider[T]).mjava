@@ -1,0 +1,5 @@
+      private ValueProvider(Key<T> key, Provider<T> provider) {
+        this.key = key;
+        this.provider = provider;
+      }
+

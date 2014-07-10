@@ -1,9 +1,0 @@
-    @Override public boolean equals(Object o) {
-      if (!(clazz.isInstance(o))) {
-        return false;
-      }
-
-      BaseAnnotation other = (BaseAnnotation) o;
-      return value.equals(other.value());
-    }
-

@@ -1,0 +1,21 @@
+      public boolean containsElement(com.google.inject.spi.Element element) {
+        if (mapBinder.containsElement(element)) {
+          return true;
+        } else {
+          Key<?> elementKey;
+          if (element instanceof Binding) {
+            elementKey = ((Binding<?>) element).getKey();
+          } else if (element instanceof ProviderLookup) {
+            elementKey = ((ProviderLookup<?>) element).getKey();
+          } else {
+            return false; // cannot match;
+          }
+
+          return elementKey.equals(optionalKey)
+              || elementKey.equals(optionalProviderKey)
+              || elementKey.equals(optionalJavaxProviderKey)
+              || matchesTypeKey(element, elementKey)
+              || matchesUserBinding(elementKey);
+        }
+      }
+

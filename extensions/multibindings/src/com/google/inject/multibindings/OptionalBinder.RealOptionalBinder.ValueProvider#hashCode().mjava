@@ -1,0 +1,5 @@
+      /** We only use the hashcode of the typeliteral, which can't change. */
+      @Override public int hashCode() {
+        return key.getTypeLiteral().hashCode();
+      }
+

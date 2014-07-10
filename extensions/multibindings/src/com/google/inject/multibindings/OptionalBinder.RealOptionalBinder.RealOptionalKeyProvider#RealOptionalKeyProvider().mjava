@@ -1,4 +1,4 @@
       RealOptionalKeyProvider() {
-        super(typeKey);
+        super(mapKey);
       }
 

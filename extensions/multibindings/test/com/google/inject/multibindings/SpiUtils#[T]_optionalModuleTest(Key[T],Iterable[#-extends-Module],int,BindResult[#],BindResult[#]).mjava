@@ -6,22 +6,27 @@
     Map<Key<?>, Binding<?>> indexed = index(elements);
     Key<Optional<T>> optionalKey =
         keyType.ofType(OptionalBinder.optionalOf(keyType.getTypeLiteral()));
+    Key<Map<Source, T>> sourceMapKey =
+        keyType.ofType(mapOf(TypeLiteral.get(Source.class), keyType.getTypeLiteral()));
     Visitor<Optional<T>> visitor = new Visitor<Optional<T>>();
     OptionalBinderBinding<T> optionalBinder = null;
+    MapBinderBinding<Map<Source, T>> mapbinderBinding = null;
     Key<?> defaultKey = null;
     Key<?> actualKey = null;
 
     Binding optionalBinding = indexed.get(optionalKey);
     optionalBinder = (OptionalBinderBinding<T>) optionalBinding.acceptTargetVisitor(visitor);
+    Binding mapBinding = indexed.get(sourceMapKey);
+    mapbinderBinding = (MapBinderBinding<Map<Source, T>>) mapBinding.acceptTargetVisitor(visitor);
 
     // Locate the defaultKey & actualKey
     for (Element element : elements) {
       if (optionalBinder.containsElement(element) && element instanceof Binding) {
         Binding binding = (Binding) element;
         if (isSourceEntry(binding, Source.DEFAULT)) {
-          defaultKey = binding.getKey();
+          defaultKey = keyFromOptionalSourceBinding(binding, indexed);
         } else if (isSourceEntry(binding, Source.ACTUAL)) {
-          actualKey = binding.getKey();
+          actualKey = keyFromOptionalSourceBinding(binding, indexed);
         }
       }
     }
@@ -37,6 +42,7 @@
     boolean optionalKeyMatch = false;
     boolean optionalJavaxProviderKeyMatch = false;
     boolean optionalProviderKeyMatch = false;
+    boolean mapBindingMatch = false;
     boolean defaultMatch = false;
     boolean actualMatch = false;
     List<Object> otherOptionalElements = Lists.newArrayList();
@@ -80,6 +86,11 @@
       } else if (key != null && key.equals(optionalProviderKey)) {
         assertTrue(contains);
         optionalProviderKeyMatch = true;
+      } else if (key != null && key.equals(sourceMapKey)) {
+        assertTrue(contains);
+        mapBindingMatch = true;
+        // Validate that this binding is also a MapBinding.
+        assertEquals(mapbinderBinding, b.acceptTargetVisitor(visitor));
       } else if (key != null && key.equals(defaultKey)) {
         assertTrue(contains);
         if (b != null) { // otherwise it might just be a ProviderLookup into it
@@ -93,6 +104,8 @@
           assertTrue("expected: " + expectedActual + ", but was: " + b, matches(b, expectedActual));
           actualMatch = true;
         }
+      } else if (mapbinderBinding.containsElement(element)) {
+        assertTrue(contains);
       } else if (contains) {
         otherContains.add(element);
       }
@@ -103,6 +116,7 @@
     assertTrue(optionalKeyMatch);
     assertTrue(optionalJavaxProviderKeyMatch);
     assertTrue(optionalProviderKeyMatch);
+    assertTrue(mapBindingMatch);
     assertEquals(expectedDefault != null, defaultMatch);
     assertEquals(expectedActual != null, actualMatch);
     assertEquals(otherContains.toString(), 0, otherContains.size());

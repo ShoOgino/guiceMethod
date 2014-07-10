@@ -1,4 +1,0 @@
-    @Override public String toString() {
-      return "@" + clazz.getName() + (value.isEmpty() ? "" : "(value=" + value + ")");
-    }
-
