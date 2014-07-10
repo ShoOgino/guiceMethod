@@ -1,13 +1,11 @@
   private static boolean isSourceEntry(Binding b, Source type) {
-    if (b instanceof ProviderInstanceBinding && b.getKey().getAnnotation() instanceof RealElement) {
-      javax.inject.Provider provider = ((ProviderInstanceBinding) b).getUserSuppliedProvider();
-      if (provider instanceof Map.Entry) {
-        Map.Entry entry = (Map.Entry) provider;
-        if (entry.getKey() == type) {
-          return true;
-        }
-      }
+    switch(type) {
+      case ACTUAL:
+        return b.getKey().getAnnotation() instanceof OptionalBinder.Actual;
+      case DEFAULT:
+        return b.getKey().getAnnotation() instanceof OptionalBinder.Default;
+      default:
+        throw new IllegalStateException("invalid type: " + type);
     }
-    return false;
   }
 

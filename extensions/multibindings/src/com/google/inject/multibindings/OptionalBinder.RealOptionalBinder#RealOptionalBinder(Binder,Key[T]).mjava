@@ -5,25 +5,14 @@
       this.optionalKey = typeKey.ofType(optionalOf(literal));
       this.optionalJavaxProviderKey = typeKey.ofType(optionalOfJavaxProvider(literal));
       this.optionalProviderKey = typeKey.ofType(optionalOfProvider(literal));
-      this.mapKey =
-          typeKey.ofType(MapBinder.mapOfProviderOf(TypeLiteral.get(Source.class), literal));
-      this.dependencies = ImmutableSet.<Dependency<?>>of(Dependency.get(mapKey));
       this.optionalProviderT = binder.getProvider(optionalProviderKey);
-      if (typeKey.getAnnotation() != null) {
-        this.mapBinder = (RealMapBinder<Source, T>) MapBinder.newMapBinder(binder,
-            TypeLiteral.get(Source.class), typeKey.getTypeLiteral(), typeKey.getAnnotation());
-      } else if (typeKey.getAnnotationType() != null) {
-        this.mapBinder = (RealMapBinder<Source, T>) MapBinder.newMapBinder(binder,
-            TypeLiteral.get(Source.class), typeKey.getTypeLiteral(), typeKey.getAnnotationType());
-      } else {
-        this.mapBinder = (RealMapBinder<Source, T>) MapBinder.newMapBinder(binder,
-            TypeLiteral.get(Source.class), typeKey.getTypeLiteral());
-      }
-      mapBinder.updateDuplicateKeyMessage(Source.DEFAULT, "OptionalBinder for "
-          + Errors.convert(typeKey)
-          + " called with different setDefault values, from bindings:\n");
-      mapBinder.updateDuplicateKeyMessage(Source.ACTUAL, "OptionalBinder for "
-          + Errors.convert(typeKey)
-          + " called with different setBinding values, from bindings:\n");
+      String name = RealElement.nameOf(typeKey);
+      this.defaultKey = Key.get(typeKey.getTypeLiteral(), new DefaultImpl(name));
+      this.actualKey = Key.get(typeKey.getTypeLiteral(), new ActualImpl(name));
+      // Until the injector initializes us, we don't know what our dependencies are,
+      // so initialize to the whole Injector (like Multibinder, and MapBinder indirectly).
+      this.dependencies = ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
+      this.providerDependencies =
+          ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
     }
 

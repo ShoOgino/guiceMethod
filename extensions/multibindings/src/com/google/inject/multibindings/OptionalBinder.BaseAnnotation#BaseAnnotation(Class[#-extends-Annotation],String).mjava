@@ -1,0 +1,5 @@
+    BaseAnnotation(Class<? extends Annotation> clazz, String value) {
+      this.clazz = checkNotNull(clazz, "clazz");
+      this.value = checkNotNull(value, "value");
+    }
+
