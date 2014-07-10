@@ -22,6 +22,7 @@
         VisitType.BOTH,
         0,
         linked(aKey),
-        linked(bKey));
+        linked(bKey),
+        null);
   }
 

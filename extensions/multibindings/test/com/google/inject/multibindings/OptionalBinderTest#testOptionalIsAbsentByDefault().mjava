@@ -16,6 +16,6 @@
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertFalse(optionalJxP.isPresent());
     
-    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null);
+    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null, null);
   }
 

@@ -42,6 +42,7 @@
         VisitType.BOTH,
         0,
         instance("a"),
-        instance("b"));
+        instance("b"),
+        null);
   }
 

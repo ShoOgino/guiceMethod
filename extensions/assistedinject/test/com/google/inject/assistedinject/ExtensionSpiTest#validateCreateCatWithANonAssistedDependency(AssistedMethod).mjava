@@ -1,6 +1,0 @@
-  private void validateCreateCatWithANonAssistedDependency(AssistedMethod assistedMethod)
-      throws Exception {
-    validateAssistedMethod(assistedMethod, "createCatWithANonAssistedDependency",
-        CatWithAName.class, ImmutableList.<Key<?>>of(Key.get(String.class, named("catName2"))));
-  }
-

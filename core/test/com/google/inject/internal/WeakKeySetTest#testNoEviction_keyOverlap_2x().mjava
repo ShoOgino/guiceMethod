@@ -21,7 +21,7 @@
 
     Key<Integer> key = key1 = key2 = Key.get(Integer.class);
 
-    GcFinalization.awaitFullGc();
+    awaitFullGc();
 
     assertTrue(set.contains(key));
     assertEquals(2, set.getSources(key).size());

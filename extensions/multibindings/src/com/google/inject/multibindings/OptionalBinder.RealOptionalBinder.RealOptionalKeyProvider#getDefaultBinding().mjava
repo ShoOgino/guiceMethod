@@ -1,4 +1,4 @@
-      public Binding<?> getDefaultBinding() {
+      @Override public Binding<?> getDefaultBinding() {
         if (isInitialized()) {
           return defaultBinding;
         } else {

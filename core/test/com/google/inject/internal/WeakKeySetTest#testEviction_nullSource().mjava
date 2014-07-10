@@ -12,13 +12,13 @@
 
     state = null;
 
-    GcFinalization.awaitFullGc();
+    awaitFullGc();
 
     assertFalse(set.contains(Key.get(Integer.class)));
     assertNull(set.getSources(Key.get(Integer.class)));
 
     // Ensure there are no hanging references.
     key = null;
-    GcFinalization.awaitClear(weakKeyRef);
+    awaitClear(weakKeyRef);
   }
 

@@ -1,4 +1,4 @@
-  public void testAbsentWithUserBoundValue() {
+  public void testUsesUserBoundValue() {
     Module module = new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder.newOptionalBinder(binder(), String.class);
@@ -10,15 +10,21 @@
     assertEquals("foo", injector.getInstance(String.class));
     
     Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
-    assertFalse(optional.isPresent());
+    assertEquals("foo", optional.get());
     
     Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
-    assertFalse(optionalP.isPresent());
+    assertEquals("foo", optionalP.get().get());
     
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
-    assertFalse(optionalJxP.isPresent());
+    assertEquals("foo", optionalJxP.get().get());
     
-    assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null);
+    assertOptionalVisitor(stringKey,
+        setOf(module),
+        VisitType.BOTH,
+        0,
+        null,
+        null,
+        providerInstance("foo"));
   }
 

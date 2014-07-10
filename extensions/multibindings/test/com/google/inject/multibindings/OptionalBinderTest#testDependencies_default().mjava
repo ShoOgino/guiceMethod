@@ -1,11 +1,9 @@
-  public void testDependencies() {
+  public void testDependencies_default() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder<String> optionalbinder =
             OptionalBinder.newOptionalBinder(binder(), String.class);
         optionalbinder.setDefault().toInstance("A");
-        optionalbinder.setBinding().to(Key.get(String.class, Names.named("b")));
-        bindConstant().annotatedWith(Names.named("b")).to("B");
       }
     });
 
@@ -13,6 +11,6 @@
     HasDependencies withDependencies = (HasDependencies) binding;
     Set<String> elements = Sets.newHashSet();
     elements.addAll(recurseForDependencies(injector, withDependencies));
-    assertEquals(ImmutableSet.of("A", "B"), elements);
+    assertEquals(ImmutableSet.of("A"), elements);
   }
 

@@ -1,0 +1,4 @@
+    public DefaultImpl(String value) {
+      super(Default.class, value);
+    }
+

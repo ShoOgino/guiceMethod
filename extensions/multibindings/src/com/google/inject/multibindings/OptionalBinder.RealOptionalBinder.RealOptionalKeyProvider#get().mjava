@@ -1,4 +1,4 @@
-      public Optional<T> get() {
+      @Override public Optional<T> get() {
         Optional<Provider<T>> optional = optionalProviderT.get();
         if (optional.isPresent()) {
           return Optional.fromNullable(optional.get().get());

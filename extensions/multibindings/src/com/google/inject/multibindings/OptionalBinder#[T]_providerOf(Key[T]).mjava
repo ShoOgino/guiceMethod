@@ -1,0 +1,6 @@
+  @SuppressWarnings("unchecked")
+  static <T> Key<Provider<T>> providerOf(Key<T> key) {
+    Type providerT = Types.providerOf(key.getTypeLiteral().getType());
+    return (Key<Provider<T>>) key.ofType(providerT);
+  }
+

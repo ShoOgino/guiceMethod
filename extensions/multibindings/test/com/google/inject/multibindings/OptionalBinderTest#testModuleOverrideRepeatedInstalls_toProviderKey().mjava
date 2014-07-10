@@ -17,6 +17,7 @@
         VisitType.BOTH,
         0,
         providerKey(Key.get(AStringProvider.class)),
-        providerKey(Key.get(BStringProvider.class)));
+        providerKey(Key.get(BStringProvider.class)),
+        null);
   }
 
