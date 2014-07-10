@@ -34,7 +34,7 @@
     Key<Integer> key = key1 = key2 = key3 = Key.get(Integer.class);
     state1 = null;
 
-    GcFinalization.awaitFullGc();
+    awaitFullGc();
 
     assertTrue(set.contains(key));
     assertEquals(2, set.getSources(key).size());
@@ -43,32 +43,32 @@
     source1 = null;
     // Key1 will be referenced as the key in the sources backingSet and won't be
     // GC'd.
-    GcFinalization.awaitClear(weakSource1Ref);
+    awaitClear(weakSource1Ref);
 
     state2 = null;
-    GcFinalization.awaitFullGc();
+    awaitFullGc();
 
     assertTrue(set.contains(key));
     assertEquals(1, set.getSources(key).size());
     assertTrue(set.getSources(key).contains(source3));
 
-    GcFinalization.awaitClear(weakKey2Ref);
+    awaitClear(weakKey2Ref);
     
     source2 = null;
-    GcFinalization.awaitClear(weakSource2Ref);
+    awaitClear(weakSource2Ref);
     // Key1 will be referenced as the key in the sources backingSet and won't be
     // GC'd.
 
     state3 = null;
-    GcFinalization.awaitFullGc();
+    awaitFullGc();
 
     assertFalse(set.contains(Key.get(Integer.class)));
     assertNull(set.getSources(Key.get(Integer.class)));
 
-    GcFinalization.awaitClear(weakKey3Ref);
+    awaitClear(weakKey3Ref);
     source3 = null;
-    GcFinalization.awaitClear(weakSource3Ref);
+    awaitClear(weakSource3Ref);
     // Now that the backing set is emptied, key1 is released.
-    GcFinalization.awaitClear(weakKey1Ref);
+    awaitClear(weakKey1Ref);
   }
 

@@ -24,12 +24,12 @@
     
     // Clear ref1, GC, and ensure that we still blacklist.
     childInjector1 = null;
-    GcFinalization.awaitClear(weakRef1);
+    awaitClear(weakRef1);
     assertBlacklisted(parentInjector, Key.get(String.class));
 
     // Clear the ref, GC, and ensure that we are no longer blacklisting.
     childInjector2 = null;
-    GcFinalization.awaitClear(weakRef2);
+    awaitClear(weakRef2);
     assertNotBlacklisted(parentInjector, Key.get(String.class));
   }
 

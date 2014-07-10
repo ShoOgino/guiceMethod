@@ -18,7 +18,7 @@
    // Clear the ref, GC, and ensure that we are no longer blacklisting.
    childInjector = null;
    
-   GcFinalization.awaitClear(weakRef);
+   WeakKeySetUtils.awaitClear(weakRef);
    WeakKeySetUtils.assertNotBlacklisted(parentInjector, Key.get(Integer.class));
  }
 
