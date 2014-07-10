@@ -21,6 +21,5 @@
     list.add("C");
     Key<?> keyAfter = binding.getKey();
     assertSame(keyBefore, keyAfter);
-    assertTrue(RehashableKeys.Keys.needsRehashing(keyAfter));
   }
 

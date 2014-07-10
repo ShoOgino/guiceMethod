@@ -1,35 +1,35 @@
     public void configure(Binder binder) {
       checkConfiguration(!isInitialized(), "OptionalBinder was already initialized");
 
-      final Provider<Map<Source, Provider<T>>> mapProvider = binder.getProvider(mapKey);
       binder.bind(optionalProviderKey).toProvider(
           new RealOptionalBinderProviderWithDependencies<Optional<Provider<T>>>(typeKey) {
         private Optional<Provider<T>> optional;
 
         @Toolable @Inject void initialize(Injector injector) {
           RealOptionalBinder.this.binder = null;
-          Map<Source, Provider<T>> map = mapProvider.get();
-          // Map might be null if duplicates prevented MapBinder from initializing
-          if (map != null) {
-            if (map.containsKey(Source.ACTUAL)) {
-              // TODO(sameb): Consider exposing an option that will allow
-              // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
-              // Right now, an ACTUAL binding can convert from present -> absent
-              // if it's bound to a provider that returns null.
-              optional = Optional.fromNullable(map.get(Source.ACTUAL)); 
-            } else if (map.containsKey(Source.DEFAULT)) {
-              optional = Optional.fromNullable(map.get(Source.DEFAULT));
-            } else {
-              optional = Optional.absent();
-            }
-            
-            // Also set up the bindings for the SPI.
-            if (map.containsKey(Source.ACTUAL)) {
-              actualBinding = getBindingFromMapProvider(injector, map.get(Source.ACTUAL));
-            }
-            if (map.containsKey(Source.DEFAULT)) {
-              defaultBinding = getBindingFromMapProvider(injector, map.get(Source.DEFAULT));
-            }
+          actualBinding = injector.getExistingBinding(actualKey);
+          defaultBinding = injector.getExistingBinding(defaultKey);
+          Binding<T> binding = null;
+          if (actualBinding != null) {
+            // TODO(sameb): Consider exposing an option that will allow
+            // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
+            // Right now, an ACTUAL binding can convert from present -> absent
+            // if it's bound to a provider that returns null.
+            binding = actualBinding;
+          } else if (defaultBinding != null) {
+            binding = defaultBinding;
+          }
+          
+          if (binding != null) {
+            optional = Optional.of(binding.getProvider());
+            RealOptionalBinder.this.dependencies =
+                ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
+            RealOptionalBinder.this.providerDependencies = 
+                ImmutableSet.<Dependency<?>>of(Dependency.get(providerOf(binding.getKey())));
+          } else {            
+            optional = Optional.absent();
+            RealOptionalBinder.this.dependencies = ImmutableSet.of();
+            RealOptionalBinder.this.providerDependencies = ImmutableSet.of();
           }
         }
         
@@ -38,7 +38,7 @@
         }
 
         public Set<Dependency<?>> getDependencies() {
-          return dependencies;
+          return providerDependencies;
         }
       });
       

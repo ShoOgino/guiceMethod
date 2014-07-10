@@ -1,8 +1,0 @@
-  /** Returns {@code Key<T>} for something like {@code Key<Provider<T>>} */
-  private static Key<?> genericOf(Key<?> key) {
-    ParameterizedType type = (ParameterizedType) key.getTypeLiteral().getType();
-    assertEquals(1, type.getActualTypeArguments().length);
-    Key<?> result = key.ofType(type.getActualTypeArguments()[0]);
-    return result;
-  }
-

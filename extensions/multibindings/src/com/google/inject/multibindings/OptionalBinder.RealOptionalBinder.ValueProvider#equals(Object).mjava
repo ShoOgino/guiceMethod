@@ -1,9 +1,0 @@
-      /**
-       * Equality is based on the key (which includes the target information, because of how
-       * RealElement works). This lets duplicate bindings collapse.
-       */
-      @Override public boolean equals(Object obj) {
-        return obj instanceof ValueProvider
-            && getCurrentKey().equals(((ValueProvider) obj).getCurrentKey());
-      }
-
