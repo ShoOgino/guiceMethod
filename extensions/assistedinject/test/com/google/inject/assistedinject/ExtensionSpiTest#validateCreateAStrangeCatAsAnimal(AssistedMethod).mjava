@@ -1,5 +1,0 @@
-  private void validateCreateAStrangeCatAsAnimal(AssistedMethod assistedMethod) {
-    validateAssistedMethod(assistedMethod, "createAStrangeCatAsAnimal",
-      StrangeCat.class, ImmutableList.<Key<?>>of());
-  }
-
