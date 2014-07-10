@@ -1,0 +1,15 @@
+  public static void assertSourceNotInSet(WeakKeySet set, Key<?> key, Object source) {
+    // if we're expecting it to not be a source, loop around and wait for threads to run.
+    for (int i = 0; i < 10; i++) {
+      Set<Object> sources = set.getSources(key);
+      assertNotNull("expected at least one source", source);
+      if (!sources.contains(source)) {
+        break;
+      }
+      sleep();
+    }
+    Set<Object> sources = set.getSources(key);
+    assertNotNull("expected at least one source", source);
+    assertFalse(sources.contains(source));
+  }
+

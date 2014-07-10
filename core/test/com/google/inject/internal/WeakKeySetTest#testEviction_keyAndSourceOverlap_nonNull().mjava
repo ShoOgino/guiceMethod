@@ -6,16 +6,11 @@
     Object source = new Object();
 
     set.add(key1, state1, source);
-    assertTrue(set.contains(key1));
-    assertEquals(1, set.getSources(key1).size());
-    assertTrue(set.getSources(key1).contains(source));
+    assertInSet(set, key1, 1, source);
 
     set.add(key2, state2, source);
-    assertTrue(set.contains(key2));
-
     // Same source so still only one value.
-    assertEquals(1, set.getSources(key2).size());
-    assertTrue(set.getSources(key1).contains(source));
+    assertInSet(set, key2, 1, source);
 
     WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<Key<Integer>>(key1);
     WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<Key<Integer>>(key2);
@@ -26,11 +21,9 @@
 
     awaitFullGc();
 
-    assertTrue(set.contains(key));
-
-    // Should still have a single source.
-    assertEquals(1, set.getSources(key).size());
-    assertTrue(set.getSources(key1).contains(source));
+ // Same source so still only one value.
+    assertInSet(set, key, 1, source);
+    assertInSet(set, key1, 1, source);
     
     source = null;
 
@@ -43,8 +36,7 @@
 
     awaitFullGc();
 
-    assertFalse(set.contains(key));
-    assertNull(set.getSources(key));
+    assertNotInSet(set, key);
 
     awaitClear(weakKey2Ref);
     awaitClear(weakSourceRef);

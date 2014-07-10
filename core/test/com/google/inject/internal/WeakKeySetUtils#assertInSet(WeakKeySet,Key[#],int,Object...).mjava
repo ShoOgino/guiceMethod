@@ -1,0 +1,9 @@
+  public static void assertInSet(WeakKeySet set, Key<?> key, int expectedSources,
+      Object... sources) {
+    assertTrue(set.contains(key));
+    assertEquals(expectedSources, set.getSources(key).size());
+    for (Object source : sources) {
+      assertTrue("didn't contain source: " + source, set.getSources(key).contains(source));
+    }
+  }
+

@@ -6,16 +6,13 @@
     WeakReference<Key<Integer>> weakKeyRef = new WeakReference<Key<Integer>>(key);
 
     set.add(key, state, source);
-    assertTrue(set.contains(key));
-    assertEquals(1, set.getSources(key).size());
-    assertTrue(set.getSources(key).contains(source));
+    assertInSet(set, key, 1, source);
 
     state = null;
 
     awaitFullGc();
 
-    assertFalse(set.contains(Key.get(Integer.class)));
-    assertNull(set.getSources(Key.get(Integer.class)));
+    assertNotInSet(set, Key.get(Integer.class));
 
     // Ensure there are no hanging references.
     key = null;
