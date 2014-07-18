@@ -1,5 +1,4 @@
-  @Test
-  public void givenErrorOnEntityManagerClose_whenEndIsCalled_thenEntityManagerIsRemoved() {
+  public void test_givenErrorOnEntityManagerClose_whenEndIsCalled_thenEntityManagerIsRemoved() {
     sut.start(factory);
     sut.begin();
 
