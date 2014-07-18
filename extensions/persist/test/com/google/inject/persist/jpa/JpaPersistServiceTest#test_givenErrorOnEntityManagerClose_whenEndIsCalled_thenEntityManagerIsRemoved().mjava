@@ -1,0 +1,15 @@
+  public void test_givenErrorOnEntityManagerClose_whenEndIsCalled_thenEntityManagerIsRemoved() {
+    sut.start(factory);
+    sut.begin();
+
+    // arrange an exception on sut.end(), which invokes entityManager.close()
+    doThrow(SimulatedException.class).when(entityManager).close();
+    try {
+      sut.end();
+      fail("Exception expected");
+    }
+    catch (SimulatedException expected) {
+      assertThat(sut.isWorking(), is(false));
+    }
+  }
+

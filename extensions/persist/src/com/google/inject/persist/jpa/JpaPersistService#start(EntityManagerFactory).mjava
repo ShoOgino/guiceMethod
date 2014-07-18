@@ -1,0 +1,5 @@
+  @VisibleForTesting
+  synchronized void start(EntityManagerFactory emFactory) {
+    this.emFactory = emFactory;
+  }
+

@@ -6,7 +6,11 @@
       return;
     }
 
-    em.close();
-    entityManager.remove();
+    try {
+      em.close();
+    }
+    finally {
+      entityManager.remove();
+    }
   }
 
