@@ -1,7 +1,8 @@
   /**
    * Returns a single location in source code that defines the element. It can be any object
-   * such as {@link Constructor}, {@link Method}, {@link Field}, {@link StackTraceElement}, etc. For
-   * example, if the element is created from a method annotated by {@literal @Provides}, the 
+   * such as {@link java.lang.reflect.Constructor}, {@link java.lang.reflect.Method},
+   * {@link java.lang.reflect.Field}, {@link StackTraceElement}, etc. For
+   * example, if the element is created from a method annotated by {@literal @Provides}, the
    * declaring source of element would be the method itself.
    */
   public Object getDeclaringSource() {
