@@ -1,0 +1,6 @@
+  private ProviderMethodsModule(Object delegate, boolean skipFastClassGeneration) {
+    this.delegate = checkNotNull(delegate, "delegate");
+    this.typeLiteral = TypeLiteral.get(this.delegate.getClass());
+    this.skipFastClassGeneration = skipFastClassGeneration;
+  }
+
