@@ -1,7 +1,7 @@
   /**
-   * Returns the position of {@link Module#configure(Binder) configure(Binder)} method call in the
-   * {@link #getStackTrace() stack trace} for modules that their classes returned by
-   * {@link #getModuleClassNames()}. For example, if the stack trace looks like the following:
+   * Returns the position of {@link com.google.inject.Module#configure configure(Binder)} method
+   * call in the {@link #getStackTrace stack trace} for modules that their classes returned by
+   * {@link #getModuleClassNames}. For example, if the stack trace looks like the following:
    * <p>
    * {@code
    *  0 - Binder.bind(),
