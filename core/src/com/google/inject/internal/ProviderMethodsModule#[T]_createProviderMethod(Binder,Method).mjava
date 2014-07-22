@@ -33,6 +33,6 @@
     }
 
     return ProviderMethod.create(key, method, delegate, ImmutableSet.copyOf(dependencies),
-        parameterProviders, scopeAnnotation);
+        parameterProviders, scopeAnnotation, skipFastClassGeneration);
   }
 
