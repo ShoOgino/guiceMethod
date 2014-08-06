@@ -1,0 +1,8 @@
+      private RealProviderMapProvider(
+          ImmutableSet<Dependency<?>> dependencies,
+          Provider<Set<Entry<K, Provider<V>>>> entrySetProvider) {
+        super(mapKey);
+        this.dependencies = dependencies;
+        this.entrySetProvider = entrySetProvider;
+      }
+
