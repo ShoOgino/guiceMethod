@@ -49,7 +49,9 @@
         if (b instanceof ProviderInstanceBinding) {
           ProviderInstanceBinding<?> pb = (ProviderInstanceBinding<?>) b;
           if (pb.getUserSuppliedProvider() instanceof ProviderMapEntry) {
-            ProviderMapEntry<?, ?> pme = (ProviderMapEntry<?, ?>) pb.getUserSuppliedProvider();
+            // weird casting required to workaround jdk6 compilation problems
+            ProviderMapEntry<?, ?> pme =
+                (ProviderMapEntry<?, ?>) (Provider) pb.getUserSuppliedProvider();
             Binding<?> valueBinding = keyMap.get(pme.getValueKey());
             if (indexer.isIndexable(valueBinding)
                 && !indexedEntries.put(pme.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
