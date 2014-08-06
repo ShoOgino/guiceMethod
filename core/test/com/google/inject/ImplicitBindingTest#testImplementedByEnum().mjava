@@ -1,0 +1,14 @@
+  // An enum cannot be implemented by anything, so it should not be possible to have a successful
+  // binding when the enum is annotated with @ImplementedBy.
+  public void testImplementedByEnum() {
+    Injector injector = Guice.createInjector();
+    try {
+      injector.getInstance(EnumWithImplementedBy.class);
+      fail("Expected failure");
+    } catch(ConfigurationException expected) {
+      Message msg = Iterables.getOnlyElement(expected.getErrorMessages());
+      Asserts.assertContains(msg.getMessage(),
+          "No implementation for " + EnumWithImplementedBy.class.getName() + " was bound.");
+    }
+  }
+
