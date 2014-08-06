@@ -1,0 +1,7 @@
+  RealElement(String setName, Element.Type type, String keyType, int uniqueId) {
+    this.uniqueId = uniqueId;
+    this.setName = setName;
+    this.type = type;
+    this.keyType = keyType;
+  }
+

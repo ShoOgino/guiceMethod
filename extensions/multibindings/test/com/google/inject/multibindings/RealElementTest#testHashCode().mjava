@@ -1,0 +1,4 @@
+  public void testHashCode() {
+    assertEquals(systemElement.hashCode(), realElement.hashCode());
+  }
+

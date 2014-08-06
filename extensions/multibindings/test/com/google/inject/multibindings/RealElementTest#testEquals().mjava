@@ -1,0 +1,5 @@
+  public void testEquals() {
+    assertEquals(systemElement, realElement);
+    assertEquals(realElement, systemElement);
+  }
+

@@ -1,7 +1,7 @@
   /** We just want to make sure that mapbinder's binding depends on the underlying multibinder. */
   public void testMultibinderDependenciesInToolStage() {
     Injector injector = Guice.createInjector(Stage.TOOL, new AbstractModule() {
-        protected void configure() {
+      @Override protected void configure() {
           MapBinder<Integer, String> mapBinder
               = MapBinder.newMapBinder(binder(), Integer.class, String.class);
           mapBinder.addBinding(1).toInstance("A");

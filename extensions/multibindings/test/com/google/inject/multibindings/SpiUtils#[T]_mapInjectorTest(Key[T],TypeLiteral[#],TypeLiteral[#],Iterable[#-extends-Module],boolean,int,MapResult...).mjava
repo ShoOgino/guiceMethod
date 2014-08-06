@@ -50,6 +50,10 @@
     boolean mapSetProviderMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
     List<Binding> otherMatches = Lists.newArrayList();
+    Multimap<Object, IndexedBinding> indexedEntries =
+        MultimapBuilder.hashKeys().hashSetValues().build();
+    Indexer indexer = new Indexer(injector);
+    int duplicates = 0;
     for(Binding b : injector.getAllBindings().values()) {
       boolean contains = mapbinder.containsElement(b);      
       Object visited = b.acceptTargetVisitor(visitor);
@@ -77,6 +81,17 @@
         // Validate that this binding is also a MultibinderBinding.
         assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
       } else if (contains) {
+        if (b instanceof ProviderInstanceBinding) {
+          ProviderInstanceBinding<?> pib = (ProviderInstanceBinding<?>)b;
+          if (pib.getUserSuppliedProvider() instanceof ProviderMapEntry) {
+            ProviderMapEntry<?, ?> pme = (ProviderMapEntry<?, ?>)pib.getUserSuppliedProvider();
+            Binding<?> valueBinding = injector.getBinding(pme.getValueKey());
+            if (indexer.isIndexable(valueBinding)
+                && !indexedEntries.put(pme.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
+              duplicates++;
+            }
+          }
+        }
         otherMatches.add(b);
       }
     }
@@ -86,7 +101,8 @@
       sizeOfOther--; // account for 1 duplicate binding
     }
     sizeOfOther = sizeOfOther / 2; // account for 1 value & 1 Map.Entry of each expected binding.
-    assertEquals("Incorrect other matches: " + otherMatches, mapResults.size(), sizeOfOther);
+    assertEquals("Incorrect other matches: " + otherMatches,
+        mapResults.size() + duplicates, sizeOfOther);
     assertTrue(entrySetMatch);
     assertTrue(mapProviderMatch);
     assertTrue(mapJavaxProviderMatch);

@@ -16,11 +16,9 @@
         Iterables.filter(Elements.getElements(ab), InstanceBinding.class));
     Key<?> keyBefore = binding.getKey();
     assertEquals(listOfStrings, keyBefore.getTypeLiteral());
-    assertFalse(RehashableKeys.Keys.needsRehashing(keyBefore));
 
     list.add("C");
     Key<?> keyAfter = binding.getKey();
     assertSame(keyBefore, keyAfter);
-    assertTrue(RehashableKeys.Keys.needsRehashing(keyAfter));
   }
 

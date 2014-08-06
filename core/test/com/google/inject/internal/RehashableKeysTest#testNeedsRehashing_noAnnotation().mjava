@@ -1,5 +1,0 @@
-  public void testNeedsRehashing_noAnnotation() {
-    Key<?> key = Key.get(Integer.class);
-    assertFalse(needsRehashing(key));
-  }
-

@@ -1,5 +1,0 @@
-    public void asEagerSingleton() {
-      delegate.asEagerSingleton();
-      annotation.scope = EAGER_SINGLETON;
-    }
-

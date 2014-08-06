@@ -1,5 +1,0 @@
-  public void testRehash_noParametersAnnotation() {
-    Key<?> key = Key.get(Integer.class, NoParametersAnnotation.class);
-    assertSame(key, rehash(key));
-  }
-

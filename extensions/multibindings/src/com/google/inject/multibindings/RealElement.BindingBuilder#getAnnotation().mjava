@@ -1,4 +1,0 @@
-    RealElement getAnnotation() {
-      return annotation;
-    }
-

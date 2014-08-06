@@ -1,0 +1,4 @@
+  boolean isIndexable(Binding<?> binding) {
+    return binding.getKey().getAnnotation() instanceof Element;
+  }
+

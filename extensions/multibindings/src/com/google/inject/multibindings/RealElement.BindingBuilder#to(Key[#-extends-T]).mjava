@@ -1,7 +1,0 @@
-    public ScopedBindingBuilder to(Key<? extends T> targetKey) {
-      delegate.to(targetKey);
-      annotation.targetType = TargetType.LINKED_KEY;
-      annotation.target = targetKey;
-      return this;
-    }
-

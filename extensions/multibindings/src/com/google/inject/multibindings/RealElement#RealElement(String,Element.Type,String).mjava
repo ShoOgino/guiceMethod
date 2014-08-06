@@ -1,0 +1,4 @@
+  RealElement(String setName, Element.Type type, String keyType) {
+    this(setName, type, keyType, nextUniqueId.incrementAndGet());
+  }
+

@@ -1,4 +1,0 @@
-  public BindingImpl<T> withRehashedKeys() {
-    throw new AssertionError();
-  }
-

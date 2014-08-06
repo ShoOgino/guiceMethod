@@ -1,0 +1,4 @@
+  @Override public Object visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
+    return scopeAnnotation;
+  }
+

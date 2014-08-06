@@ -1,5 +1,5 @@
   public boolean contains(Key<?> key) {
     evictionCache.cleanUp();
-    return backingMap != null && backingMap.containsKey(new BlacklistKey(key));
+    return backingMap != null && backingMap.containsKey(key);
   }
 

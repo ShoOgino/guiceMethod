@@ -1,4 +1,4 @@
-  public Class<? extends Annotation> annotationType() {
+  @Override public Class<? extends Annotation> annotationType() {
     return Element.class;
   }
 

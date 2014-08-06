@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return String.format("@%s(setName=%s, uniqueId=%d, type=%s)",
-        annotationType().getName(), setName, uniqueId, type);
+    return "@" + Element.class.getName() + "(setName=" + setName
+        + ",uniqueId=" + uniqueId + ", type=" + type + ", keyType=" + keyType + ")";
   }
 

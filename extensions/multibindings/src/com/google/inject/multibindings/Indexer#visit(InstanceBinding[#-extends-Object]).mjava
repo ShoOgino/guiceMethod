@@ -1,0 +1,5 @@
+  @Override public Indexer.IndexedBinding visit(InstanceBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.INSTANCE, scope(binding),
+        binding.getInstance());
+  }
+

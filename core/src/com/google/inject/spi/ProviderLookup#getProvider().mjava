@@ -12,12 +12,6 @@
       }
       
       public Set<Dependency<?>> getDependencies() {
-        // If someone inside a Module is casting the Provider to HasDependencies
-        // in order to find its dependencies, we give them nothing (because we can't
-        // guarantee that the key is finalized yet).  However, if someone acts on
-        // a ProviderLookup or ProviderInstanceBinding, it will properly find dependencies.
-        checkState(rehashed, "Dependencies can not be retrieved until the Injector has been "
-            + "created (or Elements.getElements finishes)");
         // We depend on Provider<T>, not T directly.  This is an important distinction
         // for dependency analysis tools that short-circuit on providers.
         Key<?> providerKey = key.ofType(Types.providerOf(key.getTypeLiteral().getType()));

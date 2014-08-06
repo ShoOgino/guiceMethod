@@ -1,8 +1,0 @@
-    public ScopedBindingBuilder toProvider(
-        Key<? extends javax.inject.Provider<? extends T>> providerKey) {
-      delegate.toProvider(providerKey);
-      annotation.targetType = TargetType.PROVIDER_KEY;
-      annotation.target = providerKey;
-      return this;
-    }
-

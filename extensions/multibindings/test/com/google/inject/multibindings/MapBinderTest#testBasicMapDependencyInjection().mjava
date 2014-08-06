@@ -8,7 +8,7 @@
       }
     };
     Module abc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         requestInjection(anObject);
         MapBinder<String, String> multibinder =
             MapBinder.newMapBinder(binder(), String.class, String.class);

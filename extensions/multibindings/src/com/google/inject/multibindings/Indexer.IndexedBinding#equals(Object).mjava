@@ -1,0 +1,13 @@
+    @Override public boolean equals(Object obj) {
+      if (!(obj instanceof IndexedBinding)) {
+        return false;
+      }
+      IndexedBinding o = (IndexedBinding) obj;
+      return type == o.type
+          && Objects.equal(scope, o.scope)
+          && typeLiteral.equals(o.typeLiteral)
+          && annotationType == o.annotationType
+          && annotationName.equals(o.annotationName)
+          && Objects.equal(extraEquality, o.extraEquality);
+    }
+

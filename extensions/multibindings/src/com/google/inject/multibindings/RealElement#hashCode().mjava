@@ -1,11 +1,7 @@
-  /**
-   * Returns the hash code of this annotation. This depends on the binding the annotation is in.
-   * 
-   * <p>This <b>does not</b> match the definition of {@link Annotation#hashCode}. However, as
-   * these annotations will only ever be used within Guice, and {@link Element} itself is package
-   * private and will never be used as an annotation, this should not cause problems.
-   */
   @Override public int hashCode() {
-    return Objects.hashCode(setName, type, mapEntryKey, scope, targetType, target, mapKeyType);
+    return ((127 * "setName".hashCode()) ^ setName.hashCode())
+        + ((127 * "uniqueId".hashCode()) ^ uniqueId)
+        + ((127 * "type".hashCode()) ^ type.hashCode())
+        + ((127 * "keyType".hashCode()) ^ keyType.hashCode());
   }
 

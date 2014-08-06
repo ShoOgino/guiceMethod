@@ -1,32 +1,8 @@
-  /**
-   * Returns true if the given object is a {@link RealElement} associated with a binding that
-   * is considered a duplicate of the one associated with this object. Specifically, that means all
-   * the following must hold:
-   * <ul>
-   * <li>the bindings are from the same collection (as determined by {@link #setName} and
-   *     {@link #type})
-   * <li>the bindings are in the same scope
-   * <li>the target types ("instance", "linked key", etc.) match
-   * <li>the targets themselves (the instance, the linked key, etc.) are equal
-   * </ul>
-   * 
-   * <p>Note that this means the definition of equality can change if a bound instance changes.
-   * 
-   * <p>This <b>does not</b> match the definition of {@link Annotation#equals}. However, as
-   * these annotations will only ever be used within Guice, and {@link Element} itself is package
-   * private and will never be used as an annotation, this should not cause problems.
-   */
-  @Override public boolean equals(Object obj) {
-    if (obj == null || getClass() != obj.getClass()) {
-      return false;
-    }
-    RealElement other = (RealElement) obj;
-    return (setName.equals(other.setName)
-        && type.equals(other.type)
-        && Objects.equal(mapKeyType, other.mapKeyType)
-        && Objects.equal(mapEntryKey, other.mapEntryKey)
-        && scope.equals(other.scope)
-        && targetType.equals(other.targetType)
-        && Objects.equal(target, other.target));
+  @Override public boolean equals(Object o) {
+    return o instanceof Element
+        && ((Element) o).setName().equals(setName())
+        && ((Element) o).uniqueId() == uniqueId()
+        && ((Element) o).type() == type()
+        && ((Element) o).keyType().equals(keyType());
   }
 

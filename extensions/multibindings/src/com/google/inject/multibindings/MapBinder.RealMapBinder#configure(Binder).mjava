@@ -1,4 +1,4 @@
-    public void configure(Binder binder) {
+    @Override public void configure(Binder binder) {
       checkConfiguration(!isInitialized(), "MapBinder was already initialized");
 
       final ImmutableSet<Dependency<?>> dependencies
@@ -18,18 +18,24 @@
 
           Map<K, Provider<V>> providerMapMutable = new LinkedHashMap<K, Provider<V>>();
           List<Map.Entry<K, Binding<V>>> bindingsMutable = Lists.newArrayList();
+          Indexer indexer = new Indexer(injector);
+          Multimap<K, IndexedBinding> index = HashMultimap.create();
           Set<K> duplicateKeys = null;
           for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
-            Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
-            if (previous != null && !permitDuplicates) {
-              if (duplicateKeys == null) {
-                duplicateKeys = Sets.newHashSet();
-              }
-              duplicateKeys.add(entry.getKey());
-            }
             ProviderMapEntry<K, V> providerEntry = (ProviderMapEntry<K, V>) entry;
             Key<V> valueKey = providerEntry.getValueKey();
-            bindingsMutable.add(Maps.immutableEntry(entry.getKey(), injector.getBinding(valueKey)));
+            Binding<V> valueBinding = injector.getBinding(valueKey);
+            // If this isn't a dup due to an exact same binding, add it.
+            if (index.put(entry.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
+              Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
+              if (previous != null && !permitDuplicates) {
+                if (duplicateKeys == null) {
+                  duplicateKeys = Sets.newHashSet();
+                }
+                duplicateKeys.add(entry.getKey());
+              }
+              bindingsMutable.add(Maps.immutableEntry(entry.getKey(), valueBinding));
+            }
           }
           if (duplicateKeys != null) {
             // Must use a ListMultimap in case more than one binding has the same source
@@ -67,11 +73,11 @@
           mapBindings = ImmutableList.copyOf(bindingsMutable);
         }
 
-        public Map<K, Provider<V>> get() {
+        @Override public Map<K, Provider<V>> get() {
           return providerMap;
         }
 
-        public Set<Dependency<?>> getDependencies() {
+        @Override public Set<Dependency<?>> getDependencies() {
           return dependencies;
         }
       });
@@ -85,7 +91,7 @@
 
       final Provider<Map<K, Provider<V>>> mapProvider = binder.getProvider(providerMapKey);
       binder.bind(mapKey).toProvider(new RealMapWithExtensionProvider<Map<K, V>>(mapKey) {
-        public Map<K, V> get() {
+        @Override public Map<K, V> get() {
           Map<K, V> map = new LinkedHashMap<K, V>();
           for (Entry<K, Provider<V>> entry : mapProvider.get().entrySet()) {
             V value = entry.getValue().get();
@@ -97,11 +103,12 @@
           return Collections.unmodifiableMap(map);
         }
 
-        public Set<Dependency<?>> getDependencies() {
+        @Override public Set<Dependency<?>> getDependencies() {
           return dependencies;
         }
 
         @SuppressWarnings("unchecked")
+        @Override 
         public <B, R> R acceptExtensionVisitor(BindingTargetVisitor<B, R> visitor,
             ProviderInstanceBinding<? extends B> binding) {
           if (visitor instanceof MultibindingsTargetVisitor) {
@@ -111,19 +118,20 @@
           }
         }
 
-        public Key<Map<K, V>> getMapKey() {
+        @Override public Key<Map<K, V>> getMapKey() {
           return mapKey;
         }
 
-        public TypeLiteral<?> getKeyTypeLiteral() {
+        @Override public TypeLiteral<?> getKeyTypeLiteral() {
           return keyType;
         }
 
-        public TypeLiteral<?> getValueTypeLiteral() {
+        @Override public TypeLiteral<?> getValueTypeLiteral() {
           return valueType;
         }
 
         @SuppressWarnings("unchecked")
+        @Override 
         public List<Entry<?, Binding<?>>> getEntries() {
           if (isInitialized()) {
             return (List)mapBindings; // safe because mapBindings is immutable
@@ -132,7 +140,7 @@
           }
         }
 
-        public boolean permitsDuplicates() {
+        @Override public boolean permitsDuplicates() {
           if (isInitialized()) {
             return permitDuplicates;
           } else {
@@ -140,7 +148,7 @@
           }
         }
 
-        public boolean containsElement(com.google.inject.spi.Element element) {
+        @Override public boolean containsElement(Element element) {
           return RealMapBinder.this.containsElement(element);
         }
       });

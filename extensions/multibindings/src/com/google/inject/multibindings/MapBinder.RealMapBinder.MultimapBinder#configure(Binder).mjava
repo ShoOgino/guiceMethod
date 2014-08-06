@@ -1,4 +1,4 @@
-      public void configure(Binder binder) {
+      @Override public void configure(Binder binder) {
         final ImmutableSet<Dependency<?>> dependencies
             = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetKey));
 
@@ -31,11 +31,11 @@
                 providerMultimap = providerMultimapBuilder.build();
               }
 
-              public Map<K, Set<Provider<V>>> get() {
+              @Override public Map<K, Set<Provider<V>>> get() {
                 return providerMultimap;
               }
 
-              public Set<Dependency<?>> getDependencies() {
+              @Override public Set<Dependency<?>> getDependencies() {
                 return dependencies;
               }
             });
@@ -44,7 +44,7 @@
             binder.getProvider(providerMultimapKey);
         binder.bind(multimapKey).toProvider(new RealMapBinderProviderWithDependencies<Map<K, Set<V>>>(multimapKey) {
 
-          public Map<K, Set<V>> get() {
+          @Override public Map<K, Set<V>> get() {
             ImmutableMap.Builder<K, Set<V>> multimapBuilder = ImmutableMap.builder();
             for (Entry<K, Set<Provider<V>>> entry : multimapProvider.get().entrySet()) {
               K key = entry.getKey();
@@ -60,7 +60,7 @@
             return multimapBuilder.build();
           }
 
-          public Set<Dependency<?>> getDependencies() {
+          @Override public Set<Dependency<?>> getDependencies() {
             return dependencies;
           }
         });

@@ -1,8 +1,0 @@
-  private RealElement(String setName, Element.Type type, TypeLiteral<?> mapKeyType, Object mapKey) {
-    this.uniqueId = nextUniqueId.incrementAndGet();
-    this.setName = setName;
-    this.type = type;
-    this.mapEntryKey = mapKey;
-    this.mapKeyType = mapKeyType;
-  }
-

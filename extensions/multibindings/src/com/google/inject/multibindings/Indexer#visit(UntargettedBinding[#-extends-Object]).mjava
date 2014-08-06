@@ -1,0 +1,4 @@
+  @Override public Indexer.IndexedBinding visit(UntargettedBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.UNTARGETTED, scope(binding), null);
+  }
+

@@ -1,0 +1,5 @@
+  @Override public Indexer.IndexedBinding visit(ConstructorBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.CONSTRUCTOR, scope(binding),
+        binding.getConstructor());
+  }
+

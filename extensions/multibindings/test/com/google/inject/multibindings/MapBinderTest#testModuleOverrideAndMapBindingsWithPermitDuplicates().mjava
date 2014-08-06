@@ -3,7 +3,7 @@
    */
   public void testModuleOverrideAndMapBindingsWithPermitDuplicates() {
     Module abc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
         multibinder.addBinding("a").toInstance("A");
         multibinder.addBinding("b").toInstance("B");
@@ -12,7 +12,7 @@
       }
     };
     Module cd = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
         multibinder.addBinding("c").toInstance("C");
         multibinder.addBinding("d").toInstance("D");
@@ -20,7 +20,7 @@
       }
     };
     Module ef = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
         multibinder.addBinding("e").toInstance("E");
         multibinder.addBinding("f").toInstance("F");

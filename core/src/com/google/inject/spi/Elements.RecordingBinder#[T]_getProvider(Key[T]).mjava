@@ -1,7 +1,6 @@
     public <T> Provider<T> getProvider(final Key<T> key) {
       final ProviderLookup<T> element = new ProviderLookup<T>(getElementSource(), key);
       elements.add(element);
-      rehashables.add(element.getKeyRehasher());
       return element.getProvider();
     }
 

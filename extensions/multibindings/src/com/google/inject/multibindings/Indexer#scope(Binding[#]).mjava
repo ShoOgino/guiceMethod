@@ -1,0 +1,4 @@
+  private Object scope(Binding<?> binding) {
+    return binding.acceptScopingVisitor(this);
+  }
+
