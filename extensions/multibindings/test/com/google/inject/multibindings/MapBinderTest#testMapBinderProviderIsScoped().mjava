@@ -1,7 +1,7 @@
   public void testMapBinderProviderIsScoped() {
     final Provider<Integer> counter = new Provider<Integer>() {
       int next = 1;
-      public Integer get() {
+      @Override public Integer get() {
         return next++;
       }
     };

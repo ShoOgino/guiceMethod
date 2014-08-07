@@ -1,8 +1,0 @@
-  public void testRehash_immutableAnnotation() {
-    Key<?> key = Key.get(Integer.class, Names.named("testy"));
-    Key<?> keyCopy = rehash(key);
-    assertEquals(key, keyCopy);
-    assertEquals(key.hashCode(), keyCopy.hashCode());
-    assertEquals(key.toString(), keyCopy.toString());
-  }
-

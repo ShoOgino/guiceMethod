@@ -18,6 +18,9 @@
     List<Object> otherMultibinders = Lists.newArrayList();
     Set<Element> otherContains = new HashSet<Element>();
     List<Element> otherElements = Lists.newArrayList();
+    int duplicates = 0;
+    Set<IndexedBinding> setOfIndexed = Sets.newHashSet();
+    Indexer indexer = new Indexer(null);
     for(Element element : elements) {
       boolean contains = multibinder.containsElement(element);
       if(!contains) {
@@ -26,6 +29,11 @@
       boolean matched = false;
       if(element instanceof Binding) {
         Binding binding = (Binding)element;
+        if (indexer.isIndexable(binding)
+            && !setOfIndexed.add((IndexedBinding) binding.acceptTargetVisitor(indexer))) {
+          duplicates++;
+        }
+        
         Object visited = binding.acceptTargetVisitor(visitor);
         if(visited != null) {
           matched = true;
@@ -43,9 +51,11 @@
     }
     
     if(allowDuplicates) {
-      assertEquals("wrong contained elements: " + otherContains, bindResults.size() + 1, otherContains.size());
+      assertEquals("wrong contained elements: " + otherContains,
+          bindResults.size() + 1 + duplicates, otherContains.size());
     } else {
-      assertEquals("wrong contained elements: " + otherContains, bindResults.size(), otherContains.size());
+      assertEquals("wrong contained elements: " + otherContains,
+          bindResults.size() + duplicates, otherContains.size());
     }
      
     assertEquals("other multibindings found: " + otherMultibinders, otherMultibindings,

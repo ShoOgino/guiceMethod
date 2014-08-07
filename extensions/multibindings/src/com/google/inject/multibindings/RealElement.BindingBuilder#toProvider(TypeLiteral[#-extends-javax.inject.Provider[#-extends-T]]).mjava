@@ -1,5 +1,0 @@
-    public ScopedBindingBuilder toProvider(
-        TypeLiteral<? extends javax.inject.Provider<? extends T>> providerType) {
-      return toProvider(Key.get(providerType));
-    }
-

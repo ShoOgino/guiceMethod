@@ -1,0 +1,6 @@
+  public void testProvidedByNonEmptyEnum() {
+    NonEmptyEnum cardSuit = Guice.createInjector().getInstance(NonEmptyEnum.class);
+
+    assertEquals(NonEmptyEnum.HEARTS, cardSuit);
+  }
+

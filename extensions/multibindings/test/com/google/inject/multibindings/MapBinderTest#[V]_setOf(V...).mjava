@@ -1,5 +1,5 @@
   @SuppressWarnings("unchecked")
   private <V> Set<V> setOf(V... elements) {
-    return new HashSet(Arrays.asList(elements));
+    return new HashSet<V>(Arrays.asList(elements));
   }
 

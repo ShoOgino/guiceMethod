@@ -8,7 +8,6 @@
     }
     // Free the memory consumed by the stack trace elements cache
     StackTraceElements.clearCache();
-    binder.rehashKeys();
     return Collections.unmodifiableList(binder.elements);
   }
 

@@ -3,7 +3,7 @@
       return key.getAnnotation() instanceof RealElement
           && ((RealElement) key.getAnnotation()).setName().equals(entrySetBinder.getSetName())
           && ((RealElement) key.getAnnotation()).type() == MAPBINDER
-          && ((RealElement) key.getAnnotation()).mapKeyType.equals(keyType)
+          && ((RealElement) key.getAnnotation()).keyType().equals(keyType.toString())
           && key.getTypeLiteral().equals(valueType);
     }
 

@@ -1,0 +1,10 @@
+    IndexedBinding(Binding<?> binding, BindingType type, Object scope, Object extraEquality) {
+      this.scope = scope;
+      this.type = type;
+      this.extraEquality = extraEquality;
+      this.typeLiteral = binding.getKey().getTypeLiteral();
+      Element annotation = (Element) binding.getKey().getAnnotation();
+      this.annotationName = annotation.setName();
+      this.annotationType = annotation.type();
+    }
+

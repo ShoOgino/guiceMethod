@@ -1,0 +1,5 @@
+  public void testProvidedByEmptyEnum() {
+    EmptyEnum emptyEnumValue = Guice.createInjector().getInstance(EmptyEnum.class);
+    assertNull(emptyEnumValue);
+  }
+

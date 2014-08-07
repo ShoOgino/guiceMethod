@@ -1,0 +1,5 @@
+    @Override
+    public NonEmptyEnum get() {
+      return NonEmptyEnum.HEARTS;
+    }
+

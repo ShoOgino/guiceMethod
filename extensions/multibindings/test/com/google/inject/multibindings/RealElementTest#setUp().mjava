@@ -1,0 +1,5 @@
+  @Override protected void setUp() throws Exception {
+    this.systemElement = Holder.class.getAnnotation(Element.class);
+    this.realElement = new RealElement("b", Type.MULTIBINDER, "a", 1);
+  }
+

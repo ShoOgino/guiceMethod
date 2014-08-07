@@ -5,13 +5,17 @@
      */
     @Toolable @Inject void initialize(Injector injector) {
       List<Binding<T>> bindings = Lists.newArrayList();
+      Set<Indexer.IndexedBinding> index = Sets.newHashSet();
+      Indexer indexer = new Indexer(injector);
       List<Dependency<?>> dependencies = Lists.newArrayList();
       for (Binding<?> entry : injector.findBindingsByType(elementType)) {
         if (keyMatches(entry.getKey())) {
           @SuppressWarnings("unchecked") // protected by findBindingsByType()
           Binding<T> binding = (Binding<T>) entry;
-          bindings.add(binding);
-          dependencies.add(Dependency.get(binding.getKey()));
+          if (index.add(binding.acceptTargetVisitor(indexer))) {
+            bindings.add(binding);
+            dependencies.add(Dependency.get(binding.getKey()));
+          }
         }
       }
 

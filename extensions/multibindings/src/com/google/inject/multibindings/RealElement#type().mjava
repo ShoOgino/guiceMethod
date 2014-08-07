@@ -1,4 +1,4 @@
-  public Element.Type type() {
+  @Override public Element.Type type() {
     return type;
   }
 

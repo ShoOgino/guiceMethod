@@ -4,7 +4,7 @@
       Binding<?> binding = injector.getBinding(dependency.getKey());
       HasDependencies deps = (HasDependencies) binding;
       if (binding instanceof InstanceBinding) {
-        elements.add((String) ((InstanceBinding) binding).getInstance());
+        elements.add((String) ((InstanceBinding<?>) binding).getInstance());
       } else {
         elements.addAll(recurseForDependencies(injector, deps));
       }

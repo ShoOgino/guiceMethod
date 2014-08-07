@@ -1,4 +1,0 @@
-    MutableTestAnnotation(int value) {
-      this.value = value;
-    }
-

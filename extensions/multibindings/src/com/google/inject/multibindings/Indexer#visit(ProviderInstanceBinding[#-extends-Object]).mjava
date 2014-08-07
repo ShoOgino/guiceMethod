@@ -1,0 +1,5 @@
+  @Override public Indexer.IndexedBinding visit(ProviderInstanceBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.PROVIDER_INSTANCE, scope(binding),
+        binding.getUserSuppliedProvider());
+  }
+

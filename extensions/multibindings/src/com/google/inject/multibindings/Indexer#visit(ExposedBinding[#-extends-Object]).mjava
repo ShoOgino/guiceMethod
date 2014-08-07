@@ -1,0 +1,4 @@
+  @Override public Indexer.IndexedBinding visit(ExposedBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.EXPOSED, scope(binding), binding);
+  }
+

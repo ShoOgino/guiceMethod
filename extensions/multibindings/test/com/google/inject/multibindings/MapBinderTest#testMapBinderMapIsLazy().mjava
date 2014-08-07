@@ -4,7 +4,7 @@
         MapBinder.newMapBinder(binder(), String.class, Integer.class)
             .addBinding("num").toProvider(new Provider<Integer>() {
           int nextValue = 1;
-          public Integer get() {
+          @Override public Integer get() {
             return nextValue++;
           }
         });

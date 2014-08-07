@@ -6,11 +6,10 @@
       checkNotNull(key, "key");
       checkConfiguration(!isInitialized(), "MapBinder was already initialized");
 
-      RealElement.BindingBuilder<V> valueBinding = RealElement.addMapBinding(
-          binder, key, keyType, valueType, entrySetBinder.getSetName());
-      Key<V> valueKey = Key.get(valueType, valueBinding.getAnnotation());
+      Key<V> valueKey = Key.get(valueType,
+          new RealElement(entrySetBinder.getSetName(), MAPBINDER, keyType.toString()));
       entrySetBinder.addBinding().toProvider(new ProviderMapEntry<K, V>(
           key, binder.getProvider(valueKey), valueKey));
-      return valueBinding;
+      return binder.bind(valueKey);
     }
 

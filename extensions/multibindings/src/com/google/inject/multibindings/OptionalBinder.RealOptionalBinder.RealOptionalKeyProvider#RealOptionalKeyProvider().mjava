@@ -1,4 +1,4 @@
-      RealOptionalKeyProvider() {
+      private RealOptionalKeyProvider() {
         super(typeKey);
       }
 

@@ -1,4 +1,0 @@
-    public ScopedBindingBuilder toProvider(Provider<? extends T> provider) {
-      return toProvider((javax.inject.Provider<T>) provider);
-    }
-

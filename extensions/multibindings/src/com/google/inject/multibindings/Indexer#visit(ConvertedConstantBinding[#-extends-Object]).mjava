@@ -1,0 +1,6 @@
+  @Override public Indexer.IndexedBinding visit(
+      ConvertedConstantBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(binding, BindingType.CONSTANT, scope(binding),
+        binding.getValue());
+  }
+

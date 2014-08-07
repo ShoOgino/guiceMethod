@@ -5,11 +5,11 @@
   private void cleanUpForCollectedState(Set<KeyAndSource> keysAndSources) {
     synchronized (lock) {
       for (KeyAndSource keyAndSource : keysAndSources) {
-        Multiset<Object> set = backingMap.get(keyAndSource.blacklistKey);
+        Multiset<Object> set = backingMap.get(keyAndSource.key);
         if (set != null) {
           set.remove(keyAndSource.source);
           if (set.isEmpty()) {
-            backingMap.remove(keyAndSource.blacklistKey);
+            backingMap.remove(keyAndSource.key);
           }
         }
       }

@@ -1,0 +1,7 @@
+  public void testProperties() {
+    assertEquals("a", realElement.keyType());
+    assertEquals("b", realElement.setName());
+    assertEquals(Type.MULTIBINDER, realElement.type());
+    assertEquals(1, realElement.uniqueId());
+  }
+

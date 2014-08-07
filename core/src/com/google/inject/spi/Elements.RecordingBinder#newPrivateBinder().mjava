@@ -2,7 +2,6 @@
       PrivateElementsImpl privateElements = new PrivateElementsImpl(getElementSource());
       RecordingBinder binder = new RecordingBinder(this, privateElements);
       elements.add(privateElements);
-      rehashables.add(binder);
       return binder;
     }
 

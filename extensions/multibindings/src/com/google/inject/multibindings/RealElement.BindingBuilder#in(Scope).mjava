@@ -1,5 +1,0 @@
-    public void in(Scope scope) {
-      delegate.in(scope);
-      annotation.scope = scope;
-    }
-

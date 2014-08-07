@@ -8,7 +8,7 @@
       }
     };
     Module abc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         requestInjection(anObject);
         MapBinder<String, String> multibinder =
             MapBinder.newMapBinder(binder(), String.class, String.class);
@@ -21,7 +21,7 @@
     Guice.createInjector(abc);
     Map<String, String> map = Maps.transformValues(injectedMultimap.get(),
         new Function<Set<Provider<String>>, String>() {
-          public String apply(Set<Provider<String>> stringProvidersSet) {
+          @Override public String apply(Set<Provider<String>> stringProvidersSet) {
             return Iterables.getOnlyElement(stringProvidersSet).get();
           }
         });

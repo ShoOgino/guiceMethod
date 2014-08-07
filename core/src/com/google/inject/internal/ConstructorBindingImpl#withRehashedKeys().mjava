@@ -1,8 +1,0 @@
-  @Override public BindingImpl<T> withRehashedKeys() {
-    if (needsRehashing(getKey())) {
-      return withKey(rehash(getKey()));
-    } else {
-      return this;
-    }
-  }
-
