@@ -8,6 +8,7 @@
 
     Set<String> set = injector.getInstance(Key.get(setOfString));
     assertEquals(Collections.emptySet(), set);
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(module), BOTH, false, 0);
+    assertSetVisitor(Key.get(setOfString), Key.get(collectionOfProvidersOfStrings), stringType,
+        setOf(module), BOTH, false, 0);
   }
 

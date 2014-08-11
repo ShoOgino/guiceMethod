@@ -3,6 +3,7 @@
    * 
    * @param <T> The type of the binding
    * @param setKey The key the set belongs to.
+   * @param collectionOfProvidersKey The key to use for Collections of Providers of Elements.
    * @param elementType the TypeLiteral of the element
    * @param modules The modules that define the multibindings
    * @param visitType The kind of test we should perform.  A live Injector, a raw Elements (Module) test, or both.
@@ -10,7 +11,8 @@
    * @param expectedMultibindings The number of other multibinders we expect to see.
    * @param results The kind of bindings contained in the multibinder.
    */
-  static <T> void assertSetVisitor(Key<T> setKey, TypeLiteral<?> elementType,
+  static <T> void assertSetVisitor(Key<Set<T>> setKey,
+      Key<Collection<Provider<T>>> collectionOfProvidersKey, TypeLiteral<?> elementType,
       Iterable<? extends Module> modules, VisitType visitType, boolean allowDuplicates,
       int expectedMultibindings, BindResult... results) {
     if(visitType == null) {
@@ -18,11 +20,13 @@
     }
     
     if(visitType == BOTH || visitType == INJECTOR) {
-      setInjectorTest(setKey, elementType, modules, allowDuplicates, expectedMultibindings, results);
+      setInjectorTest(setKey, collectionOfProvidersKey, elementType, modules, allowDuplicates,
+          expectedMultibindings, results);
     }
     
     if(visitType == BOTH || visitType == MODULE) {
-      setModuleTest(setKey, elementType, modules, allowDuplicates, expectedMultibindings, results);
+      setModuleTest(setKey, collectionOfProvidersKey, elementType, modules, allowDuplicates,
+          expectedMultibindings, results);
     }
   }
 

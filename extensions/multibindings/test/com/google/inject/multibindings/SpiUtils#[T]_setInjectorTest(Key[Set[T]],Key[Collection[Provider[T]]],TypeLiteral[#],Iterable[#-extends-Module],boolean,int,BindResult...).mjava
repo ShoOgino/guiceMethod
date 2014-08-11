@@ -1,11 +1,13 @@
   @SuppressWarnings("unchecked")
-  private static <T> void setInjectorTest(Key<T> setKey, TypeLiteral<?> elementType,
+  private static <T> void setInjectorTest(Key<Set<T>> setKey,
+      Key<Collection<Provider<T>>> collectionOfProvidersKey, TypeLiteral<?> elementType,
       Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
       BindResult... results) {
     Injector injector = Guice.createInjector(modules);
-    Visitor<T> visitor = new Visitor<T>();
-    Binding<T> binding = injector.getBinding(setKey);
-    MultibinderBinding<T> multibinder = (MultibinderBinding<T>)binding.acceptTargetVisitor(visitor);
+    Visitor<Set<T>> visitor = new Visitor<Set<T>>();
+    Binding<Set<T>> binding = injector.getBinding(setKey);
+    MultibinderBinding<Set<T>> multibinder =
+        (MultibinderBinding<Set<T>>)binding.acceptTargetVisitor(visitor);
     assertNotNull(multibinder);
     assertEquals(elementType, multibinder.getElementTypeLiteral());
     assertEquals(allowDuplicates, multibinder.permitsDuplicates());
@@ -14,7 +16,7 @@
     assertEquals("wrong bind elements, expected: " + bindResults
         + ", but was: " + multibinder.getElements(),
         bindResults.size(), elements.size());
-    
+
     for(BindResult result : bindResults) {
       Binding found = null;
       for(Binding item : elements) {
@@ -43,8 +45,10 @@
 
     List<Object> otherMultibinders = Lists.newArrayList();
     List<Binding> otherContains = Lists.newArrayList();
+    boolean collectionOfProvidersMatch = false;
     for(Binding b : injector.getAllBindings().values()) {
       boolean contains = multibinder.containsElement(b);
+      Key key = b.getKey();
       Object visited = b.acceptTargetVisitor(visitor);
       if(visited != null) {
         if(visited.equals(multibinder)) {
@@ -54,13 +58,18 @@
         }
       } else if(setOfElements.contains(b)) {
         assertTrue(contains);
-      } else if(contains) {
+      } else if (key.equals(collectionOfProvidersKey)) {
+        assertTrue(contains);
+        collectionOfProvidersMatch = true;
+      } else if (contains) {
         if (!indexer.isIndexable(b) || !setOfIndexed.contains(b.acceptTargetVisitor(indexer))) {
           otherContains.add(b);
         }
       }
     }
-    
+
+    assertTrue(collectionOfProvidersMatch);
+
     if(allowDuplicates) {
       assertEquals("contained more than it should: " + otherContains, 1, otherContains.size());
     } else {

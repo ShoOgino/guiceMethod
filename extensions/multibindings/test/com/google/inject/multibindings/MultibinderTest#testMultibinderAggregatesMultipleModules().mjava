@@ -17,11 +17,13 @@
 
     Injector injector = Guice.createInjector(abc, de);
     Key<Set<String>> setKey = Key.get(setOfString);
+    Key<Collection<Provider<String>>> collectionOfProvidersKey =
+        Key.get(collectionOfProvidersOfStrings);
     Set<String> abcde = injector.getInstance(setKey);
     Set<String> results = setOf("A", "B", "C", "D", "E");
 
     assertEquals(results, abcde);
-    assertSetVisitor(setKey, stringType, setOf(abc, de), BOTH, false, 0, instance("A"),
-        instance("B"), instance("C"), instance("D"), instance("E"));
+    assertSetVisitor(setKey, collectionOfProvidersKey, stringType, setOf(abc, de), BOTH, false, 0,
+        instance("A"), instance("B"), instance("C"), instance("D"), instance("E"));
   }
 

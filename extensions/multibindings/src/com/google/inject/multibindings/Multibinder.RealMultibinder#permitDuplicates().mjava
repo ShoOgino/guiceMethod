@@ -1,5 +1,4 @@
-    @Override
-    public Multibinder<T> permitDuplicates() {
+    @Override public Multibinder<T> permitDuplicates() {
       binder.install(new PermitDuplicatesModule(permitDuplicatesKey));
       return this;
     }

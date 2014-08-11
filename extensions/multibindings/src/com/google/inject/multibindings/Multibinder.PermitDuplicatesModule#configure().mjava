@@ -1,5 +1,4 @@
-    @Override
-    protected void configure() {
+    @Override protected void configure() {
       bind(key).toInstance(true);
     }
 

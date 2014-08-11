@@ -3,7 +3,8 @@
         Binding<?> binding = (Binding<?>) element;
         return keyMatches(binding.getKey())
             || binding.getKey().equals(permitDuplicatesKey)
-            || binding.getKey().equals(setKey);
+            || binding.getKey().equals(setKey)
+            || binding.getKey().equals(collectionOfProvidersKey);
       } else {
         return false;
       }
