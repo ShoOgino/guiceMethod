@@ -48,7 +48,7 @@
     assertTrue(collector.setbinding.containsElement(a));
     assertFalse(collector.setbinding.containsElement(b));
     assertFalse(collector.setbinding.containsElement(c));
-    
+
     assertFalse(collector.optionalbinding.containsElement(a));
     assertFalse(collector.optionalbinding.containsElement(b));
     assertTrue(collector.optionalbinding.containsElement(c));

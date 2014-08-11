@@ -1,0 +1,8 @@
+  @SuppressWarnings("unchecked")
+  static <T> TypeLiteral<Collection<Provider<T>>> collectionOfProvidersOf(
+      TypeLiteral<T> elementType) {
+    Type providerType = Types.providerOf(elementType.getType());
+    Type type = Types.newParameterizedType(Collection.class, providerType);
+    return (TypeLiteral<Collection<Provider<T>>>) TypeLiteral.get(type);
+  }
+

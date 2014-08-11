@@ -1,0 +1,22 @@
+  public void testMultibinderCanInjectCollectionOfProviders() {
+    Module module = new AbstractModule() {
+      protected void configure() {
+        final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toProvider(Providers.of("A"));
+        multibinder.addBinding().toProvider(Providers.of("B"));
+        multibinder.addBinding().toInstance("C");
+      }
+    };
+
+    Injector injector = Guice.createInjector(module);
+    injector.getInstance(Key.get(collectionOfProvidersOfStrings));
+    Key<Collection<Provider<String>>> collectionKey = Key.get(collectionOfProvidersOfStrings);
+    Collection<Provider<String>> providers = injector.getInstance(collectionKey);
+    Collection<String> values = Lists.newArrayList();
+    for (Provider<String> provider : providers) {
+      values.add(provider.get());
+    }
+    Collection<String> expectedValues = ImmutableList.of("A", "B", "C");
+    assertEquals(expectedValues, values);
+  }
+

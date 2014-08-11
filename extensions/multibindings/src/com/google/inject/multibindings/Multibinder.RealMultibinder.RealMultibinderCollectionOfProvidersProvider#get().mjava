@@ -1,0 +1,10 @@
+      @Override public Collection<Provider<T>> get() {
+        checkConfiguration(isInitialized(), "Multibinder is not initialized");
+
+        ImmutableList.Builder<Provider<T>> resultBuilder = new ImmutableList.Builder<Provider<T>>();
+        for (Binding<T> binding : bindings) {
+          resultBuilder.add(binding.getProvider());
+        }
+        return resultBuilder.build();
+      }
+

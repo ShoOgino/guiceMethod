@@ -11,7 +11,9 @@
 
     assertEquals(setOf("A"), injector.getInstance(Key.get(setOfString)));
     assertEquals(setOf(1), injector.getInstance(Key.get(setOfInteger)));
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(module), BOTH, false, 1, instance("A"));
-    assertSetVisitor(Key.get(setOfInteger), intType, setOf(module), BOTH, false, 1, instance(1));
+    assertSetVisitor(Key.get(setOfString), Key.get(collectionOfProvidersOfStrings), stringType,
+        setOf(module), BOTH, false, 1, instance("A"));
+    assertSetVisitor(Key.get(setOfInteger), Key.get(collectionOfProvidersOfIntegers), intType,
+        setOf(module), BOTH, false, 1, instance(1));
   }
 

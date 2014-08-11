@@ -6,7 +6,8 @@
       Binder binder, TypeLiteral<T> type, Annotation annotation) {
     binder = binder.skipSources(RealMultibinder.class, Multibinder.class);
     RealMultibinder<T> result = new RealMultibinder<T>(binder, type,
-        Key.get(Multibinder.<T>setOf(type), annotation));
+        Key.get(Multibinder.<T>setOf(type), annotation),
+        Key.get(Multibinder.<T>collectionOfProvidersOf(type), annotation));
     binder.install(result);
     return result;
   }

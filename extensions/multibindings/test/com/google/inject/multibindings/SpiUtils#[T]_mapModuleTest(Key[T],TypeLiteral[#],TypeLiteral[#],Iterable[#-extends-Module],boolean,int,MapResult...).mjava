@@ -25,7 +25,10 @@
     Key<?> mapOfSetOfProvider = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
     Key<?> mapOfSet = mapKey.ofType(mapOf(keyType, setOf(valueType)));
     Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));    
+    Key<?> collectionOfProvidersOfEntry =
+        mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
     boolean entrySetMatch = false;
+    boolean entryProviderCollectionMatch = false;
     boolean mapProviderMatch = false;
     boolean mapSetMatch = false; 
     boolean mapSetProviderMatch = false;
@@ -95,16 +98,20 @@
           if(b != null) {
             assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
           }
+        } else if(key.equals(collectionOfProvidersOfEntry)) {
+          matched = true;
+          assertTrue(contains);
+          entryProviderCollectionMatch = true;
         }
       }
       
-      if(!matched && contains) {
+      if (!matched && contains) {
         otherMatches.add(element);
       }
     }
     
     int otherMatchesSize = otherMatches.size();
-    if(allowDuplicates) {
+    if (allowDuplicates) {
       otherMatchesSize--; // allow for 1 duplicate binding
     }
     otherMatchesSize = otherMatchesSize / 3; // value, ProviderLookup per value, Map.Entry per value
@@ -112,6 +119,7 @@
         .size() + duplicates, otherMatchesSize);
 
     assertTrue(entrySetMatch);
+    assertTrue(entryProviderCollectionMatch);
     assertTrue(mapProviderMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
