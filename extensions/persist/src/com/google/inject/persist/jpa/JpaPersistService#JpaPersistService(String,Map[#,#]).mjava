@@ -1,6 +1,6 @@
   @Inject
   public JpaPersistService(@Jpa String persistenceUnitName,
-      @Nullable @Jpa Properties persistenceProperties) {
+      @Nullable @Jpa Map<?,?> persistenceProperties) {
     this.persistenceUnitName = persistenceUnitName;
     this.persistenceProperties = persistenceProperties;
   }

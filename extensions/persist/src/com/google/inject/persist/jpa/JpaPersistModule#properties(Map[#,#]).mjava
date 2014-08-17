@@ -4,7 +4,7 @@
    * @param properties A set of name value pairs that configure a JPA persistence
    * provider as per the specification.
    */
-  public JpaPersistModule properties(Properties properties) {
+  public JpaPersistModule properties(Map<?,?> properties) {
     this.properties = properties;
     return this;
   }

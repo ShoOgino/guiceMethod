@@ -1,13 +1,6 @@
   @Override protected void configurePersistence() {
     bindConstant().annotatedWith(Jpa.class).to(jpaUnit);
 
-    if (null != properties) {
-      bind(Properties.class).annotatedWith(Jpa.class).toInstance(properties);
-    } else {
-      bind(Properties.class).annotatedWith(Jpa.class)
-          .toProvider(Providers.<Properties>of(null));
-    }
-
     bind(JpaPersistService.class).in(Singleton.class);
 
     bind(PersistService.class).to(JpaPersistService.class);

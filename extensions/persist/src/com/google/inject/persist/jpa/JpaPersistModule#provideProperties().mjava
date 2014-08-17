@@ -1,0 +1,4 @@
+  @Provides @Jpa Map<?, ?> provideProperties() {
+    return properties;
+  }
+
