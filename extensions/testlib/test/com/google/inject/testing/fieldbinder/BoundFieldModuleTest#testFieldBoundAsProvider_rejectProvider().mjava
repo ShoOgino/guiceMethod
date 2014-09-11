@@ -1,0 +1,10 @@
+  public void testFieldBoundAsProvider_rejectProvider() {
+    LazyProviderClass asProvider = new LazyProviderClass();
+    try {
+      Guice.createInjector(BoundFieldModule.of(asProvider));
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(), "'lazy' is incompatible with Provider valued fields");
+    }
+  }
+

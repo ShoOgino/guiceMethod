@@ -1,0 +1,5 @@
+    BoundFieldException(Message message) {
+      super(message.getMessage());
+      this.message = message;
+    }
+

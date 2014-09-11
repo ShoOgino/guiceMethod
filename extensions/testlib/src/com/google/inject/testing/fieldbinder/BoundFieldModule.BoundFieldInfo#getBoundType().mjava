@@ -5,7 +5,7 @@
       if (bindClass == Bind.class) {
         Preconditions.checkState(naturalType != null);
         if (!this.naturalType.isPresent()) {
-          addErrorAndThrow(
+          throwBoundFieldException(
               field,
               "Non parameterized Provider fields must have an explicit "
               + "binding class via @Bind(to = Foo.class)");

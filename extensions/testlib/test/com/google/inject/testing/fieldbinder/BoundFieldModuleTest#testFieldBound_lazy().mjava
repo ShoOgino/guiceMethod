@@ -1,0 +1,8 @@
+  public void testFieldBound_lazy() {
+    LazyClass asProvider = new LazyClass();
+    Injector injector = Guice.createInjector(BoundFieldModule.of(asProvider));
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    asProvider.foo++;
+    assertEquals(2, injector.getInstance(Integer.class).intValue());
+  }
+
