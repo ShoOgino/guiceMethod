@@ -1,7 +1,7 @@
     public Set<T> get() {
       checkConfiguration(isInitialized(), "Multibinder is not initialized");
 
-      Map<T, Binding<T>> result = new LinkedHashMap<T, Binding<T>>();
+      Map<T, Binding<T>> result = new LinkedHashMap<T, Binding<T>>(mapCapacity(bindings.size()));
       for (Binding<T> binding : bindings) {
         final T newValue = binding.getProvider().get();
         checkConfiguration(newValue != null, "Set injection failed due to null element");
