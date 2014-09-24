@@ -1,9 +1,9 @@
-  private void bindField(BoundFieldInfo fieldInfo) {
+  private void bindField(final BoundFieldInfo fieldInfo) {
     if (fieldInfo.naturalType.isPresent()) {
       Class<?> naturalRawType = fieldInfo.naturalType.get().getRawType();
       Class<?> boundRawType = fieldInfo.boundType.getRawType();
       if (!boundRawType.isAssignableFrom(naturalRawType)) {
-        addErrorAndThrow(
+        throwBoundFieldException(
             fieldInfo.field,
             "Requested binding type \"%s\" is not assignable from field binding type \"%s\"",
             boundRawType.getName(),
@@ -23,24 +23,24 @@
     @SuppressWarnings("unchecked")
     AnnotatedBindingBuilder<Object> binderUnsafe = (AnnotatedBindingBuilder<Object>) binder;
 
-    Object fieldValue = fieldInfo.getValue();
-
-    if (fieldValue == null) {
-      addErrorAndThrow(
-          fieldInfo.field,
-          "Binding to null values is not allowed. "
-          + "Use Providers.of(null) if this is your intended behavior.",
-          fieldInfo.field.getName());
-    }
-
     if (isTransparentProvider(fieldInfo.type.getRawType())) {
+      if (fieldInfo.bindAnnotation.lazy()) {
+        // We don't support this because it is confusing about when values are captured.
+        throwBoundFieldException(fieldInfo.field, 
+            "'lazy' is incompatible with Provider valued fields");
+      }
       // This is safe because we checked that the field's type is Provider above.
       @SuppressWarnings("unchecked")
-      Provider<?> fieldValueUnsafe = (Provider<?>) fieldValue;
-
+      Provider<?> fieldValueUnsafe = (Provider<?>) getFieldValue(fieldInfo);
       binderUnsafe.toProvider(fieldValueUnsafe);
+    } else if (fieldInfo.bindAnnotation.lazy()) {
+      binderUnsafe.toProvider(new Provider<Object>() {
+        @Override public Object get() {
+          return getFieldValue(fieldInfo);
+        }
+      });
     } else {
-      binderUnsafe.toInstance(fieldValue);
+      binderUnsafe.toInstance(getFieldValue(fieldInfo));
     }
   }
 

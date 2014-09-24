@@ -12,7 +12,7 @@
       return Optional.absent();
     }
     if (hasInject(field)) {
-      addErrorAndThrow(
+      throwBoundFieldException(
           field,
           "Fields annotated with both @Bind and @Inject are illegal.");
     }

@@ -1,0 +1,15 @@
+  public void testFieldBound_lazy_rejectNull() {
+    LazyClass asProvider = new LazyClass();
+    Injector injector = Guice.createInjector(BoundFieldModule.of(asProvider));
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    asProvider.foo = null;
+    try {
+      injector.getInstance(Integer.class);
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(),
+          "Binding to null values is not allowed. "
+          + "Use Providers.of(null) if this is your intended behavior.");
+    }
+  }
+
