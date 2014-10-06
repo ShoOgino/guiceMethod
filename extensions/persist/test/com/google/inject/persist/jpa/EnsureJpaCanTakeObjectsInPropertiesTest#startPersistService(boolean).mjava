@@ -1,0 +1,9 @@
+  private void startPersistService(boolean passDataSource) {
+    final JDBCDataSource dataSource = getDataSource();
+
+    injector = Guice.createInjector(new DBModule(dataSource, passDataSource));
+
+    //startup persistence
+    injector.getInstance(PersistService.class).start();
+  }
+

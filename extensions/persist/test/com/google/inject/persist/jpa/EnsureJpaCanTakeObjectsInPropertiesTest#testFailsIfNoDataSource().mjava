@@ -1,0 +1,10 @@
+  public void testFailsIfNoDataSource() {
+    try {
+      startPersistService(false);
+      fail();
+    } catch (PersistenceException ex) {
+      // Expected
+      injector = null;
+    }
+  }
+

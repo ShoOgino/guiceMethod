@@ -1,0 +1,14 @@
+    @Override
+    protected void configure() {
+      Map<String, Object> p = new HashMap<String, Object>();
+
+      p.put(Environment.CONNECTION_PROVIDER, InjectedDataSourceConnectionProvider.class.getName());
+      if (passDataSource) {
+        p.put(Environment.DATASOURCE, ds);
+      }
+
+      JpaPersistModule jpaPersistModule = new JpaPersistModule("testProperties").properties(p);
+
+      install(jpaPersistModule);
+    }
+
