@@ -1,5 +1,9 @@
   @Override
   public void tearDown() {
-    injector.getInstance(EntityManagerFactory.class).close();
+    try {
+      injector.getInstance(EntityManagerFactory.class).close();
+    } catch(HibernateException ex) {
+        // Expected if the persist service has already been stopped.
+    }
   }
 
