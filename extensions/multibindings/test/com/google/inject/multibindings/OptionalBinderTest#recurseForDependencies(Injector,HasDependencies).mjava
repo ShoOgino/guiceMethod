@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes")
   private Set<String> recurseForDependencies(Injector injector, HasDependencies hasDependencies) {
     Set<String> elements = Sets.newHashSet();
     for (Dependency<?> dependency : hasDependencies.getDependencies()) {

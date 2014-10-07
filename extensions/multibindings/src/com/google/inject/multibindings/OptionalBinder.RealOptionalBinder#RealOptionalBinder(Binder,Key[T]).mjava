@@ -14,5 +14,15 @@
       this.dependencies = ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
       this.providerDependencies =
           ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
+
+      if (JAVA_OPTIONAL_CLASS != null) {
+        this.javaOptionalKey = typeKey.ofType(javaOptionalOf(literal));
+        this.javaOptionalJavaxProviderKey = typeKey.ofType(javaOptionalOfJavaxProvider(literal));
+        this.javaOptionalProviderKey = typeKey.ofType(javaOptionalOfProvider(literal));
+      } else {
+        this.javaOptionalKey = null;
+        this.javaOptionalJavaxProviderKey = null;
+        this.javaOptionalProviderKey = null;
+      }
     }
 

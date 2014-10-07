@@ -1,4 +1,5 @@
-  public void testLinkedToNullProvidersMakeAbsentValuesAndPresentProviders_actual() {
+  public void testLinkedToNullProvidersMakeAbsentValuesAndPresentProviders_actual()
+      throws Exception {
     Module module = new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder.newOptionalBinder(binder(), String.class)
@@ -18,7 +19,7 @@
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertTrue(optionalJxP.isPresent());
-    assertNull(optionalP.get().get());
+    assertNull(optionalJxP.get().get());
     
     assertOptionalVisitor(stringKey,
         setOf(module),
@@ -27,5 +28,18 @@
         null,
         SpiUtils.<String>providerInstance(null),
         null);
+
+    if (HAS_JAVA_OPTIONAL) {
+      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
+      assertFalse(optional.isPresent());
+
+      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+      assertTrue(optionalP.isPresent());
+      assertNull(optionalP.get().get());
+
+      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+      assertTrue(optionalJxP.isPresent());
+      assertNull(optionalJxP.get().get());
+    }
   }
 

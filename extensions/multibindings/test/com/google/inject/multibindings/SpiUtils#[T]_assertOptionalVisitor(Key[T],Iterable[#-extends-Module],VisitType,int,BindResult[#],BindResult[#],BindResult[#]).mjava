@@ -23,6 +23,11 @@
       fail("must test something");
     }
 
+    // if java.util.Optional is bound, there'll be twice as many as we expect.
+    if (HAS_JAVA_OPTIONAL) {
+      expectedOtherOptionalBindings *= 2;
+    }
+
     if (visitType == BOTH || visitType == INJECTOR) {
       optionalInjectorTest(keyType, modules, expectedOtherOptionalBindings, expectedDefault,
           expectedActual, expectedUserLinkedActual);

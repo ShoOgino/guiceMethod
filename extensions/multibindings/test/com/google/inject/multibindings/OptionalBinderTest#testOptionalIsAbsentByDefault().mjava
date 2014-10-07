@@ -1,4 +1,4 @@
-  public void testOptionalIsAbsentByDefault() {
+  public void testOptionalIsAbsentByDefault() throws Exception {
     Module module = new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder.newOptionalBinder(binder(), String.class);
@@ -17,5 +17,16 @@
     assertFalse(optionalJxP.isPresent());
     
     assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null, null);
+
+    if (HAS_JAVA_OPTIONAL) {
+      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
+      assertFalse(optional.isPresent());
+
+      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+      assertFalse(optionalP.isPresent());
+
+      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+      assertFalse(optionalJxP.isPresent());
+    }
   }
 
