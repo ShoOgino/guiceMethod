@@ -1,0 +1,5 @@
+    DBModule(DataSource ds, boolean passDataSource) {
+      this.ds = ds;
+      this.passDataSource = passDataSource;
+    }
+

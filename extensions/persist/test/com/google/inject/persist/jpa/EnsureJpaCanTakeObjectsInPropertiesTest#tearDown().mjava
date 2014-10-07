@@ -1,0 +1,10 @@
+  @Override
+  public final void tearDown() {
+    if (injector == null) {
+      return;
+    }
+
+    injector.getInstance(UnitOfWork.class).end();
+    injector.getInstance(EntityManagerFactory.class).close();
+  }
+
