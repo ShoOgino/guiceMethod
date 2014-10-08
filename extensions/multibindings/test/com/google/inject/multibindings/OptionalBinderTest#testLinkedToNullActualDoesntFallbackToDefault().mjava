@@ -1,5 +1,5 @@
   // TODO(sameb): Maybe change this?
-  public void testLinkedToNullActualDoesntFallbackToDefault() {
+  public void testLinkedToNullActualDoesntFallbackToDefault() throws Exception {
     Module module = new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
@@ -29,5 +29,18 @@
         instance("a"),
         SpiUtils.<String>providerInstance(null),
         null);
+
+    if (HAS_JAVA_OPTIONAL) {
+      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
+      assertFalse(optional.isPresent());
+
+      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+      assertTrue(optionalP.isPresent());
+      assertNull(optionalP.get().get());
+
+      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+      assertTrue(optionalJxP.isPresent());
+      assertNull(optionalJxP.get().get());
+    }
   }
 

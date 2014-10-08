@@ -1,4 +1,4 @@
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   private static <T> void optionalModuleTest(Key<T> keyType,
       Iterable<? extends Module> modules,
       int expectedOtherOptionalBindings,
@@ -13,13 +13,22 @@
     Map<Key<?>, Binding<?>> indexed = index(elements);
     Key<Optional<T>> optionalKey =
         keyType.ofType(OptionalBinder.optionalOf(keyType.getTypeLiteral()));
-    Visitor<Optional<T>> visitor = new Visitor<Optional<T>>();
-    OptionalBinderBinding<T> optionalBinder = null;
+    Key<?> javaOptionalKey = HAS_JAVA_OPTIONAL ?
+        keyType.ofType(OptionalBinder.javaOptionalOf(keyType.getTypeLiteral())) : null;
+    Visitor visitor = new Visitor();
+    OptionalBinderBinding<Optional<T>> optionalBinder = null;
+    OptionalBinderBinding<?> javaOptionalBinder = null;
     Key<?> defaultKey = null;
     Key<?> actualKey = null;
 
     Binding optionalBinding = indexed.get(optionalKey);
-    optionalBinder = (OptionalBinderBinding<T>) optionalBinding.acceptTargetVisitor(visitor);
+    optionalBinder =
+        (OptionalBinderBinding<Optional<T>>) optionalBinding.acceptTargetVisitor(visitor);
+
+    if (HAS_JAVA_OPTIONAL) {
+      Binding javaOptionalBinding = indexed.get(javaOptionalKey);
+      javaOptionalBinder = (OptionalBinderBinding) javaOptionalBinding.acceptTargetVisitor(visitor);
+    }
 
     // Locate the defaultKey & actualKey
     for (Element element : elements) {
@@ -33,17 +42,27 @@
       }
     }
     assertNotNull(optionalBinder);
+    if (HAS_JAVA_OPTIONAL) {
+      assertNotNull(javaOptionalBinder);
+    }
     assertEquals(expectedDefault == null, defaultKey == null);
     assertEquals(expectedActual == null, actualKey == null);
 
     Key<Optional<javax.inject.Provider<T>>> optionalJavaxProviderKey =
         keyType.ofType(optionalOfJavaxProvider(keyType.getTypeLiteral()));
+    Key<?> javaOptionalJavaxProviderKey = HAS_JAVA_OPTIONAL ?
+        keyType.ofType(javaOptionalOfJavaxProvider(keyType.getTypeLiteral())) : null;
     Key<Optional<Provider<T>>> optionalProviderKey =
         keyType.ofType(optionalOfProvider(keyType.getTypeLiteral()));
+    Key<?> javaOptionalProviderKey = HAS_JAVA_OPTIONAL ?
+        keyType.ofType(javaOptionalOfProvider(keyType.getTypeLiteral())) : null;
     boolean keyMatch = false;
     boolean optionalKeyMatch = false;
+    boolean javaOptionalKeyMatch = false;
     boolean optionalJavaxProviderKeyMatch = false;
+    boolean javaOptionalJavaxProviderKeyMatch = false;
     boolean optionalProviderKeyMatch = false;
+    boolean javaOptionalProviderKeyMatch = false;
     boolean defaultMatch = false;
     boolean actualMatch = false;
     List<Object> otherOptionalElements = Lists.newArrayList();
@@ -51,6 +70,9 @@
     List<Element> nonContainedElements = Lists.newArrayList();
     for (Element element : elements) {
       boolean contains = optionalBinder.containsElement(element);
+      if (HAS_JAVA_OPTIONAL) {
+        assertEquals(contains, javaOptionalBinder.containsElement(element));
+      }
       if (!contains) {
         nonContainedElements.add(element);
       }
@@ -62,6 +84,8 @@
         Object visited = b.acceptTargetVisitor(visitor);
         if (visited instanceof OptionalBinderBinding) {
           if (visited.equals(optionalBinder)) {
+            assertTrue(contains);
+          } else if (HAS_JAVA_OPTIONAL && visited.equals(javaOptionalBinder)) {
             assertTrue(contains);
           } else {
             otherOptionalElements.add(visited);
@@ -81,12 +105,21 @@
       } else if (key != null && key.equals(optionalKey)) {
         assertTrue(contains);
         optionalKeyMatch = true;
+      } else if (key != null && key.equals(javaOptionalKey)) {
+        assertTrue(contains);
+        javaOptionalKeyMatch = true;
       } else if (key != null && key.equals(optionalJavaxProviderKey)) {
         assertTrue(contains);
         optionalJavaxProviderKeyMatch = true;
+      } else if (key != null && key.equals(javaOptionalJavaxProviderKey)) {
+        assertTrue(contains);
+        javaOptionalJavaxProviderKeyMatch = true;
       } else if (key != null && key.equals(optionalProviderKey)) {
         assertTrue(contains);
         optionalProviderKeyMatch = true;
+      } else if (key != null && key.equals(javaOptionalProviderKey)) {
+        assertTrue(contains);
+        javaOptionalProviderKeyMatch = true;
       } else if (key != null && key.equals(defaultKey)) {
         assertTrue(contains);
         if (b != null) { // otherwise it might just be a ProviderLookup into it
@@ -110,6 +143,9 @@
     assertTrue(optionalKeyMatch);
     assertTrue(optionalJavaxProviderKeyMatch);
     assertTrue(optionalProviderKeyMatch);
+    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalKeyMatch);
+    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalJavaxProviderKeyMatch);
+    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalProviderKeyMatch);
     assertEquals(expectedDefault != null, defaultMatch);
     assertEquals(expectedActual != null, actualMatch);
     assertEquals(otherContains.toString(), 0, otherContains.size());

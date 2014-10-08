@@ -10,5 +10,8 @@
       binder.bind(optionalJavaxProviderKey).to(massagedOptionalProviderKey);
 
       binder.bind(optionalKey).toProvider(new RealOptionalKeyProvider());
+
+      // Bind the java-8 types if we know them.
+      bindJava8Optional(binder);
     }
 

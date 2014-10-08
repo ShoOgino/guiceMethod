@@ -1,0 +1,7 @@
+  @SuppressWarnings("unchecked")
+  private <T> Optional<T> toOptional(Object object) throws Exception {
+    assertTrue("not a java.util.Optional: " + object.getClass(),
+        JAVA_OPTIONAL_CLASS.isInstance(object));
+    return Optional.fromNullable((T) JAVA_OPTIONAL_OR_ELSE.invoke(object, (Void) null));
+  }
+

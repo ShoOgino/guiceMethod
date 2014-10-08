@@ -1,4 +1,4 @@
-  public void testSpreadAcrossModules() {
+  public void testSpreadAcrossModules() throws Exception {
     Module module1 = new AbstractModule() {
       @Override protected void configure() {
         OptionalBinder.newOptionalBinder(binder(), String.class);
@@ -38,5 +38,19 @@
         instance("a"),
         instance("b"),
         null);
+
+    if (HAS_JAVA_OPTIONAL) {
+      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
+      assertTrue(optional.isPresent());
+      assertEquals("b", optional.get());
+
+      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+      assertTrue(optionalP.isPresent());
+      assertEquals("b", optionalP.get().get());
+
+      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+      assertTrue(optionalJxP.isPresent());
+      assertEquals("b", optionalJxP.get().get());
+    }
   }
 
