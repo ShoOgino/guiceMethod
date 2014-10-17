@@ -1,0 +1,5 @@
+  // visible for testing
+  static HttpServletRequest wrapRequest(HttpServletRequest request, String newUri) {
+    return new RequestDispatcherRequestWrapper(request, newUri);
+  }
+
