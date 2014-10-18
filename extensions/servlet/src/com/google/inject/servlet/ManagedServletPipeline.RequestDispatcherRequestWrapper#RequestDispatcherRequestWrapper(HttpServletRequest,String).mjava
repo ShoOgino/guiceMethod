@@ -1,0 +1,5 @@
+    public RequestDispatcherRequestWrapper(HttpServletRequest servletRequest, String newRequestUri) {
+      super(servletRequest);
+      this.newRequestUri = newRequestUri;
+    }
+

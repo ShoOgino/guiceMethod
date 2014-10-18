@@ -22,7 +22,7 @@
 
             ServletRequest requestToProcess;
             if (servletRequest instanceof HttpServletRequest) {
-               requestToProcess = new RequestDispatcherRequestWrapper(servletRequest, newRequestUri);
+               requestToProcess = wrapRequest((HttpServletRequest)servletRequest, newRequestUri);
             } else {
               // This should never happen, but instead of throwing an exception
               // we will allow a happy case pass thru for maximum tolerance to

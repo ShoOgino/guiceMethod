@@ -1,0 +1,11 @@
+  public final void testWrappedRequestUrlNegativePort() {
+    final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
+    expect(mockRequest.getScheme()).andReturn("http");
+    expect(mockRequest.getServerName()).andReturn("the.server");
+    expect(mockRequest.getServerPort()).andReturn(-1);
+    replay(mockRequest);
+    HttpServletRequest wrappedRequest = ManagedServletPipeline.wrapRequest(mockRequest, "/new-uri");
+    assertEquals("/new-uri", wrappedRequest.getRequestURI());
+    assertEquals("http://the.server/new-uri", wrappedRequest.getRequestURL().toString());
+  }
+

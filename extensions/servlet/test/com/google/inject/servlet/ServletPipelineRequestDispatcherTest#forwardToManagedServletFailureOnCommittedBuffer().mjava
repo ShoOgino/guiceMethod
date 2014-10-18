@@ -57,6 +57,5 @@
     finally {
       verify(injector, mockRequest, mockResponse, mockBinding);
     }
-
   }
 
