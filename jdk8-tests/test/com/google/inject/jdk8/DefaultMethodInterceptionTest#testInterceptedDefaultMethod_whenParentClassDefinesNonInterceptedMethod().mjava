@@ -1,0 +1,17 @@
+  public void testInterceptedDefaultMethod_whenParentClassDefinesNonInterceptedMethod() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(InterceptMe.class),
+            interceptor);
+        bind(Foo.class).to(InheritingFoo.class);
+      }
+    });
+
+    // the concrete implementation that wins is not annotated
+    Foo foo = injector.getInstance(Foo.class);
+    assertEquals("BaseClass", foo.defaultMethod());
+    assertEquals(1, callCount.get());
+    assertEquals(0, interceptedCallCount.get());
+  }
+

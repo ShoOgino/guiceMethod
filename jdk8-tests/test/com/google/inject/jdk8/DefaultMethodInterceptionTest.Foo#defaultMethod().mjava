@@ -1,0 +1,6 @@
+    @InterceptMe
+    default String defaultMethod() {
+      callCount.incrementAndGet();
+      return "Foo";
+    }
+

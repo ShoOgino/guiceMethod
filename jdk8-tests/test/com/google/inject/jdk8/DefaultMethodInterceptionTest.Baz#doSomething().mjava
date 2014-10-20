@@ -1,0 +1,4 @@
+    default String doSomething() {
+      return "Baz";
+    }
+

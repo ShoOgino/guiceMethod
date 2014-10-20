@@ -1,0 +1,7 @@
+    // the definition of this method on the class will win over the default method
+    @InterceptMe
+    public String defaultMethod() {
+      callCount.incrementAndGet();
+      return "BaseClass2";
+    }
+
