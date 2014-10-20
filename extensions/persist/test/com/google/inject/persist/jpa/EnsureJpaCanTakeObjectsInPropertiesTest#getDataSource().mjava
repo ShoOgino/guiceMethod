@@ -1,4 +1,4 @@
-  private static JDBCDataSource getDataSource() {
+  private static DataSource getDataSource() {
     final JDBCDataSource dataSource = new JDBCDataSource();
     dataSource.setDatabase("jdbc:hsqldb:mem:persistence");
     dataSource.setUser("sa");
