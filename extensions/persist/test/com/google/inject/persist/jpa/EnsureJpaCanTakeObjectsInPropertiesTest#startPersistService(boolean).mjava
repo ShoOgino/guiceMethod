@@ -1,5 +1,5 @@
   private void startPersistService(boolean passDataSource) {
-    final JDBCDataSource dataSource = getDataSource();
+    final DataSource dataSource = getDataSource();
 
     injector = Guice.createInjector(new DBModule(dataSource, passDataSource));
 
