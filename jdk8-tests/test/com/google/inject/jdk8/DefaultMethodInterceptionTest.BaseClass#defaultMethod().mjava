@@ -1,0 +1,6 @@
+    // the definition of this method on the class will win over the default method
+    public String defaultMethod() {
+      callCount.incrementAndGet();
+      return "BaseClass";
+    }
+

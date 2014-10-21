@@ -1,0 +1,15 @@
+  public void testInterceptedDefaultMethod_calledByAnotherMethod() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindInterceptor(Matchers.any(), Matchers.annotatedWith(InterceptMe.class),
+            interceptor);
+      }
+    });
+
+    NonOverridingFoo foo = injector.getInstance(NonOverridingFoo.class);
+    assertEquals("NonOverriding-Foo", foo.methodCallingDefault());
+    assertEquals(1, callCount.get());
+    assertEquals(1, interceptedCallCount.get());
+  }
+

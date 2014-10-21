@@ -1,0 +1,5 @@
+    @Inject
+    StringProvider(UUID uuid) {
+      this.uuid = uuid;
+    }
+

@@ -1,0 +1,17 @@
+  public void testInterception_ofAllMethodsOnType_interceptsInheritedDefaultMethod() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bindInterceptor(Matchers.subclassesOf(BazImpl.class), Matchers.any(), interceptor);
+        bind(Baz.class).to(BazImpl.class);
+      }
+    });
+
+    Baz baz = injector.getInstance(Baz.class);
+
+    assertEquals("Baz", baz.doSomething());
+    assertEquals("BazImpl", baz.doSomethingElse());
+
+    assertEquals(2, interceptedCallCount.get());
+  }
+

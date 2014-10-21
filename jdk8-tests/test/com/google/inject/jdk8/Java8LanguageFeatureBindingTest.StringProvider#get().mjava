@@ -1,0 +1,7 @@
+    @Override
+    public String get() {
+      return Collections.singleton(uuid).stream()
+          .map(UUID::toString)
+          .findFirst().get();
+    }
+
