@@ -1,0 +1,35 @@
+  /**
+   * Tests that injectors int the same hierarchy do not create singletons in parallel.
+   *
+   * <p>This creates a second thread to work in parallel, to create instance of
+   * {@link G} and {@link H} as the same time. Both instances are created by injectors belonging
+   * to the same hierarchy. If the lock is too narrow (i.e. per Injector or per binding)
+   * instances would be created in parallel and test fail.
+   */
+
+  public void testSiblingInjectorsGettingDifferentSingletonsDontDeadlock() throws Exception {
+    final GHProvider ghProvider = new GHProvider();
+    final Injector parentInjector = Guice.createInjector();
+
+    Future<?> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Runnable() {
+      public void run() {
+        parentInjector.createChildInjector(new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(H.class).toProvider(ghProvider.hProvider).in(Scopes.SINGLETON);
+          }
+        }).getInstance(H.class);
+      }
+    });
+
+    parentInjector.createChildInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(G.class).toProvider(ghProvider.gProvider).in(Scopes.SINGLETON);
+      }
+    }).getInstance(G.class);
+
+    // verify no thrown exceptions
+    secondThreadResult.get();
+  }
+

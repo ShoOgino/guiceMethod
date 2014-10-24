@@ -1,0 +1,35 @@
+  /**
+   * Tests that different injectors should not affect each other.
+   *
+   * <p>This creates a second thread to work in parallel, to create two instances of
+   * {@link F} as the same time. If the lock if not granular enough (i.e. JVM-wide)
+   * then they would block each other creating a deadlock and await timeout.
+   */
+
+  public void testInjectorsDontDeadlockOnSingletons() throws Exception {
+    final FProvider provider = new FProvider();
+    final Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(F.class).toProvider(provider).in(Scopes.SINGLETON);
+      }
+    });
+    final Injector secondInjector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(F.class).toProvider(provider).in(Scopes.SINGLETON);
+      }
+    });
+
+    Future<?> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Runnable() {
+      public void run() {
+        secondInjector.getInstance(F.class);
+      }
+    });
+
+    injector.getInstance(F.class);
+
+    // verify no thrown exceptions
+    secondThreadResult.get();
+  }
+
