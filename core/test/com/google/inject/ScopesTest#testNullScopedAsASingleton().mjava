@@ -1,14 +1,17 @@
   public void testNullScopedAsASingleton() {
-    Provider<String> unscoped = new Provider<String>() {
-      final Iterator<String> values = Arrays.asList(null, "A").iterator();
-      public String get() {
-        return values.next();
-      }
-    };
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {}
 
-    Provider<String> scoped = Scopes.SINGLETON.scope(Key.get(String.class), unscoped);
-    assertNull(scoped.get());
-    assertNull(scoped.get());
-    assertNull(scoped.get());
+      final Iterator<String> values = Arrays.asList(null, "A").iterator();
+
+      @Provides @Singleton String provideString() {
+         return values.next();
+      }
+    });
+
+    assertNull(injector.getInstance(String.class));
+    assertNull(injector.getInstance(String.class));
+    assertNull(injector.getInstance(String.class));
   }
 
