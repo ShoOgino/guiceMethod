@@ -43,11 +43,14 @@
     Key<?> mapOfSetOfProvider = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
     Key<?> mapOfSet = mapKey.ofType(mapOf(keyType, setOf(valueType)));
     Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));
+    Key<?> collectionOfProvidersOfEntryOfProvider =
+        mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
     boolean entrySetMatch = false;
     boolean mapJavaxProviderMatch = false;
     boolean mapProviderMatch = false;
     boolean mapSetMatch = false; 
     boolean mapSetProviderMatch = false;
+    boolean collectionOfProvidersOfEntryOfProviderMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
     List<Binding> otherMatches = Lists.newArrayList();
     Multimap<Object, IndexedBinding> indexedEntries =
@@ -80,6 +83,9 @@
         entrySetMatch = true;
         // Validate that this binding is also a MultibinderBinding.
         assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
+      } else if(b.getKey().equals(collectionOfProvidersOfEntryOfProvider)) {
+        assertTrue(contains);
+        collectionOfProvidersOfEntryOfProviderMatch = true;
       } else if (contains) {
         if (b instanceof ProviderInstanceBinding) {
           ProviderInstanceBinding<?> pib = (ProviderInstanceBinding<?>)b;
@@ -102,12 +108,13 @@
     if(allowDuplicates) {
       sizeOfOther--; // account for 1 duplicate binding
     }
-    sizeOfOther = sizeOfOther / 2; // account for 1 value & 1 Map.Entry of each expected binding.
-    assertEquals("Incorrect other matches: " + otherMatches,
-        mapResults.size() + duplicates, sizeOfOther);
+    // Multiply by two because each has a value and Map.Entry.
+    int expectedSize = 2 * (mapResults.size() + duplicates);
+    assertEquals("Incorrect other matches: " + otherMatches, expectedSize, sizeOfOther);
     assertTrue(entrySetMatch);
     assertTrue(mapProviderMatch);
     assertTrue(mapJavaxProviderMatch);
+    assertTrue(collectionOfProvidersOfEntryOfProviderMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
     assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,
