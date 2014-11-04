@@ -1,8 +1,8 @@
   @SuppressWarnings("unchecked")
-  private static <T> void setInjectorTest(Key<Set<T>> setKey,
-      Key<Collection<Provider<T>>> collectionOfProvidersKey, TypeLiteral<?> elementType,
+  private static <T> void setInjectorTest(Key<Set<T>> setKey, TypeLiteral<?> elementType,
       Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
       BindResult... results) {
+    Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
     Injector injector = Guice.createInjector(modules);
     Visitor<Set<T>> visitor = new Visitor<Set<T>>();
     Binding<Set<T>> binding = injector.getBinding(setKey);
