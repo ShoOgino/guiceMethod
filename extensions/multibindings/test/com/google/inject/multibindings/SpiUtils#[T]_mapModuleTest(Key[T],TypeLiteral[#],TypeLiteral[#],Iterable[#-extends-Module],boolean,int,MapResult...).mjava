@@ -28,12 +28,15 @@
     Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));    
     Key<?> collectionOfProvidersOfEntry =
         mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
+    Key<?> collectionOfJavaxProvidersOfEntry =
+        mapKey.ofType(collectionOfJavaxProvidersOf(entryOfProviderOf(keyType, valueType)));
     boolean entrySetMatch = false;
-    boolean entryProviderCollectionMatch = false;
     boolean mapProviderMatch = false;
     boolean mapJavaxProviderMatch = false;
     boolean mapSetMatch = false;
     boolean mapSetProviderMatch = false;
+    boolean collectionOfProvidersOfEntryMatch = false;
+    boolean collectionOfJavaxProvidersOfEntryMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
     List<Element> otherMatches = Lists.newArrayList();
     List<Element> otherElements = Lists.newArrayList();
@@ -107,7 +110,11 @@
         } else if(key.equals(collectionOfProvidersOfEntry)) {
           matched = true;
           assertTrue(contains);
-          entryProviderCollectionMatch = true;
+          collectionOfProvidersOfEntryMatch = true;
+        } else if(key.equals(collectionOfJavaxProvidersOfEntry)) {
+          matched = true;
+          assertTrue(contains);
+          collectionOfJavaxProvidersOfEntryMatch = true;
         }
       }
       
@@ -126,9 +133,10 @@
         expectedSize, otherMatchesSize);
 
     assertTrue(entrySetMatch);
-    assertTrue(entryProviderCollectionMatch);
     assertTrue(mapProviderMatch);
     assertTrue(mapJavaxProviderMatch);
+    assertTrue(collectionOfProvidersOfEntryMatch);
+    assertTrue(collectionOfJavaxProvidersOfEntryMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
     assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,

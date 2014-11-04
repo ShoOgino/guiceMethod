@@ -45,12 +45,15 @@
     Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));
     Key<?> collectionOfProvidersOfEntryOfProvider =
         mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
+    Key<?> collectionOfJavaxProvidersOfEntryOfProvider =
+        mapKey.ofType(collectionOfJavaxProvidersOf(entryOfProviderOf(keyType, valueType)));
     boolean entrySetMatch = false;
     boolean mapJavaxProviderMatch = false;
     boolean mapProviderMatch = false;
     boolean mapSetMatch = false; 
     boolean mapSetProviderMatch = false;
     boolean collectionOfProvidersOfEntryOfProviderMatch = false;
+    boolean collectionOfJavaxProvidersOfEntryOfProviderMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
     List<Binding> otherMatches = Lists.newArrayList();
     Multimap<Object, IndexedBinding> indexedEntries =
@@ -86,6 +89,9 @@
       } else if(b.getKey().equals(collectionOfProvidersOfEntryOfProvider)) {
         assertTrue(contains);
         collectionOfProvidersOfEntryOfProviderMatch = true;
+      } else if(b.getKey().equals(collectionOfJavaxProvidersOfEntryOfProvider)) {
+        assertTrue(contains);
+        collectionOfJavaxProvidersOfEntryOfProviderMatch = true;
       } else if (contains) {
         if (b instanceof ProviderInstanceBinding) {
           ProviderInstanceBinding<?> pib = (ProviderInstanceBinding<?>)b;
@@ -115,6 +121,7 @@
     assertTrue(mapProviderMatch);
     assertTrue(mapJavaxProviderMatch);
     assertTrue(collectionOfProvidersOfEntryOfProviderMatch);
+    assertTrue(collectionOfJavaxProvidersOfEntryOfProviderMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
     assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,

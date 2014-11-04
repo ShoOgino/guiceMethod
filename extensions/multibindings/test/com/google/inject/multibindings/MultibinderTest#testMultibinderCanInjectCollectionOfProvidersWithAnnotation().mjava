@@ -9,14 +9,17 @@
         multibinder.addBinding().toInstance("C");
       }
     };
-    Injector injector = Guice.createInjector(module);
-    Key<Collection<Provider<String>>> collectionKey = Key.get(collectionOfProvidersOfStrings, ann);
-    Collection<Provider<String>> providers = injector.getInstance(collectionKey);
-    Collection<String> values = Lists.newArrayList();
-    for (Provider<String> provider : providers) {
-      values.add(provider.get());
-    }
     Collection<String> expectedValues = ImmutableList.of("A", "B", "C");
+
+    Injector injector = Guice.createInjector(module);
+
+    Collection<Provider<String>> providers =
+        injector.getInstance(Key.get(collectionOfProvidersOfStrings, ann));
+    Collection<String> values = collectValues(providers);
     assertEquals(expectedValues, values);
+
+    Collection<javax.inject.Provider<String>> javaxProviders =
+        injector.getInstance(Key.get(collectionOfJavaxProvidersOf(stringType), ann));
+    assertEquals(expectedValues, collectValues(javaxProviders));
   }
 

@@ -1,0 +1,9 @@
+  @SuppressWarnings("unchecked")
+  static <T> TypeLiteral<Collection<javax.inject.Provider<T>>> collectionOfJavaxProvidersOf(
+      TypeLiteral<T> elementType) {
+    Type providerType =
+        Types.newParameterizedType(javax.inject.Provider.class, elementType.getType());
+    Type type = Types.newParameterizedType(Collection.class, providerType);
+    return (TypeLiteral<Collection<javax.inject.Provider<T>>>) TypeLiteral.get(type);
+  }
+

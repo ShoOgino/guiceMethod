@@ -4,7 +4,8 @@
         return keyMatches(binding.getKey())
             || binding.getKey().equals(permitDuplicatesKey)
             || binding.getKey().equals(setKey)
-            || binding.getKey().equals(collectionOfProvidersKey);
+            || binding.getKey().equals(collectionOfProvidersKey)
+            || binding.getKey().equals(collectionOfJavaxProvidersKey);
       } else {
         return false;
       }
