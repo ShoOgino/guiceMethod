@@ -1,0 +1,4 @@
+  private Type collectionOf(Type type) {
+    return Types.newParameterizedType(Collection.class, type);
+  }
+

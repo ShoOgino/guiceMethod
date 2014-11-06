@@ -1,0 +1,48 @@
+  public void testAllBindings() {
+    Module module = new AbstractModule() {
+      @Override
+      protected void configure() {
+        MapBinder.newMapBinder(binder(), String.class, String.class).permitDuplicates();
+      }
+    };
+
+    Injector injector = Guice.createInjector(module);
+
+    Map<Key<?>, Binding<?>> bindings = injector.getBindings();
+
+    ImmutableSet<Key<?>> expectedBindings = ImmutableSet.<Key<?>>builder()
+        .add(
+            // Map<K, V>
+            Key.get(Types.mapOf(String.class, String.class)),
+            // Map<K, Provider<V>>
+            Key.get(Types.mapOf(String.class, Types.providerOf(String.class))),
+            // Map<K, javax.inject.Provider<V>>
+            Key.get(Types.mapOf(String.class, javaxProviderOf(String.class))),
+            // Map<K, Set<V>>
+            Key.get(Types.mapOf(String.class, Types.setOf(String.class))),
+            // Map<K, Set<Provider<V>>
+            Key.get(Types.mapOf(String.class, Types.setOf(Types.providerOf(String.class)))),
+            // Set<Map.Entry<K, Provider<V>>>
+            Key.get(Types.setOf(mapEntryOf(String.class, Types.providerOf(String.class)))),
+            // Collection<Provider<Map.Entry<K, Provider<V>>>>
+            Key.get(collectionOf(Types.providerOf(
+                mapEntryOf(String.class, Types.providerOf(String.class))))),
+            // Collection<javax.inject.Provider<Map.Entry<K, Provider<V>>>>
+            Key.get(collectionOf(javaxProviderOf(
+                mapEntryOf(String.class, Types.providerOf(String.class))))),
+            // @Named(...) Boolean
+            Key.get(Boolean.class,
+                named("Multibinder<java.util.Map$Entry<java.lang.String, "
+                    + "com.google.inject.Provider<java.lang.String>>> permits duplicates"))
+        )
+        .addAll(FRAMEWORK_KEYS).build();
+
+    Set<Key<?>> missingBindings = Sets.difference(expectedBindings, bindings.keySet());
+    Set<Key<?>> extraBindings = Sets.difference(bindings.keySet(), expectedBindings);
+
+    assertTrue("There should be no missing bindings. Missing: " + missingBindings,
+        missingBindings.isEmpty());
+    assertTrue("There should be no extra bindings. Extra: " + extraBindings,
+        extraBindings.isEmpty());
+  }
+
