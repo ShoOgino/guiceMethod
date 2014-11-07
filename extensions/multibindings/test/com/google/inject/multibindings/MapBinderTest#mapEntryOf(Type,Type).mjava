@@ -1,0 +1,4 @@
+  private Type mapEntryOf(Type keyType, Type valueType) {
+    return Types.newParameterizedTypeWithOwner(Map.class, Map.Entry.class, keyType, valueType);
+  }
+

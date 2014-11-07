@@ -1,0 +1,29 @@
+  /**
+   * Gets the system option indicated by the specified key; runs as a privileged action.
+   *
+   * @param name of the system option
+   * @param defaultValue if the option is not set
+   * @param secureValue if the security manager disallows access to the option
+   *
+   * @return value of the option, defaultValue if not set, secureValue if no access
+   */
+  private static <T extends Enum<T>> T getSystemOption(final String name, T defaultValue,
+      T secureValue) {
+    Class<T> enumType = defaultValue.getDeclaringClass();
+    String value = null;
+    try {
+      value = AccessController.doPrivileged(new PrivilegedAction<String>() {
+        public String run() {
+          return System.getProperty(name);
+        }
+      });
+      return (value != null && value.length() > 0) ? Enum.valueOf(enumType, value) : defaultValue;
+    } catch (SecurityException e) {
+      return secureValue;
+    } catch (IllegalArgumentException e) {
+      logger.warning(value + " is not a valid flag value for " + name + ". "
+          + " Values must be one of " + Arrays.asList(enumType.getEnumConstants()));
+      return defaultValue;
+    }
+  }
+

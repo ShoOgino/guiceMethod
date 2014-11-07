@@ -1,8 +1,10 @@
   @SuppressWarnings("unchecked")
-  private static <T> void setModuleTest(Key<Set<T>> setKey,
-      Key<Collection<Provider<T>>> collectionOfProvidersKey, TypeLiteral<?> elementType,
+  private static <T> void setModuleTest(Key<Set<T>> setKey, TypeLiteral<?> elementType,
       Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
       BindResult... results) {
+    Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
+    Key<?> collectionOfJavaxProvidersKey =
+        setKey.ofType(collectionOfJavaxProvidersOf(elementType));
     List<BindResult> bindResults = Lists.newArrayList(results);
     List<Element> elements = Elements.getElements(modules);
     Visitor<T> visitor = new Visitor<T>();
@@ -23,6 +25,7 @@
     Set<IndexedBinding> setOfIndexed = Sets.newHashSet();
     Indexer indexer = new Indexer(null);
     boolean collectionOfProvidersMatch = false;
+    boolean collectionOfJavaxProvidersMatch = false;
     for(Element element : elements) {
       boolean contains = multibinder.containsElement(element);
       if(!contains) {
@@ -52,6 +55,10 @@
         assertTrue(contains);
         assertFalse(matched);
         collectionOfProvidersMatch = true;
+      } else if (collectionOfJavaxProvidersKey.equals(key)) {
+          assertTrue(contains);
+          assertFalse(matched);
+          collectionOfJavaxProvidersMatch = true;
       } else if (!matched && contains) {
         otherContains.add(element);
       }
@@ -68,6 +75,7 @@
     assertEquals("other multibindings found: " + otherMultibinders, otherMultibindings,
         otherMultibinders.size());
     assertTrue(collectionOfProvidersMatch);
+    assertTrue(collectionOfJavaxProvidersMatch);
 
     // Validate that we can construct an injector out of the remaining bindings.
     Guice.createInjector(Elements.getModule(otherElements));

@@ -1,8 +1,10 @@
   @SuppressWarnings("unchecked")
-  private static <T> void setInjectorTest(Key<Set<T>> setKey,
-      Key<Collection<Provider<T>>> collectionOfProvidersKey, TypeLiteral<?> elementType,
+  private static <T> void setInjectorTest(Key<Set<T>> setKey, TypeLiteral<?> elementType,
       Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
       BindResult... results) {
+    Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
+    Key<?> collectionOfJavaxProvidersKey =
+        setKey.ofType(collectionOfJavaxProvidersOf(elementType));
     Injector injector = Guice.createInjector(modules);
     Visitor<Set<T>> visitor = new Visitor<Set<T>>();
     Binding<Set<T>> binding = injector.getBinding(setKey);
@@ -46,6 +48,7 @@
     List<Object> otherMultibinders = Lists.newArrayList();
     List<Binding> otherContains = Lists.newArrayList();
     boolean collectionOfProvidersMatch = false;
+    boolean collectionOfJavaxProvidersMatch = false;
     for(Binding b : injector.getAllBindings().values()) {
       boolean contains = multibinder.containsElement(b);
       Key key = b.getKey();
@@ -61,6 +64,9 @@
       } else if (key.equals(collectionOfProvidersKey)) {
         assertTrue(contains);
         collectionOfProvidersMatch = true;
+      } else if (key.equals(collectionOfJavaxProvidersKey)) {
+        assertTrue(contains);
+        collectionOfJavaxProvidersMatch = true;
       } else if (contains) {
         if (!indexer.isIndexable(b) || !setOfIndexed.contains(b.acceptTargetVisitor(indexer))) {
           otherContains.add(b);
@@ -69,6 +75,7 @@
     }
 
     assertTrue(collectionOfProvidersMatch);
+    assertTrue(collectionOfJavaxProvidersMatch);
 
     if(allowDuplicates) {
       assertEquals("contained more than it should: " + otherContains, 1, otherContains.size());

@@ -1,0 +1,14 @@
+    private RealMapBinder(Binder binder, TypeLiteral<K> keyType, TypeLiteral<V> valueType,
+        Key<Map<K, V>> mapKey, Multibinder<Map.Entry<K, Provider<V>>> entrySetBinder) {
+      this.keyType = keyType;
+      this.valueType = valueType;
+      this.mapKey = mapKey;
+      this.providerMapKey = mapKey.ofType(mapOfProviderOf(keyType, valueType));
+      this.javaxProviderMapKey = mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType));
+      this.multimapKey = mapKey.ofType(mapOf(keyType, setOf(valueType)));
+      this.providerMultimapKey = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+      this.entrySetBinder = (RealMultibinder<Entry<K, Provider<V>>>) entrySetBinder;
+      this.binder = binder;
+      this.duplicateKeyErrorMessages = Maps.newHashMap();
+    }
+

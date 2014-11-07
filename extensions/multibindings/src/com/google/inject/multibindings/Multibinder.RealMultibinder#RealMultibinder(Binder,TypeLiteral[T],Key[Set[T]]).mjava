@@ -1,10 +1,9 @@
-    private RealMultibinder(Binder binder, TypeLiteral<T> elementType, Key<Set<T>> setKey,
-        Key<Collection<Provider<T>>> collectionOfProvidersKey) {
+    private RealMultibinder(Binder binder, TypeLiteral<T> elementType, Key<Set<T>> setKey) {
       this.binder = checkNotNull(binder, "binder");
       this.elementType = checkNotNull(elementType, "elementType");
       this.setKey = checkNotNull(setKey, "setKey");
-      this.collectionOfProvidersKey =
-          checkNotNull(collectionOfProvidersKey, "collectionOfProviders");
+      this.collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
+      this.collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
       this.setName = RealElement.nameOf(setKey);
       this.permitDuplicatesKey = Key.get(Boolean.class, named(toString() + " permits duplicates"));
     }

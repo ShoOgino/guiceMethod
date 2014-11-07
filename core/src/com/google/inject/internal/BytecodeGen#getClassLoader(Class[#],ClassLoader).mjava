@@ -1,7 +1,7 @@
   private static ClassLoader getClassLoader(Class<?> type, ClassLoader delegate) {
 
     // simple case: do nothing!
-    if (!CUSTOM_LOADER_ENABLED) {
+    if (getCustomClassLoadingOption() == CustomClassLoadingOption.OFF) {
       return delegate;
     }
 

@@ -1,0 +1,12 @@
+  /**
+   * Gets the system option indicated by the specified key; runs as a privileged action.
+   *
+   * @param name of the system option
+   * @param defaultValue if the option is not set
+   *
+   * @return value of the option, defaultValue if not set
+   */
+  private static <T extends Enum<T>> T getSystemOption(final String name, T defaultValue) {
+    return getSystemOption(name, defaultValue, defaultValue);
+  }
+

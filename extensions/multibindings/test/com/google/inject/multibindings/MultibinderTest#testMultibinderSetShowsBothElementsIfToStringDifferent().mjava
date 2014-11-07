@@ -40,8 +40,6 @@
 
     TypeLiteral<ValueType> valueType = TypeLiteral.get(ValueType.class);
     TypeLiteral<Set<ValueType>> setOfValueType = new TypeLiteral<Set<ValueType>>() {};
-    TypeLiteral<Collection<Provider<ValueType>>> collectionOfProvidersOfValueType =
-        new TypeLiteral<Collection<Provider<ValueType>>>() {};
     try {
       injector.getInstance(Key.get(setOfValueType));
       fail();
@@ -55,8 +53,7 @@
     }
 
     // But we can still visit the module!
-    assertSetVisitor(Key.get(setOfValueType), Key.get(collectionOfProvidersOfValueType), valueType,
-        setOf(module1, module2), MODULE, false, 0, instance(new ValueType(1, 2)),
-        instance(new ValueType(1, 3)));
+    assertSetVisitor(Key.get(setOfValueType), valueType, setOf(module1, module2), MODULE, false, 0,
+        instance(new ValueType(1, 2)), instance(new ValueType(1, 3)));
   }
 

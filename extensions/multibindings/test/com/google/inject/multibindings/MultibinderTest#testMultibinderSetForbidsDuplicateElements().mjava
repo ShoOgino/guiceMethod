@@ -24,7 +24,7 @@
     }
 
     // But we can still visit the module!
-    assertSetVisitor(Key.get(setOfString), Key.get(collectionOfProvidersOfStrings), stringType,
-        setOf(module1, module2), MODULE, false, 0, instance("A"), instance("A"));
+    assertSetVisitor(Key.get(setOfString), stringType, setOf(module1, module2), MODULE, false, 0,
+        instance("A"), instance("A"));
   }
 
