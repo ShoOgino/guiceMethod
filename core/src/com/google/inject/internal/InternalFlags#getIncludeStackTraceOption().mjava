@@ -1,14 +1,4 @@
   public static IncludeStackTraceOption getIncludeStackTraceOption() {
-    String flag = System.getProperty("guice_include_stack_traces");
-    try {
-      return (flag == null || flag.length() == 0)
-          ? IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE
-          : IncludeStackTraceOption.valueOf(flag);
-    } catch (IllegalArgumentException e) {
-      logger.warning(flag
-          + " is not a valid flag value for guice_include_stack_traces. "
-          + " Values must be one of " + Arrays.asList(IncludeStackTraceOption.values()));
-      return IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE;
-    }
+    return INCLUDE_STACK_TRACES;
   }
 

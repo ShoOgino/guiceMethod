@@ -1,0 +1,4 @@
+  public static CustomClassLoadingOption getCustomClassLoadingOption() {
+    return CUSTOM_CLASS_LOADING;
+  }
+
