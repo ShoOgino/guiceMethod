@@ -2,5 +2,6 @@
       this.callable = callable;
       this.context = context;
       this.errors = errors;
+      this.numErrorsBefore = errors.size();
     }
 
