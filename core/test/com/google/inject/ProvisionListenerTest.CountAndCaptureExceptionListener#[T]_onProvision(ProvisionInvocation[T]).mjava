@@ -1,0 +1,11 @@
+    public <T> void onProvision(ProvisionInvocation<T> provision) {
+      beforeProvision++;
+      try {
+        provision.provision();
+      } catch (RuntimeException re) {
+        capture.set(re);
+        throw re;
+      }
+      afterProvision++;
+    }
+
