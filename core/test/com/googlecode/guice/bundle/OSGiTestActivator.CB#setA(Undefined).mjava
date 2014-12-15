@@ -1,0 +1,2 @@
+    @Inject public void setA(Undefined undefined) {}
+

@@ -1,0 +1,32 @@
+    @Override protected void configure() {
+      bindInterceptor(new AbstractMatcher<Class<?>>() {
+        public boolean matches(Class<?> clazz) {
+          try {
+
+            // the class and constructor must be visible
+            int clazzModifiers = clazz.getModifiers();
+            int ctorModifiers = clazz.getConstructor().getModifiers();
+            return (clazzModifiers & (Modifier.PUBLIC | Modifier.PROTECTED)) != 0
+                && (ctorModifiers & (Modifier.PUBLIC | Modifier.PROTECTED)) != 0;
+
+          } catch (NoSuchMethodException e) {
+            return false;
+          }
+        }
+      }, new AbstractMatcher<Method>() {
+        public boolean matches(Method method) {
+
+          // the intercepted method must also be visible
+          int methodModifiers = method.getModifiers();
+          return (methodModifiers & (Modifier.PUBLIC | Modifier.PROTECTED)) != 0;
+
+        }
+      }, new org.aopalliance.intercept.MethodInterceptor() {
+        public Object invoke(org.aopalliance.intercept.MethodInvocation mi)
+            throws Throwable {
+
+          return mi.proceed();
+        }
+      });
+    }
+

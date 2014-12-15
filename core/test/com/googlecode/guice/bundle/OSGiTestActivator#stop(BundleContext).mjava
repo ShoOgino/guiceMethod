@@ -1,0 +1,3 @@
+  // called from OSGi when bundle stops
+  public void stop(BundleContext context) {}
+
