@@ -1,6 +1,6 @@
   public void testMultibinderWithEmptySet() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder.newSetBinder(binder(), String.class);
       }
     };

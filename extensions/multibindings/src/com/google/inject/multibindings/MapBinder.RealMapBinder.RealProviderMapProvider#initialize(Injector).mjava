@@ -12,15 +12,16 @@
           Key<V> valueKey = providerEntry.getValueKey();
           Binding<V> valueBinding = injector.getBinding(valueKey);
           // If this isn't a dup due to an exact same binding, add it.
-          if (index.put(entry.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
-            Provider<V> previous = providerMapMutable.put(entry.getKey(), entry.getValue());
+          if (index.put(providerEntry.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
+            Provider<V> previous = providerMapMutable.put(providerEntry.getKey(),
+                new ValueProvider<V>(providerEntry.getValue(), valueBinding));
             if (previous != null && !permitDuplicates) {
               if (duplicateKeys == null) {
                 duplicateKeys = Sets.newHashSet();
               }
-              duplicateKeys.add(entry.getKey());
+              duplicateKeys.add(providerEntry.getKey());
             }
-            bindingsMutable.add(Maps.immutableEntry(entry.getKey(), valueBinding));
+            bindingsMutable.add(Maps.immutableEntry(providerEntry.getKey(), valueBinding));
           }
         }
         if (duplicateKeys != null) {

@@ -4,7 +4,7 @@
    */
   public void testMultibinderDependencies() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
         multibinder.addBinding().to(Key.get(String.class, Names.named("b")));

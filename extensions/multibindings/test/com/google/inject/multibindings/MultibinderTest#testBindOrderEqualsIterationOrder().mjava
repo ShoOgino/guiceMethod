@@ -5,12 +5,12 @@
   public void testBindOrderEqualsIterationOrder() {
     Injector injector = Guice.createInjector(
         new AbstractModule() {
-          protected void configure() {
+          @Override protected void configure() {
             Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
             multibinder.addBinding().toInstance("leonardo");
             multibinder.addBinding().toInstance("donatello");
             install(new AbstractModule() {
-              protected void configure() {
+              @Override protected void configure() {
                 Multibinder.newSetBinder(binder(), String.class)
                     .addBinding().toInstance("michaelangelo");
               }
@@ -18,7 +18,7 @@
           }
         },
         new AbstractModule() {
-          protected void configure() {
+          @Override protected void configure() {
             Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("raphael");
           }
         });

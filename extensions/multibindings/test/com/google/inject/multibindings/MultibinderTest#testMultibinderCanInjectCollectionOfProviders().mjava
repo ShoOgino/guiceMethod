@@ -1,6 +1,6 @@
   public void testMultibinderCanInjectCollectionOfProviders() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toProvider(Providers.of("A"));
         multibinder.addBinding().toProvider(Providers.of("B"));

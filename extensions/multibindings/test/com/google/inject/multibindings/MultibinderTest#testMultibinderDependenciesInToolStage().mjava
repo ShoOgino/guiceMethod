@@ -4,13 +4,14 @@
    */
   public void testMultibinderDependenciesInToolStage() {
     Injector injector = Guice.createInjector(Stage.TOOL, new AbstractModule() {
-        protected void configure() {
-          Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-          multibinder.addBinding().toInstance("A");
-          multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
+      @Override protected void configure() {
+        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+        multibinder.addBinding().toInstance("A");
+        multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
 
-          bindConstant().annotatedWith(Names.named("b")).to("B");
-        }});
+        bindConstant().annotatedWith(Names.named("b")).to("B");
+      }
+    });
 
     Binding<Set<String>> binding = injector.getBinding(new Key<Set<String>>() {});
     HasDependencies withDependencies = (HasDependencies) binding;
