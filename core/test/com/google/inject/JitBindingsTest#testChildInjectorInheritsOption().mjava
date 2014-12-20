@@ -18,18 +18,18 @@
       });
       fail("should have failed");
     } catch(CreationException expected) {
-      assertContains(expected.getMessage(), "1) " + jitFailed(Foo.class));
-      assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      assertContains(expected.getMessage(), "\n1) " + jitFailed(Foo.class));
+      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
     }
     
     Injector child = parent.createChildInjector(new AbstractModule() {
       @Override
       protected void configure() {
         bind(Foo.class).to(FooImpl.class);
+        bind(FooImpl.class);
       }
     });
     ensureWorks(child, Foo.class, Bar.class);
-    ensureFails(child, ALLOW_BINDING, FooImpl.class);
     ensureInChild(parent, FooImpl.class, Foo.class);
     // TODO(sameb): FooBar may or may not be in a child injector, depending on if GC has run.
     // We should fix failed child injectors to remove their contents from the parent blacklist
@@ -44,8 +44,6 @@
       }
     });
     ensureWorks(grandchild, FooBar.class, Foo.class, Bar.class);
-    ensureFails(grandchild, ALLOW_BINDING, FooImpl.class);
-    ensureFails(child, ALLOW_BINDING, FooImpl.class);
-    ensureInChild(parent, FooImpl.class, FooBar.class, Foo.class);    
+    ensureInChild(parent, FooImpl.class, FooBar.class, Foo.class);
   }
 

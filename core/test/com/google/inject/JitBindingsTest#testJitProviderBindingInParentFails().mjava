@@ -1,0 +1,21 @@
+  public void testJitProviderBindingInParentFails() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          install(new PrivateModule() {
+            @Override
+            protected void configure() {
+              binder().requireExplicitBindings();
+              bind(Foo.class).toProvider(FooProvider.class);
+            }
+          });
+        }
+      });
+      fail("should have failed");
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "\n1) " + jitInParentFailed(FooProvider.class));
+      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
+    }
+  }
+

@@ -15,8 +15,8 @@
       });
       fail("should have failed");
     } catch(CreationException expected) {
-      assertContains(expected.getMessage(), "1) " + jitFailed(Bar.class));
-      assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+      assertContains(expected.getMessage(), "\n1) " + jitFailed(Bar.class));
+      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
     }
     
     Injector injector = Guice.createInjector(new AbstractModule() {
@@ -27,6 +27,7 @@
           public void configure() {
             bind(Foo.class).to(FooImpl.class);
             expose(Foo.class);
+            bind(FooImpl.class);
           }
         });
       }

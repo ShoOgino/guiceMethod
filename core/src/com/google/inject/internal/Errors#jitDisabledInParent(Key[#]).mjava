@@ -1,0 +1,4 @@
+  public Errors jitDisabledInParent(Key<?> key) {
+    return addMessage("Explicit bindings are required and %s would be bound in a parent injector.", key);
+  }
+
