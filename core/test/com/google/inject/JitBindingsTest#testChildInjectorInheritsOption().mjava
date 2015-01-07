@@ -18,8 +18,8 @@
       });
       fail("should have failed");
     } catch(CreationException expected) {
-      assertContains(expected.getMessage(), "\n1) " + jitFailed(Foo.class));
-      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
+      assertContains(expected.getMessage(), jitFailed(Foo.class));
+      assertEquals(1, expected.getErrorMessages().size());
     }
     
     Injector child = parent.createChildInjector(new AbstractModule() {

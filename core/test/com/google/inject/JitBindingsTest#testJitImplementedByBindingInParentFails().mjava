@@ -14,8 +14,8 @@
       });
       fail("should have failed");
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "\n1) " + jitInParentFailed(ImplByImpl.class));
-      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
+      assertContains(expected.getMessage(), jitInParentFailed(ImplByImpl.class));
+      assertEquals(1, expected.getErrorMessages().size());
     }
   }
 

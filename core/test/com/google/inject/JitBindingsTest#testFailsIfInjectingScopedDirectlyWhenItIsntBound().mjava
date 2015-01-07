@@ -10,8 +10,8 @@
       });
       fail();
     } catch(CreationException expected) {
-      assertContains(expected.getMessage(), "\n1) " + jitFailed(ScopedFooImpl.class));
-      assertTrue(expected.getMessage(), !expected.getMessage().contains("\n2) "));
+      assertContains(expected.getMessage(), jitFailed(ScopedFooImpl.class));
+      assertEquals(1, expected.getErrorMessages().size());
     }
   }
 
