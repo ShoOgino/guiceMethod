@@ -1,0 +1,2 @@
+    @Inject DoubleFailure(Integer i, Double d) { }
+

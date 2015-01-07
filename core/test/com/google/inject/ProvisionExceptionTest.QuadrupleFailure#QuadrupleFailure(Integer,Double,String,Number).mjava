@@ -1,0 +1,2 @@
+    @Inject QuadrupleFailure(Integer i, Double d, String s, Number n) { }
+

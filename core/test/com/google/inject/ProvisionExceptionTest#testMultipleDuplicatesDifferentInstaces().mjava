@@ -1,0 +1,25 @@
+  public void testMultipleDuplicatesDifferentInstaces() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {}
+
+      @Provides Integer i() { throw new RuntimeException("fail"); }
+
+      @Provides String s() { throw new RuntimeException("abort"); }
+
+    });
+
+    try{
+      injector.getInstance(QuadrupleSameFailure.class);
+      fail();
+    } catch (ProvisionException pe) {
+      assertNull(pe.getCause());
+      assertEquals(4, pe.getErrorMessages().size());
+
+      assertContains(pe.getMessage(),
+          "\n1) ", "Caused by: java.lang.RuntimeException: fail",
+          "\n2) ", "Caused by: java.lang.RuntimeException (same stack trace as error #1)",
+          "\n3) ", "Caused by: java.lang.RuntimeException: abort",
+          "\n4) ", "Caused by: java.lang.RuntimeException (same stack trace as error #3)");
+    }
+  }
+

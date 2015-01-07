@@ -1,7 +1,7 @@
   public void testProvisionExceptionsAreWrappedForBindToProviderInstance() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           bind(F.class).toProvider(new FProvider());
         }
       }).getInstance(F.class);

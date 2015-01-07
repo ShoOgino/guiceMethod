@@ -1,6 +1,6 @@
   public void testProviderKeyBindings() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(D.class).toProvider(DProvider.class);
       }
     });
