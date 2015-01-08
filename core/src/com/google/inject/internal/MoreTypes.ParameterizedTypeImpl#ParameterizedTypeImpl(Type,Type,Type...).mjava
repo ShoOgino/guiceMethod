@@ -1,12 +1,6 @@
     public ParameterizedTypeImpl(Type ownerType, Type rawType, Type... typeArguments) {
       // require an owner type if the raw type needs it
-      if (rawType instanceof Class<?>) {
-        Class rawTypeAsClass = (Class) rawType;
-        checkArgument(ownerType != null || rawTypeAsClass.getEnclosingClass() == null,
-            "No owner type for enclosed %s", rawType);
-        checkArgument(ownerType == null || rawTypeAsClass.getEnclosingClass() != null,
-            "Owner type for unenclosed %s", rawType);
-      }
+      ensureOwnerType(ownerType, rawType);
 
       this.ownerType = ownerType == null ? null : canonicalize(ownerType);
       this.rawType = canonicalize(rawType);
