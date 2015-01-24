@@ -4,24 +4,24 @@
         injector.getInstance(classes[i]);
         fail("should have failed tring to retrieve class: " + classes[i]);
       } catch(ConfigurationException expected) {
-        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
-        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+        assertContains(expected.getMessage(), inChildMessage(classes[i]));
+        assertEquals(1, expected.getErrorMessages().size());
       }
       
       try { 
         injector.getProvider(classes[i]);
         fail("should have failed tring to retrieve class: " + classes[i]);
       } catch(ConfigurationException expected) {
-        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
-        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+        assertContains(expected.getMessage(), inChildMessage(classes[i]));
+        assertEquals(1, expected.getErrorMessages().size());
       }
       
       try {
         injector.getBinding(classes[i]);
         fail("should have failed tring to retrieve class: " + classes[i]);          
       } catch(ConfigurationException expected) {
-        assertContains(expected.getMessage(), "1) " + inChildMessage(classes[i]));
-        assertTrue(expected.getMessage(), !expected.getMessage().contains("2) "));
+        assertContains(expected.getMessage(), inChildMessage(classes[i]));
+        assertEquals(1, expected.getErrorMessages().size());
       }
     }
   }

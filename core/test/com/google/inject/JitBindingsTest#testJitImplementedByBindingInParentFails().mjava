@@ -1,0 +1,21 @@
+  public void testJitImplementedByBindingInParentFails() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override
+        protected void configure() {
+          install(new PrivateModule() {
+            @Override
+            protected void configure() {
+              binder().requireExplicitBindings();
+              bind(ImplBy.class);
+            }
+          });
+        }
+      });
+      fail("should have failed");
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), jitInParentFailed(ImplByImpl.class));
+      assertEquals(1, expected.getErrorMessages().size());
+    }
+  }
+

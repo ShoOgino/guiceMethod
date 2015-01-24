@@ -1,0 +1,4 @@
+  private String jitInParentFailed(TypeLiteral<?> clazz) {
+    return "Explicit bindings are required and " + clazz + " would be bound in a parent injector.";
+  }
+

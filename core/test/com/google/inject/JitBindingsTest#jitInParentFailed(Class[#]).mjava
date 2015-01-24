@@ -1,0 +1,4 @@
+  private String jitInParentFailed(Class<?> clazz) {
+    return jitInParentFailed(TypeLiteral.get(clazz));
+  }
+
