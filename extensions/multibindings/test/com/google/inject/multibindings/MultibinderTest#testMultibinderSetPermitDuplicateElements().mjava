@@ -1,13 +1,13 @@
   public void testMultibinderSetPermitDuplicateElements() {
     Module ab = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
         multibinder.addBinding().toInstance("B");
       }
     };
     Module bc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.permitDuplicates();
         multibinder.addBinding().toInstance("B");

@@ -1,0 +1,4 @@
+    TestModule(Bundle bundle) {
+      this.bundle = bundle;
+    }
+

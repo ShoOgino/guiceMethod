@@ -4,9 +4,12 @@
         Map<K, Object> map = new LinkedHashMap<K, Object>(mapProvider.get());
         for (Entry<K, Object> entry : map.entrySet()) {
           @SuppressWarnings("unchecked")  // we initialized the entries with providers
-          V value = ((Provider<V>) entry.getValue()).get();
+          ValueProvider<V> provider = (ValueProvider<V>)entry.getValue();
+          V value = provider.get();
           checkConfiguration(value != null,
-              "Map injection failed due to null value for key \"%s\"", entry.getKey());
+              "Map injection failed due to null value for key \"%s\", bound at: %s",
+              entry.getKey(),
+              provider.getValueBinding().getSource());
           entry.setValue(value);
         }
         @SuppressWarnings("unchecked")  // if we exited the loop then we replaced all Providers

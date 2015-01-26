@@ -1,6 +1,6 @@
   public void testMultibinderWithMultipleSetTypes() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder.newSetBinder(binder(), String.class)
             .addBinding().toInstance("A");
         Multibinder.newSetBinder(binder(), Integer.class)

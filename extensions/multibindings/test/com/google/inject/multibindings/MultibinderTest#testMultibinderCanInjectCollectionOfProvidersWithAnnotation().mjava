@@ -1,7 +1,7 @@
   public void testMultibinderCanInjectCollectionOfProvidersWithAnnotation() {
     final Annotation ann = Names.named("foo");
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<String> multibinder =
             Multibinder.newSetBinder(binder(), String.class, ann);
         multibinder.addBinding().toProvider(Providers.of("A"));

@@ -1,6 +1,6 @@
   public void testMultibinderWithMultipleAnnotationValueSets() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> abcMultibinder
             = Multibinder.newSetBinder(binder(), String.class, named("abc"));
         abcMultibinder.addBinding().toInstance("A");

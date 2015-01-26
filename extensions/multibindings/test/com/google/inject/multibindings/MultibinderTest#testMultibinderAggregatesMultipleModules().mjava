@@ -1,6 +1,6 @@
   public void testMultibinderAggregatesMultipleModules() {
     Module abc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
         multibinder.addBinding().toInstance("B");
@@ -8,7 +8,7 @@
       }
     };
     Module de = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("D");
         multibinder.addBinding().toInstance("E");

@@ -1,6 +1,6 @@
   public void testMultibinderSetPermitDuplicateCallsToPermitDuplicates() {
     Module ab = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.permitDuplicates();
         multibinder.addBinding().toInstance("A");
@@ -8,7 +8,7 @@
       }
     };
     Module bc = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.permitDuplicates();
         multibinder.addBinding().toInstance("B");

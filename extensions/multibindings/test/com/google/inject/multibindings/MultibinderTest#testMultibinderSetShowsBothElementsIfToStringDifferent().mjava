@@ -23,14 +23,14 @@
     }
 
     Module module1 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<ValueType> multibinder =
             Multibinder.newSetBinder(binder(), ValueType.class);
         multibinder.addBinding().toProvider(Providers.of(new ValueType(1, 2)));
       }
     };
     Module module2 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<ValueType> multibinder =
             Multibinder.newSetBinder(binder(), ValueType.class);
         multibinder.addBinding().toInstance(new ValueType(1, 3));

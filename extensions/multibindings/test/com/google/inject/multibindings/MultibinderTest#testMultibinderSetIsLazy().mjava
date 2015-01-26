@@ -1,6 +1,6 @@
   public void testMultibinderSetIsLazy() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder.newSetBinder(binder(), Integer.class)
             .addBinding().toProvider(new Provider<Integer>() {
           int nextValue = 1;

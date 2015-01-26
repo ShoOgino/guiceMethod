@@ -1,6 +1,6 @@
   public void testMultibinderAggregationForAnnotationType() {
     Module module = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         Multibinder<String> multibinder
             = Multibinder.newSetBinder(binder(), String.class, Abc.class);
         multibinder.addBinding().toInstance("A");

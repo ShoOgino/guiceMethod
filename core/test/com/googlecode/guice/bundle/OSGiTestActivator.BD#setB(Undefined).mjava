@@ -1,0 +1,2 @@
+    @Inject protected void setB(Undefined undefined) {}
+

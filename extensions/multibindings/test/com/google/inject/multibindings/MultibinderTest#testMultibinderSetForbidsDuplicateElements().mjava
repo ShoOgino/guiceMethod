@@ -1,12 +1,12 @@
   public void testMultibinderSetForbidsDuplicateElements() {
     Module module1 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toProvider(Providers.of("A"));
       }
     };
     Module module2 = new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         final Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
         multibinder.addBinding().toInstance("A");
       }
