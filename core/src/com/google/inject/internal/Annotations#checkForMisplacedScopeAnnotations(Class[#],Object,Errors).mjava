@@ -9,7 +9,9 @@
     }
 
     Class<? extends Annotation> scopeAnnotation = findScopeAnnotation(errors, type);
-    if (scopeAnnotation != null) {
+    if (scopeAnnotation != null
+        // We let Dagger Components through to aid migrations.
+        && !containsComponentAnnotation(type.getAnnotations())) {
       errors.withSource(type).scopeAnnotationOnAbstractType(scopeAnnotation, type, source);
     }
   }
