@@ -1,4 +1,12 @@
   @Override public String toString() {
-    return "@Provides " + StackTraceElements.forMember(method);
+    String annotationString = annotation.toString();
+    // Show @Provides w/o the com.google.inject prefix.
+    if (annotation.annotationType() == Provides.class) {
+      annotationString = "@Provides";
+    } else if (annotationString.endsWith("()")) {
+      // Remove the common "()" suffix if there are no values.
+      annotationString = annotationString.substring(0, annotationString.length() - 2);
+    }
+    return annotationString + " " + StackTraceElements.forMember(method);
   }
 

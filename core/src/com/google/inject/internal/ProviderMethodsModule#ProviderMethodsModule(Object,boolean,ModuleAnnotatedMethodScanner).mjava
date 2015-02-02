@@ -1,6 +1,8 @@
-  private ProviderMethodsModule(Object delegate, boolean skipFastClassGeneration) {
+  private ProviderMethodsModule(Object delegate, boolean skipFastClassGeneration,
+      ModuleAnnotatedMethodScanner scanner) {
     this.delegate = checkNotNull(delegate, "delegate");
     this.typeLiteral = TypeLiteral.get(this.delegate.getClass());
     this.skipFastClassGeneration = skipFastClassGeneration;
+    this.scanner = scanner;
   }
 

@@ -1,0 +1,7 @@
+  /**
+   * Returns the annotations this should scan for. Every method in the module that has one of these
+   * annotations will create a Provider binding, with the return value of the binding being what's
+   * provided and the parameters of the method being dependencies of the provider.
+   */
+  public abstract Set<? extends Class<? extends Annotation>> annotationClasses();
+

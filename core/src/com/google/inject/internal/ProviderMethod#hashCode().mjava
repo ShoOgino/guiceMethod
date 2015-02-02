@@ -3,6 +3,6 @@
     // Avoid calling hashCode on 'instance', which is a user-object
     // that might not be expecting it.
     // (We need to call equals, so we do.  But we can avoid hashCode.)
-    return Objects.hashCode(method);
+    return Objects.hashCode(method, annotation);
   }
 

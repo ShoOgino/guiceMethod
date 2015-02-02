@@ -1,0 +1,16 @@
+    ReflectionProviderMethod(Key<T> key,
+        Method method,
+        Object instance,
+        ImmutableSet<Dependency<?>> dependencies,
+        List<Provider<?>> parameterProviders,
+        Class<? extends Annotation> scopeAnnotation,
+        Annotation annotation) {
+      super(key,
+          method,
+          instance,
+          dependencies,
+          parameterProviders,
+          scopeAnnotation,
+          annotation);
+    }
+

@@ -1,0 +1,43 @@
+  /**
+   * Creates a {@link ProviderMethod}.
+   *
+   * <p>Unless {@code skipFastClassGeneration} is set, this will use
+   * {@link net.sf.cglib.reflect.FastClass} to invoke the actual method, since it is significantly
+   * faster. However, this will fail if the method is {@code private} or {@code protected}, since
+   * fastclass is subject to java access policies.
+   */
+  static <T> ProviderMethod<T> create(Key<T> key, Method method, Object instance,
+      ImmutableSet<Dependency<?>> dependencies, List<Provider<?>> parameterProviders,
+      Class<? extends Annotation> scopeAnnotation, boolean skipFastClassGeneration,
+      Annotation annotation) {
+    int modifiers = method.getModifiers();
+    /*if[AOP]*/
+    if (!skipFastClassGeneration && !Modifier.isPrivate(modifiers)
+        && !Modifier.isProtected(modifiers)) {
+      try {
+        // We use an index instead of FastMethod to save a stack frame.
+        return new FastClassProviderMethod<T>(key,
+            method,
+            instance,
+            dependencies,
+            parameterProviders,
+            scopeAnnotation,
+            annotation);
+      } catch (net.sf.cglib.core.CodeGenerationException e) {/* fall-through */}
+    }
+    /*end[AOP]*/
+
+    if (!Modifier.isPublic(modifiers) ||
+        !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
+      method.setAccessible(true);
+    }
+
+    return new ReflectionProviderMethod<T>(key,
+        method,
+        instance,
+        dependencies,
+        parameterProviders,
+        scopeAnnotation,
+        annotation);
+  }
+

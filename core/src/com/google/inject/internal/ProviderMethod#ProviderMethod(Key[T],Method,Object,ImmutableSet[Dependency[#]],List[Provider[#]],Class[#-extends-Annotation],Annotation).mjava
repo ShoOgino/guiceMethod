@@ -3,7 +3,7 @@
    */
   private ProviderMethod(Key<T> key, Method method, Object instance,
       ImmutableSet<Dependency<?>> dependencies, List<Provider<?>> parameterProviders,
-      Class<? extends Annotation> scopeAnnotation) {
+      Class<? extends Annotation> scopeAnnotation, Annotation annotation) {
     this.key = key;
     this.scopeAnnotation = scopeAnnotation;
     this.instance = instance;
@@ -11,5 +11,6 @@
     this.method = method;
     this.parameterProviders = parameterProviders;
     this.exposed = method.isAnnotationPresent(Exposed.class);
+    this.annotation = annotation;
   }
 

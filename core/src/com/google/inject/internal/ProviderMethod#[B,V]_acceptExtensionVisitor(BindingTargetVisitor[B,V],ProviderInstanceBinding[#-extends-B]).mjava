@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked")
   public <B, V> V acceptExtensionVisitor(BindingTargetVisitor<B, V> visitor,
       ProviderInstanceBinding<? extends B> binding) {

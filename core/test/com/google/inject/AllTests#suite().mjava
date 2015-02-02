@@ -25,6 +25,7 @@
     suite.addTestSuite(MembersInjectorTest.class);
     suite.addTestSuite(ModulesTest.class);
     suite.addTestSuite(ModuleTest.class);
+    suite.addTestSuite(ModuleAnnotatedMethodScannerTest.class);
     suite.addTestSuite(NullableInjectionPointTest.class);
     suite.addTestSuite(OptionalBindingTest.class);
     suite.addTestSuite(OverrideModuleTest.class);

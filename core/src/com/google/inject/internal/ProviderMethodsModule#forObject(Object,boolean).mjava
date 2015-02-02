@@ -1,9 +1,0 @@
-  private static Module forObject(Object object, boolean skipFastClassGeneration) {
-    // avoid infinite recursion, since installing a module always installs itself
-    if (object instanceof ProviderMethodsModule) {
-      return Modules.EMPTY_MODULE;
-    }
-
-    return new ProviderMethodsModule(object, skipFastClassGeneration);
-  }
-
