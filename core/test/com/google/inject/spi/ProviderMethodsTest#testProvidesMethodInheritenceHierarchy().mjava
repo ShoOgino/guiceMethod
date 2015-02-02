@@ -4,7 +4,7 @@
       fail("Expected injector creation failure");
     } catch (CreationException expected) {
       // both of our super class bindings cause errors
-      assertContains(expected.getMessage(), 
+      assertContains(expected.getMessage(),
           "A binding to java.lang.Long was already configured",
           "A binding to java.lang.Integer was already configured");
     }

@@ -8,7 +8,7 @@
       @Provides Integer provideInt(@Named("foo") String dep) { return 42; }
     };
     Injector injector = Guice.createInjector(m1, m2);
-    
+
     Binding<String> stringBinding =
         injector.getBinding(Key.get(String.class, Names.named("foo")));
     ProvidesMethodBinding<String> stringMethod =
@@ -19,7 +19,7 @@
     assertEquals(((HasDependencies) stringBinding).getDependencies(),
         stringMethod.getDependencies());
     assertEquals(Key.get(String.class, Names.named("foo")), stringMethod.getKey());
-    
+
     Binding<Integer> intBinding = injector.getBinding(Integer.class);
     ProvidesMethodBinding<Integer> intMethod =
         intBinding.acceptTargetVisitor(new BindingCapturer<Integer>());
@@ -29,6 +29,6 @@
     assertEquals(((HasDependencies) intBinding).getDependencies(),
         intMethod.getDependencies());
     assertEquals(Key.get(Integer.class), intMethod.getKey());
-    
+
   }
 

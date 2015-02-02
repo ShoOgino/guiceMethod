@@ -8,7 +8,7 @@
       Guice.createInjector(new SubClassModule());
       fail();
     } catch (CreationException e) {
-      assertContains(e.getMessage(), 
+      assertContains(e.getMessage(),
           "Overriding @Provides methods is not allowed.",
           "@Provides method: " + SuperClassModule.class.getName() + ".providerMethod()",
           "overridden by: " + SubClassModule.class.getName() + ".providerMethod()");

@@ -1,7 +1,7 @@
   public <T> Provider<T> getProvider(final Key<T> key) {
     Errors errors = new Errors(key);
     try {
-      Provider<T> result = getProviderOrThrow(key, errors);
+      Provider<T> result = getProviderOrThrow(Dependency.get(key), errors);
       errors.throwIfNewErrors(0);
       return result;
     } catch (ErrorsException e) {

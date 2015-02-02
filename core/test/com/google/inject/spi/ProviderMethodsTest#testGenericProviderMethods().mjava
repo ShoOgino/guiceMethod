@@ -1,7 +1,7 @@
   public void testGenericProviderMethods() {
     Injector injector = Guice.createInjector(
         new ProvideTs<String>("A", "B") {}, new ProvideTs<Integer>(1, 2) {});
-    
+
     assertEquals("A", injector.getInstance(Key.get(String.class, Names.named("First"))));
     assertEquals("B", injector.getInstance(Key.get(String.class, Names.named("Second"))));
     assertEquals(ImmutableSet.of("A", "B"),

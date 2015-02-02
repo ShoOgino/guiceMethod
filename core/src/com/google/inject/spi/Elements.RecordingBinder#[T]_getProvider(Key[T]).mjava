@@ -1,6 +1,4 @@
     public <T> Provider<T> getProvider(final Key<T> key) {
-      final ProviderLookup<T> element = new ProviderLookup<T>(getElementSource(), key);
-      elements.add(element);
-      return element.getProvider();
+      return getProvider(Dependency.get(key));
     }
 

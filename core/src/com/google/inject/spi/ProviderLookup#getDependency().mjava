@@ -1,0 +1,4 @@
+  public Dependency<T> getDependency() {
+    return dependency;
+  }
+

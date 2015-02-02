@@ -8,6 +8,29 @@
       return value;
     }
 
+    // Hack to allow null parameters to @Provides methods, for backwards compatibility.
+    if (dependency.getInjectionPoint().getMember() instanceof Method) {
+      Method annotated = (Method) dependency.getInjectionPoint().getMember();
+      if (annotated.isAnnotationPresent(Provides.class)) {
+        switch (InternalFlags.getNullableProvidesOption()) {
+          case ERROR:
+            break; // break out & let the below exception happen
+          case IGNORE:
+            return value; // user doesn't care about injecting nulls to non-@Nullables.
+          case WARN:
+            logger.log(Level.WARNING,
+                "Guice injected null into parameter {0} of {1} (a {2}), please mark it @Nullable."
+                    + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
+                    + " error.",
+                new Object[] {
+                    dependency.getParameterIndex(),
+                    convert(dependency.getInjectionPoint().getMember()),
+                    convert(dependency.getKey())});
+            return null; // log & exit.
+        }
+      }
+    }
+
     int parameterIndex = dependency.getParameterIndex();
     String parameterName = (parameterIndex != -1)
         ? "parameter " + parameterIndex + " of "
