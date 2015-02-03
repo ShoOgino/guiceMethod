@@ -18,6 +18,10 @@
           case IGNORE:
             return value; // user doesn't care about injecting nulls to non-@Nullables.
           case WARN:
+            // Warn only once, otherwise we spam logs too much.
+            if (!warnedDependencies.add(dependency)) {
+              return value;
+            }
             logger.log(Level.WARNING,
                 "Guice injected null into parameter {0} of {1} (a {2}), please mark it @Nullable."
                     + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
