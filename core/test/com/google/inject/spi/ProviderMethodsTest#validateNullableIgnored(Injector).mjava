@@ -1,0 +1,4 @@
+  private void validateNullableIgnored(Injector injector) {
+    injector.getInstance(Integer.class); // no exception
+  }
+

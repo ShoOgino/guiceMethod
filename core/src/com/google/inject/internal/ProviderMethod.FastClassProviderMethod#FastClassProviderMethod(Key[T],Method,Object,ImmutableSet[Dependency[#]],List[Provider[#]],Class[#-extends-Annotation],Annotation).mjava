@@ -3,8 +3,15 @@
         Object instance,
         ImmutableSet<Dependency<?>> dependencies,
         List<Provider<?>> parameterProviders,
-        Class<? extends Annotation> scopeAnnotation) {
-      super(key, method, instance, dependencies, parameterProviders, scopeAnnotation);
+        Class<? extends Annotation> scopeAnnotation,
+        Annotation annotation) {
+      super(key,
+          method,
+          instance,
+          dependencies,
+          parameterProviders,
+          scopeAnnotation,
+          annotation);
       // We need to generate a FastClass for the method's class, not the object's class.
       this.fastClass =
           BytecodeGen.newFastClass(method.getDeclaringClass(), Visibility.forMember(method));

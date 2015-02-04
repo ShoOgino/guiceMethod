@@ -1,0 +1,26 @@
+  /**
+   * Returns true if the method is a provider.
+   *
+   * Synthetic bridge methods are excluded. Starting with JDK 8, javac copies annotations onto
+   * bridge methods (which always have erased signatures).
+   */
+  private Optional<Annotation> isProvider(Binder binder, Method method) {
+    if (method.isBridge() || method.isSynthetic()) {
+      return Optional.absent();
+    }
+    Annotation annotation = null;
+    for (Class<? extends Annotation> annotationClass : scanner.annotationClasses()) {
+      Annotation foundAnnotation = method.getAnnotation(annotationClass);
+      if (foundAnnotation != null) {
+        if (annotation != null) {
+          binder.addError("More than one annotation claimed by %s on method %s."
+              + " Methods can only have one annotation claimed per scanner.",
+              scanner, method);
+          return Optional.absent();
+        }
+        annotation = foundAnnotation;
+      }
+    }
+    return Optional.fromNullable(annotation);
+  }
+

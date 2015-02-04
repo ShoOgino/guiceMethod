@@ -1,9 +1,10 @@
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof ProviderMethod) {
-      ProviderMethod o = (ProviderMethod)obj;
+      ProviderMethod<?> o = (ProviderMethod<?>) obj;
       return method.equals(o.method)
-         && instance.equals(o.instance);
+         && instance.equals(o.instance)
+         && annotation.equals(o.annotation);
     } else {
       return false;
     }

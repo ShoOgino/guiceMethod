@@ -10,16 +10,16 @@
             "This Provider cannot be used until the Injector has been created.");
         return delegate.get();
       }
-      
+
       public Set<Dependency<?>> getDependencies() {
         // We depend on Provider<T>, not T directly.  This is an important distinction
         // for dependency analysis tools that short-circuit on providers.
-        Key<?> providerKey = key.ofType(Types.providerOf(key.getTypeLiteral().getType()));
+        Key<?> providerKey = getKey().ofType(Types.providerOf(getKey().getTypeLiteral().getType()));
         return ImmutableSet.<Dependency<?>>of(Dependency.get(providerKey));
       }
 
       @Override public String toString() {
-        return "Provider<" + key.getTypeLiteral() + ">";
+        return "Provider<" + getKey().getTypeLiteral() + ">";
       }
     };
   }

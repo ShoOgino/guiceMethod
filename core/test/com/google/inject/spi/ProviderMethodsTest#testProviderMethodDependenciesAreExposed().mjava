@@ -1,5 +1,5 @@
-  public void testProviderMethodDependenciesAreExposed() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
+  public void testProviderMethodDependenciesAreExposed() throws Exception {
+    Module module = new AbstractModule() {
       @Override protected void configure() {
         bind(Integer.class).toInstance(50);
         bindConstant().annotatedWith(Names.named("units")).to("Kg");
@@ -7,12 +7,17 @@
       @Provides @Named("weight") String provideWeight(Integer count, @Named("units") String units) {
         return count + units;
       }
-    });
+    };
+    Injector injector = Guice.createInjector(module);
 
     ProviderInstanceBinding<?> binding = (ProviderInstanceBinding<?>) injector.getBinding(
         Key.get(String.class, Names.named("weight")));
-    assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Integer.class)),
-        Dependency.get(Key.get(String.class, Names.named("units")))),
-        binding.getDependencies());
+    Method method =
+      module.getClass().getDeclaredMethod("provideWeight", Integer.class, String.class);
+    InjectionPoint point = new InjectionPoint(TypeLiteral.get(module.getClass()), method, false);
+    assertEquals(ImmutableSet.<Dependency<?>>of(
+        new Dependency<Integer>(point, Key.get(Integer.class), false, 0),
+        new Dependency<String>(point, Key.get(String.class, Names.named("units")), false, 1)),
+         binding.getDependencies());
   }
 

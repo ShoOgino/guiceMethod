@@ -1,0 +1,30 @@
+  public void testNullability() throws Exception {
+    Module module = new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(String.class).toProvider(Providers.<String>of(null));
+      }
+
+      @SuppressWarnings("unused")
+      @Provides
+      Integer fail(String foo) {
+        return 1;
+      }
+
+      @SuppressWarnings("unused")
+      @Provides
+      Long succeed(@Nullable String foo) {
+        return 2L;
+      }
+    };
+    Injector injector = Guice.createInjector(module);
+    InjectionPoint fooPoint = InjectionPoint.forMethod(
+        module.getClass().getDeclaredMethod("fail", String.class),
+        TypeLiteral.get(module.getClass()));
+    Dependency<?> fooDependency = Iterables.getOnlyElement(fooPoint.getDependencies());
+
+    runNullableTest(injector, fooDependency, module);
+
+    injector.getInstance(Long.class);
+  }
+

@@ -1,0 +1,26 @@
+  private <T> ProviderMethod<T> createProviderMethod(Binder binder, Method method,
+      Annotation annotation) {
+    binder = binder.withSource(method);
+    Errors errors = new Errors(method);
+
+    // prepare the parameter providers
+    InjectionPoint point = InjectionPoint.forMethod(method, typeLiteral);
+    List<Dependency<?>> dependencies = point.getDependencies();
+    List<Provider<?>> parameterProviders = Lists.newArrayList();
+    for (Dependency<?> dependency : point.getDependencies()) {
+      parameterProviders.add(binder.getProvider(dependency));
+    }
+
+    @SuppressWarnings("unchecked") // Define T as the method's return type.
+    TypeLiteral<T> returnType = (TypeLiteral<T>) typeLiteral.getReturnType(method);
+    Key<T> key = getKey(errors, returnType, method, method.getAnnotations());
+    key = scanner.prepareMethod(binder, annotation, key, point);
+    Class<? extends Annotation> scopeAnnotation
+        = Annotations.findScopeAnnotation(errors, method.getAnnotations());
+    for (Message message : errors.getMessages()) {
+      binder.addError(message);
+    }
+    return ProviderMethod.create(key, method, delegate, ImmutableSet.copyOf(dependencies),
+        parameterProviders, scopeAnnotation, skipFastClassGeneration, annotation);
+  }
+

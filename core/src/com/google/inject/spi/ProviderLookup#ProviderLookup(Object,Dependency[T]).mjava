@@ -1,0 +1,6 @@
+  /** @since 4.0 */
+  public ProviderLookup(Object source, Dependency<T> dependency) {
+    this.source = checkNotNull(source, "source");
+    this.dependency = checkNotNull(dependency, "dependency");
+  }
+

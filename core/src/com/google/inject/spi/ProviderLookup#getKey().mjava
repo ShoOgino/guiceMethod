@@ -1,4 +1,4 @@
   public Key<T> getKey() {
-    return key;
+    return dependency.getKey();
   }
 

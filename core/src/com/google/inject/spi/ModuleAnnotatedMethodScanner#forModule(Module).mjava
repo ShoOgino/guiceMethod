@@ -1,0 +1,8 @@
+  /**
+   * Scans the module for methods and returns a module that will bind the methods
+   * that match this scanner.
+   */
+  public final Module forModule(Module module) {
+    return ProviderMethodsModule.forModule(module, this);
+  }
+

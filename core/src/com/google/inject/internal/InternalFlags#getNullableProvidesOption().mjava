@@ -1,0 +1,4 @@
+  public static NullableProvidesOption getNullableProvidesOption() {
+    return NULLABLE_PROVIDES;
+  }
+

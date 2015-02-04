@@ -1,0 +1,5 @@
+  private static NullableProvidesOption parseNullableProvidesOption(
+      NullableProvidesOption defaultValue) {
+    return getSystemOption("guice_check_nullable_provides_params", defaultValue);
+  }
+

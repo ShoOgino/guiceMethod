@@ -12,8 +12,9 @@
             && !method.isBridge() && !method.isSynthetic()) {
           methodsBySignature.put(new Signature(method), method);
         }
-        if (isProvider(method)) {
-          result.add(createProviderMethod(binder, method));
+        Optional<Annotation> annotation = isProvider(binder, method);
+        if (annotation.isPresent()) {
+          result.add(createProviderMethod(binder, method, annotation.get()));
         }
       }
     }
@@ -30,9 +31,11 @@
         }
         // now we know matching signature is in a subtype of method.getDeclaringClass()
         if (overrides(matchingSignature, method)) {
+          String annotationString = provider.getAnnotation().annotationType() == Provides.class
+              ? "@Provides" : "@" + provider.getAnnotation().annotationType().getCanonicalName();
           binder.addError(
-              "Overriding @Provides methods is not allowed."
-                  + "\n\t@Provides method: %s\n\toverridden by: %s",
+              "Overriding " + annotationString + " methods is not allowed."
+                  + "\n\t" + annotationString + " method: %s\n\toverridden by: %s",
               method,
               matchingSignature);
           break;
