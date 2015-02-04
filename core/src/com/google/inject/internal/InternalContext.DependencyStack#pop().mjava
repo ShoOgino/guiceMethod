@@ -1,0 +1,5 @@
+    void pop() {
+      int sz = size();
+      removeRange(sz - 2, sz);
+    }
+
