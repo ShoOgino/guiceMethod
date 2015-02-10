@@ -1,0 +1,4 @@
+    @TestProvides String aString() {
+      return "Foo";
+    }
+

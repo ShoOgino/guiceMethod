@@ -1,0 +1,4 @@
+  public Module getDelegateModule() {
+    return delegate instanceof Module ? (Module) delegate : null;
+  }
+
