@@ -1,5 +1,5 @@
   /**
-   * Returns the size of {@link ModuleSource ModuleSources} chain (all parents) that ends at this 
+   * Returns the size of {@link ModuleSource ModuleSources} chain (all parents) that ends at this
    * object.
    */
   int size() {

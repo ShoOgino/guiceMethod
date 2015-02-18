@@ -1,0 +1,4 @@
+    @dagger.Provides(type=SET) Integer anInteger() {
+      return 5;
+    }
+

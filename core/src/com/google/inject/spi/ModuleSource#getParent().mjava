@@ -1,5 +1,5 @@
-  /** 
-   * Returns the parent module {@link ModuleSource source}. 
+  /**
+   * Returns the parent module {@link ModuleSource source}.
    */
   ModuleSource getParent() {
     return parent;

@@ -1,4 +1,4 @@
-    private ModuleSource getModuleSource(Module module) {
+    private ModuleSource getModuleSource(Object module) {
       StackTraceElement[] partialCallStack;
       if (getIncludeStackTraceOption() == IncludeStackTraceOption.COMPLETE) {
         partialCallStack = getPartialCallStack(new Throwable().getStackTrace());

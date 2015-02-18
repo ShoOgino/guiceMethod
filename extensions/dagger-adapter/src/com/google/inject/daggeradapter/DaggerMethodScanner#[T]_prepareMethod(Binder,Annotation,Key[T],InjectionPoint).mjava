@@ -1,0 +1,22 @@
+  @Override public <T> Key<T> prepareMethod(
+      Binder binder, Annotation rawAnnotation, Key<T> key, InjectionPoint injectionPoint) {
+    Method providesMethod = (Method) injectionPoint.getMember();
+    Provides annotation = (Provides) rawAnnotation;
+    switch (annotation.type()) {
+      case UNIQUE:
+        return key;
+      case MAP:
+        /* TODO(cgruber) implement map bindings */
+        binder.addError("Map bindings are not yet supported.");
+      case SET:
+        return processSetBinding(binder, key);
+      case SET_VALUES:
+        binder.addError(Type.SET_VALUES.name() + " contributions are not supported by Guice.",
+            providesMethod);
+        return key;
+      default:
+        binder.addError("Unknown @Provides type " + annotation.type() + ".", providesMethod);
+        return key;
+    }
+  }
+
