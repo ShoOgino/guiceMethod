@@ -1,0 +1,13 @@
+  // See https://github.com/google/guice/issues/904
+  public void testIgnoresSyntheticFactoryMethods() {
+    // Validate the injector can be successfully created.
+    Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        install(new FactoryModuleBuilder().build(ConcreteAssistedWithOverride.Factory.class));
+        install(new FactoryModuleBuilder().build(ConcreteAssistedWithoutOverride.Factory.class));
+        install(new FactoryModuleBuilder().build(
+            new TypeLiteral<AbstractAssisted.Factory<ConcreteAssisted>>() {}));
+      }
+    });
+  }
+
