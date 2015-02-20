@@ -1,11 +1,6 @@
-  public void testFailingScanner_scannerInModule() {
-    Module module = new AbstractModule() {
-      @Override public void configure() {
-        install(new FailingScanner().forModule(new SomeModule()));
-      }
-    };
+  public void testFailingScanner() {
     try {
-      Guice.createInjector(module);
+      Guice.createInjector(new SomeModule(), FailingScanner.module());
       fail();
     } catch (CreationException expected) {
       Message m = Iterables.getOnlyElement(expected.getErrorMessages());
@@ -14,8 +9,8 @@
           m.getMessage());
       assertEquals(IllegalStateException.class, m.getCause().getClass());
       ElementSource source = (ElementSource) Iterables.getOnlyElement(m.getSources());
-      assertEquals(ImmutableList.of(SomeModule.class.getName(), module.getClass().getName()),
-          source.getModuleClassNames());
+      assertEquals(SomeModule.class.getName(),
+          Iterables.getOnlyElement(source.getModuleClassNames()));
       assertEquals(String.class.getName() + " " + SomeModule.class.getName() + ".aString()",
           source.toString());
     }

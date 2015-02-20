@@ -1,0 +1,5 @@
+  public ModuleAnnotatedMethodScannerBinding(Object source, ModuleAnnotatedMethodScanner scanner) {
+    this.source = checkNotNull(source, "source");
+    this.scanner = checkNotNull(scanner, "scanner");
+  }
+

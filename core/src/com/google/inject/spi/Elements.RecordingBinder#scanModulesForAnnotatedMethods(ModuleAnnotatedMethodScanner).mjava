@@ -1,0 +1,6 @@
+    @Override
+    public void scanModulesForAnnotatedMethods(ModuleAnnotatedMethodScanner scanner) {
+      scanners.add(scanner);
+      elements.add(new ModuleAnnotatedMethodScannerBinding(getElementSource(), scanner));
+    }
+

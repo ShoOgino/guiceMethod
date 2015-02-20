@@ -1,0 +1,4 @@
+    public List<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
+      return ImmutableList.of();
+    }
+

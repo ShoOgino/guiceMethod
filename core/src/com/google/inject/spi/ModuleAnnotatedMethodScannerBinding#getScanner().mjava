@@ -1,0 +1,4 @@
+  public ModuleAnnotatedMethodScanner getScanner() {
+    return scanner;
+  }
+

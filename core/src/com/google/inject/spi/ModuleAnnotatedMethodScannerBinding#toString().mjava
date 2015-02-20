@@ -1,0 +1,5 @@
+  @Override public String toString() {
+    return scanner + " which scans for " + scanner.annotationClasses()
+        + " (bound at " + Errors.convert(source) + ")";
+  }
+

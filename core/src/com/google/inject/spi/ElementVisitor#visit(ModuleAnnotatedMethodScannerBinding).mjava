@@ -1,0 +1,7 @@
+  /**
+   * Visits a {@link Binder#scanModulesForAnnotatedMethods} command.
+   *
+   * @since 4.0
+   */
+  V visit(ModuleAnnotatedMethodScannerBinding binding);
+

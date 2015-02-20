@@ -1,7 +1,7 @@
   public List<TypeListenerBinding> getTypeListenerBindings() {
     List<TypeListenerBinding> parentBindings = parent.getTypeListenerBindings();
-    List<TypeListenerBinding> result
-        = new ArrayList<TypeListenerBinding>(parentBindings.size() + 1);
+    List<TypeListenerBinding> result =
+        Lists.newArrayListWithCapacity(parentBindings.size() + typeListenerBindings.size());
     result.addAll(parentBindings);
     result.addAll(typeListenerBindings);
     return result;

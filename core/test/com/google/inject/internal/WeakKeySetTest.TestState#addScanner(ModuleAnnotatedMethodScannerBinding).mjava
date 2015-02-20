@@ -1,0 +1,4 @@
+    public void addScanner(ModuleAnnotatedMethodScannerBinding scanner) {
+      throw new UnsupportedOperationException();
+    }
+

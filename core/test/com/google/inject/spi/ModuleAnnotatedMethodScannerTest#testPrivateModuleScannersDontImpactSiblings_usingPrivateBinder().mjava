@@ -1,0 +1,27 @@
+  public void testPrivateModuleScannersDontImpactSiblings_usingPrivateBinder() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {
+        binder().newPrivateBinder().install(new AbstractModule() {
+          @Override protected void configure() {
+            install(NamedMunger.module());
+          }
+
+          @Exposed @TestProvides @Named("foo") String foo() {
+            return "foo";
+          }
+        });
+      }
+    }, new AbstractModule() {
+      @Override protected void configure() {
+        binder().newPrivateBinder().install(new AbstractModule() {
+          @Override protected void configure() {}
+
+          // ignored! (because the scanner doesn't run over this module)
+          @Exposed @TestProvides @Named("foo") String foo() {
+            return "foo";
+          }
+        });
+      }});
+    assertMungedBinding(injector, String.class, "foo", "foo");
+  }
+
