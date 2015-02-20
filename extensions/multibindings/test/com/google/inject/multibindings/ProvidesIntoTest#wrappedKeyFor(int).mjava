@@ -1,0 +1,15 @@
+  WrappedKey wrappedKeyFor(int number) throws Exception {
+    Field field;
+    switch (number) {
+      case 1:
+        field = ProvidesIntoTest.class.getDeclaredField("wrappedKey1Holder");
+        break;
+      case 2:
+        field = ProvidesIntoTest.class.getDeclaredField("wrappedKey2Holder");
+        break;
+      default:
+        throw new IllegalArgumentException("only 1 or 2 supported");
+    }
+    return field.getAnnotation(WrappedKey.class);
+  }
+

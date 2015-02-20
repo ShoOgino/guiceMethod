@@ -3,13 +3,6 @@
      * and another for {@code V}.
      */
     @Override public LinkedBindingBuilder<V> addBinding(K key) {
-      checkNotNull(key, "key");
-      checkConfiguration(!isInitialized(), "MapBinder was already initialized");
-
-      Key<V> valueKey = Key.get(valueType,
-          new RealElement(entrySetBinder.getSetName(), MAPBINDER, keyType.toString()));
-      entrySetBinder.addBinding().toProvider(new ProviderMapEntry<K, V>(
-          key, binder.getProvider(valueKey), valueKey));
-      return binder.bind(valueKey);
+      return binder.bind(getKeyForNewValue(key));
     }
 

@@ -1,0 +1,23 @@
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  static TypeAndValue<?> typeAndValueOfMapKey(Annotation mapKeyAnnotation) {
+    if (!mapKeyAnnotation.annotationType().getAnnotation(MapKey.class).unwrapValue()) {
+      return new TypeAndValue(TypeLiteral.get(mapKeyAnnotation.annotationType()), mapKeyAnnotation);
+    } else {
+      try {
+        Method valueMethod = mapKeyAnnotation.annotationType().getDeclaredMethod("value");
+        valueMethod.setAccessible(true);
+        TypeLiteral<?> returnType =
+            TypeLiteral.get(mapKeyAnnotation.annotationType()).getReturnType(valueMethod);
+        return new TypeAndValue(returnType, valueMethod.invoke(mapKeyAnnotation));
+      } catch (NoSuchMethodException e) {
+        throw new IllegalStateException(e);
+      } catch (SecurityException e) {
+        throw new IllegalStateException(e);
+      } catch (IllegalAccessException e) {
+        throw new IllegalStateException(e);
+      } catch (InvocationTargetException e) {
+        throw new IllegalStateException(e);
+      }
+    }
+  }
+

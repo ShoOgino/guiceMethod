@@ -1,0 +1,5 @@
+    AnnotationOrError(Annotation annotation, boolean error) {
+      this.annotation = annotation;
+      this.error = error;
+    }
+

@@ -1,0 +1,21 @@
+  public void testMoreThanOneMapKeyAnnotation() {
+    Module m = new AbstractModule() {
+      @Override protected void configure() {}
+
+      @ProvidesIntoMap
+      @TestEnumKey(TestEnum.A)
+      @TestEnumKey2(TestEnum.B)
+      String provideFoo() {
+        return "foo";
+      }
+    };
+    try {
+      Guice.createInjector(MultibindingsScanner.asModule(), m);
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      assertContains(ce.getMessage(), "Found more than one MapKey annotations on "
+          + m.getClass().getName() + ".provideFoo");
+    }    
+  }
+
