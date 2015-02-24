@@ -17,15 +17,22 @@
       if(!factoryRawType.isInterface()) {
         throw errors.addMessage("%s must be an interface.", factoryRawType).toException();
       }
-      
+
+      Multimap<String, Method> defaultMethods = HashMultimap.create();
+      Multimap<String, Method> otherMethods = HashMultimap.create();
       ImmutableMap.Builder<Method, AssistData> assistDataBuilder = ImmutableMap.builder();
       // TODO: also grab methods from superinterfaces
       for (Method method : factoryRawType.getMethods()) {
-        // Skip synthetic methods that java8 may have created.
-        if (method.isBridge() || method.isSynthetic()) {
+        // Skip default methods that java8 may have created.
+        if (isDefault(method) && (method.isBridge() || method.isSynthetic())) {
+          // Even synthetic default methods need the return type validation...
+          // unavoidable consequence of javac8. :-(
+          validateFactoryReturnType(errors, method.getReturnType(), factoryRawType);
+          defaultMethods.put(method.getName(), method);
           continue;
         }
-        
+        otherMethods.put(method.getName(), method);
+
         TypeLiteral<?> returnTypeLiteral = factoryType.getReturnType(method);
         Key<?> returnType;
         try {
@@ -97,9 +104,51 @@
           providers = providerListBuilder.build();
           optimized = true;
         }
-        assistDataBuilder.put(method,
-            new AssistData(constructor, returnType, immutableParamList, implementation,
-                method, removeAssistedDeps(deps), optimized, providers));
+
+        AssistData data = new AssistData(constructor,
+            returnType,
+            immutableParamList,
+            implementation,
+            method,
+            removeAssistedDeps(deps),
+            optimized,
+            providers);
+        assistDataBuilder.put(method, data);
+      }
+
+      factory = factoryRawType.cast(Proxy.newProxyInstance(
+          BytecodeGen.getClassLoader(factoryRawType), new Class<?>[] {factoryRawType}, this));
+
+      // Now go back through default methods. Try to use MethodHandles to make things
+      // work.  If that doesn't work, fallback to trying to find compatible method
+      // signatures.
+      Map<Method, AssistData> dataSoFar = assistDataBuilder.build();
+      ImmutableMap.Builder<Method, MethodHandleWrapper> methodHandleBuilder = ImmutableMap.builder();
+      for (Map.Entry<String, Method> entry : defaultMethods.entries()) {
+        Method defaultMethod = entry.getValue();
+        MethodHandleWrapper handle = MethodHandleWrapper.create(defaultMethod, factory);
+        if (handle != null) {
+          methodHandleBuilder.put(defaultMethod, handle);
+        } else {
+          boolean foundMatch = false;
+          for (Method otherMethod : otherMethods.get(defaultMethod.getName())) {
+            if (dataSoFar.containsKey(otherMethod) && isCompatible(defaultMethod, otherMethod)) {
+              if (foundMatch) {
+                errors.addMessage("Generated default method %s with parameters %s is"
+                    + " signature-compatible with more than one non-default method."
+                    + " Unable to create factory. As a workaround, remove the override"
+                    + " so javac stops generating a default method.",
+                    defaultMethod, Arrays.asList(defaultMethod.getParameterTypes()));
+              } else {
+                assistDataBuilder.put(defaultMethod, dataSoFar.get(otherMethod));
+                foundMatch = true;
+              }
+            }
+          }
+          if (!foundMatch) {
+            throw new IllegalStateException("Can't find method compatible with: " + defaultMethod);
+          }
+        }
       }
 
       // If we generated any errors (from finding matching constructors, for instance), throw an exception.
@@ -108,11 +157,9 @@
       }
 
       assistDataByMethod = assistDataBuilder.build();
+      methodHandleByMethod = methodHandleBuilder.build();
     } catch (ErrorsException e) {
       throw new ConfigurationException(e.getErrors().getMessages());
     }
-
-    factory = factoryRawType.cast(Proxy.newProxyInstance(BytecodeGen.getClassLoader(factoryRawType),
-        new Class[] { factoryRawType }, this));
   }
 

@@ -1,0 +1,17 @@
+  private boolean isCompatible(Method src, Method dst) {
+    if (!src.getReturnType().isAssignableFrom(dst.getReturnType())) {
+      return false;
+    }
+    Class<?>[] srcParams = src.getParameterTypes();
+    Class<?>[] dstParams = dst.getParameterTypes();
+    if (srcParams.length != dstParams.length) {
+      return false;
+    }
+    for (int i = 0; i < srcParams.length; i++) {
+      if (!srcParams[i].isAssignableFrom(dstParams[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+

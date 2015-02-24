@@ -1,0 +1,23 @@
+    static MethodHandleWrapper create(Method method, Object proxy) {
+      if (!valid) {
+        return null;
+      }
+      try {
+        Class<?> declaringClass = method.getDeclaringClass();
+        // Note: this isn't a public API, but we need to use it in order to call default methods.
+        Object lookup = lookupCxtor.newInstance(declaringClass, ALL_MODES);
+        method.setAccessible(true);
+        // These are part of the public API, but we use reflection since we run on java6
+        // and they were introduced in java7.
+        lookup = unreflectSpecial.invoke(lookup, method, declaringClass);
+        Object handle = bindTo.invoke(lookup, proxy);
+        return new MethodHandleWrapper(handle);
+      } catch (InvocationTargetException ite) {
+        return null;
+      } catch (IllegalAccessException iae) {
+        return null;
+      } catch (InstantiationException ie) {
+        return null;
+      }
+    }
+

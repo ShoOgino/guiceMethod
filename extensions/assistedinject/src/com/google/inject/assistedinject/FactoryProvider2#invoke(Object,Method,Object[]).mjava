@@ -3,6 +3,13 @@
    * use that to get an instance of the return type.
    */
   public Object invoke(Object proxy, final Method method, final Object[] args) throws Throwable {
+    // If we setup a method handle earlier for this method, call it.
+    // This is necessary for default methods that java8 creates, so we
+    // can call the default method implementation (and not our proxied version of it).
+    if (methodHandleByMethod.containsKey(method)) {
+      return methodHandleByMethod.get(method).invokeWithArguments(args);
+    }
+
     if (method.getDeclaringClass().equals(Object.class)) {
       if ("equals".equals(method.getName())) {
         return proxy == args[0];
@@ -14,6 +21,7 @@
     }
 
     AssistData data = assistDataByMethod.get(method);
+    checkState(data != null, "No data for method: %s", method);
     Provider<?> provider;
     if(data.cachedBinding != null) { // Try to get optimized form...
       provider = data.cachedBinding.getProvider();
