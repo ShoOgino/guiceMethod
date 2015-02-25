@@ -1,0 +1,7 @@
+  private void assertMungedBinding(Injector injector, Class<?> clazz, String originalName,
+      Object expectedValue) {
+    assertNull(injector.getExistingBinding(Key.get(clazz, named(originalName))));
+    Binding<?> fooBinding = injector.getBinding(Key.get(clazz, named(originalName + "-munged")));
+    assertEquals(expectedValue, fooBinding.getProvider().get());
+  }
+

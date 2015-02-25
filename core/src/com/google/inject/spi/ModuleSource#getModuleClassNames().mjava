@@ -1,6 +1,6 @@
   /**
    * Returns the class names of modules in this module source. The first element (index 0) is filled
-   * by this object {@link #getModuleClassName()}. The second element is filled by the parent's 
+   * by this object {@link #getModuleClassName()}. The second element is filled by the parent's
    * {@link #getModuleClassName()} and so on.
    */
   List<String> getModuleClassNames() {

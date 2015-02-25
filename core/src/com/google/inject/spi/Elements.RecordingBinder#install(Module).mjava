@@ -1,13 +1,31 @@
     public void install(Module module) {
-      if (modules.add(module)) {
+      if (!modules.containsKey(module)) {
         Binder binder = this;
+        boolean unwrapModuleSource = false;
         // Update the module source for the new module
-        if (!(module instanceof ProviderMethodsModule)) {
+        if (module instanceof ProviderMethodsModule) {
+          // There are two reason's we'd want to get the module source in a ProviderMethodsModule.
+          // ModuleAnnotatedMethodScanner lets users scan their own modules for @Provides-like
+          // bindings.  If they install the module at a top-level, then moduleSource can be null.
+          // Also, if they pass something other than 'this' to it, we'd have the wrong source.
+          Object delegate = ((ProviderMethodsModule) module).getDelegateModule();
+          if (moduleSource == null
+              || !moduleSource.getModuleClassName().equals(delegate.getClass().getName())) {
+            moduleSource = getModuleSource(delegate);
+            unwrapModuleSource = true;
+          }
+        } else {
           moduleSource = getModuleSource(module);
+          unwrapModuleSource = true;
         }
         if (module instanceof PrivateModule) {
           binder = binder.newPrivateBinder();
-        }      
+          // Store the module in the private binder too.
+          ((RecordingBinder) binder).modules.put(module, new ModuleInfo(binder, moduleSource));
+        }
+        // Always store this in the parent binder (even if it was a private module)
+        // so that we know not to process it again, and so that scanners inherit down.
+        modules.put(module, new ModuleInfo(binder, moduleSource));
         try {
           module.configure(binder);
         } catch (RuntimeException e) {
@@ -20,7 +38,7 @@
         }
         binder.install(ProviderMethodsModule.forModule(module));
         // We are done with this module, so undo module source change
-        if (!(module instanceof ProviderMethodsModule)) {
+        if (unwrapModuleSource) {
           moduleSource = moduleSource.getParent();
         }
       }

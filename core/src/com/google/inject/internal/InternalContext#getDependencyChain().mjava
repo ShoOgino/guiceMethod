@@ -2,8 +2,14 @@
   public List<DependencyAndSource> getDependencyChain() {
     ImmutableList.Builder<DependencyAndSource> builder = ImmutableList.builder();
     for (int i = 0; i < state.size(); i += 2) {
-      builder.add(new DependencyAndSource(
-          (Dependency<?>) state.get(i), state.get(i + 1)));
+      Object evenEntry = state.get(i);
+      Dependency<?> dependency;
+      if (evenEntry instanceof Key) {
+        dependency = Dependency.get((Key<?>) evenEntry);
+      } else {
+        dependency = (Dependency<?>) evenEntry;
+      }
+      builder.add(new DependencyAndSource(dependency, state.get(i + 1)));
     }
     return builder.build();
   }

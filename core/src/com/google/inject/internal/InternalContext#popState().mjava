@@ -1,6 +1,5 @@
   /** Pops from the state without setting a dependency. */
   public void popState() {
-    state.remove(state.size() - 1);
-    state.remove(state.size() - 1);
+    state.pop();
   }
 

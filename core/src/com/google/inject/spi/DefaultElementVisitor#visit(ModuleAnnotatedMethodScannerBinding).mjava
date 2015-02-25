@@ -1,0 +1,4 @@
+  public V visit(ModuleAnnotatedMethodScannerBinding binding) {
+    return visitOther(binding);
+  }
+

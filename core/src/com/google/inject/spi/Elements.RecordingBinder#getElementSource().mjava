@@ -13,7 +13,7 @@
       }
       IncludeStackTraceOption stackTraceOption = getIncludeStackTraceOption();
       if (stackTraceOption == IncludeStackTraceOption.COMPLETE ||
-          (stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE 
+          (stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE
           && declaringSource == null)) {
         callStack = new Throwable().getStackTrace();
       }

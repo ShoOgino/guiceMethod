@@ -1,0 +1,4 @@
+    InheritedScannersModule(State state) {
+      this.state = state;
+    }
+

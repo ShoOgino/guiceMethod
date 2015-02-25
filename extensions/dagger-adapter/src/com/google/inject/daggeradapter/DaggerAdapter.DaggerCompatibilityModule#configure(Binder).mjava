@@ -1,0 +1,6 @@
+    @Override public void configure(Binder binder) {
+      for (Object module : daggerModuleObjects) {
+        binder.install(ProviderMethodsModule.forModule(module, DaggerMethodScanner.INSTANCE));
+      }
+    }
+

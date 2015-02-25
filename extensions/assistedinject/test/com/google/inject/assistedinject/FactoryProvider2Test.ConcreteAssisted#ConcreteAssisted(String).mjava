@@ -1,0 +1,2 @@
+    @Inject ConcreteAssisted(@SuppressWarnings("unused") @Assisted String string) {}
+

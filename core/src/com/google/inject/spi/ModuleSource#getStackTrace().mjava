@@ -9,7 +9,7 @@
     int cursor = 0;
     ModuleSource current = this;
     while (current != null) {
-      StackTraceElement[] chunk = 
+      StackTraceElement[] chunk =
           StackTraceElements.convertToStackTraceElement(current.partialCallStack);
       int chunkSize = chunk.length;
       System.arraycopy(chunk, 0, callStack, cursor, chunkSize);

@@ -1,0 +1,4 @@
+    static AnnotationOrError forPossiblyNullAnnotation(Annotation annotation) {
+      return new AnnotationOrError(annotation, false);
+    }
+

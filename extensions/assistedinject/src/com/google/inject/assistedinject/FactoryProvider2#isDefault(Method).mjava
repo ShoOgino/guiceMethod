@@ -1,0 +1,8 @@
+  static boolean isDefault(Method method) {
+    // Per the javadoc, default methods are non-abstract, public, non-static.
+    // They're also in interfaces, but we can guarantee that already since we only act
+    // on interfaces.
+    return (method.getModifiers() & (Modifier.ABSTRACT | Modifier.PUBLIC | Modifier.STATIC))
+        == Modifier.PUBLIC;
+  }
+

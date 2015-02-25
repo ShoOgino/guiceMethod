@@ -1,0 +1,5 @@
+    private ModuleInfo(Binder binder, ModuleSource moduleSource) {
+      this.binder = binder;
+      this.moduleSource = moduleSource;
+    }
+

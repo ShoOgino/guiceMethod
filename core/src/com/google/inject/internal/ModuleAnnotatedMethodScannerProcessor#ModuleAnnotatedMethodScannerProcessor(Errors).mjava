@@ -1,0 +1,4 @@
+  ModuleAnnotatedMethodScannerProcessor(Errors errors) {
+    super(errors);
+  }
+

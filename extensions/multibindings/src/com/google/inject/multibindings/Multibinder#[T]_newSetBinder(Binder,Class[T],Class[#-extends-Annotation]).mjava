@@ -4,6 +4,6 @@
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, Class<T> type,
       Class<? extends Annotation> annotationType) {
-    return newSetBinder(binder, TypeLiteral.get(type), annotationType);
+    return newSetBinder(binder, Key.get(type, annotationType));
   }
 

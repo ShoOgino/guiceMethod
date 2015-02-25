@@ -1,0 +1,26 @@
+    void scanForAnnotatedMethods() {
+      for (ModuleAnnotatedMethodScanner scanner : scanners) {
+        // Note: we must iterate over a copy of the modules because calling install(..)
+        // will mutate modules, otherwise causing a ConcurrentModificationException.
+        for (Map.Entry<Module, ModuleInfo> entry : Maps.newLinkedHashMap(modules).entrySet()) {
+          Module module = entry.getKey();
+          // If this was from a child private binder, skip it... we'll process it later.
+          if (entry.getValue().binder != this) {
+            continue;
+          }
+          moduleSource = entry.getValue().moduleSource;
+          try {
+            install(ProviderMethodsModule.forModule(module, scanner));
+          } catch(RuntimeException e) {
+            Collection<Message> messages = Errors.getMessagesFromThrowable(e);
+            if (!messages.isEmpty()) {
+              elements.addAll(messages);
+            } else {
+              addError(e);
+            }
+          }
+        }
+      }
+      moduleSource = null;
+    }
+

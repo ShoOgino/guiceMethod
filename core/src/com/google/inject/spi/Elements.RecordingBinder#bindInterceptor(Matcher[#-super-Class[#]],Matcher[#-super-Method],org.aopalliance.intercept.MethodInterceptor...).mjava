@@ -1,4 +1,5 @@
     /*if[AOP]*/
+    @Override
     public void bindInterceptor(
         Matcher<? super Class<?>> classMatcher,
         Matcher<? super Method> methodMatcher,

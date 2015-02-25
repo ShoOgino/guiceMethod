@@ -1,0 +1,6 @@
+    @Override public String toString() {
+      return Objects.toStringHelper(this)
+          .add("modules", Arrays.asList(daggerModuleObjects))
+          .toString();
+    }
+

@@ -1,0 +1,15 @@
+  public void testProvidesIntoSetWithMapKey() {
+    Module m = new AbstractModule() {
+      @Override protected void configure() {}
+      @ProvidesIntoSet @TestEnumKey(TestEnum.A) String provideFoo() { return "foo"; }
+    };
+    try {
+      Guice.createInjector(MultibindingsScanner.asModule(), m);
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      assertContains(ce.getMessage(), "Found a MapKey annotation on non map binding at "
+          + m.getClass().getName() + ".provideFoo");
+    }
+  }
+

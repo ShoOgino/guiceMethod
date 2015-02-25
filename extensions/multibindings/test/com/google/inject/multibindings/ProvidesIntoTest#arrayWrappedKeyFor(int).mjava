@@ -1,0 +1,15 @@
+  ArrayWrappedKey arrayWrappedKeyFor(int number) throws Exception {
+    Field field;
+    switch (number) {
+      case 12:
+        field = ProvidesIntoTest.class.getDeclaredField("arrayWrappedKeyHolder12");
+        break;
+      case 34:
+        field = ProvidesIntoTest.class.getDeclaredField("arrayWrappedKeyHolder34");
+        break;
+      default:
+        throw new IllegalArgumentException("only 1 or 2 supported");
+    }
+    return field.getAnnotation(ArrayWrappedKey.class);
+  }
+

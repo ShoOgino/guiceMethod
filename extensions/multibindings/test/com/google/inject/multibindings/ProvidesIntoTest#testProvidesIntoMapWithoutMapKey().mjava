@@ -1,0 +1,15 @@
+  public void testProvidesIntoMapWithoutMapKey() {
+    Module m = new AbstractModule() {
+      @Override protected void configure() {}
+      @ProvidesIntoMap String provideFoo() { return "foo"; }
+    };
+    try {
+      Guice.createInjector(MultibindingsScanner.asModule(), m);
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(1, ce.getErrorMessages().size());
+      assertContains(ce.getMessage(), "No MapKey found for map binding at "
+          + m.getClass().getName() + ".provideFoo");
+    }
+  }
+

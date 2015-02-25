@@ -1,0 +1,4 @@
+    @Provides String aString(Integer i) {
+      return i.toString();
+    }
+

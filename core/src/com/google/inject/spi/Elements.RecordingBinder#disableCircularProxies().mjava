@@ -1,3 +1,4 @@
+    @Override
     public void disableCircularProxies() {
       elements.add(new DisableCircularProxiesOption(getElementSource()));
     }

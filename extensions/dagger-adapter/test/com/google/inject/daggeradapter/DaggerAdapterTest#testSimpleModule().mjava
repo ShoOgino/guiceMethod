@@ -1,0 +1,5 @@
+  public void testSimpleModule() {
+    Injector i = Guice.createInjector(DaggerAdapter.from(new SimpleDaggerModule()));
+    assertEquals((Integer) 1, i.getInstance(Integer.class));
+  }
+

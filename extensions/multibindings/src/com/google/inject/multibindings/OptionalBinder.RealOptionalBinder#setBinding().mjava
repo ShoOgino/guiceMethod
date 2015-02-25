@@ -1,6 +1,4 @@
     @Override public LinkedBindingBuilder<T> setBinding() {
-      checkConfiguration(!isInitialized(), "already initialized");      
-      addDirectTypeBinding(binder);
-      return binder.bind(actualKey);
+      return binder.bind(getKeyForActualBinding());
     }
 

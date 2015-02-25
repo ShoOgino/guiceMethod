@@ -1,0 +1,2 @@
+    @AssistedInject Public(@SuppressWarnings("unused") @Assisted StringBuilder sb) {}
+

@@ -1,7 +1,7 @@
   public List<ProvisionListenerBinding> getProvisionListenerBindings() {
     List<ProvisionListenerBinding> parentBindings = parent.getProvisionListenerBindings();
-    List<ProvisionListenerBinding> result
-        = new ArrayList<ProvisionListenerBinding>(parentBindings.size() + 1);
+    List<ProvisionListenerBinding> result =
+        Lists.newArrayListWithCapacity(parentBindings.size() + provisionListenerBindings.size());
     result.addAll(parentBindings);
     result.addAll(provisionListenerBindings);
     return result;

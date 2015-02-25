@@ -1,0 +1,8 @@
+    static Module module() {
+      return new AbstractModule() {
+        @Override protected void configure() {
+          binder().scanModulesForAnnotatedMethods(new NamedMunger());
+        }
+      };
+    }
+

@@ -1,0 +1,6 @@
+    public void configure(Binder binder) {
+      for (ModuleAnnotatedMethodScannerBinding binding : state.getScannerBindings()) {
+        binding.applyTo(binder);
+      }
+    }
+

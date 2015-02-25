@@ -1,4 +1,4 @@
-  /** 
+  /**
    * Returns the corresponding module class name.
    *
    * @see Class#getName()

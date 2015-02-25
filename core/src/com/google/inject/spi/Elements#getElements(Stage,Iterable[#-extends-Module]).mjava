@@ -6,6 +6,10 @@
     for (Module module : modules) {
       binder.install(module);
     }
+    binder.scanForAnnotatedMethods();
+    for (RecordingBinder child : binder.privateBinders) {
+      child.scanForAnnotatedMethods();
+    }
     // Free the memory consumed by the stack trace elements cache
     StackTraceElements.clearCache();
     return Collections.unmodifiableList(binder.elements);

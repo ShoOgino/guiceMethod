@@ -1,0 +1,6 @@
+    Object invokeWithArguments(Object[] args) throws Exception {
+      // We must cast the args to an object so the Object[] is the first param,
+      // as opposed to each individual varargs param.
+      return invokeWithArguments.invoke(handle, (Object) args);
+    }
+

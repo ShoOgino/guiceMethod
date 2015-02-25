@@ -1,0 +1,9 @@
+  public List<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
+    List<ModuleAnnotatedMethodScannerBinding> parentBindings = parent.getScannerBindings();
+    List<ModuleAnnotatedMethodScannerBinding> result =
+        Lists.newArrayListWithCapacity(parentBindings.size() + scannerBindings.size());
+    result.addAll(parentBindings);
+    result.addAll(scannerBindings);
+    return result;
+  }
+
