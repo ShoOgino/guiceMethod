@@ -1,6 +1,6 @@
     ScopedBindingBuilder toProviderMethod(CheckedProviderMethod<?> target) {
-      Key<CheckedProviderMethod> targetKey =
-          Key.get(CheckedProviderMethod.class, UniqueAnnotations.create());
+      Key<CheckedProviderMethod<?>> targetKey = 
+          Key.get(CHECKED_PROVIDER_METHOD_TYPE, UniqueAnnotations.create());
       binder.bind(targetKey).toInstance(target);
 
       return toInternal(targetKey);

@@ -12,6 +12,14 @@
             .bind(RemoteProvider.class, Foo.class)
             .to(mockRemoteProvider)
             .in(testScope);
+
+        ThrowingProviderBinder.create(binder())
+            .bind(RemoteProvider.class, Foo.class)
+            .annotatedWith(NotExceptionScoping.class)
+            .scopeExceptions(false)
+            .to(mockRemoteProvider)
+            .in(testScope);
+
       }
     });  
     
@@ -28,6 +36,15 @@
       Foo throwOrGet() throws RemoteException, BindException {
         return mockRemoteProvider.get();
       }
+
+      @SuppressWarnings("unused")
+      @CheckedProvides(value = RemoteProvider.class, scopeExceptions = false)
+      @NotExceptionScoping
+      @TestScope.Scoped
+      Foo notExceptionScopingThrowOrGet() throws RemoteException, BindException {
+        return mockRemoteProvider.get();
+      }    
+      
     });
     
     cxtorInjector = Guice.createInjector(new AbstractModule() {
@@ -37,6 +54,14 @@
           .bind(RemoteProvider.class, Foo.class)
           .providing(MockFoo.class)
           .in(testScope);
+
+        ThrowingProviderBinder.create(binder())
+          .bind(RemoteProvider.class, Foo.class)
+          .annotatedWith(NotExceptionScoping.class)
+          .scopeExceptions(false)
+          .providing(MockFoo.class)
+          .in(testScope);
+        
       }
     });
   }

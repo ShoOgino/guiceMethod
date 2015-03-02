@@ -1,0 +1,4 @@
+  public void testExceptionsNotScopedWhenNotExceptionScoping_Bind() {
+    tExceptionsNotScopedWhenNotExceptionScoping(bindInjector);
+  }
+

@@ -6,7 +6,8 @@
       List<Provider<?>> parameterProviders,
       Class<? extends Annotation> scopeAnnotation,
       Class<? extends CheckedProvider> checkedProvider,
-      List<TypeLiteral<?>> exceptionTypes) {
+      List<TypeLiteral<?>> exceptionTypes,
+      boolean scopeExceptions) {
     this.key = key;
     this.scopeAnnotation = scopeAnnotation;
     this.instance = instance;
@@ -16,6 +17,7 @@
     this.exposed = method.isAnnotationPresent(Exposed.class);
     this.checkedProvider = checkedProvider;
     this.exceptionTypes = exceptionTypes;
+    this.scopeExceptions = scopeExceptions;
 
     method.setAccessible(true);
   }

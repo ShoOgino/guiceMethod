@@ -1,0 +1,4 @@
+  public void testValuesScopedWhenNotExceptionScoping_Provides() throws Exception  {
+    tValuesScoped(providesInjector, NotExceptionScoping.class);
+  }
+

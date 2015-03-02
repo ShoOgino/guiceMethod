@@ -4,7 +4,7 @@
       for (Method method : c.getDeclaredMethods()) {
         CheckedProvides checkedProvides = method.getAnnotation(CheckedProvides.class);
         if(checkedProvides != null) {
-          result.add(createProviderMethod(binder, method, checkedProvides.value()));
+          result.add(createProviderMethod(binder, method, checkedProvides));
         }
       }
     }

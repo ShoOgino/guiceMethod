@@ -1,5 +1,7 @@
   <T> CheckedProviderMethod<T> createProviderMethod(Binder binder, final Method method,
-      Class<? extends CheckedProvider> throwingProvider) {
+      CheckedProvides checkedProvides) {
+    @SuppressWarnings("rawtypes")
+    Class<? extends CheckedProvider> throwingProvider = checkedProvides.value();
     binder = binder.withSource(method);
     Errors errors = new Errors(method);
 
@@ -35,6 +37,7 @@
     }
 
     return new CheckedProviderMethod<T>(key, method, delegate, ImmutableSet.copyOf(dependencies),
-        parameterProviders, scopeAnnotation, throwingProvider, exceptionTypes);
+        parameterProviders, scopeAnnotation, throwingProvider, exceptionTypes, 
+        checkedProvides.scopeExceptions()); 
   }
 

@@ -1,0 +1,35 @@
+    private ProviderWithDependencies<Result> createResultProvider(
+        final Key<? extends CheckedProvider<?>> targetKey,
+        final Provider<? extends CheckedProvider<?>> targetProvider) {
+      return new ProviderWithDependencies<Result>() {
+        @Override
+        public Result get() {
+          try {
+            return Result.forValue(targetProvider.get().get());
+          } catch (Exception e) {
+            for (Class<? extends Throwable> exceptionType : exceptionTypes) {
+              if (exceptionType.isInstance(e)) {
+                if (scopeExceptions) {
+                  return Result.forException(e);
+                } else {
+                  throw new ResultException(e);
+                }
+              }
+            }
+
+            if (e instanceof RuntimeException) {
+              throw (RuntimeException) e;
+            } else {
+              // this should never happen
+              throw new RuntimeException(e);
+            }
+          }
+        }
+
+        @Override
+        public Set<Dependency<?>> getDependencies() {
+          return ImmutableSet.<Dependency<?>>of(Dependency.get(targetKey));
+        }
+      };
+    }
+

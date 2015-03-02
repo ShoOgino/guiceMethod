@@ -1,0 +1,4 @@
+  public void testValuesScopedWhenNotExceptionScoping_Provides() throws RemoteException {
+    tValuesScoped(providesInjector, NotExceptionScoping.class);
+  }
+

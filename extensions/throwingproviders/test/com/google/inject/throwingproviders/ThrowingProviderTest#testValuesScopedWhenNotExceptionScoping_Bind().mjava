@@ -1,0 +1,4 @@
+  public void testValuesScopedWhenNotExceptionScoping_Bind() throws RemoteException {
+    tValuesScoped(bindInjector, NotExceptionScoping.class);
+  }
+

@@ -1,0 +1,4 @@
+  public void testExceptionsNotScopedWhenNotExceptionScoping_Provides() throws Exception {
+    tExceptionsNotScopedWhenNotExceptionScoping(providesInjector);
+  }
+
