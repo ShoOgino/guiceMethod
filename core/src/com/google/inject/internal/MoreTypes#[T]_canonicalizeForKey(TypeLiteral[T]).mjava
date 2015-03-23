@@ -28,8 +28,19 @@
 
     @SuppressWarnings("unchecked")
     TypeLiteral<T> wrappedPrimitives = (TypeLiteral<T>) PRIMITIVE_TO_WRAPPER.get(typeLiteral);
-    return wrappedPrimitives != null
-        ? wrappedPrimitives
-        : typeLiteral;
+    if (wrappedPrimitives != null) {
+      return wrappedPrimitives;
+    }
+
+    // If we know this isn't a subclass, return as-is.
+    if (typeLiteral.getClass() == TypeLiteral.class) {
+      return typeLiteral;
+    }
+
+    // recreate the TypeLiteral to avoid anonymous TypeLiterals from holding refs to their
+    // surrounding classes.
+    @SuppressWarnings("unchecked")
+    TypeLiteral<T> recreated = (TypeLiteral<T>) TypeLiteral.get(typeLiteral.getType());
+    return recreated;
   }
 
