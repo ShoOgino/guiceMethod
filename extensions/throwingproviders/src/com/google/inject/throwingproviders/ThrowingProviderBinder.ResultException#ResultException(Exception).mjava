@@ -1,0 +1,4 @@
+    ResultException(Exception cause) {
+      super(cause);
+    }
+

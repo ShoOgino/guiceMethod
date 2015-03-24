@@ -1,0 +1,23 @@
+  private void tExceptionsNotScopedWhenNotExceptionScoping(Injector injector) throws Exception {
+    RemoteProvider<Foo> remoteProvider = 
+        injector.getInstance(Key.get(remoteProviderOfFoo, NotExceptionScoping.class));
+
+    mockRemoteProvider.throwOnNextGet(new RemoteException("A"));
+    MockFoo.nextToThrow = new RemoteException("A");
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertEquals("A", expected.getMessage());
+    }
+    
+    mockRemoteProvider.throwOnNextGet(new RemoteException("B"));
+    MockFoo.nextToThrow = new RemoteException("B");
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertEquals("B", expected.getMessage());
+    }
+  }
+

@@ -1,7 +1,7 @@
     @Override
     public <T> MembersInjector<T> getMembersInjector(final TypeLiteral<T> typeLiteral) {
-      final MembersInjectorLookup<T> element
-          = new MembersInjectorLookup<T>(getElementSource(), typeLiteral);
+      final MembersInjectorLookup<T> element = new MembersInjectorLookup<T>(getElementSource(),
+          MoreTypes.canonicalizeForKey(typeLiteral));
       elements.add(element);
       return element.getMembersInjector();
     }

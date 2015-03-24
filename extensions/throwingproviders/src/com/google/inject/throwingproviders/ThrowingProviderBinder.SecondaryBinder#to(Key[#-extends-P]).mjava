@@ -1,5 +1,6 @@
+    @SuppressWarnings("unchecked") // P only extends the raw type of CheckedProvider
     public ScopedBindingBuilder to(Key<? extends P> targetKey) {
       checkNotNull(targetKey, "targetKey");
-      return toInternal(targetKey);
+      return toInternal((Key<? extends CheckedProvider<?>>)targetKey);
     }
 

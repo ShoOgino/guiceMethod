@@ -1,4 +1,4 @@
   public void testValuesScoped_Bind() throws RemoteException {
-    tValuesScoped(bindInjector);
+    tValuesScoped(bindInjector, null);
   }
 

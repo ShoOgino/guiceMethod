@@ -1,4 +1,4 @@
   public void testValuesScoped_Provides() throws RemoteException {
-    tValuesScoped(providesInjector);
+    tValuesScoped(providesInjector, null);
   }
 

@@ -1,0 +1,9 @@
+    /**
+     * Determines if exceptions should be scoped. By default exceptions are scoped.
+     * @param scopeExceptions whether exceptions should be scoped.
+     */
+    public SecondaryBinder<P, T> scopeExceptions(boolean scopeExceptions) {
+      this.scopeExceptions = scopeExceptions;
+      return this;
+    }
+

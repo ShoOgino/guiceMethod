@@ -1,0 +1,4 @@
+  public void testExceptionNotScopedWhenNotExceptionScoping_Cxtor() throws Exception {
+    tExceptionsNotScopedWhenNotExceptionScoping(cxtorInjector);
+  }
+

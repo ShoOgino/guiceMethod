@@ -2,13 +2,14 @@
     binder = binder.withSource(method);
 
     SecondaryBinder<?, ?> sbinder = 
-      ThrowingProviderBinder.create(binder)
-        .bind(checkedProvider, key.getTypeLiteral());
+        ThrowingProviderBinder.create(binder)
+          .bind(checkedProvider, key.getTypeLiteral());
     if(key.getAnnotation() != null) {
       sbinder = sbinder.annotatedWith(key.getAnnotation());
     } else if(key.getAnnotationType() != null) {
       sbinder = sbinder.annotatedWith(key.getAnnotationType());
-    } 
+    }
+    sbinder.scopeExceptions(scopeExceptions);
     ScopedBindingBuilder sbbuilder = sbinder.toProviderMethod(this);
     if(scopeAnnotation != null) {
       sbbuilder.in(scopeAnnotation);

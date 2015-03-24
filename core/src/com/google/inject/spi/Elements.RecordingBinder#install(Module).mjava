@@ -1,6 +1,6 @@
     public void install(Module module) {
       if (!modules.containsKey(module)) {
-        Binder binder = this;
+        RecordingBinder binder = this;
         boolean unwrapModuleSource = false;
         // Update the module source for the new module
         if (module instanceof ProviderMethodsModule) {
@@ -18,14 +18,16 @@
           moduleSource = getModuleSource(module);
           unwrapModuleSource = true;
         }
+        boolean skipScanning = false;
         if (module instanceof PrivateModule) {
-          binder = binder.newPrivateBinder();
-          // Store the module in the private binder too.
-          ((RecordingBinder) binder).modules.put(module, new ModuleInfo(binder, moduleSource));
+          binder = (RecordingBinder) binder.newPrivateBinder();
+          // Store the module in the private binder too so we scan for it.
+          binder.modules.put(module, new ModuleInfo(binder, moduleSource, false));
+          skipScanning = true; // don't scan this module in the parent's module set.
         }
         // Always store this in the parent binder (even if it was a private module)
         // so that we know not to process it again, and so that scanners inherit down.
-        modules.put(module, new ModuleInfo(binder, moduleSource));
+        modules.put(module, new ModuleInfo(binder, moduleSource, skipScanning));
         try {
           module.configure(binder);
         } catch (RuntimeException e) {
