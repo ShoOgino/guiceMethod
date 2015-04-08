@@ -1,5 +1,5 @@
-    void pop() {
-      int sz = size();
-      removeRange(sz - 2, sz);
+    public void pop() {
+      elements[--size] = null;
+      elements[--size] = null;
     }
 

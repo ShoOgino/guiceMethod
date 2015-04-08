@@ -1,0 +1,8 @@
+    public void add(Object dependencyOrKey, Object source) {
+      if (elements.length < size + 2) {
+        elements = Arrays.copyOf(elements, (elements.length*3)/2 + 2);
+      }
+      elements[size++] = dependencyOrKey;
+      elements[size++] = source;
+    }
+

@@ -2,8 +2,7 @@
   public Dependency<?> pushDependency(Dependency<?> dependency, Object source) {
     Dependency<?> previous = this.dependency;
     this.dependency = dependency;
-    state.add(dependency);
-    state.add(source);
+    state.add(dependency, source);
     return previous;
   }
 
