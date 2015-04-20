@@ -1,0 +1,8 @@
+    /**
+     * Relies on Guice implementation to inject S first and G later, which provides a barrier .
+     */
+    @Inject
+    HImpl(S synchronizationBarrier, G g) throws Exception {
+      this.g = g;
+    }
+

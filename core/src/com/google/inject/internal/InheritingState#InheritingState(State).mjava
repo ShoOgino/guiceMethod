@@ -1,8 +1,6 @@
   InheritingState(State parent) {
     this.parent = checkNotNull(parent, "parent");
     this.lock = (parent == State.NONE) ? this : parent.lock();
-    this.singletonCreationLock =
-        (parent == State.NONE) ? new Object() : parent.singletonCreationLock();
     this.blacklistedKeys = new WeakKeySet(lock);
   }
 

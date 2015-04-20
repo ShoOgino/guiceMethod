@@ -1,0 +1,52 @@
+  /**
+   * Tests that injector can create two singletons with circular dependency in parallel.
+   *
+   * <p>This creates two threads to work in parallel, to create instances of
+   * {@link G} and {@link H}. Creation is synchronized by injection of {@link S},
+   * first thread would block until second would be inside a singleton creation as well.
+   *
+   * <p>Both instances are created by sibling injectors, that share singleton scope.
+   * Verifies that exactly one circular proxy object is created.
+   */
+
+  public void testSiblingInjectorGettingCircularSingletonsOneCircularProxy() throws Exception {
+    final Provider<S> provider = new SBarrierProvider(2);
+    final Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(S.class).toProvider(provider);
+      }
+    });
+
+    Future<G> firstThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<G>() {
+      public G call() {
+        Thread.currentThread().setName("G.class");
+        return injector.createChildInjector().getInstance(G.class);
+      }
+    });
+    Future<H> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<H>() {
+      public H call() {
+        Thread.currentThread().setName("H.class");
+        return injector.createChildInjector().getInstance(H.class);
+      }
+    });
+
+    // using separate threads to avoid potential deadlock on the main thread
+    // waiting twice as much to be sure that both would time out in their respective barriers
+    GImpl g = (GImpl) firstThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+    HImpl h = (HImpl) secondThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+
+    // Check that G and H created are not proxied
+    assertTrue(!Scopes.isCircularProxy(g) && !Scopes.isCircularProxy(h));
+
+    // Check that we have no more than one circular proxy created
+    assertFalse(Scopes.isCircularProxy(g.h) && Scopes.isCircularProxy(h.g));
+
+    // Check that non-proxy variable points to another singleton
+    assertTrue(g.h == h || h.g == g);
+
+    // Check correct proxy initialization as default equals implementation would
+    assertEquals(g.h, h);
+    assertEquals(h.g, g);
+  }
+

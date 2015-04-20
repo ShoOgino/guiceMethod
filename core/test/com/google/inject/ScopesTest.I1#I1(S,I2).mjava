@@ -1,0 +1,7 @@
+    /**
+     * Relies on Guice implementation to inject S first, which provides a barrier .
+     */
+    @Inject
+    I1(S synchronizationBarrier, I2 i) {
+    }
+

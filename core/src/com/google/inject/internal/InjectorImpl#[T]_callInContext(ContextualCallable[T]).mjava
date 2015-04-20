@@ -5,17 +5,30 @@
       reference = new Object[1];
       localContext.set(reference);
     }
+    Thread currentThread = Thread.currentThread();
     if (reference[0] == null) {
-      reference[0] = new InternalContext();
+      reference[0] = new InternalContext(options);
+      globalInternalContext.put(currentThread, (InternalContext) reference[0]);
       try {
-        return callable.call((InternalContext)reference[0]);
+        return callable.call((InternalContext) reference[0]);
       } finally {
-        // Only clear the context if this call created it.
+        // Only clear contexts if this call created them.
         reference[0] = null;
+        globalInternalContext.remove(currentThread);
       }
     } else {
-      // Someone else will clean up this context.
-      return callable.call((InternalContext)reference[0]);
+      Object previousGlobalInternalContext = globalInternalContext.get(currentThread);
+      globalInternalContext.put(currentThread, (InternalContext) reference[0]);
+      try {
+        // Someone else will clean up this local context.
+        return callable.call((InternalContext) reference[0]);
+      } finally {
+        if (previousGlobalInternalContext != null) {
+          globalInternalContext.put(currentThread, (InternalContext) previousGlobalInternalContext);
+        } else {
+          globalInternalContext.remove(currentThread);
+        }
+      }
     }
   }
 

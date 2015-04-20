@@ -1,0 +1,9 @@
+    SBarrierProvider(int nThreads) {
+      barrier = new CyclicBarrier(nThreads, new Runnable() {
+        public void run() {
+          // would finish before returning from await() for any thread
+          barrierPassed = true;
+        }
+      });
+    }
+

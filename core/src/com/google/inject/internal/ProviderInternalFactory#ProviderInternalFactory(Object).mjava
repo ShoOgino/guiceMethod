@@ -1,0 +1,4 @@
+  ProviderInternalFactory(Object source) {
+    this.source = checkNotNull(source, "source");
+  }
+

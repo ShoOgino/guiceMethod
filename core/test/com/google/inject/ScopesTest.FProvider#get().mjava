@@ -1,9 +1,0 @@
-    public F get() {
-      try {
-        bothThreadsAreInProvider.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-      } catch (Exception e) {
-        throw new RuntimeException(e);
-      }
-      return new FImpl();
-    }
-

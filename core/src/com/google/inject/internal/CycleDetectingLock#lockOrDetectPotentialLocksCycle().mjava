@@ -1,0 +1,14 @@
+  /**
+   * Takes a lock in a blocking fashion in case no potential deadlocks are detected.
+   * If the lock was successfully owned, returns an empty map indicating no detected potential
+   * deadlocks.
+   *
+   * Otherwise, a map indicating threads involved in a potential deadlock are returned.
+   * Map is ordered by dependency cycle and lists locks for each thread that are part of
+   * the loop in order. Returned map is created atomically.
+   *
+   * In case no cycle is detected performance is O(threads creating singletons),
+   * in case cycle is detected performance is O(singleton locks).
+   */
+  ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle();
+

@@ -1,0 +1,4 @@
+  InternalContext(InjectorOptions options) {
+    this.options = options;
+  }
+
