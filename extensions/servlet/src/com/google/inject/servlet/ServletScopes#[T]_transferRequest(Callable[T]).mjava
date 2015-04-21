@@ -19,6 +19,7 @@
    *     context available to it.
    * @throws OutOfScopeException if this method is called from a non-request
    *     thread, or if the request has completed.
+   * @since 4.0
    */
   public static <T> Callable<T> transferRequest(Callable<T> callable) {
     return (GuiceFilter.localContext.get() != null)
