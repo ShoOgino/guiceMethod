@@ -1,0 +1,12 @@
+    public S get() {
+      try {
+        if (!barrierPassed) {
+          // only if we're triggering barrier for the first time
+          barrier.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        }
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+      return new S(0);
+    }
+

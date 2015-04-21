@@ -1,0 +1,4 @@
+  public InjectorOptions getInjectorOptions() {
+    return options;
+  }
+

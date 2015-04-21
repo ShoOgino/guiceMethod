@@ -1,0 +1,7 @@
+    /**
+     * Relies on Guice implementation to inject S first, which provides a barrier .
+     */
+    @Inject
+    J2(K1 k) {
+    }
+

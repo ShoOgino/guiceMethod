@@ -1,0 +1,120 @@
+  /**
+   * Check that circular dependencies on non-interfaces are correctly resolved in multi-threaded
+   * case. And that an error message constructed is a good one.
+   *
+   * <p>I0 -> I1 -> I2 -> J1 and J0 -> J1 -> J2 -> K1 and K0 -> K1 -> K2,
+   * where I1, J1 and K1 are created in parallel.
+   *
+   * <p>Creation is synchronized by injection of {@link S}, first thread would block until second
+   * would be inside a singleton creation as well.
+   *
+   * <p>Verifies that provision results in an error, that spans two threads and
+   * has a dependency cycle.
+   */
+
+  public void testUnresolvableSingletonCircularDependencyErrorMessage() throws Exception {
+    final Provider<S> provider = new SBarrierProvider(3);
+    final Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(S.class).toProvider(provider);
+      }
+    });
+
+    Future<I0> firstThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<I0>() {
+      public I0 call() {
+        Thread.currentThread().setName("I0.class");
+        return injector.getInstance(I0.class);
+      }
+    });
+    Future<J0> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<J0>() {
+      public J0 call() {
+        Thread.currentThread().setName("J0.class");
+        return injector.getInstance(J0.class);
+      }
+    });
+    Future<K0> thirdThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<K0>() {
+      public K0 call() {
+        Thread.currentThread().setName("K0.class");
+        return injector.getInstance(K0.class);
+      }
+    });
+
+    // using separate threads to avoid potential deadlock on the main thread
+    // waiting twice as much to be sure that both would time out in their respective barriers
+    Throwable firstException = null;
+    Throwable secondException = null;
+    Throwable thirdException = null;
+    try {
+      firstThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+      fail();
+    } catch (ExecutionException e) {
+      firstException = e.getCause();
+    }
+    try {
+      secondThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+      fail();
+    } catch (ExecutionException e) {
+      secondException = e.getCause();
+    }
+    try {
+      thirdThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+      fail();
+    } catch (ExecutionException e) {
+      thirdException = e.getCause();
+    }
+
+    // verification of error messages generated
+    assertEquals(firstException.getClass(), ProvisionException.class);
+    assertEquals(secondException.getClass(), ProvisionException.class);
+    assertEquals(thirdException.getClass(), ProvisionException.class);
+    List<String> errorMessages = Lists.newArrayList(
+        String.format("%s\n%s\n%s",
+            firstException.getMessage(), secondException.getMessage(), thirdException.getMessage())
+            .split("\\n\\n"));
+    Collections.sort(errorMessages, new Comparator<String>() {
+      @Override
+      public int compare(String s1, String s2) {
+        return s2.length() - s1.length();
+      }
+    });
+    // this is brittle, but turns out that second to longest message spans all threads
+    String errorMessage = errorMessages.get(1);
+    assertContains(errorMessage,
+        "Encountered circular dependency spanning several threads. Tried proxying "
+            + this.getClass().getName());
+    assertFalse("Both I0 and J0 can not be a part of a dependency cycle",
+        errorMessage.contains(I0.class.getName()) && errorMessage.contains(J0.class.getName()));
+    assertFalse("Both J0 and K0 can not be a part of a dependency cycle",
+        errorMessage.contains(J0.class.getName()) && errorMessage.contains(K0.class.getName()));
+    assertFalse("Both K0 and I0 can not be a part of a dependency cycle",
+        errorMessage.contains(K0.class.getName()) && errorMessage.contains(I0.class.getName()));
+
+    List<String> firstErrorLineForThread = new ArrayList<String>();
+    boolean addNextLine = false;
+    for (String errorLine : errorMessage.split("\\n")) {
+      if (errorLine.contains("in thread")) {
+        addNextLine = true;
+        firstErrorLineForThread.add(errorLine);
+      } else if (addNextLine) {
+        addNextLine = false;
+        firstErrorLineForThread.add(errorLine);
+      }
+    }
+    assertEquals("we expect to see [T1, $A, T2, $B, T3, $C, T1, $A]",
+        8, firstErrorLineForThread.size());
+    assertEquals("first four elements should be different",
+        6, new HashSet<String>(firstErrorLineForThread.subList(0, 6)).size());
+    assertEquals(firstErrorLineForThread.get(6), firstErrorLineForThread.get(0));
+    assertEquals(firstErrorLineForThread.get(7), firstErrorLineForThread.get(1));
+    assertFalse("K0 thread could not be blocked by J0",
+        firstErrorLineForThread.get(0).contains("J0")
+            && firstErrorLineForThread.get(2).contains("K0"));
+    assertFalse("J0 thread could not be blocked by I0",
+        firstErrorLineForThread.get(0).contains("I0")
+            && firstErrorLineForThread.get(2).contains("J0"));
+    assertFalse("I0 thread could not be blocked by K0",
+        firstErrorLineForThread.get(0).contains("K0")
+            && firstErrorLineForThread.get(2).contains("I0"));
+  }
+

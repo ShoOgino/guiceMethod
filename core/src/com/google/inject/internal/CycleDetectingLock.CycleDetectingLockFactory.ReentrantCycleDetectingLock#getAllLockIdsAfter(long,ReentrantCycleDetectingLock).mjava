@@ -1,0 +1,20 @@
+      /** Return locks owned by a thread after a lock specified, inclusive. */
+      private List<ID> getAllLockIdsAfter(long threadId, ReentrantCycleDetectingLock lock) {
+        List<ID> ids = Lists.newArrayList();
+        boolean found = false;
+        Collection<ReentrantCycleDetectingLock> ownedLocks = locksOwnedByThread.get(threadId);
+        Preconditions.checkNotNull(ownedLocks,
+            "Internal error: No locks were found taken by a thread");
+        for (ReentrantCycleDetectingLock ownedLock : ownedLocks) {
+          if (ownedLock == lock) {
+            found = true;
+          }
+          if (found) {
+            ids.add(ownedLock.userLockId);
+          }
+        }
+        Preconditions.checkState(found, "Internal error: We can not find locks that "
+            + "created a cycle that we detected");
+        return ids;
+      }
+

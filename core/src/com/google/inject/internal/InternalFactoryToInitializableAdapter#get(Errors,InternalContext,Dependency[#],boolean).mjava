@@ -1,6 +1,6 @@
   public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
       throws ErrorsException {
-    return circularGet(initializable.get(errors), errors, context, dependency, linked,
+    return circularGet(initializable.get(errors), errors, context, dependency,
         provisionCallback);
   }
 

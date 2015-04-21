@@ -3,6 +3,8 @@
       for (DelegatingInvocationHandler<T> handler : invocationHandlers) {
         handler.setDelegate(delegate);
       }
+      // initialization of each handler can happen no more than once
+      invocationHandlers = null;
     }
   }
 

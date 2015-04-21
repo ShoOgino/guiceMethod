@@ -1,0 +1,6 @@
+      ReentrantCycleDetectingLock(ID userLockId, Lock lockImplementation) {
+        this.userLockId = Preconditions.checkNotNull(userLockId, "userLockId");
+        this.lockImplementation = Preconditions.checkNotNull(
+            lockImplementation, "lockImplementation");
+      }
+

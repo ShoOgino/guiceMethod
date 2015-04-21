@@ -1,0 +1,10 @@
+    /**
+     * Creates new lock within this factory context. We can guarantee that locks created by
+     * the same factory would not deadlock.
+     *
+     * @param newLockId lock id that would be used to report lock cycles if detected
+     */
+    CycleDetectingLock<ID> create(ID newLockId) {
+      return new ReentrantCycleDetectingLock(newLockId, new ReentrantLock());
+    }
+

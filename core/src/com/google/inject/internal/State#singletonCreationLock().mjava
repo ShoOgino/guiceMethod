@@ -1,6 +1,0 @@
-  /**
-   * Returns the shared lock for all injector's singletons. This is a low-granularity lock
-   * to guarantee singleton creation semantics.
-   */
-  Object singletonCreationLock();
-

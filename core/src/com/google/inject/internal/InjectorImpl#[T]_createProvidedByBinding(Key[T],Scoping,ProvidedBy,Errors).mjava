@@ -13,8 +13,7 @@
     @SuppressWarnings("unchecked")
     Key<? extends Provider<T>> providerKey = (Key<? extends Provider<T>>) Key.get(providerType);
     ProvidedByInternalFactory<T> internalFactory =
-        new ProvidedByInternalFactory<T>(rawType, providerType,
-            providerKey, !options.disableCircularProxies);
+        new ProvidedByInternalFactory<T>(rawType, providerType, providerKey);
     Object source = rawType;
     BindingImpl<T> binding = LinkedProviderBindingImpl.createWithInitializer(
         this,
