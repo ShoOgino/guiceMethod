@@ -8,6 +8,7 @@
    * @param binding binding to check
    * @param scope scope implementation instance
    * @param scopeAnnotation scope annotation class
+   * @since 4.0
    */
   public static boolean isScoped(Binding<?> binding, final Scope scope,
       final Class<? extends Annotation> scopeAnnotation) {

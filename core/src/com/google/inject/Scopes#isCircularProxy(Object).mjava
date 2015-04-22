@@ -5,6 +5,8 @@
    * because the proxies are not intended for general purpose use. (They are
    * designed just to fulfill the immediate injection, not all injections.
    * Caching them can lead to IllegalArgumentExceptions or ClassCastExceptions.)
+   *
+   * @since 4.0
    */
   public static boolean isCircularProxy(Object object) {
     return object instanceof CircularDependencyProxy;
