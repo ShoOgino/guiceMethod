@@ -3,7 +3,7 @@
 
     // Likewise, stops are idempotent.
     if (state == State.STOPPED) {
-      return new FutureTask<State>(Runnables.doNothing(), State.STOPPED);
+      return new FutureTask<State>(DO_NOTHING, State.STOPPED);
     }
 
     return executor.submit(new Callable<State>() {
