@@ -1,3 +1,4 @@
+  /** @since 4.0 */
   public NodeId getNodeId() {
     return nodeId;
   }

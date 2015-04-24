@@ -1,3 +1,4 @@
+  /** @since 4.0 */
   public void setIdentifier(String identifier) {
     this.identifier = identifier;
   }

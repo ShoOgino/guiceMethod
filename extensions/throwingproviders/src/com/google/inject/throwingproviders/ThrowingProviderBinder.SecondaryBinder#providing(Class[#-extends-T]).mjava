@@ -1,3 +1,4 @@
+    /** @since 4.0 */
     public ScopedBindingBuilder providing(Class<? extends T> cxtorClass) {
       return providing(TypeLiteral.get(cxtorClass));
     }
