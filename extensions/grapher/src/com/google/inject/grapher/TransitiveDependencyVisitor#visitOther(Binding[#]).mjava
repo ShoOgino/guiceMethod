@@ -1,3 +1,4 @@
+  /** @since 4.0 */
   @Override public Collection<Key<?>> visitOther(Binding<?> binding) {
     return ImmutableSet.of();
   }

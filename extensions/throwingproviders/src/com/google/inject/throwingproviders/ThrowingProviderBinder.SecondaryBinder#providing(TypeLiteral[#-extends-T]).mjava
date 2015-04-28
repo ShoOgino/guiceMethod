@@ -1,3 +1,4 @@
+    /** @since 4.0 */
     @SuppressWarnings("unchecked") // safe because this is the cxtor of the literal
     public ScopedBindingBuilder providing(TypeLiteral<? extends T> cxtorLiteral) {     
       // Find a constructor that has @ThrowingInject.
