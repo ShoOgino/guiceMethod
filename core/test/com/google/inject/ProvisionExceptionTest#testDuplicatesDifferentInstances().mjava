@@ -1,0 +1,20 @@
+  public void testDuplicatesDifferentInstances() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {}
+
+      @Provides Integer i() { throw new RuntimeException(); }
+
+    });
+
+    try{
+      injector.getInstance(DoubleSameFailure.class);
+      fail();
+    } catch (ProvisionException pe) {
+      assertNotNull(pe.toString(), pe.getCause());
+      assertEquals(2, pe.getErrorMessages().size());
+      for (Message message : pe.getErrorMessages()) {
+        assertNotNull(message.toString(), message.getCause());
+      }
+    }
+  }
+

@@ -1,6 +1,6 @@
   public void testLinkedBindings() {
     Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
+      @Override protected void configure() {
         bind(D.class).to(RealD.class);
       }
     });

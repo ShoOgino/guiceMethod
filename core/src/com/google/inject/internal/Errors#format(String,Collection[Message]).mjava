@@ -4,8 +4,10 @@
     int index = 1;
     boolean displayCauses = getOnlyCause(errorMessages) == null;
 
+    Map<Equivalence.Wrapper<Throwable>, Integer> causes = Maps.newHashMap();
     for (Message errorMessage : errorMessages) {
-      fmt.format("%s) %s%n", index++, errorMessage.getMessage());
+      int thisIdx = index++;
+      fmt.format("%s) %s%n", thisIdx, errorMessage.getMessage());
 
       List<Object> dependencies = errorMessage.getSources();
       for (int i = dependencies.size() - 1; i >= 0; i--) {
@@ -15,9 +17,15 @@
 
       Throwable cause = errorMessage.getCause();
       if (displayCauses && cause != null) {
-        StringWriter writer = new StringWriter();
-        cause.printStackTrace(new PrintWriter(writer));
-        fmt.format("Caused by: %s", writer.getBuffer());
+        Equivalence.Wrapper<Throwable> causeEquivalence = ThrowableEquivalence.INSTANCE.wrap(cause);
+        if (!causes.containsKey(causeEquivalence)) {
+          causes.put(causeEquivalence, thisIdx);
+          fmt.format("Caused by: %s", Throwables.getStackTraceAsString(cause));
+        } else {
+          int causeIdx = causes.get(causeEquivalence);
+          fmt.format("Caused by: %s (same stack trace as error #%s)",
+              cause.getClass().getName(), causeIdx);
+        }
       }
 
       fmt.format("%n");

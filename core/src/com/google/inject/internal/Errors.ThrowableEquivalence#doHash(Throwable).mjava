@@ -1,0 +1,4 @@
+    @Override protected int doHash(Throwable t) {
+      return Objects.hashCode(t.getClass().hashCode(), t.getMessage(), hash(t.getCause()));
+    }
+

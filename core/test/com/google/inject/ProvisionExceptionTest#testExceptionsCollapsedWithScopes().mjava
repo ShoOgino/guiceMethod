@@ -5,7 +5,7 @@
   public void testExceptionsCollapsedWithScopes() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           bind(B.class).in(Scopes.SINGLETON);
         }
       }).getInstance(A.class);

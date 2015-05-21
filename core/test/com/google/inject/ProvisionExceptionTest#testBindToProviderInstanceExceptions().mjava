@@ -1,7 +1,7 @@
   public void testBindToProviderInstanceExceptions() {
     try {
       Guice.createInjector(new AbstractModule() {
-        protected void configure() {
+        @Override protected void configure() {
           bind(D.class).toProvider(new DProvider());
         }
       }).getInstance(D.class);
