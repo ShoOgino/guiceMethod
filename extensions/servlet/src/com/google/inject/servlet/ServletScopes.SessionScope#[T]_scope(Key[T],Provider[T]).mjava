@@ -1,0 +1,30 @@
+    @Override
+    public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
+      final String name = key.toString();
+      return new Provider<T>() {
+        @Override
+        public T get() {
+          HttpSession session = GuiceFilter.getRequest(key).getSession();
+          synchronized (session) {
+            Object obj = session.getAttribute(name);
+            if (NullObject.INSTANCE == obj) {
+              return null;
+            }
+            @SuppressWarnings("unchecked")
+            T t = (T) obj;
+            if (t == null) {
+              t = creator.get();
+              if (!Scopes.isCircularProxy(t)) {
+                session.setAttribute(name, (t != null) ? t : NullObject.INSTANCE);
+              }
+            }
+            return t;
+          }
+        }
+        @Override
+        public String toString() {
+          return String.format("%s[%s]", creator, SESSION);
+        }
+      };
+    }
+
