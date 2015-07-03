@@ -1,0 +1,9 @@
+  public void testMessageHashCodeVariesWithCause() {
+    String innerMessage = "This is the message.";
+    List<Object> sourceList = Lists.newArrayList(new Object());
+    // the throwable argument of each Message below do not have value equality
+    Message firstMessage = new Message(sourceList, innerMessage, new Exception(innerMessage));
+    Message secondMessage = new Message(sourceList, innerMessage, new Exception(innerMessage));
+    assertFalse(firstMessage.hashCode() == secondMessage.hashCode());
+  }
+

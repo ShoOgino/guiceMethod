@@ -72,6 +72,7 @@
     suite.addTestSuite(ToolStageInjectorTest.class);
     suite.addTestSuite(ModuleSourceTest.class);
     suite.addTestSuite(ElementSourceTest.class);
+    suite.addTestSuite(MessageTest.class);
 
     // tools
     // suite.addTestSuite(JmxTest.class); not a testcase
