@@ -1,0 +1,5 @@
+    @Inject
+    Thing(@Assisted int i) {
+      this.i = i;
+    }
+

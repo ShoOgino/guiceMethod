@@ -1,0 +1,4 @@
+    static Factory getDefault() {
+      return Thing::new;
+    }
+
