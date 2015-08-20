@@ -1,0 +1,8 @@
+  /**
+   * @param regexes Any Java-style regular expressions.
+   * @since 5.0
+   */
+  protected final FilterKeyBindingBuilder filterRegex(Iterable<String> regexes) {
+    return getFiltersModuleBuilder().filterRegex(ImmutableList.copyOf(regexes));
+  }
+

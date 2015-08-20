@@ -1,0 +1,8 @@
+  /**
+   * @param regexes Any Java-style regular expressions.
+   * @since 5.0
+   */
+  protected final ServletKeyBindingBuilder serveRegex(Iterable<String> regexes) {
+    return getServletModuleBuilder().serveRegex(ImmutableList.copyOf(regexes));
+  }
+
