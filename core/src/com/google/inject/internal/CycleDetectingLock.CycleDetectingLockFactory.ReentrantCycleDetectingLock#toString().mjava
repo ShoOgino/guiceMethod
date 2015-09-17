@@ -1,12 +1,11 @@
       @Override public String toString() {
         // copy is made to prevent a data race
         // no synchronization is used, potentially stale data, should be good enough
-        Long localLockOwnerThreadId = this.lockOwnerThreadId;
-        if (localLockOwnerThreadId != null) {
-          return String.format("CycleDetectingLock[%s][locked by %s]",
-              userLockId, localLockOwnerThreadId);
+        Long threadId = this.lockOwnerThreadId;
+        if (threadId != null) {
+          return String.format("%s[%s][locked by Id=%d]", super.toString(), userLockId, threadId);
         } else {
-          return String.format("CycleDetectingLock[%s][unlocked]", userLockId);
+          return String.format("%s[%s][unlocked]", super.toString(), userLockId);
         }
       }
 

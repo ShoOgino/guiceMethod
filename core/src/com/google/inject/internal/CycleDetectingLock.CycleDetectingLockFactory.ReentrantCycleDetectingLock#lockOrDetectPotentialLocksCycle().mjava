@@ -1,6 +1,6 @@
       @Override public ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle() {
         final long currentThreadId = Thread.currentThread().getId();
-        synchronized (CycleDetectingLockFactory.this) {
+        synchronized (CycleDetectingLockFactory.class) {
           checkState();
           ListMultimap<Long, ID> locksInCycle = detectPotentialLocksCycle();
           if (!locksInCycle.isEmpty()) {
@@ -14,7 +14,7 @@
         // this may be blocking, but we don't expect it to cause a deadlock
         lockImplementation.lock();
 
-        synchronized (CycleDetectingLockFactory.this) {
+        synchronized (CycleDetectingLockFactory.class) {
           // current thread is no longer waiting on this lock
           lockThreadIsWaitingOn.remove(currentThreadId);
           checkState();

@@ -1,0 +1,56 @@
+  /**
+   * Verifies that factories do not deadlock each other.
+   *
+   * <pre>
+   *   Thread A: lock a lock A (factory A)
+   *   Thread B: lock a lock B (factory B)
+   *   Thread A: lock a lock B (factory B)
+   *   Thread B: lock a lock A (factory A)
+   * </pre>
+   *
+   * <p>This should succeed even though from the point of view of each individual factory
+   * there are no deadlocks to detect.
+   */
+
+  public void testCycleDetectingLockFactoriesDoNotDeadlock() throws Exception {
+    final CycleDetectingLockFactory<String> factoryA = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLock<String> lockA = factoryA.create("A");
+    final CycleDetectingLockFactory<String> factoryB = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLock<String> lockB = factoryB.create("B");
+    final CyclicBarrier eachThreadAcquiredFirstLock = new CyclicBarrier(2);
+    Future<Boolean> threadA = Executors.newSingleThreadExecutor().submit(
+        new Callable<Boolean>() {
+          public Boolean call() throws Exception {
+            Thread.currentThread().setName("A");
+            assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
+            eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            boolean isEmpty = lockB.lockOrDetectPotentialLocksCycle().isEmpty();
+            if (isEmpty) {
+              lockB.unlock();
+            }
+            lockA.unlock();
+            return isEmpty;
+          }
+        });
+    Future<Boolean> threadB = Executors.newSingleThreadExecutor().submit(
+        new Callable<Boolean>() {
+          public Boolean call() throws Exception {
+            Thread.currentThread().setName("B");
+            assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
+            eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+            boolean isEmpty = lockA.lockOrDetectPotentialLocksCycle().isEmpty();
+            if (isEmpty) {
+              lockA.unlock();
+            }
+            lockB.unlock();
+            return isEmpty;
+          }
+        });
+
+    boolean deadlockADetected = threadA.get(DEADLOCK_TIMEOUT_SECONDS * 2, TimeUnit.SECONDS);
+    boolean deadlockBDetected = threadB.get(DEADLOCK_TIMEOUT_SECONDS * 2, TimeUnit.SECONDS);
+
+    assertTrue("Deadlock should get detected", deadlockADetected || deadlockBDetected);
+    assertTrue("One deadlock should get detected", deadlockADetected != deadlockBDetected);
+  }
+

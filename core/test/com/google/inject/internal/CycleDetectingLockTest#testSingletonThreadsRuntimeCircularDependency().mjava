@@ -18,40 +18,42 @@
     final CyclicBarrier signal1 = new CyclicBarrier(2);
     final CyclicBarrier signal2 = new CyclicBarrier(2);
     final CyclicBarrier signal3 = new CyclicBarrier(2);
-    CycleDetectingLockFactory<String> lockFactory = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLockFactory<String> lockFactory = new CycleDetectingLockFactory<String>();
     final CycleDetectingLock<String> lockA =
-        lockFactory.new ReentrantCycleDetectingLock("A", new ReentrantLock() {
-          @Override
-          public void lock() {
-            if (Thread.currentThread().getName().equals("T2")) {
-              try {
-                signal3.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-              } catch (Exception e) {
-                throw new RuntimeException(e);
+        new ReentrantCycleDetectingLock<String>(lockFactory, "A",
+            new ReentrantLock() {
+              @Override
+              public void lock() {
+                if (Thread.currentThread().getName().equals("T2")) {
+                  try {
+                    signal3.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                  } catch (Exception e) {
+                    throw new RuntimeException(e);
+                  }
+                } else {
+                  assertEquals("T1", Thread.currentThread().getName());
+                }
+                super.lock();
               }
-            } else {
-              assertEquals("T1", Thread.currentThread().getName());
-            }
-            super.lock();
-          }
-        });
+            });
     final CycleDetectingLock<String> lockB =
-        lockFactory.new ReentrantCycleDetectingLock("B", new ReentrantLock() {
-          @Override
-          public void lock() {
-            if (Thread.currentThread().getName().equals("T1")) {
-              try {
-                signal2.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-                signal3.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-              } catch (Exception e) {
-                throw new RuntimeException(e);
+        new ReentrantCycleDetectingLock<String>(lockFactory, "B",
+            new ReentrantLock() {
+              @Override
+              public void lock() {
+                if (Thread.currentThread().getName().equals("T1")) {
+                  try {
+                    signal2.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                    signal3.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                  } catch (Exception e) {
+                    throw new RuntimeException(e);
+                  }
+                } else {
+                  assertEquals("T2", Thread.currentThread().getName());
+                }
+                super.lock();
               }
-            } else {
-              assertEquals("T2", Thread.currentThread().getName());
-            }
-            super.lock();
-          }
-        });
+            });
     Future<Void> firstThreadResult = Executors.newSingleThreadExecutor().submit(
         new Callable<Void>() {
           public Void call() throws Exception {
@@ -78,7 +80,7 @@
           }
         });
 
-    firstThreadResult.get();
-    secondThreadResult.get();
+    firstThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
+    secondThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
   }
 
