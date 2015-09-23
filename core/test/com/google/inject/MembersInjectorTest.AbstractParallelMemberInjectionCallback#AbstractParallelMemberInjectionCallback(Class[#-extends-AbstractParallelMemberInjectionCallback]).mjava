@@ -1,0 +1,6 @@
+    AbstractParallelMemberInjectionCallback(
+        Class<? extends AbstractParallelMemberInjectionCallback> otherCallbackClass) {
+      this.mainThread = Thread.currentThread();
+      this.otherCallbackClass = otherCallbackClass;
+    }
+

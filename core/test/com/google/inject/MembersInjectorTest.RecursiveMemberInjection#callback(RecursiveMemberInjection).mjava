@@ -1,0 +1,7 @@
+    @Inject void callback(RecursiveMemberInjection recursiveMemberInjection) {
+      if (called) {
+        fail("Should not be called twice");
+      }
+      called = true;
+    }
+

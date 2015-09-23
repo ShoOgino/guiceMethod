@@ -1,0 +1,12 @@
+  /** Verifies that member injection injecting itself would get a non initialized instance. */
+  public void testRecursiveMemberInjector() throws Exception {
+    final RecursiveMemberInjection rmi = new RecursiveMemberInjection();
+    Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        bind(RecursiveMemberInjection.class).toInstance(rmi);
+      }
+    });
+    assertTrue("Member injection should happen", rmi.called);
+  }
+

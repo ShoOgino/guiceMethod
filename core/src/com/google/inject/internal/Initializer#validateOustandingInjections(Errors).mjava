@@ -3,9 +3,11 @@
    * on the injected instances.
    */
   void validateOustandingInjections(Errors errors) {
-    for (InjectableReference<?> reference : pendingInjection.values()) {
+    validationStarted = true;
+    initializablesCache.clear();
+    for (InjectableReference<?> reference : pendingInjections) {
       try {
-        pendingMembersInjectors.put(reference.instance, reference.validate(errors));
+        reference.validate(errors);
       } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }

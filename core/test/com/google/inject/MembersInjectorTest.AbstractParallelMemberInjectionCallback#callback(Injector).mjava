@@ -1,0 +1,34 @@
+    @Inject void callback(final Injector injector) throws Exception {
+      called = true;
+      if (mainThread != Thread.currentThread()) {
+        // only execute logic on the main thread
+        return;
+      }
+      // verify that other callback can be finished on a separate thread
+      AbstractParallelMemberInjectionCallback otherCallback = Executors
+          .newSingleThreadExecutor()
+          .submit(new Callable<AbstractParallelMemberInjectionCallback>() {
+            @Override
+            public AbstractParallelMemberInjectionCallback call() throws Exception {
+              return injector.getInstance(otherCallbackClass);
+            }
+          }).get(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+      assertTrue(otherCallback.called);
+
+      try {
+        // other thread would wait for callback to finish on this thread first
+        Executors.newSingleThreadExecutor()
+            .submit(new Callable<Object>() {
+              @Override
+              public Object call() throws Exception {
+                return injector.getInstance(
+                    AbstractParallelMemberInjectionCallback.this.getClass());
+              }
+            }).get(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+        fail();
+      } catch (TimeoutException expected) {
+        // recursive call from another thread should time out
+        // as it would be waiting for this thread to finish
+      }
+    }
+

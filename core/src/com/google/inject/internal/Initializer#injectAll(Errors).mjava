@@ -4,20 +4,14 @@
    * instances are codependent (directly or transitively), ordering of injection is arbitrary.
    */
   void injectAll(final Errors errors) {
-    // loop over a defensive copy since ensureInjected() mutates the set. Unfortunately, that copy
-    // is made complicated by a bug in IBM's JDK, wherein entrySet().toArray(Object[]) doesn't work
-    for (InjectableReference<?> reference : Lists.newArrayList(pendingInjection.values())) {
+    Preconditions.checkState(validationStarted, "Validation should be done before injection");
+    for (InjectableReference<?> reference : pendingInjections) {
       try {
         reference.get(errors);
       } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }
-
-    if (!pendingInjection.isEmpty()) {
-      throw new AssertionError("Failed to satisfy " + pendingInjection);
-    }
-
-    ready.countDown();
+    pendingInjections.clear();
   }
 
