@@ -1,6 +1,6 @@
     @Override
     public String toString() {
-      return Objects.toStringHelper(Params.class)
+      return MoreObjects.toStringHelper(Params.class)
         .add("pattern", pattern)
         .add("keyOrInstance", keyOrInstance)
         .add("initParams", params)
