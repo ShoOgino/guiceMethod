@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return Objects.toStringHelper(Binding.class)
+    return MoreObjects.toStringHelper(Binding.class)
         .add("key", key)
         .add("scope", scoping)
         .add("source", source)

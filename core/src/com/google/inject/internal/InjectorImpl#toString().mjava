@@ -1,6 +1,6 @@
   @Override
   public String toString() {
-    return Objects.toStringHelper(Injector.class)
+    return MoreObjects.toStringHelper(Injector.class)
         .add("bindings", state.getExplicitBindingsThisLevel().values())
         .toString();
   }
