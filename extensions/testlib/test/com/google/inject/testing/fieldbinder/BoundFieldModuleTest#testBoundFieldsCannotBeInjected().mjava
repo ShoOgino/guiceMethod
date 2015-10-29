@@ -9,6 +9,7 @@
 
     try {
       Guice.createInjector(module);
+      fail();
     } catch (CreationException e) {
       assertContains(
           e.getMessage(),

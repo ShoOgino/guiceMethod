@@ -1,0 +1,8 @@
+  /**
+   * @param urlPatterns Any Servlet-style patterns. examples: /*, /html/*, *.html, etc.
+   * @since 5.0
+   */
+  protected final ServletKeyBindingBuilder serve(Iterable<String> urlPatterns) {
+    return getServletModuleBuilder().serve(ImmutableList.copyOf(urlPatterns));
+  }
+

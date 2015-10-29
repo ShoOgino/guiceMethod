@@ -9,6 +9,7 @@
 
     try {
       injector.getInstance(Integer.class);
+      fail();
     } catch (ConfigurationException e) {
       assertContains(
           e.getMessage(),

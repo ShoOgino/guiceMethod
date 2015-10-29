@@ -9,7 +9,8 @@
   <T> Initializable<T> requestInjection(InjectorImpl injector, T instance, Binding<T> binding,
       Object source, Set<InjectionPoint> injectionPoints) {
     checkNotNull(source);
-    
+    Preconditions.checkState(!validationStarted,
+        "Member injection could not be requested after validation is started");
     ProvisionListenerStackCallback<T> provisionCallback =
         binding == null ? null : injector.provisionListenerStore.get(binding);
 
@@ -20,9 +21,17 @@
       return Initializables.of(instance);
     }
 
-    InjectableReference<T> initializable = new InjectableReference<T>(
-        injector, instance, binding == null ? null : binding.getKey(), provisionCallback, source);
-    pendingInjection.put(instance, initializable);
-    return initializable;
+    if (initializablesCache.containsKey(instance)) {
+      @SuppressWarnings("unchecked") // Map from T to InjectableReference<T>
+      Initializable<T> cached = (Initializable<T>) initializablesCache.get(instance);
+      return cached;
+    }
+
+    InjectableReference<T> injectableReference = new InjectableReference<T>(
+        injector, instance, binding == null ? null : binding.getKey(), provisionCallback, source,
+        cycleDetectingLockFactory.create(instance.getClass()));
+    initializablesCache.put(instance, injectableReference);
+    pendingInjections.add(injectableReference);
+    return injectableReference;
   }
 

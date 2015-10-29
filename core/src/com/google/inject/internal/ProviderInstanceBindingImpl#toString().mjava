@@ -1,6 +1,6 @@
   @Override
   public String toString() {
-    return Objects.toStringHelper(ProviderInstanceBinding.class)
+    return MoreObjects.toStringHelper(ProviderInstanceBinding.class)
         .add("key", getKey())
         .add("source", getSource())
         .add("scope", getScoping())

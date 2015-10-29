@@ -11,6 +11,7 @@
 
     try {
       Guice.createInjector(module);
+      fail();
     } catch (CreationException e) {
       assertContains(e.getMessage(), "More than one annotation is specified for this binding.");
     }

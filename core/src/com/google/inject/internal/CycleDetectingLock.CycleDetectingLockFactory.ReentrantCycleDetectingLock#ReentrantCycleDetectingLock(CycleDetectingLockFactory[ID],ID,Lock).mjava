@@ -1,4 +1,6 @@
-      ReentrantCycleDetectingLock(ID userLockId, Lock lockImplementation) {
+      ReentrantCycleDetectingLock(CycleDetectingLockFactory<ID> lockFactory,
+          ID userLockId, Lock lockImplementation) {
+        this.lockFactory = lockFactory;
         this.userLockId = Preconditions.checkNotNull(userLockId, "userLockId");
         this.lockImplementation = Preconditions.checkNotNull(
             lockImplementation, "lockImplementation");

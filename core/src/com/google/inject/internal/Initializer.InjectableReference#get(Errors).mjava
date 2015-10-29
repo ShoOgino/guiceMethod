@@ -3,30 +3,49 @@
      * method will ensure that all its members have been injected before returning.
      */
     public T get(Errors errors) throws ErrorsException {
-      if (ready.getCount() == 0) {
+      // skipping acquiring lock if initialization is already finished
+      if (state == InjectableReferenceState.READY) {
         return instance;
       }
 
-      // just wait for everything to be injected by another thread
-      if (Thread.currentThread() != creatingThread) {
-        try {
-          ready.await();
-          return instance;
-        } catch (InterruptedException e) {
-          // Give up, since we don't know if our injection is ready
-          throw new RuntimeException(e);
-        }
-      }
+      // acquire lock for current binding to initialize an instance
+      Multimap<?, ?> lockCycle = lock.lockOrDetectPotentialLocksCycle();
+      if (!lockCycle.isEmpty()) {
+        // Potential deadlock detected and creation lock is not taken.
+        // According to injectAll()'s contract return non-initialized instance.
 
-      // toInject needs injection, do it right away. we only do this once, even if it fails
-      if (pendingInjection.remove(instance) != null) {
-        // safe because we only insert a members injector for the appropriate instance
-        @SuppressWarnings("unchecked")
-        MembersInjectorImpl<T> membersInjector =
-            (MembersInjectorImpl<T>)pendingMembersInjectors.remove(instance);
-        Preconditions.checkState(membersInjector != null,
-            "No membersInjector available for instance: %s, from key: %s", instance, key);
-        
+        // This condition should not be possible under the current Guice implementation.
+        // This clause exists for defensive programming purposes.
+
+        // Reasoning:
+        // get() is called either directly from injectAll(), holds no locks and can not create
+        // a cycle, or it is called through a singleton scope, which resolves deadlocks by itself.
+        // Before calling get() object has to be requested for injection.
+        // Initializer.requestInjection() is called either for constant object bindings, which wrap
+        // creation into a Singleton scope, or from Binder.requestInjection(), which
+        // has to use Singleton scope to reuse the same InjectableReference to potentially
+        // create a lock cycle.
+        return instance;
+      }
+      try {
+        // lock acquired, current thread owns this instance initialization
+        switch (state) {
+          case READY:
+            return instance;
+          // When instance depends on itself in the same thread potential dead lock
+          // is not detected. We have to prevent a stack overflow and we use
+          // an "injecting" stage to short-circuit a call.
+          case INJECTING:
+            return instance;
+          case VALIDATED:
+            state = InjectableReferenceState.INJECTING;
+            break;
+          case NEW:
+            throw new IllegalStateException("InjectableReference is not validated yet");
+          default:
+            throw new IllegalStateException("Unknown state: " + state);
+        }
+
         // if in Stage.TOOL, we only want to inject & notify toolable injection points.
         // (otherwise we'll inject all of them)
         membersInjector.injectAndNotify(instance,
@@ -35,8 +54,13 @@
             provisionCallback,
             source,
             injector.options.stage == Stage.TOOL);
-      }
 
-      return instance;
+        // mark instance as ready to skip a lock on subsequent calls
+        state = InjectableReferenceState.READY;
+        return instance;
+      } finally {
+        // always release our creation lock, even on failures
+        lock.unlock();
+      }
     }
 

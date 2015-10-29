@@ -1,5 +1,5 @@
   @Override public String toString() {
-    return Objects.toStringHelper(PrivateElements.class)
+    return MoreObjects.toStringHelper(PrivateElements.class)
         .add("exposedKeys", getExposedKeys())
         .add("source", getSource())
         .toString();

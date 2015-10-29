@@ -1,0 +1,4 @@
+    ParallelMemberInjectionCallback1() {
+      super(ParallelMemberInjectionCallback2.class);
+    }
+

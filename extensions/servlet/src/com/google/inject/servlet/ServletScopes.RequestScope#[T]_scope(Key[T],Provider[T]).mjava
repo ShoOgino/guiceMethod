@@ -1,0 +1,78 @@
+    @Override
+    public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
+      return new Provider<T>() {
+
+        /** Keys bound in request-scope which are handled directly by GuiceFilter. */
+        private final ImmutableSet<Key<?>> REQUEST_CONTEXT_KEYS = ImmutableSet.of(
+                Key.get(HttpServletRequest.class),
+                Key.get(HttpServletResponse.class),
+                new Key<Map<String, String[]>>(RequestParameters.class) {});
+
+        @Override
+        public T get() {
+          // Check if the alternate request scope should be used, if no HTTP
+          // request is in progress.
+          if (null == GuiceFilter.localContext.get()) {
+
+            // NOTE(dhanji): We don't need to synchronize on the scope map
+            // unlike the HTTP request because we're the only ones who have
+            // a reference to it, and it is only available via a threadlocal.
+            Context context = requestScopeContext.get();
+            if (null != context) {
+              @SuppressWarnings("unchecked")
+              T t = (T) context.map.get(key);
+
+              // Accounts for @Nullable providers.
+              if (NullObject.INSTANCE == t) {
+                return null;
+              }
+
+              if (t == null) {
+                t = creator.get();
+                if (!Scopes.isCircularProxy(t)) {
+                  // Store a sentinel for provider-given null values.
+                  context.map.put(key, t != null ? t : NullObject.INSTANCE);
+                }
+              }
+
+              return t;
+            } // else: fall into normal HTTP request scope and out of scope
+              // exception is thrown.
+          }
+
+          // Always synchronize and get/set attributes on the underlying request
+          // object since Filters may wrap the request and change the value of
+          // {@code GuiceFilter.getRequest()}.
+          //
+          // This _correctly_ throws up if the thread is out of scope.
+          HttpServletRequest request = GuiceFilter.getOriginalRequest(key);
+          if (REQUEST_CONTEXT_KEYS.contains(key)) {
+            // Don't store these keys as attributes, since they are handled by
+            // GuiceFilter itself.
+            return creator.get();
+          }
+          String name = key.toString();
+          synchronized (request) {
+            Object obj = request.getAttribute(name);
+            if (NullObject.INSTANCE == obj) {
+              return null;
+            }
+            @SuppressWarnings("unchecked")
+            T t = (T) obj;
+            if (t == null) {
+              t = creator.get();
+              if (!Scopes.isCircularProxy(t)) {
+                request.setAttribute(name, (t != null) ? t : NullObject.INSTANCE);
+              }
+            }
+            return t;
+          }
+        }
+
+        @Override
+        public String toString() {
+          return String.format("%s[%s]", creator, REQUEST);
+        }
+      };
+    }
+

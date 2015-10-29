@@ -1,6 +1,6 @@
       @Override public void unlock() {
         final long currentThreadId = Thread.currentThread().getId();
-        synchronized (CycleDetectingLockFactory.this) {
+        synchronized (CycleDetectingLockFactory.class) {
           checkState();
           Preconditions.checkState(lockOwnerThreadId != null,
               "Thread is trying to unlock a lock that is not locked");
