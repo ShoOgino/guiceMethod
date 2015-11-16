@@ -1,0 +1,22 @@
+  private static RequestScoper continueRequest(Map<Key<?>, Object> seedMap) {
+    Preconditions.checkArgument(null != seedMap,
+        "Seed map cannot be null, try passing in Collections.emptyMap() instead.");
+
+    // Snapshot the seed map and add all the instances to our continuing HTTP request.
+    final ContinuingHttpServletRequest continuingRequest =
+        new ContinuingHttpServletRequest(
+            GuiceFilter.getRequest(Key.get(HttpServletRequest.class)));
+    for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
+      Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
+      continuingRequest.setAttribute(entry.getKey().toString(), value);
+    }
+
+    return new RequestScoper() {
+      @Override public CloseableScope open() {
+        checkScopingState(null == GuiceFilter.localContext.get(),
+            "Cannot continue request in the same thread as a HTTP request!");
+        return new GuiceFilter.Context(continuingRequest, continuingRequest, null).open();
+      }
+    };
+  }
+

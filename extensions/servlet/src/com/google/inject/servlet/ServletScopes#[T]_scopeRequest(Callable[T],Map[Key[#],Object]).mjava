@@ -17,29 +17,8 @@
    *     that exposes the instances in the {@code seedMap} as scoped keys.
    * @since 3.0
    */
-  public static <T> Callable<T> scopeRequest(final Callable<T> callable,
+  public static <T> Callable<T> scopeRequest(Callable<T> callable,
       Map<Key<?>, Object> seedMap) {
-    Preconditions.checkArgument(null != seedMap,
-        "Seed map cannot be null, try passing in Collections.emptyMap() instead.");
-
-    // Copy the seed values into our local scope map.
-    final Context context = new Context();
-    Map<Key<?>, Object> validatedAndCanonicalizedMap =
-        Maps.transformEntries(seedMap, new EntryTransformer<Key<?>, Object, Object>() {
-          @Override public Object transformEntry(Key<?> key, Object value) {
-            return validateAndCanonicalizeValue(key, value);
-          }
-        });
-    context.map.putAll(validatedAndCanonicalizedMap);
-
-    return new Callable<T>() {
-      public T call() throws Exception {
-        checkScopingState(null == GuiceFilter.localContext.get(),
-            "An HTTP request is already in progress, cannot scope a new request in this thread.");
-        checkScopingState(null == requestScopeContext.get(),
-            "A request scope is already in progress, cannot scope a new request in this thread.");
-        return context.call(callable);
-      }
-    };
+    return wrap(callable, scopeRequest(seedMap));
   }
 

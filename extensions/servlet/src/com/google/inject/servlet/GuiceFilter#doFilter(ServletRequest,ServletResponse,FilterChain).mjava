@@ -12,13 +12,13 @@
     HttpServletRequest originalRequest
         = (previous != null) ? previous.getOriginalRequest() : request;
     try {
-      new Context(originalRequest, request, response).call(new Callable<Void>() {
-        @Override public Void call() throws Exception {
-          //dispatch across the servlet pipeline, ensuring web.xml's filterchain is honored
-          filterPipeline.dispatch(servletRequest, servletResponse, filterChain);
-          return null;
-        }
-      });
+      RequestScoper.CloseableScope scope = new Context(originalRequest, request, response).open();
+      try {
+        //dispatch across the servlet pipeline, ensuring web.xml's filterchain is honored
+        filterPipeline.dispatch(servletRequest, servletResponse, filterChain);
+      } finally {
+        scope.close();
+      }
     } catch (IOException e) {
       throw e;
     } catch (ServletException e) {

@@ -22,8 +22,6 @@
    * @since 4.0
    */
   public static <T> Callable<T> transferRequest(Callable<T> callable) {
-    return (GuiceFilter.localContext.get() != null)
-        ? transferHttpRequest(callable)
-        : transferNonHttpRequest(callable);
+    return wrap(callable, transferRequest());
   }
 

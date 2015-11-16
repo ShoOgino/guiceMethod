@@ -1,0 +1,12 @@
+    @Override public CloseableScope open() {
+      lock.lock();
+      final Context previous = localContext.get();
+      localContext.set(this);
+      return new CloseableScope() {
+        @Override public void close() {
+          localContext.set(previous);
+          lock.unlock();
+        }
+      };
+    }
+
