@@ -1,12 +1,9 @@
   /*if[AOP]*/
   // use fully-qualified names so imports don't need preprocessor statements 
-  public static net.sf.cglib.reflect.FastClass newFastClass(Class<?> type, Visibility visibility) {
+  public static net.sf.cglib.reflect.FastClass newFastClass(Class<?> type) {
     net.sf.cglib.reflect.FastClass.Generator generator
         = new net.sf.cglib.reflect.FastClass.Generator();
     generator.setType(type);
-    if (visibility == Visibility.PUBLIC) {
-      generator.setClassLoader(getClassLoader(type));
-    }
     generator.setNamingPolicy(FASTCLASS_NAMING_POLICY);
     logger.fine("Loading " + type + " FastClass with " + generator.getClassLoader());
     return generator.create();

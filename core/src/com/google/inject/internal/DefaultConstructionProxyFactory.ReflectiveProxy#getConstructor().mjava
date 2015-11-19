@@ -1,0 +1,5 @@
+    @Override
+    public Constructor<T> getConstructor() {
+      return constructor;
+    }
+

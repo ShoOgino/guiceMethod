@@ -12,8 +12,7 @@
       Annotation annotation) {
     int modifiers = method.getModifiers();
     /*if[AOP]*/
-    if (!skipFastClassGeneration && !Modifier.isPrivate(modifiers)
-        && !Modifier.isProtected(modifiers)) {
+    if (!skipFastClassGeneration && BytecodeGen.isFastClassable(method)) {
       try {
         // We use an index instead of FastMethod to save a stack frame.
         return new FastClassProviderMethod<T>(key,

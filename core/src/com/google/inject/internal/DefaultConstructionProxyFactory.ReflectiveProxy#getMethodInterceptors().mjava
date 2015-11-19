@@ -1,0 +1,8 @@
+    /*if[AOP]*/
+    @Override
+    public ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>>
+        getMethodInterceptors() {
+      return ImmutableMap.of();
+    }
+    /*end[AOP]*/
+
