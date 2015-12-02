@@ -6,8 +6,7 @@
       this.constructor = (Constructor<T>) injectionPoint.getMember();
       this.callbacks = callbacks;
       this.methodInterceptors = methodInterceptors;
-
-      this.fastClass = newFastClass(enhanced);
+      this.fastClass = newFastClassForMember(enhanced, constructor);
       this.constructorIndex = fastClass.getIndex(constructor.getParameterTypes());
     }
 

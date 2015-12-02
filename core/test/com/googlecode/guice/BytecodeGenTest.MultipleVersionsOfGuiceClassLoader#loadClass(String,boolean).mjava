@@ -1,0 +1,37 @@
+    /**
+     * Classic parent-delegating classloaders are meant to override findClass.
+     * However, non-delegating classloaders (as used in OSGi) instead override
+     * loadClass to provide support for "class-space" separation.
+     */
+    @Override
+    protected Class<?> loadClass(final String name, final boolean resolve)
+        throws ClassNotFoundException {
+
+      synchronized (this) {
+        // check our local cache to avoid duplicates
+        final Class<?> clazz = findLoadedClass(name);
+        if (clazz != null) {
+          return clazz;
+        }
+      }
+
+      if (name.startsWith("java.")
+          || name.startsWith("javax.")
+          || name.equals(LogCreator.class.getName())
+          || (!name.startsWith("com.google.inject.")
+              && !name.contains(".cglib.")
+              && !name.startsWith("com.googlecode.guice"))) {
+
+        // standard parent delegation
+        return super.loadClass(name, resolve);
+
+      } else {
+        // load a new copy of the class
+        final Class<?> clazz = findClass(name);
+        if (resolve) {
+          resolveClass(clazz);
+        }
+        return clazz;
+      }
+    }
+

@@ -1,4 +1,5 @@
     FastClassProviderMethod(Key<T> key,
+        net.sf.cglib.reflect.FastClass fc, 
         Method method,
         Object instance,
         ImmutableSet<Dependency<?>> dependencies,
@@ -12,8 +13,7 @@
           parameterProviders,
           scopeAnnotation,
           annotation);
-      // We need to generate a FastClass for the method's class, not the object's class.
-      this.fastClass = BytecodeGen.newFastClass(method.getDeclaringClass());
-      this.methodIndex = fastClass.getMethod(method).getIndex();
+      this.fastClass = fc;
+      this.methodIndex = fc.getMethod(method).getIndex();
     }
 
