@@ -10,8 +10,7 @@
       fail();
     } catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Tried proxying " + C2.class.getName() + " to support a circular dependency, ",
-          "but circular proxies are disabled.");
+          "Found a circular dependency involving " + C2.class.getName() + ", and circular dependencies are disabled.");
     }
   }
 

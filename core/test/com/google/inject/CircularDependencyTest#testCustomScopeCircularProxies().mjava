@@ -5,7 +5,7 @@
    * typically cache the results without checking to see if the result is a
    * proxy. This leads to caching a result that is unsuitable for reuse for
    * other parameters.
-   * 
+   *
    * This means that custom proxies have to do an
    *   {@code if(Scopes.isCircularProxy(..))}
    * in order to avoid exceptions.
@@ -20,7 +20,7 @@
         bind(J.class).to(JImpl.class);
       }
     });
-    
+
     // The reason this happens is because the Scope gets these requests, in order:
     // entry: Key<IImpl> (1 - from getInstance call)
     // entry: Key<HImpl>
@@ -28,13 +28,13 @@
     // result of 2nd Key<IImpl> - a com.google.inject.$Proxy, because it's a circular proxy
     // result of Key<HImpl> - an HImpl
     // entry: Key<JImpl>
-    // entry: Key<IImpl> (3 - another circular dependency, this time from JImpl)    
+    // entry: Key<IImpl> (3 - another circular dependency, this time from JImpl)
     // At this point, if the first Key<Impl> result was cached, our cache would have
     //  Key<IImpl> caching to an instanceof of I, but not an an instanceof of IImpl.
     // If returned this, it would result in cglib giving a ClassCastException or
     // java reflection giving an IllegalArgumentException when filling in parameters
     // for the constructor, because JImpl wants an IImpl, not an I.
-    
+
     try {
       injector.getInstance(IImpl.class);
       fail();
