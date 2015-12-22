@@ -1,0 +1,7 @@
+  public void testMessageHashCodeVariesWithSource() {
+    String innerMessage = "This is the message.";
+    Message firstMessage = new Message(1, innerMessage);
+    Message secondMessage = new Message(2, innerMessage);
+    assertFalse(firstMessage.hashCode() == secondMessage.hashCode());
+  }
+
