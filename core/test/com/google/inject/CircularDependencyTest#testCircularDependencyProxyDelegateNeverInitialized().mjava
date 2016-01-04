@@ -1,5 +1,6 @@
   public void testCircularDependencyProxyDelegateNeverInitialized() {
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         bind(F.class).to(RealF.class);
         bind(G.class).to(RealG.class);

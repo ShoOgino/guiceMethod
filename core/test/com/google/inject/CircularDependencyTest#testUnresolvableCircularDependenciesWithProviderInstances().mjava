@@ -1,7 +1,7 @@
   public void testUnresolvableCircularDependenciesWithProviderInstances() {
     try {
       Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {}        
+        @Override protected void configure() {}
         @Provides C c(D d) { return null; }
         @Provides D d(C c) { return null; }
       }).getInstance(C.class);

@@ -1,6 +1,0 @@
-  public Errors circularProxiesDisabled(Class<?> expectedType) {
-    return addMessage(
-        "Tried proxying %s to support a circular dependency, but circular proxies are disabled.",
-        expectedType);
-  }
-

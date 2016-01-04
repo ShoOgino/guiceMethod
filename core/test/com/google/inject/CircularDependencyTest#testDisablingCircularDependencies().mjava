@@ -1,19 +1,20 @@
-  public void testDisablingCircularProxies() {
+  public void testDisablingCircularDependencies() {
     Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
       protected void configure() {
         binder().disableCircularProxies();
         binder.bind(A.class).to(E.class);
         binder.bind(B.class).to(E.class);
       }
     });
-    
+
     try {
       injector.getInstance(A.class);
       fail("expected exception");
     } catch(ProvisionException expected) {
       assertContains(expected.getMessage(),
-          "Tried proxying " + A.class.getName() + " to support a circular dependency, but circular proxies are disabled", 
-          "Tried proxying " + B.class.getName() + " to support a circular dependency, but circular proxies are disabled");
+          "Found a circular dependency involving " + A.class.getName() + ", and circular dependencies are disabled.",
+          "Found a circular dependency involving " + B.class.getName() + ", and circular dependencies are disabled.");
     }
   }
 

@@ -1,0 +1,25 @@
+  public void testDisabledNonConstructorCircularDependencies() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {
+        binder().disableCircularProxies();
+      }
+    });
+
+    try {
+      injector.getInstance(K.class);
+      fail("expected exception");
+    } catch(ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "Found a circular dependency involving " + K.class.getName() + ", and circular dependencies are disabled.");
+    }
+
+    try {
+      injector.getInstance(L.class);
+      fail("expected exception");
+    } catch(ProvisionException expected) {
+      assertContains(expected.getMessage(),
+          "Found a circular dependency involving " + L.class.getName() + ", and circular dependencies are disabled.");
+    }
+  }
+

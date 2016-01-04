@@ -1,0 +1,3 @@
+    @Inject void inject(K k) {
+    }
+

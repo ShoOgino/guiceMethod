@@ -10,11 +10,11 @@
       protected void configure() {
         bind(Number.class).to(Integer.class);
       }
-      
-      @Provides @Singleton Integer provideInteger(List list) { 
+
+      @Provides @Singleton Integer provideInteger(List list) {
         return new Integer(2);
       }
-      
+
       @Provides List provideList(Integer integer) {
         return new ArrayList();
       }
@@ -25,7 +25,7 @@
     } catch(ProvisionException expected) {
       assertContains(expected.getMessage(),
           "Tried proxying " + Integer.class.getName() + " to support a circular dependency, ",
-          "but it is not an interface.");      
+          "but it is not an interface.");
     }
   }
 

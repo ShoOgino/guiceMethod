@@ -1,0 +1,6 @@
+  public Errors circularDependenciesDisabled(Class<?> expectedType) {
+    return addMessage(
+        "Found a circular dependency involving %s, and circular dependencies are disabled.",
+        expectedType);
+  }
+
