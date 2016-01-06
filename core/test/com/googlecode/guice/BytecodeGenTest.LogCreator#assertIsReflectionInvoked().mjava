@@ -1,4 +1,4 @@
-    void assertIsReflectionInvoked() {
+    void assertIsReflectionInvoked() throws Throwable {
       // Scan for a call to Constructor.newInstance, but stop if we see the test itself.
       for (StackTraceElement element : caller.getStackTrace()) {
         if (element.getClassName().equals(BytecodeGenTest.class.getName())) {
@@ -10,6 +10,6 @@
           return;
         }
       }
-      throw new AssertionError("Caller was not Constructor.newInstance", caller);
+      throw new AssertionError("Caller was not Constructor.newInstance").initCause(caller);
     }
 

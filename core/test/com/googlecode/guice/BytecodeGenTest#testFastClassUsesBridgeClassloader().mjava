@@ -1,6 +1,6 @@
   // This tests for a situation where a osgi bundle contains a version of guice.  When guice
   // generates a fast class it will use a bridge classloader
-  public void testFastClassUsesBridgeClassloader() throws Exception {
+  public void testFastClassUsesBridgeClassloader() throws Throwable {
     Injector injector = Guice.createInjector();
     // These classes are all in the same classloader as guice itself, so other than the private one
     // they can all be fast class invoked
