@@ -1,0 +1,7 @@
+    @Override
+    @SuppressWarnings("unchecked")
+    public T newInstance(Object... arguments) throws InvocationTargetException {
+      // Use this method instead of FastConstructor to save a stack frame
+      return (T) fc.newInstance(index, arguments);
+    }
+

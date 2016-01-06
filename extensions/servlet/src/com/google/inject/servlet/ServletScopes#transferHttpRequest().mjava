@@ -1,0 +1,8 @@
+  private static RequestScoper transferHttpRequest() {
+    final GuiceFilter.Context context = GuiceFilter.localContext.get();
+    if (context == null) {
+      throw new OutOfScopeException("Not in a request scope");
+    }
+    return context;
+  }
+

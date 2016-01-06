@@ -29,28 +29,11 @@
    *     thread, or if the request has completed.
    * 
    * @since 3.0
+   * @deprecated You probably want to use {@code transferRequest} instead
    */
-  public static <T> Callable<T> continueRequest(final Callable<T> callable,
-      final Map<Key<?>, Object> seedMap) {
-    Preconditions.checkArgument(null != seedMap,
-        "Seed map cannot be null, try passing in Collections.emptyMap() instead.");
-
-    // Snapshot the seed map and add all the instances to our continuing HTTP request.
-    final ContinuingHttpServletRequest continuingRequest =
-        new ContinuingHttpServletRequest(
-            GuiceFilter.getRequest(Key.get(HttpServletRequest.class)));
-    for (Map.Entry<Key<?>, Object> entry : seedMap.entrySet()) {
-      Object value = validateAndCanonicalizeValue(entry.getKey(), entry.getValue());
-      continuingRequest.setAttribute(entry.getKey().toString(), value);
-    }
-
-    return new Callable<T>() {
-      public T call() throws Exception {
-        checkScopingState(null == GuiceFilter.localContext.get(),
-            "Cannot continue request in the same thread as a HTTP request!");
-        return new GuiceFilter.Context(continuingRequest, continuingRequest, null)
-            .call(callable);
-      }
-    };
+  @Deprecated
+  public static <T> Callable<T> continueRequest(Callable<T> callable,
+      Map<Key<?>, Object> seedMap) {
+    return wrap(callable, continueRequest(seedMap));
   }
 

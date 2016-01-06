@@ -1,0 +1,5 @@
+    public Class<? extends LogCreator> loadLogCreatorType(Class<? extends LogCreator> cls)
+        throws ClassNotFoundException {
+      return loadClass(cls.getName()).asSubclass(LogCreator.class);
+    }
+

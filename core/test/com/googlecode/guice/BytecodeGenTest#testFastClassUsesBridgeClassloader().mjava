@@ -1,0 +1,25 @@
+  // This tests for a situation where a osgi bundle contains a version of guice.  When guice
+  // generates a fast class it will use a bridge classloader
+  public void testFastClassUsesBridgeClassloader() throws Throwable {
+    Injector injector = Guice.createInjector();
+    // These classes are all in the same classloader as guice itself, so other than the private one
+    // they can all be fast class invoked
+    injector.getInstance(PublicInject.class).assertIsFastClassInvoked();
+    injector.getInstance(ProtectedInject.class).assertIsFastClassInvoked();
+    injector.getInstance(PackagePrivateInject.class).assertIsFastClassInvoked();
+    injector.getInstance(PrivateInject.class).assertIsReflectionInvoked();
+
+    // This classloader will load the types in an loader with a different version of guice/cglib
+    // this prevents the use of fastclass for all but the public types (where the bridge
+    // classloader can be used).
+    MultipleVersionsOfGuiceClassLoader fakeLoader = new MultipleVersionsOfGuiceClassLoader();
+    injector.getInstance(fakeLoader.loadLogCreatorType(PublicInject.class))
+        .assertIsFastClassInvoked();
+    injector.getInstance(fakeLoader.loadLogCreatorType(ProtectedInject.class))
+        .assertIsReflectionInvoked();
+    injector.getInstance(fakeLoader.loadLogCreatorType(PackagePrivateInject.class))
+        .assertIsReflectionInvoked();
+    injector.getInstance(fakeLoader.loadLogCreatorType(PrivateInject.class))
+        .assertIsReflectionInvoked();
+  }
+

@@ -1,21 +1,4 @@
-    public TestVisibilityClassLoader(boolean hideInternals) {
-      super(new URL[0]);
-
-      this.hideInternals = hideInternals;
-
-      final String[] classpath = System.getProperty("java.class.path").split(File.pathSeparator);
-      for (final String element : classpath) {
-        try {
-          // is it a remote/local URL?
-          addURL(new URL(element));
-        } catch (final MalformedURLException e1) {
-          try {
-            // nope - perhaps it's a filename?
-            addURL(new File(element).toURI().toURL());
-          } catch (final MalformedURLException e2) {
-            throw new RuntimeException(e1);
-          }
-        }
-      }
+    TestVisibilityClassLoader(boolean hideInternals) {
+      this((URLClassLoader) TestVisibilityClassLoader.class.getClassLoader(), hideInternals);
     }
 

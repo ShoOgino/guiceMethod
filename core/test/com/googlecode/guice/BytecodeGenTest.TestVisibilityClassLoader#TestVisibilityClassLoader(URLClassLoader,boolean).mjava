@@ -1,0 +1,5 @@
+    TestVisibilityClassLoader(URLClassLoader classloader, boolean hideInternals) {
+      super(classloader.getURLs(), classloader);
+      this.hideInternals = hideInternals;
+    }
+

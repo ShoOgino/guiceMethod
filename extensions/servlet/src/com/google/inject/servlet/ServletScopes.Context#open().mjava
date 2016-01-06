@@ -1,0 +1,12 @@
+    @Override public CloseableScope open() {
+      lock.lock();
+      final Context previous = requestScopeContext.get();
+      requestScopeContext.set(this);
+      return new CloseableScope() {
+        @Override public void close() {
+          requestScopeContext.set(previous);
+          lock.unlock();
+        }
+      };
+    }
+

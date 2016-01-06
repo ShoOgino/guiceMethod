@@ -1,0 +1,31 @@
+  public void testTransferNonHttpRequest_concurrentUseBlocks_closeable() throws Exception {
+    Callable<Boolean> callable = new Callable<Boolean>() {
+      @Override public Boolean call() throws Exception {
+        final RequestScoper scoper = ServletScopes.transferRequest();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        try {
+          Future<Boolean> future = executor.submit(new Callable<Boolean>() {
+            @Override public Boolean call() {
+              RequestScoper.CloseableScope scope = scoper.open();
+              try {
+                return false;
+              } finally {
+                scope.close();
+              }
+            }
+          });
+          try {
+            return future.get(100, TimeUnit.MILLISECONDS);
+          } catch (TimeoutException e) {
+            return true;
+          }
+        } finally {
+          executor.shutdownNow();
+        }
+      }
+    };
+
+    ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
+    assertTrue(ServletScopes.scopeRequest(callable, seedMap).call());
+  }
+

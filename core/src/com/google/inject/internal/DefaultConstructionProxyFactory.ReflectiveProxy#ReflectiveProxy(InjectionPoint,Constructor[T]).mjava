@@ -1,0 +1,9 @@
+    ReflectiveProxy(InjectionPoint injectionPoint, Constructor<T> constructor) {
+      if (!Modifier.isPublic(constructor.getDeclaringClass().getModifiers())
+          || !Modifier.isPublic(constructor.getModifiers())) {
+        constructor.setAccessible(true);
+      }
+      this.injectionPoint = injectionPoint;
+      this.constructor = constructor;
+    }
+

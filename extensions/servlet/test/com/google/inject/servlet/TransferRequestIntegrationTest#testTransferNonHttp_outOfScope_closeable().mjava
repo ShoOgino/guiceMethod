@@ -1,0 +1,7 @@
+  public void testTransferNonHttp_outOfScope_closeable() {
+    try {
+      ServletScopes.transferRequest();
+      fail();
+    } catch (OutOfScopeException expected) {}
+  }
+

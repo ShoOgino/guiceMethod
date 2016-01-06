@@ -1,0 +1,26 @@
+  /**
+   * Returns true if the member can be called by a fast class generated in a different classloader.
+   */
+  private static boolean isPubliclyCallable(Member member) {
+    if (!Modifier.isPublic(member.getModifiers())) {
+      return false;
+    }
+    Class<?>[] parameterTypes;
+    if (member instanceof Constructor) {
+      parameterTypes = ((Constructor) member).getParameterTypes();
+    } else {
+      Method method = (Method) member;
+      if (!Modifier.isPublic(method.getReturnType().getModifiers())) {
+        return false;
+      }
+      parameterTypes = method.getParameterTypes();
+    }
+
+    for (Class<?> type : parameterTypes) {
+      if (!Modifier.isPublic(type.getModifiers())) {
+        return false;
+      }
+    }
+    return true;
+  }
+
