@@ -1,4 +1,25 @@
   public void testProxyClassUnloading() {
-    GcFinalization.awaitClear(getWeakReference());
+    Object testObject = Guice.createInjector(interceptorModule, testModule)
+        .getInstance(proxyTestClass);
+    assertNotNull(testObject.getClass().getClassLoader());
+    assertNotSame(testObject.getClass().getClassLoader(), systemClassLoader);
+
+    // take a weak reference to the generated proxy class
+    WeakReference<Class<?>> clazzRef = new WeakReference<Class<?>>(testObject.getClass());
+
+    assertNotNull(clazzRef.get());
+
+    // null the proxy
+    testObject = null;
+
+    /*
+     * this should be enough to queue the weak reference
+     * unless something is holding onto it accidentally.
+     */
+    GcFinalization.awaitClear(clazzRef);
+
+    // This test could be somewhat flaky when the GC isn't working.
+    // If it fails, run the test again to make sure it's failing reliably.
+    assertNull("Proxy class was not unloaded.", clazzRef.get());
   }
 
