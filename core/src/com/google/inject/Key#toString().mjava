@@ -1,4 +1,11 @@
   @Override public final String toString() {
-    return toStringSupplier.get();
+    // Note: to not introduce dangerous data races the field should only be read once in this
+    // method.
+    String local = toString;
+    if (local == null) {
+      local = "Key[type=" + typeLiteral + ", annotation=" + annotationStrategy + "]";
+      toString = local;
+    }
+    return local;
   }
 

@@ -16,6 +16,5 @@
     this.typeLiteral = MoreTypes.canonicalizeForKey(
         (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass()));
     this.hashCode = computeHashCode();
-    this.toStringSupplier = createToStringSupplier();
   }
 
