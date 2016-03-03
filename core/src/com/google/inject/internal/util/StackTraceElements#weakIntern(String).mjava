@@ -1,9 +1,9 @@
   private static String weakIntern(String s) {
-    String cached = (String) cache.get(s);
+    String cached = stringCache.get(s);
     if (cached != null) {
       return cached;
     }
-    cache.put(s, s);
-    return s;  
+    stringCache.put(s, s);
+    return s;
   }
 
