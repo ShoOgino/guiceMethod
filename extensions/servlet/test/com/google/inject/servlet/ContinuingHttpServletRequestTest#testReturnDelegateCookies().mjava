@@ -20,7 +20,7 @@
 
     try {
       assertCookieArraysEqual(cookies, continuingRequest.getCookies());
-      fail();
+      throw new Error();
     } catch (AssertionFailedError e) {
       // Expected.
     }
