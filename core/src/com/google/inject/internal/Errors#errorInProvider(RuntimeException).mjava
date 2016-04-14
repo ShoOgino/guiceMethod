@@ -1,5 +1,0 @@
-  public Errors errorInProvider(RuntimeException runtimeException) {
-    Throwable unwrapped = unwrap(runtimeException);
-    return errorInUserCode(unwrapped, "Error in custom provider, %s", unwrapped);
-  }
-

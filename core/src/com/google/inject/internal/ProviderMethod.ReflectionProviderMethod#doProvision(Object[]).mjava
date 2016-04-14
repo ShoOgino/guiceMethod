@@ -1,5 +1,6 @@
-    @Override Object doProvision(Object[] parameters) throws IllegalAccessException,
-        InvocationTargetException {
-      return method.invoke(instance, parameters);
+    @SuppressWarnings("unchecked")
+    @Override
+    T doProvision(Object[] parameters) throws IllegalAccessException, InvocationTargetException {
+      return (T) method.invoke(instance, parameters);
     }
 

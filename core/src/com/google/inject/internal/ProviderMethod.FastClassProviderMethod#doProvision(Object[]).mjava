@@ -1,5 +1,7 @@
-    @Override public Object doProvision(Object[] parameters)
+    @SuppressWarnings("unchecked")
+    @Override
+    public T doProvision(Object[] parameters)
         throws IllegalAccessException, InvocationTargetException {
-      return fastClass.invoke(methodIndex, instance, parameters);
+      return (T) fastClass.invoke(methodIndex, instance, parameters);
     }
 

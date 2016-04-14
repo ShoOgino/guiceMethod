@@ -1,4 +1,4 @@
   /** Extension point for our subclasses to implement the provisioning strategy. */
-  abstract Object doProvision(Object[] parameters)
+  abstract T doProvision(Object[] parameters)
       throws IllegalAccessException, InvocationTargetException;
 

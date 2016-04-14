@@ -1,4 +1,4 @@
-  private Throwable unwrap(RuntimeException runtimeException) {
+  private Throwable unwrap(Throwable runtimeException) {
    if(runtimeException instanceof Exceptions.UnhandledCheckedUserException) {
      return runtimeException.getCause();
    } else {
