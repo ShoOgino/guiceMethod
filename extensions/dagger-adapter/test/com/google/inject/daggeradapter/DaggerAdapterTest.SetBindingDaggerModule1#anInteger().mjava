@@ -1,4 +1,6 @@
-    @dagger.Provides(type=SET) Integer anInteger() {
+    @dagger.Provides
+    @IntoSet
+    Integer anInteger() {
       return 5;
     }
 
