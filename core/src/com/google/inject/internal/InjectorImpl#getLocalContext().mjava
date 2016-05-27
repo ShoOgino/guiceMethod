@@ -1,0 +1,5 @@
+  /** Only to be called by the {@link SingletonScope} provider. */
+  InternalContext getLocalContext() {
+    return (InternalContext) localContext.get()[0];
+  }
+

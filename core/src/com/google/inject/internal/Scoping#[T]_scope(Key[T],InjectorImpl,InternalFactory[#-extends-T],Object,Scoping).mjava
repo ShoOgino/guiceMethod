@@ -8,6 +8,8 @@
 
     Scope scope = scoping.getScopeInstance();
 
+    // SingletonScope needs access to the injector's thread-specific InternalContext
+    SingletonScope.currentInjector.set(new WeakReference<InjectorImpl>(injector));
     Provider<T> scoped
         = scope.scope(key, new ProviderToInternalFactoryAdapter<T>(injector, creator));
     return new InternalFactoryToProviderAdapter<T>(scoped, source);
