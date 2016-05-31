@@ -1,11 +1,12 @@
+  /** Returns a field value to bind, throwing for non-{@code @Nullable} fields with null values. */
+  @Nullable
   private Object getFieldValue(final BoundFieldInfo fieldInfo) {
     Object fieldValue = fieldInfo.getValue();
-    if (fieldValue == null) {
+    if (fieldValue == null && !Nullability.allowsNull(fieldInfo.field.getAnnotations())) {
       throwBoundFieldException(
           fieldInfo.field,
-          "Binding to null values is not allowed. "
-              + "Use Providers.of(null) if this is your intended behavior.",
-              fieldInfo.field.getName());
+          "Binding to null values is only allowed for fields that are annotated @Nullable.",
+          fieldInfo.field.getName());
     }
     return fieldValue;
   }

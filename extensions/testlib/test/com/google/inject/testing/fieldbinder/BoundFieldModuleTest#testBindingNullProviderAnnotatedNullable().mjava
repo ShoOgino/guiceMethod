@@ -1,6 +1,6 @@
-  public void testBindingNullProvider() {
+  public void testBindingNullProviderAnnotatedNullable() {
     Object instance = new Object() {
-      @Bind private Provider<Integer> anIntProvider = null;
+      @Bind @Nullable private Provider<Integer> anIntProvider = null;
     };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
