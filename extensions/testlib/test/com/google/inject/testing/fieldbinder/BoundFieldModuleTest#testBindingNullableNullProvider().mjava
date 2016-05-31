@@ -1,4 +1,4 @@
-  public void testBindingNullProviderAnnotatedNullable() {
+  public void testBindingNullableNullProvider() {
     Object instance = new Object() {
       @Bind @Nullable private Provider<Integer> anIntProvider = null;
     };
