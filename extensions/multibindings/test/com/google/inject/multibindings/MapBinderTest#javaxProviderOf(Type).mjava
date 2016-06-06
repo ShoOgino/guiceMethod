@@ -1,4 +1,4 @@
   private Type javaxProviderOf(Type type) {
-    return Types.newParameterizedType(javax.inject.Provider.class, type);
+    return Types.javaxProviderOf(type);
   }
 

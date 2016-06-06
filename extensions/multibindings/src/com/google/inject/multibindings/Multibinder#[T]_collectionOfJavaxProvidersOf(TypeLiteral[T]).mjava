@@ -3,7 +3,7 @@
       TypeLiteral<T> elementType) {
     Type providerType =
         Types.newParameterizedType(javax.inject.Provider.class, elementType.getType());
-    Type type = Types.newParameterizedType(Collection.class, providerType);
+    Type type = Types.collectionOf(providerType);
     return (TypeLiteral<Collection<javax.inject.Provider<T>>>) TypeLiteral.get(type);
   }
 

@@ -6,7 +6,11 @@
       this.providerMapKey = mapKey.ofType(mapOfProviderOf(keyType, valueType));
       this.javaxProviderMapKey = mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType));
       this.multimapKey = mapKey.ofType(mapOf(keyType, setOf(valueType)));
-      this.providerMultimapKey = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+      this.providerSetMultimapKey = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+      this.javaxProviderSetMultimapKey = mapKey.ofType(mapOfSetOfJavaxProviderOf(keyType, valueType));
+      this.providerCollectionMultimapKey = mapKey.ofType(mapOfCollectionOfProviderOf(keyType, valueType));
+      this.javaxProviderCollectionMultimapKey = mapKey.ofType(mapOfCollectionOfJavaxProviderOf(keyType, valueType));
+      this.entrySetJavaxProviderKey = mapKey.ofType(setOfEntryOfJavaxProviderOf(keyType, valueType));
       this.entrySetBinder = (RealMultibinder<Entry<K, Provider<V>>>) entrySetBinder;
       this.binder = binder;
       this.duplicateKeyErrorMessages = Maps.newHashMap();
