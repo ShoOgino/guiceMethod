@@ -1,8 +1,8 @@
+  // @Nullable
   /**
    * Returns the field value to bind, throwing for non-{@code @Nullable} fields with null values,
    * and for null "transparent providers".
    */
-  @Nullable
   private Object getFieldValue(final BoundFieldInfo fieldInfo) {
     Object fieldValue = fieldInfo.getValue();
     if (fieldValue == null && !fieldInfo.allowsNull()) {
