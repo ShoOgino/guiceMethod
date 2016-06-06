@@ -13,7 +13,7 @@
     if (modules.size() <= 1) {
       return "";
     }
-
+    
     // Ideally we'd do:
     //    return Joiner.on(" -> ")
     //        .appendTo(new StringBuilder(" (via modules: "), Lists.reverse(modules))
@@ -24,7 +24,7 @@
       builder.append(modules.get(i));
       if (i != 0) {
         builder.append(" -> ");
-      }
+      }      
     }
     builder.append(")");
     return builder.toString();

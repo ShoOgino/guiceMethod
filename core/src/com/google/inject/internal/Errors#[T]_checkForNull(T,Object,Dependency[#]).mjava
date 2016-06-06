@@ -4,7 +4,7 @@
    */
   public <T> T checkForNull(T value, Object source, Dependency<?> dependency)
       throws ErrorsException {
-    if (value != null || dependency.isNullable() ) {
+    if (value != null || dependency.isNullable()) {
       return value;
     }
 

@@ -2,7 +2,7 @@
     ElementSource source = null;
     if (o instanceof ElementSource) {
       source = (ElementSource)o;
-      o = source.getDeclaringSource();
+      o = source.getDeclaringSource(); 
     }
     return convert(o, source);
   }
