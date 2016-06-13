@@ -15,8 +15,12 @@
             || key.equals(providerMapKey)
             || key.equals(javaxProviderMapKey)
             || key.equals(multimapKey)
-            || key.equals(providerMultimapKey)
+            || key.equals(providerSetMultimapKey)
+            || key.equals(javaxProviderSetMultimapKey)
+            || key.equals(providerCollectionMultimapKey)
+            || key.equals(javaxProviderCollectionMultimapKey)
             || key.equals(entrySetBinder.getSetKey())
+            || key.equals(entrySetJavaxProviderKey)
             || matchesValueKey(key);
         }
     }

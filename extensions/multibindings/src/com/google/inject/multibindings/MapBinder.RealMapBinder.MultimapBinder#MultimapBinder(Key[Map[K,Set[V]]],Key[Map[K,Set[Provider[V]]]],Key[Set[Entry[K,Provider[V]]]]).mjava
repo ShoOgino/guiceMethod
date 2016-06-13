@@ -1,9 +1,0 @@
-      public MultimapBinder(
-          Key<Map<K, Set<V>>> multimapKey,
-          Key<Map<K, Set<Provider<V>>>> providerMultimapKey,
-          Key<Set<Entry<K,Provider<V>>>> entrySetKey) {
-        this.multimapKey = multimapKey;
-        this.providerMultimapKey = providerMultimapKey;
-        this.entrySetKey = entrySetKey;
-      }
-

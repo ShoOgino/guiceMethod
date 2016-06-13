@@ -1,0 +1,22 @@
+  public void testFieldBoundAsProvider_lazy() {
+    LazyProviderClass asProvider = new LazyProviderClass();
+    Provider<Integer> provider =
+        Guice.createInjector(BoundFieldModule.of(asProvider)).getProvider(Integer.class);
+    assertNull(provider.get());
+    asProvider.foo = Providers.of(1);
+    assertEquals(1, provider.get().intValue());
+    asProvider.foo =
+        new Provider<Integer>() {
+          @Override
+          public Integer get() {
+            throw new RuntimeException("boom");
+          }
+        };
+    try {
+      provider.get();
+      fail();
+    } catch (ProvisionException e) {
+      assertContains(e.getMessage(), "boom");
+    }
+  }
+

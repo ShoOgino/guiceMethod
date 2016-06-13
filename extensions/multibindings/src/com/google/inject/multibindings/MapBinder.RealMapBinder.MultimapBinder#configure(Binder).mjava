@@ -13,5 +13,7 @@
             binder.getProvider(providerMultimapKey);
         binder.bind(multimapKey).toProvider(
             new RealMultimapProvider(dependencies, multimapProvider));
+        
+        linkKeys(binder);
       }
 

@@ -6,9 +6,7 @@
     }
 
     try {
-      @SuppressWarnings({ "unchecked", "UnnecessaryLocalVariable" })
-      T result = (T) doProvision(parameters);
-      return result;
+      return doProvision(parameters);
     } catch (IllegalAccessException e) {
       throw new AssertionError(e);
     } catch (InvocationTargetException e) {

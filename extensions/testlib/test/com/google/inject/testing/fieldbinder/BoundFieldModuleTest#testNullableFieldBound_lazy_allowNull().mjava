@@ -1,0 +1,8 @@
+  public void testNullableFieldBound_lazy_allowNull() {
+    LazyClassNullable asProvider = new LazyClassNullable();
+    Injector injector = Guice.createInjector(BoundFieldModule.of(asProvider));
+    assertEquals(1, injector.getInstance(Integer.class).intValue());
+    asProvider.foo = null;
+    assertNull(injector.getInstance(Integer.class));
+  }
+

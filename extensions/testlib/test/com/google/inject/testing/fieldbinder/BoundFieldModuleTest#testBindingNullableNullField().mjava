@@ -1,0 +1,9 @@
+  public void testBindingNullableNullField() {
+    Object instance = new Object() {
+      @Bind @Nullable private Integer anInt = null;
+    };
+
+    Injector injector = Guice.createInjector(BoundFieldModule.of(instance));
+    assertNull(injector.getInstance(Integer.class));
+  }
+

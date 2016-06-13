@@ -1,0 +1,7 @@
+  @SuppressWarnings("unchecked") // a provider map <K, Set<V>> is safely a Map<K, Set<Provider<V>>>
+  static <K, V> TypeLiteral<Map<K, Collection<Provider<V>>>> mapOfCollectionOfProviderOf(
+      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+    return (TypeLiteral<Map<K, Collection<Provider<V>>>>) TypeLiteral.get(
+        Types.mapOf(keyType.getType(), Types.collectionOf(Types.providerOf(valueType.getType()))));
+  }
+

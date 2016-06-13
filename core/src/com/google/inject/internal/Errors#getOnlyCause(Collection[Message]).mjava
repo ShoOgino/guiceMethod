@@ -10,7 +10,7 @@
         continue;
       }
 
-      if (onlyCause != null
+      if (onlyCause != null 
           && !ThrowableEquivalence.INSTANCE.equivalent(onlyCause, messageCause)) {
         return null;
       }

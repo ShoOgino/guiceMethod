@@ -1,0 +1,16 @@
+  public void testBindingNonNullableNullField() {
+    Object instance = new Object() {
+      @Bind private Integer anInt = null;
+    };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertContains(e.getMessage(),
+          "Binding to null values is only allowed for fields that are annotated @Nullable.");
+    }
+  }
+

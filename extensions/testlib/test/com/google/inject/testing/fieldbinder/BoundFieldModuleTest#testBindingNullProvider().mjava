@@ -10,8 +10,8 @@
       fail();
     } catch (CreationException e) {
       assertContains(e.getMessage(),
-          "Binding to null values is not allowed. "
-          + "Use Providers.of(null) if this is your intended behavior.");
+          "Binding to null is not allowed. Use Providers.of(null) if this is your intended "
+              + "behavior.");
     }
   }
 

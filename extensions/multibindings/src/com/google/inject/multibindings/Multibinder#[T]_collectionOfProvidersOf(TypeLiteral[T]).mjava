@@ -2,7 +2,7 @@
   static <T> TypeLiteral<Collection<Provider<T>>> collectionOfProvidersOf(
       TypeLiteral<T> elementType) {
     Type providerType = Types.providerOf(elementType.getType());
-    Type type = Types.newParameterizedType(Collection.class, providerType);
+    Type type = Types.collectionOf(providerType);
     return (TypeLiteral<Collection<Provider<T>>>) TypeLiteral.get(type);
   }
 
