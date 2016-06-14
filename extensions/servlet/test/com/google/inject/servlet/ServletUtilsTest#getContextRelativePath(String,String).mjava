@@ -1,0 +1,10 @@
+  private String getContextRelativePath(String contextPath, String requestPath) {
+    HttpServletRequest mock = createMock(HttpServletRequest.class);
+    expect(mock.getContextPath()).andReturn(contextPath);
+    expect(mock.getRequestURI()).andReturn(requestPath);
+    replay(mock);
+    String contextRelativePath = ServletUtils.getContextRelativePath(mock);
+    verify(mock);
+    return contextRelativePath;
+  }
+

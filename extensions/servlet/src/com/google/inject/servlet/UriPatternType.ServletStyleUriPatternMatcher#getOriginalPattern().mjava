@@ -1,0 +1,5 @@
+    @Override
+    public String getOriginalPattern() {
+      return originalPattern;
+    }
+

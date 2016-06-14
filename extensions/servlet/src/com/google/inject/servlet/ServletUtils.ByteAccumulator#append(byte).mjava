@@ -1,0 +1,5 @@
+    void append(byte b) {
+      ensureCapacity(length + 1);
+      bytes[length++] = b;
+    }
+

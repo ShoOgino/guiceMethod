@@ -22,9 +22,12 @@
     replay(injector, binding, request);
 
     String pattern = "/*";
-    final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET, pattern),
-        new HashMap<String, String>(), null);
+    final FilterDefinition filterDef =
+        new FilterDefinition(
+            Key.get(Filter.class),
+            UriPatternType.get(UriPatternType.SERVLET, pattern),
+            new HashMap<String, String>(),
+            null);
     //should fire on mockfilter now
     filterDef.init(createMock(ServletContext.class), injector, Sets.<Filter>newIdentityHashSet());
     assertTrue(filterDef.getFilter() instanceof MockFilter);

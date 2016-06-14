@@ -1,8 +1,11 @@
   public void testGetFilterIfMatching() throws ServletException {
     String pattern = "/*";
-    final FilterDefinition filterDef = new FilterDefinition(pattern, Key.get(Filter.class),
-        UriPatternType.get(UriPatternType.SERVLET, pattern),
-        new HashMap<String, String>(), null);
+    final FilterDefinition filterDef =
+        new FilterDefinition(
+            Key.get(Filter.class),
+            UriPatternType.get(UriPatternType.SERVLET, pattern),
+            new HashMap<String, String>(),
+            null);
     HttpServletRequest servletRequest = createMock(HttpServletRequest.class);
     ServletContext servletContext = createMock(ServletContext.class);
     Injector injector = createMock(Injector.class);

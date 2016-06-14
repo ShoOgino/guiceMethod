@@ -4,13 +4,11 @@
       if(servletInstance != null) {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new InstanceServletBindingImpl(initParams,
-                pattern,
                 servletInstance,
                 patternMatcher));
       } else {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new LinkedServletBindingImpl(initParams,
-                pattern,
                 servletKey,
                 patternMatcher));
       }

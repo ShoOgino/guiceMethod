@@ -1,0 +1,5 @@
+    ByteAccumulator(int capacity, Charset encoding) {
+      this.bytes = new byte[Math.min(16, capacity)];
+      this.encoding = encoding;
+    }
+

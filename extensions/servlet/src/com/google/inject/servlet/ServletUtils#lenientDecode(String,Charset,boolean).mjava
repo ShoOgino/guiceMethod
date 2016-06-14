@@ -1,0 +1,82 @@
+  /**
+   * Percent-decodes a US-ASCII string into a Unicode string. The specified
+   * encoding is used to determine what characters are represented by any
+   * consecutive sequences of the form "%<i>XX</i>". This is the lenient
+   * kind of decoding that will simply ignore and copy as-is any "%XX"
+   * sequence that is invalid (for example, "%HH").
+   *
+   * @param string a percent-encoded US-ASCII string
+   * @param encoding a character encoding
+   * @param decodePlus boolean to indicate whether to decode '+' as ' '
+   * @return a Unicode string
+   */
+  private static String lenientDecode(String string, Charset encoding, boolean decodePlus) {
+
+    checkNotNull(string);
+    checkNotNull(encoding);
+
+    if (decodePlus) {
+      string = string.replace('+', ' ');
+    }
+
+    int firstPercentPos = string.indexOf('%');
+
+    if (firstPercentPos < 0) {
+      return string;
+    }
+
+    ByteAccumulator accumulator =
+        new ByteAccumulator(string.length(), encoding);
+    StringBuilder builder = new StringBuilder(string.length());
+
+    if (firstPercentPos > 0) {
+      builder.append(string, 0, firstPercentPos);
+    }
+
+    for (int srcPos = firstPercentPos; srcPos < string.length(); srcPos++) {
+
+      char c = string.charAt(srcPos);
+
+      if (c < 0x80) {  // ASCII
+        boolean processed = false;
+
+        if (c == '%' && string.length() >= srcPos + 3) {
+          String hex = string.substring(srcPos + 1, srcPos + 3);
+
+          try {
+            int encoded = Integer.parseInt(hex, 16);
+
+            if (encoded >= 0) {
+              accumulator.append((byte) encoded);
+              srcPos += 2;
+              processed = true;
+            }
+          } catch (NumberFormatException ignore) {
+            // Expected case (badly formatted % group)
+          }
+        }
+
+        if (!processed) {
+          if (accumulator.isEmpty()) {
+            // We're not accumulating elements of a multibyte encoded
+            // char, so just toss it right into the result string.
+
+            builder.append(c);
+          } else {
+            accumulator.append((byte) c);
+          }
+        }
+      } else {  // Non-ASCII
+        // A non-ASCII char marks the end of a multi-char encoding sequence,
+        // if one is in progress.
+
+        accumulator.dumpTo(builder);
+        builder.append(c);
+      }
+    }
+
+    accumulator.dumpTo(builder);
+
+    return builder.toString();
+  }
+

@@ -1,0 +1,7 @@
+  LinkedServletBindingImpl(
+      Map<String, String> initParams,
+      Key<? extends HttpServlet> target,
+      UriPatternMatcher patternMatcher) {
+    super(initParams, target, patternMatcher);
+  }
+

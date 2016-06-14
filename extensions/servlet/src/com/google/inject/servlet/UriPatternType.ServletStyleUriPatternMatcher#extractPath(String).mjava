@@ -2,7 +2,7 @@
       if (patternKind == Kind.PREFIX) {
         return null;
       } else if (patternKind == Kind.SUFFIX) {
-        String extract = pattern;
+        String extract = literal;
 
         //trim the trailing '/'
         if (extract.endsWith("/")) {

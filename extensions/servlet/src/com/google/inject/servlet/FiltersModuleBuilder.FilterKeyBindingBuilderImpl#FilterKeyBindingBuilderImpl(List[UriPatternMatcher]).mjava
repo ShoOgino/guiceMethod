@@ -1,0 +1,4 @@
+    private FilterKeyBindingBuilderImpl(List<UriPatternMatcher> uriPatterns) {
+      this.uriPatterns = uriPatterns;
+    }
+

@@ -5,12 +5,12 @@
 
       uri = getUri(uri);
       if (patternKind == Kind.PREFIX) {
-        return uri.endsWith(pattern);
+        return uri.endsWith(literal);
       } else if (patternKind == Kind.SUFFIX) {
-        return uri.startsWith(pattern);
+        return uri.startsWith(literal);
       }
 
-      //else treat as a literal
-      return pattern.equals(uri);
+      //else we need a complete match
+      return literal.equals(uri);
     }
 

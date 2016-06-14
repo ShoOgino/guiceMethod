@@ -1,10 +1,16 @@
   public void testGetContextRelativePath() {
-    HttpServletRequest servletRequest = createMock(HttpServletRequest.class);
-    expect(servletRequest.getContextPath()).andReturn("/a_context_path");
-    expect(servletRequest.getRequestURI()).andReturn("/a_context_path/test.html");
-    replay(servletRequest);
-    String path = ServletUtils.getContextRelativePath(servletRequest);
-    assertEquals("/test.html", path);
-    verify(servletRequest);
+    assertEquals("/test.html", 
+        getContextRelativePath("/a_context_path", "/a_context_path/test.html"));
+    assertEquals("/test.html", getContextRelativePath("", "/test.html"));
+    assertEquals("/test.html", getContextRelativePath("", "/foo/../test.html"));
+    assertEquals("/test.html", getContextRelativePath("", "/././foo/../test.html"));
+    assertEquals("/test.html", getContextRelativePath("", "/foo/../../../../test.html"));
+    assertEquals("/test.html", getContextRelativePath("", "/foo/%2E%2E/test.html"));
+    // %2E == '.'
+    assertEquals("/test.html", getContextRelativePath("", "/foo/%2E%2E/test.html"));
+    // %2F == '/'
+    assertEquals("/foo/%2F/test.html", getContextRelativePath("", "/foo/%2F/test.html"));
+    // %66 == 'f'
+    assertEquals("/foo.html", getContextRelativePath("", "/%66oo.html"));
   }
 
