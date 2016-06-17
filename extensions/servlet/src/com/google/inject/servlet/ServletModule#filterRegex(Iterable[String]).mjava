@@ -1,6 +1,6 @@
   /**
    * @param regexes Any Java-style regular expressions.
-   * @since 5.0
+   * @since 4.1
    */
   protected final FilterKeyBindingBuilder filterRegex(Iterable<String> regexes) {
     return getFiltersModuleBuilder().filterRegex(ImmutableList.copyOf(regexes));

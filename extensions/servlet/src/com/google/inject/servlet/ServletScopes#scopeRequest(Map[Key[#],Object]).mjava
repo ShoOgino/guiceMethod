@@ -12,7 +12,7 @@
    *     request scope with.  To seed a key with null, use {@code null} as
    *     the value.
    * @return an object that when opened will initiate the request scope
-   * @since 5.0
+   * @since 4.1
    */
   public static RequestScoper scopeRequest(Map<Key<?>, Object> seedMap) {
     Preconditions.checkArgument(null != seedMap,
