@@ -1,0 +1,9 @@
+  private static String formatParameter(Dependency<?> dependency) {
+    int ordinal = dependency.getParameterIndex() + 1;
+    return String.format(
+        "the %s%s parameter of %s",
+        ordinal,
+        getOrdinalSuffix(ordinal),
+        StackTraceElements.forMember(dependency.getInjectionPoint().getMember()));
+  }
+

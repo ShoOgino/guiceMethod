@@ -6,7 +6,8 @@
     catch (ProvisionException expected) {
       assertContains(expected.getMessage(),
           "null returned by binding at " + getClass().getName(),
-          " but " + FooField.class.getName() + ".foo is not @Nullable");
+          " but " + FooField.class.getName() + ".foo",
+          " is not @Nullable");
     }
   }
 

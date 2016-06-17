@@ -15,14 +15,11 @@
       injector.getInstance(Integer.class); // no exception, but assert it does log.
       LogRecord record = Iterables.getOnlyElement(logRecords);
       assertEquals(
-          "Guice injected null into parameter {0} of {1} (a {2}), please mark it @Nullable."
+          "Guice injected null into {0} (a {1}), please mark it @Nullable."
               + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
               + " error.",
           record.getMessage());
-      assertEquals(dependency.getParameterIndex(), record.getParameters()[0]);
-      assertEquals(Errors.convert(dependency.getInjectionPoint().getMember()),
-          record.getParameters()[1]);
-      assertEquals(Errors.convert(dependency.getKey()), record.getParameters()[2]);
+      assertEquals(Errors.convert(dependency.getKey()), record.getParameters()[1]);
     } finally {
       Logger.getLogger(Guice.class.getName()).removeHandler(fakeHandler);
     }

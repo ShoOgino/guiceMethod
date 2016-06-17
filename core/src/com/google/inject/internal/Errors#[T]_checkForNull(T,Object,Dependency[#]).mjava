@@ -22,25 +22,23 @@
             if (!warnedDependencies.add(dependency)) {
               return value;
             }
-            logger.log(Level.WARNING,
-                "Guice injected null into parameter {0} of {1} (a {2}), please mark it @Nullable."
+            logger.log(
+                Level.WARNING,
+                "Guice injected null into {0} (a {1}), please mark it @Nullable."
                     + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
                     + " error.",
-                new Object[] {
-                    dependency.getParameterIndex(),
-                    convert(dependency.getInjectionPoint().getMember()),
-                    convert(dependency.getKey())});
+                new Object[] {formatParameter(dependency), convert(dependency.getKey())});
             return null; // log & exit.
         }
       }
     }
 
-    int parameterIndex = dependency.getParameterIndex();
-    String parameterName = (parameterIndex != -1)
-        ? "parameter " + parameterIndex + " of "
-        : "";
-    addMessage("null returned by binding at %s%n but %s%s is not @Nullable",
-        source, parameterName, dependency.getInjectionPoint().getMember());
+    Object formattedDependency =
+        (dependency.getParameterIndex() != -1)
+            ? formatParameter(dependency)
+            : StackTraceElements.forMember(dependency.getInjectionPoint().getMember());
+    addMessage(
+        "null returned by binding at %s%n but %s is not @Nullable", source, formattedDependency);
 
     throw toException();
   }
