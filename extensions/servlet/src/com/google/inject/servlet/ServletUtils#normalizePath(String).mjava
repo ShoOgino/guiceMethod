@@ -1,0 +1,38 @@
+  /**
+   * Normalizes a path by unescaping all safe, percent encoded characters.
+   */
+  static String normalizePath(String path) {
+    StringBuilder sb = new StringBuilder(path.length());
+    int queryStart = path.indexOf('?');
+    String query = null;
+    if (queryStart != -1) {
+      query = path.substring(queryStart);
+      path = path.substring(0, queryStart);
+    }
+    // Normalize the path.  we need to decode path segments, normalize and rejoin in order to
+    // 1. decode and normalize safe percent escaped characters.  e.g. %70 -> 'p'
+    // 2. decode and interpret dangerous character sequences. e.g. /%2E/ -> '/./' -> '/'
+    // 3. preserve dangerous encoded characters. e.g. '/%2F/' -> '///' -> '/%2F'
+    List<String> segments = new ArrayList<String>();
+    for (String segment : SLASH_SPLITTER.split(path)) {
+      // This decodes all non-special characters from the path segment.  so if someone passes
+      // /%2E/foo we will normalize it to /./foo and then /foo
+      String normalized =
+          UrlEscapers.urlPathSegmentEscaper().escape(lenientDecode(segment, UTF_8, false));
+      if (".".equals(normalized)) {
+        // skip
+      } else if ("..".equals(normalized)) {
+        if (segments.size() > 1) {
+          segments.remove(segments.size() - 1);
+        }
+      } else {
+        segments.add(normalized);
+      }
+    }
+    SLASH_JOINER.appendTo(sb, segments);
+    if (query != null) {
+      sb.append(query);
+    }
+    return sb.toString();
+  }
+

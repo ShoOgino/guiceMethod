@@ -1,4 +1,9 @@
     public RegexUriPatternMatcher(String pattern) {
-      this.pattern = Pattern.compile(pattern);
+      this.originalPattern = pattern;
+      try {
+        this.pattern = Pattern.compile(pattern);
+      } catch (PatternSyntaxException pse) {
+        throw new IllegalArgumentException("Invalid regex pattern: " + pse.getMessage());
+      }
     }
 

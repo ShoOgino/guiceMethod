@@ -1,0 +1,27 @@
+  /**
+   * Maps {@code 1} to the string {@code "1st"} ditto for all non-negative numbers
+   * 
+   * @see <a href="https://en.wikipedia.org/wiki/English_numerals#Ordinal_numbers">
+   *     https://en.wikipedia.org/wiki/English_numerals#Ordinal_numbers</a>
+   */
+  private static String getOrdinalSuffix(int ordinal) {
+    // negative ordinals don't make sense, we allow zero though because we are programmers
+    checkArgument(ordinal >= 0);
+    if ((ordinal / 10) % 10 == 1) {
+      // all the 'teens' are weird
+      return "th";
+    } else {
+      // could use a lookup table? any better?
+      switch (ordinal % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    }
+  }
+

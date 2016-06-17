@@ -2,17 +2,20 @@
    * Gets the context path relative path of the URI. Returns the path of the
    * resource relative to the context path for a request's URI, or null if no
    * path can be extracted.
+   *
+   * <p>Also performs url decoding and normalization of the path.
    */
   // @Nullable
-  public static String getContextRelativePath(
+  static String getContextRelativePath(
       // @Nullable
       final HttpServletRequest request) {
     if (request != null) {
       String contextPath = request.getContextPath();
       String requestURI = request.getRequestURI();
       if (contextPath.length() < requestURI.length()) {
-        return requestURI.substring(contextPath.length());
-      } else if (requestURI != null && requestURI.trim().length() > 0 &&
+        String suffix = requestURI.substring(contextPath.length());
+        return normalizePath(suffix);
+      } else if (requestURI.trim().length() > 0 &&
           contextPath.length() == requestURI.length()) {
         return "/";
       }

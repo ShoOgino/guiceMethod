@@ -1,0 +1,5 @@
+  public void testGetContextRelativePath_preserveQuery() {
+    assertEquals("/foo?q=f", getContextRelativePath("", "/foo?q=f"));
+    assertEquals("/foo?q=%20+%20", getContextRelativePath("", "/foo?q=%20+%20"));
+  }
+

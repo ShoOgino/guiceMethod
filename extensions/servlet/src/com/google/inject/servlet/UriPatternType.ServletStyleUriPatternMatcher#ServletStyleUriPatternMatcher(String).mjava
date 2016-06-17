@@ -1,13 +1,28 @@
     public ServletStyleUriPatternMatcher(String pattern) {
+      this.originalPattern = pattern;
       if (pattern.startsWith("*")) {
-        this.pattern = pattern.substring(1);
+        this.literal = pattern.substring(1);
         this.patternKind = Kind.PREFIX;
       } else if (pattern.endsWith("*")) {
-        this.pattern = pattern.substring(0, pattern.length() - 1);
+        this.literal = pattern.substring(0, pattern.length() - 1);
         this.patternKind = Kind.SUFFIX;
       } else {
-        this.pattern = pattern;
+        this.literal = pattern;
         this.patternKind = Kind.LITERAL;
+      }
+      String normalized = ServletUtils.normalizePath(literal);
+      if (patternKind == Kind.PREFIX) {
+        normalized = "*" + normalized;
+      } else if (patternKind == Kind.SUFFIX) {
+        normalized = normalized + "*";
+      }
+      if (!pattern.equals(normalized)) {
+        throw new IllegalArgumentException(
+            "Servlet patterns cannot contain escape patterns. Registered pattern: '"
+                + pattern
+                + "' normalizes to: '"
+                + normalized
+                + "'");
       }
     }
 

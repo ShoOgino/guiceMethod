@@ -1,0 +1,23 @@
+  public final void testFilterBypass() throws ServletException,
+      IOException {
+
+    final Injector injector = Guice.createInjector(new ServletModule() {
+      @Override
+      protected void configureServlets() {
+        filter("/protected/*").through(TestFilter.class);
+      }
+    });
+
+    final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
+    pipeline.initPipeline(null);
+    assertEquals(1, inits);
+
+    runRequestForPath(pipeline, "/./protected/resource", true);
+    runRequestForPath(pipeline, "/protected/../resource", false);
+    runRequestForPath(pipeline, "/protected/../protected/resource", true);
+
+    assertEquals(0, destroys);
+    pipeline.destroyPipeline();
+    assertEquals(1, destroys);
+  }
+

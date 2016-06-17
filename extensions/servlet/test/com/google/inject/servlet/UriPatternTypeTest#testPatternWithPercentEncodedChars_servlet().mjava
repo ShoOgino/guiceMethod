@@ -1,0 +1,9 @@
+  public void testPatternWithPercentEncodedChars_servlet() {
+    try {
+      UriPatternType.get(UriPatternType.SERVLET, "/foo/%2f/*");
+      fail();
+    } catch (IllegalArgumentException iae) {
+      assertTrue(iae.getMessage().contains("Servlet patterns cannot contain escape patterns."));
+    }
+  }
+

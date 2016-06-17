@@ -1,4 +1,4 @@
   public ServletModule.ServletKeyBindingBuilder serveRegex(List<String> regexes) {
-    return new ServletKeyBindingBuilderImpl(regexes, UriPatternType.REGEX);
+    return new ServletKeyBindingBuilderImpl(parsePatterns(UriPatternType.REGEX, regexes));
   }
 

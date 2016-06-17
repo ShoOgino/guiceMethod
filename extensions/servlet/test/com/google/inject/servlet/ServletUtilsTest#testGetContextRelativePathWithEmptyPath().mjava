@@ -1,10 +1,4 @@
   public void testGetContextRelativePathWithEmptyPath() {
-    HttpServletRequest servletRequest = createMock(HttpServletRequest.class);
-    expect(servletRequest.getContextPath()).andReturn("");
-    expect(servletRequest.getRequestURI()).andReturn("");
-    replay(servletRequest);
-    String path = ServletUtils.getContextRelativePath(servletRequest);
-    assertNull(path);
-    verify(servletRequest);
+    assertNull(getContextRelativePath("", ""));
   }
 

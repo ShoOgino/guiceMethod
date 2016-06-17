@@ -1,0 +1,26 @@
+  private void runRequestForPath(FilterPipeline pipeline, String value, boolean matches)
+      throws IOException, ServletException {
+    assertEquals(0, doFilters);
+    //create ourselves a mock request with test URI
+    HttpServletRequest requestMock = control.createMock(HttpServletRequest.class);
+    expect(requestMock.getRequestURI())
+            .andReturn(value)
+            .anyTimes();
+    expect(requestMock.getContextPath())
+        .andReturn("")
+        .anyTimes();
+    // dispatch request
+    FilterChain filterChain = control.createMock(FilterChain.class);
+    filterChain.doFilter(requestMock, null);
+    control.replay();
+    pipeline.dispatch(requestMock, null, filterChain);
+    control.verify();
+    control.reset();
+    if (matches) {
+      assertEquals("filter was not run", 1, doFilters);
+      doFilters = 0;
+    } else {
+      assertEquals("filter was run", 0, doFilters);
+    }
+  }
+

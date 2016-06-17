@@ -4,13 +4,11 @@
       if(filterInstance != null) {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new InstanceFilterBindingImpl(initParams,
-                pattern,
                 filterInstance,
                 patternMatcher));
       } else {
         return ((ServletModuleTargetVisitor<B, V>)visitor).visit(
             new LinkedFilterBindingImpl(initParams,
-                pattern,
                 filterKey,
                 patternMatcher));
       }

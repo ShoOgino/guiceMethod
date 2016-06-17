@@ -1,10 +1,11 @@
     private void through(Key<? extends Filter> filterKey,
         Map<String, String> initParams,
         Filter filterInstance) {
-      for (String pattern : uriPatterns) {
-        binder.bind(FilterDefinition.class).annotatedWith(UniqueAnnotations.create()).toProvider(
-            new FilterDefinition(pattern, filterKey, UriPatternType.get(uriPatternType, pattern),
-                initParams, filterInstance));
+      for (UriPatternMatcher pattern : uriPatterns) {
+        binder
+            .bind(FilterDefinition.class)
+            .annotatedWith(UniqueAnnotations.create())
+            .toProvider(new FilterDefinition(filterKey, pattern, initParams, filterInstance));
       }
     }
 
