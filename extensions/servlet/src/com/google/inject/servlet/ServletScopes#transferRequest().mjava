@@ -18,7 +18,7 @@
    * @return an object that when opened will initiate the request scope
    * @throws OutOfScopeException if this method is called from a non-request
    *     thread, or if the request has completed.
-   * @since 5.0
+   * @since 4.1
    */
   public static RequestScoper transferRequest() {
     return (GuiceFilter.localContext.get() != null)
