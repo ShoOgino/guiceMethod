@@ -1,0 +1,23 @@
+  public void testMissingAnnotationRelated() {
+    try {
+      final TypeLiteral<List<Butter>> list = new TypeLiteral<List<Butter>>() {};
+
+      Guice.createInjector(new AbstractModule() {
+        @SuppressWarnings("unchecked")
+        @Override
+        public void configure() {
+          bind(list).toInstance(butters);
+          bind(Sandwitch.class).to(ButterSandwitch.class);
+        }
+      });
+
+      fail();
+    } catch (CreationException e) {
+      final String msg = e.getMessage();
+      assertContains(msg, "Unable to create injector, see the following errors:",
+          "Did you mean?",
+          "java.util.List<com.google.inject.BindingTest$Butter> bound"
+          + "  at com.google.inject.BindingTest$24.configure");
+    }
+  }
+

@@ -65,7 +65,7 @@
           // throw with a more appropriate message below
         }
       }
-      throw errors.missingImplementation(key).toException();
+      throw errors.missingImplementationWithHint(key, this).toException();
     }
 
     Object source = key.getTypeLiteral().getRawType();

@@ -5,6 +5,7 @@
       public void configure() {
         bind(Bacon.class).to(UncookedBacon.class);
         bind(Bacon.class).annotatedWith(named("Turkey")).to(TurkeyBacon.class);
+        bind(Bacon.class).annotatedWith(named("Tofu")).to(TofuBacon.class);
         bind(Bacon.class).annotatedWith(named("Cooked")).toConstructor(
             (Constructor)InjectionPoint.forConstructorOf(Bacon.class).getMember());
       }
@@ -19,6 +20,27 @@
     
     Bacon cookedBacon = injector.getInstance(Key.get(Bacon.class, named("Cooked")));
     assertEquals(Food.PORK, cookedBacon.getMaterial());
-    assertTrue(cookedBacon.isCooked());    
+    assertTrue(cookedBacon.isCooked());
+
+    try {
+      // Turkey typo, missing a letter...
+      injector.getInstance(Key.get(Bacon.class, named("Turky")));
+      fail();
+    } catch (ConfigurationException e) {
+      String msg = e.getMessage();
+      assertContains(msg,
+          "Guice configuration errors:",
+          "1) No implementation for"
+              + " com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=Turky) was bound.",
+          "Did you mean?",
+          "* com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=Turkey)",
+          "* com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=Tofu)",
+          "1 more binding with other annotations.",
+          "while locating com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=Turky)");
+    }
   }
 
