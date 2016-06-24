@@ -1,5 +1,9 @@
   /** Pops from the state without setting a dependency. */
-  public void popState() {
-    state.pop();
+  void popState() {
+    Object[] localElements = dependencyStack;
+    int localSize = dependencyStackSize;
+    localElements[--localSize] = null;
+    localElements[--localSize] = null;
+    dependencyStackSize = localSize;
   }
 

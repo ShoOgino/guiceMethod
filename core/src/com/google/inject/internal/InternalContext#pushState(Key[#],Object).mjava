@@ -1,5 +1,5 @@
   /** Adds to the state without setting the dependency. */
-  public void pushState(Key<?> key, Object source) {
-    state.add(key, source);
+  void pushState(Key<?> key, Object source) {
+    doPushState(key, source);
   }
 

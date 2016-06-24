@@ -1,0 +1,11 @@
+  private void doPushState(Object dependencyOrKey, Object source) {
+    int localSize = dependencyStackSize;
+    Object[] localStack = dependencyStack;
+    if (localStack.length < localSize + 2) {
+      localStack = dependencyStack = Arrays.copyOf(localStack, (localStack.length * 3) / 2 + 2);
+    }
+    localStack[localSize++] = dependencyOrKey;
+    localStack[localSize++] = source;
+    dependencyStackSize = localSize;
+  }
+

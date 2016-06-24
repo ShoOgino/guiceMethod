@@ -3,8 +3,8 @@
     this.injector = injector;
     this.typeLiteral = typeLiteral;
     this.memberInjectors = memberInjectors;
-    this.userMembersInjectors = encounter.getMembersInjectors();
-    this.injectionListeners = encounter.getInjectionListeners();
+    this.userMembersInjectors = encounter.getMembersInjectors().asList();
+    this.injectionListeners = encounter.getInjectionListeners().asList();
     /*if[AOP]*/
     this.addedAspects = encounter.getAspects();
     /*end[AOP]*/
