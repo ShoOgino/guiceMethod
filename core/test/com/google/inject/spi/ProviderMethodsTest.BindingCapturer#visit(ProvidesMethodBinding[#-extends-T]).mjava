@@ -1,3 +1,4 @@
+    @Override
     @SuppressWarnings("unchecked")
     public ProvidesMethodBinding<T> visit(
         ProvidesMethodBinding<? extends T> providesMethodBinding) {

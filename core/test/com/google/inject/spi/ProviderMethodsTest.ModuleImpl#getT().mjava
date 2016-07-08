@@ -1,3 +1,4 @@
+    @Override
     @Provides public String getT() {
       return "string";
     }

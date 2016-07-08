@@ -1,0 +1,42 @@
+  public void testCircularDependency() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override
+      protected void configure() {}
+
+      @Provides Foo newFoo(final Bar bar) {
+        return new Foo() {
+
+          @Override
+          public Bar getBar() {
+            return bar;
+          }
+
+          @Override
+          public int getI() {
+            return 5;
+          }
+        };
+      }
+
+      @Provides Bar newBar(final Foo foo) {
+        return new Bar() {
+
+          @Override
+          public Foo getFoo() {
+            return foo;
+          }
+
+          @Override
+          public int getI() {
+            return 10;
+          }
+        };
+      }
+    });
+
+    Foo foo = injector.getInstance(Foo.class);
+    assertEquals(5, foo.getI());
+    assertEquals(10, foo.getBar().getI());
+    assertEquals(5, foo.getBar().getFoo().getI());
+  }
+
