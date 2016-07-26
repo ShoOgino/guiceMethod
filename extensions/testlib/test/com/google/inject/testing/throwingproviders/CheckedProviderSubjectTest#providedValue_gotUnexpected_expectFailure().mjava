@@ -1,0 +1,18 @@
+  @Test
+  public void providedValue_gotUnexpected_expectFailure() {
+    String expected = "keep Summer safe";
+    String unexpected = "Summer is unsafe";
+    CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, unexpected);
+    String message =
+        String.format(
+            "value provided by <%s>: Not true that <%s> is equal to <%s>",
+            getReturningProviderName(unexpected), unexpected, expected);
+
+    try {
+      createSubject(provider).providedValue().isEqualTo(expected);
+      fail("Expected an exception to be thrown");
+    } catch (FailureStrategyException e) {
+      assertThat(e).hasMessage(message);
+    }
+  }
+

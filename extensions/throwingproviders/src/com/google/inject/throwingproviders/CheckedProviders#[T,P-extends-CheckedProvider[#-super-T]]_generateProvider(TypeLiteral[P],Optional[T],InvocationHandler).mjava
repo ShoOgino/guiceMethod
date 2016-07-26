@@ -1,0 +1,8 @@
+  private static <T, P extends CheckedProvider<? super T>> P generateProvider(
+      TypeLiteral<P> providerType, Optional<T> value, InvocationHandler handler) {
+    // TODO(eatnumber1): Understand why TypeLiteral#getRawType returns a Class<? super T> rather
+    // than a Class<T> and remove this unsafe cast.
+    Class<P> providerRaw = (Class<P>) providerType.getRawType();
+    return generateProvider(providerRaw, value, handler);
+  }
+

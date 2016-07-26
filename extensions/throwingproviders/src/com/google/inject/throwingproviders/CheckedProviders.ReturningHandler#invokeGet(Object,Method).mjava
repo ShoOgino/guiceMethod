@@ -1,0 +1,5 @@
+    @Override
+    protected T invokeGet(Object proxy, Method method) throws Throwable {
+      return returned;
+    }
+

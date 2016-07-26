@@ -1,0 +1,20 @@
+  /**
+   * Allows for assertions on the value provided by this provider.
+   *
+   * <p>The value provided by a checked provider is the object returned by a call to {@link
+   * CheckedProvider#get}
+   *
+   * @return a {@link Subject} for asserting against the return value of {@link CheckedProvider#get}
+   */
+  public Subject<?, Object> providedValue() {
+    P provider = getSubject();
+    T got;
+    try {
+      got = provider.get();
+    } catch (Exception e) {
+      failureStrategy.fail(String.format("checked provider <%s> threw an exception", provider), e);
+      throw new AssertionError("Impossible, I hope...", e);
+    }
+    return assert_().withFailureMessage("value provided by <%s>", provider).that(got);
+  }
+

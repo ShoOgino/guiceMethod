@@ -1,0 +1,7 @@
+  public void testCheckedProviderTypeLiteralNull_get_returnsNull() {
+    StringCheckedProvider provider =
+        CheckedProviders.of(TypeLiteral.get(StringCheckedProvider.class), null);
+
+    assertThat(provider).providedValue().isNull();
+  }
+

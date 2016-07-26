@@ -1,0 +1,15 @@
+  /**
+   * Returns a {@link CheckedProvider} which always provides {@code instance}.
+   *
+   * <p>The provider type passed as {@code providerType} must be an interface. Calls to methods
+   * other than {@link CheckedProvider#get} will throw {@link UnsupportedOperationException}.
+   *
+   * @param providerType the type of the {@link CheckedProvider} to return
+   * @param instance the instance that should always be provided
+   */
+  public static <T, P extends CheckedProvider<? super T>> P of(
+      TypeLiteral<P> providerType, @Nullable T instance) {
+    return generateProvider(
+        providerType, Optional.fromNullable(instance), new ReturningHandler<T>(instance));
+  }
+

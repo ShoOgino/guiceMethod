@@ -1,0 +1,4 @@
+    ReturningHandler(T returned) {
+      this.returned = returned;
+    }
+

@@ -1,0 +1,5 @@
+  private static boolean isCheckedException(Class<? extends Throwable> thrownType) {
+    return Exception.class.isAssignableFrom(thrownType)
+        && !RuntimeException.class.isAssignableFrom(thrownType);
+  }
+

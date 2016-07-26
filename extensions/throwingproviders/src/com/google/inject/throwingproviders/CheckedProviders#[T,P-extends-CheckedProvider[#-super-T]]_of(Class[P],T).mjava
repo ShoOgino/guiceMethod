@@ -1,0 +1,12 @@
+  /**
+   * Returns a {@link CheckedProvider} which always provides {@code instance}.
+   *
+   * @param providerType the type of the {@link CheckedProvider} to return
+   * @param instance the instance that should always be provided
+   * @see #of(TypeLiteral, T)
+   */
+  public static <T, P extends CheckedProvider<? super T>> P of(
+      Class<P> providerType, @Nullable T instance) {
+    return of(TypeLiteral.get(providerType), instance);
+  }
+

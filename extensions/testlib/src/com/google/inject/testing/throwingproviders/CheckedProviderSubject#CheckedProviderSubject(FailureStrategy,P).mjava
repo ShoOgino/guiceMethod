@@ -1,0 +1,7 @@
+  @VisibleForTesting
+  CheckedProviderSubject(FailureStrategy failureStrategy, @Nullable P subject) {
+    super(failureStrategy, subject);
+
+    this.assertVerb = new TestVerb(failureStrategy);
+  }
+

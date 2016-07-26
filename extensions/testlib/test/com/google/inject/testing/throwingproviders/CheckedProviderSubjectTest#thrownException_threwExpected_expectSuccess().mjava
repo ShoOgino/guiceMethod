@@ -1,0 +1,8 @@
+  @Test
+  public void thrownException_threwExpected_expectSuccess() {
+    CheckedProvider<?> provider =
+        CheckedProviders.throwing(StringCheckedProvider.class, SummerException.class);
+
+    createSubject(provider).thrownException().isInstanceOf(SummerException.class);
+  }
+

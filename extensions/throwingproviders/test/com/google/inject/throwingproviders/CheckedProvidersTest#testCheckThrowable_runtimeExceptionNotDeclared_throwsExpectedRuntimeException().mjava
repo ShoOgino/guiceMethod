@@ -1,0 +1,13 @@
+  public void testCheckThrowable_runtimeExceptionNotDeclared_throwsExpectedRuntimeException()
+      throws Exception {
+    FooCheckedProvider provider =
+        CheckedProviders.throwing(FooCheckedProvider.class, ExpectedRuntimeException.class);
+
+    try {
+      provider.get();
+      fail("Expected an exception to be thrown");
+    } catch (ExpectedRuntimeException e) {
+      // expected
+    }
+  }
+

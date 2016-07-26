@@ -1,4 +1,5 @@
-    @Override public boolean apply(Method input) {
+    @Override
+    public boolean apply(Method input) {
       return !input.isBridge() && !input.isSynthetic();
     }
 

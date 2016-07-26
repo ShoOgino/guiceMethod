@@ -1,0 +1,9 @@
+  public void testCheckedProviderTypeLiteral_get_returnsValidString() {
+    String expected = "morty";
+
+    StringCheckedProvider provider =
+        CheckedProviders.of(TypeLiteral.get(StringCheckedProvider.class), expected);
+
+    assertThat(provider).providedValue().isEqualTo(expected);
+  }
+

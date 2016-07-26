@@ -1,0 +1,11 @@
+  private static <T, P extends CheckedProvider<? super T>> P generateProvider(
+      Class<P> providerType, Optional<T> value, InvocationHandler handler) {
+    checkInterface(providerType, getClassOptional(value));
+    Object proxy =
+        Proxy.newProxyInstance(
+            providerType.getClassLoader(), new Class<?>[] {providerType}, handler);
+    @SuppressWarnings("unchecked") // guaranteed by the newProxyInstance API
+    P proxyP = (P) proxy;
+    return proxyP;
+  }
+

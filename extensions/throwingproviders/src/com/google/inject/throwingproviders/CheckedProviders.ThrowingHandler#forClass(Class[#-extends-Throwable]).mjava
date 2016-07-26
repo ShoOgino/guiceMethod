@@ -1,0 +1,11 @@
+    static ThrowingHandler forClass(Class<? extends Throwable> throwable) {
+      try {
+        return new ThrowingHandler(throwable.getDeclaredConstructor(), throwable.getName());
+      } catch (NoSuchMethodException e) {
+        // This should have been caught by checkThrowable
+        throw new AssertionError(
+            String.format(
+                "Throwable <%s> does not have a no-argument constructor", throwable.getName()));
+      }
+    }
+

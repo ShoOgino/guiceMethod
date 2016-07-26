@@ -1,0 +1,6 @@
+  public void testCheckedProviderClassNull_get_returnsNull() {
+    StringCheckedProvider provider = CheckedProviders.of(StringCheckedProvider.class, null);
+
+    assertThat(provider).providedValue().isNull();
+  }
+

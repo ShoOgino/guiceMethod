@@ -1,0 +1,5 @@
+  public static <T, P extends CheckedProvider<T>> CheckedProviderSubject<T, P> assertThat(
+      @Nullable P provider) {
+    return assertAbout(new CheckedProviderSubjectFactory<T, P>()).that(provider);
+  }
+
