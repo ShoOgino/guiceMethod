@@ -1,2 +1,3 @@
-    @Inject TooManyConstructors(Injector i) {}
+    @Inject
+    TooManyConstructors(Injector i) {}
 
