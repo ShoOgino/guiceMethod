@@ -1,8 +1,0 @@
-    @Override
-    public final T get() {
-      Provider<T> local = delegateProvider;
-      checkState(local != null,
-          "This Provider cannot be used until the Injector has been created.");
-      return local.get();
-    }
-

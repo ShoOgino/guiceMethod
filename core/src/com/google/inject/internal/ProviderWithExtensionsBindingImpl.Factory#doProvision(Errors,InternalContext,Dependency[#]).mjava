@@ -1,9 +1,0 @@
-    /**
-     * Creates an object to be injected.
-     *
-     * @throws com.google.inject.internal.ErrorsException if a value cannot be provided
-     * @return instance to be injected
-     */
-    protected abstract T doProvision(
-        Errors errors, InternalContext context, Dependency<?> dependency) throws ErrorsException;
-
