@@ -1,5 +1,5 @@
     @Override
-    public T get(
+    public final T get(
         final Errors errors,
         final InternalContext context,
         final Dependency<?> dependency,
@@ -9,7 +9,6 @@
       // We have a circular reference between bindings. Return a proxy.
       if (constructionContext.isConstructing()) {
         Class<?> expectedType = dependency.getKey().getTypeLiteral().getRawType();
-        // TODO: if we can't proxy this object, can we proxy the other object?
         @SuppressWarnings("unchecked")
         T proxyType =
             (T) constructionContext.createProxy(errors, context.getInjectorOptions(), expectedType);

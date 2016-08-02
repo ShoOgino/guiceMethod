@@ -7,7 +7,7 @@
    * fastclass is subject to java access policies.
    */
   static <T> ProviderMethod<T> create(Key<T> key, Method method, Object instance,
-      ImmutableSet<Dependency<?>> dependencies, List<Provider<?>> parameterProviders,
+      ImmutableSet<Dependency<?>> dependencies,
       Class<? extends Annotation> scopeAnnotation, boolean skipFastClassGeneration,
       Annotation annotation) {
     int modifiers = method.getModifiers();
@@ -21,7 +21,6 @@
               method,
               instance,
               dependencies,
-              parameterProviders,
               scopeAnnotation,
               annotation);
         }
@@ -38,7 +37,6 @@
         method,
         instance,
         dependencies,
-        parameterProviders,
         scopeAnnotation,
         annotation);
   }
