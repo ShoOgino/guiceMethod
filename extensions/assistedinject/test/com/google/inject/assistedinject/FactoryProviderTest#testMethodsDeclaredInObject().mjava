@@ -1,3 +1,4 @@
+  @SuppressWarnings("SelfEquals")
   public void testMethodsDeclaredInObject() {
     Injector injector = Guice.createInjector(new AbstractModule() {
         @Override protected void configure() {
