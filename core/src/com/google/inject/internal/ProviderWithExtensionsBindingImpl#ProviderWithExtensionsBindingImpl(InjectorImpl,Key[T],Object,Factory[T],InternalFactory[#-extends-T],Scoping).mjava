@@ -1,0 +1,18 @@
+  ProviderWithExtensionsBindingImpl(
+      InjectorImpl injector,
+      Key<T> key,
+      Object source,
+      Factory<T> originalFactory,
+      InternalFactory<? extends T> scopedFactory,
+      Scoping scoping) {
+    super(
+        injector,
+        key,
+        source,
+        scopedFactory,
+        scoping,
+        originalFactory,
+        ImmutableSet.<InjectionPoint>of());
+    this.originalFactory = originalFactory;
+  }
+

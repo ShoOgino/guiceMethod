@@ -1,0 +1,7 @@
+    /**
+     * A callback that allows for implementations to fetch dependencies on other bindings.
+     *
+     * <p>Will be called exactly once, prior to any call to {@link #doProvision}.
+     */
+    abstract void initialize(InjectorImpl injector, Errors errors) throws ErrorsException;
+

@@ -1,0 +1,15 @@
+  @Override
+  protected T doProvision(Errors errors, InternalContext context, Dependency<?> dependency)
+      throws ErrorsException {
+    try {
+      T t = doProvision(SingleParameterInjector.getAll(errors, context, parameterInjectors));
+      errors.checkForNull(t, getMethod(), dependency);
+      return t;
+    } catch (IllegalAccessException e) {
+      throw new AssertionError(e);
+    } catch (InvocationTargetException userException) {
+      Throwable cause = userException.getCause() != null ? userException.getCause() : userException;
+      throw errors.withSource(getSource()).errorInProvider(cause).toException();
+    }
+  }
+

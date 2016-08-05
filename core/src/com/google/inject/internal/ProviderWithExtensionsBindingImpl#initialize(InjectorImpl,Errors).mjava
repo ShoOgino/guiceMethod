@@ -1,0 +1,10 @@
+  @Override
+  public void initialize(final InjectorImpl injector, final Errors errors) throws ErrorsException {
+    originalFactory.source = getSource();
+    originalFactory.provisionCallback = injector.provisionListenerStore.get(this);
+    // For these kinds of providers, the 'user supplied provider' is really 'guice supplied'
+    // So make our user supplied provider just delegate to the guice supplied one.
+    originalFactory.delegateProvider = getProvider();
+    originalFactory.initialize(injector, errors);
+  }
+
