@@ -1,4 +1,4 @@
-  ProviderWithExtensionsBindingImpl(
+  InternalProviderInstanceBindingImpl(
       InjectorImpl injector,
       Key<T> key,
       Object source,

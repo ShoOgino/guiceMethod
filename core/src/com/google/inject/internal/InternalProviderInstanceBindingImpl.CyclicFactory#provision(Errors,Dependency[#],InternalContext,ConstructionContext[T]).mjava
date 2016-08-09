@@ -11,7 +11,7 @@
       } catch (ErrorsException ee) {
         throw ee;
       } catch (Throwable t) {
-        throw errors.withSource(source).errorInProvider(t).toException();
+        throw errors.withSource(getSource()).errorInProvider(t).toException();
       }
     }
 
