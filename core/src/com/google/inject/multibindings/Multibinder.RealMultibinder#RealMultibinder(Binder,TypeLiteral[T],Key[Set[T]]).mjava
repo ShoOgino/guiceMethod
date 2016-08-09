@@ -4,7 +4,7 @@
       this.setKey = checkNotNull(setKey, "setKey");
       this.collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
       this.collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
-      this.setName = RealElement.nameOf(setKey);
+      this.setName = Annotations.nameOf(setKey);
       this.permitDuplicatesKey = Key.get(Boolean.class, named(toString() + " permits duplicates"));
     }
 

@@ -6,7 +6,7 @@
       this.optionalJavaxProviderKey = typeKey.ofType(optionalOfJavaxProvider(literal));
       this.optionalProviderKey = typeKey.ofType(optionalOfProvider(literal));
       this.optionalProviderT = binder.getProvider(optionalProviderKey);
-      String name = RealElement.nameOf(typeKey);
+      String name = Annotations.nameOf(typeKey);
       this.defaultKey = Key.get(typeKey.getTypeLiteral(), new DefaultImpl(name));
       this.actualKey = Key.get(typeKey.getTypeLiteral(), new ActualImpl(name));
       // Until the injector initializes us, we don't know what our dependencies are,
