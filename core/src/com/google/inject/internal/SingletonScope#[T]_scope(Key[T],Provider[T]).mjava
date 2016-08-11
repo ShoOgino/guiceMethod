@@ -44,8 +44,12 @@
       /* @Nullable */ final InjectorImpl injector;
 
       {
-        WeakReference<InjectorImpl> ref = currentInjector.get();
-        injector = ref == null ? null : ref.get();
+        // If we are getting called by Scoping
+        if (creator instanceof ProviderToInternalFactoryAdapter) {
+          injector = ((ProviderToInternalFactoryAdapter)creator).getInjector();
+        } else {
+          injector = null;
+        }
       }
 
       @SuppressWarnings("DoubleCheckedLocking")
