@@ -1,0 +1,12 @@
+  // Note: We use valueTypeAndAnnotation effectively as a Pair<TypeLiteral, Annotation|Class>
+  // since it's an easy way to group a type and an optional annotation type or instance.
+  static <K, V> RealMapBinder<K, V> newRealMapBinder(Binder binder, TypeLiteral<K> keyType,
+      Key<V> valueTypeAndAnnotation) {
+    binder = binder.skipSources(RealMapBinder.class);
+    TypeLiteral<V> valueType = valueTypeAndAnnotation.getTypeLiteral();
+    return newRealMapBinder(binder, keyType, valueType,
+        valueTypeAndAnnotation.ofType(mapOf(keyType, valueType)),
+        RealMultibinder.newRealSetBinder(binder,
+            valueTypeAndAnnotation.ofType(entryOfProviderOf(keyType, valueType))));
+  }
+

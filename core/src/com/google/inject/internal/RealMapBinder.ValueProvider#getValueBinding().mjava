@@ -1,0 +1,4 @@
+    public Binding<V> getValueBinding() {
+      return binding;
+    }
+

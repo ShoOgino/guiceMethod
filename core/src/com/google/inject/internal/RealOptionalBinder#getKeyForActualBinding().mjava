@@ -1,0 +1,12 @@
+  /**
+   * Returns the key to use for the actual binding, overrides the default if set.
+   * 
+   * <p>As a side effect this installs support for the 'direct type', so a binding for {@code T}
+   * will be made available.
+   */
+  Key<T> getKeyForActualBinding() {
+    checkConfiguration(!isInitialized(), "already initialized");      
+    addDirectTypeBinding(binder);
+    return actualKey;
+  }
+

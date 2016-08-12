@@ -1,4 +1,0 @@
-      @Override public boolean containsElement(Element element) {
-        return RealOptionalBinder.this.containsElement(element);
-      }
-

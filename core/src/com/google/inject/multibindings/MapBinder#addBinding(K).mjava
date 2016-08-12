@@ -9,5 +9,7 @@
    * <p>Scoping elements independently is supported. Use the {@code in} method
    * to specify a binding scope.
    */
-  public abstract LinkedBindingBuilder<V> addBinding(K key);
+  public LinkedBindingBuilder<V> addBinding(K key) {
+    return delegate.addBinding(key);
+  }
 

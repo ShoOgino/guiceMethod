@@ -1,0 +1,13 @@
+    @Override public Set<Dependency<?>> getDependencies() {
+      if (!isInitialized()) {
+        return ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class)));
+      }
+      ImmutableSet.Builder<Dependency<?>> setBuilder = ImmutableSet.builder();
+      for (Dependency<?> dependency : dependencies) {
+        Key key = dependency.getKey();
+        setBuilder.add(
+            Dependency.get(key.ofType(Types.providerOf(key.getTypeLiteral().getType()))));
+      }
+      return setBuilder.build();
+    }
+

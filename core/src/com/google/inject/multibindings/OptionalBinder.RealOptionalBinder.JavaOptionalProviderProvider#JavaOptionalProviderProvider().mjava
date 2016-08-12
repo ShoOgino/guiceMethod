@@ -1,4 +1,0 @@
-      private JavaOptionalProviderProvider() {
-        super(typeKey);
-      }
-

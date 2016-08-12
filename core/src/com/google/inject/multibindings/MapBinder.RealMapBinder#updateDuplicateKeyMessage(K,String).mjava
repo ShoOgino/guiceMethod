@@ -1,5 +1,0 @@
-    /** Sets the error message to be shown if the key had duplicate non-equal bindings. */
-    void updateDuplicateKeyMessage(K k, String errMsg) {
-      duplicateKeyErrorMessages.put(k, errMsg);
-    }
-

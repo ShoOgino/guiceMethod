@@ -1,0 +1,4 @@
+  private Multibinder(RealMultibinder<T> delegate) {
+    this.delegate = delegate;
+  }
+

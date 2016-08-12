@@ -1,0 +1,6 @@
+  @Override
+  public Set<? extends Class<? extends Annotation>> annotationClasses() {
+    return ImmutableSet.of(
+        ProvidesIntoSet.class, ProvidesIntoMap.class, ProvidesIntoOptional.class);
+  }
+

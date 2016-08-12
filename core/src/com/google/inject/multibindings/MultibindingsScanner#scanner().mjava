@@ -4,6 +4,6 @@
    * {@literal @}{@link ProvidesIntoSet}, and {@literal @}{@link ProvidesIntoOptional}.
    */
   public static ModuleAnnotatedMethodScanner scanner() {
-    return Scanner.INSTANCE;
+    return MultibindingsMethodScanner.INSTANCE;
   }
 

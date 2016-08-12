@@ -1,0 +1,9 @@
+    // Provide links from a few different public keys to the providerMultimapKey.  In each case
+    // this is safe because the Map and Set instances are unmodifiable by consumers.
+    @SuppressWarnings("unchecked")
+    private void linkKeys(Binder binder) {
+      binder.bind(javaxProviderMultimapKey).to((Key) providerMultimapKey);
+      binder.bind(javaxProviderCollectionMultimapKey).to((Key) providerMultimapKey);
+      binder.bind(providerCollectionMultimapKey).to((Key) providerMultimapKey);
+    }
+

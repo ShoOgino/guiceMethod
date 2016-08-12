@@ -1,0 +1,8 @@
+      RealMultimapProvider(
+          ImmutableSet<Dependency<?>> dependencies,
+          Provider<Map<K, Set<Provider<V>>>> multimapProvider) {
+        super(multimapKey);
+        this.dependencies = dependencies;
+        this.multimapProvider = multimapProvider;
+      }
+

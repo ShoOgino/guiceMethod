@@ -1,0 +1,4 @@
+    @Override public Entry<K, Provider<V>> get() {
+      return this;
+    }
+

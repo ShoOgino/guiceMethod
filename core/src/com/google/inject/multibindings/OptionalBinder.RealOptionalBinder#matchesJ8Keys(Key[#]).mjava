@@ -1,9 +1,0 @@
-    private boolean matchesJ8Keys(Key<?> elementKey) {
-      if (JAVA_OPTIONAL_CLASS != null) {
-        return elementKey.equals(javaOptionalKey)
-            || elementKey.equals(javaOptionalProviderKey)
-            || elementKey.equals(javaOptionalJavaxProviderKey);
-      }
-      return false;
-    }
-
