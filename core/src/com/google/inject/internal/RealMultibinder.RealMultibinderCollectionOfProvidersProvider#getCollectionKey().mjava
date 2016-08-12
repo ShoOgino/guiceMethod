@@ -1,0 +1,4 @@
+    Key getCollectionKey() {
+      return RealMultibinder.this.collectionOfProvidersKey;
+    }
+

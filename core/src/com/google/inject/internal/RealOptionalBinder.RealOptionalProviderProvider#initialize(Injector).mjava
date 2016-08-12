@@ -1,0 +1,35 @@
+    @Toolable @Inject void initialize(Injector injector) {
+      RealOptionalBinder.this.binder = null;
+      actualBinding = injector.getExistingBinding(actualKey);
+      defaultBinding = injector.getExistingBinding(defaultKey);
+      Binding<T> userBinding = injector.getExistingBinding(typeKey);
+      Binding<T> binding = null;
+      if (actualBinding != null) {
+        // TODO(sameb): Consider exposing an option that will allow
+        // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
+        // Right now, an ACTUAL binding can convert from present -> absent
+        // if it's bound to a provider that returns null.
+        binding = actualBinding;
+      } else if (defaultBinding != null) {
+        binding = defaultBinding;
+      } else if (userBinding != null) {
+        // If neither the actual or default is set, then we fallback
+        // to the value bound to the type itself and consider that the
+        // "actual binding" for the SPI.
+        binding = userBinding;
+        actualBinding = userBinding;
+      }
+        
+      if (binding != null) {
+        optional = Optional.of(binding.getProvider());
+        RealOptionalBinder.this.dependencies =
+            ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
+        RealOptionalBinder.this.providerDependencies =
+            ImmutableSet.<Dependency<?>>of(Dependency.get(providerOf(binding.getKey())));
+      } else {
+        optional = Optional.absent();
+        RealOptionalBinder.this.dependencies = ImmutableSet.of();
+        RealOptionalBinder.this.providerDependencies = ImmutableSet.of();
+      }
+    }
+

@@ -1,0 +1,21 @@
+      @SuppressWarnings("unused")
+      @Inject void initialize(Injector injector) {
+        Map<K, ImmutableSet.Builder<Provider<V>>> providerMultimapMutable =
+            new LinkedHashMap<K, ImmutableSet.Builder<Provider<V>>>();
+        for (Entry<K, Provider<V>> entry : entrySetProvider.get()) {
+          if (!providerMultimapMutable.containsKey(entry.getKey())) {
+            providerMultimapMutable.put(
+                entry.getKey(), ImmutableSet.<Provider<V>>builder());
+          }
+          providerMultimapMutable.get(entry.getKey()).add(entry.getValue());
+        }
+
+        ImmutableMap.Builder<K, Set<Provider<V>>> providerMultimapBuilder =
+            ImmutableMap.builder();
+        for (Entry<K, ImmutableSet.Builder<Provider<V>>> entry
+            : providerMultimapMutable.entrySet()) {
+          providerMultimapBuilder.put(entry.getKey(), entry.getValue().build());
+        }
+        providerMultimap = providerMultimapBuilder.build();
+      }
+

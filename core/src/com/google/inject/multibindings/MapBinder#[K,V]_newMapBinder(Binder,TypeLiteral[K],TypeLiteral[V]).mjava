@@ -4,8 +4,7 @@
    */
   public static <K, V> MapBinder<K, V> newMapBinder(Binder binder,
       TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    binder = binder.skipSources(MapBinder.class, RealMapBinder.class);
-    return newRealMapBinder(binder, keyType, valueType, Key.get(mapOf(keyType, valueType)),
-        Multibinder.newSetBinder(binder, entryOfProviderOf(keyType, valueType)));
+    return new MapBinder<K, V>(
+        newMapRealBinder(binder.skipSources(MapBinder.class), keyType, valueType));
   }
 

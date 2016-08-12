@@ -5,5 +5,7 @@
    * <p>It is an error to call this method without also calling one of the {@code to}
    * methods on the returned binding builder. 
    */
-  public abstract LinkedBindingBuilder<T> setDefault();
+  public LinkedBindingBuilder<T> setDefault() {
+    return delegate.setDefault();
+  }
 

@@ -1,0 +1,29 @@
+  static <T> ConfigurationException newDuplicateValuesException(
+      Map<T, Binding<T>> existingBindings,
+      Binding<T> binding,
+      final T newValue,
+      Binding<T> duplicateBinding) {
+    T oldValue = getOnlyElement(filter(existingBindings.keySet(), equalTo(newValue)));
+    String oldString = oldValue.toString();
+    String newString = newValue.toString();
+    if (Objects.equal(oldString, newString)) {
+      // When the value strings match, just show the source of the bindings
+      return new ConfigurationException(ImmutableSet.of(new Message(Errors.format(
+          "Set injection failed due to duplicated element \"%s\""
+              + "\n    Bound at %s\n    Bound at %s",
+          newValue,
+          duplicateBinding.getSource(),
+          binding.getSource()))));
+    } else {
+      // When the value strings don't match, include them both as they may be useful for debugging
+      return new ConfigurationException(ImmutableSet.of(new Message(Errors.format(
+          "Set injection failed due to multiple elements comparing equal:"
+              + "\n    \"%s\"\n        bound at %s"
+              + "\n    \"%s\"\n        bound at %s",
+          oldValue,
+          duplicateBinding.getSource(),
+          newValue,
+          binding.getSource()))));
+    }
+  }
+

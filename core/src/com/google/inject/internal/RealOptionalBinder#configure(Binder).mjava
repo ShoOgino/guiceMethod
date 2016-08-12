@@ -1,0 +1,17 @@
+  @Override public void configure(Binder binder) {
+    checkConfiguration(!isInitialized(), "OptionalBinder was already initialized");
+
+    binder.bind(optionalProviderKey).toProvider(new RealOptionalProviderProvider());
+
+    // Optional is immutable, so it's safe to expose Optional<Provider<T>> as
+    // Optional<javax.inject.Provider<T>> (since Guice provider implements javax Provider).
+    @SuppressWarnings({"unchecked", "cast"})
+    Key massagedOptionalProviderKey = (Key) optionalProviderKey;
+    binder.bind(optionalJavaxProviderKey).to(massagedOptionalProviderKey);
+
+    binder.bind(optionalKey).toProvider(new RealOptionalKeyProvider());
+
+    // Bind the java-8 types if we know them.
+    bindJava8Optional(binder);
+  }
+

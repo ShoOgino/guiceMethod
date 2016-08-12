@@ -1,4 +1,0 @@
-      @Override public V get() {
-        return delegate.get();
-      }
-

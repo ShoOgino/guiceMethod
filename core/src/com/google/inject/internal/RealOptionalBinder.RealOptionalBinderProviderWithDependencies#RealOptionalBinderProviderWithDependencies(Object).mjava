@@ -1,0 +1,4 @@
+    public RealOptionalBinderProviderWithDependencies(Object equality) {
+      this.equality = equality;
+    }
+

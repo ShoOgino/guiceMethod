@@ -1,4 +1,0 @@
-    @Override public LinkedBindingBuilder<T> setDefault() {
-      return binder.bind(getKeyForDefaultBinding());
-    }
-

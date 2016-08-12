@@ -1,0 +1,8 @@
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Multibinder) {
+      return delegate.equals(((Multibinder<?>) obj).delegate);
+    }
+    return false;
+  }
+

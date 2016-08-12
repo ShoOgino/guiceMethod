@@ -1,0 +1,4 @@
+    private RealDirectTypeProvider() {
+      super(typeKey);
+    }
+

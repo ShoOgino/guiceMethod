@@ -3,6 +3,6 @@
    * itself bound with no binding annotation.
    */
   public static <T> Multibinder<T> newSetBinder(Binder binder, TypeLiteral<T> type) {
-    return newRealSetBinder(binder, Key.get(type));
+    return newSetBinder(binder, Key.get(type));
   }
 
