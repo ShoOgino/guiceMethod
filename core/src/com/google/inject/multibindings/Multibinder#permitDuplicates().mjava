@@ -6,8 +6,5 @@
    * @return this multibinder
    * @since 3.0
    */
-  public Multibinder<T> permitDuplicates() {
-    delegate.permitDuplicates();
-    return this;
-  }
+  public abstract Multibinder<T> permitDuplicates();
 

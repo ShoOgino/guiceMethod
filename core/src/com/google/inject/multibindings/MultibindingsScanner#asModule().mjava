@@ -9,7 +9,7 @@
   public static Module asModule() {
     return new AbstractModule() {
       @Override protected void configure() {
-        binder().scanModulesForAnnotatedMethods(MultibindingsMethodScanner.INSTANCE);
+        binder().scanModulesForAnnotatedMethods(Scanner.INSTANCE);
       }
     };
   }

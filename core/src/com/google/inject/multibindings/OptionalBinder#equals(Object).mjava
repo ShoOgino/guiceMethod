@@ -1,8 +1,0 @@
-  @Override
-  public boolean equals(Object obj) {
-    if (obj instanceof OptionalBinder) {
-      return delegate.equals(((OptionalBinder<?>) obj).delegate);
-    }
-    return false;
-  }
-

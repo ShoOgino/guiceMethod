@@ -1,0 +1,11 @@
+  private static boolean isSourceEntry(Binding b, Source type) {
+    switch(type) {
+      case ACTUAL:
+        return b.getKey().getAnnotation() instanceof OptionalBinder.Actual;
+      case DEFAULT:
+        return b.getKey().getAnnotation() instanceof OptionalBinder.Default;
+      default:
+        throw new IllegalStateException("invalid type: " + type);
+    }
+  }
+

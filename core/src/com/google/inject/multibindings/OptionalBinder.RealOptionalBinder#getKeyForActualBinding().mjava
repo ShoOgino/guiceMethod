@@ -1,0 +1,6 @@
+    Key<T> getKeyForActualBinding() {
+      checkConfiguration(!isInitialized(), "already initialized");      
+      addDirectTypeBinding(binder);
+      return actualKey;
+    }
+

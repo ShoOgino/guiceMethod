@@ -1,0 +1,15 @@
+    public void configure(Binder binder) {
+      checkConfiguration(!isInitialized(), "Multibinder was already initialized");
+
+      binder.bind(setKey).toProvider(this);
+      binder.bind(collectionOfProvidersKey).toProvider(
+          new RealMultibinderCollectionOfProvidersProvider());
+
+      // The collection this exposes is internally an ImmutableList, so it's OK to massage
+      // the guice Provider to javax Provider in the value (since the guice Provider implements
+      // javax Provider).
+      @SuppressWarnings("unchecked")
+      Key key = (Key) collectionOfProvidersKey;
+      binder.bind(collectionOfJavaxProvidersKey).to(key);
+    }
+

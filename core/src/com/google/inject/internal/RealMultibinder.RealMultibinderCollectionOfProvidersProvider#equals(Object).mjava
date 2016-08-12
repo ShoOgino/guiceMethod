@@ -1,6 +1,0 @@
-    @Override public boolean equals(Object o) {
-      return o instanceof RealMultibinder.RealMultibinderCollectionOfProvidersProvider
-          && ((RealMultibinder.RealMultibinderCollectionOfProvidersProvider) o)
-              .getCollectionKey().equals(getCollectionKey());
-    }
-

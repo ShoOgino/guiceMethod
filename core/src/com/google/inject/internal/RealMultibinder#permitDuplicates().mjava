@@ -1,4 +1,0 @@
-  public void permitDuplicates() {
-    binder.install(new PermitDuplicatesModule(permitDuplicatesKey));
-  }
-

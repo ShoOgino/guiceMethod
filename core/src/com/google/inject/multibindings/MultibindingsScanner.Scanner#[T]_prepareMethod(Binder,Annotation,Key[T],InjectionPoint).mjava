@@ -1,0 +1,38 @@
+    @SuppressWarnings({"unchecked", "rawtypes"}) // mapKey doesn't know its key type
+    @Override
+    public <T> Key<T> prepareMethod(Binder binder, Annotation annotation, Key<T> key,
+        InjectionPoint injectionPoint) {
+      Method method = (Method) injectionPoint.getMember();
+      AnnotationOrError mapKey = findMapKeyAnnotation(binder, method);
+      if (annotation instanceof ProvidesIntoSet) {
+        if (mapKey.annotation != null) {
+          binder.addError("Found a MapKey annotation on non map binding at %s.", method);
+        }
+        return Multibinder.newRealSetBinder(binder, key).getKeyForNewItem();
+      } else if (annotation instanceof ProvidesIntoMap) {
+        if (mapKey.error) {
+          // Already failed on the MapKey, don't bother doing more work.
+          return key;
+        }
+        if (mapKey.annotation == null) {
+          // If no MapKey, make an error and abort.
+          binder.addError("No MapKey found for map binding at %s.", method);
+          return key;
+        }
+        TypeAndValue typeAndValue = typeAndValueOfMapKey(mapKey.annotation);
+        return MapBinder.newRealMapBinder(binder, typeAndValue.type, key)
+            .getKeyForNewValue(typeAndValue.value);
+      } else if (annotation instanceof ProvidesIntoOptional) {
+        if (mapKey.annotation != null) {
+          binder.addError("Found a MapKey annotation on non map binding at %s.", method);
+        }
+        switch (((ProvidesIntoOptional)annotation).value()) {
+          case DEFAULT:
+            return OptionalBinder.newRealOptionalBinder(binder, key).getKeyForDefaultBinding();
+          case ACTUAL:
+            return OptionalBinder.newRealOptionalBinder(binder, key).getKeyForActualBinding();
+        }
+      }
+      throw new IllegalStateException("Invalid annotation: " + annotation);
+    }
+

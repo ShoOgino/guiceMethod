@@ -1,4 +1,0 @@
-    public RealMapWithExtensionProvider(Object equality) {
-      super(equality);
-    }
-

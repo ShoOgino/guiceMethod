@@ -1,0 +1,10 @@
+    private RealMultibinder(Binder binder, TypeLiteral<T> elementType, Key<Set<T>> setKey) {
+      this.binder = checkNotNull(binder, "binder");
+      this.elementType = checkNotNull(elementType, "elementType");
+      this.setKey = checkNotNull(setKey, "setKey");
+      this.collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
+      this.collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
+      this.setName = Annotations.nameOf(setKey);
+      this.permitDuplicatesKey = Key.get(Boolean.class, named(toString() + " permits duplicates"));
+    }
+

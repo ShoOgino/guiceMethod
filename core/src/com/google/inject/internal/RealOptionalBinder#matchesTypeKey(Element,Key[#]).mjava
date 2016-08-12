@@ -1,9 +1,0 @@
-  /** Returns true if the key & element indicate they were bound by this OptionalBinder. */
-  private boolean matchesTypeKey(Element element, Key<?> elementKey) {
-    // Just doing .equals(typeKey) isn't enough, because the user can bind that themselves.
-    return elementKey.equals(typeKey)
-        && element instanceof ProviderInstanceBinding
-        && (((ProviderInstanceBinding) element)
-            .getUserSuppliedProvider() instanceof RealOptionalBinderProviderWithDependencies);
-  }
-

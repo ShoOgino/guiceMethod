@@ -1,7 +1,0 @@
-  public static <T> RealOptionalBinder<T> newRealOptionalBinder(Binder binder, Key<T> type) {
-    binder = binder.skipSources(RealOptionalBinder.class);
-    RealOptionalBinder<T> optionalBinder = new RealOptionalBinder<T>(binder, type);
-    binder.install(optionalBinder);
-    return optionalBinder;
-  }
-

@@ -1,4 +1,0 @@
-  public LinkedBindingBuilder<T> addBinding() {
-    return binder.bind(getKeyForNewItem());
-  }
-

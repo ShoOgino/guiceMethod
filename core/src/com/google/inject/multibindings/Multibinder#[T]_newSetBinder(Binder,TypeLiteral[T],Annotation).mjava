@@ -4,6 +4,6 @@
    */
   public static <T> Multibinder<T> newSetBinder(
       Binder binder, TypeLiteral<T> type, Annotation annotation) {
-    return newSetBinder(binder, Key.get(type, annotation));
+    return newRealSetBinder(binder, Key.get(type, annotation));
   }
 

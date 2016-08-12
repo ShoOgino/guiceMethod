@@ -1,0 +1,20 @@
+  public void testDifferentBindingsFail_actual() {
+    Module module = new AbstractModule() {
+      @Override protected void configure() {
+        OptionalBinder.newOptionalBinder(binder(), String.class).setBinding().toInstance("a");
+        OptionalBinder.newOptionalBinder(binder(), String.class).setBinding().toInstance("b");
+      }
+    };
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException ce) {
+      assertEquals(ce.getMessage(), 1, ce.getErrorMessages().size());
+      assertContains(ce.getMessage(),
+          "1) A binding to java.lang.String annotated with @" 
+              + Actual.class.getName() + " was already configured at "
+              + module.getClass().getName() + ".configure(",
+          "at " + module.getClass().getName() + ".configure(");
+    }
+  }  
+

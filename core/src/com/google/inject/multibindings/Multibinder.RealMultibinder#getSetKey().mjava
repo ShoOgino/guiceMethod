@@ -1,0 +1,4 @@
+    public Key<Set<T>> getSetKey() {
+      return setKey;
+    }
+

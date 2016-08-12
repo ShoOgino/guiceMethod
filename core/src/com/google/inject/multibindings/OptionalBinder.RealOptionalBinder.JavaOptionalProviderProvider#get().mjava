@@ -1,0 +1,17 @@
+      @Override public Object get() {
+        Optional<Provider<T>> optional = optionalProviderT.get();
+        try {
+          if (optional.isPresent()) {
+            return JAVA_OF_NULLABLE_METHOD.invoke(JAVA_OPTIONAL_CLASS, optional.get());
+          } else {
+            return JAVA_EMPTY_METHOD.invoke(JAVA_OPTIONAL_CLASS);
+          }
+        } catch (IllegalAccessException e) {
+          throw new SecurityException(e);
+        } catch (IllegalArgumentException e) {
+          throw new IllegalStateException(e);
+        } catch (InvocationTargetException e) {
+          throw Throwables.propagate(e.getCause());
+        }
+      }
+

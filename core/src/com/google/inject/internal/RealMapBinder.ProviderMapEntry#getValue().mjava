@@ -1,4 +1,0 @@
-    @Override public Provider<V> getValue() {
-      return provider;
-    }
-

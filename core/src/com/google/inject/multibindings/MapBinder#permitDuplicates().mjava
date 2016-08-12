@@ -13,8 +13,5 @@
    * @return this map binder
    * @since 3.0
    */
-  public MapBinder<K, V> permitDuplicates() {
-    delegate.permitDuplicates();
-    return this;
-  }
+  public abstract MapBinder<K, V> permitDuplicates();
 

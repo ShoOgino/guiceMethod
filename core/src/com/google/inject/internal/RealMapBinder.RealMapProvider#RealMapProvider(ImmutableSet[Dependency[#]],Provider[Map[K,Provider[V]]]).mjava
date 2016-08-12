@@ -1,8 +1,0 @@
-    private RealMapProvider(
-        ImmutableSet<Dependency<?>> dependencies,
-        Provider<Map<K, Provider<V>>> mapProvider) {
-      super(mapKey);
-      this.dependencies = dependencies;
-      this.mapProvider = mapProvider;
-    }
-

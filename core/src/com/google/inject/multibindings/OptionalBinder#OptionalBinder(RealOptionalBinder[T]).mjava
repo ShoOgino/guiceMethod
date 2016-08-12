@@ -1,4 +1,0 @@
-  private OptionalBinder(RealOptionalBinder<T> delegate) {
-    this.delegate = delegate;
-  }
-

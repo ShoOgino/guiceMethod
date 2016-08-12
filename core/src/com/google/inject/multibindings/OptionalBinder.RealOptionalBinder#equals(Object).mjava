@@ -1,0 +1,5 @@
+    @Override public boolean equals(Object o) {
+      return o instanceof RealOptionalBinder
+          && ((RealOptionalBinder<?>) o).typeKey.equals(typeKey);
+    }
+

@@ -1,0 +1,4 @@
+    @Override public LinkedBindingBuilder<T> setBinding() {
+      return binder.bind(getKeyForActualBinding());
+    }
+

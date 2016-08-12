@@ -1,0 +1,5 @@
+    Key<T> getKeyForNewItem() {
+      checkConfiguration(!isInitialized(), "Multibinder was already initialized");
+      return Key.get(elementType, new RealElement(setName, MULTIBINDER, ""));
+    }
+
