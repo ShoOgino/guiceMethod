@@ -1,0 +1,9 @@
+    private String getBindingName() {
+      // Lazily allocated, most instantiations will never need this because they are deduped during
+      // module installation.
+      if (bindingName == null) {
+        bindingName = Annotations.nameOf(key);
+      }
+      return bindingName;
+    }
+

@@ -2,11 +2,7 @@
     return Guice.createInjector(
         new AbstractModule() {
           protected void configure() {
-            bind(Foo.class).toProvider(new Provider<Foo>() {
-              public Foo get() {
-                return null;
-              }
-            });
+            bind(Foo.class).toProvider(Providers.<Foo>of(null));
           }
         });
   }

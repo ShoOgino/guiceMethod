@@ -1,0 +1,11 @@
+  /**
+   * Initialized bindings that need to be delayed until after all injection points and other 
+   * bindings are processed.  The main current usecase for this is resolving Optional 
+   * dependencies for OptionalBinder bindings.
+   */
+  void initializeDelayedBindings() {
+    for (Runnable initializer : delayedUninitializedBindings) {
+      initializer.run();
+    }
+  }
+

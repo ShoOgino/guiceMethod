@@ -1,0 +1,4 @@
+    BindingSelection(Key<T> key) {
+      this.key = key;
+    }
+

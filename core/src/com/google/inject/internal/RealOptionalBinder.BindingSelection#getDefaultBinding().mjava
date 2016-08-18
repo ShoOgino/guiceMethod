@@ -1,0 +1,5 @@
+    // Provide default implementations for most of the OptionalBinderBinding interface
+    BindingImpl<T> getDefaultBinding() {
+      return defaultBinding;
+    }
+

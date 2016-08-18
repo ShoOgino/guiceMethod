@@ -1,0 +1,4 @@
+    ImmutableSet<Dependency<?>> providerDependencies() {
+      return providerDependencies;
+    }
+

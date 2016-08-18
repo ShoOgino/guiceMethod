@@ -1,0 +1,5 @@
+    @Override protected Optional<Provider<T>> doProvision(
+        Errors errors, InternalContext context, Dependency<?> dependency) {
+      return value;
+    }
+

@@ -1,0 +1,11 @@
+  /**
+   * Returns java.util.Optional.empty() if the parameter is null, calls
+   * {@link #invokeJavaOptionalOf} otherwise.
+   */
+  private static Object invokeJavaOptionalOfNullable(Object o) {
+    if (o == null) {
+      return JAVA_OPTIONAL_EMPTY;
+    }
+    return invokeJavaOptionalOf(o);
+  }
+

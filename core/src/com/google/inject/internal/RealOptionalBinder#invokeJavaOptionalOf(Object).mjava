@@ -1,0 +1,13 @@
+  /** Invokes java.util.Optional.of. */
+  private static Object invokeJavaOptionalOf(Object o) {
+    try {
+      return JAVA_OPTIONAL_OF_METHOD.invoke(null, o);
+    } catch (IllegalAccessException e) {
+      throw new SecurityException(e);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalStateException(e);
+    } catch (InvocationTargetException e) {
+      throw Throwables.propagate(e.getCause());
+    }
+  }
+

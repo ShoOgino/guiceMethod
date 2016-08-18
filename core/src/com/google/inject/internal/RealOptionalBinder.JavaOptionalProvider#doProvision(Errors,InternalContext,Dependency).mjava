@@ -1,0 +1,20 @@
+    @Override
+    protected Object doProvision(Errors errors, InternalContext context, Dependency dependency)
+        throws ErrorsException {
+      InternalFactory<?> local = target;
+      if (local == null) {
+        return JAVA_OPTIONAL_EMPTY;
+      }
+      Dependency<?> localDependency = targetDependency;
+      Dependency previous = context.pushDependency(localDependency, getSource());
+      Object result;
+      try {
+        // See comments in RealOptionalKeyProvider, about how localDependency may be more specific
+        // than what we actually need.
+        result = local.get(errors.withSource(localDependency), context, localDependency, false);
+      } finally {
+        context.popStateAndSetDependency(previous);
+      }
+      return invokeJavaOptionalOfNullable(result);
+    }
+

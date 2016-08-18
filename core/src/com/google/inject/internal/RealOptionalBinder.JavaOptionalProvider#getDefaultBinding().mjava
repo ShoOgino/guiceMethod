@@ -1,4 +1,4 @@
-    @Override public Binding getDefaultBinding() {
-      return RealOptionalBinder.this.getDefaultBinding();
+    @Override public Binding<?> getDefaultBinding() {
+      return bindingSelection.getDefaultBinding();
     }
 

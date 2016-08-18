@@ -5,8 +5,8 @@
    * will be made available.
    */
   Key<T> getKeyForActualBinding() {
-    checkConfiguration(!isInitialized(), "already initialized");      
+    bindingSelection.checkNotInitialized();
     addDirectTypeBinding(binder);
-    return actualKey;
+    return bindingSelection.getKeyForActualBinding();
   }
 

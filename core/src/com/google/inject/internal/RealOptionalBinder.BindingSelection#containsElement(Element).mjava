@@ -1,0 +1,21 @@
+    /** Implementation of {@link OptionalBinderBinding#containsElement}. */
+    boolean containsElement(Element element) {
+      // All of our bindings are ProviderInstanceBindings whose providers extend
+      // RealOptionalBinderProviderWithDependencies and have 'this' as its binding selection.
+      if (element instanceof ProviderInstanceBinding) {
+        javax.inject.Provider<?> providerInstance =
+            ((ProviderInstanceBinding<?>) element).getUserSuppliedProvider();
+        if (providerInstance instanceof RealOptionalBinderProviderWithDependencies) {
+          return ((RealOptionalBinderProviderWithDependencies<?, ?>) providerInstance)
+              .bindingSelection.equals(this);
+        }
+      }
+      if (element instanceof Binding) {
+        Key<?> elementKey = ((Binding) element).getKey();
+        // if it isn't one of the things we bound directly it might be an actual or default key
+        return elementKey.equals(getKeyForActualBinding())
+            || elementKey.equals(getKeyForDefaultBinding());
+      }
+      return false; // cannot match;
+    }
+

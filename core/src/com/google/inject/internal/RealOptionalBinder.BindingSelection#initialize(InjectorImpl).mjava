@@ -1,9 +1,13 @@
-    @Toolable @Inject void initialize(Injector injector) {
-      RealOptionalBinder.this.binder = null;
-      actualBinding = injector.getExistingBinding(actualKey);
-      defaultBinding = injector.getExistingBinding(defaultKey);
-      Binding<T> userBinding = injector.getExistingBinding(typeKey);
-      Binding<T> binding = null;
+    void initialize(InjectorImpl injector) {
+      // Every one of our providers will call this method, so only execute the logic once.
+      if (initialized) {
+        return;
+      }
+
+      actualBinding = injector.getExistingBinding(getKeyForActualBinding());
+      defaultBinding = injector.getExistingBinding(getKeyForDefaultBinding());
+      // We should never create Jit bindings, but we can use them if some other binding created it.
+      BindingImpl<T> userBinding = injector.getExistingBinding(key);
       if (actualBinding != null) {
         // TODO(sameb): Consider exposing an option that will allow
         // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
@@ -19,17 +23,15 @@
         binding = userBinding;
         actualBinding = userBinding;
       }
-        
       if (binding != null) {
-        optional = Optional.of(binding.getProvider());
-        RealOptionalBinder.this.dependencies =
+        dependencies =
             ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
-        RealOptionalBinder.this.providerDependencies =
+        providerDependencies =
             ImmutableSet.<Dependency<?>>of(Dependency.get(providerOf(binding.getKey())));
       } else {
-        optional = Optional.absent();
-        RealOptionalBinder.this.dependencies = ImmutableSet.of();
-        RealOptionalBinder.this.providerDependencies = ImmutableSet.of();
+        dependencies = ImmutableSet.of();
+        providerDependencies = ImmutableSet.of();
       }
+      initialized = true;
     }
 

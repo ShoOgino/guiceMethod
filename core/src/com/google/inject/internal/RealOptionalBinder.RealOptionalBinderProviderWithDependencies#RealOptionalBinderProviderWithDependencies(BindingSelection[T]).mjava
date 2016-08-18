@@ -1,0 +1,8 @@
+    RealOptionalBinderProviderWithDependencies(BindingSelection<T> bindingSelection) {
+      // We need delayed initialization so we can detect jit bindings created by other bindings
+      // while not also creating jit bindings ourselves.  This ensures we only pick up user bindings
+      // if the binding would have existed in the injector statically.
+      super(InitializationTiming.DELAYED);
+      this.bindingSelection = bindingSelection;
+    }
+

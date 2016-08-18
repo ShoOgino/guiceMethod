@@ -1,0 +1,10 @@
+    @Override
+    void doInitialize() {
+      BindingImpl<T> targetBinding = bindingSelection.getBinding();
+      // we only install this factory if they call setBinding()/setDefault() so we know that
+      // targetBinding will be non-null.
+      this.targetKey = targetBinding.getKey();
+      this.targetSource = targetBinding.getSource();
+      this.targetFactory = targetBinding.getInternalFactory();
+    }
+

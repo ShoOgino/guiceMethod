@@ -1,12 +1,8 @@
-    protected void scheduleInitialization(final BindingImpl<?> binding) {
-      bindingData.addUninitializedBinding(new Runnable() {
-        public void run() {
-          try {
-            binding.getInjector().initializeBinding(binding, errors.withSource(source));
-          } catch (ErrorsException e) {
-            errors.merge(e.getErrors());
-          }
-        }
-      });
+    /**
+     * Schedule initialization of this binding to occur immediately after all bindings have been
+     * initialially processed.
+     */
+    protected void scheduleInitialization(BindingImpl<?> binding) {
+      bindingData.addUninitializedBinding(asRunnable(binding));
     }
 

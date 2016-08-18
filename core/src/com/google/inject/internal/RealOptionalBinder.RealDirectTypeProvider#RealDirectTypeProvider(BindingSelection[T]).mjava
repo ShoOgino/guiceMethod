@@ -1,0 +1,4 @@
+    RealDirectTypeProvider(BindingSelection<T> bindingSelection) {
+      super(bindingSelection);
+    }
+

@@ -3,6 +3,7 @@
    * bindings.
    */
   private void addDirectTypeBinding(Binder binder) {
-    binder.bind(typeKey).toProvider(new RealDirectTypeProvider());
+    binder.bind(bindingSelection.getDirectKey())
+        .toProvider(new RealDirectTypeProvider<T>(bindingSelection));
   }
 

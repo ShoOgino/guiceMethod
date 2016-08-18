@@ -1,0 +1,7 @@
+    Key<T> getKeyForActualBinding() {
+      if (actualBindingKey == null) {
+        actualBindingKey = Key.get(key.getTypeLiteral(), new ActualImpl(getBindingName()));
+      }
+      return actualBindingKey;
+    }
+

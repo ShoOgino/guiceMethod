@@ -1,0 +1,4 @@
+  InitializationTiming getInitializationTiming() {
+    return originalFactory.initializationTiming;
+  }
+
