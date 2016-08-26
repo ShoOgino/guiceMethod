@@ -1,0 +1,4 @@
+    @Inject void setter(String dummy) {
+      setterHasBeenCalled = true;
+    }
+
