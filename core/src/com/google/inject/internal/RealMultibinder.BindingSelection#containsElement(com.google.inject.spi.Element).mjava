@@ -1,0 +1,13 @@
+    boolean containsElement(com.google.inject.spi.Element element) {
+      if (element instanceof Binding) {
+        Binding<?> binding = (Binding<?>) element;
+        return keyMatches(binding.getKey())
+            || binding.getKey().equals(getPermitDuplicatesKey())
+            || binding.getKey().equals(setKey)
+            || binding.getKey().equals(collectionOfProvidersKey)
+            || binding.getKey().equals(collectionOfJavaxProvidersKey);
+      } else {
+        return false;
+      }
+    }
+

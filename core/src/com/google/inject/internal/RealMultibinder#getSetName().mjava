@@ -1,4 +1,4 @@
-  public String getSetName() {
-    return setName;
+  String getSetName() {
+    return bindingSelection.getSetName();
   }
 

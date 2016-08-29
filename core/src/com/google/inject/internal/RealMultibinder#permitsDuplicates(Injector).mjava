@@ -1,4 +1,4 @@
-  public boolean permitsDuplicates(Injector injector) {
-    return injector.getBindings().containsKey(permitDuplicatesKey);
+  boolean permitsDuplicates(Injector injector) {
+    return bindingSelection.permitsDuplicates(injector);
   }
 

@@ -1,8 +1,9 @@
-  /** 
+  /**
    * Adds a new entry to the set and returns the key for it.
    */
   Key<T> getKeyForNewItem() {
-    checkConfiguration(!isInitialized(), "Multibinder was already initialized");
-    return Key.get(elementType, new RealElement(setName, MULTIBINDER, ""));
+    checkConfiguration(!bindingSelection.isInitialized(), "Multibinder was already initialized");
+    return Key.get(bindingSelection.getElementTypeLiteral(),
+        new RealElement(bindingSelection.getSetName(), MULTIBINDER, ""));
   }
 

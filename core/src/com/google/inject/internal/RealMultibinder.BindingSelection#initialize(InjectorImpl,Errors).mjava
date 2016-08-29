@@ -1,0 +1,48 @@
+    void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+      // This will be called multiple times, once by each Factory. We only want
+      // to do the work to initialize everything once, so guard this code with
+      // isInitialized.
+      if (isInitialized) {
+        return;
+      }
+      List<Binding<T>> bindings = Lists.newArrayList();
+      Set<Indexer.IndexedBinding> index = Sets.newHashSet();
+      Indexer indexer = new Indexer(injector);
+      List<Dependency<?>> dependencies = Lists.newArrayList();
+      List<Dependency<?>> providerDependencies = Lists.newArrayList();
+      for (Binding<?> entry : injector.findBindingsByType(elementType)) {
+        if (keyMatches(entry.getKey())) {
+          @SuppressWarnings("unchecked") // protected by findBindingsByType()
+          Binding<T> binding = (Binding<T>) entry;
+          if (index.add(binding.acceptTargetVisitor(indexer))) {
+            // TODO(lukes): most of these are linked bindings since user bindings are linked to
+            // a user binding through the @Element annotation.  Since this is an implementation
+            // detail we could 'dereference' the @Element if it is a LinkedBinding and avoid
+            // provisioning through the FactoryProxy at runtime.
+            // Ditto for OptionalBinder/MapBinder
+            bindings.add(binding);
+            Key<T> key = binding.getKey();
+            // TODO(lukes): we should mark this as a non-nullable dependency since we don't accept
+            // null.
+            // Add a dependency on Key<T>
+            dependencies.add(Dependency.get(key));
+            // and add a dependency on Key<Provider<T>>
+            providerDependencies.add(
+                Dependency.get(key.ofType(Types.providerOf(key.getTypeLiteral().getType()))));
+          }
+        }
+      }
+
+      this.bindings = ImmutableList.copyOf(bindings);
+      this.dependencies = ImmutableSet.copyOf(dependencies);
+      this.providerDependencies = ImmutableSet.copyOf(providerDependencies);
+      this.permitDuplicates = permitsDuplicates(injector);
+      // This is safe because all our dependencies are assignable to T and we never assign to
+      // elements of this array.
+      @SuppressWarnings("unchecked")
+      SingleParameterInjector<T>[] typed =
+          (SingleParameterInjector<T>[]) injector.getParametersInjectors(dependencies, errors);
+      this.parameterinjectors = typed;
+      isInitialized = true;
+    }
+

@@ -1,0 +1,27 @@
+    @Override
+    protected Set<T> doProvision(Errors errors, InternalContext context, Dependency<?> dependency)
+        throws ErrorsException {
+      SingleParameterInjector<T>[] localInjectors = injectors;
+      if (localInjectors == null) {
+        // if localInjectors == null, then we have no bindings so return the empty set.
+        return ImmutableSet.of();
+      }
+      boolean localPermitsDuplicates = permitDuplicates;
+      int size = localInjectors.length;
+      LinkedHashSet<T> result = Sets.newLinkedHashSetWithExpectedSize(size);
+      for (int i = 0; i < size; i++) {
+        SingleParameterInjector<T> parameterInjector = localInjectors[i];
+        T newValue = parameterInjector.inject(errors, context);
+        if (newValue == null) {
+          errors.addMessage("Set injection failed due to null element bound at: %s",
+              bindings.get(i).getSource());
+          throw errors.toException();
+        }
+        boolean uniqueValue = result.add(newValue);
+        if (!uniqueValue && !localPermitsDuplicates) {
+          throw newDuplicateValuesException(bindings, result, bindings.get(i), newValue, errors);
+        }
+      }
+      return Collections.unmodifiableSet(result);
+    }
+

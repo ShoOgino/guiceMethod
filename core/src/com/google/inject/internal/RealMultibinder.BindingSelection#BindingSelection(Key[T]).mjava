@@ -1,0 +1,5 @@
+    BindingSelection(Key<T> key) {
+      this.setKey = key.ofType(setOf(key.getTypeLiteral()));
+      this.elementType = key.getTypeLiteral();
+    }
+

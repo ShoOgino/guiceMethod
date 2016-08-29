@@ -1,5 +1,5 @@
   @Override public boolean equals(Object o) {
     return o instanceof RealMultibinder
-        && ((RealMultibinder<?>) o).setKey.equals(setKey);
+        && ((RealMultibinder<?>) o).bindingSelection.equals(bindingSelection);
   }
 

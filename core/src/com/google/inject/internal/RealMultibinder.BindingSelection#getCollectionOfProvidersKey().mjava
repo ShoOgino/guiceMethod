@@ -1,0 +1,8 @@
+    Key<Collection<Provider<T>>> getCollectionOfProvidersKey() {
+      Key<Collection<Provider<T>>> local = collectionOfProvidersKey;
+      if (local == null) {
+        local = collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
+      }
+      return local;
+    }
+

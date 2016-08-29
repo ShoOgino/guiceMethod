@@ -1,4 +1,4 @@
-  public Key<Set<T>> getSetKey() {
-    return setKey;
+  Key<Set<T>> getSetKey() {
+    return bindingSelection.getSetKey();
   }
 
