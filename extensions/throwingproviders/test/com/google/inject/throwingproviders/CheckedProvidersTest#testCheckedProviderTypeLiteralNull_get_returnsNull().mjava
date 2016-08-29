@@ -1,7 +1,6 @@
-  public void testCheckedProviderTypeLiteralNull_get_returnsNull() {
+  public void testCheckedProviderTypeLiteralNull_get_returnsNull() throws Exception {
     StringCheckedProvider provider =
         CheckedProviders.of(TypeLiteral.get(StringCheckedProvider.class), null);
-
-    assertThat(provider).providedValue().isNull();
+    assertThat(provider.get()).isNull();
   }
 

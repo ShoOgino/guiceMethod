@@ -1,6 +1,5 @@
-  public void testCheckedProviderClassNull_get_returnsNull() {
+  public void testCheckedProviderClassNull_get_returnsNull() throws Exception {
     StringCheckedProvider provider = CheckedProviders.of(StringCheckedProvider.class, null);
-
-    assertThat(provider).providedValue().isNull();
+    assertThat(provider.get()).isNull();
   }
 
