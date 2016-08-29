@@ -4,6 +4,5 @@
     super(injector, key, source, internalFactory, Scoping.EAGER_SINGLETON);
     this.injectionPoints = ImmutableSet.copyOf(injectionPoints);
     this.instance = instance;
-    this.provider = Providers.of(instance);
   }
 

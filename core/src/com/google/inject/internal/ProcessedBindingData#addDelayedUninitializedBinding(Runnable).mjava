@@ -1,0 +1,4 @@
+  void addDelayedUninitializedBinding(Runnable runnable) {
+    delayedUninitializedBindings.add(runnable);
+  }
+

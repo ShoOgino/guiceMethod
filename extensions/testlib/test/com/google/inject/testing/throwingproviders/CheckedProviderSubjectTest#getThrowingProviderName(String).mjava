@@ -1,0 +1,4 @@
+  private String getThrowingProviderName(String throwing) {
+    return String.format("generated CheckedProvider throwing <%s>", throwing);
+  }
+

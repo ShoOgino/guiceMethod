@@ -1,0 +1,8 @@
+    @Override void doInitialize() {
+      if (bindingSelection.getBinding() == null) {
+        value = Optional.absent();
+      } else {
+        value = Optional.of(bindingSelection.getBinding().getProvider());
+      }
+    }
+

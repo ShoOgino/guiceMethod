@@ -1,0 +1,2 @@
+    protected abstract T invokeGet(Object proxy, Method method) throws Throwable;
+

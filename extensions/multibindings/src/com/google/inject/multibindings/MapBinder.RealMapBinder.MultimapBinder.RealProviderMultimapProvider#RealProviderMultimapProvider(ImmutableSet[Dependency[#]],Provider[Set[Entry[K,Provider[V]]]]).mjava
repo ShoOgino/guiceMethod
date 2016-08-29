@@ -1,7 +1,0 @@
-        private RealProviderMultimapProvider(ImmutableSet<Dependency<?>> dependencies,
-            Provider<Set<Entry<K, Provider<V>>>> entrySetProvider) {
-          super(multimapKey);
-          this.dependencies = dependencies;
-          this.entrySetProvider = entrySetProvider;
-        }
-

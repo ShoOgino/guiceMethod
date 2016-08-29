@@ -1,0 +1,5 @@
+    SingleParameterInjector<T>[] getParameterInjectors() {
+      checkConfiguration(isInitialized, "not initialized");
+      return parameterinjectors;
+    }
+

@@ -1,0 +1,4 @@
+    RealOptionalProviderProvider(BindingSelection<T> bindingSelection) {
+      super(bindingSelection);
+    }
+

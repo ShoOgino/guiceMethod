@@ -1,0 +1,5 @@
+    @Override
+    public TypeLiteral<?> getElementTypeLiteral() {
+      return bindingSelection.getElementTypeLiteral();
+    }
+

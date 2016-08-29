@@ -1,0 +1,10 @@
+    @Override
+    void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+      bindingSelection.initialize(injector, errors);
+      ImmutableList.Builder<Provider<T>> providers = ImmutableList.builder();
+      for (Binding<T> binding : bindingSelection.getBindings()) {
+        providers.add(binding.getProvider());
+      }
+      this.collectionOfProviders = providers.build();
+    }
+

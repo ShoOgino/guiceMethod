@@ -1,0 +1,37 @@
+    void initialize(InjectorImpl injector) {
+      // Every one of our providers will call this method, so only execute the logic once.
+      if (initialized) {
+        return;
+      }
+
+      actualBinding = injector.getExistingBinding(getKeyForActualBinding());
+      defaultBinding = injector.getExistingBinding(getKeyForDefaultBinding());
+      // We should never create Jit bindings, but we can use them if some other binding created it.
+      BindingImpl<T> userBinding = injector.getExistingBinding(key);
+      if (actualBinding != null) {
+        // TODO(sameb): Consider exposing an option that will allow
+        // ACTUAL to fallback to DEFAULT if ACTUAL's provider returns null.
+        // Right now, an ACTUAL binding can convert from present -> absent
+        // if it's bound to a provider that returns null.
+        binding = actualBinding;
+      } else if (defaultBinding != null) {
+        binding = defaultBinding;
+      } else if (userBinding != null) {
+        // If neither the actual or default is set, then we fallback
+        // to the value bound to the type itself and consider that the
+        // "actual binding" for the SPI.
+        binding = userBinding;
+        actualBinding = userBinding;
+      }
+      if (binding != null) {
+        dependencies =
+            ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
+        providerDependencies =
+            ImmutableSet.<Dependency<?>>of(Dependency.get(providerOf(binding.getKey())));
+      } else {
+        dependencies = ImmutableSet.of();
+        providerDependencies = ImmutableSet.of();
+      }
+      initialized = true;
+    }
+

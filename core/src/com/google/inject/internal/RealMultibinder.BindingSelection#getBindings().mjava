@@ -1,0 +1,5 @@
+    ImmutableList<Binding<T>> getBindings() {
+      checkConfiguration(isInitialized, "not initialized");
+      return bindings;
+    }
+

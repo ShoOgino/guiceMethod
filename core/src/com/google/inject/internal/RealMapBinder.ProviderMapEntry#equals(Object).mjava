@@ -1,0 +1,9 @@
+     @Override public boolean equals(Object obj) {
+       if (obj instanceof Map.Entry) {
+         Map.Entry o = (Map.Entry)obj;
+         return Objects.equal(key, o.getKey())
+             && Objects.equal(provider, o.getValue());
+       }
+       return false;
+    }
+

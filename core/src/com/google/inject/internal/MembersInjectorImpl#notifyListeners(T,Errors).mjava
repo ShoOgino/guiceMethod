@@ -1,6 +1,8 @@
   void notifyListeners(T instance, Errors errors) throws ErrorsException {
     int numErrorsBefore = errors.size();
-    for (InjectionListener<? super T> injectionListener : injectionListeners) {
+    // optimization: use manual for/each to save allocating an iterator here
+    for (int i = 0; i < injectionListeners.size(); i++) {
+      InjectionListener<? super T> injectionListener = injectionListeners.get(i);
       try {
         injectionListener.afterInjection(instance);
       } catch (RuntimeException e) {

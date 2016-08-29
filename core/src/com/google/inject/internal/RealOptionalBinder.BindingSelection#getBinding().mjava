@@ -1,0 +1,4 @@
+    BindingImpl<T> getBinding() {
+      return binding;
+    }
+

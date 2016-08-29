@@ -1,0 +1,7 @@
+    @Override void doInitialize() {
+      if (bindingSelection.getBinding() != null) {
+        delegate = bindingSelection.getBinding().getInternalFactory();
+        targetDependency = bindingSelection.getDependency();
+      }
+    }
+

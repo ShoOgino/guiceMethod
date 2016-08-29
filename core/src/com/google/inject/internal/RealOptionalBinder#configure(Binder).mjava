@@ -1,0 +1,35 @@
+  @Override public void configure(Binder binder) {
+    bindingSelection.checkNotInitialized();
+    Key<T> key = bindingSelection.getDirectKey();
+    // Every OptionalBinder get's the following types bound
+    // * Optional<Provider<T>>
+    // * Optional<javax.inject.Provider<T>>
+    // * Optional<T>
+    // If setDefault() or setBinding() is called then also
+    // * T is bound
+    // If java.util.Optional is on the classpath (because this is a jdk8+ vm), then you also get
+    // * java.util.Optional<Provider<T>>
+    // * java.util.Optional<javax.inject.Provider<T>>
+    // * java.util.Optional<T>
+    InternalProviderInstanceBindingImpl.Factory<Optional<Provider<T>>> optionalProviderFactory =
+        new RealOptionalProviderProvider<T>(bindingSelection);
+    binder.bind(key.ofType(optionalOfProvider(key.getTypeLiteral())))
+        .toProvider(optionalProviderFactory);
+
+    // Provider is assignable to javax.inject.Provider and the provider that the factory contains
+    // cannot be modified so we can use some rawtypes hackery to share the same implementation.
+    @SuppressWarnings("unchecked")
+    InternalProviderInstanceBindingImpl.Factory<Optional<javax.inject.Provider<T>>>
+        optionalJavaxProviderFactory =
+            (InternalProviderInstanceBindingImpl.Factory) optionalProviderFactory;
+    binder.bind(key.ofType(optionalOfJavaxProvider(key.getTypeLiteral())))
+        .toProvider(optionalJavaxProviderFactory);
+
+    Key<Optional<T>> optionalKey = key.ofType(optionalOf(key.getTypeLiteral()));
+    binder.bind(optionalKey)
+        .toProvider(new RealOptionalKeyProvider<T>(bindingSelection, optionalKey));
+
+    // Bind the java-8 types if we know them.
+    bindJava8Optional(binder);
+  }
+

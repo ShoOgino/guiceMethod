@@ -1,0 +1,8 @@
+  /**
+   * Returns a new multibinder that collects instances of {@code type} in a {@link Set} that is
+   * itself bound with no binding annotation.
+   */
+  public static <T> Multibinder<T> newSetBinder(Binder binder, Class<T> type) {
+    return newSetBinder(binder, Key.get(type));
+  }
+

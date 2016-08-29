@@ -1,0 +1,14 @@
+  /** 
+   * Adds a binding to the map for the given key.
+   */
+  Key<V> getKeyForNewValue(K key) {
+    checkNotNull(key, "key");
+    checkConfiguration(!isInitialized(), "MapBinder was already initialized");
+
+    Key<V> valueKey = Key.get(valueType,
+        new RealElement(entrySetBinder.getSetName(), MAPBINDER, keyType.toString()));
+    entrySetBinder.addBinding().toProvider(new ProviderMapEntry<K, V>(
+        key, binder.getProvider(valueKey), valueKey));
+    return valueKey;
+  }
+

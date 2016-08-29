@@ -1,4 +1,0 @@
-    public Object get(int i) {
-      return elements[i];
-    }
-

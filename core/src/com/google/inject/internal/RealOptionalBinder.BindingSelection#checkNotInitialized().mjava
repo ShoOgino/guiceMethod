@@ -1,0 +1,4 @@
+    void checkNotInitialized() {
+      checkConfiguration(!initialized, "already initialized");
+    }
+

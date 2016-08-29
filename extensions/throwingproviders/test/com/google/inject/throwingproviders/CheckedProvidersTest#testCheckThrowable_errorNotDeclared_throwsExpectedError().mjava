@@ -1,0 +1,12 @@
+  public void testCheckThrowable_errorNotDeclared_throwsExpectedError() throws Exception {
+    FooCheckedProvider provider =
+        CheckedProviders.throwing(FooCheckedProvider.class, ExpectedError.class);
+
+    try {
+      provider.get();
+      fail("Expected an exception to be thrown");
+    } catch (ExpectedError e) {
+      // expected
+    }
+  }
+

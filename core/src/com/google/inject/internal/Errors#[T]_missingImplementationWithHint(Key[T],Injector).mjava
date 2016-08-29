@@ -1,0 +1,71 @@
+  /** Within guice's core, allow for better missing binding messages */
+  <T> Errors missingImplementationWithHint(Key<T> key, Injector injector) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(format("No implementation for %s was bound.", key));
+
+    // Keys which have similar strings as the desired key
+    List<String> possibleMatches = new ArrayList<String>();
+
+    // Check for other keys that may have the same type,
+    // but not the same annotation
+    TypeLiteral<T> type = key.getTypeLiteral();
+    List<Binding<T>> sameTypes = injector.findBindingsByType(type);
+    if (!sameTypes.isEmpty()) {
+      sb.append(format("%n  Did you mean?"));
+      int howMany = Math.min(sameTypes.size(), MAX_MATCHING_TYPES_REPORTED);
+      for (int i = 0; i < howMany; ++i) {
+        // TODO: Look into a better way to prioritize suggestions. For example, possbily
+        // use levenshtein distance of the given annotation vs actual annotation.
+        sb.append(format("%n    * %s", sameTypes.get(i).getKey()));
+      }
+      int remaining = sameTypes.size() - MAX_MATCHING_TYPES_REPORTED;
+      if (remaining > 0) {
+        String plural = (remaining == 1) ? "" : "s";
+        sb.append(format("%n    %d more binding%s with other annotations.", remaining, plural));
+      }
+    } else {
+      // For now, do a simple substring search for possibilities. This can help spot
+      // issues when there are generics being used (such as a wrapper class) and the
+      // user has forgotten they need to bind based on the wrapper, not the underlying
+      // class. In the future, consider doing a strict in-depth type search.
+      // TODO: Look into a better way to prioritize suggestions. For example, possbily
+      // use levenshtein distance of the type literal strings.
+      String want = type.toString();
+      Map<Key<?>, Binding<?>> bindingMap = injector.getAllBindings();
+      for (Key<?> bindingKey : bindingMap.keySet()) {
+        String have = bindingKey.getTypeLiteral().toString();
+        if (have.contains(want) || want.contains(have)) {
+          Formatter fmt = new Formatter();
+          formatSource(fmt, bindingMap.get(bindingKey).getSource());
+          String match = String.format("%s bound%s", convert(bindingKey),
+              fmt.toString());
+          possibleMatches.add(match);
+          // TODO: Consider a check that if there are more than some number of results,
+          // don't suggest any.
+          if (possibleMatches.size() > MAX_RELATED_TYPES_REPORTED) {
+            // Early exit if we have found more than we need.
+            break;
+          }
+        }
+      }
+
+      if ((possibleMatches.size() > 0) && (possibleMatches.size() <= MAX_RELATED_TYPES_REPORTED)) {
+        sb.append(format("%n  Did you mean?"));
+        for (String possibleMatch : possibleMatches) {
+          sb.append(format("%n    %s", possibleMatch));
+        }
+      }
+    }
+
+    // If where are no possibilities to suggest, then handle the case of missing
+    // annotations on simple types. This is usually a bad idea.
+    if (sameTypes.isEmpty() && possibleMatches.isEmpty() && key.getAnnotation() == null
+        && COMMON_AMBIGUOUS_TYPES.contains(key.getTypeLiteral().getRawType())) {
+      // We don't recommend using such simple types without annotations.
+      sb.append(format("%nThe key seems very generic, did you forget an annotation?"));
+    }
+
+    return addMessage(sb.toString());
+  }
+

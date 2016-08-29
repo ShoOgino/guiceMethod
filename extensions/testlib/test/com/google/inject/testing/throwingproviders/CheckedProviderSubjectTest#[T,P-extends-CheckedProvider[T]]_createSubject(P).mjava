@@ -1,0 +1,4 @@
+  private <T, P extends CheckedProvider<T>> CheckedProviderSubject<T, P> createSubject(P provider) {
+    return new CheckedProviderSubject<T, P>(new ThrowingFailureStrategy(), provider);
+  }
+

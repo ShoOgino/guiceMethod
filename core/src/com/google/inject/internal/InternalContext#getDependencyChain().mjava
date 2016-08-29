@@ -1,15 +1,15 @@
-  /** Returns the current dependency chain (all the state). */
-  public List<DependencyAndSource> getDependencyChain() {
+  /** Returns the current dependency chain (all the state stored in the dependencyStack). */
+  List<DependencyAndSource> getDependencyChain() {
     ImmutableList.Builder<DependencyAndSource> builder = ImmutableList.builder();
-    for (int i = 0; i < state.size(); i += 2) {
-      Object evenEntry = state.get(i);
+    for (int i = 0; i < dependencyStackSize; i += 2) {
+      Object evenEntry = dependencyStack[i];
       Dependency<?> dependency;
       if (evenEntry instanceof Key) {
         dependency = Dependency.get((Key<?>) evenEntry);
       } else {
         dependency = (Dependency<?>) evenEntry;
       }
-      builder.add(new DependencyAndSource(dependency, state.get(i + 1)));
+      builder.add(new DependencyAndSource(dependency, dependencyStack[i + 1]));
     }
     return builder.build();
   }

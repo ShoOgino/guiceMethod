@@ -1,0 +1,4 @@
+    ImmutableSet<Dependency<?>> dependencies() {
+      return dependencies;
+    }
+

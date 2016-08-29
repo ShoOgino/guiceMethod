@@ -1,0 +1,7 @@
+    private boolean isGetMethod(Method method) {
+      // Since Java does not allow multiple methods with the same name and number & type of
+      // arguments, this is all we need to check to see if it is an overriding method of
+      // CheckedProvider#get().
+      return method.getName().equals("get") && method.getParameterTypes().length == 0;
+    }
+

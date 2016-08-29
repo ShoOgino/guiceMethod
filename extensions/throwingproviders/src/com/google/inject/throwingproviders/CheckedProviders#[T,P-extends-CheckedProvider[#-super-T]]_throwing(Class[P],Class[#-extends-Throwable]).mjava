@@ -1,0 +1,12 @@
+  /**
+   * Returns a {@link CheckedProvider} which always throws exceptions.
+   *
+   * @param providerType the type of the {@link CheckedProvider} to return
+   * @param throwable the type of the {@link Throwable} to throw
+   * @see #throwing(TypeLiteral, Class)
+   */
+  public static <T, P extends CheckedProvider<? super T>> P throwing(
+      Class<P> providerType, Class<? extends Throwable> throwable) {
+    return throwing(TypeLiteral.get(providerType), throwable);
+  }
+

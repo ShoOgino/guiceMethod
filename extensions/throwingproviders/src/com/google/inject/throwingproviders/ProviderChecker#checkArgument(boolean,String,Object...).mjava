@@ -1,0 +1,6 @@
+  private static void checkArgument(boolean condition, String messageFormat, Object... args) {
+    if (!condition) {
+      throw new IllegalArgumentException(Errors.format(messageFormat, args));
+    }
+  }
+

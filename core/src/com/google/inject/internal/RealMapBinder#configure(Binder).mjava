@@ -1,0 +1,31 @@
+  @Override public void configure(Binder binder) {
+    checkConfiguration(!isInitialized(), "MapBinder was already initialized");
+
+    ImmutableSet<Dependency<?>> dependencies
+        = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
+
+    // Binds a Map<K, Provider<V>> from a collection of Set<Entry<K, Provider<V>>.
+    Provider<Set<Entry<K, Provider<V>>>> entrySetProvider = binder
+        .getProvider(entrySetBinder.getSetKey());
+
+    binder.bind(providerMapKey).toProvider(
+        new RealProviderMapProvider(dependencies, entrySetProvider));
+
+    // The map this exposes is internally an ImmutableMap, so it's OK to massage
+    // the guice Provider to javax Provider in the value (since Guice provider
+    // implements javax Provider).
+    @SuppressWarnings("unchecked")
+    Key massagedProviderMapKey = (Key)providerMapKey;
+    binder.bind(javaxProviderMapKey).to(massagedProviderMapKey);
+
+    Provider<Map<K, Provider<V>>> mapProvider = binder.getProvider(providerMapKey);
+    binder.bind(mapKey).toProvider(new RealMapProvider(dependencies, mapProvider));
+
+    // The Map.Entries are all ProviderMapEntry instances which do not allow setValue, so it is
+    // safe to massage the return type like this
+    @SuppressWarnings("unchecked")
+    Key<Set<Entry<K,javax.inject.Provider<V>>>> massagedEntrySetProviderKey =
+        (Key) entrySetBinder.getSetKey();
+    binder.bind(entrySetJavaxProviderKey).to(massagedEntrySetProviderKey);
+  }
+

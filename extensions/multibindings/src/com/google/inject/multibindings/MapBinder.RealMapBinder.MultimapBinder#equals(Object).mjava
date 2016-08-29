@@ -1,5 +1,0 @@
-      @Override public boolean equals(Object o) {
-        return o instanceof MultimapBinder
-            && ((MultimapBinder<?, ?>) o).multimapKey.equals(multimapKey);
-      }
-

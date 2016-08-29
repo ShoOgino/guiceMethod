@@ -1,4 +1,0 @@
-      @Override public TypeLiteral<?> getKeyTypeLiteral() {
-        return keyType;
-      }
-

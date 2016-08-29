@@ -1,4 +1,4 @@
-  public Dependency<?> getDependency() {
+  Dependency<?> getDependency() {
     return dependency;
   }
 

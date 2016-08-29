@@ -1,0 +1,3 @@
+    @Override
+    Object get() throws FooException;
+

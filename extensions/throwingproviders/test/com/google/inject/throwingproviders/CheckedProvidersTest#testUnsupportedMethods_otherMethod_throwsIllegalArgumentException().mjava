@@ -1,0 +1,18 @@
+  public void testUnsupportedMethods_otherMethod_throwsIllegalArgumentException()
+      throws NoSuchMethodException {
+    String message =
+        String.format(
+            "%s may not declare any new methods, but declared %s",
+            MoreMethodsCheckedProvider.class.getName(),
+            Arrays.toString(MoreMethodsCheckedProvider.class.getDeclaredMethods()));
+
+    try {
+      CheckedProviders.of(
+          new TypeLiteral<MoreMethodsCheckedProvider<String>>() {},
+          "SHOW ME WHAT YOU GOT");
+      fail("Expected an exception to be thrown");
+    } catch (IllegalArgumentException e) {
+      assertThat(e).hasMessage(message);
+    }
+  }
+

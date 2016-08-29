@@ -1,0 +1,18 @@
+  public void testScopedProviderMethodThrowsException() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @Override protected void configure() {}
+      @Provides @Singleton int provideInt() {
+        throw new RuntimeException("boom");
+      }
+    });
+    Provider<Integer> intProvider = injector.getProvider(Integer.class);
+    try {
+      intProvider.get();
+      fail();
+    } catch (ProvisionException pe) {
+      // by default assertContains asserts that the last item doesn't repeat... which is the main
+      // thing we are testing for
+      assertContains(pe.getMessage(), "java.lang.RuntimeException: boom", "provideInt");
+    }
+  }
+

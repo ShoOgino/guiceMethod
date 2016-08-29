@@ -1,0 +1,21 @@
+  public void testScopeAppliedByUserInsteadOfScoping() throws Exception {
+    Injector injector =
+        java.util.concurrent.Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<Injector>() {
+                  @Override
+                  public Injector call() {
+                    return Guice.createInjector(
+                        new AbstractModule() {
+                          @Override
+                          protected void configure() {
+                            bindListener(Matchers.any(), new ScopeMutatingProvisionListener());
+                            bind(SingletonClass.class);
+                          }
+                        });
+                  }
+                })
+            .get();
+    injector.getInstance(SingletonClass.class); // will fail here with NPE
+  }
+

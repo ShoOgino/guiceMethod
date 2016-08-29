@@ -1,0 +1,5 @@
+    @Override
+    protected Object invokeGet(Object proxy, Method method) throws Throwable {
+      throw this.throwableCtor.newInstance();
+    }
+

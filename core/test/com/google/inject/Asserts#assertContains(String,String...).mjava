@@ -1,24 +1,8 @@
   /**
-   * Fails unless {@code text} includes all {@code substrings}, in order.
+   * Fails unless {@code text} includes all {@code substrings}, in order,
+   * no duplicates
    */
   public static void assertContains(String text, String... substrings) {
-    /*if[NO_AOP]
-    // when we strip out bytecode manipulation, we lose the ability to generate some source lines.
-    if (text.contains("(Unknown Source)")) {
-      return;
-    }
-    end[NO_AOP]*/
-
-    int startingFrom = 0;
-    for (String substring : substrings) {
-      int index = text.indexOf(substring, startingFrom);
-      assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"", text, substring),
-          index >= startingFrom);
-      startingFrom = index + substring.length();
-    }
-
-    String lastSubstring = substrings[substrings.length - 1];
-    assertTrue(String.format("Expected \"%s\" to contain substring \"%s\" only once),",
-        text, lastSubstring), text.indexOf(lastSubstring, startingFrom) == -1);
+    assertContains(text, false, substrings);
   }
 

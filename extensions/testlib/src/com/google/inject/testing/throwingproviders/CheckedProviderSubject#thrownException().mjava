@@ -1,0 +1,21 @@
+  /**
+   * Allows for assertions on the exception thrown by this provider.
+   *
+   * <p>The exception thrown by a checked provider is the {@link Throwable} thrown by a call to
+   * {@link CheckedProvider#get}
+   *
+   * @return a {@link ThrowableSubject} for asserting against the {@link Throwable} thrown by {@link
+   *     CheckedProvider#get}
+   */
+  public ThrowableSubject thrownException() {
+    P provider = getSubject();
+    T got;
+    try {
+      got = provider.get();
+    } catch (Throwable e) {
+      return assert_().withFailureMessage("exception thrown by <%s>", provider).that(e);
+    }
+    failWithBadResults("threw", "an exception", "provided", got);
+    throw new AssertionError("Impossible, I hope...");
+  }
+

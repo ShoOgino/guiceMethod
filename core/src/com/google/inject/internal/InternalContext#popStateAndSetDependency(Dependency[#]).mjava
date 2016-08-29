@@ -1,6 +1,6 @@
   /** Pops the current state & sets the new dependency. */
-  public void popStateAndSetDependency(Dependency<?> newDependency) {
-    state.pop();
+  void popStateAndSetDependency(Dependency<?> newDependency) {
+    popState();
     this.dependency = newDependency;
   }
 

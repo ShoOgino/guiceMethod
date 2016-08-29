@@ -1,0 +1,4 @@
+    BindingImpl<T> getActualBinding() {
+      return actualBinding;
+    }
+

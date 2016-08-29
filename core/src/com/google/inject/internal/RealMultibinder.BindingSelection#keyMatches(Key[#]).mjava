@@ -1,0 +1,7 @@
+    private boolean keyMatches(Key<?> key) {
+      return key.getTypeLiteral().equals(elementType)
+          && key.getAnnotation() instanceof Element
+          && ((Element) key.getAnnotation()).setName().equals(getSetName())
+          && ((Element) key.getAnnotation()).type() == MULTIBINDER;
+    }
+

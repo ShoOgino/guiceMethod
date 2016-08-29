@@ -1,0 +1,4 @@
+    CyclicFactory(InitializationTiming initializationTiming) {
+      super(initializationTiming);
+    }
+

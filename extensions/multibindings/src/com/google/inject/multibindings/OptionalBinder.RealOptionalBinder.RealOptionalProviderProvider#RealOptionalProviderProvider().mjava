@@ -1,4 +1,0 @@
-      private RealOptionalProviderProvider() {
-        super(typeKey);
-      }
-

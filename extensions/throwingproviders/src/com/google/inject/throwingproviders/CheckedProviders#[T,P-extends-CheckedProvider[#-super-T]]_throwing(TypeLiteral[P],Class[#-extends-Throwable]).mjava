@@ -1,0 +1,23 @@
+  /**
+   * Returns a {@link CheckedProvider} which always throws exceptions.
+   *
+   * <p>This method uses the nullary (no argument) constructor of {@code throwable} to create a new
+   * instance of the given {@link Throwable} on each method invocation which is then thrown
+   * immediately.
+   *
+   * <p>See {@link #of(TypeLiteral, T)} for more information.
+   *
+   * @param providerType the type of the {@link CheckedProvider} to return
+   * @param throwable the type of the {@link Throwable} to throw
+   * @see #of(TypeLiteral, T)
+   */
+  public static <T, P extends CheckedProvider<? super T>> P throwing(
+      TypeLiteral<P> providerType, Class<? extends Throwable> throwable) {
+    // TODO(eatnumber1): Understand why TypeLiteral#getRawType returns a Class<? super T> rather
+    // than a Class<T> and remove this unsafe cast.
+    Class<P> providerRaw = (Class<P>) providerType.getRawType();
+    checkThrowable(providerRaw, throwable);
+    return generateProvider(
+        providerType, Optional.<T>absent(), ThrowingHandler.forClass(throwable));
+  }
+

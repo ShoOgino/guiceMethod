@@ -1,9 +1,0 @@
-    /** Returns true if the key indicates this is a value in the map. */
-    private boolean matchesValueKey(Key<?> key) {
-      return key.getAnnotation() instanceof RealElement
-          && ((RealElement) key.getAnnotation()).setName().equals(entrySetBinder.getSetName())
-          && ((RealElement) key.getAnnotation()).type() == MAPBINDER
-          && ((RealElement) key.getAnnotation()).keyType().equals(keyType.toString())
-          && key.getTypeLiteral().equals(valueType);
-    }
-

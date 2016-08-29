@@ -1,0 +1,4 @@
+    ImmutableSet<Dependency<?>> getProviderDependencies() {
+      return providerDependencies;
+    }
+

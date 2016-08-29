@@ -1,4 +1,0 @@
-  public static <T> OptionalBinder<T> newOptionalBinder(Binder binder, Class<T> type) {
-    return newRealOptionalBinder(binder, Key.get(type));
-  }
-

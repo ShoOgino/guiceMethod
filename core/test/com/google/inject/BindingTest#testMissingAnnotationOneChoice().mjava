@@ -1,0 +1,28 @@
+  public void testMissingAnnotationOneChoice() {
+    Injector injector = Guice.createInjector(new AbstractModule() {
+      @SuppressWarnings("unchecked")
+      @Override
+      public void configure() {
+        bind(Bacon.class).annotatedWith(named("Turkey")).to(TurkeyBacon.class);
+      }
+    });
+
+    try {
+      // turkey typo (should be Upper case)...
+      injector.getInstance(Key.get(Bacon.class, named("turkey")));
+      fail();
+    } catch (ConfigurationException e) {
+      String msg = e.getMessage();
+      assertContains(msg, "Guice configuration errors:");
+      assertContains(msg,
+          "1) No implementation for com.google.inject.BindingTest$Bacon"
+              + " annotated with"
+              + " @com.google.inject.name.Named(value=turkey) was bound.",
+          "Did you mean?",
+          "* com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=Turkey)",
+          "while locating com.google.inject.BindingTest$Bacon annotated with"
+              + " @com.google.inject.name.Named(value=turkey)");
+    }
+  }
+

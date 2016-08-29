@@ -1,0 +1,4 @@
+    public Key<V> getValueKey() {
+      return valueKey;
+    }
+

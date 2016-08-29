@@ -1,0 +1,4 @@
+    Factory(InitializationTiming initializationTiming) {
+      this.initializationTiming = initializationTiming;
+    }
+

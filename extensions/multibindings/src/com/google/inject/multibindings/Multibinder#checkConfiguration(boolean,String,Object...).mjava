@@ -1,8 +1,0 @@
-  static void checkConfiguration(boolean condition, String format, Object... args) {
-    if (condition) {
-      return;
-    }
-
-    throw new ConfigurationException(ImmutableSet.of(new Message(Errors.format(format, args))));
-  }
-

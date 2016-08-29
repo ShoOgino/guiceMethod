@@ -2,6 +2,7 @@
   @Singleton
   Dagny provideDagny() {
     return new Dagny() {
+      @Override
       public int getAge() {
         return 1;
       }

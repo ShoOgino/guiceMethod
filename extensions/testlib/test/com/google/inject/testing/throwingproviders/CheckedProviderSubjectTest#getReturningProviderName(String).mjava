@@ -1,0 +1,4 @@
+  private String getReturningProviderName(String providing) {
+    return String.format("generated CheckedProvider returning <%s>", providing);
+  }
+

@@ -1,5 +1,5 @@
   @SuppressWarnings("unchecked")
-  public <T> ConstructionContext<T> getConstructionContext(Object key) {
+  <T> ConstructionContext<T> getConstructionContext(Object key) {
     ConstructionContext<T> constructionContext
         = (ConstructionContext<T>) constructionContexts.get(key);
     if (constructionContext == null) {

@@ -1,0 +1,4 @@
+  String getSetName() {
+    return bindingSelection.getSetName();
+  }
+

@@ -1,0 +1,9 @@
+  public void testThrowingCheckedProviderClass_get_throwsException() {
+    FooCheckedProvider provider =
+        CheckedProviders.throwing(FooCheckedProvider.class, FooException.class);
+    try {
+      provider.get();
+      fail();
+    } catch (FooException expected) {}
+  }
+

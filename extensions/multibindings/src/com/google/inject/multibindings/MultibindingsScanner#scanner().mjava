@@ -1,9 +1,0 @@
-  /**
-   * Returns a {@link ModuleAnnotatedMethodScanner} that, when bound, will scan all modules for
-   * methods with the annotations {@literal @}{@link ProvidesIntoMap},
-   * {@literal @}{@link ProvidesIntoSet}, and {@literal @}{@link ProvidesIntoOptional}.
-   */
-  public static ModuleAnnotatedMethodScanner scanner() {
-    return Scanner.INSTANCE;
-  }
-

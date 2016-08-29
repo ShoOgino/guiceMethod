@@ -1,0 +1,5 @@
+    RealOptionalKeyProvider(BindingSelection<T> bindingSelection, Key<Optional<T>> optionalKey) {
+      super(bindingSelection);
+      this.optionalKey = optionalKey;
+    }
+

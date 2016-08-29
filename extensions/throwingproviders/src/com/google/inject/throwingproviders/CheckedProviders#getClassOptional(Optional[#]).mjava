@@ -1,0 +1,7 @@
+  private static Optional<Class<?>> getClassOptional(Optional<?> value) {
+    if (!value.isPresent()) {
+      return Optional.absent();
+    }
+    return Optional.<Class<?>>of(value.get().getClass());
+  }
+

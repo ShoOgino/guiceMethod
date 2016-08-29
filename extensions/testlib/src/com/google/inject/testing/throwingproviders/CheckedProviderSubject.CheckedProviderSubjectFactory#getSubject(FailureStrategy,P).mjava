@@ -1,0 +1,6 @@
+    @Override
+    public CheckedProviderSubject<T, P> getSubject(
+        FailureStrategy failureStrategy, @Nullable P target) {
+      return new CheckedProviderSubject<T, P>(failureStrategy, target);
+    }
+

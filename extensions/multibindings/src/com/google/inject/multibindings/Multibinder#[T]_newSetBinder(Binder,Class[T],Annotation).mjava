@@ -1,9 +1,0 @@
-  /**
-   * Returns a new multibinder that collects instances of {@code type} in a {@link Set} that is
-   * itself bound with {@code annotation}.
-   */
-  public static <T> Multibinder<T> newSetBinder(
-      Binder binder, Class<T> type, Annotation annotation) {
-    return newRealSetBinder(binder, Key.get(type, annotation));
-  }
-

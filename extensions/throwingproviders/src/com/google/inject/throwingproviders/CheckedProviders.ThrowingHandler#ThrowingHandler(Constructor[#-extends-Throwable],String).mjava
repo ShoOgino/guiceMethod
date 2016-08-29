@@ -1,0 +1,7 @@
+    private ThrowingHandler(Constructor<? extends Throwable> throwableCtor, String typeName) {
+      this.throwableCtor = throwableCtor;
+      this.typeName = typeName;
+
+      this.throwableCtor.setAccessible(true);
+    }
+

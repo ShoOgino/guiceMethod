@@ -1,0 +1,13 @@
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+      if (method.getDeclaringClass() == Object.class) {
+        return method.invoke(this, args);
+      } else if (isGetMethod(method)) {
+        return invokeGet(proxy, method);
+      }
+      throw new UnsupportedOperationException(
+          String.format(
+              "Unsupported method <%s> with args <%s> invoked on <%s>",
+              method, Arrays.toString(args), proxy));
+    }
+

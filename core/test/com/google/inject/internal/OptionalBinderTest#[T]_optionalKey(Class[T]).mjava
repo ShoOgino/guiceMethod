@@ -1,0 +1,4 @@
+  public <T> Key<Optional<T>> optionalKey(Class<T> type) {
+    return Key.get(RealOptionalBinder.optionalOf(TypeLiteral.get(type)));
+  }
+

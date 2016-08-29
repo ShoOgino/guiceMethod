@@ -1,0 +1,4 @@
+  boolean containsElement(com.google.inject.spi.Element element) {
+    return bindingSelection.containsElement(element);
+  }
+

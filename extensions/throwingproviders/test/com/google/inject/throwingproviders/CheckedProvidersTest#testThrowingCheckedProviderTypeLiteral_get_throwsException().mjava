@@ -1,0 +1,9 @@
+  public void testThrowingCheckedProviderTypeLiteral_get_throwsException() {
+    FooCheckedProvider provider =
+        CheckedProviders.throwing(TypeLiteral.get(FooCheckedProvider.class), FooException.class);
+    try {
+      provider.get();
+      fail();
+    } catch (FooException expected) {}
+  }
+

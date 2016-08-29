@@ -1,0 +1,5 @@
+    @Override
+    public List<Binding<?>> getElements() {
+      return bindingSelection.getElements();
+    }
+

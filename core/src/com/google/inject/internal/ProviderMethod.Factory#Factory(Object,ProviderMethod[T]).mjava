@@ -1,5 +1,0 @@
-    Factory(Object source, ProviderMethod<T> providerMethod) {
-      this.source = source;
-      this.providerMethod = providerMethod;
-    }
-

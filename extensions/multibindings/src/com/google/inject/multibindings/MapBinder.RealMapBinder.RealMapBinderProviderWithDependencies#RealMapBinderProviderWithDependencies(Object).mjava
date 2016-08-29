@@ -1,4 +1,0 @@
-      public RealMapBinderProviderWithDependencies(Object equality) {
-        this.equality = equality;
-      }
-

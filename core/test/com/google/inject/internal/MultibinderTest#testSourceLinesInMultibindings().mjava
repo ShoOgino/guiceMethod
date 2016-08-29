@@ -1,0 +1,15 @@
+  public void testSourceLinesInMultibindings() {
+    try {
+      Guice.createInjector(new AbstractModule() {
+        @Override protected void configure() {
+          Multibinder.newSetBinder(binder(), Integer.class).addBinding();
+        }
+      });
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), true,
+          "No implementation for java.lang.Integer",
+          "at " + getClass().getName());
+    }
+  }
+

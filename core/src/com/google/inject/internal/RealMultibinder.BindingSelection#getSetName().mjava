@@ -1,0 +1,8 @@
+    String getSetName() {
+      // lazily initialized since most selectors don't survive module installation.
+      if (setName == null) {
+        setName = Annotations.nameOf(setKey);
+      }
+      return setName;
+    }
+

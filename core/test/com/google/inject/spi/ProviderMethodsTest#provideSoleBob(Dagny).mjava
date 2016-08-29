@@ -3,10 +3,12 @@
   @Sole
   Bob provideSoleBob(final Dagny dagny) {
     return new Bob() {
+      @Override
       public String getName() {
         return "Only Bob";
       }
 
+      @Override
       public Dagny getDaughter() {
         return dagny;
       }

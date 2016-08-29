@@ -1,0 +1,7 @@
+  public void testCheckedProviderClass_get_returnsValidString() throws Exception {
+    String expected = "rick";
+
+    StringCheckedProvider provider = CheckedProviders.of(StringCheckedProvider.class, expected);
+    assertThat(provider.get()).isEqualTo(expected);
+  }
+

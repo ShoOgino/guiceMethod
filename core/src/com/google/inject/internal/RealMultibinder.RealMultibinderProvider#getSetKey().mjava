@@ -1,0 +1,5 @@
+    @Override
+    public Key<Set<T>> getSetKey() {
+      return bindingSelection.getSetKey();
+    }
+

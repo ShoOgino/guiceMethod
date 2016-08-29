@@ -1,0 +1,5 @@
+  private RealOptionalBinder(Binder binder, Key<T> typeKey) {
+    this.bindingSelection = new BindingSelection<T>(typeKey);
+    this.binder = binder;
+  }
+

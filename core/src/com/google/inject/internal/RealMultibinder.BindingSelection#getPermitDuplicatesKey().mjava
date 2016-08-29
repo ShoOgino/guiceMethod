@@ -1,0 +1,9 @@
+    Key<Boolean> getPermitDuplicatesKey() {
+      Key<Boolean> local = permitDuplicatesKey;
+      if (local == null) {
+        local = permitDuplicatesKey =
+            Key.get(Boolean.class, named(toString() + " permits duplicates"));
+      }
+      return local;
+    }
+

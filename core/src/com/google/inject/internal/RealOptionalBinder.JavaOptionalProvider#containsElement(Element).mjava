@@ -1,0 +1,4 @@
+    @Override public boolean containsElement(Element element) {
+      return bindingSelection.containsElement(element);
+    }
+

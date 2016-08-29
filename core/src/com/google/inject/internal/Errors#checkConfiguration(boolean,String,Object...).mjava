@@ -1,0 +1,12 @@
+  /**
+   * Throws a ConfigurationException with a formatted {@link Message} if this condition is 
+   * {@code false}.
+   */
+  static void checkConfiguration(boolean condition, String format, Object... args) {
+    if (condition) {
+      return;
+    }
+
+    throw new ConfigurationException(ImmutableSet.of(new Message(Errors.format(format, args))));
+  }
+

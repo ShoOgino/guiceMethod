@@ -1,9 +1,0 @@
-  /**
-   * Returns a binding builder used to set the actual value that will be injected.
-   * This overrides any binding set by {@link #setDefault}.
-   * 
-   * <p>It is an error to call this method without also calling one of the {@code to}
-   * methods on the returned binding builder. 
-   */
-  public abstract LinkedBindingBuilder<T> setBinding();
-

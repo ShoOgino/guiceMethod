@@ -1,0 +1,15 @@
+  public void testCheckThrowable_checkedExceptionNotDeclared_throwsIllegalArgumentException()
+      throws Exception {
+    String message =
+        String.format(
+            "Thrown exception <%s> is not declared to be thrown by <%s>",
+            BarException.class.getName(), FooCheckedProvider.class.getMethod("get"));
+
+    try {
+      CheckedProviders.throwing(FooCheckedProvider.class, BarException.class);
+      fail("Expected an exception to be thrown");
+    } catch (IllegalArgumentException e) {
+      assertThat(e).hasMessage(message);
+    }
+  }
+

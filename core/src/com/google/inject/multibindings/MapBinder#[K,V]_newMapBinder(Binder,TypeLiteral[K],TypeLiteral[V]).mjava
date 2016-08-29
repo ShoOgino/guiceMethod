@@ -1,0 +1,10 @@
+  /**
+   * Returns a new mapbinder that collects entries of {@code keyType}/{@code valueType} in a
+   * {@link Map} that is itself bound with no binding annotation.
+   */
+  public static <K, V> MapBinder<K, V> newMapBinder(Binder binder,
+      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+    return new MapBinder<K, V>(
+        newMapRealBinder(binder.skipSources(MapBinder.class), keyType, valueType));
+  }
+

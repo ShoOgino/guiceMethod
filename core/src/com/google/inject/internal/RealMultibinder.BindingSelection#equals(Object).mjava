@@ -1,0 +1,7 @@
+    @Override public boolean equals(Object obj) {
+      if (obj instanceof BindingSelection) {
+        return setKey.equals(((BindingSelection<?>) obj).setKey);
+      }
+      return false;
+    }
+
