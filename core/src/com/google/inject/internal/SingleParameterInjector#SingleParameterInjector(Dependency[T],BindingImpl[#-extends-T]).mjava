@@ -1,5 +1,6 @@
   SingleParameterInjector(Dependency<T> dependency, BindingImpl<? extends T> binding) {
     this.dependency = dependency;
-    this.binding = binding;
+    this.source = binding.getSource();
+    this.factory = binding.getInternalFactory();
   }
 

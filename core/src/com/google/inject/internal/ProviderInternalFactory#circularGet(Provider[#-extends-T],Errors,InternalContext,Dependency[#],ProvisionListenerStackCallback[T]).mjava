@@ -1,6 +1,6 @@
   protected T circularGet(final Provider<? extends T> provider, final Errors errors,
       InternalContext context, final Dependency<?> dependency,
-      ProvisionListenerStackCallback<T> provisionCallback)
+      /* @Nullable */ ProvisionListenerStackCallback<T> provisionCallback)
       throws ErrorsException {    
     final ConstructionContext<T> constructionContext = context.getConstructionContext(this);
 
@@ -17,7 +17,7 @@
     // Optimization: Don't go through the callback stack if no one's listening.
     constructionContext.startConstruction();
     try {
-      if (!provisionCallback.hasListeners()) {
+      if (provisionCallback == null) {
         return provision(provider, errors, dependency, constructionContext);
       } else {
         return provisionCallback.provision(errors, context, new ProvisionCallback<T>() {

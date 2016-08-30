@@ -20,27 +20,14 @@
 
     // Look up the target binding.
     final Key<? extends T> targetKey = Key.get(subclass);
-    final BindingImpl<? extends T> targetBinding = getBindingOrThrow(targetKey, errors, JitLimitation.NEW_OR_EXISTING_JIT);
-
-    InternalFactory<T> internalFactory = new InternalFactory<T>() {
-      public T get(Errors errors, InternalContext context, Dependency<?> dependency, boolean linked)
-          throws ErrorsException {
-        context.pushState(targetKey, targetBinding.getSource());
-        try {
-          return targetBinding.getInternalFactory().get(
-              errors.withSource(targetKey), context, dependency, true);
-        } finally {
-          context.popState();
-        }
-      }
-    };
-
     Object source = rawType;
+    FactoryProxy<T> factory = new FactoryProxy<T>(this, key, targetKey, source);
+    factory.notify(errors);  // causes the factory to initialize itself internally
     return new LinkedBindingImpl<T>(
         this,
         key,
         source,
-        Scoping.<T>scope(key, this, internalFactory, source, scoping),
+        Scoping.<T>scope(key, this, factory, source, scoping),
         scoping,
         targetKey);
   }

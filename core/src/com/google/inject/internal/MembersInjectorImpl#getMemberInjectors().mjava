@@ -1,4 +1,4 @@
   public ImmutableList<SingleMemberInjector> getMemberInjectors() {
-    return memberInjectors;
+    return memberInjectors == null ? ImmutableList.<SingleMemberInjector>of() : memberInjectors;
   }
 

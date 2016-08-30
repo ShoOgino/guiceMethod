@@ -1,8 +1,12 @@
   public ImmutableSet<InjectionPoint> getInjectionPoints() {
-    ImmutableSet.Builder<InjectionPoint> builder = ImmutableSet.builder();
-    for (SingleMemberInjector memberInjector : memberInjectors) {
-      builder.add(memberInjector.getInjectionPoint());
+    ImmutableList<SingleMemberInjector> localMemberInjectors = memberInjectors;
+    if (localMemberInjectors != null) {
+      ImmutableSet.Builder<InjectionPoint> builder = ImmutableSet.builder();
+      for (SingleMemberInjector memberInjector : localMemberInjectors) {
+        builder.add(memberInjector.getInjectionPoint());
+      }
+      return builder.build();
     }
-    return builder.build();
+    return ImmutableSet.of();
   }
 
