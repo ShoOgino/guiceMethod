@@ -1,10 +1,12 @@
   public void testInjectStaticInterface() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          requestStaticInjection(Interface.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              requestStaticInjection(Interface.class);
+            }
+          });
       fail();
     } catch(CreationException ce) {
       assertEquals(1, ce.getErrorMessages().size());

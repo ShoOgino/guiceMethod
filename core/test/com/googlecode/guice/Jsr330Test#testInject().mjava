@@ -1,13 +1,16 @@
   public void testInject() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(B.class).toInstance(b);
-        bind(C.class).toInstance(c);
-        bind(D.class).toInstance(d);
-        bind(E.class).toInstance(e);
-        bind(A.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(B.class).toInstance(b);
+                bind(C.class).toInstance(c);
+                bind(D.class).toInstance(d);
+                bind(E.class).toInstance(e);
+                bind(A.class);
+              }
+            });
 
     A a = injector.getInstance(A.class);
     assertSame(b, a.b);

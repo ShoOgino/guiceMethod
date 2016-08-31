@@ -16,14 +16,17 @@
     expect(mockResponse.isCommitted())
         .andReturn(true);
 
-    final HttpServlet mockServlet = new HttpServlet() {
-      protected void service(HttpServletRequest request, HttpServletResponse httpServletResponse)
-          throws ServletException, IOException {
+    final HttpServlet mockServlet =
+        new HttpServlet() {
+          @Override
+          protected void service(
+              HttpServletRequest request, HttpServletResponse httpServletResponse)
+              throws ServletException, IOException {
 
-        final Object o = request.getAttribute(A_KEY);
-        assertEquals("Wrong attrib returned - " + o, A_VALUE, o);
-      }
-    };
+            final Object o = request.getAttribute(A_KEY);
+            assertEquals("Wrong attrib returned - " + o, A_VALUE, o);
+          }
+        };
 
     expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
         .andReturn(true);

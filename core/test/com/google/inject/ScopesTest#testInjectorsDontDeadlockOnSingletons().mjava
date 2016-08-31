@@ -23,11 +23,15 @@
       }
     });
 
-    Future<S> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<S>() {
-      public S call() {
-        return secondInjector.getInstance(S.class);
-      }
-    });
+    Future<S> secondThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<S>() {
+                  @Override
+                  public S call() {
+                    return secondInjector.getInstance(S.class);
+                  }
+                });
 
     S firstS = injector.getInstance(S.class);
     S secondS = secondThreadResult.get();

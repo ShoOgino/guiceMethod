@@ -1,32 +1,35 @@
   public void testErrorsAddedWhenExceptionsAreThrown() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
-            install(new AbstractModule() {
-              protected void configure() {
-                throw new RuntimeException("Throwing RuntimeException in AbstractModule.configure().");
-              }
-            });
+            install(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    throw new RuntimeException(
+                        "Throwing RuntimeException in AbstractModule.configure().");
+                  }
+                });
 
             addError("Code after the exception still gets executed");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
-            assertEquals("Throwing RuntimeException in AbstractModule.configure().",
+          @Override
+          public Void visit(Message command) {
+            assertEquals(
+                "Throwing RuntimeException in AbstractModule.configure().",
                 command.getCause().getMessage());
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
-            assertEquals("Code after the exception still gets executed",
-                command.getMessage());
+          @Override
+          public Void visit(Message command) {
+            assertEquals("Code after the exception still gets executed", command.getMessage());
             return null;
           }
-        }
-    );
+        });
   }
 

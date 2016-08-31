@@ -13,23 +13,29 @@
   public static boolean isScoped(Binding<?> binding, final Scope scope,
       final Class<? extends Annotation> scopeAnnotation) {
     do {
-      boolean matches = binding.acceptScopingVisitor(new BindingScopingVisitor<Boolean>() {
-        public Boolean visitNoScoping() {
-          return false;
-        }
+      boolean matches =
+          binding.acceptScopingVisitor(
+              new BindingScopingVisitor<Boolean>() {
+                @Override
+                public Boolean visitNoScoping() {
+                  return false;
+                }
 
-        public Boolean visitScopeAnnotation(Class<? extends Annotation> visitedAnnotation) {
-          return visitedAnnotation == scopeAnnotation;
-        }
+                @Override
+                public Boolean visitScopeAnnotation(Class<? extends Annotation> visitedAnnotation) {
+                  return visitedAnnotation == scopeAnnotation;
+                }
 
-        public Boolean visitScope(Scope visitedScope) {
-          return visitedScope == scope;
-        }
+                @Override
+                public Boolean visitScope(Scope visitedScope) {
+                  return visitedScope == scope;
+                }
 
-        public Boolean visitEagerSingleton() {
-          return false;
-        }
-      });
+                @Override
+                public Boolean visitEagerSingleton() {
+                  return false;
+                }
+              });
 
       if (matches) {
         return true;

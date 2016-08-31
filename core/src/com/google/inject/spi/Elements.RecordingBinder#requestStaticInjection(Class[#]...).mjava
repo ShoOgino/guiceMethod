@@ -1,3 +1,4 @@
+    @Override
     public void requestStaticInjection(Class<?>... types) {
       for (Class<?> type : types) {
         elements.add(new StaticInjectionRequest(getElementSource(), type));

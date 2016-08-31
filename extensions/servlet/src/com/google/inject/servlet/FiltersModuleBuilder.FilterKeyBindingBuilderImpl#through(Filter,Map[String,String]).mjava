@@ -1,5 +1,5 @@
-    public void through(Filter filter,
-        Map<String, String> initParams) {
+    @Override
+    public void through(Filter filter, Map<String, String> initParams) {
       Key<Filter> filterKey = Key.get(Filter.class, UniqueAnnotations.create());
       binder.bind(filterKey).toInstance(filter);
       through(filterKey, initParams, filter);

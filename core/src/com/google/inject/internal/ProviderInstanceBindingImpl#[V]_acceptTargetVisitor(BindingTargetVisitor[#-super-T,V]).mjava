@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked") // the extension type is always consistent with the provider type
   public <V> V acceptTargetVisitor(BindingTargetVisitor<? super T, V> visitor) {
     if(providerInstance instanceof ProviderWithExtensionVisitor) {

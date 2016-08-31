@@ -1,5 +1,5 @@
-    public void with(Key<? extends HttpServlet> servletKey,
-        Map<String, String> initParams) {
+    @Override
+    public void with(Key<? extends HttpServlet> servletKey, Map<String, String> initParams) {
       with(servletKey, initParams, null);
     }
 

@@ -54,31 +54,37 @@
                 super.lock();
               }
             });
-    Future<Void> firstThreadResult = Executors.newSingleThreadExecutor().submit(
-        new Callable<Void>() {
-          public Void call() throws Exception {
-            Thread.currentThread().setName("T1");
-            signal1.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-            assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
-            assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
-            lockB.unlock();
-            lockA.unlock();
-            return null;
-          }
-        });
-    Future<Void> secondThreadResult = Executors.newSingleThreadExecutor().submit(
-        new Callable<Void>() {
-          public Void call() throws Exception {
-            Thread.currentThread().setName("T2");
-            assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
-            signal1.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-            signal2.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-            lockB.unlock();
-            assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
-            lockA.unlock();
-            return null;
-          }
-        });
+    Future<Void> firstThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<Void>() {
+                  @Override
+                  public Void call() throws Exception {
+                    Thread.currentThread().setName("T1");
+                    signal1.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                    assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
+                    assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
+                    lockB.unlock();
+                    lockA.unlock();
+                    return null;
+                  }
+                });
+    Future<Void> secondThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<Void>() {
+                  @Override
+                  public Void call() throws Exception {
+                    Thread.currentThread().setName("T2");
+                    assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
+                    signal1.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                    signal2.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                    lockB.unlock();
+                    assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
+                    lockA.unlock();
+                    return null;
+                  }
+                });
 
     firstThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);
     secondThreadResult.get(DEADLOCK_TIMEOUT_SECONDS * 3, TimeUnit.SECONDS);

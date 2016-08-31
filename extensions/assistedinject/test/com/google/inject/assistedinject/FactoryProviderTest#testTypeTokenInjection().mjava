@@ -13,6 +13,6 @@
     DeLorean deLorean = (DeLorean) carFactory.create(Color.GRAY);
     assertEquals(Color.GRAY, deLorean.color);
     assertEquals("Flux Capacitor", deLorean.features.iterator().next());
-    assertEquals(new Integer(88), deLorean.featureActivationSpeeds.iterator().next());
+    assertEquals(Integer.valueOf(88), deLorean.featureActivationSpeeds.iterator().next());
   }
 

@@ -1,28 +1,29 @@
   public void testBindToInstanceInScope() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             AnnotatedBindingBuilder<String> b = bind(String.class);
             b.toInstance("A");
             b.in(Singleton.class);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
-            assertEquals("Setting the scope is not permitted when binding to a single instance.",
+          @Override
+          public Void visit(Message command) {
+            assertEquals(
+                "Setting the scope is not permitted when binding to a single instance.",
                 command.getMessage());
             assertNull(command.getCause());
             assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
-        }
-      );
+        });
   }
 

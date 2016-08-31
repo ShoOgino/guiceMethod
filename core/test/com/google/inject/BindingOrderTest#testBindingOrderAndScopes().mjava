@@ -1,10 +1,13 @@
   public void testBindingOrderAndScopes() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(A.class);
-        bind(B.class).asEagerSingleton();
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class);
+                bind(B.class).asEagerSingleton();
+              }
+            });
 
     assertSame(injector.getInstance(A.class).b, injector.getInstance(A.class).b);
   }

@@ -1,13 +1,20 @@
   public void testInterceptingFinalClass() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.any(), new MethodInterceptor() {
-          public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-            return methodInvocation.proceed();
-          }
-        });
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(
+                    Matchers.any(),
+                    Matchers.any(),
+                    new MethodInterceptor() {
+                      @Override
+                      public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+                        return methodInvocation.proceed();
+                      }
+                    });
+              }
+            });
     try {
       injector.getInstance(NotInterceptable.class);
       fail();

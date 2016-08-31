@@ -1,3 +1,4 @@
+  @Override
   public Provider<T> getProvider() {
     if (provider == null) {
       if (injector == null) {

@@ -1,3 +1,4 @@
+    @Override
     public void configure(Binder binder) {
       binder = binder.withSource(SourceProvider.UNKNOWN_SOURCE);
       binder.bindScope(Singleton.class, SINGLETON);

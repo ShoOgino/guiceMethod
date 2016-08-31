@@ -1,4 +1,5 @@
   /*if[AOP]*/
+  @Override
   public V visit(InterceptorBinding interceptorBinding) {
     return visitOther(interceptorBinding);
   }

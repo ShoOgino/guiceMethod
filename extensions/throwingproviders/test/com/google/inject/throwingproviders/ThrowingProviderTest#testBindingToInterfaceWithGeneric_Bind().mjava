@@ -1,15 +1,20 @@
   public void testBindingToInterfaceWithGeneric_Bind() throws RemoteException {
-    bindInjector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, new TypeLiteral<List<String>>() { }.getType())
-            .to(new RemoteProvider<List<String>>() {
-              public List<String> get() throws RemoteException {
-                return Arrays.asList("A", "B");
+    bindInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, new TypeLiteral<List<String>>() {}.getType())
+                    .to(
+                        new RemoteProvider<List<String>>() {
+                          @Override
+                          public List<String> get() throws RemoteException {
+                            return Arrays.asList("A", "B");
+                          }
+                        });
               }
             });
-      }
-    });
 
     Key<RemoteProvider<List<String>>> key
         = Key.get(new TypeLiteral<RemoteProvider<List<String>>>() { });

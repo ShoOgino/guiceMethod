@@ -9,54 +9,69 @@
     convertToPrimitiveType(injector, float.class, Float.class);
     convertToPrimitiveType(injector, double.class, Double.class);
 
-    convertToClass(injector, Character.class, new TypeConverter() {
-      public Object convert(String value, TypeLiteral<?> toType) {
-        value = value.trim();
-        if (value.length() != 1) {
-          throw new RuntimeException("Length != 1.");
-        }
-        return value.charAt(0);
-      }
-
-      @Override public String toString() {
-        return "TypeConverter<Character>";
-      }
-    });
-
-    convertToClasses(injector, Matchers.subclassesOf(Enum.class), new TypeConverter() {
-      @SuppressWarnings("unchecked")
-      public Object convert(String value, TypeLiteral<?> toType) {
-          return Enum.valueOf((Class) toType.getRawType(), value);
-        }
-
-        @Override public String toString() {
-          return "TypeConverter<E extends Enum<E>>";
-        }
-      });
-
-    internalConvertToTypes(injector, new AbstractMatcher<TypeLiteral<?>>() {
-        public boolean matches(TypeLiteral<?> typeLiteral) {
-          return typeLiteral.getRawType() == Class.class;
-        }
-
-        @Override public String toString() {
-          return "Class<?>";
-        }
-      },
-      new TypeConverter() {
-        @SuppressWarnings("unchecked")
-        public Object convert(String value, TypeLiteral<?> toType) {
-          try {
-            return Class.forName(value);
-          } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
+    convertToClass(
+        injector,
+        Character.class,
+        new TypeConverter() {
+          @Override
+          public Object convert(String value, TypeLiteral<?> toType) {
+            value = value.trim();
+            if (value.length() != 1) {
+              throw new RuntimeException("Length != 1.");
+            }
+            return value.charAt(0);
           }
-        }
 
-        @Override public String toString() {
-          return "TypeConverter<Class<?>>";
-        }
-      }
-    );
+          @Override
+          public String toString() {
+            return "TypeConverter<Character>";
+          }
+        });
+
+    convertToClasses(
+        injector,
+        Matchers.subclassesOf(Enum.class),
+        new TypeConverter() {
+          @Override
+          @SuppressWarnings("unchecked")
+          public Object convert(String value, TypeLiteral<?> toType) {
+            return Enum.valueOf((Class) toType.getRawType(), value);
+          }
+
+          @Override
+          public String toString() {
+            return "TypeConverter<E extends Enum<E>>";
+          }
+        });
+
+    internalConvertToTypes(
+        injector,
+        new AbstractMatcher<TypeLiteral<?>>() {
+          @Override
+          public boolean matches(TypeLiteral<?> typeLiteral) {
+            return typeLiteral.getRawType() == Class.class;
+          }
+
+          @Override
+          public String toString() {
+            return "Class<?>";
+          }
+        },
+        new TypeConverter() {
+          @Override
+          @SuppressWarnings("unchecked")
+          public Object convert(String value, TypeLiteral<?> toType) {
+            try {
+              return Class.forName(value);
+            } catch (ClassNotFoundException e) {
+              throw new RuntimeException(e.getMessage());
+            }
+          }
+
+          @Override
+          public String toString() {
+            return "TypeConverter<Class<?>>";
+          }
+        });
   }
 

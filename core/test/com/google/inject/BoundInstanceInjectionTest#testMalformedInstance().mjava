@@ -1,10 +1,12 @@
   public void testMalformedInstance() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(Object.class).toInstance(new MalformedInjectable());
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(Object.class).toInstance(new MalformedInjectable());
+            }
+          });
       fail();
     } catch (CreationException expected) {
       Asserts.assertContains(expected.getMessage(), MalformedInjectable.class.getName(),

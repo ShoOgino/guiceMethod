@@ -3,12 +3,15 @@
     final Key<Object> s = new Key<Object>(named("s")) {};
     final Key<Object> i = new Key<Object>(named("i")) {};
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(s).toConstructor(constructor, new TypeLiteral<C<Stage>>() {});
-        bind(i).toConstructor(constructor, new TypeLiteral<C<Injector>>() {});
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(s).toConstructor(constructor, new TypeLiteral<C<Stage>>() {});
+                bind(i).toConstructor(constructor, new TypeLiteral<C<Injector>>() {});
+              }
+            });
 
     C<Stage> one = (C<Stage>) injector.getInstance(s);
     assertEquals(Stage.DEVELOPMENT, one.stage);

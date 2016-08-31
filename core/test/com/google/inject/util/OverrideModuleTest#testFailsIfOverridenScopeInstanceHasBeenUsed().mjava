@@ -1,13 +1,16 @@
   public void testFailsIfOverridenScopeInstanceHasBeenUsed() {
-    final Scope scope = new Scope() {
-      public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
-        return unscoped;
-      }
+    final Scope scope =
+        new Scope() {
+          @Override
+          public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+            return unscoped;
+          }
 
-      @Override public String toString() {
-        return "ORIGINAL SCOPE";
-      }
-    };
+          @Override
+          public String toString() {
+            return "ORIGINAL SCOPE";
+          }
+        };
 
     final Module original = new AbstractModule() {
       @Override protected void configure() {

@@ -1,25 +1,27 @@
   public void testBindListener() {
     final Matcher<Object> typeMatcher = Matchers.only(TypeLiteral.get(String.class));
-    final TypeListener listener = new TypeListener() {
-      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-        throw new UnsupportedOperationException();
-      }
-    };
+    final TypeListener listener =
+        new TypeListener() {
+          @Override
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+            throw new UnsupportedOperationException();
+          }
+        };
     
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bindListener(typeMatcher, listener);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(TypeListenerBinding binding) {
+          @Override
+          public Void visit(TypeListenerBinding binding) {
             assertSame(typeMatcher, binding.getTypeMatcher());
             assertSame(listener, binding.getListener());
             return null;
           }
-        }
-    );
+        });
   }
 

@@ -1,3 +1,4 @@
+    @Override
     public <T> T getInstance(Key<T> key) {
       throw new UnsupportedOperationException(
         "Injector.getInstance(Key<T>) is not supported in Stage.TOOL");

@@ -1,16 +1,18 @@
   public void testBindingToInterfaceWithExtraMethod_Provides() throws RemoteException {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-          
-        @SuppressWarnings("unused")
-        @CheckedProvides(RemoteProviderWithExtraMethod.class)
-        String foo() {
-          return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(RemoteProviderWithExtraMethod.class)
+            String foo() {
+              return null;
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertEquals(RemoteProviderWithExtraMethod.class.getName() + " may not declare any new methods, but declared " 

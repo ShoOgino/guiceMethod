@@ -1,3 +1,4 @@
+    @Override
     public int accept(Method method) {
       return indices.get(MethodWrapper.create(method));
     }

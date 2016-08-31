@@ -1,3 +1,4 @@
+  @Override
   public void applyTo(Binder binder) {
     binder.withSource(getSource()).bindInterceptor(classMatcher, methodMatcher,
         interceptors.toArray(new MethodInterceptor[interceptors.size()]));

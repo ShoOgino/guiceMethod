@@ -1,16 +1,18 @@
   public void testProviderMethodWithSuperclassFails() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(RemoteProvider.class)
-        String foo() throws IOException {
-            return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(RemoteProvider.class)
+            String foo() throws IOException {
+              return null;
+            }
+          });
       fail();
     } catch(CreationException ce) {
       assertEquals(IOException.class.getName() + " is not compatible with the exceptions (["

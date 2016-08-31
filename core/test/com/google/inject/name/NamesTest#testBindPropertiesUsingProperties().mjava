@@ -3,11 +3,14 @@
     teams.setProperty("SanJose", "Sharks");
     teams.setProperty("Edmonton", "Oilers");
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        Names.bindProperties(binder(), teams);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Names.bindProperties(binder(), teams);
+              }
+            });
 
     assertEquals("Sharks", injector.getInstance(Key.get(String.class, Names.named("SanJose"))));
     assertEquals("Oilers", injector.getInstance(Key.get(String.class, Names.named("Edmonton"))));

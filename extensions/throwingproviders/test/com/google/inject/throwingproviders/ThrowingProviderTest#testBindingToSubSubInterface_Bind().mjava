@@ -1,11 +1,14 @@
   public void testBindingToSubSubInterface_Bind() throws RemoteException {
     try {
-      bindInjector = Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(SubRemoteProvider.class, String.class);
-        }
-      });
+      bindInjector =
+          Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ThrowingProviderBinder.create(binder())
+                      .bind(SubRemoteProvider.class, String.class);
+                }
+              });
       fail();
     } catch (CreationException expected) {
       assertEquals(SubRemoteProvider.class.getName() + " must extend CheckedProvider (and only CheckedProvider)",

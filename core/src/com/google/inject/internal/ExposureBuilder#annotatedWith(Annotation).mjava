@@ -1,3 +1,4 @@
+  @Override
   public void annotatedWith(Annotation annotation) {
     Preconditions.checkNotNull(annotation, "annotation");
     checkNotAnnotated();

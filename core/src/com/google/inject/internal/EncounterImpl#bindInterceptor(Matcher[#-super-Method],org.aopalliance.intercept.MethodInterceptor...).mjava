@@ -1,4 +1,6 @@
-  public void bindInterceptor(Matcher<? super Method> methodMatcher,
+  @Override
+  public void bindInterceptor(
+      Matcher<? super Method> methodMatcher,
       org.aopalliance.intercept.MethodInterceptor... interceptors) {
     checkState(valid, "Encounters may not be used after hear() returns.");
 

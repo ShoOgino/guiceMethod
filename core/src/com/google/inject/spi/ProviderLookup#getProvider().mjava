@@ -5,6 +5,7 @@
    */
   public Provider<T> getProvider() {
     return new ProviderWithDependencies<T>() {
+      @Override
       public T get() {
         Provider<T> local = delegate;
         if (local == null) {
@@ -14,6 +15,7 @@
         return local.get();
       }
 
+      @Override
       public Set<Dependency<?>> getDependencies() {
         // We depend on Provider<T>, not T directly.  This is an important distinction
         // for dependency analysis tools that short-circuit on providers.
@@ -21,7 +23,8 @@
         return ImmutableSet.<Dependency<?>>of(Dependency.get(providerKey));
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "Provider<" + getKey().getTypeLiteral() + ">";
       }
     };

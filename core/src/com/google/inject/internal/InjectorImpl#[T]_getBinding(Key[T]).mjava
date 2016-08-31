@@ -1,4 +1,5 @@
   /** Returns the binding for {@code key} */
+  @Override
   public <T> BindingImpl<T> getBinding(Key<T> key) {
     Errors errors = new Errors(key);
     try {

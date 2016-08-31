@@ -1,16 +1,18 @@
   public void testManyMethods() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(ManyMethods.class)
-        String foo() {
-            return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(ManyMethods.class)
+            String foo() {
+              return null;
+            }
+          });
       fail();
     } catch(CreationException ce) {
       assertEquals(ManyMethods.class.getName() 

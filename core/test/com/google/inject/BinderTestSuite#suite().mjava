@@ -3,32 +3,39 @@
 
     new Builder()
         .name("bind A")
-        .module(new AbstractModule() {
-          protected void configure() {
-            bind(A.class);
-          }
-        })
+        .module(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class);
+              }
+            })
         .creationException("No implementation for %s was bound", A.class.getName())
         .addToSuite(suite);
 
     new Builder()
         .name("bind PlainA named apple")
-        .module(new AbstractModule() {
-          protected void configure() {
-            bind(PlainA.class).annotatedWith(named("apple"));
-          }
-        })
-        .creationException("No implementation for %s annotated with %s was bound",
+        .module(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(PlainA.class).annotatedWith(named("apple"));
+              }
+            })
+        .creationException(
+            "No implementation for %s annotated with %s was bound",
             PlainA.class.getName(), named("apple"))
         .addToSuite(suite);
 
     new Builder()
         .name("bind A to new PlainA(1)")
-        .module(new AbstractModule() {
-          protected void configure() {
-            bind(A.class).toInstance(new PlainA(1));
-          }
-        })
+        .module(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class).toInstance(new PlainA(1));
+              }
+            })
         .creationTime(CreationTime.NONE)
         .expectedValues(new PlainA(1), new PlainA(1), new PlainA(1))
         .addToSuite(suite);
@@ -76,81 +83,95 @@
       new Builder()
           .name("bind PlainA")
           .key(Key.get(PlainA.class), InjectsPlainA.class)
-          .module(new AbstractModule() {
-            protected void configure() {
-              AnnotatedBindingBuilder<PlainA> abb = bind(PlainA.class);
-              scoper.configure(abb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  AnnotatedBindingBuilder<PlainA> abb = bind(PlainA.class);
+                  scoper.configure(abb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind A to PlainA")
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(A.class).to(PlainA.class);
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(A.class).to(PlainA.class);
+                  scoper.configure(sbb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind A to PlainAProvider.class")
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(A.class).toProvider(PlainAProvider.class);
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(A.class).toProvider(PlainAProvider.class);
+                  scoper.configure(sbb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind A to new PlainAProvider()")
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(A.class).toProvider(new PlainAProvider());
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(A.class).toProvider(new PlainAProvider());
+                  scoper.configure(sbb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind AWithProvidedBy")
           .key(Key.get(AWithProvidedBy.class), InjectsAWithProvidedBy.class)
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(AWithProvidedBy.class);
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(AWithProvidedBy.class);
+                  scoper.configure(sbb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind AWithImplementedBy")
           .key(Key.get(AWithImplementedBy.class), InjectsAWithImplementedBy.class)
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(AWithImplementedBy.class);
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(AWithImplementedBy.class);
+                  scoper.configure(sbb);
+                }
+              })
           .scoper(scoper)
           .addToSuite(suite);
 
       new Builder()
           .name("bind ScopedA")
           .key(Key.get(ScopedA.class), InjectsScopedA.class)
-          .module(new AbstractModule() {
-            protected void configure() {
-              ScopedBindingBuilder sbb = bind(ScopedA.class);
-              scoper.configure(sbb);
-            }
-          })
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ScopedBindingBuilder sbb = bind(ScopedA.class);
+                  scoper.configure(sbb);
+                }
+              })
           .expectedValues(new PlainA(201), new PlainA(201), new PlainA(202), new PlainA(202))
           .scoper(scoper)
           .addToSuite(suite);
@@ -158,34 +179,43 @@
 
       new Builder()
           .name("bind AWithProvidedBy named apple")
-          .module(new AbstractModule() {
-            protected void configure() {
-              scoper.configure(bind(AWithProvidedBy.class).annotatedWith(named("apple")));
-            }
-          })
-          .creationException("No implementation for %s annotated with %s was bound",
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  scoper.configure(bind(AWithProvidedBy.class).annotatedWith(named("apple")));
+                }
+              })
+          .creationException(
+              "No implementation for %s annotated with %s was bound",
               AWithProvidedBy.class.getName(), named("apple"))
           .addToSuite(suite);
 
       new Builder()
           .name("bind AWithImplementedBy named apple")
-          .module(new AbstractModule() {
-            protected void configure() {
-              scoper.configure(bind(AWithImplementedBy.class).annotatedWith(named("apple")));
-            }
-          })
-          .creationException("No implementation for %s annotated with %s was bound",
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  scoper.configure(bind(AWithImplementedBy.class).annotatedWith(named("apple")));
+                }
+              })
+          .creationException(
+              "No implementation for %s annotated with %s was bound",
               AWithImplementedBy.class.getName(), named("apple"))
           .addToSuite(suite);
 
       new Builder()
           .name("bind ScopedA named apple")
-          .module(new AbstractModule() {
-            protected void configure() {
-              scoper.configure(bind(ScopedA.class).annotatedWith(named("apple")));
-            }
-          })
-          .creationException("No implementation for %s annotated with %s was bound",
+          .module(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  scoper.configure(bind(ScopedA.class).annotatedWith(named("apple")));
+                }
+              })
+          .creationException(
+              "No implementation for %s annotated with %s was bound",
               ScopedA.class.getName(), named("apple"))
           .addToSuite(suite);
 

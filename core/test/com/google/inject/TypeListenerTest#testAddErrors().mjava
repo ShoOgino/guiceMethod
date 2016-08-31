@@ -1,18 +1,23 @@
   public void testAddErrors() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          requestInjection(new Object());
-          bindListener(Matchers.any(), new TypeListener() {
-            public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-              encounter.addError("There was an error on %s", type);
-              encounter.addError(new IllegalArgumentException("whoops!"));
-              encounter.addError(new Message("And another problem"));
-              encounter.addError(new IllegalStateException());
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              requestInjection(new Object());
+              bindListener(
+                  Matchers.any(),
+                  new TypeListener() {
+                    @Override
+                    public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                      encounter.addError("There was an error on %s", type);
+                      encounter.addError(new IllegalArgumentException("whoops!"));
+                      encounter.addError(new Message("And another problem"));
+                      encounter.addError(new IllegalStateException());
+                    }
+                  });
             }
           });
-        }
-      });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),

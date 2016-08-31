@@ -2,21 +2,25 @@
     final Set<TypeLiteral<?>> heardTypes = Sets.newHashSet();
 
     final Constructor<D> constructor = D.class.getConstructor(Stage.class);
-    final TypeListener listener = new TypeListener() {
-      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-        if (!heardTypes.add(type)) {
-          fail("Heard " + type + " multiple times!");
-        }
-      }
-    };
+    final TypeListener listener =
+        new TypeListener() {
+          @Override
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+            if (!heardTypes.add(type)) {
+              fail("Heard " + type + " multiple times!");
+            }
+          }
+        };
 
-    Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Object.class).toConstructor(constructor);
-        bind(D.class).toConstructor(constructor);
-        bindListener(Matchers.any(), listener);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Object.class).toConstructor(constructor);
+            bind(D.class).toConstructor(constructor);
+            bindListener(Matchers.any(), listener);
+          }
+        });
     
     assertEquals(ImmutableSet.of(TypeLiteral.get(D.class)), heardTypes);
   }

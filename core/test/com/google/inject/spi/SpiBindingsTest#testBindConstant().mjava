@@ -1,18 +1,18 @@
   public void testBindConstant() {
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bindConstant().annotatedWith(Names.named("one")).to(1);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof InstanceBinding);
             assertEquals(Key.get(Integer.class, Names.named("one")), binding.getKey());
             return null;
           }
-        }
-    );
+        });
   }
 

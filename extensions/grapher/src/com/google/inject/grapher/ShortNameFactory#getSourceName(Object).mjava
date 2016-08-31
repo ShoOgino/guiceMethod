@@ -1,8 +1,9 @@
   /**
-   * Returns a name for a Guice "source" object. This will typically be either
-   * a {@link StackTraceElement} for when the binding is made to the instance,
-   * or a {@link Method} when a provider method is used.
+   * Returns a name for a Guice "source" object. This will typically be either a {@link
+   * StackTraceElement} for when the binding is made to the instance, or a {@link Method} when a
+   * provider method is used.
    */
+  @Override
   public String getSourceName(Object source) {
     if (source instanceof ElementSource) {
       source = ((ElementSource) source).getDeclaringSource();

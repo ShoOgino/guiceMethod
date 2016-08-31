@@ -1,25 +1,27 @@
   public void testConstantBinding() {
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bindConstant().annotatedWith(Names.named("one")).to(1);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof InstanceBinding);
             checkBindingSource(binding);
             assertEquals(Key.get(Integer.class, Names.named("one")), binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(InstanceBinding<? extends T> binding) {
-                assertEquals(1, binding.getInstance());
-                return null;
-              }
-            });
+            binding.acceptTargetVisitor(
+                new FailingTargetVisitor<T>() {
+                  @Override
+                  public Void visit(InstanceBinding<? extends T> binding) {
+                    assertEquals(1, binding.getInstance());
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

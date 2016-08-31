@@ -1,9 +1,12 @@
   public void testExplicitCyclicDependency() {
-    Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(A.class);
-        bind(B.class);
-      }
-    }).getInstance(A.class);
+    Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class);
+                bind(B.class);
+              }
+            })
+        .getInstance(A.class);
   }
 

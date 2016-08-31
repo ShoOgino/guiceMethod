@@ -1,36 +1,45 @@
   public void testPrivateModulesInheritOptions() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          binder().requireExplicitBindings();
-          bind(Foo.class).to(FooImpl.class);
-  
-          install(new PrivateModule() {
-            public void configure() {
-              bind(FooBar.class);
-              expose(FooBar.class);
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              binder().requireExplicitBindings();
+              bind(Foo.class).to(FooImpl.class);
+
+              install(
+                  new PrivateModule() {
+                    @Override
+                    public void configure() {
+                      bind(FooBar.class);
+                      expose(FooBar.class);
+                    }
+                  });
             }
           });
-        }
-      });
       fail("should have failed");
     } catch(CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(Bar.class));
       assertEquals(1, expected.getErrorMessages().size());
     }
     
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        binder().requireExplicitBindings();
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder().requireExplicitBindings();
 
-        install(new PrivateModule() {
-          public void configure() {
-            bind(Foo.class).to(FooImpl.class);
-            expose(Foo.class);
-          }
-        });
-      }
-    });
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        bind(Foo.class).to(FooImpl.class);
+                        expose(Foo.class);
+                      }
+                    });
+              }
+            });
     ensureInChild(injector, FooImpl.class);
   }
 

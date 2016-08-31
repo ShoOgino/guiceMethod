@@ -13,10 +13,10 @@
 
     Mustang blueMustang = (Mustang) carFactory.create(Color.BLUE);
     assertEquals(Color.BLUE, blueMustang.color);
-    assertEquals(5.0d, blueMustang.engineSize);
+    assertEquals(5.0d, blueMustang.engineSize, 0.0);
 
     Mustang redMustang = (Mustang) carFactory.create(Color.RED);
     assertEquals(Color.RED, redMustang.color);
-    assertEquals(5.0d, redMustang.engineSize);
+    assertEquals(5.0d, redMustang.engineSize, 0.0);
   }
 

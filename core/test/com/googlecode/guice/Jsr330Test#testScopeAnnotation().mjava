@@ -1,13 +1,16 @@
   public void testScopeAnnotation() {
     final TestScope scope = new TestScope();
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(B.class).in(scope);
-        bind(C.class).in(TestScoped.class);
-        bindScope(TestScoped.class, scope);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(B.class).in(scope);
+                bind(C.class).in(TestScoped.class);
+                bindScope(TestScoped.class, scope);
+              }
+            });
 
     B b = injector.getInstance(B.class);
     assertSame(b, injector.getInstance(B.class));

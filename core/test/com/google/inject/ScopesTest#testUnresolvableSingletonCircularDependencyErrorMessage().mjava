@@ -21,24 +21,36 @@
       }
     });
 
-    Future<I0> firstThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<I0>() {
-      public I0 call() {
-        Thread.currentThread().setName("I0.class");
-        return injector.getInstance(I0.class);
-      }
-    });
-    Future<J0> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<J0>() {
-      public J0 call() {
-        Thread.currentThread().setName("J0.class");
-        return injector.getInstance(J0.class);
-      }
-    });
-    Future<K0> thirdThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<K0>() {
-      public K0 call() {
-        Thread.currentThread().setName("K0.class");
-        return injector.getInstance(K0.class);
-      }
-    });
+    Future<I0> firstThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<I0>() {
+                  @Override
+                  public I0 call() {
+                    Thread.currentThread().setName("I0.class");
+                    return injector.getInstance(I0.class);
+                  }
+                });
+    Future<J0> secondThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<J0>() {
+                  @Override
+                  public J0 call() {
+                    Thread.currentThread().setName("J0.class");
+                    return injector.getInstance(J0.class);
+                  }
+                });
+    Future<K0> thirdThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<K0>() {
+                  @Override
+                  public K0 call() {
+                    Thread.currentThread().setName("K0.class");
+                    return injector.getInstance(K0.class);
+                  }
+                });
 
     // using separate threads to avoid potential deadlock on the main thread
     // waiting twice as much to be sure that both would time out in their respective barriers

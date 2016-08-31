@@ -1,5 +1,6 @@
-    public TypeConverterBinding getConverter(String stringValue, TypeLiteral<?> type, Errors errors,
-        Object source) {
+    @Override
+    public TypeConverterBinding getConverter(
+        String stringValue, TypeLiteral<?> type, Errors errors, Object source) {
       throw new UnsupportedOperationException();
     }
 

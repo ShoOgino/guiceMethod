@@ -1,14 +1,20 @@
   public void testInjectionListenerThrows() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            encounter.register(failingInjectionListener);
-          }
-        });
-        bind(B.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    onlyAbcd,
+                    new TypeListener() {
+                      @Override
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        encounter.register(failingInjectionListener);
+                      }
+                    });
+                bind(B.class);
+              }
+            });
 
     try {
       injector.getInstance(A.class);

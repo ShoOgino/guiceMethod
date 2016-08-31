@@ -1,3 +1,4 @@
+    @Override
     @SuppressWarnings("unchecked") // the constructor promises to produce 'T's
     public T newInstance(Object... arguments) throws InvocationTargetException {
       Enhancer.registerCallbacks(enhanced, callbacks);

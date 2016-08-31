@@ -1,36 +1,55 @@
   public void testDependenciesBetweenPrivateAndPublicWithPublicEagerSingleton() {
-    Injector injector = Guice.createInjector(
-        new PrivateModule() {
-          @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              protected void configure() {}
 
-          @Provides @Exposed @Named("a") String provideA() {
-            return "A";
-          }
-
-          @Provides @Exposed @Named("abc") String provideAbc(@Named("ab") String ab) {
-            return ab + "C";
-          }
-        },
-        new AbstractModule() {
-          @Override protected void configure() {
-            bind(String.class).annotatedWith(named("abcde")).toProvider(new Provider<String>() {
-              @Inject @Named("abcd") String abcd;
-
-              public String get() {
-                return abcd + "E";
+              @Provides
+              @Exposed
+              @Named("a")
+              String provideA() {
+                return "A";
               }
-            }).asEagerSingleton();
-          }
 
-          @Provides @Named("ab") String provideAb(@Named("a") String a) {
-            return a + "B";
-          }
+              @Provides
+              @Exposed
+              @Named("abc")
+              String provideAbc(@Named("ab") String ab) {
+                return ab + "C";
+              }
+            },
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class)
+                    .annotatedWith(named("abcde"))
+                    .toProvider(
+                        new Provider<String>() {
+                          @Inject
+                          @Named("abcd")
+                          String abcd;
 
-          @Provides @Named("abcd") String provideAbcd(@Named("abc") String abc) {
-            return abc + "D";
-          }
-        }
-    );
+                          @Override
+                          public String get() {
+                            return abcd + "E";
+                          }
+                        })
+                    .asEagerSingleton();
+              }
+
+              @Provides
+              @Named("ab")
+              String provideAb(@Named("a") String a) {
+                return a + "B";
+              }
+
+              @Provides
+              @Named("abcd")
+              String provideAbcd(@Named("abc") String abc) {
+                return abc + "D";
+              }
+            });
 
     assertEquals("ABCDE", injector.getInstance(Key.get(String.class, named("abcde"))));
   }

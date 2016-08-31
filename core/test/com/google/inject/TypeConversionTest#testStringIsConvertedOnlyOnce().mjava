@@ -1,14 +1,17 @@
   public void testStringIsConvertedOnlyOnce() {
-    final TypeConverter converter = new TypeConverter() {
-      boolean converted = false;
-      public Object convert(String value, TypeLiteral<?> toType) {
-        if (converted) {
-          throw new AssertionFailedError("converted multiple times!");
-        }
-        converted = true;
-        return new Date();
-      }
-    };
+    final TypeConverter converter =
+        new TypeConverter() {
+          boolean converted = false;
+
+          @Override
+          public Object convert(String value, TypeLiteral<?> toType) {
+            if (converted) {
+              throw new AssertionFailedError("converted multiple times!");
+            }
+            converted = true;
+            return new Date();
+          }
+        };
 
     Injector injector = Guice.createInjector(new AbstractModule() {
       @Override protected void configure() {

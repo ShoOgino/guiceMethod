@@ -5,21 +5,24 @@
         = new AtomicReference<MembersInjector<String>>();
 
     final AtomicReference<String> lastInjected = new AtomicReference<String>();
-    final MembersInjector<String> stringInjector = new MembersInjector<String>() {
-      public void injectMembers(String instance) {
-        lastInjected.set(instance);
-      }
-    };
+    final MembersInjector<String> stringInjector =
+        new MembersInjector<String>() {
+          @Override
+          public void injectMembers(String instance) {
+            lastInjected.set(instance);
+          }
+        };
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             providerFromBinder.set(getProvider(String.class));
             membersInjectorFromBinder.set(getMembersInjector(String.class));
           }
         },
-
         new FailingElementVisitor() {
+          @Override
           public <T> Void visit(ProviderLookup<T> providerLookup) {
             @SuppressWarnings("unchecked") // we know that T is a String here
             ProviderLookup<String> stringLookup = (ProviderLookup<String>) providerLookup;
@@ -29,9 +32,9 @@
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(MembersInjectorLookup<T> lookup) {
+          @Override
+          public <T> Void visit(MembersInjectorLookup<T> lookup) {
             @SuppressWarnings("unchecked") // we know that T is a String here
             MembersInjectorLookup<String> stringLookup = (MembersInjectorLookup<String>) lookup;
             stringLookup.initializeDelegate(stringInjector);

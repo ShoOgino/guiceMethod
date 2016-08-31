@@ -3,36 +3,40 @@
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(C.class).toConstructor(constructor);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertEquals(Key.get(C.class), binding.getKey());
             assertTrue(binding instanceof UntargettedBinding);
             return null;
           }
         },
-
         new ExternalFailureVisitor() {
-          @Override public Void visit(Message message) {
-            assertContains(message.getMessage(),
+          @Override
+          public Void visit(Message message) {
+            assertContains(
+                message.getMessage(),
                 C.class.getName() + ".a has more than one annotation ",
-                Named.class.getName(), SampleAnnotation.class.getName());
+                Named.class.getName(),
+                SampleAnnotation.class.getName());
             return null;
           }
         },
-
         new ExternalFailureVisitor() {
-          @Override public Void visit(Message message) {
-            assertContains(message.getMessage(),
+          @Override
+          public Void visit(Message message) {
+            assertContains(
+                message.getMessage(),
                 C.class.getName() + ".<init>() has more than one annotation ",
-                Named.class.getName(), SampleAnnotation.class.getName());
+                Named.class.getName(),
+                SampleAnnotation.class.getName());
             return null;
           }
-        }
-    );
+        });
   }
 

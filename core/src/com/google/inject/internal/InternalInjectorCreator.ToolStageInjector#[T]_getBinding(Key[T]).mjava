@@ -1,3 +1,4 @@
+    @Override
     public <T> Binding<T> getBinding(Key<T> key) {
       return this.delegateInjector.getBinding(key);
     }

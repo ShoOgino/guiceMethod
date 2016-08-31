@@ -2,15 +2,18 @@
     if (singleton) {
       singletons.add(key);
       final Provider<Object> unscoped = provider;
-      provider = new Provider<Object>() {
-        private Object onlyInstance = UNINITIALIZED;
-        public Object get() {
-          if (onlyInstance == UNINITIALIZED) {
-            onlyInstance = unscoped.get();
-          }
-          return onlyInstance;
-        }
-      };
+      provider =
+          new Provider<Object>() {
+            private Object onlyInstance = UNINITIALIZED;
+
+            @Override
+            public Object get() {
+              if (onlyInstance == UNINITIALIZED) {
+                onlyInstance = unscoped.get();
+              }
+              return onlyInstance;
+            }
+          };
     }
 
     if (bindings.put(key, provider) != null) {

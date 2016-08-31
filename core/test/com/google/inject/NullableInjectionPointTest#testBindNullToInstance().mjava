@@ -3,11 +3,13 @@
    */
   public void testBindNullToInstance() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(Foo.class).toInstance(null);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(Foo.class).toInstance(null);
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),

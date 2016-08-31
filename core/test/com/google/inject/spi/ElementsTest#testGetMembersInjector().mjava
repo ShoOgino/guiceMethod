@@ -1,11 +1,13 @@
   public void testGetMembersInjector() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
-            MembersInjector<A<String>> typeMembersInjector
-                = getMembersInjector(new TypeLiteral<A<String>>() {});
+            MembersInjector<A<String>> typeMembersInjector =
+                getMembersInjector(new TypeLiteral<A<String>>() {});
             try {
               typeMembersInjector.injectMembers(new A<String>());
+              fail("Expected IllegalStateException");
             } catch (IllegalStateException e) {
               assertEquals(
                   "This MembersInjector cannot be used until the Injector has been created.",
@@ -15,6 +17,7 @@
             MembersInjector<String> classMembersInjector = getMembersInjector(String.class);
             try {
               classMembersInjector.injectMembers("hello");
+              fail("Expected IllegalStateException");
             } catch (IllegalStateException e) {
               assertEquals(
                   "This MembersInjector cannot be used until the Injector has been created.",
@@ -22,22 +25,21 @@
             }
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(MembersInjectorLookup<T> command) {
+          @Override
+          public <T> Void visit(MembersInjectorLookup<T> command) {
             assertEquals(new TypeLiteral<A<String>>() {}, command.getType());
             assertNull(command.getDelegate());
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(MembersInjectorLookup<T> command) {
+          @Override
+          public <T> Void visit(MembersInjectorLookup<T> command) {
             assertEquals(TypeLiteral.get(String.class), command.getType());
             assertNull(command.getDelegate());
             return null;
           }
-        }
-    );
+        });
   }
 

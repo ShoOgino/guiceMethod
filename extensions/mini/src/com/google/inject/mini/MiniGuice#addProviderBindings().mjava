@@ -3,11 +3,13 @@
     for (final Map.Entry<Key, Provider<?>> binding : bindings.entrySet()) {
       Key key = binding.getKey();
       final Provider<?> value = binding.getValue();
-      Provider<Provider<?>> providerProvider = new Provider<Provider<?>>() {
-        public Provider<?> get() {
-          return value;
-        }
-      };
+      Provider<Provider<?>> providerProvider =
+          new Provider<Provider<?>>() {
+            @Override
+            public Provider<?> get() {
+              return value;
+            }
+          };
       providerBindings.put(new Key(new ProviderType(javax.inject.Provider.class, key.type),
           key.annotation), providerProvider);
     }

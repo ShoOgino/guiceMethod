@@ -1,6 +1,7 @@
   public void testBindInScopes() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class);
             bind(List.class).to(ArrayList.class).in(Scopes.SINGLETON);
@@ -8,56 +9,63 @@
             bind(Set.class).to(TreeSet.class).asEagerSingleton();
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              @Override public Void visitNoScoping() {
-                return null;
-              }
-            });
+            command.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitNoScoping() {
+                    return null;
+                  }
+                });
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             assertEquals(Key.get(List.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              @Override public Void visitScope(Scope scope) {
-                assertEquals(Scopes.SINGLETON, scope);
-                return null;
-              }
-            });
+            command.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitScope(Scope scope) {
+                    assertEquals(Scopes.SINGLETON, scope);
+                    return null;
+                  }
+                });
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             assertEquals(Key.get(Map.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              @Override public Void visitScopeAnnotation(Class<? extends Annotation> annotation) {
-                assertEquals(Singleton.class, annotation);
-                return null;
-              }
-            });
+            command.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitScopeAnnotation(Class<? extends Annotation> annotation) {
+                    assertEquals(Singleton.class, annotation);
+                    return null;
+                  }
+                });
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             assertEquals(Key.get(Set.class), command.getKey());
-            command.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              public Void visitEagerSingleton() {
-                return null;
-              }
-            });
+            command.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitEagerSingleton() {
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

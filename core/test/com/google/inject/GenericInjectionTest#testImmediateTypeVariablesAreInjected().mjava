@@ -1,9 +1,12 @@
   public void testImmediateTypeVariablesAreInjected() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(String.class).toInstance("tee");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("tee");
+              }
+            });
     InjectsT<String> injectsT = injector.getInstance(new Key<InjectsT<String>>() {});
     assertEquals("tee", injectsT.t);
   }

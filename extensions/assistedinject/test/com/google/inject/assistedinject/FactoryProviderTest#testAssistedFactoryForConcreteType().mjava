@@ -20,12 +20,12 @@
     Mustang mustang = new Mustang(5000d, Color.BLACK);
     MustangInsurance mustangPolicy =
         (MustangInsurance) mustangInsuranceFactory.create(mustang, 800.0d);
-    assertEquals(800.0d, mustangPolicy.premium);
-    assertEquals(50000.0d, mustangPolicy.limit);
+    assertEquals(800.0d, mustangPolicy.premium, 0.0);
+    assertEquals(50000.0d, mustangPolicy.limit, 0.0);
 
     Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
     CamaroInsurance camaroPolicy = (CamaroInsurance) camaroInsuranceFactory.create(camaro, 800.0d);
-    assertEquals(800.0d, camaroPolicy.premium);
-    assertEquals(100000.0d, camaroPolicy.limit);
+    assertEquals(800.0d, camaroPolicy.premium, 0.0);
+    assertEquals(100000.0d, camaroPolicy.limit, 0.0);
   }
 

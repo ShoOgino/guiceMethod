@@ -2,27 +2,35 @@
     final AtomicInteger typeEncounters = new AtomicInteger();
     final AtomicInteger injections = new AtomicInteger();
 
-    final InjectionListener<A> listener = new InjectionListener<A>() {
-      public void afterInjection(A injectee) {
-        injections.incrementAndGet();
-        assertNotNull(injectee.injector);
-      }
-    };
-
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, new TypeListener() {
-          @SuppressWarnings("unchecked")
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            typeEncounters.incrementAndGet();
-            encounter.register((InjectionListener) listener);
+    final InjectionListener<A> listener =
+        new InjectionListener<A>() {
+          @Override
+          public void afterInjection(A injectee) {
+            injections.incrementAndGet();
+            assertNotNull(injectee.injector);
           }
-        });
+        };
 
-        bind(A.class);
-        getMembersInjector(A.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    onlyAbcd,
+                    new TypeListener() {
+                      @Override
+                      @SuppressWarnings("unchecked")
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        typeEncounters.incrementAndGet();
+                        encounter.register((InjectionListener) listener);
+                      }
+                    });
+
+                bind(A.class);
+                getMembersInjector(A.class);
+              }
+            });
 
     // creating the injector shouldn't trigger injections
     assertEquals(0, injections.getAndSet(0));

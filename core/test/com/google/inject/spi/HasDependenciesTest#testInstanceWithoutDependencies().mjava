@@ -1,9 +1,12 @@
   public void testInstanceWithoutDependencies() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(A.class).toInstance(new A());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class).toInstance(new A());
+              }
+            });
 
     InstanceBinding<?> binding = (InstanceBinding<?>) injector.getBinding(A.class);
     Dependency<?> onlyDependency = Iterables.getOnlyElement(binding.getDependencies());

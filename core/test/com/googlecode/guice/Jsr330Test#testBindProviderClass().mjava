@@ -5,14 +5,19 @@
    * support binding to instances of javax.inject.Provider.
    */
   public void testBindProviderClass() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(B.class).toProvider(BProvider.class);
-        bind(B.class).annotatedWith(Names.named("1")).toProvider(BProvider.class);
-        bind(B.class).annotatedWith(Names.named("2")).toProvider(Key.get(BProvider.class));
-        bind(B.class).annotatedWith(Names.named("3")).toProvider(TypeLiteral.get(BProvider.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(B.class).toProvider(BProvider.class);
+                bind(B.class).annotatedWith(Names.named("1")).toProvider(BProvider.class);
+                bind(B.class).annotatedWith(Names.named("2")).toProvider(Key.get(BProvider.class));
+                bind(B.class)
+                    .annotatedWith(Names.named("3"))
+                    .toProvider(TypeLiteral.get(BProvider.class));
+              }
+            });
     
     injector.getInstance(Key.get(B.class));
     injector.getInstance(Key.get(B.class, Names.named("1")));

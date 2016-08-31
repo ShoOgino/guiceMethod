@@ -8,6 +8,7 @@
               .build(NotHidden.class));
         }
       });
+      fail("Expected CreationException");
     } catch(CreationException ce) {
       assertEquals(NotHidden.class.getName() + " is public, but has a method that returns a non-public type: "
           + Hidden.class.getName() + ". Due to limitations with java.lang.reflect.Proxy, this is not allowed. "

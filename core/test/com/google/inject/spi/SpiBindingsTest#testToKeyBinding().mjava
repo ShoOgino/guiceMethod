@@ -4,33 +4,35 @@
 
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(aKey).to(bKey);
             bind(bKey).toInstance("B");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof LinkedKeyBinding);
             checkBindingSource(binding);
             assertEquals(aKey, binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(LinkedKeyBinding<? extends T> binding) {
-                assertEquals(bKey, binding.getLinkedKey());
-                return null;
-              }
-            });
+            binding.acceptTargetVisitor(
+                new FailingTargetVisitor<T>() {
+                  @Override
+                  public Void visit(LinkedKeyBinding<? extends T> binding) {
+                    assertEquals(bKey, binding.getLinkedKey());
+                    return null;
+                  }
+                });
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertEquals(bKey, binding.getKey());
             return null;
           }
-        }
-    );
+        });
   }
 

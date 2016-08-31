@@ -1,21 +1,29 @@
   public void testInstallingInjectionListener() {
     final List<Object> injectees = Lists.newArrayList();
-    final InjectionListener<Object> injectionListener = new InjectionListener<Object>() {
-      public void afterInjection(Object injectee) {
-        injectees.add(injectee);
-      }
-    };
-
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            encounter.register(injectionListener);
+    final InjectionListener<Object> injectionListener =
+        new InjectionListener<Object>() {
+          @Override
+          public void afterInjection(Object injectee) {
+            injectees.add(injectee);
           }
-        });
-        bind(A.class);
-      }
-    });
+        };
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    onlyAbcd,
+                    new TypeListener() {
+                      @Override
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        encounter.register(injectionListener);
+                      }
+                    });
+                bind(A.class);
+              }
+            });
 
     assertEquals(ImmutableList.of(), injectees);
 

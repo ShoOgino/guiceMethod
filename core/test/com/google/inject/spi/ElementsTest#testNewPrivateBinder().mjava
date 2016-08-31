@@ -9,51 +9,53 @@
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             PrivateBinder one = binder().newPrivateBinder();
             one.expose(ArrayList.class);
             one.expose(Collection.class).annotatedWith(SampleAnnotation.class);
             one.bind(List.class).to(ArrayList.class);
 
-            PrivateBinder two = binder().withSource("1 FooBar")
-                .newPrivateBinder().withSource("2 FooBar");
+            PrivateBinder two =
+                binder().withSource("1 FooBar").newPrivateBinder().withSource("2 FooBar");
             two.expose(String.class).annotatedWith(Names.named("a"));
             two.expose(b);
             two.bind(List.class).to(ArrayList.class);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(PrivateElements one) {
+          @Override
+          public Void visit(PrivateElements one) {
             assertEquals(collections, one.getExposedKeys());
-            checkElements(one.getElements(),
+            checkElements(
+                one.getElements(),
                 new FailingElementVisitor() {
-                  @Override public <T> Void visit(Binding<T> binding) {
+                  @Override
+                  public <T> Void visit(Binding<T> binding) {
                     assertEquals(Key.get(List.class), binding.getKey());
                     return null;
                   }
-                }
-            );
+                });
             return null;
           }
         },
-
         new ExternalFailureVisitor() {
-          @Override public Void visit(PrivateElements two) {
+          @Override
+          public Void visit(PrivateElements two) {
             assertEquals(ab, two.getExposedKeys());
             assertEquals("1 FooBar", two.getSource().toString());
-            checkElements(two.getElements(),
+            checkElements(
+                two.getElements(),
                 new ExternalFailureVisitor() {
-                  @Override public <T> Void visit(Binding<T> binding) {
+                  @Override
+                  public <T> Void visit(Binding<T> binding) {
                     assertEquals("2 FooBar", binding.getSource().toString());
                     assertEquals(Key.get(List.class), binding.getKey());
                     return null;
                   }
-                }
-            );
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

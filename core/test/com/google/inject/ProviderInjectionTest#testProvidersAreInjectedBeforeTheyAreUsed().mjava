@@ -4,31 +4,44 @@
    * List.class is injected before it is used.
    */
   public void testProvidersAreInjectedBeforeTheyAreUsed() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      public void configure() {
-        // should bind String to "[true]"
-        bind(String.class).toProvider(new Provider<String>() {
-          private String value;
-          @Inject void initialize(List list) {
-            value = list.toString();
-          }
-          public String get() {
-            return value;
-          }
-        });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              public void configure() {
+                // should bind String to "[true]"
+                bind(String.class)
+                    .toProvider(
+                        new Provider<String>() {
+                          private String value;
 
-        // should bind List to [true]
-        bind(List.class).toProvider(new Provider<List>() {
-          @Inject Boolean injectedYet = Boolean.FALSE;
-          public List get() {
-            return Arrays.asList(injectedYet);
-          }
-        });
+                          @Inject
+                          void initialize(List list) {
+                            value = list.toString();
+                          }
 
-        // should bind Boolean to true
-        bind(Boolean.class).toInstance(Boolean.TRUE);
-      }
-    });
+                          @Override
+                          public String get() {
+                            return value;
+                          }
+                        });
+
+                // should bind List to [true]
+                bind(List.class)
+                    .toProvider(
+                        new Provider<List>() {
+                          @Inject Boolean injectedYet = Boolean.FALSE;
+
+                          @Override
+                          public List get() {
+                            return Arrays.asList(injectedYet);
+                          }
+                        });
+
+                // should bind Boolean to true
+                bind(Boolean.class).toInstance(Boolean.TRUE);
+              }
+            });
 
     assertEquals("Providers not injected before use",
         "[true]",

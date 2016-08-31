@@ -17,8 +17,8 @@
     Camaro camaro = new Camaro(3000, 1967, Color.BLUE);
     AutoInsurance<?> camaroPolicy =
         (AutoInsurance<?>) camaroInsuranceFactory.create(camaro, 800.0d);
-    assertEquals(800.0d, camaroPolicy.premium);
-    assertEquals(50000.0d, camaroPolicy.limit);
+    assertEquals(800.0d, camaroPolicy.premium, 0.0);
+    assertEquals(50000.0d, camaroPolicy.limit, 0.0);
     assertEquals(camaro, camaroPolicy.car);
   }
 

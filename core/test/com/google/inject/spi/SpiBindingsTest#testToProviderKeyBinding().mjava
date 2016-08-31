@@ -1,25 +1,27 @@
   public void testToProviderKeyBinding() {
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toProvider(StringProvider.class);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof ProviderKeyBinding);
             checkBindingSource(binding);
             assertEquals(Key.get(String.class), binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(ProviderKeyBinding<? extends T> binding) {
-                assertEquals(Key.get(StringProvider.class), binding.getProviderKey());
-                return null;
-              }
-            });
+            binding.acceptTargetVisitor(
+                new FailingTargetVisitor<T>() {
+                  @Override
+                  public Void visit(ProviderKeyBinding<? extends T> binding) {
+                    assertEquals(Key.get(StringProvider.class), binding.getProviderKey());
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

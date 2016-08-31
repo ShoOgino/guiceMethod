@@ -5,7 +5,7 @@
       @SuppressWarnings({"unchecked"})
       Class<? extends Module> moduleClass =
           (Class<? extends Module>) Class.forName(moduleClassName);
-      this.module = moduleClass.newInstance();
+      this.module = moduleClass.getConstructor().newInstance();
     } catch (Exception e) {
       throw new RuntimeException(e);
     }

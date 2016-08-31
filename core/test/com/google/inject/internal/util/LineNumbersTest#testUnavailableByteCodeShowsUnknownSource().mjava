@@ -1,10 +1,12 @@
   public void testUnavailableByteCodeShowsUnknownSource() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(new GeneratingClassLoader().generate());
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(new GeneratingClassLoader().generate());
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(

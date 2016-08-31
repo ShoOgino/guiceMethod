@@ -1,30 +1,34 @@
   public void testToInstanceBinding() {
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toInstance("A");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof InstanceBinding);
             checkBindingSource(binding);
             assertEquals(Key.get(String.class), binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(InstanceBinding<? extends T> binding) {
-                assertEquals("A", binding.getInstance());
-                return null;
-              }
-            });
-            binding.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              public Void visitEagerSingleton() {
-                return null;
-              }
-            });
+            binding.acceptTargetVisitor(
+                new FailingTargetVisitor<T>() {
+                  @Override
+                  public Void visit(InstanceBinding<? extends T> binding) {
+                    assertEquals("A", binding.getInstance());
+                    return null;
+                  }
+                });
+            binding.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitEagerSingleton() {
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

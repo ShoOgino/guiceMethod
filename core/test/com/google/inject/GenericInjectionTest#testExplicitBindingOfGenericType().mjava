@@ -1,10 +1,13 @@
   public void testExplicitBindingOfGenericType() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Key.get(new TypeLiteral<Parameterized<String>>() {}))
-            .to((Class) Parameterized.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Key.get(new TypeLiteral<Parameterized<String>>() {}))
+                    .to((Class) Parameterized.class);
+              }
+            });
 
     Parameterized<String> parameterized
         = injector.getInstance(Key.get(new TypeLiteral<Parameterized<String>>() { }));

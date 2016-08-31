@@ -1,3 +1,4 @@
+    @Override
     public void putBinding(Key<?> key, BindingImpl<?> binding) {
       throw new UnsupportedOperationException();
     }

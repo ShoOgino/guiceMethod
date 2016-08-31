@@ -1,3 +1,4 @@
+  @Override
   public void begin() {
     Preconditions.checkState(null == entityManager.get(),
         "Work already begun on this thread. Looks like you have called UnitOfWork.begin() twice"

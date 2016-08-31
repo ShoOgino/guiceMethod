@@ -1,10 +1,13 @@
   public void testInterceptedMethodThrows() throws Exception {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
-        bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
+                bindInterceptor(Matchers.any(), Matchers.any(), new CountingInterceptor());
+              }
+            });
 
     Interceptable interceptable = injector.getInstance(Interceptable.class);
     try {

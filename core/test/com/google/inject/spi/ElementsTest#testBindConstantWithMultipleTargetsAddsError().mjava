@@ -1,27 +1,27 @@
   public void testBindConstantWithMultipleTargetsAddsError() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             ConstantBindingBuilder cbb = bindConstant().annotatedWith(SampleAnnotation.class);
             cbb.to("A");
             cbb.to("B");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message message) {
+          @Override
+          public Void visit(Message message) {
             assertEquals("Constant value is set more than once.", message.getMessage());
             assertNull(message.getCause());
             assertContains(message.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
-        }
-    );
+        });
   }
 

@@ -14,7 +14,7 @@
     Fleet fleet = fleetFactory.createFleet(Color.RED);
 
     assertSame(Color.RED, fleet.mustang.color);
-    assertEquals(5.0d, fleet.mustang.engineSize);
+    assertEquals(5.0d, fleet.mustang.engineSize, 0.0);
     assertSame(Color.RED, fleet.camaro.color);
     assertEquals(250, fleet.camaro.horsePower);
     assertEquals(1984, fleet.camaro.modelYear);

@@ -1,15 +1,18 @@
   public void testProviderMethodWithSubclassOfExceptionIsOk() {
-    providesInjector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        install(ThrowingProviderBinder.forModule(this));
-      }
-      
-      @SuppressWarnings("unused")
-      @CheckedProvides(RemoteProvider.class)
-      String foo() throws AccessException {
-        throw new AccessException("boo!");
-      }
-    });
+    providesInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(ThrowingProviderBinder.forModule(this));
+              }
+
+              @SuppressWarnings("unused")
+              @CheckedProvides(RemoteProvider.class)
+              String foo() throws AccessException {
+                throw new AccessException("boo!");
+              }
+            });
     
     RemoteProvider<String> remoteProvider = 
       providesInjector.getInstance(Key.get(remoteProviderOfString));

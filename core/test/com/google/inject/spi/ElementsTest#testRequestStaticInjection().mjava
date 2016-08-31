@@ -1,17 +1,17 @@
   public void testRequestStaticInjection() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             requestStaticInjection(ArrayList.class);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(StaticInjectionRequest command) {
+          @Override
+          public Void visit(StaticInjectionRequest command) {
             assertEquals(ArrayList.class, command.getType());
             return null;
           }
-        }
-    );
+        });
   }
 

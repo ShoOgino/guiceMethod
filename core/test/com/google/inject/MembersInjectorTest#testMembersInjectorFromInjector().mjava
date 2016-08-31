@@ -1,9 +1,12 @@
   public void testMembersInjectorFromInjector() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(C.class).toInstance(myFavouriteC);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(C.class).toInstance(myFavouriteC);
+              }
+            });
 
     MembersInjector<A<C>> aMembersInjector
         = injector.getMembersInjector(new TypeLiteral<A<C>>() {});

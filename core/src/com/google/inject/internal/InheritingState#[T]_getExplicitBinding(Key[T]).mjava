@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked") // we only put in BindingImpls that match their key types
   public <T> BindingImpl<T> getExplicitBinding(Key<T> key) {
     Binding<?> binding = explicitBindings.get(key);

@@ -54,25 +54,27 @@
     final Constructor<?> constructor = injectedConstructor;
     final Key[] parameterKeys = parametersToKeys(
         constructor, constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
-    final Provider<Object> unscoped = new Provider<Object>() {
-      public Object get() {
-        Object[] constructorParameters = keysToValues(parameterKeys);
-        try {
-          Object result = constructor.newInstance(constructorParameters);
-          Object[] fieldValues = keysToValues(fieldKeys);
-          for (int i = 0; i < fieldValues.length; i++) {
-            injectedFields.get(i).set(result, fieldValues[i]);
+    final Provider<Object> unscoped =
+        new Provider<Object>() {
+          @Override
+          public Object get() {
+            Object[] constructorParameters = keysToValues(parameterKeys);
+            try {
+              Object result = constructor.newInstance(constructorParameters);
+              Object[] fieldValues = keysToValues(fieldKeys);
+              for (int i = 0; i < fieldValues.length; i++) {
+                injectedFields.get(i).set(result, fieldValues[i]);
+              }
+              return result;
+            } catch (IllegalAccessException e) {
+              throw new RuntimeException(e.getCause());
+            } catch (InvocationTargetException e) {
+              throw new RuntimeException(e.getCause());
+            } catch (InstantiationException e) {
+              throw new RuntimeException(e);
+            }
           }
-          return result;
-        } catch (IllegalAccessException e) {
-          throw new RuntimeException(e.getCause());
-        } catch (InvocationTargetException e) {
-          throw new RuntimeException(e.getCause());
-        } catch (InstantiationException e) {
-          throw new RuntimeException(e);
-        }
-      }
-    };
+        };
 
     boolean singleton = type.isAnnotationPresent(javax.inject.Singleton.class);
     putBinding(new Key(type, null), unscoped, singleton);

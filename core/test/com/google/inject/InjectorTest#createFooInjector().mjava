@@ -1,11 +1,13 @@
   private Injector createFooInjector() throws CreationException {
-    return Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Bar.class).to(BarImpl.class);
-        bind(Tee.class).to(TeeImpl.class);
-        bindConstant().annotatedWith(S.class).to("test");
-        bindConstant().annotatedWith(I.class).to(5);
-      }
-    });
+    return Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Bar.class).to(BarImpl.class);
+            bind(Tee.class).to(TeeImpl.class);
+            bindConstant().annotatedWith(S.class).to("test");
+            bindConstant().annotatedWith(I.class).to(5);
+          }
+        });
   }
 

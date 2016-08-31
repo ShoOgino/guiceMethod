@@ -1,9 +1,12 @@
   private static TypeConverter failingTypeConverter() {
     return new TypeConverter() {
+      @Override
       public Object convert(String value, TypeLiteral<?> toType) {
         throw new UnsupportedOperationException("Cannot convert");
       }
-      @Override public String toString() {
+
+      @Override
+      public String toString() {
         return "BrokenConverter";
       }
     };

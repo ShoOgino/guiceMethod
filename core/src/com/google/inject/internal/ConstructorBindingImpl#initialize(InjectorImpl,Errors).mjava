@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked") // the result type always agrees with the ConstructorInjector type
   public void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
     factory.constructorInjector =

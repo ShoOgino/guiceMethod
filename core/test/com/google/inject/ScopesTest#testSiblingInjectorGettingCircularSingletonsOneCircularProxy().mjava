@@ -18,18 +18,26 @@
       }
     });
 
-    Future<G> firstThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<G>() {
-      public G call() {
-        Thread.currentThread().setName("G.class");
-        return injector.createChildInjector().getInstance(G.class);
-      }
-    });
-    Future<H> secondThreadResult = Executors.newSingleThreadExecutor().submit(new Callable<H>() {
-      public H call() {
-        Thread.currentThread().setName("H.class");
-        return injector.createChildInjector().getInstance(H.class);
-      }
-    });
+    Future<G> firstThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<G>() {
+                  @Override
+                  public G call() {
+                    Thread.currentThread().setName("G.class");
+                    return injector.createChildInjector().getInstance(G.class);
+                  }
+                });
+    Future<H> secondThreadResult =
+        Executors.newSingleThreadExecutor()
+            .submit(
+                new Callable<H>() {
+                  @Override
+                  public H call() {
+                    Thread.currentThread().setName("H.class");
+                    return injector.createChildInjector().getInstance(H.class);
+                  }
+                });
 
     // using separate threads to avoid potential deadlock on the main thread
     // waiting twice as much to be sure that both would time out in their respective barriers

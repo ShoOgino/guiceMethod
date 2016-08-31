@@ -1,9 +1,12 @@
   public void testSingleton() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(B.class).in(Singleton.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(B.class).in(Singleton.class);
+              }
+            });
 
     B b = injector.getInstance(B.class);
     assertSame(b, injector.getInstance(B.class));
