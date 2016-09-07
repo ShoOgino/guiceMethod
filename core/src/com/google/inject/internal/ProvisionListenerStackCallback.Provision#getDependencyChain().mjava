@@ -1,3 +1,4 @@
+    @Deprecated
     @Override
     public List<DependencyAndSource> getDependencyChain() {
       return context.getDependencyChain();

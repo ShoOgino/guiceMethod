@@ -1,3 +1,4 @@
   // called from OSGi when bundle stops
+  @Override
   public void stop(BundleContext context) {}
 

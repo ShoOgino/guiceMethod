@@ -1,3 +1,4 @@
+  @Override
   public void addError(Throwable t) {
     checkState(valid, "Encounters may not be used after hear() returns.");
     errors.errorInUserCode(t, "An exception was caught and reported. Message: %s", t.getMessage());

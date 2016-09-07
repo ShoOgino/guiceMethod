@@ -1,19 +1,25 @@
   public void testAddingInterceptors() throws NoSuchMethodException {
     final Matcher<Object> buzz = only(C.class.getMethod("buzz"));
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindInterceptor(any(), buzz, prefixInterceptor("ka"));
-        bindInterceptor(any(), any(), prefixInterceptor("fe"));
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(any(), buzz, prefixInterceptor("ka"));
+                bindInterceptor(any(), any(), prefixInterceptor("fe"));
 
-        bindListener(onlyAbcd, new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            encounter.bindInterceptor(any(), prefixInterceptor("li"));
-            encounter.bindInterceptor(buzz, prefixInterceptor("no"));
-          }
-        });
-      }
-    });
+                bindListener(
+                    onlyAbcd,
+                    new TypeListener() {
+                      @Override
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        encounter.bindInterceptor(any(), prefixInterceptor("li"));
+                        encounter.bindInterceptor(buzz, prefixInterceptor("no"));
+                      }
+                    });
+              }
+            });
 
     // interceptors must be invoked in the order they're bound.
     C c = injector.getInstance(C.class);

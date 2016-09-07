@@ -1,3 +1,4 @@
+    @Override
     public String call() throws Exception {
       // Inside this request, we should always get the same instance.
       assertSame(someObject.get(), someObject.get());

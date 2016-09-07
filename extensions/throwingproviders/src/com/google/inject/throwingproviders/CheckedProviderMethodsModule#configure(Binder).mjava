@@ -1,3 +1,4 @@
+  @Override
   public synchronized void configure(Binder binder) {
     for (CheckedProviderMethod<?> throwingProviderMethod : getProviderMethods(binder)) {
       throwingProviderMethod.configure(binder);

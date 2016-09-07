@@ -1,3 +1,4 @@
+  @Override
   public void applyTo(Binder binder) {
     throw new UnsupportedOperationException("This element represents a synthetic binding.");
   }

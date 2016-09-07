@@ -1,24 +1,26 @@
   public void testConvertToTypes() {
-    final TypeConverter typeConverter = new TypeConverter() {
-      public Object convert(String value, TypeLiteral<?> toType) {
-        return value;
-      }
-    };
+    final TypeConverter typeConverter =
+        new TypeConverter() {
+          @Override
+          public Object convert(String value, TypeLiteral<?> toType) {
+            return value;
+          }
+        };
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             convertToTypes(Matchers.any(), typeConverter);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(TypeConverterBinding command) {
+          @Override
+          public Void visit(TypeConverterBinding command) {
             assertSame(typeConverter, command.getTypeConverter());
             assertSame(Matchers.any(), command.getTypeMatcher());
             return null;
           }
-        }
-    );
+        });
   }
 

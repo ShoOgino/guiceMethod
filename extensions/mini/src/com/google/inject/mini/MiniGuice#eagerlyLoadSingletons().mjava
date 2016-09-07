@@ -2,11 +2,14 @@
     for (Key key : singletons) {
       Provider<?> provider = bindings.get(key);
       final Object onlyInstance = provider.get();
-      bindings.put(key, new Provider<Object>() {
-        public Object get() {
-          return onlyInstance;
-        }
-      });
+      bindings.put(
+          key,
+          new Provider<Object>() {
+            @Override
+            public Object get() {
+              return onlyInstance;
+            }
+          });
     }
   }
 

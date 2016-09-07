@@ -3,26 +3,27 @@
 
     checkInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toProvider(stringProvider);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertTrue(binding instanceof ProviderInstanceBinding);
             checkBindingSource(binding);
             assertEquals(Key.get(String.class), binding.getKey());
-            binding.acceptTargetVisitor(new FailingTargetVisitor<T>() {
-              @Override public Void visit(
-                  ProviderInstanceBinding<? extends T> binding) {
-                assertSame(stringProvider, binding.getUserSuppliedProvider());
-                return null;
-              }
-            });
+            binding.acceptTargetVisitor(
+                new FailingTargetVisitor<T>() {
+                  @Override
+                  public Void visit(ProviderInstanceBinding<? extends T> binding) {
+                    assertSame(stringProvider, binding.getUserSuppliedProvider());
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-    );
+        });
   }
 

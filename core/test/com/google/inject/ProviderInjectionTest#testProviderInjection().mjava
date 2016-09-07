@@ -1,10 +1,13 @@
   public void testProviderInjection() throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Bar.class);
-        bind(SampleSingleton.class).in(Scopes.SINGLETON);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Bar.class);
+                bind(SampleSingleton.class).in(Scopes.SINGLETON);
+              }
+            });
 
     Foo foo = injector.getInstance(Foo.class);
 

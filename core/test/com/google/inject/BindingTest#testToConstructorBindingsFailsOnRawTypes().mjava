@@ -2,11 +2,13 @@
     final Constructor constructor = C.class.getConstructor(Stage.class, Object.class);
 
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(Object.class).toConstructor(constructor);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(Object.class).toConstructor(constructor);
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),

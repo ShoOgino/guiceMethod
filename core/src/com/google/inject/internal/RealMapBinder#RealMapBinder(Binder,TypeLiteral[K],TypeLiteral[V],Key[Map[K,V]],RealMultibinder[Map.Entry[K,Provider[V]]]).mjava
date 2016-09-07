@@ -13,6 +13,5 @@
     this.entrySetJavaxProviderKey = mapKey.ofType(setOfEntryOfJavaxProviderOf(keyType, valueType));
     this.entrySetBinder = (RealMultibinder<Entry<K, Provider<V>>>) entrySetBinder;
     this.binder = binder;
-    this.duplicateKeyErrorMessages = Maps.newHashMap();
   }
 

@@ -2,18 +2,20 @@
     final Key[] parameterKeys = parametersToKeys(
         method, method.getGenericParameterTypes(), method.getParameterAnnotations());
     method.setAccessible(true);
-    final Provider<Object> unscoped = new Provider<Object>() {
-      public Object get() {
-        Object[] parameters = keysToValues(parameterKeys);
-        try {
-          return method.invoke(instance, parameters);
-        } catch (IllegalAccessException e) {
-          throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-          throw new RuntimeException(e.getCause());
-        }
-      }
-    };
+    final Provider<Object> unscoped =
+        new Provider<Object>() {
+          @Override
+          public Object get() {
+            Object[] parameters = keysToValues(parameterKeys);
+            try {
+              return method.invoke(instance, parameters);
+            } catch (IllegalAccessException e) {
+              throw new RuntimeException(e);
+            } catch (InvocationTargetException e) {
+              throw new RuntimeException(e.getCause());
+            }
+          }
+        };
 
     boolean singleton = method.isAnnotationPresent(javax.inject.Singleton.class);
     putBinding(key, unscoped, singleton);

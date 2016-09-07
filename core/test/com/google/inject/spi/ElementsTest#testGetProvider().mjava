@@ -1,41 +1,45 @@
   public void testGetProvider() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
-            Provider<String> keyGetProvider
-                = getProvider(Key.get(String.class, SampleAnnotation.class));
+            Provider<String> keyGetProvider =
+                getProvider(Key.get(String.class, SampleAnnotation.class));
             try {
               keyGetProvider.get();
+              fail("Expected IllegalStateException");
             } catch (IllegalStateException e) {
-              assertEquals("This Provider cannot be used until the Injector has been created.",
+              assertEquals(
+                  "This Provider cannot be used until the Injector has been created.",
                   e.getMessage());
             }
 
             Provider<String> typeGetProvider = getProvider(String.class);
             try {
               typeGetProvider.get();
+              fail("Expected IllegalStateException");
             } catch (IllegalStateException e) {
-              assertEquals("This Provider cannot be used until the Injector has been created.",
+              assertEquals(
+                  "This Provider cannot be used until the Injector has been created.",
                   e.getMessage());
             }
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(ProviderLookup<T> command) {
+          @Override
+          public <T> Void visit(ProviderLookup<T> command) {
             assertEquals(Key.get(String.class, SampleAnnotation.class), command.getKey());
             assertNull(command.getDelegate());
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(ProviderLookup<T> command) {
+          @Override
+          public <T> Void visit(ProviderLookup<T> command) {
             assertEquals(Key.get(String.class), command.getKey());
             assertNull(command.getDelegate());
             return null;
           }
-        }
-    );
+        });
   }
 

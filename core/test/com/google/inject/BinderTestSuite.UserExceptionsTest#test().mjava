@@ -39,6 +39,7 @@
       try {
         nextId.set(-1);
         newInjector().getInstance(injectsKey);
+        fail("Expected ProvisionException");
       } catch (ProvisionException expected) {
         assertContains(
             expected.getMessage(),
@@ -64,6 +65,7 @@
       try {
         nextId.set(-1);
         hasProvider.provider.get();
+        // TODO(lukes): insert fail() call here
       } catch (ProvisionException expected) {
         assertContains(expected.getMessage(), "Illegal value: -1");
       }

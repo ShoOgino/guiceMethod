@@ -1,19 +1,19 @@
   public void testBindToInstance() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toInstance("A");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             assertTrue(command instanceof InstanceBinding);
             assertEquals(Key.get(String.class), command.getKey());
             assertEquals("A", getInstance(command));
             return null;
           }
-        }
-    );
+        });
   }
 

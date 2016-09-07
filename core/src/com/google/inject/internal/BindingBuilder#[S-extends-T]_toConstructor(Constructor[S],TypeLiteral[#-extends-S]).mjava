@@ -1,5 +1,6 @@
-  public <S extends T> ScopedBindingBuilder toConstructor(Constructor<S> constructor,
-      TypeLiteral<? extends S> type) {
+  @Override
+  public <S extends T> ScopedBindingBuilder toConstructor(
+      Constructor<S> constructor, TypeLiteral<? extends S> type) {
     checkNotNull(constructor, "constructor");
     checkNotNull(type, "type");
     checkNotTargetted();

@@ -1,6 +1,7 @@
   private Injector createInjector() {
     return Guice.createInjector(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(Foo.class).toProvider(Providers.<Foo>of(null));
           }

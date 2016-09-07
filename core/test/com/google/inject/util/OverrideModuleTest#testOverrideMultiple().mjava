@@ -4,7 +4,7 @@
     Injector injector = createInjector(module);
     assertEquals("B", injector.getInstance(String.class));
     assertEquals(2, injector.getInstance(Integer.class).intValue());
-    assertEquals(0.5f, injector.getInstance(Float.class));
-    assertEquals(1.5d, injector.getInstance(Double.class));
+    assertEquals(0.5f, injector.getInstance(Float.class), 0.0f);
+    assertEquals(1.5d, injector.getInstance(Double.class), 0.0);
   }
 

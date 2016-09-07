@@ -1,3 +1,4 @@
+    @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
       ++count;

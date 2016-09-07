@@ -10,6 +10,6 @@
     Equals.Factory equalsFactory = injector.getInstance(Equals.Factory.class);
     Equals.Impl shallowEquals = (Impl) equalsFactory.equals(ComparisonMethod.SHALLOW);
     assertEquals(ComparisonMethod.SHALLOW, shallowEquals.comparisonMethod);
-    assertEquals(0.01d, shallowEquals.sigma);
+    assertEquals(0.01d, shallowEquals.sigma, 0.0);
   }
 

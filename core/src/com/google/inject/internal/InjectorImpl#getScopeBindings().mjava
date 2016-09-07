@@ -1,3 +1,4 @@
+  @Override
   public Map<Class<? extends Annotation>, Scope> getScopeBindings() {
     return ImmutableMap.copyOf(state.getScopes());
   }

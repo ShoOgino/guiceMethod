@@ -1,5 +1,5 @@
-    public void with(HttpServlet servlet,
-        Map<String, String> initParams) {
+    @Override
+    public void with(HttpServlet servlet, Map<String, String> initParams) {
       Key<HttpServlet> servletKey = Key.get(HttpServlet.class, UniqueAnnotations.create());
       binder.bind(servletKey).toInstance(servlet);
       with(servletKey, initParams, servlet);

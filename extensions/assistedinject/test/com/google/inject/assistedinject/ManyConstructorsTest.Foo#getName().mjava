@@ -1,2 +1,4 @@
-    public String getName() { return name; }
+    @Override
+    public String getName() {
+      return name; }
 

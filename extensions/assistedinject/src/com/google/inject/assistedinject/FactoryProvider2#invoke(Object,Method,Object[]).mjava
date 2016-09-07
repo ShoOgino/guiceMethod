@@ -2,6 +2,7 @@
    * When a factory method is invoked, we create a child injector that binds all parameters, then
    * use that to get an instance of the return type.
    */
+  @Override
   public Object invoke(Object proxy, final Method method, final Object[] args) throws Throwable {
     // If we setup a method handle earlier for this method, call it.
     // This is necessary for default methods that java8 creates, so we

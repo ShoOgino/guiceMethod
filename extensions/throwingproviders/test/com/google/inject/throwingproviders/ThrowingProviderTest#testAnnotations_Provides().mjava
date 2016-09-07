@@ -1,24 +1,27 @@
   public void testAnnotations_Provides() throws RemoteException {
     final MockRemoteProvider<String> mockRemoteProviderA = new MockRemoteProvider<String>();
     final MockRemoteProvider<String> mockRemoteProviderB = new MockRemoteProvider<String>();
-    providesInjector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        install(ThrowingProviderBinder.forModule(this));
-       }
-       
-       @SuppressWarnings("unused")
-       @CheckedProvides(RemoteProvider.class)
-       @Named("a")
-       String throwOrGet() throws RemoteException {
-         return mockRemoteProviderA.get();
-       }
-       
-       @SuppressWarnings("unused")
-       @CheckedProvides(RemoteProvider.class)
-       String throwOrGet2() throws RemoteException {
-         return mockRemoteProviderB.get();
-       }
-    });
+    providesInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(ThrowingProviderBinder.forModule(this));
+              }
+
+              @SuppressWarnings("unused")
+              @CheckedProvides(RemoteProvider.class)
+              @Named("a")
+              String throwOrGet() throws RemoteException {
+                return mockRemoteProviderA.get();
+              }
+
+              @SuppressWarnings("unused")
+              @CheckedProvides(RemoteProvider.class)
+              String throwOrGet2() throws RemoteException {
+                return mockRemoteProviderB.get();
+              }
+            });
     tAnnotations(providesInjector, mockRemoteProviderA, mockRemoteProviderB);
   }
 

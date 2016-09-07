@@ -6,6 +6,7 @@
           bind(NeedsRunnable.class);
         }
       });
+      fail("Expected CreationException");
     } catch (CreationException e) {
       assertEquals(1, e.getErrorMessages().size());
       assertContains(e.getMessage(),

@@ -1,9 +1,14 @@
   public void testSystemClassLoaderIsUsedIfProxiedClassUsesIt() {
-    ProxyTest testProxy = Guice.createInjector(interceptorModule, new Module() {
-      public void configure(Binder binder) {
-        binder.bind(ProxyTest.class).to(ProxyTestImpl.class);
-      }
-    }).getInstance(ProxyTest.class);
+    ProxyTest testProxy =
+        Guice.createInjector(
+                interceptorModule,
+                new Module() {
+                  @Override
+                  public void configure(Binder binder) {
+                    binder.bind(ProxyTest.class).to(ProxyTestImpl.class);
+                  }
+                })
+            .getInstance(ProxyTest.class);
 
     if (ProxyTest.class.getClassLoader() == systemClassLoader) {
       assertSame(testProxy.getClass().getClassLoader(), systemClassLoader);

@@ -5,18 +5,19 @@
     Thread[] threads = new Thread[threadCount];
 
     for (int i = 0; i < threadCount; i++) {
-      threads[i] = new Thread() {
-        public void run() {
-          for (int i = 0; i < count; i++) {
-            try {
-              validate(callable);
+      threads[i] =
+          new Thread() {
+            @Override
+            public void run() {
+              for (int i = 0; i < count; i++) {
+                try {
+                  validate(callable);
+                } catch (Exception e) {
+                  throw new RuntimeException(e);
+                }
+              }
             }
-            catch (Exception e) {
-              throw new RuntimeException(e);
-            }
-          }
-        }
-      };
+          };
     }
 
 

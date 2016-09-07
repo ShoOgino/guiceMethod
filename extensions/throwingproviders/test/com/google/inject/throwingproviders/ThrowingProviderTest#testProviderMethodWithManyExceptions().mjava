@@ -1,17 +1,20 @@
   public void testProviderMethodWithManyExceptions() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(RemoteProvider.class)
-        String foo() throws InterruptedException, RuntimeException, RemoteException, 
-                            AccessException, TooManyListenersException {
-            return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(RemoteProvider.class)
+            String foo()
+                throws InterruptedException, RuntimeException, RemoteException, AccessException,
+                    TooManyListenersException {
+              return null;
+            }
+          });
       fail();
     } catch(CreationException ce) {
       // The only two that should fail are Interrupted & TooManyListeners.. the rest are OK.

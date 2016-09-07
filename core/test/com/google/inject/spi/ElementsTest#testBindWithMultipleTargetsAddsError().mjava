@@ -1,27 +1,27 @@
   public void testBindWithMultipleTargetsAddsError() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             AnnotatedBindingBuilder<String> abb = bind(String.class);
             abb.toInstance("A");
             abb.toInstance("B");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> command) {
+          @Override
+          public <T> Void visit(Binding<T> command) {
             return null;
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
+          @Override
+          public Void visit(Message command) {
             assertEquals("Implementation is set more than once.", command.getMessage());
             assertNull(command.getCause());
             assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
-        }
-    );
+        });
   }
 

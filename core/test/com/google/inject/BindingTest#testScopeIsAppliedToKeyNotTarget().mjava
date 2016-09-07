@@ -3,12 +3,15 @@
    * not to what the key is linked to.
    */
   public void testScopeIsAppliedToKeyNotTarget() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Integer.class).toProvider(Counter.class).asEagerSingleton();
-        bind(Number.class).toProvider(Counter.class).asEagerSingleton();
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Integer.class).toProvider(Counter.class).asEagerSingleton();
+                bind(Number.class).toProvider(Counter.class).asEagerSingleton();
+              }
+            });
 
     assertNotSame(injector.getInstance(Integer.class), injector.getInstance(Number.class));
   }

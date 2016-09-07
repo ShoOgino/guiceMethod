@@ -1,9 +1,12 @@
   public void testProvider() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(A.class).toProvider(new ProviderOfA());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class).toProvider(new ProviderOfA());
+              }
+            });
 
     ProviderInstanceBinding<?> binding = (ProviderInstanceBinding<?>) injector.getBinding(A.class);
     Dependency<?> onlyDependency = Iterables.getOnlyElement(binding.getDependencies());

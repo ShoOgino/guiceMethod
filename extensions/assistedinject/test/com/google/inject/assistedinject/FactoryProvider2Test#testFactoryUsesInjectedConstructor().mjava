@@ -12,7 +12,7 @@
 
     Corvette redCorvette = (Corvette) carFactory.create(Color.RED, false);
     assertEquals(Color.RED, redCorvette.color);
-    assertEquals(140f, redCorvette.maxMph);
+    assertEquals(140f, redCorvette.maxMph, 0.0f);
     assertFalse(redCorvette.isConvertable);
   }
 

@@ -1,20 +1,19 @@
   public void testAddThrowableErrorCommand() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             addError(new Exception("A"));
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
+          @Override
+          public Void visit(Message command) {
             assertEquals("A", command.getCause().getMessage());
-            assertEquals(command.getMessage(),
-                "An exception was caught and reported. Message: A");
+            assertEquals(command.getMessage(), "An exception was caught and reported. Message: A");
             assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
-        }
-    );
+        });
   }
 

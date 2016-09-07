@@ -1,22 +1,24 @@
   public void testBindToInstanceScope() {
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toInstance("A");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public <T> Void visit(Binding<T> binding) {
+          @Override
+          public <T> Void visit(Binding<T> binding) {
             assertEquals(Key.get(String.class), binding.getKey());
-            binding.acceptScopingVisitor(new FailingBindingScopingVisitor() {
-              public Void visitEagerSingleton() {
-                return null;
-              }
-            });
+            binding.acceptScopingVisitor(
+                new FailingBindingScopingVisitor() {
+                  @Override
+                  public Void visitEagerSingleton() {
+                    return null;
+                  }
+                });
             return null;
           }
-        }
-      );
+        });
   }
 

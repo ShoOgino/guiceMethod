@@ -12,6 +12,6 @@
 
     Mustang mustang = factory.create(Color.RED);
     assertSame(Color.RED, mustang.color);
-    assertEquals(5.0d, mustang.engineSize);
+    assertEquals(5.0d, mustang.engineSize, 0.0);
   }
 

@@ -1,3 +1,4 @@
+    @Override
     @SuppressWarnings("OverridesJavaxInjectableMethod")
     public void atInject() {}
 

@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked")
   public V visit(ProviderBinding<? extends T> providerBinding) {
     // TODO(cushon): remove raw (Binding) cast when we don't care about javac 6 anymore

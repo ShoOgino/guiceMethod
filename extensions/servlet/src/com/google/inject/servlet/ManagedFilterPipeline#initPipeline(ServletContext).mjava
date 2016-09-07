@@ -1,5 +1,5 @@
-  public synchronized void initPipeline(ServletContext servletContext)
-      throws ServletException {
+  @Override
+  public synchronized void initPipeline(ServletContext servletContext) throws ServletException {
 
     //double-checked lock, prevents duplicate initialization
     if (initialized)

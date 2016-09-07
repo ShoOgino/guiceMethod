@@ -1,3 +1,4 @@
+  @Override
   public String getInstanceName(Object instance) {
     if (instance instanceof ProviderMethod) {
       return getMethodString(((ProviderMethod<?>) instance).getMethod());

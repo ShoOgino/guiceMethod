@@ -1,11 +1,14 @@
   public void testInaccessibleConstructor() throws NoSuchMethodException {
     final Constructor<E> constructor = E.class.getDeclaredConstructor(Stage.class);
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(E.class).toConstructor(constructor);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(E.class).toConstructor(constructor);
+              }
+            });
 
     E e = injector.getInstance(E.class);
     assertEquals(Stage.DEVELOPMENT, e.stage);

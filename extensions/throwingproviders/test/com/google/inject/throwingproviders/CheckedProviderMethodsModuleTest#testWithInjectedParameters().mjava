@@ -4,6 +4,6 @@
     RpcProvider<Pair<Double, String>> provider = injector
         .getInstance(Key.get(rpcProviderOfPair));
     Pair<Double, String> pair = provider.get();
-    assertEquals(pair.first, 4.0d);
+    assertEquals(pair.first, 4.0d, 0.0);
   }
 

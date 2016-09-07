@@ -1,2 +1,4 @@
-    @Override public void gFirstThenAt() {}
+    @SuppressWarnings("OverridesGuiceInjectableMethod")
+    @Override
+    public void gFirstThenAt() {}
 

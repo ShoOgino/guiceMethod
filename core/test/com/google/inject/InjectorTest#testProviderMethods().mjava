@@ -2,14 +2,15 @@
     final SampleSingleton singleton = new SampleSingleton();
     final SampleSingleton other = new SampleSingleton();
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(SampleSingleton.class).toInstance(singleton);
-        bind(SampleSingleton.class)
-            .annotatedWith(Other.class)
-            .toInstance(other);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(SampleSingleton.class).toInstance(singleton);
+                bind(SampleSingleton.class).annotatedWith(Other.class).toInstance(other);
+              }
+            });
 
     assertSame(singleton,
         injector.getInstance(Key.get(SampleSingleton.class)));

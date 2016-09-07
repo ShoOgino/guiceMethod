@@ -1,3 +1,4 @@
+    @Override
     public <T> AnnotatedBindingBuilder<T> bind(Class<T> type) {
       return bind(Key.get(type));
     }

@@ -1,15 +1,19 @@
   public void testGuicifyWithDependencies() {
-    Provider<String> jsr330Provider = new Provider<String>() {
-      @Inject double d;
-      int i;
-      @Inject void injectMe(int i) {
-        this.i = i;
-      }
-      
-      public String get() {
-        return  d + "-" + i;
-      }
-    };
+    Provider<String> jsr330Provider =
+        new Provider<String>() {
+          @Inject double d;
+          int i;
+
+          @Inject
+          void injectMe(int i) {
+            this.i = i;
+          }
+
+          @Override
+          public String get() {
+            return d + "-" + i;
+          }
+        };
     
     final com.google.inject.Provider<String> guicified =
         Providers.guicify(jsr330Provider);

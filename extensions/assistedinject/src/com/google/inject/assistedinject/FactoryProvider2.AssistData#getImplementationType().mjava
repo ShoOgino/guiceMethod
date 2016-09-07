@@ -1,3 +1,4 @@
+    @Override
     public TypeLiteral<?> getImplementationType() {
       return implementationType;
     }

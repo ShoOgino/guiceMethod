@@ -1,3 +1,3 @@
-  public void destroyPipeline() {
-  }
+  @Override
+  public void destroyPipeline() {}
 

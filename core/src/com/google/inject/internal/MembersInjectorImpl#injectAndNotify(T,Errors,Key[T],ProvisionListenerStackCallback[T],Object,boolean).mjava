@@ -13,7 +13,7 @@
       public Void call(final InternalContext context) throws ErrorsException {
         context.pushState(key, source);
         try {
-          if (provisionCallback != null && provisionCallback.hasListeners()) {
+          if (provisionCallback != null) {
             provisionCallback.provision(errors, context, new ProvisionCallback<T>() {
               @Override public T call() {
                 injectMembers(instance, errors, context, toolableOnly);

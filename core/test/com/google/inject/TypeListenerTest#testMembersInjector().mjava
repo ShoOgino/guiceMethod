@@ -1,35 +1,45 @@
   public void testMembersInjector() {
-    final MembersInjector<D> membersInjector = new MembersInjector<D>() {
-      public void injectMembers(D instance) {
-        instance.userInjected++;
-        assertEquals(instance.guiceInjected, instance.userInjected);
-      }
-    };
-
-    final InjectionListener<D> injectionListener = new InjectionListener<D>() {
-      public void afterInjection(D injectee) {
-        assertTrue(injectee.userInjected > 0);
-        injectee.listenersNotified++;
-        assertEquals(injectee.guiceInjected, injectee.listenersNotified);
-      }
-    };
-
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, new TypeListener() {
-          @SuppressWarnings("unchecked")
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            encounter.register((MembersInjector) membersInjector);
-            encounter.register((InjectionListener) injectionListener);
+    final MembersInjector<D> membersInjector =
+        new MembersInjector<D>() {
+          @Override
+          public void injectMembers(D instance) {
+            instance.userInjected++;
+            assertEquals(instance.guiceInjected, instance.userInjected);
           }
-        });
+        };
 
-        D boundThreeTimes = new D();
-        bind(D.class).annotatedWith(named("i")).toInstance(boundThreeTimes);
-        bind(D.class).annotatedWith(named("ii")).toInstance(boundThreeTimes);
-        bind(D.class).annotatedWith(named("iii")).toInstance(boundThreeTimes);
-      }
-    });
+    final InjectionListener<D> injectionListener =
+        new InjectionListener<D>() {
+          @Override
+          public void afterInjection(D injectee) {
+            assertTrue(injectee.userInjected > 0);
+            injectee.listenersNotified++;
+            assertEquals(injectee.guiceInjected, injectee.listenersNotified);
+          }
+        };
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    onlyAbcd,
+                    new TypeListener() {
+                      @Override
+                      @SuppressWarnings("unchecked")
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        encounter.register((MembersInjector) membersInjector);
+                        encounter.register((InjectionListener) injectionListener);
+                      }
+                    });
+
+                D boundThreeTimes = new D();
+                bind(D.class).annotatedWith(named("i")).toInstance(boundThreeTimes);
+                bind(D.class).annotatedWith(named("ii")).toInstance(boundThreeTimes);
+                bind(D.class).annotatedWith(named("iii")).toInstance(boundThreeTimes);
+              }
+            });
 
     D boundThreeTimes = injector.getInstance(Key.get(D.class, named("iii")));
     boundThreeTimes.assertAllCounts(1);

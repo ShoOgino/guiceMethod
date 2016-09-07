@@ -1,10 +1,13 @@
   public void testIntAndIntegerAreInterchangeable()
       throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindConstant().annotatedWith(I.class).to(5);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(I.class).to(5);
+              }
+            });
 
     IntegerWrapper iw = injector.getInstance(IntegerWrapper.class);
     assertEquals(5, (int) iw.i);

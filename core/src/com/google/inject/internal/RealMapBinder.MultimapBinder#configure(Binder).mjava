@@ -1,19 +1,31 @@
     @Override public void configure(Binder binder) {
       ImmutableSet<Dependency<?>> dependencies
-          = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetKey));
+          = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
 
-      Provider<Set<Entry<K, Provider<V>>>> entrySetProvider =
-          binder.getProvider(entrySetKey);
-      // Binds a Map<K, Set<Provider<V>>> from a collection of Map<Entry<K, Provider<V>> if
-      // permitDuplicates was called.
-      binder.bind(providerMultimapKey).toProvider(
-          new RealProviderMultimapProvider(dependencies, entrySetProvider));
-
+      // Binds a Map<K, Set<Provider<V>>>
       Provider<Map<K, Set<Provider<V>>>> multimapProvider =
-          binder.getProvider(providerMultimapKey);
+          new RealProviderMultimapProvider<K, V>(entrySetBinder, multimapKey);
+      binder.bind(providerMultimapKey).toProvider(multimapProvider);
+
+      // Provide links from a few different public keys to the providerMultimapKey.
+      // The collection this exposes is internally an ImmutableMap, so it's OK to massage
+      // the guice Provider to javax Provider in the value (since the guice Provider implements
+      // javax Provider).
+      @SuppressWarnings("unchecked")
+      Provider<Map<K, Set<javax.inject.Provider<V>>>> javaxProvider = (Provider) multimapProvider;
+      binder.bind(javaxProviderMultimapKey).toProvider(javaxProvider);
+
+      @SuppressWarnings("unchecked")
+      Provider<Map<K, Collection<Provider<V>>>> collectionProvider = (Provider) multimapProvider;
+      binder.bind(providerCollectionMultimapKey).toProvider(collectionProvider);
+
+      @SuppressWarnings("unchecked")
+      Provider<Map<K, Collection<javax.inject.Provider<V>>>> collectionJavaxProvider =
+          (Provider) multimapProvider;
+      binder.bind(javaxProviderCollectionMultimapKey).toProvider(collectionJavaxProvider);
+
+      // Binds a Map<K, Set<V>>
       binder.bind(multimapKey).toProvider(
           new RealMultimapProvider(dependencies, multimapProvider));
-      
-      linkKeys(binder);
     }
 

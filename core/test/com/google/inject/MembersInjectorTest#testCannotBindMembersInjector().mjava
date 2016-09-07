@@ -1,10 +1,12 @@
   public void testCannotBindMembersInjector() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(MembersInjector.class).toProvider(Providers.<MembersInjector>of(null));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(MembersInjector.class).toProvider(Providers.<MembersInjector>of(null));
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),
@@ -12,12 +14,14 @@
     }
 
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(new TypeLiteral<MembersInjector<A<C>>>() {})
-              .toProvider(Providers.<MembersInjector<A<C>>>of(null));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(new TypeLiteral<MembersInjector<A<C>>>() {})
+                  .toProvider(Providers.<MembersInjector<A<C>>>of(null));
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),

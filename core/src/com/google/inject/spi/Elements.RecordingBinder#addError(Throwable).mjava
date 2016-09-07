@@ -1,3 +1,4 @@
+    @Override
     public void addError(Throwable t) {
       String message = "An exception was caught and reported. Message: " + t.getMessage();
       elements.add(new Message(ImmutableList.of((Object) getElementSource()), message, t));

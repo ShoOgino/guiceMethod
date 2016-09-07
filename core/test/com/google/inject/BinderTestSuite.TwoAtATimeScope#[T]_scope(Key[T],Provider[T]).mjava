@@ -1,6 +1,9 @@
+    @Override
     public <T> Provider<T> scope(Key<T> key, final Provider<T> unscoped) {
       return new Provider<T>() {
         T instance;
+
+        @Override
         public T get() {
           if (instance == null) {
             instance = unscoped.get();

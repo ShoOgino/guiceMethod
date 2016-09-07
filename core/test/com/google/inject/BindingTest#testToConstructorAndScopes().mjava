@@ -6,14 +6,17 @@
     final Key<Object> n = Key.get(Object.class, named("N")); // "N" instances
     final Key<Object> r = Key.get(Object.class, named("R")); // a regular binding
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(d).toConstructor(constructor);
-        bind(s).toConstructor(constructor).in(Singleton.class);
-        bind(n).toConstructor(constructor).in(Scopes.NO_SCOPE);
-        bind(r).to(F.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(d).toConstructor(constructor);
+                bind(s).toConstructor(constructor).in(Singleton.class);
+                bind(n).toConstructor(constructor).in(Scopes.NO_SCOPE);
+                bind(r).to(F.class);
+              }
+            });
 
     assertDistinct(injector, 1, d, d, d, d);
     assertDistinct(injector, 1, s, s, s, s);

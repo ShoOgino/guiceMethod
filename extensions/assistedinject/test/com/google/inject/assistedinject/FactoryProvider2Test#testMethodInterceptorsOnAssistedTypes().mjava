@@ -1,14 +1,15 @@
   /*if[AOP]*/
   public void testMethodInterceptorsOnAssistedTypes() {
     final AtomicInteger invocationCount = new AtomicInteger();
-    final org.aopalliance.intercept.MethodInterceptor interceptor
-        = new org.aopalliance.intercept.MethodInterceptor() {
-      public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
-          throws Throwable {
-        invocationCount.incrementAndGet();
-        return methodInvocation.proceed();
-      }
-    };
+    final org.aopalliance.intercept.MethodInterceptor interceptor =
+        new org.aopalliance.intercept.MethodInterceptor() {
+          @Override
+          public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
+              throws Throwable {
+            invocationCount.incrementAndGet();
+            return methodInvocation.proceed();
+          }
+        };
 
     Injector injector = Guice.createInjector(new AbstractModule() {
       @Override

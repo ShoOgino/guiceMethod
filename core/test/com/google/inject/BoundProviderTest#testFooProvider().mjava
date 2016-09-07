@@ -1,9 +1,12 @@
   public void testFooProvider() throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Foo.class).toProvider(FooProvider.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Foo.class).toProvider(FooProvider.class);
+              }
+            });
 
     Foo a = injector.getInstance(Foo.class);
     Foo b = injector.getInstance(Foo.class);

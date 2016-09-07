@@ -1,3 +1,4 @@
+    @Override
     public void addError(String message, Object... arguments) {
       elements.add(new Message(getElementSource(), Errors.format(message, arguments)));
     }

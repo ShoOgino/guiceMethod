@@ -1,4 +1,5 @@
     /*if[AOP]*/
+    @Override
     public void addMethodAspect(MethodAspect methodAspect) {
       throw new UnsupportedOperationException();
     }

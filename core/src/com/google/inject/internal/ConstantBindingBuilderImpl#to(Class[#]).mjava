@@ -1,3 +1,4 @@
+  @Override
   public void to(final Class<?> value) {
     toConstant(Class.class, value);
   }

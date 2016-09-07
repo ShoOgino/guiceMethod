@@ -1,35 +1,45 @@
   public void testEncounterCannotBeUsedAfterHearReturns() {
     final AtomicReference<TypeEncounter<?>> encounterReference = new AtomicReference<TypeEncounter<?>>();
 
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(any(), new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            encounterReference.set(encounter);
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindListener(
+                any(),
+                new TypeListener() {
+                  @Override
+                  public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                    encounterReference.set(encounter);
+                  }
+                });
+
+            bind(C.class);
           }
         });
-
-        bind(C.class);
-      }
-    });
     TypeEncounter<?> encounter = encounterReference.get();
 
     try {
-      encounter.register(new InjectionListener<Object>() {
-        public void afterInjection(Object injectee) {}
-      });
+      encounter.register(
+          new InjectionListener<Object>() {
+            @Override
+            public void afterInjection(Object injectee) {}
+          });
       fail();
     } catch (IllegalStateException expected) {
     }
 
     /*if[AOP]*/
     try {
-      encounter.bindInterceptor(any(), new org.aopalliance.intercept.MethodInterceptor() {
-        public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
-            throws Throwable {
-          return methodInvocation.proceed();
-        }
-      });
+      encounter.bindInterceptor(
+          any(),
+          new org.aopalliance.intercept.MethodInterceptor() {
+            @Override
+            public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
+                throws Throwable {
+              return methodInvocation.proceed();
+            }
+          });
       fail();
     } catch (IllegalStateException expected) {
     }

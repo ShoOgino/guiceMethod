@@ -1,18 +1,23 @@
   private static void convertToClasses(InjectorImpl injector,
       final Matcher<? super Class<?>> typeMatcher, TypeConverter converter) {
-    internalConvertToTypes(injector, new AbstractMatcher<TypeLiteral<?>>() {
-      public boolean matches(TypeLiteral<?> typeLiteral) {
-        Type type = typeLiteral.getType();
-        if (!(type instanceof Class)) {
-          return false;
-        }
-        Class<?> clazz = (Class<?>) type;
-        return typeMatcher.matches(clazz);
-      }
+    internalConvertToTypes(
+        injector,
+        new AbstractMatcher<TypeLiteral<?>>() {
+          @Override
+          public boolean matches(TypeLiteral<?> typeLiteral) {
+            Type type = typeLiteral.getType();
+            if (!(type instanceof Class)) {
+              return false;
+            }
+            Class<?> clazz = (Class<?>) type;
+            return typeMatcher.matches(clazz);
+          }
 
-      @Override public String toString() {
-        return typeMatcher.toString();
-      }
-    }, converter);
+          @Override
+          public String toString() {
+            return typeMatcher.toString();
+          }
+        },
+        converter);
   }
 

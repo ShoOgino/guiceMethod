@@ -1,5 +1,4 @@
-  /**
-   * Returns a singleton set containing only the converted key.
-   */
+  /** Returns a singleton set containing only the converted key. */
+  @Override
   Set<Dependency<?>> getDependencies();
 

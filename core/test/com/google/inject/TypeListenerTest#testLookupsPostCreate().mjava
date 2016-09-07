@@ -1,17 +1,23 @@
   public void testLookupsPostCreate() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(only(TypeLiteral.get(C.class)), new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            assertNotNull(encounter.getProvider(B.class).get());
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    only(TypeLiteral.get(C.class)),
+                    new TypeListener() {
+                      @Override
+                      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                        assertNotNull(encounter.getProvider(B.class).get());
 
-            A a = new A();
-            encounter.getMembersInjector(A.class).injectMembers(a);
-            assertNotNull(a.injector);
-          }
-        });
-      }
-    });
+                        A a = new A();
+                        encounter.getMembersInjector(A.class).injectMembers(a);
+                        assertNotNull(a.injector);
+                      }
+                    });
+              }
+            });
     
     injector.getInstance(C.class);
   }

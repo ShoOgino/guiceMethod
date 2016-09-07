@@ -12,12 +12,12 @@
 
     Corvette blueCorvette = (Corvette) carFactory.createConvertible(Color.BLUE);
     assertEquals(Color.BLUE, blueCorvette.color);
-    assertEquals(100f, blueCorvette.maxMph);
+    assertEquals(100f, blueCorvette.maxMph, 0.0f);
     assertTrue(blueCorvette.isConvertable);
 
     Corvette redCorvette = (Corvette) carFactory.create(Color.RED, false);
     assertEquals(Color.RED, redCorvette.color);
-    assertEquals(140f, redCorvette.maxMph);
+    assertEquals(140f, redCorvette.maxMph, 0.0f);
     assertFalse(redCorvette.isConvertable);
   }
 

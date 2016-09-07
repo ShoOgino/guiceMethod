@@ -1,3 +1,4 @@
+    @Override
     public SomeObject call() throws Exception {
       return someObject.get();
     }

@@ -1,3 +1,4 @@
+    @Override
     public UriPatternType getPatternType() {
       return UriPatternType.SERVLET;
     }

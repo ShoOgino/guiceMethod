@@ -4,12 +4,12 @@
         Key<Map<K, Set<javax.inject.Provider<V>>>> javaxProviderSetMultimapKey,
         Key<Map<K, Collection<Provider<V>>>> providerCollectionMultimapKey,
         Key<Map<K, Collection<javax.inject.Provider<V>>>> javaxProviderCollectionMultimapKey,
-        Key<Set<Entry<K,Provider<V>>>> entrySetKey) {
+        RealMultibinder<Map.Entry<K, Provider<V>>> entrySetBinder) {
       this.multimapKey = multimapKey;
       this.providerMultimapKey = providerSetMultimapKey;
       this.javaxProviderMultimapKey = javaxProviderSetMultimapKey;
       this.providerCollectionMultimapKey = providerCollectionMultimapKey;
       this.javaxProviderCollectionMultimapKey = javaxProviderCollectionMultimapKey;
-      this.entrySetKey = entrySetKey;
+      this.entrySetBinder = entrySetBinder;
     }
 

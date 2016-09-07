@@ -1,3 +1,4 @@
+    @Override
     public String extractPath(String path) {
       if (patternKind == Kind.PREFIX) {
         return null;

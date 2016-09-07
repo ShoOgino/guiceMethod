@@ -1,16 +1,18 @@
   public void testBindingToNonInterfaceType_Provides() throws RemoteException {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-          
-        @SuppressWarnings("unused")
-        @CheckedProvides(MockRemoteProvider.class)
-        String foo() {
-          return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(MockRemoteProvider.class)
+            String foo() {
+              return null;
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertEquals(MockRemoteProvider.class.getName() + " must be an interface",

@@ -17,7 +17,7 @@
       // Optimization: Don't go through the callback stack if no one's listening.
       constructionContext.startConstruction();
       try {
-        if (!provisionCallback.hasListeners()) {
+        if (provisionCallback == null) {
           return provision(errors, dependency, context, constructionContext);
         } else {
           return provisionCallback.provision(

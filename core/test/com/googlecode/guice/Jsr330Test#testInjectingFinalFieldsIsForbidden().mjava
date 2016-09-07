@@ -1,10 +1,12 @@
   public void testInjectingFinalFieldsIsForbidden() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(L.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(L.class);
+            }
+          });
       fail();
     } catch (CreationException expected) {
       assertContains(expected.getMessage(),

@@ -1,3 +1,4 @@
+  @Override
   public void destroyPipeline() {
     //destroy servlets first
     servletPipeline.destroy();

@@ -2,10 +2,13 @@
     final TypeLiteral<ParameterizedDeps<String, Integer>> type
         = new TypeLiteral<ParameterizedDeps<String, Integer>>() {};
 
-    assertParameterizedDepsInjected(Key.get(type), new AbstractModule() {
-      protected void configure() {
-        bind(type).to(new TypeLiteral<SubParameterizedDeps<String, Long, Integer>>() {});
-      }
-    });
+    assertParameterizedDepsInjected(
+        Key.get(type),
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(type).to(new TypeLiteral<SubParameterizedDeps<String, Long, Integer>>() {});
+          }
+        });
   }
 

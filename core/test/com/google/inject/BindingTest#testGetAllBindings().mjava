@@ -1,11 +1,14 @@
   public void testGetAllBindings() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(D.class).toInstance(new D(Stage.PRODUCTION));
-        bind(Object.class).to(D.class);
-        getProvider(new Key<C<Stage>>() {});
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(D.class).toInstance(new D(Stage.PRODUCTION));
+                bind(Object.class).to(D.class);
+                getProvider(new Key<C<Stage>>() {});
+              }
+            });
 
     Map<Key<?>,Binding<?>> bindings = injector.getAllBindings();
     assertEquals(ImmutableSet.of(Key.get(Injector.class), Key.get(Stage.class), Key.get(D.class),

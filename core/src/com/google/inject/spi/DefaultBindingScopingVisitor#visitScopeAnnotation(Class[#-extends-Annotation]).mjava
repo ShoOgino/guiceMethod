@@ -1,3 +1,4 @@
+  @Override
   public V visitScopeAnnotation(Class<? extends Annotation> scopeAnnotation) {
     return visitOther();
   }

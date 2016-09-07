@@ -1,3 +1,4 @@
+  @Override
   public BindingBuilder<T> annotatedWith(Class<? extends Annotation> annotationType) {
     annotatedWithInternal(annotationType);
     return this;

@@ -8,13 +8,15 @@
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).annotatedWith(SampleAnnotation.class).toInstance("A");
-            bind(new TypeLiteral<String>() {}).annotatedWith(SampleAnnotation.class).toInstance("B");
+            bind(new TypeLiteral<String>() {})
+                .annotatedWith(SampleAnnotation.class)
+                .toInstance("B");
           }
         },
         annotationChecker,
-        annotationChecker
-    );
+        annotationChecker);
   }
 

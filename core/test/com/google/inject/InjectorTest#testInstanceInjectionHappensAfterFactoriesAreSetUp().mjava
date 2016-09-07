@@ -1,12 +1,16 @@
   public void testInstanceInjectionHappensAfterFactoriesAreSetUp() {
-    Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Object.class).toInstance(new Object() {
-          @Inject Runnable r;
-        });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Object.class)
+                .toInstance(
+                    new Object() {
+                      @Inject Runnable r;
+                    });
 
-        bind(Runnable.class).to(MyRunnable.class);
-      }
-    });
+            bind(Runnable.class).to(MyRunnable.class);
+          }
+        });
   }
 

@@ -3,49 +3,57 @@
     final AtomicReference<MembersInjector<A>> aMembersInjectorReference
         = new AtomicReference<MembersInjector<A>>();
 
-    final InjectionListener<Object> lookupsTester = new InjectionListener<Object>() {
-      public void afterInjection(Object injectee) {
-        assertNotNull(bProviderReference.get().get());
+    final InjectionListener<Object> lookupsTester =
+        new InjectionListener<Object>() {
+          @Override
+          public void afterInjection(Object injectee) {
+            assertNotNull(bProviderReference.get().get());
 
-        A a = new A();
-        aMembersInjectorReference.get().injectMembers(a);
-        assertNotNull(a.injector);
-      }
-    };
+            A a = new A();
+            aMembersInjectorReference.get().injectMembers(a);
+            assertNotNull(a.injector);
+          }
+        };
 
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(only(TypeLiteral.get(C.class)), new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            Provider<B> bProvider = encounter.getProvider(B.class);
-            try {
-              bProvider.get();
-              fail();
-            } catch (IllegalStateException expected) {
-              assertEquals("This Provider cannot be used until the Injector has been created.",
-                  expected.getMessage());
-            }
-            bProviderReference.set(bProvider);
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindListener(
+                only(TypeLiteral.get(C.class)),
+                new TypeListener() {
+                  @Override
+                  public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                    Provider<B> bProvider = encounter.getProvider(B.class);
+                    try {
+                      bProvider.get();
+                      fail();
+                    } catch (IllegalStateException expected) {
+                      assertEquals(
+                          "This Provider cannot be used until the Injector has been created.",
+                          expected.getMessage());
+                    }
+                    bProviderReference.set(bProvider);
 
-            MembersInjector<A> aMembersInjector = encounter.getMembersInjector(A.class);
-            try {
-              aMembersInjector.injectMembers(new A());
-              fail();
-            } catch (IllegalStateException expected) {
-              assertEquals(
-                  "This MembersInjector cannot be used until the Injector has been created.",
-                  expected.getMessage());
-            }
-            aMembersInjectorReference.set(aMembersInjector);
+                    MembersInjector<A> aMembersInjector = encounter.getMembersInjector(A.class);
+                    try {
+                      aMembersInjector.injectMembers(new A());
+                      fail();
+                    } catch (IllegalStateException expected) {
+                      assertEquals(
+                          "This MembersInjector cannot be used until the Injector has been created.",
+                          expected.getMessage());
+                    }
+                    aMembersInjectorReference.set(aMembersInjector);
 
-            encounter.register(lookupsTester);
+                    encounter.register(lookupsTester);
+                  }
+                });
+
+            // this ensures the type listener fires, and also the afterInjection() listener
+            bind(C.class).asEagerSingleton();
           }
         });
-
-        // this ensures the type listener fires, and also the afterInjection() listener
-        bind(C.class).asEagerSingleton();
-      }
-    });
 
     lookupsTester.afterInjection(null);
   }

@@ -1,0 +1,5 @@
+      @Override protected Map<K, Set<Provider<V>>> doProvision(
+          Errors errors, InternalContext context, Dependency<?> dependency) {
+        return providerMultimap;
+      }
+

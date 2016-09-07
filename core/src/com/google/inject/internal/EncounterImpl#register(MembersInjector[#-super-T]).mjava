@@ -1,3 +1,4 @@
+  @Override
   public void register(MembersInjector<? super T> membersInjector) {
     checkState(valid, "Encounters may not be used after hear() returns.");
 

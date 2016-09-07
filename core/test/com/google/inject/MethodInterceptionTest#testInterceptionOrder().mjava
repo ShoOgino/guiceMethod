@@ -1,13 +1,18 @@
   public void testInterceptionOrder() {
     final List<String> callList = Lists.newArrayList();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.any(), 
-          new NamedInterceptor("a", callList),
-          new NamedInterceptor("b", callList),
-          new NamedInterceptor("c", callList));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(
+                    Matchers.any(),
+                    Matchers.any(),
+                    new NamedInterceptor("a", callList),
+                    new NamedInterceptor("b", callList),
+                    new NamedInterceptor("c", callList));
+              }
+            });
 
     Interceptable interceptable = injector.getInstance(Interceptable.class);
     assertEquals(0, callList.size());

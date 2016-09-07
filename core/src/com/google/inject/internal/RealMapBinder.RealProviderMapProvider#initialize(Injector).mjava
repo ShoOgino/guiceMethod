@@ -38,18 +38,9 @@
         for (K key : dups.keySet()) {
           if (first) {
             first = false;
-            if (duplicateKeyErrorMessages.containsKey(key)) {
-              sb.setLength(0);
-              sb.append(duplicateKeyErrorMessages.get(key));
-            } else {
-              sb.append("\"" + key + "\", from bindings:\n");
-            }
+            sb.append("\"" + key + "\", from bindings:\n");
           } else {
-            if (duplicateKeyErrorMessages.containsKey(key)) {
-              sb.append("\n and " + duplicateKeyErrorMessages.get(key));
-            } else {
-              sb.append("\n and key: \"" + key + "\", from bindings:\n");
-            }
+            sb.append("\n and key: \"" + key + "\", from bindings:\n");
           }
           Joiner.on('\n').appendTo(sb, dups.get(key)).append("\n");
         }

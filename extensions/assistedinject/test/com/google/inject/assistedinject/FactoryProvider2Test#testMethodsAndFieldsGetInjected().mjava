@@ -13,7 +13,7 @@
 
     Porsche grayPorsche = (Porsche) carFactory.create(Color.GRAY);
     assertEquals(Color.GRAY, grayPorsche.color);
-    assertEquals(50000d, grayPorsche.price);
+    assertEquals(50000d, grayPorsche.price, 0.0);
     assertEquals(911, grayPorsche.model);
     assertEquals("turbo", grayPorsche.name);
   }

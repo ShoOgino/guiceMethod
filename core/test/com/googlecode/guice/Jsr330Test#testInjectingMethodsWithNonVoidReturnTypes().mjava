@@ -1,8 +1,10 @@
   public void testInjectingMethodsWithNonVoidReturnTypes() {
-    Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(P.class);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(P.class);
+          }
+        });
   }
 

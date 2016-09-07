@@ -2,29 +2,30 @@
   public void testBindIntercepor() {
     final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
     final Matcher<Object> methodMatcher = Matchers.any();
-    final org.aopalliance.intercept.MethodInterceptor methodInterceptor
-        = new org.aopalliance.intercept.MethodInterceptor() {
-      public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation) {
-        return null;
-      }
-    };
+    final org.aopalliance.intercept.MethodInterceptor methodInterceptor =
+        new org.aopalliance.intercept.MethodInterceptor() {
+          @Override
+          public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation) {
+            return null;
+          }
+        };
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bindInterceptor(classMatcher, methodMatcher, methodInterceptor);
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(InterceptorBinding command) {
+          @Override
+          public Void visit(InterceptorBinding command) {
             assertSame(classMatcher, command.getClassMatcher());
             assertSame(methodMatcher, command.getMethodMatcher());
             assertEquals(Arrays.asList(methodInterceptor), command.getInterceptors());
             return null;
           }
-        }
-    );
+        });
   }
   /*end[AOP]*/
 

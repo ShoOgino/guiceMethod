@@ -1,3 +1,4 @@
+    @Override
     @SuppressWarnings("OverridesJavaxInjectableMethod")
     void setB(B b) {}
 

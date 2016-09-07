@@ -3,7 +3,7 @@
 
     assertEquals(42, injector.getInstance(Integer.class).intValue());
     assertEquals(42L, injector.getInstance(Long.class).longValue());
-    assertEquals(42D, injector.getInstance(Double.class).doubleValue());
-    assertEquals(42F, injector.getInstance(Float.class).floatValue());
+    assertEquals(42D, injector.getInstance(Double.class).doubleValue(), 0.0);
+    assertEquals(42F, injector.getInstance(Float.class).floatValue(), 0.0f);
   }
 

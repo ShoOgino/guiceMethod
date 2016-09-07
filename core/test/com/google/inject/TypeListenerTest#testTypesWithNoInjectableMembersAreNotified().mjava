@@ -6,17 +6,22 @@
   public void testTypesWithNoInjectableMembersAreNotified() {
     final AtomicInteger notificationCount = new AtomicInteger();
 
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, new TypeListener() {
-          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-            notificationCount.incrementAndGet();
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindListener(
+                onlyAbcd,
+                new TypeListener() {
+                  @Override
+                  public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+                    notificationCount.incrementAndGet();
+                  }
+                });
+
+            bind(C.class).toInstance(new C());
           }
         });
-
-        bind(C.class).toInstance(new C());
-      }
-    });
 
     assertEquals(1, notificationCount.get());
   }

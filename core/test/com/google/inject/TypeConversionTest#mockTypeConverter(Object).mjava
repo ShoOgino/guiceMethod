@@ -1,10 +1,12 @@
   TypeConverter mockTypeConverter(final Object result) {
     return new TypeConverter() {
+      @Override
       public Object convert(String value, TypeLiteral<?> toType) {
         return result;
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return "CustomConverter";
       }
     };

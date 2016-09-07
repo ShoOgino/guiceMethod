@@ -1,20 +1,24 @@
   public void testPrivateModuleAddsOption() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          bind(Foo.class).to(FooImpl.class);
-  
-          // Fails because FooBar is in the private module,
-          // and it wants Bar, but Bar would be JIT.
-          install(new PrivateModule() {
-            public void configure() {
-              binder().requireExplicitBindings();
-              bind(FooBar.class);
-              expose(FooBar.class);
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(Foo.class).to(FooImpl.class);
+
+              // Fails because FooBar is in the private module,
+              // and it wants Bar, but Bar would be JIT.
+              install(
+                  new PrivateModule() {
+                    @Override
+                    public void configure() {
+                      binder().requireExplicitBindings();
+                      bind(FooBar.class);
+                      expose(FooBar.class);
+                    }
+                  });
             }
           });
-        }
-      });
       fail("should have failed");
     } catch(CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(Bar.class));

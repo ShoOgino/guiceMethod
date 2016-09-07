@@ -2,19 +2,24 @@
   public void testToConstructorAndMethodInterceptors() throws NoSuchMethodException {
     final Constructor<D> constructor = D.class.getConstructor(Stage.class);
     final AtomicInteger count = new AtomicInteger();
-    final MethodInterceptor countingInterceptor = new MethodInterceptor() {
-      public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-        count.incrementAndGet();
-        return methodInvocation.proceed();
-      }
-    };
+    final MethodInterceptor countingInterceptor =
+        new MethodInterceptor() {
+          @Override
+          public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+            count.incrementAndGet();
+            return methodInvocation.proceed();
+          }
+        };
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Object.class).toConstructor(constructor);
-        bindInterceptor(Matchers.any(), Matchers.any(), countingInterceptor);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Object.class).toConstructor(constructor);
+                bindInterceptor(Matchers.any(), Matchers.any(), countingInterceptor);
+              }
+            });
 
     D d = (D) injector.getInstance(Object.class);
     d.hashCode();

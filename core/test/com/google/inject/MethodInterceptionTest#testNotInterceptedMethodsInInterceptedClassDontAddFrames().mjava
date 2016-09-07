@@ -1,10 +1,13 @@
   public void testNotInterceptedMethodsInInterceptedClassDontAddFrames() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.returns(only(Foo.class)),
-            new NoOpInterceptor());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(
+                    Matchers.any(), Matchers.returns(only(Foo.class)), new NoOpInterceptor());
+              }
+            });
 
     Interceptable interceptable = injector.getInstance(Interceptable.class);
     assertNull(interceptable.lastElements);

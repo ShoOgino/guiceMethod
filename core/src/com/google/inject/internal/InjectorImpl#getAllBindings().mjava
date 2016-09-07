@@ -1,3 +1,4 @@
+  @Override
   public Map<Key<?>, Binding<?>> getAllBindings() {
     synchronized (state.lock()) {
       return new ImmutableMap.Builder<Key<?>, Binding<?>>()

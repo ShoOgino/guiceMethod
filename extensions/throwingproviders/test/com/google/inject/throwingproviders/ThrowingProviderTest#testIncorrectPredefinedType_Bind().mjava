@@ -1,16 +1,20 @@
   public void testIncorrectPredefinedType_Bind() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(StringRemoteProvider.class, Integer.class)
-              .to(new StringRemoteProvider() {
-                public String get() throws RemoteException {
-                  return "A";
-                }
-              });
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              ThrowingProviderBinder.create(binder())
+                  .bind(StringRemoteProvider.class, Integer.class)
+                  .to(
+                      new StringRemoteProvider() {
+                        @Override
+                        public String get() throws RemoteException {
+                          return "A";
+                        }
+                      });
+            }
+          });
       fail();
     } catch(CreationException ce) {
       assertEquals(StringRemoteProvider.class.getName() 

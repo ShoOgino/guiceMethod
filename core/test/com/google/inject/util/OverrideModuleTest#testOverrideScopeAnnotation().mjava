@@ -1,9 +1,11 @@
   public void testOverrideScopeAnnotation() {
-    final Scope scope = new Scope() {
-      public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
-        throw new AssertionError("Should not be called");
-      }
-    };
+    final Scope scope =
+        new Scope() {
+          @Override
+          public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+            throw new AssertionError("Should not be called");
+          }
+        };
 
     final SingleUseScope replacementScope = new SingleUseScope();
 

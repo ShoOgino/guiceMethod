@@ -5,21 +5,22 @@
 
     final boolean[] invoked = new boolean[1];
     GuiceFilter filter = new GuiceFilter();
-    FilterChain filterChain = new FilterChain() {
-      public void doFilter(ServletRequest servletRequest,
-          ServletResponse servletResponse) {
-        invoked[0] = true;
-        assertSame(request, servletRequest);
-        assertSame(request, injector.getInstance(ServletRequest.class));
-        assertSame(request, injector.getInstance(HTTP_REQ_KEY));
+    FilterChain filterChain =
+        new FilterChain() {
+          @Override
+          public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse) {
+            invoked[0] = true;
+            assertSame(request, servletRequest);
+            assertSame(request, injector.getInstance(ServletRequest.class));
+            assertSame(request, injector.getInstance(HTTP_REQ_KEY));
 
-        assertSame(response, servletResponse);
-        assertSame(response, injector.getInstance(ServletResponse.class));
-        assertSame(response, injector.getInstance(HTTP_RESP_KEY));
+            assertSame(response, servletResponse);
+            assertSame(response, injector.getInstance(ServletResponse.class));
+            assertSame(response, injector.getInstance(HTTP_RESP_KEY));
 
-        assertSame(servletRequest.getParameterMap(), injector.getInstance(REQ_PARAMS_KEY));
-      }
-    };
+            assertSame(servletRequest.getParameterMap(), injector.getInstance(REQ_PARAMS_KEY));
+          }
+        };
     filter.doFilter(request, response, filterChain);
 
     assertTrue(invoked[0]);

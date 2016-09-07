@@ -1,0 +1,54 @@
+      @Override void initialize(InjectorImpl injector, Errors errors) {
+        // We now build the Map<K, Set<Provider<V>>> from the entrySetBinder.
+        // The entrySetBinder contains all of the ProviderMapEntrys, and once
+        // we have those, it's easy to iterate through them to organize them by K.
+        Map<K, ImmutableSet.Builder<Provider<V>>> providerMultimapMutable =
+            new LinkedHashMap<K, ImmutableSet.Builder<Provider<V>>>();
+        List<Dependency<?>> dependencies = Lists.newArrayList();
+        Set<Indexer.IndexedBinding> index = Sets.newHashSet();
+        Indexer indexer = new Indexer(injector);
+        TypeLiteral<?> elementType = entrySetBinder.getElementTypeLiteral();
+        // We get all of the Bindings that were put into the entrySetBinder
+        for (Binding<?> binding : injector.findBindingsByType(elementType)) {
+          if (entrySetBinder.containsElement(binding)) {
+            @SuppressWarnings("unchecked") // protected by findBindingsByType()
+            ProviderInstanceBinding<ProviderMapEntry<K, V>> entryBinding =
+                (ProviderInstanceBinding<ProviderMapEntry<K, V>>) binding;
+            // Use the indexer to de-dupe user bindings. This is needed because of the
+            // uniqueId in RealElement. The uniqueId intentionally circumvents the regular
+            // Guice deduplication, so we need to re-implement our own here, ignoring
+            // uniqueId.
+            if (index.add(entryBinding.acceptTargetVisitor(indexer))) {
+              @SuppressWarnings("unchecked")
+              // We added all these bindings initially, so we know they are ProviderMapEntrys
+              ProviderMapEntry<K, V> entry =
+                  (ProviderMapEntry) entryBinding.getUserSuppliedProvider();
+
+              // Create a set builder for this key if it's the first time we've seen it
+              if (!providerMultimapMutable.containsKey(entry.getKey())) {
+                providerMultimapMutable.put(
+                    entry.getKey(), ImmutableSet.<Provider<V>>builder());
+              }
+              // Add a dependency for this element
+              dependencies.add(Dependency.get(entryBinding.getKey()));
+
+              // Add the Provider<V>
+              providerMultimapMutable.get(entry.getKey()).add(entry.getValue());
+            }
+          }
+        }
+
+        // Build all of the ImmutableSet.Builders,
+        // transforming from Map<K, ImmutableSet.Builder<Provider<V>>> to
+        // ImmutableMap<K, Set<Provider<V>>>
+        ImmutableMap.Builder<K, Set<Provider<V>>> providerMultimapBuilder =
+            ImmutableMap.builder();
+        for (Entry<K, ImmutableSet.Builder<Provider<V>>> entry
+            : providerMultimapMutable.entrySet()) {
+          providerMultimapBuilder.put(entry.getKey(), entry.getValue().build());
+        }
+        providerMultimap = providerMultimapBuilder.build();
+
+        this.dependencies = ImmutableSet.copyOf(dependencies);
+      }
+

@@ -1,3 +1,4 @@
+  @Override
   @SuppressWarnings("unchecked")
   public Object buildBean(Class clazz, Map extraContext) {
     if (injector == null) {

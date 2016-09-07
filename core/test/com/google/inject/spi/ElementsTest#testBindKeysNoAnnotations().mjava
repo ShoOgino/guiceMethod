@@ -8,6 +8,7 @@
 
     checkModule(
         new AbstractModule() {
+          @Override
           protected void configure() {
             bind(String.class).toInstance("A");
             bind(new TypeLiteral<String>() {}).toInstance("B");
@@ -16,7 +17,6 @@
         },
         keyChecker,
         keyChecker,
-        keyChecker
-    );
+        keyChecker);
   }
 

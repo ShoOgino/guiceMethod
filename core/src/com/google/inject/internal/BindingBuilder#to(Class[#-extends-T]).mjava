@@ -1,3 +1,4 @@
+  @Override
   public BindingBuilder<T> to(Class<? extends T> implementation) {
     return to(Key.get(implementation));
   }

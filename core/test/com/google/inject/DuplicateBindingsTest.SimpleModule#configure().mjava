@@ -1,3 +1,4 @@
+    @Override
     protected void configure() {
       // InstanceBinding
       bind(Foo.class).annotatedWith(named("instance")).toInstance(foo);

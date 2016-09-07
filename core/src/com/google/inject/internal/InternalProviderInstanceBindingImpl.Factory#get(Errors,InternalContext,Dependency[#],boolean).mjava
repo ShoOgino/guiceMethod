@@ -4,7 +4,7 @@
         final Dependency<?> dependency,
         boolean linked)
         throws ErrorsException {
-      if (!provisionCallback.hasListeners()) {
+      if (provisionCallback == null) {
           return doProvision(errors, context, dependency);
         } else {
           return provisionCallback.provision(

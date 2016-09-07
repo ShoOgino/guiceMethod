@@ -1,12 +1,14 @@
   public void testTypeListenersAreFired() {
     final AtomicInteger firedCount = new AtomicInteger();
 
-    final TypeListener typeListener = new TypeListener() {
-      public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
-        assertEquals(new TypeLiteral<A>() {}, type);
-        firedCount.incrementAndGet();
-      }
-    };
+    final TypeListener typeListener =
+        new TypeListener() {
+          @Override
+          public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter) {
+            assertEquals(new TypeLiteral<A>() {}, type);
+            firedCount.incrementAndGet();
+          }
+        };
 
     Guice.createInjector(new AbstractModule() {
       @Override protected void configure() {

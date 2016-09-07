@@ -10,11 +10,14 @@
         = new RootBeanDefinition(Prototype.class, false);
     beanFactory.registerBeanDefinition("prototype", prototype);
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        SpringIntegration.bindAll(binder(), beanFactory);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                SpringIntegration.bindAll(binder(), beanFactory);
+              }
+            });
 
     Key<Singleton> singletonKey
         = Key.get(Singleton.class, Names.named("singleton"));

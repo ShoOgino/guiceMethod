@@ -1,3 +1,4 @@
+    @Override
     public <T> AnnotatedBindingBuilder<T> bind(Key<T> key) {
       BindingBuilder<T> builder =
           new BindingBuilder<T>(this, elements, getElementSource(), MoreTypes.canonicalizeKey(key));

@@ -1,6 +1,6 @@
   // called from OSGi when bundle starts
-  public void start(BundleContext context)
-      throws BundleException {
+  @Override
+  public void start(BundleContext context) throws BundleException {
 
     final Bundle bundle = context.getBundle();
 

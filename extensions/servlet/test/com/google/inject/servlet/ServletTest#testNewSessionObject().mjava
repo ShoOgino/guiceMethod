@@ -5,14 +5,15 @@
 
     GuiceFilter filter = new GuiceFilter();
     final boolean[] invoked = new boolean[1];
-    FilterChain filterChain = new FilterChain() {
-      public void doFilter(ServletRequest servletRequest,
-          ServletResponse servletResponse) {
-        invoked[0] = true;
-        assertNotNull(injector.getInstance(InSession.class));
-        assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
-      }
-    };
+    FilterChain filterChain =
+        new FilterChain() {
+          @Override
+          public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse) {
+            invoked[0] = true;
+            assertNotNull(injector.getInstance(InSession.class));
+            assertNull(injector.getInstance(IN_SESSION_NULL_KEY));
+          }
+        };
 
     filter.doFilter(request, null, filterChain);
 

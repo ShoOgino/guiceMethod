@@ -1,18 +1,24 @@
   public void testToProviderInstance() {
     final AtomicBoolean notified = new AtomicBoolean();    
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Object.class).toProvider(new Provider<Object>() {
-          @Inject Foo foo;
-          public Object get() {
-            return null;
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Object.class)
+                .toProvider(
+                    new Provider<Object>() {
+                      @Inject Foo foo;
+
+                      @Override
+                      public Object get() {
+                        return null;
+                      }
+                    });
+            bindListener(
+                Matchers.any(),
+                new SpecialChecker(Foo.class, getClass().getName() + ".configure(", notified));
           }
         });
-        bindListener(Matchers.any(),
-            new SpecialChecker(Foo.class, getClass().getName() + ".configure(", notified));
-      }
-    });
     assertTrue(notified.get());
   }
 

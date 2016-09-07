@@ -13,6 +13,7 @@
 
     try {
       Types.newParameterizedTypeWithOwner(Object.class, Set.class, String.class);
+      fail("Expected IllegalArgumentException");
     } catch (IllegalArgumentException expected) {
       assertContains(expected.getMessage(),
           "Owner type for unenclosed " + Set.class);

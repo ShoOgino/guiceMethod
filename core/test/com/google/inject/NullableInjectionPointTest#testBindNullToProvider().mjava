@@ -1,14 +1,18 @@
   public void testBindNullToProvider() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      protected void configure() {
-        bind(Foo.class).toProvider(Providers.<Foo>of(null));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Foo.class).toProvider(Providers.<Foo>of(null));
+              }
+            });
     assertNull(injector.getInstance(NullableFooField.class).foo);
     assertNull(injector.getInstance(CustomNullableFooField.class).foo);
 
     try {
       injector.getInstance(FooField.class);
+      fail("Expected ProvisionException");
     }
     catch(ProvisionException expected) {
       assertContains(expected.getMessage(), "null returned by binding at");
