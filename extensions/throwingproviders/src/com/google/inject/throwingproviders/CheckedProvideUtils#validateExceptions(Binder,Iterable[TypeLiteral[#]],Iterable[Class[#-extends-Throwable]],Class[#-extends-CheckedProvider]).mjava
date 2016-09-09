@@ -1,5 +1,6 @@
   /** Adds errors to the binder if the exceptions aren't valid. */
-  static void validateExceptions(Binder binder,
+  static void validateExceptions(
+      Binder binder,
       Iterable<TypeLiteral<?>> actualExceptionTypes,
       Iterable<Class<? extends Throwable>> expectedExceptionTypes,
       Class<? extends CheckedProvider> checkedProvider) {
@@ -22,8 +23,8 @@
       }
       if (notAssignable) {
         binder.addError(
-            "%s is not compatible with the exceptions (%s) declared in " 
-            + "the CheckedProvider interface (%s)",
+            "%s is not compatible with the exceptions (%s) declared in "
+                + "the CheckedProvider interface (%s)",
             exActual, expectedExceptionTypes, checkedProvider);
       }
     }

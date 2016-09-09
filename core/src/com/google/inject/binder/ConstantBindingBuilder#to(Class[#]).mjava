@@ -1,5 +1,3 @@
-  /**
-   * Binds constant to the given value.
-   */
+  /** Binds constant to the given value. */
   void to(Class<?> value);
 

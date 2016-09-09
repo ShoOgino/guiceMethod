@@ -1,12 +1,12 @@
     public SecondaryBinder(Class<P> interfaceType, Type valueType) {
       this.interfaceType = checkNotNull(interfaceType, "interfaceType");
       this.valueType = checkNotNull(valueType, "valueType");
-      if(checkInterface()) {
+      if (checkInterface()) {
         this.exceptionTypes = getExceptionType(interfaceType);
         valid = true;
       } else {
         valid = false;
         this.exceptionTypes = ImmutableList.of();
-      }      
+      }
     }
 

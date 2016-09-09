@@ -1,6 +1,6 @@
   public static ThrowingProviderBinder create(Binder binder) {
-    return new ThrowingProviderBinder(binder.skipSources(
-        ThrowingProviderBinder.class,
-        ThrowingProviderBinder.SecondaryBinder.class));
+    return new ThrowingProviderBinder(
+        binder.skipSources(
+            ThrowingProviderBinder.class, ThrowingProviderBinder.SecondaryBinder.class));
   }
 

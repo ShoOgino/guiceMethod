@@ -1,17 +1,16 @@
   void configure(Binder binder) {
     binder = binder.withSource(method);
 
-    SecondaryBinder<?, ?> sbinder = 
-        ThrowingProviderBinder.create(binder)
-          .bind(checkedProvider, key.getTypeLiteral());
-    if(key.getAnnotation() != null) {
+    SecondaryBinder<?, ?> sbinder =
+        ThrowingProviderBinder.create(binder).bind(checkedProvider, key.getTypeLiteral());
+    if (key.getAnnotation() != null) {
       sbinder = sbinder.annotatedWith(key.getAnnotation());
-    } else if(key.getAnnotationType() != null) {
+    } else if (key.getAnnotationType() != null) {
       sbinder = sbinder.annotatedWith(key.getAnnotationType());
     }
     sbinder.scopeExceptions(scopeExceptions);
     ScopedBindingBuilder sbbuilder = sbinder.toProviderMethod(this);
-    if(scopeAnnotation != null) {
+    if (scopeAnnotation != null) {
       sbbuilder.in(scopeAnnotation);
     }
 
@@ -20,7 +19,7 @@
       // misplaced @Exposed, calling this will add an error to the binder's error queue
       ((PrivateBinder) binder).expose(sbinder.getKey());
     }
-    
+
     CheckedProvideUtils.validateExceptions(
         binder, exceptionTypes, sbinder.getExceptionTypes(), checkedProvider);
   }

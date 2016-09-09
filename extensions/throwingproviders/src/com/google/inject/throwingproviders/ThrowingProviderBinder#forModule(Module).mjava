@@ -1,6 +1,6 @@
   /**
    * Returns a module that installs {@literal @}{@link CheckedProvides} methods.
-   * 
+   *
    * @since 3.0
    */
   public static Module forModule(Module module) {

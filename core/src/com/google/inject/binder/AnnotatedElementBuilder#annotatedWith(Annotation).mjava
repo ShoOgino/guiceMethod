@@ -1,5 +1,3 @@
-  /**
-   * See the EDSL examples at {@link com.google.inject.Binder}.
-   */
+  /** See the EDSL examples at {@link com.google.inject.Binder}. */
   void annotatedWith(Annotation annotation);
 

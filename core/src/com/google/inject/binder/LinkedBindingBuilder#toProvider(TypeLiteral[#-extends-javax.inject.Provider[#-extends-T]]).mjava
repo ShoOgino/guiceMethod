@@ -1,6 +1,4 @@
-  /**
-   * See the EDSL examples at {@link com.google.inject.Binder}.
-   */
+  /** See the EDSL examples at {@link com.google.inject.Binder}. */
   ScopedBindingBuilder toProvider(
       TypeLiteral<? extends javax.inject.Provider<? extends T>> providerType);
 

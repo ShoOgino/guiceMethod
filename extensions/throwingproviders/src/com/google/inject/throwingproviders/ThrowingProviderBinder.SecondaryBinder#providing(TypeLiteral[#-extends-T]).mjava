@@ -1,6 +1,6 @@
     /** @since 4.0 */
     @SuppressWarnings("unchecked") // safe because this is the cxtor of the literal
-    public ScopedBindingBuilder providing(TypeLiteral<? extends T> cxtorLiteral) {     
+    public ScopedBindingBuilder providing(TypeLiteral<? extends T> cxtorLiteral) {
       // Find a constructor that has @ThrowingInject.
       Constructor<? extends T> cxtor =
           CheckedProvideUtils.findThrowingConstructor(cxtorLiteral, binder);
@@ -12,7 +12,7 @@
         // Validate the exceptions are consistent with the CheckedProvider interface.
         CheckedProvideUtils.validateExceptions(
             binder, cxtorLiteral.getExceptionTypes(cxtor), exceptionTypes, interfaceType);
-        
+
         typeKey = Key.get(cxtorLiteral, UniqueAnnotations.create());
         binder.bind(typeKey).toConstructor((Constructor) cxtor).in(Scopes.NO_SCOPE);
         typeProvider = binder.getProvider((Key<T>) typeKey);
@@ -21,37 +21,38 @@
         typeProvider = null;
         typeKey = null;
       }
-        
+
       // Create a CheckedProvider that calls our cxtor
-      CheckedProvider<T> checkedProvider = new CheckedProviderWithDependencies<T>() {
-        @Override
-        public T get() throws Exception {
-          try {
-            return typeProvider.get();
-          } catch (ProvisionException pe) {
-            // Rethrow the provision cause as the actual exception
-            if (pe.getCause() instanceof Exception) {
-              throw (Exception) pe.getCause();
-            } else if (pe.getCause() instanceof Error) {
-              throw (Error) pe.getCause();
-            } else {
-              // If this failed because of multiple reasons (ie, more than
-              // one dependency failed due to scoping errors), then
-              // the ProvisionException won't have a cause, so we need
-              // to rethrow it as-is.
-              throw pe;
+      CheckedProvider<T> checkedProvider =
+          new CheckedProviderWithDependencies<T>() {
+            @Override
+            public T get() throws Exception {
+              try {
+                return typeProvider.get();
+              } catch (ProvisionException pe) {
+                // Rethrow the provision cause as the actual exception
+                if (pe.getCause() instanceof Exception) {
+                  throw (Exception) pe.getCause();
+                } else if (pe.getCause() instanceof Error) {
+                  throw (Error) pe.getCause();
+                } else {
+                  // If this failed because of multiple reasons (ie, more than
+                  // one dependency failed due to scoping errors), then
+                  // the ProvisionException won't have a cause, so we need
+                  // to rethrow it as-is.
+                  throw pe;
+                }
+              }
             }
-          }
-        }
-        
-        @Override
-        public Set<Dependency<?>> getDependencies() {
-          return ImmutableSet.<Dependency<?>>of(Dependency.get(typeKey));
-        }
-      };
-      
-      Key<CheckedProvider<?>> targetKey = Key.get(CHECKED_PROVIDER_TYPE,
-          UniqueAnnotations.create());
+
+            @Override
+            public Set<Dependency<?>> getDependencies() {
+              return ImmutableSet.<Dependency<?>>of(Dependency.get(typeKey));
+            }
+          };
+
+      Key<CheckedProvider<?>> targetKey =
+          Key.get(CHECKED_PROVIDER_TYPE, UniqueAnnotations.create());
       binder.bind(targetKey).toInstance(checkedProvider);
       return toInternal(targetKey);
     }
