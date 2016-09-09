@@ -1,14 +1,16 @@
   public void testTransferNonHttpRequest_concurrentUseSameThreadOk_closeable() throws Exception {
-    Callable<Boolean> callable = new Callable<Boolean>() {
-      @Override public Boolean call() throws Exception {
-        RequestScoper.CloseableScope scope = ServletScopes.transferRequest().open();
-        try {
-          return false;
-        } finally {
-          scope.close();
-        }
-      }
-    };
+    Callable<Boolean> callable =
+        new Callable<Boolean>() {
+          @Override
+          public Boolean call() throws Exception {
+            RequestScoper.CloseableScope scope = ServletScopes.transferRequest().open();
+            try {
+              return false;
+            } finally {
+              scope.close();
+            }
+          }
+        };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
     assertFalse(ServletScopes.scopeRequest(callable, seedMap).call());

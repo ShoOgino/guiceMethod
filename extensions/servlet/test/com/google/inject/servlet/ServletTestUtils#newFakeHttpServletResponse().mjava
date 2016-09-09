@@ -1,10 +1,11 @@
   /**
-   * Returns a fake, HttpServletResponse which throws an exception if any of its
-   * methods are called.
+   * Returns a fake, HttpServletResponse which throws an exception if any of its methods are called.
    */
   public static HttpServletResponse newFakeHttpServletResponse() {
-    return (HttpServletResponse) Proxy.newProxyInstance(
-        HttpServletResponse.class.getClassLoader(),
-        new Class[] { HttpServletResponse.class }, new ThrowingInvocationHandler());
-  }  
+    return (HttpServletResponse)
+        Proxy.newProxyInstance(
+            HttpServletResponse.class.getClassLoader(),
+            new Class[] {HttpServletResponse.class},
+            new ThrowingInvocationHandler());
+  }
 

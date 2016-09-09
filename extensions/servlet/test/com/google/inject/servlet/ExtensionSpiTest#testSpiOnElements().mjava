@@ -1,9 +1,9 @@
   public final void testSpiOnElements() {
     ServletSpiVisitor visitor = new ServletSpiVisitor(false);
     int count = 0;
-    for(Element element : Elements.getElements(new Module())) {
-      if(element instanceof Binding) {
-        assertEquals(count++, ((Binding)element).acceptTargetVisitor(visitor));
+    for (Element element : Elements.getElements(new Module())) {
+      if (element instanceof Binding) {
+        assertEquals(count++, ((Binding) element).acceptTargetVisitor(visitor));
       }
     }
     validateVisitor(visitor);

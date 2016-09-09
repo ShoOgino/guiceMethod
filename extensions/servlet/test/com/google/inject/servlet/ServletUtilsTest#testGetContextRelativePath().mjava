@@ -1,6 +1,6 @@
   public void testGetContextRelativePath() {
-    assertEquals("/test.html", 
-        getContextRelativePath("/a_context_path", "/a_context_path/test.html"));
+    assertEquals(
+        "/test.html", getContextRelativePath("/a_context_path", "/a_context_path/test.html"));
     assertEquals("/test.html", getContextRelativePath("", "/test.html"));
     assertEquals("/test.html", getContextRelativePath("", "/foo/../test.html"));
     assertEquals("/test.html", getContextRelativePath("", "/././foo/../test.html"));

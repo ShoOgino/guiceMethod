@@ -1,20 +1,22 @@
   public final void testDispatchRequestToManagedPipeline() throws ServletException, IOException {
-    final Injector injector = Guice.createInjector(new ServletModule() {
+    final Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
 
-      @Override
-      protected void configureServlets() {
-        filter("/*").through(TestFilter.class);
-        filter("*.html").through(TestFilter.class);
-        filter("/*").through(Key.get(TestFilter.class));
+              @Override
+              protected void configureServlets() {
+                filter("/*").through(TestFilter.class);
+                filter("*.html").through(TestFilter.class);
+                filter("/*").through(Key.get(TestFilter.class));
 
-        // These filters should never fire
-        filter("/index/*").through(Key.get(TestFilter.class));
-        filter("*.jsp").through(Key.get(TestFilter.class));
+                // These filters should never fire
+                filter("/index/*").through(Key.get(TestFilter.class));
+                filter("*.jsp").through(Key.get(TestFilter.class));
 
-        // Bind a servlet
-        serve("*.html").with(TestServlet.class);
-      }
-    });
+                // Bind a servlet
+                serve("*.html").with(TestServlet.class);
+              }
+            });
 
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
     pipeline.initPipeline(null);
@@ -22,20 +24,14 @@
     // create ourselves a mock request with test URI
     HttpServletRequest requestMock = control.createMock(HttpServletRequest.class);
 
-    expect(requestMock.getRequestURI())
-            .andReturn("/index.html")
-            .anyTimes();
-    expect(requestMock.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(requestMock.getRequestURI()).andReturn("/index.html").anyTimes();
+    expect(requestMock.getContextPath()).andReturn("").anyTimes();
 
     requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);
     requestMock.removeAttribute(REQUEST_DISPATCHER_REQUEST);
 
     HttpServletResponse responseMock = control.createMock(HttpServletResponse.class);
-    expect(responseMock.isCommitted())
-        .andReturn(false)
-        .anyTimes();
+    expect(responseMock.isCommitted()).andReturn(false).anyTimes();
     responseMock.resetBuffer();
     expectLastCall().anyTimes();
 
@@ -52,8 +48,14 @@
     assertTrue(servlet.processedUris.contains("/index.html"));
     assertTrue(servlet.processedUris.contains(TestServlet.FORWARD_TO));
 
-    assertTrue("lifecycle states did not"
-        + " fire correct number of times-- inits: " + inits + "; dos: " + doFilters
-        + "; destroys: " + destroys, inits == 1 && doFilters == 3 && destroys == 1);
+    assertTrue(
+        "lifecycle states did not"
+            + " fire correct number of times-- inits: "
+            + inits
+            + "; dos: "
+            + doFilters
+            + "; destroys: "
+            + destroys,
+        inits == 1 && doFilters == 3 && destroys == 1);
   }
 

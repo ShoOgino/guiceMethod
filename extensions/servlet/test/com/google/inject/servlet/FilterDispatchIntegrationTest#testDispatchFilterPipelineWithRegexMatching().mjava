@@ -1,16 +1,18 @@
-  public final void testDispatchFilterPipelineWithRegexMatching() throws ServletException,
-      IOException {
+  public final void testDispatchFilterPipelineWithRegexMatching()
+      throws ServletException, IOException {
 
-    final Injector injector = Guice.createInjector(new ServletModule() {
+    final Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
 
-      @Override
-      protected void configureServlets() {
-        filterRegex("/[A-Za-z]*").through(TestFilter.class);
-        filterRegex("/index").through(TestFilter.class);
-        //these filters should never fire
-        filterRegex("\\w").through(Key.get(TestFilter.class));
-      }
-    });
+              @Override
+              protected void configureServlets() {
+                filterRegex("/[A-Za-z]*").through(TestFilter.class);
+                filterRegex("/index").through(TestFilter.class);
+                //these filters should never fire
+                filterRegex("\\w").through(Key.get(TestFilter.class));
+              }
+            });
 
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
     pipeline.initPipeline(null);
@@ -18,12 +20,8 @@
     //create ourselves a mock request with test URI
     HttpServletRequest requestMock = control.createMock(HttpServletRequest.class);
 
-    expect(requestMock.getRequestURI())
-            .andReturn("/index")
-            .anyTimes();
-    expect(requestMock.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(requestMock.getRequestURI()).andReturn("/index").anyTimes();
+    expect(requestMock.getContextPath()).andReturn("").anyTimes();
 
     // dispatch request
     FilterChain filterChain = control.createMock(FilterChain.class);
@@ -33,9 +31,14 @@
     pipeline.destroyPipeline();
     control.verify();
 
-    assertTrue("lifecycle states did not fire "
-        + "correct number of times-- inits: " + inits + "; dos: " + doFilters
-        + "; destroys: " + destroys,
+    assertTrue(
+        "lifecycle states did not fire "
+            + "correct number of times-- inits: "
+            + inits
+            + "; dos: "
+            + doFilters
+            + "; destroys: "
+            + destroys,
         inits == 1 && doFilters == 2 && destroys == 1);
   }
 

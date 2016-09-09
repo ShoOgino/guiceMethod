@@ -12,15 +12,12 @@
     final HttpServletRequest requestMock = createMock(HttpServletRequest.class);
     final HttpServletResponse mockResponse = createMock(HttpServletResponse.class);
 
-    expect(requestMock.getAttribute(A_KEY))
-        .andReturn(A_VALUE);
-
+    expect(requestMock.getAttribute(A_KEY)).andReturn(A_VALUE);
 
     requestMock.setAttribute(REQUEST_DISPATCHER_REQUEST, true);
     requestMock.removeAttribute(REQUEST_DISPATCHER_REQUEST);
 
-    expect(mockResponse.isCommitted())
-        .andReturn(false);
+    expect(mockResponse.isCommitted()).andReturn(false);
 
     mockResponse.resetBuffer();
     expectLastCall().once();
@@ -39,31 +36,26 @@
           }
         };
 
-    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
-        .andReturn(true);
-    expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(binding);
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject())).andReturn(true);
+    expect(injector.getBinding(Key.get(HttpServlet.class))).andReturn(binding);
 
-    expect(injector.getInstance(HTTP_SERLVET_KEY))
-        .andReturn(mockServlet);
+    expect(injector.getInstance(HTTP_SERLVET_KEY)).andReturn(mockServlet);
 
-    final Key<ServletDefinition> servetDefsKey = Key
-        .get(TypeLiteral.get(ServletDefinition.class));
+    final Key<ServletDefinition> servetDefsKey = Key.get(TypeLiteral.get(ServletDefinition.class));
 
     Binding<ServletDefinition> mockBinding = createMock(Binding.class);
     expect(injector.findBindingsByType(eq(servetDefsKey.getTypeLiteral())))
         .andReturn(ImmutableList.<Binding<ServletDefinition>>of(mockBinding));
     Provider<ServletDefinition> bindingProvider = Providers.of(servletDefinition);
-    expect(mockBinding.getProvider())
-        .andReturn(bindingProvider);
+    expect(mockBinding.getProvider()).andReturn(bindingProvider);
 
     replay(injector, binding, requestMock, mockResponse, mockBinding);
 
     // Have to init the Servlet before we can dispatch to it.
     servletDefinition.init(null, injector, Sets.<HttpServlet>newIdentityHashSet());
 
-    final RequestDispatcher dispatcher = new ManagedServletPipeline(injector)
-        .getRequestDispatcher(pattern);
+    final RequestDispatcher dispatcher =
+        new ManagedServletPipeline(injector).getRequestDispatcher(pattern);
 
     assertNotNull(dispatcher);
     dispatcher.forward(requestMock, mockResponse);

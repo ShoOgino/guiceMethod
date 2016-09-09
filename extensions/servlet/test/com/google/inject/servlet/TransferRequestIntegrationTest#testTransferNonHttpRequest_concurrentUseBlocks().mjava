@@ -1,19 +1,22 @@
   public void testTransferNonHttpRequest_concurrentUseBlocks() throws Exception {
-    Callable<Boolean> callable = new Callable<Boolean>() {
-      @Override public Boolean call() throws Exception {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        try {
-          Future<Boolean> future = executor.submit(ServletScopes.transferRequest(FALSE_CALLABLE));
-          try {
-            return future.get(100, TimeUnit.MILLISECONDS);
-          } catch (TimeoutException e) {
-            return true;
+    Callable<Boolean> callable =
+        new Callable<Boolean>() {
+          @Override
+          public Boolean call() throws Exception {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            try {
+              Future<Boolean> future =
+                  executor.submit(ServletScopes.transferRequest(FALSE_CALLABLE));
+              try {
+                return future.get(100, TimeUnit.MILLISECONDS);
+              } catch (TimeoutException e) {
+                return true;
+              }
+            } finally {
+              executor.shutdownNow();
+            }
           }
-        } finally {
-          executor.shutdownNow();
-        }
-      }
-    };
+        };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
     assertTrue(ServletScopes.scopeRequest(callable, seedMap).call());

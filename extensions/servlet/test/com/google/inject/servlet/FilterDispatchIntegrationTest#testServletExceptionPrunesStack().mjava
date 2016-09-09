@@ -1,25 +1,28 @@
   public final void testServletExceptionPrunesStack() throws Exception {
-    Injector injector = Guice.createInjector(new ServletModule() {
-      @Override
-      protected void configureServlets() {
-        filter("/").through(TestFilter.class);
-        filter("/nothing").through(TestFilter.class);
-        serve("/").with(ThrowingServlet.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                filter("/").through(TestFilter.class);
+                filter("/nothing").through(TestFilter.class);
+                serve("/").with(ThrowingServlet.class);
+              }
+            });
 
-    HttpServletRequest request = newFakeHttpServletRequest();    
+    HttpServletRequest request = newFakeHttpServletRequest();
     FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
-    pipeline.initPipeline(null);    
+    pipeline.initPipeline(null);
     try {
       pipeline.dispatch(request, null, null);
       fail("expected exception");
-    } catch(ServletException ex) {
+    } catch (ServletException ex) {
       for (StackTraceElement element : ex.getStackTrace()) {
         String className = element.getClassName();
-        assertTrue("was: " + element,
+        assertTrue(
+            "was: " + element,
             !className.equals(FilterChainInvocation.class.getName())
-            && !className.equals(FilterDefinition.class.getName()));
+                && !className.equals(FilterDefinition.class.getName()));
       }
     }
   }

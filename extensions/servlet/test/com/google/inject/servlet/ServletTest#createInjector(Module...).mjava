@@ -1,13 +1,20 @@
   private Injector createInjector(Module... modules) throws CreationException {
-    return Guice.createInjector(Lists.<Module>asList(new AbstractModule() {
-      @Override
-      protected void configure() {
-        install(new ServletModule());
-        bind(InSession.class);
-        bind(IN_SESSION_NULL_KEY).toProvider(Providers.<InSession>of(null)).in(SessionScoped.class);
-        bind(InRequest.class);
-        bind(IN_REQUEST_NULL_KEY).toProvider(Providers.<InRequest>of(null)).in(RequestScoped.class);
-      }
-    }, modules));
+    return Guice.createInjector(
+        Lists.<Module>asList(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new ServletModule());
+                bind(InSession.class);
+                bind(IN_SESSION_NULL_KEY)
+                    .toProvider(Providers.<InSession>of(null))
+                    .in(SessionScoped.class);
+                bind(InRequest.class);
+                bind(IN_REQUEST_NULL_KEY)
+                    .toProvider(Providers.<InRequest>of(null))
+                    .in(RequestScoped.class);
+              }
+            },
+            modules));
   }
 

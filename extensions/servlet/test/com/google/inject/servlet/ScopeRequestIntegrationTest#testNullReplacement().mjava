@@ -1,16 +1,19 @@
   public final void testNullReplacement() throws Exception {
-    Injector injector = Guice.createInjector(new ServletModule() {
-      @Override protected void configureServlets() {
-        bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
-        bind(SomeObject.class).in(RequestScoped.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
+                bind(SomeObject.class).in(RequestScoped.class);
+              }
+            });
 
     Callable<SomeObject> callable = injector.getInstance(Caller.class);
     try {
       assertNotNull(callable.call());
       fail();
-    } catch(ProvisionException pe) {
+    } catch (ProvisionException pe) {
       assertTrue(pe.getCause() instanceof OutOfScopeException);
     }
 

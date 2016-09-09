@@ -1,15 +1,17 @@
   public final void testDispatchRequestToManagedPipelineServlets()
       throws ServletException, IOException {
-    final Injector injector = Guice.createInjector(new ServletModule() {
+    final Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
 
-      @Override
-      protected void configureServlets() {
-        serve("/*", "/index.html").with(TestServlet.class);
+              @Override
+              protected void configureServlets() {
+                serve("/*", "/index.html").with(TestServlet.class);
 
-        // These servets should never fire... (ordering test)
-        serve("*.html", "/o/*", "/index/*", "*.jsp").with(Key.get(NeverServlet.class));
-      }
-    });
+                // These servets should never fire... (ordering test)
+                serve("*.html", "/o/*", "/index/*", "*.jsp").with(Key.get(NeverServlet.class));
+              }
+            });
 
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
 
@@ -18,12 +20,8 @@
     //create ourselves a mock request with test URI
     HttpServletRequest requestMock = createMock(HttpServletRequest.class);
 
-    expect(requestMock.getRequestURI())
-        .andReturn("/index.html")
-        .times(1);
-    expect(requestMock.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(requestMock.getRequestURI()).andReturn("/index.html").times(1);
+    expect(requestMock.getContextPath()).andReturn("").anyTimes();
 
     //dispatch request
     replay(requestMock);
@@ -33,8 +31,13 @@
 
     verify(requestMock);
 
-    assertTrue("lifecycle states did not fire correct number of times-- inits: " + inits + "; dos: "
-            + services + "; destroys: " + destroys,
+    assertTrue(
+        "lifecycle states did not fire correct number of times-- inits: "
+            + inits
+            + "; dos: "
+            + services
+            + "; destroys: "
+            + destroys,
         inits == 2 && services == 1 && destroys == 2);
   }
 

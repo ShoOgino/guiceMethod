@@ -1,32 +1,51 @@
   public void testScopeExceptions() throws Exception {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        install(new ServletModule());        
-      }
-      @Provides @RequestScoped String provideString() { return "foo"; }
-      @Provides @SessionScoped Integer provideInteger() { return 1; }
-      @Provides @RequestScoped @Named("foo") String provideNamedString() { return "foo"; }
-    });
-    
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new ServletModule());
+              }
+
+              @Provides
+              @RequestScoped
+              String provideString() {
+                return "foo";
+              }
+
+              @Provides
+              @SessionScoped
+              Integer provideInteger() {
+                return 1;
+              }
+
+              @Provides
+              @RequestScoped
+              @Named("foo")
+              String provideNamedString() {
+                return "foo";
+              }
+            });
+
     try {
       injector.getInstance(String.class);
       fail();
-    } catch(ProvisionException oose) {
+    } catch (ProvisionException oose) {
       assertContains(oose.getMessage(), "Cannot access scoped [java.lang.String].");
     }
-    
+
     try {
       injector.getInstance(Integer.class);
       fail();
-    } catch(ProvisionException oose) {
+    } catch (ProvisionException oose) {
       assertContains(oose.getMessage(), "Cannot access scoped [java.lang.Integer].");
     }
-    
+
     Key<?> key = Key.get(String.class, Names.named("foo"));
     try {
       injector.getInstance(key);
       fail();
-    } catch(ProvisionException oose) {
+    } catch (ProvisionException oose) {
       assertContains(oose.getMessage(), "Cannot access scoped [" + Errors.convert(key) + "]");
     }
   }

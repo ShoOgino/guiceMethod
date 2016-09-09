@@ -1,12 +1,13 @@
-  public final void testFilterInNonSingletonScopeThrowsServletException(){
+  public final void testFilterInNonSingletonScopeThrowsServletException() {
     GuiceFilter guiceFilter = new GuiceFilter();
 
-    Guice.createInjector(new ServletModule() {
-      @Override
-      protected void configureServlets() {
-        filter("/*").through(MyNonSingletonFilter.class);
-      }
-    });
+    Guice.createInjector(
+        new ServletModule() {
+          @Override
+          protected void configureServlets() {
+            filter("/*").through(MyNonSingletonFilter.class);
+          }
+        });
 
     ServletException se = null;
     try {

@@ -2,7 +2,7 @@
     ServletSpiVisitor visitor = new ServletSpiVisitor(true);
     int count = 0;
     Injector injector = Guice.createInjector(new Module());
-    for(Binding binding : injector.getBindings().values()) {
+    for (Binding binding : injector.getBindings().values()) {
       assertEquals(count++, binding.acceptTargetVisitor(visitor));
     }
     validateVisitor(visitor);

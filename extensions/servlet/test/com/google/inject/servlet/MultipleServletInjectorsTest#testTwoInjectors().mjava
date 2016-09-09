@@ -16,14 +16,16 @@
       @Override
       protected Injector getInjector() {
         // Cache this injector in the test for later testing...
-        return injectorOne = Guice.createInjector(new ServletModule() {
+        return injectorOne =
+            Guice.createInjector(
+                new ServletModule() {
 
-          @Override
-          protected void configureServlets() {
-            // This creates a ManagedFilterPipeline internally...
-            serve("/*").with(DummyServlet.class);
-          }
-        });
+                  @Override
+                  protected void configureServlets() {
+                    // This creates a ManagedFilterPipeline internally...
+                    serve("/*").with(DummyServlet.class);
+                  }
+                });
       }
     }.contextInitialized(new ServletContextEvent(fakeContextOne));
 
@@ -36,16 +38,18 @@
 
       @Override
       protected Injector getInjector() {
-        return injectorTwo = Guice.createInjector(new ServletModule() {
+        return injectorTwo =
+            Guice.createInjector(
+                new ServletModule() {
 
-          @Override
-          protected void configureServlets() {
-            // This creates a ManagedFilterPipeline internally...
-            filter("/8").through(DummyFilterImpl.class);
+                  @Override
+                  protected void configureServlets() {
+                    // This creates a ManagedFilterPipeline internally...
+                    filter("/8").through(DummyFilterImpl.class);
 
-            serve("/*").with(HttpServlet.class);
-          }
-        });
+                    serve("/*").with(HttpServlet.class);
+                  }
+                });
       }
     }.contextInitialized(new ServletContextEvent(fakeContextTwo));
 

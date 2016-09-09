@@ -1,6 +1,4 @@
-  /**
-   * Returns a FilterChain that does nothing.
-   */
+  /** Returns a FilterChain that does nothing. */
   public static FilterChain newNoOpFilterChain() {
     return new FilterChain() {
       @Override

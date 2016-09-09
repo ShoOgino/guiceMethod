@@ -1,20 +1,21 @@
   @Override
   public final void setUp() {
     GuiceFilter.reset();
-    
-    Guice.createInjector(new ServletModule() {
 
-      @Override
-      protected void configureServlets() {
-          filter("/*").through(TestFilter.class);
-          filter("*.html").through(TestFilter.class);
-          filter("/*").through(Key.get(TestFilter.class));
-          filter("*.jsp").through(Key.get(TestFilter.class));
+    Guice.createInjector(
+        new ServletModule() {
 
-          // These filters should never fire
-          filter("/index/*").through(Key.get(NeverFilter.class));
-          filter("/public/login/*").through(Key.get(NeverFilter.class));
-      }
-    });
+          @Override
+          protected void configureServlets() {
+            filter("/*").through(TestFilter.class);
+            filter("*.html").through(TestFilter.class);
+            filter("/*").through(Key.get(TestFilter.class));
+            filter("*.jsp").through(Key.get(TestFilter.class));
+
+            // These filters should never fire
+            filter("/index/*").through(Key.get(NeverFilter.class));
+            filter("/public/login/*").through(Key.get(NeverFilter.class));
+          }
+        });
   }
 

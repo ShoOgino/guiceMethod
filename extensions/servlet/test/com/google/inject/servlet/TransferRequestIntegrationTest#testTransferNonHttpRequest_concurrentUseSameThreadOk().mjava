@@ -1,9 +1,11 @@
   public void testTransferNonHttpRequest_concurrentUseSameThreadOk() throws Exception {
-    Callable<Boolean> callable = new Callable<Boolean>() {
-      @Override public Boolean call() throws Exception {
-        return ServletScopes.transferRequest(FALSE_CALLABLE).call();
-      }
-    };
+    Callable<Boolean> callable =
+        new Callable<Boolean>() {
+          @Override
+          public Boolean call() throws Exception {
+            return ServletScopes.transferRequest(FALSE_CALLABLE).call();
+          }
+        };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
     assertFalse(ServletScopes.scopeRequest(callable, seedMap).call());

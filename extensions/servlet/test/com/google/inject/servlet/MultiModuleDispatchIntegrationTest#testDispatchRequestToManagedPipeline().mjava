@@ -1,26 +1,27 @@
   public final void testDispatchRequestToManagedPipeline() throws ServletException, IOException {
-    final Injector injector = Guice.createInjector(new ServletModule() {
+    final Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
 
-      @Override
-      protected void configureServlets() {
-        filter("/*").through(TestFilter.class);
+              @Override
+              protected void configureServlets() {
+                filter("/*").through(TestFilter.class);
 
-        // These filters should never fire
-        filter("*.jsp").through(Key.get(TestFilter.class));
-      }
+                // These filters should never fire
+                filter("*.jsp").through(Key.get(TestFilter.class));
+              }
+            },
+            new ServletModule() {
 
-    }, new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                filter("*.html").through(TestFilter.class);
+                filter("/*").through(Key.get(TestFilter.class));
 
-      @Override
-      protected void configureServlets() {
-        filter("*.html").through(TestFilter.class);
-        filter("/*").through(Key.get(TestFilter.class));
-
-        // These filters should never fire
-        filter("/index/*").through(Key.get(TestFilter.class));
-      }
-
-    });
+                // These filters should never fire
+                filter("/index/*").through(Key.get(TestFilter.class));
+              }
+            });
 
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
     pipeline.initPipeline(null);
@@ -28,12 +29,8 @@
     //create ourselves a mock request with test URI
     HttpServletRequest requestMock = createMock(HttpServletRequest.class);
 
-    expect(requestMock.getRequestURI())
-            .andReturn("/index.html")
-            .anyTimes();
-    expect(requestMock.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(requestMock.getRequestURI()).andReturn("/index.html").anyTimes();
+    expect(requestMock.getContextPath()).andReturn("").anyTimes();
 
     //dispatch request
     replay(requestMock);
@@ -42,9 +39,14 @@
 
     verify(requestMock);
 
-    assertTrue("lifecycle states did not"
-        + " fire correct number of times-- inits: " + inits + "; dos: " + doFilters
-        + "; destroys: " + destroys,
+    assertTrue(
+        "lifecycle states did not"
+            + " fire correct number of times-- inits: "
+            + inits
+            + "; dos: "
+            + doFilters
+            + "; destroys: "
+            + destroys,
         inits == 1 && doFilters == 3 && destroys == 1);
   }
 
