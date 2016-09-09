@@ -1,6 +1,6 @@
     @Override
     public void through(Class<? extends Filter> filterKey, Map<String, String> initParams) {
-      
+
       // Careful you don't accidentally make this method recursive, thank you IntelliJ IDEA!
       through(Key.get(filterKey), initParams);
     }

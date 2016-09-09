@@ -1,16 +1,16 @@
   /**
    * Introspects the injector and collects all instances of bound {@code List<FilterDefinition>}
    * into a master list.
-   * 
-   * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
-   * that preserves insertion order in entry-set iterators.
+   *
+   * <p>We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map that
+   * preserves insertion order in entry-set iterators.
    */
   private FilterDefinition[] collectFilterDefinitions(Injector injector) {
     List<FilterDefinition> filterDefinitions = Lists.newArrayList();
     for (Binding<FilterDefinition> entry : injector.findBindingsByType(FILTER_DEFS)) {
       filterDefinitions.add(entry.getProvider().get());
     }
-    
+
     // Copy to a fixed-size array for speed of iteration.
     return filterDefinitions.toArray(new FilterDefinition[filterDefinitions.size()]);
   }

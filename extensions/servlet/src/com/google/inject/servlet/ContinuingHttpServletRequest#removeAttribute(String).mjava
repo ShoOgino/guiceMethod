@@ -1,4 +1,5 @@
-  @Override public void removeAttribute(String name) {
+  @Override
+  public void removeAttribute(String name) {
     attributes.remove(name);
   }
 

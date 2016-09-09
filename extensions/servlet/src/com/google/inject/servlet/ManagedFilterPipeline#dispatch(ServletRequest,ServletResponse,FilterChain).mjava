@@ -12,6 +12,5 @@
     //obtain the servlet pipeline to dispatch against
     new FilterChainInvocation(filterDefinitions, servletPipeline, proceedingFilterChain)
         .doFilter(withDispatcher(request, servletPipeline), response);
-
   }
 

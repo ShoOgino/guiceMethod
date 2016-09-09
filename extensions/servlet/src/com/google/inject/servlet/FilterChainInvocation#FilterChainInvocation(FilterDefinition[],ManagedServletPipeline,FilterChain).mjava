@@ -1,5 +1,7 @@
-  public FilterChainInvocation(FilterDefinition[] filterDefinitions,
-      ManagedServletPipeline servletPipeline, FilterChain proceedingChain) {
+  public FilterChainInvocation(
+      FilterDefinition[] filterDefinitions,
+      ManagedServletPipeline servletPipeline,
+      FilterChain proceedingChain) {
 
     this.filterDefinitions = filterDefinitions;
     this.servletPipeline = servletPipeline;

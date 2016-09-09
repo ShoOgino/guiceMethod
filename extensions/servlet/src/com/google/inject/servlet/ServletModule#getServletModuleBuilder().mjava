@@ -1,6 +1,6 @@
   private ServletsModuleBuilder getServletModuleBuilder() {
-    checkState(servletsModuleBuilder != null,
-        "This method can only be used inside configureServlets()");
+    checkState(
+        servletsModuleBuilder != null, "This method can only be used inside configureServlets()");
     return servletsModuleBuilder;
   }
 

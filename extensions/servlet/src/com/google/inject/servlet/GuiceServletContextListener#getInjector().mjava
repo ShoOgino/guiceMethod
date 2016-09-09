@@ -1,6 +1,3 @@
-  /**
-   * Override this method to create (or otherwise obtain a reference to) your
-   * injector.
-   */
+  /** Override this method to create (or otherwise obtain a reference to) your injector. */
   protected abstract Injector getInjector();
 

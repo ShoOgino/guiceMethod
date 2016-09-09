@@ -1,4 +1,5 @@
-  @Override public Object getAttribute(String name) {
+  @Override
+  public Object getAttribute(String name) {
     return attributes.get(name);
   }
 

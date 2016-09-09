@@ -1,9 +1,10 @@
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return MoreObjects.toStringHelper(LinkedFilterBinding.class)
-      .add("pattern", getPattern())
-      .add("initParams", getInitParams())
-      .add("uriPatternType", getUriPatternType())
-      .add("linkedFilterKey", getLinkedKey())
-      .toString();
+        .add("pattern", getPattern())
+        .add("initParams", getInitParams())
+        .add("uriPatternType", getUriPatternType())
+        .add("linkedFilterKey", getLinkedKey())
+        .toString();
   }
 

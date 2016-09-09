@@ -1,4 +1,6 @@
-  @Provides @RequestScoped HttpServletResponse provideHttpServletResponse() {
+  @Provides
+  @RequestScoped
+  HttpServletResponse provideHttpServletResponse() {
     return GuiceFilter.getResponse(Key.get(HttpServletResponse.class));
   }
 

@@ -5,14 +5,15 @@
       }
 
       Logger.getLogger(InternalServletModule.class.getName())
-          .warning("You are attempting to use a deprecated API (specifically,"
-          + " attempting to @Inject ServletContext inside an eagerly created"
-          + " singleton. While we allow this for backwards compatibility, be"
-          + " warned that this MAY have unexpected behavior if you have more"
-          + " than one injector (with ServletModule) running in the same JVM."
-          + " Please consult the Guice documentation at"
-          + " https://github.com/google/guice/wiki/Servlets for more"
-          + " information.");
+          .warning(
+              "You are attempting to use a deprecated API (specifically,"
+                  + " attempting to @Inject ServletContext inside an eagerly created"
+                  + " singleton. While we allow this for backwards compatibility, be"
+                  + " warned that this MAY have unexpected behavior if you have more"
+                  + " than one injector (with ServletModule) running in the same JVM."
+                  + " Please consult the Guice documentation at"
+                  + " https://github.com/google/guice/wiki/Servlets for more"
+                  + " information.");
       return GuiceFilter.getServletContext();
     }
 

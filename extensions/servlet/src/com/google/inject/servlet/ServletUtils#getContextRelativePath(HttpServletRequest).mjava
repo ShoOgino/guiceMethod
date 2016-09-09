@@ -1,7 +1,6 @@
   /**
-   * Gets the context path relative path of the URI. Returns the path of the
-   * resource relative to the context path for a request's URI, or null if no
-   * path can be extracted.
+   * Gets the context path relative path of the URI. Returns the path of the resource relative to
+   * the context path for a request's URI, or null if no path can be extracted.
    *
    * <p>Also performs url decoding and normalization of the path.
    */
@@ -15,8 +14,7 @@
       if (contextPath.length() < requestURI.length()) {
         String suffix = requestURI.substring(contextPath.length());
         return normalizePath(suffix);
-      } else if (requestURI.trim().length() > 0 &&
-          contextPath.length() == requestURI.length()) {
+      } else if (requestURI.trim().length() > 0 && contextPath.length() == requestURI.length()) {
         return "/";
       }
     }

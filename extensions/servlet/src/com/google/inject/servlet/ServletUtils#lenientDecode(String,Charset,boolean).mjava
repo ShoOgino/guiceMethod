@@ -1,9 +1,8 @@
   /**
-   * Percent-decodes a US-ASCII string into a Unicode string. The specified
-   * encoding is used to determine what characters are represented by any
-   * consecutive sequences of the form "%<i>XX</i>". This is the lenient
-   * kind of decoding that will simply ignore and copy as-is any "%XX"
-   * sequence that is invalid (for example, "%HH").
+   * Percent-decodes a US-ASCII string into a Unicode string. The specified encoding is used to
+   * determine what characters are represented by any consecutive sequences of the form
+   * "%<i>XX</i>". This is the lenient kind of decoding that will simply ignore and copy as-is any
+   * "%XX" sequence that is invalid (for example, "%HH").
    *
    * @param string a percent-encoded US-ASCII string
    * @param encoding a character encoding
@@ -25,8 +24,7 @@
       return string;
     }
 
-    ByteAccumulator accumulator =
-        new ByteAccumulator(string.length(), encoding);
+    ByteAccumulator accumulator = new ByteAccumulator(string.length(), encoding);
     StringBuilder builder = new StringBuilder(string.length());
 
     if (firstPercentPos > 0) {
@@ -37,7 +35,7 @@
 
       char c = string.charAt(srcPos);
 
-      if (c < 0x80) {  // ASCII
+      if (c < 0x80) { // ASCII
         boolean processed = false;
 
         if (c == '%' && string.length() >= srcPos + 3) {
@@ -66,7 +64,7 @@
             accumulator.append((byte) c);
           }
         }
-      } else {  // Non-ASCII
+      } else { // Non-ASCII
         // A non-ASCII char marks the end of a multi-char encoding sequence,
         // if one is in progress.
 

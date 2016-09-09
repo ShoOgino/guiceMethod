@@ -1,2 +1,3 @@
-    @Override void close();
+    @Override
+    void close();
 
