@@ -1,2 +1,4 @@
-    @SuppressWarnings("unused") @Inject void method(Collection c) {}
+    @SuppressWarnings("unused")
+    @Inject
+    void method(Collection c) {}
 

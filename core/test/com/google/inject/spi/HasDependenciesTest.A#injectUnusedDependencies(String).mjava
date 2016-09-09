@@ -1,2 +1,3 @@
-    @Inject void injectUnusedDependencies(String unused) {}
+    @Inject
+    void injectUnusedDependencies(String unused) {}
 

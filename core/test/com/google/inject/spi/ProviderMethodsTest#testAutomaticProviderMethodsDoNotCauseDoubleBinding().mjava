@@ -3,15 +3,19 @@
    * binding of the provider methods' types.
    */
   public void testAutomaticProviderMethodsDoNotCauseDoubleBinding() {
-    Module installsSelf = new AbstractModule() {
-      @Override protected void configure() {
-        install(this);
-        bind(Integer.class).toInstance(5);
-      }
-      @Provides public String provideString(Integer count) {
-        return "A" + count;
-      }
-    };
+    Module installsSelf =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(this);
+            bind(Integer.class).toInstance(5);
+          }
+
+          @Provides
+          public String provideString(Integer count) {
+            return "A" + count;
+          }
+        };
 
     Injector injector = Guice.createInjector(installsSelf);
     assertEquals("A5", injector.getInstance(String.class));

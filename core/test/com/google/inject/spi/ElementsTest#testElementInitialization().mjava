@@ -1,8 +1,8 @@
   public void testElementInitialization() {
-    final AtomicReference<Provider<String>> providerFromBinder
-        = new AtomicReference<Provider<String>>();
-    final AtomicReference<MembersInjector<String>> membersInjectorFromBinder
-        = new AtomicReference<MembersInjector<String>>();
+    final AtomicReference<Provider<String>> providerFromBinder =
+        new AtomicReference<Provider<String>>();
+    final AtomicReference<MembersInjector<String>> membersInjectorFromBinder =
+        new AtomicReference<MembersInjector<String>>();
 
     final AtomicReference<String> lastInjected = new AtomicReference<String>();
     final MembersInjector<String> stringInjector =

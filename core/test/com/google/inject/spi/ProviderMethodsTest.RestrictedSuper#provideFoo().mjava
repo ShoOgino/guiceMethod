@@ -1,2 +1,5 @@
-    @Provides public String provideFoo() { return "foo"; }
+    @Provides
+    public String provideFoo() {
+      return "foo";
+    }
 

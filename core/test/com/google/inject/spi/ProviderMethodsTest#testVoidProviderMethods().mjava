@@ -1,15 +1,20 @@
   public void testVoidProviderMethods() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {}
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {}
 
-        @Provides void provideFoo() {}
-      });
+            @Provides
+            void provideFoo() {}
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Provider methods must return a value. Do not return void.",
-          getClass().getName(), ".provideFoo(ProviderMethodsTest.java:");
+          getClass().getName(),
+          ".provideFoo(ProviderMethodsTest.java:");
     }
   }
 

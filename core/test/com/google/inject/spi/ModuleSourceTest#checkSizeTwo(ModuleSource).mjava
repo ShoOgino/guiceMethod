@@ -3,11 +3,11 @@
     assertEquals(3, moduleSource.getStackTraceSize());
     // Check call stack
     StackTraceElement[] callStack = moduleSource.getStackTrace();
-    assertEquals(BINDER_INSTALL, callStack[0]);    
+    assertEquals(BINDER_INSTALL, callStack[0]);
     assertEquals(
         new StackTraceElement(
             "com.google.inject.spi.moduleSourceTest$A", "configure", "Unknown Source", 100),
         callStack[1]);
-    assertEquals(BINDER_INSTALL, callStack[2]);    
+    assertEquals(BINDER_INSTALL, callStack[2]);
   }
 

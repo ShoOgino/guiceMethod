@@ -1,21 +1,23 @@
   private ModuleSource createModuleSource() {
     // First module
     StackTraceElement[] partialCallStack = new StackTraceElement[1];
-    partialCallStack[0] = BINDER_INSTALL;    
+    partialCallStack[0] = BINDER_INSTALL;
     ModuleSource moduleSource = new ModuleSource(new A(), partialCallStack);
-    // Second module 
+    // Second module
     partialCallStack = new StackTraceElement[2];
     partialCallStack[0] = BINDER_INSTALL;
-    partialCallStack[1] = new StackTraceElement(
-        "com.google.inject.spi.moduleSourceTest$A", "configure", "Unknown Source", 100);
-    moduleSource = moduleSource.createChild(new B(), partialCallStack);    
+    partialCallStack[1] =
+        new StackTraceElement(
+            "com.google.inject.spi.moduleSourceTest$A", "configure", "Unknown Source", 100);
+    moduleSource = moduleSource.createChild(new B(), partialCallStack);
     // Third module
     partialCallStack = new StackTraceElement[4];
     partialCallStack[0] = BINDER_INSTALL;
     partialCallStack[1] = new StackTraceElement("class1", "method1", "Class1.java", 1);
     partialCallStack[2] = new StackTraceElement("class2", "method2", "Class2.java", 2);
-    partialCallStack[3] = new StackTraceElement(
-        "com.google.inject.spi.moduleSourceTest$B", "configure", "Unknown Source", 200);
+    partialCallStack[3] =
+        new StackTraceElement(
+            "com.google.inject.spi.moduleSourceTest$B", "configure", "Unknown Source", 200);
     return moduleSource.createChild(new C(), partialCallStack);
   }
 

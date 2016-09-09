@@ -1,14 +1,21 @@
   public void testCallStackSize() {
     ModuleSource moduleSource = createModuleSource();
     StackTraceElement[] bindingCallStack = new StackTraceElement[3];
-    bindingCallStack[0] = new StackTraceElement(
-        "com.google.inject.spi.Elements$RecordingBinder", "bind", "Unknown Source", 200);
-    bindingCallStack[1] = new StackTraceElement(
-        "com.google.inject.spi.Elements$RecordingBinder", "bind", "Unknown Source", 100);
-    bindingCallStack[2] = new StackTraceElement(
-        "com.google.inject.spi.moduleSourceTest$C", "configure", "Unknown Source", 100);
-    ElementSource elementSource = new ElementSource(
-        null /* No original element source */, "" /* Don't care */, moduleSource, bindingCallStack);
+    bindingCallStack[0] =
+        new StackTraceElement(
+            "com.google.inject.spi.Elements$RecordingBinder", "bind", "Unknown Source", 200);
+    bindingCallStack[1] =
+        new StackTraceElement(
+            "com.google.inject.spi.Elements$RecordingBinder", "bind", "Unknown Source", 100);
+    bindingCallStack[2] =
+        new StackTraceElement(
+            "com.google.inject.spi.moduleSourceTest$C", "configure", "Unknown Source", 100);
+    ElementSource elementSource =
+        new ElementSource(
+            null /* No original element source */,
+            "" /* Don't care */,
+            moduleSource,
+            bindingCallStack);
     assertEquals(10 /* call stack size */, elementSource.getStackTrace().length);
-  }  
+  }
 

@@ -11,7 +11,9 @@
       InjectionPoint.forConstructor(constructor, new TypeLiteral<LinkedHashSet<String>>() {});
       fail("Expected ConfigurationException");
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(), "java.util.LinkedHashSet<java.lang.String>",
+      assertContains(
+          expected.getMessage(),
+          "java.util.LinkedHashSet<java.lang.String>",
           " does not define java.util.HashSet.<init>()",
           "  while locating java.util.LinkedHashSet<java.lang.String>");
     }
@@ -20,7 +22,9 @@
       InjectionPoint.forConstructor((Constructor) constructor, new TypeLiteral<Set<String>>() {});
       fail("Expected ConfigurationException");
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(), "java.util.Set<java.lang.String>",
+      assertContains(
+          expected.getMessage(),
+          "java.util.Set<java.lang.String>",
           " does not define java.util.HashSet.<init>()",
           "  while locating java.util.Set<java.lang.String>");
     }

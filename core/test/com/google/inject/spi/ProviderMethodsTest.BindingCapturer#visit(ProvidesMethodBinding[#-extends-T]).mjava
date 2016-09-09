@@ -2,6 +2,6 @@
     @SuppressWarnings("unchecked")
     public ProvidesMethodBinding<T> visit(
         ProvidesMethodBinding<? extends T> providesMethodBinding) {
-      return (ProvidesMethodBinding<T>)providesMethodBinding;
+      return (ProvidesMethodBinding<T>) providesMethodBinding;
     }
 

@@ -1,2 +1,3 @@
-    @com.google.inject.Inject public void gInject(Provider<String> p) {}
+    @com.google.inject.Inject
+    public void gInject(Provider<String> p) {}
 

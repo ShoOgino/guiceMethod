@@ -1,2 +1,3 @@
-    @Inject public D(Injector unused) { }
+    @Inject
+    public D(Injector unused) {}
 

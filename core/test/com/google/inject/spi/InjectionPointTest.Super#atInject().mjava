@@ -1,2 +1,3 @@
-    @javax.inject.Inject public void atInject() {}
+    @javax.inject.Inject
+    public void atInject() {}
 

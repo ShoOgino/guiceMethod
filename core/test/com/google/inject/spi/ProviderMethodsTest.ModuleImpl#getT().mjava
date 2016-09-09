@@ -1,5 +1,6 @@
     @Override
-    @Provides public String getT() {
+    @Provides
+    public String getT() {
       return "string";
     }
 

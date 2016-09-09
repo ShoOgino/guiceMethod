@@ -1,4 +1,5 @@
-    @Provides Set<T> provideBoth(@Named("First") T first, @Named("Second") T second) {
+    @Provides
+    Set<T> provideBoth(@Named("First") T first, @Named("Second") T second) {
       return ImmutableSet.of(first, second);
     }
 

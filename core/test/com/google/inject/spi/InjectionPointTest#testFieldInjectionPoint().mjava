@@ -10,14 +10,18 @@
     assertNotSerializable(injectionPoint);
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
-    assertEquals("Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=a)]@"
-        + getClass().getName() + ".foo", dependency.toString());
+    assertEquals(
+        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=a)]@"
+            + getClass().getName()
+            + ".foo",
+        dependency.toString());
     assertEquals(fooField, dependency.getInjectionPoint().getMember());
     assertEquals(-1, dependency.getParameterIndex());
     assertEquals(Key.get(String.class, named("a")), dependency.getKey());
     assertFalse(dependency.isNullable());
     assertNotSerializable(dependency);
-    assertEqualsBothWays(dependency,
+    assertEqualsBothWays(
+        dependency,
         getOnlyElement(new InjectionPoint(typeLiteral, fooField, false).getDependencies()));
   }
 

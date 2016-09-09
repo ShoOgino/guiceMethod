@@ -1,4 +1,5 @@
-    @Provides Integer foo() {
+    @Provides
+    Integer foo() {
       return 42;
     }
 

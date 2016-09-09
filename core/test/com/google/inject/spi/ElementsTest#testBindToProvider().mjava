@@ -6,7 +6,7 @@
             return "A";
           }
         };
-    
+
     final javax.inject.Provider<Integer> intJavaxProvider =
         new javax.inject.Provider<Integer>() {
           @Override
@@ -14,7 +14,7 @@
             return 42;
           }
         };
-    
+
     final javax.inject.Provider<Double> doubleJavaxProvider =
         new javax.inject.Provider<Double>() {
           @javax.inject.Inject String string;

@@ -1,4 +1,6 @@
-    @Provides @Named("list") List<String> annotatedGenericProviderMethod() {
+    @Provides
+    @Named("list")
+    List<String> annotatedGenericProviderMethod() {
       return new ArrayList<String>();
     }
 

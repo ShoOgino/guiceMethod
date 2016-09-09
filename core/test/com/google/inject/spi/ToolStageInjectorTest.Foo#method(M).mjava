@@ -1,2 +1,6 @@
-    @SuppressWarnings("unused") @Inject void method(M m) { this.m = m; }
+    @SuppressWarnings("unused")
+    @Inject
+    void method(M m) {
+      this.m = m;
+    }
 

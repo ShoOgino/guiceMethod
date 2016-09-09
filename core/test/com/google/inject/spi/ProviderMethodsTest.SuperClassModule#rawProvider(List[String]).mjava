@@ -1,4 +1,6 @@
-    @Provides @Named("rawlist") List rawProvider(@Named("list") List<String> f) {
+    @Provides
+    @Named("rawlist")
+    List rawProvider(@Named("list") List<String> f) {
       return f;
     }
 

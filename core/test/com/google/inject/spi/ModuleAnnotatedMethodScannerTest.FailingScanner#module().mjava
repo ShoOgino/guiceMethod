@@ -1,6 +1,7 @@
     static Module module() {
       return new AbstractModule() {
-        @Override protected void configure() {
+        @Override
+        protected void configure() {
           binder().scanModulesForAnnotatedMethods(new FailingScanner());
         }
       };

@@ -1,4 +1,5 @@
-    @Provides Long bar() {
+    @Provides
+    Long bar() {
       return 42L;
     }
 

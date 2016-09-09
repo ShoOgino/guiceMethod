@@ -1,22 +1,23 @@
   public void testAddMessageErrorCommand() {
     checkModule(
         new AbstractModule() {
-          @Override protected void configure() {
+          @Override
+          protected void configure() {
             addError("Message %s %d %s", "A", 5, "C");
           }
         },
-
         new FailingElementVisitor() {
-          @Override public Void visit(Message command) {
+          @Override
+          public Void visit(Message command) {
             assertEquals("Message A 5 C", command.getMessage());
             assertNull(command.getCause());
-            assertContains(command.getSources().toString(),
+            assertContains(
+                command.getSources().toString(),
                 ElementsTest.class.getName(),
                 getDeclaringSourcePart(ElementsTest.class));
             assertContains(command.getSource(), getDeclaringSourcePart(ElementsTest.class));
             return null;
           }
-        }
-    );
+        });
   }
 

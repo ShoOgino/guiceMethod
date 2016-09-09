@@ -5,13 +5,13 @@
     } catch (CreationException expected) {
       Message m = Iterables.getOnlyElement(expected.getErrorMessages());
       assertEquals(
-          "An exception was caught and reported. Message: Failing in the scanner.",
-          m.getMessage());
+          "An exception was caught and reported. Message: Failing in the scanner.", m.getMessage());
       assertEquals(IllegalStateException.class, m.getCause().getClass());
       ElementSource source = (ElementSource) Iterables.getOnlyElement(m.getSources());
-      assertEquals(SomeModule.class.getName(),
-          Iterables.getOnlyElement(source.getModuleClassNames()));
-      assertEquals(String.class.getName() + " " + SomeModule.class.getName() + ".aString()",
+      assertEquals(
+          SomeModule.class.getName(), Iterables.getOnlyElement(source.getModuleClassNames()));
+      assertEquals(
+          String.class.getName() + " " + SomeModule.class.getName() + ".aString()",
           source.toString());
     }
   }

@@ -1,2 +1,7 @@
-    @Toolable @SuppressWarnings("unused") @Inject void method(M m) { this.m = m; }
+    @Toolable
+    @SuppressWarnings("unused")
+    @Inject
+    void method(M m) {
+      this.m = m;
+    }
 

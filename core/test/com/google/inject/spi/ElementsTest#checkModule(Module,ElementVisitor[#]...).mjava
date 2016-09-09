@@ -1,6 +1,4 @@
-  /**
-   * Ensures the module performs the commands consistent with {@code visitors}.
-   */
+  /** Ensures the module performs the commands consistent with {@code visitors}. */
   protected void checkModule(Module module, ElementVisitor<?>... visitors) {
     List<Element> elements = Elements.getElements(module);
     assertEquals(elements.size(), visitors.length);

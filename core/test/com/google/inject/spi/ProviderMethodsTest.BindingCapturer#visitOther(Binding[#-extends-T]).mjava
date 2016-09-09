@@ -1,4 +1,5 @@
-    @Override protected ProvidesMethodBinding<T> visitOther(Binding<? extends T> binding) {
+    @Override
+    protected ProvidesMethodBinding<T> visitOther(Binding<? extends T> binding) {
       throw new IllegalStateException("unexpected visit of: " + binding);
     }
 

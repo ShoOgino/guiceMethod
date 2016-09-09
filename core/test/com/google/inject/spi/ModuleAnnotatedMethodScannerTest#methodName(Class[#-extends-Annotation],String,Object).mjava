@@ -1,6 +1,8 @@
   private String methodName(Class<? extends Annotation> annotation, String method, Object container)
       throws Exception {
-    return "@" + annotation.getName() + " "
+    return "@"
+        + annotation.getName()
+        + " "
         + StackTraceElements.forMember(container.getClass().getDeclaredMethod(method));
   }
 

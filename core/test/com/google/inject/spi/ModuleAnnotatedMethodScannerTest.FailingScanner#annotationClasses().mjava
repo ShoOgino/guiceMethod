@@ -1,4 +1,5 @@
-    @Override public Set<? extends Class<? extends Annotation>> annotationClasses() {
+    @Override
+    public Set<? extends Class<? extends Annotation>> annotationClasses() {
       return ImmutableSet.of(TestProvides.class);
     }
 

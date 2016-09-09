@@ -1,4 +1,5 @@
-    @TestProvides String aString() {
+    @TestProvides
+    String aString() {
       return "Foo";
     }
 

@@ -12,9 +12,6 @@
     assertSame(bob.getDaughter(), clone.getDaughter());
 
     Key soleBobKey = Key.get(Bob.class, Sole.class);
-    assertSame(
-        injector.getInstance(soleBobKey),
-        injector.getInstance(soleBobKey)
-    );
+    assertSame(injector.getInstance(soleBobKey), injector.getInstance(soleBobKey));
   }
 

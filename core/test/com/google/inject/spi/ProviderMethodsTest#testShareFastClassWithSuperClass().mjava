@@ -1,8 +1,10 @@
   public void testShareFastClassWithSuperClass() {
     CallerInspecterSubClassModule module = new CallerInspecterSubClassModule();
     Guice.createInjector(Stage.PRODUCTION, module);
-    assertEquals("Expected provider methods in the same class to share fastclass classes",
-        module.fooCallerClass, module.barCallerClass);
+    assertEquals(
+        "Expected provider methods in the same class to share fastclass classes",
+        module.fooCallerClass,
+        module.barCallerClass);
     assertFalse(
         "Did not expect provider methods in the subclasses to share fastclass classes "
             + "with their parent classes",

@@ -1,4 +1,5 @@
-  @Override protected Void visitOther(Element element) {
+  @Override
+  protected Void visitOther(Element element) {
     throw new AssertionFailedError();
   }
 

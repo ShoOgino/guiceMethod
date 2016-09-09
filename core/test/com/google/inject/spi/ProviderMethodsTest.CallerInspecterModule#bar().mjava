@@ -1,4 +1,6 @@
-    @Provides @Singleton Long bar() {
+    @Provides
+    @Singleton
+    Long bar() {
       this.barCallerClass = new Exception().getStackTrace()[1].getClassName();
       return 42L;
     }

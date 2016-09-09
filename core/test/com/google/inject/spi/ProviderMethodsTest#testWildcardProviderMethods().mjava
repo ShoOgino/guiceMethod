@@ -2,20 +2,28 @@
     final List<String> strings = ImmutableList.of("A", "B", "C");
     final List<Number> numbers = ImmutableList.<Number>of(1, 2, 3);
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        @SuppressWarnings("unchecked")
-        Key<List<? super Integer>> listOfSupertypesOfInteger = (Key<List<? super Integer>>)
-            Key.get(Types.listOf(Types.supertypeOf(Integer.class)));
-        bind(listOfSupertypesOfInteger).toInstance(numbers);
-      }
-      @Provides public List<? extends CharSequence> provideCharSequences() {
-        return strings;
-      }
-      @Provides public Class<?> provideType() {
-        return Float.class;
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                @SuppressWarnings("unchecked")
+                Key<List<? super Integer>> listOfSupertypesOfInteger =
+                    (Key<List<? super Integer>>)
+                        Key.get(Types.listOf(Types.supertypeOf(Integer.class)));
+                bind(listOfSupertypesOfInteger).toInstance(numbers);
+              }
+
+              @Provides
+              public List<? extends CharSequence> provideCharSequences() {
+                return strings;
+              }
+
+              @Provides
+              public Class<?> provideType() {
+                return Float.class;
+              }
+            });
 
     assertSame(strings, injector.getInstance(HasWildcardInjection.class).charSequences);
     assertSame(numbers, injector.getInstance(HasWildcardInjection.class).numbers);

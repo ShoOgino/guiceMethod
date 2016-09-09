@@ -1,2 +1,3 @@
-    @javax.inject.Inject public void privateGAndPublicAt() {}
+    @javax.inject.Inject
+    public void privateGAndPublicAt() {}
 

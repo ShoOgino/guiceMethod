@@ -1,12 +1,17 @@
   public void testChildInjectorInheritsScanner() {
     Injector parent = Guice.createInjector(NamedMunger.module());
-    Injector child = parent.createChildInjector(new AbstractModule() {
-      @Override protected void configure() {}
+    Injector child =
+        parent.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @TestProvides @Named("foo") String foo() {
-        return "foo";
-      }
-    });
+              @TestProvides
+              @Named("foo")
+              String foo() {
+                return "foo";
+              }
+            });
     assertMungedBinding(child, String.class, "foo", "foo");
   }
 

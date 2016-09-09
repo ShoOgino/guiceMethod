@@ -1,4 +1,5 @@
-    @Provides public Object getObject() {
+    @Provides
+    public Object getObject() {
       return new Object();
     }
     /* javac will synthesize a bridge method for getT with the types erased, equivalent to:

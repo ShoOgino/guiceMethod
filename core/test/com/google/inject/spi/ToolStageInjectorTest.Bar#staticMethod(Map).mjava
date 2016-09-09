@@ -1,2 +1,4 @@
-    @SuppressWarnings("unused") @Inject static void staticMethod(Map map) {}
+    @SuppressWarnings("unused")
+    @Inject
+    static void staticMethod(Map map) {}
 
