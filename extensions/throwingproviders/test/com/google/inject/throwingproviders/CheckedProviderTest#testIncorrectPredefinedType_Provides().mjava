@@ -1,21 +1,23 @@
   public void testIncorrectPredefinedType_Provides() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(StringRemoteProvider.class)
-        Integer foo() {
-            return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(StringRemoteProvider.class)
+            Integer foo() {
+              return null;
+            }
+          });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(StringRemoteProvider.class.getName() 
-          + " expects the value type to be java.lang.String, but it was java.lang.Integer",
+    } catch (CreationException ce) {
+      assertEquals(
+          StringRemoteProvider.class.getName()
+              + " expects the value type to be java.lang.String, but it was java.lang.Integer",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

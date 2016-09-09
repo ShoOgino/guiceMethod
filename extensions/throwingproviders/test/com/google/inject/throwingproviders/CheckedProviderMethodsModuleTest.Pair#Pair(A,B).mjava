@@ -1,5 +1,5 @@
     Pair(A a, B b) {
-      this.first= a;
+      this.first = a;
       this.second = b;
     }
 

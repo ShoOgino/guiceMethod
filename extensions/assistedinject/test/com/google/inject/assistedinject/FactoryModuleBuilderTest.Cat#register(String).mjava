@@ -1,2 +1,3 @@
-    @Inject void register(@Named("cat3") String a) {}
+    @Inject
+    void register(@Named("cat3") String a) {}
 

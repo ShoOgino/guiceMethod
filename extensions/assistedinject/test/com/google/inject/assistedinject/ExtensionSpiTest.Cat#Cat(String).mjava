@@ -1,2 +1,3 @@
-    @Inject Cat(@Assisted String owner) {}
+    @Inject
+    Cat(@Assisted String owner) {}
 

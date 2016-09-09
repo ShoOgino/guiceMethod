@@ -1,12 +1,6 @@
     @SuppressWarnings("unused")
     @ThrowingInject
     public ManyExceptionFoo()
-        throws InterruptedException,
-        RuntimeException,
-        RemoteException,
-        AccessException,
-        TooManyListenersException,
-        BindException,
-        SubBindException {
-    }
+        throws InterruptedException, RuntimeException, RemoteException, AccessException,
+            TooManyListenersException, BindException, SubBindException {}
 

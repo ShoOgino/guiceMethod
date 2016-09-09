@@ -1,12 +1,16 @@
   public void testConfigureAnnotatedReturnValue() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        install(new FactoryModuleBuilder()
-            .implement(Car.class, Names.named("german"), Beetle.class)
-            .implement(Car.class, Names.named("american"), Mustang.class)
-            .build(AnnotatedVersatileCarFactory.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(
+                    new FactoryModuleBuilder()
+                        .implement(Car.class, Names.named("german"), Beetle.class)
+                        .implement(Car.class, Names.named("american"), Mustang.class)
+                        .build(AnnotatedVersatileCarFactory.class));
+              }
+            });
 
     AnnotatedVersatileCarFactory factory = injector.getInstance(AnnotatedVersatileCarFactory.class);
     assertTrue(factory.getGermanCar(Color.GRAY) instanceof Beetle);

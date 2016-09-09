@@ -1,14 +1,16 @@
   public void testMethodsAndFieldsGetInjected() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class).toInstance("turbo");
-        bind(int.class).toInstance(911);
-        bind(double.class).toInstance(50000d);
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, Porsche.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("turbo");
+                bind(int.class).toInstance(911);
+                bind(double.class).toInstance(50000d);
+                bind(ColoredCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Porsche.class));
+              }
+            });
     ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
 
     Porsche grayPorsche = (Porsche) carFactory.create(Color.GRAY);

@@ -1,2 +1,4 @@
-    Color getColor() { return injector.getInstance(Key.get(Color.class, FactoryProvider2.DEFAULT_ANNOTATION)); }
+    Color getColor() {
+      return injector.getInstance(Key.get(Color.class, FactoryProvider2.DEFAULT_ANNOTATION));
+    }
 

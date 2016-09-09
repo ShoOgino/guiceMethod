@@ -7,7 +7,8 @@
         return false;
       }
       InMemoryStackTraceElement e = (InMemoryStackTraceElement) obj;
-      return e.declaringClass.equals(declaringClass) && e.lineNumber == lineNumber && 
-          methodName.equals(e.methodName);
+      return e.declaringClass.equals(declaringClass)
+          && e.lineNumber == lineNumber
+          && methodName.equals(e.methodName);
     }
 

@@ -2,10 +2,10 @@
     assertEquals(actual.toString(), 2, actual.size());
     Dependency<?> dDep = null;
     Dependency<?> iDep = null;
-    for(Dependency<?> dep : actual) {
-      if(dep.getKey().equals(Key.get(Double.class))) {
+    for (Dependency<?> dep : actual) {
+      if (dep.getKey().equals(Key.get(Double.class))) {
         dDep = dep;
-      } else if(dep.getKey().equals(Key.get(Integer.class))) {
+      } else if (dep.getKey().equals(Key.get(Integer.class))) {
         iDep = dep;
       }
     }
@@ -14,7 +14,7 @@
     assertEquals(TypeLiteral.get(owner), dDep.getInjectionPoint().getDeclaringType());
     assertEquals("d", dDep.getInjectionPoint().getMember().getName());
     assertEquals(-1, dDep.getParameterIndex());
-    
+
     assertEquals(TypeLiteral.get(owner), iDep.getInjectionPoint().getDeclaringType());
     assertEquals("injectMe", iDep.getInjectionPoint().getMember().getName());
     assertEquals(0, iDep.getParameterIndex());

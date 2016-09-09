@@ -15,7 +15,7 @@
                         });
               }
             });
-    
+
     assertEquals("A", bindInjector.getInstance(StringRemoteProvider.class).get());
   }
 

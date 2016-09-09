@@ -18,7 +18,7 @@
 
     // when you guicify the Guice-friendly, it's a no-op
     assertSame(guicified, Providers.guicify(guicified));
-    
+
     assertFalse(guicified instanceof HasDependencies);
   }
 

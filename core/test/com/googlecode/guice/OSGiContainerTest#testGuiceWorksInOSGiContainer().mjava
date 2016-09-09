@@ -1,8 +1,7 @@
   //This test may fail if it is not run from ant, or if it is not run after ant has
   //compiled & built jars. This is because the test is validating that the Guice jar
   //is properly setup to load in an OSGi container
-  public void testGuiceWorksInOSGiContainer()
-      throws Throwable {
+  public void testGuiceWorksInOSGiContainer() throws Throwable {
 
     // ask framework to clear cache on startup
     Properties properties = new Properties();
@@ -18,9 +17,9 @@
       BundleContext systemContext = framework.getBundleContext();
 
       // load all the necessary bundles and start the OSGi test bundle
-/*if[AOP]*/
+      /*if[AOP]*/
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/aopalliance.jar");
-/*end[AOP]*/
+      /*end[AOP]*/
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/javax.inject.jar");
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/guava.jar");
       systemContext.installBundle("reference:file:" + GUICE_JAR);

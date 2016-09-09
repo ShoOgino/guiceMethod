@@ -1,2 +1,3 @@
-    @Inject protected ProtectedInject() {}
+    @Inject
+    protected ProtectedInject() {}
 

@@ -1,4 +1,2 @@
-    Foo(String a, String b, String c) {
-      
-    }
+    Foo(String a, String b, String c) {}
 

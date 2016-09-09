@@ -1,10 +1,12 @@
   public void testDifferentOrderParameters() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        install(new FactoryModuleBuilder().build(OtherFactory.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new FactoryModuleBuilder().build(OtherFactory.class));
+              }
+            });
     OtherFactory factory = injector.getInstance(OtherFactory.class);
     Foo noIndex = factory.create("no index");
     assertEquals("no index", noIndex.name);

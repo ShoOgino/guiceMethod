@@ -9,8 +9,11 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "1) Injected method " + N.class.getName()
-          + ".setB() cannot declare type parameters of its own.");
+      assertContains(
+          expected.getMessage(),
+          "1) Injected method "
+              + N.class.getName()
+              + ".setB() cannot declare type parameters of its own.");
     }
   }
 

@@ -4,17 +4,23 @@
     final TypeLiteral<InsuranceFactory<Camaro>> camaroInsuranceFactoryType =
         new TypeLiteral<InsuranceFactory<Camaro>>() {};
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
-        bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
-        bind(mustangInsuranceFactoryType).toProvider(FactoryProvider.newFactory(
-            mustangInsuranceFactoryType, TypeLiteral.get(MustangInsurance.class)));
-        bind(camaroInsuranceFactoryType).toProvider(FactoryProvider.newFactory(
-            camaroInsuranceFactoryType, TypeLiteral.get(CamaroInsurance.class)));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
+                bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
+                bind(mustangInsuranceFactoryType)
+                    .toProvider(
+                        FactoryProvider.newFactory(
+                            mustangInsuranceFactoryType, TypeLiteral.get(MustangInsurance.class)));
+                bind(camaroInsuranceFactoryType)
+                    .toProvider(
+                        FactoryProvider.newFactory(
+                            camaroInsuranceFactoryType, TypeLiteral.get(CamaroInsurance.class)));
+              }
+            });
 
     InsuranceFactory<Mustang> mustangInsuranceFactory =
         injector.getInstance(Key.get(mustangInsuranceFactoryType));

@@ -1,9 +1,9 @@
   public final void testSpiOnElements() throws Exception {
     AssistedInjectSpiVisitor visitor = new AssistedInjectSpiVisitor();
     Integer count = 0;
-    for(Element element : Elements.getElements(new Module())) {
-      if(element instanceof Binding) {
-        assertEquals(count++, ((Binding<?>)element).acceptTargetVisitor(visitor));
+    for (Element element : Elements.getElements(new Module())) {
+      if (element instanceof Binding) {
+        assertEquals(count++, ((Binding<?>) element).acceptTargetVisitor(visitor));
       }
     }
     validateVisitor(visitor);

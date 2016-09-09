@@ -1,2 +1,3 @@
-    @Inject private PrivateInject() {}
+    @Inject
+    private PrivateInject() {}
 

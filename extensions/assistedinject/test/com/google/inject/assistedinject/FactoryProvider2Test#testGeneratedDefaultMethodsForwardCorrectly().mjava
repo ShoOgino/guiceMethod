@@ -2,15 +2,22 @@
   public void testGeneratedDefaultMethodsForwardCorrectly() {
     final Key<AbstractAssisted.Factory<ConcreteAssisted, String>> concreteKey =
         new Key<AbstractAssisted.Factory<ConcreteAssisted, String>>() {};
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        install(new FactoryModuleBuilder().build(ConcreteAssistedWithOverride.Factory.class));
-        install(new FactoryModuleBuilder().build(ConcreteAssistedWithOverride.Factory2.class));
-        install(new FactoryModuleBuilder().build(ConcreteAssistedWithoutOverride.Factory.class));
-        install(new FactoryModuleBuilder().build(Public.Factory.class));
-        install(new FactoryModuleBuilder().build(concreteKey));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(
+                    new FactoryModuleBuilder().build(ConcreteAssistedWithOverride.Factory.class));
+                install(
+                    new FactoryModuleBuilder().build(ConcreteAssistedWithOverride.Factory2.class));
+                install(
+                    new FactoryModuleBuilder()
+                        .build(ConcreteAssistedWithoutOverride.Factory.class));
+                install(new FactoryModuleBuilder().build(Public.Factory.class));
+                install(new FactoryModuleBuilder().build(concreteKey));
+              }
+            });
 
     ConcreteAssistedWithOverride.Factory factory1 =
         injector.getInstance(ConcreteAssistedWithOverride.Factory.class);
@@ -37,8 +44,7 @@
     AbstractAssisted.Factory<Public, String> factory4Abstract = factory4;
     factory4Abstract.create("foo");
 
-    AbstractAssisted.Factory<ConcreteAssisted, String> factory5 =
-        injector.getInstance(concreteKey);
+    AbstractAssisted.Factory<ConcreteAssisted, String> factory5 = injector.getInstance(concreteKey);
     factory5.create("foo");
   }
 

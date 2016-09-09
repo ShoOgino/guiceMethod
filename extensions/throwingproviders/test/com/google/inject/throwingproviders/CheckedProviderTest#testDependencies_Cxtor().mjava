@@ -1,19 +1,21 @@
   public void testDependencies_Cxtor() {
-    cxtorInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class).toInstance("Foo");
-        bind(Integer.class).toInstance(5);
-        bind(Double.class).toInstance(5d);
-        bind(Long.class).toInstance(5L);
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .providing(DependentMockFoo.class);
-      }
-    });
-    
+    cxtorInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("Foo");
+                bind(Integer.class).toInstance(5);
+                bind(Double.class).toInstance(5d);
+                bind(Long.class).toInstance(5L);
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .providing(DependentMockFoo.class);
+              }
+            });
+
     Key<?> key = Key.get(remoteProviderOfFoo);
-    
+
     // RemoteProvider<String> is dependent on Result.
     HasDependencies hasDependencies = (HasDependencies) cxtorInjector.getBinding(key);
     key = Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey();
@@ -23,17 +25,23 @@
     hasDependencies = (HasDependencies) cxtorInjector.getBinding(key);
     key = Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey();
     assertTrue(CheckedProvider.class.isAssignableFrom(key.getTypeLiteral().getRawType()));
-    
+
     // And the CheckedProvider is dependent on DependentMockFoo...
     hasDependencies = (HasDependencies) cxtorInjector.getBinding(key);
     key = Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey();
     assertEquals(DependentMockFoo.class, key.getTypeLiteral().getRawType());
-    
+
     // And DependentMockFoo is dependent on the goods.
-    hasDependencies = (HasDependencies) cxtorInjector.getBinding(key); 
-    Set<Key<?>> dependencyKeys = ImmutableSet.copyOf(
-        Iterables.transform(hasDependencies.getDependencies(), DEPENDENCY_TO_KEY));
-    assertEquals(ImmutableSet.<Key<?>>of(Key.get(String.class), Key.get(Integer.class),
-        Key.get(Long.class), Key.get(Double.class)), dependencyKeys);
-  }  
+    hasDependencies = (HasDependencies) cxtorInjector.getBinding(key);
+    Set<Key<?>> dependencyKeys =
+        ImmutableSet.copyOf(
+            Iterables.transform(hasDependencies.getDependencies(), DEPENDENCY_TO_KEY));
+    assertEquals(
+        ImmutableSet.<Key<?>>of(
+            Key.get(String.class),
+            Key.get(Integer.class),
+            Key.get(Long.class),
+            Key.get(Double.class)),
+        dependencyKeys);
+  }
 

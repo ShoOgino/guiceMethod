@@ -13,17 +13,19 @@
                     .to(DependentRemoteProvider.class);
               }
             });
-    
+
     HasDependencies hasDependencies =
-        (HasDependencies)bindInjector.getBinding(Key.get(remoteProviderOfString));
-    hasDependencies = 
-        (HasDependencies)bindInjector.getBinding(
-            Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey());
+        (HasDependencies) bindInjector.getBinding(Key.get(remoteProviderOfString));
+    hasDependencies =
+        (HasDependencies)
+            bindInjector.getBinding(
+                Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey());
     // Make sure that that is dependent on DependentRemoteProvider.
-    assertEquals(Dependency.get(Key.get(DependentRemoteProvider.class)), 
+    assertEquals(
+        Dependency.get(Key.get(DependentRemoteProvider.class)),
         Iterables.getOnlyElement(hasDependencies.getDependencies()));
     // And make sure DependentRemoteProvider has the proper dependencies.
-    hasDependencies = (HasDependencies)bindInjector.getBinding(DependentRemoteProvider.class);
+    hasDependencies = (HasDependencies) bindInjector.getBinding(DependentRemoteProvider.class);
     Set<Key<?>> dependencyKeys =
         ImmutableSet.copyOf(
             Iterables.transform(
@@ -34,7 +36,12 @@
                     return from.getKey();
                   }
                 }));
-    assertEquals(ImmutableSet.<Key<?>>of(Key.get(String.class), Key.get(Integer.class),
-        Key.get(Long.class), Key.get(Double.class)), dependencyKeys);
+    assertEquals(
+        ImmutableSet.<Key<?>>of(
+            Key.get(String.class),
+            Key.get(Integer.class),
+            Key.get(Long.class),
+            Key.get(Double.class)),
+        dependencyKeys);
   }
 

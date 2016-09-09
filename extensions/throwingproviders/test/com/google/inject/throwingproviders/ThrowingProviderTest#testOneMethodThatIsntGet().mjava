@@ -14,9 +14,11 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(OneNoneGetMethod.class.getName() 
-          + " may not declare any new methods, but declared " + Classes.toString(OneNoneGetMethod.class.getDeclaredMethods()[0]),
+    } catch (CreationException ce) {
+      assertEquals(
+          OneNoneGetMethod.class.getName()
+              + " may not declare any new methods, but declared "
+              + Classes.toString(OneNoneGetMethod.class.getDeclaredMethods()[0]),
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

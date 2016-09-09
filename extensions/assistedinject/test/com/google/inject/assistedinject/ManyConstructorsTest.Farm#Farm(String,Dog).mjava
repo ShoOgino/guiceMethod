@@ -1,4 +1,5 @@
-    @AssistedInject Farm(@Assisted String pop, Dog dog) {
+    @AssistedInject
+    Farm(@Assisted String pop, Dog dog) {
       this.pop = pop;
     }
 

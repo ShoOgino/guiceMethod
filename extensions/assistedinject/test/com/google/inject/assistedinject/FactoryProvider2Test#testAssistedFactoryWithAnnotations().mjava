@@ -1,13 +1,15 @@
   public void testAssistedFactoryWithAnnotations() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(int.class).annotatedWith(Names.named("horsePower")).toInstance(250);
-        bind(int.class).annotatedWith(Names.named("modelYear")).toInstance(1984);
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, Camaro.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(int.class).annotatedWith(Names.named("horsePower")).toInstance(250);
+                bind(int.class).annotatedWith(Names.named("modelYear")).toInstance(1984);
+                bind(ColoredCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Camaro.class));
+              }
+            });
 
     ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
 

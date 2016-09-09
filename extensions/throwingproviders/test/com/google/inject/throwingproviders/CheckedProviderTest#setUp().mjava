@@ -4,65 +4,68 @@
     MockFoo.nextToReturn = null;
     AnotherMockFoo.nextToThrow = null;
     AnotherMockFoo.nextToReturn = null;
-    
-    bindInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .to(mockRemoteProvider)
-            .in(testScope);
 
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .annotatedWith(NotExceptionScoping.class)
-            .scopeExceptions(false)
-            .to(mockRemoteProvider)
-            .in(testScope);
+    bindInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .to(mockRemoteProvider)
+                    .in(testScope);
 
-      }
-    });  
-    
-    providesInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-       install(ThrowingProviderBinder.forModule(this));
-       bindScope(TestScope.Scoped.class, testScope);
-      }
-      
-      @SuppressWarnings("unused")
-      @CheckedProvides(RemoteProvider.class)
-      @TestScope.Scoped
-      Foo throwOrGet() throws RemoteException, BindException {
-        return mockRemoteProvider.get();
-      }
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .annotatedWith(NotExceptionScoping.class)
+                    .scopeExceptions(false)
+                    .to(mockRemoteProvider)
+                    .in(testScope);
+              }
+            });
 
-      @SuppressWarnings("unused")
-      @CheckedProvides(value = RemoteProvider.class, scopeExceptions = false)
-      @NotExceptionScoping
-      @TestScope.Scoped
-      Foo notExceptionScopingThrowOrGet() throws RemoteException, BindException {
-        return mockRemoteProvider.get();
-      }    
-      
-    });
-    
-    cxtorInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-          .bind(RemoteProvider.class, Foo.class)
-          .providing(MockFoo.class)
-          .in(testScope);
+    providesInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(ThrowingProviderBinder.forModule(this));
+                bindScope(TestScope.Scoped.class, testScope);
+              }
 
-        ThrowingProviderBinder.create(binder())
-          .bind(RemoteProvider.class, Foo.class)
-          .annotatedWith(NotExceptionScoping.class)
-          .scopeExceptions(false)
-          .providing(MockFoo.class)
-          .in(testScope);
-        
-      }
-    });
+              @SuppressWarnings("unused")
+              @CheckedProvides(RemoteProvider.class)
+              @TestScope.Scoped
+              Foo throwOrGet() throws RemoteException, BindException {
+                return mockRemoteProvider.get();
+              }
+
+              @SuppressWarnings("unused")
+              @CheckedProvides(value = RemoteProvider.class, scopeExceptions = false)
+              @NotExceptionScoping
+              @TestScope.Scoped
+              Foo notExceptionScopingThrowOrGet() throws RemoteException, BindException {
+                return mockRemoteProvider.get();
+              }
+            });
+
+    cxtorInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .providing(MockFoo.class)
+                    .in(testScope);
+
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .annotatedWith(NotExceptionScoping.class)
+                    .scopeExceptions(false)
+                    .providing(MockFoo.class)
+                    .in(testScope);
+              }
+            });
   }
 

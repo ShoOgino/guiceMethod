@@ -1,2 +1,3 @@
-      @Override ConcreteAssistedWithOverride create(String string);
+      @Override
+      ConcreteAssistedWithOverride create(String string);
 

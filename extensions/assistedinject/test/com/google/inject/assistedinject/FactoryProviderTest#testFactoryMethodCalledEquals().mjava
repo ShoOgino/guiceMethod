@@ -1,12 +1,15 @@
   public void testFactoryMethodCalledEquals() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Double.class).toInstance(0.01d);
-        bind(Equals.Factory.class).toProvider(
-            FactoryProvider.newFactory(Equals.Factory.class, Equals.Impl.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Double.class).toInstance(0.01d);
+                bind(Equals.Factory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(Equals.Factory.class, Equals.Impl.class));
+              }
+            });
     Equals.Factory equalsFactory = injector.getInstance(Equals.Factory.class);
     Equals.Impl shallowEquals = (Impl) equalsFactory.equals(ComparisonMethod.SHALLOW);
     assertEquals(ComparisonMethod.SHALLOW, shallowEquals.comparisonMethod);

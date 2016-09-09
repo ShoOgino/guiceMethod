@@ -1,4 +1,3 @@
     @ThrowingInject
-    public ProvisionExceptionFoo(Unscoped1 a, Unscoped2 b) {
-    }
+    public ProvisionExceptionFoo(Unscoped1 a, Unscoped2 b) {}
 

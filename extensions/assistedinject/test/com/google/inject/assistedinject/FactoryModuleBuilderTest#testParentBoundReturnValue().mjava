@@ -1,13 +1,17 @@
   public void testParentBoundReturnValue() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(Car.class).to(Golf.class);
-        bind(Double.class).toInstance(5.0d);
-        install(new FactoryModuleBuilder()
-            .implement(Car.class, Mustang.class)
-            .build(ColoredCarFactory.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Car.class).to(Golf.class);
+                bind(Double.class).toInstance(5.0d);
+                install(
+                    new FactoryModuleBuilder()
+                        .implement(Car.class, Mustang.class)
+                        .build(ColoredCarFactory.class));
+              }
+            });
 
     ColoredCarFactory factory = injector.getInstance(ColoredCarFactory.class);
     assertTrue(factory.create(Color.RED) instanceof Mustang);

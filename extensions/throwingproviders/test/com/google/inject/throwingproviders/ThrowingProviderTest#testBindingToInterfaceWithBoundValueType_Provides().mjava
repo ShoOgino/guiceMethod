@@ -13,7 +13,7 @@
                 return "A";
               }
             });
-    
+
     assertEquals("A", providesInjector.getInstance(StringRemoteProvider.class).get());
   }
 

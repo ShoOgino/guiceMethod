@@ -1,12 +1,14 @@
   public void testFactoryWithMultipleMethods() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(float.class).toInstance(140f);
-        bind(SummerCarFactory.class).toProvider(
-            FactoryProvider.newFactory(SummerCarFactory.class, Corvette.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(float.class).toInstance(140f);
+                bind(SummerCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(SummerCarFactory.class, Corvette.class));
+              }
+            });
 
     SummerCarFactory carFactory = injector.getInstance(SummerCarFactory.class);
 

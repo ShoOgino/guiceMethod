@@ -1,4 +1,5 @@
-    @Inject CatWithAName(@Assisted String owner, @Named("catName2") String name) {
+    @Inject
+    CatWithAName(@Assisted String owner, @Named("catName2") String name) {
       super(owner);
     }
 

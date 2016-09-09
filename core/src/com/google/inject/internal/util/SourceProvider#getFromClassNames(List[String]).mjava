@@ -1,6 +1,4 @@
-  /**
-   * Returns the non-skipped module class name.
-   */
+  /** Returns the non-skipped module class name. */
   public Object getFromClassNames(List<String> moduleClassNames) {
     Preconditions.checkNotNull(moduleClassNames, "The list of module class names cannot be null.");
     for (final String moduleClassName : moduleClassNames) {

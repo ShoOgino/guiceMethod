@@ -1,2 +1,3 @@
-    @AssistedInject StrangeCat(@Assisted String owner) {}
+    @AssistedInject
+    StrangeCat(@Assisted String owner) {}
 

@@ -4,10 +4,11 @@
     if (cached != null) {
       return cached;
     }
-    inMemoryStackTraceElement = new InMemoryStackTraceElement(
-        weakIntern(inMemoryStackTraceElement.getClassName()), 
-        weakIntern(inMemoryStackTraceElement.getMethodName()), 
-        inMemoryStackTraceElement.getLineNumber());
+    inMemoryStackTraceElement =
+        new InMemoryStackTraceElement(
+            weakIntern(inMemoryStackTraceElement.getClassName()),
+            weakIntern(inMemoryStackTraceElement.getMethodName()),
+            inMemoryStackTraceElement.getLineNumber());
     elementCache.put(inMemoryStackTraceElement, inMemoryStackTraceElement);
     return inMemoryStackTraceElement;
   }

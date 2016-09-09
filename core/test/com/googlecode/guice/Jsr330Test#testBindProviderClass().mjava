@@ -1,8 +1,7 @@
   /**
-   * This test verifies that we can compile bindings to provider instances
-   * whose compile-time type implements javax.inject.Provider but not
-   * com.google.inject.Provider. For binary compatibility, we don't (and won't)
-   * support binding to instances of javax.inject.Provider.
+   * This test verifies that we can compile bindings to provider instances whose compile-time type
+   * implements javax.inject.Provider but not com.google.inject.Provider. For binary compatibility,
+   * we don't (and won't) support binding to instances of javax.inject.Provider.
    */
   public void testBindProviderClass() {
     Injector injector =
@@ -18,7 +17,7 @@
                     .toProvider(TypeLiteral.get(BProvider.class));
               }
             });
-    
+
     injector.getInstance(Key.get(B.class));
     injector.getInstance(Key.get(B.class, Names.named("1")));
     injector.getInstance(Key.get(B.class, Names.named("2")));

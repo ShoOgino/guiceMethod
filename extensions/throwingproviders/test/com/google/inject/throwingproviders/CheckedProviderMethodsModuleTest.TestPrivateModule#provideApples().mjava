@@ -1,4 +1,6 @@
-    @CheckedProvides(RpcProvider.class) @Named("fruit") @Exposed
+    @CheckedProvides(RpcProvider.class)
+    @Named("fruit")
+    @Exposed
     String provideApples() {
       return "apple";
     }

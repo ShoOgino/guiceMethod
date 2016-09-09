@@ -1,2 +1,3 @@
-    @Inject public PublicUserOfPackagePrivate(PackagePrivateInterface ppi) {}
+    @Inject
+    public PublicUserOfPackagePrivate(PackagePrivateInterface ppi) {}
 

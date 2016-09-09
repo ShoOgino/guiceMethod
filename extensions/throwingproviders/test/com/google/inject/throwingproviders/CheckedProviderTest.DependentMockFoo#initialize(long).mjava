@@ -1,2 +1,3 @@
-    @Inject void initialize(long foo) {}
+    @Inject
+    void initialize(long foo) {}
 

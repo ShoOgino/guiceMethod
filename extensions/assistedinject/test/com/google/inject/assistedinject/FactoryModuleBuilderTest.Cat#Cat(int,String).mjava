@@ -1,2 +1,3 @@
-    @AssistedInject Cat(@Assisted int a, @Named("cat2") String b) {}
+    @AssistedInject
+    Cat(@Assisted int a, @Named("cat2") String b) {}
 

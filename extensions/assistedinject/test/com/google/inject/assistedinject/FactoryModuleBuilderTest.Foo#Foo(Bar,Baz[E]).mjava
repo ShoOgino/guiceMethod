@@ -1,3 +1,4 @@
     @SuppressWarnings("unused")
-    @Inject Foo(@Assisted Bar bar, Baz<E> baz) {}
+    @Inject
+    Foo(@Assisted Bar bar, Baz<E> baz) {}
 

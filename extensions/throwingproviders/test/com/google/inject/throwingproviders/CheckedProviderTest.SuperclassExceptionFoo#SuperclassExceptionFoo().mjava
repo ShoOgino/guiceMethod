@@ -1,5 +1,4 @@
     @SuppressWarnings("unused")
     @ThrowingInject
-    public SuperclassExceptionFoo() throws IOException {
-    }
+    public SuperclassExceptionFoo() throws IOException {}
 

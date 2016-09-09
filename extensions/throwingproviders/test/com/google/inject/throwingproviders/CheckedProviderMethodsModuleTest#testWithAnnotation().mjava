@@ -1,8 +1,8 @@
   public void testWithAnnotation() throws BindException, RemoteException {
     TestModule testModule = new TestModule();
     Injector injector = Guice.createInjector(testModule);
-    RpcProvider<Long> provider = injector
-        .getInstance(Key.get(rpcProviderOfLong, TestAnnotation.class));
-    assertEquals((Long)0xffL, provider.get());
+    RpcProvider<Long> provider =
+        injector.getInstance(Key.get(rpcProviderOfLong, TestAnnotation.class));
+    assertEquals((Long) 0xffL, provider.get());
   }
 

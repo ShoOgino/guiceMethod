@@ -1,4 +1,3 @@
-      public void visitLocalVariable(String name, String desc, String signature,
-          Label start, Label end, int index) {
-      }
+      public void visitLocalVariable(
+          String name, String desc, String signature, Label start, Label end, int index) {}
 

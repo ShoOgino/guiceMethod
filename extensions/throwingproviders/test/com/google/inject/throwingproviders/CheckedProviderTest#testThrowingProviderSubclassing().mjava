@@ -2,16 +2,17 @@
     final SubMockRemoteProvider aProvider = new SubMockRemoteProvider();
     aProvider.setNextToReturn(new SimpleFoo("A"));
 
-    bindInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .to(aProvider);
-      }
-    });
+    bindInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .to(aProvider);
+              }
+            });
 
-    assertEquals("A",
-        bindInjector.getInstance(Key.get(remoteProviderOfFoo)).get().s());
+    assertEquals("A", bindInjector.getInstance(Key.get(remoteProviderOfFoo)).get().s());
   }
 

@@ -1,7 +1,9 @@
       @Override
       public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-        if (opcode == Opcodes.PUTFIELD && LineNumberReader.this.name.equals(owner)
-            && !lines.containsKey(name) && line != -1) {
+        if (opcode == Opcodes.PUTFIELD
+            && LineNumberReader.this.name.equals(owner)
+            && !lines.containsKey(name)
+            && line != -1) {
           lines.put(name, line);
         }
       }

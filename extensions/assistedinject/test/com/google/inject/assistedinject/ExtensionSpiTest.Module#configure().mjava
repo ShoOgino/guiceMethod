@@ -4,9 +4,10 @@
       bind(String.class).annotatedWith(named("catName2")).toInstance("kitty2");
       bind(String.class).annotatedWith(named("petName")).toInstance("pussy");
       bind(Integer.class).annotatedWith(named("age")).toInstance(12);
-      install(new FactoryModuleBuilder()
-        .implement(Animal.class, StrangeCat.class)
-        .implement(Animal.class, named("SimpleCat"), SimpleCat.class)
-        .build(AnimalFactory.class));
+      install(
+          new FactoryModuleBuilder()
+              .implement(Animal.class, StrangeCat.class)
+              .implement(Animal.class, named("SimpleCat"), SimpleCat.class)
+              .build(AnimalFactory.class));
     }
 

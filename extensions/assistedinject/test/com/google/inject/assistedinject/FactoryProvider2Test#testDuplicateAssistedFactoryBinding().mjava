@@ -1,14 +1,16 @@
   public void testDuplicateAssistedFactoryBinding() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Double.class).toInstance(5.0d);
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Double.class).toInstance(5.0d);
+                bind(ColoredCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+                bind(ColoredCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+              }
+            });
     ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
 
     Mustang blueMustang = (Mustang) carFactory.create(Color.BLUE);

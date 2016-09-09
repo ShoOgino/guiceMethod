@@ -6,7 +6,7 @@
     Preconditions.checkNotNull(stackTraceElements, "The stack trace elements cannot be null.");
     for (final StackTraceElement element : stackTraceElements) {
       String className = element.getClassName();
-      
+
       if (!shouldBeSkipped(className)) {
         return element;
       }
