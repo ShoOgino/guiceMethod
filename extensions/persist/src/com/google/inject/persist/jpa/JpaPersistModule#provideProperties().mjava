@@ -1,4 +1,6 @@
-  @Provides @Jpa Map<?, ?> provideProperties() {
+  @Provides
+  @Jpa
+  Map<?, ?> provideProperties() {
     return properties;
   }
 

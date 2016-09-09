@@ -1,7 +1,7 @@
-public void testClient() {
-  MockService mock = new MockService();
-  Client client = new Client(mock);
-  client.go();
-  Assert.assertTrue(mock.isGone());
-}
+  public void testClient() {
+    MockService mock = new MockService();
+    Client client = new Client(mock);
+    client.go();
+    Assert.assertTrue(mock.isGone());
+  }
 

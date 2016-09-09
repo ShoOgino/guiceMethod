@@ -1,4 +1,4 @@
-  public static Service getInstance() {
-    return service;
-  }
+    public static Service getInstance() {
+      return service;
+    }
 

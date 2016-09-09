@@ -32,14 +32,12 @@
       // Validate number of parameters.
       Type[] parameterTypes = setter.getGenericParameterTypes();
       if (parameterTypes.length != 1) {
-        sourced.addError("%s.%s() must take one argument.",
-            setterName, type.getName());
+        sourced.addError("%s.%s() must take one argument.", setterName, type.getName());
         return;
       }
 
       // Add property descriptor to builder.
       Provider<?> provider = sourced.getProvider(Key.get(parameterTypes[0]));
-      beanBuilder.properties.add(
-          new Property(setter, provider));
+      beanBuilder.properties.add(new Property(setter, provider));
     }
 

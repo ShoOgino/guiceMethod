@@ -1,11 +1,9 @@
     void setOn(Object o) {
       try {
         setter.invoke(o, provider.get());
-      }
-      catch (IllegalAccessException e) {
+      } catch (IllegalAccessException e) {
         throw new RuntimeException(e);
-      }
-      catch (InvocationTargetException e) {
+      } catch (InvocationTargetException e) {
         throw new RuntimeException(e);
       }
     }

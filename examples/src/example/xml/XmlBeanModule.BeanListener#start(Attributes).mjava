@@ -13,8 +13,7 @@
       Class<?> type;
       try {
         type = Class.forName(typeString);
-      }
-      catch (ClassNotFoundException e) {
+      } catch (ClassNotFoundException e) {
         sourced.addError(e);
         return;
       }
@@ -22,8 +21,7 @@
       // Look for a no-arg constructor.
       try {
         type.getConstructor();
-      }
-      catch (NoSuchMethodException e) {
+      } catch (NoSuchMethodException e) {
         sourced.addError("%s doesn't have a no-arg constructor.");
         return;
       }

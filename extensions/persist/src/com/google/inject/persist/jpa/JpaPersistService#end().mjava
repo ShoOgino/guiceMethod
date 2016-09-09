@@ -9,8 +9,7 @@
 
     try {
       em.close();
-    }
-    finally {
+    } finally {
       entityManager.remove();
     }
   }

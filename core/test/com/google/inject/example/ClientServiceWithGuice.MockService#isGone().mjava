@@ -1,4 +1,4 @@
-  public boolean isGone() {
-    return gone;
-  }
+    public boolean isGone() {
+      return gone;
+    }
 

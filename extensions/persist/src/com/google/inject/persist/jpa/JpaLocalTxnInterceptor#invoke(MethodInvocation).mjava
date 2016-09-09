@@ -44,7 +44,7 @@
       txn.commit();
     } finally {
       //close the em if necessary
-      if (null != didWeStartWork.get() ) {
+      if (null != didWeStartWork.get()) {
         didWeStartWork.remove();
         unitOfWork.end();
       }

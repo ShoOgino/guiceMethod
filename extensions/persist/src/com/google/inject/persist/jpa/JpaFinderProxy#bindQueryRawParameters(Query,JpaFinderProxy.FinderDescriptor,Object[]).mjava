@@ -1,5 +1,5 @@
-  private void bindQueryRawParameters(Query jpaQuery,
-      JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
+  private void bindQueryRawParameters(
+      Query jpaQuery, JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
     for (int i = 0, index = 1; i < arguments.length; i++) {
       Object argument = arguments[i];
       Object annotation = descriptor.parameterAnnotations[i];

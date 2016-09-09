@@ -1,5 +1,5 @@
-  private void bindQueryNamedParameters(Query jpaQuery,
-      JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
+  private void bindQueryNamedParameters(
+      Query jpaQuery, JpaFinderProxy.FinderDescriptor descriptor, Object[] arguments) {
     for (int i = 0; i < arguments.length; i++) {
       Object argument = arguments[i];
       Object annotation = descriptor.parameterAnnotations[i];
@@ -7,7 +7,7 @@
       if (null == annotation)
       //noinspection UnnecessaryContinue
       {
-        continue;   //skip param as it's not bindable
+        continue; //skip param as it's not bindable
       } else if (annotation instanceof Named) {
         Named named = (Named) annotation;
         jpaQuery.setParameter(named.value(), argument);

@@ -1,4 +1,5 @@
-  @Override protected void configurePersistence() {
+  @Override
+  protected void configurePersistence() {
     bindConstant().annotatedWith(Jpa.class).to(jpaUnit);
 
     bind(JpaPersistService.class).in(Singleton.class);

@@ -51,9 +51,12 @@
     requestInjection(finderInvoker);
 
     @SuppressWarnings("unchecked") // Proxy must produce instance of type given.
-    T proxy = (T) Proxy
-        .newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[] { iface },
-            finderInvoker);
+    T proxy =
+        (T)
+            Proxy.newProxyInstance(
+                Thread.currentThread().getContextClassLoader(),
+                new Class<?>[] {iface},
+                finderInvoker);
 
     bind(iface).toInstance(proxy);
   }
