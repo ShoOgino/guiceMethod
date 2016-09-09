@@ -4,10 +4,10 @@
    * work for MultibinderBindings retrieved from an injector and {@link Elements#getElements}.
    * Usually this is only necessary if you are working with elements retrieved from modules (without
    * an Injector), otherwise {@link #getElements} and {@link #permitsDuplicates} are better options.
-   * <p>
-   * If you need to introspect the details of the set, such as the values or if it permits
-   * duplicates, it is necessary to pass the elements through an Injector and use
-   * {@link #getElements()} and {@link #permitsDuplicates()}.
+   *
+   * <p>If you need to introspect the details of the set, such as the values or if it permits
+   * duplicates, it is necessary to pass the elements through an Injector and use {@link
+   * #getElements()} and {@link #permitsDuplicates()}.
    */
   boolean containsElement(Element element);
 

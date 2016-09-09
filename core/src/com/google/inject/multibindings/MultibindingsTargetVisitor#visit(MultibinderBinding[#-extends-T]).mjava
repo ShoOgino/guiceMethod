@@ -1,5 +1,3 @@
-  /**
-   * Visits a binding created through {@link Multibinder}.
-   */
+  /** Visits a binding created through {@link Multibinder}. */
   V visit(MultibinderBinding<? extends T> multibinding);
 

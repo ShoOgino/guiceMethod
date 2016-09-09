@@ -2,8 +2,8 @@
    * Returns a new multibinder that collects instances of {@code type} in a {@link Set} that is
    * itself bound with {@code annotationType}.
    */
-  public static <T> Multibinder<T> newSetBinder(Binder binder, TypeLiteral<T> type,
-      Class<? extends Annotation> annotationType) {
+  public static <T> Multibinder<T> newSetBinder(
+      Binder binder, TypeLiteral<T> type, Class<? extends Annotation> annotationType) {
     return newSetBinder(binder, Key.get(type, annotationType));
   }
 

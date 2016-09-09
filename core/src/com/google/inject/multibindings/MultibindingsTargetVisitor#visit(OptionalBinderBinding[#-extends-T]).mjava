@@ -1,6 +1,6 @@
   /**
    * Visits a binding created through {@link OptionalBinder}.
-   * 
+   *
    * @since 4.0
    */
   V visit(OptionalBinderBinding<? extends T> optionalbinding);

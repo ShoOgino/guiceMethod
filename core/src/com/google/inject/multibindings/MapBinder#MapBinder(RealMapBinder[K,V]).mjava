@@ -1,4 +1,4 @@
-  private MapBinder(RealMapBinder<K,V> delegate) {
+  private MapBinder(RealMapBinder<K, V> delegate) {
     this.delegate = delegate;
   }
 
