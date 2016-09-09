@@ -1,6 +1,7 @@
   private static void assertInjectionsSucceed(Module module) {
     Injector injector = Guice.createInjector(module);
-    assertInjected(injector.getInstance(GuiceNamedClient.class), injector
-        .getInstance(Jsr330NamedClient.class));
+    assertInjected(
+        injector.getInstance(GuiceNamedClient.class),
+        injector.getInstance(Jsr330NamedClient.class));
   }
 

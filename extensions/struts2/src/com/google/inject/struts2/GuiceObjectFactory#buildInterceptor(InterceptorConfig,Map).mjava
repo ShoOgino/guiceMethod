@@ -10,8 +10,8 @@
       throw new RuntimeException(e);
     }
 
-    ProvidedInterceptor providedInterceptor = new ProvidedInterceptor(
-        interceptorConfig, interceptorRefParams, interceptorClass);
+    ProvidedInterceptor providedInterceptor =
+        new ProvidedInterceptor(interceptorConfig, interceptorRefParams, interceptorClass);
     interceptors.add(providedInterceptor);
     return providedInterceptor;
   }

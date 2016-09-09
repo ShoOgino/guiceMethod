@@ -1,6 +1,4 @@
-  /**
-   * Returns a matcher which matches objects equal to the given object.
-   */
+  /** Returns a matcher which matches objects equal to the given object. */
   public static Matcher<Object> only(Object value) {
     return new Only(value);
   }

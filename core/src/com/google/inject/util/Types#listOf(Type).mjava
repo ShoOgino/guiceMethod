@@ -1,6 +1,5 @@
   /**
-   * Returns a type modelling a {@link List} whose elements are of type
-   * {@code elementType}.
+   * Returns a type modelling a {@link List} whose elements are of type {@code elementType}.
    *
    * @return a {@link java.io.Serializable serializable} parameterized type.
    */

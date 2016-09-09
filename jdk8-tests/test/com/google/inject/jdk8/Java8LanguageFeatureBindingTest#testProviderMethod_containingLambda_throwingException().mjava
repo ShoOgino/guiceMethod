@@ -1,17 +1,19 @@
   public void testProviderMethod_containingLambda_throwingException() throws Exception {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides
-      public Callable<String> provideCallable() {
-        if (Boolean.parseBoolean("false")) { // avoid dead code warnings
-          return () -> "foo";
-        } else {
-          throw new RuntimeException("foo");
-        }
-      }
-    });
+              @Provides
+              public Callable<String> provideCallable() {
+                if (Boolean.parseBoolean("false")) { // avoid dead code warnings
+                  return () -> "foo";
+                } else {
+                  throw new RuntimeException("foo");
+                }
+              }
+            });
 
     try {
       injector.getInstance(new Key<Callable<String>>() {});

@@ -1,7 +1,12 @@
   private static Module getGuiceBindingProviderMethodModule() {
     return new AbstractModule() {
-      @Override protected void configure() {}
-      @SuppressWarnings("unused") @Provides @Named("foo") String provideFoo() {
+      @Override
+      protected void configure() {}
+
+      @SuppressWarnings("unused")
+      @Provides
+      @Named("foo")
+      String provideFoo() {
         return "bar";
       }
     };

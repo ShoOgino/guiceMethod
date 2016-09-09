@@ -1,12 +1,14 @@
   public void testInterceptedDefaultMethod() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.annotatedWith(InterceptMe.class),
-            interceptor);
-        bind(Foo.class).to(NonOverridingFoo.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(
+                    Matchers.any(), Matchers.annotatedWith(InterceptMe.class), interceptor);
+                bind(Foo.class).to(NonOverridingFoo.class);
+              }
+            });
 
     Foo foo = injector.getInstance(Foo.class);
     assertEquals("Foo", foo.defaultMethod());

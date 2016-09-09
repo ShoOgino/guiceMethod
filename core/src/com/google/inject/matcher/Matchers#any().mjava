@@ -1,6 +1,4 @@
-  /**
-   * Returns a matcher which matches any input.
-   */
+  /** Returns a matcher which matches any input. */
   public static Matcher<Object> any() {
     return ANY;
   }

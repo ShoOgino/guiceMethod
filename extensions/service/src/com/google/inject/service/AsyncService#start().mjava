@@ -1,7 +1,7 @@
   @Override
-  public synchronized final Future<State> start() {
-    Preconditions.checkState(state != State.STOPPED,
-        "Cannot restart a service that has been stopped");
+  public final synchronized Future<State> start() {
+    Preconditions.checkState(
+        state != State.STOPPED, "Cannot restart a service that has been stopped");
 
     // Starts are idempotent.
     if (state == State.STARTED) {

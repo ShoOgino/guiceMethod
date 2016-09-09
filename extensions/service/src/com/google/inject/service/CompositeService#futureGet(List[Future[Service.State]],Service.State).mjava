@@ -1,5 +1,5 @@
-  private FutureTask<Service.State> futureGet(final List<Future<Service.State>> tasks,
-      final Service.State state) {
+  private FutureTask<Service.State> futureGet(
+      final List<Future<Service.State>> tasks, final Service.State state) {
     return new FutureTask<Service.State>(
         new Callable<Service.State>() {
           @Override

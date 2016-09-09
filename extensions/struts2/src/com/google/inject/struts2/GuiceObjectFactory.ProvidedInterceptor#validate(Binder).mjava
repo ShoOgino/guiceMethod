@@ -1,15 +1,17 @@
     void validate(Binder binder) {
       // TODO: Set source from Struts XML.
       if (hasScope(interceptorClass)) {
-        binder.addError("Scoping interceptors is not currently supported."
-            + " Please remove the scope annotation from "
-            + interceptorClass.getName() + ".");
+        binder.addError(
+            "Scoping interceptors is not currently supported."
+                + " Please remove the scope annotation from "
+                + interceptorClass.getName()
+                + ".");
       }
 
       // Make sure it implements Interceptor.
       if (!Interceptor.class.isAssignableFrom(interceptorClass)) {
-        binder.addError(interceptorClass.getName() + " must implement "
-          + Interceptor.class.getName() + ".");
+        binder.addError(
+            interceptorClass.getName() + " must implement " + Interceptor.class.getName() + ".");
       }
     }
 

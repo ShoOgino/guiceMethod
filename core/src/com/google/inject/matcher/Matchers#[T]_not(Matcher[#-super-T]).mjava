@@ -1,6 +1,4 @@
-  /**
-   * Inverts the given matcher.
-   */
+  /** Inverts the given matcher. */
   public static <T> Matcher<T> not(final Matcher<? super T> p) {
     return new Not<T>(p);
   }

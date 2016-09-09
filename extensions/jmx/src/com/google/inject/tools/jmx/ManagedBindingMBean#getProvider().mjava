@@ -1,5 +1,3 @@
-  /**
-   * Gets the provider to which this binding is bound.
-   */
+  /** Gets the provider to which this binding is bound. */
   String getProvider();
 

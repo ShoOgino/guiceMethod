@@ -1,6 +1,5 @@
   /**
-   * Returns an array type whose elements are all instances of
-   * {@code componentType}.
+   * Returns an array type whose elements are all instances of {@code componentType}.
    *
    * @return a {@link java.io.Serializable serializable} generic array type.
    */

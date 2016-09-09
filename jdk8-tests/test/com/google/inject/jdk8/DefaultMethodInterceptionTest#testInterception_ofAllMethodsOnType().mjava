@@ -1,11 +1,13 @@
   public void testInterception_ofAllMethodsOnType() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindInterceptor(Matchers.subclassesOf(Baz.class), Matchers.any(), interceptor);
-        bind(Baz.class).to(BazImpl.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(Matchers.subclassesOf(Baz.class), Matchers.any(), interceptor);
+                bind(Baz.class).to(BazImpl.class);
+              }
+            });
 
     Baz baz = injector.getInstance(Baz.class);
 

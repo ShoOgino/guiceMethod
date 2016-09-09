@@ -1,13 +1,15 @@
   public void testProviderMethod_returningLambda() throws Exception {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides
-      public Callable<String> provideCallable() {
-        return () -> "foo";
-      }
-    });
+              @Provides
+              public Callable<String> provideCallable() {
+                return () -> "foo";
+              }
+            });
 
     Callable<String> callable = injector.getInstance(new Key<Callable<String>>() {});
     assertEquals("foo", callable.call());

@@ -1,6 +1,7 @@
   private static Module moduleWithAnnotation(final Annotation annotation) {
     return new AbstractModule() {
-      @Override protected void configure() {
+      @Override
+      protected void configure() {
         bindConstant().annotatedWith(annotation).to("bar");
       }
     };

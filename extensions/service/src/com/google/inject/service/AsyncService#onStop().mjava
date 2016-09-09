@@ -1,9 +1,7 @@
   /**
-   * Called back when this service must shutdown. Typically occurs
-   * in a background thread. The result of this method is returned to the
-   * original caller of {@link Service#stop()} and can thus be used to
-   * return a status message after stop completes (or fails as the case
-   * may be).
+   * Called back when this service must shutdown. Typically occurs in a background thread. The
+   * result of this method is returned to the original caller of {@link Service#stop()} and can thus
+   * be used to return a status message after stop completes (or fails as the case may be).
    */
   protected abstract void onStop();
 

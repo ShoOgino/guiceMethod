@@ -1,5 +1,3 @@
-  /**
-   * Gets the binding key.
-   */
+  /** Gets the binding key. */
   String getKey();
 
