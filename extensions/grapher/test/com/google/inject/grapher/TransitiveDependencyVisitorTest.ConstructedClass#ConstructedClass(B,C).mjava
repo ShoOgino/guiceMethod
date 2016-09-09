@@ -1,2 +1,3 @@
-    @Inject ConstructedClass(B b, C c) {}
+    @Inject
+    ConstructedClass(B b, C c) {}
 

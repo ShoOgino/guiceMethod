@@ -1,5 +1,5 @@
   public void testDefensiveCopies() {
-    Type[] arguments = new Type[] { String.class, Integer.class };
+    Type[] arguments = new Type[] {String.class, Integer.class};
     ParameterizedType parameterizedType = Types.newParameterizedType(Map.class, arguments);
     arguments[0] = null;
     assertEquals(String.class, parameterizedType.getActualTypeArguments()[0]);

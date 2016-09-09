@@ -1,11 +1,14 @@
   public void testExposedBindingOverride() throws Exception {
-    Injector inj = Guice.createInjector(
-        Modules.override(new ExampleModule()).with(
-            new AbstractModule() {
-              @Override protected void configure() {
-                bind(RESULT_KEY).toInstance(OVERRIDDEN_RESULT);
-              }
-            }));
+    Injector inj =
+        Guice.createInjector(
+            Modules.override(new ExampleModule())
+                .with(
+                    new AbstractModule() {
+                      @Override
+                      protected void configure() {
+                        bind(RESULT_KEY).toInstance(OVERRIDDEN_RESULT);
+                      }
+                    }));
     assertEquals(inj.getInstance(RESULT_KEY), OVERRIDDEN_RESULT);
   }
 

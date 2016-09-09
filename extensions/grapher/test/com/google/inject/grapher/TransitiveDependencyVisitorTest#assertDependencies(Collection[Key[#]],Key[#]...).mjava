@@ -1,7 +1,7 @@
   private void assertDependencies(Collection<Key<?>> dependencies, Key<?>... keys) {
     assertNotNull("Dependencies should not be null", dependencies);
-    assertEquals("There should be " + keys.length + " dependencies",
-        keys.length, dependencies.size());
+    assertEquals(
+        "There should be " + keys.length + " dependencies", keys.length, dependencies.size());
 
     for (Key<?> key : keys) {
       assertTrue("Dependencies should contain " + key, dependencies.contains(key));

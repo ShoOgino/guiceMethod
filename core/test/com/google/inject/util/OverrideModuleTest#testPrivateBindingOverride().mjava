@@ -1,11 +1,14 @@
   public void testPrivateBindingOverride() throws Exception {
-    Injector inj = Guice.createInjector(
-        Modules.override(new ExampleModule()).with(
-            new AbstractModule() {
-              @Override protected void configure() {
-                bind(INPUT_KEY).toInstance(OVERRIDDEN_INPUT);
-              }
-            }));
+    Injector inj =
+        Guice.createInjector(
+            Modules.override(new ExampleModule())
+                .with(
+                    new AbstractModule() {
+                      @Override
+                      protected void configure() {
+                        bind(INPUT_KEY).toInstance(OVERRIDDEN_INPUT);
+                      }
+                    }));
     assertEquals(inj.getInstance(RESULT_KEY), OVERRIDDEN_RESULT);
   }
 

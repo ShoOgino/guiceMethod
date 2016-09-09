@@ -2,17 +2,20 @@
     final HashEqualsTester a = new HashEqualsTester();
     a.throwOnHashcode = true;
     a.equality = "test";
-    
+
     final HashEqualsTester b = new HashEqualsTester();
     b.throwOnHashcode = true;
     b.equality = "test";
-    Guice.createInjector(Modules.override(new AbstractModule() {
-      @Override
-      protected void configure() {
-       bind(String.class);
-       bind(HashEqualsTester.class).toInstance(a);
-       bind(HashEqualsTester.class).toInstance(b);
-      }
-    }).with());
+    Guice.createInjector(
+        Modules.override(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    bind(String.class);
+                    bind(HashEqualsTester.class).toInstance(a);
+                    bind(HashEqualsTester.class).toInstance(b);
+                  }
+                })
+            .with());
   }
 

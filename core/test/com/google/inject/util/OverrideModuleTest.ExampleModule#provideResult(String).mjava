@@ -1,4 +1,6 @@
-    @Provides @Exposed @Named(RESULT)
+    @Provides
+    @Exposed
+    @Named(RESULT)
     public String provideResult(@Named(PRIVATE_INPUT) String input) {
       return "Size: " + input.length();
     }

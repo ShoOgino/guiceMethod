@@ -1,8 +1,7 @@
   public void testVisitInstance_instanceHasDependencies() {
     Binding<?> binding = getBinding(Key.get(Interface.class), new HasDependenciesModule());
-    Collection<Key<?>> dependencies = visitor.visit(
-        (InstanceBinding<?>) binding);
-    
+    Collection<Key<?>> dependencies = visitor.visit((InstanceBinding<?>) binding);
+
     // Dependencies should only be on the stated
     // HasDependencies#getDependencies() values
     assertDependencies(dependencies, Key.get(G.class));

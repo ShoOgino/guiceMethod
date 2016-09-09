@@ -3,7 +3,7 @@
 
     Connector connector = new SelectChannelConnector();
     connector.setPort(8080);
-    server.setConnectors(new Connector[] { connector });
+    server.setConnectors(new Connector[] {connector});
 
     WebAppContext webapp = new WebAppContext("./root", "/example");
     server.addHandler(webapp);

@@ -1,14 +1,17 @@
   public void testTypeWithOwnerType() {
-    ParameterizedType actual = Types.newParameterizedTypeWithOwner(
-        TypesTest.class, Inner.class, Float.class, Double.class);
+    ParameterizedType actual =
+        Types.newParameterizedTypeWithOwner(
+            TypesTest.class, Inner.class, Float.class, Double.class);
     assertEquals(TypesTest.class, actual.getOwnerType());
     assertEqualsBothWays(innerFloatDouble, actual);
     // The JDK prints this out as:
     //     com.google.inject.util.TypesTest.com.google.inject.util.TypesTest$Inner<java.lang.Float, java.lang.Double>
     // and we think that's wrong, so the assertEquals comparison is worthless. :-(
-//    assertEquals(innerFloatDouble.toString(), actual.toString());
-    
+    //    assertEquals(innerFloatDouble.toString(), actual.toString());
+
     // We think the correct comparison is:
-    assertEquals("com.google.inject.util.TypesTest$Inner<java.lang.Float, java.lang.Double>", actual.toString());
+    assertEquals(
+        "com.google.inject.util.TypesTest$Inner<java.lang.Float, java.lang.Double>",
+        actual.toString());
   }
 

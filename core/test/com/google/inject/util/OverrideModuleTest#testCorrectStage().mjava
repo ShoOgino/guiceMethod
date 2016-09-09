@@ -1,20 +1,24 @@
   public void testCorrectStage() {
     final Stage stage = Stage.PRODUCTION;
-    Module module = Modules.override(new AbstractModule() {
-      @Override
-      protected void configure() {
-        if (currentStage() != Stage.PRODUCTION) {
-          addError("Wronge stage in overridden module:" + currentStage());
-        }
-      }
-    }).with(new AbstractModule() {
-      @Override
-      protected void configure() {
-        if (currentStage() != Stage.PRODUCTION) {
-          addError("Wronge stage in overriding module:" + currentStage());
-        }
-      }
-    });
+    Module module =
+        Modules.override(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    if (currentStage() != Stage.PRODUCTION) {
+                      addError("Wronge stage in overridden module:" + currentStage());
+                    }
+                  }
+                })
+            .with(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    if (currentStage() != Stage.PRODUCTION) {
+                      addError("Wronge stage in overriding module:" + currentStage());
+                    }
+                  }
+                });
     Guice.createInjector(stage, module);
   }
 

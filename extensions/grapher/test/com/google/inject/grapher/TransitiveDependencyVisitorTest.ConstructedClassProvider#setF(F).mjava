@@ -1,2 +1,3 @@
-    @Inject void setF(F f) {}
+    @Inject
+    void setF(F f) {}
 

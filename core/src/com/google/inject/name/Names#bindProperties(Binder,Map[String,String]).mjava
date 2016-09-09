@@ -1,7 +1,4 @@
-  /**
-   * Creates a constant binding to {@code @Named(key)} for each entry in
-   * {@code properties}.
-   */
+  /** Creates a constant binding to {@code @Named(key)} for each entry in {@code properties}. */
   public static void bindProperties(Binder binder, Map<String, String> properties) {
     binder = binder.skipSources(Names.class);
     for (Map.Entry<String, String> entry : properties.entrySet()) {

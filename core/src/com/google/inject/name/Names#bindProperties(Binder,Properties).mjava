@@ -1,7 +1,6 @@
   /**
-   * Creates a constant binding to {@code @Named(key)} for each property. This
-   * method binds all properties including those inherited from 
-   * {@link Properties#defaults defaults}.
+   * Creates a constant binding to {@code @Named(key)} for each property. This method binds all
+   * properties including those inherited from {@link Properties#defaults defaults}.
    */
   public static void bindProperties(Binder binder, Properties properties) {
     binder = binder.skipSources(Names.class);

@@ -1,4 +1,5 @@
-    @Inject void setValue(int value) {
+    @Inject
+    void setValue(int value) {
       this.value = value;
     }
 

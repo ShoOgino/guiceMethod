@@ -1,14 +1,20 @@
   public void testOverrideIsLazy() {
     final AtomicReference<String> value = new AtomicReference<String>("A");
-    Module overridden = Modules.override(new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).annotatedWith(named("original")).toInstance(value.get());
-      }
-    }).with(new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).annotatedWith(named("override")).toInstance(value.get());
-      }
-    });
+    Module overridden =
+        Modules.override(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    bind(String.class).annotatedWith(named("original")).toInstance(value.get());
+                  }
+                })
+            .with(
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    bind(String.class).annotatedWith(named("override")).toInstance(value.get());
+                  }
+                });
 
     // the value.get() call should be deferred until Guice.createInjector
     value.set("B");

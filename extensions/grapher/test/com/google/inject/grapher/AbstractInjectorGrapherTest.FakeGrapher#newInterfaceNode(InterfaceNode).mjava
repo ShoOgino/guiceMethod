@@ -1,4 +1,5 @@
-    @Override protected void newInterfaceNode(InterfaceNode node) {
+    @Override
+    protected void newInterfaceNode(InterfaceNode node) {
       assertFalse(nodes.contains(node));
       nodes.add(node);
     }

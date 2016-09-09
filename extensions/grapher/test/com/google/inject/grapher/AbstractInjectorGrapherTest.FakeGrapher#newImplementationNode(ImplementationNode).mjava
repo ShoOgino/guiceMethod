@@ -1,4 +1,5 @@
-    @Override protected void newImplementationNode(ImplementationNode node) {
+    @Override
+    protected void newImplementationNode(ImplementationNode node) {
       assertFalse(nodes.contains(node));
       nodes.add(node);
     }

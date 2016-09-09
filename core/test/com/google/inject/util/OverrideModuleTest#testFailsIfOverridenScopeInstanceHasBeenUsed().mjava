@@ -12,38 +12,46 @@
           }
         };
 
-    final Module original = new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(TestScopeAnnotation.class, scope);
-        bind(Date.class).in(scope);
-        bind(String.class).in(scope);
-      }
-    };
-    Module originalWrapper = new AbstractModule() {
-      @Override protected void configure() {
-        install(original);
-      }
-    };
+    final Module original =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindScope(TestScopeAnnotation.class, scope);
+            bind(Date.class).in(scope);
+            bind(String.class).in(scope);
+          }
+        };
+    Module originalWrapper =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(original);
+          }
+        };
 
-    Module replacements = new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(TestScopeAnnotation.class, new SingleUseScope());
-      }
-    };
+    Module replacements =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindScope(TestScopeAnnotation.class, new SingleUseScope());
+          }
+        };
 
     try {
       createInjector(Modules.override(originalWrapper).with(replacements));
       fail("Exception expected");
     } catch (CreationException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) The scope for @TestScopeAnnotation is bound directly and cannot be overridden.",
           "original binding at " + original.getClass().getName() + ".configure(",
           asModuleChain(originalWrapper.getClass(), original.getClass()),
           "bound directly at " + original.getClass().getName() + ".configure(",
           asModuleChain(originalWrapper.getClass(), original.getClass()),
           "bound directly at " + original.getClass().getName() + ".configure(",
-          asModuleChain(originalWrapper.getClass(), original.getClass()),          
-          "at ", replacements.getClass().getName() + ".configure(",
+          asModuleChain(originalWrapper.getClass(), original.getClass()),
+          "at ",
+          replacements.getClass().getName() + ".configure(",
           asModuleChain(Modules.OverrideModule.class, replacements.getClass()));
     }
   }

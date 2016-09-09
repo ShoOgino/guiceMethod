@@ -1,2 +1,3 @@
-    @Inject public A2(Provider<String> strProvider) {}
+    @Inject
+    public A2(Provider<String> strProvider) {}
 

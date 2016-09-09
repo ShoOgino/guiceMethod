@@ -1,8 +1,7 @@
   public void testVisitInstance() {
     Binding<?> binding = getBinding(Key.get(ConstructedClass.class), new InstanceModule());
-    Collection<Key<?>> dependencies = visitor.visit(
-        (InstanceBinding<?>) binding);
-    
+    Collection<Key<?>> dependencies = visitor.visit((InstanceBinding<?>) binding);
+
     // Dependencies will only be on the field- and method-injected classes.
     assertDependencies(dependencies, Key.get(A.class), Key.get(D.class));
   }

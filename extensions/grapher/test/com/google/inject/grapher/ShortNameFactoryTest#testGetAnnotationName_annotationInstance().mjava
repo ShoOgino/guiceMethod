@@ -1,6 +1,6 @@
   public void testGetAnnotationName_annotationInstance() throws Exception {
-    Key<?> key = Key.get(String.class,
-        Obj.class.getDeclaredField("field").getDeclaredAnnotations()[0]);
+    Key<?> key =
+        Key.get(String.class, Obj.class.getDeclaredField("field").getDeclaredAnnotations()[0]);
     assertEquals("@Annotated", nameFactory.getAnnotationName(key));
   }
 

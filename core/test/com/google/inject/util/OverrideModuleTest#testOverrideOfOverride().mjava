@@ -1,27 +1,33 @@
   public void testOverrideOfOverride() {
-    Module original = new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).toInstance("A1");
-        bind(key2).toInstance("A2");
-        bind(key3).toInstance("A3");
-      }
-    };
+    Module original =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(String.class).toInstance("A1");
+            bind(key2).toInstance("A2");
+            bind(key3).toInstance("A3");
+          }
+        };
 
-    Module replacements1 = new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).toInstance("B1");
-        bind(key2).toInstance("B2");
-      }
-    };
+    Module replacements1 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(String.class).toInstance("B1");
+            bind(key2).toInstance("B2");
+          }
+        };
 
     Module overrides = Modules.override(original).with(replacements1);
 
-    Module replacements2 = new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).toInstance("C1");
-        bind(key3).toInstance("C3");
-      }
-    };
+    Module replacements2 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(String.class).toInstance("C1");
+            bind(key3).toInstance("C3");
+          }
+        };
 
     Injector injector = createInjector(Modules.override(overrides).with(replacements2));
     assertEquals("C1", injector.getInstance(String.class));
