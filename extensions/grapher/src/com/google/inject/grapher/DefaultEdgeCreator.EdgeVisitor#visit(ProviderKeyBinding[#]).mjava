@@ -1,9 +1,13 @@
     /**
-     * Same as {@link #visit(LinkedKeyBinding)}, but the binding edge is
-     * {@link BindingEdge.Type#PROVIDER}.
+     * Same as {@link #visit(LinkedKeyBinding)}, but the binding edge is {@link
+     * BindingEdge.Type#PROVIDER}.
      */
-    @Override public Collection<Edge> visit(ProviderKeyBinding<?> binding) {
-      return ImmutableList.<Edge>of(new BindingEdge(NodeId.newTypeId(binding.getKey()),
-          NodeId.newTypeId(binding.getProviderKey()), BindingEdge.Type.PROVIDER));
+    @Override
+    public Collection<Edge> visit(ProviderKeyBinding<?> binding) {
+      return ImmutableList.<Edge>of(
+          new BindingEdge(
+              NodeId.newTypeId(binding.getKey()),
+              NodeId.newTypeId(binding.getProviderKey()),
+              BindingEdge.Type.PROVIDER));
     }
 

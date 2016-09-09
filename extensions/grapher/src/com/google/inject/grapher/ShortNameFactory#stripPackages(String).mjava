@@ -1,6 +1,6 @@
   /**
-   * Eliminates runs of lowercase characters and numbers separated by periods.
-   * Seems to remove packages from fully-qualified type names pretty well.
+   * Eliminates runs of lowercase characters and numbers separated by periods. Seems to remove
+   * packages from fully-qualified type names pretty well.
    */
   private String stripPackages(String str) {
     return str.replaceAll("(^|[< .\\(])([a-z0-9]+\\.)*", "$1");

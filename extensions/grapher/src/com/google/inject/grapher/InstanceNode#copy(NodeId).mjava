@@ -1,4 +1,5 @@
-  @Override public Node copy(NodeId id) {
+  @Override
+  public Node copy(NodeId id) {
     return new InstanceNode(id, getSource(), getInstance(), getMembers());
   }
 

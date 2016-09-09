@@ -1,4 +1,5 @@
-  @Override public final void graph(Injector injector) throws IOException {
+  @Override
+  public final void graph(Injector injector) throws IOException {
     graph(injector, rootKeySetCreator.getRootKeys(injector));
   }
 

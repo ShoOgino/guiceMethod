@@ -1,5 +1,11 @@
-  @Override public String toString() {
-    return "ImplementationNode{id=" + getId() + " source=" + getSource()
-        + " members=" + members + "}";
+  @Override
+  public String toString() {
+    return "ImplementationNode{id="
+        + getId()
+        + " source="
+        + getSource()
+        + " members="
+        + members
+        + "}";
   }
 

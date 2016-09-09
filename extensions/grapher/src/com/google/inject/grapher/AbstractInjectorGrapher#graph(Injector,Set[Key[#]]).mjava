@@ -1,4 +1,5 @@
-  @Override public final void graph(Injector injector, Set<Key<?>> root) throws IOException {
+  @Override
+  public final void graph(Injector injector, Set<Key<?>> root) throws IOException {
     reset();
 
     Iterable<Binding<?>> bindings = getBindings(injector, root);

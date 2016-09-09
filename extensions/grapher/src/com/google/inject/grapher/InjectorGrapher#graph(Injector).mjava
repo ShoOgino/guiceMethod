@@ -1,5 +1,3 @@
-  /**
-   * Graphs the guice dependency graph for the given injector using default starting keys.
-   */
+  /** Graphs the guice dependency graph for the given injector using default starting keys. */
   void graph(Injector injector) throws IOException;
 
