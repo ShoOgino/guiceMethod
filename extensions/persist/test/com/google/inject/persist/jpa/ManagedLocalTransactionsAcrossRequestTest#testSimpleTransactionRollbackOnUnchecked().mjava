@@ -7,15 +7,19 @@
     }
 
     EntityManager em = injector.getInstance(EntityManager.class);
-    assertFalse("Session was not closed by transactional service (rollback didnt happen?)",
+    assertFalse(
+        "Session was not closed by transactional service (rollback didnt happen?)",
         em.getTransaction().isActive());
 
     try {
-      Object result = em.createQuery("from JpaTestEntity where text = :text")
-          .setParameter("text", TRANSIENT_UNIQUE_TEXT).getSingleResult();
+      Object result =
+          em.createQuery("from JpaTestEntity where text = :text")
+              .setParameter("text", TRANSIENT_UNIQUE_TEXT)
+              .getSingleResult();
       injector.getInstance(UnitOfWork.class).end();
       fail();
-    } catch (NoResultException e) {}
+    } catch (NoResultException e) {
+    }
 
     injector.getInstance(UnitOfWork.class).end();
   }

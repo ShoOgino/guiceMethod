@@ -1,6 +1,7 @@
   public void testSessionCreateOnInjection() {
 
-    assertEquals("SINGLETON VIOLATION " + UnitOfWork.class.getName(),
+    assertEquals(
+        "SINGLETON VIOLATION " + UnitOfWork.class.getName(),
         injector.getInstance(UnitOfWork.class),
         injector.getInstance(UnitOfWork.class));
 

@@ -2,19 +2,25 @@
     injector.getInstance(TransactionalObject.class).runOperationInTxn();
 
     EntityManager session = injector.getInstance(EntityManager.class);
-    assertFalse("EntityManager was not closed by transactional service",
+    assertFalse(
+        "EntityManager was not closed by transactional service",
         session.getTransaction().isActive());
 
     //test that the data has been stored
     session.getTransaction().begin();
-    Object result = session.createQuery("from JpaTestEntity where text = :text")
-        .setParameter("text", UNIQUE_TEXT).getSingleResult();
+    Object result =
+        session
+            .createQuery("from JpaTestEntity where text = :text")
+            .setParameter("text", UNIQUE_TEXT)
+            .getSingleResult();
 
     session.getTransaction().commit();
 
     assertTrue("odd result returned fatal", result instanceof JpaTestEntity);
 
-    assertEquals("queried entity did not match--did automatic txn fail?",
-        UNIQUE_TEXT, (((JpaTestEntity) result).getText()));
+    assertEquals(
+        "queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT,
+        (((JpaTestEntity) result).getText()));
   }
 

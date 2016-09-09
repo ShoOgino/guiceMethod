@@ -5,15 +5,18 @@
     assertFalse(em.getTransaction().isActive());
 
     //test that the data has been stored
-    Object result = em.createQuery("from JpaTestEntity where text = :text")
-        .setParameter("text", UNIQUE_TEXT).getSingleResult();
+    Object result =
+        em.createQuery("from JpaTestEntity where text = :text")
+            .setParameter("text", UNIQUE_TEXT)
+            .getSingleResult();
     injector.getInstance(UnitOfWork.class).end();
 
     assertTrue("odd result returned fatal", result instanceof JpaTestEntity);
 
-    assertEquals("queried entity did not match--did automatic txn fail?",
-        UNIQUE_TEXT, ((JpaTestEntity) result).getText());
+    assertEquals(
+        "queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT,
+        ((JpaTestEntity) result).getText());
     injector.getInstance(UnitOfWork.class).end();
-
   }
 

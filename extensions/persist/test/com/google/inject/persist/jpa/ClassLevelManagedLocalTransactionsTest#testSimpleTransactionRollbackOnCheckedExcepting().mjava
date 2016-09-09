@@ -8,17 +8,20 @@
     }
 
     EntityManager session = injector.getInstance(EntityManager.class);
-    assertFalse("Txn was not closed by transactional service (commit didnt happen?)",
+    assertFalse(
+        "Txn was not closed by transactional service (commit didnt happen?)",
         session.getTransaction().isActive());
 
     //test that the data has been stored
     session.getTransaction().begin();
-    Object result = session.createQuery("from JpaTestEntity where text = :text")
-        .setParameter("text", UNIQUE_TEXT_2).getSingleResult();
+    Object result =
+        session
+            .createQuery("from JpaTestEntity where text = :text")
+            .setParameter("text", UNIQUE_TEXT_2)
+            .getSingleResult();
 
     session.getTransaction().commit();
 
-    assertNotNull("a result was not returned! rollback happened anyway (ignore failed)!!!",
-        result);
+    assertNotNull("a result was not returned! rollback happened anyway (ignore failed)!!!", result);
   }
 

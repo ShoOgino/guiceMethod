@@ -7,8 +7,7 @@
     try {
       sut.end();
       fail("Exception expected");
-    }
-    catch (SimulatedException expected) {
+    } catch (SimulatedException expected) {
       assertThat(sut.isWorking(), is(false));
     }
   }

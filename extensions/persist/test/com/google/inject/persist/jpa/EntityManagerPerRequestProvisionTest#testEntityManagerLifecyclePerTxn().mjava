@@ -8,13 +8,17 @@
     dao.persist(te);
 
     //im not sure this hack works...
-    assertEquals("Entity managers closed inside same thread-scope",
-        injector.getInstance(EntityManager.class), JpaDao.em);
+    assertEquals(
+        "Entity managers closed inside same thread-scope",
+        injector.getInstance(EntityManager.class),
+        JpaDao.em);
 
     //try to start a new em in a new txn
     dao = injector.getInstance(JpaDao.class);
 
-    assertTrue("EntityManager was closed and reopened around txn"
-        + " (persistent object does not persist)", dao.contains(te));
+    assertTrue(
+        "EntityManager was closed and reopened around txn"
+            + " (persistent object does not persist)",
+        dao.contains(te));
   }
 
