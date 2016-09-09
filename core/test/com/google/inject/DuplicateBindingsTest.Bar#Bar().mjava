@@ -1,2 +1,3 @@
-    @Inject public Bar() {}
+    @Inject
+    public Bar() {}
 

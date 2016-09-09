@@ -1,20 +1,21 @@
   /**
    * Tests that member injections could happen in parallel.
    *
-   * <p>Additional check that when member injection happen other threads would wait for
-   * it to finish to provide proper resolution order semantics.
+   * <p>Additional check that when member injection happen other threads would wait for it to finish
+   * to provide proper resolution order semantics.
    */
 
   public void testMemberInjectorParallelization() throws Exception {
     final ParallelMemberInjectionCallback1 c1 = new ParallelMemberInjectionCallback1();
     final ParallelMemberInjectionCallback2 c2 = new ParallelMemberInjectionCallback2();
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(ParallelMemberInjectionCallback1.class).toInstance(c1);
-        bind(ParallelMemberInjectionCallback2.class).toInstance(c2);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(ParallelMemberInjectionCallback1.class).toInstance(c1);
+            bind(ParallelMemberInjectionCallback2.class).toInstance(c2);
+          }
+        });
     assertTrue(c1.called);
     assertTrue(c2.called);
   }

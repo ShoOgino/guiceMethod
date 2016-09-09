@@ -1,8 +1,10 @@
   public void testScopingAnnotationsOnAbstractTypeIsValidForComponent() {
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(ComponentAnnotationTest.class).to(ComponentAnnotationTestImpl.class);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(ComponentAnnotationTest.class).to(ComponentAnnotationTestImpl.class);
+          }
+        });
   }
 

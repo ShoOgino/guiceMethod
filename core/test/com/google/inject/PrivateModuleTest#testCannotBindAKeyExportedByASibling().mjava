@@ -1,27 +1,36 @@
   public void testCannotBindAKeyExportedByASibling() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          install(new PrivateModule() {
-            @Override public void configure() {
-              bind(String.class).toInstance("public");
-              expose(String.class);
-            }
-          });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(
+                  new PrivateModule() {
+                    @Override
+                    public void configure() {
+                      bind(String.class).toInstance("public");
+                      expose(String.class);
+                    }
+                  });
 
-          install(new PrivateModule() {
-            @Override public void configure() {
-              bind(String.class).toInstance("private");
+              install(
+                  new PrivateModule() {
+                    @Override
+                    public void configure() {
+                      bind(String.class).toInstance("private");
+                    }
+                  });
             }
           });
-        }
-      });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "A binding to java.lang.String was already configured at ",
-          getClass().getName(), getDeclaringSourcePart(getClass()),
-          " at " + getClass().getName(), getDeclaringSourcePart(getClass()));
+          getClass().getName(),
+          getDeclaringSourcePart(getClass()),
+          " at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

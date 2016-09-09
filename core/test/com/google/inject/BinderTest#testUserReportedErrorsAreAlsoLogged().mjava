@@ -1,17 +1,19 @@
   public void testUserReportedErrorsAreAlsoLogged() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          addError(new Message("Whoops!", new IllegalArgumentException()));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              addError(new Message("Whoops!", new IllegalArgumentException()));
+            }
+          });
       fail();
     } catch (CreationException expected) {
     }
 
     LogRecord logRecord = Iterables.getOnlyElement(this.logRecords);
-    assertContains(logRecord.getMessage(),
+    assertContains(
+        logRecord.getMessage(),
         "An exception was caught and reported. Message: java.lang.IllegalArgumentException");
   }
 

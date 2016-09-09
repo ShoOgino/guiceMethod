@@ -13,9 +13,10 @@
     try {
       injector.getInstance(FooField.class);
       fail();
-    } catch(ProvisionException expected) {
-      assertContains(expected.getMessage(), "null returned by binding "
-          + "at com.google.inject.NullableInjectionPointTest");
+    } catch (ProvisionException expected) {
+      assertContains(
+          expected.getMessage(),
+          "null returned by binding " + "at com.google.inject.NullableInjectionPointTest");
     }
   }
 

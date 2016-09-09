@@ -1,13 +1,18 @@
   public void testProvisionExceptionsAreWrappedForBindToProviderInstance() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(F.class).toProvider(new FProvider());
-        }
-      }).getInstance(F.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  bind(F.class).toProvider(new FProvider());
+                }
+              })
+          .getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(), "1) User Exception",
+      assertContains(
+          e.getMessage(),
+          "1) User Exception",
           "at " + ProvisionExceptionTest.class.getName(),
           getDeclaringSourcePart(getClass()));
     }

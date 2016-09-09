@@ -13,8 +13,7 @@
     try {
       injector.getInstance(FooField.class);
       fail("Expected ProvisionException");
-    }
-    catch(ProvisionException expected) {
+    } catch (ProvisionException expected) {
       assertContains(expected.getMessage(), "null returned by binding at");
     }
   }

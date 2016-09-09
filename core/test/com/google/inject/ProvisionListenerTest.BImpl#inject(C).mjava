@@ -1,2 +1,3 @@
-    @Inject void inject(C c) {}
+    @Inject
+    void inject(C c) {}
 

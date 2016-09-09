@@ -1,5 +1,5 @@
   public void testToProviderInstance() {
-    final AtomicBoolean notified = new AtomicBoolean();    
+    final AtomicBoolean notified = new AtomicBoolean();
     Guice.createInjector(
         new AbstractModule() {
           @Override

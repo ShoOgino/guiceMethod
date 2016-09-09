@@ -1,9 +1,13 @@
-    FooModule(FooImpl foo, Provider<Foo> pFoo, Class<? extends Provider<? extends Foo>> pclFoo,
-        Class<? extends Foo> clFoo, Constructor<FooImpl> cFoo) {
+    FooModule(
+        FooImpl foo,
+        Provider<Foo> pFoo,
+        Class<? extends Provider<? extends Foo>> pclFoo,
+        Class<? extends Foo> clFoo,
+        Constructor<FooImpl> cFoo) {
       this.foo = foo;
       this.pFoo = pFoo;
       this.pclFoo = pclFoo;
       this.clFoo = clFoo;
       this.cFoo = cFoo;
-    }    
+    }
 

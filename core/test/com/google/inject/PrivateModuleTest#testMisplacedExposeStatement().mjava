@@ -1,15 +1,20 @@
   public void testMisplacedExposeStatement() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          ((PrivateBinder) binder()).expose(String.class).annotatedWith(named("a"));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              ((PrivateBinder) binder()).expose(String.class).annotatedWith(named("a"));
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "Cannot expose java.lang.String on a standard binder. ",
+      assertContains(
+          expected.getMessage(),
+          "Cannot expose java.lang.String on a standard binder. ",
           "Exposed bindings are only applicable to private binders.",
-          " at " + PrivateModuleTest.class.getName(), getDeclaringSourcePart(getClass()));
+          " at " + PrivateModuleTest.class.getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

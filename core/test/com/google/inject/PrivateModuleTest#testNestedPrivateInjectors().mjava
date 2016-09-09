@@ -1,16 +1,21 @@
   public void testNestedPrivateInjectors() {
-    Injector injector = Guice.createInjector(new PrivateModule() {
-      @Override public void configure() {
-        expose(String.class);
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              public void configure() {
+                expose(String.class);
 
-        install(new PrivateModule() {
-          @Override public void configure() {
-            bind(String.class).toInstance("nested");
-            expose(String.class);
-          }
-        });
-      }
-    });
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        bind(String.class).toInstance("nested");
+                        expose(String.class);
+                      }
+                    });
+              }
+            });
 
     assertEquals("nested", injector.getInstance(String.class));
   }

@@ -1,2 +1,3 @@
-    @Inject void tee(String s, int i) {}
+    @Inject
+    void tee(String s, int i) {}
 

@@ -1,22 +1,26 @@
-  /**
-   * The module returned by Modules.combine shouldn't show up in binder sources.
-   */
+  /** The module returned by Modules.combine shouldn't show up in binder sources. */
   public void testCombineSources() {
     final Module m1 = newModule(1);
     final Module m2 = newModule(2L);
     final Module combined1 = Modules.combine(m1, m2);
-    Module skipSourcesModule = new AbstractModule() {
-      @Override protected void configure() {
-        install(combined1);
-      }
-    };
+    Module skipSourcesModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(combined1);
+          }
+        };
     final Module combined2 = Modules.combine(skipSourcesModule);
     Injector injector = Guice.createInjector(combined2);
     ElementSource source = (ElementSource) injector.getBinding(Integer.class).getSource();
     assertEquals(source.getModuleClassNames().size(), 4);
-    assertEquals(ImmutableList.of(m1.getClass().getName(),
-        combined1.getClass().getName(), skipSourcesModule.getClass().getName(),
-        combined2.getClass().getName()), source.getModuleClassNames());
+    assertEquals(
+        ImmutableList.of(
+            m1.getClass().getName(),
+            combined1.getClass().getName(),
+            skipSourcesModule.getClass().getName(),
+            combined2.getClass().getName()),
+        source.getModuleClassNames());
     StackTraceElement stackTraceElement = (StackTraceElement) source.getDeclaringSource();
     assertEquals(skipSourcesModule.getClass().getName(), stackTraceElement.getClassName());
   }

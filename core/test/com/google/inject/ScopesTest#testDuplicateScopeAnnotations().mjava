@@ -1,15 +1,19 @@
   public void testDuplicateScopeAnnotations() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(CustomScoped.class, Scopes.NO_SCOPE);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(CustomScoped.class, Scopes.NO_SCOPE);
+              }
+            });
 
     try {
       injector.getInstance(SingletonAndCustomScoped.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) More than one scope annotation was found: ",
           "while locating " + SingletonAndCustomScoped.class.getName());
     }

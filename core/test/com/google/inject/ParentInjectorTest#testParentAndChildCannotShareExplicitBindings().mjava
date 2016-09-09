@@ -4,9 +4,17 @@
       parent.createChildInjector(bindsA);
       fail("Created the same explicit binding on both parent and child");
     } catch (CreationException e) {
-      assertContains(e.getMessage(), "A binding to ", A.class.getName(), " was already configured",
-          " at ", getClass().getName(), getDeclaringSourcePart(getClass()),
-          " at ", getClass().getName(), getDeclaringSourcePart(getClass()));
+      assertContains(
+          e.getMessage(),
+          "A binding to ",
+          A.class.getName(),
+          " was already configured",
+          " at ",
+          getClass().getName(),
+          getDeclaringSourcePart(getClass()),
+          " at ",
+          getClass().getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

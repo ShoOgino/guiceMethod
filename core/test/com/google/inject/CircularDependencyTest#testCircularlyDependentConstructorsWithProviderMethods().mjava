@@ -1,12 +1,21 @@
-  public void testCircularlyDependentConstructorsWithProviderMethods()
-      throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {}
+  public void testCircularlyDependentConstructorsWithProviderMethods() throws CreationException {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides @Singleton A a(B b) { return new AImpl(b); }
-      @Provides B b(A a) { return new BImpl(a); }
-    });
+              @Provides
+              @Singleton
+              A a(B b) {
+                return new AImpl(b);
+              }
+
+              @Provides
+              B b(A a) {
+                return new BImpl(a);
+              }
+            });
     assertCircularDependencies(injector);
   }
 

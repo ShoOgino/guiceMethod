@@ -1,7 +1,4 @@
-  /**
-   * Fails unless {@code text} includes all {@code substrings}, in order,
-   * no duplicates
-   */
+  /** Fails unless {@code text} includes all {@code substrings}, in order, no duplicates */
   public static void assertContains(String text, String... substrings) {
     assertContains(text, false, substrings);
   }

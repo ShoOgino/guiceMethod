@@ -3,7 +3,8 @@
       Guice.createInjector().getInstance(E.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           E.class.getName() + " is annotated with " + Singleton.class.getName(),
           "but scope annotations are not supported for abstract types.",
           "at " + E.class.getName() + ".class(ScopesTest.java:");

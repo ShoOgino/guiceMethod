@@ -1,13 +1,14 @@
   public void testJitInjectionFails() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          binder().requireExplicitBindings();
-          bind(Foo.class).to(FooImpl.class);
-          bind(FooBar.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              binder().requireExplicitBindings();
+              bind(Foo.class).to(FooImpl.class);
+              bind(FooBar.class);
+            }
+          });
       fail("should have failed");
     } catch (CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(Bar.class));

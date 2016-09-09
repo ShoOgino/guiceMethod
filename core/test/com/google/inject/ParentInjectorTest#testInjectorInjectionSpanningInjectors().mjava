@@ -1,10 +1,13 @@
   public void testInjectorInjectionSpanningInjectors() {
     Injector parent = Guice.createInjector();
-    Injector child = parent.createChildInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(D.class);
-      }
-    });
+    Injector child =
+        parent.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(D.class);
+              }
+            });
 
     D d = child.getInstance(D.class);
     assertSame(d.injector, child);

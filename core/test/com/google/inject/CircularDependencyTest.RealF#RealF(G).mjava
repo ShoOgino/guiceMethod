@@ -1,4 +1,5 @@
-    @Inject RealF(G g) {
+    @Inject
+    RealF(G g) {
       this.g = g;
     }
 

@@ -1,2 +1,3 @@
-    @Inject public C(A a, D d, E e) {}
+    @Inject
+    public C(A a, D d, E e) {}
 

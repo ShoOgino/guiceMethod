@@ -4,16 +4,17 @@
       fail();
     } catch (ProvisionException expected) {
       ProvisionException reserialized = reserialize(expected);
-      assertContains(reserialized.getMessage(),
+      assertContains(
+          reserialized.getMessage(),
           "1) Error injecting constructor, java.lang.UnsupportedOperationException",
-              "at com.google.inject.ProvisionExceptionTest$RealD.<init>()",
-              "at Key[type=com.google.inject.ProvisionExceptionTest$RealD, annotation=[none]]",
-              "@com.google.inject.ProvisionExceptionTest$C.setD()[0]",
-              "at Key[type=com.google.inject.ProvisionExceptionTest$C, annotation=[none]]",
-              "@com.google.inject.ProvisionExceptionTest$B.c",
-              "at Key[type=com.google.inject.ProvisionExceptionTest$B, annotation=[none]]",
-              "@com.google.inject.ProvisionExceptionTest$A.<init>()[0]",
-              "at Key[type=com.google.inject.ProvisionExceptionTest$A, annotation=[none]]");
+          "at com.google.inject.ProvisionExceptionTest$RealD.<init>()",
+          "at Key[type=com.google.inject.ProvisionExceptionTest$RealD, annotation=[none]]",
+          "@com.google.inject.ProvisionExceptionTest$C.setD()[0]",
+          "at Key[type=com.google.inject.ProvisionExceptionTest$C, annotation=[none]]",
+          "@com.google.inject.ProvisionExceptionTest$B.c",
+          "at Key[type=com.google.inject.ProvisionExceptionTest$B, annotation=[none]]",
+          "@com.google.inject.ProvisionExceptionTest$A.<init>()[0]",
+          "at Key[type=com.google.inject.ProvisionExceptionTest$A, annotation=[none]]");
     }
   }
 

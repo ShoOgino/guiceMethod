@@ -1,6 +1,6 @@
     @Override
     public int hashCode() {
-      if(throwOnHashcode) {
+      if (throwOnHashcode) {
         throw new RuntimeException();
       } else {
         return super.hashCode();

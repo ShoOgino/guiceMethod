@@ -24,9 +24,12 @@
         newInjector().getInstance(injectsKey);
         fail();
       } catch (ConfigurationException expected) {
-        assertContains(expected.getMessage(),
-            configurationException, injectsKey.getName() + ".inject",
-            configurationException, injectsKey.getName() + ".inject",
+        assertContains(
+            expected.getMessage(),
+            configurationException,
+            injectsKey.getName() + ".inject",
+            configurationException,
+            injectsKey.getName() + ".inject",
             "2 errors");
       }
 
@@ -35,9 +38,12 @@
         newInjector().injectMembers(injectable);
         fail();
       } catch (ConfigurationException expected) {
-        assertContains(expected.getMessage(),
-            configurationException, injectsKey.getName() + ".inject",
-            configurationException, injectsKey.getName() + ".inject",
+        assertContains(
+            expected.getMessage(),
+            configurationException,
+            injectsKey.getName() + ".inject",
+            configurationException,
+            injectsKey.getName() + ".inject",
             "2 errors");
       }
     }

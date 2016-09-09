@@ -1,7 +1,4 @@
-    /**
-     * Relies on Guice implementation to inject S first, which provides a barrier .
-     */
+    /** Relies on Guice implementation to inject S first, which provides a barrier . */
     @Inject
-    I0(I1 i) {
-    }
+    I0(I1 i) {}
 

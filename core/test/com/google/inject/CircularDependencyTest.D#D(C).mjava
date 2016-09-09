@@ -1,2 +1,3 @@
-    @Inject D(C c) {}
+    @Inject
+    D(C c) {}
 

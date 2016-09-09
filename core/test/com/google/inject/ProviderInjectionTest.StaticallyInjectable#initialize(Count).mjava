@@ -1,4 +1,5 @@
-    @Inject static void initialize(@Named("c") Count cCount) {
+    @Inject
+    static void initialize(@Named("c") Count cCount) {
       cCountAtInjectionTime = cCount.value;
     }
 

@@ -1,6 +1,6 @@
-    @Inject WantsTypeLiterals(TypeLiteral<T> literal, Set<T> set) {
+    @Inject
+    WantsTypeLiterals(TypeLiteral<T> literal, Set<T> set) {
       this.literal = literal;
       this.set = set;
-      
     }
 

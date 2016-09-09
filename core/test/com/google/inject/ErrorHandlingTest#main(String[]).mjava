@@ -1,8 +1,7 @@
   public static void main(String[] args) throws CreationException {
     try {
       Guice.createInjector(new MyModule());
-    }
-    catch (CreationException e) {
+    } catch (CreationException e) {
       e.printStackTrace();
       System.err.println("--");
     }
@@ -24,15 +23,13 @@
             });
     try {
       bad.getInstance(String.class);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       System.err.println("--");
     }
     try {
       bad.getInstance(NeedsString.class);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
       System.err.println("--");
     }

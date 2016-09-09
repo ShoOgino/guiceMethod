@@ -1,6 +1,4 @@
-    /**
-     * Relies on Guice implementation to inject S first and H later, which provides a barrier .
-     */
+    /** Relies on Guice implementation to inject S first and H later, which provides a barrier . */
     @Inject
     GImpl(S synchronizationBarrier, H h) {
       this.h = h;

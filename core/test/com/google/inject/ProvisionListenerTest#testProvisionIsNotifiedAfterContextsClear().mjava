@@ -1,21 +1,25 @@
   public void testProvisionIsNotifiedAfterContextsClear() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(Matchers.any(), new ProvisionListener() {
-          @Override
-          public <T> void onProvision(ProvisionInvocation<T> provision) {
-            Object provisioned = provision.provision();
-            if (provisioned instanceof X) {
-              ((X)provisioned).init();
-            } else if (provisioned instanceof Y) {
-              X.createY = false;
-              ((Y)provisioned).init();
-            }
-          }
-        });
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    Matchers.any(),
+                    new ProvisionListener() {
+                      @Override
+                      public <T> void onProvision(ProvisionInvocation<T> provision) {
+                        Object provisioned = provision.provision();
+                        if (provisioned instanceof X) {
+                          ((X) provisioned).init();
+                        } else if (provisioned instanceof Y) {
+                          X.createY = false;
+                          ((Y) provisioned).init();
+                        }
+                      }
+                    });
+              }
+            });
 
     X.createY = true;
     X x = injector.getInstance(X.class);

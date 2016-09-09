@@ -1,4 +1,5 @@
-    @Inject SubParameterizedDeps(Set<A> keys) {
+    @Inject
+    SubParameterizedDeps(Set<A> keys) {
       super(keys);
     }
 

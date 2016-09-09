@@ -3,7 +3,8 @@
       Guice.createInjector(new OuterModule(new ConverterNullModule()));
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Received null converting 'foo' (bound at ",
           getClass().getName(),
           getDeclaringSourcePart(getClass()),

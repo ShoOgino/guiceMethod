@@ -4,8 +4,10 @@
       injector.getInstance(InvalidInteger.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
-          "Error converting 'invalid' (bound at " + InnerErrorModule.class.getName()
+      assertContains(
+          expected.getMessage(),
+          "Error converting 'invalid' (bound at "
+              + InnerErrorModule.class.getName()
               + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterErrorModule.class, InnerErrorModule.class),
           "using TypeConverter<Integer> which matches identicalTo(class java.lang.Integer)"

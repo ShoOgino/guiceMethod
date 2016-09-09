@@ -3,8 +3,10 @@
       Guice.createInjector(new OuterAmbiguousModule());
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
-          "1) Multiple converters can convert 'foo' (bound at ", getClass().getName(),
+      assertContains(
+          expected.getMessage(),
+          "1) Multiple converters can convert 'foo' (bound at ",
+          getClass().getName(),
           getDeclaringSourcePart(getClass()),
           asModuleChain(OuterAmbiguousModule.class, InnerAmbiguousModule.class),
           "to java.util.Date:",

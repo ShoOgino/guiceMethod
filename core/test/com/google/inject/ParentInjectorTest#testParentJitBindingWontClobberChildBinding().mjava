@@ -5,7 +5,8 @@
       parent.getInstance(A.class);
       fail("Created a just-in-time binding on the parent that's the same as a child's binding");
     } catch (ConfigurationException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "Unable to create binding for " + A.class.getName(),
           "It was already configured on one or more child injectors or private modules",
           "bound at " + bindsA.getClass().getName() + ".configure(",

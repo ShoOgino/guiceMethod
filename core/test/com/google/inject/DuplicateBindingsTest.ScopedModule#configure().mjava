@@ -2,16 +2,16 @@
     protected void configure() {
       // ProviderInstanceBinding
       bind(Foo.class).annotatedWith(named("pInstance")).toProvider(pFoo).in(scope);
-      
+
       // ProviderKeyBinding
       bind(Foo.class).annotatedWith(named("pKey")).toProvider(pclFoo).in(scope);
-      
+
       // LinkedKeyBinding
       bind(Foo.class).annotatedWith(named("linkedKey")).to(clFoo).in(scope);
-      
+
       // UntargettedBinding / ConstructorBinding
       bind(FooImpl.class).in(scope);
-      
+
       // ConstructorBinding
       bind(Foo.class).annotatedWith(named("constructor")).toConstructor(cFoo).in(scope);
     }

@@ -1,16 +1,19 @@
   public void testBindingToProvider() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(new TypeLiteral<Provider<String>>() {}).toInstance(Providers.of("A"));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(new TypeLiteral<Provider<String>>() {}).toInstance(Providers.of("A"));
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Binding to Provider is not allowed.",
-          "at " + BinderTest.class.getName(), getDeclaringSourcePart(getClass()));
+          "at " + BinderTest.class.getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

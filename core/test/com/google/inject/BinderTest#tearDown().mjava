@@ -1,4 +1,5 @@
-  @Override protected void tearDown() throws Exception {
+  @Override
+  protected void tearDown() throws Exception {
     loggerToWatch.removeHandler(fakeHandler);
     super.tearDown();
   }

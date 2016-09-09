@@ -5,9 +5,10 @@
     try {
       injector.getInstance(EnumWithImplementedBy.class);
       fail("Expected failure");
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
       Message msg = Iterables.getOnlyElement(expected.getErrorMessages());
-      Asserts.assertContains(msg.getMessage(),
+      Asserts.assertContains(
+          msg.getMessage(),
           "No implementation for " + EnumWithImplementedBy.class.getName() + " was bound.");
     }
   }

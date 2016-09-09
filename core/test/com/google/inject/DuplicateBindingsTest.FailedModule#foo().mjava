@@ -1,4 +1,5 @@
-    @Provides Foo foo() {
+    @Provides
+    Foo foo() {
       return null;
     }
 

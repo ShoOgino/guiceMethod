@@ -1,15 +1,16 @@
     @Override
     public <T> void onProvision(ProvisionInvocation<T> provision) {
       notified.set(true);
-      assertEquals(notifyType, provision.getBinding().getKey().getRawType());            
+      assertEquals(notifyType, provision.getBinding().getKey().getRawType());
       assertEquals(2, provision.getDependencyChain().size());
-      
+
       assertNull(provision.getDependencyChain().get(0).getDependency());
       assertContains(provision.getDependencyChain().get(0).getBindingSource(), firstSource);
-      
-      assertEquals(notifyType,
-          provision.getDependencyChain().get(1).getDependency().getKey().getRawType());
-      assertContains(provision.getDependencyChain().get(1).getBindingSource(),
+
+      assertEquals(
+          notifyType, provision.getDependencyChain().get(1).getDependency().getKey().getRawType());
+      assertContains(
+          provision.getDependencyChain().get(1).getBindingSource(),
           notifyType.getName() + ".class(");
     }
 

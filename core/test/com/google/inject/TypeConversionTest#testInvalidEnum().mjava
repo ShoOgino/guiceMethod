@@ -1,9 +1,12 @@
   public void testInvalidEnum() throws CreationException {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindConstant().annotatedWith(NumericValue.class).to("invalid");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(NumericValue.class).to("invalid");
+              }
+            });
 
     try {
       injector.getInstance(InvalidEnum.class);

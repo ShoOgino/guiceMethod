@@ -1,7 +1,7 @@
   public void testLookupsAtInjectorCreateTime() {
     final AtomicReference<Provider<B>> bProviderReference = new AtomicReference<Provider<B>>();
-    final AtomicReference<MembersInjector<A>> aMembersInjectorReference
-        = new AtomicReference<MembersInjector<A>>();
+    final AtomicReference<MembersInjector<A>> aMembersInjectorReference =
+        new AtomicReference<MembersInjector<A>>();
 
     final InjectionListener<Object> lookupsTester =
         new InjectionListener<Object>() {

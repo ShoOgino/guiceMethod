@@ -1,4 +1,5 @@
-    @Inject void injectSecond() {
+    @Inject
+    void injectSecond() {
       throw new NullPointerException("can't inject second either");
     }
 

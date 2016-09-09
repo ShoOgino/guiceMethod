@@ -1,2 +1,3 @@
-    @Inject DoubleSameFailure(Integer i1, Integer i2) { }
+    @Inject
+    DoubleSameFailure(Integer i1, Integer i2) {}
 

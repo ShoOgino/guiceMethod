@@ -1,46 +1,62 @@
   public void testPrivateModulesAndProvidesMethods() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        install(new PrivateModule() {
-          @Override public void configure() {
-            expose(String.class).annotatedWith(named("a"));
-          }
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        expose(String.class).annotatedWith(named("a"));
+                      }
 
-          @Provides @Named("a") String providePublicA() {
-            return "i";
-          }
+                      @Provides
+                      @Named("a")
+                      String providePublicA() {
+                        return "i";
+                      }
 
-          @Provides @Named("b") String providePrivateB() {
-            return "private";
-          }
-        });
+                      @Provides
+                      @Named("b")
+                      String providePrivateB() {
+                        return "private";
+                      }
+                    });
 
-        install(new PrivateModule() {
-          @Override public void configure() {}
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {}
 
-          @Provides @Named("c") String providePrivateC() {
-            return "private";
-          }
+                      @Provides
+                      @Named("c")
+                      String providePrivateC() {
+                        return "private";
+                      }
 
-          @Provides @Exposed @Named("d") String providePublicD() {
-            return "ii";
-          }
-        });
-      }
-    });
+                      @Provides
+                      @Exposed
+                      @Named("d")
+                      String providePublicD() {
+                        return "ii";
+                      }
+                    });
+              }
+            });
 
     assertEquals("i", injector.getInstance(Key.get(String.class, named("a"))));
 
     try {
       injector.getInstance(Key.get(String.class, named("b")));
       fail();
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
     }
 
     try {
       injector.getInstance(Key.get(String.class, named("c")));
       fail();
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
     }
 
     assertEquals("ii", injector.getInstance(Key.get(String.class, named("d"))));

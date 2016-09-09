@@ -4,8 +4,8 @@
 
     typeResolver = new TypeLiteral<Map<String, Integer>>() {};
     assertEquals(String.class, typeResolver.resolveType(mapK));
-    assertEquals(Types.mapOf(String.class, Integer.class),
-        typeResolver.getSupertype(Map.class).getType());
+    assertEquals(
+        Types.mapOf(String.class, Integer.class), typeResolver.getSupertype(Map.class).getType());
 
     typeResolver = new TypeLiteral<BetterMap<String, Integer>>() {};
     assertEquals(String.class, typeResolver.resolveType(mapK));

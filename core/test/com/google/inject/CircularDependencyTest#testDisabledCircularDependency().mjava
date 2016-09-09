@@ -1,15 +1,20 @@
   public void testDisabledCircularDependency() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          binder().disableCircularProxies();
-        }
-      }).getInstance(C.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  binder().disableCircularProxies();
+                }
+              })
+          .getInstance(C.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
-          "Found a circular dependency involving " + C.class.getName() + ", and circular dependencies are disabled.");
+      assertContains(
+          expected.getMessage(),
+          "Found a circular dependency involving "
+              + C.class.getName()
+              + ", and circular dependencies are disabled.");
     }
   }
 

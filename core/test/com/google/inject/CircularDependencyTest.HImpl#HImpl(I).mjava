@@ -1,2 +1,3 @@
-     @Inject HImpl(I i) {}
+    @Inject
+    HImpl(I i) {}
 

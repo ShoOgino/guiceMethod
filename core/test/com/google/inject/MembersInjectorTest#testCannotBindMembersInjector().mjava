@@ -9,7 +9,8 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Binding to core guice framework type is not allowed: MembersInjector.");
     }
 
@@ -24,7 +25,8 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Binding to core guice framework type is not allowed: MembersInjector.");
     }
   }

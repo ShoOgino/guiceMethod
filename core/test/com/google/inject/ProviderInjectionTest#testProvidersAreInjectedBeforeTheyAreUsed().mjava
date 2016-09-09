@@ -1,7 +1,6 @@
   /**
-   * When custom providers are used at injector creation time, they should be
-   * injected before use. In this testcase, we verify that a provider for
-   * List.class is injected before it is used.
+   * When custom providers are used at injector creation time, they should be injected before use.
+   * In this testcase, we verify that a provider for List.class is injected before it is used.
    */
   public void testProvidersAreInjectedBeforeTheyAreUsed() {
     Injector injector =
@@ -43,8 +42,6 @@
               }
             });
 
-    assertEquals("Providers not injected before use",
-        "[true]",
-        injector.getInstance(String.class));
+    assertEquals("Providers not injected before use", "[true]", injector.getInstance(String.class));
   }
 

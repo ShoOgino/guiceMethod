@@ -3,11 +3,12 @@
       Guice.createInjector(new OuterThrowsModule());
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           getDeclaringSourcePart(getClass()),
           asModuleChain(OuterThrowsModule.class, InnerThrowsModule.class),
-          "of " + B.class.getName(), 
+          "of " + B.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #1",
           "2) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           getDeclaringSourcePart(getClass()),
@@ -15,17 +16,21 @@
           "of " + C.class.getName(),
           "Reason: java.lang.ClassCastException: whoops, failure #2");
     }
-    
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, failingTypeListener);
-      }
-    });
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(onlyAbcd, failingTypeListener);
+              }
+            });
     try {
       injector.getProvider(B.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           getDeclaringSourcePart(getClass()),
           "of " + B.class.getName(),
@@ -37,7 +42,8 @@
       injector.getInstance(B.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error notifying TypeListener clumsy (bound at " + getClass().getName(),
           getDeclaringSourcePart(getClass()),
           "of " + B.class.getName(),

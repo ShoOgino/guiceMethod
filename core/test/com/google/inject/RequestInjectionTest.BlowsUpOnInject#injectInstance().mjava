@@ -1,4 +1,5 @@
-    @Inject void injectInstance() {
+    @Inject
+    void injectInstance() {
       throw new UnsupportedOperationException("Pop");
     }
 

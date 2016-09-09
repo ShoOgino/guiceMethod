@@ -1,15 +1,20 @@
   public void testInstallingRegularModulesFromPrivateModules() {
-    Injector injector = Guice.createInjector(new PrivateModule() {
-      @Override public void configure() {
-        expose(String.class);
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              public void configure() {
+                expose(String.class);
 
-        install(new AbstractModule() {
-          @Override protected void configure() {
-            bind(String.class).toInstance("nested");
-          }
-        });
-      }
-    });
+                install(
+                    new AbstractModule() {
+                      @Override
+                      protected void configure() {
+                        bind(String.class).toInstance("nested");
+                      }
+                    });
+              }
+            });
 
     assertEquals("nested", injector.getInstance(String.class));
   }

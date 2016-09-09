@@ -32,17 +32,28 @@
       assertEquals(4, e.getErrorMessages().size());
       String segment1 = "No implementation for java.lang.Runnable was bound.";
       String segment2 = "No implementation for " + Comparator.class.getName() + " was bound.";
-      String segment3 = "No implementation for java.util.concurrent.Callable<java.lang.String> was"
-          + " bound.";
-      String segment4 = "No implementation for java.util.Date annotated with @"
-          + Named.class.getName() + "(value=date) was bound.";
+      String segment3 =
+          "No implementation for java.util.concurrent.Callable<java.lang.String> was" + " bound.";
+      String segment4 =
+          "No implementation for java.util.Date annotated with @"
+              + Named.class.getName()
+              + "(value=date) was bound.";
       String atSegment = "at " + getClass().getName();
       String sourceFileName = getDeclaringSourcePart(getClass());
-      assertContains(e.getMessage(),
-          segment1, atSegment, sourceFileName,
-          segment2, atSegment, sourceFileName,
-          segment3, atSegment, sourceFileName,
-          segment4, atSegment, sourceFileName);
+      assertContains(
+          e.getMessage(),
+          segment1,
+          atSegment,
+          sourceFileName,
+          segment2,
+          atSegment,
+          sourceFileName,
+          segment3,
+          atSegment,
+          sourceFileName,
+          segment4,
+          atSegment,
+          sourceFileName);
     }
   }
 

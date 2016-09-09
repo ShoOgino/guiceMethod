@@ -1,11 +1,13 @@
   public void testAnnotationWithValueMatchesKeyWithTypeOnly() throws CreationException {
-    Injector c = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(Blue.class).to("foo");
-        bind(BlueFoo.class);
-      }
-    });
+    Injector c =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Blue.class).to("foo");
+                bind(BlueFoo.class);
+              }
+            });
 
     BlueFoo foo = c.getInstance(BlueFoo.class);
 

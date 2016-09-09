@@ -1,7 +1,7 @@
   public void testExceptionsCollapsed() {
     try {
       Guice.createInjector().getInstance(A.class);
-      fail(); 
+      fail();
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
       assertContains(

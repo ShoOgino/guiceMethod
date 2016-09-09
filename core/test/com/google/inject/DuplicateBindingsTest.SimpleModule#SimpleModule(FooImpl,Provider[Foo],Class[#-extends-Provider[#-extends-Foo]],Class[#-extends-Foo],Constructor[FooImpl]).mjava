@@ -1,5 +1,9 @@
-    SimpleModule(FooImpl foo, Provider<Foo> pFoo, Class<? extends Provider<? extends Foo>> pclFoo,
-        Class<? extends Foo> clFoo, Constructor<FooImpl> cFoo) {
+    SimpleModule(
+        FooImpl foo,
+        Provider<Foo> pFoo,
+        Class<? extends Provider<? extends Foo>> pclFoo,
+        Class<? extends Foo> clFoo,
+        Constructor<FooImpl> cFoo) {
       super(foo, pFoo, pclFoo, clFoo, cFoo);
     }
 

@@ -1,27 +1,32 @@
   public void testNoCxtors_separateOptionsForPrivateModules() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(AnotherNoCxtors.class);
-          install(new PrivateModule() {
+      Guice.createInjector(
+          new AbstractModule() {
             @Override
             protected void configure() {
-              binder().requireAtInjectOnConstructors();
-              bind(NoCxtors.class);
+              bind(AnotherNoCxtors.class);
+              install(
+                  new PrivateModule() {
+                    @Override
+                    protected void configure() {
+                      binder().requireAtInjectOnConstructors();
+                      bind(NoCxtors.class);
+                    }
+                  });
             }
           });
-        }
-      });
       fail();
     } catch (CreationException ce) {
       // This is testing that the parent module doesn't fail because it isn't included
       // in the error message.
       assertEquals(1, ce.getErrorMessages().size());
-      Asserts.assertContains(ce.getMessage(),
+      Asserts.assertContains(
+          ce.getMessage(),
           "1) Explicit @Inject annotations are required on constructors, but "
-          + NoCxtors.class.getName() + " has no constructors annotated with @Inject",
-          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$", "configure");
+              + NoCxtors.class.getName()
+              + " has no constructors annotated with @Inject",
+          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$",
+          "configure");
     }
   }
 

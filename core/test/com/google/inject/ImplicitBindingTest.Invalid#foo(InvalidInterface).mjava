@@ -1,2 +1,3 @@
-    @Inject void foo(InvalidInterface a) {}
+    @Inject
+    void foo(InvalidInterface a) {}
 

@@ -1,7 +1,6 @@
   public void testMixedScopeAndUnscopedIgnored() {
     Guice.createInjector(
         new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
-        new ScopedModule(Scopes.NO_SCOPE, foo, pFoo, pclFoo, clFoo, cFoo)
-    );
+        new ScopedModule(Scopes.NO_SCOPE, foo, pFoo, pclFoo, clFoo, cFoo));
   }
 

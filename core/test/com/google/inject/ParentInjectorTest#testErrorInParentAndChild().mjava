@@ -5,8 +5,10 @@
     try {
       childInjector.getInstance(G.class);
       fail();
-    } catch(ConfigurationException expected) {
-      assertContains(expected.getMessage(), "No scope is bound to " + MyScope.class.getName(),
+    } catch (ConfigurationException expected) {
+      assertContains(
+          expected.getMessage(),
+          "No scope is bound to " + MyScope.class.getName(),
           "at " + F.class.getName() + ".class(ParentInjectorTest.java:",
           "  while locating " + G.class.getName());
     }

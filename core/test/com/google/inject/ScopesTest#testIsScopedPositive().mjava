@@ -7,26 +7,33 @@
     final Key<Object> f = Key.get(Object.class, named("F"));
     final Key<String> g = Key.get(String.class, named("G"));
 
-    Module customBindings = new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(CustomScoped.class, CUSTOM_SCOPE);
-        bind(a).to(b);
-        bind(b).to(c);
-        bind(c).toProvider(Providers.of("c")).in(CUSTOM_SCOPE);
-        bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
-        bind(f).to(AnnotatedCustomScoped.class);
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(g).toProvider(Providers.of("g")).in(CustomScoped.class);
-            expose(g);
+    Module customBindings =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindScope(CustomScoped.class, CUSTOM_SCOPE);
+            bind(a).to(b);
+            bind(b).to(c);
+            bind(c).toProvider(Providers.of("c")).in(CUSTOM_SCOPE);
+            bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
+            bind(f).to(AnnotatedCustomScoped.class);
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(g).toProvider(Providers.of("g")).in(CustomScoped.class);
+                    expose(g);
+                  }
+                });
           }
-        });
-      }
 
-      @Provides @Named("E") @CustomScoped String provideE() {
-        return "e";
-      }
-    };
+          @Provides
+          @Named("E")
+          @CustomScoped
+          String provideE() {
+            return "e";
+          }
+        };
 
     @SuppressWarnings("unchecked") // we know the module contains only bindings
     List<Element> moduleBindings = Elements.getElements(customBindings);

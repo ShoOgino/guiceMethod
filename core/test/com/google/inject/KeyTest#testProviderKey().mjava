@@ -1,8 +1,9 @@
   public void testProviderKey() throws NoSuchMethodException {
-    Key<?> actual = Key.get(getClass().getMethod("foo", List.class, List.class)
-        .getGenericParameterTypes()[0]).providerKey();
-    Key<?> expected = Key.get(getClass().getMethod("bar", Provider.class)
-        .getGenericParameterTypes()[0]);
+    Key<?> actual =
+        Key.get(getClass().getMethod("foo", List.class, List.class).getGenericParameterTypes()[0])
+            .providerKey();
+    Key<?> expected =
+        Key.get(getClass().getMethod("bar", Provider.class).getGenericParameterTypes()[0]);
     assertEqualsBothWays(expected, actual);
     assertEquals(expected.toString(), actual.toString());
   }

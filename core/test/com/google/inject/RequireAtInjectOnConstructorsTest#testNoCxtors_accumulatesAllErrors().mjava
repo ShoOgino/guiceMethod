@@ -1,23 +1,29 @@
   public void testNoCxtors_accumulatesAllErrors() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(NoCxtors.class);
-          bind(AnotherNoCxtors.class);
-          binder().requireAtInjectOnConstructors();
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(NoCxtors.class);
+              bind(AnotherNoCxtors.class);
+              binder().requireAtInjectOnConstructors();
+            }
+          });
       fail();
     } catch (CreationException ce) {
       assertEquals(2, ce.getErrorMessages().size());
-      Asserts.assertContains(ce.getMessage(),
+      Asserts.assertContains(
+          ce.getMessage(),
           "1) Explicit @Inject annotations are required on constructors, but "
-          + NoCxtors.class.getName() + " has no constructors annotated with @Inject",
-          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$", "configure",
+              + NoCxtors.class.getName()
+              + " has no constructors annotated with @Inject",
+          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$",
+          "configure",
           "2) Explicit @Inject annotations are required on constructors, but "
-          + AnotherNoCxtors.class.getName() + " has no constructors annotated with @Inject",
-          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$", "configure");
+              + AnotherNoCxtors.class.getName()
+              + " has no constructors annotated with @Inject",
+          "at " + RequireAtInjectOnConstructorsTest.class.getName() + "$",
+          "configure");
     }
   }
 

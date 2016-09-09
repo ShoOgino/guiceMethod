@@ -1,5 +1,6 @@
     @SuppressWarnings("unused")
-    @Inject Foo(Logger logger) {
+    @Inject
+    Foo(Logger logger) {
       this.logger = logger;
     }
 

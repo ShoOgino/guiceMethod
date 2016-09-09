@@ -6,7 +6,9 @@
       Guice.createInjector().getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(), "1) User Exception",
+      assertContains(
+          e.getMessage(),
+          "1) User Exception",
           "at " + F.class.getName() + ".<init>(ProvisionExceptionTest.java:");
     }
   }

@@ -1,14 +1,20 @@
   public void testScopesInherited() {
-    Injector parent = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(MyScope.class, Scopes.SINGLETON);
-      }
-    });
-    Injector child = parent.createChildInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(A.class).in(MyScope.class);
-      }
-    });
+    Injector parent =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(MyScope.class, Scopes.SINGLETON);
+              }
+            });
+    Injector child =
+        parent.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(A.class).in(MyScope.class);
+              }
+            });
     assertSame(child.getInstance(A.class), child.getInstance(A.class));
   }
 

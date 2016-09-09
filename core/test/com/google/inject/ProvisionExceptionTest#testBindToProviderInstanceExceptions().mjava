@@ -1,14 +1,18 @@
   public void testBindToProviderInstanceExceptions() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(D.class).toProvider(new DProvider());
-        }
-      }).getInstance(D.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  bind(D.class).toProvider(new DProvider());
+                }
+              })
+          .getInstance(D.class);
       fail();
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error in custom provider, java.lang.UnsupportedOperationException",
           "at " + ProvisionExceptionTest.class.getName(),
           getDeclaringSourcePart(getClass()));

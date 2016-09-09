@@ -1,22 +1,24 @@
   public void testDifferentBindingTypesFail() {
-    List<Element> elements = Elements.getElements(
-        new FailedModule(foo, pFoo, pclFoo, clFoo, cFoo)
-    );
-    
+    List<Element> elements = Elements.getElements(new FailedModule(foo, pFoo, pclFoo, clFoo, cFoo));
+
     // Make sure every combination of the elements with another element fails.
     // This ensures that duplication checks the kind of binding also.
-    for(Element e1 : elements) {
-      for(Element e2: elements) {
+    for (Element e1 : elements) {
+      for (Element e2 : elements) {
         // if they're the same, this shouldn't fail.
         try {
           Guice.createInjector(Elements.getModule(Arrays.asList(e1, e2)));
-          if(e1 != e2) {
+          if (e1 != e2) {
             fail("must fail!");
           }
-        } catch(CreationException expected) {
-          if(e1 != e2) {
-            assertContains(expected.getMessage(),
-                "A binding to " + Foo.class.getName() + " was already configured at " + FailedModule.class.getName(),
+        } catch (CreationException expected) {
+          if (e1 != e2) {
+            assertContains(
+                expected.getMessage(),
+                "A binding to "
+                    + Foo.class.getName()
+                    + " was already configured at "
+                    + FailedModule.class.getName(),
                 "at " + FailedModule.class.getName());
           } else {
             throw expected;

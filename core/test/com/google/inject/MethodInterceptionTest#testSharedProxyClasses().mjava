@@ -34,9 +34,11 @@
     Interceptable nullFoosTwo = childTwo.getInstance(Interceptable.class);
     assertNull(nullFoosTwo.foo()); // confirm it's being intercepted
 
-    assertSame("Child injectors should share proxy classes, otherwise memory leaks!",
-        nullFoosOne.getClass(), nullFoosTwo.getClass());
-    
+    assertSame(
+        "Child injectors should share proxy classes, otherwise memory leaks!",
+        nullFoosOne.getClass(),
+        nullFoosTwo.getClass());
+
     Injector injector2 =
         Guice.createInjector(
             new AbstractModule() {
@@ -48,7 +50,9 @@
             });
     Interceptable separateNullFoos = injector2.getInstance(Interceptable.class);
     assertNull(separateNullFoos.foo()); // confirm it's being intercepted
-    assertSame("different injectors should share proxy classes, otherwise memory leaks!",
-        nullFoosOne.getClass(), separateNullFoos.getClass());
+    assertSame(
+        "different injectors should share proxy classes, otherwise memory leaks!",
+        nullFoosOne.getClass(),
+        separateNullFoos.getClass());
   }
 

@@ -20,7 +20,6 @@
           };
     }
 
-
     long time = System.currentTimeMillis();
 
     for (int i = 0; i < threadCount; i++) {
@@ -30,15 +29,13 @@
     for (int i = 0; i < threadCount; i++) {
       try {
         threads[i].join();
-      }
-      catch (InterruptedException e) {
+      } catch (InterruptedException e) {
         throw new RuntimeException(e);
       }
     }
 
     time = System.currentTimeMillis() - time;
 
-    System.err.println(label
-        + format.format(count * 1000 / time) + " creations/s");
+    System.err.println(label + format.format(count * 1000 / time) + " creations/s");
   }
 

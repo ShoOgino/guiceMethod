@@ -1,16 +1,18 @@
   public void testCachedInScopePreventsProvisionNotify() {
     final Counter count1 = new Counter();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(Matchers.any(), count1);
-        bind(Foo.class).in(Scopes.SINGLETON);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(Matchers.any(), count1);
+                bind(Foo.class).in(Scopes.SINGLETON);
+              }
+            });
     Foo foo = injector.getInstance(Foo.class);
     assertNotNull(foo);
     assertEquals(1, count1.count);
-    
+
     // not notified the second time because nothing is provisioned
     // (it's cached in the scope)
     count1.count = 0;

@@ -1,6 +1,6 @@
   public void testInjectingParameterizedDependenciesForBindingSource() {
-    final TypeLiteral<ParameterizedDeps<String, Integer>> type
-        = new TypeLiteral<ParameterizedDeps<String, Integer>>() {};
+    final TypeLiteral<ParameterizedDeps<String, Integer>> type =
+        new TypeLiteral<ParameterizedDeps<String, Integer>>() {};
 
     assertParameterizedDepsInjected(
         Key.get(type),

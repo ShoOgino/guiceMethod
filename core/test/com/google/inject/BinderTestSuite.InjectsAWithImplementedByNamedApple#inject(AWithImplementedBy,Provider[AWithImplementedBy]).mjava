@@ -1,4 +1,6 @@
-    @Inject public void inject(@Named("apple") AWithImplementedBy aWithImplementedBy,
+    @Inject
+    public void inject(
+        @Named("apple") AWithImplementedBy aWithImplementedBy,
         @Named("apple") Provider<AWithImplementedBy> aWithImplementedByProvider) {
       this.value = aWithImplementedBy;
       this.provider = aWithImplementedByProvider;

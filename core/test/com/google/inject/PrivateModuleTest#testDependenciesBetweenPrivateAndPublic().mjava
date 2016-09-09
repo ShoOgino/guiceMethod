@@ -1,28 +1,40 @@
   public void testDependenciesBetweenPrivateAndPublic() {
-    Injector injector = Guice.createInjector(
-        new PrivateModule() {
-          @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              protected void configure() {}
 
-          @Provides @Exposed @Named("a") String provideA() {
-            return "A";
-          }
+              @Provides
+              @Exposed
+              @Named("a")
+              String provideA() {
+                return "A";
+              }
 
-          @Provides @Exposed @Named("abc") String provideAbc(@Named("ab") String ab) {
-            return ab + "C";
-          }
-        },
-        new AbstractModule() {
-          @Override protected void configure() {}
+              @Provides
+              @Exposed
+              @Named("abc")
+              String provideAbc(@Named("ab") String ab) {
+                return ab + "C";
+              }
+            },
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-          @Provides @Named("ab") String provideAb(@Named("a") String a) {
-            return a + "B";
-          }
+              @Provides
+              @Named("ab")
+              String provideAb(@Named("a") String a) {
+                return a + "B";
+              }
 
-          @Provides @Named("abcd") String provideAbcd(@Named("abc") String abc) {
-            return abc + "D";
-          }
-        }
-    );
+              @Provides
+              @Named("abcd")
+              String provideAbcd(@Named("abc") String abc) {
+                return abc + "D";
+              }
+            });
 
     assertEquals("ABCD", injector.getInstance(Key.get(String.class, named("abcd"))));
   }

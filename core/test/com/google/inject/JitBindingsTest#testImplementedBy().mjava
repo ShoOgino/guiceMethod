@@ -1,11 +1,13 @@
   public void testImplementedBy() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        binder().requireExplicitBindings();
-        bind(ImplBy.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder().requireExplicitBindings();
+                bind(ImplBy.class);
+              }
+            });
     ensureWorks(injector, ImplBy.class);
     ensureFails(injector, ALLOW_BINDING, ImplByImpl.class);
   }

@@ -1,8 +1,8 @@
   public void testElementsDeduplicate() {
-    List<Element> elements = Elements.getElements(
-        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
-        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
-    );
+    List<Element> elements =
+        Elements.getElements(
+            new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
+            new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo));
     assertEquals(14, elements.size());
     assertEquals(7, new LinkedHashSet<Element>(elements).size());
   }

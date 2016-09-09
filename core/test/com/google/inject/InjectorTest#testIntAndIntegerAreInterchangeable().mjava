@@ -1,5 +1,4 @@
-  public void testIntAndIntegerAreInterchangeable()
-      throws CreationException {
+  public void testIntAndIntegerAreInterchangeable() throws CreationException {
     Injector injector =
         Guice.createInjector(
             new AbstractModule() {

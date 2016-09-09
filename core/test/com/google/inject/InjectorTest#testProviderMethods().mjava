@@ -12,11 +12,9 @@
               }
             });
 
-    assertSame(singleton,
-        injector.getInstance(Key.get(SampleSingleton.class)));
+    assertSame(singleton, injector.getInstance(Key.get(SampleSingleton.class)));
     assertSame(singleton, injector.getInstance(SampleSingleton.class));
 
-    assertSame(other,
-        injector.getInstance(Key.get(SampleSingleton.class, Other.class)));
+    assertSame(other, injector.getInstance(Key.get(SampleSingleton.class, Other.class)));
   }
 

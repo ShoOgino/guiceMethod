@@ -1,25 +1,38 @@
   public void testNestedPrivateModulesWithSomeKeysUnexposed() {
-    Injector injector = Guice.createInjector(new PrivateModule() {
-      @Override public void configure() {
-        bind(String.class).annotatedWith(named("bound outer, exposed outer")).toInstance("boeo");
-        expose(String.class).annotatedWith(named("bound outer, exposed outer"));
-        bind(String.class).annotatedWith(named("bound outer, exposed none")).toInstance("boen");
-        expose(String.class).annotatedWith(named("bound inner, exposed both"));
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              public void configure() {
+                bind(String.class)
+                    .annotatedWith(named("bound outer, exposed outer"))
+                    .toInstance("boeo");
+                expose(String.class).annotatedWith(named("bound outer, exposed outer"));
+                bind(String.class)
+                    .annotatedWith(named("bound outer, exposed none"))
+                    .toInstance("boen");
+                expose(String.class).annotatedWith(named("bound inner, exposed both"));
 
-        install(new PrivateModule() {
-          @Override public void configure() {
-            bind(String.class).annotatedWith(named("bound inner, exposed both")).toInstance("bieb");
-            expose(String.class).annotatedWith(named("bound inner, exposed both"));
-            bind(String.class).annotatedWith(named("bound inner, exposed none")).toInstance("bien");
-          }
-        });
-      }
-    });
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        bind(String.class)
+                            .annotatedWith(named("bound inner, exposed both"))
+                            .toInstance("bieb");
+                        expose(String.class).annotatedWith(named("bound inner, exposed both"));
+                        bind(String.class)
+                            .annotatedWith(named("bound inner, exposed none"))
+                            .toInstance("bien");
+                      }
+                    });
+              }
+            });
 
-    assertEquals("boeo",
-        injector.getInstance(Key.get(String.class, named("bound outer, exposed outer"))));
-    assertEquals("bieb",
-        injector.getInstance(Key.get(String.class, named("bound inner, exposed both"))));
+    assertEquals(
+        "boeo", injector.getInstance(Key.get(String.class, named("bound outer, exposed outer"))));
+    assertEquals(
+        "bieb", injector.getInstance(Key.get(String.class, named("bound inner, exposed both"))));
 
     try {
       injector.getInstance(Key.get(String.class, named("bound outer, exposed none")));

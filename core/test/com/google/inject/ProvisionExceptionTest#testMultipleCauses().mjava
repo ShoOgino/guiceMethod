@@ -3,7 +3,8 @@
       Guice.createInjector().getInstance(G.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error injecting method, java.lang.IllegalArgumentException",
           "Caused by: java.lang.IllegalArgumentException: java.lang.UnsupportedOperationException",
           "Caused by: java.lang.UnsupportedOperationException: Unsupported",

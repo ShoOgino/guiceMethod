@@ -1,21 +1,26 @@
   public void testListenerCallsProvisionTwice() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(Matchers.any(), new ProvisionTwice());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(Matchers.any(), new ProvisionTwice());
+              }
+            });
     try {
       injector.getInstance(Foo.class);
       fail();
-    } catch(ProvisionException pe) {
+    } catch (ProvisionException pe) {
       assertEquals(1, pe.getErrorMessages().size());
-      assertContains(pe.getMessage(),
-          "1) Error notifying ProvisionListener " + ProvisionTwice.class.getName()
-          + " of " + Foo.class.getName(),
+      assertContains(
+          pe.getMessage(),
+          "1) Error notifying ProvisionListener "
+              + ProvisionTwice.class.getName()
+              + " of "
+              + Foo.class.getName(),
           "Reason: java.lang.IllegalStateException: Already provisioned in this listener.",
           "while locating " + Foo.class.getName());
-      assertEquals("Already provisioned in this listener.", pe.getCause().getMessage());  
+      assertEquals("Already provisioned in this listener.", pe.getCause().getMessage());
     }
   }
 

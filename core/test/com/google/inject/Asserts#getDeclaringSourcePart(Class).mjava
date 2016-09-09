@@ -1,5 +1,5 @@
   /**
-   * Returns the source file appears in error messages based on {@link 
+   * Returns the source file appears in error messages based on {@link
    * #getIncludeStackTraceOption()} value.
    */
   public static String getDeclaringSourcePart(Class clazz) {

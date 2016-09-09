@@ -1,11 +1,11 @@
   public void testDuplicateBindingsAreIgnored() {
-    Injector injector = Guice.createInjector(
-        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
-        new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo)
-    );
+    Injector injector =
+        Guice.createInjector(
+            new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo),
+            new SimpleModule(foo, pFoo, pclFoo, clFoo, cFoo));
     List<Key<?>> bindings = Lists.newArrayList(injector.getAllBindings().keySet());
     removeBasicBindings(bindings);
-    
+
     // Ensure only one binding existed for each type.
     assertTrue(bindings.remove(Key.get(Foo.class, named("instance"))));
     assertTrue(bindings.remove(Key.get(Foo.class, named("pInstance"))));
@@ -15,7 +15,7 @@
     assertTrue(bindings.remove(Key.get(Foo.class, named("constructor"))));
     assertTrue(bindings.remove(Key.get(FooProvider.class))); // JIT binding
     assertTrue(bindings.remove(Key.get(Foo.class, named("providerMethod"))));
-    
+
     assertEquals(bindings.toString(), 0, bindings.size());
   }
 

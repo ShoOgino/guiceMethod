@@ -1,2 +1,3 @@
-    @Inject C2(D2 d) {}
+    @Inject
+    C2(D2 d) {}
 

@@ -1,14 +1,15 @@
   public void testInjectionFailure() {
     Injector injector = Guice.createInjector();
 
-    MembersInjector<InjectionFailure> membersInjector
-        = injector.getMembersInjector(InjectionFailure.class);
+    MembersInjector<InjectionFailure> membersInjector =
+        injector.getMembersInjector(InjectionFailure.class);
 
     try {
       membersInjector.injectMembers(new InjectionFailure());
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error injecting method, java.lang.ClassCastException: whoops, failure #1");
     }
   }

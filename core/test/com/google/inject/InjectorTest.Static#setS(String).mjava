@@ -1,4 +1,5 @@
-    @Inject static void setS(@S String s) {
+    @Inject
+    static void setS(@S String s) {
       Static.s = s;
     }
 

@@ -6,25 +6,32 @@
     final Key<String> e = Key.get(String.class, named("E"));
     final Key<String> f = Key.get(String.class, named("F"));
 
-    Module singletonBindings = new AbstractModule() {
-      @Override protected void configure() {
-        bind(a).to(b);
-        bind(b).to(c);
-        bind(c).toProvider(Providers.of("c")).in(Scopes.NO_SCOPE);
-        bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
-        bindScope(CustomScoped.class, Scopes.NO_SCOPE);
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(f).toProvider(Providers.of("f")).in(CustomScoped.class);
-            expose(f);
+    Module singletonBindings =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(a).to(b);
+            bind(b).to(c);
+            bind(c).toProvider(Providers.of("c")).in(Scopes.NO_SCOPE);
+            bind(d).toProvider(Providers.of("d")).in(CustomScoped.class);
+            bindScope(CustomScoped.class, Scopes.NO_SCOPE);
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(f).toProvider(Providers.of("f")).in(CustomScoped.class);
+                    expose(f);
+                  }
+                });
           }
-        });
-      }
 
-      @Provides @Named("E") @CustomScoped String provideE() {
-        return "e";
-      }
-    };
+          @Provides
+          @Named("E")
+          @CustomScoped
+          String provideE() {
+            return "e";
+          }
+        };
 
     @SuppressWarnings("unchecked") // we know the module contains only bindings
     List<Element> moduleBindings = Elements.getElements(singletonBindings);

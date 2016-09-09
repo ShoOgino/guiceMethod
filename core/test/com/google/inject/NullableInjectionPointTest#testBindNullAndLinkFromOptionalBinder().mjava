@@ -3,17 +3,21 @@
    * was rejecting nulls from its dependencies.
    */
   public void testBindNullAndLinkFromOptionalBinder() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Foo.class).toProvider(Providers.<Foo>of(null));
-        OptionalBinder.newOptionalBinder(binder(), Foo.class);
-      }
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Foo.class).toProvider(Providers.<Foo>of(null));
+                OptionalBinder.newOptionalBinder(binder(), Foo.class);
+              }
 
-      @Provides @Named("throughProvidesMethod") Foo provideFoo(Optional<Foo> foo) {
-        return foo.orNull();
-      }
-    });
+              @Provides
+              @Named("throughProvidesMethod")
+              Foo provideFoo(Optional<Foo> foo) {
+                return foo.orNull();
+              }
+            });
     assertNull(injector.getInstance(Key.get(Foo.class, Names.named("throughProvidesMethod"))));
   }
 

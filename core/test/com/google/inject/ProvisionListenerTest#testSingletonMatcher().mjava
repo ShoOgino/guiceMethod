@@ -1,16 +1,20 @@
   public void testSingletonMatcher() {
     final Counter counter = new Counter();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(new AbstractMatcher<Binding<?>>() {
-          @Override
-          public boolean matches(Binding<?> t) {
-            return Scopes.isSingleton(t);
-          }
-        }, counter);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    new AbstractMatcher<Binding<?>>() {
+                      @Override
+                      public boolean matches(Binding<?> t) {
+                        return Scopes.isSingleton(t);
+                      }
+                    },
+                    counter);
+              }
+            });
     assertEquals(0, counter.count);
     // no increment for getting Many.
     injector.getInstance(Many.class);

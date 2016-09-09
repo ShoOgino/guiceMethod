@@ -1,12 +1,13 @@
   public void testInjectStatics() throws CreationException {
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(ForMethod.class).to("test");
-        bindConstant().annotatedWith(ForField.class).to(5);
-        requestStaticInjection(HasInjections.class);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindConstant().annotatedWith(ForMethod.class).to("test");
+            bindConstant().annotatedWith(ForField.class).to(5);
+            requestStaticInjection(HasInjections.class);
+          }
+        });
 
     assertEquals("test", HasInjections.staticMethod);
     assertEquals(5, HasInjections.staticField);

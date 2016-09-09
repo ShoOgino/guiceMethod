@@ -1,16 +1,22 @@
   public void testDisabledCircularDependenciesWithProviderKeys() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          binder().disableCircularProxies();
-          bind(C2.class).toProvider(C2P.class);
-          bind(D2.class).toProvider(D2P.class);
-        }
-      }).getInstance(C2.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  binder().disableCircularProxies();
+                  bind(C2.class).toProvider(C2P.class);
+                  bind(D2.class).toProvider(D2P.class);
+                }
+              })
+          .getInstance(C2.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
-          "Found a circular dependency involving " + C2.class.getName() + ", and circular dependencies are disabled.");
+      assertContains(
+          expected.getMessage(),
+          "Found a circular dependency involving "
+              + C2.class.getName()
+              + ", and circular dependencies are disabled.");
     }
   }
 

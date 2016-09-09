@@ -1,22 +1,24 @@
   /**
    * Tests that injector can create two singletons with circular dependency in parallel.
    *
-   * <p>This creates two threads to work in parallel, to create instances of
-   * {@link G} and {@link H}. Creation is synchronized by injection of {@link S},
-   * first thread would block until second would be inside a singleton creation as well.
+   * <p>This creates two threads to work in parallel, to create instances of {@link G} and {@link
+   * H}. Creation is synchronized by injection of {@link S}, first thread would block until second
+   * would be inside a singleton creation as well.
    *
-   * <p>Both instances are created by sibling injectors, that share singleton scope.
-   * Verifies that exactly one circular proxy object is created.
+   * <p>Both instances are created by sibling injectors, that share singleton scope. Verifies that
+   * exactly one circular proxy object is created.
    */
 
   public void testSiblingInjectorGettingCircularSingletonsOneCircularProxy() throws Exception {
     final Provider<S> provider = new SBarrierProvider(2);
-    final Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(S.class).toProvider(provider);
-      }
-    });
+    final Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(S.class).toProvider(provider);
+              }
+            });
 
     Future<G> firstThreadResult =
         Executors.newSingleThreadExecutor()

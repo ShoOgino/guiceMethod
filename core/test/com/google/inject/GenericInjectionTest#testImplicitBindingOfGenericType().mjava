@@ -1,11 +1,11 @@
   /**
-   * Although we may not have intended to support this behaviour, this test
-   * passes under Guice 1.0. The workaround is to add an explicit binding for
-   * the parameterized type. See {@link #testExplicitBindingOfGenericType()}.
+   * Although we may not have intended to support this behaviour, this test passes under Guice 1.0.
+   * The workaround is to add an explicit binding for the parameterized type. See {@link
+   * #testExplicitBindingOfGenericType()}.
    */
   public void testImplicitBindingOfGenericType() {
-    Parameterized<String> parameterized
-        = Guice.createInjector().getInstance(Key.get(new TypeLiteral<Parameterized<String>>() {}));
+    Parameterized<String> parameterized =
+        Guice.createInjector().getInstance(Key.get(new TypeLiteral<Parameterized<String>>() {}));
     assertNotNull(parameterized);
   }
 

@@ -1,4 +1,5 @@
-  @Override protected void setUp() throws Exception {
+  @Override
+  protected void setUp() throws Exception {
     AnnotatedSingleton.nextInstanceId = 0;
     BoundAsSingleton.nextInstanceId = 0;
     EagerSingleton.nextInstanceId = 0;

@@ -1,15 +1,16 @@
   public void testFailsIfInjectingScopedDirectlyWhenItIsntBound() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          binder().requireExplicitBindings();
-          bind(Foo.class).to(ScopedFooImpl.class);
-          bind(WantsScopedFooImpl.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              binder().requireExplicitBindings();
+              bind(Foo.class).to(ScopedFooImpl.class);
+              bind(WantsScopedFooImpl.class);
+            }
+          });
       fail();
-    } catch(CreationException expected) {
+    } catch (CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(ScopedFooImpl.class));
       assertEquals(1, expected.getErrorMessages().size());
     }

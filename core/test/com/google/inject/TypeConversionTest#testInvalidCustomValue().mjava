@@ -6,11 +6,15 @@
     } catch (CreationException expected) {
       Throwable cause = Iterables.getOnlyElement(expected.getErrorMessages()).getCause();
       assertTrue(cause instanceof UnsupportedOperationException);
-      assertContains(expected.getMessage(),
-          "1) Error converting 'invalid' (bound at ", getClass().getName(),
-          getDeclaringSourcePart(getClass()), "to java.util.Date",
+      assertContains(
+          expected.getMessage(),
+          "1) Error converting 'invalid' (bound at ",
+          getClass().getName(),
+          getDeclaringSourcePart(getClass()),
+          "to java.util.Date",
           "using BrokenConverter which matches only(java.util.Date) ",
-          "(bound at " + getClass().getName(), getDeclaringSourcePart(getClass()),
+          "(bound at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()),
           "Reason: java.lang.UnsupportedOperationException: Cannot convert",
           "at " + DateHolder.class.getName() + ".date(TypeConversionTest.java:");
     }

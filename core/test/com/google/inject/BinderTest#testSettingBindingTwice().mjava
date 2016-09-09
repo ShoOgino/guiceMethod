@@ -1,16 +1,17 @@
-  /**
-   * Binding something to two different things should give an error.
-   */
+  /** Binding something to two different things should give an error. */
   public void testSettingBindingTwice() {
     try {
       Guice.createInjector(new ParentModule());
       fail();
-    } catch(CreationException expected) {
-      assertContains(expected.getMessage(),
-        "1) A binding to java.lang.String was already configured at " + ConstantModule.class.getName(),
-        asModuleChain(ParentModule.class, FooModule.class, ConstantModule.class),
-        "at " + ConstantModule.class.getName(), getDeclaringSourcePart(getClass()),
-        asModuleChain(ParentModule.class, BarModule.class, ConstantModule.class));
+    } catch (CreationException expected) {
+      assertContains(
+          expected.getMessage(),
+          "1) A binding to java.lang.String was already configured at "
+              + ConstantModule.class.getName(),
+          asModuleChain(ParentModule.class, FooModule.class, ConstantModule.class),
+          "at " + ConstantModule.class.getName(),
+          getDeclaringSourcePart(getClass()),
+          asModuleChain(ParentModule.class, BarModule.class, ConstantModule.class));
       assertContains(expected.getMessage(), "1 error");
     }
   }

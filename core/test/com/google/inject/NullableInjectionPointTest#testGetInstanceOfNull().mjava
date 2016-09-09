@@ -1,7 +1,4 @@
-  /**
-   * Provider.getInstance() is allowed to return null via direct calls to
-   * getInstance().
-   */
+  /** Provider.getInstance() is allowed to return null via direct calls to getInstance(). */
   public void testGetInstanceOfNull() {
     assertNull(createInjector().getInstance(Foo.class));
   }

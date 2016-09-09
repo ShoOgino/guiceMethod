@@ -2,12 +2,15 @@
     try {
       Guice.createInjector(new FailingProviderModule(), new FailingProviderModule());
       fail("should have failed");
-    } catch(CreationException ce) {
-      assertContains(ce.getMessage(),
-          "A binding to " + Foo.class.getName() + " was already configured " +
-          "at " + FailingProviderModule.class.getName(),
-          "at " + FailingProviderModule.class.getName()
-          );
+    } catch (CreationException ce) {
+      assertContains(
+          ce.getMessage(),
+          "A binding to "
+              + Foo.class.getName()
+              + " was already configured "
+              + "at "
+              + FailingProviderModule.class.getName(),
+          "at " + FailingProviderModule.class.getName());
     }
   }
 

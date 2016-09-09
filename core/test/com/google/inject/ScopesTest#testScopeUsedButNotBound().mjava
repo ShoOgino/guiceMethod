@@ -1,16 +1,20 @@
   public void testScopeUsedButNotBound() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(B.class).in(CustomScoped.class);
-          bind(C.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(B.class).in(CustomScoped.class);
+              bind(C.class);
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) No scope is bound to " + CustomScoped.class.getName(),
-          "at " + getClass().getName(), getDeclaringSourcePart(getClass()),
+          "at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()),
           "2) No scope is bound to " + CustomScoped.class.getName(),
           "at " + C.class.getName() + ".class");
     }

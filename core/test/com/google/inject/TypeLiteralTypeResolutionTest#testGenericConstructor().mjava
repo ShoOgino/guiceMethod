@@ -1,6 +1,6 @@
   public void testGenericConstructor() throws NoSuchMethodException {
     TypeLiteral<?> resolver = TypeLiteral.get(hasGenericConstructorOfShort);
-    assertEquals(Short.class,
-        resolver.getParameterTypes(newHasGenericConstructor).get(0).getType());
+    assertEquals(
+        Short.class, resolver.getParameterTypes(newHasGenericConstructor).get(0).getType());
   }
 

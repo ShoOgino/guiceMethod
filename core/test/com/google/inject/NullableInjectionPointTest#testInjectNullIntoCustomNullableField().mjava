@@ -1,6 +1,5 @@
   public void testInjectNullIntoCustomNullableField() {
-    CustomNullableFooField nff
-        = createInjector().getInstance(CustomNullableFooField.class);
+    CustomNullableFooField nff = createInjector().getInstance(CustomNullableFooField.class);
     assertNull(nff.foo);
-  }  
+  }
 

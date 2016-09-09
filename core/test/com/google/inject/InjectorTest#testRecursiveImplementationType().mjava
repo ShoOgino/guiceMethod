@@ -3,9 +3,11 @@
       Guice.createInjector().getInstance(SeaHorse.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "@ImplementedBy points to the same class it annotates.",
-          "while locating ", SeaHorse.class.getName());
+          "while locating ",
+          SeaHorse.class.getName());
     }
   }
 

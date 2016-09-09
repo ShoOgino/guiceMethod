@@ -1,10 +1,13 @@
   public void testBindDuplicateScope() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(CustomScoped.class, Scopes.SINGLETON);
-        bindScope(CustomScoped.class, Scopes.SINGLETON);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(CustomScoped.class, Scopes.SINGLETON);
+                bindScope(CustomScoped.class, Scopes.SINGLETON);
+              }
+            });
 
     assertSame(
         injector.getInstance(AnnotatedCustomScoped.class),

@@ -4,11 +4,14 @@
    */
   public void testExceptionsCollapsedWithScopes() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(B.class).in(Scopes.SINGLETON);
-        }
-      }).getInstance(A.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  bind(B.class).in(Scopes.SINGLETON);
+                }
+              })
+          .getInstance(A.class);
       fail();
     } catch (ProvisionException e) {
       assertTrue(e.getCause() instanceof UnsupportedOperationException);

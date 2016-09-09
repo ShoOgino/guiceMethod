@@ -4,9 +4,11 @@
       injector.getInstance(MissingParameter.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Could not find a suitable constructor in " + NoInjectConstructor.class.getName(),
-          "for the 1st parameter of " + MissingParameter.class.getName() 
+          "for the 1st parameter of "
+              + MissingParameter.class.getName()
               + ".<init>(BinderTest.java:");
     }
   }

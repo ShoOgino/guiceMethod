@@ -4,7 +4,8 @@
       injector.getInstance(InnerClass.class);
       fail();
     } catch (Exception expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "Injecting into inner classes is not supported.",
           "while locating " + InnerClass.class.getName());
     }

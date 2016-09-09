@@ -1,33 +1,38 @@
   public void testChildInjectorInheritsOption() {
-    Injector parent = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        binder().requireExplicitBindings();
-        bind(Bar.class);
-      }
-    });
+    Injector parent =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder().requireExplicitBindings();
+                bind(Bar.class);
+              }
+            });
     ensureWorks(parent, Bar.class);
     ensureFails(parent, FAIL_ALL, FooImpl.class, FooBar.class, Foo.class);
-    
+
     try {
-      parent.createChildInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(FooBar.class);
-        }
-      });
+      parent.createChildInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(FooBar.class);
+            }
+          });
       fail("should have failed");
-    } catch(CreationException expected) {
+    } catch (CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(Foo.class));
       assertEquals(1, expected.getErrorMessages().size());
     }
-    
-    Injector child = parent.createChildInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Foo.class).to(FooImpl.class);
-      }
-    });
+
+    Injector child =
+        parent.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Foo.class).to(FooImpl.class);
+              }
+            });
     ensureWorks(child, Foo.class, Bar.class);
     ensureFails(child, ALLOW_BINDING, FooImpl.class);
     ensureInChild(parent, FooImpl.class, Foo.class);
@@ -37,12 +42,14 @@
     // FooBar was succesfully inserted into the child injector (and parent blacklist), but then
     // JIT bindings it depended on failed, making the child injector invalid.
 
-    Injector grandchild = child.createChildInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(FooBar.class);
-      }
-    });
+    Injector grandchild =
+        child.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(FooBar.class);
+              }
+            });
     ensureWorks(grandchild, FooBar.class, Foo.class, Bar.class);
     ensureFails(grandchild, ALLOW_BINDING, FooImpl.class);
     ensureFails(child, ALLOW_BINDING, FooImpl.class);

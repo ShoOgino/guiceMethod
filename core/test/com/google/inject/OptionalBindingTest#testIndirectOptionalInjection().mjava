@@ -1,6 +1,5 @@
   /**
-   * Test for bug 107, where we weren't doing optional injection properly for
-   * indirect injections.
+   * Test for bug 107, where we weren't doing optional injection properly for indirect injections.
    */
   public void testIndirectOptionalInjection() {
     Indirect indirect = Guice.createInjector().getInstance(Indirect.class);

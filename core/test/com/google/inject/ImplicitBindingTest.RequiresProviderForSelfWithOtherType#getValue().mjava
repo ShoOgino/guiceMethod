@@ -1,8 +1,8 @@
     public String getValue() {
       // Attempt to get another instance of ourself. This pattern
-      // is possible for recursive processing. 
+      // is possible for recursive processing.
       selfProvider.get();
-      
+
       return providedStringValue;
     }
 

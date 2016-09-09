@@ -1,4 +1,5 @@
-    @Inject void method(Collection<V> values) {
+    @Inject
+    void method(Collection<V> values) {
       this.values = values;
     }
 

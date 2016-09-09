@@ -1,8 +1,8 @@
   public void testMembersInjectorWithNonInjectedTypes() {
     Injector injector = Guice.createInjector();
 
-    MembersInjector<NoInjectedMembers> membersInjector
-        = injector.getMembersInjector(NoInjectedMembers.class);
+    MembersInjector<NoInjectedMembers> membersInjector =
+        injector.getMembersInjector(NoInjectedMembers.class);
 
     membersInjector.injectMembers(new NoInjectedMembers());
     membersInjector.injectMembers(new NoInjectedMembers());

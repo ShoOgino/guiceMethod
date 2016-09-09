@@ -1,4 +1,5 @@
-    @Inject public AImpl(B b) {
+    @Inject
+    public AImpl(B b) {
       this.b = b;
     }
 
