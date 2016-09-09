@@ -1,4 +1,5 @@
-  @Override public final int hashCode() {
+  @Override
+  public final int hashCode() {
     return this.hashCode;
   }
 

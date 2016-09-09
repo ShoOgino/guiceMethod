@@ -4,7 +4,7 @@
    *
    * @param typeLiteral type to get members injector for
    * @see Binder#getMembersInjector(TypeLiteral) for an alternative that offers up front error
-   *  detection
+   *     detection
    * @since 2.0
    */
   <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> typeLiteral);

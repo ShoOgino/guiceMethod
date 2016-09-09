@@ -1,6 +1,4 @@
-  /**
-   * Gets underlying {@code Type} instance.
-   */
+  /** Gets underlying {@code Type} instance. */
   public final Type getType() {
     return type;
   }

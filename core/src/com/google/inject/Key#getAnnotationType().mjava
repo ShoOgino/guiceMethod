@@ -1,6 +1,4 @@
-  /**
-   * Gets the annotation type.
-   */
+  /** Gets the annotation type. */
   public final Class<? extends Annotation> getAnnotationType() {
     return annotationStrategy.getAnnotationType();
   }

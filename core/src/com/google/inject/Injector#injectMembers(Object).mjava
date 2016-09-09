@@ -7,9 +7,8 @@
    * you, you'll never need to use this method.
    *
    * @param instance to inject members on
-   *
    * @see Binder#getMembersInjector(Class) for a preferred alternative that supports checks before
-   *  run time
+   *     run time
    */
   void injectMembers(Object instance);
 

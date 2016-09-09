@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#requestInjection(Object)
-   */
+  /** @see Binder#requestInjection(Object) */
   protected final void requestInjection(Object instance) {
     binder().requestInjection(instance);
   }

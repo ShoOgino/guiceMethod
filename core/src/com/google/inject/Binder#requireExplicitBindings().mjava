@@ -1,30 +1,26 @@
   /**
-   * Instructs the Injector that bindings must be listed in a Module in order to
-   * be injected. Classes that are not explicitly bound in a module cannot be
-   * injected. Bindings created through a linked binding
-   * (<code>bind(Foo.class).to(FooImpl.class)</code>) are allowed, but the
-   * implicit binding (<code>FooImpl</code>) cannot be directly injected unless
-   * it is also explicitly bound (<code>bind(FooImpl.class)</code>).
-   * <p>
-   * Tools can still retrieve bindings for implicit bindings (bindings created
-   * through a linked binding) if explicit bindings are required, however
-   * {@link Binding#getProvider} will fail.
-   * <p>
-   * By default, explicit bindings are not required.
-   * <p>
-   * If a parent injector requires explicit bindings, then all child injectors
-   * (and private modules within that injector) also require explicit bindings.
-   * If a parent does not require explicit bindings, a child injector or private
-   * module may optionally declare itself as requiring explicit bindings. If it
-   * does, the behavior is limited only to that child or any grandchildren. No
-   * siblings of the child will require explicit bindings.
-   * <p>
-   * In the absence of an explicit binding for the target, linked bindings in
-   * child injectors create a binding for the target in the parent. Since this
-   * behavior can be surprising, it causes an error instead if explicit bindings
-   * are required. To avoid this error, add an explicit binding for the target,
-   * either in the child or the parent.
-   * 
+   * Instructs the Injector that bindings must be listed in a Module in order to be injected.
+   * Classes that are not explicitly bound in a module cannot be injected. Bindings created through
+   * a linked binding (<code>bind(Foo.class).to(FooImpl.class)</code>) are allowed, but the implicit
+   * binding (<code>FooImpl</code>) cannot be directly injected unless it is also explicitly bound (
+   * <code>bind(FooImpl.class)</code>).
+   *
+   * <p>Tools can still retrieve bindings for implicit bindings (bindings created through a linked
+   * binding) if explicit bindings are required, however {@link Binding#getProvider} will fail.
+   *
+   * <p>By default, explicit bindings are not required.
+   *
+   * <p>If a parent injector requires explicit bindings, then all child injectors (and private
+   * modules within that injector) also require explicit bindings. If a parent does not require
+   * explicit bindings, a child injector or private module may optionally declare itself as
+   * requiring explicit bindings. If it does, the behavior is limited only to that child or any
+   * grandchildren. No siblings of the child will require explicit bindings.
+   *
+   * <p>In the absence of an explicit binding for the target, linked bindings in child injectors
+   * create a binding for the target in the parent. Since this behavior can be surprising, it causes
+   * an error instead if explicit bindings are required. To avoid this error, add an explicit
+   * binding for the target, either in the child or the parent.
+   *
    * @since 3.0
    */
   void requireExplicitBindings();

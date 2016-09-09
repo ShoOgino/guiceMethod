@@ -1,6 +1,6 @@
-  private static void ensureRetainedAtRuntime(
-      Class<? extends Annotation> annotationType) {
-    checkArgument(Annotations.isRetainedAtRuntime(annotationType),
+  private static void ensureRetainedAtRuntime(Class<? extends Annotation> annotationType) {
+    checkArgument(
+        Annotations.isRetainedAtRuntime(annotationType),
         "%s is not retained at runtime. Please annotate it with @Retention(RUNTIME).",
         annotationType.getName());
   }

@@ -1,5 +1,3 @@
-  /**
-   * Binds a scope to an annotation.
-   */
+  /** Binds a scope to an annotation. */
   void bindScope(Class<? extends Annotation> annotationType, Scope scope);
 

@@ -1,11 +1,10 @@
   /**
-   * Returns a binder that uses {@code source} as the reference location for
-   * configuration errors. This is typically a {@link StackTraceElement}
-   * for {@code .java} source but it could any binding source, such as the
-   * path to a {@code .properties} file.
+   * Returns a binder that uses {@code source} as the reference location for configuration errors.
+   * This is typically a {@link StackTraceElement} for {@code .java} source but it could any binding
+   * source, such as the path to a {@code .properties} file.
    *
-   * @param source any object representing the source location and has a
-   *     concise {@link Object#toString() toString()} value
+   * @param source any object representing the source location and has a concise {@link
+   *     Object#toString() toString()} value
    * @return a binder that shares its configuration with this binder
    * @since 2.0
    */

@@ -7,8 +7,8 @@
    * @since 2.0
    */
   public TypeLiteral<?> getSupertype(Class<?> supertype) {
-    checkArgument(supertype.isAssignableFrom(rawType),
-        "%s is not a supertype of %s", supertype, this.type);
+    checkArgument(
+        supertype.isAssignableFrom(rawType), "%s is not a supertype of %s", supertype, this.type);
     return resolve(MoreTypes.getGenericSupertype(type, rawType, supertype));
   }
 

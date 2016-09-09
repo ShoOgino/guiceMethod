@@ -1,4 +1,5 @@
-  @Override public String getMessage() {
+  @Override
+  public String getMessage() {
     return Errors.format("Unable to provision, see the following errors", messages);
   }
 

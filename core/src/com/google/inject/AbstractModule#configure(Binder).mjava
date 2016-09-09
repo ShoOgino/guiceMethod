@@ -5,8 +5,7 @@
     this.binder = checkNotNull(builder, "builder");
     try {
       configure();
-    }
-    finally {
+    } finally {
       this.binder = null;
     }
   }

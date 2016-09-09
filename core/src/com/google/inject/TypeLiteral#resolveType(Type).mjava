@@ -12,9 +12,7 @@
         GenericArrayType original = (GenericArrayType) toResolve;
         Type componentType = original.getGenericComponentType();
         Type newComponentType = resolveType(componentType);
-        return componentType == newComponentType
-            ? original
-            : Types.arrayOf(newComponentType);
+        return componentType == newComponentType ? original : Types.arrayOf(newComponentType);
 
       } else if (toResolve instanceof ParameterizedType) {
         ParameterizedType original = (ParameterizedType) toResolve;

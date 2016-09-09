@@ -1,6 +1,4 @@
-  /**
-   * Unsafe. Constructs a key from a manually specified type.
-   */
+  /** Unsafe. Constructs a key from a manually specified type. */
   @SuppressWarnings("unchecked")
   private Key(Type type, AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;

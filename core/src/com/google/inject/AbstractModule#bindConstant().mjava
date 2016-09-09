@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#bindConstant()
-   */
+  /** @see Binder#bindConstant() */
   protected AnnotatedConstantBindingBuilder bindConstant() {
     return binder().bindConstant();
   }

@@ -1,8 +1,8 @@
   /**
-   * Prevents Guice from injecting dependencies that form a cycle, unless broken by a
-   * {@link Provider}. By default, circular dependencies are not disabled.
-   * <p>
-   * If a parent injector disables circular dependencies, then all child injectors (and private
+   * Prevents Guice from injecting dependencies that form a cycle, unless broken by a {@link
+   * Provider}. By default, circular dependencies are not disabled.
+   *
+   * <p>If a parent injector disables circular dependencies, then all child injectors (and private
    * modules within that injector) also disable circular dependencies. If a parent does not disable
    * circular dependencies, a child injector or private module may optionally declare itself as
    * disabling circular dependencies. If it does, the behavior is limited only to that child or any

@@ -1,6 +1,4 @@
-  /**
-   * Gets the annotation.
-   */
+  /** Gets the annotation. */
   public final Annotation getAnnotation() {
     return annotationStrategy.getAnnotation();
   }

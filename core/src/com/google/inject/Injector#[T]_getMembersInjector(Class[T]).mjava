@@ -4,8 +4,7 @@
    * instead to get increased up front error detection.
    *
    * @param type type to get members injector for
-   * @see Binder#getMembersInjector(Class) for an alternative that offers up front error
-   *  detection
+   * @see Binder#getMembersInjector(Class) for an alternative that offers up front error detection
    * @since 2.0
    */
   <T> MembersInjector<T> getMembersInjector(Class<T> type);

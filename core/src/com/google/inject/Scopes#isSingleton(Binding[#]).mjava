@@ -20,8 +20,8 @@
           binding = injector.getBinding(linkedBinding.getLinkedKey());
           continue;
         }
-      } else if(binding instanceof ExposedBinding) {
-        ExposedBinding<?> exposedBinding = (ExposedBinding)binding;
+      } else if (binding instanceof ExposedBinding) {
+        ExposedBinding<?> exposedBinding = (ExposedBinding) binding;
         Injector injector = exposedBinding.getPrivateElements().getInjector();
         if (injector != null) {
           binding = injector.getBinding(exposedBinding.getKey());

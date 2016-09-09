@@ -1,5 +1,3 @@
-  /**
-   * Uses the given module to configure more bindings.
-   */
+  /** Uses the given module to configure more bindings. */
   void install(Module module);
 

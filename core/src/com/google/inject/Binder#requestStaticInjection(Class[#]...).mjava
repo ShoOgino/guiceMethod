@@ -1,6 +1,6 @@
   /**
-   * Upon successful creation, the {@link Injector} will inject static fields
-   * and methods in the given classes.
+   * Upon successful creation, the {@link Injector} will inject static fields and methods in the
+   * given classes.
    *
    * @param types for which static members will be injected
    */

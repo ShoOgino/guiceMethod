@@ -5,8 +5,11 @@
    * @since 2.0
    */
   public TypeLiteral<?> getReturnType(Method method) {
-    checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
-        "%s is not defined by a supertype of %s", method, type);
+    checkArgument(
+        method.getDeclaringClass().isAssignableFrom(rawType),
+        "%s is not defined by a supertype of %s",
+        method,
+        type);
     return resolve(method.getGenericReturnType());
   }
 

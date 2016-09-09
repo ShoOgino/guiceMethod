@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#currentStage()
-   */
+  /** @see Binder#currentStage() */
   protected final Stage currentStage() {
     return binder().currentStage();
   }

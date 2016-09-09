@@ -1,6 +1,4 @@
-  /**
-   * Gets type literal for the given {@code Type} instance.
-   */
+  /** Gets type literal for the given {@code Type} instance. */
   public static TypeLiteral<?> get(Type type) {
     return new TypeLiteral<Object>(type);
   }

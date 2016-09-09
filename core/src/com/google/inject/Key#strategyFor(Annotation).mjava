@@ -1,6 +1,4 @@
-  /**
-   * Gets the strategy for an annotation.
-   */
+  /** Gets the strategy for an annotation. */
   static AnnotationStrategy strategyFor(Annotation annotation) {
     checkNotNull(annotation, "annotation");
     Class<? extends Annotation> annotationType = annotation.annotationType();

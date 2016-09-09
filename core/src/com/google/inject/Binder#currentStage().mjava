@@ -1,5 +1,3 @@
-  /**
-   * Gets the current stage.
-   */
+  /** Gets the current stage. */
   Stage currentStage();
 

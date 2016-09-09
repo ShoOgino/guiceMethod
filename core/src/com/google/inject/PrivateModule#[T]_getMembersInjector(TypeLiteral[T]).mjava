@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#getMembersInjector(TypeLiteral)
-   */
+  /** @see Binder#getMembersInjector(TypeLiteral) */
   protected <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> type) {
     return binder().getMembersInjector(type);
   }

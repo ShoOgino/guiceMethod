@@ -6,6 +6,5 @@
    * @param listener for injectable types matched by typeMatcher
    * @since 2.0
    */
-  void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
-      TypeListener listener);
+  void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher, TypeListener listener);
 

@@ -1,10 +1,9 @@
   /**
-   * Returns true if the object is a proxy for a circular dependency,
-   * constructed by Guice because it encountered a circular dependency. Scope
-   * implementations should be careful to <b>not cache circular proxies</b>,
-   * because the proxies are not intended for general purpose use. (They are
-   * designed just to fulfill the immediate injection, not all injections.
-   * Caching them can lead to IllegalArgumentExceptions or ClassCastExceptions.)
+   * Returns true if the object is a proxy for a circular dependency, constructed by Guice because
+   * it encountered a circular dependency. Scope implementations should be careful to <b>not cache
+   * circular proxies</b>, because the proxies are not intended for general purpose use. (They are
+   * designed just to fulfill the immediate injection, not all injections. Caching them can lead to
+   * IllegalArgumentExceptions or ClassCastExceptions.)
    *
    * @since 4.0
    */
