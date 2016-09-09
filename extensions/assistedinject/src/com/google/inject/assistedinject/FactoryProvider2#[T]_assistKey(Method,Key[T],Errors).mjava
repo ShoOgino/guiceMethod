@@ -1,7 +1,7 @@
   /**
-   * Returns a key similar to {@code key}, but with an {@literal @}Assisted binding annotation.
-   * This fails if another binding annotation is clobbered in the process. If the key already has
-   * the {@literal @}Assisted annotation, it is returned as-is to preserve any String value.
+   * Returns a key similar to {@code key}, but with an {@literal @}Assisted binding annotation. This
+   * fails if another binding annotation is clobbered in the process. If the key already has the
+   * {@literal @}Assisted annotation, it is returned as-is to preserve any String value.
    */
   private <T> Key<T> assistKey(Method method, Key<T> key, Errors errors) throws ErrorsException {
     if (key.getAnnotationType() == null) {
@@ -9,9 +9,11 @@
     } else if (key.getAnnotationType() == Assisted.class) {
       return key;
     } else {
-      errors.withSource(method).addMessage(
-          "Only @Assisted is allowed for factory parameters, but found @%s",
-          key.getAnnotationType());
+      errors
+          .withSource(method)
+          .addMessage(
+              "Only @Assisted is allowed for factory parameters, but found @%s",
+              key.getAnnotationType());
       throw errors.toException();
     }
   }

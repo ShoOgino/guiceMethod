@@ -1,9 +1,6 @@
-  @Override protected void configure() {
-    bind(NameFactory.class)
-        .annotatedWith(Graphviz.class)
-        .to(ShortNameFactory.class);
-    bind(PortIdFactory.class)
-        .annotatedWith(Graphviz.class)
-        .to(PortIdFactoryImpl.class);
+  @Override
+  protected void configure() {
+    bind(NameFactory.class).annotatedWith(Graphviz.class).to(ShortNameFactory.class);
+    bind(PortIdFactory.class).annotatedWith(Graphviz.class).to(PortIdFactoryImpl.class);
   }
 

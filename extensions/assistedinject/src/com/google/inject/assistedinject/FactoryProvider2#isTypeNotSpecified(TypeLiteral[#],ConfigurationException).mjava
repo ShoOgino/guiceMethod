@@ -5,8 +5,8 @@
   private boolean isTypeNotSpecified(TypeLiteral<?> typeLiteral, ConfigurationException ce) {
     Collection<Message> messages = ce.getErrorMessages();
     if (messages.size() == 1) {
-      Message msg = Iterables.getOnlyElement(
-          new Errors().keyNotFullySpecified(typeLiteral).getMessages());
+      Message msg =
+          Iterables.getOnlyElement(new Errors().keyNotFullySpecified(typeLiteral).getMessages());
       return msg.getMessage().equals(Iterables.getOnlyElement(messages).getMessage());
     } else {
       return false;

@@ -1,9 +1,8 @@
   /**
-   * Replace annotation instances with annotation types, this is only
-   * appropriate for testing if a key is bound and not for injecting.
+   * Replace annotation instances with annotation types, this is only appropriate for testing if a
+   * key is bound and not for injecting.
    *
-   * See Guice bug 125,
-   * https://github.com/google/guice/issues/125
+   * <p>See Guice bug 125, https://github.com/google/guice/issues/125
    */
   public Key<?> fixAnnotations(Key<?> key) {
     return key.getAnnotation() == null

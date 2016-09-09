@@ -3,7 +3,8 @@
    */
   public Binding<?> getBindingFromNewInjector(
       final Method method, final Object[] args, final AssistData data) {
-    checkState(injector != null,
+    checkState(
+        injector != null,
         "Factories.create() factories cannot be used until they're initialized by Guice.");
 
     final Key<?> returnType = data.returnType;
@@ -11,42 +12,46 @@
     // We ignore any pre-existing binding annotation.
     final Key<?> returnKey = Key.get(returnType.getTypeLiteral(), RETURN_ANNOTATION);
 
-    Module assistedModule = new AbstractModule() {
-      @Override
-      @SuppressWarnings({
-        "unchecked", "rawtypes"}) // raw keys are necessary for the args array and return value
-      protected void configure() {
-        Binder binder = binder().withSource(method);
+    Module assistedModule =
+        new AbstractModule() {
+          @Override
+          @SuppressWarnings({
+            "unchecked",
+            "rawtypes"
+          }) // raw keys are necessary for the args array and return value
+          protected void configure() {
+            Binder binder = binder().withSource(method);
 
-        int p = 0;
-        if(!data.optimized) {
-          for (Key<?> paramKey : data.paramTypes) {
-            // Wrap in a Provider to cover null, and to prevent Guice from injecting the parameter
-            binder.bind((Key) paramKey).toProvider(Providers.of(args[p++]));
-          }
-        } else {
-          for (Key<?> paramKey : data.paramTypes) {
-            // Bind to our ThreadLocalProviders.
-            binder.bind((Key) paramKey).toProvider(data.providers.get(p++));
-          }
-        }
+            int p = 0;
+            if (!data.optimized) {
+              for (Key<?> paramKey : data.paramTypes) {
+                // Wrap in a Provider to cover null, and to prevent Guice from injecting the parameter
+                binder.bind((Key) paramKey).toProvider(Providers.of(args[p++]));
+              }
+            } else {
+              for (Key<?> paramKey : data.paramTypes) {
+                // Bind to our ThreadLocalProviders.
+                binder.bind((Key) paramKey).toProvider(data.providers.get(p++));
+              }
+            }
 
-        Constructor constructor = data.constructor;
-        // Constructor *should* always be non-null here,
-        // but if it isn't, we'll end up throwing a fairly good error
-        // message for the user.
-        if(constructor != null) {
-          binder.bind(returnKey)
-              .toConstructor(constructor, (TypeLiteral)data.implementationType)
-              .in(Scopes.NO_SCOPE); // make sure we erase any scope on the implementation type
-        }
-      }
-    };
+            Constructor constructor = data.constructor;
+            // Constructor *should* always be non-null here,
+            // but if it isn't, we'll end up throwing a fairly good error
+            // message for the user.
+            if (constructor != null) {
+              binder
+                  .bind(returnKey)
+                  .toConstructor(constructor, (TypeLiteral) data.implementationType)
+                  .in(Scopes.NO_SCOPE); // make sure we erase any scope on the implementation type
+            }
+          }
+        };
 
     Injector forCreate = injector.createChildInjector(assistedModule);
     Binding<?> binding = forCreate.getBinding(returnKey);
     // If we have providers cached in data, cache the binding for future optimizations.
-    if(data.optimized) {
+    if (data.optimized) {
       data.cachedBinding = binding;
     }
     return binding;

@@ -1,13 +1,12 @@
-  /**
-   * Returns the Guice {@link Key} for this parameter.
-   */
+  /** Returns the Guice {@link Key} for this parameter. */
   public Object getValue(Injector injector) {
     if (null == provider) {
       synchronized (this) {
         if (null == provider) {
-          provider = isProvider
-              ? injector.getProvider(getBindingForType(getProvidedType(type)))
-              : injector.getProvider(getPrimaryBindingKey());
+          provider =
+              isProvider
+                  ? injector.getProvider(getBindingForType(getProvidedType(type)))
+                  : injector.getProvider(getPrimaryBindingKey());
         }
       }
     }

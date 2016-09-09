@@ -1,6 +1,7 @@
-  @Override protected void postProcess() {
+  @Override
+  protected void postProcess() {
     start();
-    
+
     for (GraphvizNode node : nodes.values()) {
       renderNode(node);
     }
@@ -8,9 +9,9 @@
     for (GraphvizEdge edge : edges) {
       renderEdge(edge);
     }
-    
+
     finish();
-    
+
     out.flush();
   }
 

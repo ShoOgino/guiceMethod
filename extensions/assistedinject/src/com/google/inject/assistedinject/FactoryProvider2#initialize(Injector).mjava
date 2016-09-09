@@ -1,12 +1,16 @@
   /**
-   * At injector-creation time, we initialize the invocation handler. At this time we make sure
-   * all factory methods will be able to build the target types.
+   * At injector-creation time, we initialize the invocation handler. At this time we make sure all
+   * factory methods will be able to build the target types.
    */
-  @Inject @Toolable
+  @Inject
+  @Toolable
   void initialize(Injector injector) {
     if (this.injector != null) {
-      throw new ConfigurationException(ImmutableList.of(new Message(FactoryProvider2.class,
-          "Factories.create() factories may only be used in one Injector!")));
+      throw new ConfigurationException(
+          ImmutableList.of(
+              new Message(
+                  FactoryProvider2.class,
+                  "Factories.create() factories may only be used in one Injector!")));
     }
 
     this.injector = injector;
@@ -15,13 +19,14 @@
       Method method = entry.getKey();
       AssistData data = entry.getValue();
       Object[] args;
-      if(!data.optimized) {
+      if (!data.optimized) {
         args = new Object[method.getParameterTypes().length];
         Arrays.fill(args, "dummy object for validating Factories");
       } else {
         args = null; // won't be used -- instead will bind to data.providers.
       }
-      getBindingFromNewInjector(method, args, data); // throws if the binding isn't properly configured
+      getBindingFromNewInjector(
+          method, args, data); // throws if the binding isn't properly configured
     }
   }
 

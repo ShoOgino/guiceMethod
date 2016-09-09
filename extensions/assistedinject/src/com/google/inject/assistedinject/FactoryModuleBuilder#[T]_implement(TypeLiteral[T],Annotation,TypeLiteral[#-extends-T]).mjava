@@ -1,8 +1,6 @@
-  /**
-   * See the factory configuration examples at {@link FactoryModuleBuilder}.
-   */
-  public <T> FactoryModuleBuilder implement(TypeLiteral<T> source, Annotation annotation,
-      TypeLiteral<? extends T> target) {
+  /** See the factory configuration examples at {@link FactoryModuleBuilder}. */
+  public <T> FactoryModuleBuilder implement(
+      TypeLiteral<T> source, Annotation annotation, TypeLiteral<? extends T> target) {
     return implement(Key.get(source, annotation), target);
   }
 

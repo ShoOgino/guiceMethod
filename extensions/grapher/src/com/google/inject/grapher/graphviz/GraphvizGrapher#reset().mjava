@@ -1,4 +1,5 @@
-  @Override protected void reset() {
+  @Override
+  protected void reset() {
     nodes.clear();
     edges.clear();
   }

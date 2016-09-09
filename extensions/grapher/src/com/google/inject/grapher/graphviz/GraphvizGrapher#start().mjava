@@ -1,6 +1,6 @@
   protected void start() {
     out.println("digraph injector {");
-    
+
     Map<String, String> attrs = getGraphAttributes();
     out.println("graph " + getAttrString(attrs) + ";");
   }

@@ -1,7 +1,4 @@
-  /**
-   * Returns an instance of T, constructed using this constructor, with the
-   * supplied arguments.
-   */
+  /** Returns an instance of T, constructed using this constructor, with the supplied arguments. */
   public T newInstance(Object[] args) throws Throwable {
     constructor.setAccessible(true);
     try {

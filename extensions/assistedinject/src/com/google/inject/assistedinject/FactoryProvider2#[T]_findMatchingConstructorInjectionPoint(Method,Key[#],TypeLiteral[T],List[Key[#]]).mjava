@@ -1,15 +1,15 @@
   /**
-   * Finds a constructor suitable for the method.  If the implementation contained any constructors
+   * Finds a constructor suitable for the method. If the implementation contained any constructors
    * marked with {@link AssistedInject}, this requires all {@link Assisted} parameters to exactly
-   * match the parameters (in any order) listed in the method.  Otherwise, if no
-   * {@link AssistedInject} constructors exist, this will default to looking for an
-   * {@literal @}{@link Inject} constructor.
+   * match the parameters (in any order) listed in the method. Otherwise, if no {@link
+   * AssistedInject} constructors exist, this will default to looking for an {@literal @}{@link
+   * Inject} constructor.
    */
   private <T> InjectionPoint findMatchingConstructorInjectionPoint(
       Method method, Key<?> returnType, TypeLiteral<T> implementation, List<Key<?>> paramList)
       throws ErrorsException {
     Errors errors = new Errors(method);
-    if(returnType.getTypeLiteral().equals(implementation)) {
+    if (returnType.getTypeLiteral().equals(implementation)) {
       errors = errors.withSource(implementation);
     } else {
       errors = errors.withSource(returnType).withSource(implementation);
@@ -39,12 +39,11 @@
         anyAssistedInjectConstructors = true;
         if (constructorHasMatchingParams(implementation, constructor, paramList, errors)) {
           if (matchingConstructor != null) {
-            errors
-                .addMessage(
-                    "%s has more than one constructor annotated with @AssistedInject"
-                        + " that matches the parameters in method %s.  Unable to create "
-                        + "AssistedInject factory.",
-                    implementation, method);
+            errors.addMessage(
+                "%s has more than one constructor annotated with @AssistedInject"
+                    + " that matches the parameters in method %s.  Unable to create "
+                    + "AssistedInject factory.",
+                implementation, method);
             throw errors.toException();
           } else {
             matchingConstructor = constructor;
@@ -53,26 +52,27 @@
       }
     }
 
-    if(!anyAssistedInjectConstructors) {
+    if (!anyAssistedInjectConstructors) {
       // If none existed, use @Inject.
       try {
         return InjectionPoint.forConstructorOf(implementation);
-      } catch(ConfigurationException e) {
+      } catch (ConfigurationException e) {
         errors.merge(e.getErrorMessages());
         throw errors.toException();
       }
     } else {
       // Otherwise, use it or fail with a good error message.
-      if(matchingConstructor != null) {
-          // safe because we got the constructor from this implementation.
-          @SuppressWarnings("unchecked")
-          InjectionPoint ip = InjectionPoint.forConstructor(
-              (Constructor<? super T>) matchingConstructor, implementation);
-          return ip;
+      if (matchingConstructor != null) {
+        // safe because we got the constructor from this implementation.
+        @SuppressWarnings("unchecked")
+        InjectionPoint ip =
+            InjectionPoint.forConstructor(
+                (Constructor<? super T>) matchingConstructor, implementation);
+        return ip;
       } else {
         errors.addMessage(
             "%s has @AssistedInject constructors, but none of them match the"
-            + " parameters in method %s.  Unable to create AssistedInject factory.",
+                + " parameters in method %s.  Unable to create AssistedInject factory.",
             implementation, method);
         throw errors.toException();
       }
