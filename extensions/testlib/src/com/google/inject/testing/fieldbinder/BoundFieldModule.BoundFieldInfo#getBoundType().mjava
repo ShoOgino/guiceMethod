@@ -8,7 +8,7 @@
           throwBoundFieldException(
               field,
               "Non parameterized Provider fields must have an explicit "
-              + "binding class via @Bind(to = Foo.class)");
+                  + "binding class via @Bind(to = Foo.class)");
         }
         return this.naturalType.get();
       } else {

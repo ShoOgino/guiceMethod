@@ -1,4 +1,6 @@
-    @Override @SuppressWarnings("unchecked") protected void configure() {
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void configure() {
       for (Class<?> api : TEST_CLAZZES) {
         for (Visibility visibility : Visibility.values()) {
           try {

@@ -1,17 +1,25 @@
   public void testArrayKeys_unwrapValuesTrue() {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {}
-      @ProvidesIntoMap @ArrayUnwrappedKey({1, 2}) String provideFoo() { return "foo"; }
-    };
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {}
+
+          @ProvidesIntoMap
+          @ArrayUnwrappedKey({1, 2})
+          String provideFoo() {
+            return "foo";
+          }
+        };
     try {
       Guice.createInjector(MultibindingsScanner.asModule(), m);
       fail();
     } catch (CreationException ce) {
       assertEquals(1, ce.getErrorMessages().size());
-      assertContains(ce.getMessage(),
+      assertContains(
+          ce.getMessage(),
           "Array types are not allowed in a MapKey with unwrapValue=true: "
               + ArrayUnwrappedKey.class.getName(),
           "at " + m.getClass().getName() + ".provideFoo(");
-    }    
+    }
   }
 

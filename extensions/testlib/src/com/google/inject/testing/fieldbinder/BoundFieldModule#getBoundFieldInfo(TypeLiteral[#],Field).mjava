@@ -1,25 +1,19 @@
   /**
    * Retrieve a {@link BoundFieldInfo}.
    *
-   * <p>This returns a {@link BoundFieldInfo} if the field has a {@link Bind} annotation.
-   * Otherwise it returns {@link Optional#absent()}.
+   * <p>This returns a {@link BoundFieldInfo} if the field has a {@link Bind} annotation. Otherwise
+   * it returns {@link Optional#absent()}.
    */
   private Optional<BoundFieldInfo> getBoundFieldInfo(
-      TypeLiteral<?> containingClassType,
-      Field field) {
+      TypeLiteral<?> containingClassType, Field field) {
     Bind bindAnnotation = field.getAnnotation(Bind.class);
     if (bindAnnotation == null) {
       return Optional.absent();
     }
     if (hasInject(field)) {
-      throwBoundFieldException(
-          field,
-          "Fields annotated with both @Bind and @Inject are illegal.");
+      throwBoundFieldException(field, "Fields annotated with both @Bind and @Inject are illegal.");
     }
     return Optional.of(
-        new BoundFieldInfo(
-            field,
-            bindAnnotation,
-            containingClassType.getFieldType(field)));
+        new BoundFieldInfo(field, bindAnnotation, containingClassType.getFieldType(field)));
   }
 

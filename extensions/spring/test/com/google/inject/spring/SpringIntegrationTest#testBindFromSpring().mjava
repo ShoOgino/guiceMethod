@@ -1,13 +1,10 @@
   public void testBindFromSpring() throws CreationException {
-    final DefaultListableBeanFactory beanFactory
-        = new DefaultListableBeanFactory();
+    final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
-    RootBeanDefinition singleton
-        = new RootBeanDefinition(Singleton.class);
+    RootBeanDefinition singleton = new RootBeanDefinition(Singleton.class);
     beanFactory.registerBeanDefinition("singleton", singleton);
 
-    RootBeanDefinition prototype
-        = new RootBeanDefinition(Prototype.class, false);
+    RootBeanDefinition prototype = new RootBeanDefinition(Prototype.class, false);
     beanFactory.registerBeanDefinition("prototype", prototype);
 
     Injector injector =
@@ -22,11 +19,9 @@
             });
 
     assertNotNull(injector.getInstance(Singleton.class));
-    assertSame(injector.getInstance(Singleton.class),
-        injector.getInstance(Singleton.class));
+    assertSame(injector.getInstance(Singleton.class), injector.getInstance(Singleton.class));
 
     assertNotNull(injector.getInstance(Prototype.class));
-    assertNotSame(injector.getInstance(Prototype.class),
-        injector.getInstance(Prototype.class));
+    assertNotSame(injector.getInstance(Prototype.class), injector.getInstance(Prototype.class));
   }
 

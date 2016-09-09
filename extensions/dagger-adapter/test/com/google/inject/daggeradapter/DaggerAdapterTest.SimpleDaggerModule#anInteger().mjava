@@ -1,4 +1,5 @@
-    @dagger.Provides Integer anInteger() {
+    @dagger.Provides
+    Integer anInteger() {
       return 1;
     }
 

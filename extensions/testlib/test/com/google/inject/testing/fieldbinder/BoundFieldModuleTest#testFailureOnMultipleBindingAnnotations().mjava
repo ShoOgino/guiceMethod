@@ -1,11 +1,12 @@
   public void testFailureOnMultipleBindingAnnotations() {
     final Integer testInt = 1024;
-    Object instance = new Object() {
-      @Bind
-      @Named("a")
-      @SomeBindingAnnotation
-      private Integer anInt = testInt;
-    };
+    Object instance =
+        new Object() {
+          @Bind
+          @Named("a")
+          @SomeBindingAnnotation
+          private Integer anInt = testInt;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
 

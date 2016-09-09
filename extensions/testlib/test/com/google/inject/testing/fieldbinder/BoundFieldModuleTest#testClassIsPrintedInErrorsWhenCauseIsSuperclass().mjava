@@ -10,7 +10,7 @@
       assertContains(
           e.getMessage(),
           "Requested binding type \"java.lang.String\" is not assignable from field binding type "
-          + "\"java.lang.Integer\"");
+              + "\"java.lang.Integer\"");
     }
   }
 

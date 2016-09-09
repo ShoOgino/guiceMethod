@@ -1,10 +1,11 @@
   public void testBindingSuperTypeAndBindingAnnotation() {
     final Integer testValue = 1024;
-    Object instance = new Object() {
-      @Bind(to = Number.class)
-      @Named("foo")
-      private Integer anInt = testValue;
-    };
+    Object instance =
+        new Object() {
+          @Bind(to = Number.class)
+          @Named("foo")
+          private Integer anInt = testValue;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

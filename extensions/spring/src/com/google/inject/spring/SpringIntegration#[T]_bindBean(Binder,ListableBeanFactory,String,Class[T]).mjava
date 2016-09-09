@@ -1,17 +1,13 @@
-  static <T> void bindBean(Binder binder, ListableBeanFactory beanFactory,
-      String name, Class<T> type) {
-    SpringProvider<T> provider
-        = SpringProvider.newInstance(type, name);
+  static <T> void bindBean(
+      Binder binder, ListableBeanFactory beanFactory, String name, Class<T> type) {
+    SpringProvider<T> provider = SpringProvider.newInstance(type, name);
     try {
       provider.initialize(beanFactory);
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       binder.addError(e);
       return;
     }
 
-    binder.bind(type)
-        .annotatedWith(Names.named(name))
-        .toProvider(provider);
+    binder.bind(type).annotatedWith(Names.named(name)).toProvider(provider);
   }
 

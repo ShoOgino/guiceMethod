@@ -1,8 +1,8 @@
     void initialize(BeanFactory beanFactory) {
       this.beanFactory = beanFactory;
       if (!beanFactory.isTypeMatch(name, type)) {
-        throw new ClassCastException("Spring bean named '" + name
-            + "' does not implement " + type.getName() + ".");
+        throw new ClassCastException(
+            "Spring bean named '" + name + "' does not implement " + type.getName() + ".");
       }
       singleton = beanFactory.isSingleton(name);
     }

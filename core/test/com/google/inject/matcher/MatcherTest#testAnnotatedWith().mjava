@@ -1,7 +1,6 @@
   public void testAnnotatedWith() {
     assertTrue(annotatedWith(Foo.class).matches(Bar.class));
-    assertFalse(annotatedWith(Foo.class).matches(
-        MatcherTest.class.getMethods()[0]));
+    assertFalse(annotatedWith(Foo.class).matches(MatcherTest.class.getMethods()[0]));
     assertEquals("annotatedWith(Foo.class)", annotatedWith(Foo.class).toString());
     assertEqualsBothWays(annotatedWith(Foo.class), annotatedWith(Foo.class));
     assertFalse(annotatedWith(Foo.class).equals(annotatedWith(Named.class)));

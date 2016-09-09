@@ -10,8 +10,9 @@
               return value;
             }
           };
-      providerBindings.put(new Key(new ProviderType(javax.inject.Provider.class, key.type),
-          key.annotation), providerProvider);
+      providerBindings.put(
+          new Key(new ProviderType(javax.inject.Provider.class, key.type), key.annotation),
+          providerProvider);
     }
     bindings.putAll(providerBindings);
   }

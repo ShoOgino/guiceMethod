@@ -2,11 +2,9 @@
     protected void configure() {
       bind(Foo.class).to(FooImpl.class);
       bind(Bar.class);
-      bind(Foo.class)
-          .annotatedWith(Transactional.class)
-          .to(FooImpl.class);
+      bind(Foo.class).annotatedWith(Transactional.class).to(FooImpl.class);
       bindConstant().annotatedWith(Names.named("port")).to(8080);
       bind(Key.get(Object.class)).to(Key.get(Bar.class));
-//      install(new ServletModule());
+      //      install(new ServletModule());
     }
 

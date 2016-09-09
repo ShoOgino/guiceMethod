@@ -1,7 +1,6 @@
   /**
-   * Creates a provider which looks up objects from Spring using the given name.
-   * Expects a binding to {@link
-   * org.springframework.beans.factory.BeanFactory}. Example usage:
+   * Creates a provider which looks up objects from Spring using the given name. Expects a binding
+   * to {@link org.springframework.beans.factory.BeanFactory}. Example usage:
    *
    * <pre>
    * bind(DataSource.class)

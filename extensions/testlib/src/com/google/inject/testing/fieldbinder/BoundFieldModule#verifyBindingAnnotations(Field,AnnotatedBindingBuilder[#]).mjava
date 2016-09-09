@@ -1,6 +1,5 @@
   private LinkedBindingBuilder<?> verifyBindingAnnotations(
-      Field field,
-      AnnotatedBindingBuilder<?> annotatedBinder) {
+      Field field, AnnotatedBindingBuilder<?> annotatedBinder) {
     LinkedBindingBuilder<?> binderRet = annotatedBinder;
     for (Annotation annotation : field.getAnnotations()) {
       Class<? extends Annotation> annotationType = annotation.annotationType();

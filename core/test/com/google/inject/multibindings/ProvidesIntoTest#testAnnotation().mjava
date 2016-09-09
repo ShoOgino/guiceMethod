@@ -1,80 +1,120 @@
   public void testAnnotation() throws Exception {
-    Injector injector = Guice.createInjector(MultibindingsScanner.asModule(), new AbstractModule() {
-      @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            MultibindingsScanner.asModule(),
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @ProvidesIntoSet
-      @Named("foo")
-      String setFoo() { return "foo"; }
+              @ProvidesIntoSet
+              @Named("foo")
+              String setFoo() {
+                return "foo";
+              }
 
-      @ProvidesIntoSet
-      @Named("foo")
-      String setFoo2() { return "foo2"; }
+              @ProvidesIntoSet
+              @Named("foo")
+              String setFoo2() {
+                return "foo2";
+              }
 
-      @ProvidesIntoSet
-      @Named("bar")
-      String setBar() { return "bar"; }
+              @ProvidesIntoSet
+              @Named("bar")
+              String setBar() {
+                return "bar";
+              }
 
-      @ProvidesIntoSet
-      @Named("bar")
-      String setBar2() { return "bar2"; }
+              @ProvidesIntoSet
+              @Named("bar")
+              String setBar2() {
+                return "bar2";
+              }
 
-      @ProvidesIntoSet
-      String setNoAnnotation() { return "na"; }
+              @ProvidesIntoSet
+              String setNoAnnotation() {
+                return "na";
+              }
 
-      @ProvidesIntoSet
-      String setNoAnnotation2() { return "na2"; }
+              @ProvidesIntoSet
+              String setNoAnnotation2() {
+                return "na2";
+              }
 
-      @ProvidesIntoMap
-      @StringMapKey("fooKey")
-      @Named("foo")
-      String mapFoo() { return "foo"; }
+              @ProvidesIntoMap
+              @StringMapKey("fooKey")
+              @Named("foo")
+              String mapFoo() {
+                return "foo";
+              }
 
-      @ProvidesIntoMap
-      @StringMapKey("foo2Key")
-      @Named("foo")
-      String mapFoo2() { return "foo2"; }
+              @ProvidesIntoMap
+              @StringMapKey("foo2Key")
+              @Named("foo")
+              String mapFoo2() {
+                return "foo2";
+              }
 
-      @ProvidesIntoMap
-      @ClassMapKey(String.class)
-      @Named("bar")
-      String mapBar() { return "bar"; }
+              @ProvidesIntoMap
+              @ClassMapKey(String.class)
+              @Named("bar")
+              String mapBar() {
+                return "bar";
+              }
 
-      @ProvidesIntoMap
-      @ClassMapKey(Number.class)
-      @Named("bar")
-      String mapBar2() { return "bar2"; }
+              @ProvidesIntoMap
+              @ClassMapKey(Number.class)
+              @Named("bar")
+              String mapBar2() {
+                return "bar2";
+              }
 
-      @ProvidesIntoMap
-      @TestEnumKey(TestEnum.A)
-      String mapNoAnnotation() { return "na"; }
+              @ProvidesIntoMap
+              @TestEnumKey(TestEnum.A)
+              String mapNoAnnotation() {
+                return "na";
+              }
 
-      @ProvidesIntoMap
-      @TestEnumKey(TestEnum.B)
-      String mapNoAnnotation2() { return "na2"; }
+              @ProvidesIntoMap
+              @TestEnumKey(TestEnum.B)
+              String mapNoAnnotation2() {
+                return "na2";
+              }
 
-      @ProvidesIntoMap
-      @WrappedKey(number = 1)
-      Number wrapped1() { return 11; }
+              @ProvidesIntoMap
+              @WrappedKey(number = 1)
+              Number wrapped1() {
+                return 11;
+              }
 
-      @ProvidesIntoMap
-      @WrappedKey(number = 2)
-      Number wrapped2() { return 22; }
+              @ProvidesIntoMap
+              @WrappedKey(number = 2)
+              Number wrapped2() {
+                return 22;
+              }
 
-      @ProvidesIntoOptional(ProvidesIntoOptional.Type.DEFAULT)
-      @Named("foo")
-      String optionalDefaultFoo() { return "foo"; }
+              @ProvidesIntoOptional(ProvidesIntoOptional.Type.DEFAULT)
+              @Named("foo")
+              String optionalDefaultFoo() {
+                return "foo";
+              }
 
-      @ProvidesIntoOptional(ProvidesIntoOptional.Type.ACTUAL)
-      @Named("foo")
-      String optionalActualFoo() { return "foo2"; }
+              @ProvidesIntoOptional(ProvidesIntoOptional.Type.ACTUAL)
+              @Named("foo")
+              String optionalActualFoo() {
+                return "foo2";
+              }
 
-      @ProvidesIntoOptional(ProvidesIntoOptional.Type.DEFAULT)
-      @Named("bar")
-      String optionalDefaultBar() { return "bar"; }
+              @ProvidesIntoOptional(ProvidesIntoOptional.Type.DEFAULT)
+              @Named("bar")
+              String optionalDefaultBar() {
+                return "bar";
+              }
 
-      @ProvidesIntoOptional(ProvidesIntoOptional.Type.ACTUAL)
-      String optionalActualBar() { return "na2"; }
-    });
+              @ProvidesIntoOptional(ProvidesIntoOptional.Type.ACTUAL)
+              String optionalActualBar() {
+                return "na2";
+              }
+            });
 
     Set<String> fooSet = injector.getInstance(new Key<Set<String>>(named("foo")) {});
     assertEquals(ImmutableSet.of("foo", "foo2"), fooSet);
@@ -101,16 +141,13 @@
         injector.getInstance(new Key<Map<WrappedKey, Number>>() {});
     assertEquals(ImmutableMap.of(wrappedKeyFor(1), 11, wrappedKeyFor(2), 22), wrappedMap);
 
-    Optional<String> fooOptional =
-        injector.getInstance(new Key<Optional<String>>(named("foo")) {});
+    Optional<String> fooOptional = injector.getInstance(new Key<Optional<String>>(named("foo")) {});
     assertEquals("foo2", fooOptional.get());
 
-    Optional<String> barOptional =
-        injector.getInstance(new Key<Optional<String>>(named("bar")) {});
+    Optional<String> barOptional = injector.getInstance(new Key<Optional<String>>(named("bar")) {});
     assertEquals("bar", barOptional.get());
 
-    Optional<String> noAnnotationOptional =
-        injector.getInstance(new Key<Optional<String>>() {});
+    Optional<String> noAnnotationOptional = injector.getInstance(new Key<Optional<String>>() {});
     assertEquals("na2", noAnnotationOptional.get());
   }
 

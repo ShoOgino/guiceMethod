@@ -1,20 +1,24 @@
   public void testMapKeyMissingValueMethod() {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {}
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {}
 
-      @ProvidesIntoMap
-      @MissingValueMethod
-      String provideFoo() {
-        return "foo";
-      }
-    };
+          @ProvidesIntoMap
+          @MissingValueMethod
+          String provideFoo() {
+            return "foo";
+          }
+        };
     try {
       Guice.createInjector(MultibindingsScanner.asModule(), m);
       fail();
     } catch (CreationException ce) {
       assertEquals(1, ce.getErrorMessages().size());
-      assertContains(ce.getMessage(), "No 'value' method in MapKey with unwrapValue=true: "
-          + MissingValueMethod.class.getName());
-    }    
+      assertContains(
+          ce.getMessage(),
+          "No 'value' method in MapKey with unwrapValue=true: "
+              + MissingValueMethod.class.getName());
+    }
   }
 

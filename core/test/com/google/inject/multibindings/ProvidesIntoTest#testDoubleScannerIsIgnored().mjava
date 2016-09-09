@@ -1,12 +1,17 @@
   public void testDoubleScannerIsIgnored() {
-    Injector injector = Guice.createInjector(
-        MultibindingsScanner.asModule(),
-        MultibindingsScanner.asModule(),
-        new AbstractModule() {
-          @Override protected void configure() {}
-          @ProvidesIntoSet String provideFoo() { return "foo"; }
-        }
-    );
+    Injector injector =
+        Guice.createInjector(
+            MultibindingsScanner.asModule(),
+            MultibindingsScanner.asModule(),
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
+
+              @ProvidesIntoSet
+              String provideFoo() {
+                return "foo";
+              }
+            });
     assertEquals(ImmutableSet.of("foo"), injector.getInstance(new Key<Set<String>>() {}));
   }
 

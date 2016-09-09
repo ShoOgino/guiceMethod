@@ -1,4 +1,4 @@
   public static void main(String[] args) throws Exception {
-    Manager.main(new String[] { TestModule.class.getName() });
+    Manager.main(new String[] {TestModule.class.getName()});
   }
 

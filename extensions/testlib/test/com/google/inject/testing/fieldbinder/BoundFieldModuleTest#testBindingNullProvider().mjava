@@ -1,7 +1,8 @@
   public void testBindingNullProvider() {
-    Object instance = new Object() {
-      @Bind private Provider<Integer> anIntProvider = null;
-    };
+    Object instance =
+        new Object() {
+          @Bind private Provider<Integer> anIntProvider = null;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
 
@@ -9,7 +10,8 @@
       Guice.createInjector(module);
       fail();
     } catch (CreationException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "Binding to null is not allowed. Use Providers.of(null) if this is your intended "
               + "behavior.");
     }

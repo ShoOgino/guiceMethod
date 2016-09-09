@@ -7,7 +7,7 @@
      * is the field's actual type.
      *
      * @return the type this field binds to naturally, or {@link Optional#absent()} if this field is
-     * a non-parameterized {@link Provider}.
+     *     a non-parameterized {@link Provider}.
      */
     private Optional<TypeLiteral<?>> getNaturalFieldType() {
       if (isTransparentProvider(type.getRawType())) {

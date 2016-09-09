@@ -1,7 +1,8 @@
   public void testNullableProviderSubclassesAllowNull() {
-    Object instance = new Object() {
-      @Bind @Nullable private IntegerProvider anIntProvider = null;
-    };
+    Object instance =
+        new Object() {
+          @Bind @Nullable private IntegerProvider anIntProvider = null;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

@@ -1,6 +1,5 @@
   /**
-   * Creates a provider which looks up objects in JNDI using the given name.
-   * Example usage:
+   * Creates a provider which looks up objects in JNDI using the given name. Example usage:
    *
    * <pre>
    * bind(DataSource.class).toProvider(fromJndi(DataSource.class, "java:..."));

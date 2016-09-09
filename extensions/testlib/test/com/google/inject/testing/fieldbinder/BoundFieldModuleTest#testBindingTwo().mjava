@@ -1,10 +1,11 @@
   public void testBindingTwo() {
     final Integer testValue = 1024;
     final String testString = "Hello World!";
-    Object instance = new Object() {
-      @Bind private Integer anInt = testValue;
-      @Bind private String aString = testString;
-    };
+    Object instance =
+        new Object() {
+          @Bind private Integer anInt = testValue;
+          @Bind private String aString = testString;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

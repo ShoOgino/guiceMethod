@@ -37,14 +37,14 @@
     }
     if (injectedConstructor == null) {
       if (fieldKeys.length == 0) {
-        throw new IllegalArgumentException("No injectable constructor on "
-            + type + " required by " + requiredBy);
+        throw new IllegalArgumentException(
+            "No injectable constructor on " + type + " required by " + requiredBy);
       }
       try {
         injectedConstructor = type.getConstructor();
       } catch (NoSuchMethodException e) {
-        throw new IllegalArgumentException("No injectable constructor on "
-            + type + " required by " + requiredBy);
+        throw new IllegalArgumentException(
+            "No injectable constructor on " + type + " required by " + requiredBy);
       }
     }
 
@@ -52,8 +52,11 @@
      * Create a provider that invokes the constructor and sets its fields.
      */
     final Constructor<?> constructor = injectedConstructor;
-    final Key[] parameterKeys = parametersToKeys(
-        constructor, constructor.getGenericParameterTypes(), constructor.getParameterAnnotations());
+    final Key[] parameterKeys =
+        parametersToKeys(
+            constructor,
+            constructor.getGenericParameterTypes(),
+            constructor.getParameterAnnotations());
     final Provider<Object> unscoped =
         new Provider<Object>() {
           @Override
