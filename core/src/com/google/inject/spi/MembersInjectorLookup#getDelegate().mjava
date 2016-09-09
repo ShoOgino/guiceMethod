@@ -1,7 +1,7 @@
   /**
-   * Returns the delegate members injector, or {@code null} if it has not yet been initialized.
-   * The delegate will be initialized when this element is processed, or otherwise used to create
-   * an injector.
+   * Returns the delegate members injector, or {@code null} if it has not yet been initialized. The
+   * delegate will be initialized when this element is processed, or otherwise used to create an
+   * injector.
    */
   public MembersInjector<T> getDelegate() {
     return delegate;

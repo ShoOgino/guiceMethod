@@ -1,4 +1,5 @@
-  @Override public String toString() {
+  @Override
+  public String toString() {
     StringBuilder builder = new StringBuilder();
     builder.append(key);
     if (injectionPoint != null) {

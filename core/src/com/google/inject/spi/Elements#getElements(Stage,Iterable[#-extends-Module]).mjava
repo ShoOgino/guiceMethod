@@ -1,6 +1,4 @@
-  /**
-   * Records the elements executed by {@code modules}.
-   */
+  /** Records the elements executed by {@code modules}. */
   public static List<Element> getElements(Stage stage, Iterable<? extends Module> modules) {
     RecordingBinder binder = new RecordingBinder(stage);
     for (Module module : modules) {

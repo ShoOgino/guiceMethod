@@ -1,6 +1,7 @@
   @Override
   public void applyTo(Binder binder) {
-    binder.withSource(getSource()).bindListener(bindingMatcher,
-        listeners.toArray(new ProvisionListener[listeners.size()]));
+    binder
+        .withSource(getSource())
+        .bindListener(bindingMatcher, listeners.toArray(new ProvisionListener[listeners.size()]));
   }
 

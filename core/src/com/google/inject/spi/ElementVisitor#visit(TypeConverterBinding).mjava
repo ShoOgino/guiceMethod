@@ -1,5 +1,3 @@
-  /**
-   * Visit a registration of type converters for matching target types.
-   */
+  /** Visit a registration of type converters for matching target types. */
   V visit(TypeConverterBinding binding);
 

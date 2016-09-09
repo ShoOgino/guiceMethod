@@ -1,8 +1,7 @@
     /**
-     * Applies all scanners to the modules we've installed. We skip certain
-     * PrivateModules because store them in more than one Modules map and only
-     * want to process them through one of the maps.  (They're stored in both
-     * maps to prevent a module from being installed more than once.)
+     * Applies all scanners to the modules we've installed. We skip certain PrivateModules because
+     * store them in more than one Modules map and only want to process them through one of the
+     * maps. (They're stored in both maps to prevent a module from being installed more than once.)
      */
     void scanForAnnotatedMethods() {
       for (ModuleAnnotatedMethodScanner scanner : scanners) {
@@ -17,7 +16,7 @@
           moduleSource = entry.getValue().moduleSource;
           try {
             info.binder.install(ProviderMethodsModule.forModule(module, scanner));
-          } catch(RuntimeException e) {
+          } catch (RuntimeException e) {
             Collection<Message> messages = Errors.getMessagesFromThrowable(e);
             if (!messages.isEmpty()) {
               elements.addAll(messages);

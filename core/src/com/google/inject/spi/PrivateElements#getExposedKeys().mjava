@@ -1,5 +1,3 @@
-  /**
-   * Returns the unique exposed keys for these private elements.
-   */
+  /** Returns the unique exposed keys for these private elements. */
   Set<Key<?>> getExposedKeys();
 

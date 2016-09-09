@@ -1,5 +1,4 @@
-    InjectableMethod(TypeLiteral<?> declaringType, Method method,
-        Annotation atInject) {
+    InjectableMethod(TypeLiteral<?> declaringType, Method method, Annotation atInject) {
       super(declaringType, atInject);
       this.method = method;
     }

@@ -1,6 +1,4 @@
-  /**
-   * Records the elements executed by {@code modules}.
-   */
+  /** Records the elements executed by {@code modules}. */
   public static List<Element> getElements(Iterable<? extends Module> modules) {
     return getElements(Stage.DEVELOPMENT, modules);
   }

@@ -1,5 +1,3 @@
-  /**
-   * Returns the configuration information in this private environment.
-   */
+  /** Returns the configuration information in this private environment. */
   List<Element> getElements();
 

@@ -1,21 +1,17 @@
     /**
-     * Removes a method overridden by the given method, if present. In order to
-     * remain backwards compatible with prior Guice versions, this will *not*
-     * remove overridden methods if 'alwaysRemove' is false and the overridden
-     * signature was annotated with a com.google.inject.Inject.
-     * 
-     * @param method
-     *          The method used to determine what is overridden and should be
-     *          removed.
-     * @param alwaysRemove
-     *          true if overridden methods should be removed even if they were
-     *          guice @Inject
-     * @param injectableMethod
-     *          if this method overrode any guice @Inject methods,
-     *          {@link InjectableMethod#overrodeGuiceInject} is set to true
+     * Removes a method overridden by the given method, if present. In order to remain backwards
+     * compatible with prior Guice versions, this will *not* remove overridden methods if
+     * 'alwaysRemove' is false and the overridden signature was annotated with a
+     * com.google.inject.Inject.
+     *
+     * @param method The method used to determine what is overridden and should be removed.
+     * @param alwaysRemove true if overridden methods should be removed even if they were
+     *     guice @Inject
+     * @param injectableMethod if this method overrode any guice @Inject methods, {@link
+     *     InjectableMethod#overrodeGuiceInject} is set to true
      */
-    boolean removeIfOverriddenBy(Method method, boolean alwaysRemove, 
-        InjectableMethod injectableMethod) {
+    boolean removeIfOverriddenBy(
+        Method method, boolean alwaysRemove, InjectableMethod injectableMethod) {
       if (position == Position.TOP) {
         // If we're at the top of the hierarchy, there's nothing to override.
         return false;
@@ -25,7 +21,8 @@
         // We encountered a method in a subclass. Time to index the
         // methods in the parent class.
         bySignature = new HashMap<Signature, List<InjectableMethod>>();
-        for (InjectableMember member = injectableMembers.head; member != null;
+        for (InjectableMember member = injectableMembers.head;
+            member != null;
             member = member.next) {
           if (!(member instanceof InjectableMethod)) continue;
           InjectableMethod im = (InjectableMethod) member;
@@ -41,19 +38,18 @@
       List<InjectableMethod> methods = bySignature.get(signature);
       boolean removed = false;
       if (methods != null) {
-        for (Iterator<InjectableMethod> iterator = methods.iterator();
-            iterator.hasNext();) {
+        for (Iterator<InjectableMethod> iterator = methods.iterator(); iterator.hasNext(); ) {
           InjectableMethod possiblyOverridden = iterator.next();
           if (overrides(method, possiblyOverridden.method)) {
             boolean wasGuiceInject =
-              !possiblyOverridden.jsr330 || possiblyOverridden.overrodeGuiceInject;
-            if(injectableMethod != null) {
+                !possiblyOverridden.jsr330 || possiblyOverridden.overrodeGuiceInject;
+            if (injectableMethod != null) {
               injectableMethod.overrodeGuiceInject = wasGuiceInject;
             }
             // Only actually remove the methods if we want to force
             // remove or if the signature never specified @com.google.inject.Inject
             // somewhere.
-            if(alwaysRemove || !wasGuiceInject) {
+            if (alwaysRemove || !wasGuiceInject) {
               removed = true;
               iterator.remove();
               injectableMembers.remove(possiblyOverridden);

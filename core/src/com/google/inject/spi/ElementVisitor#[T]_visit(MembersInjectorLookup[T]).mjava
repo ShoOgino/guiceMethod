@@ -1,5 +1,3 @@
-  /**
-   * Visit a lookup of the members injector.
-   */
+  /** Visit a lookup of the members injector. */
   <T> V visit(MembersInjectorLookup<T> lookup);
 

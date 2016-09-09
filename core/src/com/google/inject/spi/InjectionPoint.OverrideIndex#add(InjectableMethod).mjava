@@ -1,18 +1,19 @@
     /**
-     * Adds the given method to the list of injection points. Keeps track of it in this index
-     * in case it gets overridden.
+     * Adds the given method to the list of injection points. Keeps track of it in this index in
+     * case it gets overridden.
      */
     void add(InjectableMethod injectableMethod) {
       injectableMembers.add(injectableMethod);
-      if (position == Position.BOTTOM
-          || injectableMethod.isFinal()) {
+      if (position == Position.BOTTOM || injectableMethod.isFinal()) {
         // This method can't be overridden, so there's no need to index it.
         return;
       }
       if (bySignature != null) {
         // Try to reuse the signature we created during removal
-        Signature signature = injectableMethod.method == lastMethod
-            ? lastSignature : new Signature(injectableMethod.method);
+        Signature signature =
+            injectableMethod.method == lastMethod
+                ? lastSignature
+                : new Signature(injectableMethod.method);
         List<InjectableMethod> methods = bySignature.get(signature);
         if (methods == null) {
           methods = new ArrayList<InjectableMethod>();

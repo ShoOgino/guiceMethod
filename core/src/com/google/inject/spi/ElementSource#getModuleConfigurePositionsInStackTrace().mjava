@@ -2,18 +2,18 @@
    * Returns the position of {@link com.google.inject.Module#configure configure(Binder)} method
    * call in the {@link #getStackTrace stack trace} for modules that their classes returned by
    * {@link #getModuleClassNames}. For example, if the stack trace looks like the following:
-   * <p>
-   * {@code
-   *  0 - Binder.bind(),
-   *  1 - ModuleTwo.configure(),
-   *  2 - Binder.install(),
-   *  3 - ModuleOne.configure(),
-   *  4 - theRest(). 
-   * }
-   * <p>
-   * 1 and 3 are returned.
-   * <p>
-   * In the cases where stack trace is not available (i.e., the stack trace was not collected),
+   *
+   * <ol>
+   *   <li>{@code Binder.bind()}
+   *   <li>{@code ModuleTwo.configure()}
+   *   <li>{@code Binder.install()}
+   *   <li>{@code ModuleOne.configure()}
+   *   <li>{@code theRest().
+   * </ol>
+   *
+   * <p>1 and 3 are returned.
+   *
+   * <p>In the cases where stack trace is not available (i.e., the stack trace was not collected),
    * it returns -1 for all module positions.
    */
   public List<Integer> getModuleConfigurePositionsInStackTrace() {

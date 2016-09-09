@@ -1,5 +1,3 @@
-  /**
-   * Visit a lookup of the provider for a type.
-   */
+  /** Visit a lookup of the provider for a type. */
   <T> V visit(ProviderLookup<T> lookup);
 

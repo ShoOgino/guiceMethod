@@ -1,5 +1,5 @@
-  TypeListenerBinding(Object source, TypeListener listener,
-      Matcher<? super TypeLiteral<?>> typeMatcher) {
+  TypeListenerBinding(
+      Object source, TypeListener listener, Matcher<? super TypeLiteral<?>> typeMatcher) {
     this.source = source;
     this.listener = listener;
     this.typeMatcher = typeMatcher;

@@ -1,6 +1,4 @@
-  /**
-   * @since 2.0
-   */
+  /** @since 2.0 */
   public Message(List<Object> sources, String message, Throwable cause) {
     this.sources = ImmutableList.copyOf(sources);
     this.message = checkNotNull(message, "message");

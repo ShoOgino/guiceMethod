@@ -12,9 +12,9 @@
         declaringSource = originalSource.getDeclaringSource();
       }
       IncludeStackTraceOption stackTraceOption = getIncludeStackTraceOption();
-      if (stackTraceOption == IncludeStackTraceOption.COMPLETE ||
-          (stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE
-          && declaringSource == null)) {
+      if (stackTraceOption == IncludeStackTraceOption.COMPLETE
+          || (stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE
+              && declaringSource == null)) {
         callStack = new Throwable().getStackTrace();
       }
       if (stackTraceOption == IncludeStackTraceOption.COMPLETE) {
@@ -22,8 +22,8 @@
       }
       if (declaringSource == null) {
         // So 'source' and 'originalSource' are null otherwise declaringSource has some value
-        if (stackTraceOption == IncludeStackTraceOption.COMPLETE ||
-            stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE) {
+        if (stackTraceOption == IncludeStackTraceOption.COMPLETE
+            || stackTraceOption == IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE) {
           // With the above conditions and assignments 'callStack' is non-null
           declaringSource = sourceProvider.get(callStack);
         } else { // or if (stackTraceOption == IncludeStackTraceOptions.OFF)
@@ -32,7 +32,6 @@
         }
       }
       // Build the binding call stack
-      return new ElementSource(
-          originalSource, declaringSource, moduleSource, partialCallStack);
+      return new ElementSource(originalSource, declaringSource, moduleSource, partialCallStack);
     }
 
