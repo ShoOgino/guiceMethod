@@ -1,3 +1,4 @@
   // This will demonstrate a ConvertedConstantBinding.
-  @Inject void setYear(@Named("year") int year) {}
+  @Inject
+  void setYear(@Named("year") int year) {}
 

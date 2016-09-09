@@ -1,7 +1,8 @@
   @Override
   protected void configure() {
-    install(new FactoryModuleBuilder()
-        .implement(DanceParty.class, DancePartyImpl.class)
-        .build(DancePartyFactory.class));
+    install(
+        new FactoryModuleBuilder()
+            .implement(DanceParty.class, DancePartyImpl.class)
+            .build(DancePartyFactory.class));
   }
 
