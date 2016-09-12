@@ -17,8 +17,13 @@
 
     try {
       InjectionPoint constructorPoint = InjectionPoint.forConstructor(constructor, type);
-      setBinding(new ConstructorBindingImpl<T>(base.getKey(), base.getSource(), base.getScoping(),
-          constructorPoint, injectionPoints));
+      setBinding(
+          new ConstructorBindingImpl<T>(
+              base.getKey(),
+              base.getSource(),
+              base.getScoping(),
+              constructorPoint,
+              injectionPoints));
     } catch (ConfigurationException e) {
       copyErrorsToBinder(e);
     }

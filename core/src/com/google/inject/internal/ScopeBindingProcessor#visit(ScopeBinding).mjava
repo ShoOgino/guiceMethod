@@ -1,6 +1,8 @@
-  @Override public Boolean visit(ScopeBinding command) {
+  @Override
+  public Boolean visit(ScopeBinding command) {
     Scope scope = checkNotNull(command.getScope(), "scope");
-    Class<? extends Annotation> annotationType = checkNotNull(command.getAnnotationType(), "annotation type");
+    Class<? extends Annotation> annotationType =
+        checkNotNull(command.getAnnotationType(), "annotation type");
 
     if (!Annotations.isScopeAnnotation(annotationType)) {
       errors.missingScopeAnnotation(annotationType);

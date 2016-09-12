@@ -4,7 +4,7 @@
     jitBindings.remove(binding.getKey());
     membersInjectorStore.remove(binding.getKey().getTypeLiteral());
     provisionListenerStore.remove(binding);
-    if(ip != null) {
+    if (ip != null) {
       constructors.remove(ip);
     }
   }

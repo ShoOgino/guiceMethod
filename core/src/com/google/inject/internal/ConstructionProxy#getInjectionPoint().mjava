@@ -1,5 +1,3 @@
-  /**
-   * Returns the injection point for this constructor.
-   */
+  /** Returns the injection point for this constructor. */
   InjectionPoint getInjectionPoint();
 

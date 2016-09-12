@@ -2,7 +2,7 @@
     this.injectionPoint = injectionPoint;
 
     @SuppressWarnings("unchecked") // the member of injectionPoint is always a Constructor<T>
-        Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
+    Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
     declaringClass = constructor.getDeclaringClass();
 
     // Find applicable aspects. Bow out if none are applicable to this class.
@@ -35,12 +35,13 @@
     for (MethodAspect methodAspect : applicableAspects) {
       for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
         if (methodAspect.matches(pair.method)) {
-          if(pair.method.isSynthetic()) {
-            logger.log(Level.WARNING,
+          if (pair.method.isSynthetic()) {
+            logger.log(
+                Level.WARNING,
                 "Method [{0}] is synthetic and is being intercepted by {1}."
-              + " This could indicate a bug.  The method may be intercepted twice,"
-              + " or may not be intercepted at all.",
-                new Object[] { pair.method, methodAspect.interceptors() });
+                    + " This could indicate a bug.  The method may be intercepted twice,"
+                    + " or may not be intercepted at all.",
+                new Object[] {pair.method, methodAspect.interceptors()});
           }
           visibility = visibility.and(BytecodeGen.Visibility.forMember(pair.method));
           pair.addAll(methodAspect.interceptors());
@@ -76,8 +77,9 @@
       callbacks[i] = new InterceptorStackCallback(pair.method, deDuplicated);
     }
 
-    interceptors = interceptorsMapBuilder != null
-        ? interceptorsMapBuilder.build()
-        : ImmutableMap.<Method, List<MethodInterceptor>>of();
+    interceptors =
+        interceptorsMapBuilder != null
+            ? interceptorsMapBuilder.build()
+            : ImmutableMap.<Method, List<MethodInterceptor>>of();
   }
 

@@ -1,6 +1,4 @@
-    /**
-     * Constructs a new checker that looks for annotations of the given types.
-     */
+    /** Constructs a new checker that looks for annotations of the given types. */
     AnnotationChecker(Collection<Class<? extends Annotation>> annotationTypes) {
       this.annotationTypes = annotationTypes;
     }

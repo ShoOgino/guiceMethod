@@ -1,11 +1,10 @@
   /**
-   * Returns a key that doesn't hold any references to parent classes.
-   * This is necessary for anonymous keys, so ensure we don't hold a ref
-   * to the containing module (or class) forever.
+   * Returns a key that doesn't hold any references to parent classes. This is necessary for
+   * anonymous keys, so ensure we don't hold a ref to the containing module (or class) forever.
    */
   public static <T> Key<T> canonicalizeKey(Key<T> key) {
     // If we know this isn't a subclass, return as-is.
-    // Otherwise, recreate the key to avoid the subclass 
+    // Otherwise, recreate the key to avoid the subclass
     if (key.getClass() == Key.class) {
       return key;
     } else if (key.getAnnotation() != null) {

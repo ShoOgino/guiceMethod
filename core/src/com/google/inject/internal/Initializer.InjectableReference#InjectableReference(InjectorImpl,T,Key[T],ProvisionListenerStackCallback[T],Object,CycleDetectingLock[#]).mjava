@@ -1,5 +1,9 @@
-    public InjectableReference(InjectorImpl injector, T instance, Key<T> key,
-        ProvisionListenerStackCallback<T> provisionCallback, Object source,
+    public InjectableReference(
+        InjectorImpl injector,
+        T instance,
+        Key<T> key,
+        ProvisionListenerStackCallback<T> provisionCallback,
+        Object source,
         CycleDetectingLock<?> lock) {
       this.injector = injector;
       this.key = key; // possibly null!

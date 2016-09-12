@@ -1,4 +1,5 @@
-    @Override public TypeLiteral<?> getValueTypeLiteral() {
+    @Override
+    public TypeLiteral<?> getValueTypeLiteral() {
       return valueType;
     }
 

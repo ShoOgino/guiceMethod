@@ -1,4 +1,5 @@
-    @Override public Key<Map<K, V>> getMapKey() {
+    @Override
+    public Key<Map<K, V>> getMapKey() {
       return mapKey;
     }
 

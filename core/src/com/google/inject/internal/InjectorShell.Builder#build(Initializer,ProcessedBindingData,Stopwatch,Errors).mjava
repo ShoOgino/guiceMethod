@@ -19,12 +19,12 @@
         modules.add(0, new InheritedScannersModule(parent.state));
       }
       elements.addAll(Elements.getElements(stage, modules));
-      
+
       // Look for injector-changing options
       InjectorOptionsProcessor optionsProcessor = new InjectorOptionsProcessor(errors);
       optionsProcessor.process(null, elements);
       options = optionsProcessor.getOptions(stage, options);
-      
+
       InjectorImpl injector = new InjectorImpl(parent, state, options);
       if (privateElements != null) {
         privateElements.initInjector(injector);
@@ -62,7 +62,7 @@
       bindStage(injector, stage);
       bindInjector(injector);
       bindLogger(injector);
-      
+
       // Process all normal bindings, then UntargettedBindings.
       // This is necessary because UntargettedBindings can create JIT bindings
       // and need all their other dependencies set up ahead of time.

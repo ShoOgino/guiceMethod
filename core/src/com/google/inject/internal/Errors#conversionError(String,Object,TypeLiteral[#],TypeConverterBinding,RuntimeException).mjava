@@ -1,8 +1,16 @@
-  public Errors conversionError(String stringValue, Object source,
-      TypeLiteral<?> type, TypeConverterBinding typeConverterBinding, RuntimeException cause) {
-    return errorInUserCode(cause, "Error converting '%s' (bound at %s) to %s%n"
-        + " using %s.%n"
-        + " Reason: %s",
-        stringValue, convert(source), type, typeConverterBinding, cause);
+  public Errors conversionError(
+      String stringValue,
+      Object source,
+      TypeLiteral<?> type,
+      TypeConverterBinding typeConverterBinding,
+      RuntimeException cause) {
+    return errorInUserCode(
+        cause,
+        "Error converting '%s' (bound at %s) to %s%n using %s.%n Reason: %s",
+        stringValue,
+        convert(source),
+        type,
+        typeConverterBinding,
+        cause);
   }
 

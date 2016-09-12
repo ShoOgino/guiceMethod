@@ -1,4 +1,5 @@
   public Errors jitBindingAlreadySet(Key<?> key) {
-    return addMessage("A just-in-time binding to %s was already configured on a parent injector.", key);
+    return addMessage(
+        "A just-in-time binding to %s was already configured on a parent injector.", key);
   }
 

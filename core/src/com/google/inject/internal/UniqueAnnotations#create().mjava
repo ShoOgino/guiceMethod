@@ -1,6 +1,6 @@
   /**
-   * Returns an annotation instance that is not equal to any other annotation
-   * instances, for use in creating distinct {@link com.google.inject.Key}s.
+   * Returns an annotation instance that is not equal to any other annotation instances, for use in
+   * creating distinct {@link com.google.inject.Key}s.
    */
   public static Annotation create() {
     return create(nextUniqueValue.getAndIncrement());

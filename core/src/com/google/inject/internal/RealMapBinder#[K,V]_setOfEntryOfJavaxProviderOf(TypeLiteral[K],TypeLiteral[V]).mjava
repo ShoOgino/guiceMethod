@@ -1,6 +1,7 @@
   @SuppressWarnings("unchecked") // a provider entry <K, V> is safely a Map.Entry<K, Provider<V>>
-  static <K, V> TypeLiteral<Set<Map.Entry<K, javax.inject.Provider<V>>>> setOfEntryOfJavaxProviderOf(
-      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+  static <K, V>
+      TypeLiteral<Set<Map.Entry<K, javax.inject.Provider<V>>>> setOfEntryOfJavaxProviderOf(
+          TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
     return (TypeLiteral<Set<Entry<K, javax.inject.Provider<V>>>>)
         TypeLiteral.get(Types.setOf(entryOfJavaxProviderOf(keyType, valueType).getType()));
   }

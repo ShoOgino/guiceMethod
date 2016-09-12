@@ -1,4 +1,5 @@
-    @Override protected boolean doEquivalent(Throwable a, Throwable b) {
+    @Override
+    protected boolean doEquivalent(Throwable a, Throwable b) {
       return a.getClass().equals(b.getClass())
           && Objects.equal(a.getMessage(), b.getMessage())
           && Arrays.equals(a.getStackTrace(), b.getStackTrace())

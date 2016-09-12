@@ -1,6 +1,7 @@
   /** Provisions a new T. */
-  private T provision(Errors errors, InternalContext context,
-      ConstructionContext<T> constructionContext) throws ErrorsException {
+  private T provision(
+      Errors errors, InternalContext context, ConstructionContext<T> constructionContext)
+      throws ErrorsException {
     try {
       T t;
       try {
@@ -20,11 +21,11 @@
 
       return t;
     } catch (InvocationTargetException userException) {
-      Throwable cause = userException.getCause() != null
-          ? userException.getCause()
-          : userException;
-      throw errors.withSource(constructionProxy.getInjectionPoint())
-          .errorInjectingConstructor(cause).toException();
+      Throwable cause = userException.getCause() != null ? userException.getCause() : userException;
+      throw errors
+          .withSource(constructionProxy.getInjectionPoint())
+          .errorInjectingConstructor(cause)
+          .toException();
     } finally {
       constructionContext.removeCurrentReference();
     }

@@ -1,5 +1,8 @@
-    @Override public String toString() {
-      return (getSetName().isEmpty()  ? "" : getSetName() + " ")
-          + "Multibinder<" + elementType + ">";
+    @Override
+    public String toString() {
+      return (getSetName().isEmpty() ? "" : getSetName() + " ")
+          + "Multibinder<"
+          + elementType
+          + ">";
     }
 

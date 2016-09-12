@@ -5,8 +5,10 @@
    *     annotatedWith(Transactional.class)}.
    * @param interceptors to apply
    */
-  MethodAspect(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, List<MethodInterceptor> interceptors) {
+  MethodAspect(
+      Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher,
+      List<MethodInterceptor> interceptors) {
     this.classMatcher = checkNotNull(classMatcher, "class matcher");
     this.methodMatcher = checkNotNull(methodMatcher, "method matcher");
     this.interceptors = checkNotNull(interceptors, "interceptors");

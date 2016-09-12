@@ -1,5 +1,6 @@
-    @Override protected T doProvision(
-        Errors errors, InternalContext context, Dependency<?> dependency) throws ErrorsException {
+    @Override
+    protected T doProvision(Errors errors, InternalContext context, Dependency<?> dependency)
+        throws ErrorsException {
       // This is what linked bindings do (see FactoryProxy), and we are pretty similar.
       context.pushState(targetKey, targetSource);
       try {

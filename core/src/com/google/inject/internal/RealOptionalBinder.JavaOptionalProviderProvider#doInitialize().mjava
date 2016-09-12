@@ -1,4 +1,5 @@
-    @Override void doInitialize() {
+    @Override
+    void doInitialize() {
       if (bindingSelection.getBinding() == null) {
         value = JAVA_OPTIONAL_EMPTY;
       } else {

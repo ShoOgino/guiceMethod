@@ -1,6 +1,6 @@
   InjectorOptions getOptions(Stage stage, InjectorOptions parentOptions) {
     checkNotNull(stage, "stage must be set");
-    if(parentOptions == null) {
+    if (parentOptions == null) {
       return new InjectorOptions(
           stage,
           jitDisabled,

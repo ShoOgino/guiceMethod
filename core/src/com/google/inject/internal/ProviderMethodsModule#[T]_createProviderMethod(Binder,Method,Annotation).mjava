@@ -1,5 +1,5 @@
-  private <T> ProviderMethod<T> createProviderMethod(Binder binder, Method method,
-      Annotation annotation) {
+  private <T> ProviderMethod<T> createProviderMethod(
+      Binder binder, Method method, Annotation annotation) {
     binder = binder.withSource(method);
     Errors errors = new Errors(method);
 
@@ -10,11 +10,11 @@
     Key<T> key = getKey(errors, returnType, method, method.getAnnotations());
     try {
       key = scanner.prepareMethod(binder, annotation, key, point);
-    } catch(Throwable t) {
+    } catch (Throwable t) {
       binder.addError(t);
     }
-    Class<? extends Annotation> scopeAnnotation
-        = Annotations.findScopeAnnotation(errors, method.getAnnotations());
+    Class<? extends Annotation> scopeAnnotation =
+        Annotations.findScopeAnnotation(errors, method.getAnnotations());
     for (Message message : errors.getMessages()) {
       binder.addError(message);
     }

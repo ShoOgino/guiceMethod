@@ -1,5 +1,5 @@
     RealMultibinderCollectionOfProvidersProvider(BindingSelection<T> bindingSelection) {
-      super(InitializationTiming.DELAYED);  // See comment in RealMultibinderProvider
+      super(InitializationTiming.DELAYED); // See comment in RealMultibinderProvider
       this.bindingSelection = bindingSelection;
     }
 

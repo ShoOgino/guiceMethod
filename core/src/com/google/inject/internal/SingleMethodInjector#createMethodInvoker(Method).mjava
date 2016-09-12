@@ -2,8 +2,7 @@
 
     /*if[AOP]*/
     try {
-    final net.sf.cglib.reflect.FastClass fastClass =
-        BytecodeGen.newFastClassForMember(method);
+      final net.sf.cglib.reflect.FastClass fastClass = BytecodeGen.newFastClassForMember(method);
       if (fastClass != null) {
         final int index = fastClass.getMethod(method).getIndex();
 
@@ -15,12 +14,14 @@
           }
         };
       }
-    } catch (net.sf.cglib.core.CodeGenerationException e) {/* fall-through */}
+    } catch (net.sf.cglib.core.CodeGenerationException e) {
+      /* fall-through */
+    }
     /*end[AOP]*/
 
     int modifiers = method.getModifiers();
-    if (!Modifier.isPublic(modifiers) ||
-        !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
+    if (!Modifier.isPublic(modifiers)
+        || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {
       method.setAccessible(true);
     }
 

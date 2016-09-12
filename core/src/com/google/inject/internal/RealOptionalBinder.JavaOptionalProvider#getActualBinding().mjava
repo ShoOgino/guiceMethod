@@ -1,4 +1,5 @@
-    @Override public Binding<?> getActualBinding() {
+    @Override
+    public Binding<?> getActualBinding() {
       return bindingSelection.getActualBinding();
     }
 

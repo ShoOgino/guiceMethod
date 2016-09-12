@@ -1,4 +1,5 @@
-    @Override public String toString() {
+    @Override
+    public String toString() {
       StringBuilder stringBuilder = new StringBuilder(30 * (typeArguments.length + 1));
       stringBuilder.append(typeToString(rawType));
 

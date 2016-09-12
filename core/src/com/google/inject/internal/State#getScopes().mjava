@@ -1,5 +1,3 @@
-  /**
-   * Returns all the scope bindings at this level and parent levels.
-   */
+  /** Returns all the scope bindings at this level and parent levels. */
   Map<Class<? extends Annotation>, Scope> getScopes();
 

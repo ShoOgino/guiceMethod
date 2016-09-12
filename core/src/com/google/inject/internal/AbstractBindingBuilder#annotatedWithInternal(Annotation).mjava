@@ -2,7 +2,6 @@
   protected BindingImpl<T> annotatedWithInternal(Annotation annotation) {
     checkNotNull(annotation, "annotation");
     checkNotAnnotated();
-    return setBinding(binding.withKey(
-        Key.get(this.binding.getKey().getTypeLiteral(), annotation)));
+    return setBinding(binding.withKey(Key.get(this.binding.getKey().getTypeLiteral(), annotation)));
   }
 

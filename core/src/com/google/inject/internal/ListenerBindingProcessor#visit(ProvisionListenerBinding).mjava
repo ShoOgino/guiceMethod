@@ -1,4 +1,5 @@
-  @Override public Boolean visit(ProvisionListenerBinding binding) {
+  @Override
+  public Boolean visit(ProvisionListenerBinding binding) {
     injector.state.addProvisionListener(binding);
     return true;
   }

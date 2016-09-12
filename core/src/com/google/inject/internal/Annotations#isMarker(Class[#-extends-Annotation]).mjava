@@ -1,6 +1,4 @@
-  /**
-   * Returns {@code true} if the given annotation type has no attributes.
-   */
+  /** Returns {@code true} if the given annotation type has no attributes. */
   public static boolean isMarker(Class<? extends Annotation> annotationType) {
     return annotationType.getDeclaredMethods().length == 0;
   }

@@ -1,6 +1,5 @@
   /**
-   * Creates a new {@link ProvisionListenerStackCallback} with the correct listeners
-   * for the key.
+   * Creates a new {@link ProvisionListenerStackCallback} with the correct listeners for the key.
    */
   private <T> ProvisionListenerStackCallback<T> create(Binding<T> binding) {
     List<ProvisionListener> listeners = null;

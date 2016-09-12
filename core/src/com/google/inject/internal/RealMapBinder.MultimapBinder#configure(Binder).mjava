@@ -1,6 +1,7 @@
-    @Override public void configure(Binder binder) {
-      ImmutableSet<Dependency<?>> dependencies
-          = ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
+    @Override
+    public void configure(Binder binder) {
+      ImmutableSet<Dependency<?>> dependencies =
+          ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
 
       // Binds a Map<K, Set<Provider<V>>>
       Provider<Map<K, Set<Provider<V>>>> multimapProvider =
@@ -25,7 +26,6 @@
       binder.bind(javaxProviderCollectionMultimapKey).toProvider(collectionJavaxProvider);
 
       // Binds a Map<K, Set<V>>
-      binder.bind(multimapKey).toProvider(
-          new RealMultimapProvider(dependencies, multimapProvider));
+      binder.bind(multimapKey).toProvider(new RealMultimapProvider(dependencies, multimapProvider));
     }
 

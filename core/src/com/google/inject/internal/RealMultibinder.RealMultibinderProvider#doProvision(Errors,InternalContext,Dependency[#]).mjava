@@ -13,8 +13,8 @@
         SingleParameterInjector<T> parameterInjector = localInjectors[i];
         T newValue = parameterInjector.inject(errors, context);
         if (newValue == null) {
-          errors.addMessage("Set injection failed due to null element bound at: %s",
-              bindings.get(i).getSource());
+          errors.addMessage(
+              "Set injection failed due to null element bound at: %s", bindings.get(i).getSource());
           throw errors.toException();
         }
         boolean uniqueValue = result.add(newValue);

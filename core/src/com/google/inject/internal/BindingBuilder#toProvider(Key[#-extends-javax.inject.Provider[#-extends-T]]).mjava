@@ -5,8 +5,9 @@
     checkNotTargetted();
 
     BindingImpl<T> base = getBinding();
-    setBinding(new LinkedProviderBindingImpl<T>(
-        base.getSource(), base.getKey(), base.getScoping(), providerKey));
+    setBinding(
+        new LinkedProviderBindingImpl<T>(
+            base.getSource(), base.getKey(), base.getScoping(), providerKey));
     return this;
   }
 

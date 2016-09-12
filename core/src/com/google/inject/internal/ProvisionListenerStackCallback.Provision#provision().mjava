@@ -7,7 +7,7 @@
           // Make sure we don't return the provisioned object if there were any errors
           // injecting its field/method dependencies.
           errors.throwIfNewErrors(numErrorsBefore);
-        } catch(ErrorsException ee) {
+        } catch (ErrorsException ee) {
           exceptionDuringProvision = ee;
           throw new ProvisionException(errors.merge(ee.getErrors()).getMessages());
         }
@@ -15,7 +15,7 @@
         int currentIdx = index;
         try {
           listeners[index].onProvision(this);
-        } catch(RuntimeException re) {
+        } catch (RuntimeException re) {
           erredListener = listeners[currentIdx];
           throw re;
         }

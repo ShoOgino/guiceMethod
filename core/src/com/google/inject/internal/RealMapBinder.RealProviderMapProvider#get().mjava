@@ -1,4 +1,5 @@
-    @Override public Map<K, Provider<V>> get() {
+    @Override
+    public Map<K, Provider<V>> get() {
       return providerMap;
     }
 

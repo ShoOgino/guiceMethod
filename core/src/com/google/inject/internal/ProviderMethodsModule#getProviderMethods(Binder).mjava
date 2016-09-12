@@ -9,7 +9,8 @@
         // synthetic overrides in some cases where we don't want to generate an error (e.g.
         // increasing visibility of a subclass).
         if (((method.getModifiers() & (Modifier.PRIVATE | Modifier.STATIC)) == 0)
-            && !method.isBridge() && !method.isSynthetic()) {
+            && !method.isBridge()
+            && !method.isSynthetic()) {
           methodsBySignature.put(new Signature(method), method);
         }
         Optional<Annotation> annotation = isProvider(binder, method);
@@ -31,11 +32,17 @@
         }
         // now we know matching signature is in a subtype of method.getDeclaringClass()
         if (overrides(matchingSignature, method)) {
-          String annotationString = provider.getAnnotation().annotationType() == Provides.class
-              ? "@Provides" : "@" + provider.getAnnotation().annotationType().getCanonicalName();
+          String annotationString =
+              provider.getAnnotation().annotationType() == Provides.class
+                  ? "@Provides"
+                  : "@" + provider.getAnnotation().annotationType().getCanonicalName();
           binder.addError(
-              "Overriding " + annotationString + " methods is not allowed."
-                  + "\n\t" + annotationString + " method: %s\n\toverridden by: %s",
+              "Overriding "
+                  + annotationString
+                  + " methods is not allowed."
+                  + "\n\t"
+                  + annotationString
+                  + " method: %s\n\toverridden by: %s",
               method,
               matchingSignature);
           break;

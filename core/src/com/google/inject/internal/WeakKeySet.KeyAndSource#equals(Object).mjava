@@ -9,7 +9,6 @@
       }
 
       KeyAndSource other = (KeyAndSource) obj;
-      return Objects.equal(key, other.key)
-          && Objects.equal(source, other.source);
+      return Objects.equal(key, other.key) && Objects.equal(source, other.source);
     }
 

@@ -1,6 +1,4 @@
-  /**
-   * Returns true if {@code a} and {@code b} are equal.
-   */
+  /** Returns true if {@code a} and {@code b} are equal. */
   public static boolean equals(Type a, Type b) {
     if (a == b) {
       // also handles (a == null && b == null)

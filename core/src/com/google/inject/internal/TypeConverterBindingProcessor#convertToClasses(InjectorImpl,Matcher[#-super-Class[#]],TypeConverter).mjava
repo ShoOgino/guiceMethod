@@ -1,5 +1,5 @@
-  private static void convertToClasses(InjectorImpl injector,
-      final Matcher<? super Class<?>> typeMatcher, TypeConverter converter) {
+  private static void convertToClasses(
+      InjectorImpl injector, final Matcher<? super Class<?>> typeMatcher, TypeConverter converter) {
     internalConvertToTypes(
         injector,
         new AbstractMatcher<TypeLiteral<?>>() {

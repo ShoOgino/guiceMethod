@@ -4,8 +4,8 @@
    * ImplicitBindingTest#testCircularJitBindingsLeaveNoResidue and
    * #testInstancesRequestingProvidersForThemselvesWithChildInjectors for examples of when this is
    * necessary.)
-   * 
-   * Returns true if the type was stored in the cache, false otherwise.
+   *
+   * <p>Returns true if the type was stored in the cache, false otherwise.
    */
   boolean remove(TypeLiteral<?> type) {
     return cache.remove(type);

@@ -1,5 +1,3 @@
-  /**
-   * Gets a construction proxy for the given constructor.
-   */
+  /** Gets a construction proxy for the given constructor. */
   ConstructionProxy<T> create() throws ErrorsException;
 

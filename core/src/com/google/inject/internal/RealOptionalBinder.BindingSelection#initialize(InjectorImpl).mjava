@@ -24,8 +24,7 @@
         actualBinding = userBinding;
       }
       if (binding != null) {
-        dependencies =
-            ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
+        dependencies = ImmutableSet.<Dependency<?>>of(Dependency.get(binding.getKey()));
         providerDependencies =
             ImmutableSet.<Dependency<?>>of(Dependency.get(providerOf(binding.getKey())));
       } else {

@@ -1,5 +1,6 @@
-  @Override public Indexer.IndexedBinding visit(LinkedKeyBinding<? extends Object> binding) {
-    return new Indexer.IndexedBinding(binding, BindingType.LINKED_KEY, scope(binding),
-        binding.getLinkedKey());
+  @Override
+  public Indexer.IndexedBinding visit(LinkedKeyBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(
+        binding, BindingType.LINKED_KEY, scope(binding), binding.getLinkedKey());
   }
 

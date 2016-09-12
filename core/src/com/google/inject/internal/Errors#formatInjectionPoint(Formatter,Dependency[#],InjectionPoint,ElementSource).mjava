@@ -1,5 +1,8 @@
-  public static void formatInjectionPoint(Formatter formatter, Dependency<?> dependency,
-      InjectionPoint injectionPoint, ElementSource elementSource) {
+  public static void formatInjectionPoint(
+      Formatter formatter,
+      Dependency<?> dependency,
+      InjectionPoint injectionPoint,
+      ElementSource elementSource) {
     Member member = injectionPoint.getMember();
     Class<? extends Member> memberType = Classes.memberType(member);
 

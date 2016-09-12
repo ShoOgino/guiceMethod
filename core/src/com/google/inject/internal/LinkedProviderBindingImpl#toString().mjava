@@ -1,4 +1,5 @@
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return MoreObjects.toStringHelper(ProviderKeyBinding.class)
         .add("key", getKey())
         .add("source", getSource())

@@ -1,4 +1,5 @@
-  @Override public String keyType() {
+  @Override
+  public String keyType() {
     return keyType;
   }
 

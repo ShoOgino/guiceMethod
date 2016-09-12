@@ -21,8 +21,9 @@
       // the following casts are generally unsafe, but com.google.inject.Provider extends
       // javax.inject.Provider and is covariant
       @SuppressWarnings("unchecked")
-      TypeLiteral<T> guiceProviderType = (TypeLiteral<T>) TypeLiteral.get(
-          Types.providerOf(parameterizedType.getActualTypeArguments()[0]));
+      TypeLiteral<T> guiceProviderType =
+          (TypeLiteral<T>)
+              TypeLiteral.get(Types.providerOf(parameterizedType.getActualTypeArguments()[0]));
       return guiceProviderType;
     }
 

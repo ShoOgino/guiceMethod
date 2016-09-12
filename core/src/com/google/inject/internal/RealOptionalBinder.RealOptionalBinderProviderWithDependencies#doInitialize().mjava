@@ -1,5 +1,5 @@
     /**
-     * Initialize the factory.  BindingSelection is guaranteed to be initialized at this point and
+     * Initialize the factory. BindingSelection is guaranteed to be initialized at this point and
      * this will be called prior to any provisioning.
      */
     abstract void doInitialize();

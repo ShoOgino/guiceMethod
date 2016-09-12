@@ -1,6 +1,7 @@
-  public Errors duplicateBindingAnnotations(Member member,
-      Class<? extends Annotation> a, Class<? extends Annotation> b) {
-    return addMessage("%s has more than one annotation annotated with @BindingAnnotation: "
-        + "%s and %s", member, a, b);
+  public Errors duplicateBindingAnnotations(
+      Member member, Class<? extends Annotation> a, Class<? extends Annotation> b) {
+    return addMessage(
+        "%s has more than one annotation annotated with @BindingAnnotation: %s and %s",
+        member, a, b);
   }
 

@@ -10,7 +10,7 @@
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
         @SuppressWarnings("unchecked")
         BindingImpl<T> jitBinding = (BindingImpl<T>) injector.jitBindings.get(key);
-        if(jitBinding != null) {
+        if (jitBinding != null) {
           return jitBinding;
         }
       }
@@ -18,15 +18,15 @@
 
     // If Key is a Provider, we have to see if the type it is providing exists,
     // and, if so, we have to create the binding for the provider.
-    if(isProvider(key)) {
+    if (isProvider(key)) {
       try {
         // This is safe because isProvider above ensures that T is a Provider<?>
         @SuppressWarnings({"unchecked", "cast"})
-        Key<?> providedKey = (Key<?>)getProvidedKey((Key)key, new Errors());
-        if(getExistingBinding(providedKey) != null) {
+        Key<?> providedKey = (Key<?>) getProvidedKey((Key) key, new Errors());
+        if (getExistingBinding(providedKey) != null) {
           return getBinding(key);
         }
-      } catch(ErrorsException e) {
+      } catch (ErrorsException e) {
         throw new ConfigurationException(e.getErrors().getMessages());
       }
     }

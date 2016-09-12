@@ -1,4 +1,5 @@
-    @Override public Provider<T> getProvider() {
+    @Override
+    public Provider<T> getProvider() {
       return provider;
     }
 

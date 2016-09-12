@@ -1,10 +1,14 @@
     private static void ensureOwnerType(Type ownerType, Type rawType) {
       if (rawType instanceof Class<?>) {
         Class rawTypeAsClass = (Class) rawType;
-        checkArgument(ownerType != null || rawTypeAsClass.getEnclosingClass() == null,
-            "No owner type for enclosed %s", rawType);
-        checkArgument(ownerType == null || rawTypeAsClass.getEnclosingClass() != null,
-            "Owner type for unenclosed %s", rawType);
+        checkArgument(
+            ownerType != null || rawTypeAsClass.getEnclosingClass() == null,
+            "No owner type for enclosed %s",
+            rawType);
+        checkArgument(
+            ownerType == null || rawTypeAsClass.getEnclosingClass() != null,
+            "Owner type for unenclosed %s",
+            rawType);
       }
     }
 

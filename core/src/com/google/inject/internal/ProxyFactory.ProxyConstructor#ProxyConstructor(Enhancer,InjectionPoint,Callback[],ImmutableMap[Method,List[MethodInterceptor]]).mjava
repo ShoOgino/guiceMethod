@@ -1,5 +1,8 @@
     @SuppressWarnings("unchecked") // the constructor promises to construct 'T's
-    ProxyConstructor(Enhancer enhancer, InjectionPoint injectionPoint, Callback[] callbacks,
+    ProxyConstructor(
+        Enhancer enhancer,
+        InjectionPoint injectionPoint,
+        Callback[] callbacks,
         ImmutableMap<Method, List<MethodInterceptor>> methodInterceptors) {
       this.enhanced = enhancer.createClass(); // this returns a cached class if possible
       this.injectionPoint = injectionPoint;

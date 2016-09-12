@@ -1,8 +1,9 @@
   @SuppressWarnings("unchecked")
   static <T> TypeLiteral<Optional<javax.inject.Provider<T>>> optionalOfJavaxProvider(
       TypeLiteral<T> type) {
-    return (TypeLiteral<Optional<javax.inject.Provider<T>>>) TypeLiteral.get(
-        Types.newParameterizedType(Optional.class,
-            newParameterizedType(javax.inject.Provider.class, type.getType())));
+    return (TypeLiteral<Optional<javax.inject.Provider<T>>>)
+        TypeLiteral.get(
+            Types.newParameterizedType(
+                Optional.class, newParameterizedType(javax.inject.Provider.class, type.getType())));
   }
 

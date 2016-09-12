@@ -12,12 +12,14 @@
             // validate there's a declared method called "value"
             Method valueMethod = annotation.annotationType().getDeclaredMethod("value");
             if (valueMethod.getReturnType().isArray()) {
-              binder.addError("Array types are not allowed in a MapKey with unwrapValue=true: %s",                    
+              binder.addError(
+                  "Array types are not allowed in a MapKey with unwrapValue=true: %s",
                   annotation.annotationType());
               return AnnotationOrError.forError();
             }
           } catch (NoSuchMethodException invalid) {
-            binder.addError("No 'value' method in MapKey with unwrapValue=true: %s",
+            binder.addError(
+                "No 'value' method in MapKey with unwrapValue=true: %s",
                 annotation.annotationType());
             return AnnotationOrError.forError();
           }

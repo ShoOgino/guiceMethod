@@ -1,6 +1,7 @@
   /** Implements {@link Annotation#equals}. */
-  private static boolean annotationEquals(Class<? extends Annotation> type,
-      Map<String, Object> members, Object other) throws Exception {
+  private static boolean annotationEquals(
+      Class<? extends Annotation> type, Map<String, Object> members, Object other)
+      throws Exception {
     if (!type.isInstance(other)) {
       return false;
     }

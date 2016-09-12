@@ -1,7 +1,12 @@
   public void permitDuplicates() {
     entrySetBinder.permitDuplicates();
-    binder.install(new MultimapBinder<K, V>(
-        multimapKey, providerSetMultimapKey, javaxProviderSetMultimapKey,
-        providerCollectionMultimapKey, javaxProviderCollectionMultimapKey, entrySetBinder));
+    binder.install(
+        new MultimapBinder<K, V>(
+            multimapKey,
+            providerSetMultimapKey,
+            javaxProviderSetMultimapKey,
+            providerCollectionMultimapKey,
+            javaxProviderCollectionMultimapKey,
+            entrySetBinder));
   }
 

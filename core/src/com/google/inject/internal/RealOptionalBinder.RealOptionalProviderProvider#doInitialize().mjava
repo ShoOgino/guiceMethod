@@ -1,4 +1,5 @@
-    @Override void doInitialize() {
+    @Override
+    void doInitialize() {
       if (bindingSelection.getBinding() == null) {
         value = Optional.absent();
       } else {

@@ -1,6 +1,6 @@
   /**
    * Returns the key to use for the default binding.
-   * 
+   *
    * <p>As a side effect this installs support for the 'direct type', so a binding for {@code T}
    * will be made available.
    */

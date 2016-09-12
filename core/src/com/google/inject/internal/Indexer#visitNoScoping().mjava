@@ -1,4 +1,5 @@
-  @Override public Object visitNoScoping() {
+  @Override
+  public Object visitNoScoping() {
     return Scopes.NO_SCOPE;
   }
 

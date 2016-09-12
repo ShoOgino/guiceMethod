@@ -1,6 +1,6 @@
   /** Returns an injection point that can be used to clean up the constructor store. */
   InjectionPoint getInternalConstructor() {
-    if(factory.constructorInjector != null) {
+    if (factory.constructorInjector != null) {
       return factory.constructorInjector.getConstructionProxy().getInjectionPoint();
     } else {
       return constructorInjectionPoint;

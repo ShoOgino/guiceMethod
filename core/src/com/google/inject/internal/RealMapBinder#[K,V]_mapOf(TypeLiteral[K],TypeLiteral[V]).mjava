@@ -1,7 +1,6 @@
   @SuppressWarnings("unchecked") // a map of <K, V> is safely a Map<K, V>
-  static <K, V> TypeLiteral<Map<K, V>> mapOf(
-      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    return (TypeLiteral<Map<K, V>>) TypeLiteral.get(
-        Types.mapOf(keyType.getType(), valueType.getType()));
+  static <K, V> TypeLiteral<Map<K, V>> mapOf(TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+    return (TypeLiteral<Map<K, V>>)
+        TypeLiteral.get(Types.mapOf(keyType.getType(), valueType.getType()));
   }
 

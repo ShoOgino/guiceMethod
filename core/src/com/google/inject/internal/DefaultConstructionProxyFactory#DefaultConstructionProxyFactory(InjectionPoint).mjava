@@ -1,6 +1,4 @@
-  /**
-   * @param injectionPoint an injection point whose member is a constructor of {@code T}.
-   */
+  /** @param injectionPoint an injection point whose member is a constructor of {@code T}. */
   DefaultConstructionProxyFactory(InjectionPoint injectionPoint) {
     this.injectionPoint = injectionPoint;
   }

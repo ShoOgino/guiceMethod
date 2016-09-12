@@ -1,5 +1,6 @@
-  @Override public Indexer.IndexedBinding visit(ProviderKeyBinding<? extends Object> binding) {
-    return new Indexer.IndexedBinding(binding, BindingType.PROVIDER_KEY, scope(binding),
-        binding.getProviderKey());
+  @Override
+  public Indexer.IndexedBinding visit(ProviderKeyBinding<? extends Object> binding) {
+    return new Indexer.IndexedBinding(
+        binding, BindingType.PROVIDER_KEY, scope(binding), binding.getProviderKey());
   }
 

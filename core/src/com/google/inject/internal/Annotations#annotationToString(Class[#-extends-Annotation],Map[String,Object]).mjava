@@ -1,6 +1,6 @@
   /** Implements {@link Annotation#toString}. */
-  private static String annotationToString(Class<? extends Annotation> type,
-      Map<String, Object> members) throws Exception {
+  private static String annotationToString(
+      Class<? extends Annotation> type, Map<String, Object> members) throws Exception {
     StringBuilder sb = new StringBuilder().append("@").append(type.getName()).append("(");
     JOINER.appendTo(sb, Maps.transformValues(members, DEEP_TO_STRING_FN));
     return sb.append(")").toString();

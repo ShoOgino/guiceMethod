@@ -1,5 +1,4 @@
-  public InterceptorStackCallback(Method method,
-      List<MethodInterceptor> interceptors) {
+  public InterceptorStackCallback(Method method, List<MethodInterceptor> interceptors) {
     this.method = method;
     this.interceptors = interceptors.toArray(new MethodInterceptor[interceptors.size()]);
   }

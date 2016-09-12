@@ -1,4 +1,5 @@
-  @Override public Object visitEagerSingleton() {
+  @Override
+  public Object visitEagerSingleton() {
     return EAGER_SINGLETON;
   }
 

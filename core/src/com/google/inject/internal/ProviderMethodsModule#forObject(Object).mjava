@@ -1,6 +1,6 @@
   /**
-   * Returns a module which creates bindings for provider methods from the given object.
-   * This is useful notably for <a href="http://code.google.com/p/google-gin/">GIN</a>
+   * Returns a module which creates bindings for provider methods from the given object. This is
+   * useful notably for <a href="http://code.google.com/p/google-gin/">GIN</a>
    *
    * <p>This will skip bytecode generation for provider methods, since it is assumed that callers
    * are only interested in Module metadata.

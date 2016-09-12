@@ -1,12 +1,13 @@
   private static void bindStage(InjectorImpl injector, Stage stage) {
     Key<Stage> key = Key.get(Stage.class);
-    InstanceBindingImpl<Stage> stageBinding = new InstanceBindingImpl<Stage>(
-        injector,
-        key,
-        SourceProvider.UNKNOWN_SOURCE,
-        new ConstantFactory<Stage>(Initializables.of(stage)),
-        ImmutableSet.<InjectionPoint>of(),
-        stage);
+    InstanceBindingImpl<Stage> stageBinding =
+        new InstanceBindingImpl<Stage>(
+            injector,
+            key,
+            SourceProvider.UNKNOWN_SOURCE,
+            new ConstantFactory<Stage>(Initializables.of(stage)),
+            ImmutableSet.<InjectionPoint>of(),
+            stage);
     injector.state.putBinding(key, stageBinding);
   }
 

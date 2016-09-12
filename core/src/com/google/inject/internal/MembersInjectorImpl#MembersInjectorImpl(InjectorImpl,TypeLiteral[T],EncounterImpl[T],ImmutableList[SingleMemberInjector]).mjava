@@ -1,14 +1,17 @@
-  MembersInjectorImpl(InjectorImpl injector, TypeLiteral<T> typeLiteral,
-      EncounterImpl<T> encounter, ImmutableList<SingleMemberInjector> memberInjectors) {
+  MembersInjectorImpl(
+      InjectorImpl injector,
+      TypeLiteral<T> typeLiteral,
+      EncounterImpl<T> encounter,
+      ImmutableList<SingleMemberInjector> memberInjectors) {
     this.injector = injector;
     this.typeLiteral = typeLiteral;
     this.memberInjectors = memberInjectors.isEmpty() ? null : memberInjectors;
-    this.userMembersInjectors = encounter.getMembersInjectors().isEmpty() 
-        ? null 
-        : encounter.getMembersInjectors().asList();
-    this.injectionListeners = encounter.getInjectionListeners().isEmpty() 
-        ? null 
-        : encounter.getInjectionListeners().asList();
+    this.userMembersInjectors =
+        encounter.getMembersInjectors().isEmpty() ? null : encounter.getMembersInjectors().asList();
+    this.injectionListeners =
+        encounter.getInjectionListeners().isEmpty()
+            ? null
+            : encounter.getInjectionListeners().asList();
     /*if[AOP]*/
     this.addedAspects = encounter.getAspects().isEmpty() ? null : encounter.getAspects();
     /*end[AOP]*/

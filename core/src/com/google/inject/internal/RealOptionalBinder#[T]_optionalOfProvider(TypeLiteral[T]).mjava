@@ -1,6 +1,8 @@
   @SuppressWarnings("unchecked")
   static <T> TypeLiteral<Optional<Provider<T>>> optionalOfProvider(TypeLiteral<T> type) {
-    return (TypeLiteral<Optional<Provider<T>>>) TypeLiteral.get(Types.newParameterizedType(
-        Optional.class, newParameterizedType(Provider.class, type.getType())));
+    return (TypeLiteral<Optional<Provider<T>>>)
+        TypeLiteral.get(
+            Types.newParameterizedType(
+                Optional.class, newParameterizedType(Provider.class, type.getType())));
   }
 

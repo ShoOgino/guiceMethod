@@ -7,12 +7,13 @@
         allSources.format("%n    bound at %s", source);
       }
     }
-    Errors errors = addMessage(
-        "Unable to create binding for %s."
-      + " It was already configured on one or more child injectors or private modules"
-      + "%s%n"
-      + "  If it was in a PrivateModule, did you forget to expose the binding?",
-        key, allSources.out());
+    Errors errors =
+        addMessage(
+            "Unable to create binding for %s."
+                + " It was already configured on one or more child injectors or private modules"
+                + "%s%n"
+                + "  If it was in a PrivateModule, did you forget to expose the binding?",
+            key, allSources.out());
     return errors;
   }
 

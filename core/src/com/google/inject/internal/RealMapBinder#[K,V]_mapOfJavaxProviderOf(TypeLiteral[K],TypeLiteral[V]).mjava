@@ -2,8 +2,10 @@
   @SuppressWarnings("unchecked")
   static <K, V> TypeLiteral<Map<K, javax.inject.Provider<V>>> mapOfJavaxProviderOf(
       TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    return (TypeLiteral<Map<K, javax.inject.Provider<V>>>) TypeLiteral.get(
-        Types.mapOf(keyType.getType(),
-            newParameterizedType(javax.inject.Provider.class, valueType.getType())));
+    return (TypeLiteral<Map<K, javax.inject.Provider<V>>>)
+        TypeLiteral.get(
+            Types.mapOf(
+                keyType.getType(),
+                newParameterizedType(javax.inject.Provider.class, valueType.getType())));
   }
 

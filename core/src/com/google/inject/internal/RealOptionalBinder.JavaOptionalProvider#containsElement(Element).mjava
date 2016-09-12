@@ -1,4 +1,5 @@
-    @Override public boolean containsElement(Element element) {
+    @Override
+    public boolean containsElement(Element element) {
       return bindingSelection.containsElement(element);
     }
 

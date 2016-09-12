@@ -1,4 +1,5 @@
-    @Override public boolean permitsDuplicates() {
+    @Override
+    public boolean permitsDuplicates() {
       if (isInitialized()) {
         return permitDuplicates;
       } else {

@@ -1,5 +1,6 @@
   /** Returns the scoping annotation, or null if there isn't one. */
-  public static Class<? extends Annotation> findScopeAnnotation(Errors errors, Annotation[] annotations) {
+  public static Class<? extends Annotation> findScopeAnnotation(
+      Errors errors, Annotation[] annotations) {
     Class<? extends Annotation> found = null;
 
     for (Annotation annotation : annotations) {

@@ -1,4 +1,5 @@
-  @Override public String toString() {
+  @Override
+  public String toString() {
     String annotationString = annotation.toString();
     // Show @Provides w/o the com.google.inject prefix.
     if (annotation.annotationType() == Provides.class) {

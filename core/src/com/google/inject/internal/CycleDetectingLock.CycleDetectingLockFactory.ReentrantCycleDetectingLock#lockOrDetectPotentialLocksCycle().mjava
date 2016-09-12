@@ -1,4 +1,5 @@
-      @Override public ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle() {
+      @Override
+      public ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle() {
         final long currentThreadId = Thread.currentThread().getId();
         synchronized (CycleDetectingLockFactory.class) {
           checkState();

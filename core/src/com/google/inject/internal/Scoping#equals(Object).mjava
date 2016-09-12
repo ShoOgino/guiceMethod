@@ -1,9 +1,9 @@
   @Override
   public boolean equals(Object obj) {
-    if(obj instanceof Scoping) {
-      Scoping o = (Scoping)obj;
+    if (obj instanceof Scoping) {
+      Scoping o = (Scoping) obj;
       return Objects.equal(getScopeAnnotation(), o.getScopeAnnotation())
-        && Objects.equal(getScopeInstance(), o.getScopeInstance());
+          && Objects.equal(getScopeInstance(), o.getScopeInstance());
     } else {
       return false;
     }

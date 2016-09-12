@@ -1,5 +1,5 @@
-  public InstanceBindingImpl(Object source, Key<T> key, Scoping scoping,
-      Set<InjectionPoint> injectionPoints, T instance) {
+  public InstanceBindingImpl(
+      Object source, Key<T> key, Scoping scoping, Set<InjectionPoint> injectionPoints, T instance) {
     super(source, key, scoping);
     this.injectionPoints = ImmutableSet.copyOf(injectionPoints);
     this.instance = instance;

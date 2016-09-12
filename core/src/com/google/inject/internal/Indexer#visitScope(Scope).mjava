@@ -1,4 +1,5 @@
-  @Override public Object visitScope(Scope scope) {
+  @Override
+  public Object visitScope(Scope scope) {
     return scope;
   }
 

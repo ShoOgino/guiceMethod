@@ -1,7 +1,5 @@
   /*if[AOP]*/
-  /**
-   * Returns the interceptors applied to each method, in order of invocation.
-   */
+  /** Returns the interceptors applied to each method, in order of invocation. */
   ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>> getMethodInterceptors();
   /*end[AOP]*/
 

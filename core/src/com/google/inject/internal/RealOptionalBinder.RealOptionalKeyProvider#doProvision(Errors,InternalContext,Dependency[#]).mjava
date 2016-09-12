@@ -1,4 +1,5 @@
-    @Override protected Optional<T> doProvision(
+    @Override
+    protected Optional<T> doProvision(
         Errors errors, InternalContext context, Dependency<?> currentDependency)
         throws ErrorsException {
       InternalFactory<? extends T> local = delegate;

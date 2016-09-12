@@ -1,6 +1,6 @@
     @Override
     public <T> T getInstance(Class<T> type) {
       throw new UnsupportedOperationException(
-        "Injector.getInstance(Class<T>) is not supported in Stage.TOOL");
+          "Injector.getInstance(Class<T>) is not supported in Stage.TOOL");
     }
 
