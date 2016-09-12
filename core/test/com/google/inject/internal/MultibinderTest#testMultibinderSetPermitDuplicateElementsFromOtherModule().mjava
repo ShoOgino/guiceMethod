@@ -2,26 +2,40 @@
     // This module duplicates a binding for "B", which would normally be an error.
     // Because module cd is also installed and the Multibinder<String>
     // in cd sets permitDuplicates, there should be no error.
-    Module ab = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().toInstance("B");
-        multibinder.addBinding().toProvider(Providers.of("B"));
-      }
-    };
-    Module cd = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.permitDuplicates();
-        multibinder.addBinding().toInstance("C");
-        multibinder.addBinding().toInstance("D");
-      }
-    };
+    Module ab =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("A");
+            multibinder.addBinding().toInstance("B");
+            multibinder.addBinding().toProvider(Providers.of("B"));
+          }
+        };
+    Module cd =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.permitDuplicates();
+            multibinder.addBinding().toInstance("C");
+            multibinder.addBinding().toInstance("D");
+          }
+        };
     Injector injector = Guice.createInjector(ab, cd);
 
     assertEquals(setOf("A", "B", "C", "D"), injector.getInstance(Key.get(setOfString)));
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(ab, cd), BOTH, true, 0,
-        instance("A"), instance("B"), providerInstance("B"), instance("C"), instance("D"));
+    assertSetVisitor(
+        Key.get(setOfString),
+        stringType,
+        setOf(ab, cd),
+        BOTH,
+        true,
+        0,
+        instance("A"),
+        instance("B"),
+        providerInstance("B"),
+        instance("C"),
+        instance("D"));
   }
 

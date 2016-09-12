@@ -1,27 +1,33 @@
   /**
-   * Our implementation maintains order, but doesn't guarantee it in the API spec.
-   * TODO: specify the iteration order?
+   * Our implementation maintains order, but doesn't guarantee it in the API spec. TODO: specify the
+   * iteration order?
    */
   public void testBindOrderEqualsIterationOrder() {
-    Injector injector = Guice.createInjector(
-        new AbstractModule() {
-          @Override protected void configure() {
-            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-            multibinder.addBinding().toInstance("leonardo");
-            multibinder.addBinding().toInstance("donatello");
-            install(new AbstractModule() {
-              @Override protected void configure() {
-                Multibinder.newSetBinder(binder(), String.class)
-                    .addBinding().toInstance("michaelangelo");
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+                multibinder.addBinding().toInstance("leonardo");
+                multibinder.addBinding().toInstance("donatello");
+                install(
+                    new AbstractModule() {
+                      @Override
+                      protected void configure() {
+                        Multibinder.newSetBinder(binder(), String.class)
+                            .addBinding()
+                            .toInstance("michaelangelo");
+                      }
+                    });
+              }
+            },
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("raphael");
               }
             });
-          }
-        },
-        new AbstractModule() {
-          @Override protected void configure() {
-            Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("raphael");
-          }
-        });
 
     List<String> inOrder = ImmutableList.copyOf(injector.getInstance(Key.get(setOfString)));
     assertEquals(ImmutableList.of("leonardo", "donatello", "michaelangelo", "raphael"), inOrder);

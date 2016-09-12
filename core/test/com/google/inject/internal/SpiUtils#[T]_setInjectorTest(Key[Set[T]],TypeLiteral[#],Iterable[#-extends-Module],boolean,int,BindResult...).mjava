@@ -1,44 +1,48 @@
   @SuppressWarnings("unchecked")
-  private static <T> void setInjectorTest(Key<Set<T>> setKey, TypeLiteral<?> elementType,
-      Iterable<? extends Module> modules, boolean allowDuplicates, int otherMultibindings,
+  private static <T> void setInjectorTest(
+      Key<Set<T>> setKey,
+      TypeLiteral<?> elementType,
+      Iterable<? extends Module> modules,
+      boolean allowDuplicates,
+      int otherMultibindings,
       BindResult... results) {
     Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
-    Key<?> collectionOfJavaxProvidersKey =
-        setKey.ofType(collectionOfJavaxProvidersOf(elementType));
+    Key<?> collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
     Injector injector = Guice.createInjector(modules);
     Visitor<Set<T>> visitor = new Visitor<Set<T>>();
     Binding<Set<T>> binding = injector.getBinding(setKey);
     MultibinderBinding<Set<T>> multibinder =
-        (MultibinderBinding<Set<T>>)binding.acceptTargetVisitor(visitor);
+        (MultibinderBinding<Set<T>>) binding.acceptTargetVisitor(visitor);
     assertNotNull(multibinder);
     assertEquals(elementType, multibinder.getElementTypeLiteral());
     assertEquals(allowDuplicates, multibinder.permitsDuplicates());
     List<Binding<?>> elements = Lists.newArrayList(multibinder.getElements());
     List<BindResult> bindResults = Lists.newArrayList(results);
-    assertEquals("wrong bind elements, expected: " + bindResults
-        + ", but was: " + multibinder.getElements(),
-        bindResults.size(), elements.size());
+    assertEquals(
+        "wrong bind elements, expected: " + bindResults + ", but was: " + multibinder.getElements(),
+        bindResults.size(),
+        elements.size());
 
-    for(BindResult result : bindResults) {
+    for (BindResult result : bindResults) {
       Binding found = null;
-      for(Binding item : elements) {
+      for (Binding item : elements) {
         if (matches(item, result)) {
           found = item;
           break;
         }
       }
-      if(found == null) {
+      if (found == null) {
         fail("Could not find element: " + result + " in remaining elements: " + elements);
       } else {
         elements.remove(found);
       }
     }
-    
-    if(!elements.isEmpty()) {
+
+    if (!elements.isEmpty()) {
       fail("Found all elements of: " + bindResults + ", but more were left over: " + elements);
     }
 
-    Set<Binding> setOfElements = new HashSet<Binding>(multibinder.getElements()); 
+    Set<Binding> setOfElements = new HashSet<Binding>(multibinder.getElements());
     Set<IndexedBinding> setOfIndexed = Sets.newHashSet();
     Indexer indexer = new Indexer(injector);
     for (Binding<?> oneBinding : setOfElements) {
@@ -49,17 +53,17 @@
     List<Binding> otherContains = Lists.newArrayList();
     boolean collectionOfProvidersMatch = false;
     boolean collectionOfJavaxProvidersMatch = false;
-    for(Binding b : injector.getAllBindings().values()) {
+    for (Binding b : injector.getAllBindings().values()) {
       boolean contains = multibinder.containsElement(b);
       Key key = b.getKey();
       Object visited = b.acceptTargetVisitor(visitor);
-      if(visited != null) {
-        if(visited.equals(multibinder)) {
+      if (visited != null) {
+        if (visited.equals(multibinder)) {
           assertTrue(contains);
         } else {
           otherMultibinders.add(visited);
         }
-      } else if(setOfElements.contains(b)) {
+      } else if (setOfElements.contains(b)) {
         assertTrue(contains);
       } else if (key.equals(collectionOfProvidersKey)) {
         assertTrue(contains);
@@ -77,13 +81,14 @@
     assertTrue(collectionOfProvidersMatch);
     assertTrue(collectionOfJavaxProvidersMatch);
 
-    if(allowDuplicates) {
+    if (allowDuplicates) {
       assertEquals("contained more than it should: " + otherContains, 1, otherContains.size());
     } else {
       assertTrue("contained more than it should: " + otherContains, otherContains.isEmpty());
     }
-    assertEquals("other multibindings found: " + otherMultibinders, otherMultibindings,
+    assertEquals(
+        "other multibindings found: " + otherMultibinders,
+        otherMultibindings,
         otherMultibinders.size());
-    
   }
 

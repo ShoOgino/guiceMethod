@@ -1,9 +1,11 @@
   public void testMapBinderWithEmptyMap() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder.newMapBinder(binder(), String.class, String.class);
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder.newMapBinder(binder(), String.class, String.class);
+          }
+        };
     Injector injector = Guice.createInjector(module);
 
     Map<String, String> map = injector.getInstance(Key.get(mapOfString));

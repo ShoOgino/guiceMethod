@@ -1,14 +1,16 @@
   public void testSourceLinesInMapBindings() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          MapBinder.newMapBinder(binder(), String.class, Integer.class)
-              .addBinding("one");
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              MapBinder.newMapBinder(binder(), String.class, Integer.class).addBinding("one");
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) No implementation for java.lang.Integer",
           "at " + getClass().getName());
     }

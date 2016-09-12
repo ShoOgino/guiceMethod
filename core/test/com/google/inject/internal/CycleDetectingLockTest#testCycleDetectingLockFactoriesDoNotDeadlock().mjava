@@ -8,8 +8,8 @@
    *   Thread B: lock a lock A (factory A)
    * </pre>
    *
-   * <p>This should succeed even though from the point of view of each individual factory
-   * there are no deadlocks to detect.
+   * <p>This should succeed even though from the point of view of each individual factory there are
+   * no deadlocks to detect.
    */
 
   public void testCycleDetectingLockFactoriesDoNotDeadlock() throws Exception {

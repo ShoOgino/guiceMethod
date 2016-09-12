@@ -7,13 +7,16 @@
     // We initially bind two equal lists
     final List<String> list1 = Lists.newArrayList();
     final List<String> list2 = Lists.newArrayList();
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<List<String>> multibinder = Multibinder.newSetBinder(binder(), listOfStrings);
-        multibinder.addBinding().toInstance(list1);
-        multibinder.addBinding().toInstance(list2);
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<List<String>> multibinder =
+                Multibinder.newSetBinder(binder(), listOfStrings);
+            multibinder.addBinding().toInstance(list1);
+            multibinder.addBinding().toInstance(list2);
+          }
+        };
     List<Element> elements = Elements.getElements(module);
 
     // Now we change the lists so they no longer match, and create the injector.

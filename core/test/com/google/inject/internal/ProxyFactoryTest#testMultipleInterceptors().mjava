@@ -4,8 +4,8 @@
     CountingInterceptor countingInterceptor = new CountingInterceptor();
 
     aspects.add(new MethodAspect(any(), any(), doubleInterceptor, countingInterceptor));
-    ProxyFactory<Counter> factory
-        = new ProxyFactory<Counter>(InjectionPoint.forConstructorOf(Counter.class), aspects);
+    ProxyFactory<Counter> factory =
+        new ProxyFactory<Counter>(InjectionPoint.forConstructorOf(Counter.class), aspects);
 
     ConstructionProxy<Counter> constructor = factory.create();
 

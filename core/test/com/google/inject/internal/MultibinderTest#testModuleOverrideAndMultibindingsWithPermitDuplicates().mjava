@@ -1,39 +1,54 @@
-  /**
-   * With overrides, we should get the union of all multibindings.
-   */
+  /** With overrides, we should get the union of all multibindings. */
   public void testModuleOverrideAndMultibindingsWithPermitDuplicates() {
-    Module abc = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().toInstance("B");
-        multibinder.addBinding().toInstance("C");
-        multibinder.permitDuplicates();
-      }
-    };
-    Module cd = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("C");
-        multibinder.addBinding().toInstance("D");
-        multibinder.permitDuplicates();
-      }
-    };
-    Module ef = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("E");
-        multibinder.addBinding().toInstance("F");
-        multibinder.permitDuplicates();
-      }
-    };
+    Module abc =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("A");
+            multibinder.addBinding().toInstance("B");
+            multibinder.addBinding().toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        };
+    Module cd =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("C");
+            multibinder.addBinding().toInstance("D");
+            multibinder.permitDuplicates();
+          }
+        };
+    Module ef =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("E");
+            multibinder.addBinding().toInstance("F");
+            multibinder.permitDuplicates();
+          }
+        };
 
     Module abcd = Modules.override(abc).with(cd);
     Injector injector = Guice.createInjector(abcd, ef);
-    assertEquals(ImmutableSet.of("A", "B", "C", "D", "E", "F"),
-        injector.getInstance(Key.get(setOfString)));
+    assertEquals(
+        ImmutableSet.of("A", "B", "C", "D", "E", "F"), injector.getInstance(Key.get(setOfString)));
 
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(abcd, ef), BOTH, true, 0,
-        instance("A"), instance("B"), instance("C"), instance("D"), instance("E"), instance("F"));
+    assertSetVisitor(
+        Key.get(setOfString),
+        stringType,
+        setOf(abcd, ef),
+        BOTH,
+        true,
+        0,
+        instance("A"),
+        instance("B"),
+        instance("C"),
+        instance("D"),
+        instance("E"),
+        instance("F"));
   }
 

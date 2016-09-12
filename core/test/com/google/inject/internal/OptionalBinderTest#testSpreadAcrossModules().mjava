@@ -1,37 +1,44 @@
   public void testSpreadAcrossModules() throws Exception {
-    Module module1 = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class);
-      }
-    };
-    Module module2 = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
-      }
-    };
-    Module module3 = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class).setBinding().toInstance("b");
-      }
-    };
+    Module module1 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class);
+          }
+        };
+    Module module2 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class).setDefault().toInstance("a");
+          }
+        };
+    Module module3 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class).setBinding().toInstance("b");
+          }
+        };
 
     Injector injector = Guice.createInjector(module1, module2, module3);
     assertEquals("b", injector.getInstance(String.class));
-    
+
     Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
     assertTrue(optional.isPresent());
     assertEquals("b", optional.get());
-    
+
     Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
     assertTrue(optionalP.isPresent());
     assertEquals("b", optionalP.get().get());
-    
+
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertTrue(optionalJxP.isPresent());
     assertEquals("b", optionalJxP.get().get());
-    
-    assertOptionalVisitor(stringKey,
+
+    assertOptionalVisitor(
+        stringKey,
         setOf(module1, module2, module3),
         VisitType.BOTH,
         0,

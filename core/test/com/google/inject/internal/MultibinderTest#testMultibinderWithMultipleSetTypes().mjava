@@ -1,19 +1,18 @@
   public void testMultibinderWithMultipleSetTypes() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder.newSetBinder(binder(), String.class)
-            .addBinding().toInstance("A");
-        Multibinder.newSetBinder(binder(), Integer.class)
-            .addBinding().toInstance(1);
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("A");
+            Multibinder.newSetBinder(binder(), Integer.class).addBinding().toInstance(1);
+          }
+        };
     Injector injector = Guice.createInjector(module);
 
     assertEquals(setOf("A"), injector.getInstance(Key.get(setOfString)));
     assertEquals(setOf(1), injector.getInstance(Key.get(setOfInteger)));
-    assertSetVisitor(Key.get(setOfString), stringType, setOf(module), BOTH, false, 1,
-        instance("A"));
-    assertSetVisitor(Key.get(setOfInteger), intType, setOf(module), BOTH, false, 1,
-        instance(1));
+    assertSetVisitor(
+        Key.get(setOfString), stringType, setOf(module), BOTH, false, 1, instance("A"));
+    assertSetVisitor(Key.get(setOfInteger), intType, setOf(module), BOTH, false, 1, instance(1));
   }
 

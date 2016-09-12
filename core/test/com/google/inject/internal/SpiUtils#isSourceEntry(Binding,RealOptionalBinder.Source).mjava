@@ -1,5 +1,5 @@
   private static boolean isSourceEntry(Binding b, RealOptionalBinder.Source type) {
-    switch(type) {
+    switch (type) {
       case ACTUAL:
         return b.getKey().getAnnotation() instanceof RealOptionalBinder.Actual;
       case DEFAULT:

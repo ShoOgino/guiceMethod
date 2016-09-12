@@ -1,4 +1,4 @@
-  @SuppressWarnings("unchecked") 
+  @SuppressWarnings("unchecked")
   private <V> Set<V> setOf(V... elements) {
     return ImmutableSet.copyOf(elements);
   }

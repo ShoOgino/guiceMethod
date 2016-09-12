@@ -1,21 +1,23 @@
   public void testOptionalIsAbsentByDefault() throws Exception {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class);
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class);
+          }
+        };
 
     Injector injector = Guice.createInjector(module);
     Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
     assertFalse(optional.isPresent());
-    
+
     Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
     assertFalse(optionalP.isPresent());
-    
+
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertFalse(optionalJxP.isPresent());
-    
+
     assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null, null);
 
     if (HAS_JAVA_OPTIONAL) {

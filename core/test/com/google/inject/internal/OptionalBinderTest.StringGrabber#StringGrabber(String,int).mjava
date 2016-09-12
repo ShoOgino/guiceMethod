@@ -1,4 +1,4 @@
-    @SuppressWarnings("unused")  // Found by reflection
+    @SuppressWarnings("unused") // Found by reflection
     public StringGrabber(@Named("B_string") String string, int unused) {
       this.string = string;
     }

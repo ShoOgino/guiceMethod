@@ -3,15 +3,19 @@
    * really care about the underlying structure of those bindings, which are implementation details.
    */
   public void testMultibinderDependenciesInToolStage() {
-    Injector injector = Guice.createInjector(Stage.TOOL, new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
+    Injector injector =
+        Guice.createInjector(
+            Stage.TOOL,
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+                multibinder.addBinding().toInstance("A");
+                multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
 
-        bindConstant().annotatedWith(Names.named("b")).to("B");
-      }
-    });
+                bindConstant().annotatedWith(Names.named("b")).to("B");
+              }
+            });
 
     Binding<Set<String>> binding = injector.getBinding(new Key<Set<String>>() {});
     HasDependencies withDependencies = (HasDependencies) binding;
@@ -26,17 +30,22 @@
     // the Key of @Named("b") String=B
     for (Dependency<?> dependency : withDependencies.getDependencies()) {
       Binding<?> b = injector.getBinding(dependency.getKey());
-      if(b instanceof InstanceBinding) {
-        if(instanceBinding != null) {
-          fail("Already have an instance binding of: " + instanceBinding + ", and now want to add: " + b);
+      if (b instanceof InstanceBinding) {
+        if (instanceBinding != null) {
+          fail(
+              "Already have an instance binding of: "
+                  + instanceBinding
+                  + ", and now want to add: "
+                  + b);
         } else {
-          instanceBinding = (InstanceBinding)b;
+          instanceBinding = (InstanceBinding) b;
         }
-      } else if(b instanceof LinkedKeyBinding) {
-        if(linkedBinding != null) {
-          fail("Already have a linked binding of: " + linkedBinding + ", and now want to add: " + b);
+      } else if (b instanceof LinkedKeyBinding) {
+        if (linkedBinding != null) {
+          fail(
+              "Already have a linked binding of: " + linkedBinding + ", and now want to add: " + b);
         } else {
-          linkedBinding = (LinkedKeyBinding)b;
+          linkedBinding = (LinkedKeyBinding) b;
         }
       } else {
         fail("Unexpected dependency of: " + dependency);

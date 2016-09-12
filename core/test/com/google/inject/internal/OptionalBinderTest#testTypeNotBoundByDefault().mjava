@@ -1,24 +1,27 @@
   public void testTypeNotBoundByDefault() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class);
-        requireBinding(new Key<Optional<String>>() {}); // the above specifies this.
-        requireBinding(String.class); // but it doesn't specify this.
-        binder().requireExplicitBindings(); // need to do this, otherwise String will JIT
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class);
+            requireBinding(new Key<Optional<String>>() {}); // the above specifies this.
+            requireBinding(String.class); // but it doesn't specify this.
+            binder().requireExplicitBindings(); // need to do this, otherwise String will JIT
 
-        if (HAS_JAVA_OPTIONAL) {
-          requireBinding(Key.get(javaOptionalOfString));
-        }
-      }
-    };
+            if (HAS_JAVA_OPTIONAL) {
+              requireBinding(Key.get(javaOptionalOfString));
+            }
+          }
+        };
 
     try {
       Guice.createInjector(module);
       fail();
     } catch (CreationException ce) {
-      assertContains(ce.getMessage(),
+      assertContains(
+          ce.getMessage(),
           "1) Explicit bindings are required and java.lang.String is not explicitly bound.");
       assertEquals(1, ce.getErrorMessages().size());
     }
-  } 
+  }
 

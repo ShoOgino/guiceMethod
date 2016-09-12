@@ -1,2 +1,3 @@
-    @Inject DependsOnJitBinding(JitBinding jitBinding) {}
+    @Inject
+    DependsOnJitBinding(JitBinding jitBinding) {}
 

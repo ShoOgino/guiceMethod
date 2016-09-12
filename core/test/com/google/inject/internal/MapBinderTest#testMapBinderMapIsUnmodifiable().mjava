@@ -1,16 +1,20 @@
   public void testMapBinderMapIsUnmodifiable() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder.newMapBinder(binder(), String.class, String.class)
-            .addBinding("a").toInstance("A");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                MapBinder.newMapBinder(binder(), String.class, String.class)
+                    .addBinding("a")
+                    .toInstance("A");
+              }
+            });
 
     Map<String, String> map = injector.getInstance(Key.get(mapOfString));
     try {
       map.clear();
       fail();
-    } catch(UnsupportedOperationException expected) {
+    } catch (UnsupportedOperationException expected) {
     }
   }
 

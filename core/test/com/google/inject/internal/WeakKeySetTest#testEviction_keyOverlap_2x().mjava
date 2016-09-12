@@ -26,11 +26,11 @@
     assertInSet(set, key, 1, source2);
 
     source1 = source2 = null;
-    
+
     awaitClear(weakSource1Ref);
     // Key1 will be referenced as the key in the sources backingSet and won't be
     // GC'd.
-    
+
     // Should not be GC'd until state2 goes away.
     assertNotNull(weakSource2Ref.get());
 
