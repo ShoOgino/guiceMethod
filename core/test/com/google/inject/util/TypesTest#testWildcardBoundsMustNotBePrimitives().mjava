@@ -3,16 +3,16 @@
       supertypeOf(int.class);
       fail();
     } catch (IllegalArgumentException expected) {
-      assertContains(expected.getMessage(),
-          "Primitive types are not allowed in wildcard bounds: int");
+      assertContains(
+          expected.getMessage(), "Primitive types are not allowed in wildcard bounds: int");
     }
 
     try {
       subtypeOf(int.class);
       fail();
     } catch (IllegalArgumentException expected) {
-      assertContains(expected.getMessage(),
-          "Primitive types are not allowed in wildcard bounds: int");
+      assertContains(
+          expected.getMessage(), "Primitive types are not allowed in wildcard bounds: int");
     }
   }
 

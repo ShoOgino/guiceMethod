@@ -1,4 +1,5 @@
-    @Inject void setInstanceS(@ForMethod String instanceS) {
+    @Inject
+    void setInstanceS(@ForMethod String instanceS) {
       this.instanceMethod = instanceS;
     }
 

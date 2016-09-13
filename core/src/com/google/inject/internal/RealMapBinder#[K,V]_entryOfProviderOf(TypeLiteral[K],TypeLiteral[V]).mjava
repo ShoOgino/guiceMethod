@@ -1,7 +1,9 @@
   @SuppressWarnings("unchecked") // a provider entry <K, V> is safely a Map.Entry<K, Provider<V>>
   static <K, V> TypeLiteral<Map.Entry<K, Provider<V>>> entryOfProviderOf(
       TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    return (TypeLiteral<Entry<K, Provider<V>>>) TypeLiteral.get(newParameterizedTypeWithOwner(
-        Map.class, Entry.class, keyType.getType(), Types.providerOf(valueType.getType())));
+    return (TypeLiteral<Entry<K, Provider<V>>>)
+        TypeLiteral.get(
+            newParameterizedTypeWithOwner(
+                Map.class, Entry.class, keyType.getType(), Types.providerOf(valueType.getType())));
   }
 

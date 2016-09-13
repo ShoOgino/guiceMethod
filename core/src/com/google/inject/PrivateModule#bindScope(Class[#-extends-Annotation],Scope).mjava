@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#bindScope(Class, Scope)
-   */
+  /** @see Binder#bindScope(Class, Scope) */
   protected final void bindScope(Class<? extends Annotation> scopeAnnotation, Scope scope) {
     binder().bindScope(scopeAnnotation, scope);
   }

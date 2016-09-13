@@ -1,3 +1,4 @@
     @SuppressWarnings("OverridesJavaxInjectableMethod")
-    @Override public void privateGAndPublicAt() {}
+    @Override
+    public void privateGAndPublicAt() {}
 

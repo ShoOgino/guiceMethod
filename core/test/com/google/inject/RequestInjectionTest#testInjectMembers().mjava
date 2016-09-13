@@ -1,14 +1,15 @@
   public void testInjectMembers() {
     final HasInjections hi = new HasInjections();
 
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(ForMethod.class).to("test");
-        bindConstant().annotatedWith(ForField.class).to(5);
-        requestInjection(hi);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindConstant().annotatedWith(ForMethod.class).to("test");
+            bindConstant().annotatedWith(ForField.class).to(5);
+            requestInjection(hi);
+          }
+        });
 
     assertEquals("test", hi.instanceMethod);
     assertEquals(5, hi.instanceField);

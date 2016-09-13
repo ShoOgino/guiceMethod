@@ -1,5 +1,5 @@
   private void ensureWorks(Injector injector, Class<?>... classes) {
-    for(int i = 0; i < classes.length; i++) {
+    for (int i = 0; i < classes.length; i++) {
       injector.getInstance(classes[i]);
       injector.getProvider(classes[i]).get();
       injector.getBinding(classes[i]).getProvider().get();

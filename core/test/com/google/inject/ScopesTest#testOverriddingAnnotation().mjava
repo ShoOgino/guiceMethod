@@ -1,9 +1,12 @@
   public void testOverriddingAnnotation() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(AnnotatedSingleton.class).in(Scopes.NO_SCOPE);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(AnnotatedSingleton.class).in(Scopes.NO_SCOPE);
+              }
+            });
 
     assertNotSame(
         injector.getInstance(AnnotatedSingleton.class),

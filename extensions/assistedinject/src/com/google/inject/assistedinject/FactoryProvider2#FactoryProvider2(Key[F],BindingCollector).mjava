@@ -1,7 +1,6 @@
   /**
    * @param factoryKey a key for a Java interface that defines one or more create methods.
-   * @param collector binding configuration that maps method return types to
-   *    implementation types.
+   * @param collector binding configuration that maps method return types to implementation types.
    */
   FactoryProvider2(Key<F> factoryKey, BindingCollector collector) {
     this.factoryKey = factoryKey;
@@ -14,7 +13,7 @@
     Class<F> factoryRawType = (Class<F>) (Class<?>) factoryType.getRawType();
 
     try {
-      if(!factoryRawType.isInterface()) {
+      if (!factoryRawType.isInterface()) {
         throw errors.addMessage("%s must be an interface.", factoryRawType).toException();
       }
 
@@ -41,11 +40,12 @@
         TypeLiteral<?> returnTypeLiteral = factoryType.getReturnType(method);
         Key<?> returnType;
         try {
-          returnType = Annotations.getKey(returnTypeLiteral, method, method.getAnnotations(), errors);
-        } catch(ConfigurationException ce) {
+          returnType =
+              Annotations.getKey(returnTypeLiteral, method, method.getAnnotations(), errors);
+        } catch (ConfigurationException ce) {
           // If this was an error due to returnTypeLiteral not being specified, rephrase
           // it as our factory not being specified, so it makes more sense to users.
-          if(isTypeNotSpecified(returnTypeLiteral, ce)) {
+          if (isTypeNotSpecified(returnTypeLiteral, ce)) {
             throw errors.keyNotFullySpecified(TypeLiteral.get(factoryRawType)).toException();
           } else {
             throw ce;
@@ -61,9 +61,10 @@
           Class<?> underlylingType = paramKey.getTypeLiteral().getRawType();
           if (underlylingType.equals(Provider.class)
               || underlylingType.equals(javax.inject.Provider.class)) {
-            errors.addMessage("A Provider may not be a type in a factory method of an AssistedInject."
+            errors.addMessage(
+                "A Provider may not be a type in a factory method of an AssistedInject."
                     + "\n  Offending instance is parameter [%s] with key [%s] on method [%s]",
-                    p, paramKey, method);
+                p, paramKey, method);
           }
           keys.add(assistKey(method, paramKey, errors));
         }
@@ -71,23 +72,25 @@
 
         // try to match up the method to the constructor
         TypeLiteral<?> implementation = collector.getBindings().get(returnType);
-        if(implementation == null) {
+        if (implementation == null) {
           implementation = returnType.getTypeLiteral();
         }
         Class<? extends Annotation> scope =
             Annotations.findScopeAnnotation(errors, implementation.getRawType());
         if (scope != null) {
-          errors.addMessage("Found scope annotation [%s] on implementation class "
-              + "[%s] of AssistedInject factory [%s].\nThis is not allowed, please"
-              + " remove the scope annotation.",
+          errors.addMessage(
+              "Found scope annotation [%s] on implementation class "
+                  + "[%s] of AssistedInject factory [%s].\nThis is not allowed, please"
+                  + " remove the scope annotation.",
               scope, implementation.getRawType(), factoryType);
         }
-        
+
         InjectionPoint ctorInjectionPoint;
         try {
           ctorInjectionPoint =
-            findMatchingConstructorInjectionPoint(method, returnType, implementation, immutableParamList);
-        } catch(ErrorsException ee) {
+              findMatchingConstructorInjectionPoint(
+                  method, returnType, implementation, immutableParamList);
+        } catch (ErrorsException ee) {
           errors.merge(ee.getErrors());
           continue;
         }
@@ -101,34 +104,41 @@
         // all injections directly inject the object itself (and not a Provider of the object,
         // or an Injector), because it caches a single child injector and mutates the Provider
         // of the arguments in a ThreadLocal.
-        if(isValidForOptimizedAssistedInject(deps, implementation.getRawType(), factoryType)) {
+        if (isValidForOptimizedAssistedInject(deps, implementation.getRawType(), factoryType)) {
           ImmutableList.Builder<ThreadLocalProvider> providerListBuilder = ImmutableList.builder();
-          for(int i = 0; i < params.size(); i++) {
+          for (int i = 0; i < params.size(); i++) {
             providerListBuilder.add(new ThreadLocalProvider());
           }
           providers = providerListBuilder.build();
           optimized = true;
         }
 
-        AssistData data = new AssistData(constructor,
-            returnType,
-            immutableParamList,
-            implementation,
-            method,
-            removeAssistedDeps(deps),
-            optimized,
-            providers);
+        AssistData data =
+            new AssistData(
+                constructor,
+                returnType,
+                immutableParamList,
+                implementation,
+                method,
+                removeAssistedDeps(deps),
+                optimized,
+                providers);
         assistDataBuilder.put(method, data);
       }
 
-      factory = factoryRawType.cast(Proxy.newProxyInstance(
-          BytecodeGen.getClassLoader(factoryRawType), new Class<?>[] {factoryRawType}, this));
+      factory =
+          factoryRawType.cast(
+              Proxy.newProxyInstance(
+                  BytecodeGen.getClassLoader(factoryRawType),
+                  new Class<?>[] {factoryRawType},
+                  this));
 
       // Now go back through default methods. Try to use MethodHandles to make things
       // work.  If that doesn't work, fallback to trying to find compatible method
       // signatures.
       Map<Method, AssistData> dataSoFar = assistDataBuilder.build();
-      ImmutableMap.Builder<Method, MethodHandleWrapper> methodHandleBuilder = ImmutableMap.builder();
+      ImmutableMap.Builder<Method, MethodHandleWrapper> methodHandleBuilder =
+          ImmutableMap.builder();
       for (Map.Entry<String, Method> entry : defaultMethods.entries()) {
         Method defaultMethod = entry.getValue();
         MethodHandleWrapper handle = MethodHandleWrapper.create(defaultMethod, factory);
@@ -139,10 +149,11 @@
           for (Method otherMethod : otherMethods.get(defaultMethod.getName())) {
             if (dataSoFar.containsKey(otherMethod) && isCompatible(defaultMethod, otherMethod)) {
               if (foundMatch) {
-                errors.addMessage("Generated default method %s with parameters %s is"
-                    + " signature-compatible with more than one non-default method."
-                    + " Unable to create factory. As a workaround, remove the override"
-                    + " so javac stops generating a default method.",
+                errors.addMessage(
+                    "Generated default method %s with parameters %s is"
+                        + " signature-compatible with more than one non-default method."
+                        + " Unable to create factory. As a workaround, remove the override"
+                        + " so javac stops generating a default method.",
                     defaultMethod, Arrays.asList(defaultMethod.getParameterTypes()));
               } else {
                 assistDataBuilder.put(defaultMethod, dataSoFar.get(otherMethod));
@@ -157,7 +168,7 @@
       }
 
       // If we generated any errors (from finding matching constructors, for instance), throw an exception.
-      if(errors.hasErrors()) {
+      if (errors.hasErrors()) {
         throw errors.toException();
       }
 

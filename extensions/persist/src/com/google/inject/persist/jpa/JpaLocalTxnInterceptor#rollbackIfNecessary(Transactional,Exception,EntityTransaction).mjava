@@ -5,8 +5,8 @@
    * @param e The exception to test for rollback
    * @param txn A JPA Transaction to issue rollbacks on
    */
-  private boolean rollbackIfNecessary(Transactional transactional, Exception e,
-      EntityTransaction txn) {
+  private boolean rollbackIfNecessary(
+      Transactional transactional, Exception e, EntityTransaction txn) {
     boolean commit = true;
 
     //check rollback clauses

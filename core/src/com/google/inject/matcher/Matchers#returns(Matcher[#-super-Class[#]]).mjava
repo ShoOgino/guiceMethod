@@ -1,8 +1,5 @@
-  /**
-   * Returns a matcher which matches methods with matching return types.
-   */
-  public static Matcher<Method> returns(
-      final Matcher<? super Class<?>> returnType) {
+  /** Returns a matcher which matches methods with matching return types. */
+  public static Matcher<Method> returns(final Matcher<? super Class<?>> returnType) {
     return new Returns(returnType);
   }
 

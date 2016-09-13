@@ -1,9 +1,9 @@
   /*if[AOP]*/
   // use fully-qualified names so imports don't need preprocessor statements
   /**
-   * Returns a FastClass proxy for invoking the given member or {@code null} if access rules 
+   * Returns a FastClass proxy for invoking the given member or {@code null} if access rules
    * disallow it.
-   * 
+   *
    * @see #newFastClassForMember(Class, Member) for a full description
    */
   public static net.sf.cglib.reflect.FastClass newFastClassForMember(Member member) {

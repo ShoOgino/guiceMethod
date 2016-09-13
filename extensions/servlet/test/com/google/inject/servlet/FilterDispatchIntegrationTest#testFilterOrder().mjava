@@ -2,23 +2,26 @@
     AtomicInteger counter = new AtomicInteger();
     final CountFilter f1 = new CountFilter(counter);
     final CountFilter f2 = new CountFilter(counter);
-    
-    Injector injector = Guice.createInjector(new ServletModule() {
-      @Override
-      protected void configureServlets() {
-        filter("/").through(f1);
-        install(new ServletModule() {
-          @Override
-          protected void configureServlets() {
-            filter("/").through(f2);
-          }
-        });
-      }
-    });
-    
-    HttpServletRequest request = newFakeHttpServletRequest();    
+
+    Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                filter("/").through(f1);
+                install(
+                    new ServletModule() {
+                      @Override
+                      protected void configureServlets() {
+                        filter("/").through(f2);
+                      }
+                    });
+              }
+            });
+
+    HttpServletRequest request = newFakeHttpServletRequest();
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
-    pipeline.initPipeline(null);    
+    pipeline.initPipeline(null);
     pipeline.dispatch(request, null, newNoOpFilterChain());
     assertEquals(0, f1.calledAt);
     assertEquals(1, f2.calledAt);

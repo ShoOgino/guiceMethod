@@ -4,8 +4,8 @@
       injector.getInstance(MembersInjector.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
-          "Cannot inject a MembersInjector that has no type parameter");
+      assertContains(
+          expected.getMessage(), "Cannot inject a MembersInjector that has no type parameter");
     }
   }
 

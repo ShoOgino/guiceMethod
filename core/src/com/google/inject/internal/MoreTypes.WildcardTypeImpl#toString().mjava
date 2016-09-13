@@ -1,4 +1,5 @@
-    @Override public String toString() {
+    @Override
+    public String toString() {
       if (lowerBound != null) {
         return "? super " + typeToString(lowerBound);
       } else if (upperBound == Object.class) {

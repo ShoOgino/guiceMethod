@@ -1,5 +1,9 @@
-  private void pathInfoWithServletStyleMatching(final String requestUri, final String contextPath,
-      String mapping, final String expectedPathInfo, final String servletPath)
+  private void pathInfoWithServletStyleMatching(
+      final String requestUri,
+      final String contextPath,
+      String mapping,
+      final String expectedPathInfo,
+      final String servletPath)
       throws IOException, ServletException {
 
     Injector injector = createMock(Injector.class);
@@ -7,48 +11,45 @@
     HttpServletRequest request = createMock(HttpServletRequest.class);
     HttpServletResponse response = createMock(HttpServletResponse.class);
 
-    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
-        .andReturn(true);
-    expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(binding);
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject())).andReturn(true);
+    expect(injector.getBinding(Key.get(HttpServlet.class))).andReturn(binding);
 
     final boolean[] run = new boolean[1];
     //get an instance of this servlet
     expect(injector.getInstance(Key.get(HttpServlet.class)))
-        .andReturn(new HttpServlet() {
+        .andReturn(
+            new HttpServlet() {
 
-          @Override
-          protected void service(HttpServletRequest servletRequest,
-              HttpServletResponse httpServletResponse) throws ServletException, IOException {
+              @Override
+              protected void service(
+                  HttpServletRequest servletRequest, HttpServletResponse httpServletResponse)
+                  throws ServletException, IOException {
 
-            final String path = servletRequest.getPathInfo();
+                final String path = servletRequest.getPathInfo();
 
-            if (null == expectedPathInfo) {
-              assertNull(String.format("expected [%s] but was [%s]", expectedPathInfo, path),
-                  path);
-            }
-            else {
-              assertEquals(String.format("expected [%s] but was [%s]", expectedPathInfo, path),
-                  expectedPathInfo, path);
-            }
+                if (null == expectedPathInfo) {
+                  assertNull(
+                      String.format("expected [%s] but was [%s]", expectedPathInfo, path), path);
+                } else {
+                  assertEquals(
+                      String.format("expected [%s] but was [%s]", expectedPathInfo, path),
+                      expectedPathInfo,
+                      path);
+                }
 
-            //assert memoizer
-            //noinspection StringEquality
-            assertSame("memo field did not work", path, servletRequest.getPathInfo());
+                //assert memoizer
+                //noinspection StringEquality
+                assertSame("memo field did not work", path, servletRequest.getPathInfo());
 
-            run[0] = true;
-          }
-        });
+                run[0] = true;
+              }
+            });
 
-    expect(request.getRequestURI())
-        .andReturn(requestUri);
+    expect(request.getRequestURI()).andReturn(requestUri);
 
-    expect(request.getServletPath())
-        .andReturn(servletPath)
-        .anyTimes();
+    expect(request.getServletPath()).andReturn(servletPath).anyTimes();
 
-    expect(request.getContextPath())
-        .andReturn(contextPath);
+    expect(request.getContextPath()).andReturn(contextPath);
 
     expect(request.getAttribute(REQUEST_DISPATCHER_REQUEST)).andReturn(null);
 

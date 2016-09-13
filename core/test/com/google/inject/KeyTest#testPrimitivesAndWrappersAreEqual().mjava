@@ -1,16 +1,31 @@
   /**
-   * Key canonicalizes {@link int.class} to {@code Integer.class}, and
-   * won't expose wrapper types.
+   * Key canonicalizes {@link int.class} to {@code Integer.class}, and won't expose wrapper types.
    */
   public void testPrimitivesAndWrappersAreEqual() {
-    Class[] primitives = new Class[] {
-        boolean.class, byte.class, short.class, int.class, long.class,
-        float.class, double.class, char.class, void.class
-    };
-    Class[] wrappers = new Class[] {
-        Boolean.class, Byte.class, Short.class, Integer.class, Long.class,
-        Float.class, Double.class, Character.class, Void.class
-    };
+    Class[] primitives =
+        new Class[] {
+          boolean.class,
+          byte.class,
+          short.class,
+          int.class,
+          long.class,
+          float.class,
+          double.class,
+          char.class,
+          void.class
+        };
+    Class[] wrappers =
+        new Class[] {
+          Boolean.class,
+          Byte.class,
+          Short.class,
+          Integer.class,
+          Long.class,
+          Float.class,
+          Double.class,
+          Character.class,
+          Void.class
+        };
 
     for (int t = 0; t < primitives.length; t++) {
       @SuppressWarnings("unchecked")

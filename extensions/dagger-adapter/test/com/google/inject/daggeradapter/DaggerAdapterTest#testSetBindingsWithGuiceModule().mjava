@@ -1,7 +1,8 @@
   public void testSetBindingsWithGuiceModule() {
-    Injector i = Guice.createInjector(
-        new MultibindingGuiceModule(),
-        DaggerAdapter.from(new SetBindingDaggerModule1(), new SetBindingDaggerModule2()));
+    Injector i =
+        Guice.createInjector(
+            new MultibindingGuiceModule(),
+            DaggerAdapter.from(new SetBindingDaggerModule1(), new SetBindingDaggerModule2()));
     assertEquals(ImmutableSet.of(13, 3, 5, 8), i.getInstance(new Key<Set<Integer>>() {}));
   }
 

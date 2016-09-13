@@ -1,7 +1,7 @@
   @SuppressWarnings("unchecked")
   <T> ConstructionContext<T> getConstructionContext(Object key) {
-    ConstructionContext<T> constructionContext
-        = (ConstructionContext<T>) constructionContexts.get(key);
+    ConstructionContext<T> constructionContext =
+        (ConstructionContext<T>) constructionContexts.get(key);
     if (constructionContext == null) {
       constructionContext = new ConstructionContext<T>();
       constructionContexts.put(key, constructionContext);

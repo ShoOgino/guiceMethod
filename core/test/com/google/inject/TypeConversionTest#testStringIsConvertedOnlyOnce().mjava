@@ -13,12 +13,15 @@
           }
         };
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), converter);
-        bindConstant().annotatedWith(NumericValue.class).to("unused");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                convertToTypes(Matchers.only(TypeLiteral.get(Date.class)), converter);
+                bindConstant().annotatedWith(NumericValue.class).to("unused");
+              }
+            });
 
     Date first = injector.getInstance(Key.get(Date.class, NumericValue.class));
     Date second = injector.getInstance(Key.get(Date.class, NumericValue.class));

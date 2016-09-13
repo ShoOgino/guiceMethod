@@ -1,6 +1,6 @@
   /**
    * Visit a require explicit {@literal @}{@link Inject} command.
-   * 
+   *
    * @since 4.0
    */
   V visit(RequireAtInjectOnConstructorsOption option);

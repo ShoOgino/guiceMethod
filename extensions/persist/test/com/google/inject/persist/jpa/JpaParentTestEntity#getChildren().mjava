@@ -1,5 +1,5 @@
-    @OneToMany
-    public List<JpaTestEntity> getChildren() {
-        return children;
-    }
+  @OneToMany
+  public List<JpaTestEntity> getChildren() {
+    return children;
+  }
 

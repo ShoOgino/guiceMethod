@@ -1,14 +1,17 @@
   public void testFactoryFailsWithMissingBinding() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(ColoredCarFactory.class)
-              .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(ColoredCarFactory.class)
+                  .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Parameter of type 'double' is not injectable or annotated with @Assisted");
     }
   }

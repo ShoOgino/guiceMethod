@@ -1,17 +1,22 @@
   public void testGetInstanceName_providerMethod() throws Exception {
     final ProviderMethod<?>[] methodHolder = new ProviderMethod[1];
-    
+
     Injector injector = Guice.createInjector(new ProvidingModule());
-    injector.getBinding(Integer.class).acceptTargetVisitor(
-        new DefaultBindingTargetVisitor<Object, Void>() {
-          @SuppressWarnings("unchecked") @Override
-          public Void visit(ProviderInstanceBinding<?> binding) {
-            methodHolder[0] = (ProviderMethod) binding.getUserSuppliedProvider();
-            return null;
-          }
-        });
-    
-    assertEquals("Method provider should pretty print as the method signature",
-        "#provideInteger(String)", nameFactory.getInstanceName(methodHolder[0]));
+    injector
+        .getBinding(Integer.class)
+        .acceptTargetVisitor(
+            new DefaultBindingTargetVisitor<Object, Void>() {
+              @SuppressWarnings("unchecked")
+              @Override
+              public Void visit(ProviderInstanceBinding<?> binding) {
+                methodHolder[0] = (ProviderMethod) binding.getUserSuppliedProvider();
+                return null;
+              }
+            });
+
+    assertEquals(
+        "Method provider should pretty print as the method signature",
+        "#provideInteger(String)",
+        nameFactory.getInstanceName(methodHolder[0]));
   }
 

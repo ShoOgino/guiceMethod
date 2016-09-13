@@ -1,19 +1,20 @@
   /**
-   * Although {@code String[].class} isn't equal to {@code new
-   * GenericArrayTypeImpl(String.class)}, Guice should treat these two types
-   * interchangeably.
+   * Although {@code String[].class} isn't equal to {@code new GenericArrayTypeImpl(String.class)},
+   * Guice should treat these two types interchangeably.
    */
   public void testArrayTypeCanonicalization() {
-    final String[] strings = new String[] { "A" };
-    final Integer[] integers = new Integer[] { 1 };
+    final String[] strings = new String[] {"A"};
+    final Integer[] integers = new Integer[] {1};
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String[].class).toInstance(strings);
-        bind(new TypeLiteral<Integer[]>() {}).toInstance(integers);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String[].class).toInstance(strings);
+                bind(new TypeLiteral<Integer[]>() {}).toInstance(integers);
+              }
+            });
 
     assertSame(integers, injector.getInstance(Key.get(new TypeLiteral<Integer[]>() {})));
     assertSame(integers, injector.getInstance(new Key<Integer[]>() {}));
@@ -23,29 +24,34 @@
     assertSame(strings, injector.getInstance(String[].class));
 
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(String[].class).toInstance(new String[] { "A" });
-          bind(new TypeLiteral<String[]>() {}).toInstance(new String[] { "B" });
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(String[].class).toInstance(new String[] {"A"});
+              bind(new TypeLiteral<String[]>() {}).toInstance(new String[] {"B"});
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) A binding to java.lang.String[] was already configured at " + getClass().getName(),
-          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
+          "at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()));
       assertContains(expected.getMessage(), "1 error");
     }
 
     // passes because duplicates are ignored
-    injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String[].class).toInstance(strings);
-        bind(new TypeLiteral<String[]>() {}).toInstance(strings);
-      }
-    });
+    injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String[].class).toInstance(strings);
+                bind(new TypeLiteral<String[]>() {}).toInstance(strings);
+              }
+            });
     assertSame(strings, injector.getInstance(Key.get(new TypeLiteral<String[]>() {})));
     assertSame(strings, injector.getInstance(new Key<String[]>() {}));
     assertSame(strings, injector.getInstance(String[].class));

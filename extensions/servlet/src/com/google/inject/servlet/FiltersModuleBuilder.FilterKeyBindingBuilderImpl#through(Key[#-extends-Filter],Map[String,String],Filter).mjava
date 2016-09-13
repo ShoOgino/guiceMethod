@@ -1,6 +1,5 @@
-    private void through(Key<? extends Filter> filterKey,
-        Map<String, String> initParams,
-        Filter filterInstance) {
+    private void through(
+        Key<? extends Filter> filterKey, Map<String, String> initParams, Filter filterInstance) {
       for (UriPatternMatcher pattern : uriPatterns) {
         binder
             .bind(FilterDefinition.class)

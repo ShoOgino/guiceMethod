@@ -1,11 +1,9 @@
   public void testGuicifyEquality() {
     new EqualsTester()
         .addEqualityGroup(
-            Providers.guicify(new JavaxProvider(10)),
-            Providers.guicify(new JavaxProvider(10)))
+            Providers.guicify(new JavaxProvider(10)), Providers.guicify(new JavaxProvider(10)))
         .addEqualityGroup(
-            Providers.guicify(new JavaxProvider(11)),
-            Providers.guicify(new JavaxProvider(11)))
+            Providers.guicify(new JavaxProvider(11)), Providers.guicify(new JavaxProvider(11)))
         .addEqualityGroup(
             Providers.guicify(new JavaxProviderWithDependencies()),
             Providers.guicify(new JavaxProviderWithDependencies()))

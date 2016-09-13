@@ -3,17 +3,18 @@
     try {
       injector.getBinding(clazz);
       fail("Shouldn't have been able to get binding of: " + clazz);
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
       Message msg = Iterables.getOnlyElement(expected.getErrorMessages());
-      Asserts.assertContains(msg.getMessage(),
+      Asserts.assertContains(
+          msg.getMessage(),
           "No implementation for " + InvalidInterface.class.getName() + " was bound.");
       List<Object> sources = msg.getSources();
       // Assert that the first item in the sources if the key for the class we're looking up,
       // ensuring that each lookup is "new".
       assertEquals(Key.get(clazz).toString(), sources.get(0).toString());
       // Assert that the last item in each lookup contains the InvalidInterface class
-      Asserts.assertContains(sources.get(sources.size()-1).toString(),
-          Key.get(InvalidInterface.class).toString());
+      Asserts.assertContains(
+          sources.get(sources.size() - 1).toString(), Key.get(InvalidInterface.class).toString());
     }
   }
 

@@ -1,8 +1,10 @@
   @SuppressWarnings("unchecked") // a provider map <K, Set<V>> is safely a Map<K, Set<Provider<V>>>
-  static <K, V> TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>> mapOfCollectionOfJavaxProviderOf(
-      TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    return (TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>>) TypeLiteral.get(
-        Types.mapOf(keyType.getType(), 
-            Types.collectionOf(Types.javaxProviderOf(valueType.getType()))));
+  static <K, V>
+      TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>> mapOfCollectionOfJavaxProviderOf(
+          TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
+    return (TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>>)
+        TypeLiteral.get(
+            Types.mapOf(
+                keyType.getType(), Types.collectionOf(Types.javaxProviderOf(valueType.getType()))));
   }
 

@@ -1,2 +1,4 @@
-      public T aMethod(T t) { return null; }
+    public T aMethod(T t) {
+      return null;
+    }
 

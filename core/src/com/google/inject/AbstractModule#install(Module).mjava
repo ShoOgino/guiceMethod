@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#install(Module)
-   */
+  /** @see Binder#install(Module) */
   protected void install(Module module) {
     binder().install(module);
   }

@@ -1,15 +1,17 @@
   /**
-   * As reported by issue 349, we give a lousy trace when a class is circularly
-   * dependent on itself in multiple ways.
+   * As reported by issue 349, we give a lousy trace when a class is circularly dependent on itself
+   * in multiple ways.
    */
   public void testCircularlyDependentMultipleWays() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        binder.bind(A.class).to(E.class);
-        binder.bind(B.class).to(E.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder.bind(A.class).to(E.class);
+                binder.bind(B.class).to(E.class);
+              }
+            });
     injector.getInstance(A.class);
   }
 

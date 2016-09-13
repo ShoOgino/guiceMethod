@@ -1,5 +1,6 @@
     @SuppressWarnings("unused")
-    @Provides protected Double baz() {
+    @Provides
+    protected Double baz() {
       return 42D;
     }
 

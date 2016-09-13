@@ -1,6 +1,4 @@
-  /**
-   * Returns true if null is a legal value for this dependency.
-   */
+  /** Returns true if null is a legal value for this dependency. */
   public boolean isNullable() {
     return nullable;
   }

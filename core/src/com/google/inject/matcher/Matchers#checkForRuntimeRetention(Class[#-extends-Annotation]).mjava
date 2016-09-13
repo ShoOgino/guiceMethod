@@ -1,7 +1,8 @@
-  private static void checkForRuntimeRetention(
-      Class<? extends Annotation> annotationType) {
+  private static void checkForRuntimeRetention(Class<? extends Annotation> annotationType) {
     Retention retention = annotationType.getAnnotation(Retention.class);
-    checkArgument(retention != null && retention.value() == RetentionPolicy.RUNTIME,
-        "Annotation %s is missing RUNTIME retention", annotationType.getSimpleName());
+    checkArgument(
+        retention != null && retention.value() == RetentionPolicy.RUNTIME,
+        "Annotation %s is missing RUNTIME retention",
+        annotationType.getSimpleName());
   }
 

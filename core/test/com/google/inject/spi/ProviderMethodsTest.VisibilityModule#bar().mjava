@@ -1,5 +1,6 @@
     @SuppressWarnings("unused")
-    @Provides private Long bar() {
+    @Provides
+    private Long bar() {
       return 42L;
     }
 

@@ -1,8 +1,9 @@
   public void testProviderSubclassesBindToTheProviderItself() {
     final IntegerProvider integerProvider = new IntegerProvider(1024);
-    Object instance = new Object() {
-      @Bind private IntegerProvider anIntProvider = integerProvider;
-    };
+    Object instance =
+        new Object() {
+          @Bind private IntegerProvider anIntProvider = integerProvider;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

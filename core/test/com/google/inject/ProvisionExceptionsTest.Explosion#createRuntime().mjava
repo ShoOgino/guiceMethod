@@ -1,8 +1,8 @@
     public static Explosion createRuntime() {
       try {
         return new Explosion(true);
-      } catch(IOException iox) {
+      } catch (IOException iox) {
         throw new RuntimeException();
-      }      
+      }
     }
 

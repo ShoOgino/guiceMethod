@@ -15,7 +15,8 @@
     }
 
     assertNotNull("No exception was thrown!", e);
-    assertTrue("Exception thrown was not what was expected (i.e. commit-time)",
+    assertTrue(
+        "Exception thrown was not what was expected (i.e. commit-time)",
         e instanceof PersistenceException);
   }
 

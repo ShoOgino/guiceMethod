@@ -1,7 +1,6 @@
   /**
-   * Instructs the {@link com.google.inject.Injector} to eagerly initialize this
-   * singleton-scoped binding upon creation. Useful for application
-   * initialization logic.  See the EDSL examples at
+   * Instructs the {@link com.google.inject.Injector} to eagerly initialize this singleton-scoped
+   * binding upon creation. Useful for application initialization logic. See the EDSL examples at
    * {@link com.google.inject.Binder}.
    */
   void asEagerSingleton();

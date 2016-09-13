@@ -1,4 +1,5 @@
-    @Inject F(@Named("jodie") B b) {
+    @Inject
+    F(@Named("jodie") B b) {
       this.b = b;
     }
 

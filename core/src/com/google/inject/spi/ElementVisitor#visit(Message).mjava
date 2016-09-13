@@ -1,5 +1,3 @@
-  /**
-   * Visit an error message and the context in which it occured.
-   */
+  /** Visit an error message and the context in which it occured. */
   V visit(Message message);
 

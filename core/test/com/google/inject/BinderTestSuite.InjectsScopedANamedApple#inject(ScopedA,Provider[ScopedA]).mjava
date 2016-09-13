@@ -1,5 +1,6 @@
-    @Inject public void inject(@Named("apple") ScopedA scopedA,
-        @Named("apple") Provider<ScopedA> scopedAProvider) {
+    @Inject
+    public void inject(
+        @Named("apple") ScopedA scopedA, @Named("apple") Provider<ScopedA> scopedAProvider) {
       this.value = scopedA;
       this.provider = scopedAProvider;
     }

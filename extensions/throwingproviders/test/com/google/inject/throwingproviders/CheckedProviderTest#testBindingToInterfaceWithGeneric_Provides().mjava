@@ -1,19 +1,21 @@
   public void testBindingToInterfaceWithGeneric_Provides() throws Exception {
-    providesInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        install(ThrowingProviderBinder.forModule(this));
-      }
-      
-      @SuppressWarnings("unused")
-      @CheckedProvides(RemoteProvider.class)
-      List<String> foo() throws RemoteException {
-          return Arrays.asList("A", "B");
-      }
-    });
+    providesInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(ThrowingProviderBinder.forModule(this));
+              }
 
-    Key<RemoteProvider<List<String>>> key
-        = Key.get(new TypeLiteral<RemoteProvider<List<String>>>() { });
+              @SuppressWarnings("unused")
+              @CheckedProvides(RemoteProvider.class)
+              List<String> foo() throws RemoteException {
+                return Arrays.asList("A", "B");
+              }
+            });
+
+    Key<RemoteProvider<List<String>>> key =
+        Key.get(new TypeLiteral<RemoteProvider<List<String>>>() {});
     assertEquals(Arrays.asList("A", "B"), providesInjector.getInstance(key).get());
   }
 

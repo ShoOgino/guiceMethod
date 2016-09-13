@@ -1,7 +1,7 @@
   public void disabled_testSimpleTransactionWithMergeAndDF() {
     EntityManager emOrig = injector.getInstance(EntityManager.class);
-    JpaTestEntity entity = injector.getInstance(TransactionalObject.class)
-        .runOperationInTxnWithMergeForDf();
+    JpaTestEntity entity =
+        injector.getInstance(TransactionalObject.class).runOperationInTxnWithMergeForDf();
 
     EntityManager em = injector.getInstance(EntityManager.class);
     assertFalse("txn was not closed by transactional service", em.getTransaction().isActive());
@@ -17,9 +17,10 @@
     assertNotNull(result);
     assertTrue(result instanceof JpaTestEntity);
 
-    assertEquals("queried entity did not match--did automatic txn fail?",
-        UNIQUE_TEXT_MERGE_FORDF, ((JpaTestEntity) result).getText());
+    assertEquals(
+        "queried entity did not match--did automatic txn fail?",
+        UNIQUE_TEXT_MERGE_FORDF,
+        ((JpaTestEntity) result).getText());
     injector.getInstance(UnitOfWork.class).end();
-
   }
 

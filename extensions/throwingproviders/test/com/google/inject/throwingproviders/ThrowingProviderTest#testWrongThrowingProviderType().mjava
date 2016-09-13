@@ -14,11 +14,12 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(WrongThrowingProviderType.class.getName() 
-          + " does not properly extend CheckedProvider, the first type parameter of CheckedProvider "
-          + "(java.lang.String) is not a generic type",
+    } catch (CreationException ce) {
+      assertEquals(
+          WrongThrowingProviderType.class.getName()
+              + " does not properly extend CheckedProvider, the first type parameter of CheckedProvider "
+              + "(java.lang.String) is not a generic type",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
-    }    
+    }
   }
 

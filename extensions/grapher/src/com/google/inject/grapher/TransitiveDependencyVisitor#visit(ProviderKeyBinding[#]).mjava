@@ -1,4 +1,5 @@
-  @Override public Collection<Key<?>> visit(ProviderKeyBinding<?> binding) {
+  @Override
+  public Collection<Key<?>> visit(ProviderKeyBinding<?> binding) {
     return ImmutableSet.<Key<?>>of(binding.getProviderKey());
   }
 

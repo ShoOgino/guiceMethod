@@ -1,15 +1,18 @@
   private void validateNullableWarns(Injector injector, Dependency<?> dependency) {
     final List<LogRecord> logRecords = Lists.newArrayList();
-    final Handler fakeHandler = new Handler() {
-      @Override
-      public void publish(LogRecord logRecord) {
-        logRecords.add(logRecord);
-      }
-      @Override
-      public void flush() {}
-      @Override
-      public void close() throws SecurityException {}
-    };
+    final Handler fakeHandler =
+        new Handler() {
+          @Override
+          public void publish(LogRecord logRecord) {
+            logRecords.add(logRecord);
+          }
+
+          @Override
+          public void flush() {}
+
+          @Override
+          public void close() throws SecurityException {}
+        };
     Logger.getLogger(Guice.class.getName()).addHandler(fakeHandler);
     try {
       injector.getInstance(Integer.class); // no exception, but assert it does log.

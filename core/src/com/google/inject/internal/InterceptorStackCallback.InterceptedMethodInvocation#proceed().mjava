@@ -3,8 +3,8 @@
       try {
         return index == interceptors.length
             ? methodProxy.invokeSuper(proxy, arguments)
-            : interceptors[index].invoke(
-                new InterceptedMethodInvocation(proxy, methodProxy, arguments, index + 1));
+            : interceptors[index]
+                .invoke(new InterceptedMethodInvocation(proxy, methodProxy, arguments, index + 1));
       } catch (Throwable t) {
         pruneStacktrace(t);
         throw t;

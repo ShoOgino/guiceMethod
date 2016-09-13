@@ -1,2 +1,3 @@
-    @Inject DependsOnFooBombInCxtor(FooBomb fooBomb) {}
+    @Inject
+    DependsOnFooBombInCxtor(FooBomb fooBomb) {}
 

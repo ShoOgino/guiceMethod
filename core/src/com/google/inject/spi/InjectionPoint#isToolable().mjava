@@ -1,9 +1,9 @@
   /**
    * Returns true if the element is annotated with {@literal @}{@link Toolable}.
-   * 
+   *
    * @since 3.0
    */
   public boolean isToolable() {
-    return ((AnnotatedElement)member).isAnnotationPresent(Toolable.class);
+    return ((AnnotatedElement) member).isAnnotationPresent(Toolable.class);
   }
 

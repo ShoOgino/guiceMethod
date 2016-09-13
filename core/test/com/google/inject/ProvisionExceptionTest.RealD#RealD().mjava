@@ -1,4 +1,5 @@
-    @Inject RealD() {
+    @Inject
+    RealD() {
       throw new UnsupportedOperationException();
     }
 

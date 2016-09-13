@@ -1,11 +1,14 @@
   public void testExceptionDuringConstruction() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, ExplodingCar.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(ColoredCarFactory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(ColoredCarFactory.class, ExplodingCar.class));
+              }
+            });
     try {
       injector.getInstance(ColoredCarFactory.class).create(Color.ORANGE);
       fail();

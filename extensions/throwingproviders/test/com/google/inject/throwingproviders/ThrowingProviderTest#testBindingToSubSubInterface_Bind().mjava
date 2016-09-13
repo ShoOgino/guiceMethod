@@ -11,7 +11,9 @@
               });
       fail();
     } catch (CreationException expected) {
-      assertEquals(SubRemoteProvider.class.getName() + " must extend CheckedProvider (and only CheckedProvider)",
+      assertEquals(
+          SubRemoteProvider.class.getName()
+              + " must extend CheckedProvider (and only CheckedProvider)",
           Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
     }
   }

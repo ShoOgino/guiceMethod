@@ -1,15 +1,19 @@
   public void testProviderKeyBindings() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(D.class).toProvider(DProvider.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(D.class).toProvider(DProvider.class);
+              }
+            });
 
     try {
       injector.getInstance(D.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "while locating " + DProvider.class.getName(),
           "while locating " + D.class.getName());
     }

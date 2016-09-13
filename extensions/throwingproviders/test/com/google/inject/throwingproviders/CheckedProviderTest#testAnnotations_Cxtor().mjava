@@ -1,23 +1,24 @@
   public void testAnnotations_Cxtor() throws Exception {
-    cxtorInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .annotatedWith(Names.named("a"))
-            .providing(MockFoo.class);
+    cxtorInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .annotatedWith(Names.named("a"))
+                    .providing(MockFoo.class);
 
-        ThrowingProviderBinder.create(binder())
-            .bind(RemoteProvider.class, Foo.class)
-            .providing(AnotherMockFoo.class);
-      }
-    });
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .providing(AnotherMockFoo.class);
+              }
+            });
     MockFoo.nextToReturn = "A";
     AnotherMockFoo.nextToReturn = "B";
-    assertEquals("A", 
-        cxtorInjector.getInstance(Key.get(remoteProviderOfFoo, Names.named("a"))).get().s());
+    assertEquals(
+        "A", cxtorInjector.getInstance(Key.get(remoteProviderOfFoo, Names.named("a"))).get().s());
 
-    assertEquals("B", 
-        cxtorInjector.getInstance(Key.get(remoteProviderOfFoo)).get().s());
+    assertEquals("B", cxtorInjector.getInstance(Key.get(remoteProviderOfFoo)).get().s());
   }
 

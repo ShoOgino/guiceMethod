@@ -3,7 +3,7 @@
     Injector left = top.createChildInjector();
     Injector leftLeft = left.createChildInjector(bindsD);
     Injector right = top.createChildInjector(bindsD);
-    
+
     assertSame(leftLeft, leftLeft.getInstance(D.class).injector);
     assertSame(right, right.getInstance(D.class).injector);
     assertSame(top, leftLeft.getInstance(E.class).injector);

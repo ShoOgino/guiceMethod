@@ -1,5 +1,7 @@
-  MethodAspect(Matcher<? super Class<?>> classMatcher,
-      Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
+  MethodAspect(
+      Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher,
+      MethodInterceptor... interceptors) {
     this(classMatcher, methodMatcher, Arrays.asList(interceptors));
   }
 

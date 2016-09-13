@@ -1,5 +1,6 @@
-    @Provides @Named("collection") Collection<String> annotatedGenericParameterProviderMethod(
-        @Named("list") List<String> foo) {
+    @Provides
+    @Named("collection")
+    Collection<String> annotatedGenericParameterProviderMethod(@Named("list") List<String> foo) {
       return foo;
     }
 

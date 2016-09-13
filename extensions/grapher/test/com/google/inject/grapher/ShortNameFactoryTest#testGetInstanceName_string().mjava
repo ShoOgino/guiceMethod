@@ -1,5 +1,7 @@
   public void testGetInstanceName_string() throws Exception {
-    assertEquals("String should have quotes to evoke a string literal",
-        "\"My String Instance\"", nameFactory.getInstanceName("My String Instance"));
+    assertEquals(
+        "String should have quotes to evoke a string literal",
+        "\"My String Instance\"",
+        nameFactory.getInstanceName("My String Instance"));
   }
 

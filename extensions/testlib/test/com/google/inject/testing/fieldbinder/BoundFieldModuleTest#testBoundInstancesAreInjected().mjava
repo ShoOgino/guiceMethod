@@ -1,10 +1,11 @@
   public void testBoundInstancesAreInjected() {
     final Integer testValue = 1024;
     final InjectedNumberProvider testNumberProvider = new InjectedNumberProvider();
-    Object instance = new Object() {
-      @Bind private Integer anInt = testValue;
-      @Bind private InjectedNumberProvider aNumberProvider = testNumberProvider;
-    };
+    Object instance =
+        new Object() {
+          @Bind private Integer anInt = testValue;
+          @Bind private InjectedNumberProvider aNumberProvider = testNumberProvider;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Guice.createInjector(module);

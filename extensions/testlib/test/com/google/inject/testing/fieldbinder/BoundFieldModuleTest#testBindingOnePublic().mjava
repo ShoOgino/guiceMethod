@@ -1,8 +1,9 @@
   public void testBindingOnePublic() {
     final Integer testValue = 1024;
-    Object instance = new Object() {
-      @Bind public Integer anInt = testValue;
-    };
+    Object instance =
+        new Object() {
+          @Bind public Integer anInt = testValue;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

@@ -1,6 +1,6 @@
   public void testProxyClassLoading() throws Exception {
-    Object testObject = Guice.createInjector(interceptorModule, testModule)
-        .getInstance(proxyTestClass);
+    Object testObject =
+        Guice.createInjector(interceptorModule, testModule).getInstance(proxyTestClass);
 
     // verify method interception still works
     Method m = realClass.getMethod("sayHello");

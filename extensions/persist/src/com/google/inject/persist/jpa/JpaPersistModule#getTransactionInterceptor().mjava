@@ -1,4 +1,5 @@
-  @Override protected MethodInterceptor getTransactionInterceptor() {
+  @Override
+  protected MethodInterceptor getTransactionInterceptor() {
     return transactionInterceptor;
   }
 

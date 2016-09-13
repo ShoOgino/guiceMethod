@@ -1,10 +1,12 @@
   public void testTwoConstructors() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        install(new FactoryModuleBuilder().build(Factory.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new FactoryModuleBuilder().build(Factory.class));
+              }
+            });
     Factory factory = injector.getInstance(Factory.class);
     Foo noIndex = factory.create("no index");
     assertEquals("no index", noIndex.name);

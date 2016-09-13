@@ -1,11 +1,14 @@
   public void testMapBinderMapForbidsNullKeys() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          MapBinder.newMapBinder(binder(), String.class, String.class).addBinding(null);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              MapBinder.newMapBinder(binder(), String.class, String.class).addBinding(null);
+            }
+          });
       fail();
-    } catch (CreationException expected) {}
+    } catch (CreationException expected) {
+    }
   }
 

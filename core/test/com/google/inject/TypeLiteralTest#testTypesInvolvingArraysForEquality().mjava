@@ -2,8 +2,7 @@
     TypeLiteral<String[]> stringArray = new TypeLiteral<String[]>() {};
     assertEquals(stringArray, new TypeLiteral<String[]>() {});
 
-    TypeLiteral<List<String[]>> listOfStringArray
-        = new TypeLiteral<List<String[]>>() {};
+    TypeLiteral<List<String[]>> listOfStringArray = new TypeLiteral<List<String[]>>() {};
     assertEquals(listOfStringArray, new TypeLiteral<List<String[]>>() {});
   }
 

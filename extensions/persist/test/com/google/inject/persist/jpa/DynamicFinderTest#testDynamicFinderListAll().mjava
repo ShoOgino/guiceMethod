@@ -9,7 +9,8 @@
     dao.persist(te);
 
     //im not sure this hack works...
-    assertFalse("Duplicate entity managers crossing-scope",
+    assertFalse(
+        "Duplicate entity managers crossing-scope",
         dao.lastEm.equals(injector.getInstance(EntityManager.class)));
 
     List<JpaTestEntity> list = injector.getInstance(JpaFinder.class).listAll();

@@ -1,6 +1,4 @@
-  /**
-   * Resolves known type parameters in {@code toResolve} and returns the result.
-   */
+  /** Resolves known type parameters in {@code toResolve} and returns the result. */
   TypeLiteral<?> resolve(Type toResolve) {
     return TypeLiteral.get(resolveType(toResolve));
   }

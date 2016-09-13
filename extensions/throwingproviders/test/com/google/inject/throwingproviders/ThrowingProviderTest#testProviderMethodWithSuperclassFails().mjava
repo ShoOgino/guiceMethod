@@ -14,10 +14,14 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(IOException.class.getName() + " is not compatible with the exceptions (["
-          + RemoteException.class + "]) declared in the CheckedProvider interface ("
-          + RemoteProvider.class.getName() + ")",
+    } catch (CreationException ce) {
+      assertEquals(
+          IOException.class.getName()
+              + " is not compatible with the exceptions (["
+              + RemoteException.class
+              + "]) declared in the CheckedProvider interface ("
+              + RemoteProvider.class.getName()
+              + ")",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

@@ -1,38 +1,42 @@
   public void testMembersInjectorFromBinder() {
-    final AtomicReference<MembersInjector<A<C>>> aMembersInjectorReference
-        = new AtomicReference<MembersInjector<A<C>>>();
-    final AtomicReference<MembersInjector<B>> bMembersInjectorReference
-        = new AtomicReference<MembersInjector<B>>();
+    final AtomicReference<MembersInjector<A<C>>> aMembersInjectorReference =
+        new AtomicReference<MembersInjector<A<C>>>();
+    final AtomicReference<MembersInjector<B>> bMembersInjectorReference =
+        new AtomicReference<MembersInjector<B>>();
 
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        MembersInjector<A<C>> aMembersInjector = getMembersInjector(new TypeLiteral<A<C>>() {});
-        try {
-          aMembersInjector.injectMembers(uninjectableA);
-          fail();
-        } catch (IllegalStateException expected) {
-          assertContains(expected.getMessage(),
-              "This MembersInjector cannot be used until the Injector has been created.");
-        }
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MembersInjector<A<C>> aMembersInjector = getMembersInjector(new TypeLiteral<A<C>>() {});
+            try {
+              aMembersInjector.injectMembers(uninjectableA);
+              fail();
+            } catch (IllegalStateException expected) {
+              assertContains(
+                  expected.getMessage(),
+                  "This MembersInjector cannot be used until the Injector has been created.");
+            }
 
-        MembersInjector<B> bMembersInjector = getMembersInjector(B.class);
-        try {
-          bMembersInjector.injectMembers(uninjectableB);
-          fail();
-        } catch (IllegalStateException expected) {
-          assertContains(expected.getMessage(),
-              "This MembersInjector cannot be used until the Injector has been created.");
-        }
+            MembersInjector<B> bMembersInjector = getMembersInjector(B.class);
+            try {
+              bMembersInjector.injectMembers(uninjectableB);
+              fail();
+            } catch (IllegalStateException expected) {
+              assertContains(
+                  expected.getMessage(),
+                  "This MembersInjector cannot be used until the Injector has been created.");
+            }
 
-        aMembersInjectorReference.set(aMembersInjector);
-        bMembersInjectorReference.set(bMembersInjector);
+            aMembersInjectorReference.set(aMembersInjector);
+            bMembersInjectorReference.set(bMembersInjector);
 
-        assertEquals("MembersInjector<java.lang.String>",
-            getMembersInjector(String.class).toString());
+            assertEquals(
+                "MembersInjector<java.lang.String>", getMembersInjector(String.class).toString());
 
-        bind(C.class).toInstance(myFavouriteC);
-      }
-    });
+            bind(C.class).toInstance(myFavouriteC);
+          }
+        });
 
     A<C> injectableA = new A<C>();
     aMembersInjectorReference.get().injectMembers(injectableA);

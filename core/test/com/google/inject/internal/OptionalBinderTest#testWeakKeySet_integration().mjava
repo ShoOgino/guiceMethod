@@ -1,24 +1,32 @@
- // Tests for com.google.inject.internal.WeakKeySet not leaking memory.
- public void testWeakKeySet_integration() {   
-   Injector parentInjector = Guice.createInjector(new AbstractModule() {
-         @Override protected void configure() {
-           bind(String.class).toInstance("hi");
-         }
-       });
-   WeakKeySetUtils.assertNotBlacklisted(parentInjector, Key.get(Integer.class));
+  // Tests for com.google.inject.internal.WeakKeySet not leaking memory.
+  public void testWeakKeySet_integration() {
+    Injector parentInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("hi");
+              }
+            });
+    WeakKeySetUtils.assertNotBlacklisted(parentInjector, Key.get(Integer.class));
 
-   Injector childInjector = parentInjector.createChildInjector(new AbstractModule() {
-     @Override protected void configure() {
-       OptionalBinder.newOptionalBinder(binder(), Integer.class).setDefault().toInstance(4);
-     }
-   });
-   WeakReference<Injector> weakRef = new WeakReference<Injector>(childInjector);
-   WeakKeySetUtils.assertBlacklisted(parentInjector, Key.get(Integer.class));
-   
-   // Clear the ref, GC, and ensure that we are no longer blacklisting.
-   childInjector = null;
-   
-   Asserts.awaitClear(weakRef);
-   WeakKeySetUtils.assertNotBlacklisted(parentInjector, Key.get(Integer.class));
- }
+    Injector childInjector =
+        parentInjector.createChildInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                OptionalBinder.newOptionalBinder(binder(), Integer.class)
+                    .setDefault()
+                    .toInstance(4);
+              }
+            });
+    WeakReference<Injector> weakRef = new WeakReference<Injector>(childInjector);
+    WeakKeySetUtils.assertBlacklisted(parentInjector, Key.get(Integer.class));
+
+    // Clear the ref, GC, and ensure that we are no longer blacklisting.
+    childInjector = null;
+
+    Asserts.awaitClear(weakRef);
+    WeakKeySetUtils.assertNotBlacklisted(parentInjector, Key.get(Integer.class));
+  }
 

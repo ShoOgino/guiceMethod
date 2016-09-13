@@ -1,6 +1,4 @@
-  /**
-   * Unsafe. Constructs a type literal manually.
-   */
+  /** Unsafe. Constructs a type literal manually. */
   @SuppressWarnings("unchecked")
   TypeLiteral(Type type) {
     this.type = canonicalize(checkNotNull(type, "type"));

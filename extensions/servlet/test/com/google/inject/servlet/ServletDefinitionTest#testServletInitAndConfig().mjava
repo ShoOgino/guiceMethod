@@ -2,23 +2,20 @@
     Injector injector = createMock(Injector.class);
     Binding binding = createMock(Binding.class);
 
-    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
-        .andReturn(true);
-    expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(binding);
-    final HttpServlet mockServlet = new HttpServlet() {
-    };
-    expect(injector.getInstance(Key.get(HttpServlet.class)))
-        .andReturn(mockServlet)
-        .anyTimes();
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject())).andReturn(true);
+    expect(injector.getBinding(Key.get(HttpServlet.class))).andReturn(binding);
+    final HttpServlet mockServlet = new HttpServlet() {};
+    expect(injector.getInstance(Key.get(HttpServlet.class))).andReturn(mockServlet).anyTimes();
 
     replay(injector, binding);
 
     //some init params
     //noinspection SSBasedInspection
-    final Map<String, String> initParams = new ImmutableMap.Builder<String, String>()
-      .put("ahsd", "asdas24dok")
-      .put("ahssd", "asdasd124ok").build();
+    final Map<String, String> initParams =
+        new ImmutableMap.Builder<String, String>()
+            .put("ahsd", "asdas24dok")
+            .put("ahssd", "asdasd124ok")
+            .build();
 
     String pattern = "/*";
     final ServletDefinition servletDefinition =
@@ -30,8 +27,7 @@
 
     ServletContext servletContext = createMock(ServletContext.class);
     final String contextName = "thing__!@@44__SRV" + getClass();
-    expect(servletContext.getServletContextName())
-        .andReturn(contextName);
+    expect(servletContext.getServletContextName()).andReturn(contextName);
 
     replay(servletContext);
 

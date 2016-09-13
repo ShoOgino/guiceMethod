@@ -1,11 +1,13 @@
   public void testConstructorDoesntNeedAllFactoryMethodArguments() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(SummerCarFactory.class).toProvider(
-            FactoryProvider.newFactory(SummerCarFactory.class, Beetle.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(SummerCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(SummerCarFactory.class, Beetle.class));
+              }
+            });
     SummerCarFactory factory = injector.getInstance(SummerCarFactory.class);
 
     Beetle beetle = (Beetle) factory.create(Color.RED, true);

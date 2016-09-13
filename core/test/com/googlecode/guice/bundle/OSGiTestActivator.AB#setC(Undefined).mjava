@@ -1,2 +1,3 @@
-    @Inject void setC(Undefined undefined) {}
+    @Inject
+    void setC(Undefined undefined) {}
 

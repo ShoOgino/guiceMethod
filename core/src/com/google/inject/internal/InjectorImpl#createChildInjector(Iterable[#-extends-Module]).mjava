@@ -1,8 +1,5 @@
   @Override
   public Injector createChildInjector(Iterable<? extends Module> modules) {
-    return new InternalInjectorCreator()
-        .parentInjector(this)
-        .addModules(modules)
-        .build();
+    return new InternalInjectorCreator().parentInjector(this).addModules(modules).build();
   }
 

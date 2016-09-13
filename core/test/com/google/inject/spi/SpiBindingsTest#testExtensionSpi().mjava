@@ -1,6 +1,6 @@
   public void testExtensionSpi() {
     final AtomicBoolean visiting = new AtomicBoolean(false);
-    
+
     final Injector injector =
         Guice.createInjector(
             new AbstractModule() {
@@ -34,7 +34,7 @@
                         });
               }
             });
-    
+
     visiting.set(true);
 
     // Check for Provider<String> binding -- that is still a ProviderBinding.
@@ -43,13 +43,15 @@
     assertEquals(providerOfStringKey, providerBinding.getKey());
     checkBindingSource(providerBinding);
     assertTrue("binding: " + providerBinding, providerBinding instanceof ProviderBinding);
-    providerBinding.acceptTargetVisitor(new FailingTargetVisitor<Provider<String>>() {
-      @Override public Void visit(ProviderBinding<? extends Provider<String>> binding) {
-        assertEquals(Key.get(String.class), binding.getProvidedKey());
-        return null;
-      }
-    });
-    
+    providerBinding.acceptTargetVisitor(
+        new FailingTargetVisitor<Provider<String>>() {
+          @Override
+          public Void visit(ProviderBinding<? extends Provider<String>> binding) {
+            assertEquals(Key.get(String.class), binding.getProvidedKey());
+            return null;
+          }
+        });
+
     // Check for String binding -- that one is ProviderInstanceBinding, and gets hooked
     Binding<String> binding = injector.getBinding(String.class);
     assertEquals(Key.get(String.class), binding.getKey());

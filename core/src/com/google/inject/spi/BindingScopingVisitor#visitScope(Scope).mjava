@@ -1,5 +1,3 @@
-  /**
-   * Visit a scope instance. This scope strategy is found on both module and injector bindings.
-   */
+  /** Visit a scope instance. This scope strategy is found on both module and injector bindings. */
   V visitScope(Scope scope);
 

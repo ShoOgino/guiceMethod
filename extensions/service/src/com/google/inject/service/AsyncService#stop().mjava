@@ -1,5 +1,5 @@
   @Override
-  public synchronized final Future<State> stop() {
+  public final synchronized Future<State> stop() {
     Preconditions.checkState(state != null, "Must start this service before you stop it!");
 
     // Likewise, stops are idempotent.

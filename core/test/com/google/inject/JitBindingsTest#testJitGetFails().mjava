@@ -1,13 +1,15 @@
   public void testJitGetFails() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-         binder().requireExplicitBindings(); 
-        }
-      }).getInstance(Bar.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  binder().requireExplicitBindings();
+                }
+              })
+          .getInstance(Bar.class);
       fail("should have failed");
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
       assertContains(expected.getMessage(), jitFailed(Bar.class));
       assertEquals(1, expected.getErrorMessages().size());
     }

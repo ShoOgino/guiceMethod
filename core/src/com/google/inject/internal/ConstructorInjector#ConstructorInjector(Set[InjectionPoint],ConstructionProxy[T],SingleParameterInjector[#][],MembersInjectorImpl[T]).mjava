@@ -1,4 +1,5 @@
-  ConstructorInjector(Set<InjectionPoint> injectableMembers,
+  ConstructorInjector(
+      Set<InjectionPoint> injectableMembers,
       ConstructionProxy<T> constructionProxy,
       SingleParameterInjector<?>[] parameterInjectors,
       MembersInjectorImpl<T> membersInjector) {

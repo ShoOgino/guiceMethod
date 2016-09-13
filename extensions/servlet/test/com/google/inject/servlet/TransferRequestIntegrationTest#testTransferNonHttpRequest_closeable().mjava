@@ -1,27 +1,34 @@
   public void testTransferNonHttpRequest_closeable() throws Exception {
-    final Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(RequestScoped.class, ServletScopes.REQUEST);
-      }
+    final Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(RequestScoped.class, ServletScopes.REQUEST);
+              }
 
-      @Provides @RequestScoped Object provideObject() {
-        return new Object();
-      }
-    });
+              @Provides
+              @RequestScoped
+              Object provideObject() {
+                return new Object();
+              }
+            });
 
     class Data {
       Object object;
       RequestScoper scoper;
     }
 
-    Callable<Data> callable = new Callable<Data>() {
-      @Override public Data call() {
-        Data data = new Data();
-        data.object = injector.getInstance(Object.class);
-        data.scoper = ServletScopes.transferRequest();
-        return data;
-      }
-    };
+    Callable<Data> callable =
+        new Callable<Data>() {
+          @Override
+          public Data call() {
+            Data data = new Data();
+            data.object = injector.getInstance(Object.class);
+            data.scoper = ServletScopes.transferRequest();
+            return data;
+          }
+        };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
     Data data = ServletScopes.scopeRequest(callable, seedMap).call();

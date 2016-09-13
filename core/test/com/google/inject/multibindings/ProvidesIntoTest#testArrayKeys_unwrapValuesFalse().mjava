@@ -1,9 +1,21 @@
   public void testArrayKeys_unwrapValuesFalse() throws Exception {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {}
-      @ProvidesIntoMap @ArrayWrappedKey(number = {1, 2}) String provideFoo() { return "foo"; }
-      @ProvidesIntoMap @ArrayWrappedKey(number = {3, 4}) String provideBar() { return "bar"; }
-    };
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {}
+
+          @ProvidesIntoMap
+          @ArrayWrappedKey(number = {1, 2})
+          String provideFoo() {
+            return "foo";
+          }
+
+          @ProvidesIntoMap
+          @ArrayWrappedKey(number = {3, 4})
+          String provideBar() {
+            return "bar";
+          }
+        };
     Injector injector = Guice.createInjector(MultibindingsScanner.asModule(), m);
     Map<ArrayWrappedKey, String> map =
         injector.getInstance(new Key<Map<ArrayWrappedKey, String>>() {});

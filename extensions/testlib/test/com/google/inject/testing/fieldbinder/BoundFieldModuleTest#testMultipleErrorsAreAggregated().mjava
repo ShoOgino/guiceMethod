@@ -1,8 +1,11 @@
   public void testMultipleErrorsAreAggregated() {
-    Object instance = new Object() {
-      @Bind private Provider aProvider;
-      @Bind(to = String.class) private Integer anInt;
-    };
+    Object instance =
+        new Object() {
+          @Bind private Provider aProvider;
+
+          @Bind(to = String.class)
+          private Integer anInt;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     try {

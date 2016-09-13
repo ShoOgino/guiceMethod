@@ -1,5 +1,10 @@
-  @Override public String toString() {
-    return typeConverter + " which matches " + typeMatcher
-        + " (bound at " + Errors.convert(source) + ")";
+  @Override
+  public String toString() {
+    return typeConverter
+        + " which matches "
+        + typeMatcher
+        + " (bound at "
+        + Errors.convert(source)
+        + ")";
   }
 

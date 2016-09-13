@@ -1,6 +1,6 @@
   /**
    * Runs creation listeners.
-   * 
+   *
    * <p>TODO(lukes): figure out exactly why this case exists.
    */
   void runCreationListeners(Errors errors) {

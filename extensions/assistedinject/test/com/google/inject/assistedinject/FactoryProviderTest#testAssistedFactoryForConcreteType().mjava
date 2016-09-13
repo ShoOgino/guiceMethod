@@ -1,16 +1,22 @@
   public void testAssistedFactoryForConcreteType() {
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
-        bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
-        bind(MustangInsuranceFactory.class).toProvider(
-            FactoryProvider.newFactory(MustangInsuranceFactory.class, MustangInsurance.class));
-        bind(CamaroInsuranceFactory.class).toProvider(
-            FactoryProvider.newFactory(CamaroInsuranceFactory.class, CamaroInsurance.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Double.class).annotatedWith(Names.named("lowLimit")).toInstance(50000.0d);
+                bind(Double.class).annotatedWith(Names.named("highLimit")).toInstance(100000.0d);
+                bind(MustangInsuranceFactory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(
+                            MustangInsuranceFactory.class, MustangInsurance.class));
+                bind(CamaroInsuranceFactory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(
+                            CamaroInsuranceFactory.class, CamaroInsurance.class));
+              }
+            });
 
     MustangInsuranceFactory mustangInsuranceFactory =
         injector.getInstance(MustangInsuranceFactory.class);

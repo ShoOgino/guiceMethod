@@ -1,11 +1,14 @@
   public void testDependencies_default() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder<String> optionalbinder =
-            OptionalBinder.newOptionalBinder(binder(), String.class);
-        optionalbinder.setDefault().toInstance("A");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                OptionalBinder<String> optionalbinder =
+                    OptionalBinder.newOptionalBinder(binder(), String.class);
+                optionalbinder.setDefault().toInstance("A");
+              }
+            });
 
     Binding<String> binding = injector.getBinding(Key.get(String.class));
     HasDependencies withDependencies = (HasDependencies) binding;

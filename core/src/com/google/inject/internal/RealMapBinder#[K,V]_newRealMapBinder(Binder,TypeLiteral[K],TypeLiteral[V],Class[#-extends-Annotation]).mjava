@@ -1,12 +1,19 @@
   /**
-   * Returns a new mapbinder that collects entries of {@code keyType}/{@code valueType} in a
-   * {@link Map} that is itself bound with {@code annotationType}.
+   * Returns a new mapbinder that collects entries of {@code keyType}/{@code valueType} in a {@link
+   * Map} that is itself bound with {@code annotationType}.
    */
-  public static <K, V> RealMapBinder<K, V> newRealMapBinder(Binder binder, TypeLiteral<K> keyType,
-      TypeLiteral<V> valueType, Class<? extends Annotation> annotationType) {
+  public static <K, V> RealMapBinder<K, V> newRealMapBinder(
+      Binder binder,
+      TypeLiteral<K> keyType,
+      TypeLiteral<V> valueType,
+      Class<? extends Annotation> annotationType) {
     binder = binder.skipSources(RealMapBinder.class);
-    return newRealMapBinder(binder, keyType, valueType,
+    return newRealMapBinder(
+        binder,
+        keyType,
+        valueType,
         Key.get(mapOf(keyType, valueType), annotationType),
-        RealMultibinder.newRealSetBinder(binder, Key.get(entryOfProviderOf(keyType, valueType), annotationType)));
+        RealMultibinder.newRealSetBinder(
+            binder, Key.get(entryOfProviderOf(keyType, valueType), annotationType)));
   }
 

@@ -21,7 +21,7 @@
     }
     assertTrue(Arrays.toString(interceptable.lastElements), cglibFound);
     cglibFound = false;
-    
+
     interceptable.bar();
     for (int i = 0; i < interceptable.lastElements.length; i++) {
       if (interceptable.lastElements[i].toString().contains("cglib")) {

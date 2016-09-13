@@ -1,8 +1,10 @@
   public void testServletModuleCallOutsideConfigure() {
     try {
-      new ServletModule() {{
-        serve("/*").with(DummyServlet.class);
-      }};
+      new ServletModule() {
+        {
+          serve("/*").with(DummyServlet.class);
+        }
+      };
       fail();
     } catch (IllegalStateException e) {
       // Expected.

@@ -1,4 +1,5 @@
-  @Override public Boolean visit(InjectionRequest<?> request) {
+  @Override
+  public Boolean visit(InjectionRequest<?> request) {
     Set<InjectionPoint> injectionPoints;
     try {
       injectionPoints = request.getInjectionPoints();

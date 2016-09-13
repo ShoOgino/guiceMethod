@@ -3,7 +3,8 @@
       Guice.createInjector().getInstance(Key.get(I.class, Names.named("i")));
       fail();
     } catch (ConfigurationException expected) {
-      Asserts.assertContains(expected.getMessage(),
+      Asserts.assertContains(
+          expected.getMessage(),
           "1) No implementation for " + I.class.getName(),
           "annotated with @" + Named.class.getName() + "(value=i) was bound.",
           "while locating " + I.class.getName(),

@@ -3,9 +3,10 @@
     try {
       injector.getBinding(Key.get(Types.providerOf(List.class)));
       fail();
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
       assertEquals(1, expected.getErrorMessages().size());
-      assertContains(expected.toString(),
+      assertContains(
+          expected.toString(),
           "Unable to create binding for com.google.inject.Provider<java.util.List>.",
           "It was already configured on one or more child injectors or private modules",
           "bound at " + FailingPrivateModule.class.getName() + ".configure(",

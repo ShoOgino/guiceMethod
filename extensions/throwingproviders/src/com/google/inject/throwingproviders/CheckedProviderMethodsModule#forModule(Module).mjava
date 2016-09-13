@@ -1,6 +1,4 @@
-  /**
-   * Returns a module which creates bindings for provider methods from the given module.
-   */
+  /** Returns a module which creates bindings for provider methods from the given module. */
   static Module forModule(Module module) {
     // avoid infinite recursion, since installing a module always installs itself
     if (module instanceof CheckedProviderMethodsModule) {

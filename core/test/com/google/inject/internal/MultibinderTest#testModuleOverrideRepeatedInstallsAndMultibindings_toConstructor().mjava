@@ -1,34 +1,40 @@
   public void testModuleOverrideRepeatedInstallsAndMultibindings_toConstructor() {
     TypeLiteral<Set<StringGrabber>> setOfStringGrabber = new TypeLiteral<Set<StringGrabber>>() {};
-    Module ab = new AbstractModule() {
-      @Override protected void configure() {
-        Key<String> aKey = Key.get(String.class, Names.named("A_string"));
-        Key<String> bKey = Key.get(String.class, Names.named("B_string"));
-        bind(aKey).toInstance("A");
-        bind(bKey).toInstance("B");
-        bind(Integer.class).toInstance(0);  // used to disambiguate constructors
+    Module ab =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Key<String> aKey = Key.get(String.class, Names.named("A_string"));
+            Key<String> bKey = Key.get(String.class, Names.named("B_string"));
+            bind(aKey).toInstance("A");
+            bind(bKey).toInstance("B");
+            bind(Integer.class).toInstance(0); // used to disambiguate constructors
 
-        Multibinder<StringGrabber> multibinder =
-            Multibinder.newSetBinder(binder(), StringGrabber.class);
-        try {
-          multibinder.addBinding().toConstructor(
-              StringGrabber.class.getConstructor(String.class));
-          multibinder.addBinding().toConstructor(
-              StringGrabber.class.getConstructor(String.class, int.class));
-        } catch (NoSuchMethodException e) {
-          fail("No such method: " + e.getMessage());
-        }
-      }
-    };
+            Multibinder<StringGrabber> multibinder =
+                Multibinder.newSetBinder(binder(), StringGrabber.class);
+            try {
+              multibinder
+                  .addBinding()
+                  .toConstructor(StringGrabber.class.getConstructor(String.class));
+              multibinder
+                  .addBinding()
+                  .toConstructor(StringGrabber.class.getConstructor(String.class, int.class));
+            } catch (NoSuchMethodException e) {
+              fail("No such method: " + e.getMessage());
+            }
+          }
+        };
 
     // Guice guarantees this assertion, as the same module cannot be installed twice.
-    assertEquals(ImmutableSet.of("A", "B"),
+    assertEquals(
+        ImmutableSet.of("A", "B"),
         StringGrabber.values(
             Guice.createInjector(ab, ab).getInstance(Key.get(setOfStringGrabber))));
 
     // Guice will only guarantee this assertion if Multibinder ensures the bindings match.
     Injector injector = Guice.createInjector(ab, Modules.override(ab).with(ab));
-    assertEquals(ImmutableSet.of("A", "B"),
+    assertEquals(
+        ImmutableSet.of("A", "B"),
         StringGrabber.values(injector.getInstance(Key.get(setOfStringGrabber))));
   }
 

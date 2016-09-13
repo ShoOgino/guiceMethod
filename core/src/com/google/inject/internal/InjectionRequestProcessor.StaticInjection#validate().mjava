@@ -8,12 +8,12 @@
         injectionPoints = e.getPartialValue();
       }
       if (injectionPoints != null) {
-        memberInjectors = injector.membersInjectorStore.getInjectors(
-            injectionPoints, errorsForMember);
+        memberInjectors =
+            injector.membersInjectorStore.getInjectors(injectionPoints, errorsForMember);
       } else {
         memberInjectors = ImmutableList.of();
       }
-      
+
       errors.merge(errorsForMember);
     }
 

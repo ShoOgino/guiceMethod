@@ -1,15 +1,19 @@
   public void testInjectorInjectMembers() {
-    final Object object = new Object() {
-      @Inject Foo foo;
-    };
-    final AtomicBoolean notified = new AtomicBoolean();    
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(Matchers.any(),
-            new SpecialChecker(Foo.class, object.getClass().getName(), notified));
-      }
-    }).injectMembers(object);
+    final Object object =
+        new Object() {
+          @Inject Foo foo;
+        };
+    final AtomicBoolean notified = new AtomicBoolean();
+    Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    Matchers.any(),
+                    new SpecialChecker(Foo.class, object.getClass().getName(), notified));
+              }
+            })
+        .injectMembers(object);
     assertTrue(notified.get());
   }
 

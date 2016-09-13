@@ -1,10 +1,12 @@
   public void testAssistedInjection() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        install(new FactoryModuleBuilder().build(Factory.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new FactoryModuleBuilder().build(Factory.class));
+              }
+            });
     Factory factory = injector.getInstance(Factory.class);
     assertEquals(1, factory.create(1).i);
   }

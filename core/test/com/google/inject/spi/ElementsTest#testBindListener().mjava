@@ -7,7 +7,7 @@
             throw new UnsupportedOperationException();
           }
         };
-    
+
     checkModule(
         new AbstractModule() {
           @Override

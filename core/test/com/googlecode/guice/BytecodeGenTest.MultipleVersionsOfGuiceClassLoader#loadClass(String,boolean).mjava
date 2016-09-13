@@ -1,7 +1,7 @@
     /**
-     * Classic parent-delegating classloaders are meant to override findClass.
-     * However, non-delegating classloaders (as used in OSGi) instead override
-     * loadClass to provide support for "class-space" separation.
+     * Classic parent-delegating classloaders are meant to override findClass. However,
+     * non-delegating classloaders (as used in OSGi) instead override loadClass to provide support
+     * for "class-space" separation.
      */
     @Override
     protected Class<?> loadClass(final String name, final boolean resolve)

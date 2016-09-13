@@ -1,8 +1,9 @@
     Key<Collection<javax.inject.Provider<T>>> getCollectionOfJavaxProvidersKey() {
       Key<Collection<javax.inject.Provider<T>>> local = collectionOfJavaxProvidersKey;
       if (local == null) {
-        local = collectionOfJavaxProvidersKey =
-            setKey.ofType(collectionOfJavaxProvidersOf(elementType));
+        local =
+            collectionOfJavaxProvidersKey =
+                setKey.ofType(collectionOfJavaxProvidersOf(elementType));
       }
       return local;
     }

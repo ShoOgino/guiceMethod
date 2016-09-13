@@ -1,5 +1,6 @@
-    @Override public int hashCode() {
-      return Objects.hashCode(type, scope, typeLiteral, annotationType, annotationName,
-          extraEquality);
+    @Override
+    public int hashCode() {
+      return Objects.hashCode(
+          type, scope, typeLiteral, annotationType, annotationName, extraEquality);
     }
 

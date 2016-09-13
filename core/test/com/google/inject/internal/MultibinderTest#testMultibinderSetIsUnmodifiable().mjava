@@ -1,16 +1,18 @@
   public void testMultibinderSetIsUnmodifiable() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder.newSetBinder(binder(), String.class)
-            .addBinding().toInstance("A");
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("A");
+              }
+            });
 
     Set<String> set = injector.getInstance(Key.get(setOfString));
     try {
       set.clear();
       fail();
-    } catch(UnsupportedOperationException expected) {
+    } catch (UnsupportedOperationException expected) {
     }
   }
 

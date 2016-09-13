@@ -1,18 +1,26 @@
   public void testSingletonScopeOnAssistedClassIsIgnored() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          install(new FactoryModuleBuilder().build(SingletonFactory.class));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(new FactoryModuleBuilder().build(SingletonFactory.class));
+            }
+          });
       fail();
     } catch (CreationException ce) {
       assertEquals(1, ce.getErrorMessages().size());
-      assertEquals("Found scope annotation [" + Singleton.class.getName() + "]"
-          + " on implementation class [" + AssistedSingleton.class.getName() + "]"
-          + " of AssistedInject factory [" + SingletonFactory.class.getName() + "]."
-          + "\nThis is not allowed, please remove the scope annotation.",
+      assertEquals(
+          "Found scope annotation ["
+              + Singleton.class.getName()
+              + "]"
+              + " on implementation class ["
+              + AssistedSingleton.class.getName()
+              + "]"
+              + " of AssistedInject factory ["
+              + SingletonFactory.class.getName()
+              + "]."
+              + "\nThis is not allowed, please remove the scope annotation.",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

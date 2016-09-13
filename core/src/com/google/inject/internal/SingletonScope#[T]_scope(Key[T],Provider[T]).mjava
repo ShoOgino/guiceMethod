@@ -1,25 +1,23 @@
   /**
-   * Provides singleton scope with the following properties:
-   * - creates no more than one instance per Key as a creator is used no more than once,
-   * - result is cached and returned quickly on subsequent calls,
-   * - exception in a creator is not treated as instance creation and is not cached,
-   * - creates singletons in parallel whenever possible,
-   * - waits for dependent singletons to be created even across threads and when dependencies
-   *   are shared as long as no circular dependencies are detected,
-   * - returns circular proxy only when circular dependencies are detected,
-   * - aside from that, blocking synchronization is only used for proxy creation and initialization,
+   * Provides singleton scope with the following properties: - creates no more than one instance per
+   * Key as a creator is used no more than once, - result is cached and returned quickly on
+   * subsequent calls, - exception in a creator is not treated as instance creation and is not
+   * cached, - creates singletons in parallel whenever possible, - waits for dependent singletons to
+   * be created even across threads and when dependencies are shared as long as no circular
+   * dependencies are detected, - returns circular proxy only when circular dependencies are
+   * detected, - aside from that, blocking synchronization is only used for proxy creation and
+   * initialization,
+   *
    * @see CycleDetectingLockFactory
    */
   @Override
   public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
     /**
-     * Locking strategy:
-     * - volatile instance: double-checked locking for quick exit when scope is initialized,
-     * - constructionContext: manipulations with proxies list or instance initialization
-     * - creationLock: singleton instance creation,
-     *   -- allows to guarantee only one instance per singleton,
-     *   -- special type of a lock, that prevents potential deadlocks,
-     *   -- guards constructionContext for all operations except proxy creation
+     * Locking strategy: - volatile instance: double-checked locking for quick exit when scope is
+     * initialized, - constructionContext: manipulations with proxies list or instance
+     * initialization - creationLock: singleton instance creation, -- allows to guarantee only one
+     * instance per singleton, -- special type of a lock, that prevents potential deadlocks, --
+     * guards constructionContext for all operations except proxy creation
      */
     return new Provider<T>() {
       /**
@@ -46,7 +44,7 @@
       {
         // If we are getting called by Scoping
         if (creator instanceof ProviderToInternalFactoryAdapter) {
-          injector = ((ProviderToInternalFactoryAdapter)creator).getInjector();
+          injector = ((ProviderToInternalFactoryAdapter) creator).getInjector();
         } else {
           injector = null;
         }
@@ -199,7 +197,9 @@
        * internal context.
        *
        * <p>The main thing being done is creating a list of Dependencies involved into lock cycle
-       * across all the threads involved. This is a structure we're creating: <pre>
+       * across all the threads involved. This is a structure we're creating:
+       *
+       * <pre>
        * { Current Thread, C.class, B.class, Other Thread, B.class, C.class, Current Thread }
        * To be inserted in the beginning by Guice: { A.class, B.class, C.class }
        * </pre>
@@ -211,7 +211,7 @@
       private Message createCycleDependenciesMessage(
           Map<Thread, InternalContext> internalContextsMap,
           ListMultimap<Long, Key<?>> locksCycle,
-          /* @Nullable */  Message proxyCreationError) {
+          /* @Nullable */ Message proxyCreationError) {
         // this is the main thing that we'll show in an error message,
         // current thread is populate by Guice
         List<Object> sourcesCycle = Lists.newArrayList();

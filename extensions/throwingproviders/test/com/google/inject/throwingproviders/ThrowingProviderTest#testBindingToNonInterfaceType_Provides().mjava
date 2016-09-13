@@ -15,8 +15,9 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertEquals(MockRemoteProvider.class.getName() + " must be an interface",
+      assertEquals(
+          MockRemoteProvider.class.getName() + " must be an interface",
           Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
     }
-  }  
+  }
 

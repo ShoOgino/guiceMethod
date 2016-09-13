@@ -20,7 +20,8 @@
       injector.getInstance(A.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error notifying InjectionListener goofy of " + A.class.getName(),
           " Reason: java.lang.ClassCastException: whoops, failure #1");
     }
@@ -30,7 +31,8 @@
       injector.getInstance(A.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error notifying InjectionListener goofy of " + A.class.getName(),
           " Reason: java.lang.ClassCastException: whoops, failure #2");
     }
@@ -41,7 +43,8 @@
       bProvider.get();
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error notifying InjectionListener goofy of " + B.class.getName(),
           " Reason: java.lang.ClassCastException: whoops, failure #3");
     }

@@ -3,21 +3,24 @@
 
     final CountDownLatch startLatch = new CountDownLatch(1);
     final CountDownLatch stopLatch = new CountDownLatch(1);
-    AsyncService service = new AsyncService(executor) {
-      @Override protected void onStart() {
-        assertEquals(1, startLatch.getCount());
-        assertEquals(1, stopLatch.getCount());
+    AsyncService service =
+        new AsyncService(executor) {
+          @Override
+          protected void onStart() {
+            assertEquals(1, startLatch.getCount());
+            assertEquals(1, stopLatch.getCount());
 
-        startLatch.countDown();
-      }
+            startLatch.countDown();
+          }
 
-      @Override protected void onStop() {
-        assertEquals(0, startLatch.getCount());
-        assertEquals(1, stopLatch.getCount());
+          @Override
+          protected void onStop() {
+            assertEquals(0, startLatch.getCount());
+            assertEquals(1, stopLatch.getCount());
 
-        stopLatch.countDown();
-      }
-    };
+            stopLatch.countDown();
+          }
+        };
 
     Future<?> future = service.start();
     // This should not pass!  TODO(sameb): Why?  Looks like it should to me

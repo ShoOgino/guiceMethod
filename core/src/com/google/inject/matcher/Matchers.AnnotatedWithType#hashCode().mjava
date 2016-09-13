@@ -1,4 +1,5 @@
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
       return 37 * annotationType.hashCode();
     }
 

@@ -1,6 +1,9 @@
   @Override
-  protected T provision(javax.inject.Provider<? extends T> provider, Errors errors,
-      Dependency<?> dependency, ConstructionContext<T> constructionContext)
+  protected T provision(
+      javax.inject.Provider<? extends T> provider,
+      Errors errors,
+      Dependency<?> dependency,
+      ConstructionContext<T> constructionContext)
       throws ErrorsException {
     try {
       Object o = super.provision(provider, errors, dependency, constructionContext);

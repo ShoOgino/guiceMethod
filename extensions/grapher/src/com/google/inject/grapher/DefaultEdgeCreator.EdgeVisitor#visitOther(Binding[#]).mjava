@@ -1,4 +1,5 @@
-    @Override public Collection<Edge> visitOther(Binding<?> binding) {
+    @Override
+    public Collection<Edge> visitOther(Binding<?> binding) {
       return ImmutableList.of();
     }
 

@@ -1,2 +1,3 @@
-    @Inject Dog(@Assisted String a, double b) {}
+    @Inject
+    Dog(@Assisted String a, double b) {}
 

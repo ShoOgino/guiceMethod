@@ -1,5 +1,3 @@
-  /**
-   * See the EDSL examples at {@link Binder}.
-   */
+  /** See the EDSL examples at {@link Binder}. */
   <T> AnnotatedBindingBuilder<T> bind(Class<T> type);
 

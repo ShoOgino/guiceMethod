@@ -1,8 +1,9 @@
   public void testBindArray() {
-    final Integer[] testArray = new Integer[] { 1024, 2048 };
-    Object instance = new Object() {
-      @Bind private Integer[] anIntArray = testArray;
-    };
+    final Integer[] testArray = new Integer[] {1024, 2048};
+    Object instance =
+        new Object() {
+          @Bind private Integer[] anIntArray = testArray;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

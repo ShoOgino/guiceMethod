@@ -1,8 +1,8 @@
   /**
-   * Visits a servlet binding created by {@link ServletModule#serve} where
-   * {@link ServletKeyBindingBuilder#with}, is called with a Class or Key.
-   * 
-   * If multiple patterns were specified, this will be called multiple times.
+   * Visits a servlet binding created by {@link ServletModule#serve} where {@link
+   * ServletKeyBindingBuilder#with}, is called with a Class or Key.
+   *
+   * <p>If multiple patterns were specified, this will be called multiple times.
    */
   V visit(LinkedServletBinding binding);
 

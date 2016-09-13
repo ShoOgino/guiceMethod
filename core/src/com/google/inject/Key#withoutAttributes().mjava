@@ -1,6 +1,5 @@
   /**
-   * Returns this key without annotation attributes, i.e. with only the
-   * annotation type.
+   * Returns this key without annotation attributes, i.e. with only the annotation type.
    *
    * @since 3.0
    */

@@ -1,10 +1,10 @@
   protected Map<String, String> getEdgeAttributes(GraphvizEdge edge) {
     Map<String, String> attrs = Maps.newHashMap();
-    
+
     attrs.put("arrowhead", getArrowString(edge.getArrowHead()));
     attrs.put("arrowtail", getArrowString(edge.getArrowTail()));
     attrs.put("style", edge.getStyle().toString());
-    
+
     return attrs;
   }
 

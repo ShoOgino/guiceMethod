@@ -1,4 +1,5 @@
-    @CheckedProvides(RpcProvider.class) @TestAnnotation
+    @CheckedProvides(RpcProvider.class)
+    @TestAnnotation
     long getSomeLongFromServer() {
       return 0xffL;
     }

@@ -1,4 +1,6 @@
-    @Named("Second") @Provides T provideSecond() {
+    @Named("Second")
+    @Provides
+    T provideSecond() {
       return second;
     }
 

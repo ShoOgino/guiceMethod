@@ -1,20 +1,22 @@
-  private Object getAsCollection(JpaFinderProxy.FinderDescriptor finderDescriptor,
-      List results) {
+  private Object getAsCollection(JpaFinderProxy.FinderDescriptor finderDescriptor, List results) {
     Collection<?> collection;
     try {
       collection = (Collection) finderDescriptor.returnCollectionTypeConstructor.newInstance();
     } catch (InstantiationException e) {
       throw new RuntimeException(
           "Specified collection class of Finder's returnAs could not be instantated: "
-              + finderDescriptor.returnCollectionType, e);
+              + finderDescriptor.returnCollectionType,
+          e);
     } catch (IllegalAccessException e) {
       throw new RuntimeException(
           "Specified collection class of Finder's returnAs could not be instantated (do not have access privileges): "
-              + finderDescriptor.returnCollectionType, e);
+              + finderDescriptor.returnCollectionType,
+          e);
     } catch (InvocationTargetException e) {
       throw new RuntimeException(
           "Specified collection class of Finder's returnAs could not be instantated (it threw an exception): "
-              + finderDescriptor.returnCollectionType, e);
+              + finderDescriptor.returnCollectionType,
+          e);
     }
 
     collection.addAll(results);

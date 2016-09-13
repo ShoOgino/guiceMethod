@@ -2,16 +2,21 @@
     final AtomicBoolean sInjected = new AtomicBoolean();
 
     R.injected = false;
-    MiniGuice.inject(A.class, new Object() {
-      @Provides F provideF(R r) {
-        return new F();
-      }
+    MiniGuice.inject(
+        A.class,
+        new Object() {
+          @Provides
+          F provideF(R r) {
+            return new F();
+          }
 
-      @Provides @Singleton S provideS() {
-        sInjected.set(true);
-        return new S();
-      }
-    });
+          @Provides
+          @Singleton
+          S provideS() {
+            sInjected.set(true);
+            return new S();
+          }
+        });
 
     assertTrue(R.injected);
     assertTrue(sInjected.get());

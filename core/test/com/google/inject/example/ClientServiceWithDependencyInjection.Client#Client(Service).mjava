@@ -1,4 +1,4 @@
-  public Client(Service service) {
-    this.service = service;
-  }
+    public Client(Service service) {
+      this.service = service;
+    }
 

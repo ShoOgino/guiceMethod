@@ -1,4 +1,5 @@
-    @Inject(optional=true) void methodInjectZeroArguments() {
+    @Inject(optional = true)
+    void methodInjectZeroArguments() {
       invoked0 = true;
     }
 

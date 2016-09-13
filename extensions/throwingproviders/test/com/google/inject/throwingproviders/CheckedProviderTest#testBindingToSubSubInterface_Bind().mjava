@@ -1,15 +1,18 @@
   public void testBindingToSubSubInterface_Bind() throws Exception {
     try {
-      bindInjector = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(SubRemoteProvider.class, Foo.class);
-        }
-      });
+      bindInjector =
+          Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  ThrowingProviderBinder.create(binder()).bind(SubRemoteProvider.class, Foo.class);
+                }
+              });
       fail();
     } catch (CreationException expected) {
-      assertEquals(SubRemoteProvider.class.getName() + " must extend CheckedProvider (and only CheckedProvider)",
+      assertEquals(
+          SubRemoteProvider.class.getName()
+              + " must extend CheckedProvider (and only CheckedProvider)",
           Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
     }
   }

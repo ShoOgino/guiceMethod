@@ -6,6 +6,8 @@
     assertFalse(inSubpackage(stringPackageName).matches(Matchers.class));
     assertFalse(inSubpackage("jav").matches(Object.class));
     assertEqualsBothWays(inSubpackage(stringPackageName), inSubpackage(stringPackageName));
-    assertFalse(inSubpackage(stringPackageName).equals(inSubpackage(Matchers.class.getPackage().getName())));
+    assertFalse(
+        inSubpackage(stringPackageName)
+            .equals(inSubpackage(Matchers.class.getPackage().getName())));
   }
 

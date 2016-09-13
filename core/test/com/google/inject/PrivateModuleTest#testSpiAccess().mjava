@@ -1,21 +1,28 @@
   public void testSpiAccess() {
-    Injector injector = Guice.createInjector(new PrivateModule() {
-          @Override public void configure() {
-            bind(String.class).annotatedWith(named("a")).toInstance("private");
-            bind(String.class).annotatedWith(named("b")).toInstance("exposed");
-            expose(String.class).annotatedWith(named("b"));
-          }
-        });
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              public void configure() {
+                bind(String.class).annotatedWith(named("a")).toInstance("private");
+                bind(String.class).annotatedWith(named("b")).toInstance("exposed");
+                expose(String.class).annotatedWith(named("b"));
+              }
+            });
 
-    ExposedBinding<?> binding
-        = (ExposedBinding<?>) injector.getBinding(Key.get(String.class, Names.named("b")));
-    assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class))),
+    ExposedBinding<?> binding =
+        (ExposedBinding<?>) injector.getBinding(Key.get(String.class, Names.named("b")));
+    assertEquals(
+        ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Injector.class))),
         binding.getDependencies());
     PrivateElements privateElements = binding.getPrivateElements();
-    assertEquals(ImmutableSet.<Key<?>>of(Key.get(String.class, named("b"))),
+    assertEquals(
+        ImmutableSet.<Key<?>>of(Key.get(String.class, named("b"))),
         privateElements.getExposedKeys());
-    assertContains(privateElements.getExposedSource(Key.get(String.class, named("b"))).toString(),
-        PrivateModuleTest.class.getName(), getDeclaringSourcePart(getClass()));
+    assertContains(
+        privateElements.getExposedSource(Key.get(String.class, named("b"))).toString(),
+        PrivateModuleTest.class.getName(),
+        getDeclaringSourcePart(getClass()));
     Injector privateInjector = privateElements.getInjector();
     assertEquals("private", privateInjector.getInstance(Key.get(String.class, Names.named("a"))));
   }

@@ -1,2 +1,2 @@
-      RetType aMethod(RetType obj);
+    RetType aMethod(RetType obj);
 

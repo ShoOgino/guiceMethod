@@ -1,4 +1,6 @@
-    @Provides @Singleton Double baz() {
+    @Provides
+    @Singleton
+    Double baz() {
       this.bazCallerClass = new Exception().getStackTrace()[1].getClassName();
       return 42D;
     }

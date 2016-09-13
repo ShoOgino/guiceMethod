@@ -1,14 +1,16 @@
   public void testMultibinderCanInjectCollectionOfProvidersWithAnnotation() {
     final Annotation ann = Names.named("foo");
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        final Multibinder<String> multibinder =
-            Multibinder.newSetBinder(binder(), String.class, ann);
-        multibinder.addBinding().toProvider(Providers.of("A"));
-        multibinder.addBinding().toProvider(Providers.of("B"));
-        multibinder.addBinding().toInstance("C");
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            final Multibinder<String> multibinder =
+                Multibinder.newSetBinder(binder(), String.class, ann);
+            multibinder.addBinding().toProvider(Providers.of("A"));
+            multibinder.addBinding().toProvider(Providers.of("B"));
+            multibinder.addBinding().toInstance("C");
+          }
+        };
     Collection<String> expectedValues = ImmutableList.of("A", "B", "C");
 
     Injector injector = Guice.createInjector(module);

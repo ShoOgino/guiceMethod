@@ -3,7 +3,8 @@
     assertEquals(keyForAnnotation(Names.named("foo")), keyForAnnotation(new GuiceNamed("foo")));
     assertEquals(keyForAnnotation(Names.named("foo")), keyForAnnotation(new JsrNamed("foo")));
 
-    assertEquals(keyForAnnotationType(com.google.inject.name.Named.class),
+    assertEquals(
+        keyForAnnotationType(com.google.inject.name.Named.class),
         keyForAnnotationType(javax.inject.Named.class));
   }
 

@@ -2,8 +2,9 @@
    * Creates a binding for an injectable type with the given scope. Looks for a scope on the type if
    * none is specified.
    */
-  <T> BindingImpl<T> createUninitializedBinding(Key<T> key, Scoping scoping, Object source,
-      Errors errors, boolean jitBinding) throws ErrorsException {
+  <T> BindingImpl<T> createUninitializedBinding(
+      Key<T> key, Scoping scoping, Object source, Errors errors, boolean jitBinding)
+      throws ErrorsException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
 
     ImplementedBy implementedBy = rawType.getAnnotation(ImplementedBy.class);
@@ -16,8 +17,8 @@
     // Handle TypeLiteral<T> by binding the inner type
     if (rawType == TypeLiteral.class) {
       @SuppressWarnings("unchecked") // we have to fudge the inner type as Object
-      BindingImpl<T> binding = (BindingImpl<T>) createTypeLiteralBinding(
-          (Key<TypeLiteral<Object>>) key, errors);
+      BindingImpl<T> binding =
+          (BindingImpl<T>) createTypeLiteralBinding((Key<TypeLiteral<Object>>) key, errors);
       return binding;
     }
 
@@ -34,8 +35,8 @@
       return createProvidedByBinding(key, scoping, providedBy, errors);
     }
 
-
-    return ConstructorBindingImpl.create(this,
+    return ConstructorBindingImpl.create(
+        this,
         key,
         null, /* use default constructor */
         source,

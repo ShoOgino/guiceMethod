@@ -16,10 +16,12 @@
             }
           });
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error in custom provider, java.lang.UnsupportedOperationException",
           "for field at " + NeedsRunnable.class.getName() + ".runnable(RequestInjectionTest.java:",
-          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
+          "at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

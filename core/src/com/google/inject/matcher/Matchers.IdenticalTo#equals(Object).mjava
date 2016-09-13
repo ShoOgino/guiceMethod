@@ -1,5 +1,5 @@
-    @Override public boolean equals(Object other) {
-      return other instanceof IdenticalTo
-          && ((IdenticalTo) other).value == value;
+    @Override
+    public boolean equals(Object other) {
+      return other instanceof IdenticalTo && ((IdenticalTo) other).value == value;
     }
 

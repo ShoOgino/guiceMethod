@@ -2,13 +2,13 @@
    * Introspects the injector and collects all instances of bound {@code List<ServletDefinition>}
    * into a master list.
    *
-   * We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map
-   * that preserves insertion order in entry-set iterators.
+   * <p>We have a guarantee that {@link com.google.inject.Injector#getBindings()} returns a map that
+   * preserves insertion order in entry-set iterators.
    */
   private ServletDefinition[] collectServletDefinitions(Injector injector) {
     List<ServletDefinition> servletDefinitions = Lists.newArrayList();
     for (Binding<ServletDefinition> entry : injector.findBindingsByType(SERVLET_DEFS)) {
-        servletDefinitions.add(entry.getProvider().get());
+      servletDefinitions.add(entry.getProvider().get());
     }
 
     // Copy to a fixed size array for speed.

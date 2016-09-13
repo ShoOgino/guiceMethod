@@ -1,4 +1,5 @@
-    @Override protected void newBindingEdge(BindingEdge edge) {
+    @Override
+    protected void newBindingEdge(BindingEdge edge) {
       assertFalse(edges.contains(edge));
       edges.add(edge);
     }

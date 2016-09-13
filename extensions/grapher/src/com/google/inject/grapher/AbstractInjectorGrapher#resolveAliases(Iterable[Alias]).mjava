@@ -1,6 +1,6 @@
   /**
-   * Transitively resolves aliases. Given aliases (X to Y) and (Y to Z), it will return mappings
-   * (X to Z) and (Y to Z).
+   * Transitively resolves aliases. Given aliases (X to Y) and (Y to Z), it will return mappings (X
+   * to Z) and (Y to Z).
    */
   private Map<NodeId, NodeId> resolveAliases(Iterable<Alias> aliases) {
     Map<NodeId, NodeId> resolved = Maps.newHashMap();

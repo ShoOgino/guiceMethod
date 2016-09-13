@@ -1,6 +1,6 @@
   public void testTypeVariablesWithSingleBound() {
-    TypeVariable<Class<HasTypeParameters>>[] typeVariables
-        = HasTypeParameters.class.getTypeParameters();
+    TypeVariable<Class<HasTypeParameters>>[] typeVariables =
+        HasTypeParameters.class.getTypeParameters();
 
     TypeLiteral<?> cTl = TypeLiteral.get(typeVariables[2]);
     assertEquals(Object.class, cTl.getRawType());

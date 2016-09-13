@@ -1,5 +1,4 @@
-  private static boolean isValidMethod(InjectableMethod injectableMethod,
-      Errors errors) {
+  private static boolean isValidMethod(InjectableMethod injectableMethod, Errors errors) {
     boolean result = true;
     if (injectableMethod.jsr330) {
       Method method = injectableMethod.method;

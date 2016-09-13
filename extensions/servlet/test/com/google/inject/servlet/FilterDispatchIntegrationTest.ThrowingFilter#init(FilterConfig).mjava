@@ -1,5 +1,3 @@
     @Override
-    public void init(FilterConfig filterConfig) {
-
-    }
+    public void init(FilterConfig filterConfig) {}
 

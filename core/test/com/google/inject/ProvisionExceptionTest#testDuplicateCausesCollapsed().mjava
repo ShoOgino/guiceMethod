@@ -1,15 +1,23 @@
   public void testDuplicateCausesCollapsed() {
     final RuntimeException sharedException = new RuntimeException("fail");
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides Integer i() { throw sharedException; }
+              @Provides
+              Integer i() {
+                throw sharedException;
+              }
 
-      @Provides Double d() { throw sharedException; }
+              @Provides
+              Double d() {
+                throw sharedException;
+              }
+            });
 
-    });
-
-    try{
+    try {
       injector.getInstance(DoubleFailure.class);
       fail();
     } catch (ProvisionException pe) {

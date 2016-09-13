@@ -1,5 +1,6 @@
   public void testEncounterCannotBeUsedAfterHearReturns() {
-    final AtomicReference<TypeEncounter<?>> encounterReference = new AtomicReference<TypeEncounter<?>>();
+    final AtomicReference<TypeEncounter<?>> encounterReference =
+        new AtomicReference<TypeEncounter<?>>();
 
     Guice.createInjector(
         new AbstractModule() {

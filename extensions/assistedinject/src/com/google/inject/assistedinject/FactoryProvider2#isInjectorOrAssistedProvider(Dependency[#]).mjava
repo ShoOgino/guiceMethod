@@ -1,14 +1,22 @@
   /**
-   * Returns true if the dependency is for {@link Injector} or if the dependency
-   * is a {@link Provider} for a parameter that is {@literal @}{@link Assisted}.
+   * Returns true if the dependency is for {@link Injector} or if the dependency is a {@link
+   * Provider} for a parameter that is {@literal @}{@link Assisted}.
    */
   private boolean isInjectorOrAssistedProvider(Dependency<?> dependency) {
     Class<?> annotationType = dependency.getKey().getAnnotationType();
     if (annotationType != null && annotationType.equals(Assisted.class)) { // If it's assisted..
-      if (dependency.getKey().getTypeLiteral().getRawType().equals(Provider.class)) { // And a Provider...
+      if (dependency
+          .getKey()
+          .getTypeLiteral()
+          .getRawType()
+          .equals(Provider.class)) { // And a Provider...
         return true;
       }
-    } else if (dependency.getKey().getTypeLiteral().getRawType().equals(Injector.class)) { // If it's the Injector...
+    } else if (dependency
+        .getKey()
+        .getTypeLiteral()
+        .getRawType()
+        .equals(Injector.class)) { // If it's the Injector...
       return true;
     }
     return false;

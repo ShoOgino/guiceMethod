@@ -1,16 +1,32 @@
   /**
-   * Unlike Key, TypeLiteral retains full type information and differentiates
-   * between {@code int.class} and {@code Integer.class}.
+   * Unlike Key, TypeLiteral retains full type information and differentiates between {@code
+   * int.class} and {@code Integer.class}.
    */
   public void testDifferentiationBetweenWrappersAndPrimitives() {
-    Class[] primitives = new Class[] {
-        boolean.class, byte.class, short.class, int.class, long.class,
-        float.class, double.class, char.class, void.class
-    };
-    Class[] wrappers = new Class[] {
-        Boolean.class, Byte.class, Short.class, Integer.class, Long.class,
-        Float.class, Double.class, Character.class, Void.class
-    };
+    Class[] primitives =
+        new Class[] {
+          boolean.class,
+          byte.class,
+          short.class,
+          int.class,
+          long.class,
+          float.class,
+          double.class,
+          char.class,
+          void.class
+        };
+    Class[] wrappers =
+        new Class[] {
+          Boolean.class,
+          Byte.class,
+          Short.class,
+          Integer.class,
+          Long.class,
+          Float.class,
+          Double.class,
+          Character.class,
+          Void.class
+        };
 
     for (int t = 0; t < primitives.length; t++) {
       @SuppressWarnings("unchecked")

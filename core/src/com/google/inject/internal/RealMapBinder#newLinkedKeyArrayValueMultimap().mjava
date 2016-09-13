@@ -2,7 +2,8 @@
     return Multimaps.newListMultimap(
         new LinkedHashMap<K, Collection<String>>(),
         new Supplier<List<String>>() {
-          @Override public List<String> get() {
+          @Override
+          public List<String> get() {
             return Lists.newArrayList();
           }
         });

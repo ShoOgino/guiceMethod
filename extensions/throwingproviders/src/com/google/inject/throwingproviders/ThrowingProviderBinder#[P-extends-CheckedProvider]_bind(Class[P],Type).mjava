@@ -1,9 +1,7 @@
-  /**
-   * @deprecated Use {@link #bind(Class, Class)} or {@link #bind(Class, TypeLiteral)} instead. 
-   */
+  /** @deprecated Use {@link #bind(Class, Class)} or {@link #bind(Class, TypeLiteral)} instead. */
   @Deprecated
-  public <P extends CheckedProvider> SecondaryBinder<P, ?> 
-      bind(Class<P> interfaceType, Type clazz) {
+  public <P extends CheckedProvider> SecondaryBinder<P, ?> bind(
+      Class<P> interfaceType, Type clazz) {
     return new SecondaryBinder<P, Object>(interfaceType, clazz);
   }
 

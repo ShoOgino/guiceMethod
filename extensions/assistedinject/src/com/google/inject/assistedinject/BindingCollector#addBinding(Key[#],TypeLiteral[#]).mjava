@@ -1,7 +1,7 @@
   public BindingCollector addBinding(Key<?> key, TypeLiteral<?> target) {
     if (bindings.containsKey(key)) {
-      throw new ConfigurationException(ImmutableSet.of(
-          new Message("Only one implementation can be specified for " + key)));
+      throw new ConfigurationException(
+          ImmutableSet.of(new Message("Only one implementation can be specified for " + key)));
     }
 
     bindings.put(key, target);

@@ -1,14 +1,19 @@
   /**
-   * Returns the String that would appear in an error message for this chain of classes 
-   * as modules.
+   * Returns the String that would appear in an error message for this chain of classes as modules.
    */
   public static String asModuleChain(Class... classes) {
-    return Joiner.on(" -> ").appendTo(new StringBuilder(" (via modules: "),
-        Iterables.transform(ImmutableList.copyOf(classes), new Function<Class, String>() {
-          @Override
-          public String apply(Class input) {
-            return input.getName();
-          }
-        })).append(")").toString();
+    return Joiner.on(" -> ")
+        .appendTo(
+            new StringBuilder(" (via modules: "),
+            Iterables.transform(
+                ImmutableList.copyOf(classes),
+                new Function<Class, String>() {
+                  @Override
+                  public String apply(Class input) {
+                    return input.getName();
+                  }
+                }))
+        .append(")")
+        .toString();
   }
 

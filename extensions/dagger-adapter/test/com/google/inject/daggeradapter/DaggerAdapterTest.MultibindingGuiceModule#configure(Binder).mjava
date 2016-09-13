@@ -1,4 +1,5 @@
-    @Override public void configure(Binder binder) {
+    @Override
+    public void configure(Binder binder) {
       Multibinder<Integer> mb = Multibinder.newSetBinder(binder, Integer.class);
       mb.addBinding().toInstance(13);
       mb.addBinding().toProvider(Providers.of(8)); // mix'n'match.

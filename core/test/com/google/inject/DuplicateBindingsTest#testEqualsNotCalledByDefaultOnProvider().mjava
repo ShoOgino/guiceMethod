@@ -1,12 +1,13 @@
   public void testEqualsNotCalledByDefaultOnProvider() {
     final HashEqualsTester a = new HashEqualsTester();
     a.throwOnEquals = true;
-    Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-       bind(String.class);
-       bind(Object.class).toProvider(a);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(String.class);
+            bind(Object.class).toProvider(a);
+          }
+        });
   }
 

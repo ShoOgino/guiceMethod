@@ -2,6 +2,8 @@
     try {
       new TypeLiteral() {};
       fail();
-    } catch (RuntimeException e) { /* expected */ }
+    } catch (RuntimeException e) {
+      /* expected */
+    }
   }
 

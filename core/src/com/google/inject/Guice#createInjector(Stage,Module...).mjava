@@ -1,9 +1,7 @@
   /**
-   * Creates an injector for the given set of modules, in a given development
-   * stage.
+   * Creates an injector for the given set of modules, in a given development stage.
    *
-   * @throws CreationException if one or more errors occur during injector
-   *     creation.
+   * @throws CreationException if one or more errors occur during injector creation.
    */
   public static Injector createInjector(Stage stage, Module... modules) {
     return createInjector(stage, Arrays.asList(modules));

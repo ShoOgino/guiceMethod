@@ -10,12 +10,14 @@
           }
         };
 
-    Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(onlyAbcd, typeListener);
-        bind(A.class);
-      }
-    });
+    Guice.createInjector(
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindListener(onlyAbcd, typeListener);
+            bind(A.class);
+          }
+        });
 
     assertEquals(1, firedCount.get());
   }

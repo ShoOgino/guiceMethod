@@ -1,9 +1,10 @@
   /**
    * Creates and returns a child {@link ModuleSource} corresponding to the {@link Module module}.
+   *
    * @param module the corresponding module
    * @param partialCallStack the chunk of call stack that starts from the parent module {@link
-   * Module#configure(Binder) configure(Binder)} call and ends just before the module {@link
-   * Module#configure(Binder) configure(Binder)} method invocation
+   *     Module#configure(Binder) configure(Binder)} call and ends just before the module {@link
+   *     Module#configure(Binder) configure(Binder)} method invocation
    */
   ModuleSource createChild(Object module, StackTraceElement[] partialCallStack) {
     return new ModuleSource(this, module, partialCallStack);

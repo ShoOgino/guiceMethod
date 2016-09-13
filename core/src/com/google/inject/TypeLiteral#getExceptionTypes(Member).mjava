@@ -9,14 +9,20 @@
 
     if (methodOrConstructor instanceof Method) {
       Method method = (Method) methodOrConstructor;
-      checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
-          "%s is not defined by a supertype of %s", method, type);
+      checkArgument(
+          method.getDeclaringClass().isAssignableFrom(rawType),
+          "%s is not defined by a supertype of %s",
+          method,
+          type);
       genericExceptionTypes = method.getGenericExceptionTypes();
 
     } else if (methodOrConstructor instanceof Constructor) {
       Constructor<?> constructor = (Constructor<?>) methodOrConstructor;
-      checkArgument(constructor.getDeclaringClass().isAssignableFrom(rawType),
-          "%s does not construct a supertype of %s", constructor, type);
+      checkArgument(
+          constructor.getDeclaringClass().isAssignableFrom(rawType),
+          "%s does not construct a supertype of %s",
+          constructor,
+          type);
       genericExceptionTypes = constructor.getGenericExceptionTypes();
 
     } else {

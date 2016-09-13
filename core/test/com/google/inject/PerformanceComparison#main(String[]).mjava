@@ -7,7 +7,7 @@
 
     for (int i2 = 0; i2 < 10; i2++) {
       iterate(springFactory, "Spring:  ");
-      iterate(juiceFactory,  "Guice:   ");
+      iterate(juiceFactory, "Guice:   ");
       iterate(byHandFactory, "By Hand: ");
 
       System.err.println();
@@ -17,7 +17,7 @@
 
     for (int i2 = 0; i2 < 10; i2++) {
       concurrentlyIterate(springFactory, "Spring:  ");
-      concurrentlyIterate(juiceFactory,  "Guice:   ");
+      concurrentlyIterate(juiceFactory, "Guice:   ");
       concurrentlyIterate(byHandFactory, "By Hand: ");
 
       System.err.println();

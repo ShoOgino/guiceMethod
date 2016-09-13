@@ -1,6 +1,4 @@
-  /**
-   * Gets the key type.
-   */
+  /** Gets the key type. */
   public final TypeLiteral<T> getTypeLiteral() {
     return typeLiteral;
   }

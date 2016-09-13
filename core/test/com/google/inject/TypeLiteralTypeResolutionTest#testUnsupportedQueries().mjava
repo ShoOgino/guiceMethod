@@ -5,43 +5,54 @@
       resolver.getExceptionTypes(stringIndexOf);
       fail();
     } catch (IllegalArgumentException e) {
-      assertEquals("public int java.lang.String.indexOf(java.lang.String) is not defined by a "
-          + "supertype of java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "public int java.lang.String.indexOf(java.lang.String) is not defined by a "
+              + "supertype of java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
     try {
       resolver.getParameterTypes(stringIndexOf);
       fail();
     } catch (Exception e) {
-      assertEquals("public int java.lang.String.indexOf(java.lang.String) is not defined by a "
-          + "supertype of java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "public int java.lang.String.indexOf(java.lang.String) is not defined by a "
+              + "supertype of java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
     try {
       resolver.getReturnType(stringIndexOf);
       fail();
     } catch (Exception e) {
-      assertEquals("public int java.lang.String.indexOf(java.lang.String) is not defined by a "
-          + "supertype of java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "public int java.lang.String.indexOf(java.lang.String) is not defined by a "
+              + "supertype of java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
     try {
       resolver.getSupertype(String.class);
       fail();
     } catch (Exception e) {
-      assertEquals("class java.lang.String is not a supertype of "
-          + "java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "class java.lang.String is not a supertype of " + "java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
     try {
       resolver.getExceptionTypes(newString);
       fail();
     } catch (Exception e) {
-      assertEquals("public java.lang.String(java.lang.String) does not construct "
-          + "a supertype of java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "public java.lang.String(java.lang.String) does not construct "
+              + "a supertype of java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
     try {
       resolver.getParameterTypes(newString);
       fail();
     } catch (Exception e) {
-      assertEquals("public java.lang.String(java.lang.String) does not construct "
-          + "a supertype of java.util.ArrayList<java.lang.String>", e.getMessage());
+      assertEquals(
+          "public java.lang.String(java.lang.String) does not construct "
+              + "a supertype of java.util.ArrayList<java.lang.String>",
+          e.getMessage());
     }
   }
 

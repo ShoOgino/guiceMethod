@@ -1,5 +1,4 @@
-  public void testNewSessionObject()
-      throws CreationException, IOException, ServletException {
+  public void testNewSessionObject() throws CreationException, IOException, ServletException {
     final Injector injector = createInjector();
     final HttpServletRequest request = newFakeHttpServletRequest();
 

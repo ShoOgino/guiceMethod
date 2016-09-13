@@ -1,6 +1,6 @@
   /** Implements {@link Annotation#hashCode}. */
-  private static int annotationHashCode(Class<? extends Annotation> type,
-      Map<String, Object> members) throws Exception {
+  private static int annotationHashCode(
+      Class<? extends Annotation> type, Map<String, Object> members) throws Exception {
     int result = 0;
     for (Method method : type.getDeclaredMethods()) {
       String name = method.getName();

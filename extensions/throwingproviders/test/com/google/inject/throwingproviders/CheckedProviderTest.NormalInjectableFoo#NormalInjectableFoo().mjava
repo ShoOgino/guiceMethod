@@ -1,4 +1,3 @@
     @Inject
-    public NormalInjectableFoo() {
-    }
+    public NormalInjectableFoo() {}
 

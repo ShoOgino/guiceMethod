@@ -1,6 +1,8 @@
   public void testGetClassName_key() throws Exception {
     Key<?> key = Key.get(Obj.class);
-    assertEquals("Class name should not have the package",
-        "ShortNameFactoryTest$Obj", nameFactory.getClassName(key));
+    assertEquals(
+        "Class name should not have the package",
+        "ShortNameFactoryTest$Obj",
+        nameFactory.getClassName(key));
   }
 

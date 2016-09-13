@@ -1,20 +1,34 @@
   public void testMultipleDuplicates() {
     final RuntimeException exception1 = new RuntimeException("fail");
     final RuntimeException exception2 = new RuntimeException("abort");
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides Integer i() { throw exception1; }
+              @Provides
+              Integer i() {
+                throw exception1;
+              }
 
-      @Provides Double d() { throw exception1; }
+              @Provides
+              Double d() {
+                throw exception1;
+              }
 
-      @Provides String s() { throw exception2; }
+              @Provides
+              String s() {
+                throw exception2;
+              }
 
-      @Provides Number n() { throw exception2; }
+              @Provides
+              Number n() {
+                throw exception2;
+              }
+            });
 
-    });
-
-    try{
+    try {
       injector.getInstance(QuadrupleFailure.class);
       fail();
     } catch (ProvisionException pe) {
@@ -23,9 +37,16 @@
 
       String e1 = Throwables.getStackTraceAsString(exception1);
       String e2 = Throwables.getStackTraceAsString(exception2);
-      assertContains(pe.getMessage(),
-          "\n1) ", e1, "\n2) ", "(same stack trace as error #1)",
-          "\n3) ", e2, "\n4) ", "(same stack trace as error #3)");
+      assertContains(
+          pe.getMessage(),
+          "\n1) ",
+          e1,
+          "\n2) ",
+          "(same stack trace as error #1)",
+          "\n3) ",
+          e2,
+          "\n4) ",
+          "(same stack trace as error #3)");
     }
   }
 

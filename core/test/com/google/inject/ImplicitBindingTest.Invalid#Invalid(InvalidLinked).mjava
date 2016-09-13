@@ -1,2 +1,3 @@
-    @Inject Invalid(InvalidLinked a) {}    
+    @Inject
+    Invalid(InvalidLinked a) {}
 

@@ -1,24 +1,27 @@
   public void testProvider_usingJdk8Features() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bind(String.class).toProvider(StringProvider.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bind(String.class).toProvider(StringProvider.class);
+            }
+          });
 
       fail();
     } catch (CreationException expected) {
     }
 
     UUID uuid = UUID.randomUUID();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(UUID.class).toInstance(uuid);
-        bind(String.class).toProvider(StringProvider.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(UUID.class).toInstance(uuid);
+                bind(String.class).toProvider(StringProvider.class);
+              }
+            });
 
     assertEquals(uuid.toString(), injector.getInstance(String.class));
   }

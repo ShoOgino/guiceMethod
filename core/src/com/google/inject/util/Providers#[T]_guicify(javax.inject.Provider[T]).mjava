@@ -1,25 +1,25 @@
   /**
-   * Returns a Guice-friendly {@code com.google.inject.Provider} for the given
-   * JSR-330 {@code javax.inject.Provider}. The converse method is unnecessary,
-   * since Guice providers directly implement the JSR-330 interface.
-   * 
+   * Returns a Guice-friendly {@code com.google.inject.Provider} for the given JSR-330 {@code
+   * javax.inject.Provider}. The converse method is unnecessary, since Guice providers directly
+   * implement the JSR-330 interface.
+   *
    * @since 3.0
    */
   public static <T> Provider<T> guicify(javax.inject.Provider<T> provider) {
     if (provider instanceof Provider) {
       return (Provider<T>) provider;
     }
-  
+
     final javax.inject.Provider<T> delegate = checkNotNull(provider, "provider");
-    
+
     // Ensure that we inject all injection points from the delegate provider.
     Set<InjectionPoint> injectionPoints =
         InjectionPoint.forInstanceMethodsAndFields(provider.getClass());
-    if(injectionPoints.isEmpty()) {
+    if (injectionPoints.isEmpty()) {
       return new GuicifiedProvider<T>(delegate);
     } else {
       Set<Dependency<?>> mutableDeps = Sets.newHashSet();
-      for(InjectionPoint ip : injectionPoints) {
+      for (InjectionPoint ip : injectionPoints) {
         mutableDeps.addAll(ip.getDependencies());
       }
       final Set<Dependency<?>> dependencies = ImmutableSet.copyOf(mutableDeps);

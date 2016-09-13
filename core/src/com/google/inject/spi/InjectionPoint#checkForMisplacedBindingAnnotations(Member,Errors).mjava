@@ -1,9 +1,8 @@
-  /**
-   * Returns true if the binding annotation is in the wrong place.
-   */
+  /** Returns true if the binding annotation is in the wrong place. */
   private static boolean checkForMisplacedBindingAnnotations(Member member, Errors errors) {
-    Annotation misplacedBindingAnnotation = Annotations.findBindingAnnotation(
-        errors, member, ((AnnotatedElement) member).getAnnotations());
+    Annotation misplacedBindingAnnotation =
+        Annotations.findBindingAnnotation(
+            errors, member, ((AnnotatedElement) member).getAnnotations());
     if (misplacedBindingAnnotation == null) {
       return false;
     }

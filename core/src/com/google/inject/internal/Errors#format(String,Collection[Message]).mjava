@@ -23,7 +23,8 @@
           fmt.format("Caused by: %s", Throwables.getStackTraceAsString(cause));
         } else {
           int causeIdx = causes.get(causeEquivalence);
-          fmt.format("Caused by: %s (same stack trace as error #%s)",
+          fmt.format(
+              "Caused by: %s (same stack trace as error #%s)",
               cause.getClass().getName(), causeIdx);
         }
       }

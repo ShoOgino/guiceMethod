@@ -1,8 +1,5 @@
-  /**
-   * Gets a key for an injection type and an annotation strategy.
-   */
-  static <T> Key<T> get(Class<T> type,
-      AnnotationStrategy annotationStrategy) {
+  /** Gets a key for an injection type and an annotation strategy. */
+  static <T> Key<T> get(Class<T> type, AnnotationStrategy annotationStrategy) {
     return new Key<T>(type, annotationStrategy);
   }
 

@@ -8,16 +8,20 @@
 
     EntityManager em = injector.getInstance(EntityManager.class);
 
-    assertFalse("Previous EM was not closed by transactional service (rollback didnt happen?)",
+    assertFalse(
+        "Previous EM was not closed by transactional service (rollback didnt happen?)",
         em.getTransaction().isActive());
 
     //test that the data has been stored
     try {
-      Object result = em.createQuery("from JpaTestEntity where text = :text")
-          .setParameter("text", TRANSIENT_UNIQUE_TEXT).getSingleResult();
+      Object result =
+          em.createQuery("from JpaTestEntity where text = :text")
+              .setParameter("text", TRANSIENT_UNIQUE_TEXT)
+              .getSingleResult();
       injector.getInstance(UnitOfWork.class).end();
       fail();
-    } catch (NoResultException e) {}
+    } catch (NoResultException e) {
+    }
 
     injector.getInstance(UnitOfWork.class).end();
   }

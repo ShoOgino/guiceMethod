@@ -1,5 +1,5 @@
-    @Override protected Object doProvision(
-        Errors errors, InternalContext context, Dependency dependency) {
+    @Override
+    protected Object doProvision(Errors errors, InternalContext context, Dependency dependency) {
       return value;
     }
 

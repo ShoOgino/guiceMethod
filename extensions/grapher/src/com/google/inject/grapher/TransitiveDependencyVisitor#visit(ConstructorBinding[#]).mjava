@@ -1,4 +1,5 @@
-  @Override public Collection<Key<?>> visit(ConstructorBinding<?> binding) {
+  @Override
+  public Collection<Key<?>> visit(ConstructorBinding<?> binding) {
     return visitHasDependencies(binding);
   }
 

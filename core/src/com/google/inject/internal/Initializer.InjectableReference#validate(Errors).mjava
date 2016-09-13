@@ -2,8 +2,11 @@
       @SuppressWarnings("unchecked") // the type of 'T' is a TypeLiteral<T>
       TypeLiteral<T> type = TypeLiteral.get((Class<T>) instance.getClass());
       membersInjector = injector.membersInjectorStore.get(type, errors.withSource(source));
-      Preconditions.checkNotNull(membersInjector,
-          "No membersInjector available for instance: %s, from key: %s", instance, key);
+      Preconditions.checkNotNull(
+          membersInjector,
+          "No membersInjector available for instance: %s, from key: %s",
+          instance,
+          key);
       state = InjectableReferenceState.VALIDATED;
     }
 

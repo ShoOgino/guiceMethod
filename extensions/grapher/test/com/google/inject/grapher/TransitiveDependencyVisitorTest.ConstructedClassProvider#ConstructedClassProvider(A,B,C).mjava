@@ -1,2 +1,3 @@
-    @Inject ConstructedClassProvider(A a, B b, C c) {}
+    @Inject
+    ConstructedClassProvider(A a, B b, C c) {}
 

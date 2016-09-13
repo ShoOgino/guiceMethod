@@ -1,5 +1,4 @@
-    InjectableField(TypeLiteral<?> declaringType, Field field,
-        Annotation atInject) {
+    InjectableField(TypeLiteral<?> declaringType, Field field, Annotation atInject) {
       super(declaringType, atInject);
       this.field = field;
     }

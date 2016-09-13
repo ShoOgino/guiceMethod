@@ -3,9 +3,11 @@
       Guice.createInjector().getInstance(PineTree.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           Tree.class.getName() + " doesn't extend " + PineTree.class.getName(),
-          "while locating ", PineTree.class.getName());
+          "while locating ",
+          PineTree.class.getName());
     }
   }
 

@@ -3,7 +3,8 @@
       return new Provider<T>() {
 
         /** Keys bound in request-scope which are handled directly by GuiceFilter. */
-        private final ImmutableSet<Key<?>> REQUEST_CONTEXT_KEYS = ImmutableSet.of(
+        private final ImmutableSet<Key<?>> REQUEST_CONTEXT_KEYS =
+            ImmutableSet.of(
                 Key.get(HttpServletRequest.class),
                 Key.get(HttpServletResponse.class),
                 new Key<Map<String, String[]>>(RequestParameters.class) {});
@@ -37,7 +38,7 @@
 
               return t;
             } // else: fall into normal HTTP request scope and out of scope
-              // exception is thrown.
+            // exception is thrown.
           }
 
           // Always synchronize and get/set attributes on the underlying request

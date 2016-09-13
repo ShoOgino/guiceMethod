@@ -1,19 +1,25 @@
   public void testMoreThanOneClaimedAnnotationFails() throws Exception {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {}
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {}
 
-      @TestProvides @TestProvides2 String foo() {
-        return "foo";
-      }
-    };
+          @TestProvides
+          @TestProvides2
+          String foo() {
+            return "foo";
+          }
+        };
     try {
       Guice.createInjector(module, NamedMunger.module());
       fail();
-    } catch(CreationException expected) {
+    } catch (CreationException expected) {
       assertEquals(1, expected.getErrorMessages().size());
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "More than one annotation claimed by NamedMunger on method "
-              + module.getClass().getName() + ".foo(). Methods can only have "
+              + module.getClass().getName()
+              + ".foo(). Methods can only have "
               + "one annotation claimed per scanner.");
     }
   }

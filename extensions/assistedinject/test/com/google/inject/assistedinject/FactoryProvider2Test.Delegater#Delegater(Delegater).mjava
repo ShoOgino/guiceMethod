@@ -1,4 +1,5 @@
-    @Inject Delegater(@Assisted Delegater delegater) {
+    @Inject
+    Delegater(@Assisted Delegater delegater) {
       this.delegate = delegater;
     }
 

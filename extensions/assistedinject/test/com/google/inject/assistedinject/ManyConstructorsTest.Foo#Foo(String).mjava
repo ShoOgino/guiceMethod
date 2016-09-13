@@ -1,4 +1,5 @@
-    @AssistedInject Foo(@Assisted String name) {
+    @AssistedInject
+    Foo(@Assisted String name) {
       this.name = name;
       this.index = null;
     }

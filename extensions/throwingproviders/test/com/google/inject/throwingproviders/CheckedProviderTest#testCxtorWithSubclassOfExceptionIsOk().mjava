@@ -1,22 +1,23 @@
   public void testCxtorWithSubclassOfExceptionIsOk() throws Exception {
-    cxtorInjector = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(RemoteProvider.class, Foo.class)
-              .providing(SubclassExceptionFoo.class);
-        }
-      });
-    
-    RemoteProvider<Foo> remoteProvider = 
-        cxtorInjector.getInstance(Key.get(remoteProviderOfFoo));
+    cxtorInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, Foo.class)
+                    .providing(SubclassExceptionFoo.class);
+              }
+            });
 
-      try {
-        remoteProvider.get();
-        fail();
-      } catch (RemoteException expected) {
-        assertTrue(expected instanceof AccessException);
-        assertEquals("boo!", expected.getMessage());
-      }
+    RemoteProvider<Foo> remoteProvider = cxtorInjector.getInstance(Key.get(remoteProviderOfFoo));
+
+    try {
+      remoteProvider.get();
+      fail();
+    } catch (RemoteException expected) {
+      assertTrue(expected instanceof AccessException);
+      assertEquals("boo!", expected.getMessage());
+    }
   }
 

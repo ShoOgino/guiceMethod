@@ -1,5 +1,10 @@
-  private void runTest(final String requestURI, final String servletPath, final String contextPath,
-      final boolean filterResult, final boolean fooResult, final boolean barResult)
+  private void runTest(
+      final String requestURI,
+      final String servletPath,
+      final String contextPath,
+      final boolean filterResult,
+      final boolean fooResult,
+      final boolean barResult)
       throws Exception {
     IMocksControl testControl = createControl();
 

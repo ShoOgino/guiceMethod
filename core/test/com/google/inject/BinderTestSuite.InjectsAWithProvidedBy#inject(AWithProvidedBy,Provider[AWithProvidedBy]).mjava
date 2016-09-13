@@ -1,5 +1,6 @@
-    @Inject public void inject(AWithProvidedBy aWithProvidedBy,
-        Provider<AWithProvidedBy> aWithProvidedByProvider) {
+    @Inject
+    public void inject(
+        AWithProvidedBy aWithProvidedBy, Provider<AWithProvidedBy> aWithProvidedByProvider) {
       this.value = aWithProvidedBy;
       this.provider = aWithProvidedByProvider;
     }

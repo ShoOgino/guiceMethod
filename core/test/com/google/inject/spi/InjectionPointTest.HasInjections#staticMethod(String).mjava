@@ -1,2 +1,3 @@
-    @Inject public static void staticMethod(@Named("a") String a) {}
+    @Inject
+    public static void staticMethod(@Named("a") String a) {}
 

@@ -1,48 +1,58 @@
   // A previous version of OptionalBinder would fail to find jit dependendencies that were created
   // by other bindings
   public void testOptionalBinderDependsOnJitBinding() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
+          }
+        };
 
     // Everything should be absent since nothing triggered discovery of the jit binding
     Injector injector = Guice.createInjector(module);
     assertFalse(injector.getInstance(optionalKey(JitBinding.class)).isPresent());
     assertNull(injector.getExistingBinding(Key.get(JitBinding.class)));
-    
+
     // in this case, because jit bindings are allowed in this injector, the DependsOnJitBinding
     // binding will get initialized and create jit bindings for its dependency. The optionalbinder
     // should then pick it up
-    module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
-        bind(DependsOnJitBinding.class);
-      }
-    };
+    module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
+            bind(DependsOnJitBinding.class);
+          }
+        };
     injector = Guice.createInjector(module);
     assertTrue(injector.getInstance(optionalKey(JitBinding.class)).isPresent());
     assertNotNull(injector.getExistingBinding(Key.get(JitBinding.class)));
-    
+
     // in this case, because the jit binding is discovered dynamically, the optionalbinder won't
-    // find it.  In prior implementations of OptionalBinder this would depend on the exact 
+    // find it.  In prior implementations of OptionalBinder this would depend on the exact
     // sequencing of the installation of OptionalBinder vs. these injection points that trigger
     // dynamic injection.  In the current implementation it will consistently not find it.
-    module = new AbstractModule() {
-      @Override protected void configure() {
-        bind(Object.class).toProvider(new Provider<Object>() {
-          @Inject void setter(Injector injector) {
-            injector.getInstance(JitBinding.class);
-          }
+    module =
+        new AbstractModule() {
           @Override
-          public Object get() {
-            return null;
+          protected void configure() {
+            bind(Object.class)
+                .toProvider(
+                    new Provider<Object>() {
+                      @Inject
+                      void setter(Injector injector) {
+                        injector.getInstance(JitBinding.class);
+                      }
+
+                      @Override
+                      public Object get() {
+                        return null;
+                      }
+                    });
+            OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
           }
-        });
-        OptionalBinder.newOptionalBinder(binder(), JitBinding.class);
-      }
-    };
+        };
     injector = Guice.createInjector(module);
     assertFalse(injector.getInstance(optionalKey(JitBinding.class)).isPresent());
     assertNotNull(injector.getExistingBinding(Key.get(JitBinding.class)));

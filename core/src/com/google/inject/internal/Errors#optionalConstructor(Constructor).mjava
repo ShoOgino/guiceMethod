@@ -1,5 +1,6 @@
   public Errors optionalConstructor(Constructor constructor) {
-    return addMessage("%s is annotated @Inject(optional=true), "
-        + "but constructors cannot be optional.", constructor);
+    return addMessage(
+        "%s is annotated @Inject(optional=true), but constructors cannot be optional.",
+        constructor);
   }
 

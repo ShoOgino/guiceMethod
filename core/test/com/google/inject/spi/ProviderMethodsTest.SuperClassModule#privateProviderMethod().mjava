@@ -1,4 +1,5 @@
-    @Provides private String privateProviderMethod() {
+    @Provides
+    private String privateProviderMethod() {
       return "hello";
     }
 

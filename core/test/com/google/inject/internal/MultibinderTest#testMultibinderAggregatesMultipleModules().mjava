@@ -1,19 +1,23 @@
   public void testMultibinderAggregatesMultipleModules() {
-    Module abc = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().toInstance("B");
-        multibinder.addBinding().toInstance("C");
-      }
-    };
-    Module de = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("D");
-        multibinder.addBinding().toInstance("E");
-      }
-    };
+    Module abc =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("A");
+            multibinder.addBinding().toInstance("B");
+            multibinder.addBinding().toInstance("C");
+          }
+        };
+    Module de =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("D");
+            multibinder.addBinding().toInstance("E");
+          }
+        };
 
     Injector injector = Guice.createInjector(abc, de);
     Key<Set<String>> setKey = Key.get(setOfString);
@@ -21,7 +25,17 @@
     Set<String> results = setOf("A", "B", "C", "D", "E");
 
     assertEquals(results, abcde);
-    assertSetVisitor(setKey, stringType, setOf(abc, de), BOTH, false, 0,
-        instance("A"), instance("B"), instance("C"), instance("D"), instance("E"));
+    assertSetVisitor(
+        setKey,
+        stringType,
+        setOf(abc, de),
+        BOTH,
+        false,
+        0,
+        instance("A"),
+        instance("B"),
+        instance("C"),
+        instance("D"),
+        instance("E"));
   }
 

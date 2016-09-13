@@ -1,11 +1,13 @@
   public void testRequireExactAnnotationsDoesntBreakIfDefaultsExist() {
-       Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          binder().requireExactBindingAnnotations();
-          bindConstant().annotatedWith(Red.class).to("foo");
-          bind(RedFoo.class);
-        }
-      }).getInstance(RedFoo.class);      
+    Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder().requireExactBindingAnnotations();
+                bindConstant().annotatedWith(Red.class).to("foo");
+                bind(RedFoo.class);
+              }
+            })
+        .getInstance(RedFoo.class);
   }
 

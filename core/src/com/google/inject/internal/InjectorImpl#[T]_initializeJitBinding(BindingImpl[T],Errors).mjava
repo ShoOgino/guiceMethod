@@ -6,7 +6,7 @@
       Key<T> key = binding.getKey();
       jitBindings.put(key, binding);
       boolean successful = false;
-      DelayedInitialize delayed = (DelayedInitialize)binding;
+      DelayedInitialize delayed = (DelayedInitialize) binding;
       try {
         delayed.initialize(this, errors);
         successful = true;

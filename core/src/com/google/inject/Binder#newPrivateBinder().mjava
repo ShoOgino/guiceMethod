@@ -4,7 +4,7 @@
    * PrivateModule} for details.
    *
    * @return a binder that inherits configuration from this binder. Only exposed configuration on
-   *      the returned binder will be visible to this binder.
+   *     the returned binder will be visible to this binder.
    * @since 2.0
    */
   PrivateBinder newPrivateBinder();

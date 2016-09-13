@@ -1,9 +1,14 @@
-  public Errors ambiguousTypeConversion(String stringValue, Object source, TypeLiteral<?> type,
-      TypeConverterBinding a, TypeConverterBinding b) {
-    return addMessage("Multiple converters can convert '%s' (bound at %s) to %s:%n"
-        + " %s and%n"
-        + " %s.%n"
-        + " Please adjust your type converter configuration to avoid overlapping matches.",
+  public Errors ambiguousTypeConversion(
+      String stringValue,
+      Object source,
+      TypeLiteral<?> type,
+      TypeConverterBinding a,
+      TypeConverterBinding b) {
+    return addMessage(
+        "Multiple converters can convert '%s' (bound at %s) to %s:%n"
+            + " %s and%n"
+            + " %s.%n"
+            + " Please adjust your type converter configuration to avoid overlapping matches.",
         stringValue, convert(source), type, a, b);
   }
 

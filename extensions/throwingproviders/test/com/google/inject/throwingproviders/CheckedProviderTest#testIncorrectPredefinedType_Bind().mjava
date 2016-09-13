@@ -16,9 +16,10 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(StringRemoteProvider.class.getName() 
-          + " expects the value type to be java.lang.String, but it was java.lang.Integer",
+    } catch (CreationException ce) {
+      assertEquals(
+          StringRemoteProvider.class.getName()
+              + " expects the value type to be java.lang.String, but it was java.lang.Integer",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

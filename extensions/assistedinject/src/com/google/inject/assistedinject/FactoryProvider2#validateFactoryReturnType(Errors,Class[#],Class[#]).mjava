@@ -1,9 +1,10 @@
   private void validateFactoryReturnType(Errors errors, Class<?> returnType, Class<?> factoryType) {
     if (Modifier.isPublic(factoryType.getModifiers())
         && !Modifier.isPublic(returnType.getModifiers())) {
-      errors.addMessage("%s is public, but has a method that returns a non-public type: %s. "
-          + "Due to limitations with java.lang.reflect.Proxy, this is not allowed. "
-          + "Please either make the factory non-public or the return type public.",
+      errors.addMessage(
+          "%s is public, but has a method that returns a non-public type: %s. "
+              + "Due to limitations with java.lang.reflect.Proxy, this is not allowed. "
+              + "Please either make the factory non-public or the return type public.",
           factoryType, returnType);
     }
   }

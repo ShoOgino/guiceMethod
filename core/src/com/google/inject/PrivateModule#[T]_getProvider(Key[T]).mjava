@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#getProvider(Key)
-   */
+  /** @see Binder#getProvider(Key) */
   protected final <T> Provider<T> getProvider(Key<T> key) {
     return binder().getProvider(key);
   }

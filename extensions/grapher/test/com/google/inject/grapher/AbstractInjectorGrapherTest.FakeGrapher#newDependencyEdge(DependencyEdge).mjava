@@ -1,4 +1,5 @@
-    @Override protected void newDependencyEdge(DependencyEdge edge) {
+    @Override
+    protected void newDependencyEdge(DependencyEdge edge) {
       assertFalse(edges.contains(edge));
       edges.add(edge);
     }

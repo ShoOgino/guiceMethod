@@ -1,14 +1,20 @@
   public void testExceptionInFieldProvision() throws Exception {
     final CountAndCaptureExceptionListener listener = new CountAndCaptureExceptionListener();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindListener(new AbstractMatcher<Binding<?>>() {
-          @Override public boolean matches(Binding<?> binding) {
-            return binding.getKey().getRawType().equals(DependsOnFooBombInField.class);
-          }
-        }, listener);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(
+                    new AbstractMatcher<Binding<?>>() {
+                      @Override
+                      public boolean matches(Binding<?> binding) {
+                        return binding.getKey().getRawType().equals(DependsOnFooBombInField.class);
+                      }
+                    },
+                    listener);
+              }
+            });
     assertEquals(0, listener.beforeProvision);
     String expectedMsg = null;
     try {
@@ -17,7 +23,8 @@
     } catch (ProvisionException expected) {
       assertEquals(1, expected.getErrorMessages().size());
       expectedMsg = expected.getMessage();
-      assertContains(listener.capture.get().getMessage(),
+      assertContains(
+          listener.capture.get().getMessage(),
           "1) Error injecting constructor, java.lang.RuntimeException: Retry, Abort, Fail",
           " at " + FooBomb.class.getName(),
           " while locating " + FooBomb.class.getName(),

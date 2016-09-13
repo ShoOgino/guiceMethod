@@ -1,6 +1,6 @@
   /**
-   * Returns a new matcher which returns {@code true} if both this and the
-   * given matcher return {@code true}.
+   * Returns a new matcher which returns {@code true} if both this and the given matcher return
+   * {@code true}.
    */
   Matcher<T> and(Matcher<? super T> other);
 

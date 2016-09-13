@@ -1,11 +1,14 @@
   public void testEmptyMultibinder() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          Multibinder.newSetBinder(binder(), String.class);
-        }
-      });
-    assertEquals(ImmutableSet.of(), injector.getInstance(new Key<Set<String>>(){}));
-    assertEquals(ImmutableList.of(),
-        injector.getInstance(new Key<Collection<Provider<String>>>(){}));
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder.newSetBinder(binder(), String.class);
+              }
+            });
+    assertEquals(ImmutableSet.of(), injector.getInstance(new Key<Set<String>>() {}));
+    assertEquals(
+        ImmutableList.of(), injector.getInstance(new Key<Collection<Provider<String>>>() {}));
   }
 

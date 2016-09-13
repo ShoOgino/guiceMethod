@@ -1,4 +1,5 @@
-    @Provides @Named(PRIVATE_INPUT)
+    @Provides
+    @Named(PRIVATE_INPUT)
     public String provideInput() {
       return "Hello World";
     }

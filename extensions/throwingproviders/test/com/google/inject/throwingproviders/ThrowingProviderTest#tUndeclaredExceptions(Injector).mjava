@@ -1,6 +1,5 @@
-  private void tUndeclaredExceptions(Injector injector) throws RemoteException { 
-    RemoteProvider<String> remoteProvider = 
-        injector.getInstance(Key.get(remoteProviderOfString));
+  private void tUndeclaredExceptions(Injector injector) throws RemoteException {
+    RemoteProvider<String> remoteProvider = injector.getInstance(Key.get(remoteProviderOfString));
     mockRemoteProvider.throwOnNextGet(new IndexOutOfBoundsException("A"));
     try {
       remoteProvider.get();

@@ -3,28 +3,33 @@
    * explicitly bound in {@link Scopes#NO_SCOPE}.
    */
   public void testDuplicateUnscopedBindings() {
-    Module singleBinding = new AbstractModule() {
-      @Override protected void configure() {
-        bind(Integer.class).to(Key.get(Integer.class, named("A")));
-        bind(Integer.class).to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
-      }
+    Module singleBinding =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Integer.class).to(Key.get(Integer.class, named("A")));
+            bind(Integer.class).to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
+          }
 
-      @Provides @Named("A")
-      int provideInteger() {
-        return 5;
-      }
-    };
-    Module multibinding = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<Integer> multibinder = Multibinder.newSetBinder(binder(), Integer.class);
-        multibinder.addBinding().to(Key.get(Integer.class, named("A")));
-        multibinder.addBinding().to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
-      }
-    };
+          @Provides
+          @Named("A")
+          int provideInteger() {
+            return 5;
+          }
+        };
+    Module multibinding =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<Integer> multibinder = Multibinder.newSetBinder(binder(), Integer.class);
+            multibinder.addBinding().to(Key.get(Integer.class, named("A")));
+            multibinder.addBinding().to(Key.get(Integer.class, named("A"))).in(Scopes.NO_SCOPE);
+          }
+        };
 
-    assertEquals(5,
-        (int) Guice.createInjector(singleBinding).getInstance(Integer.class));
-    assertEquals(ImmutableSet.of(5),
+    assertEquals(5, (int) Guice.createInjector(singleBinding).getInstance(Integer.class));
+    assertEquals(
+        ImmutableSet.of(5),
         Guice.createInjector(singleBinding, multibinding).getInstance(Key.get(setOfInteger)));
   }
 

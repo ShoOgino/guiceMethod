@@ -1,19 +1,20 @@
   public void testModuleOverrideRepeatedInstallsAndMultibindings_toProviderKey() {
-    Module ab = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toProvider(Key.get(AStringProvider.class));
-        multibinder.addBinding().toProvider(Key.get(BStringProvider.class));
-      }
-    };
+    Module ab =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toProvider(Key.get(AStringProvider.class));
+            multibinder.addBinding().toProvider(Key.get(BStringProvider.class));
+          }
+        };
 
     // Guice guarantees this assertion, as the same module cannot be installed twice.
-    assertEquals(ImmutableSet.of("A", "B"),
-        Guice.createInjector(ab, ab).getInstance(Key.get(setOfString)));
+    assertEquals(
+        ImmutableSet.of("A", "B"), Guice.createInjector(ab, ab).getInstance(Key.get(setOfString)));
 
     // Guice will only guarantee this assertion if Multibinder ensures the bindings match.
     Injector injector = Guice.createInjector(ab, Modules.override(ab).with(ab));
-    assertEquals(ImmutableSet.of("A", "B"),
-        injector.getInstance(Key.get(setOfString)));
+    assertEquals(ImmutableSet.of("A", "B"), injector.getInstance(Key.get(setOfString)));
   }
 

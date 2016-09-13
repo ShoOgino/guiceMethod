@@ -1,5 +1,5 @@
     @Override
     protected void configure() {
-    bind(Service.class).to(ServiceImpl.class).in(Scopes.SINGLETON);
-  }
+      bind(Service.class).to(ServiceImpl.class).in(Scopes.SINGLETON);
+    }
 

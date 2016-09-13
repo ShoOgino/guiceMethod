@@ -1,5 +1,6 @@
   /** Calculates all dependencies required by the implementation and constructor. */
-  private Set<Dependency<?>> getDependencies(InjectionPoint ctorPoint, TypeLiteral<?> implementation) {
+  private Set<Dependency<?>> getDependencies(
+      InjectionPoint ctorPoint, TypeLiteral<?> implementation) {
     ImmutableSet.Builder<Dependency<?>> builder = ImmutableSet.builder();
     builder.addAll(ctorPoint.getDependencies());
     if (!implementation.getRawType().isInterface()) {

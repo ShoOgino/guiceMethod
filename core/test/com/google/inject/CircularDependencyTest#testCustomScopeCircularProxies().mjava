@@ -1,25 +1,25 @@
   /**
-   * When Scope Providers call their unscoped Provider's get() methods are
-   * called, it's possible that the result is a circular proxy designed for one
-   * specific parameter (not for all possible parameters). But custom scopes
-   * typically cache the results without checking to see if the result is a
-   * proxy. This leads to caching a result that is unsuitable for reuse for
-   * other parameters.
+   * When Scope Providers call their unscoped Provider's get() methods are called, it's possible
+   * that the result is a circular proxy designed for one specific parameter (not for all possible
+   * parameters). But custom scopes typically cache the results without checking to see if the
+   * result is a proxy. This leads to caching a result that is unsuitable for reuse for other
+   * parameters.
    *
-   * This means that custom proxies have to do an
-   *   {@code if(Scopes.isCircularProxy(..))}
-   * in order to avoid exceptions.
+   * <p>This means that custom proxies have to do an {@code if(Scopes.isCircularProxy(..))} in order
+   * to avoid exceptions.
    */
   public void testCustomScopeCircularProxies() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindScope(SimpleSingleton.class, new BasicSingleton());
-        bind(H.class).to(HImpl.class);
-        bind(I.class).to(IImpl.class);
-        bind(J.class).to(JImpl.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(SimpleSingleton.class, new BasicSingleton());
+                bind(H.class).to(HImpl.class);
+                bind(I.class).to(IImpl.class);
+                bind(J.class).to(JImpl.class);
+              }
+            });
 
     // The reason this happens is because the Scope gets these requests, in order:
     // entry: Key<IImpl> (1 - from getInstance call)
@@ -38,10 +38,12 @@
     try {
       injector.getInstance(IImpl.class);
       fail();
-    } catch(ProvisionException pe) {
-      assertContains(Iterables.getOnlyElement(pe.getErrorMessages()).getMessage(),
-          "Tried proxying " + IImpl.class.getName()
-          + " to support a circular dependency, but it is not an interface.");
+    } catch (ProvisionException pe) {
+      assertContains(
+          Iterables.getOnlyElement(pe.getErrorMessages()).getMessage(),
+          "Tried proxying "
+              + IImpl.class.getName()
+              + " to support a circular dependency, but it is not an interface.");
     }
   }
 

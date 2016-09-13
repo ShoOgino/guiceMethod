@@ -1,22 +1,27 @@
   public void testConstructorRuntimeException() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindConstant().annotatedWith(Names.named("runtime")).to(true);
-        bind(Exploder.class).to(Explosion.class);
-        bind(Tracer.class).to(TracerImpl.class);        
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Names.named("runtime")).to(true);
+                bind(Exploder.class).to(Explosion.class);
+                bind(Tracer.class).to(TracerImpl.class);
+              }
+            });
     try {
       injector.getInstance(Tracer.class);
       fail();
-    } catch(ProvisionException pe) {
+    } catch (ProvisionException pe) {
       // Make sure our initial error message gives the user exception.
-      Asserts.assertContains(pe.getMessage(),
-          "1) Error injecting constructor", "java.lang.IllegalStateException: boom!");
+      Asserts.assertContains(
+          pe.getMessage(),
+          "1) Error injecting constructor",
+          "java.lang.IllegalStateException: boom!");
       assertEquals(1, pe.getErrorMessages().size());
       assertEquals(IllegalStateException.class, pe.getCause().getClass());
-      assertEquals(IllegalStateException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+      assertEquals(
+          IllegalStateException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
     }
   }
 

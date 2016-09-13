@@ -1,10 +1,13 @@
   public void testGenericSupertype() {
     TypeLiteral<?> resolver = TypeLiteral.get(arrayListOfString);
-    assertEquals(newParameterizedType(Collection.class, String.class),
+    assertEquals(
+        newParameterizedType(Collection.class, String.class),
         resolver.getSupertype(Collection.class).getType());
-    assertEquals(newParameterizedType(Iterable.class, String.class),
+    assertEquals(
+        newParameterizedType(Iterable.class, String.class),
         resolver.getSupertype(Iterable.class).getType());
-    assertEquals(newParameterizedType(AbstractList.class, String.class),
+    assertEquals(
+        newParameterizedType(AbstractList.class, String.class),
         resolver.getSupertype(AbstractList.class).getType());
     assertEquals(Object.class, resolver.getSupertype(Object.class).getType());
   }

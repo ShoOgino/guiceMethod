@@ -1,6 +1,4 @@
-  /**
-   * We haven't decided on what the desired behaviour of this test should be...
-   */
+  /** We haven't decided on what the desired behaviour of this test should be... */
   public void testBindNullToInstance() {
     try {
       Guice.createInjector(
@@ -12,9 +10,11 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "Binding to null instances is not allowed.",
-          "at " + getClass().getName(), getDeclaringSourcePart(getClass()));
+          "at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()));
     }
   }
 

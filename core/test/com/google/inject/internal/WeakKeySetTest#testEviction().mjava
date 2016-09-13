@@ -2,7 +2,7 @@
     TestState state = new TestState();
     Key<Integer> key = Key.get(Integer.class);
     Object source = new Object();
-    
+
     WeakReference<Key<Integer>> weakKeyRef = new WeakReference<Key<Integer>>(key);
 
     set.add(key, state, source);

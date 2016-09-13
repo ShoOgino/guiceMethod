@@ -1,6 +1,6 @@
     @Inject
-    public MustangInsurance(@Named("lowLimit") double limit, @Assisted Mustang car,
-        @Assisted double premium) {
+    public MustangInsurance(
+        @Named("lowLimit") double limit, @Assisted Mustang car, @Assisted double premium) {
       this.premium = premium;
       this.limit = limit;
       this.car = car;

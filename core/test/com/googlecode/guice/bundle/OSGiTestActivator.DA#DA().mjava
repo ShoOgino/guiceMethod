@@ -1,2 +1,3 @@
-    @Inject private DA() {}
+    @Inject
+    private DA() {}
 

@@ -1,6 +1,4 @@
-  /**
-   * Returns the interceptors that apply to the constructed type.
-   */
+  /** Returns the interceptors that apply to the constructed type. */
   public ImmutableMap<Method, List<MethodInterceptor>> getInterceptors() {
     return interceptors;
   }

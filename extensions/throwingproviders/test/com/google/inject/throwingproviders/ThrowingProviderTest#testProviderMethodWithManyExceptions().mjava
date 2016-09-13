@@ -16,16 +16,24 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
+    } catch (CreationException ce) {
       // The only two that should fail are Interrupted & TooManyListeners.. the rest are OK.
       List<Message> errors = ImmutableList.copyOf(ce.getErrorMessages());
-      assertEquals(InterruptedException.class.getName() + " is not compatible with the exceptions (["
-          + RemoteException.class + "]) declared in the CheckedProvider interface ("
-          + RemoteProvider.class.getName() + ")",
+      assertEquals(
+          InterruptedException.class.getName()
+              + " is not compatible with the exceptions (["
+              + RemoteException.class
+              + "]) declared in the CheckedProvider interface ("
+              + RemoteProvider.class.getName()
+              + ")",
           errors.get(0).getMessage());
-      assertEquals(TooManyListenersException.class.getName() + " is not compatible with the exceptions (["
-          + RemoteException.class + "]) declared in the CheckedProvider interface ("
-          + RemoteProvider.class.getName() + ")",
+      assertEquals(
+          TooManyListenersException.class.getName()
+              + " is not compatible with the exceptions (["
+              + RemoteException.class
+              + "]) declared in the CheckedProvider interface ("
+              + RemoteProvider.class.getName()
+              + ")",
           errors.get(1).getMessage());
       assertEquals(2, errors.size());
     }

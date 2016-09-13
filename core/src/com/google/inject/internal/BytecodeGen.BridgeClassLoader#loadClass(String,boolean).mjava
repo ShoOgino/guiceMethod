@@ -1,5 +1,5 @@
-    @Override protected Class<?> loadClass(String name, boolean resolve)
-        throws ClassNotFoundException {
+    @Override
+    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
 
       if (name.startsWith("sun.reflect")) {
         // these reflection classes must be loaded from bootstrap class loader

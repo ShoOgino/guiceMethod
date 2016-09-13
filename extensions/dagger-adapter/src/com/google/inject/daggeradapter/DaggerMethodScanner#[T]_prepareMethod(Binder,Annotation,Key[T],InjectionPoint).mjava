@@ -1,4 +1,5 @@
-  @Override public <T> Key<T> prepareMethod(
+  @Override
+  public <T> Key<T> prepareMethod(
       Binder binder, Annotation rawAnnotation, Key<T> key, InjectionPoint injectionPoint) {
     Method providesMethod = (Method) injectionPoint.getMember();
     Provides annotation = (Provides) rawAnnotation;
@@ -23,8 +24,8 @@
       case SET:
         return processSetBinding(binder, key);
       case SET_VALUES:
-        binder.addError(Type.SET_VALUES.name() + " contributions are not supported by Guice.",
-            providesMethod);
+        binder.addError(
+            Type.SET_VALUES.name() + " contributions are not supported by Guice.", providesMethod);
         return key;
       default:
         binder.addError("Unknown @Provides type " + annotation.type() + ".", providesMethod);

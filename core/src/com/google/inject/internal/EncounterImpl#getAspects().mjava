@@ -1,7 +1,5 @@
   /*if[AOP]*/
   ImmutableList<MethodAspect> getAspects() {
-    return aspects == null
-        ? ImmutableList.<MethodAspect>of()
-        : ImmutableList.copyOf(aspects);
+    return aspects == null ? ImmutableList.<MethodAspect>of() : ImmutableList.copyOf(aspects);
   }
 

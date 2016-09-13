@@ -1,5 +1,5 @@
-  <T> CheckedProviderMethod<T> createProviderMethod(Binder binder, final Method method,
-      CheckedProvides checkedProvides) {
+  <T> CheckedProviderMethod<T> createProviderMethod(
+      Binder binder, final Method method, CheckedProvides checkedProvides) {
     @SuppressWarnings("rawtypes")
     Class<? extends CheckedProvider> throwingProvider = checkedProvides.value();
     binder = binder.withSource(method);
@@ -21,7 +21,7 @@
         key = loggerKey;
       }
       dependencies.add(Dependency.get(key));
-      parameterProviders.add(binder.getProvider(key));        
+      parameterProviders.add(binder.getProvider(key));
     }
 
     @SuppressWarnings("unchecked") // Define T as the method's return type.
@@ -29,15 +29,22 @@
     List<TypeLiteral<?>> exceptionTypes = typeLiteral.getExceptionTypes(method);
 
     Key<T> key = getKey(errors, returnType, method, method.getAnnotations());
-    Class<? extends Annotation> scopeAnnotation
-        = Annotations.findScopeAnnotation(errors, method.getAnnotations());
+    Class<? extends Annotation> scopeAnnotation =
+        Annotations.findScopeAnnotation(errors, method.getAnnotations());
 
     for (Message message : errors.getMessages()) {
       binder.addError(message);
     }
 
-    return new CheckedProviderMethod<T>(key, method, delegate, ImmutableSet.copyOf(dependencies),
-        parameterProviders, scopeAnnotation, throwingProvider, exceptionTypes, 
-        checkedProvides.scopeExceptions()); 
+    return new CheckedProviderMethod<T>(
+        key,
+        method,
+        delegate,
+        ImmutableSet.copyOf(dependencies),
+        parameterProviders,
+        scopeAnnotation,
+        throwingProvider,
+        exceptionTypes,
+        checkedProvides.scopeExceptions());
   }
 

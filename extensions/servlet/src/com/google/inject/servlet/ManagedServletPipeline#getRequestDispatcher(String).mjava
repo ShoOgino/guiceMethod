@@ -1,6 +1,6 @@
   /**
-   * @return Returns a request dispatcher wrapped with a servlet mapped to
-   * the given path or null if no mapping was found.
+   * @return Returns a request dispatcher wrapped with a servlet mapped to the given path or null if
+   *     no mapping was found.
    */
   RequestDispatcher getRequestDispatcher(String path) {
     final String newRequestUri = path;

@@ -11,15 +11,17 @@
           }
         };
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindInterceptor(Matchers.any(), Matchers.any(), interceptor);
-        bind(Double.class).toInstance(5.0d);
-        bind(ColoredCarFactory.class).toProvider(
-            FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindInterceptor(Matchers.any(), Matchers.any(), interceptor);
+                bind(Double.class).toInstance(5.0d);
+                bind(ColoredCarFactory.class)
+                    .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class));
+              }
+            });
 
     ColoredCarFactory factory = injector.getInstance(ColoredCarFactory.class);
     Mustang mustang = (Mustang) factory.create(Color.GREEN);

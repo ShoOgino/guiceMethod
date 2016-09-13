@@ -1,6 +1,8 @@
   public Errors scopeAnnotationOnAbstractType(
       Class<? extends Annotation> scopeAnnotation, Class<?> type, Object source) {
-    return addMessage("%s is annotated with %s, but scope annotations are not supported "
-        + "for abstract types.%n Bound at %s.", type, scopeAnnotation, convert(source));
+    return addMessage(
+        "%s is annotated with %s, but scope annotations are not supported "
+            + "for abstract types.%n Bound at %s.",
+        type, scopeAnnotation, convert(source));
   }
 

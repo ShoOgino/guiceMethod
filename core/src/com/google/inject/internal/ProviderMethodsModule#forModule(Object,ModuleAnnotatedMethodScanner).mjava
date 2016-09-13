@@ -1,6 +1,4 @@
-  /**
-   * Returns a module which creates bindings methods in the module that match the scanner.
-   */
+  /** Returns a module which creates bindings methods in the module that match the scanner. */
   public static Module forModule(Object module, ModuleAnnotatedMethodScanner scanner) {
     return forObject(module, false, scanner);
   }

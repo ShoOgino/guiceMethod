@@ -4,17 +4,24 @@
 
     // We use servlet module here because we want to test that @RequestScoped
     // behaves properly with the non-HTTP request scope logic.
-    Injector injector = Guice.createInjector(new ServletModule() {
-      @Override protected void configureServlets() {
-        bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
-        bind(SomeObject.class).in(RequestScoped.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
+                bind(SomeObject.class).in(RequestScoped.class);
+              }
+            });
 
     SomeObject someObject = new SomeObject(A_VALUE);
     OffRequestCallable offRequestCallable = injector.getInstance(OffRequestCallable.class);
-    executor.submit(ServletScopes.scopeRequest(offRequestCallable,
-        ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), someObject))).get();
+    executor
+        .submit(
+            ServletScopes.scopeRequest(
+                offRequestCallable,
+                ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), someObject)))
+        .get();
 
     assertSame(injector.getInstance(OffRequestCallable.class), offRequestCallable);
 
@@ -24,8 +31,12 @@
 
     // Now create a new request and assert that the scopes don't cross.
     someObject = new SomeObject(A_DIFFERENT_VALUE);
-    executor.submit(ServletScopes.scopeRequest(offRequestCallable,
-        ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), someObject))).get();
+    executor
+        .submit(
+            ServletScopes.scopeRequest(
+                offRequestCallable,
+                ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), someObject)))
+        .get();
 
     assertSame(injector.getInstance(OffRequestCallable.class), offRequestCallable);
 

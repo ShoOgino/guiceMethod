@@ -3,31 +3,38 @@
         new AtomicReference<Provider<List<String>>>();
     final AtomicReference<Provider<List<Integer>>> intProvider =
         new AtomicReference<Provider<List<Integer>>>();
-    final Object foo = new Object() {
-      @SuppressWarnings("unused") @Inject List<String> list;
-    };
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        bind(new Key<List<String>>() {}).toInstance(new ArrayList<String>());
-        bind(new TypeLiteral<List<Integer>>() {}).toInstance(new ArrayList<Integer>());
+    final Object foo =
+        new Object() {
+          @SuppressWarnings("unused")
+          @Inject
+          List<String> list;
+        };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(new Key<List<String>>() {}).toInstance(new ArrayList<String>());
+            bind(new TypeLiteral<List<Integer>>() {}).toInstance(new ArrayList<Integer>());
 
-        stringProvider.set(getProvider(new Key<List<String>>() {}));
-        intProvider.set(binder().getProvider(Dependency.get(new Key<List<Integer>>() {})));
+            stringProvider.set(getProvider(new Key<List<String>>() {}));
+            intProvider.set(binder().getProvider(Dependency.get(new Key<List<Integer>>() {})));
 
-        binder().requestInjection(new TypeLiteral<Object>() {}, foo);
-      }
-    };
+            binder().requestInjection(new TypeLiteral<Object>() {}, foo);
+          }
+        };
     WeakReference<Module> moduleRef = new WeakReference<Module>(module);
     final Injector injector = Guice.createInjector(module);
     module = null;
     awaitClear(moduleRef); // Make sure anonymous keys & typeliterals don't hold the module.
 
-    Runnable runner = new Runnable() {
-      @Override public void run() {
-        injector.getInstance(new Key<Typed<String>>() {});
-        injector.getInstance(Key.get(new TypeLiteral<Typed<Integer>>() {}));
-      }
-    };
+    Runnable runner =
+        new Runnable() {
+          @Override
+          public void run() {
+            injector.getInstance(new Key<Typed<String>>() {});
+            injector.getInstance(Key.get(new TypeLiteral<Typed<Integer>>() {}));
+          }
+        };
     WeakReference<Runnable> runnerRef = new WeakReference<Runnable>(runner);
     runner.run();
     runner = null;

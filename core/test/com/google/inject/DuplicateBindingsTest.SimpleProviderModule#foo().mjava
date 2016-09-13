@@ -1,4 +1,6 @@
-    @Provides @Named("providerMethod") Foo foo() {
+    @Provides
+    @Named("providerMethod")
+    Foo foo() {
       return null;
     }
 

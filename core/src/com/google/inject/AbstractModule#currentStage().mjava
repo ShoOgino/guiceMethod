@@ -1,5 +1,5 @@
   /**
-   * @see Binder#currentStage() 
+   * @see Binder#currentStage()
    * @since 2.0
    */
   protected Stage currentStage() {

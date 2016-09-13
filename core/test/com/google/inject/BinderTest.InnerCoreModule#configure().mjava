@@ -1,6 +1,6 @@
-    @Override protected void configure() {
-      bind(AbstractModule.class).annotatedWith(red)
-      .toProvider(Providers.<AbstractModule>of(null));
+    @Override
+    protected void configure() {
+      bind(AbstractModule.class).annotatedWith(red).toProvider(Providers.<AbstractModule>of(null));
       bind(Binder.class).annotatedWith(red).toProvider(Providers.<Binder>of(null));
       bind(Binding.class).annotatedWith(red).toProvider(Providers.<Binding>of(null));
       bind(Injector.class).annotatedWith(red).toProvider(Providers.<Injector>of(null));

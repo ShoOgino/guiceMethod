@@ -1,5 +1,7 @@
   @Inject
-  public ManagedFilterPipeline(Injector injector, ManagedServletPipeline servletPipeline,
+  public ManagedFilterPipeline(
+      Injector injector,
+      ManagedServletPipeline servletPipeline,
       Provider<ServletContext> servletContext) {
     this.injector = injector;
     this.servletPipeline = servletPipeline;

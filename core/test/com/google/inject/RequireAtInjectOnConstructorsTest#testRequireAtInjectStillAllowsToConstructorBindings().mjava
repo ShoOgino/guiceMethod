@@ -1,16 +1,18 @@
   public void testRequireAtInjectStillAllowsToConstructorBindings() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          try {
-            bind(ManyConstructors.class)
-                .toConstructor(ManyConstructors.class.getDeclaredConstructor());
-          } catch (Exception e) {
-            throw new RuntimeException(e);
-          }
-          binder().requireAtInjectOnConstructors();
-        }
-      });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                try {
+                  bind(ManyConstructors.class)
+                      .toConstructor(ManyConstructors.class.getDeclaredConstructor());
+                } catch (Exception e) {
+                  throw new RuntimeException(e);
+                }
+                binder().requireAtInjectOnConstructors();
+              }
+            });
     injector.getInstance(ManyConstructors.class);
   }
 

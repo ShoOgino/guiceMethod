@@ -3,8 +3,8 @@
       Types.newParameterizedType(Map.class, String.class, int.class);
       fail();
     } catch (IllegalArgumentException expected) {
-      assertContains(expected.getMessage(),
-          "Primitive types are not allowed in type parameters: int");
+      assertContains(
+          expected.getMessage(), "Primitive types are not allowed in type parameters: int");
     }
   }
 

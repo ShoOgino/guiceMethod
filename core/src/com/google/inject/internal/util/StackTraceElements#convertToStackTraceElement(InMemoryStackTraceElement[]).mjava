@@ -6,13 +6,13 @@
     if (inMemoryStackTraceElements.length == 0) {
       return EMPTY_STACK_TRACE;
     }
-    StackTraceElement[] stackTraceElements = 
+    StackTraceElement[] stackTraceElements =
         new StackTraceElement[inMemoryStackTraceElements.length];
     for (int i = 0; i < inMemoryStackTraceElements.length; i++) {
       String declaringClass = inMemoryStackTraceElements[i].getClassName();
       String methodName = inMemoryStackTraceElements[i].getMethodName();
       int lineNumber = inMemoryStackTraceElements[i].getLineNumber();
-      stackTraceElements[i] = 
+      stackTraceElements[i] =
           new StackTraceElement(declaringClass, methodName, UNKNOWN_SOURCE, lineNumber);
     }
     return stackTraceElements;

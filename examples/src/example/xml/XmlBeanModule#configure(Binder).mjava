@@ -13,8 +13,7 @@
 
       Reader in = new InputStreamReader(xmlUrl.openStream());
       Parsers.parse(in, beans.getContentHandler());
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       originalBinder.addError(e);
     }
   }

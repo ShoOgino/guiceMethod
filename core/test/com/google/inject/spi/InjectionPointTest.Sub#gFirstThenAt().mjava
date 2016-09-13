@@ -1,4 +1,4 @@
     @javax.inject.Inject
-    @Override 
+    @Override
     public void gFirstThenAt() {}
 

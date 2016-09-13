@@ -1,18 +1,20 @@
   /**
    * Returns a new just-in-time binding created by resolving {@code key}. The strategies used to
    * create just-in-time bindings are:
+   *
    * <ol>
-   *   <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
+   * <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
    *     to the binding for {@code T}.
-   *   <li>Converting constants.
-   *   <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
-   *   <li>The constructor of the raw type. Only for unannotated keys.
+   * <li>Converting constants.
+   * <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
+   * <li>The constructor of the raw type. Only for unannotated keys.
    * </ol>
    *
    * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
    */
-  private <T> BindingImpl<T> createJustInTimeBinding(Key<T> key, Errors errors,
-      boolean jitDisabled, JitLimitation jitType) throws ErrorsException {
+  private <T> BindingImpl<T> createJustInTimeBinding(
+      Key<T> key, Errors errors, boolean jitDisabled, JitLimitation jitType)
+      throws ErrorsException {
     int numErrorsBefore = errors.size();
 
     // Retrieve the sources before checking for blacklisting to guard against sources becoming null
@@ -48,9 +50,7 @@
       return convertedBinding;
     }
 
-    if (!isTypeLiteral(key)
-        && jitDisabled
-        && jitType != JitLimitation.NEW_OR_EXISTING_JIT) {
+    if (!isTypeLiteral(key) && jitDisabled && jitType != JitLimitation.NEW_OR_EXISTING_JIT) {
       throw errors.jitDisabled(key).toException();
     }
 
@@ -69,7 +69,8 @@
     }
 
     Object source = key.getTypeLiteral().getRawType();
-    BindingImpl<T> binding = createUninitializedBinding(key, Scoping.UNSCOPED, source, errors, true);
+    BindingImpl<T> binding =
+        createUninitializedBinding(key, Scoping.UNSCOPED, source, errors, true);
     errors.throwIfNewErrors(numErrorsBefore);
     initializeJitBinding(binding, errors);
     return binding;

@@ -1,6 +1,6 @@
   private String failMsg() {
     return "This test may fail if it is not run from ant, or if it is not run after ant has "
-         + "compiled & built jars. This is because the test is validating that the Guice jar "
-         + "is properly setup to load in an OSGi container";
+        + "compiled & built jars. This is because the test is validating that the Guice jar "
+        + "is properly setup to load in an OSGi container";
   }
 

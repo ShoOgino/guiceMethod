@@ -1,4 +1,5 @@
-  @Override @SuppressWarnings("unchecked")
+  @Override
+  @SuppressWarnings("unchecked")
   public Object buildBean(Class clazz, Map<String, Object> extraContext) {
     if (strutsInjector == null) {
       synchronized (this) {

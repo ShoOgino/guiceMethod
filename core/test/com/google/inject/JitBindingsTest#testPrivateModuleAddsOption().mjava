@@ -20,7 +20,7 @@
             }
           });
       fail("should have failed");
-    } catch(CreationException expected) {
+    } catch (CreationException expected) {
       assertContains(expected.getMessage(), jitFailed(Bar.class));
       assertEquals(1, expected.getErrorMessages().size());
     }

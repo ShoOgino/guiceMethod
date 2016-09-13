@@ -1,12 +1,18 @@
   public void testBasicInjection() {
-    G g = MiniGuice.inject(G.class, new Object() {
-      @Provides E provideE(F f) {
-        return new E(f);
-      }
-      @Provides F provideF() {
-        return new F();
-      }
-    });
+    G g =
+        MiniGuice.inject(
+            G.class,
+            new Object() {
+              @Provides
+              E provideE(F f) {
+                return new E(f);
+              }
+
+              @Provides
+              F provideF() {
+                return new F();
+              }
+            });
 
     assertNotNull(g.a);
     assertNotNull(g.b);

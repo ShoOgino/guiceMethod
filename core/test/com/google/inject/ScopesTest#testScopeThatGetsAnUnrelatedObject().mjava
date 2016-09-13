@@ -1,13 +1,16 @@
   public void testScopeThatGetsAnUnrelatedObject() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(B.class);
-        bind(C.class);
-        ProviderGetScope providerGetScope = new ProviderGetScope();
-        requestInjection(providerGetScope);
-        bindScope(CustomScoped.class, providerGetScope);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(B.class);
+                bind(C.class);
+                ProviderGetScope providerGetScope = new ProviderGetScope();
+                requestInjection(providerGetScope);
+                bindScope(CustomScoped.class, providerGetScope);
+              }
+            });
 
     injector.getInstance(C.class);
   }

@@ -1,6 +1,7 @@
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
       // We check against each annotation type instead of BaseAnnotation
-      // so that we can compare against generated annotation implementations. 
+      // so that we can compare against generated annotation implementations.
       if (o instanceof Actual && clazz == Actual.class) {
         Actual other = (Actual) o;
         return value.equals(other.value());

@@ -1,34 +1,41 @@
-  void injectAndNotify(final T instance,
+  void injectAndNotify(
+      final T instance,
       final Errors errors,
       final Key<T> key, // possibly null!
       final ProvisionListenerStackCallback<T> provisionCallback, // possibly null!
       final Object source,
-      final boolean toolableOnly) throws ErrorsException {
+      final boolean toolableOnly)
+      throws ErrorsException {
     if (instance == null) {
       return;
     }
 
-    injector.callInContext(new ContextualCallable<Void>() {
-      @Override
-      public Void call(final InternalContext context) throws ErrorsException {
-        context.pushState(key, source);
-        try {
-          if (provisionCallback != null) {
-            provisionCallback.provision(errors, context, new ProvisionCallback<T>() {
-              @Override public T call() {
+    injector.callInContext(
+        new ContextualCallable<Void>() {
+          @Override
+          public Void call(final InternalContext context) throws ErrorsException {
+            context.pushState(key, source);
+            try {
+              if (provisionCallback != null) {
+                provisionCallback.provision(
+                    errors,
+                    context,
+                    new ProvisionCallback<T>() {
+                      @Override
+                      public T call() {
+                        injectMembers(instance, errors, context, toolableOnly);
+                        return instance;
+                      }
+                    });
+              } else {
                 injectMembers(instance, errors, context, toolableOnly);
-                return instance;
               }
-            });
-          } else {
-            injectMembers(instance, errors, context, toolableOnly);
+            } finally {
+              context.popState();
+            }
+            return null;
           }
-        } finally {
-          context.popState();
-        }
-        return null;
-      }
-    });
+        });
 
     // TODO: We *could* notify listeners too here,
     // but it's not clear if we want to.  There's no way to know
@@ -38,7 +45,7 @@
     // if atleast one InjectionPoint was toolable, in which case
     // the above callInContext could return 'true' if it injected
     // anything.)
-    if(!toolableOnly) {
+    if (!toolableOnly) {
       notifyListeners(instance, errors);
     }
   }

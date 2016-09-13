@@ -1,40 +1,58 @@
-  /**
-   * With overrides, we should get the union of all map bindings.
-   */
+  /** With overrides, we should get the union of all map bindings. */
   public void testModuleOverrideAndMapBindingsWithPermitDuplicates() {
-    Module abc = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
-        multibinder.addBinding("a").toInstance("A");
-        multibinder.addBinding("b").toInstance("B");
-        multibinder.addBinding("c").toInstance("C");
-        multibinder.permitDuplicates();
-      }
-    };
-    Module cd = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
-        multibinder.addBinding("c").toInstance("C");
-        multibinder.addBinding("d").toInstance("D");
-        multibinder.permitDuplicates();
-      }
-    };
-    Module ef = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(binder(), String.class, String.class);
-        multibinder.addBinding("e").toInstance("E");
-        multibinder.addBinding("f").toInstance("F");
-        multibinder.permitDuplicates();
-      }
-    };
+    Module abc =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B");
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        };
+    Module cd =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.addBinding("d").toInstance("D");
+            multibinder.permitDuplicates();
+          }
+        };
+    Module ef =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            multibinder.addBinding("e").toInstance("E");
+            multibinder.addBinding("f").toInstance("F");
+            multibinder.permitDuplicates();
+          }
+        };
 
     Module abcd = Modules.override(abc).with(cd);
     Injector injector = Guice.createInjector(abcd, ef);
-    assertEquals(mapOf("a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F"),
+    assertEquals(
+        mapOf("a", "A", "b", "B", "c", "C", "d", "D", "e", "E", "f", "F"),
         injector.getInstance(Key.get(mapOfString)));
-    assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(abcd, ef), BOTH, true, 0,
-        instance("a", "A"), instance("b", "B"), instance("c", "C"), instance(
-            "d", "D"), instance("e", "E"), instance("f", "F"));
-
-  }  
+    assertMapVisitor(
+        Key.get(mapOfString),
+        stringType,
+        stringType,
+        setOf(abcd, ef),
+        BOTH,
+        true,
+        0,
+        instance("a", "A"),
+        instance("b", "B"),
+        instance("c", "C"),
+        instance("d", "D"),
+        instance("e", "E"),
+        instance("f", "F"));
+  }
 

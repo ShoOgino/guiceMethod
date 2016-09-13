@@ -1,12 +1,13 @@
-  public final void testFilterBypass() throws ServletException,
-      IOException {
+  public final void testFilterBypass() throws ServletException, IOException {
 
-    final Injector injector = Guice.createInjector(new ServletModule() {
-      @Override
-      protected void configureServlets() {
-        filter("/protected/*").through(TestFilter.class);
-      }
-    });
+    final Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                filter("/protected/*").through(TestFilter.class);
+              }
+            });
 
     final FilterPipeline pipeline = injector.getInstance(FilterPipeline.class);
     pipeline.initPipeline(null);

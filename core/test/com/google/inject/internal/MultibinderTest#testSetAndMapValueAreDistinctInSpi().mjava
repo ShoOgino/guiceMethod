@@ -1,17 +1,21 @@
   // See issue 670
   public void testSetAndMapValueAreDistinctInSpi() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder.newSetBinder(binder(), String.class)
-            .addBinding().toInstance("A");
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("A");
 
-        MapBinder.newMapBinder(binder(), String.class, String.class)
-            .addBinding("B").toInstance("b");
-        
-        OptionalBinder.newOptionalBinder(binder(), String.class)
-            .setDefault().toInstance("C");
-      }
-    });
+                MapBinder.newMapBinder(binder(), String.class, String.class)
+                    .addBinding("B")
+                    .toInstance("b");
+
+                OptionalBinder.newOptionalBinder(binder(), String.class)
+                    .setDefault()
+                    .toInstance("C");
+              }
+            });
     Collector collector = new Collector();
     Binding<Map<String, String>> mapbinding = injector.getBinding(Key.get(mapOfStringString));
     mapbinding.acceptTargetVisitor(collector);
@@ -29,9 +33,10 @@
     // (but because of the OptionalBinder, there's 2 ProviderInstanceBindings also).
     // We also know the InstanceBindings will be in the order: A, b, C because that's
     // how we bound them, and binding order is preserved.
-    List<Binding<String>> bindings = FluentIterable.from(injector.findBindingsByType(stringType))
-        .filter(Predicates.instanceOf(InstanceBinding.class))
-        .toList();
+    List<Binding<String>> bindings =
+        FluentIterable.from(injector.findBindingsByType(stringType))
+            .filter(Predicates.instanceOf(InstanceBinding.class))
+            .toList();
     assertEquals(bindings.toString(), 3, bindings.size());
     Binding<String> a = bindings.get(0);
     Binding<String> b = bindings.get(1);

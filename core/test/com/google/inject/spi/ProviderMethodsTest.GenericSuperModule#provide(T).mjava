@@ -1,4 +1,5 @@
-    @Provides String provide(T thing) {
+    @Provides
+    String provide(T thing) {
       return thing.toString();
     }
 

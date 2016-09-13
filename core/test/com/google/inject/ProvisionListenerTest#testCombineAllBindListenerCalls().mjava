@@ -1,13 +1,15 @@
   public void testCombineAllBindListenerCalls() {
     final Counter count1 = new Counter();
     final Counter count2 = new Counter();
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bindListener(Matchers.any(), count1);
-        bindListener(Matchers.any(), count2);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindListener(Matchers.any(), count1);
+                bindListener(Matchers.any(), count2);
+              }
+            });
     assertNotNull(injector.getInstance(Foo.class));
     assertEquals(1, count1.count);
     assertEquals(1, count2.count);

@@ -1,6 +1,4 @@
-  /**
-   * Initialize the specified lookups, either immediately or when the injector is created.
-   */
+  /** Initialize the specified lookups, either immediately or when the injector is created. */
   void initialize(Errors errors) {
     injector.lookups = injector;
     new LookupProcessor(errors).process(injector, lookups);

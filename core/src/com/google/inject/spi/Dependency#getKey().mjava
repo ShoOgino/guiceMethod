@@ -1,6 +1,4 @@
-  /**
-   * Returns the key to the binding that satisfies this dependency.
-   */
+  /** Returns the key to the binding that satisfies this dependency. */
   public Key<T> getKey() {
     return this.key;
   }

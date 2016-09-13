@@ -14,9 +14,11 @@
             }
           });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(TooManyTypeParameters.class.getName() + " has more than one generic type parameter: [T, P]",
+    } catch (CreationException ce) {
+      assertEquals(
+          TooManyTypeParameters.class.getName()
+              + " has more than one generic type parameter: [T, P]",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
-    }    
+    }
   }
 

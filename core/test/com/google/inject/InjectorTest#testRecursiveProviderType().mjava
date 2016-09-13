@@ -3,9 +3,11 @@
       Guice.createInjector().getInstance(Chicken.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "@ProvidedBy points to the same class it annotates",
-          "while locating ", Chicken.class.getName());
+          "while locating ",
+          Chicken.class.getName());
     }
   }
 

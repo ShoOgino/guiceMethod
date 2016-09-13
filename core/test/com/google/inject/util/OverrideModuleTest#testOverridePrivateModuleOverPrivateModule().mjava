@@ -1,44 +1,56 @@
   public void testOverridePrivateModuleOverPrivateModule() {
-    Module exposes5and6 = new AbstractModule() {
-      @Override protected void configure() {
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(Integer.class).toInstance(5);
-            expose(Integer.class);
+    Module exposes5and6 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(Integer.class).toInstance(5);
+                    expose(Integer.class);
 
-            bind(Character.class).toInstance('E');
+                    bind(Character.class).toInstance('E');
+                  }
+                });
+
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(Long.class).toInstance(6L);
+                    expose(Long.class);
+
+                    bind(Character.class).toInstance('F');
+                  }
+                });
           }
-        });
+        };
 
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(Long.class).toInstance(6L);
-            expose(Long.class);
+    AbstractModule exposes15 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(Integer.class).toInstance(15);
+                    expose(Integer.class);
 
-            bind(Character.class).toInstance('F');
+                    bind(Character.class).toInstance('G');
+                  }
+                });
+
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(Character.class).toInstance('H');
+                  }
+                });
           }
-        });
-      }
-    };
-
-    AbstractModule exposes15 = new AbstractModule() {
-      @Override protected void configure() {
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(Integer.class).toInstance(15);
-            expose(Integer.class);
-
-            bind(Character.class).toInstance('G');
-          }
-        });
-
-        install(new PrivateModule() {
-          @Override protected void configure() {
-            bind(Character.class).toInstance('H');
-          }
-        });
-      }
-    };
+        };
 
     // override forwards
     Injector injector = Guice.createInjector(Modules.override(exposes5and6).with(exposes15));

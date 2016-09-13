@@ -1,31 +1,47 @@
   public void testMapBinderMultimapWithAnotation() {
-    AbstractModule ab1 = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class, Abc.class);
-        multibinder.addBinding("a").toInstance("A");
-        multibinder.addBinding("b").toInstance("B1");
-      }
-    };
-    AbstractModule b2c = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class, Abc.class);
-        multibinder.addBinding("b").toInstance("B2");
-        multibinder.addBinding("c").toInstance("C");
-        multibinder.permitDuplicates();
-      }
-    };
+    AbstractModule ab1 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class, Abc.class);
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B1");
+          }
+        };
+    AbstractModule b2c =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class, Abc.class);
+            multibinder.addBinding("b").toInstance("B2");
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        };
     Injector injector = Guice.createInjector(ab1, b2c);
 
-    assertEquals(mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
+    assertEquals(
+        mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
         injector.getInstance(Key.get(mapOfSetOfString, Abc.class)));
     try {
       injector.getInstance(Key.get(mapOfSetOfString));
       fail();
-    } catch (ConfigurationException expected) {}
-    
-    assertMapVisitor(Key.get(mapOfString, Abc.class), stringType, stringType, setOf(ab1, b2c), BOTH, true, 0,
-        instance("a", "A"), instance("b", "B1"), instance("b", "B2"), instance("c", "C"));
+    } catch (ConfigurationException expected) {
+    }
+
+    assertMapVisitor(
+        Key.get(mapOfString, Abc.class),
+        stringType,
+        stringType,
+        setOf(ab1, b2c),
+        BOTH,
+        true,
+        0,
+        instance("a", "A"),
+        instance("b", "B1"),
+        instance("b", "B2"),
+        instance("c", "C"));
   }
 

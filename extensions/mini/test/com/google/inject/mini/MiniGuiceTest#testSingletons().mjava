@@ -1,9 +1,14 @@
   public void testSingletons() {
-    J j = MiniGuice.inject(J.class, new Object() {
-      @Provides @Singleton F provideK() {
-        return new F();
-      }
-    });
+    J j =
+        MiniGuice.inject(
+            J.class,
+            new Object() {
+              @Provides
+              @Singleton
+              F provideK() {
+                return new F();
+              }
+            });
     assertSame(j.fProvider.get(), j.fProvider.get());
     assertSame(j.iProvider.get(), j.iProvider.get());
   }

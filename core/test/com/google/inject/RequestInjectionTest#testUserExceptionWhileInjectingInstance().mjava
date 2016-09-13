@@ -1,14 +1,16 @@
   public void testUserExceptionWhileInjectingInstance() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          requestInjection(new BlowsUpOnInject());
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              requestInjection(new BlowsUpOnInject());
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Error injecting method, java.lang.UnsupportedOperationException: Pop",
           "at " + BlowsUpOnInject.class.getName() + ".injectInstance(RequestInjectionTest.java:");
     }

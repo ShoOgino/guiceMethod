@@ -7,8 +7,11 @@
       Guice.createInjector().getInstance(B.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(), TypeLiteral.class.getName() + "<java.util.List<T>> "
-          + "cannot be used as a key; It is not fully specified.");
+      assertContains(
+          expected.getMessage(),
+          TypeLiteral.class.getName()
+              + "<java.util.List<T>> "
+              + "cannot be used as a key; It is not fully specified.");
     }
   }
 

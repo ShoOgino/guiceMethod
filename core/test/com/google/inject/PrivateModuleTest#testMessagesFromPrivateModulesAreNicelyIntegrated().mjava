@@ -1,29 +1,34 @@
   /**
-   * Ensure that when we've got errors in different private modules, Guice presents all errors
-   * in a unified message.
+   * Ensure that when we've got errors in different private modules, Guice presents all errors in a
+   * unified message.
    */
   public void testMessagesFromPrivateModulesAreNicelyIntegrated() {
     try {
       Guice.createInjector(
           new PrivateModule() {
-            @Override public void configure() {
+            @Override
+            public void configure() {
               bind(C.class);
             }
           },
           new PrivateModule() {
-            @Override public void configure() {
+            @Override
+            public void configure() {
               bind(AB.class);
             }
-          }
-      );
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) No implementation for " + C.class.getName() + " was bound.",
-          "at " + getClass().getName(), getDeclaringSourcePart(getClass()),
-          "2) No implementation for " + String.class.getName(), "Named(value=a) was bound.",
+          "at " + getClass().getName(),
+          getDeclaringSourcePart(getClass()),
+          "2) No implementation for " + String.class.getName(),
+          "Named(value=a) was bound.",
           "for field at " + AB.class.getName() + ".a(PrivateModuleTest.java:",
-          "3) No implementation for " + String.class.getName(), "Named(value=b) was bound.",
+          "3) No implementation for " + String.class.getName(),
+          "Named(value=b) was bound.",
           "for field at " + AB.class.getName() + ".b(PrivateModuleTest.java:",
           "3 errors");
     }

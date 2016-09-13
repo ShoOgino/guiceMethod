@@ -1,14 +1,14 @@
   /**
    * Configures the {@code MapBinder} to handle duplicate entries.
-   * <p>When multiple equal keys are bound, the value that gets included in the map is
-   * arbitrary.
-   * <p>In addition to the {@code Map<K, V>} and {@code Map<K, Provider<V>>}
-   * maps that are normally bound, a {@code Map<K, Set<V>>} and
-   * {@code Map<K, Set<Provider<V>>>} are <em>also</em> bound, which contain
-   * all values bound to each key.
-   * <p>
-   * When multiple modules contribute elements to the map, this configuration
-   * option impacts all of them.
+   *
+   * <p>When multiple equal keys are bound, the value that gets included in the map is arbitrary.
+   *
+   * <p>In addition to the {@code Map<K, V>} and {@code Map<K, Provider<V>>} maps that are normally
+   * bound, a {@code Map<K, Set<V>>} and {@code Map<K, Set<Provider<V>>>} are <em>also</em> bound,
+   * which contain all values bound to each key.
+   *
+   * <p>When multiple modules contribute elements to the map, this configuration option impacts all
+   * of them.
    *
    * @return this map binder
    * @since 3.0

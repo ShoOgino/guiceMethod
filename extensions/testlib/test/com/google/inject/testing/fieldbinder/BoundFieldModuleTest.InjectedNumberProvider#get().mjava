@@ -1,4 +1,5 @@
-    @Override public Number get() {
+    @Override
+    public Number get() {
       return anInt;
     }
 

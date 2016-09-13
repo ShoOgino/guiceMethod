@@ -1,2 +1,6 @@
-    @Inject @Green String green() { return green; }
+    @Inject
+    @Green
+    String green() {
+      return green;
+    }
 

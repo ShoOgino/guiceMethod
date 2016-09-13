@@ -1,24 +1,35 @@
   public void testMapBinderAggregationForAnnotationInstance() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class, Names.named("abc"));
-        multibinder.addBinding("a").toInstance("A");
-        multibinder.addBinding("b").toInstance("B");
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class, Names.named("abc"));
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B");
 
-        multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class, Names.named("abc"));
-        multibinder.addBinding("c").toInstance("C");
-      }
-    };
+            multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class, Names.named("abc"));
+            multibinder.addBinding("c").toInstance("C");
+          }
+        };
     Injector injector = Guice.createInjector(module);
 
     Key<Map<String, String>> key = Key.get(mapOfString, Names.named("abc"));
     Map<String, String> abc = injector.getInstance(key);
     assertEquals(mapOf("a", "A", "b", "B", "c", "C"), abc);
-    assertMapVisitor(key, stringType, stringType, setOf(module), BOTH, false, 0,
-        instance("a", "A"), instance("b", "B"), instance("c", "C"));
-    
+    assertMapVisitor(
+        key,
+        stringType,
+        stringType,
+        setOf(module),
+        BOTH,
+        false,
+        0,
+        instance("a", "A"),
+        instance("b", "B"),
+        instance("c", "C"));
+
     // just make sure these succeed
     injector.getInstance(Key.get(mapOfStringProvider, Names.named("abc")));
     injector.getInstance(Key.get(mapOfStringJavaxProvider, Names.named("abc")));

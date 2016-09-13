@@ -1,12 +1,13 @@
   public void testBindToInjectorWithListeningGivesSaneException() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bindListener(Matchers.any(), new Counter());
-          bind(Injector.class).toProvider(Providers.<Injector>of(null));
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bindListener(Matchers.any(), new Counter());
+              bind(Injector.class).toProvider(Providers.<Injector>of(null));
+            }
+          });
       fail();
     } catch (CreationException ce) {
       assertContains(

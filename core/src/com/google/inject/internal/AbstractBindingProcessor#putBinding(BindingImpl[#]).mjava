@@ -12,11 +12,11 @@
       // If it failed because of an explicit duplicate binding...
       if (injector.state.getExplicitBinding(key) != null) {
         try {
-          if(!isOkayDuplicate(original, binding, injector.state)) {
+          if (!isOkayDuplicate(original, binding, injector.state)) {
             errors.bindingAlreadySet(key, original.getSource());
             return;
           }
-        } catch(Throwable t) {
+        } catch (Throwable t) {
           errors.errorCheckingDuplicateBinding(key, original.getSource(), t);
           return;
         }

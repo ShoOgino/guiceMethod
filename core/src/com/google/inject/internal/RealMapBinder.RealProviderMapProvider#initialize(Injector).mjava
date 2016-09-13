@@ -1,4 +1,6 @@
-    @Toolable @Inject void initialize(Injector injector) {
+    @Toolable
+    @Inject
+    void initialize(Injector injector) {
       RealMapBinder.this.binder = null;
       permitDuplicates = entrySetBinder.permitsDuplicates(injector);
 
@@ -13,8 +15,10 @@
         Binding<V> valueBinding = injector.getBinding(valueKey);
         // If this isn't a dup due to an exact same binding, add it.
         if (index.put(providerEntry.getKey(), valueBinding.acceptTargetVisitor(indexer))) {
-          Provider<V> previous = providerMapMutable.put(providerEntry.getKey(),
-              new ValueProvider<V>(providerEntry.getValue(), valueBinding));
+          Provider<V> previous =
+              providerMapMutable.put(
+                  providerEntry.getKey(),
+                  new ValueProvider<V>(providerEntry.getValue(), valueBinding));
           if (previous != null && !permitDuplicates) {
             if (duplicateKeys == null) {
               duplicateKeys = Sets.newHashSet();

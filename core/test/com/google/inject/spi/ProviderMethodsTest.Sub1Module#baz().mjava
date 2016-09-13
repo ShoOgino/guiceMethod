@@ -1,4 +1,5 @@
-    @Provides Double baz() {
+    @Provides
+    Double baz() {
       return 42D;
     }
 

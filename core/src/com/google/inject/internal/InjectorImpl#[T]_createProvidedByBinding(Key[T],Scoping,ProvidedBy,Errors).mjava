@@ -1,6 +1,6 @@
   /** Creates a binding for a type annotated with @ProvidedBy. */
-  <T> BindingImpl<T> createProvidedByBinding(Key<T> key, Scoping scoping,
-      ProvidedBy providedBy, Errors errors) throws ErrorsException {
+  <T> BindingImpl<T> createProvidedByBinding(
+      Key<T> key, Scoping scoping, ProvidedBy providedBy, Errors errors) throws ErrorsException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
     Class<? extends javax.inject.Provider<?>> providerType = providedBy.value();
 
@@ -15,14 +15,15 @@
     ProvidedByInternalFactory<T> internalFactory =
         new ProvidedByInternalFactory<T>(rawType, providerType, providerKey);
     Object source = rawType;
-    BindingImpl<T> binding = LinkedProviderBindingImpl.createWithInitializer(
-        this,
-        key,
-        source,
-        Scoping.<T>scope(key, this, internalFactory, source, scoping),
-        scoping,
-        providerKey,
-        internalFactory);
+    BindingImpl<T> binding =
+        LinkedProviderBindingImpl.createWithInitializer(
+            this,
+            key,
+            source,
+            Scoping.<T>scope(key, this, internalFactory, source, scoping),
+            scoping,
+            providerKey,
+            internalFactory);
     internalFactory.setProvisionListenerCallback(provisionListenerStore.get(binding));
     return binding;
   }

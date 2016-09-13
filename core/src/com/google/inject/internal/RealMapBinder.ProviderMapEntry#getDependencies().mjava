@@ -1,4 +1,5 @@
-    @Override public Set<Dependency<?>> getDependencies() {
+    @Override
+    public Set<Dependency<?>> getDependencies() {
       return ((HasDependencies) provider).getDependencies();
     }
 

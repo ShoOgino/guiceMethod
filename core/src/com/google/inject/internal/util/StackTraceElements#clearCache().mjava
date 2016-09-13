@@ -1,6 +1,4 @@
-  /**
-   * Clears the internal cache for {@link StackTraceElement StackTraceElements}.
-   */
+  /** Clears the internal cache for {@link StackTraceElement StackTraceElements}. */
   public static void clearCache() {
     elementCache.clear();
     stringCache.clear();

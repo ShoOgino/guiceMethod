@@ -1,7 +1,6 @@
   /**
-   * Returns the current state of this service. One of {@link State} possible
-   * values, or null if this is a brand new object, i.e., has not been put into
-   * any state yet.
+   * Returns the current state of this service. One of {@link State} possible values, or null if
+   * this is a brand new object, i.e., has not been put into any state yet.
    */
   State state();
 

@@ -1,3 +1,5 @@
     @Override
-    public String s() { return null; }
+    public String s() {
+      return null;
+    }
 

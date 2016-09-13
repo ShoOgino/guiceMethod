@@ -1,6 +1,6 @@
   /**
    * Returns the type converter binding used to convert the constant.
-   * 
+   *
    * @since 3.0
    */
   TypeConverterBinding getTypeConverterBinding();

@@ -1,6 +1,7 @@
     @Override
     public <T> void requestInjection(TypeLiteral<T> type, T instance) {
-      elements.add(new InjectionRequest<T>(getElementSource(), MoreTypes.canonicalizeForKey(type),
-          instance));
+      elements.add(
+          new InjectionRequest<T>(
+              getElementSource(), MoreTypes.canonicalizeForKey(type), instance));
     }
 

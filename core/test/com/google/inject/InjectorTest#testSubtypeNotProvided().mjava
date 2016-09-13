@@ -3,10 +3,13 @@
       Guice.createInjector().getInstance(Money.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           Tree.class.getName() + " doesn't provide instances of " + Money.class.getName(),
-          "while locating ", Tree.class.getName(),
-          "while locating ", Money.class.getName());
+          "while locating ",
+          Tree.class.getName(),
+          "while locating ",
+          Money.class.getName());
     }
   }
 

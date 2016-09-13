@@ -14,8 +14,8 @@
               }
             });
 
-    Key<RemoteProvider<List<String>>> key
-        = Key.get(new TypeLiteral<RemoteProvider<List<String>>>() { });
+    Key<RemoteProvider<List<String>>> key =
+        Key.get(new TypeLiteral<RemoteProvider<List<String>>>() {});
     assertEquals(Arrays.asList("A", "B"), providesInjector.getInstance(key).get());
   }
 

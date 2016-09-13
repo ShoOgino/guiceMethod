@@ -1,6 +1,4 @@
-  /**
-   * When an instance implements HasDependencies, the injected dependencies aren't used.
-   */
+  /** When an instance implements HasDependencies, the injected dependencies aren't used. */
   public void testInstanceWithDependencies() {
     Injector injector =
         Guice.createInjector(
@@ -12,7 +10,8 @@
             });
 
     InstanceBinding<?> binding = (InstanceBinding<?>) injector.getBinding(A.class);
-    assertEquals(ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Integer.class))),
+    assertEquals(
+        ImmutableSet.<Dependency<?>>of(Dependency.get(Key.get(Integer.class))),
         binding.getDependencies());
   }
 

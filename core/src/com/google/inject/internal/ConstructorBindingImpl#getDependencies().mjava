@@ -1,8 +1,9 @@
   @Override
   public Set<Dependency<?>> getDependencies() {
-    return Dependency.forInjectionPoints(new ImmutableSet.Builder<InjectionPoint>()
-        .add(getConstructor())
-        .addAll(getInjectableMembers())
-        .build());
+    return Dependency.forInjectionPoints(
+        new ImmutableSet.Builder<InjectionPoint>()
+            .add(getConstructor())
+            .addAll(getInjectableMembers())
+            .build());
   }
 

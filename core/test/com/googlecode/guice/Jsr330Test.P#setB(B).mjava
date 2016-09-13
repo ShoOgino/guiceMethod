@@ -1,4 +1,5 @@
-    @Inject B setB(B b) {
+    @Inject
+    B setB(B b) {
       return b;
     }
 

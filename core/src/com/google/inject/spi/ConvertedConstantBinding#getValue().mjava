@@ -1,5 +1,3 @@
-  /**
-   * Returns the converted value.
-   */
+  /** Returns the converted value. */
   T getValue();
 

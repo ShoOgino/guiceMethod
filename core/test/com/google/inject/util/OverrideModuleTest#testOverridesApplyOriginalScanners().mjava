@@ -1,9 +1,18 @@
   public void testOverridesApplyOriginalScanners() {
     Injector injector =
-        Guice.createInjector(Modules.override(NamedMunger.module()).with(new AbstractModule() {
-      @Override protected void configure() {}
-      @TestProvides @Named("test") String provideString() { return "foo"; }
-    }));
+        Guice.createInjector(
+            Modules.override(NamedMunger.module())
+                .with(
+                    new AbstractModule() {
+                      @Override
+                      protected void configure() {}
+
+                      @TestProvides
+                      @Named("test")
+                      String provideString() {
+                        return "foo";
+                      }
+                    }));
 
     assertNull(injector.getExistingBinding(Key.get(String.class, named("test"))));
     Binding<String> binding = injector.getBinding(Key.get(String.class, named("test-munged")));

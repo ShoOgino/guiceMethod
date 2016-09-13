@@ -1,4 +1,5 @@
-    @Override public Key getKey() {
+    @Override
+    public Key getKey() {
       return optionalKey;
     }
 

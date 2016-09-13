@@ -1,4 +1,5 @@
-  @Override protected void newBindingEdge(BindingEdge edge) {
+  @Override
+  protected void newBindingEdge(BindingEdge edge) {
     GraphvizEdge gedge = new GraphvizEdge(edge.getFromId(), edge.getToId());
     gedge.setStyle(EdgeStyle.DASHED);
     switch (edge.getType()) {

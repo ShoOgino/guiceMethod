@@ -1,35 +1,32 @@
   public void testSetBindingOverridesDefault() throws Exception {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder<String> optionalBinder =
-            OptionalBinder.newOptionalBinder(binder(), String.class);
-        optionalBinder.setDefault().toInstance("a");
-        optionalBinder.setBinding().toInstance("b");
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder<String> optionalBinder =
+                OptionalBinder.newOptionalBinder(binder(), String.class);
+            optionalBinder.setDefault().toInstance("a");
+            optionalBinder.setBinding().toInstance("b");
+          }
+        };
     Injector injector = Guice.createInjector(module);
     assertEquals("b", injector.getInstance(String.class));
-    
+
     Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
     assertTrue(optional.isPresent());
     assertEquals("b", optional.get());
-    
+
     Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
     assertTrue(optionalP.isPresent());
     assertEquals("b", optionalP.get().get());
-    
+
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertTrue(optionalJxP.isPresent());
     assertEquals("b", optionalJxP.get().get());
-    
-    assertOptionalVisitor(stringKey,
-        setOf(module),
-        VisitType.BOTH,
-        0,
-        instance("a"),
-        instance("b"),
-        null);
+
+    assertOptionalVisitor(
+        stringKey, setOf(module), VisitType.BOTH, 0, instance("a"), instance("b"), null);
 
     if (HAS_JAVA_OPTIONAL) {
       optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));

@@ -15,7 +15,8 @@
     assertSame(myFavouriteC, a.t);
     assertSame(myFavouriteC, a.b.c);
 
-    assertEquals("MembersInjector<java.lang.String>",
+    assertEquals(
+        "MembersInjector<java.lang.String>",
         injector.getInstance(new Key<MembersInjector<String>>() {}).toString());
   }
 

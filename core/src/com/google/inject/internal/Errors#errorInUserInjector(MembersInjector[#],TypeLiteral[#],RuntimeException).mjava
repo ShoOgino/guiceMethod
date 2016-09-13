@@ -1,6 +1,6 @@
   public Errors errorInUserInjector(
       MembersInjector<?> listener, TypeLiteral<?> type, RuntimeException cause) {
-    return errorInUserCode(cause, "Error injecting %s using %s.%n"
-        + " Reason: %s", type, listener, cause);
+    return errorInUserCode(
+        cause, "Error injecting %s using %s.%n Reason: %s", type, listener, cause);
   }
 

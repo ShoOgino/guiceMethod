@@ -1,5 +1,4 @@
     @SuppressWarnings("unused")
     @ThrowingInject
-    public WrongExceptionFoo() throws InterruptedException {
-    }
+    public WrongExceptionFoo() throws InterruptedException {}
 

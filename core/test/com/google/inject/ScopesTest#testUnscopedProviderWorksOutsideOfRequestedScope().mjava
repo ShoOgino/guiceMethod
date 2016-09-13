@@ -1,12 +1,15 @@
   public void testUnscopedProviderWorksOutsideOfRequestedScope() {
     final RememberProviderScope scope = new RememberProviderScope();
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bindScope(CustomScoped.class, scope);
-        bind(List.class).to(ArrayList.class).in(CustomScoped.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindScope(CustomScoped.class, scope);
+                bind(List.class).to(ArrayList.class).in(CustomScoped.class);
+              }
+            });
 
     injector.getInstance(List.class);
     Provider<?> listProvider = scope.providers.get(Key.get(List.class));

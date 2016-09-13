@@ -1,6 +1,3 @@
-  /**
-   * See the EDSL examples at {@link com.google.inject.Binder}.
-   */
-  LinkedBindingBuilder<T> annotatedWith(
-      Class<? extends Annotation> annotationType);
+  /** See the EDSL examples at {@link com.google.inject.Binder}. */
+  LinkedBindingBuilder<T> annotatedWith(Class<? extends Annotation> annotationType);
 

@@ -2,12 +2,11 @@
     try {
       createInjector().getInstance(FooConstructor.class);
       fail("Injecting null should fail with an error");
-    }
-    catch (ProvisionException expected) {
+    } catch (ProvisionException expected) {
       assertContains(
           expected.getMessage(),
           "null returned by binding at " + getClass().getName(),
-          "the 1st parameter of " + FooConstructor.class.getName() + ".<init>(", 
+          "the 1st parameter of " + FooConstructor.class.getName() + ".<init>(",
           "is not @Nullable");
     }
   }

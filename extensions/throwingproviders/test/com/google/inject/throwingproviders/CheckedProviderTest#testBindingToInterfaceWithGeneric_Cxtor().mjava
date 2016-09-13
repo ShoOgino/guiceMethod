@@ -1,15 +1,17 @@
   public void testBindingToInterfaceWithGeneric_Cxtor() throws Exception {
-    cxtorInjector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        ThrowingProviderBinder.create(binder())
-        .bind(RemoteProvider.class, new TypeLiteral<List<String>>() {})
-        .providing(new TypeLiteral<ThrowingArrayList<String>>() {});
-      }
-    });
+    cxtorInjector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                ThrowingProviderBinder.create(binder())
+                    .bind(RemoteProvider.class, new TypeLiteral<List<String>>() {})
+                    .providing(new TypeLiteral<ThrowingArrayList<String>>() {});
+              }
+            });
 
-    Key<RemoteProvider<List<String>>> key
-        = Key.get(new TypeLiteral<RemoteProvider<List<String>>>() { });
+    Key<RemoteProvider<List<String>>> key =
+        Key.get(new TypeLiteral<RemoteProvider<List<String>>>() {});
     assertEquals(Arrays.asList(), cxtorInjector.getInstance(key).get());
   }
 

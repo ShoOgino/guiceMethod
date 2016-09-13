@@ -1,4 +1,5 @@
-  @Override protected void newDependencyEdge(DependencyEdge edge) {
+  @Override
+  protected void newDependencyEdge(DependencyEdge edge) {
     GraphvizEdge gedge = new GraphvizEdge(edge.getFromId(), edge.getToId());
     InjectionPoint fromPoint = edge.getInjectionPoint();
     if (fromPoint == null) {

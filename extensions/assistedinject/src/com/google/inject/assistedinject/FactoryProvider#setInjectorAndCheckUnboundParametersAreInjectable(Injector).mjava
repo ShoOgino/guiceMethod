@@ -3,12 +3,14 @@
     this.injector = injector;
     for (AssistedConstructor<?> c : factoryMethodToConstructor.values()) {
       for (Parameter p : c.getAllParameters()) {
-        if(!p.isProvidedByFactory() && !paramCanBeInjected(p, injector)) {
+        if (!p.isProvidedByFactory() && !paramCanBeInjected(p, injector)) {
           // this is lame - we're not using the proper mechanism to add an
           // error to the injector. Throughout this class we throw exceptions
           // to add errors, which isn't really the best way in Guice
-          throw newConfigurationException("Parameter of type '%s' is not injectable or annotated "
-                + "with @Assisted for Constructor '%s'", p, c);
+          throw newConfigurationException(
+              "Parameter of type '%s' is not injectable or annotated "
+                  + "with @Assisted for Constructor '%s'",
+              p, c);
         }
       }
     }

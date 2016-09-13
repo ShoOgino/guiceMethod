@@ -1,14 +1,14 @@
     @Override
     public String toString() {
-      switch(type) {
-      case INSTANCE:
-        return "instance[" + instance + "]";
-      case LINKED:
-        return "linkedKey[" + key + "]";
-      case PROVIDER_INSTANCE:
-        return "providerInstance[" + instance + "]";
-      case PROVIDER_KEY:
-        return "providerKey[" + key + "]";
+      switch (type) {
+        case INSTANCE:
+          return "instance[" + instance + "]";
+        case LINKED:
+          return "linkedKey[" + key + "]";
+        case PROVIDER_INSTANCE:
+          return "providerInstance[" + instance + "]";
+        case PROVIDER_KEY:
+          return "providerKey[" + key + "]";
       }
       return null;
     }

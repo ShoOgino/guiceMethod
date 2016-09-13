@@ -1,6 +1,6 @@
   /**
-   * Returns an ordered list of all constructor parameters (both
-   * {@link Assisted} and {@link Inject}ed).
+   * Returns an ordered list of all constructor parameters (both {@link Assisted} and {@link
+   * Inject}ed).
    */
   public List<Parameter> getAllParameters() {
     return allParameters;

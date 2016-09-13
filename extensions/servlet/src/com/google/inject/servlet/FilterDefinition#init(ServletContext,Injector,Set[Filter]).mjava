@@ -1,10 +1,13 @@
-  public void init(final ServletContext servletContext, Injector injector,
-      Set<Filter> initializedSoFar) throws ServletException {
+  public void init(
+      final ServletContext servletContext, Injector injector, Set<Filter> initializedSoFar)
+      throws ServletException {
 
     // This absolutely must be a singleton, and so is only initialized once.
     if (!Scopes.isSingleton(injector.getBinding(filterKey))) {
-      throw new ServletException("Filters must be bound as singletons. "
-        + filterKey + " was not bound in singleton scope.");
+      throw new ServletException(
+          "Filters must be bound as singletons. "
+              + filterKey
+              + " was not bound in singleton scope.");
     }
 
     Filter filter = injector.getInstance(filterKey);

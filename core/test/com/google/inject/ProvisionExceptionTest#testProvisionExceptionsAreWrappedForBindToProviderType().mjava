@@ -1,15 +1,22 @@
   public void testProvisionExceptionsAreWrappedForBindToProviderType() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          bind(F.class).toProvider(FProvider.class);
-        }
-      }).getInstance(F.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {
+                  bind(F.class).toProvider(FProvider.class);
+                }
+              })
+          .getInstance(F.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(), "1) User Exception",
-          "while locating ", FProvider.class.getName(),
-          "while locating ", F.class.getName());
+      assertContains(
+          e.getMessage(),
+          "1) User Exception",
+          "while locating ",
+          FProvider.class.getName(),
+          "while locating ",
+          F.class.getName());
     }
   }
 

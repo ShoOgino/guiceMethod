@@ -1,4 +1,5 @@
-    @CheckedProvides(RpcProvider.class) @TestScope.Scoped
+    @CheckedProvides(RpcProvider.class)
+    @TestScope.Scoped
     int getSomeIntegerFromServer() {
       return nextIntToReturn;
     }

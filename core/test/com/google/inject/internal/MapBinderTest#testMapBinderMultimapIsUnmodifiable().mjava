@@ -1,23 +1,26 @@
   public void testMapBinderMultimapIsUnmodifiable() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> mapBinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class);
-        mapBinder.addBinding("a").toInstance("A");
-        mapBinder.permitDuplicates();
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                MapBinder<String, String> mapBinder =
+                    MapBinder.newMapBinder(binder(), String.class, String.class);
+                mapBinder.addBinding("a").toInstance("A");
+                mapBinder.permitDuplicates();
+              }
+            });
 
     Map<String, Set<String>> map = injector.getInstance(Key.get(mapOfSetOfString));
     try {
       map.clear();
       fail();
-    } catch(UnsupportedOperationException expected) {
+    } catch (UnsupportedOperationException expected) {
     }
     try {
       map.get("a").clear();
       fail();
-    } catch(UnsupportedOperationException expected) {
+    } catch (UnsupportedOperationException expected) {
     }
   }
 

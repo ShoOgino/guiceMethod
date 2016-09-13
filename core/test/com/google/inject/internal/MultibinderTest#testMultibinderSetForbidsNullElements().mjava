@@ -1,19 +1,24 @@
   public void testMultibinderSetForbidsNullElements() {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder.newSetBinder(binder(), String.class)
-            .addBinding().toProvider(Providers.<String>of(null));
-      }
-    };
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder.newSetBinder(binder(), String.class)
+                .addBinding()
+                .toProvider(Providers.<String>of(null));
+          }
+        };
     Injector injector = Guice.createInjector(m);
 
     try {
       injector.getInstance(Key.get(setOfString));
       fail();
-    } catch(ProvisionException expected) {
-      assertContains(expected.getMessage(),
+    } catch (ProvisionException expected) {
+      assertContains(
+          expected.getMessage(),
           "1) Set injection failed due to null element bound at: "
-          + m.getClass().getName() + ".configure(");
+              + m.getClass().getName()
+              + ".configure(");
     }
   }
 

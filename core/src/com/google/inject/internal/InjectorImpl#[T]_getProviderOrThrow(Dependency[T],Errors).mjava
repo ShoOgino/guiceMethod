@@ -1,4 +1,5 @@
-  <T> Provider<T> getProviderOrThrow(final Dependency<T> dependency, Errors errors) throws ErrorsException {
+  <T> Provider<T> getProviderOrThrow(final Dependency<T> dependency, Errors errors)
+      throws ErrorsException {
     Key<T> key = dependency.getKey();
     BindingImpl<? extends T> binding = getBindingOrThrow(key, errors, JitLimitation.NO_JIT);
     final InternalFactory<? extends T> internalFactory = binding.getInternalFactory();

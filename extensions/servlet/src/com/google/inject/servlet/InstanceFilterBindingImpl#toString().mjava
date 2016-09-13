@@ -1,9 +1,10 @@
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return MoreObjects.toStringHelper(InstanceFilterBinding.class)
-      .add("pattern", getPattern())
-      .add("initParams", getInitParams())
-      .add("uriPatternType", getUriPatternType())
-      .add("filterInstance", getFilterInstance())
-      .toString();
+        .add("pattern", getPattern())
+        .add("initParams", getInitParams())
+        .add("uriPatternType", getUriPatternType())
+        .add("filterInstance", getFilterInstance())
+        .toString();
   }
 

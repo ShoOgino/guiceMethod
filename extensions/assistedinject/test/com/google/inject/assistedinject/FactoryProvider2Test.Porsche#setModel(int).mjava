@@ -1,4 +1,5 @@
-    @Inject void setModel(int model) {
+    @Inject
+    void setModel(int model) {
       this.model = model;
     }
 

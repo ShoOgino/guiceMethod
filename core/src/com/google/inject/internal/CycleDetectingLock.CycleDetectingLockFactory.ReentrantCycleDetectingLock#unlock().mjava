@@ -1,10 +1,12 @@
-      @Override public void unlock() {
+      @Override
+      public void unlock() {
         final long currentThreadId = Thread.currentThread().getId();
         synchronized (CycleDetectingLockFactory.class) {
           checkState();
-          Preconditions.checkState(lockOwnerThreadId != null,
-              "Thread is trying to unlock a lock that is not locked");
-          Preconditions.checkState(lockOwnerThreadId == currentThreadId,
+          Preconditions.checkState(
+              lockOwnerThreadId != null, "Thread is trying to unlock a lock that is not locked");
+          Preconditions.checkState(
+              lockOwnerThreadId == currentThreadId,
               "Thread is trying to unlock a lock owned by another thread");
 
           // releasing underlying lock
@@ -15,7 +17,8 @@
           if (lockReentranceCount == 0) {
             // we no longer own this lock
             lockOwnerThreadId = null;
-            Preconditions.checkState(locksOwnedByThread.remove(currentThreadId, this),
+            Preconditions.checkState(
+                locksOwnedByThread.remove(currentThreadId, this),
                 "Internal error: Can not find this lock in locks owned by a current thread");
             if (locksOwnedByThread.get(currentThreadId).isEmpty()) {
               // clearing memory

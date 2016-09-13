@@ -1,10 +1,10 @@
-  /**
-   * Run with no arguments for usage instructions.
-   */
+  /** Run with no arguments for usage instructions. */
   public static void main(String[] args) throws Exception {
     if (args.length != 1) {
-      System.err.println("Usage: java -Dcom.sun.management.jmxremote "
-          + Manager.class.getName() + " [module class name]");
+      System.err.println(
+          "Usage: java -Dcom.sun.management.jmxremote "
+              + Manager.class.getName()
+              + " [module class name]");
       System.err.println("Then run 'jconsole' to connect.");
       System.exit(1);
     }

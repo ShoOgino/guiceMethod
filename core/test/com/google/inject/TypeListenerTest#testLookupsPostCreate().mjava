@@ -18,7 +18,7 @@
                     });
               }
             });
-    
+
     injector.getInstance(C.class);
   }
 

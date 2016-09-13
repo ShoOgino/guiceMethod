@@ -1,2 +1,3 @@
-     @Inject JImpl(IImpl i) {}
+    @Inject
+    JImpl(IImpl i) {}
 

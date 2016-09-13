@@ -1,4 +1,5 @@
-    @Override public void setPath(String uri) {
+    @Override
+    public void setPath(String uri) {
       throw new UnsupportedOperationException("Cannot modify cookies on a continued request");
     }
 

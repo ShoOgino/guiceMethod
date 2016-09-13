@@ -1,2 +1,3 @@
-    @Inject void register(@Named("dog") String a) {}
+    @Inject
+    void register(@Named("dog") String a) {}
 

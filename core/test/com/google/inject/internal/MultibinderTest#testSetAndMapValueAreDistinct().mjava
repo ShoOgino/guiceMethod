@@ -1,19 +1,24 @@
   // See issue 670
   public void testSetAndMapValueAreDistinct() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder.newSetBinder(binder(), String.class)
-            .addBinding().toInstance("A");
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder.newSetBinder(binder(), String.class).addBinding().toInstance("A");
 
-        MapBinder.newMapBinder(binder(), String.class, String.class)
-            .addBinding("B").toInstance("b");
+                MapBinder.newMapBinder(binder(), String.class, String.class)
+                    .addBinding("B")
+                    .toInstance("b");
 
-        OptionalBinder.newOptionalBinder(binder(), String.class)
-            .setDefault().toInstance("C");
-        OptionalBinder.newOptionalBinder(binder(), String.class)
-            .setBinding().toInstance("D");
-      }
-    });
+                OptionalBinder.newOptionalBinder(binder(), String.class)
+                    .setDefault()
+                    .toInstance("C");
+                OptionalBinder.newOptionalBinder(binder(), String.class)
+                    .setBinding()
+                    .toInstance("D");
+              }
+            });
 
     assertEquals(ImmutableSet.of("A"), injector.getInstance(Key.get(setOfString)));
     assertEquals(ImmutableMap.of("B", "b"), injector.getInstance(Key.get(mapOfStringString)));

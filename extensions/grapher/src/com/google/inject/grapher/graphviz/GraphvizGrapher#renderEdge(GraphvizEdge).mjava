@@ -1,12 +1,18 @@
   protected void renderEdge(GraphvizEdge edge) {
     Map<String, String> attrs = getEdgeAttributes(edge);
-    
-    String tailId = getEdgeEndPoint(nodes.get(edge.getTailNodeId()).getIdentifier(),
-        edge.getTailPortId(), edge.getTailCompassPoint());
 
-    String headId = getEdgeEndPoint(nodes.get(edge.getHeadNodeId()).getIdentifier(),
-        edge.getHeadPortId(), edge.getHeadCompassPoint());
-    
+    String tailId =
+        getEdgeEndPoint(
+            nodes.get(edge.getTailNodeId()).getIdentifier(),
+            edge.getTailPortId(),
+            edge.getTailCompassPoint());
+
+    String headId =
+        getEdgeEndPoint(
+            nodes.get(edge.getHeadNodeId()).getIdentifier(),
+            edge.getHeadPortId(),
+            edge.getHeadCompassPoint());
+
     out.println(tailId + " -> " + headId + " " + getAttrString(attrs));
   }
 

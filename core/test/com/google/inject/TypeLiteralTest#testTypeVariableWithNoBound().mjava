@@ -1,6 +1,6 @@
   public void testTypeVariableWithNoBound() {
-    TypeVariable<Class<HasTypeParameters>>[] typeVariables
-        = HasTypeParameters.class.getTypeParameters();
+    TypeVariable<Class<HasTypeParameters>>[] typeVariables =
+        HasTypeParameters.class.getTypeParameters();
 
     TypeLiteral<?> aTl = TypeLiteral.get(typeVariables[0]);
     assertEquals(Object.class, aTl.getRawType());

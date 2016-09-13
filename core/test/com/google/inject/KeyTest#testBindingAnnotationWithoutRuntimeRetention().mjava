@@ -3,7 +3,9 @@
       Key.get(String.class, Bar.class);
       fail();
     } catch (IllegalArgumentException expected) {
-      assertContains(expected.getMessage(), Bar.class.getName() + " is not retained at runtime.",
+      assertContains(
+          expected.getMessage(),
+          Bar.class.getName() + " is not retained at runtime.",
           "Please annotate it with @Retention(RUNTIME).");
     }
   }

@@ -1,5 +1,5 @@
-  public Errors subtypeNotProvided(Class<? extends javax.inject.Provider<?>> providerType,
-      Class<?> type) {
+  public Errors subtypeNotProvided(
+      Class<? extends javax.inject.Provider<?>> providerType, Class<?> type) {
     return addMessage("%s doesn't provide instances of %s.", providerType, type);
   }
 

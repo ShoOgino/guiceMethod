@@ -20,7 +20,8 @@
       injector.getInstance(A.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error injecting " + A.class.getName() + " using awkward.",
           "Reason: java.lang.ClassCastException: whoops, failure #1");
     }
@@ -30,7 +31,8 @@
       injector.getInstance(A.class);
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error injecting " + A.class.getName() + " using awkward.",
           "Reason: java.lang.ClassCastException: whoops, failure #2");
     }
@@ -41,7 +43,8 @@
       bProvider.get();
       fail();
     } catch (ProvisionException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "1) Error injecting " + B.class.getName() + " using awkward.",
           "Reason: java.lang.ClassCastException: whoops, failure #3");
     }

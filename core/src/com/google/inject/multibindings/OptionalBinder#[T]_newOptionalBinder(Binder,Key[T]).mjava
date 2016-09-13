@@ -1,4 +1,5 @@
   public static <T> OptionalBinder<T> newOptionalBinder(Binder binder, Key<T> type) {
-    return new OptionalBinder<T>(newRealOptionalBinder(binder.skipSources(OptionalBinder.class), type));
+    return new OptionalBinder<T>(
+        newRealOptionalBinder(binder.skipSources(OptionalBinder.class), type));
   }
 

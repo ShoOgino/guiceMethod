@@ -1,6 +1,4 @@
-  /**
-   * Records the elements executed by {@code modules}.
-   */
+  /** Records the elements executed by {@code modules}. */
   public static List<Element> getElements(Stage stage, Module... modules) {
     return getElements(stage, Arrays.asList(modules));
   }

@@ -6,24 +6,27 @@
       // If the sole element was a PrivateElements, we want to override
       // the private elements within that -- so refocus our elements
       // and binder.
-      if(baseElements.size() == 1) {
+      if (baseElements.size() == 1) {
         Element element = Iterables.getOnlyElement(baseElements);
-        if(element instanceof PrivateElements) {
-          PrivateElements privateElements = (PrivateElements)element;
-          PrivateBinder privateBinder = baseBinder.newPrivateBinder().withSource(privateElements.getSource());
-          for(Key exposed : privateElements.getExposedKeys()) {
+        if (element instanceof PrivateElements) {
+          PrivateElements privateElements = (PrivateElements) element;
+          PrivateBinder privateBinder =
+              baseBinder.newPrivateBinder().withSource(privateElements.getSource());
+          for (Key exposed : privateElements.getExposedKeys()) {
             privateBinder.withSource(privateElements.getExposedSource(exposed)).expose(exposed);
           }
           baseBinder = privateBinder;
           baseElements = privateElements.getElements();
         }
       }
-      
+
       final Binder binder = baseBinder.skipSources(this.getClass());
       final LinkedHashSet<Element> elements = new LinkedHashSet<Element>(baseElements);
       final Module scannersModule = extractScanners(elements);
-      final List<Element> overrideElements = Elements.getElements(currentStage(),
-          ImmutableList.<Module>builder().addAll(overrides).add(scannersModule).build());
+      final List<Element> overrideElements =
+          Elements.getElements(
+              currentStage(),
+              ImmutableList.<Module>builder().addAll(overrides).add(scannersModule).build());
 
       final Set<Key<?>> overriddenKeys = Sets.newHashSet();
       final Map<Class<? extends Annotation>, ScopeBinding> overridesScopeAnnotations =
@@ -31,17 +34,20 @@
 
       // execute the overrides module, keeping track of which keys and scopes are bound
       new ModuleWriter(binder) {
-        @Override public <T> Void visit(Binding<T> binding) {
+        @Override
+        public <T> Void visit(Binding<T> binding) {
           overriddenKeys.add(binding.getKey());
           return super.visit(binding);
         }
 
-        @Override public Void visit(ScopeBinding scopeBinding) {
+        @Override
+        public Void visit(ScopeBinding scopeBinding) {
           overridesScopeAnnotations.put(scopeBinding.getAnnotationType(), scopeBinding);
           return super.visit(scopeBinding);
         }
 
-        @Override public Void visit(PrivateElements privateElements) {
+        @Override
+        public Void visit(PrivateElements privateElements) {
           overriddenKeys.addAll(privateElements.getExposedKeys());
           return super.visit(privateElements);
         }
@@ -53,7 +59,8 @@
       final Map<Scope, List<Object>> scopeInstancesInUse = Maps.newHashMap();
       final List<ScopeBinding> scopeBindings = Lists.newArrayList();
       new ModuleWriter(binder) {
-        @Override public <T> Void visit(Binding<T> binding) {
+        @Override
+        public <T> Void visit(Binding<T> binding) {
           if (!overriddenKeys.remove(binding.getKey())) {
             super.visit(binding);
 
@@ -73,8 +80,8 @@
         }
 
         void rewrite(Binder binder, PrivateElements privateElements, Set<Key<?>> keysToSkip) {
-          PrivateBinder privateBinder = binder.withSource(privateElements.getSource())
-              .newPrivateBinder();
+          PrivateBinder privateBinder =
+              binder.withSource(privateElements.getSource()).newPrivateBinder();
 
           Set<Key<?>> skippedExposes = Sets.newHashSet();
 
@@ -87,8 +94,7 @@
           }
 
           for (Element element : privateElements.getElements()) {
-            if (element instanceof Binding
-                && skippedExposes.remove(((Binding) element).getKey())) {
+            if (element instanceof Binding && skippedExposes.remove(((Binding) element).getKey())) {
               continue;
             }
             if (element instanceof PrivateElements) {
@@ -99,12 +105,14 @@
           }
         }
 
-        @Override public Void visit(PrivateElements privateElements) {
+        @Override
+        public Void visit(PrivateElements privateElements) {
           rewrite(binder, privateElements, overriddenKeys);
           return null;
         }
 
-        @Override public Void visit(ScopeBinding scopeBinding) {
+        @Override
+        public Void visit(ScopeBinding scopeBinding) {
           scopeBindings.add(scopeBinding);
           return null;
         }
@@ -113,7 +121,8 @@
       // execute the scope bindings, skipping scopes that have been overridden. Any scope that
       // is overridden and in active use will prompt an error
       new ModuleWriter(binder) {
-        @Override public Void visit(ScopeBinding scopeBinding) {
+        @Override
+        public Void visit(ScopeBinding scopeBinding) {
           ScopeBinding overideBinding =
               overridesScopeAnnotations.remove(scopeBinding.getAnnotationType());
           if (overideBinding == null) {
@@ -121,13 +130,15 @@
           } else {
             List<Object> usedSources = scopeInstancesInUse.get(scopeBinding.getScope());
             if (usedSources != null) {
-              StringBuilder sb = new StringBuilder(
-                  "The scope for @%s is bound directly and cannot be overridden.");
+              StringBuilder sb =
+                  new StringBuilder(
+                      "The scope for @%s is bound directly and cannot be overridden.");
               sb.append("%n     original binding at " + Errors.convert(scopeBinding.getSource()));
               for (Object usedSource : usedSources) {
                 sb.append("%n     bound directly at " + Errors.convert(usedSource) + "");
               }
-              binder.withSource(overideBinding.getSource())
+              binder
+                  .withSource(overideBinding.getSource())
                   .addError(sb.toString(), scopeBinding.getAnnotationType().getSimpleName());
             }
           }

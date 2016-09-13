@@ -1,10 +1,10 @@
   /** Safely gets the dependencies of possibly not initialized bindings. */
   @SuppressWarnings("unchecked")
   private Set<Dependency<?>> getInternalDependencies(BindingImpl<?> binding) {
-    if(binding instanceof ConstructorBindingImpl) {
-      return ((ConstructorBindingImpl)binding).getInternalDependencies();
-    } else if(binding instanceof HasDependencies) {
-      return ((HasDependencies)binding).getDependencies();
+    if (binding instanceof ConstructorBindingImpl) {
+      return ((ConstructorBindingImpl) binding).getInternalDependencies();
+    } else if (binding instanceof HasDependencies) {
+      return ((HasDependencies) binding).getDependencies();
     } else {
       return ImmutableSet.of();
     }

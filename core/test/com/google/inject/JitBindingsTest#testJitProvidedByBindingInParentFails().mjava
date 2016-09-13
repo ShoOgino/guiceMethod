@@ -1,17 +1,19 @@
   public void testJitProvidedByBindingInParentFails() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          install(new PrivateModule() {
+      Guice.createInjector(
+          new AbstractModule() {
             @Override
             protected void configure() {
-              binder().requireExplicitBindings();
-              bind(ProvBy.class);
+              install(
+                  new PrivateModule() {
+                    @Override
+                    protected void configure() {
+                      binder().requireExplicitBindings();
+                      bind(ProvBy.class);
+                    }
+                  });
             }
           });
-        }
-      });
       fail("should have failed");
     } catch (CreationException expected) {
       assertContains(expected.getMessage(), jitInParentFailed(ProvByProvider.class));

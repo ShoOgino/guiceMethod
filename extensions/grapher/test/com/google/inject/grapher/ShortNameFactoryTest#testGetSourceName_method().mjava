@@ -1,10 +1,13 @@
   /**
-   * Tests the case where a provider method is the source of the 
+   * Tests the case where a provider method is the source of the
+   *
    * @throws Exception
    */
   public void testGetSourceName_method() throws Exception {
     Member method = Obj.class.getDeclaredMethod("method", String.class);
-    assertEquals("Method should be identified by its file name and line number",
-        "ShortNameFactoryTest.java:53", nameFactory.getSourceName(method));
+    assertEquals(
+        "Method should be identified by its file name and line number",
+        "ShortNameFactoryTest.java:52",
+        nameFactory.getSourceName(method));
   }
 

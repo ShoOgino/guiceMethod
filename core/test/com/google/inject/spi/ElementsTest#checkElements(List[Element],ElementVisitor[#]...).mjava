@@ -3,13 +3,13 @@
       ElementVisitor<?> visitor = visitors[i];
       Element element = elements.get(i);
       if (!(element instanceof Message)) {
-          ElementSource source = (ElementSource) element.getSource();
-          assertFalse(source.getModuleClassNames().isEmpty());
-          if (isIncludeStackTraceComplete()) {
-            assertTrue(source.getStackTrace().length > 0);
-          } else {
-            assertEquals(0, source.getStackTrace().length);
-          }
+        ElementSource source = (ElementSource) element.getSource();
+        assertFalse(source.getModuleClassNames().isEmpty());
+        if (isIncludeStackTraceComplete()) {
+          assertTrue(source.getStackTrace().length > 0);
+        } else {
+          assertEquals(0, source.getStackTrace().length);
+        }
       }
       if (!(visitor instanceof ExternalFailureVisitor)) {
         assertContains(element.getSource().toString(), getDeclaringSourcePart(ElementsTest.class));

@@ -1,4 +1,5 @@
-    @Inject void guiceInjected() {
+    @Inject
+    void guiceInjected() {
       guiceInjected++;
     }
 

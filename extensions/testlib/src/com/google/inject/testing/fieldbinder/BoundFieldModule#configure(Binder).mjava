@@ -7,8 +7,7 @@
     while (currentClassType.getRawType() != Object.class) {
       for (Field field : currentClassType.getRawType().getDeclaredFields()) {
         try {
-          Optional<BoundFieldInfo> fieldInfoOpt =
-              getBoundFieldInfo(currentClassType, field);
+          Optional<BoundFieldInfo> fieldInfoOpt = getBoundFieldInfo(currentClassType, field);
           if (fieldInfoOpt.isPresent()) {
             bindField(fieldInfoOpt.get());
           }

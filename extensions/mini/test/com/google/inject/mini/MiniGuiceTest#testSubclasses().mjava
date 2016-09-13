@@ -1,9 +1,13 @@
   public void testSubclasses() {
-    Q q = MiniGuice.inject(Q.class, new Object() {
-      @Provides F provideF() {
-        return new F();
-      }
-    });
+    Q q =
+        MiniGuice.inject(
+            Q.class,
+            new Object() {
+              @Provides
+              F provideF() {
+                return new F();
+              }
+            });
 
     assertNotNull(q.f);
   }

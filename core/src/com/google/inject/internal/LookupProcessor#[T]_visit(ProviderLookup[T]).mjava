@@ -1,4 +1,5 @@
-  @Override public <T> Boolean visit(ProviderLookup<T> lookup) {
+  @Override
+  public <T> Boolean visit(ProviderLookup<T> lookup) {
     // ensure the provider can be created
     try {
       Provider<T> provider = injector.getProviderOrThrow(lookup.getDependency(), errors);

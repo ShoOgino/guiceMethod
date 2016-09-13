@@ -8,8 +8,12 @@
     for (Method method : iface.getMethods()) {
       DynamicFinder finder = DynamicFinder.from(method);
       if (null == finder) {
-        addError("Dynamic Finder methods must be annotated with @Finder, but " + iface
-            + "." + method.getName() + " was not");
+        addError(
+            "Dynamic Finder methods must be annotated with @Finder, but "
+                + iface
+                + "."
+                + method.getName()
+                + " was not");
         valid = false;
       }
     }

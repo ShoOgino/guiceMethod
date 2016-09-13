@@ -1,39 +1,33 @@
   /**
-   * Wraps the given callable in a contextual callable that "continues" the
-   * HTTP request in another thread. This acts as a way of transporting
-   * request context data from the request processing thread to to worker
-   * threads.
-   * <p>
-   * There are some limitations:
+   * Wraps the given callable in a contextual callable that "continues" the HTTP request in another
+   * thread. This acts as a way of transporting request context data from the request processing
+   * thread to to worker threads.
+   *
+   * <p>There are some limitations:
+   *
    * <ul>
-   *   <li>Derived objects (i.e. anything marked @RequestScoped will not be
-   *      transported.</li>
-   *   <li>State changes to the HttpServletRequest after this method is called
-   *      will not be seen in the continued thread.</li>
-   *   <li>Only the HttpServletRequest, ServletContext and request parameter
-   *      map are available in the continued thread. The response and session
-   *      are not available.</li>
+   * <li>Derived objects (i.e. anything marked @RequestScoped will not be transported.
+   * <li>State changes to the HttpServletRequest after this method is called will not be seen in the
+   *     continued thread.
+   * <li>Only the HttpServletRequest, ServletContext and request parameter map are available in the
+   *     continued thread. The response and session are not available.
    * </ul>
    *
-   * <p>The returned callable will throw a {@link ScopingException} when called
-   * if the HTTP request scope is still active on the current thread.
+   * <p>The returned callable will throw a {@link ScopingException} when called if the HTTP request
+   * scope is still active on the current thread.
    *
-   * @param callable code to be executed in another thread, which depends on
-   *     the request scope.
-   * @param seedMap the initial set of scoped instances for Guice to seed the
-   *     request scope with.  To seed a key with null, use {@code null} as
-   *     the value.
-   * @return a callable that will invoke the given callable, making the request
-   *     context available to it.
-   * @throws OutOfScopeException if this method is called from a non-request
-   *     thread, or if the request has completed.
-   * 
+   * @param callable code to be executed in another thread, which depends on the request scope.
+   * @param seedMap the initial set of scoped instances for Guice to seed the request scope with. To
+   *     seed a key with null, use {@code null} as the value.
+   * @return a callable that will invoke the given callable, making the request context available to
+   *     it.
+   * @throws OutOfScopeException if this method is called from a non-request thread, or if the
+   *     request has completed.
    * @since 3.0
    * @deprecated You probably want to use {@code transferRequest} instead
    */
   @Deprecated
-  public static <T> Callable<T> continueRequest(Callable<T> callable,
-      Map<Key<?>, Object> seedMap) {
+  public static <T> Callable<T> continueRequest(Callable<T> callable, Map<Key<?>, Object> seedMap) {
     return wrap(callable, continueRequest(seedMap));
   }
 

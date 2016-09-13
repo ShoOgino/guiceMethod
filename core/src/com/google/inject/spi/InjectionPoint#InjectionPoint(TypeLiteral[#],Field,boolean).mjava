@@ -16,7 +16,8 @@
     }
     errors.throwConfigurationExceptionIfErrorsExist();
 
-    this.dependencies = ImmutableList.<Dependency<?>>of(
-        newDependency(key, Nullability.allowsNull(annotations), -1));
+    this.dependencies =
+        ImmutableList.<Dependency<?>>of(
+            newDependency(key, Nullability.allowsNull(annotations), -1));
   }
 

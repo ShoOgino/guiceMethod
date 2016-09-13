@@ -1,12 +1,16 @@
   public void testExplicitlyBoundRawProviderCanBeBound() {
     final Integer testValue = 1024;
-    Object instance = new Object() {
-      @Bind(to = Integer.class) private Provider anIntProvider = new Provider() {
-        @Override public Object get() {
-          return testValue;
-        }
-      };
-    };
+    Object instance =
+        new Object() {
+          @Bind(to = Integer.class)
+          private Provider anIntProvider =
+              new Provider() {
+                @Override
+                public Object get() {
+                  return testValue;
+                }
+              };
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

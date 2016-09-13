@@ -1,6 +1,6 @@
   /** Asserts that each injection point has the specified dependencies, in the given order. */
-  private void assertPointDependencies(Iterable<InjectionPoint> points,
-      TypeLiteral<?>... literals) {
+  private void assertPointDependencies(
+      Iterable<InjectionPoint> points, TypeLiteral<?>... literals) {
     for (InjectionPoint point : points) {
       assertEquals(literals.length, point.getDependencies().size());
       for (Dependency<?> dep : point.getDependencies()) {

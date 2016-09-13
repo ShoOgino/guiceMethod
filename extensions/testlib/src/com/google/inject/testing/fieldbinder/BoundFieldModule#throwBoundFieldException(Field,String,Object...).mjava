@@ -1,9 +1,7 @@
   private void throwBoundFieldException(Field field, String format, Object... args) {
     Preconditions.checkNotNull(binder);
-    String source = String.format(
-        "%s field %s",
-        field.getDeclaringClass().getName(),
-        field.getName());
+    String source =
+        String.format("%s field %s", field.getDeclaringClass().getName(), field.getName());
     throw new BoundFieldException(new Message(source, String.format(format, args)));
   }
 

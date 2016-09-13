@@ -1,5 +1,3 @@
-  /**
-   * Visits an {@link AssistedInjectBinding} created through {@link FactoryModuleBuilder}.
-   */
+  /** Visits an {@link AssistedInjectBinding} created through {@link FactoryModuleBuilder}. */
   V visit(AssistedInjectBinding<? extends T> assistedInjectBinding);
 

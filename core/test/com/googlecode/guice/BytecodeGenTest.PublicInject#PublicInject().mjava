@@ -1,2 +1,3 @@
-    @Inject public PublicInject() {}
+    @Inject
+    public PublicInject() {}
 

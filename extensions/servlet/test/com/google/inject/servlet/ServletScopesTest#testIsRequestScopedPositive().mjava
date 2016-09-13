@@ -7,30 +7,32 @@
     final Key<String> f = Key.get(String.class, named("F"));
     final Key<String> g = Key.get(String.class, named("G"));
 
-    Module requestScopedBindings = new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(a).to(b);
-        bind(b).to(c);
-        bind(c).toProvider(Providers.of("c")).in(ServletScopes.REQUEST);
-        bind(d).toProvider(Providers.of("d")).in(RequestScoped.class);
-        bind(e).to(AnnotatedRequestScopedClass.class);
-        install(new PrivateModule() {
+    Module requestScopedBindings =
+        new AbstractModule() {
           @Override
           protected void configure() {
-            bind(f).toProvider(Providers.of("f")).in(RequestScoped.class);
-            expose(f);
+            bind(a).to(b);
+            bind(b).to(c);
+            bind(c).toProvider(Providers.of("c")).in(ServletScopes.REQUEST);
+            bind(d).toProvider(Providers.of("d")).in(RequestScoped.class);
+            bind(e).to(AnnotatedRequestScopedClass.class);
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    bind(f).toProvider(Providers.of("f")).in(RequestScoped.class);
+                    expose(f);
+                  }
+                });
           }
-        });
-      }
 
-      @Provides
-      @Named("G")
-      @RequestScoped
-      String provideG() {
-        return "g";
-      }
-    };
+          @Provides
+          @Named("G")
+          @RequestScoped
+          String provideG() {
+            return "g";
+          }
+        };
 
     @SuppressWarnings("unchecked") // we know the module contains only bindings
     List<Element> moduleBindings = Elements.getElements(requestScopedBindings);

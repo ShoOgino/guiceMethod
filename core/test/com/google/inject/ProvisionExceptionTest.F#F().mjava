@@ -1,4 +1,5 @@
-    @Inject public F() {
+    @Inject
+    public F() {
       throw new ProvisionException("User Exception", new RuntimeException());
     }
 

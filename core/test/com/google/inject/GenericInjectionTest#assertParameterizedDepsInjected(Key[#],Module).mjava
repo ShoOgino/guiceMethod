@@ -22,8 +22,8 @@
         };
 
     Injector injector = Guice.createInjector(bindDataModule, bindingModule);
-    ParameterizedDeps<String, Integer> parameterizedDeps
-        = (ParameterizedDeps<String, Integer>) injector.getInstance(key);
+    ParameterizedDeps<String, Integer> parameterizedDeps =
+        (ParameterizedDeps<String, Integer>) injector.getInstance(key);
     assertEquals(ImmutableMap.of("one", 1, "two", 2), parameterizedDeps.map);
     assertEquals(ImmutableSet.of("one", "two"), parameterizedDeps.keys);
     assertEquals(ImmutableSet.of(1, 2), ImmutableSet.copyOf(parameterizedDeps.values));

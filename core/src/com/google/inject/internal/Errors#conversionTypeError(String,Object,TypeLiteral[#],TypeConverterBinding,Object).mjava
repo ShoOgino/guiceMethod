@@ -1,8 +1,13 @@
-  public Errors conversionTypeError(String stringValue, Object source, TypeLiteral<?> type,
-      TypeConverterBinding typeConverterBinding, Object converted) {
-    return addMessage("Type mismatch converting '%s' (bound at %s) to %s%n"
-        + " using %s.%n"
-        + " Converter returned %s.",
+  public Errors conversionTypeError(
+      String stringValue,
+      Object source,
+      TypeLiteral<?> type,
+      TypeConverterBinding typeConverterBinding,
+      Object converted) {
+    return addMessage(
+        "Type mismatch converting '%s' (bound at %s) to %s%n"
+            + " using %s.%n"
+            + " Converter returned %s.",
         stringValue, convert(source), type, typeConverterBinding, converted);
   }
 

@@ -1,2 +1,3 @@
-    @Inject void doublyAnnotated(@Named("a") @Another String s) {}
+    @Inject
+    void doublyAnnotated(@Named("a") @Another String s) {}
 

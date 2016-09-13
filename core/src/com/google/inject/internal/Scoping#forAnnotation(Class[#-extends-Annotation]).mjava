@@ -1,23 +1,26 @@
   public static Scoping forAnnotation(final Class<? extends Annotation> scopingAnnotation) {
-    if (scopingAnnotation == Singleton.class
-        || scopingAnnotation == javax.inject.Singleton.class) {
+    if (scopingAnnotation == Singleton.class || scopingAnnotation == javax.inject.Singleton.class) {
       return SINGLETON_ANNOTATION;
     }
 
     return new Scoping() {
-      @Override public <V> V acceptVisitor(BindingScopingVisitor<V> visitor) {
+      @Override
+      public <V> V acceptVisitor(BindingScopingVisitor<V> visitor) {
         return visitor.visitScopeAnnotation(scopingAnnotation);
       }
 
-      @Override public Class<? extends Annotation> getScopeAnnotation() {
+      @Override
+      public Class<? extends Annotation> getScopeAnnotation() {
         return scopingAnnotation;
       }
 
-      @Override public String toString() {
+      @Override
+      public String toString() {
         return scopingAnnotation.getName();
       }
 
-      @Override public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
+      @Override
+      public void applyTo(ScopedBindingBuilder scopedBindingBuilder) {
         scopedBindingBuilder.in(scopingAnnotation);
       }
     };

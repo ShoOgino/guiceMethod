@@ -1,6 +1,4 @@
   Key<?> getPrimaryBindingKey() {
-    return isProvider
-        ? getBindingForType(getProvidedType(type))
-        : getBindingForType(type);
+    return isProvider ? getBindingForType(getProvidedType(type)) : getBindingForType(type);
   }
 

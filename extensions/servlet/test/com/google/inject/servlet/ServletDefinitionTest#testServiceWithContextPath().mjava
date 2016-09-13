@@ -1,10 +1,11 @@
-  public void testServiceWithContextPath() throws IOException, ServletException   {
+  public void testServiceWithContextPath() throws IOException, ServletException {
     String pattern = "/*";
     //some init params
-    Map<String, String> initParams = new ImmutableMap.Builder<String, String>()
-        .put("ahsd", "asdas24dok")
-        .put("ahssd", "asdasd124ok")
-        .build();
+    Map<String, String> initParams =
+        new ImmutableMap.Builder<String, String>()
+            .put("ahsd", "asdas24dok")
+            .put("ahssd", "asdasd124ok")
+            .build();
 
     final ServletDefinition servletDefinition =
         new ServletDefinition(

@@ -1,6 +1,6 @@
   /**
-   * Returns the unique binding annotation from the specified list, or
-   * {@code null} if there are none.
+   * Returns the unique binding annotation from the specified list, or {@code null} if there are
+   * none.
    *
    * @throws IllegalStateException if multiple binding annotations exist.
    */
@@ -8,8 +8,11 @@
     Annotation bindingAnnotation = null;
     for (Annotation annotation : annotations) {
       if (Annotations.isBindingAnnotation(annotation.annotationType())) {
-        checkArgument(bindingAnnotation == null,
-            "Parameter has multiple binding annotations: %s and %s", bindingAnnotation, annotation);
+        checkArgument(
+            bindingAnnotation == null,
+            "Parameter has multiple binding annotations: %s and %s",
+            bindingAnnotation,
+            annotation);
         bindingAnnotation = annotation;
       }
     }

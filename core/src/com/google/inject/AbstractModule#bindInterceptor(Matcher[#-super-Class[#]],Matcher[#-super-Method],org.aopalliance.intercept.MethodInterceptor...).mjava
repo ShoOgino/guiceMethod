@@ -1,10 +1,10 @@
   /*if[AOP]*/
   /**
    * @see Binder#bindInterceptor(com.google.inject.matcher.Matcher,
-   *  com.google.inject.matcher.Matcher,
-   *  org.aopalliance.intercept.MethodInterceptor[])
+   *     com.google.inject.matcher.Matcher, org.aopalliance.intercept.MethodInterceptor[])
    */
-  protected void bindInterceptor(Matcher<? super Class<?>> classMatcher,
+  protected void bindInterceptor(
+      Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
       org.aopalliance.intercept.MethodInterceptor... interceptors) {
     binder().bindInterceptor(classMatcher, methodMatcher, interceptors);

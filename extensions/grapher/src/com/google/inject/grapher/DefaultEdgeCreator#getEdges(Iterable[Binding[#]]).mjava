@@ -1,4 +1,5 @@
-  @Override public Iterable<Edge> getEdges(Iterable<Binding<?>> bindings) {
+  @Override
+  public Iterable<Edge> getEdges(Iterable<Binding<?>> bindings) {
     List<Edge> edges = Lists.newArrayList();
     EdgeVisitor visitor = new EdgeVisitor();
     for (Binding<?> binding : bindings) {

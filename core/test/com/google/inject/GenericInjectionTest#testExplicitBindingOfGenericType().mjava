@@ -9,8 +9,8 @@
               }
             });
 
-    Parameterized<String> parameterized
-        = injector.getInstance(Key.get(new TypeLiteral<Parameterized<String>>() { }));
+    Parameterized<String> parameterized =
+        injector.getInstance(Key.get(new TypeLiteral<Parameterized<String>>() {}));
     assertNotNull(parameterized);
   }
 

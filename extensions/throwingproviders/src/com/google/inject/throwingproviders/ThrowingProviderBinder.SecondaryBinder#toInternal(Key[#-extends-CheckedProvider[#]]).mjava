@@ -7,7 +7,7 @@
       interfaceKey = createKey();
 
       // don't bother binding the proxy type if this is in an invalid state.
-      if(valid) {
+      if (valid) {
         binder
             .bind(interfaceKey)
             .toProvider(
@@ -57,9 +57,8 @@
                 });
       }
 
-      // The provider is unscoped, but the user may apply a scope to it through the 
+      // The provider is unscoped, but the user may apply a scope to it through the
       // ScopedBindingBuilder this returns.
-      return binder.bind(resultKey).toProvider(
-          createResultProvider(targetKey, targetProvider));
+      return binder.bind(resultKey).toProvider(createResultProvider(targetKey, targetProvider));
     }
 

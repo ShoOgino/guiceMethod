@@ -1,8 +1,10 @@
   /**
-   * Construct an instance. Returns {@code Object} instead of {@code T} because
-   * it may return a proxy.
+   * Construct an instance. Returns {@code Object} instead of {@code T} because it may return a
+   * proxy.
    */
-  Object construct(final Errors errors, final InternalContext context,
+  Object construct(
+      final Errors errors,
+      final InternalContext context,
       Dependency<?> dependency,
       /* @Nullable */ ProvisionListenerStackCallback<T> provisionCallback)
       throws ErrorsException {
@@ -10,8 +12,8 @@
     // We have a circular reference between constructors. Return a proxy.
     if (constructionContext.isConstructing()) {
       // TODO (crazybob): if we can't proxy this object, can we proxy the other object?
-      return constructionContext.createProxy(errors, context.getInjectorOptions(),
-          dependency.getKey().getTypeLiteral().getRawType());
+      return constructionContext.createProxy(
+          errors, context.getInjectorOptions(), dependency.getKey().getTypeLiteral().getRawType());
     }
 
     // If we're re-entering this factory while injecting fields or methods,
@@ -19,8 +21,9 @@
     T t = constructionContext.getCurrentReference();
     if (t != null) {
       if (context.getInjectorOptions().disableCircularProxies) {
-        throw errors.circularDependenciesDisabled(
-            dependency.getKey().getTypeLiteral().getRawType()).toException();
+        throw errors
+            .circularDependenciesDisabled(dependency.getKey().getTypeLiteral().getRawType())
+            .toException();
       } else {
         return t;
       }
@@ -32,12 +35,15 @@
       if (provisionCallback == null) {
         return provision(errors, context, constructionContext);
       } else {
-        return provisionCallback.provision(errors, context, new ProvisionCallback<T>() {
-          @Override
-          public T call() throws ErrorsException {
-            return provision(errors, context, constructionContext);
-          }
-        });
+        return provisionCallback.provision(
+            errors,
+            context,
+            new ProvisionCallback<T>() {
+              @Override
+              public T call() throws ErrorsException {
+                return provision(errors, context, constructionContext);
+              }
+            });
       }
     } finally {
       constructionContext.finishConstruction();

@@ -1,12 +1,15 @@
   public void testConstructorExceptionsAreThrownByFactory() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(CorrectDefectiveCarFactory.class).toProvider(
-            FactoryProvider.newFactory(
-                CorrectDefectiveCarFactory.class, DefectiveCar.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(CorrectDefectiveCarFactory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(
+                            CorrectDefectiveCarFactory.class, DefectiveCar.class));
+              }
+            });
     try {
       injector.getInstance(CorrectDefectiveCarFactory.class).createCar();
       fail();

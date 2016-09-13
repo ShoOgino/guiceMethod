@@ -1,4 +1,5 @@
-    @Inject(optional=true) void methodInjectTwoArguments(C c, D d) {
+    @Inject(optional = true)
+    void methodInjectTwoArguments(C c, D d) {
       this.c = c;
       this.d = d;
       invoked2 = true;

@@ -2,6 +2,7 @@
     try {
       ServletScopes.transferRequest();
       fail();
-    } catch (OutOfScopeException expected) {}
+    } catch (OutOfScopeException expected) {
+    }
   }
 

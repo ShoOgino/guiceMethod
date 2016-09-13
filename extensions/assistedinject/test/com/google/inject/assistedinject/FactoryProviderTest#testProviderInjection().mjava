@@ -1,12 +1,15 @@
   public void testProviderInjection() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class).toInstance("trans am");
-        bind(ColoredCarFactory.class)
-            .toProvider(FactoryProvider.newFactory(ColoredCarFactory.class, Firebird.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("trans am");
+                bind(ColoredCarFactory.class)
+                    .toProvider(
+                        FactoryProvider.newFactory(ColoredCarFactory.class, Firebird.class));
+              }
+            });
     ColoredCarFactory carFactory = injector.getInstance(ColoredCarFactory.class);
 
     Firebird blackFirebird = (Firebird) carFactory.create(Color.BLACK);

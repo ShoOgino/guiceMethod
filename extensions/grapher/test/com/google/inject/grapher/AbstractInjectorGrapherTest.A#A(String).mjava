@@ -1,2 +1,3 @@
-    @Inject public A(String str) {}
+    @Inject
+    public A(String str) {}
 

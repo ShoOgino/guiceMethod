@@ -1,2 +1,3 @@
-    @Inject I() {}
+    @Inject
+    I() {}
 

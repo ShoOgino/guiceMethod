@@ -1,4 +1,5 @@
-    @Inject void setC(Foo foo) {
+    @Inject
+    void setC(Foo foo) {
       fromMethod = foo;
     }
 

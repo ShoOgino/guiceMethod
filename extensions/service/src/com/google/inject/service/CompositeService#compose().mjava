@@ -1,5 +1,6 @@
   public Service compose() {
-    Preconditions.checkState(!composed,
+    Preconditions.checkState(
+        !composed,
         "Cannot reuse a CompositeService after it has been compose()d. Please create a new one.");
     composed = true;
 

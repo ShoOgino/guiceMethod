@@ -1,15 +1,19 @@
   public void testOverrideConstant() {
-    Module original = new AbstractModule() {
-      @Override protected void configure() {
-        bindConstant().annotatedWith(named("Test")).to("A");
-      }
-    };
+    Module original =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindConstant().annotatedWith(named("Test")).to("A");
+          }
+        };
 
-    Module replacements = new AbstractModule() {
-      @Override protected void configure() {
-        bindConstant().annotatedWith(named("Test")).to("B");
-      }
-    };
+    Module replacements =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindConstant().annotatedWith(named("Test")).to("B");
+          }
+        };
 
     Injector injector = createInjector(Modules.override(original).with(replacements));
     assertEquals("B", injector.getInstance(Key.get(String.class, named("Test"))));

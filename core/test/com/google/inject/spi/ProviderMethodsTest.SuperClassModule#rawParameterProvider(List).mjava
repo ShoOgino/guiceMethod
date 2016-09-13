@@ -1,4 +1,6 @@
-    @Provides @Named("unrawlist") List<String> rawParameterProvider(@Named("rawlist") List f) {
+    @Provides
+    @Named("unrawlist")
+    List<String> rawParameterProvider(@Named("rawlist") List f) {
       return f;
     }
 

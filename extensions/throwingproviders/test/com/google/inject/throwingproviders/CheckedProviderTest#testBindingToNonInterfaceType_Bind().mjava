@@ -1,16 +1,18 @@
   public void testBindingToNonInterfaceType_Bind() throws Exception {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(MockRemoteProvider.class, Foo.class)
-              .to(mockRemoteProvider);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              ThrowingProviderBinder.create(binder())
+                  .bind(MockRemoteProvider.class, Foo.class)
+                  .to(mockRemoteProvider);
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertEquals(MockRemoteProvider.class.getName() + " must be an interface",
+      assertEquals(
+          MockRemoteProvider.class.getName() + " must be an interface",
           Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
     }
   }

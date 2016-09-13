@@ -1,4 +1,4 @@
-  public static void setInstance(Service service) {
-    instance = service;
-  }
+    public static void setInstance(Service service) {
+      instance = service;
+    }
 

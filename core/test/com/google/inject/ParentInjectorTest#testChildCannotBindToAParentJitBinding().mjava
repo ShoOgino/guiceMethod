@@ -4,9 +4,12 @@
     try {
       parent.createChildInjector(bindsA);
       fail();
-    } catch(CreationException ce) {
-      assertContains(Iterables.getOnlyElement(ce.getErrorMessages()).getMessage(),
-          "A just-in-time binding to " + A.class.getName() + " was already configured on a parent injector.");
-    }    
+    } catch (CreationException ce) {
+      assertContains(
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage(),
+          "A just-in-time binding to "
+              + A.class.getName()
+              + " was already configured on a parent injector.");
+    }
   }
 

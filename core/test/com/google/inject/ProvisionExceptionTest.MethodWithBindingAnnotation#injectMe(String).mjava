@@ -1,2 +1,4 @@
-    @Inject @Green void injectMe(String greenString) {}
+    @Inject
+    @Green
+    void injectMe(String greenString) {}
 

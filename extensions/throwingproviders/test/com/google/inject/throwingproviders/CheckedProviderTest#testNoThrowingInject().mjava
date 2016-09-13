@@ -1,18 +1,21 @@
   public void testNoThrowingInject() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          ThrowingProviderBinder.create(binder())
-              .bind(RemoteProvider.class, Foo.class)
-              .providing(NormalInjectableFoo.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              ThrowingProviderBinder.create(binder())
+                  .bind(RemoteProvider.class, Foo.class)
+                  .providing(NormalInjectableFoo.class);
+            }
+          });
       fail();
     } catch (CreationException ce) {
-      assertEquals("Could not find a suitable constructor in " + NormalInjectableFoo.class.getName()
-          + ". Classes must have either one (and only one) constructor annotated with "
-          + "@ThrowingInject.",
+      assertEquals(
+          "Could not find a suitable constructor in "
+              + NormalInjectableFoo.class.getName()
+              + ". Classes must have either one (and only one) constructor annotated with "
+              + "@ThrowingInject.",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

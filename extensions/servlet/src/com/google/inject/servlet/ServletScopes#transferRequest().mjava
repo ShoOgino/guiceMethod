@@ -1,23 +1,21 @@
   /**
-   * Returns an object that "transfers" the request to another thread. This acts
-   * as a way of transporting request context data from the current thread to a
-   * future thread. The transferred scope is the one active for the thread that
-   * calls this method. A later call to {@code open()} activates the transferred
-   * the scope, including propagating any objects scoped at that time.
+   * Returns an object that "transfers" the request to another thread. This acts as a way of
+   * transporting request context data from the current thread to a future thread. The transferred
+   * scope is the one active for the thread that calls this method. A later call to {@code open()}
+   * activates the transferred the scope, including propagating any objects scoped at that time.
    *
-   * <p>As opposed to {@link #continueRequest}, this method propagates all
-   * existing scoped objects. The primary use case is in server implementations
-   * where you can detach the request processing thread while waiting for data,
-   * and reattach to a different thread to finish processing at a later time.
+   * <p>As opposed to {@link #continueRequest}, this method propagates all existing scoped objects.
+   * The primary use case is in server implementations where you can detach the request processing
+   * thread while waiting for data, and reattach to a different thread to finish processing at a
+   * later time.
    *
-   * <p>Because request-scoped objects are not typically thread-safe, it is
-   * important to avoid applying the same request scope concurrently. The
-   * returned Scoper will block on open until the current thread has released
-   * the request scope.
+   * <p>Because request-scoped objects are not typically thread-safe, it is important to avoid
+   * applying the same request scope concurrently. The returned Scoper will block on open until the
+   * current thread has released the request scope.
    *
    * @return an object that when opened will initiate the request scope
-   * @throws OutOfScopeException if this method is called from a non-request
-   *     thread, or if the request has completed.
+   * @throws OutOfScopeException if this method is called from a non-request thread, or if the
+   *     request has completed.
    * @since 4.1
    */
   public static RequestScoper transferRequest() {

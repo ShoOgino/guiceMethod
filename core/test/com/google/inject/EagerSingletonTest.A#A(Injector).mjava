@@ -1,4 +1,5 @@
-    @Inject A(Injector injector) {
+    @Inject
+    A(Injector injector) {
       injector.getProvider(B.class);
     }
 

@@ -13,13 +13,17 @@
     // this prevents the use of fastclass for all but the public types (where the bridge
     // classloader can be used).
     MultipleVersionsOfGuiceClassLoader fakeLoader = new MultipleVersionsOfGuiceClassLoader();
-    injector.getInstance(fakeLoader.loadLogCreatorType(PublicInject.class))
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PublicInject.class))
         .assertIsFastClassInvoked();
-    injector.getInstance(fakeLoader.loadLogCreatorType(ProtectedInject.class))
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(ProtectedInject.class))
         .assertIsReflectionInvoked();
-    injector.getInstance(fakeLoader.loadLogCreatorType(PackagePrivateInject.class))
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PackagePrivateInject.class))
         .assertIsReflectionInvoked();
-    injector.getInstance(fakeLoader.loadLogCreatorType(PrivateInject.class))
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PrivateInject.class))
         .assertIsReflectionInvoked();
   }
 

@@ -1,4 +1,5 @@
-  @Override protected BindingImpl<T> withScoping(Scoping scoping) {
+  @Override
+  protected BindingImpl<T> withScoping(Scoping scoping) {
     return new ConstructorBindingImpl<T>(
         null, getKey(), getSource(), factory, scoping, factory, constructorInjectionPoint);
   }

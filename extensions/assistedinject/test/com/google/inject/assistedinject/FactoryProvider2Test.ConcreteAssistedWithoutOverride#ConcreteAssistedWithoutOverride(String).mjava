@@ -1,2 +1,3 @@
-    @Inject ConcreteAssistedWithoutOverride(@SuppressWarnings("unused") @Assisted String string) {}
+    @Inject
+    ConcreteAssistedWithoutOverride(@SuppressWarnings("unused") @Assisted String string) {}
 

@@ -1,5 +1,6 @@
-  @SuppressWarnings({ "unchecked", "rawtypes" })
-  private static <T> void optionalModuleTest(Key<T> keyType,
+  @SuppressWarnings({"unchecked", "rawtypes"})
+  private static <T> void optionalModuleTest(
+      Key<T> keyType,
       Iterable<? extends Module> modules,
       int expectedOtherOptionalBindings,
       BindResult<?> expectedDefault,
@@ -13,8 +14,10 @@
     Map<Key<?>, Binding<?>> indexed = index(elements);
     Key<Optional<T>> optionalKey =
         keyType.ofType(RealOptionalBinder.optionalOf(keyType.getTypeLiteral()));
-    Key<?> javaOptionalKey = HAS_JAVA_OPTIONAL ?
-        keyType.ofType(RealOptionalBinder.javaOptionalOf(keyType.getTypeLiteral())) : null;
+    Key<?> javaOptionalKey =
+        HAS_JAVA_OPTIONAL
+            ? keyType.ofType(RealOptionalBinder.javaOptionalOf(keyType.getTypeLiteral()))
+            : null;
     Visitor visitor = new Visitor();
     OptionalBinderBinding<Optional<T>> optionalBinder = null;
     OptionalBinderBinding<?> javaOptionalBinder = null;
@@ -50,12 +53,17 @@
 
     Key<Optional<javax.inject.Provider<T>>> optionalJavaxProviderKey =
         keyType.ofType(RealOptionalBinder.optionalOfJavaxProvider(keyType.getTypeLiteral()));
-    Key<?> javaOptionalJavaxProviderKey = HAS_JAVA_OPTIONAL ?
-        keyType.ofType(RealOptionalBinder.javaOptionalOfJavaxProvider(keyType.getTypeLiteral())) : null;
+    Key<?> javaOptionalJavaxProviderKey =
+        HAS_JAVA_OPTIONAL
+            ? keyType.ofType(
+                RealOptionalBinder.javaOptionalOfJavaxProvider(keyType.getTypeLiteral()))
+            : null;
     Key<Optional<Provider<T>>> optionalProviderKey =
         keyType.ofType(RealOptionalBinder.optionalOfProvider(keyType.getTypeLiteral()));
-    Key<?> javaOptionalProviderKey = HAS_JAVA_OPTIONAL ?
-        keyType.ofType(RealOptionalBinder.javaOptionalOfProvider(keyType.getTypeLiteral())) : null;
+    Key<?> javaOptionalProviderKey =
+        HAS_JAVA_OPTIONAL
+            ? keyType.ofType(RealOptionalBinder.javaOptionalOfProvider(keyType.getTypeLiteral()))
+            : null;
     boolean keyMatch = false;
     boolean optionalKeyMatch = false;
     boolean javaOptionalKeyMatch = false;
@@ -123,8 +131,8 @@
       } else if (key != null && key.equals(defaultKey)) {
         assertTrue(contains);
         if (b != null) { // otherwise it might just be a ProviderLookup into it
-          assertTrue("expected: " + expectedDefault + ", but was: " + b,
-              matches(b, expectedDefault));
+          assertTrue(
+              "expected: " + expectedDefault + ", but was: " + b, matches(b, expectedDefault));
           defaultMatch = true;
         }
       } else if (key != null && key.equals(actualKey)) {
@@ -137,7 +145,7 @@
         otherContains.add(element);
       }
     }
-    
+
     // only expect a keymatch if either default or actual are set
     assertEquals(expectedDefault != null || expectedActual != null, keyMatch);
     assertTrue(optionalKeyMatch);
@@ -149,10 +157,12 @@
     assertEquals(expectedDefault != null, defaultMatch);
     assertEquals(expectedActual != null, actualMatch);
     assertEquals(otherContains.toString(), 0, otherContains.size());
-    assertEquals("other OptionalBindings found: " + otherOptionalElements,
-        expectedOtherOptionalBindings, otherOptionalElements.size());
-    
-     // Validate that we can construct an injector out of the remaining bindings.
+    assertEquals(
+        "other OptionalBindings found: " + otherOptionalElements,
+        expectedOtherOptionalBindings,
+        otherOptionalElements.size());
+
+    // Validate that we can construct an injector out of the remaining bindings.
     Guice.createInjector(Elements.getModule(nonContainedElements));
   }
 

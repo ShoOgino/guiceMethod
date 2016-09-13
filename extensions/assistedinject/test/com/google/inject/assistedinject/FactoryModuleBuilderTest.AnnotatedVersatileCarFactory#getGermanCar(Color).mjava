@@ -1,2 +1,3 @@
-    @Named("german") Car getGermanCar(Color color);
+    @Named("german")
+    Car getGermanCar(Color color);
 

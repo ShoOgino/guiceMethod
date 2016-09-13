@@ -3,7 +3,6 @@
         throws IOException, ServletException {
       final HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-      request.getRequestDispatcher("/blah.jsp")
-          .forward(servletRequest, servletResponse);
+      request.getRequestDispatcher("/blah.jsp").forward(servletRequest, servletResponse);
     }
 

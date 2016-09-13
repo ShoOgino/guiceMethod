@@ -1,4 +1,5 @@
-  @Id @GeneratedValue
+  @Id
+  @GeneratedValue
   public Long getId() {
     return id;
   }

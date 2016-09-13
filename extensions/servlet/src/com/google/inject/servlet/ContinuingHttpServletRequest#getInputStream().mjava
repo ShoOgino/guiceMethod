@@ -1,4 +1,5 @@
-  @Override public ServletInputStream getInputStream() throws IOException {
+  @Override
+  public ServletInputStream getInputStream() throws IOException {
     throw new UnsupportedOperationException("Cannot access raw request on a continued request");
   }
 

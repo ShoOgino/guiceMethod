@@ -1,7 +1,7 @@
   @SuppressWarnings({"unchecked", "rawtypes"}) // mapKey doesn't know its key type
   @Override
-  public <T> Key<T> prepareMethod(Binder binder, Annotation annotation, Key<T> key,
-      InjectionPoint injectionPoint) {
+  public <T> Key<T> prepareMethod(
+      Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
     Method method = (Method) injectionPoint.getMember();
     AnnotationOrError mapKey = findMapKeyAnnotation(binder, method);
     if (annotation instanceof ProvidesIntoSet) {

@@ -1,16 +1,20 @@
   public void testOverrideModuleAndPrivateModule() {
-    Module exposes5 = new PrivateModule() {
-      @Override protected void configure() {
-        bind(Integer.class).toInstance(5);
-        expose(Integer.class);
-      }
-    };
+    Module exposes5 =
+        new PrivateModule() {
+          @Override
+          protected void configure() {
+            bind(Integer.class).toInstance(5);
+            expose(Integer.class);
+          }
+        };
 
-    Module binds15 = new AbstractModule() {
-      @Override protected void configure() {
-        bind(Integer.class).toInstance(15);
-      }
-    };
+    Module binds15 =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Integer.class).toInstance(15);
+          }
+        };
 
     Injector injector = Guice.createInjector(Modules.override(exposes5).with(binds15));
     assertEquals(15, injector.getInstance(Integer.class).intValue());

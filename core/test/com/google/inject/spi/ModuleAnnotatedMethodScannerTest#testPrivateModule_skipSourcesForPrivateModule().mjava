@@ -1,14 +1,26 @@
   public void testPrivateModule_skipSourcesForPrivateModule() {
-    Injector injector = Guice.createInjector(NamedMunger.module(), new AbstractModule() {
-      @Override protected void configure() {
-        binder().skipSources(getClass()).install(new PrivateModule() {
-          @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            NamedMunger.module(),
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder()
+                    .skipSources(getClass())
+                    .install(
+                        new PrivateModule() {
+                          @Override
+                          protected void configure() {}
 
-          @Exposed @TestProvides @Named("foo") String foo() {
-            return "foo";
-          }
-        });
-      }});
+                          @Exposed
+                          @TestProvides
+                          @Named("foo")
+                          String foo() {
+                            return "foo";
+                          }
+                        });
+              }
+            });
     assertMungedBinding(injector, String.class, "foo", "foo");
   }
 

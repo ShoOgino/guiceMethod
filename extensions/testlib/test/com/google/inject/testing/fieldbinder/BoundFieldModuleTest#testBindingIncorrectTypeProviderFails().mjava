@@ -1,12 +1,16 @@
   public void testBindingIncorrectTypeProviderFails() {
     final Integer testValue = 1024;
-    Object instance = new Object() {
-      @Bind(to = String.class) private Provider<Integer> anIntProvider = new Provider<Integer>() {
-        @Override public Integer get() {
-          return testValue;
-        }
-      };
-    };
+    Object instance =
+        new Object() {
+          @Bind(to = String.class)
+          private Provider<Integer> anIntProvider =
+              new Provider<Integer>() {
+                @Override
+                public Integer get() {
+                  return testValue;
+                }
+              };
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
 
@@ -17,7 +21,7 @@
       assertContains(
           e.getMessage(),
           "Requested binding type \"java.lang.String\" is not "
-          + "assignable from field binding type \"java.lang.Integer\"");
+              + "assignable from field binding type \"java.lang.Integer\"");
     }
   }
 

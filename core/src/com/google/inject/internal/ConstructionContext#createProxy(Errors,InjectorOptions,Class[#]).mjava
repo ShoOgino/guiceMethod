@@ -1,5 +1,5 @@
-  public Object createProxy(Errors errors, InjectorOptions injectorOptions,
-      Class<?> expectedType) throws ErrorsException {
+  public Object createProxy(Errors errors, InjectorOptions injectorOptions, Class<?> expectedType)
+      throws ErrorsException {
     if (injectorOptions.disableCircularProxies) {
       throw errors.circularDependenciesDisabled(expectedType).toException();
     }
@@ -18,7 +18,10 @@
     // the implementation type, I'll be able to get away with one proxy
     // instance (as opposed to one per caller).
     ClassLoader classLoader = BytecodeGen.getClassLoader(expectedType);
-    return expectedType.cast(Proxy.newProxyInstance(classLoader,
-        new Class[] { expectedType, CircularDependencyProxy.class }, invocationHandler));
+    return expectedType.cast(
+        Proxy.newProxyInstance(
+            classLoader,
+            new Class[] {expectedType, CircularDependencyProxy.class},
+            invocationHandler));
   }
 

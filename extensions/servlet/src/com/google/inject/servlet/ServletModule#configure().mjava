@@ -7,7 +7,7 @@
     try {
       // Install common bindings (skipped if already installed).
       install(new InternalServletModule());
-  
+
       // Install local filter and servlet bindings.
       configureServlets();
     } finally {

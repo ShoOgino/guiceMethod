@@ -1,13 +1,10 @@
   public void testBindAll() throws CreationException {
-    final DefaultListableBeanFactory beanFactory
-        = new DefaultListableBeanFactory();
+    final DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
 
-    RootBeanDefinition singleton
-        = new RootBeanDefinition(Singleton.class);
+    RootBeanDefinition singleton = new RootBeanDefinition(Singleton.class);
     beanFactory.registerBeanDefinition("singleton", singleton);
 
-    RootBeanDefinition prototype
-        = new RootBeanDefinition(Prototype.class, false);
+    RootBeanDefinition prototype = new RootBeanDefinition(Prototype.class, false);
     beanFactory.registerBeanDefinition("prototype", prototype);
 
     Injector injector =
@@ -19,17 +16,13 @@
               }
             });
 
-    Key<Singleton> singletonKey
-        = Key.get(Singleton.class, Names.named("singleton"));
-    Key<Prototype> prototypeKey
-        = Key.get(Prototype.class, Names.named("prototype"));
+    Key<Singleton> singletonKey = Key.get(Singleton.class, Names.named("singleton"));
+    Key<Prototype> prototypeKey = Key.get(Prototype.class, Names.named("prototype"));
 
     assertNotNull(injector.getInstance(singletonKey));
-    assertSame(injector.getInstance(singletonKey),
-        injector.getInstance(singletonKey));
+    assertSame(injector.getInstance(singletonKey), injector.getInstance(singletonKey));
 
     assertNotNull(injector.getInstance(prototypeKey));
-    assertNotSame(injector.getInstance(prototypeKey),
-        injector.getInstance(prototypeKey));
+    assertNotSame(injector.getInstance(prototypeKey), injector.getInstance(prototypeKey));
   }
 

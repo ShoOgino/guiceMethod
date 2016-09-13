@@ -1,6 +1,6 @@
   public void testTypeVariableWithMultipleBounds() {
-    TypeVariable<Class<HasTypeParameters>>[] typeVariables
-        = HasTypeParameters.class.getTypeParameters();
+    TypeVariable<Class<HasTypeParameters>>[] typeVariables =
+        HasTypeParameters.class.getTypeParameters();
 
     TypeLiteral<?> bTl = TypeLiteral.get(typeVariables[1]);
     assertEquals(Object.class, bTl.getRawType());
@@ -8,7 +8,8 @@
     TypeVariable<?> bTv = (TypeVariable) bTl.getType();
     assertEquals(HasTypeParameters.class, bTv.getGenericDeclaration());
     assertEquals("B", bTv.getName());
-    assertEquals(ImmutableList.<Type>of(Types.listOf(typeVariables[0]), Runnable.class),
+    assertEquals(
+        ImmutableList.<Type>of(Types.listOf(typeVariables[0]), Runnable.class),
         ImmutableList.copyOf(bTv.getBounds()));
     assertEquals("B", bTv.toString());
     assertEqualsBothWays(bTl, TypeLiteral.get(HasTypeParameters.class.getTypeParameters()[1]));

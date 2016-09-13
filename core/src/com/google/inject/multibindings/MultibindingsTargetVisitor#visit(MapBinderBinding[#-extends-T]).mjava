@@ -1,5 +1,3 @@
-  /**
-   * Visits a binding created through {@link MapBinder}.
-   */
+  /** Visits a binding created through {@link MapBinder}. */
   V visit(MapBinderBinding<? extends T> mapbinding);
 

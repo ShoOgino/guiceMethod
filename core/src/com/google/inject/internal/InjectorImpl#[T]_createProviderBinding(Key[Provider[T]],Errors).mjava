@@ -1,6 +1,6 @@
   /**
-   * Creates a synthetic binding to {@code Provider<T>}, i.e. a binding to the provider from
-   * {@code Binding<T>}.
+   * Creates a synthetic binding to {@code Provider<T>}, i.e. a binding to the provider from {@code
+   * Binding<T>}.
    */
   private <T> BindingImpl<Provider<T>> createProviderBinding(Key<Provider<T>> key, Errors errors)
       throws ErrorsException {

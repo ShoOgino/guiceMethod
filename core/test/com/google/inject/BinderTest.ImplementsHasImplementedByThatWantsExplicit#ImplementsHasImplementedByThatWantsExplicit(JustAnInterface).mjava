@@ -1,2 +1,3 @@
-    @Inject ImplementsHasImplementedByThatWantsExplicit(JustAnInterface jai) {}
+    @Inject
+    ImplementsHasImplementedByThatWantsExplicit(JustAnInterface jai) {}
 

@@ -1,6 +1,4 @@
-  /**
-   * Instructs Guice to require a binding to the given type.
-   */
+  /** Instructs Guice to require a binding to the given type. */
   protected final void requireBinding(Class<?> type) {
     binder().getProvider(type);
   }

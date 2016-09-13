@@ -1,23 +1,25 @@
   /**
-   * Returns a FastClass proxy for invoking the given member or {@code null} if access rules 
+   * Returns a FastClass proxy for invoking the given member or {@code null} if access rules
    * disallow it.
-   * 
+   *
    * <p>FastClass works by generating a type in the same package as the target {@code type}. This
    * may or may not work depending on the access level of the class/member. It breaks down into the
    * following cases depending on accessibility:
+   *
    * <ul>
-   *   <li>Public: This always works since we can generate the type into the 
-   *   {@link BridgeClassLoader} which ensures there are no versioning issues.
-   *   <li>Package private and Protected: This works as long as:
-   *   <ul> 
-   *     <li>We can generate into the same classloader as the type.  This is not possible for JDK
-   *     types which use the 'bootstrap' loader.
-   *     <li>The classloader of the type has the same version of {@code FastClass} as we do.  This
-   *     may be violated when running in OSGI bundles.
-   *   </ul>
-   *   <li>Private: This never works.
+   * <li>Public: This always works since we can generate the type into the {@link BridgeClassLoader}
+   *     which ensures there are no versioning issues.
+   * <li>Package private and Protected: This works as long as:
+   *     <ul>
+   *     <li>We can generate into the same classloader as the type. This is not possible for JDK
+   *         types which use the 'bootstrap' loader.
+   *     <li>The classloader of the type has the same version of {@code FastClass} as we do. This
+   *         may be violated when running in OSGI bundles.
+   *     </ul>
+   *
+   * <li>Private: This never works.
    * </ul>
-   * 
+   *
    * If we are unable to generate the type, then we return null and callers should work around by
    * using normal java reflection.
    */
@@ -33,8 +35,8 @@
       // (so we can't use the bridge classloader to work around).  Bail out.
       return null;
     }
-    net.sf.cglib.reflect.FastClass.Generator generator
-        = new net.sf.cglib.reflect.FastClass.Generator();
+    net.sf.cglib.reflect.FastClass.Generator generator =
+        new net.sf.cglib.reflect.FastClass.Generator();
     if (publiclyCallable) {
       // Use the bridge classloader if we can
       generator.setClassLoader(getClassLoader(type));

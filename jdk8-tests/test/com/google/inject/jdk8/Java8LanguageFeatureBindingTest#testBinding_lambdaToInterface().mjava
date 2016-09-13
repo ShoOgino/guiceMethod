@@ -1,10 +1,12 @@
   public void testBinding_lambdaToInterface() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(new TypeLiteral<Predicate<Object>>() {}).toInstance(o -> o != null);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(new TypeLiteral<Predicate<Object>>() {}).toInstance(o -> o != null);
+              }
+            });
 
     Predicate<Object> predicate = injector.getInstance(new Key<Predicate<Object>>() {});
     assertTrue(predicate.test(new Object()));

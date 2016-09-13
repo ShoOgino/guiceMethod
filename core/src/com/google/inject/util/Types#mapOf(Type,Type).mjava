@@ -1,6 +1,6 @@
   /**
-   * Returns a type modelling a {@link Map} whose keys are of type
-   * {@code keyType} and whose values are of type {@code valueType}.
+   * Returns a type modelling a {@link Map} whose keys are of type {@code keyType} and whose values
+   * are of type {@code valueType}.
    *
    * @return a {@link java.io.Serializable serializable} parameterized type.
    */

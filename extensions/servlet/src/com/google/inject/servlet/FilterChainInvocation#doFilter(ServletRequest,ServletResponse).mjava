@@ -4,8 +4,8 @@
     GuiceFilter.Context previous = GuiceFilter.localContext.get();
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
-    HttpServletRequest originalRequest
-        = (previous != null) ? previous.getOriginalRequest() : request;
+    HttpServletRequest originalRequest =
+        (previous != null) ? previous.getOriginalRequest() : request;
     GuiceFilter.localContext.set(new GuiceFilter.Context(originalRequest, request, response));
     try {
       Filter filter = findNextFilter(request);

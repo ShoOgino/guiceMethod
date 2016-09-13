@@ -1,23 +1,27 @@
   public void testExactSameBindingCollapses_defaults() throws Exception {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault()
-            .toInstance(new String("a")); // using new String to ensure .equals is checked.
-        OptionalBinder.newOptionalBinder(binder(), String.class).setDefault()
-            .toInstance(new String("a"));
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), String.class)
+                .setDefault()
+                .toInstance(new String("a")); // using new String to ensure .equals is checked.
+            OptionalBinder.newOptionalBinder(binder(), String.class)
+                .setDefault()
+                .toInstance(new String("a"));
+          }
+        };
     Injector injector = Guice.createInjector(module);
     assertEquals("a", injector.getInstance(String.class));
-    
+
     Optional<String> optional = injector.getInstance(Key.get(optionalOfString));
     assertTrue(optional.isPresent());
     assertEquals("a", optional.get());
-    
+
     Optional<Provider<String>> optionalP = injector.getInstance(Key.get(optionalOfProviderString));
     assertTrue(optionalP.isPresent());
     assertEquals("a", optionalP.get().get());
-    
+
     Optional<javax.inject.Provider<String>> optionalJxP =
         injector.getInstance(Key.get(optionalOfJavaxProviderString));
     assertTrue(optionalJxP.isPresent());

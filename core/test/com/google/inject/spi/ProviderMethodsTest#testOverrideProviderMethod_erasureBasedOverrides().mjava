@@ -2,11 +2,13 @@
   // bridge method)
   public void testOverrideProviderMethod_erasureBasedOverrides() {
     class SubClassModule extends GenericSuperModule<Integer> {
-      @Override String provide(Integer thing) {
+      @Override
+      String provide(Integer thing) {
         return thing.toString();
       }
 
-      @Override protected void configure() {
+      @Override
+      protected void configure() {
         bind(Integer.class).toInstance(3);
       }
     }
@@ -14,7 +16,8 @@
       Guice.createInjector(new SubClassModule());
       fail();
     } catch (CreationException e) {
-      assertContains(e.getMessage(),
+      assertContains(
+          e.getMessage(),
           "Overriding @Provides methods is not allowed.",
           "@Provides method: " + GenericSuperModule.class.getName() + ".provide()",
           "overridden by: " + SubClassModule.class.getName() + ".provide()");

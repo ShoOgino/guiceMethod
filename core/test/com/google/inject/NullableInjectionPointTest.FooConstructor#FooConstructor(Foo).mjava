@@ -1,2 +1,3 @@
-    @Inject FooConstructor(Foo foo) { }
+    @Inject
+    FooConstructor(Foo foo) {}
 

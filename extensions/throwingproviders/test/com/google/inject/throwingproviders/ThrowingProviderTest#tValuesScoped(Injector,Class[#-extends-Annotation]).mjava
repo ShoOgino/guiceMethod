@@ -1,8 +1,9 @@
-  private void tValuesScoped(Injector injector, Class<? extends Annotation> annotation) 
+  private void tValuesScoped(Injector injector, Class<? extends Annotation> annotation)
       throws RemoteException {
-    Key<RemoteProvider<String>> key = annotation != null ? 
-        Key.get(remoteProviderOfString, annotation) :
-        Key.get(remoteProviderOfString);
+    Key<RemoteProvider<String>> key =
+        annotation != null
+            ? Key.get(remoteProviderOfString, annotation)
+            : Key.get(remoteProviderOfString);
     RemoteProvider<String> remoteProvider = injector.getInstance(key);
 
     mockRemoteProvider.setNextToReturn("A");

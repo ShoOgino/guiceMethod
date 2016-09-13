@@ -33,9 +33,9 @@
         switch (state) {
           case READY:
             return instance;
-          // When instance depends on itself in the same thread potential dead lock
-          // is not detected. We have to prevent a stack overflow and we use
-          // an "injecting" stage to short-circuit a call.
+            // When instance depends on itself in the same thread potential dead lock
+            // is not detected. We have to prevent a stack overflow and we use
+            // an "injecting" stage to short-circuit a call.
           case INJECTING:
             return instance;
           case VALIDATED:
@@ -49,7 +49,8 @@
 
         // if in Stage.TOOL, we only want to inject & notify toolable injection points.
         // (otherwise we'll inject all of them)
-        membersInjector.injectAndNotify(instance,
+        membersInjector.injectAndNotify(
+            instance,
             errors.withSource(source),
             key,
             provisionCallback,

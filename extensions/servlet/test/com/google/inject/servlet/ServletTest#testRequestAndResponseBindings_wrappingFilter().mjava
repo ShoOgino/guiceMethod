@@ -1,17 +1,20 @@
   public void testRequestAndResponseBindings_wrappingFilter() throws Exception {
     final HttpServletRequest request = newFakeHttpServletRequest();
-    final ImmutableMap<String, String[]> wrappedParamMap
-        = ImmutableMap.of("wrap", new String[]{"a", "b"});
-    final HttpServletRequestWrapper requestWrapper = new HttpServletRequestWrapper(request) {
-      @Override public Map getParameterMap() {
-        return wrappedParamMap;
-      }
+    final ImmutableMap<String, String[]> wrappedParamMap =
+        ImmutableMap.of("wrap", new String[] {"a", "b"});
+    final HttpServletRequestWrapper requestWrapper =
+        new HttpServletRequestWrapper(request) {
+          @Override
+          public Map getParameterMap() {
+            return wrappedParamMap;
+          }
 
-      @Override public Object getAttribute(String attr) {
-        // Ensure that attributes are stored on the original request object.
-        throw new UnsupportedOperationException();
-      }
-    };
+          @Override
+          public Object getAttribute(String attr) {
+            // Ensure that attributes are stored on the original request object.
+            throw new UnsupportedOperationException();
+          }
+        };
     final HttpServletResponse response = newFakeHttpServletResponse();
     final HttpServletResponseWrapper responseWrapper = new HttpServletResponseWrapper(response);
 

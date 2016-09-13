@@ -1,5 +1,3 @@
-  /**
-   * Constructs an instance of {@code T} for the given arguments.
-   */
+  /** Constructs an instance of {@code T} for the given arguments. */
   T newInstance(Object... arguments) throws InvocationTargetException;
 

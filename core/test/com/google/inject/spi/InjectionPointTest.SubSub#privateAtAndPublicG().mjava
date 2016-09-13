@@ -1,3 +1,4 @@
     @SuppressWarnings("OverridesGuiceInjectableMethod")
-    @Override public void privateAtAndPublicG() {}
+    @Override
+    public void privateAtAndPublicG() {}
 

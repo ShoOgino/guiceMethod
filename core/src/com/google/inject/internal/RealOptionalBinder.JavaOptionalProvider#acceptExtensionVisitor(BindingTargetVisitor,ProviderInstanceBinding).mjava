@@ -1,6 +1,7 @@
     @SuppressWarnings("unchecked")
-    @Override public Object acceptExtensionVisitor(BindingTargetVisitor visitor,
-        ProviderInstanceBinding binding) {
+    @Override
+    public Object acceptExtensionVisitor(
+        BindingTargetVisitor visitor, ProviderInstanceBinding binding) {
       if (visitor instanceof MultibindingsTargetVisitor) {
         return ((MultibindingsTargetVisitor) visitor).visit(this);
       } else {

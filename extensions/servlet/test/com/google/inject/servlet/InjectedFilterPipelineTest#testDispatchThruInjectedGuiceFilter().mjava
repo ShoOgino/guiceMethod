@@ -8,16 +8,12 @@
 
     //begin mock script ***
 
-    expect(filterConfig.getServletContext())
-        .andReturn(servletContext)
-        .once();
+    expect(filterConfig.getServletContext()).andReturn(servletContext).once();
 
     expect(request.getRequestURI())
         .andReturn("/non-jsp/login.html") // use a path that will fail in injector2
         .anyTimes();
-    expect(request.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(request.getContextPath()).andReturn("").anyTimes();
 
     //at the end, proceed down webapp's normal filter chain
     proceedingFilterChain.doFilter(isA(HttpServletRequest.class), (ServletResponse) isNull());
@@ -35,11 +31,6 @@
     //assert expectations
     verify(filterConfig, servletContext, request, proceedingFilterChain);
 
-
-
-
-
-
     // reset mocks and run them against the other injector
     reset(filterConfig, servletContext, request, proceedingFilterChain);
 
@@ -48,15 +39,11 @@
 
     //begin mock script ***
 
-    expect(filterConfig.getServletContext())
-        .andReturn(servletContext)
-        .once();
+    expect(filterConfig.getServletContext()).andReturn(servletContext).once();
     expect(request.getRequestURI())
-            .andReturn("/public/login/login.jsp") // use a path that will fail in injector1
-            .anyTimes();
-    expect(request.getContextPath())
-        .andReturn("")
+        .andReturn("/public/login/login.jsp") // use a path that will fail in injector1
         .anyTimes();
+    expect(request.getContextPath()).andReturn("").anyTimes();
 
     //at the end, proceed down webapp's normal filter chain
     proceedingFilterChain2.doFilter(isA(HttpServletRequest.class), (ServletResponse) isNull());

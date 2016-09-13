@@ -1,4 +1,5 @@
-    @Override public Collection<Node> visitOther(Binding<?> binding) {
+    @Override
+    public Collection<Node> visitOther(Binding<?> binding) {
       return ImmutableList.<Node>of(newInterfaceNode(binding));
     }
 

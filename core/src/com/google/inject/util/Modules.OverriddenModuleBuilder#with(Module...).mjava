@@ -1,5 +1,3 @@
-    /**
-     * See the EDSL example at {@link Modules#override(Module[]) override()}.
-     */
+    /** See the EDSL example at {@link Modules#override(Module[]) override()}. */
     Module with(Module... overrides);
 

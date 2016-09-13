@@ -5,14 +5,15 @@
    * @param keyType The key OptionalBinder is binding
    * @param modules The modules that define the bindings
    * @param visitType The kind of test we should perform. A live Injector, a raw Elements (Module)
-   *        test, or both.
+   *     test, or both.
    * @param expectedOtherOptionalBindings the # of other optional bindings we expect to see.
    * @param expectedDefault the expected default binding, or null if none
    * @param expectedActual the expected actual binding, or null if none
-   * @param expectedUserLinkedActual the user binding that is the actual binding, used if
-   *        neither the default nor actual are set and a user binding existed for the type.
+   * @param expectedUserLinkedActual the user binding that is the actual binding, used if neither
+   *     the default nor actual are set and a user binding existed for the type.
    */
-  static <T> void assertOptionalVisitor(Key<T> keyType,
+  static <T> void assertOptionalVisitor(
+      Key<T> keyType,
       Iterable<? extends Module> modules,
       VisitType visitType,
       int expectedOtherOptionalBindings,
@@ -29,13 +30,23 @@
     }
 
     if (visitType == BOTH || visitType == INJECTOR) {
-      optionalInjectorTest(keyType, modules, expectedOtherOptionalBindings, expectedDefault,
-          expectedActual, expectedUserLinkedActual);
+      optionalInjectorTest(
+          keyType,
+          modules,
+          expectedOtherOptionalBindings,
+          expectedDefault,
+          expectedActual,
+          expectedUserLinkedActual);
     }
 
     if (visitType == BOTH || visitType == MODULE) {
-      optionalModuleTest(keyType, modules, expectedOtherOptionalBindings, expectedDefault,
-          expectedActual, expectedUserLinkedActual);
+      optionalModuleTest(
+          keyType,
+          modules,
+          expectedOtherOptionalBindings,
+          expectedDefault,
+          expectedActual,
+          expectedUserLinkedActual);
     }
   }
 

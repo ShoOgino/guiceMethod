@@ -1,4 +1,6 @@
-    @Provides @Singleton Integer foo() {
+    @Provides
+    @Singleton
+    Integer foo() {
       this.fooCallerClass = new Exception().getStackTrace()[1].getClassName();
       return 42;
     }

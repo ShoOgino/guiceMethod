@@ -1,4 +1,5 @@
-    @Inject void setObject(Object o) {
+    @Inject
+    void setObject(Object o) {
       throw new UnsupportedOperationException();
     }
 

@@ -2,8 +2,8 @@
   public void tearDown() {
     try {
       injector.getInstance(EntityManagerFactory.class).close();
-    } catch(HibernateException ex) {
-        // Expected if the persist service has already been stopped.
+    } catch (HibernateException ex) {
+      // Expected if the persist service has already been stopped.
     }
   }
 

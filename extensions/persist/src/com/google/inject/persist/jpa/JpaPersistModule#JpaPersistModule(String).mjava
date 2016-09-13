@@ -1,6 +1,6 @@
   public JpaPersistModule(String jpaUnit) {
-    Preconditions.checkArgument(null != jpaUnit && jpaUnit.length() > 0,
-        "JPA unit name must be a non-empty string.");
+    Preconditions.checkArgument(
+        null != jpaUnit && jpaUnit.length() > 0, "JPA unit name must be a non-empty string.");
     this.jpaUnit = jpaUnit;
   }
 

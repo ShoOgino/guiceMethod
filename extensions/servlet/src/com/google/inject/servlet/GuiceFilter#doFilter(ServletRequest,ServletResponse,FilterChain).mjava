@@ -10,8 +10,8 @@
     Context previous = GuiceFilter.localContext.get();
     HttpServletRequest request = (HttpServletRequest) servletRequest;
     HttpServletResponse response = (HttpServletResponse) servletResponse;
-    HttpServletRequest originalRequest
-        = (previous != null) ? previous.getOriginalRequest() : request;
+    HttpServletRequest originalRequest =
+        (previous != null) ? previous.getOriginalRequest() : request;
     try {
       RequestScoper.CloseableScope scope = new Context(originalRequest, request, response).open();
       try {

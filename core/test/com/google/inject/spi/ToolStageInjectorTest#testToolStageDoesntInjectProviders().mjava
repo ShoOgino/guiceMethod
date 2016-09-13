@@ -1,12 +1,14 @@
   public void testToolStageDoesntInjectProviders() {
     final Foo foo = new Foo();
-    Guice.createInjector(Stage.TOOL, new AbstractModule() {
-      @Override
-      protected void configure() {
-        requestStaticInjection(Foo.class);
-        bind(Object.class).toProvider(foo);
-      }
-    });
+    Guice.createInjector(
+        Stage.TOOL,
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            requestStaticInjection(Foo.class);
+            bind(Object.class).toProvider(foo);
+          }
+        });
     assertNull(Foo.s);
     assertNull(Foo.sm);
     assertNull(foo.f);

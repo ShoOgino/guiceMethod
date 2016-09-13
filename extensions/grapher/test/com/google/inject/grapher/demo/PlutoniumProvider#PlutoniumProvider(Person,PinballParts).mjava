@@ -1,2 +1,3 @@
-  @Inject public PlutoniumProvider(@Inventor Person inventor, @Used PinballParts parts) {}
+  @Inject
+  public PlutoniumProvider(@Inventor Person inventor, @Used PinballParts parts) {}
 

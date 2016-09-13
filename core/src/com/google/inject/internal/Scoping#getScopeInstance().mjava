@@ -1,6 +1,4 @@
-  /**
-   * Returns the scope instance, or {@code null} if that isn't known for this instance.
-   */
+  /** Returns the scope instance, or {@code null} if that isn't known for this instance. */
   public Scope getScopeInstance() {
     return null;
   }

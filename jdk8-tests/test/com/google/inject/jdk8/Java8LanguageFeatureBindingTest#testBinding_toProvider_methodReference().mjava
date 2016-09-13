@@ -1,10 +1,12 @@
   public void testBinding_toProvider_methodReference() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class).toProvider(Java8LanguageFeatureBindingTest.this::provideString);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toProvider(Java8LanguageFeatureBindingTest.this::provideString);
+              }
+            });
 
     Provider<String> provider = injector.getProvider(String.class);
     assertEquals("Hello", provider.get());

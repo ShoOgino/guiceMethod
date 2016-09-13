@@ -1,15 +1,20 @@
   public void testNonModuleProviderMethods() {
-    final Object methodsObject = new Object() {
-      @Provides @Named("foo") String provideFoo() {
-        return "foo-value";
-      }
-    };
+    final Object methodsObject =
+        new Object() {
+          @Provides
+          @Named("foo")
+          String provideFoo() {
+            return "foo-value";
+          }
+        };
 
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        install(ProviderMethodsModule.forObject(methodsObject));
-      }
-    };
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(ProviderMethodsModule.forObject(methodsObject));
+          }
+        };
 
     Injector injector = Guice.createInjector(module);
 
@@ -21,7 +26,8 @@
     assertEquals(1, elements.size());
 
     Element element = elements.get(0);
-    assertTrue(element + " instanceof ProviderInstanceBinding",
+    assertTrue(
+        element + " instanceof ProviderInstanceBinding",
         element instanceof ProviderInstanceBinding);
 
     ProviderInstanceBinding binding = (ProviderInstanceBinding) element;

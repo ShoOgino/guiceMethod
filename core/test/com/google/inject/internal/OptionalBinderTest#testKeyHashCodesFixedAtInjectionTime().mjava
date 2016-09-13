@@ -1,17 +1,18 @@
-  /**
-   * Ensure key hash codes are fixed at injection time, not binding time.
-   */
+  /** Ensure key hash codes are fixed at injection time, not binding time. */
   public void testKeyHashCodesFixedAtInjectionTime() {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder<List<String>> b = OptionalBinder.newOptionalBinder(binder(), listOfStrings);
-        List<String> list = Lists.newArrayList();
-        b.setDefault().toInstance(list);
-        b.setBinding().toInstance(list);
-        list.add("A");
-        list.add("B");
-      }
-    };
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder<List<String>> b =
+                OptionalBinder.newOptionalBinder(binder(), listOfStrings);
+            List<String> list = Lists.newArrayList();
+            b.setDefault().toInstance(list);
+            b.setBinding().toInstance(list);
+            list.add("A");
+            list.add("B");
+          }
+        };
 
     Injector injector = Guice.createInjector(m);
     for (Entry<Key<?>, Binding<?>> entry : injector.getAllBindings().entrySet()) {
@@ -25,8 +26,10 @@
         clonedKey = Key.get(bindingKey.getTypeLiteral());
       }
       assertEquals(bindingKey, clonedKey);
-      assertEquals("Incorrect hashcode for " + bindingKey + " -> " + entry.getValue(),
-          bindingKey.hashCode(), clonedKey.hashCode());
+      assertEquals(
+          "Incorrect hashcode for " + bindingKey + " -> " + entry.getValue(),
+          bindingKey.hashCode(),
+          clonedKey.hashCode());
     }
   }
 

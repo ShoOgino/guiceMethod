@@ -8,7 +8,8 @@
       // with a toConstructor binding... but we don't use that in our tests.
       if (provision.getBinding() instanceof InstanceBinding) {
         Class<? super T> expected = provision.getBinding().getKey().getRawType();
-        assertTrue("expected instanceof: " + expected + ", but was: " + provisioned,
+        assertTrue(
+            "expected instanceof: " + expected + ", but was: " + provisioned,
             expected.isInstance(provisioned));
       } else {
         assertEquals(provision.getBinding().getKey().getRawType(), provisioned.getClass());

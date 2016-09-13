@@ -1,6 +1,4 @@
-  /**
-   * Normalizes a path by unescaping all safe, percent encoded characters.
-   */
+  /** Normalizes a path by unescaping all safe, percent encoded characters. */
   static String normalizePath(String path) {
     StringBuilder sb = new StringBuilder(path.length());
     int queryStart = path.indexOf('?');

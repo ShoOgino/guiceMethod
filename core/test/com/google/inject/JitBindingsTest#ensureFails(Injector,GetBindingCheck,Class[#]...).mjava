@@ -1,21 +1,21 @@
   private void ensureFails(Injector injector, GetBindingCheck getBinding, Class<?>... classes) {
-    for(int i = 0; i < classes.length; i++) {      
-      try { 
+    for (int i = 0; i < classes.length; i++) {
+      try {
         injector.getInstance(classes[i]);
         fail("should have failed tring to retrieve class: " + classes[i]);
-      } catch(ConfigurationException expected) {
+      } catch (ConfigurationException expected) {
         assertContains(expected.getMessage(), jitFailed(classes[i]));
         assertEquals(1, expected.getErrorMessages().size());
       }
-      
-      try { 
+
+      try {
         injector.getProvider(classes[i]);
         fail("should have failed tring to retrieve class: " + classes[i]);
-      } catch(ConfigurationException expected) {
+      } catch (ConfigurationException expected) {
         assertContains(expected.getMessage(), jitFailed(classes[i]));
         assertEquals(1, expected.getErrorMessages().size());
       }
-      
+
       if (getBinding == GetBindingCheck.ALLOW_BINDING
           || getBinding == GetBindingCheck.ALLOW_BINDING_PROVIDER) {
         Binding<?> binding = injector.getBinding(classes[i]);
@@ -24,7 +24,7 @@
           if (getBinding != GetBindingCheck.ALLOW_BINDING_PROVIDER) {
             fail("should have failed trying to retrieve class: " + classes[i]);
           }
-        } catch(ConfigurationException expected) {
+        } catch (ConfigurationException expected) {
           if (getBinding == GetBindingCheck.ALLOW_BINDING_PROVIDER) {
             throw expected;
           }
@@ -34,8 +34,8 @@
       } else {
         try {
           injector.getBinding(classes[i]);
-          fail("should have failed tring to retrieve class: " + classes[i]);          
-        } catch(ConfigurationException expected) {
+          fail("should have failed tring to retrieve class: " + classes[i]);
+        } catch (ConfigurationException expected) {
           assertContains(expected.getMessage(), jitFailed(classes[i]));
           assertEquals(1, expected.getErrorMessages().size());
         }

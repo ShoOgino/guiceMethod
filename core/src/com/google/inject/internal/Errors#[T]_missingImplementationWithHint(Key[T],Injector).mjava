@@ -38,8 +38,7 @@
         if (have.contains(want) || want.contains(have)) {
           Formatter fmt = new Formatter();
           formatSource(fmt, bindingMap.get(bindingKey).getSource());
-          String match = String.format("%s bound%s", convert(bindingKey),
-              fmt.toString());
+          String match = String.format("%s bound%s", convert(bindingKey), fmt.toString());
           possibleMatches.add(match);
           // TODO: Consider a check that if there are more than some number of results,
           // don't suggest any.
@@ -60,7 +59,9 @@
 
     // If where are no possibilities to suggest, then handle the case of missing
     // annotations on simple types. This is usually a bad idea.
-    if (sameTypes.isEmpty() && possibleMatches.isEmpty() && key.getAnnotation() == null
+    if (sameTypes.isEmpty()
+        && possibleMatches.isEmpty()
+        && key.getAnnotation() == null
         && COMMON_AMBIGUOUS_TYPES.contains(key.getTypeLiteral().getRawType())) {
       // We don't recommend using such simple types without annotations.
       sb.append(format("%nThe key seems very generic, did you forget an annotation?"));

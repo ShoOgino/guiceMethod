@@ -13,7 +13,6 @@
               }
             });
 
-    assertEquals("A",
-        bindInjector.getInstance(Key.get(remoteProviderOfString)).get());
+    assertEquals("A", bindInjector.getInstance(Key.get(remoteProviderOfString)).get());
   }
 

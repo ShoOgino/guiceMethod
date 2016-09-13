@@ -2,18 +2,20 @@
       throws ErrorsException {
     int numErrorsBefore = errors.size();
 
-    SingleParameterInjector<?>[] constructorParameterInjectors
-        = injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
+    SingleParameterInjector<?>[] constructorParameterInjectors =
+        injector.getParametersInjectors(injectionPoint.getDependencies(), errors);
 
     @SuppressWarnings("unchecked") // the injector type agrees with the injection point type
-    MembersInjectorImpl<T> membersInjector = (MembersInjectorImpl<T>) injector.membersInjectorStore
-        .get(injectionPoint.getDeclaringType(), errors);
+    MembersInjectorImpl<T> membersInjector =
+        (MembersInjectorImpl<T>)
+            injector.membersInjectorStore.get(injectionPoint.getDeclaringType(), errors);
 
     /*if[AOP]*/
     ImmutableList<MethodAspect> injectorAspects = injector.state.getMethodAspects();
-    ImmutableList<MethodAspect> methodAspects = membersInjector.getAddedAspects().isEmpty()
-        ? injectorAspects
-        : ImmutableList.copyOf(concat(injectorAspects, membersInjector.getAddedAspects()));
+    ImmutableList<MethodAspect> methodAspects =
+        membersInjector.getAddedAspects().isEmpty()
+            ? injectorAspects
+            : ImmutableList.copyOf(concat(injectorAspects, membersInjector.getAddedAspects()));
     ConstructionProxyFactory<T> factory = new ProxyFactory<T>(injectionPoint, methodAspects);
     /*end[AOP]*/
     /*if[NO_AOP]
@@ -22,7 +24,10 @@
 
     errors.throwIfNewErrors(numErrorsBefore);
 
-    return new ConstructorInjector<T>(membersInjector.getInjectionPoints(), factory.create(),
-        constructorParameterInjectors, membersInjector);
+    return new ConstructorInjector<T>(
+        membersInjector.getInjectionPoints(),
+        factory.create(),
+        constructorParameterInjectors,
+        membersInjector);
   }
 

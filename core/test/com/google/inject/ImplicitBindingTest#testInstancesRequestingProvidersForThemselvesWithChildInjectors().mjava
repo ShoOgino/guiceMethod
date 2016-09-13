@@ -1,34 +1,36 @@
   /**
    * Regression test for https://github.com/google/guice/issues/319
-   * 
-   * The bug is that a class that asks for a provider for itself during injection time, 
-   * where any one of the other types required to fulfill the object creation was bound 
-   * in a child constructor, explodes when the injected Provider is called.
-   * 
-   * It works just fine when the other types are bound in a main injector.
-   */  
-  public void testInstancesRequestingProvidersForThemselvesWithChildInjectors() {       
-    final Module testModule = new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class)
-          .toProvider(TestStringProvider.class);
-      }            
-    };    
-    
+   *
+   * <p>The bug is that a class that asks for a provider for itself during injection time, where any
+   * one of the other types required to fulfill the object creation was bound in a child
+   * constructor, explodes when the injected Provider is called.
+   *
+   * <p>It works just fine when the other types are bound in a main injector.
+   */
+  public void testInstancesRequestingProvidersForThemselvesWithChildInjectors() {
+    final Module testModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(String.class).toProvider(TestStringProvider.class);
+          }
+        };
+
     // Verify it works when the type is setup in the parent.
     Injector parentSetupRootInjector = Guice.createInjector(testModule);
     Injector parentSetupChildInjector = parentSetupRootInjector.createChildInjector();
-    assertEquals(TestStringProvider.TEST_VALUE, 
-        parentSetupChildInjector.getInstance(
-            RequiresProviderForSelfWithOtherType.class).getValue());
-        
+    assertEquals(
+        TestStringProvider.TEST_VALUE,
+        parentSetupChildInjector
+            .getInstance(RequiresProviderForSelfWithOtherType.class)
+            .getValue());
+
     // Verify it works when the type is setup in the child, not the parent.
     // If it still occurs, the bug will explode here.
     Injector childSetupRootInjector = Guice.createInjector();
-    Injector childSetupChildInjector = childSetupRootInjector.createChildInjector(testModule);      
-    assertEquals(TestStringProvider.TEST_VALUE, 
-        childSetupChildInjector.getInstance(
-            RequiresProviderForSelfWithOtherType.class).getValue());
+    Injector childSetupChildInjector = childSetupRootInjector.createChildInjector(testModule);
+    assertEquals(
+        TestStringProvider.TEST_VALUE,
+        childSetupChildInjector.getInstance(RequiresProviderForSelfWithOtherType.class).getValue());
   }
 

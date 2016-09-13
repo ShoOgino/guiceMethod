@@ -1,6 +1,6 @@
   /**
-   * Iterates over the remaining filter definitions.
-   * Returns the first applicable filter, or null if none apply.
+   * Iterates over the remaining filter definitions. Returns the first applicable filter, or null if
+   * none apply.
    */
   private Filter findNextFilter(HttpServletRequest request) {
     while (++index < filterDefinitions.length) {

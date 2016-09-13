@@ -1,4 +1,5 @@
-    @Inject public BImpl(A a) {
+    @Inject
+    public BImpl(A a) {
       this.a = a;
     }
 

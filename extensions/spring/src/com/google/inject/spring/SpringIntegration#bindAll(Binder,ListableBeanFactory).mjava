@@ -1,10 +1,9 @@
   /**
-   * Binds all Spring beans from the given factory by name. For a Spring bean
-   * named "foo", this method creates a binding to the bean's type and
-   * {@code @Named("foo")}.
+   * Binds all Spring beans from the given factory by name. For a Spring bean named "foo", this
+   * method creates a binding to the bean's type and {@code @Named("foo")}.
    *
    * @see com.google.inject.name.Named
-   * @see com.google.inject.name.Names#named(String) 
+   * @see com.google.inject.name.Names#named(String)
    */
   public static void bindAll(Binder binder, ListableBeanFactory beanFactory) {
     binder = binder.skipSources(SpringIntegration.class);

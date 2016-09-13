@@ -1,4 +1,6 @@
-    private void with(Key<? extends HttpServlet> servletKey, Map<String, String> initParams,
+    private void with(
+        Key<? extends HttpServlet> servletKey,
+        Map<String, String> initParams,
         HttpServlet servletInstance) {
       for (UriPatternMatcher pattern : uriPatterns) {
         binder

@@ -1,9 +1,5 @@
-  /**
-   * Returns a matcher which matches elements (methods, classes, etc.)
-   * with a given annotation.
-   */
-  public static Matcher<AnnotatedElement> annotatedWith(
-      final Annotation annotation) {
+  /** Returns a matcher which matches elements (methods, classes, etc.) with a given annotation. */
+  public static Matcher<AnnotatedElement> annotatedWith(final Annotation annotation) {
     return new AnnotatedWith(annotation);
   }
 

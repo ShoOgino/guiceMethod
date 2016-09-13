@@ -2,8 +2,7 @@
   public synchronized void initPipeline(ServletContext servletContext) throws ServletException {
 
     //double-checked lock, prevents duplicate initialization
-    if (initialized)
-      return;
+    if (initialized) return;
 
     // Used to prevent duplicate initialization.
     Set<Filter> initializedSoFar = Sets.newIdentityHashSet();

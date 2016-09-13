@@ -1,15 +1,18 @@
   public final void testRequestContinuationDiesInHttpRequestThread()
       throws ServletException, IOException, InterruptedException {
     executor = sameThreadExecutor;
-    injector = Guice.createInjector(new ServletModule() {
-      @Override protected void configureServlets() {
-        serve("/*").with(ContinuingServlet.class);
+    injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                serve("/*").with(ContinuingServlet.class);
 
-        bind(ExecutorService.class).toInstance(executor);
+                bind(ExecutorService.class).toInstance(executor);
 
-        bind(SomeObject.class);
-      }
-    });
+                bind(SomeObject.class);
+              }
+            });
 
     FilterConfig filterConfig = createMock(FilterConfig.class);
     expect(filterConfig.getServletContext()).andReturn(createMock(ServletContext.class));
@@ -19,9 +22,7 @@
     HttpServletRequest request = createMock(HttpServletRequest.class);
 
     expect(request.getRequestURI()).andReturn("/");
-    expect(request.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(request.getContextPath()).andReturn("").anyTimes();
 
     expect(request.getMethod()).andReturn("GET");
     expect(request.getCookies()).andReturn(new Cookie[0]);

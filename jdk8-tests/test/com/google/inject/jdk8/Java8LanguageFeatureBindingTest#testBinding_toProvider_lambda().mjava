@@ -1,11 +1,13 @@
   public void testBinding_toProvider_lambda() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        AtomicInteger i = new AtomicInteger();
-        bind(String.class).toProvider(() -> "Hello" + i.incrementAndGet());
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                AtomicInteger i = new AtomicInteger();
+                bind(String.class).toProvider(() -> "Hello" + i.incrementAndGet());
+              }
+            });
 
     assertEquals("Hello1", injector.getInstance(String.class));
     assertEquals("Hello2", injector.getInstance(String.class));

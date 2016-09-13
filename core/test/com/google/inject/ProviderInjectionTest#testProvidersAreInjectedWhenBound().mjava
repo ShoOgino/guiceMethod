@@ -24,8 +24,7 @@
     try {
       Guice.createInjector(m);
       fail("Should have thrown a CreationException");
-    }
-    catch (CreationException expected) {
+    } catch (CreationException expected) {
     }
   }
 

@@ -1,4 +1,5 @@
-  @Override public int uniqueId() {
+  @Override
+  public int uniqueId() {
     return uniqueId;
   }
 

@@ -1,13 +1,19 @@
   /**
-   * The Injector is a special case because we allow both parent and child injectors to both have
-   * a binding for that key.
+   * The Injector is a special case because we allow both parent and child injectors to both have a
+   * binding for that key.
    */
   private static void bindInjector(InjectorImpl injector) {
     Key<Injector> key = Key.get(Injector.class);
     InjectorFactory injectorFactory = new InjectorFactory(injector);
-    injector.state.putBinding(key,
-        new ProviderInstanceBindingImpl<Injector>(injector, key, SourceProvider.UNKNOWN_SOURCE,
-            injectorFactory, Scoping.UNSCOPED, injectorFactory,
+    injector.state.putBinding(
+        key,
+        new ProviderInstanceBindingImpl<Injector>(
+            injector,
+            key,
+            SourceProvider.UNKNOWN_SOURCE,
+            injectorFactory,
+            Scoping.UNSCOPED,
+            injectorFactory,
             ImmutableSet.<InjectionPoint>of()));
   }
 

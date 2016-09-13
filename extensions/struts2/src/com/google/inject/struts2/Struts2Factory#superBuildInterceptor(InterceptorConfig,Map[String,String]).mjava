@@ -1,5 +1,6 @@
-  private Interceptor superBuildInterceptor(InterceptorConfig interceptorConfig,
-      Map<String, String> interceptorRefParams) throws ConfigurationException {
+  private Interceptor superBuildInterceptor(
+      InterceptorConfig interceptorConfig, Map<String, String> interceptorRefParams)
+      throws ConfigurationException {
     return super.buildInterceptor(interceptorConfig, interceptorRefParams);
   }
 

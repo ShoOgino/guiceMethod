@@ -3,9 +3,10 @@
     Field instanceField = HasInjections.class.getField("instanceField");
 
     TypeLiteral<HasInjections> type = TypeLiteral.get(HasInjections.class);
-    assertEquals(ImmutableSet.of(
-        new InjectionPoint(type, instanceMethod, false),
-        new InjectionPoint(type, instanceField, false)),
+    assertEquals(
+        ImmutableSet.of(
+            new InjectionPoint(type, instanceMethod, false),
+            new InjectionPoint(type, instanceField, false)),
         InjectionPoint.forInstanceMethodsAndFields(HasInjections.class));
   }
 

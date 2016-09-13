@@ -1,5 +1,6 @@
-    @Inject public Explosion(@Named("runtime") boolean runtime) throws IOException {
-      if(runtime) {
+    @Inject
+    public Explosion(@Named("runtime") boolean runtime) throws IOException {
+      if (runtime) {
         throw new IllegalStateException("boom!");
       } else {
         throw new IOException("boom!");

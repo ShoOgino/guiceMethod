@@ -1,10 +1,13 @@
   private static Context getContext(Key<?> key) {
     Context context = localContext.get();
     if (context == null) {
-      throw new OutOfScopeException("Cannot access scoped [" + Errors.convert(key) 
-          + "]. Either we are not currently inside an HTTP Servlet request, or you may"
-          + " have forgotten to apply " + GuiceFilter.class.getName()
-          + " as a servlet filter for this request.");
+      throw new OutOfScopeException(
+          "Cannot access scoped ["
+              + Errors.convert(key)
+              + "]. Either we are not currently inside an HTTP Servlet request, or you may"
+              + " have forgotten to apply "
+              + GuiceFilter.class.getName()
+              + " as a servlet filter for this request.");
     }
     return context;
   }

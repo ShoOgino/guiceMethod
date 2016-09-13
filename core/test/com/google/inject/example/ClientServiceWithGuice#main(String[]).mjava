@@ -1,6 +1,6 @@
-public static void main(String[] args) throws CreationException {
-  new ClientServiceWithGuice().testClient();
-  Injector injector = Guice.createInjector(new MyModule());
-  Client client = injector.getInstance(Client.class);
-}
+  public static void main(String[] args) throws CreationException {
+    new ClientServiceWithGuice().testClient();
+    Injector injector = Guice.createInjector(new MyModule());
+    Client client = injector.getInstance(Client.class);
+  }
 

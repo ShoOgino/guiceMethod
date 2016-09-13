@@ -1,6 +1,5 @@
   public void testInjectNullIntoNullableField() {
-    NullableFooField nff
-        = createInjector().getInstance(NullableFooField.class);
+    NullableFooField nff = createInjector().getInstance(NullableFooField.class);
     assertNull(nff.foo);
   }
 

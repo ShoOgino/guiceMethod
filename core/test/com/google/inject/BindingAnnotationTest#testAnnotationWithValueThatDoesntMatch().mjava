@@ -1,16 +1,19 @@
   public void testAnnotationWithValueThatDoesntMatch() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          bindConstant().annotatedWith(createBlue(6)).to("six");
-          bind(String.class).toInstance("bar");
-          bind(BlueFoo.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bindConstant().annotatedWith(createBlue(6)).to("six");
+              bind(String.class).toInstance("bar");
+              bind(BlueFoo.class);
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), true,
+      assertContains(
+          expected.getMessage(),
+          true,
           "No implementation for java.lang.String annotated with",
           "BindingAnnotationTest$Blue(value=5) was bound",
           "at " + BindingAnnotationTest.class.getName(),

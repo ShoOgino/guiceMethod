@@ -10,7 +10,8 @@
           });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "Binding to core guice framework type is not allowed: TypeLiteral");
     }
   }

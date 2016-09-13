@@ -7,7 +7,7 @@
         throw new IllegalStateException("Constructor not ready");
       }
 
-      if(!linked && failIfNotLinked) {
+      if (!linked && failIfNotLinked) {
         throw errors.jitDisabled(key).toException();
       }
 

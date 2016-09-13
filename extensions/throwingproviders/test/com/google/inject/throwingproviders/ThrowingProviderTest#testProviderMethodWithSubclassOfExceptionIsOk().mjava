@@ -13,9 +13,9 @@
                 throw new AccessException("boo!");
               }
             });
-    
-    RemoteProvider<String> remoteProvider = 
-      providesInjector.getInstance(Key.get(remoteProviderOfString));
+
+    RemoteProvider<String> remoteProvider =
+        providesInjector.getInstance(Key.get(remoteProviderOfString));
 
     try {
       remoteProvider.get();

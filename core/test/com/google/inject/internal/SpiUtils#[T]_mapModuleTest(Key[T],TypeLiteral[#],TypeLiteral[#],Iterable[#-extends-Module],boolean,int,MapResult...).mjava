@@ -1,32 +1,39 @@
   @SuppressWarnings("unchecked")
-  private static <T> void mapModuleTest(Key<T> mapKey, TypeLiteral<?> keyType,
-      TypeLiteral<?> valueType, Iterable<? extends Module> modules, boolean allowDuplicates,
-      int expectedMapBindings, MapResult... results) {
+  private static <T> void mapModuleTest(
+      Key<T> mapKey,
+      TypeLiteral<?> keyType,
+      TypeLiteral<?> valueType,
+      Iterable<? extends Module> modules,
+      boolean allowDuplicates,
+      int expectedMapBindings,
+      MapResult... results) {
     Set<Element> elements = ImmutableSet.copyOf(Elements.getElements(modules));
     Visitor<T> visitor = new Visitor<T>();
     MapBinderBinding<T> mapbinder = null;
     Map<Key<?>, Binding<?>> keyMap = Maps.newHashMap();
-    for(Element element : elements) {
-      if(element instanceof Binding) {
-        Binding<?> binding = (Binding<?>)element;
+    for (Element element : elements) {
+      if (element instanceof Binding) {
+        Binding<?> binding = (Binding<?>) element;
         keyMap.put(binding.getKey(), binding);
         if (binding.getKey().equals(mapKey)) {
-          mapbinder = (MapBinderBinding<T>)((Binding<T>)binding).acceptTargetVisitor(visitor);
+          mapbinder = (MapBinderBinding<T>) ((Binding<T>) binding).acceptTargetVisitor(visitor);
         }
       }
     }
     assertNotNull(mapbinder);
-    
+
     assertEquals(keyType, mapbinder.getKeyTypeLiteral());
     assertEquals(valueType, mapbinder.getValueTypeLiteral());
     List<MapResult> mapResults = Lists.newArrayList(results);
-    
+
     Key<?> mapOfProvider = mapKey.ofType(mapOfProviderOf(keyType, valueType));
     Key<?> mapOfJavaxProvider = mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType));
     Key<?> mapOfSetOfProvider = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
     Key<?> mapOfSetOfJavaxProvider = mapKey.ofType(mapOfSetOfJavaxProviderOf(keyType, valueType));
-    Key<?> mapOfCollectionOfProvider = mapKey.ofType(mapOfCollectionOfProviderOf(keyType, valueType));
-    Key<?> mapOfCollectionOfJavaxProvider = mapKey.ofType(mapOfCollectionOfJavaxProviderOf(keyType, valueType));
+    Key<?> mapOfCollectionOfProvider =
+        mapKey.ofType(mapOfCollectionOfProviderOf(keyType, valueType));
+    Key<?> mapOfCollectionOfJavaxProvider =
+        mapKey.ofType(mapOfCollectionOfJavaxProviderOf(keyType, valueType));
     Key<?> mapOfSet = mapKey.ofType(mapOf(keyType, setOf(valueType)));
     Key<?> setOfEntry = mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)));
     Key<?> setOfJavaxEntry = mapKey.ofType(setOf(entryOfJavaxProviderOf(keyType, valueType)));
@@ -52,16 +59,16 @@
     Multimap<Object, IndexedBinding> indexedEntries =
         MultimapBuilder.hashKeys().hashSetValues().build();
     int duplicates = 0;
-    for(Element element : elements) {
+    for (Element element : elements) {
       boolean contains = mapbinder.containsElement(element);
-      if(!contains) {
+      if (!contains) {
         otherElements.add(element);
       }
       boolean matched = false;
       Key key = null;
       Binding b = null;
-      if(element instanceof Binding) {
-        b = (Binding)element;
+      if (element instanceof Binding) {
+        b = (Binding) element;
         if (b instanceof ProviderInstanceBinding) {
           ProviderInstanceBinding<?> pb = (ProviderInstanceBinding<?>) b;
           if (pb.getUserSuppliedProvider() instanceof ProviderMapEntry) {
@@ -78,83 +85,85 @@
 
         key = b.getKey();
         Object visited = b.acceptTargetVisitor(visitor);
-        if(visited instanceof MapBinderBinding) {
+        if (visited instanceof MapBinderBinding) {
           matched = true;
-          if(visited.equals(mapbinder)) {
+          if (visited.equals(mapbinder)) {
             assertTrue(contains);
           } else {
             otherMapBindings.add(visited);
           }
         }
-      } else if(element instanceof ProviderLookup) {
-        key = ((ProviderLookup)element).getKey();
+      } else if (element instanceof ProviderLookup) {
+        key = ((ProviderLookup) element).getKey();
       }
-      
-      if(!matched && key != null) {
-        if(key.equals(mapOfProvider)) {
+
+      if (!matched && key != null) {
+        if (key.equals(mapOfProvider)) {
           matched = true;
           assertTrue(contains);
           mapProviderMatch = true;
-        } else if(key.equals(mapOfJavaxProvider)) {
+        } else if (key.equals(mapOfJavaxProvider)) {
           matched = true;
           assertTrue(contains);
           mapJavaxProviderMatch = true;
-        } else if(key.equals(mapOfSet)) {
+        } else if (key.equals(mapOfSet)) {
           matched = true;
           assertTrue(contains);
           mapSetMatch = true;
-        } else if(key.equals(mapOfSetOfProvider)) {
+        } else if (key.equals(mapOfSetOfProvider)) {
           matched = true;
           assertTrue(contains);
           mapSetProviderMatch = true;
-        } else if(key.equals(mapOfSetOfJavaxProvider)) {
+        } else if (key.equals(mapOfSetOfJavaxProvider)) {
           matched = true;
           assertTrue(contains);
           mapSetJavaxProviderMatch = true;
-        } else if(key.equals(mapOfCollectionOfProvider)) {
+        } else if (key.equals(mapOfCollectionOfProvider)) {
           matched = true;
           assertTrue(contains);
           mapCollectionProviderMatch = true;
-        } else if(key.equals(mapOfCollectionOfJavaxProvider)) {
+        } else if (key.equals(mapOfCollectionOfJavaxProvider)) {
           matched = true;
           assertTrue(contains);
           mapCollectionJavaxProviderMatch = true;
-        } else if(key.equals(setOfEntry)) {
+        } else if (key.equals(setOfEntry)) {
           matched = true;
           assertTrue(contains);
           entrySetMatch = true;
           // Validate that this binding is also a MultibinderBinding.
-          if(b != null) {
+          if (b != null) {
             assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
           }
-        } else if(key.equals(setOfJavaxEntry)) {
+        } else if (key.equals(setOfJavaxEntry)) {
           matched = true;
           assertTrue(contains);
           entrySetJavaxMatch = true;
-        } else if(key.equals(collectionOfProvidersOfEntryOfProvider)) {
+        } else if (key.equals(collectionOfProvidersOfEntryOfProvider)) {
           matched = true;
           assertTrue(contains);
           collectionOfProvidersOfEntryOfProviderMatch = true;
-        } else if(key.equals(collectionOfJavaxProvidersOfEntryOfProvider)) {
+        } else if (key.equals(collectionOfJavaxProvidersOfEntryOfProvider)) {
           matched = true;
           assertTrue(contains);
           collectionOfJavaxProvidersOfEntryOfProviderMatch = true;
         }
       }
-      
+
       if (!matched && contains) {
         otherMatches.add(element);
       }
     }
-    
+
     int otherMatchesSize = otherMatches.size();
     if (allowDuplicates) {
       otherMatchesSize--; // allow for 1 duplicate binding
     }
     // Multiply by 3 because each has a value, ProviderLookup, and Map.Entry
     int expectedSize = (mapResults.size() + duplicates) * 3;
-    assertEquals("incorrect number of contains, leftover matches:\n" + Joiner.on("\n\t").join(otherMatches),
-        expectedSize, otherMatchesSize);
+    assertEquals(
+        "incorrect number of contains, leftover matches:\n" + Joiner.on("\n\t").join(otherMatches),
+        expectedSize,
+        otherMatchesSize);
 
     assertTrue(entrySetMatch);
     assertTrue(entrySetJavaxMatch);
@@ -167,10 +176,12 @@
     assertEquals(allowDuplicates, mapSetJavaxProviderMatch);
     assertEquals(allowDuplicates, mapCollectionProviderMatch);
     assertEquals(allowDuplicates, mapCollectionJavaxProviderMatch);
-    assertEquals("other MapBindings found: " + otherMapBindings, expectedMapBindings,
+    assertEquals(
+        "other MapBindings found: " + otherMapBindings,
+        expectedMapBindings,
         otherMapBindings.size());
-    
-     // Validate that we can construct an injector out of the remaining bindings.
+
+    // Validate that we can construct an injector out of the remaining bindings.
     Guice.createInjector(Elements.getModule(otherElements));
   }
 

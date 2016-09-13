@@ -1,8 +1,8 @@
       /**
        * Algorithm to detect a potential lock cycle.
        *
-       * For lock's thread owner check which lock is it trying to take.
-       * Repeat recursively. When current thread is found a potential cycle is detected.
+       * <p>For lock's thread owner check which lock is it trying to take. Repeat recursively. When
+       * current thread is found a potential cycle is detected.
        *
        * @see CycleDetectingLock#lockOrDetectPotentialLocksCycle()
        */
@@ -14,21 +14,23 @@
           return ImmutableListMultimap.of();
         }
 
-        ListMultimap<Long, ID> potentialLocksCycle = Multimaps.newListMultimap(
-            new LinkedHashMap<Long, Collection<ID>>(),
-            new Supplier<List<ID>>() {
-              @Override
-              public List<ID> get() {
-                return Lists.newArrayList();
-              }
-            });
+        ListMultimap<Long, ID> potentialLocksCycle =
+            Multimaps.newListMultimap(
+                new LinkedHashMap<Long, Collection<ID>>(),
+                new Supplier<List<ID>>() {
+                  @Override
+                  public List<ID> get() {
+                    return Lists.newArrayList();
+                  }
+                });
         // lock that is a part of a potential locks cycle, starts with current lock
         ReentrantCycleDetectingLock lockOwnerWaitingOn = this;
         // try to find a dependency path between lock's owner thread and a current thread
         while (lockOwnerWaitingOn != null && lockOwnerWaitingOn.lockOwnerThreadId != null) {
           Long threadOwnerThreadWaits = lockOwnerWaitingOn.lockOwnerThreadId;
           // in case locks cycle exists lock we're waiting for is part of it
-          potentialLocksCycle.putAll(threadOwnerThreadWaits,
+          potentialLocksCycle.putAll(
+              threadOwnerThreadWaits,
               getAllLockIdsAfter(threadOwnerThreadWaits, lockOwnerWaitingOn));
 
           if (threadOwnerThreadWaits == currentThreadId) {

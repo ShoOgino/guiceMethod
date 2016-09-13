@@ -1,13 +1,25 @@
   public void testUnresolvableCircularDependenciesWithProviderInstances() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {}
-        @Provides C c(D d) { return null; }
-        @Provides D d(C c) { return null; }
-      }).getInstance(C.class);
+      Guice.createInjector(
+              new AbstractModule() {
+                @Override
+                protected void configure() {}
+
+                @Provides
+                C c(D d) {
+                  return null;
+                }
+
+                @Provides
+                D d(C c) {
+                  return null;
+                }
+              })
+          .getInstance(C.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "Tried proxying " + C.class.getName() + " to support a circular dependency, ",
           "but it is not an interface.");
     }

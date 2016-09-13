@@ -1,4 +1,5 @@
-    @Override public <T> Key<T> prepareMethod(
+    @Override
+    public <T> Key<T> prepareMethod(
         Binder binder, Annotation rawAnnotation, Key<T> key, InjectionPoint injectionPoint) {
       throw new IllegalStateException("Failing in the scanner.");
     }

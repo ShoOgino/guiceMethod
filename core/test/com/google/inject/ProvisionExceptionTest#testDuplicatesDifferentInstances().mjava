@@ -1,12 +1,17 @@
   public void testDuplicatesDifferentInstances() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {}
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {}
 
-      @Provides Integer i() { throw new RuntimeException(); }
+              @Provides
+              Integer i() {
+                throw new RuntimeException();
+              }
+            });
 
-    });
-
-    try{
+    try {
       injector.getInstance(DoubleSameFailure.class);
       fail();
     } catch (ProvisionException pe) {

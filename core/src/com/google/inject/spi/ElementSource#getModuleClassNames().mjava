@@ -1,7 +1,7 @@
   /**
-   * Returns the class names of modules involved in creating this {@link Element}. The first
-   * element (index 0) is the class name of module that defined the element, and the last element
-   * is the class name of root module.
+   * Returns the class names of modules involved in creating this {@link Element}. The first element
+   * (index 0) is the class name of module that defined the element, and the last element is the
+   * class name of root module.
    */
   public List<String> getModuleClassNames() {
     return moduleSource.getModuleClassNames();

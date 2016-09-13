@@ -9,6 +9,6 @@
     os.close();
 
     // assemble bundle, use -failok switch to avoid early exit
-    bnd.main(new String[]{"-failok", "build", "-classpath", classpath, bndFileName});
+    bnd.main(new String[] {"-failok", "build", "-classpath", classpath, bndFileName});
   }
 

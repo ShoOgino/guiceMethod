@@ -1,16 +1,19 @@
   public void testRequireExactAnnotationsRequireAllOptionals() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          binder().requireExactBindingAnnotations();
-          bindConstant().annotatedWith(Color.class).to("foo");
-          bind(ColorFoo.class);
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              binder().requireExactBindingAnnotations();
+              bindConstant().annotatedWith(Color.class).to("foo");
+              bind(ColorFoo.class);
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),true,
+      assertContains(
+          expected.getMessage(),
+          true,
           "No implementation for java.lang.String annotated with",
           "BindingAnnotationTest$Color",
           "at " + BindingAnnotationTest.class.getName(),

@@ -1,15 +1,21 @@
   public void testScanning() throws Exception {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {}
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {}
 
-      @TestProvides @Named("foo") String foo() {
-        return "foo";
-      }
+          @TestProvides
+          @Named("foo")
+          String foo() {
+            return "foo";
+          }
 
-      @TestProvides @Named("foo2") String foo2() {
-        return "foo2";
-      }
-    };
+          @TestProvides
+          @Named("foo2")
+          String foo2() {
+            return "foo2";
+          }
+        };
     Injector injector = Guice.createInjector(module, NamedMunger.module());
 
     // assert no bindings named "foo" or "foo2" exist -- they were munged.
@@ -19,9 +25,9 @@
     Binding<String> fooBinding = injector.getBinding(Key.get(String.class, named("foo-munged")));
     Binding<String> foo2Binding = injector.getBinding(Key.get(String.class, named("foo2-munged")));
     // Validate the provider has a sane toString
-    assertEquals(methodName(TestProvides.class, "foo", module),
-        fooBinding.getProvider().toString());
-    assertEquals(methodName(TestProvides.class, "foo2", module),
-        foo2Binding.getProvider().toString());
+    assertEquals(
+        methodName(TestProvides.class, "foo", module), fooBinding.getProvider().toString());
+    assertEquals(
+        methodName(TestProvides.class, "foo2", module), foo2Binding.getProvider().toString());
   }
 

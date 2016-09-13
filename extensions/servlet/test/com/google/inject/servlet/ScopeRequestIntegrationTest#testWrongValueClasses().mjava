@@ -1,18 +1,25 @@
   public final void testWrongValueClasses() throws Exception {
-    Injector injector = Guice.createInjector(new ServletModule() {
-      @Override protected void configureServlets() {
-        bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
-        bind(SomeObject.class).in(RequestScoped.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                bindConstant().annotatedWith(Names.named(SomeObject.INVALID)).to(SHOULDNEVERBESEEN);
+                bind(SomeObject.class).in(RequestScoped.class);
+              }
+            });
 
     OffRequestCallable offRequestCallable = injector.getInstance(OffRequestCallable.class);
     try {
-      ServletScopes.scopeRequest(offRequestCallable,
-        ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), "Boo!"));
+      ServletScopes.scopeRequest(
+          offRequestCallable, ImmutableMap.<Key<?>, Object>of(Key.get(SomeObject.class), "Boo!"));
       fail();
-    } catch(IllegalArgumentException iae) {
-      assertEquals("Value[Boo!] of type[java.lang.String] is not compatible with key[" + Key.get(SomeObject.class) + "]", iae.getMessage());
+    } catch (IllegalArgumentException iae) {
+      assertEquals(
+          "Value[Boo!] of type[java.lang.String] is not compatible with key["
+              + Key.get(SomeObject.class)
+              + "]",
+          iae.getMessage());
     }
   }
 

@@ -1,6 +1,5 @@
   private void tExceptionsScoped(Injector injector) {
-    RemoteProvider<String> remoteProvider = 
-        injector.getInstance(Key.get(remoteProviderOfString));
+    RemoteProvider<String> remoteProvider = injector.getInstance(Key.get(remoteProviderOfString));
 
     mockRemoteProvider.throwOnNextGet("A");
     try {
@@ -9,7 +8,7 @@
     } catch (RemoteException expected) {
       assertEquals("A", expected.getMessage());
     }
-    
+
     mockRemoteProvider.throwOnNextGet("B");
     try {
       remoteProvider.get();

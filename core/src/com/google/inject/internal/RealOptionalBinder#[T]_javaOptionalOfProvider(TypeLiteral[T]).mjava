@@ -1,6 +1,7 @@
   static <T> TypeLiteral<?> javaOptionalOfProvider(TypeLiteral<T> type) {
     checkState(JAVA_OPTIONAL_CLASS != null, "java.util.Optional not found");
-    return TypeLiteral.get(Types.newParameterizedType(JAVA_OPTIONAL_CLASS,
-        newParameterizedType(Provider.class, type.getType())));
+    return TypeLiteral.get(
+        Types.newParameterizedType(
+            JAVA_OPTIONAL_CLASS, newParameterizedType(Provider.class, type.getType())));
   }
 

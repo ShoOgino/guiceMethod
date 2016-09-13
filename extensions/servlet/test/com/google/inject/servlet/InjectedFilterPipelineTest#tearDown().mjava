@@ -1,4 +1,3 @@
   @Override
-  public final void tearDown() {
-  }
+  public final void tearDown() {}
 

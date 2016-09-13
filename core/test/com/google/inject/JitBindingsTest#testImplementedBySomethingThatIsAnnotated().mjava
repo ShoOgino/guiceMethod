@@ -1,12 +1,14 @@
   public void testImplementedBySomethingThatIsAnnotated() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        binder().requireExplicitBindings();
-        bind(ImplByScoped.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                binder().requireExplicitBindings();
+                bind(ImplByScoped.class);
+              }
+            });
     ensureWorks(injector, ImplByScoped.class);
-    ensureFails(injector, ALLOW_BINDING, ImplByScopedImpl.class);    
+    ensureFails(injector, ALLOW_BINDING, ImplByScopedImpl.class);
   }
 

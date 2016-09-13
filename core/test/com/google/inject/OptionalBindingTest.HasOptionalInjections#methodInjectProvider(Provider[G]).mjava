@@ -1,4 +1,5 @@
-    @Inject(optional=true) void methodInjectProvider(Provider<G> gProvider) {
+    @Inject(optional = true)
+    void methodInjectProvider(Provider<G> gProvider) {
       this.gProvider = gProvider;
       invokeProvider = true;
     }

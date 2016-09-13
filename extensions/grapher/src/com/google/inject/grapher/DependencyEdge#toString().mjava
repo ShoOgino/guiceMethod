@@ -1,5 +1,11 @@
-  @Override public String toString() {
-    return "DependencyEdge{fromId=" + getFromId() + " toId=" + getToId()
-        + " injectionPoint=" + injectionPoint + "}";
+  @Override
+  public String toString() {
+    return "DependencyEdge{fromId="
+        + getFromId()
+        + " toId="
+        + getToId()
+        + " injectionPoint="
+        + injectionPoint
+        + "}";
   }
 

@@ -1,27 +1,34 @@
   public void testBasicUsage() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(String.class).annotatedWith(named("a")).toInstance("public");
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).annotatedWith(named("a")).toInstance("public");
 
-        install(new PrivateModule() {
-          @Override public void configure() {
-            bind(String.class).annotatedWith(named("b")).toInstance("i");
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        bind(String.class).annotatedWith(named("b")).toInstance("i");
 
-            bind(AB.class).annotatedWith(named("one")).to(AB.class);
-            expose(AB.class).annotatedWith(named("one"));
-          }
-        });
+                        bind(AB.class).annotatedWith(named("one")).to(AB.class);
+                        expose(AB.class).annotatedWith(named("one"));
+                      }
+                    });
 
-        install(new PrivateModule() {
-          @Override public void configure() {
-            bind(String.class).annotatedWith(named("b")).toInstance("ii");
+                install(
+                    new PrivateModule() {
+                      @Override
+                      public void configure() {
+                        bind(String.class).annotatedWith(named("b")).toInstance("ii");
 
-            bind(AB.class).annotatedWith(named("two")).to(AB.class);
-            expose(AB.class).annotatedWith(named("two"));
-          }
-        });
-      }
-    });
+                        bind(AB.class).annotatedWith(named("two")).to(AB.class);
+                        expose(AB.class).annotatedWith(named("two"));
+                      }
+                    });
+              }
+            });
 
     AB ab1 = injector.getInstance(Key.get(AB.class, named("one")));
     assertEquals("public", ab1.a);

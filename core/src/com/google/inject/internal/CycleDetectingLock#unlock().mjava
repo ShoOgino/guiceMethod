@@ -1,5 +1,3 @@
-  /**
-   * Unlocks previously locked lock.
-   */
+  /** Unlocks previously locked lock. */
   void unlock();
 

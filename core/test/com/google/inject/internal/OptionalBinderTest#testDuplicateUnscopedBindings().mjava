@@ -3,16 +3,23 @@
    * explicitly bound in {@link Scopes#NO_SCOPE}.
    */
   public void testDuplicateUnscopedBindings() {
-    Module m = new AbstractModule() {
-      @Override protected void configure() {
-        OptionalBinder<Integer> b = OptionalBinder.newOptionalBinder(binder(), Integer.class);
-        b.setDefault().to(Key.get(Integer.class, named("foo")));
-        b.setDefault().to(Key.get(Integer.class, named("foo"))).in(Scopes.NO_SCOPE);
-        b.setBinding().to(Key.get(Integer.class, named("foo")));
-        b.setBinding().to(Key.get(Integer.class, named("foo"))).in(Scopes.NO_SCOPE);
-      }
-      @Provides @Named("foo") int provideInt() { return 5; }
-    };
+    Module m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder<Integer> b = OptionalBinder.newOptionalBinder(binder(), Integer.class);
+            b.setDefault().to(Key.get(Integer.class, named("foo")));
+            b.setDefault().to(Key.get(Integer.class, named("foo"))).in(Scopes.NO_SCOPE);
+            b.setBinding().to(Key.get(Integer.class, named("foo")));
+            b.setBinding().to(Key.get(Integer.class, named("foo"))).in(Scopes.NO_SCOPE);
+          }
+
+          @Provides
+          @Named("foo")
+          int provideInt() {
+            return 5;
+          }
+        };
     assertEquals(5, Guice.createInjector(m).getInstance(Integer.class).intValue());
   }
 

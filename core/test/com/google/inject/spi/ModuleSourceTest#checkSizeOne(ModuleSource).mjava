@@ -3,6 +3,6 @@
     assertEquals(1, moduleSource.getStackTraceSize());
     // Check call stack
     StackTraceElement[] callStack = moduleSource.getStackTrace();
-    assertEquals(BINDER_INSTALL, callStack[0]);    
+    assertEquals(BINDER_INSTALL, callStack[0]);
   }
 

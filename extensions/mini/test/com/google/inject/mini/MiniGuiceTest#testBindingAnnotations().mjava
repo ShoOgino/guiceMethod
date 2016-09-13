@@ -2,14 +2,22 @@
     final A one = new A();
     final A two = new A();
 
-    K k = MiniGuice.inject(K.class, new Object() {
-      @Provides @Named("one") A getOne() {
-        return one;
-      }
-      @Provides @Named("two") A getTwo() {
-        return two;
-      }
-    });
+    K k =
+        MiniGuice.inject(
+            K.class,
+            new Object() {
+              @Provides
+              @Named("one")
+              A getOne() {
+                return one;
+              }
+
+              @Provides
+              @Named("two")
+              A getTwo() {
+                return two;
+              }
+            });
 
     assertNotNull(k.a);
     assertSame(one, k.aOne);

@@ -1,4 +1,5 @@
-      @Override public String toString() {
+      @Override
+      public String toString() {
         // copy is made to prevent a data race
         // no synchronization is used, potentially stale data, should be good enough
         Long threadId = this.lockOwnerThreadId;

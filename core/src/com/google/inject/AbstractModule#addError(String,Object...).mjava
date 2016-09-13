@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#addError(String, Object[])
-   */
+  /** @see Binder#addError(String, Object[]) */
   protected void addError(String message, Object... arguments) {
     binder().addError(message, arguments);
   }

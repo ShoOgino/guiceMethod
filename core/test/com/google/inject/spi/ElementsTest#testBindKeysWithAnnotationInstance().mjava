@@ -1,11 +1,12 @@
   public void testBindKeysWithAnnotationInstance() {
-    FailingElementVisitor annotationChecker = new FailingElementVisitor() {
-      @Override public <T> Void visit(Binding<T> command) {
-        assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
-        return null;
-      }
-    };
-
+    FailingElementVisitor annotationChecker =
+        new FailingElementVisitor() {
+          @Override
+          public <T> Void visit(Binding<T> command) {
+            assertEquals(Key.get(String.class, Names.named("a")), command.getKey());
+            return null;
+          }
+        };
 
     checkModule(
         new AbstractModule() {

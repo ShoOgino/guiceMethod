@@ -8,7 +8,7 @@
       String annotationString = annotation.toString();
       String canonicalName = annotationType.getName();
       String simpleName = annotationType.getSimpleName();
- 
+
       return annotationString.replace(canonicalName, simpleName).replace("()", "");
     } else if (annotationType != null) {
       return "@" + annotationType.getSimpleName();

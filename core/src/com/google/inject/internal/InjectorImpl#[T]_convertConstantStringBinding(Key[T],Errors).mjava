@@ -22,7 +22,8 @@
 
     // Find a matching type converter.
     TypeLiteral<T> type = key.getTypeLiteral();
-    TypeConverterBinding typeConverterBinding = state.getConverter(stringValue, type, errors, source);
+    TypeConverterBinding typeConverterBinding =
+        state.getConverter(stringValue, type, errors, source);
 
     if (typeConverterBinding == null) {
       // No converter can handle the given type.
@@ -35,21 +36,24 @@
       T converted = (T) typeConverterBinding.getTypeConverter().convert(stringValue, type);
 
       if (converted == null) {
-        throw errors.converterReturnedNull(stringValue, source, type, typeConverterBinding)
+        throw errors
+            .converterReturnedNull(stringValue, source, type, typeConverterBinding)
             .toException();
       }
 
       if (!type.getRawType().isInstance(converted)) {
-        throw errors.conversionTypeError(stringValue, source, type, typeConverterBinding, converted)
+        throw errors
+            .conversionTypeError(stringValue, source, type, typeConverterBinding, converted)
             .toException();
       }
 
-      return new ConvertedConstantBindingImpl<T>(this, key, converted, stringBinding,
-          typeConverterBinding);
+      return new ConvertedConstantBindingImpl<T>(
+          this, key, converted, stringBinding, typeConverterBinding);
     } catch (ErrorsException e) {
       throw e;
     } catch (RuntimeException e) {
-      throw errors.conversionError(stringValue, source, type, typeConverterBinding, e)
+      throw errors
+          .conversionError(stringValue, source, type, typeConverterBinding, e)
           .toException();
     }
   }

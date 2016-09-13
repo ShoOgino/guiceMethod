@@ -43,7 +43,7 @@
     assertInSet(set, key, 1, source3);
 
     awaitClear(weakKey2Ref);
-    
+
     source2 = null;
     awaitClear(weakSource2Ref);
     // Key1 will be referenced as the key in the sources backingSet and won't be

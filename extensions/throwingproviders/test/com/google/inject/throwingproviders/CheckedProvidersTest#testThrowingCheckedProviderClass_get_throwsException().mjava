@@ -4,6 +4,7 @@
     try {
       provider.get();
       fail();
-    } catch (FooException expected) {}
+    } catch (FooException expected) {
+    }
   }
 

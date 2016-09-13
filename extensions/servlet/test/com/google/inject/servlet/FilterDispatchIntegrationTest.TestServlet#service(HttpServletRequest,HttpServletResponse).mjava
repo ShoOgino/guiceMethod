@@ -1,12 +1,14 @@
     @Override
-    protected void service(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
+    protected void service(
+        HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
         throws ServletException, IOException {
       String requestUri = httpServletRequest.getRequestURI();
       processedUris.add(requestUri);
 
       // If the client is requesting /index.html then we forward to /forwarded.html
       if (FORWARD_FROM.equals(requestUri)) {
-        httpServletRequest.getRequestDispatcher(FORWARD_TO)
+        httpServletRequest
+            .getRequestDispatcher(FORWARD_TO)
             .forward(httpServletRequest, httpServletResponse);
       }
     }

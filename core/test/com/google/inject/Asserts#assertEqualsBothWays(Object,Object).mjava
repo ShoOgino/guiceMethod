@@ -1,7 +1,6 @@
   /**
-   * Fails unless {@code expected.equals(actual)}, {@code
-   * actual.equals(expected)} and their hash codes are equal. This is useful
-   * for testing the equals method itself.
+   * Fails unless {@code expected.equals(actual)}, {@code actual.equals(expected)} and their hash
+   * codes are equal. This is useful for testing the equals method itself.
    */
   public static void assertEqualsBothWays(Object expected, Object actual) {
     assertNotNull(expected);

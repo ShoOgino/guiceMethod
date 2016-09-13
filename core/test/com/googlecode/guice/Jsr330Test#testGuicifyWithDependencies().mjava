@@ -14,22 +14,23 @@
             return d + "-" + i;
           }
         };
-    
-    final com.google.inject.Provider<String> guicified =
-        Providers.guicify(jsr330Provider);
+
+    final com.google.inject.Provider<String> guicified = Providers.guicify(jsr330Provider);
     assertTrue(guicified instanceof HasDependencies);
-    Set<Dependency<?>> actual = ((HasDependencies)guicified).getDependencies();
+    Set<Dependency<?>> actual = ((HasDependencies) guicified).getDependencies();
     validateDependencies(actual, jsr330Provider.getClass());
-    
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(String.class).toProvider(guicified);
-        bind(int.class).toInstance(1);
-        bind(double.class).toInstance(2.0d);
-      }
-    });
-    
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toProvider(guicified);
+                bind(int.class).toInstance(1);
+                bind(double.class).toInstance(2.0d);
+              }
+            });
+
     Binding<String> binding = injector.getBinding(String.class);
     assertEquals("2.0-1", binding.getProvider().get());
     validateDependencies(actual, jsr330Provider.getClass());

@@ -1,6 +1,4 @@
-  /**
-   * @see Binder#addError(Throwable)
-   */
+  /** @see Binder#addError(Throwable) */
   protected final void addError(Throwable t) {
     binder().addError(t);
   }

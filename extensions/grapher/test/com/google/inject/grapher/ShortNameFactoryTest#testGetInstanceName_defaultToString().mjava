@@ -1,5 +1,7 @@
   public void testGetInstanceName_defaultToString() throws Exception {
-    assertEquals("Should use class name instead of Object#toString()",
-        "ShortNameFactoryTest$Obj", nameFactory.getInstanceName(new Obj()));
+    assertEquals(
+        "Should use class name instead of Object#toString()",
+        "ShortNameFactoryTest$Obj",
+        nameFactory.getInstanceName(new Obj()));
   }
 

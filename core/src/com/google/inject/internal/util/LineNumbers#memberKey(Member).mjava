@@ -11,7 +11,7 @@
     } else if (member instanceof Constructor) {
       StringBuilder sb = new StringBuilder().append("<init>(");
       for (Class param : ((Constructor) member).getParameterTypes()) {
-          sb.append(org.objectweb.asm.Type.getDescriptor(param));
+        sb.append(org.objectweb.asm.Type.getDescriptor(param));
       }
       return sb.append(")V").toString();
 
@@ -23,5 +23,5 @@
     /*if[NO_AOP]
     return "<NO_MEMBER_KEY>";
     end[NO_AOP]*/
-  }  
+  }
 

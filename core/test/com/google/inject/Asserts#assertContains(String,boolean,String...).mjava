@@ -1,6 +1,6 @@
   /**
-   * Fails unless {@code text} includes all {@code substrings}, in order,
-   * and optionally {@code allowDuplicates}.
+   * Fails unless {@code text} includes all {@code substrings}, in order, and optionally {@code
+   * allowDuplicates}.
    */
   public static void assertContains(String text, boolean allowDuplicates, String... substrings) {
     /*if[NO_AOP]
@@ -13,15 +13,18 @@
     int startingFrom = 0;
     for (String substring : substrings) {
       int index = text.indexOf(substring, startingFrom);
-      assertTrue(String.format("Expected \"%s\" to contain substring \"%s\"", text, substring),
+      assertTrue(
+          String.format("Expected \"%s\" to contain substring \"%s\"", text, substring),
           index >= startingFrom);
       startingFrom = index + substring.length();
     }
 
-    if (! allowDuplicates) {
+    if (!allowDuplicates) {
       String lastSubstring = substrings[substrings.length - 1];
-      assertTrue(String.format("Expected \"%s\" to contain substring \"%s\" only once),",
-          text, lastSubstring), text.indexOf(lastSubstring, startingFrom) == -1);
+      assertTrue(
+          String.format(
+              "Expected \"%s\" to contain substring \"%s\" only once),", text, lastSubstring),
+          text.indexOf(lastSubstring, startingFrom) == -1);
     }
   }
 

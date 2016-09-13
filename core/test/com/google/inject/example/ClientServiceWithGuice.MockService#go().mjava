@@ -1,5 +1,5 @@
     @Override
     public void go() {
-    gone = true;
-  }
+      gone = true;
+    }
 

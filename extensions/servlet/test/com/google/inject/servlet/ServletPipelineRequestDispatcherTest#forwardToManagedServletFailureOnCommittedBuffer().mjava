@@ -13,8 +13,7 @@
     final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
     final HttpServletResponse mockResponse = createMock(HttpServletResponse.class);
 
-    expect(mockResponse.isCommitted())
-        .andReturn(true);
+    expect(mockResponse.isCommitted()).andReturn(true);
 
     final HttpServlet mockServlet =
         new HttpServlet() {
@@ -28,39 +27,32 @@
           }
         };
 
-    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject()))
-        .andReturn(true);
-    expect(injector.getBinding(Key.get(HttpServlet.class)))
-        .andReturn(binding);
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject())).andReturn(true);
+    expect(injector.getBinding(Key.get(HttpServlet.class))).andReturn(binding);
 
-    expect(injector.getInstance(Key.get(HttpServlet.class)))
-        .andReturn(mockServlet);
+    expect(injector.getInstance(Key.get(HttpServlet.class))).andReturn(mockServlet);
 
-
-    final Key<ServletDefinition> servetDefsKey = Key
-        .get(TypeLiteral.get(ServletDefinition.class));
+    final Key<ServletDefinition> servetDefsKey = Key.get(TypeLiteral.get(ServletDefinition.class));
 
     Binding<ServletDefinition> mockBinding = createMock(Binding.class);
     expect(injector.findBindingsByType(eq(servetDefsKey.getTypeLiteral())))
         .andReturn(ImmutableList.<Binding<ServletDefinition>>of(mockBinding));
     Provider<ServletDefinition> bindingProvider = Providers.of(servletDefinition);
-    expect(mockBinding.getProvider())
-        .andReturn(bindingProvider);
+    expect(mockBinding.getProvider()).andReturn(bindingProvider);
 
     replay(injector, binding, mockRequest, mockResponse, mockBinding);
 
     // Have to init the Servlet before we can dispatch to it.
     servletDefinition.init(null, injector, Sets.<HttpServlet>newIdentityHashSet());
 
-    final RequestDispatcher dispatcher = new ManagedServletPipeline(injector)
-        .getRequestDispatcher(pattern);
+    final RequestDispatcher dispatcher =
+        new ManagedServletPipeline(injector).getRequestDispatcher(pattern);
 
     assertNotNull(dispatcher);
 
     try {
       dispatcher.forward(mockRequest, mockResponse);
-    }
-    finally {
+    } finally {
       verify(injector, mockRequest, mockResponse, mockBinding);
     }
   }

@@ -4,18 +4,22 @@
     RuntimeException caught = null;
     try {
       provision.provision();
-    } catch(RuntimeException t) {
+    } catch (RuntimeException t) {
       caught = t;
     }
-    
+
     if (provision.exceptionDuringProvision != null) {
       throw provision.exceptionDuringProvision;
     } else if (caught != null) {
-      Object listener = provision.erredListener != null ?
-          provision.erredListener.getClass() : "(unknown)";
+      Object listener =
+          provision.erredListener != null ? provision.erredListener.getClass() : "(unknown)";
       throw errors
-          .errorInUserCode(caught, "Error notifying ProvisionListener %s of %s.%n"
-              + " Reason: %s", listener, binding.getKey(), caught)
+          .errorInUserCode(
+              caught,
+              "Error notifying ProvisionListener %s of %s.%n Reason: %s",
+              listener,
+              binding.getKey(),
+              caught)
           .toException();
     } else {
       return provision.result;

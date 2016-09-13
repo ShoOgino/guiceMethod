@@ -1,18 +1,20 @@
   public void testMultibinderWithMultipleAnnotationTypeSets() {
-    Module module = new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> abcMultibinder
-            = Multibinder.newSetBinder(binder(), String.class, Abc.class);
-        abcMultibinder.addBinding().toInstance("A");
-        abcMultibinder.addBinding().toInstance("B");
-        abcMultibinder.addBinding().toInstance("C");
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> abcMultibinder =
+                Multibinder.newSetBinder(binder(), String.class, Abc.class);
+            abcMultibinder.addBinding().toInstance("A");
+            abcMultibinder.addBinding().toInstance("B");
+            abcMultibinder.addBinding().toInstance("C");
 
-        Multibinder<String> deMultibinder
-            = Multibinder.newSetBinder(binder(), String.class, De.class);
-        deMultibinder.addBinding().toInstance("D");
-        deMultibinder.addBinding().toInstance("E");
-      }
-    };
+            Multibinder<String> deMultibinder =
+                Multibinder.newSetBinder(binder(), String.class, De.class);
+            deMultibinder.addBinding().toInstance("D");
+            deMultibinder.addBinding().toInstance("E");
+          }
+        };
     Injector injector = Guice.createInjector(module);
 
     Key<Set<String>> abcSetKey = Key.get(setOfString, Abc.class);
@@ -23,9 +25,17 @@
     assertEquals(abcResults, abc);
     Set<String> deResults = setOf("D", "E");
     assertEquals(deResults, de);
-    assertSetVisitor(abcSetKey, stringType, setOf(module), BOTH, false, 1,
-        instance("A"), instance("B"), instance("C"));
-    assertSetVisitor(deSetKey, stringType, setOf(module), BOTH, false, 1,
-        instance("D"), instance("E"));
+    assertSetVisitor(
+        abcSetKey,
+        stringType,
+        setOf(module),
+        BOTH,
+        false,
+        1,
+        instance("A"),
+        instance("B"),
+        instance("C"));
+    assertSetVisitor(
+        deSetKey, stringType, setOf(module), BOTH, false, 1, instance("D"), instance("E"));
   }
 

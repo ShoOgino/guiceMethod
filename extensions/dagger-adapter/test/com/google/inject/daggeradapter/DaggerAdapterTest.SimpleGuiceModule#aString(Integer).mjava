@@ -1,4 +1,5 @@
-    @Provides String aString(Integer i) {
+    @Provides
+    String aString(Integer i) {
       return i.toString();
     }
 

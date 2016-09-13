@@ -4,9 +4,14 @@
       this.scanners = Sets.newLinkedHashSet();
       this.elements = Lists.newArrayList();
       this.source = null;
-      this.sourceProvider = SourceProvider.DEFAULT_INSTANCE.plusSkippedClasses(
-          Elements.class, RecordingBinder.class, AbstractModule.class,
-          ConstantBindingBuilderImpl.class, AbstractBindingBuilder.class, BindingBuilder.class);
+      this.sourceProvider =
+          SourceProvider.DEFAULT_INSTANCE.plusSkippedClasses(
+              Elements.class,
+              RecordingBinder.class,
+              AbstractModule.class,
+              ConstantBindingBuilderImpl.class,
+              AbstractBindingBuilder.class,
+              BindingBuilder.class);
       this.parent = null;
       this.privateElements = null;
       this.privateBinders = Lists.newArrayList();

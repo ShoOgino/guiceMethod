@@ -3,7 +3,8 @@
       Guice.createInjector().getInstance(C2.class);
       fail();
     } catch (ProvisionException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "Tried proxying " + C2.class.getName() + " to support a circular dependency, ",
           "but it is not an interface.");
     }

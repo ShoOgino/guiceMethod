@@ -1,5 +1,5 @@
   public Errors missingConstructor(Class<?> implementation) {
-    return addMessage("Could not find a suitable constructor in %s. " + CONSTRUCTOR_RULES,
-        implementation);
+    return addMessage(
+        "Could not find a suitable constructor in %s. " + CONSTRUCTOR_RULES, implementation);
   }
 

@@ -1,4 +1,5 @@
-    @Override public Entry<K, Provider<V>> get() {
+    @Override
+    public Entry<K, Provider<V>> get() {
       return this;
     }
 

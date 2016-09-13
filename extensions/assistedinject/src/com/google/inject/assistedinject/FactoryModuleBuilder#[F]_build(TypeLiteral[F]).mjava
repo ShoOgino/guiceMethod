@@ -1,6 +1,4 @@
-  /**
-   * See the factory configuration examples at {@link FactoryModuleBuilder}.
-   */
+  /** See the factory configuration examples at {@link FactoryModuleBuilder}. */
   public <F> Module build(TypeLiteral<F> factoryInterface) {
     return build(Key.get(factoryInterface));
   }

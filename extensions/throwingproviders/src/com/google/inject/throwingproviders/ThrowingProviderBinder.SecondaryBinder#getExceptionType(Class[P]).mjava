@@ -1,6 +1,5 @@
     /**
-     * Returns the exception type declared to be thrown by the get method of
-     * {@code interfaceType}.
+     * Returns the exception type declared to be thrown by the get method of {@code interfaceType}.
      */
     private List<Class<? extends Throwable>> getExceptionType(Class<P> interfaceType) {
       try {

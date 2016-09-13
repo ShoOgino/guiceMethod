@@ -5,7 +5,7 @@
     } else if (member instanceof Method) {
       return "#" + member.getName() + "(...)";
     } else {
-      return member.getName();      
+      return member.getName();
     }
   }
 

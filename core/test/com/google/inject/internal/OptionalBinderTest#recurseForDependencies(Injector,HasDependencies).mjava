@@ -9,7 +9,7 @@
       } else {
         elements.addAll(recurseForDependencies(injector, deps));
       }
-    }    
+    }
     return elements;
   }
 

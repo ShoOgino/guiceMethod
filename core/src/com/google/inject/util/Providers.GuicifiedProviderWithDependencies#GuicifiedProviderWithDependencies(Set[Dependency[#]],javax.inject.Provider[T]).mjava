@@ -1,5 +1,5 @@
-    private GuicifiedProviderWithDependencies(Set<Dependency<?>> dependencies,
-        javax.inject.Provider<T> delegate) {
+    private GuicifiedProviderWithDependencies(
+        Set<Dependency<?>> dependencies, javax.inject.Provider<T> delegate) {
       super(delegate);
       this.dependencies = dependencies;
     }

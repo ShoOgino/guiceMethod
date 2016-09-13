@@ -8,8 +8,7 @@
 
     try {
       CheckedProviders.of(
-          new TypeLiteral<MoreMethodsCheckedProvider<String>>() {},
-          "SHOW ME WHAT YOU GOT");
+          new TypeLiteral<MoreMethodsCheckedProvider<String>>() {}, "SHOW ME WHAT YOU GOT");
       fail("Expected an exception to be thrown");
     } catch (IllegalArgumentException e) {
       assertThat(e).hasMessage(message);

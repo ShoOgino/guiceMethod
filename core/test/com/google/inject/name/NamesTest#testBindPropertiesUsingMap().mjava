@@ -1,6 +1,6 @@
   public void testBindPropertiesUsingMap() {
-    final Map<String, String> properties = ImmutableMap.of(
-        "SanJose", "Sharks", "Edmonton", "Oilers");
+    final Map<String, String> properties =
+        ImmutableMap.of("SanJose", "Sharks", "Edmonton", "Oilers");
 
     Injector injector =
         Guice.createInjector(

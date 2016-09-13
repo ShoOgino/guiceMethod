@@ -3,7 +3,8 @@
       Guice.createInjector(new OuterDeprecatedModule());
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "1) Please annotate " + Deprecated.class.getName() + " with @ScopeAnnotation.",
           "at " + InnerDeprecatedModule.class.getName() + getDeclaringSourcePart(getClass()),
           asModuleChain(OuterDeprecatedModule.class, InnerDeprecatedModule.class));

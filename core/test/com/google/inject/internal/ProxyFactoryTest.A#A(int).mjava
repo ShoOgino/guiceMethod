@@ -1,4 +1,5 @@
-    @Inject public A(int i) {
+    @Inject
+    public A(int i) {
       this.i = i;
     }
 

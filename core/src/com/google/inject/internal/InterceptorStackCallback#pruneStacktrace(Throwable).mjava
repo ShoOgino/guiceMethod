@@ -1,9 +1,9 @@
   /**
-   * Removes stacktrace elements related to AOP internal mechanics from the
-   * throwable's stack trace and any causes it may have.
+   * Removes stacktrace elements related to AOP internal mechanics from the throwable's stack trace
+   * and any causes it may have.
    */
   private void pruneStacktrace(Throwable throwable) {
-    for(Throwable t = throwable; t != null; t = t.getCause()) {
+    for (Throwable t = throwable; t != null; t = t.getCause()) {
       StackTraceElement[] stackTrace = t.getStackTrace();
       List<StackTraceElement> pruned = Lists.newArrayList();
       for (StackTraceElement element : stackTrace) {

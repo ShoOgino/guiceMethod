@@ -1,6 +1,4 @@
-  /**
-   * Creates a new members injector and attaches both injection listeners and method aspects.
-   */
+  /** Creates a new members injector and attaches both injection listeners and method aspects. */
   private <T> MembersInjectorImpl<T> createWithListeners(TypeLiteral<T> type, Errors errors)
       throws ErrorsException {
     int numErrorsBefore = errors.size();

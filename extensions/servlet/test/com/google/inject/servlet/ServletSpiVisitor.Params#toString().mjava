@@ -1,10 +1,10 @@
     @Override
     public String toString() {
       return MoreObjects.toStringHelper(Params.class)
-        .add("pattern", pattern)
-        .add("keyOrInstance", keyOrInstance)
-        .add("initParams", params)
-        .add("patternType", patternType)
-        .toString();
+          .add("pattern", pattern)
+          .add("keyOrInstance", keyOrInstance)
+          .add("initParams", params)
+          .add("patternType", patternType)
+          .toString();
     }
 

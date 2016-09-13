@@ -1,6 +1,6 @@
   public void testProxyClassUnloading() {
-    Object testObject = Guice.createInjector(interceptorModule, testModule)
-        .getInstance(proxyTestClass);
+    Object testObject =
+        Guice.createInjector(interceptorModule, testModule).getInstance(proxyTestClass);
     assertNotNull(testObject.getClass().getClassLoader());
     assertNotSame(testObject.getClass().getClassLoader(), systemClassLoader);
 

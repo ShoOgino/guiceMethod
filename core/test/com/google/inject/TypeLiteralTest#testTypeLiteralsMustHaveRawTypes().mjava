@@ -3,9 +3,11 @@
       TypeLiteral.get(Types.subtypeOf(Runnable.class));
       fail();
     } catch (IllegalArgumentException expected) {
-      Asserts.assertContains(expected.getMessage(), "Expected a Class, ParameterizedType, or "
-          + "GenericArrayType, but <? extends java.lang.Runnable> is of type "
-          + "com.google.inject.internal.MoreTypes$WildcardTypeImpl");
+      Asserts.assertContains(
+          expected.getMessage(),
+          "Expected a Class, ParameterizedType, or "
+              + "GenericArrayType, but <? extends java.lang.Runnable> is of type "
+              + "com.google.inject.internal.MoreTypes$WildcardTypeImpl");
     }
   }
 

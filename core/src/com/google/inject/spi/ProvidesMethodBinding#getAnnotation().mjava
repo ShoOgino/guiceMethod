@@ -1,8 +1,8 @@
   /**
    * Returns the annotation that caused this binding to be created. For {@code @Provides} methods,
-   * this is an instance of the {@code @Provides} annotation. For bindings from
-   * {@link ModuleAnnotatedMethodScanner}, this is the annotation that caused the scanner to produce
-   * the binding.
+   * this is an instance of the {@code @Provides} annotation. For bindings from {@link
+   * ModuleAnnotatedMethodScanner}, this is the annotation that caused the scanner to produce the
+   * binding.
    */
   Annotation getAnnotation();
 

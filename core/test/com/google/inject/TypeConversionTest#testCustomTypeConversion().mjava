@@ -1,20 +1,25 @@
   public void testCustomTypeConversion() throws CreationException {
     final Date result = new Date();
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        convertToTypes(Matchers.only(TypeLiteral.get(Date.class)) , mockTypeConverter(result));
-        bindConstant().annotatedWith(NumericValue.class).to("Today");
-        bind(DateHolder.class);
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                convertToTypes(
+                    Matchers.only(TypeLiteral.get(Date.class)), mockTypeConverter(result));
+                bindConstant().annotatedWith(NumericValue.class).to("Today");
+                bind(DateHolder.class);
+              }
+            });
 
     assertSame(result, injector.getInstance(DateHolder.class).date);
 
     Binding<Date> binding = injector.getBinding(Key.get(Date.class, NumericValue.class));
     assertTrue(binding instanceof ConvertedConstantBinding<?>);
 
-    TypeConverterBinding converterBinding = ((ConvertedConstantBinding<?>)binding).getTypeConverterBinding();
+    TypeConverterBinding converterBinding =
+        ((ConvertedConstantBinding<?>) binding).getTypeConverterBinding();
     assertEquals("CustomConverter", converterBinding.getTypeConverter().toString());
 
     assertTrue(injector.getTypeConverterBindings().contains(converterBinding));

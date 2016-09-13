@@ -1,4 +1,5 @@
-  @Override protected void tearDown() throws Exception {
+  @Override
+  protected void tearDown() throws Exception {
     injector.getInstance(GuiceFilter.class).destroy();
   }
 

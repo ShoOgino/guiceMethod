@@ -3,12 +3,8 @@
     assertEquals(0, doFilters);
     //create ourselves a mock request with test URI
     HttpServletRequest requestMock = control.createMock(HttpServletRequest.class);
-    expect(requestMock.getRequestURI())
-            .andReturn(value)
-            .anyTimes();
-    expect(requestMock.getContextPath())
-        .andReturn("")
-        .anyTimes();
+    expect(requestMock.getRequestURI()).andReturn(value).anyTimes();
+    expect(requestMock.getContextPath()).andReturn("").anyTimes();
     // dispatch request
     FilterChain filterChain = control.createMock(FilterChain.class);
     filterChain.doFilter(requestMock, null);

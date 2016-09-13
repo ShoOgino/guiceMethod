@@ -2,7 +2,7 @@
     this.member = constructor;
     this.declaringType = declaringType;
     this.optional = false;
-    this.dependencies = forMember(
-        constructor, declaringType, constructor.getParameterAnnotations());
+    this.dependencies =
+        forMember(constructor, declaringType, constructor.getParameterAnnotations());
   }
 

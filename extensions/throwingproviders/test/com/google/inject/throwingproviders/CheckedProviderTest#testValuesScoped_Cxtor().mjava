@@ -1,10 +1,9 @@
   public void testValuesScoped_Cxtor() throws Exception {
-    RemoteProvider<Foo> remoteProvider = 
-        cxtorInjector.getInstance(Key.get(remoteProviderOfFoo));
+    RemoteProvider<Foo> remoteProvider = cxtorInjector.getInstance(Key.get(remoteProviderOfFoo));
 
     Foo retrieved = remoteProvider.get();
     assertSame(retrieved, remoteProvider.get()); // same, not in new scope.
-    
+
     testScope.beginNewScope();
     assertNotSame(retrieved, remoteProvider.get()); // different, new scope.
   }

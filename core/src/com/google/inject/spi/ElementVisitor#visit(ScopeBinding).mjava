@@ -1,5 +1,3 @@
-  /**
-   * Visit a registration of a scope annotation with the scope that implements it.
-   */
+  /** Visit a registration of a scope annotation with the scope that implements it. */
   V visit(ScopeBinding binding);
 

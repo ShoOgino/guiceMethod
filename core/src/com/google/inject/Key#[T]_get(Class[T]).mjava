@@ -1,6 +1,4 @@
-  /**
-   * Gets a key for an injection type.
-   */
+  /** Gets a key for an injection type. */
   public static <T> Key<T> get(Class<T> type) {
     return new Key<T>(type, NullAnnotationStrategy.INSTANCE);
   }

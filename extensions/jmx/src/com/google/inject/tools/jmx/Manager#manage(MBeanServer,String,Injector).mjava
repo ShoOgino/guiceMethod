@@ -1,9 +1,8 @@
   /**
-   * Registers all the bindings of an Injector with the given MBean server.
-   * Consider using the name of your root {@link Module} class as the domain.
+   * Registers all the bindings of an Injector with the given MBean server. Consider using the name
+   * of your root {@link Module} class as the domain.
    */
-  public static void manage(MBeanServer server, String domain,
-      Injector injector) {
+  public static void manage(MBeanServer server, String domain, Injector injector) {
     // Register each binding independently.
     for (Binding<?> binding : injector.getBindings().values()) {
       // Construct the name manually so we can ensure proper ordering of the
@@ -15,23 +14,18 @@
       Annotation annotation = key.getAnnotation();
       if (annotation != null) {
         name.append(",annotation=").append(quote(annotation.toString()));
-      }
-      else {
+      } else {
         Class<? extends Annotation> annotationType = key.getAnnotationType();
         if (annotationType != null) {
-          name.append(",annotation=")
-              .append(quote("@" + annotationType.getName()));
+          name.append(",annotation=").append(quote("@" + annotationType.getName()));
         }
       }
 
       try {
-        server.registerMBean(new ManagedBinding(binding),
-            new ObjectName(name.toString()));
-      }
-      catch (MalformedObjectNameException e) {
+        server.registerMBean(new ManagedBinding(binding), new ObjectName(name.toString()));
+      } catch (MalformedObjectNameException e) {
         throw new RuntimeException("Bad object name: " + name, e);
-      }
-      catch (Exception e) {
+      } catch (Exception e) {
         throw new RuntimeException(e);
       }
     }

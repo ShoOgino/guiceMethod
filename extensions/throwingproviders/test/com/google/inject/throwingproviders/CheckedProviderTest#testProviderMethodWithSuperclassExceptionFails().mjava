@@ -1,25 +1,29 @@
   public void testProviderMethodWithSuperclassExceptionFails() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-        
-        @SuppressWarnings("unused")
-        @CheckedProvides(RemoteProvider.class)
-        Foo foo() throws IOException {
-            return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(RemoteProvider.class)
+            Foo foo() throws IOException {
+              return null;
+            }
+          });
       fail();
-    } catch(CreationException ce) {
-      assertEquals(IOException.class.getName()
-          + " is not compatible with the exceptions (["
-          + RemoteException.class + ", " + BindException.class
-          + "]) declared in the CheckedProvider interface ("
-          + RemoteProvider.class.getName()
-          + ")", 
+    } catch (CreationException ce) {
+      assertEquals(
+          IOException.class.getName()
+              + " is not compatible with the exceptions (["
+              + RemoteException.class
+              + ", "
+              + BindException.class
+              + "]) declared in the CheckedProvider interface ("
+              + RemoteProvider.class.getName()
+              + ")",
           Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
     }
   }

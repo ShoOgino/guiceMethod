@@ -1,8 +1,8 @@
-    /** 
+    /**
      * Returns the Dependency for the target binding, throws NoSuchElementException if no target
      * exists.
-     * 
-     * <p>Calls to this method should typically be guarded by checking if {@link #getBinding()} 
+     *
+     * <p>Calls to this method should typically be guarded by checking if {@link #getBinding()}
      * returns {@code null}.
      */
     Dependency<?> getDependency() {

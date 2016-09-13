@@ -1,4 +1,5 @@
-  @Override protected Void visitOther(Binding<? extends T> binding) {
+  @Override
+  protected Void visitOther(Binding<? extends T> binding) {
     throw new AssertionFailedError();
   }
 

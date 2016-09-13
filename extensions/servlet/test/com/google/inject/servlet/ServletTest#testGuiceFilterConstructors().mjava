@@ -1,15 +1,21 @@
   public void testGuiceFilterConstructors() throws Exception {
     final RuntimeException servletException = new RuntimeException();
     final RuntimeException chainException = new RuntimeException();
-    final Injector injector = createInjector(new ServletModule() {
-      @Override protected void configureServlets() {
-        serve("/*").with(new HttpServlet() {
-          @Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
-            throw servletException;
-          }
-        });
-      }
-    });
+    final Injector injector =
+        createInjector(
+            new ServletModule() {
+              @Override
+              protected void configureServlets() {
+                serve("/*")
+                    .with(
+                        new HttpServlet() {
+                          @Override
+                          protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+                            throw servletException;
+                          }
+                        });
+              }
+            });
     final HttpServletRequest request = newFakeHttpServletRequest();
     FilterChain filterChain =
         new FilterChain() {
@@ -32,7 +38,8 @@
       assertSame(servletException, e);
     }
     try {
-      injector.getInstance(Key.get(GuiceFilter.class, ScopingOnly.class))
+      injector
+          .getInstance(Key.get(GuiceFilter.class, ScopingOnly.class))
           .doFilter(request, null, filterChain);
       fail();
     } catch (RuntimeException e) {

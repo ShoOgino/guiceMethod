@@ -6,14 +6,19 @@
       createInjector(module);
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(),
+      assertContains(
+          expected.getMessage(),
           "A binding to java.lang.String was already configured at "
               + InnerReplacementsModule.class.getName(),
-          asModuleChain(Modules.OverrideModule.class,
-              OuterReplacementsModule.class, InnerReplacementsModule.class),
+          asModuleChain(
+              Modules.OverrideModule.class,
+              OuterReplacementsModule.class,
+              InnerReplacementsModule.class),
           "at " + InnerReplacementsModule.class.getName(),
-          asModuleChain(Modules.OverrideModule.class,
-              OuterReplacementsModule.class, InnerReplacementsModule.class));
+          asModuleChain(
+              Modules.OverrideModule.class,
+              OuterReplacementsModule.class,
+              InnerReplacementsModule.class));
     }
   }
 

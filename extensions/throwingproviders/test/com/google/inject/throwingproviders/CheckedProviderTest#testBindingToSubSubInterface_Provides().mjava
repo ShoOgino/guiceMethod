@@ -1,21 +1,24 @@
   public void testBindingToSubSubInterface_Provides() throws Exception {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override
-        protected void configure() {
-          install(ThrowingProviderBinder.forModule(this));
-        }
-          
-        @SuppressWarnings("unused")
-        @CheckedProvides(SubRemoteProvider.class)
-        Foo foo() {
-          return null;
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              install(ThrowingProviderBinder.forModule(this));
+            }
+
+            @SuppressWarnings("unused")
+            @CheckedProvides(SubRemoteProvider.class)
+            Foo foo() {
+              return null;
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertEquals(SubRemoteProvider.class.getName() + " must extend CheckedProvider (and only CheckedProvider)",
+      assertEquals(
+          SubRemoteProvider.class.getName()
+              + " must extend CheckedProvider (and only CheckedProvider)",
           Iterables.getOnlyElement(expected.getErrorMessages()).getMessage());
     }
-  }    
+  }
 

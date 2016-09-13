@@ -1,27 +1,42 @@
   public void testMapBinderMultimap() {
-    AbstractModule ab1c = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class);
-        multibinder.addBinding("a").toInstance("A");
-        multibinder.addBinding("b").toInstance("B1");
-        multibinder.addBinding("c").toInstance("C");
-      }
-    };
-    AbstractModule b2c = new AbstractModule() {
-      @Override protected void configure() {
-        MapBinder<String, String> multibinder = MapBinder.newMapBinder(
-            binder(), String.class, String.class);
-        multibinder.addBinding("b").toInstance("B2");
-        multibinder.addBinding("c").toInstance("C");
-        multibinder.permitDuplicates();
-      }
-    };
+    AbstractModule ab1c =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            multibinder.addBinding("a").toInstance("A");
+            multibinder.addBinding("b").toInstance("B1");
+            multibinder.addBinding("c").toInstance("C");
+          }
+        };
+    AbstractModule b2c =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> multibinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            multibinder.addBinding("b").toInstance("B2");
+            multibinder.addBinding("c").toInstance("C");
+            multibinder.permitDuplicates();
+          }
+        };
     Injector injector = Guice.createInjector(ab1c, b2c);
 
-    assertEquals(mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
+    assertEquals(
+        mapOf("a", setOf("A"), "b", setOf("B1", "B2"), "c", setOf("C")),
         injector.getInstance(Key.get(mapOfSetOfString)));
-    assertMapVisitor(Key.get(mapOfString), stringType, stringType, setOf(ab1c, b2c), BOTH, true, 0,
-        instance("a", "A"), instance("b", "B1"), instance("b", "B2"), instance("c", "C"));
+    assertMapVisitor(
+        Key.get(mapOfString),
+        stringType,
+        stringType,
+        setOf(ab1c, b2c),
+        BOTH,
+        true,
+        0,
+        instance("a", "A"),
+        instance("b", "B1"),
+        instance("b", "B2"),
+        instance("c", "C"));
   }
 

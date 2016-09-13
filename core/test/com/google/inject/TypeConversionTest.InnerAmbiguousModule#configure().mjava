@@ -1,4 +1,5 @@
-    @Override protected void configure() {
+    @Override
+    protected void configure() {
       install(new Ambiguous1Module());
       install(new Ambiguous2Module());
       bindConstant().annotatedWith(NumericValue.class).to("foo");

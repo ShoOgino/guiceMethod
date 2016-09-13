@@ -1,4 +1,5 @@
-  @Inject GuiceFilter(FilterPipeline filterPipeline) {
+  @Inject
+  GuiceFilter(FilterPipeline filterPipeline) {
     injectedPipeline = filterPipeline;
   }
 

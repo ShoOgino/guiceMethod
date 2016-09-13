@@ -3,9 +3,12 @@
      * annotated primitive type, and the value of {@link ConvertedConstantBinding#getSourceKey()}
      * will be of a {@link String} with the same annotation.
      */
-    @Override public Collection<Edge> visit(ConvertedConstantBinding<?> binding) {
-      return ImmutableList.<Edge>of(new BindingEdge(NodeId.newTypeId(binding.getKey()),
-          NodeId.newTypeId(binding.getSourceKey()),
-          BindingEdge.Type.CONVERTED_CONSTANT));
+    @Override
+    public Collection<Edge> visit(ConvertedConstantBinding<?> binding) {
+      return ImmutableList.<Edge>of(
+          new BindingEdge(
+              NodeId.newTypeId(binding.getKey()),
+              NodeId.newTypeId(binding.getSourceKey()),
+              BindingEdge.Type.CONVERTED_CONSTANT));
     }
 

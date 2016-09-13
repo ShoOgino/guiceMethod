@@ -1,5 +1,3 @@
-  /**
-   * Visit a request to inject the instance fields and methods of an instance.
-   */
+  /** Visit a request to inject the instance fields and methods of an instance. */
   V visit(InjectionRequest<?> request);
 

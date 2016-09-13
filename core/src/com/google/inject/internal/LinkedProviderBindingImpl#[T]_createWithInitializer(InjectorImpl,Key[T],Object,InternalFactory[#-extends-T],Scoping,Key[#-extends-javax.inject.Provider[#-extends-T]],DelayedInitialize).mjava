@@ -1,8 +1,12 @@
-  static <T> LinkedProviderBindingImpl<T> createWithInitializer(InjectorImpl injector, Key<T> key,
-      Object source, InternalFactory<? extends T> internalFactory, Scoping scoping,
+  static <T> LinkedProviderBindingImpl<T> createWithInitializer(
+      InjectorImpl injector,
+      Key<T> key,
+      Object source,
+      InternalFactory<? extends T> internalFactory,
+      Scoping scoping,
       Key<? extends javax.inject.Provider<? extends T>> providerKey,
       DelayedInitialize delayedInitializer) {
-    return new LinkedProviderBindingImpl<T>(injector, key, source, internalFactory, scoping,
-        providerKey, delayedInitializer);
+    return new LinkedProviderBindingImpl<T>(
+        injector, key, source, internalFactory, scoping, providerKey, delayedInitializer);
   }
 

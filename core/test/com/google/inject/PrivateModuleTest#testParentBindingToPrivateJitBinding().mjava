@@ -3,9 +3,10 @@
     try {
       injector.getBinding(PrivateFoo.class);
       fail();
-    } catch(ConfigurationException expected) {
+    } catch (ConfigurationException expected) {
       assertEquals(1, expected.getErrorMessages().size());
-      assertContains(expected.toString(),
+      assertContains(
+          expected.toString(),
           "Unable to create binding for " + PrivateFoo.class.getName(),
           "It was already configured on one or more child injectors or private modules",
           "(bound by a just-in-time binding)",

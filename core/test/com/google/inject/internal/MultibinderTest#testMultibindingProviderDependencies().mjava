@@ -1,17 +1,20 @@
   public void testMultibindingProviderDependencies() {
     final Annotation setAnn = Names.named("foo");
-    Injector injector = Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          Multibinder<String> multibinder =
-              Multibinder.newSetBinder(binder(), String.class, setAnn);
-          multibinder.addBinding().toInstance("a");
-          multibinder.addBinding().toInstance("b");
-        }
-      });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder<String> multibinder =
+                    Multibinder.newSetBinder(binder(), String.class, setAnn);
+                multibinder.addBinding().toInstance("a");
+                multibinder.addBinding().toInstance("b");
+              }
+            });
     HasDependencies providerBinding =
-      (HasDependencies) injector.getBinding(new Key<Collection<Provider<String>>>(setAnn) {});
+        (HasDependencies) injector.getBinding(new Key<Collection<Provider<String>>>(setAnn) {});
     HasDependencies setBinding =
-      (HasDependencies) injector.getBinding(new Key<Set<String>>(setAnn) {});
+        (HasDependencies) injector.getBinding(new Key<Set<String>>(setAnn) {});
     // sanity check the size
     assertEquals(setBinding.getDependencies().toString(), 2, setBinding.getDependencies().size());
     Set<Dependency<?>> expected = Sets.newHashSet();

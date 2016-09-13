@@ -2,8 +2,7 @@
      * Returns a dependency edge for each {@link Dependency} in the binding. These will be from the
      * given node ID to the {@link Dependency}'s {@link Key}.
      *
-     * @param nodeId ID of the node that should be the tail of the dependency
-     *     edges
+     * @param nodeId ID of the node that should be the tail of the dependency edges
      * @param binding {@link Binding} for the dependencies
      */
     private <T extends Binding<?> & HasDependencies> Collection<Edge> newDependencyEdges(

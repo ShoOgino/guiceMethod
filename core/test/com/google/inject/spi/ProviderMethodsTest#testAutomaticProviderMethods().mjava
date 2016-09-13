@@ -1,13 +1,19 @@
   public void testAutomaticProviderMethods() {
-    Injector injector = Guice.createInjector((Module) new AbstractModule() {
-      @Override protected void configure() { }
-      private int next = 1;
+    Injector injector =
+        Guice.createInjector(
+            (Module)
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {}
 
-      @Provides @Named("count")
-      public Integer provideCount() {
-        return next++;
-      }
-    });
+                  private int next = 1;
+
+                  @Provides
+                  @Named("count")
+                  public Integer provideCount() {
+                    return next++;
+                  }
+                });
 
     assertEquals(1, injector.getInstance(Key.get(Integer.class, Names.named("count"))).intValue());
     assertEquals(2, injector.getInstance(Key.get(Integer.class, Names.named("count"))).intValue());

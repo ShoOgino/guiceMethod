@@ -1,6 +1,4 @@
-  /**
-   * Computes the hash code for this key.
-   */
+  /** Computes the hash code for this key. */
   private int computeHashCode() {
     return typeLiteral.hashCode() * 31 + annotationStrategy.hashCode();
   }

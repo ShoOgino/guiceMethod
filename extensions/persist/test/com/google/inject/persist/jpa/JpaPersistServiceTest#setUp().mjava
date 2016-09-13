@@ -1,6 +1,7 @@
   @Override
   public void setUp() throws Exception {
-    when(provider.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, PERSISTENCE_PROPERTIES)).thenReturn(factory);
+    when(provider.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, PERSISTENCE_PROPERTIES))
+        .thenReturn(factory);
     when(factory.createEntityManager()).thenReturn(entityManager);
   }
 

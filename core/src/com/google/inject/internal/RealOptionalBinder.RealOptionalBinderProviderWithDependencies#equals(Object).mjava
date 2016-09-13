@@ -1,5 +1,7 @@
-    @Override public boolean equals(Object obj) {
-      return obj != null && this.getClass() == obj.getClass()
+    @Override
+    public boolean equals(Object obj) {
+      return obj != null
+          && this.getClass() == obj.getClass()
           && bindingSelection.equals(
               ((RealOptionalBinderProviderWithDependencies<?, ?>) obj).bindingSelection);
     }

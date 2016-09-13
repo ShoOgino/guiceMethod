@@ -1,5 +1,4 @@
   public static boolean isInnerClass(Class<?> clazz) {
-    return !Modifier.isStatic(clazz.getModifiers())
-        && clazz.getEnclosingClass() != null;
+    return !Modifier.isStatic(clazz.getModifiers()) && clazz.getEnclosingClass() != null;
   }
 

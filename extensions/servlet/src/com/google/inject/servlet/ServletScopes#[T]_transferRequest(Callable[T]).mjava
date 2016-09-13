@@ -1,24 +1,22 @@
   /**
-   * Wraps the given callable in a contextual callable that "transfers" the
-   * request to another thread. This acts as a way of transporting
-   * request context data from the current thread to a future thread.
+   * Wraps the given callable in a contextual callable that "transfers" the request to another
+   * thread. This acts as a way of transporting request context data from the current thread to a
+   * future thread.
    *
-   * <p>As opposed to {@link #continueRequest}, this method propagates all
-   * existing scoped objects. The primary use case is in server implementations
-   * where you can detach the request processing thread while waiting for data,
-   * and reattach to a different thread to finish processing at a later time.
+   * <p>As opposed to {@link #continueRequest}, this method propagates all existing scoped objects.
+   * The primary use case is in server implementations where you can detach the request processing
+   * thread while waiting for data, and reattach to a different thread to finish processing at a
+   * later time.
    *
-   * <p>Because request-scoped objects are not typically thread-safe, the
-   * callable returned by this method must not be run on a different thread
-   * until the current request scope has terminated. The returned callable will
-   * block until the current thread has released the request scope.
+   * <p>Because request-scoped objects are not typically thread-safe, the callable returned by this
+   * method must not be run on a different thread until the current request scope has terminated.
+   * The returned callable will block until the current thread has released the request scope.
    *
-   * @param callable code to be executed in another thread, which depends on
-   *     the request scope.
-   * @return a callable that will invoke the given callable, making the request
-   *     context available to it.
-   * @throws OutOfScopeException if this method is called from a non-request
-   *     thread, or if the request has completed.
+   * @param callable code to be executed in another thread, which depends on the request scope.
+   * @return a callable that will invoke the given callable, making the request context available to
+   *     it.
+   * @throws OutOfScopeException if this method is called from a non-request thread, or if the
+   *     request has completed.
    * @since 4.0
    */
   public static <T> Callable<T> transferRequest(Callable<T> callable) {

@@ -1,10 +1,11 @@
   public void testBindingWithGenerics() {
     final List<Integer> testIntList = Arrays.asList(new Integer[] {1, 2, 3});
     final List<Boolean> testBoolList = Arrays.asList(new Boolean[] {true, true, false});
-    Object instance = new Object() {
-      @Bind private List<Integer> anIntList = testIntList;
-      @Bind private List<Boolean> aBoolList = testBoolList;
-    };
+    Object instance =
+        new Object() {
+          @Bind private List<Integer> anIntList = testIntList;
+          @Bind private List<Boolean> aBoolList = testBoolList;
+        };
 
     BoundFieldModule module = BoundFieldModule.of(instance);
     Injector injector = Guice.createInjector(module);

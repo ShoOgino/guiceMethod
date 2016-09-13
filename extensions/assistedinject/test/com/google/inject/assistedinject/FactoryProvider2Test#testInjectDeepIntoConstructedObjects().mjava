@@ -1,14 +1,16 @@
   public void testInjectDeepIntoConstructedObjects() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(double.class).toInstance(5.0d);
-        bind(int.class).annotatedWith(Names.named("horsePower")).toInstance(250);
-        bind(int.class).annotatedWith(Names.named("modelYear")).toInstance(1984);
-        bind(FleetFactory.class).toProvider(FactoryProvider.newFactory(FleetFactory.class,
-            Fleet.class));
-      }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(double.class).toInstance(5.0d);
+                bind(int.class).annotatedWith(Names.named("horsePower")).toInstance(250);
+                bind(int.class).annotatedWith(Names.named("modelYear")).toInstance(1984);
+                bind(FleetFactory.class)
+                    .toProvider(FactoryProvider.newFactory(FleetFactory.class, Fleet.class));
+              }
+            });
 
     FleetFactory fleetFactory = injector.getInstance(FleetFactory.class);
     Fleet fleet = fleetFactory.createFleet(Color.RED);

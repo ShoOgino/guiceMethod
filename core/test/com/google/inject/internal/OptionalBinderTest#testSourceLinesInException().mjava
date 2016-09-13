@@ -1,13 +1,17 @@
   public void testSourceLinesInException() {
     try {
-      Guice.createInjector(new AbstractModule() {
-        @Override protected void configure() {
-          OptionalBinder.newOptionalBinder(binder(),  Integer.class).setDefault();
-        }
-      });
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              OptionalBinder.newOptionalBinder(binder(), Integer.class).setDefault();
+            }
+          });
       fail();
     } catch (CreationException expected) {
-      assertContains(expected.getMessage(), "No implementation for java.lang.Integer",
+      assertContains(
+          expected.getMessage(),
+          "No implementation for java.lang.Integer",
           "at " + getClass().getName());
     }
   }

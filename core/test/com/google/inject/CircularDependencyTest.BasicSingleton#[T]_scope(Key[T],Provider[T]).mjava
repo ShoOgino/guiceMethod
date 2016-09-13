@@ -11,7 +11,7 @@
             }
             cache.put(key, t);
           }
-          return (T)cache.get(key);
+          return (T) cache.get(key);
         }
       };
     }

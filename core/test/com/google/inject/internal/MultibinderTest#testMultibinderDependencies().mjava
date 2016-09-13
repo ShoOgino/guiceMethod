@@ -3,15 +3,18 @@
    * really care about the underlying structure of those bindings, which are implementation details.
    */
   public void testMultibinderDependencies() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
-        multibinder.addBinding().toInstance("A");
-        multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+                multibinder.addBinding().toInstance("A");
+                multibinder.addBinding().to(Key.get(String.class, Names.named("b")));
 
-        bindConstant().annotatedWith(Names.named("b")).to("B");
-      }
-    });
+                bindConstant().annotatedWith(Names.named("b")).to("B");
+              }
+            });
 
     Binding<Set<String>> binding = injector.getBinding(new Key<Set<String>>() {});
     HasDependencies withDependencies = (HasDependencies) binding;

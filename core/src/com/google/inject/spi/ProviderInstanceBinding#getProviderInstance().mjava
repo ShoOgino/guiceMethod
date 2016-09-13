@@ -1,7 +1,7 @@
   /**
    * If the user supplied a JSR330 binding, then this will wrap that one. To always return the
    * user-supplied provider, use {@link #getUserSuppliedProvider}.
-   * 
+   *
    * @deprecated Use {@link #getUserSuppliedProvider} instead.
    */
   @Deprecated

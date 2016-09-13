@@ -1,6 +1,6 @@
   /**
-   * Returns a new parameterized type, applying {@code typeArguments} to
-   * {@code rawType} and enclosed by {@code ownerType}.
+   * Returns a new parameterized type, applying {@code typeArguments} to {@code rawType} and
+   * enclosed by {@code ownerType}.
    *
    * @return a {@link java.io.Serializable serializable} parameterized type.
    */

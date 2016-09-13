@@ -1,5 +1,5 @@
     @Override
     public Type[] getActualTypeArguments() {
-      return new Type[] { typeArgument };
+      return new Type[] {typeArgument};
     }
 

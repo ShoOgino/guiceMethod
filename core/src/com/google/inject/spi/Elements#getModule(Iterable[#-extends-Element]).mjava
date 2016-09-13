@@ -1,6 +1,4 @@
-  /**
-   * Returns the module composed of {@code elements}.
-   */
+  /** Returns the module composed of {@code elements}. */
   public static Module getModule(final Iterable<? extends Element> elements) {
     return new ElementsAsModule(elements);
   }

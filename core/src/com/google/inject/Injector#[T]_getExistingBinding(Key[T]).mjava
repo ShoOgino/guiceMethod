@@ -1,11 +1,11 @@
   /**
-   * Returns the binding if it already exists, or null if does not exist. Unlike
-   * {@link #getBinding(Key)}, this does not attempt to create just-in-time bindings
-   * for keys that aren't bound.
-   * 
-   * <p> This method is part of the Guice SPI and is intended for use by tools and extensions.
-   * 
+   * Returns the binding if it already exists, or null if does not exist. Unlike {@link
+   * #getBinding(Key)}, this does not attempt to create just-in-time bindings for keys that aren't
+   * bound.
+   *
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
+   *
    * @since 3.0
    */
-  <T> Binding<T> getExistingBinding(Key<T> key);  
+  <T> Binding<T> getExistingBinding(Key<T> key);
 

@@ -1,11 +1,18 @@
   public void testImplicitForwardingAssistedBindingCreatesNewObjects() {
     final Mustang providedMustang = new Mustang(Color.BLUE);
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        install(new FactoryModuleBuilder().build(MustangFactory.class));
-      }
-      @Provides Mustang provide() { return providedMustang; }
-    });
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                install(new FactoryModuleBuilder().build(MustangFactory.class));
+              }
+
+              @Provides
+              Mustang provide() {
+                return providedMustang;
+              }
+            });
     assertSame(providedMustang, injector.getInstance(Mustang.class));
     MustangFactory factory = injector.getInstance(MustangFactory.class);
     Mustang created = factory.create(Color.GREEN);

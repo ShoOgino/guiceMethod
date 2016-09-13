@@ -1,6 +1,7 @@
   @Override
   public void applyTo(Binder binder) {
-    getScoping().applyTo(
-        binder.withSource(getSource()).bind(getKey()).toProvider(getUserSuppliedProvider()));
+    getScoping()
+        .applyTo(
+            binder.withSource(getSource()).bind(getKey()).toProvider(getUserSuppliedProvider()));
   }
 

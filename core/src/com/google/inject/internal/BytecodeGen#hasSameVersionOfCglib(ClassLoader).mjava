@@ -1,5 +1,5 @@
   /**
-   * Returns true if the types classloader has the same version of cglib that BytecodeGen has.  This
+   * Returns true if the types classloader has the same version of cglib that BytecodeGen has. This
    * only returns false in strange OSGI situations, but it prevents us from using FastClass for non
    * public members.
    */
