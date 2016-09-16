@@ -1,4 +1,4 @@
-    Signature(Method method) {
+    Signature(TypeLiteral<?> typeLiteral, Method method) {
       this.name = method.getName();
       // We need to 'resolve' the parameters against the actual class type in case this method uses
       // type parameters.  This is so we can detect overrides of generic superclass methods where

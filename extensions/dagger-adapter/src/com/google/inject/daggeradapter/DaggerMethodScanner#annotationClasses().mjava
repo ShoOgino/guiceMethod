@@ -1,5 +1,5 @@
   @Override
   public Set<? extends Class<? extends Annotation>> annotationClasses() {
-    return ImmutableSet.of(dagger.Provides.class);
+    return ANNOTATIONS;
   }
 

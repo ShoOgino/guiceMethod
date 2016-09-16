@@ -1,5 +1,5 @@
   @Override
-  public synchronized void configure(Binder binder) {
+  public void configure(Binder binder) {
     for (ProviderMethod<?> providerMethod : getProviderMethods(binder)) {
       providerMethod.configure(binder);
     }
