@@ -1,0 +1,7 @@
+  /** Given a Key<T> will return a Key<Provider<T>> */
+  @SuppressWarnings("unchecked")
+  private static <T> Key<Provider<T>> getKeyOfProvider(Key<T> valueKey) {
+    return (Key<Provider<T>>)
+        valueKey.ofType(Types.providerOf(valueKey.getTypeLiteral().getType()));
+  }
+

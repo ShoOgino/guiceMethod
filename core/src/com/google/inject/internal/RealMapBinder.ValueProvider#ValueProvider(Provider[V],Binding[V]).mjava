@@ -1,5 +1,0 @@
-    ValueProvider(Provider<V> delegate, Binding<V> binding) {
-      this.delegate = delegate;
-      this.binding = binding;
-    }
-

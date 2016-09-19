@@ -1,4 +1,4 @@
-    private ProviderMapEntry(K key, Provider<V> provider, Key<V> valueKey) {
+    ProviderMapEntry(K key, Provider<V> provider, Key<V> valueKey) {
       this.key = key;
       this.provider = provider;
       this.valueKey = valueKey;

@@ -1,0 +1,12 @@
+    private BindingSelection(
+        TypeLiteral<K> keyType,
+        TypeLiteral<V> valueType,
+        Key<Map<K, V>> mapKey,
+        RealMultibinder<Map.Entry<K, Provider<V>>> entrySetBinder) {
+      this.keyType = keyType;
+      this.valueType = valueType;
+      this.mapKey = mapKey;
+      this.entrySetBinder = entrySetBinder;
+      this.initializationState = InitializationState.UNINITIALIZED;
+    }
+

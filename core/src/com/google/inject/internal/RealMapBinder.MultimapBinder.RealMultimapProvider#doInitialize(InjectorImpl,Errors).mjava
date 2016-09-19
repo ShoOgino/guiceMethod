@@ -1,0 +1,39 @@
+      @Override
+      protected void doInitialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        PerKeyData<K, V>[] typedPerKeyData =
+            new PerKeyData[bindingSelection.getMapBindings().size()];
+        perKeyDatas = typedPerKeyData;
+        ImmutableSet.Builder<Dependency<?>> dependenciesBuilder = ImmutableSet.builder();
+        List<Dependency<?>> dependenciesForKey = Lists.newArrayList();
+        int i = 0;
+        for (Map.Entry<K, Set<Binding<V>>> entry :
+            bindingSelection.getMultimapBindings().entrySet()) {
+          // Clear the list of dependencies because we're reusing it for each different key
+          dependenciesForKey.clear();
+
+          Set<Binding<V>> bindings = entry.getValue();
+          @SuppressWarnings({"unchecked", "rawtypes"})
+          Binding<V>[] typedBindings = new Binding[bindings.size()];
+          Binding<V>[] bindingsArray = typedBindings;
+          int j = 0;
+          for (Binding<V> binding : bindings) {
+            Dependency<V> dependency = Dependency.get(binding.getKey());
+            dependenciesBuilder.add(dependency);
+            dependenciesForKey.add(dependency);
+            bindingsArray[j] = binding;
+            j++;
+          }
+
+          @SuppressWarnings("unchecked")
+          SingleParameterInjector<V>[] injectors =
+              (SingleParameterInjector<V>[])
+                  injector.getParametersInjectors(dependenciesForKey, errors);
+
+          perKeyDatas[i] = new PerKeyData<K, V>(entry.getKey(), bindingsArray, injectors);
+          i++;
+        }
+
+        dependencies = dependenciesBuilder.build();
+      }
+

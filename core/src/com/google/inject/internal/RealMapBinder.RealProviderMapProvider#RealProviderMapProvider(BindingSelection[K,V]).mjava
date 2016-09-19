@@ -1,0 +1,4 @@
+    private RealProviderMapProvider(BindingSelection<K, V> bindingSelection) {
+      super(bindingSelection);
+    }
+

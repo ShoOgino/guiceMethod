@@ -1,0 +1,4 @@
+    private MultimapBinder(BindingSelection<K, V> bindingSelection) {
+      this.bindingSelection = bindingSelection;
+    }
+

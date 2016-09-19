@@ -2,6 +2,7 @@
     public boolean equals(Object obj) {
       return obj != null
           && this.getClass() == obj.getClass()
-          && equality.equals(((RealMapBinderProviderWithDependencies<?>) obj).equality);
+          && bindingSelection.equals(
+              ((RealMapBinderProviderWithDependencies<?, ?, ?>) obj).bindingSelection);
     }
 

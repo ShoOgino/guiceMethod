@@ -1,0 +1,5 @@
+    private ImmutableMap<K, Binding<V>> getMapBindings() {
+      checkConfiguration(isInitialized(), "MapBinder has not yet been initialized");
+      return mapBindings;
+    }
+

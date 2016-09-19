@@ -1,0 +1,4 @@
+    private boolean isInitialized() {
+      return initializationState == InitializationState.INITIALIZED;
+    }
+

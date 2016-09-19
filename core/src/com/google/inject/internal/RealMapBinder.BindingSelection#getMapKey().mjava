@@ -1,0 +1,4 @@
+    private Key<Map<K, V>> getMapKey() {
+      return mapKey;
+    }
+

@@ -1,5 +1,6 @@
   @Override
   public boolean equals(Object o) {
-    return o instanceof RealMapBinder && ((RealMapBinder<?, ?>) o).mapKey.equals(mapKey);
+    return o instanceof RealMapBinder
+        && ((RealMapBinder<?, ?>) o).bindingSelection.equals(bindingSelection);
   }
 

@@ -1,10 +1,10 @@
-    @SuppressWarnings("unchecked")
     @Override
-    public List<Entry<?, Binding<?>>> getEntries() {
-      if (isInitialized()) {
-        return (List) mapBindings; // safe because mapBindings is immutable
+    @SuppressWarnings("unchecked")
+    public List<Map.Entry<?, Binding<?>>> getEntries() {
+      if (bindingSelection.isInitialized()) {
+        return (List<Map.Entry<?, Binding<?>>>) (List<?>) bindingSelection.getEntries();
       } else {
-        throw new UnsupportedOperationException("getElements() not supported for module bindings");
+        throw new UnsupportedOperationException("getEntries() not supported for module bindings");
       }
     }
 

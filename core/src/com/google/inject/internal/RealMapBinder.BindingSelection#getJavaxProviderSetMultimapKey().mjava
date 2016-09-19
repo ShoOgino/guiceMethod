@@ -1,0 +1,10 @@
+    private Key<Map<K, Set<javax.inject.Provider<V>>>> getJavaxProviderSetMultimapKey() {
+      Key<Map<K, Set<javax.inject.Provider<V>>>> local = javaxProviderSetMultimapKey;
+      if (local == null) {
+        local =
+            javaxProviderSetMultimapKey =
+                mapKey.ofType(mapOfSetOfJavaxProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

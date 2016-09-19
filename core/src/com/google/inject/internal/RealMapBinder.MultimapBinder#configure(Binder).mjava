@@ -1,31 +1,35 @@
     @Override
     public void configure(Binder binder) {
-      ImmutableSet<Dependency<?>> dependencies =
-          ImmutableSet.<Dependency<?>>of(Dependency.get(entrySetBinder.getSetKey()));
-
       // Binds a Map<K, Set<Provider<V>>>
       Provider<Map<K, Set<Provider<V>>>> multimapProvider =
-          new RealProviderMultimapProvider<K, V>(entrySetBinder, multimapKey);
-      binder.bind(providerMultimapKey).toProvider(multimapProvider);
+          new RealProviderMultimapProvider<K, V>(bindingSelection.getMapKey());
+      binder.bind(bindingSelection.getProviderSetMultimapKey()).toProvider(multimapProvider);
 
       // Provide links from a few different public keys to the providerMultimapKey.
       // The collection this exposes is internally an ImmutableMap, so it's OK to massage
       // the guice Provider to javax Provider in the value (since the guice Provider implements
       // javax Provider).
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({"unchecked", "rawtypes"})
       Provider<Map<K, Set<javax.inject.Provider<V>>>> javaxProvider = (Provider) multimapProvider;
-      binder.bind(javaxProviderMultimapKey).toProvider(javaxProvider);
+      binder.bind(bindingSelection.getJavaxProviderSetMultimapKey()).toProvider(javaxProvider);
 
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({"unchecked", "rawtypes"})
       Provider<Map<K, Collection<Provider<V>>>> collectionProvider = (Provider) multimapProvider;
-      binder.bind(providerCollectionMultimapKey).toProvider(collectionProvider);
+      binder
+          .bind(bindingSelection.getProviderCollectionMultimapKey())
+          .toProvider(collectionProvider);
 
-      @SuppressWarnings("unchecked")
+      @SuppressWarnings({"unchecked", "rawtypes"})
       Provider<Map<K, Collection<javax.inject.Provider<V>>>> collectionJavaxProvider =
           (Provider) multimapProvider;
-      binder.bind(javaxProviderCollectionMultimapKey).toProvider(collectionJavaxProvider);
+      binder
+          .bind(bindingSelection.getJavaxProviderCollectionMultimapKey())
+          .toProvider(collectionJavaxProvider);
 
       // Binds a Map<K, Set<V>>
-      binder.bind(multimapKey).toProvider(new RealMultimapProvider(dependencies, multimapProvider));
+      @SuppressWarnings({"unchecked", "rawtypes"})
+      Provider<Map<K, Set<V>>> realMultimapProvider =
+          new RealMultimapProvider(bindingSelection.getMapKey());
+      binder.bind(bindingSelection.getMultimapKey()).toProvider(realMultimapProvider);
     }
 

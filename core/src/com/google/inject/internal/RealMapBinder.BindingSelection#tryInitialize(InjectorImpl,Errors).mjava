@@ -1,0 +1,114 @@
+    /**
+     * Will initialize internal data structures.
+     *
+     * @return {@code true} if initialization was successful, {@code false} if there were errors
+     */
+    private boolean tryInitialize(InjectorImpl injector, Errors errors) {
+      // Every one of our providers will call this method, so only execute the logic once.
+      if (initializationState != InitializationState.UNINITIALIZED) {
+        return initializationState != InitializationState.HAS_ERRORS;
+      }
+
+      // Multiple different modules can all contribute to the same MapBinder, and if any
+      // one of them permits duplicates, then the map binder as a whole will permit duplicates.
+      // Since permitDuplicates() may not have been called on this instance, we need to go
+      // to the injector to see if permitDuplicates was set.
+      permitsDuplicates = entrySetBinder.permitsDuplicates(injector);
+
+      // We now build the Map<K, Set<Binding<V>>> from the entrySetBinder.
+      // The entrySetBinder contains all of the ProviderMapEntrys, and once
+      // we have those, it's easy to iterate through them to organize them by K.
+      Map<K, ImmutableSet.Builder<Binding<V>>> bindingMultimapMutable =
+          new LinkedHashMap<K, ImmutableSet.Builder<Binding<V>>>();
+      Map<K, Binding<V>> bindingMapMutable = new LinkedHashMap<K, Binding<V>>();
+      Multimap<K, Indexer.IndexedBinding> index = HashMultimap.create();
+      Indexer indexer = new Indexer(injector);
+      Multimap<K, Binding<V>> duplicates = null;
+
+      ImmutableList.Builder<Map.Entry<K, Binding<V>>> entriesBuilder = ImmutableList.builder();
+
+      // We get all of the Bindings that were put into the entrySetBinder
+      for (Binding<Map.Entry<K, Provider<V>>> binding :
+          injector.findBindingsByType(entrySetBinder.getElementTypeLiteral())) {
+        if (entrySetBinder.containsElement(binding)) {
+
+          // Protected by findBindingByType() and the fact that all providers are added by us
+          // in addBinding(). It would theoretically be possible for someone to directly
+          // add their own binding to the entrySetBinder, but they shouldn't do that.
+          @SuppressWarnings({"unchecked", "rawtypes"})
+          ProviderInstanceBinding<ProviderMapEntry<K, V>> entryBinding =
+              (ProviderInstanceBinding) binding;
+
+          // We added all these bindings initially, so we know they are ProviderMapEntrys
+          @SuppressWarnings({"unchecked", "rawtypes"})
+          ProviderMapEntry<K, V> entry = (ProviderMapEntry) entryBinding.getUserSuppliedProvider();
+          K key = entry.getKey();
+
+          Key<V> valueKey = entry.getValueKey();
+          Binding<V> valueBinding = injector.getExistingBinding(valueKey);
+
+          // Use the indexer to de-dupe user bindings. This is needed because of the
+          // uniqueId in RealElement. The uniqueId intentionally circumvents the regular
+          // Guice deduplication, so we need to re-implement our own here, ignoring
+          // uniqueId.
+          if (index.put(key, valueBinding.acceptTargetVisitor(indexer))) {
+
+            entriesBuilder.add(Maps.immutableEntry(key, valueBinding));
+
+            Binding<V> previous = bindingMapMutable.put(key, valueBinding);
+            // Check if this is a duplicate binding
+            if (previous != null && !permitsDuplicates) {
+              if (duplicates == null) {
+                // This is linked for both keys and values to maintain order
+                duplicates = LinkedHashMultimap.create();
+              }
+
+              // We add both the previous and the current value to the duplicates map.
+              // This is because if there are three duplicates, we will only execute this code
+              // for the second and third, but we want all three values to display a helpful
+              // error message. We rely on the multimap to dedupe repeated values.
+              duplicates.put(key, previous);
+              duplicates.put(key, valueBinding);
+            }
+
+            // Don't do extra work unless we need to
+            if (permitsDuplicates) {
+              // Create a set builder for this key if it's the first time we've seen it
+              if (!bindingMultimapMutable.containsKey(key)) {
+                bindingMultimapMutable.put(key, ImmutableSet.<Binding<V>>builder());
+              }
+
+              // Add the Binding<V>
+              bindingMultimapMutable.get(key).add(valueBinding);
+            }
+          }
+        }
+      }
+
+      // It is safe to check if duplicates is non-null because if duplicates are allowed,
+      // we don't build up this data structure
+      if (duplicates != null) {
+        initializationState = InitializationState.HAS_ERRORS;
+        reportDuplicateKeysError(duplicates, errors);
+
+        return false;
+      }
+
+      // Build all of the ImmutableSet.Builders,
+      // transforming from Map<K, ImmutableSet.Builder<Binding<V>>> to
+      // ImmutableMap<K, Set<Binding<V>>>
+      ImmutableMap.Builder<K, Set<Binding<V>>> bindingsMultimapBuilder = ImmutableMap.builder();
+      for (Map.Entry<K, ImmutableSet.Builder<Binding<V>>> entry :
+          bindingMultimapMutable.entrySet()) {
+        bindingsMultimapBuilder.put(entry.getKey(), entry.getValue().build());
+      }
+      mapBindings = ImmutableMap.copyOf(bindingMapMutable);
+      multimapBindings = bindingsMultimapBuilder.build();
+
+      entries = entriesBuilder.build();
+
+      initializationState = InitializationState.INITIALIZED;
+
+      return true;
+    }
+

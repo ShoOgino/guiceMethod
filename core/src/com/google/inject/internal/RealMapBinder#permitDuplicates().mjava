@@ -1,12 +1,6 @@
   public void permitDuplicates() {
+    checkConfiguration(!bindingSelection.isInitialized(), "MapBinder was already initialized");
     entrySetBinder.permitDuplicates();
-    binder.install(
-        new MultimapBinder<K, V>(
-            multimapKey,
-            providerSetMultimapKey,
-            javaxProviderSetMultimapKey,
-            providerCollectionMultimapKey,
-            javaxProviderCollectionMultimapKey,
-            entrySetBinder));
+    binder.install(new MultimapBinder<K, V>(bindingSelection));
   }
 

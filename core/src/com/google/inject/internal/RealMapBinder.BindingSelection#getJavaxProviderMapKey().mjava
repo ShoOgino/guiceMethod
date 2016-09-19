@@ -1,0 +1,8 @@
+    private Key<Map<K, javax.inject.Provider<V>>> getJavaxProviderMapKey() {
+      Key<Map<K, javax.inject.Provider<V>>> local = javaxProviderMapKey;
+      if (local == null) {
+        local = javaxProviderMapKey = mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

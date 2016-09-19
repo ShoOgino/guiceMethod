@@ -1,0 +1,4 @@
+    private BindingSelection<K, V> getBindingSelection() {
+      return bindingSelection;
+    }
+

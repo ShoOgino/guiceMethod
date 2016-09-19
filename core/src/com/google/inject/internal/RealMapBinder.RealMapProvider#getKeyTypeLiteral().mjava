@@ -1,5 +1,5 @@
     @Override
-    public TypeLiteral<?> getKeyTypeLiteral() {
-      return keyType;
+    public TypeLiteral<K> getKeyTypeLiteral() {
+      return bindingSelection.getKeyType();
     }
 

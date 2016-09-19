@@ -1,0 +1,11 @@
+    private RealMultimapBinderProviderWithDependencies(Key<Map<K, V>> mapKey) {
+      // While MapBinders only depend on bindings created in modules so we could theoretically
+      // initialize eagerly, they also depend on
+      // 1. findBindingsByType returning results
+      // 2. being able to call BindingImpl.acceptTargetVisitor
+      // neither of those is available during eager initialization, so we use DELAYED
+      super(InitializationTiming.DELAYED);
+
+      this.mapKey = mapKey;
+    }
+

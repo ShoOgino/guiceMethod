@@ -1,0 +1,26 @@
+    @Override
+    protected void doInitialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+      @SuppressWarnings("unchecked")
+      K[] keysArray = (K[]) new Object[bindingSelection.getMapBindings().size()];
+      keys = keysArray;
+      ImmutableSet.Builder<Dependency<?>> dependenciesBuilder = ImmutableSet.builder();
+      int i = 0;
+      for (Map.Entry<K, Binding<V>> entry : bindingSelection.getMapBindings().entrySet()) {
+        dependenciesBuilder.add(Dependency.get(entry.getValue().getKey()));
+        keys[i] = entry.getKey();
+        i++;
+      }
+
+      ImmutableSet<Dependency<?>> localDependencies = dependenciesBuilder.build();
+      dependencies = localDependencies;
+
+      List<Dependency<?>> dependenciesList = localDependencies.asList();
+
+      // We know the type because we built up our own sets of dependencies, it's just
+      // that the interface uses a "?" generic
+      @SuppressWarnings("unchecked")
+      SingleParameterInjector<V>[] typedInjectors =
+          (SingleParameterInjector<V>[]) injector.getParametersInjectors(dependenciesList, errors);
+      injectors = typedInjectors;
+    }
+

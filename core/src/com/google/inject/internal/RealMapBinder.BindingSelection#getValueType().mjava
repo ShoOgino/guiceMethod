@@ -1,0 +1,4 @@
+    private TypeLiteral<V> getValueType() {
+      return valueType;
+    }
+

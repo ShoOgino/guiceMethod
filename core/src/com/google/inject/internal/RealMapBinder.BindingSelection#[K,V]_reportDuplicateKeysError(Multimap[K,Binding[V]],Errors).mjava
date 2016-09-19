@@ -1,0 +1,23 @@
+    private static <K, V> void reportDuplicateKeysError(
+        Multimap<K, Binding<V>> duplicates, Errors errors) {
+      StringBuilder sb = new StringBuilder("Map injection failed due to duplicated key ");
+      boolean first = true;
+      for (Map.Entry<K, Collection<Binding<V>>> entry : duplicates.asMap().entrySet()) {
+        K dupKey = entry.getKey();
+
+        if (first) {
+          first = false;
+          sb.append("\"" + dupKey + "\", from bindings:\n");
+        } else {
+          sb.append("\n and key: \"" + dupKey + "\", from bindings:\n");
+        }
+
+        for (Binding<V> dup : entry.getValue()) {
+          sb.append("\t at " + Errors.convert(dup.getSource()) + "\n");
+        }
+      }
+
+      // TODO(user): Add a different error for every duplicated key
+      errors.addMessage(sb.toString());
+    }
+

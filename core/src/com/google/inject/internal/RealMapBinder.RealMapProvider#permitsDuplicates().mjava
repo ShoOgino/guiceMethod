@@ -1,7 +1,7 @@
     @Override
     public boolean permitsDuplicates() {
-      if (isInitialized()) {
-        return permitDuplicates;
+      if (bindingSelection.isInitialized()) {
+        return bindingSelection.permitsDuplicates();
       } else {
         throw new UnsupportedOperationException(
             "permitsDuplicates() not supported for module bindings");

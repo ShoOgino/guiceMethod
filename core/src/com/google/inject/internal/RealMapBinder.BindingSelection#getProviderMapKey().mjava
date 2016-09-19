@@ -1,0 +1,8 @@
+    private Key<Map<K, Provider<V>>> getProviderMapKey() {
+      Key<Map<K, Provider<V>>> local = providerMapKey;
+      if (local == null) {
+        local = providerMapKey = mapKey.ofType(mapOfProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

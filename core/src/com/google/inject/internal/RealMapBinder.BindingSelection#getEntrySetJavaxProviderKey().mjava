@@ -1,0 +1,10 @@
+    private Key<Set<Map.Entry<K, javax.inject.Provider<V>>>> getEntrySetJavaxProviderKey() {
+      Key<Set<Map.Entry<K, javax.inject.Provider<V>>>> local = entrySetJavaxProviderKey;
+      if (local == null) {
+        local =
+            entrySetJavaxProviderKey =
+                mapKey.ofType(setOfEntryOfJavaxProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

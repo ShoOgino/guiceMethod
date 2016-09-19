@@ -1,0 +1,19 @@
+      @Override
+      protected void doInitialize(InjectorImpl injector, Errors errors) {
+        ImmutableMap.Builder<K, Set<Provider<V>>> multimapOfProvidersBuilder =
+            ImmutableMap.builder();
+        ImmutableSet.Builder<Dependency<?>> dependenciesBuilder = ImmutableSet.builder();
+        for (Map.Entry<K, Set<Binding<V>>> entry :
+            bindingSelection.getMultimapBindings().entrySet()) {
+          ImmutableSet.Builder<Provider<V>> providersBuilder = ImmutableSet.builder();
+          for (Binding<V> binding : entry.getValue()) {
+            providersBuilder.add(binding.getProvider());
+            dependenciesBuilder.add(Dependency.get(getKeyOfProvider(binding.getKey())));
+          }
+
+          multimapOfProvidersBuilder.put(entry.getKey(), providersBuilder.build());
+        }
+        multimapOfProviders = multimapOfProvidersBuilder.build();
+        dependencies = dependenciesBuilder.build();
+      }
+

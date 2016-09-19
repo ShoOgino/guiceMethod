@@ -1,0 +1,10 @@
+    private Key<Map<K, Collection<Provider<V>>>> getProviderCollectionMultimapKey() {
+      Key<Map<K, Collection<Provider<V>>>> local = providerCollectionMultimapKey;
+      if (local == null) {
+        local =
+            providerCollectionMultimapKey =
+                mapKey.ofType(mapOfCollectionOfProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

@@ -2,7 +2,7 @@
   static <K, V>
       TypeLiteral<Set<Map.Entry<K, javax.inject.Provider<V>>>> setOfEntryOfJavaxProviderOf(
           TypeLiteral<K> keyType, TypeLiteral<V> valueType) {
-    return (TypeLiteral<Set<Entry<K, javax.inject.Provider<V>>>>)
+    return (TypeLiteral<Set<Map.Entry<K, javax.inject.Provider<V>>>>)
         TypeLiteral.get(Types.setOf(entryOfJavaxProviderOf(keyType, valueType).getType()));
   }
 

@@ -1,0 +1,9 @@
+    private boolean permitsDuplicates() {
+      if (isInitialized()) {
+        return permitsDuplicates;
+      } else {
+        throw new UnsupportedOperationException(
+            "permitsDuplicates() not supported for module bindings");
+      }
+    }
+

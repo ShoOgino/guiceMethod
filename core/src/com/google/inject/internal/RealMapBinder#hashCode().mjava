@@ -1,5 +1,5 @@
   @Override
   public int hashCode() {
-    return mapKey.hashCode();
+    return bindingSelection.hashCode();
   }
 

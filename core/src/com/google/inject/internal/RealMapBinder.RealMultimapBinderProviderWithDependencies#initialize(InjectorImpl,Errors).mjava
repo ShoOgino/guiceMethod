@@ -1,0 +1,21 @@
+    /**
+     * This will get the authoritative {@link BindingSelection} from the map provider. This
+     * guarantees that everyone has the same instance of the bindingSelection and sees consistent
+     * state.
+     */
+    @Override
+    final void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+      Binding<Map<K, V>> mapBinding = injector.getExistingBinding(mapKey);
+      ProviderInstanceBinding<Map<K, V>> providerInstanceBinding =
+          (ProviderInstanceBinding<Map<K, V>>) mapBinding;
+      @SuppressWarnings("unchecked")
+      RealMapProvider<K, V> mapProvider =
+          (RealMapProvider<K, V>) providerInstanceBinding.getUserSuppliedProvider();
+
+      this.bindingSelection = mapProvider.getBindingSelection();
+
+      if (bindingSelection.tryInitialize(injector, errors)) {
+        doInitialize(injector, errors);
+      }
+    }
+

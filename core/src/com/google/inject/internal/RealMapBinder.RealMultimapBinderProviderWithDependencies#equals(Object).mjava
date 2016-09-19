@@ -1,0 +1,7 @@
+    @Override
+    public boolean equals(Object obj) {
+      return obj != null
+          && this.getClass() == obj.getClass()
+          && mapKey.equals(((RealMultimapBinderProviderWithDependencies<?, ?, ?>) obj).mapKey);
+    }
+

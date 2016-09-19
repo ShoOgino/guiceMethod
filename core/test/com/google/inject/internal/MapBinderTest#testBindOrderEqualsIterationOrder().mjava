@@ -1,6 +1,4 @@
-  /**
-   * Our implementation maintains order, but doesn't guarantee it in the API spec.
-   */
+  /** Our implementation maintains order, but doesn't guarantee it in the API spec. */
   // TODO: specify the iteration order
   public void testBindOrderEqualsIterationOrder() {
     Injector injector =

@@ -1,0 +1,4 @@
+    private RealMultibinder<Map.Entry<K, Provider<V>>> getEntrySetBinder() {
+      return entrySetBinder;
+    }
+

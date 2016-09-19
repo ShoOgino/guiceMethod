@@ -1,0 +1,11 @@
+    private Key<Map<K, Collection<javax.inject.Provider<V>>>>
+        getJavaxProviderCollectionMultimapKey() {
+      Key<Map<K, Collection<javax.inject.Provider<V>>>> local = javaxProviderCollectionMultimapKey;
+      if (local == null) {
+        local =
+            javaxProviderCollectionMultimapKey =
+                mapKey.ofType(mapOfCollectionOfJavaxProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

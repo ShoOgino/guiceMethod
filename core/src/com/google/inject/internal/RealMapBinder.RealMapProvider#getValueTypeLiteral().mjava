@@ -1,5 +1,5 @@
     @Override
-    public TypeLiteral<?> getValueTypeLiteral() {
-      return valueType;
+    public TypeLiteral<V> getValueTypeLiteral() {
+      return bindingSelection.getValueType();
     }
 

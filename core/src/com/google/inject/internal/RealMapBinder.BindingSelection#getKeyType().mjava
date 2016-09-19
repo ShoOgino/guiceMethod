@@ -1,0 +1,4 @@
+    private TypeLiteral<K> getKeyType() {
+      return keyType;
+    }
+

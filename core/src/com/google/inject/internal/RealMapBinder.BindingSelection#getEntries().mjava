@@ -1,0 +1,5 @@
+    private ImmutableList<Map.Entry<K, Binding<V>>> getEntries() {
+      checkConfiguration(isInitialized(), "MapBinder has not yet been initialized");
+      return entries;
+    }
+

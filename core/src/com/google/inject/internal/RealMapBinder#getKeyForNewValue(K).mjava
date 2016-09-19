@@ -1,11 +1,18 @@
   /** Adds a binding to the map for the given key. */
   Key<V> getKeyForNewValue(K key) {
     checkNotNull(key, "key");
-    checkConfiguration(!isInitialized(), "MapBinder was already initialized");
+    checkConfiguration(!bindingSelection.isInitialized(), "MapBinder was already initialized");
+    RealMultibinder<Map.Entry<K, Provider<V>>> entrySetBinder =
+        bindingSelection.getEntrySetBinder();
 
     Key<V> valueKey =
         Key.get(
-            valueType, new RealElement(entrySetBinder.getSetName(), MAPBINDER, keyType.toString()));
+            bindingSelection.getValueType(),
+            new RealElement(
+                entrySetBinder.getSetName(), MAPBINDER, bindingSelection.getKeyType().toString()));
+    // TODO(user): Convert ProviderMapEntry to an InternalFactory
+    // when this happens, we can remove the ProviderLookup check in
+    // BindingSelection.containsElement()
     entrySetBinder
         .addBinding()
         .toProvider(new ProviderMapEntry<K, V>(key, binder.getProvider(valueKey), valueKey));

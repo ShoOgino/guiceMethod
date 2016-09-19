@@ -1,0 +1,8 @@
+    private Key<Map<K, Set<V>>> getMultimapKey() {
+      Key<Map<K, Set<V>>> local = multimapKey;
+      if (local == null) {
+        local = multimapKey = mapKey.ofType(mapOf(keyType, setOf(valueType)));
+      }
+      return local;
+    }
+

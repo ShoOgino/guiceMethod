@@ -1,4 +1,4 @@
-  public TypeLiteral<?> getElementTypeLiteral() {
+  TypeLiteral<T> getElementTypeLiteral() {
     return bindingSelection.getElementTypeLiteral();
   }
 

@@ -1,0 +1,4 @@
+      private RealMultimapProvider(Key<Map<K, V>> mapKey) {
+        super(mapKey);
+      }
+

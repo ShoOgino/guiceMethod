@@ -1,0 +1,8 @@
+    private Key<Map<K, Set<Provider<V>>>> getProviderSetMultimapKey() {
+      Key<Map<K, Set<Provider<V>>>> local = providerSetMultimapKey;
+      if (local == null) {
+        local = providerSetMultimapKey = mapKey.ofType(mapOfSetOfProviderOf(keyType, valueType));
+      }
+      return local;
+    }
+

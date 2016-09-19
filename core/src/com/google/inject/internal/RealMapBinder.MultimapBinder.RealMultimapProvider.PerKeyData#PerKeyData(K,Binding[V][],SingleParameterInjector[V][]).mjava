@@ -1,0 +1,8 @@
+        private PerKeyData(K key, Binding<V>[] bindings, SingleParameterInjector<V>[] injectors) {
+          Preconditions.checkArgument(bindings.length == injectors.length);
+
+          this.key = key;
+          this.bindings = bindings;
+          this.injectors = injectors;
+        }
+

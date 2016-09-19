@@ -1,0 +1,27 @@
+    private boolean containsElement(Element element) {
+      if (entrySetBinder.containsElement(element)) {
+        return true;
+      }
+
+      Key<?> key;
+      if (element instanceof Binding) {
+        key = ((Binding<?>) element).getKey();
+      } else if (element instanceof ProviderLookup) {
+        key = ((ProviderLookup<?>) element).getKey();
+      } else {
+        return false; // cannot match;
+      }
+
+      return key.equals(getMapKey())
+          || key.equals(getProviderMapKey())
+          || key.equals(getJavaxProviderMapKey())
+          || key.equals(getMultimapKey())
+          || key.equals(getProviderSetMultimapKey())
+          || key.equals(getJavaxProviderSetMultimapKey())
+          || key.equals(getProviderCollectionMultimapKey())
+          || key.equals(getJavaxProviderCollectionMultimapKey())
+          || key.equals(entrySetBinder.getSetKey())
+          || key.equals(getEntrySetJavaxProviderKey())
+          || matchesValueKey(key);
+    }
+

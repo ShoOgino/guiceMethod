@@ -1,0 +1,5 @@
+    private ImmutableMap<K, Set<Binding<V>>> getMultimapBindings() {
+      checkConfiguration(isInitialized(), "MapBinder has not yet been initialized");
+      return multimapBindings;
+    }
+
