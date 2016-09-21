@@ -1,0 +1,6 @@
+    private ErrorsException newNullEntryException(int i, Errors errors) {
+      errors.addMessage(
+          "Set injection failed due to null element bound at: %s", bindings.get(i).getSource());
+      return errors.toException();
+    }
+

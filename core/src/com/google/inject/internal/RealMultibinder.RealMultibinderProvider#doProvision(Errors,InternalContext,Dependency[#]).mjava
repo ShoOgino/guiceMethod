@@ -6,22 +6,25 @@
         // if localInjectors == null, then we have no bindings so return the empty set.
         return ImmutableSet.of();
       }
-      boolean localPermitsDuplicates = permitDuplicates;
-      int size = localInjectors.length;
-      LinkedHashSet<T> result = Sets.newLinkedHashSetWithExpectedSize(size);
-      for (int i = 0; i < size; i++) {
+      // Ideally we would just add to an ImmutableSet.Builder, but if we did that and there were
+      // duplicates we wouldn't be able to tell which one was the duplicate.  So to manage this we
+      // first put everything into an array and then construct the set.  This way if something gets
+      // dropped we can figure out what it is.
+      @SuppressWarnings("unchecked")
+      T[] values = (T[]) new Object[localInjectors.length];
+      for (int i = 0; i < localInjectors.length; i++) {
         SingleParameterInjector<T> parameterInjector = localInjectors[i];
         T newValue = parameterInjector.inject(errors, context);
         if (newValue == null) {
-          errors.addMessage(
-              "Set injection failed due to null element bound at: %s", bindings.get(i).getSource());
-          throw errors.toException();
+          throw newNullEntryException(i, errors);
         }
-        boolean uniqueValue = result.add(newValue);
-        if (!uniqueValue && !localPermitsDuplicates) {
-          throw newDuplicateValuesException(bindings, result, bindings.get(i), newValue, errors);
-        }
+        values[i] = newValue;
       }
-      return Collections.unmodifiableSet(result);
+      ImmutableSet<T> set = ImmutableSet.copyOf(values);
+      // There are fewer items in the set than the array.  Figure out which one got dropped.
+      if (!permitDuplicates && set.size() < values.length) {
+        throw newDuplicateValuesException(set, values, errors);
+      }
+      return set;
     }
 
