@@ -1,0 +1,23 @@
+  @SuppressWarnings("rawtypes")
+  public void testGetEntries() {
+    List<com.google.inject.spi.Element> elements =
+        Elements.getElements(new MapBinderWithTwoEntriesModule());
+
+    // Get the MapBinderBinding
+    MapBinderBinding<?> mapBinderBinding = getMapBinderBinding(elements);
+
+    // Execute the call to getEntries
+    List<Map.Entry<?, Binding<?>>> mapEntries = mapBinderBinding.getEntries(elements);
+
+    // Assert on the results
+    Map.Entry<?, Binding<?>> firstEntry = mapEntries.get(0);
+    assertEquals("keyOne", firstEntry.getKey());
+    Binding<?> firstBinding = firstEntry.getValue();
+    assertEquals("valueOne", ((InstanceBinding) firstBinding).getInstance());
+
+    Map.Entry<?, Binding<?>> secondEntry = mapEntries.get(1);
+    assertEquals("keyTwo", secondEntry.getKey());
+    Binding<?> secondBinding = secondEntry.getValue();
+    assertEquals("valueTwo", ((InstanceBinding) secondBinding).getInstance());
+  }
+

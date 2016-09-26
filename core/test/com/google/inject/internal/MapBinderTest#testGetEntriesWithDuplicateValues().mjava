@@ -1,0 +1,33 @@
+  @SuppressWarnings("rawtypes")
+  public void testGetEntriesWithDuplicateValues() {
+    // Set up the module
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            MapBinder<String, String> mapBinder =
+                MapBinder.newMapBinder(binder(), String.class, String.class);
+            mapBinder.addBinding("A").toInstance("a");
+            mapBinder.addBinding("A").toInstance("a");
+          }
+        };
+
+    // Get the MapBinderBinding
+    List<com.google.inject.spi.Element> elements = Elements.getElements(module);
+    MapBinderBinding<?> mapBinderBinding = getMapBinderBinding(elements);
+
+    // Execute the call to getEntries
+    List<Map.Entry<?, Binding<?>>> mapEntries = mapBinderBinding.getEntries(elements);
+
+    // Assert on the results
+    Map.Entry<?, Binding<?>> firstEntry = mapEntries.get(0);
+    assertEquals("A", firstEntry.getKey());
+    Binding<?> firstBinding = firstEntry.getValue();
+    assertEquals("a", ((InstanceBinding) firstBinding).getInstance());
+
+    Map.Entry<?, Binding<?>> secondEntry = mapEntries.get(1);
+    assertEquals("A", secondEntry.getKey());
+    Binding<?> secondBinding = secondEntry.getValue();
+    assertEquals("a", ((InstanceBinding) secondBinding).getInstance());
+  }
+

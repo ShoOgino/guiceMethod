@@ -1,0 +1,28 @@
+  @SuppressWarnings("rawtypes")
+  public void testGetEntriesMissingProviderMapEntry() {
+    List<com.google.inject.spi.Element> elements =
+        Lists.newArrayList(Elements.getElements(new MapBinderWithTwoEntriesModule()));
+
+    // Get the MapBinderBinding
+    MapBinderBinding<?> mapBinderBinding = getMapBinderBinding(elements);
+
+    // Remove the ProviderMapEntry for "a" from the elements
+    com.google.inject.spi.Element providerMapEntryForA = getProviderMapEntry("keyOne", elements);
+    boolean removeSuccessful = elements.remove(providerMapEntryForA);
+    assertTrue(removeSuccessful);
+
+    // Execute the call to getEntries, we expect it to fail
+    try {
+      mapBinderBinding.getEntries(elements);
+      fail();
+    } catch (IllegalArgumentException expected) {
+      assertContains(
+          expected.getMessage(),
+          "Expected a 1:1 mapping from map keys to values.",
+          "Found these Bindings that were missing an associated entry:",
+          "java.lang.String",
+          "bound at:",
+          "MapBinderWithTwoEntriesModule");
+    }
+  }
+

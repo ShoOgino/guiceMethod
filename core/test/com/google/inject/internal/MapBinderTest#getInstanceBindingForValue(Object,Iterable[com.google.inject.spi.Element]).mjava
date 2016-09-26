@@ -1,0 +1,18 @@
+  /**
+   * Will find and return the {@link com.google.inject.spi.Element} that is an {@link
+   * InstanceBinding} and binds {@code vToFind}.
+   */
+  private static com.google.inject.spi.Element getInstanceBindingForValue(
+      Object vToFind, Iterable<com.google.inject.spi.Element> elements) {
+    for (com.google.inject.spi.Element element : elements) {
+      if (element instanceof InstanceBinding) {
+        Object instanceFromBinding = ((InstanceBinding<?>) element).getInstance();
+        if (vToFind.equals(instanceFromBinding)) {
+          return element;
+        }
+      }
+    }
+    // No matching binding found
+    return null;
+  }
+

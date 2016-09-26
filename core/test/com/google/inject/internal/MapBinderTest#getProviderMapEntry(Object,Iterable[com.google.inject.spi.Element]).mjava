@@ -1,0 +1,26 @@
+  /**
+   * Will find and return the {@link com.google.inject.spi.Element} that is a {@link
+   * ProviderMapEntry} with a key that matches the one supplied by the user in {@code k}.
+   *
+   * <p>Will return {@code null} if it cannot be found.
+   */
+  private static com.google.inject.spi.Element getProviderMapEntry(
+      Object kToFind, Iterable<com.google.inject.spi.Element> elements) {
+    for (com.google.inject.spi.Element element : elements) {
+      if (element instanceof ProviderInstanceBinding) {
+        javax.inject.Provider<?> usp =
+            ((ProviderInstanceBinding<?>) element).getUserSuppliedProvider();
+        if (usp instanceof ProviderMapEntry) {
+          ProviderMapEntry<?, ?> pme = (ProviderMapEntry<?, ?>) usp;
+
+          // Check if the key from the ProviderMapEntry matches the one we're looking for
+          if (kToFind.equals(pme.getKey())) {
+            return element;
+          }
+        }
+      }
+    }
+    // No matching ProviderMapEntry found
+    return null;
+  }
+

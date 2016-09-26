@@ -1,0 +1,20 @@
+  /**
+   * Given an {@link Iterable} of elements, return the one that is a {@link MapBinderBinding}, or
+   * {@code null} if it cannot be found.
+   */
+  private static MapBinderBinding<?> getMapBinderBinding(
+      Iterable<com.google.inject.spi.Element> elements) {
+    final Collector collector = new Collector();
+    for (com.google.inject.spi.Element element : elements) {
+      element.acceptVisitor(
+          new DefaultElementVisitor<Void>() {
+            @Override
+            public <T> Void visit(Binding<T> binding) {
+              binding.acceptTargetVisitor(collector);
+              return null;
+            }
+          });
+    }
+    return collector.mapbinding;
+  }
+
