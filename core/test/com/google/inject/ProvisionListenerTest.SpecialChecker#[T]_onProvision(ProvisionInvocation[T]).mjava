@@ -12,5 +12,6 @@
       assertContains(
           provision.getDependencyChain().get(1).getBindingSource(),
           notifyType.getName() + ".class(");
+
     }
 

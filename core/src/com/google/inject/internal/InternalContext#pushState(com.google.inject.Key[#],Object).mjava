@@ -1,5 +1,5 @@
   /** Adds to the state without setting the dependency. */
-  void pushState(Key<?> key, Object source) {
+  void pushState(com.google.inject.Key<?> key, Object source) {
     doPushState(key, source);
   }
 

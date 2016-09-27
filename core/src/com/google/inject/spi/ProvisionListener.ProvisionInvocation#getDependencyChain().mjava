@@ -34,5 +34,5 @@
      * {@link HasDependencies#getDependencies()}), so you could infer some of the missing edges..
      */
     @Deprecated
-    public abstract List<DependencyAndSource> getDependencyChain();
+    public abstract java.util.List<DependencyAndSource> getDependencyChain();
 

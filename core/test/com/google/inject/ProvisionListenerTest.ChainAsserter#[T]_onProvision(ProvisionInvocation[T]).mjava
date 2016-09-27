@@ -1,10 +1,11 @@
     @Override
     public <T> void onProvision(ProvisionInvocation<T> provision) {
       List<Class<?>> actual = Lists.newArrayList();
-      for (DependencyAndSource dep : provision.getDependencyChain()) {
+      for (com.google.inject.spi.DependencyAndSource dep : provision.getDependencyChain()) {
         actual.add(dep.getDependency().getKey().getRawType());
       }
       assertEquals(expected, actual);
+
       provisionList.add(provision.getBinding().getKey().getRawType());
     }
 
