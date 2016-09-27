@@ -24,21 +24,17 @@
                   }
                 });
         // lock that is a part of a potential locks cycle, starts with current lock
-        ReentrantCycleDetectingLock lockOwnerWaitingOn = this;
+        ReentrantCycleDetectingLock<?> lockOwnerWaitingOn = this;
         // try to find a dependency path between lock's owner thread and a current thread
         while (lockOwnerWaitingOn != null && lockOwnerWaitingOn.lockOwnerThreadId != null) {
           Long threadOwnerThreadWaits = lockOwnerWaitingOn.lockOwnerThreadId;
           // in case locks cycle exists lock we're waiting for is part of it
-          potentialLocksCycle.putAll(
-              threadOwnerThreadWaits,
-              getAllLockIdsAfter(threadOwnerThreadWaits, lockOwnerWaitingOn));
-
+          lockOwnerWaitingOn =
+              addAllLockIdsAfter(threadOwnerThreadWaits, lockOwnerWaitingOn, potentialLocksCycle);
           if (threadOwnerThreadWaits == currentThreadId) {
             // owner thread depends on current thread, cycle detected
             return potentialLocksCycle;
           }
-          // going for the next thread we wait on indirectly
-          lockOwnerWaitingOn = lockThreadIsWaitingOn.get(threadOwnerThreadWaits);
         }
         // no dependency path from an owner thread to a current thread
         return ImmutableListMultimap.of();

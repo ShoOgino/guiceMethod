@@ -1,0 +1,9 @@
+  private static <T> Callable<T> fetchClass(final Injector injector, final Class<T> clazz) {
+    return new Callable<T>() {
+      @Override
+      public T call() {
+        return injector.getInstance(clazz);
+      }
+    };
+  }
+

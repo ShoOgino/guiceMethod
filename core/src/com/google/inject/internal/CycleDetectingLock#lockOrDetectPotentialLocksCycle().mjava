@@ -3,8 +3,9 @@
    * successfully owned, returns an empty map indicating no detected potential deadlocks.
    *
    * <p>Otherwise, a map indicating threads involved in a potential deadlock are returned. Map is
-   * ordered by dependency cycle and lists locks for each thread that are part of the loop in order.
-   * Returned map is created atomically.
+   * ordered by dependency cycle and lists locks for each thread that are part of the loop in order,
+   * the last lock in the list is the one that the thread is currently waiting for. Returned map is
+   * created atomically.
    *
    * <p>In case no cycle is detected performance is O(threads creating singletons), in case cycle is
    * detected performance is O(singleton locks).

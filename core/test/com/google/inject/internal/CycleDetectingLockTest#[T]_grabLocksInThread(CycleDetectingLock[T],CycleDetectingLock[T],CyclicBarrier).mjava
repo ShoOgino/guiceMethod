@@ -1,0 +1,24 @@
+  private static <T> Future<ListMultimap<Long, T>> grabLocksInThread(
+      final CycleDetectingLock<T> lock1,
+      final CycleDetectingLock<T> lock2,
+      final CyclicBarrier barrier) {
+    FutureTask<ListMultimap<Long, T>> future =
+        new FutureTask<ListMultimap<Long, T>>(
+            new Callable<ListMultimap<Long, T>>() {
+              @Override
+              public ListMultimap<Long, T> call() throws Exception {
+                assertTrue(lock1.lockOrDetectPotentialLocksCycle().isEmpty());
+                barrier.await();
+                ListMultimap<Long, T> cycle = lock2.lockOrDetectPotentialLocksCycle();
+                if (cycle == null) {
+                  lock2.unlock();
+                }
+                lock1.unlock();
+                return cycle;
+              }
+            });
+    Thread thread = new Thread(future);
+    thread.start();
+    return future;
+  }
+
