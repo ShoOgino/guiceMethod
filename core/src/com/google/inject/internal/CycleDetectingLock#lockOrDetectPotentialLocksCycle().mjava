@@ -10,5 +10,5 @@
    * <p>In case no cycle is detected performance is O(threads creating singletons), in case cycle is
    * detected performance is O(singleton locks).
    */
-  ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle();
+  ListMultimap<Thread, ID> lockOrDetectPotentialLocksCycle();
 

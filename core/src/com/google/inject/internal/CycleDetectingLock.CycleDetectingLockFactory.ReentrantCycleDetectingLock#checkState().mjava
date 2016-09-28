@@ -1,16 +1,16 @@
       /** Check consistency of an internal state. */
       void checkState() throws IllegalStateException {
-        final long currentThreadId = Thread.currentThread().getId();
+        final Thread currentThread = Thread.currentThread();
         Preconditions.checkState(
-            !lockThreadIsWaitingOn.containsKey(currentThreadId),
+            !lockThreadIsWaitingOn.containsKey(currentThread),
             "Internal error: Thread should not be in a waiting thread on a lock now");
-        if (lockOwnerThreadId != null) {
+        if (lockOwnerThread != null) {
           // check state of a locked lock
           Preconditions.checkState(
               lockReentranceCount >= 0,
               "Internal error: Lock ownership and reentrance count internal states do not match");
           Preconditions.checkState(
-              locksOwnedByThread.get(lockOwnerThreadId).contains(this),
+              locksOwnedByThread.get(lockOwnerThread).contains(this),
               "Internal error: Set of locks owned by a current thread and lock "
                   + "ownership status do not match");
         } else {

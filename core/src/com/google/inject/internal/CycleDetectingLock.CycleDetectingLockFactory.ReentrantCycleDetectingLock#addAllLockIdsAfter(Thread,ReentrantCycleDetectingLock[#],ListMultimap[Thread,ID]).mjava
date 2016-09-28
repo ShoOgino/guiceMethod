@@ -3,11 +3,11 @@
        * lock the thread is currently waiting on, if any
        */
       private ReentrantCycleDetectingLock<?> addAllLockIdsAfter(
-          long threadId,
+          Thread thread,
           ReentrantCycleDetectingLock<?> lock,
-          ListMultimap<Long, ID> potentialLocksCycle) {
+          ListMultimap<Thread, ID> potentialLocksCycle) {
         boolean found = false;
-        Collection<ReentrantCycleDetectingLock<?>> ownedLocks = locksOwnedByThread.get(threadId);
+        Collection<ReentrantCycleDetectingLock<?>> ownedLocks = locksOwnedByThread.get(thread);
         Preconditions.checkNotNull(
             ownedLocks, "Internal error: No locks were found taken by a thread");
         for (ReentrantCycleDetectingLock<?> ownedLock : ownedLocks) {
@@ -21,18 +21,18 @@
             // same factory it has to have same type as the current lock.
             @SuppressWarnings("unchecked")
             ID userLockId = (ID) ownedLock.userLockId;
-            potentialLocksCycle.put(threadId, userLockId);
+            potentialLocksCycle.put(thread, userLockId);
           }
         }
         Preconditions.checkState(
             found,
             "Internal error: We can not find locks that created a cycle that we detected");
-        ReentrantCycleDetectingLock<?> unownedLock = lockThreadIsWaitingOn.get(threadId);
+        ReentrantCycleDetectingLock<?> unownedLock = lockThreadIsWaitingOn.get(thread);
         // If this thread is waiting for a lock add it to the cycle and return it
         if (unownedLock != null && unownedLock.lockFactory == this.lockFactory) {
           @SuppressWarnings("unchecked")
           ID typed = (ID) unownedLock.userLockId;
-          potentialLocksCycle.put(threadId, typed);
+          potentialLocksCycle.put(thread, typed);
         }
         return unownedLock;
       }

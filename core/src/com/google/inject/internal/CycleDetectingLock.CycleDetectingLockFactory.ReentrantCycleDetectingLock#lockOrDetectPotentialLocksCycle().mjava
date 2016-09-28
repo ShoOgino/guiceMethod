@@ -1,14 +1,14 @@
       @Override
-      public ListMultimap<Long, ID> lockOrDetectPotentialLocksCycle() {
-        final long currentThreadId = Thread.currentThread().getId();
+      public ListMultimap<Thread, ID> lockOrDetectPotentialLocksCycle() {
+        final Thread currentThread = Thread.currentThread();
         synchronized (CycleDetectingLockFactory.class) {
           checkState();
           // Add this lock to the waiting map to ensure it is included in any reported lock cycle.
-          lockThreadIsWaitingOn.put(currentThreadId, this);
-          ListMultimap<Long, ID> locksInCycle = detectPotentialLocksCycle();
+          lockThreadIsWaitingOn.put(currentThread, this);
+          ListMultimap<Thread, ID> locksInCycle = detectPotentialLocksCycle();
           if (!locksInCycle.isEmpty()) {
             // We aren't actually going to wait for this lock, so remove it from the map.
-            lockThreadIsWaitingOn.remove(currentThreadId);
+            lockThreadIsWaitingOn.remove(currentThread);
             // potential deadlock is found, we don't try to take this lock
             return locksInCycle;
           }
@@ -20,14 +20,14 @@
 
         synchronized (CycleDetectingLockFactory.class) {
           // current thread is no longer waiting on this lock
-          lockThreadIsWaitingOn.remove(currentThreadId);
+          lockThreadIsWaitingOn.remove(currentThread);
           checkState();
 
           // mark it as owned by us
-          lockOwnerThreadId = currentThreadId;
+          lockOwnerThread = currentThread;
           lockReentranceCount++;
           // add this lock to the list of locks owned by a current thread
-          locksOwnedByThread.put(currentThreadId, this);
+          locksOwnedByThread.put(currentThread, this);
         }
         // no deadlock is found, locking successful
         return ImmutableListMultimap.of();

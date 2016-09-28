@@ -2,9 +2,9 @@
       public String toString() {
         // copy is made to prevent a data race
         // no synchronization is used, potentially stale data, should be good enough
-        Long threadId = this.lockOwnerThreadId;
-        if (threadId != null) {
-          return String.format("%s[%s][locked by Id=%d]", super.toString(), userLockId, threadId);
+        Thread thread = this.lockOwnerThread;
+        if (thread != null) {
+          return String.format("%s[%s][locked by %s]", super.toString(), userLockId, thread);
         } else {
           return String.format("%s[%s][unlocked]", super.toString(), userLockId);
         }

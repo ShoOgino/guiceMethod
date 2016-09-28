@@ -6,17 +6,17 @@
        *
        * @see CycleDetectingLock#lockOrDetectPotentialLocksCycle()
        */
-      private ListMultimap<Long, ID> detectPotentialLocksCycle() {
-        final long currentThreadId = Thread.currentThread().getId();
-        if (lockOwnerThreadId == null || lockOwnerThreadId == currentThreadId) {
+      private ListMultimap<Thread, ID> detectPotentialLocksCycle() {
+        final Thread currentThread = Thread.currentThread();
+        if (lockOwnerThread == null || lockOwnerThread == currentThread) {
           // if nobody owns this lock, lock cycle is impossible
           // if a current thread owns this lock, we let Guice to handle it
           return ImmutableListMultimap.of();
         }
 
-        ListMultimap<Long, ID> potentialLocksCycle =
+        ListMultimap<Thread, ID> potentialLocksCycle =
             Multimaps.newListMultimap(
-                new LinkedHashMap<Long, Collection<ID>>(),
+                new LinkedHashMap<Thread, Collection<ID>>(),
                 new Supplier<List<ID>>() {
                   @Override
                   public List<ID> get() {
@@ -26,12 +26,12 @@
         // lock that is a part of a potential locks cycle, starts with current lock
         ReentrantCycleDetectingLock<?> lockOwnerWaitingOn = this;
         // try to find a dependency path between lock's owner thread and a current thread
-        while (lockOwnerWaitingOn != null && lockOwnerWaitingOn.lockOwnerThreadId != null) {
-          Long threadOwnerThreadWaits = lockOwnerWaitingOn.lockOwnerThreadId;
+        while (lockOwnerWaitingOn != null && lockOwnerWaitingOn.lockOwnerThread != null) {
+          Thread threadOwnerThreadWaits = lockOwnerWaitingOn.lockOwnerThread;
           // in case locks cycle exists lock we're waiting for is part of it
           lockOwnerWaitingOn =
               addAllLockIdsAfter(threadOwnerThreadWaits, lockOwnerWaitingOn, potentialLocksCycle);
-          if (threadOwnerThreadWaits == currentThreadId) {
+          if (threadOwnerThreadWaits == currentThread) {
             // owner thread depends on current thread, cycle detected
             return potentialLocksCycle;
           }
