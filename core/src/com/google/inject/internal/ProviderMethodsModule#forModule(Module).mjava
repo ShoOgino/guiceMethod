@@ -1,5 +1,5 @@
   /** Returns a module which creates bindings for provider methods from the given module. */
   public static Module forModule(Module module) {
-    return forObject(module, false, PROVIDES_BUILDER);
+    return forObject(module, false, ProvidesMethodScanner.INSTANCE);
   }
 

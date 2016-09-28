@@ -4,6 +4,13 @@
       Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
     Method method = (Method) injectionPoint.getMember();
     AnnotationOrError mapKey = findMapKeyAnnotation(binder, method);
+    if (annotation instanceof Provides) {
+      if (mapKey.annotation != null) {
+        binder.addError("Found a MapKey annotation on non map binding at %s.", method);
+      }
+      // no key rewriting for plain old @Provides
+      return key;
+    }
     if (annotation instanceof ProvidesIntoSet) {
       if (mapKey.annotation != null) {
         binder.addError("Found a MapKey annotation on non map binding at %s.", method);

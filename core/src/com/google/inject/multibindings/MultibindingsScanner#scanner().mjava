@@ -1,9 +1,20 @@
   /**
-   * Returns a {@link ModuleAnnotatedMethodScanner} that, when bound, will scan all modules for
-   * methods with the annotations {@literal @}{@link ProvidesIntoMap}, {@literal @}{@link
-   * ProvidesIntoSet}, and {@literal @}{@link ProvidesIntoOptional}.
+   * @deprecated This method returns an empty scanner since the preexisting functionality is
+   *     installed by default.
    */
+  @Deprecated
   public static ModuleAnnotatedMethodScanner scanner() {
-    return MultibindingsMethodScanner.INSTANCE;
+    return new ModuleAnnotatedMethodScanner() {
+      @Override
+      public Set<? extends Class<? extends Annotation>> annotationClasses() {
+        return ImmutableSet.of();
+      }
+
+      @Override
+      public <T> Key<T> prepareMethod(
+          Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+        throw new IllegalStateException("Unexpected annotation: " + annotation);
+      }
+    };
   }
 

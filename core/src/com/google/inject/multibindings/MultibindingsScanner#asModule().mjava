@@ -5,13 +5,12 @@
    *
    * <p>This is a convenience method, equivalent to doing {@code
    * binder().scanModulesForAnnotatedMethods(MultibindingsScanner.scanner())}.
+   *
+   * @deprecated This functionality is now installed by default. All references/installations can be
+   *     eliminated.
    */
+  @Deprecated
   public static Module asModule() {
-    return new AbstractModule() {
-      @Override
-      protected void configure() {
-        binder().scanModulesForAnnotatedMethods(MultibindingsMethodScanner.INSTANCE);
-      }
-    };
+    return Modules.EMPTY_MODULE;
   }
 

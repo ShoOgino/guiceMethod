@@ -6,6 +6,6 @@
    * are only interested in Module metadata.
    */
   public static Module forObject(Object object) {
-    return forObject(object, true, PROVIDES_BUILDER);
+    return forObject(object, true, ProvidesMethodScanner.INSTANCE);
   }
 
