@@ -1,0 +1,6 @@
+    ProviderMapEntry(K key, Key<V> valueKey) {
+      super(InitializationTiming.EAGER);
+      this.key = key;
+      this.valueKey = valueKey;
+    }
+

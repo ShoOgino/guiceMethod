@@ -1,0 +1,6 @@
+    @Override
+    void initialize(InjectorImpl injector, Errors errors) {
+      Binding<V> valueBinding = injector.getExistingBinding(valueKey);
+      entry = Maps.immutableEntry(key, valueBinding.getProvider());
+    }
+

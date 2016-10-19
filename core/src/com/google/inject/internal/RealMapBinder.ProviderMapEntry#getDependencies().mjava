@@ -1,5 +1,6 @@
     @Override
     public Set<Dependency<?>> getDependencies() {
-      return ((HasDependencies) provider).getDependencies();
+      // The dependencies are Key<Provider<V>>
+      return ImmutableSet.<Dependency<?>>of(Dependency.get(getKeyOfProvider(valueKey)));
     }
 
