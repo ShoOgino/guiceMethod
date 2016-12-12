@@ -1,4 +1,4 @@
-    public Key<V> getValueKey() {
+    Key<V> getValueKey() {
       return valueKey;
     }
 

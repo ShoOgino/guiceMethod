@@ -1,6 +1,8 @@
   public static Scoping forInstance(final Scope scope) {
     if (scope == Scopes.SINGLETON) {
       return SINGLETON_INSTANCE;
+    } else if (scope == Scopes.NO_SCOPE) {
+      return EXPLICITLY_UNSCOPED;
     }
 
     return new Scoping() {

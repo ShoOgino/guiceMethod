@@ -1,5 +1,0 @@
-    @Override
-    public Map.Entry<K, Provider<V>> get() {
-      return this;
-    }
-

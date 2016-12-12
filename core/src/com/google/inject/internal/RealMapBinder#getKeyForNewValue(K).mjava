@@ -10,12 +10,7 @@
             bindingSelection.getValueType(),
             new RealElement(
                 entrySetBinder.getSetName(), MAPBINDER, bindingSelection.getKeyType().toString()));
-    // TODO(user): Convert ProviderMapEntry to an InternalFactory
-    // when this happens, we can remove the ProviderLookup check in
-    // BindingSelection.containsElement()
-    entrySetBinder
-        .addBinding()
-        .toProvider(new ProviderMapEntry<K, V>(key, binder.getProvider(valueKey), valueKey));
+    entrySetBinder.addBinding().toProvider(new ProviderMapEntry<K, V>(key, valueKey));
     return valueKey;
   }
 

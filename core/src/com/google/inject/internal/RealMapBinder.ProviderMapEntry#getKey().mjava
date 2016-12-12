@@ -1,5 +1,4 @@
-    @Override
-    public K getKey() {
+    K getKey() {
       return key;
     }
 

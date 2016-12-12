@@ -6,8 +6,6 @@
       Key<?> key;
       if (element instanceof Binding) {
         key = ((Binding<?>) element).getKey();
-      } else if (element instanceof ProviderLookup) {
-        key = ((ProviderLookup<?>) element).getKey();
       } else {
         return false; // cannot match;
       }

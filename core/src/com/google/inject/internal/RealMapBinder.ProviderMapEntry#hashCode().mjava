@@ -1,5 +1,5 @@
     @Override
     public int hashCode() {
-      return key.hashCode() ^ provider.hashCode();
+      return Objects.hashCode(key, valueKey);
     }
 

@@ -1,5 +1,5 @@
     @Override
     public String toString() {
-      return "ProviderMapEntry(" + key + ", " + provider + ")";
+      return "ProviderMapEntry(" + key + ", " + valueKey + ")";
     }
 
