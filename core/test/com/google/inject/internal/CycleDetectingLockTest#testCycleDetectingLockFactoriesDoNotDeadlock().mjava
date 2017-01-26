@@ -13,9 +13,9 @@
    */
 
   public void testCycleDetectingLockFactoriesDoNotDeadlock() throws Exception {
-    final CycleDetectingLockFactory<String> factoryA = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLockFactory<String> factoryA = new CycleDetectingLockFactory<>();
     final CycleDetectingLock<String> lockA = factoryA.create("A");
-    final CycleDetectingLockFactory<String> factoryB = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLockFactory<String> factoryB = new CycleDetectingLockFactory<>();
     final CycleDetectingLock<String> lockB = factoryB.create("B");
     final CyclicBarrier eachThreadAcquiredFirstLock = new CyclicBarrier(2);
     Future<Boolean> threadA =

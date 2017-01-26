@@ -10,7 +10,7 @@
     MembersInjector<A<C>> membersInjector =
         injector.getInstance(new Key<MembersInjector<A<C>>>() {});
 
-    A<C> a = new A<C>();
+    A<C> a = new A<>();
     membersInjector.injectMembers(a);
     assertSame(myFavouriteC, a.t);
     assertSame(myFavouriteC, a.b.c);

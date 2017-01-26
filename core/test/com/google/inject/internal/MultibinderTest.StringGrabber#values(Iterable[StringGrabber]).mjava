@@ -1,5 +1,5 @@
     static Set<String> values(Iterable<StringGrabber> grabbers) {
-      Set<String> result = new HashSet<String>();
+      Set<String> result = new HashSet<>();
       for (StringGrabber grabber : grabbers) {
         result.add(grabber.string);
       }

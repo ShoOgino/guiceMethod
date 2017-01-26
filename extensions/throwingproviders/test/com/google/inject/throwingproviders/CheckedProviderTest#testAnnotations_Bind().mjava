@@ -1,6 +1,6 @@
   public void testAnnotations_Bind() throws Exception {
-    final MockRemoteProvider<Foo> mockRemoteProviderA = new MockRemoteProvider<Foo>();
-    final MockRemoteProvider<Foo> mockRemoteProviderB = new MockRemoteProvider<Foo>();
+    final MockRemoteProvider<Foo> mockRemoteProviderA = new MockRemoteProvider<>();
+    final MockRemoteProvider<Foo> mockRemoteProviderB = new MockRemoteProvider<>();
     bindInjector =
         Guice.createInjector(
             new AbstractModule() {

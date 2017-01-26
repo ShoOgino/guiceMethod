@@ -9,7 +9,7 @@
                 })
             .getInstance(InjectsMembersInjector.class);
 
-    A<C> a = new A<C>();
+    A<C> a = new A<>();
     injectsMembersInjector.aMembersInjector.injectMembers(a);
     assertSame(myFavouriteC, a.t);
     assertSame(myFavouriteC, a.b.c);

@@ -5,7 +5,7 @@
       InjectionPoint constructorInjectionPoint,
       Set<InjectionPoint> injectionPoints) {
     super(source, key, scoping);
-    this.factory = new Factory<T>(false, key);
+    this.factory = new Factory<>(false, key);
     ConstructionProxy<T> constructionProxy =
         new DefaultConstructionProxyFactory<T>(constructorInjectionPoint).create();
     this.constructorInjectionPoint = constructorInjectionPoint;

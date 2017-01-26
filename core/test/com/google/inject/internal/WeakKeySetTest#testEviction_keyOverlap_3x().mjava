@@ -18,12 +18,12 @@
     set.add(key3, state3, source3);
     assertInSet(set, key1, 3, source1, source2, source3);
 
-    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<Key<Integer>>(key1);
-    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<Key<Integer>>(key2);
-    WeakReference<Key<Integer>> weakKey3Ref = new WeakReference<Key<Integer>>(key3);
-    WeakReference<Object> weakSource1Ref = new WeakReference<Object>(source1);
-    WeakReference<Object> weakSource2Ref = new WeakReference<Object>(source2);
-    WeakReference<Object> weakSource3Ref = new WeakReference<Object>(source3);
+    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<>(key1);
+    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<>(key2);
+    WeakReference<Key<Integer>> weakKey3Ref = new WeakReference<>(key3);
+    WeakReference<Object> weakSource1Ref = new WeakReference<>(source1);
+    WeakReference<Object> weakSource2Ref = new WeakReference<>(source2);
+    WeakReference<Object> weakSource3Ref = new WeakReference<>(source3);
 
     Key<Integer> key = key1 = key2 = key3 = Key.get(Integer.class);
     state1 = null;

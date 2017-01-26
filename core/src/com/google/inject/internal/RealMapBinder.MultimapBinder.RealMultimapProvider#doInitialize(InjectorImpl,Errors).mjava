@@ -30,7 +30,7 @@
               (SingleParameterInjector<V>[])
                   injector.getParametersInjectors(dependenciesForKey, errors);
 
-          perKeyDatas[i] = new PerKeyData<K, V>(entry.getKey(), bindingsArray, injectors);
+          perKeyDatas[i] = new PerKeyData<>(entry.getKey(), bindingsArray, injectors);
           i++;
         }
 

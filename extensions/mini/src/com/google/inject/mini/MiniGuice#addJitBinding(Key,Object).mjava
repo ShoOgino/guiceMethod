@@ -4,8 +4,8 @@
     /*
      * Lookup the injectable fields and their corresponding keys.
      */
-    final List<Field> injectedFields = new ArrayList<Field>();
-    List<Object> fieldKeysList = new ArrayList<Object>();
+    final List<Field> injectedFields = new ArrayList<>();
+    List<Object> fieldKeysList = new ArrayList<>();
     for (Class<?> c = type; c != Object.class; c = c.getSuperclass()) {
       for (Field field : c.getDeclaredFields()) {
         if (!field.isAnnotationPresent(javax.inject.Inject.class)) {

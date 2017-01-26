@@ -18,7 +18,7 @@
     final CyclicBarrier signal1 = new CyclicBarrier(2);
     final CyclicBarrier signal2 = new CyclicBarrier(2);
     final CyclicBarrier signal3 = new CyclicBarrier(2);
-    final CycleDetectingLockFactory<String> lockFactory = new CycleDetectingLockFactory<String>();
+    final CycleDetectingLockFactory<String> lockFactory = new CycleDetectingLockFactory<>();
     final CycleDetectingLock<String> lockA =
         new ReentrantCycleDetectingLock<String>(
             lockFactory,

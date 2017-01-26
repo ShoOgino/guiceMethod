@@ -1,5 +1,5 @@
   private void addProviderBindings() {
-    Map<Key, Provider<?>> providerBindings = new HashMap<Key, Provider<?>>();
+    Map<Key, Provider<?>> providerBindings = new HashMap<>();
     for (final Map.Entry<Key, Provider<?>> binding : bindings.entrySet()) {
       Key key = binding.getKey();
       final Provider<?> value = binding.getValue();

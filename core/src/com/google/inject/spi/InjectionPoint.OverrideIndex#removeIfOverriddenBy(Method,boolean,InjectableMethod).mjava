@@ -20,14 +20,14 @@
       if (bySignature == null) {
         // We encountered a method in a subclass. Time to index the
         // methods in the parent class.
-        bySignature = new HashMap<Signature, List<InjectableMethod>>();
+        bySignature = new HashMap<>();
         for (InjectableMember member = injectableMembers.head;
             member != null;
             member = member.next) {
           if (!(member instanceof InjectableMethod)) continue;
           InjectableMethod im = (InjectableMethod) member;
           if (im.isFinal()) continue;
-          List<InjectableMethod> methods = new ArrayList<InjectableMethod>();
+          List<InjectableMethod> methods = new ArrayList<>();
           methods.add(im);
           bySignature.put(new Signature(im.method), methods);
         }

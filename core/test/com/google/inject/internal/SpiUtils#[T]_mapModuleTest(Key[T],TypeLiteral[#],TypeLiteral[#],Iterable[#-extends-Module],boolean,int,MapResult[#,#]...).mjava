@@ -8,7 +8,7 @@
       int expectedMapBindings,
       MapResult<?, ?>... results) {
     Set<Element> elements = ImmutableSet.copyOf(Elements.getElements(modules));
-    Visitor<T> visitor = new Visitor<T>();
+    Visitor<T> visitor = new Visitor<>();
     MapBinderBinding<T> mapbinder = null;
     Map<Key<?>, Binding<?>> keyMap = Maps.newHashMap();
     for (Element element : elements) {

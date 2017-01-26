@@ -18,7 +18,7 @@
                 bind(String.class).toInstance("foo");
               }
             });
-    WeakReference<Injector> weakRef1 = new WeakReference<Injector>(childInjector1);
+    WeakReference<Injector> weakRef1 = new WeakReference<>(childInjector1);
     assertBlacklisted(parentInjector, Key.get(String.class));
     assertNotBlacklisted(parentInjector, Key.get(Long.class));
 
@@ -30,7 +30,7 @@
                 bind(Long.class).toInstance(6L);
               }
             });
-    WeakReference<Injector> weakRef2 = new WeakReference<Injector>(childInjector2);
+    WeakReference<Injector> weakRef2 = new WeakReference<>(childInjector2);
     assertBlacklisted(parentInjector, Key.get(String.class));
     assertBlacklisted(parentInjector, Key.get(Long.class));
 

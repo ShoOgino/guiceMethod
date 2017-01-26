@@ -1,5 +1,5 @@
   private static List<TypeLiteral<?>> hierarchyFor(TypeLiteral<?> type) {
-    List<TypeLiteral<?>> hierarchy = new ArrayList<TypeLiteral<?>>();
+    List<TypeLiteral<?>> hierarchy = new ArrayList<>();
     TypeLiteral<?> current = type;
     while (current.getRawType() != Object.class) {
       hierarchy.add(current);

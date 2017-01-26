@@ -4,7 +4,7 @@
       TypeLiteral<V> valueType,
       Key<Map<K, V>> mapKey,
       RealMultibinder<Map.Entry<K, Provider<V>>> entrySetBinder) {
-    this.bindingSelection = new BindingSelection<K, V>(keyType, valueType, mapKey, entrySetBinder);
+    this.bindingSelection = new BindingSelection<>(keyType, valueType, mapKey, entrySetBinder);
     this.binder = binder;
     this.entrySetBinder = entrySetBinder;
   }
