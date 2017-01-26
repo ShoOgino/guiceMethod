@@ -3,12 +3,15 @@
    * while we're binding these singletons are not be eager.
    */
   void loadEagerSingletons(InjectorImpl injector, Stage stage, final Errors errors) {
+    List<BindingImpl<?>> candidateBindings = new ArrayList<BindingImpl<?>>();
     @SuppressWarnings("unchecked") // casting Collection<Binding> to Collection<BindingImpl> is safe
-    Iterable<BindingImpl<?>> candidateBindings =
-        ImmutableList.copyOf(
-            Iterables.concat(
-                (Collection) injector.state.getExplicitBindingsThisLevel().values(),
-                injector.jitBindings.values()));
+    Collection<BindingImpl<?>> bindingsAtThisLevel =
+        (Collection) injector.state.getExplicitBindingsThisLevel().values();
+    candidateBindings.addAll(bindingsAtThisLevel);
+    synchronized (injector.state.lock()) {
+      // jit bindings must be accessed while holding the lock.
+      candidateBindings.addAll(injector.jitBindings.values());
+    }
     for (final BindingImpl<?> binding : candidateBindings) {
       if (isEagerSingleton(injector, binding, stage)) {
         try {
