@@ -1,8 +1,6 @@
   public void testProvidesIntoOptionalWithMapKey() {
     Module m =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @ProvidesIntoOptional(Type.ACTUAL)
           @TestEnumKey(TestEnum.A)

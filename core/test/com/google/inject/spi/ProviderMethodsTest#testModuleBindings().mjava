@@ -1,8 +1,6 @@
   public void testModuleBindings() throws Exception {
     Module module =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @Provides
           Integer fail() {

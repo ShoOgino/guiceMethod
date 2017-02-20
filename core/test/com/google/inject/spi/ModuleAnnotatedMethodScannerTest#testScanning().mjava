@@ -1,8 +1,6 @@
   public void testScanning() throws Exception {
     Module module =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @TestProvides
           @Named("foo")

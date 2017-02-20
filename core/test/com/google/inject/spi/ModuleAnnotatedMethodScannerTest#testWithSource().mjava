@@ -7,8 +7,6 @@
                 .withSource("source")
                 .install(
                     new AbstractModule() {
-                      @Override
-                      protected void configure() {}
 
                       @TestProvides
                       @Named("foo")

@@ -1,8 +1,6 @@
   public void testSpi() throws Exception {
     Module m1 =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @Provides
           @Named("foo")
@@ -12,8 +10,6 @@
         };
     Module m2 =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @Provides
           Integer provideInt(@Named("foo") String dep) {

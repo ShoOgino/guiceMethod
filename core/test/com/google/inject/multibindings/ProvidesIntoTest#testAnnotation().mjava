@@ -3,8 +3,6 @@
         Guice.createInjector(
             MultibindingsScanner.asModule(),
             new AbstractModule() {
-              @Override
-              protected void configure() {}
 
               @ProvidesIntoSet
               @Named("foo")

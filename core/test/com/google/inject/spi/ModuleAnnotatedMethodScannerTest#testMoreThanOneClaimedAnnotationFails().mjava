@@ -1,8 +1,6 @@
   public void testMoreThanOneClaimedAnnotationFails() throws Exception {
     Module module =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @TestProvides
           @TestProvides2

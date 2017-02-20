@@ -1,8 +1,6 @@
   public void testArrayKeys_unwrapValuesTrue() {
     Module m =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @ProvidesIntoMap
           @ArrayUnwrappedKey({1, 2})

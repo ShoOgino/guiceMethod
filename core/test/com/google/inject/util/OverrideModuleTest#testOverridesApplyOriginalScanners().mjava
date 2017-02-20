@@ -4,8 +4,6 @@
             Modules.override(NamedMunger.module())
                 .with(
                     new AbstractModule() {
-                      @Override
-                      protected void configure() {}
 
                       @TestProvides
                       @Named("test")

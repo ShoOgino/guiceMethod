@@ -10,8 +10,6 @@
                     .newPrivateBinder()
                     .install(
                         new AbstractModule() {
-                          @Override
-                          protected void configure() {}
 
                           @Exposed
                           @TestProvides
