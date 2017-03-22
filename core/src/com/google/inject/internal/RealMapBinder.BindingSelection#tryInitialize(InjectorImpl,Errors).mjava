@@ -20,7 +20,7 @@
       // we have those, it's easy to iterate through them to organize them by K.
       Map<K, ImmutableSet.Builder<Binding<V>>> bindingMultimapMutable =
           new LinkedHashMap<K, ImmutableSet.Builder<Binding<V>>>();
-      Map<K, Binding<V>> bindingMapMutable = new LinkedHashMap<K, Binding<V>>();
+      Map<K, Binding<V>> bindingMapMutable = new LinkedHashMap<>();
       Multimap<K, Indexer.IndexedBinding> index = HashMultimap.create();
       Indexer indexer = new Indexer(injector);
       Multimap<K, Binding<V>> duplicates = null;

@@ -16,7 +16,7 @@
                 : new Signature(injectableMethod.method);
         List<InjectableMethod> methods = bySignature.get(signature);
         if (methods == null) {
-          methods = new ArrayList<InjectableMethod>();
+          methods = new ArrayList<>();
           bySignature.put(signature, methods);
         }
         methods.add(injectableMethod);

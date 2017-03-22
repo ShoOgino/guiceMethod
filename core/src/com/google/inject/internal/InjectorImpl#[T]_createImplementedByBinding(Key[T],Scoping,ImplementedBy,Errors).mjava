@@ -21,7 +21,7 @@
     // Look up the target binding.
     final Key<? extends T> targetKey = Key.get(subclass);
     Object source = rawType;
-    FactoryProxy<T> factory = new FactoryProxy<T>(this, key, targetKey, source);
+    FactoryProxy<T> factory = new FactoryProxy<>(this, key, targetKey, source);
     factory.notify(errors); // causes the factory to initialize itself internally
     return new LinkedBindingImpl<T>(
         this,

@@ -1,6 +1,6 @@
   public void testAnnotations_Provides() throws Exception {
-    final MockRemoteProvider<Foo> mockRemoteProviderA = new MockRemoteProvider<Foo>();
-    final MockRemoteProvider<Foo> mockRemoteProviderB = new MockRemoteProvider<Foo>();
+    final MockRemoteProvider<Foo> mockRemoteProviderA = new MockRemoteProvider<>();
+    final MockRemoteProvider<Foo> mockRemoteProviderB = new MockRemoteProvider<>();
     providesInjector =
         Guice.createInjector(
             new AbstractModule() {

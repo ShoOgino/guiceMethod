@@ -20,8 +20,6 @@
               }
             },
             new AbstractModule() {
-              @Override
-              protected void configure() {}
 
               @Provides
               @Named("ab")

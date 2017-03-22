@@ -22,7 +22,7 @@
                 binder.addBinding("bar").toInstance("foo");
               }
             });
-    WeakReference<Injector> weakRef = new WeakReference<Injector>(childInjector);
+    WeakReference<Injector> weakRef = new WeakReference<>(childInjector);
     WeakKeySetUtils.assertBlacklisted(parentInjector, mapKey);
 
     // Clear the ref, GC, and ensure that we are no longer blacklisting.

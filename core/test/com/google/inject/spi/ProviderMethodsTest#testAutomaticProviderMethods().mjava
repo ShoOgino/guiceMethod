@@ -3,8 +3,6 @@
         Guice.createInjector(
             (Module)
                 new AbstractModule() {
-                  @Override
-                  protected void configure() {}
 
                   private int next = 1;
 

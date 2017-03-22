@@ -5,8 +5,8 @@
     ReferenceQueue<Object> queue = null;
     WeakReference extraRef = null;
     if (data != null) {
-      queue = new ReferenceQueue<Object>();
-      extraRef = new WeakReference<Object>(data, queue);
+      queue = new ReferenceQueue<>();
+      extraRef = new WeakReference<>(data, queue);
       data = null;
     }
     GcFinalization.awaitClear(ref);

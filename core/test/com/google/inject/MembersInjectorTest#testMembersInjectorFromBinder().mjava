@@ -38,7 +38,7 @@
           }
         });
 
-    A<C> injectableA = new A<C>();
+    A<C> injectableA = new A<>();
     aMembersInjectorReference.get().injectMembers(injectableA);
     assertSame(myFavouriteC, injectableA.t);
     assertSame(myFavouriteC, injectableA.b.c);

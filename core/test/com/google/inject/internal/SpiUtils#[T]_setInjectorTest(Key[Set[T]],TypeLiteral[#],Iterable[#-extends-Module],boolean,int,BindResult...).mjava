@@ -9,7 +9,7 @@
     Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
     Key<?> collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
     Injector injector = Guice.createInjector(modules);
-    Visitor<Set<T>> visitor = new Visitor<Set<T>>();
+    Visitor<Set<T>> visitor = new Visitor<>();
     Binding<Set<T>> binding = injector.getBinding(setKey);
     MultibinderBinding<Set<T>> multibinder =
         (MultibinderBinding<Set<T>>) binding.acceptTargetVisitor(visitor);

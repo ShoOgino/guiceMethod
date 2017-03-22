@@ -3,8 +3,6 @@
     Injector child =
         parent.createChildInjector(
             new AbstractModule() {
-              @Override
-              protected void configure() {}
 
               @TestProvides
               @Named("foo")

@@ -13,9 +13,9 @@
     assertInSet(set, key2, 1, source);
     assertInSet(set, key1, 1, source);
 
-    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<Key<Integer>>(key1);
-    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<Key<Integer>>(key2);
-    WeakReference<Object> weakSourceRef = new WeakReference<Object>(source);
+    WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<>(key1);
+    WeakReference<Key<Integer>> weakKey2Ref = new WeakReference<>(key2);
+    WeakReference<Object> weakSourceRef = new WeakReference<>(source);
 
     Key<Integer> key = key1 = key2 = Key.get(Integer.class);
     state1 = null;

@@ -32,7 +32,7 @@
     // This ensures that MultiBinder is internally using the correct set name --
     // making sure that instances of marker annotations have the same set name as
     // MarkerAnnotation.class.
-    Map<Integer, Integer> expected = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> expected = new HashMap<>();
     expected.put(1, 1);
     expected.put(2, 2);
     assertEquals(expected, s1);

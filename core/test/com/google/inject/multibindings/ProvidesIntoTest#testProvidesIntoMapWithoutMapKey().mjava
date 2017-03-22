@@ -1,8 +1,6 @@
   public void testProvidesIntoMapWithoutMapKey() {
     Module m =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @ProvidesIntoMap
           String provideFoo() {

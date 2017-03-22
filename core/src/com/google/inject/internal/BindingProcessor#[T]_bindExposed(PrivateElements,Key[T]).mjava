@@ -1,5 +1,5 @@
   private <T> void bindExposed(PrivateElements privateElements, Key<T> key) {
-    ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<T>(key, privateElements);
+    ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<>(key, privateElements);
     bindingData.addCreationListener(exposedKeyFactory);
     putBinding(
         new ExposedBindingImpl<T>(

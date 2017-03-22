@@ -15,7 +15,7 @@
         (Provider) providerMapProvider;
     binder.bind(bindingSelection.getJavaxProviderMapKey()).toProvider(javaxProviderMapProvider);
 
-    RealMapProvider<K, V> mapProvider = new RealMapProvider<K, V>(bindingSelection);
+    RealMapProvider<K, V> mapProvider = new RealMapProvider<>(bindingSelection);
     binder.bind(bindingSelection.getMapKey()).toProvider(mapProvider);
 
     // The Map.Entries are all ProviderMapEntry instances which do not allow setValue, so it is

@@ -17,7 +17,7 @@
                 bind(String.class).toInstance("foo");
               }
             });
-    WeakReference<Injector> weakRef1 = new WeakReference<Injector>(childInjector1);
+    WeakReference<Injector> weakRef1 = new WeakReference<>(childInjector1);
     assertBlacklisted(parentInjector, Key.get(String.class));
 
     Injector childInjector2 =
@@ -28,7 +28,7 @@
                 bind(String.class).toInstance("bar");
               }
             });
-    WeakReference<Injector> weakRef2 = new WeakReference<Injector>(childInjector2);
+    WeakReference<Injector> weakRef2 = new WeakReference<>(childInjector2);
     assertBlacklisted(parentInjector, Key.get(String.class));
 
     // Clear ref1, GC, and ensure that we still blacklist.

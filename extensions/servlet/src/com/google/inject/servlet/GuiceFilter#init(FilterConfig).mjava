@@ -3,7 +3,7 @@
     final ServletContext servletContext = filterConfig.getServletContext();
 
     // Store servlet context in a weakreference, for injection
-    GuiceFilter.servletContext = new WeakReference<ServletContext>(servletContext);
+    GuiceFilter.servletContext = new WeakReference<>(servletContext);
 
     // In the default pipeline, this is a noop. However, if replaced
     // by a managed pipeline, a lazy init will be triggered the first time

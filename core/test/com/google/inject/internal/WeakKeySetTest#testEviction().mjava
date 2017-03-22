@@ -3,7 +3,7 @@
     Key<Integer> key = Key.get(Integer.class);
     Object source = new Object();
 
-    WeakReference<Key<Integer>> weakKeyRef = new WeakReference<Key<Integer>>(key);
+    WeakReference<Key<Integer>> weakKeyRef = new WeakReference<>(key);
 
     set.add(key, state, source);
     assertInSet(set, key, 1, source);

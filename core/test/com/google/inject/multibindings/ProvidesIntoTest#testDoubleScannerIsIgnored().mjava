@@ -4,8 +4,6 @@
             MultibindingsScanner.asModule(),
             MultibindingsScanner.asModule(),
             new AbstractModule() {
-              @Override
-              protected void configure() {}
 
               @ProvidesIntoSet
               String provideFoo() {

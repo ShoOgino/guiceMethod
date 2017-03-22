@@ -1,8 +1,6 @@
   public void testMoreThanOneMapKeyAnnotation() {
     Module m =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @ProvidesIntoMap
           @TestEnumKey(TestEnum.A)

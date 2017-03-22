@@ -1,5 +1,5 @@
   RealMultibinder(Binder binder, Key<T> key) {
     this.binder = checkNotNull(binder, "binder");
-    this.bindingSelection = new BindingSelection<T>(key);
+    this.bindingSelection = new BindingSelection<>(key);
   }
 

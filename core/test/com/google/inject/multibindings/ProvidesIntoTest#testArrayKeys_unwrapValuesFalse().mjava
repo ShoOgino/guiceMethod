@@ -1,8 +1,6 @@
   public void testArrayKeys_unwrapValuesFalse() throws Exception {
     Module m =
         new AbstractModule() {
-          @Override
-          protected void configure() {}
 
           @ProvidesIntoMap
           @ArrayWrappedKey(number = {1, 2})

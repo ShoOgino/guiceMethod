@@ -1,0 +1,5 @@
+  /** Should only be called by InjectorImpl.enterContext(). */
+  void enter() {
+    enterCount++;
+  }
+

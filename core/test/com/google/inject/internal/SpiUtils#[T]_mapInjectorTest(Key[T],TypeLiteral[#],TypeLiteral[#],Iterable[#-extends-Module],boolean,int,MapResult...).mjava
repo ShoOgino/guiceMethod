@@ -8,7 +8,7 @@
       int expectedMapBindings,
       MapResult... results) {
     Injector injector = Guice.createInjector(modules);
-    Visitor<T> visitor = new Visitor<T>();
+    Visitor<T> visitor = new Visitor<>();
     Binding<T> mapBinding = injector.getBinding(mapKey);
     MapBinderBinding<T> mapbinder = (MapBinderBinding<T>) mapBinding.acceptTargetVisitor(visitor);
     assertNotNull(mapbinder);

@@ -12,7 +12,7 @@
         injector.getMembersInjector(new TypeLiteral<A<C>>() {});
     MembersInjector<B> bMembersInjector = injector.getMembersInjector(B.class);
 
-    A<C> injectableA = new A<C>();
+    A<C> injectableA = new A<>();
     aMembersInjector.injectMembers(injectableA);
     assertSame(myFavouriteC, injectableA.t);
     assertSame(myFavouriteC, injectableA.b.c);

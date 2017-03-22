@@ -2,8 +2,6 @@
     try {
       Guice.createInjector(
           new AbstractModule() {
-            @Override
-            protected void configure() {}
 
             @Provides
             @Named("A")

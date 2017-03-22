@@ -1,6 +1,6 @@
   @Override
   public <T> Provider<T> getProvider(Key<T> key) {
-    ProviderLookup<T> lookup = new ProviderLookup<T>(key, key);
+    ProviderLookup<T> lookup = new ProviderLookup<>(key, key);
     lookups.add(lookup);
     return lookup.getProvider();
   }
