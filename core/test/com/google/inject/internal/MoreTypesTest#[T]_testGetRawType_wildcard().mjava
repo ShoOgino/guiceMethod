@@ -1,0 +1,8 @@
+  public <T> void testGetRawType_wildcard() throws Exception {
+    WildcardType wildcard =
+        (WildcardType)
+            ((ParameterizedType) new TypeLiteral<List<?>>() {}.getType())
+                .getActualTypeArguments()[0];
+    assertEquals(Object.class, MoreTypes.getRawType(wildcard));
+  }
+
