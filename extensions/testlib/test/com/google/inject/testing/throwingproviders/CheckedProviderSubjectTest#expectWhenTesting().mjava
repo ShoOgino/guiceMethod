@@ -1,0 +1,8 @@
+  private AbstractVerb.DelegatedVerb<
+          CheckedProviderSubject<String, CheckedProvider<String>>, CheckedProvider<String>>
+      expectWhenTesting() {
+    return expect
+        .whenTesting()
+        .about(CheckedProviderSubject.<String, CheckedProvider<String>>checkedProviders());
+  }
+

@@ -8,11 +8,7 @@
             "value provided by <%s>: Not true that <%s> is equal to <%s>",
             getReturningProviderName(unexpected), unexpected, expected);
 
-    try {
-      createSubject(provider).providedValue().isEqualTo(expected);
-      fail("Expected an exception to be thrown");
-    } catch (FailureStrategyException e) {
-      assertThat(e).hasMessage(message);
-    }
+    expectWhenTesting().that(provider).providedValue().isEqualTo(expected);
+    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
   }
 

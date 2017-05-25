@@ -1,18 +1,15 @@
   @Test
   public void providedValue_throws_expectFailure() {
-    CheckedProvider<?> provider =
+    CheckedProvider<String> provider =
         CheckedProviders.throwing(StringCheckedProvider.class, SummerException.class);
     String message =
         String.format(
             "checked provider <%s> threw an exception",
             getThrowingProviderName(SummerException.class.getName()));
 
-    try {
-      createSubject(provider).providedValue();
-      fail("Expected an exception to be thrown");
-    } catch (FailureStrategyException e) {
-      assertThat(e.getCause()).isInstanceOf(SummerException.class);
-      assertThat(e).hasMessage(message);
-    }
+    expectWhenTesting().that(provider).providedValue();
+    AssertionError expected = expect.getFailure();
+    assertThat(expected).hasCauseThat().isInstanceOf(SummerException.class);
+    assertThat(expected).hasMessageThat().isEqualTo(message);
   }
 

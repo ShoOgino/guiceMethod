@@ -1,17 +1,13 @@
   @Test
   public void thrownException_gets_expectFailure() {
     String getValue = "keep WINTER IS COMING safe";
-    CheckedProvider<?> provider = CheckedProviders.of(StringCheckedProvider.class, getValue);
+    CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, getValue);
     String message =
         String.format(
             "Not true that <%s> threw <an exception>. It provided <%s>",
             getReturningProviderName(getValue), getValue);
 
-    try {
-      createSubject(provider).thrownException();
-      fail("Expected an exception to be thrown");
-    } catch (FailureStrategyException e) {
-      assertThat(e).hasMessage(message);
-    }
+    expectWhenTesting().that(provider).thrownException();
+    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
   }
 

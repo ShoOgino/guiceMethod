@@ -7,14 +7,14 @@
    * @return a {@link Subject} for asserting against the return value of {@link CheckedProvider#get}
    */
   public Subject<?, Object> providedValue() {
-    P provider = getSubject();
+    P provider = actual();
     T got;
     try {
       got = provider.get();
     } catch (Exception e) {
       failureStrategy.fail(String.format("checked provider <%s> threw an exception", provider), e);
-      throw new AssertionError(e);
+      return ignoreCheck().that(new Object());
     }
-    return assert_().withFailureMessage("value provided by <%s>", provider).that(got);
+    return check().withFailureMessage("value provided by <%s>", provider).that(got);
   }
 

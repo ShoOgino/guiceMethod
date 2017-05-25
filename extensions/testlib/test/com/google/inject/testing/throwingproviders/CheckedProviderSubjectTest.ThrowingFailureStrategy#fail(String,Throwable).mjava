@@ -1,5 +1,0 @@
-    @Override
-    public void fail(String message, Throwable cause) {
-      throw new FailureStrategyException(message, cause);
-    }
-

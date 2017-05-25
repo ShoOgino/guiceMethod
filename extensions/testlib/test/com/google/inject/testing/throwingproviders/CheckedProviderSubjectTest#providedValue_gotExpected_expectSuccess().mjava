@@ -3,6 +3,6 @@
     String expected = "keep Summer safe";
     CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, expected);
 
-    createSubject(provider).providedValue().isEqualTo(expected);
+    assertThat(provider).providedValue().isEqualTo(expected);
   }
 

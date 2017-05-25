@@ -8,14 +8,14 @@
    *     CheckedProvider#get}
    */
   public ThrowableSubject thrownException() {
-    P provider = getSubject();
+    P provider = actual();
     T got;
     try {
       got = provider.get();
     } catch (Throwable e) {
-      return assert_().withFailureMessage("exception thrown by <%s>", provider).that(e);
+      return check().withFailureMessage("exception thrown by <%s>", provider).that(e);
     }
     failWithBadResults("threw", "an exception", "provided", got);
-    throw new AssertionError("Impossible, I hope...");
+    return ignoreCheck().that(new Throwable());
   }
 

@@ -3,6 +3,6 @@
     CheckedProvider<?> provider =
         CheckedProviders.throwing(StringCheckedProvider.class, SummerException.class);
 
-    createSubject(provider).thrownException().isInstanceOf(SummerException.class);
+    assertThat(provider).thrownException().isInstanceOf(SummerException.class);
   }
 

@@ -2,7 +2,7 @@
   public void thrownException_threwUnexpected_expectFailure() {
     Class<? extends Throwable> expected = SummerException.class;
     Class<? extends Throwable> unexpected = UnsupportedOperationException.class;
-    CheckedProvider<?> provider =
+    CheckedProvider<String> provider =
         CheckedProviders.throwing(StringCheckedProvider.class, unexpected);
     String message =
         String.format(
@@ -13,11 +13,7 @@
             SummerException.class.getName(),
             UnsupportedOperationException.class.getName());
 
-    try {
-      createSubject(provider).thrownException().isInstanceOf(expected);
-      fail("Expected an exception to be thrown");
-    } catch (FailureStrategyException e) {
-      assertThat(e).hasMessage(message);
-    }
+    expectWhenTesting().that(provider).thrownException().isInstanceOf(expected);
+    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
   }
 
