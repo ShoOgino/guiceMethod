@@ -9,8 +9,7 @@
       fail("Expected an exception to be thrown");
     } catch (IllegalArgumentException e) {
       assertThat(e).hasMessage(message);
-      assert_()
-          .withFailureMessage(String.format("exception <%s> with cause", e))
+      assertWithMessage(String.format("exception <%s> with cause", e))
           .that(e.getCause())
           .isInstanceOf(NoSuchMethodException.class);
     }
