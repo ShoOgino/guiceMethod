@@ -1,4 +1,4 @@
-  private AbstractVerb.DelegatedVerb<
+  private SimpleSubjectBuilder<
           CheckedProviderSubject<String, CheckedProvider<String>>, CheckedProvider<String>>
       expectWhenTesting() {
     return expect
