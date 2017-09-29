@@ -11,7 +11,9 @@
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
     assertEquals(
-        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=a)]@"
+        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value="
+            + Annotations.memberValueString("a")
+            + ")]@"
             + getClass().getName()
             + ".foo",
         dependency.toString());

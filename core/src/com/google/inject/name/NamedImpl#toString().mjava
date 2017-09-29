@@ -1,5 +1,5 @@
   @Override
   public String toString() {
-    return "@" + Named.class.getName() + "(value=" + value + ")";
+    return "@" + Named.class.getName() + "(value=" + Annotations.memberValueString(value) + ")";
   }
 

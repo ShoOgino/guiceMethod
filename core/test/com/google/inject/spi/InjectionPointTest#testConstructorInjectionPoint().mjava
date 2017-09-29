@@ -12,7 +12,9 @@
 
     Dependency<?> dependency = getOnlyElement(injectionPoint.getDependencies());
     assertEquals(
-        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=c)]@"
+        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value="
+            + Annotations.memberValueString("c")
+            + ")]@"
             + Constructable.class.getName()
             + ".<init>()[0]",
         dependency.toString());

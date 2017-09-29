@@ -1,0 +1,14 @@
+  @TestAnnotation("determineWhetherToQuote")
+  private static boolean determineWhetherToQuote() {
+    try {
+      String annotation =
+          Annotations.class
+              .getDeclaredMethod("determineWhetherToQuote")
+              .getAnnotation(TestAnnotation.class)
+              .toString();
+      return annotation.contains("\"determineWhetherToQuote\"");
+    } catch (NoSuchMethodException e) {
+      throw new AssertionError(e);
+    }
+  }
+

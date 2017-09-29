@@ -14,15 +14,22 @@
     } catch (ConfigurationException e) {
       String msg = e.getMessage();
       assertContains(msg, "Guice configuration errors:");
-      assertContains(msg,
+      assertContains(
+          msg,
           "1) No implementation for com.google.inject.BindingTest$Bacon"
               + " annotated with"
-              + " @com.google.inject.name.Named(value=turkey) was bound.",
+              + " @com.google.inject.name.Named(value="
+              + Annotations.memberValueString("turkey")
+              + ") was bound.",
           "Did you mean?",
           "* com.google.inject.BindingTest$Bacon annotated with"
-              + " @com.google.inject.name.Named(value=Turkey)",
+              + " @com.google.inject.name.Named(value="
+              + Annotations.memberValueString("Turkey")
+              + ")",
           "while locating com.google.inject.BindingTest$Bacon annotated with"
-              + " @com.google.inject.name.Named(value=turkey)");
+              + " @com.google.inject.name.Named(value="
+              + Annotations.memberValueString("turkey")
+              + ")");
     }
   }
 

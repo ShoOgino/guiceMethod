@@ -1,4 +1,4 @@
     TestVisibilityClassLoader(boolean hideInternals) {
-      this((URLClassLoader) TestVisibilityClassLoader.class.getClassLoader(), hideInternals);
+      this(TestVisibilityClassLoader.class.getClassLoader(), hideInternals);
     }
 

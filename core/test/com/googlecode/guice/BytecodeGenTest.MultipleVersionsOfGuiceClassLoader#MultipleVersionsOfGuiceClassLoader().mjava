@@ -1,4 +1,4 @@
     MultipleVersionsOfGuiceClassLoader() {
-      this((URLClassLoader) MultipleVersionsOfGuiceClassLoader.class.getClassLoader());
+      this(MultipleVersionsOfGuiceClassLoader.class.getClassLoader());
     }
 

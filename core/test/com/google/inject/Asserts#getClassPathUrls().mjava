@@ -1,0 +1,23 @@
+  /** Returns the URLs in the system class path. */
+  // TODO(https://github.com/google/guava/issues/2956): Use a common API once that's available.
+  public static URL[] getClassPathUrls() {
+    if (Asserts.class.getClassLoader() instanceof URLClassLoader) {
+      return ((URLClassLoader) Asserts.class.getClassLoader()).getURLs();
+    }
+    ImmutableList.Builder<URL> urls = ImmutableList.builder();
+    for (String entry : Splitter.on(PATH_SEPARATOR.value()).split(JAVA_CLASS_PATH.value())) {
+      try {
+        try {
+          urls.add(new File(entry).toURI().toURL());
+        } catch (SecurityException e) { // File.toURI checks to see if the file is a directory
+          urls.add(new URL("file", null, new File(entry).getAbsolutePath()));
+        }
+      } catch (MalformedURLException e) {
+        AssertionError error = new AssertionError("malformed class path entry: " + entry);
+        error.initCause(e);
+        throw error;
+      }
+    }
+    return urls.build().toArray(new URL[0]);
+  }
+

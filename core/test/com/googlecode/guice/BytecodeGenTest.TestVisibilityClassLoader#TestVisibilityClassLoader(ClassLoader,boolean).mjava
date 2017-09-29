@@ -1,0 +1,5 @@
+    TestVisibilityClassLoader(ClassLoader classloader, boolean hideInternals) {
+      super(getClassPathUrls(), classloader);
+      this.hideInternals = hideInternals;
+    }
+

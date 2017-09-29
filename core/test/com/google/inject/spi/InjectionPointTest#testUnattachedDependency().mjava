@@ -1,7 +1,9 @@
   public void testUnattachedDependency() throws IOException {
     Dependency<String> dependency = Dependency.get(Key.get(String.class, named("d")));
     assertEquals(
-        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value=d)]",
+        "Key[type=java.lang.String, annotation=@com.google.inject.name.Named(value="
+            + Annotations.memberValueString("d")
+            + ")]",
         dependency.toString());
     assertNull(dependency.getInjectionPoint());
     assertEquals(-1, dependency.getParameterIndex());

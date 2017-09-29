@@ -5,7 +5,10 @@
     } catch (ConfigurationException e) {
       assertContains(
           e.getMessage(),
-          "No implementation for java.lang.String annotated with @com.google.inject.name.Named(value=foo) was bound.");
+          "No implementation for java.lang.String annotated with "
+              + "@com.google.inject.name.Named(value="
+              + Annotations.memberValueString("foo")
+              + ") was bound.");
     }
   }
 

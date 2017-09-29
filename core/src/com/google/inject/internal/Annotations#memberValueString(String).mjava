@@ -1,0 +1,8 @@
+  /**
+   * Returns {@code value}, quoted if annotation implementations quote their member values. In Java
+   * 9, annotations quote their string members.
+   */
+  public static String memberValueString(String value) {
+    return QUOTE_MEMBER_VALUES ? "\"" + value + "\"" : value;
+  }
+

@@ -16,7 +16,9 @@
               + Color.class.getName()
               + " annotated with @"
               + Assisted.class.getName()
-              + "(value=paint) was already configured at");
+              + "(value="
+              + Annotations.memberValueString("paint")
+              + ") was already configured at");
     }
   }
 

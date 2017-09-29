@@ -1,5 +1,9 @@
     @Override
     public String toString() {
-      return "@" + javax.inject.Named.class.getName() + "(value=" + value + ")";
+      return "@"
+          + javax.inject.Named.class.getName()
+          + "(value="
+          + Annotations.memberValueString(value)
+          + ")";
     }
 

@@ -8,7 +8,9 @@
       if (fails) {
         assertContains(
             e.getMessage(),
-            "A binding to java.lang.String annotated with @com.google.inject.name.Named(value=foo) was already configured");
+            "A binding to java.lang.String annotated with @com.google.inject.name.Named(value="
+                + Annotations.memberValueString("foo")
+                + ") was already configured");
       } else {
         throw e;
       }

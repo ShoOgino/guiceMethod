@@ -3,7 +3,7 @@
         (StackTraceElement) StackTraceElements.forMember(Obj.class.getField("field"));
     assertEquals(
         "Stack trace element should be identified by its file name and line number",
-        "ShortNameFactoryTest.java:50",
+        "ShortNameFactoryTest.java:51",
         nameFactory.getSourceName(element));
   }
 

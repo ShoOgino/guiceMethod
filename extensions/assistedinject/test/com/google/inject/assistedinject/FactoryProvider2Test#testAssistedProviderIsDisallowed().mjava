@@ -37,7 +37,9 @@
               + " [com.google.inject.Provider<"
               + Color.class.getName()
               + ">"
-              + " annotated with @com.google.inject.assistedinject.Assisted(value=color)]"
+              + " annotated with @com.google.inject.assistedinject.Assisted(value="
+              + Annotations.memberValueString("color")
+              + ")]"
               + " on method ["
               + ProviderBasedColoredCarFactory.class.getName()
               + ".createMustang()]");

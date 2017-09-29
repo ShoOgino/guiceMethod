@@ -37,7 +37,9 @@
       String segment4 =
           "No implementation for java.util.Date annotated with @"
               + Named.class.getName()
-              + "(value=date) was bound.";
+              + "(value="
+              + Annotations.memberValueString("date")
+              + ") was bound.";
       String atSegment = "at " + getClass().getName();
       String sourceFileName = getDeclaringSourcePart(getClass());
       assertContains(

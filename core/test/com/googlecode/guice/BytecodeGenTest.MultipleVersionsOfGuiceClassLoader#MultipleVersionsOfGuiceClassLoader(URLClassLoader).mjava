@@ -1,4 +1,0 @@
-    MultipleVersionsOfGuiceClassLoader(URLClassLoader classloader) {
-      super(classloader.getURLs(), classloader);
-    }
-

@@ -1,0 +1,4 @@
+    MultipleVersionsOfGuiceClassLoader(ClassLoader classloader) {
+      super(getClassPathUrls(), classloader);
+    }
+
