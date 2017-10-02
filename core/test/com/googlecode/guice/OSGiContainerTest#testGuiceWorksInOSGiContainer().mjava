@@ -9,9 +9,8 @@
     properties.setProperty("org.osgi.framework.storage.clean", "onFirstInit");
 
     // test each available OSGi framework in turn
-    Iterator<FrameworkFactory> f = ServiceRegistry.lookupProviders(FrameworkFactory.class);
-    while (f.hasNext()) {
-      Framework framework = f.next().newFramework(properties);
+    for (FrameworkFactory frameworkFactory : ServiceLoader.load(FrameworkFactory.class)) {
+      Framework framework = frameworkFactory.newFramework(properties);
 
       framework.start();
       BundleContext systemContext = framework.getBundleContext();
