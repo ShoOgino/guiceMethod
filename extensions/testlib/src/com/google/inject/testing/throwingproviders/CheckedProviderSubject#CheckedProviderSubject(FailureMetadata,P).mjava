@@ -1,0 +1,4 @@
+  private CheckedProviderSubject(FailureMetadata failureMetadata, @Nullable P subject) {
+    super(failureMetadata, subject);
+  }
+

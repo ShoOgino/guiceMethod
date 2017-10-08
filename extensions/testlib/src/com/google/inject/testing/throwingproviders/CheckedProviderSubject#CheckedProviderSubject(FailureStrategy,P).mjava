@@ -1,4 +1,0 @@
-  private CheckedProviderSubject(FailureStrategy failureStrategy, @Nullable P subject) {
-    super(failureStrategy, subject);
-  }
-

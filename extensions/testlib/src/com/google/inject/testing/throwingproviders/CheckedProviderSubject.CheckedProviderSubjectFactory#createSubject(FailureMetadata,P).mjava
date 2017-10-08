@@ -1,0 +1,6 @@
+    @Override
+    public CheckedProviderSubject<T, P> createSubject(
+        FailureMetadata failureMetadata, @Nullable P target) {
+      return new CheckedProviderSubject<T, P>(failureMetadata, target);
+    }
+

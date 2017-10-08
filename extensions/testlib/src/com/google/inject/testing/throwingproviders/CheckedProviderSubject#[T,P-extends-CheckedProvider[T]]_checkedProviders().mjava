@@ -1,5 +1,5 @@
   public static <T, P extends CheckedProvider<T>>
-      SubjectFactory<CheckedProviderSubject<T, P>, P> checkedProviders() {
+      Subject.Factory<CheckedProviderSubject<T, P>, P> checkedProviders() {
     return new CheckedProviderSubjectFactory<>();
   }
 
