@@ -1,5 +1,4 @@
   public Errors errorInProvider(Throwable cause) {
-    Throwable unwrapped = unwrap(cause);
-    return errorInUserCode(unwrapped, "Error in custom provider, %s", unwrapped);
+    return errorInUserCode(cause, "Error in custom provider, %s", cause);
   }
 
