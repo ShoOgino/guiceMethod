@@ -10,6 +10,7 @@
       }
       if (bySignature != null) {
         // Try to reuse the signature we created during removal
+        @SuppressWarnings("ReferenceEquality")
         Signature signature =
             injectableMethod.method == lastMethod
                 ? lastSignature

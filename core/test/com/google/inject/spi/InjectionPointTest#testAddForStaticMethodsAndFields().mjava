@@ -1,13 +1,16 @@
   public void testAddForStaticMethodsAndFields() throws Exception {
     Method staticMethod = HasInjections.class.getMethod("staticMethod", String.class);
     Field staticField = HasInjections.class.getField("staticField");
+    Field staticField2 = HasInjections.class.getField("staticField2");
 
     Set<InjectionPoint> injectionPoints =
         InjectionPoint.forStaticMethodsAndFields(HasInjections.class);
-    assertEquals(
-        ImmutableSet.of(
-            new InjectionPoint(TypeLiteral.get(HasInjections.class), staticMethod, false),
-            new InjectionPoint(TypeLiteral.get(HasInjections.class), staticField, false)),
-        injectionPoints);
+    TypeLiteral<HasInjections> type = TypeLiteral.get(HasInjections.class);
+    assertThat(injectionPoints)
+        .containsExactly(
+            new InjectionPoint(type, staticField, false),
+            new InjectionPoint(type, staticField2, false),
+            new InjectionPoint(type, staticMethod, false))
+        .inOrder();
   }
 

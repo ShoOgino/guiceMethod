@@ -1,12 +1,17 @@
   public void testAddForInstanceMethodsAndFields() throws Exception {
     Method instanceMethod = HasInjections.class.getMethod("instanceMethod", String.class);
     Field instanceField = HasInjections.class.getField("instanceField");
+    Field instanceField2 = HasInjections.class.getField("instanceField2");
 
     TypeLiteral<HasInjections> type = TypeLiteral.get(HasInjections.class);
-    assertEquals(
-        ImmutableSet.of(
-            new InjectionPoint(type, instanceMethod, false),
-            new InjectionPoint(type, instanceField, false)),
-        InjectionPoint.forInstanceMethodsAndFields(HasInjections.class));
+    Set<InjectionPoint> injectionPoints =
+        InjectionPoint.forInstanceMethodsAndFields(HasInjections.class);
+    // there is a defined order. assert on it
+    assertThat(injectionPoints)
+        .containsExactly(
+            new InjectionPoint(type, instanceField, false),
+            new InjectionPoint(type, instanceField2, false),
+            new InjectionPoint(type, instanceMethod, false))
+        .inOrder();
   }
 
