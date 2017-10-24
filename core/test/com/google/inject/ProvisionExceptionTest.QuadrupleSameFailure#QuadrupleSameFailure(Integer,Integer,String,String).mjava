@@ -1,3 +1,0 @@
-    @Inject
-    QuadrupleSameFailure(Integer i1, Integer i2, String s1, String s2) {}
-

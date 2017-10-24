@@ -1,27 +1,19 @@
   public void testDuplicateCausesCollapsed() {
     final RuntimeException sharedException = new RuntimeException("fail");
-    Injector injector =
-        Guice.createInjector(
-            new AbstractModule() {
-
-              @Provides
-              Integer i() {
-                throw sharedException;
-              }
-
-              @Provides
-              Double d() {
-                throw sharedException;
-              }
-            });
-
     try {
-      injector.getInstance(DoubleFailure.class);
+      Guice.createInjector(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              addError(sharedException);
+              addError(sharedException);
+            }
+          });
       fail();
-    } catch (ProvisionException pe) {
-      assertEquals(sharedException, pe.getCause());
-      assertEquals(2, pe.getErrorMessages().size());
-      for (Message message : pe.getErrorMessages()) {
+    } catch (CreationException ce) {
+      assertEquals(sharedException, ce.getCause());
+      assertEquals(2, ce.getErrorMessages().size());
+      for (Message message : ce.getErrorMessages()) {
         assertEquals(sharedException, message.getCause());
       }
     }
