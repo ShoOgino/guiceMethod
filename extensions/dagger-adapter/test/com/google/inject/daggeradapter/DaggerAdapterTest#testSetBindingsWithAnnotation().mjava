@@ -1,0 +1,8 @@
+  public void testSetBindingsWithAnnotation() {
+    Injector i =
+        Guice.createInjector(DaggerAdapter.from(new SetBindingWithAnnotationDaggerModule()));
+    assertEquals(
+        ImmutableSet.of(4),
+        i.getInstance(Key.get(new TypeLiteral<Set<Integer>>() {}, AnnotationOnSet.class)));
+  }
+

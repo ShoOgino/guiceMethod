@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoSet
+    @AnnotationOnSet
+    Integer anInteger() {
+      return 4;
+    }
+
