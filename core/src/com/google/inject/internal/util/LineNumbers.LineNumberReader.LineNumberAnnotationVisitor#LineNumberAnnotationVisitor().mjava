@@ -1,4 +1,4 @@
       LineNumberAnnotationVisitor() {
-        super(Opcodes.ASM5);
+        super(Opcodes.ASM6);
       }
 
