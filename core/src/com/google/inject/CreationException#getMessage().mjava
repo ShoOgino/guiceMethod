@@ -1,5 +1,5 @@
   @Override
   public String getMessage() {
-    return Errors.format("Unable to create injector, see the following errors", messages);
+    return Messages.format("Unable to create injector, see the following errors", messages);
   }
 

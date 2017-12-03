@@ -1,7 +1,5 @@
+  // TODO(lukes): inline into callers
   public static String format(String messageFormat, Object... arguments) {
-    for (int i = 0; i < arguments.length; i++) {
-      arguments[i] = Errors.convert(arguments[i]);
-    }
-    return String.format(messageFormat, arguments);
+    return Messages.format(messageFormat, arguments);
   }
 

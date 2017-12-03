@@ -1,6 +1,6 @@
   /** Creates a ConfigurationException containing {@code messages}. */
   public ConfigurationException(Iterable<Message> messages) {
-    this.messages = ImmutableSet.copyOf(messages); 
-    initCause(Errors.getOnlyCause(this.messages));
+    this.messages = com.google.common.collect.ImmutableSet.copyOf(messages);
+    initCause(Messages.getOnlyCause(this.messages));
   }
 

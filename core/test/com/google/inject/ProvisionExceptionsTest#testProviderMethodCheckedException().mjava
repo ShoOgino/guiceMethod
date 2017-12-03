@@ -22,7 +22,7 @@
           pe.getMessage(), "1) Error in custom provider", "java.io.IOException: boom!");
       assertEquals(1, pe.getErrorMessages().size());
       assertEquals(IOException.class, pe.getCause().getClass());
-      assertEquals(IOException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+      assertEquals(IOException.class, Messages.getOnlyCause(pe.getErrorMessages()).getClass());
     }
   }
 

@@ -2,6 +2,6 @@
   public ProvisionException(Iterable<Message> messages) {
     this.messages = ImmutableSet.copyOf(messages);
     checkArgument(!this.messages.isEmpty());
-    initCause(Errors.getOnlyCause(this.messages));
+    initCause(Messages.getOnlyCause(this.messages));
   }
 

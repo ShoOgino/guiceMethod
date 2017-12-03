@@ -1,0 +1,6 @@
+  public static InternalProvisionException errorNotifyingInjectionListener(
+      InjectionListener<?> listener, TypeLiteral<?> type, RuntimeException cause) {
+    return errorInUserCode(
+        cause, "Error notifying InjectionListener %s of %s.%n Reason: %s", listener, type, cause);
+  }
+

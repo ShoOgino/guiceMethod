@@ -1,0 +1,11 @@
+  /**
+   * Calls {@link String#format} after converting the arguments using some standard guice formatting
+   * for {@link Key}, {@link Class} and {@link Member} objects.
+   */
+  public static String format(String messageFormat, Object... arguments) {
+    for (int i = 0; i < arguments.length; i++) {
+      arguments[i] = convert(arguments[i]);
+    }
+    return String.format(messageFormat, arguments);
+  }
+

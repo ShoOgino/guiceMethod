@@ -25,7 +25,7 @@
       assertEquals(1, pe.getErrorMessages().size());
       assertEquals(IllegalStateException.class, pe.getCause().getClass());
       assertEquals(
-          IllegalStateException.class, Errors.getOnlyCause(pe.getErrorMessages()).getClass());
+          IllegalStateException.class, Messages.getOnlyCause(pe.getErrorMessages()).getClass());
     }
   }
 

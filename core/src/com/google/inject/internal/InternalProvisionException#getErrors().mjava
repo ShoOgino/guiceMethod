@@ -1,0 +1,11 @@
+  ImmutableList<Message> getErrors() {
+    ImmutableList.Builder<Message> builder = ImmutableList.builder();
+    // reverse them since sources are added as the exception propagates (so the first source is the
+    // last one added)
+    List<Object> newSources = Lists.reverse(sourcesToPrepend);
+    for (Message error : errors) {
+      builder.add(Messages.mergeSources(newSources, error));
+    }
+    return builder.build();
+  }
+

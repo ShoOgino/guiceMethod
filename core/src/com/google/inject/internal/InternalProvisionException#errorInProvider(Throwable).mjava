@@ -1,0 +1,4 @@
+  public static InternalProvisionException errorInProvider(Throwable cause) {
+    return errorInUserCode(cause, "Error in custom provider, %s", cause);
+  }
+

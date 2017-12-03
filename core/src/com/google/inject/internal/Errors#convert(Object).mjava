@@ -1,9 +1,5 @@
+  // TODO(lukes): inline in callers.  There are some callers outside of guice, so this is difficult
   public static Object convert(Object o) {
-    ElementSource source = null;
-    if (o instanceof ElementSource) {
-      source = (ElementSource) o;
-      o = source.getDeclaringSource();
-    }
-    return convert(o, source);
+    return Messages.convert(o);
   }
 

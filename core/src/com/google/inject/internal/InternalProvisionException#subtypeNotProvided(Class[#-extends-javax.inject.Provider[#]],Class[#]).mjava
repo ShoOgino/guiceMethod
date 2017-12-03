@@ -1,0 +1,5 @@
+  public static InternalProvisionException subtypeNotProvided(
+      Class<? extends javax.inject.Provider<?>> providerType, Class<?> type) {
+    return create("%s doesn't provide instances of %s.", providerType, type);
+  }
+

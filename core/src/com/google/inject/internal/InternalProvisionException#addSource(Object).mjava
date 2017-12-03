@@ -1,0 +1,26 @@
+  /**
+   * Prepends the given {@code source} to the stack of binding sources for the errors reported in
+   * this exception.
+   *
+   * <p>See {@link Errors#withSource(Object)}
+   *
+   * <p>It is expected that this method is called as the exception propagates up the stack.
+   *
+   * @param source
+   * @return {@code this}
+   */
+  InternalProvisionException addSource(Object source) {
+    if (source == SourceProvider.UNKNOWN_SOURCE) {
+      return this;
+    }
+    int sz = sourcesToPrepend.size();
+    if (sz > 0 && sourcesToPrepend.get(sz - 1) == source) {
+      // This is for when there are two identical sources added in a row.  This behavior is copied
+      // from Errors.withSource where it can happen when an constructor/provider method throws an
+      // exception
+      return this;
+    }
+    sourcesToPrepend.add(source);
+    return this;
+  }
+

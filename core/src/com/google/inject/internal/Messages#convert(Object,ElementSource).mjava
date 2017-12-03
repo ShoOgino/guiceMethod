@@ -1,0 +1,9 @@
+  static Object convert(Object o, ElementSource source) {
+    for (Converter<?> converter : converters) {
+      if (converter.appliesTo(o)) {
+        return appendModules(converter.convert(o), source);
+      }
+    }
+    return appendModules(o, source);
+  }
+

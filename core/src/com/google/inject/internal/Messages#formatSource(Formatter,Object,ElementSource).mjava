@@ -1,4 +1,4 @@
-  public static void formatSource(Formatter formatter, Object source, ElementSource elementSource) {
+  static void formatSource(Formatter formatter, Object source, ElementSource elementSource) {
     String modules = moduleSourceString(elementSource);
     if (source instanceof Dependency) {
       Dependency<?> dependency = (Dependency<?>) source;

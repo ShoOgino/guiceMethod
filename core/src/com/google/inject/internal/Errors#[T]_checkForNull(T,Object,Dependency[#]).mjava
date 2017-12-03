@@ -4,6 +4,8 @@
    */
   public <T> T checkForNull(T value, Object source, Dependency<?> dependency)
       throws ErrorsException {
+    // TODO(lukes): move this method to InternalProvisionException?  Maybe split into 2, one for
+    // ProviderMethods and one for everything else.
     if (value != null || dependency.isNullable()) {
       return value;
     }
@@ -19,23 +21,24 @@
             return value; // user doesn't care about injecting nulls to non-@Nullables.
           case WARN:
             // Warn only once, otherwise we spam logs too much.
-            if (!warnedDependencies.add(dependency)) {
-              return value;
+            if (warnedDependencies.add(dependency)) {
+              logger.log(
+                  Level.WARNING,
+                  "Guice injected null into {0} (a {1}), please mark it @Nullable."
+                      + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
+                      + " error.",
+                  new Object[] {
+                    Messages.formatParameter(dependency), Messages.convert(dependency.getKey())
+                  });
             }
-            logger.log(
-                Level.WARNING,
-                "Guice injected null into {0} (a {1}), please mark it @Nullable."
-                    + " Use -Dguice_check_nullable_provides_params=ERROR to turn this into an"
-                    + " error.",
-                new Object[] {formatParameter(dependency), convert(dependency.getKey())});
-            return null; // log & exit.
+            return value;
         }
       }
     }
 
     Object formattedDependency =
         (dependency.getParameterIndex() != -1)
-            ? formatParameter(dependency)
+            ? Messages.formatParameter(dependency)
             : StackTraceElements.forMember(dependency.getInjectionPoint().getMember());
     addMessage(
         "null returned by binding at %s%n but %s is not @Nullable", source, formattedDependency);

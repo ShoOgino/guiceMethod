@@ -1,4 +1,4 @@
-  private static String formatParameter(Dependency<?> dependency) {
+  static String formatParameter(Dependency<?> dependency) {
     int ordinal = dependency.getParameterIndex() + 1;
     return String.format(
         "the %s%s parameter of %s",

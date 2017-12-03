@@ -1,0 +1,10 @@
+  /**
+   * Creates a new Message without a cause.
+   *
+   * @param messageFormat Format string
+   * @param arguments format string arguments
+   */
+  public static Message create(String messageFormat, Object... arguments) {
+    return create(null, messageFormat, arguments);
+  }
+

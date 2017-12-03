@@ -1,6 +1,5 @@
-  private Message merge(Message message) {
-    List<Object> sources = Lists.newArrayList();
-    sources.addAll(getSources());
+  /** Prepends the list of sources to the given {@link Message} */
+  static Message mergeSources(List<Object> sources, Message message) {
     List<Object> messageSources = message.getSources();
     // It is possible that the end of getSources() and the beginning of message.getSources() are
     // equivalent, in this case we should drop the repeated source when joining the lists.  The
@@ -12,8 +11,9 @@
         && Objects.equal(messageSources.get(0), sources.get(sources.size() - 1))) {
       messageSources = messageSources.subList(1, messageSources.size());
     }
-    sources.addAll(messageSources);
-
-    return new Message(sources, message.getMessage(), message.getCause());
+    return new Message(
+        ImmutableList.builder().addAll(sources).addAll(messageSources).build(),
+        message.getMessage(),
+        message.getCause());
   }
 

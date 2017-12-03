@@ -1,0 +1,5 @@
+  private InternalProvisionException(Iterable<Message> errors) {
+    this.errors = ImmutableList.copyOf(errors);
+    checkArgument(!this.errors.isEmpty(), "Can't create a provision exception with no errors");
+  }
+

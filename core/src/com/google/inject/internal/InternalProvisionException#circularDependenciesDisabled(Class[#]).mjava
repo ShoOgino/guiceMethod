@@ -1,0 +1,6 @@
+  public static InternalProvisionException circularDependenciesDisabled(Class<?> expectedType) {
+    return create(
+        "Found a circular dependency involving %s, and circular dependencies are disabled.",
+        expectedType);
+  }
+

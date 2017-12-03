@@ -1,0 +1,10 @@
+  /** Formats an object in a user friendly way. */
+  static Object convert(Object o) {
+    ElementSource source = null;
+    if (o instanceof ElementSource) {
+      source = (ElementSource) o;
+      o = source.getDeclaringSource();
+    }
+    return convert(o, source);
+  }
+

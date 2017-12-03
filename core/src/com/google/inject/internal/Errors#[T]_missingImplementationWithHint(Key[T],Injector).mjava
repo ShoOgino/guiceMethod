@@ -37,7 +37,7 @@
         String have = bindingKey.getTypeLiteral().toString();
         if (have.contains(want) || want.contains(have)) {
           Formatter fmt = new Formatter();
-          formatSource(fmt, bindingMap.get(bindingKey).getSource());
+          Messages.formatSource(fmt, bindingMap.get(bindingKey).getSource());
           String match = String.format("%s bound%s", convert(bindingKey), fmt.toString());
           possibleMatches.add(match);
           // TODO: Consider a check that if there are more than some number of results,

@@ -1,0 +1,12 @@
+  public static InternalProvisionException errorInUserCode(
+      Throwable cause, String messageFormat, Object... arguments) {
+    Collection<Message> messages = Errors.getMessagesFromThrowable(cause);
+    if (!messages.isEmpty()) {
+      // TODO(lukes): it seems like we are dropping some valuable context here..
+      // consider eliminating this special case
+      return new InternalProvisionException(messages);
+    } else {
+      return new InternalProvisionException(Messages.create(cause, messageFormat, arguments));
+    }
+  }
+

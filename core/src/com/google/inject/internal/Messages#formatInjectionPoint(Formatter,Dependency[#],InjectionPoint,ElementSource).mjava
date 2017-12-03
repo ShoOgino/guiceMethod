@@ -1,4 +1,4 @@
-  public static void formatInjectionPoint(
+  private static void formatInjectionPoint(
       Formatter formatter,
       Dependency<?> dependency,
       InjectionPoint injectionPoint,

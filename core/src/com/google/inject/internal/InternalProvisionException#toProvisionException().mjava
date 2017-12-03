@@ -1,0 +1,5 @@
+  /** Returns this exception convered to a ProvisionException. */
+  public ProvisionException toProvisionException() {
+    return new ProvisionException(getErrors());
+  }
+

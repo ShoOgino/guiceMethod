@@ -1,6 +1,7 @@
   public Errors merge(Collection<Message> messages) {
+    List<Object> sources = getSources();
     for (Message message : messages) {
-      addMessage(merge(message));
+      addMessage(Messages.mergeSources(sources, message));
     }
     return this;
   }
