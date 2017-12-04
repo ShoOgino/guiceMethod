@@ -1,6 +1,0 @@
-  // TODO(lukes): remove external callers
-  /** Returns the formatted message for an exception with the specified messages. */
-  public static String format(String heading, Collection<Message> errorMessages) {
-    return Messages.format(heading, errorMessages);
-  }
-
