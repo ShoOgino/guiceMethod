@@ -1,0 +1,17 @@
+  /** Returns an array of parameter values. */
+  static Object[] getAll(InternalContext context, SingleParameterInjector<?>[] parameterInjectors)
+      throws InternalProvisionException {
+    if (parameterInjectors == null) {
+      return NO_ARGUMENTS;
+    }
+
+    int size = parameterInjectors.length;
+    Object[] parameters = new Object[size];
+
+    // optimization: use manual for/each to save allocating an iterator here
+    for (int i = 0; i < size; i++) {
+      parameters[i] = parameterInjectors[i].inject(context);
+    }
+    return parameters;
+  }
+

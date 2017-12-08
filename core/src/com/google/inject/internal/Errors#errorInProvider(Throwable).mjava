@@ -1,4 +1,0 @@
-  public Errors errorInProvider(Throwable cause) {
-    return errorInUserCode(cause, "Error in custom provider, %s", cause);
-  }
-

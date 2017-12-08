@@ -1,0 +1,3 @@
+  /** Ensures the reference is initialized, then returns it. */
+  T get() throws InternalProvisionException;
+

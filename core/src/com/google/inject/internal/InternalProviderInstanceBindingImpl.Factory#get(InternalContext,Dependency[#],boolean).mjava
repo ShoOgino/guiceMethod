@@ -1,0 +1,17 @@
+    @Override
+    public T get(final InternalContext context, final Dependency<?> dependency, boolean linked)
+        throws InternalProvisionException {
+      if (provisionCallback == null) {
+        return doProvision(context, dependency);
+      } else {
+        return provisionCallback.provision(
+            context,
+            new ProvisionCallback<T>() {
+              @Override
+              public T call() throws InternalProvisionException {
+                return doProvision(context, dependency);
+              }
+            });
+      }
+    }
+

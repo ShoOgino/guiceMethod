@@ -1,3 +1,4 @@
+  // Guice no longer calls this, but external callers do
   public void throwProvisionExceptionIfErrorsExist() {
     if (!hasErrors()) {
       return;

@@ -1,0 +1,5 @@
+    private InternalProvisionException newNullEntryException(int i) {
+      return InternalProvisionException.create(
+          "Set injection failed due to null element bound at: %s", bindings.get(i).getSource());
+    }
+

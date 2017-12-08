@@ -1,0 +1,5 @@
+    @Override
+    protected Map<K, Provider<V>> doProvision(InternalContext context, Dependency<?> dependency) {
+      return mapOfProviders;
+    }
+

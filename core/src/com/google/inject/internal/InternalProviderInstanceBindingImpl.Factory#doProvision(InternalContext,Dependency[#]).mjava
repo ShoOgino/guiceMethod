@@ -1,0 +1,9 @@
+    /**
+     * Creates an object to be injected.
+     *
+     * @throws com.google.inject.internal.InternalProvisionException if a value cannot be provided
+     * @return instance to be injected
+     */
+    protected abstract T doProvision(InternalContext context, Dependency<?> dependency)
+        throws InternalProvisionException;
+

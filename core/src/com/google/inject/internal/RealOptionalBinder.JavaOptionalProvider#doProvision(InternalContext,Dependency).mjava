@@ -1,0 +1,24 @@
+    @Override
+    protected Object doProvision(InternalContext context, Dependency dependency)
+        throws InternalProvisionException {
+      InternalFactory<?> local = target;
+      if (local == null) {
+        return JAVA_OPTIONAL_EMPTY;
+      }
+      Dependency<?> localDependency = targetDependency;
+      Object result;
+      Dependency previous = context.pushDependency(localDependency, getSource());
+
+      try {
+        // See comments in RealOptionalKeyProvider, about how localDependency may be more specific
+        // than what we actually need.
+        result = local.get(context, localDependency, false);
+      } catch (InternalProvisionException ipe) {
+        throw ipe.addSource(localDependency);
+        } finally {
+          context.popStateAndSetDependency(previous);
+
+      }
+      return invokeJavaOptionalOfNullable(result);
+    }
+

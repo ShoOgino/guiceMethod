@@ -1,0 +1,26 @@
+  public T provision(InternalContext context, ProvisionCallback<T> callable)
+      throws InternalProvisionException {
+    Provision provision = new Provision(context, callable);
+    RuntimeException caught = null;
+    try {
+      provision.provision();
+    } catch (RuntimeException t) {
+      caught = t;
+    }
+
+    if (provision.exceptionDuringProvision != null) {
+      throw provision.exceptionDuringProvision;
+    } else if (caught != null) {
+      Object listener =
+          provision.erredListener != null ? provision.erredListener.getClass() : "(unknown)";
+      throw InternalProvisionException.errorInUserCode(
+          caught,
+          "Error notifying ProvisionListener %s of %s.%n Reason: %s",
+          listener,
+          binding.getKey(),
+          caught);
+    } else {
+      return provision.result;
+    }
+  }
+

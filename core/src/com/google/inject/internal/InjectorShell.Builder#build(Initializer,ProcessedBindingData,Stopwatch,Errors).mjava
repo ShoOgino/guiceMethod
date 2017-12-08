@@ -74,7 +74,7 @@
       stopwatch.resetAndLog("Module annotated method scanners creation");
 
       List<InjectorShell> injectorShells = Lists.newArrayList();
-      injectorShells.add(new InjectorShell(this, elements, injector));
+      injectorShells.add(new InjectorShell(elements, injector));
 
       // recursively build child shells
       PrivateElementProcessor processor = new PrivateElementProcessor(errors);

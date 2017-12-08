@@ -1,0 +1,5 @@
+    @Override
+    protected Object doProvision(InternalContext context, Dependency dependency) {
+      return value;
+    }
+

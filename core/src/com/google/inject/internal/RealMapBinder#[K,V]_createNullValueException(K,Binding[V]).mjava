@@ -1,0 +1,7 @@
+  private static <K, V> InternalProvisionException createNullValueException(
+      K key, Binding<V> binding) {
+    return InternalProvisionException.create(
+        "Map injection failed due to null value for key \"%s\", bound at: %s",
+        key, binding.getSource());
+  }
+

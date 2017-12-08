@@ -1,0 +1,19 @@
+  @Override
+  protected T provision(
+      javax.inject.Provider<? extends T> provider,
+      Dependency<?> dependency,
+      ConstructionContext<T> constructionContext)
+      throws InternalProvisionException {
+    try {
+      Object o = super.provision(provider, dependency, constructionContext);
+      if (o != null && !rawType.isInstance(o)) {
+        throw InternalProvisionException.subtypeNotProvided(providerType, rawType);
+      }
+      @SuppressWarnings("unchecked") // protected by isInstance() check above
+      T t = (T) o;
+      return t;
+    } catch (RuntimeException e) {
+      throw InternalProvisionException.errorInProvider(e).addSource(source);
+    }
+  }
+

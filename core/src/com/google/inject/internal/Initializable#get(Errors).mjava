@@ -1,3 +1,0 @@
-  /** Ensures the reference is initialized, then returns it. */
-  T get(Errors errors) throws ErrorsException;
-

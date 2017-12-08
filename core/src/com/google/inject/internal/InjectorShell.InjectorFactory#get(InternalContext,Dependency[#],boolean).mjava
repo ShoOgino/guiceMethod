@@ -1,0 +1,5 @@
+    @Override
+    public Injector get(InternalContext context, Dependency<?> dependency, boolean linked) {
+      return injector;
+    }
+

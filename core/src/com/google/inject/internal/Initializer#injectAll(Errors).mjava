@@ -7,9 +7,9 @@
     Preconditions.checkState(validationStarted, "Validation should be done before injection");
     for (InjectableReference<?> reference : pendingInjections) {
       try {
-        reference.get(errors);
-      } catch (ErrorsException e) {
-        errors.merge(e.getErrors());
+        reference.get();
+      } catch (InternalProvisionException ipe) {
+        errors.merge(ipe);
       }
     }
     pendingInjections.clear();

@@ -1,0 +1,30 @@
+  /** Provisions a new T. */
+  private T provision(InternalContext context, ConstructionContext<T> constructionContext)
+      throws InternalProvisionException {
+    try {
+      T t;
+      try {
+        Object[] parameters = SingleParameterInjector.getAll(context, parameterInjectors);
+        t = constructionProxy.newInstance(parameters);
+        constructionContext.setProxyDelegates(t);
+      } finally {
+        constructionContext.finishConstruction();
+      }
+
+      // Store reference. If an injector re-enters this factory, they'll get the same reference.
+      constructionContext.setCurrentReference(t);
+
+      MembersInjectorImpl<T> localMembersInjector = membersInjector;
+      localMembersInjector.injectMembers(t, context, false);
+      localMembersInjector.notifyListeners(t);
+
+      return t;
+    } catch (InvocationTargetException userException) {
+      Throwable cause = userException.getCause() != null ? userException.getCause() : userException;
+      throw InternalProvisionException.errorInjectingConstructor(cause)
+          .addSource(constructionProxy.getInjectionPoint());
+    } finally {
+      constructionContext.removeCurrentReference();
+    }
+  }
+

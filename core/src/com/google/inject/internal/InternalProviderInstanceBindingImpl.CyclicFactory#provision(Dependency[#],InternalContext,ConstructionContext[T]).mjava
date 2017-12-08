@@ -1,0 +1,16 @@
+    private T provision(
+        Dependency<?> dependency,
+        InternalContext context,
+        ConstructionContext<T> constructionContext)
+        throws InternalProvisionException {
+      try {
+        T t = doProvision(context, dependency);
+        constructionContext.setProxyDelegates(t);
+        return t;
+      } catch (InternalProvisionException ipe) {
+        throw ipe.addSource(getSource());
+      } catch (Throwable t) {
+        throw InternalProvisionException.errorInProvider(t).addSource(getSource());
+      }
+    }
+

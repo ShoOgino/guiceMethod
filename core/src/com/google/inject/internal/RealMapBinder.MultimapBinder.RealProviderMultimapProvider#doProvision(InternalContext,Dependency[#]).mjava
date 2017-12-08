@@ -1,0 +1,6 @@
+      @Override
+      protected Map<K, Set<Provider<V>>> doProvision(
+          InternalContext context, Dependency<?> dependency) {
+        return multimapOfProviders;
+      }
+

@@ -1,0 +1,27 @@
+    @Override
+    protected Map<K, V> doProvision(InternalContext context, Dependency<?> dependency)
+        throws InternalProvisionException {
+      SingleParameterInjector<V>[] localInjectors = injectors;
+      if (localInjectors == null) {
+        // if injectors == null, then we have no bindings so return the empty map.
+        return ImmutableMap.of();
+      }
+
+      ImmutableMap.Builder<K, V> resultBuilder = ImmutableMap.builder();
+      K[] localKeys = keys;
+      for (int i = 0; i < localInjectors.length; i++) {
+        SingleParameterInjector<V> injector = localInjectors[i];
+        K key = localKeys[i];
+
+        V value = injector.inject(context);
+
+        if (value == null) {
+          throw createNullValueException(key, bindingSelection.getMapBindings().get(key));
+        }
+
+        resultBuilder.put(key, value);
+      }
+
+      return resultBuilder.build();
+    }
+

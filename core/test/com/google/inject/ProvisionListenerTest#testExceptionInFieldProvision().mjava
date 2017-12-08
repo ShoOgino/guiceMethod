@@ -22,16 +22,28 @@
       fail();
     } catch (ProvisionException expected) {
       assertEquals(1, expected.getErrorMessages().size());
-      expectedMsg = expected.getMessage();
+      expectedMsg = Iterables.getOnlyElement(expected.getErrorMessages()).getMessage();
       assertContains(
-          listener.capture.get().getMessage(),
+          expected.getMessage(),
           "1) Error injecting constructor, java.lang.RuntimeException: Retry, Abort, Fail",
           " at " + FooBomb.class.getName(),
           " while locating " + FooBomb.class.getName(),
           " while locating " + DependsOnFooBombInField.class.getName());
+      assertContains(
+          listener.capture.get().getMessage(),
+          "1) Error injecting constructor, java.lang.RuntimeException: Retry, Abort, Fail",
+          " at " + FooBomb.class.getName(),
+          " while locating " + FooBomb.class.getName());
+      // The message that is captures by the provision listener does not show what is depending on
+      // the thing being listened to.
+      assertThat(listener.capture.get().getMessage())
+          .doesNotContain(" while locating " + DependsOnFooBombInField.class.getName());
     }
     assertEquals(1, listener.beforeProvision);
-    assertEquals(expectedMsg, listener.capture.get().getMessage());
+    assertEquals(
+        expectedMsg,
+        Iterables.getOnlyElement(((ProvisionException) listener.capture.get()).getErrorMessages())
+            .getMessage());
     assertEquals(0, listener.afterProvision);
   }
 

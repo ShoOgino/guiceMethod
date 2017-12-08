@@ -1,4 +1,4 @@
-  public List<Object> getSources() {
+  private List<Object> getSources() {
     List<Object> sources = Lists.newArrayList();
     for (Errors e = this; e != null; e = e.parent) {
       if (e.source != SourceProvider.UNKNOWN_SOURCE) {

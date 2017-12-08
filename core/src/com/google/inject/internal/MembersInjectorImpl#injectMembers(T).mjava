@@ -1,13 +1,10 @@
   @Override
   public void injectMembers(T instance) {
     TypeLiteral<T> localTypeLiteral = typeLiteral;
-    Errors errors = new Errors(localTypeLiteral);
     try {
-      injectAndNotify(instance, errors, null, null, localTypeLiteral, false);
-    } catch (ErrorsException e) {
-      errors.merge(e.getErrors());
+      injectAndNotify(instance, null, null, localTypeLiteral, false);
+    } catch (InternalProvisionException ipe) {
+      throw ipe.addSource(localTypeLiteral).toProvisionException();
     }
-
-    errors.throwProvisionExceptionIfErrorsExist();
   }
 

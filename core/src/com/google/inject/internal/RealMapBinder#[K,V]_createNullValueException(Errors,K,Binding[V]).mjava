@@ -1,9 +1,0 @@
-  private static <K, V> ErrorsException createNullValueException(
-      Errors errors, K key, Binding<V> binding) {
-    errors.addMessage(
-        "Map injection failed due to null value for key \"%s\", bound at: %s",
-        key, binding.getSource());
-
-    return errors.toException();
-  }
-

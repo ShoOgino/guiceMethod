@@ -1,0 +1,8 @@
+    @Override
+    public Logger get(InternalContext context, Dependency<?> dependency, boolean linked) {
+      InjectionPoint injectionPoint = dependency.getInjectionPoint();
+      return injectionPoint == null
+          ? Logger.getAnonymousLogger()
+          : Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
+    }
+

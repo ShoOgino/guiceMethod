@@ -1,0 +1,44 @@
+  void injectAndNotify(
+      final T instance,
+      final Key<T> key, // possibly null!
+      final ProvisionListenerStackCallback<T> provisionCallback, // possibly null!
+      final Object source,
+      final boolean toolableOnly)
+      throws InternalProvisionException {
+    if (instance == null) {
+      return;
+    }
+    final InternalContext context = injector.enterContext();
+    context.pushState(key, source);
+    try {
+      if (provisionCallback != null && provisionCallback.hasListeners()) {
+        provisionCallback.provision(
+            context,
+            new ProvisionCallback<T>() {
+              @Override
+              public T call() throws InternalProvisionException {
+                injectMembers(instance, context, toolableOnly);
+                return instance;
+              }
+            });
+      } else {
+        injectMembers(instance, context, toolableOnly);
+      }
+    } finally {
+      context.popState();
+      context.close();
+    }
+
+    // TODO: We *could* notify listeners too here,
+    // but it's not clear if we want to.  There's no way to know
+    // if a MembersInjector from the usersMemberInjector list wants
+    // toolable injections, so do we really want to notify
+    // about injection?  (We could take a strategy of only notifying
+    // if atleast one InjectionPoint was toolable, in which case
+    // the above callInContext could return 'true' if it injected
+    // anything.)
+    if (!toolableOnly) {
+      notifyListeners(instance);
+    }
+  }
+

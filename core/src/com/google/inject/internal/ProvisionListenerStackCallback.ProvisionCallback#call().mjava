@@ -1,2 +1,2 @@
-    public T call() throws ErrorsException;
+    public T call() throws InternalProvisionException;
 

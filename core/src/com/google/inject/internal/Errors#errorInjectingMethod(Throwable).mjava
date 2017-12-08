@@ -1,4 +1,0 @@
-  public Errors errorInjectingMethod(Throwable cause) {
-    return errorInUserCode(cause, "Error injecting method, %s", cause);
-  }
-

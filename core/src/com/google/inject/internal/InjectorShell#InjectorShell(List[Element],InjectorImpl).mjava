@@ -1,0 +1,5 @@
+  private InjectorShell(List<Element> elements, InjectorImpl injector) {
+    this.elements = elements;
+    this.injector = injector;
+  }
+

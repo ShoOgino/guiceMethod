@@ -1,0 +1,34 @@
+    @Override
+    public final T get(
+        final InternalContext context, final Dependency<?> dependency, boolean linked)
+        throws InternalProvisionException {
+      final ConstructionContext<T> constructionContext = context.getConstructionContext(this);
+      // We have a circular reference between bindings. Return a proxy.
+      if (constructionContext.isConstructing()) {
+        Class<?> expectedType = dependency.getKey().getTypeLiteral().getRawType();
+        @SuppressWarnings("unchecked")
+        T proxyType =
+            (T) constructionContext.createProxy(context.getInjectorOptions(), expectedType);
+        return proxyType;
+      }
+      // Optimization: Don't go through the callback stack if no one's listening.
+      constructionContext.startConstruction();
+      try {
+        if (provisionCallback == null) {
+          return provision(dependency, context, constructionContext);
+        } else {
+          return provisionCallback.provision(
+              context,
+              new ProvisionCallback<T>() {
+                @Override
+                public T call() throws InternalProvisionException {
+                  return provision(dependency, context, constructionContext);
+                }
+              });
+        }
+      } finally {
+        constructionContext.removeCurrentReference();
+        constructionContext.finishConstruction();
+      }
+    }
+

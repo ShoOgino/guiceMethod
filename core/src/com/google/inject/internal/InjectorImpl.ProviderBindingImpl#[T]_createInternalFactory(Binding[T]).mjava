@@ -2,8 +2,7 @@
       final Provider<T> provider = providedBinding.getProvider();
       return new InternalFactory<Provider<T>>() {
         @Override
-        public Provider<T> get(
-            Errors errors, InternalContext context, Dependency dependency, boolean linked) {
+        public Provider<T> get(InternalContext context, Dependency<?> dependency, boolean linked) {
           return provider;
         }
       };

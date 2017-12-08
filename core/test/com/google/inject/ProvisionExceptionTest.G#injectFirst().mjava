@@ -1,5 +1,0 @@
-    @Inject
-    void injectFirst() {
-      throw new IllegalArgumentException(new UnsupportedOperationException("Unsupported"));
-    }
-

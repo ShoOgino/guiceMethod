@@ -52,7 +52,7 @@
                 return new C() {};
               }
             });
-    Instance instance = injector.getInstance(Instance.class);
+    injector.getInstance(Instance.class);
     // make sure we're checking all of the chain asserters..
     assertEquals(
         of(Instance.class, A.class, BImpl.class, C.class, DP.class, D.class, E.class, F.class),

@@ -1,0 +1,26 @@
+    @Override
+    protected Optional<T> doProvision(InternalContext context, Dependency<?> currentDependency)
+        throws InternalProvisionException {
+      InternalFactory<? extends T> local = delegate;
+      if (local == null) {
+        return Optional.absent();
+      }
+      Dependency<?> localDependency = targetDependency;
+      T result;
+      Dependency previous = context.pushDependency(localDependency, getSource());
+
+      try {
+        // currentDependency is Optional<? super T>, so we really just need to set the target
+        // dependency to ? super T, but we are currently setting it to T.  We could hypothetically
+        // make it easier for our delegate to generate proxies by modifying the dependency, but that
+        // would also require us to rewrite the key on each call.  So for now we don't do it.
+        result = local.get(context, localDependency, false);
+      } catch (InternalProvisionException ipe) {
+        throw ipe.addSource(localDependency);
+        } finally {
+          context.popStateAndSetDependency(previous);
+
+      }
+      return Optional.fromNullable(result);
+    }
+

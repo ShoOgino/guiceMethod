@@ -8,15 +8,13 @@
     return new Provider<T>() {
       @Override
       public T get() {
-        Errors errors = new Errors(dependency);
         InternalContext currentContext = enterContext();
         Dependency previous = currentContext.pushDependency(dependency, source);
         try {
-          T t = internalFactory.get(errors, currentContext, dependency, false);
-          errors.throwIfNewErrors(0);
+          T t = internalFactory.get(currentContext, dependency, false);
           return t;
-        } catch (ErrorsException e) {
-          throw new ProvisionException(errors.merge(e.getErrors()).getMessages());
+        } catch (InternalProvisionException e) {
+          throw e.addSource(dependency).toProvisionException();
         } finally {
           currentContext.popStateAndSetDependency(previous);
           currentContext.close();

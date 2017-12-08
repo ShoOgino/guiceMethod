@@ -1,0 +1,49 @@
+  /**
+   * Construct an instance. Returns {@code Object} instead of {@code T} because it may return a
+   * proxy.
+   */
+  Object construct(
+      final InternalContext context,
+      Dependency<?> dependency,
+      /* @Nullable */ ProvisionListenerStackCallback<T> provisionCallback)
+      throws InternalProvisionException {
+    final ConstructionContext<T> constructionContext = context.getConstructionContext(this);
+    // We have a circular reference between constructors. Return a proxy.
+    if (constructionContext.isConstructing()) {
+      // TODO (crazybob): if we can't proxy this object, can we proxy the other object?
+      return constructionContext.createProxy(
+          context.getInjectorOptions(), dependency.getKey().getTypeLiteral().getRawType());
+    }
+
+    // If we're re-entering this factory while injecting fields or methods,
+    // return the same instance. This prevents infinite loops.
+    T t = constructionContext.getCurrentReference();
+    if (t != null) {
+      if (context.getInjectorOptions().disableCircularProxies) {
+        throw InternalProvisionException.circularDependenciesDisabled(
+            dependency.getKey().getTypeLiteral().getRawType());
+      } else {
+        return t;
+      }
+    }
+
+    constructionContext.startConstruction();
+    try {
+      // Optimization: Don't go through the callback stack if we have no listeners.
+      if (provisionCallback == null) {
+        return provision(context, constructionContext);
+      } else {
+        return provisionCallback.provision(
+            context,
+            new ProvisionCallback<T>() {
+              @Override
+              public T call() throws InternalProvisionException {
+                return provision(context, constructionContext);
+              }
+            });
+      }
+    } finally {
+      constructionContext.finishConstruction();
+    }
+  }
+
