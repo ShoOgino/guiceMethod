@@ -1,5 +1,4 @@
-  public void testFieldInjectionPoint()
-      throws NoSuchFieldException, IOException, InternalConfigurationException {
+  public void testFieldInjectionPoint() throws NoSuchFieldException, IOException, ErrorsException {
     TypeLiteral<?> typeLiteral = TypeLiteral.get(getClass());
     Field fooField = getClass().getField("foo");
 

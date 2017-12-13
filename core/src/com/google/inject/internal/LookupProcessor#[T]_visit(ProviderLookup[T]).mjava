@@ -4,7 +4,7 @@
     try {
       Provider<T> provider = injector.getProviderOrThrow(lookup.getDependency(), errors);
       lookup.initializeDelegate(provider);
-    } catch (InternalConfigurationException e) {
+    } catch (ErrorsException e) {
       errors.merge(e.getErrors()); // TODO: source
     }
 

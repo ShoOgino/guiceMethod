@@ -1,5 +1,5 @@
     @Override
-    void initialize(InjectorImpl injector, Errors errors) throws InternalConfigurationException {
+    void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
       bindingSelection.initialize(injector, errors);
       this.bindings = bindingSelection.getBindings();
       this.injectors = bindingSelection.getParameterInjectors();

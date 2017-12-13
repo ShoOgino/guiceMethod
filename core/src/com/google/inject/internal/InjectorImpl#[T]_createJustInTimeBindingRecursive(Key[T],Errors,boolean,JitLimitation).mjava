@@ -4,7 +4,7 @@
    */
   private <T> BindingImpl<T> createJustInTimeBindingRecursive(
       Key<T> key, Errors errors, boolean jitDisabled, JitLimitation jitType)
-      throws InternalConfigurationException {
+      throws ErrorsException {
     // ask the parent to create the JIT binding
     if (parent != null) {
       if (jitType == JitLimitation.NEW_OR_EXISTING_JIT
@@ -20,7 +20,7 @@
             new Errors(),
             jitDisabled,
             parent.options.jitDisabled ? JitLimitation.NO_JIT : jitType);
-      } catch (InternalConfigurationException ignored) {
+      } catch (ErrorsException ignored) {
       }
     }
 

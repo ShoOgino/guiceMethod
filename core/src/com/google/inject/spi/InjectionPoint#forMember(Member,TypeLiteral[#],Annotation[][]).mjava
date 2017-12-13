@@ -13,7 +13,7 @@
         index++;
       } catch (ConfigurationException e) {
         errors.merge(e.getErrorMessages());
-      } catch (InternalConfigurationException e) {
+      } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

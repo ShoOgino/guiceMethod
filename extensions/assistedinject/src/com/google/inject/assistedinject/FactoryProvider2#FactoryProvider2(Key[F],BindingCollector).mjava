@@ -90,7 +90,7 @@
           ctorInjectionPoint =
               findMatchingConstructorInjectionPoint(
                   method, returnType, implementation, immutableParamList);
-        } catch (InternalConfigurationException ee) {
+        } catch (ErrorsException ee) {
           errors.merge(ee.getErrors());
           continue;
         }
@@ -174,7 +174,7 @@
 
       assistDataByMethod = assistDataBuilder.build();
       methodHandleByMethod = methodHandleBuilder.build();
-    } catch (InternalConfigurationException e) {
+    } catch (ErrorsException e) {
       throw new ConfigurationException(e.getErrors().getMessages());
     }
   }

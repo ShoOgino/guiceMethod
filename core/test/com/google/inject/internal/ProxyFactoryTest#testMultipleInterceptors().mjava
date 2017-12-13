@@ -1,5 +1,5 @@
   public void testMultipleInterceptors()
-      throws NoSuchMethodException, InvocationTargetException, InternalConfigurationException {
+      throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     DoubleInterceptor doubleInterceptor = new DoubleInterceptor();
     CountingInterceptor countingInterceptor = new CountingInterceptor();
 

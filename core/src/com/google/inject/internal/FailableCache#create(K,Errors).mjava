@@ -1,2 +1,2 @@
-  protected abstract V create(K key, Errors errors) throws InternalConfigurationException;
+  protected abstract V create(K key, Errors errors) throws ErrorsException;
 

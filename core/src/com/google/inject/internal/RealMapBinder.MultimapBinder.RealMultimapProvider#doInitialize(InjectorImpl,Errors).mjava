@@ -1,6 +1,5 @@
       @Override
-      protected void doInitialize(InjectorImpl injector, Errors errors)
-          throws InternalConfigurationException {
+      protected void doInitialize(InjectorImpl injector, Errors errors) throws ErrorsException {
         @SuppressWarnings({"unchecked", "rawtypes"})
         PerKeyData<K, V>[] typedPerKeyData =
             new PerKeyData[bindingSelection.getMapBindings().size()];

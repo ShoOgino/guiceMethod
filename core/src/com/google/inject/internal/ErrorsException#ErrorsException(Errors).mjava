@@ -1,0 +1,4 @@
+  public ErrorsException(Errors errors) {
+    this.errors = errors;
+  }
+

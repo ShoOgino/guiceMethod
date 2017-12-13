@@ -21,7 +21,7 @@
             collector.addBinding(returnType, implementationType);
           }
         }
-      } catch (InternalConfigurationException e) {
+      } catch (ErrorsException e) {
         throw new ConfigurationException(e.getErrors().getMessages());
       }
 

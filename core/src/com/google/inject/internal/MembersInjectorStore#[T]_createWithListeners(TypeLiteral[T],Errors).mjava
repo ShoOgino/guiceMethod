@@ -1,6 +1,6 @@
   /** Creates a new members injector and attaches both injection listeners and method aspects. */
   private <T> MembersInjectorImpl<T> createWithListeners(TypeLiteral<T> type, Errors errors)
-      throws InternalConfigurationException {
+      throws ErrorsException {
     int numErrorsBefore = errors.size();
 
     Set<InjectionPoint> injectionPoints;

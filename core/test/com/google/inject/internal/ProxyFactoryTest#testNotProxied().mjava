@@ -1,5 +1,5 @@
   public void testNotProxied()
-      throws NoSuchMethodException, InvocationTargetException, InternalConfigurationException {
+      throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     aspects.add(new MethodAspect(not(any()), not(any()), interceptor));

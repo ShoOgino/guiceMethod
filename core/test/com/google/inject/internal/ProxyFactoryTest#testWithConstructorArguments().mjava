@@ -1,5 +1,5 @@
   public void testWithConstructorArguments()
-      throws InvocationTargetException, NoSuchMethodException, InternalConfigurationException {
+      throws InvocationTargetException, NoSuchMethodException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     aspects.add(new MethodAspect(any(), any(), interceptor));

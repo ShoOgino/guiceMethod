@@ -3,7 +3,7 @@
     Errors errors = new Errors(typeLiteral);
     try {
       return membersInjectorStore.get(typeLiteral, errors);
-    } catch (InternalConfigurationException e) {
+    } catch (ErrorsException e) {
       throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
     }
   }

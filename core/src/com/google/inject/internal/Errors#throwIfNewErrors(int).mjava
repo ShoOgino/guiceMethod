@@ -1,4 +1,4 @@
-  public void throwIfNewErrors(int expectedSize) throws InternalConfigurationException {
+  public void throwIfNewErrors(int expectedSize) throws ErrorsException {
     if (size() == expectedSize) {
       return;
     }

@@ -4,8 +4,7 @@
      * state.
      */
     @Override
-    final void initialize(InjectorImpl injector, Errors errors)
-        throws InternalConfigurationException {
+    final void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
       Binding<Map<K, V>> mapBinding = injector.getExistingBinding(mapKey);
       ProviderInstanceBinding<Map<K, V>> providerInstanceBinding =
           (ProviderInstanceBinding<Map<K, V>>) mapBinding;

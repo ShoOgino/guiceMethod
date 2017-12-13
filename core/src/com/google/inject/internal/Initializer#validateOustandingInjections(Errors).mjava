@@ -8,7 +8,7 @@
     for (InjectableReference<?> reference : pendingInjections) {
       try {
         reference.validate(errors);
-      } catch (InternalConfigurationException e) {
+      } catch (ErrorsException e) {
         errors.merge(e.getErrors());
       }
     }

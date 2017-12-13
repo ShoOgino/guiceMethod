@@ -1,5 +1,5 @@
   @Override
-  void initialize(InjectorImpl injector, Errors errors) throws InternalConfigurationException {
+  void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
     parameterInjectors = injector.getParametersInjectors(dependencies.asList(), errors);
   }
 

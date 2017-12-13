@@ -1,5 +1,4 @@
-  <T> void initializeBinding(BindingImpl<T> binding, Errors errors)
-      throws InternalConfigurationException {
+  <T> void initializeBinding(BindingImpl<T> binding, Errors errors) throws ErrorsException {
     if (binding instanceof DelayedInitialize) {
       ((DelayedInitialize) binding).initialize(this, errors);
     }

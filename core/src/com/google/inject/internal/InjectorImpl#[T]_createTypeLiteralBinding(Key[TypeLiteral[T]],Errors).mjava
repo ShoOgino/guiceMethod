@@ -3,7 +3,7 @@
    * a bit awkward because we have to pull out the inner type in the type literal.
    */
   private <T> BindingImpl<TypeLiteral<T>> createTypeLiteralBinding(
-      Key<TypeLiteral<T>> key, Errors errors) throws InternalConfigurationException {
+      Key<TypeLiteral<T>> key, Errors errors) throws ErrorsException {
     Type typeLiteralType = key.getTypeLiteral().getType();
     if (!(typeLiteralType instanceof ParameterizedType)) {
       throw errors.cannotInjectRawTypeLiteral().toException();

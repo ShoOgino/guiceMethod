@@ -1,4 +1,4 @@
-  public InternalConfigurationException toException() {
-    return new InternalConfigurationException(this);
+  public ErrorsException toException() {
+    return new ErrorsException(this);
   }
 

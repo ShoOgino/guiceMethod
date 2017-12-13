@@ -1,6 +1,6 @@
   /** Returns parameter injectors, or {@code null} if there are no parameters. */
   SingleParameterInjector<?>[] getParametersInjectors(List<Dependency<?>> parameters, Errors errors)
-      throws InternalConfigurationException {
+      throws ErrorsException {
     if (parameters.isEmpty()) {
       return null;
     }
@@ -11,7 +11,7 @@
     for (Dependency<?> parameter : parameters) {
       try {
         result[i++] = createParameterInjector(parameter, errors.withSource(parameter));
-      } catch (InternalConfigurationException rethrownBelow) {
+      } catch (ErrorsException rethrownBelow) {
         // rethrown below
       }
     }

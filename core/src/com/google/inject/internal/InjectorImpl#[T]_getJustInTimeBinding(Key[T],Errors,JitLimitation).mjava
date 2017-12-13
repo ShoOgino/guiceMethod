@@ -1,10 +1,10 @@
   /**
    * Returns a just-in-time binding for {@code key}, creating it if necessary.
    *
-   * @throws InternalConfigurationException if the binding could not be created.
+   * @throws ErrorsException if the binding could not be created.
    */
   private <T> BindingImpl<T> getJustInTimeBinding(Key<T> key, Errors errors, JitLimitation jitType)
-      throws InternalConfigurationException {
+      throws ErrorsException {
 
     boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);
     synchronized (state.lock()) {

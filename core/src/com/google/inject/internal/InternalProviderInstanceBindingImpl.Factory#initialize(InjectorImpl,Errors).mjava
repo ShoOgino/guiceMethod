@@ -3,6 +3,5 @@
      *
      * <p>Will be called exactly once, prior to any call to {@link #doProvision}.
      */
-    abstract void initialize(InjectorImpl injector, Errors errors)
-        throws InternalConfigurationException;
+    abstract void initialize(InjectorImpl injector, Errors errors) throws ErrorsException;
 

@@ -1,7 +1,7 @@
   /** Creates a binding for a type annotated with @ImplementedBy. */
   private <T> BindingImpl<T> createImplementedByBinding(
       Key<T> key, Scoping scoping, ImplementedBy implementedBy, Errors errors)
-      throws InternalConfigurationException {
+      throws ErrorsException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
     Class<?> implementationType = implementedBy.value();
 

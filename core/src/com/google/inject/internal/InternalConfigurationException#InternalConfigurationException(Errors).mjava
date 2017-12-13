@@ -1,4 +1,0 @@
-  public InternalConfigurationException(Errors errors) {
-    this.errors = errors;
-  }
-

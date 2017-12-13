@@ -5,7 +5,7 @@
       Provider<T> result = getProviderOrThrow(Dependency.get(key), errors);
       errors.throwIfNewErrors(0);
       return result;
-    } catch (InternalConfigurationException e) {
+    } catch (ErrorsException e) {
       throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
     }
   }

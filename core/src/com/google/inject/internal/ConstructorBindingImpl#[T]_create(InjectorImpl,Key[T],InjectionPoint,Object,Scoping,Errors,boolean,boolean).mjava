@@ -12,7 +12,7 @@
       Errors errors,
       boolean failIfNotLinked,
       boolean failIfNotExplicit)
-      throws InternalConfigurationException {
+      throws ErrorsException {
     int numErrors = errors.size();
 
     @SuppressWarnings("unchecked") // constructorBinding guarantees type is consistent

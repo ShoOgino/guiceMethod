@@ -26,7 +26,7 @@
         if (getExistingBinding(providedKey) != null) {
           return getBinding(key);
         }
-      } catch (InternalConfigurationException e) {
+      } catch (ErrorsException e) {
         throw new ConfigurationException(e.getErrors().getMessages());
       }
     }
