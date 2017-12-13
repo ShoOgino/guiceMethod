@@ -1,5 +1,5 @@
     static MethodHandleWrapper create(Method method, Object proxy) {
-      if (!valid) {
+      if (!VALID) {
         return null;
       }
       try {

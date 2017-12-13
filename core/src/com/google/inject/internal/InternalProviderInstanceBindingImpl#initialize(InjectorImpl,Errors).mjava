@@ -1,5 +1,6 @@
   @Override
-  public void initialize(final InjectorImpl injector, final Errors errors) throws ErrorsException {
+  public void initialize(final InjectorImpl injector, final Errors errors)
+      throws InternalConfigurationException {
     originalFactory.source = getSource();
     originalFactory.provisionCallback = injector.provisionListenerStore.get(this);
     // For these kinds of providers, the 'user supplied provider' is really 'guice supplied'

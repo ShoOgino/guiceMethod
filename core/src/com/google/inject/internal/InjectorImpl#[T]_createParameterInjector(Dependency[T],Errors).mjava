@@ -1,5 +1,5 @@
   <T> SingleParameterInjector<T> createParameterInjector(
-      final Dependency<T> dependency, final Errors errors) throws ErrorsException {
+      final Dependency<T> dependency, final Errors errors) throws InternalConfigurationException {
     BindingImpl<? extends T> binding =
         getBindingOrThrow(dependency.getKey(), errors, JitLimitation.NO_JIT);
     return new SingleParameterInjector<T>(dependency, binding);

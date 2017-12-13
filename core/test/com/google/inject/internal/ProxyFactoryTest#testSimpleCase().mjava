@@ -1,5 +1,5 @@
   public void testSimpleCase()
-      throws NoSuchMethodException, InvocationTargetException, ErrorsException {
+      throws NoSuchMethodException, InvocationTargetException, InternalConfigurationException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
     InjectionPoint injectionPoint = InjectionPoint.forConstructorOf(Simple.class);
 

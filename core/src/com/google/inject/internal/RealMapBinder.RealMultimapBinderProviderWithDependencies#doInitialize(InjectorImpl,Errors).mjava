@@ -2,5 +2,6 @@
      * Initialize the factory. BindingSelection is guaranteed to be initialized at this point and
      * this will be called prior to any provisioning.
      */
-    abstract void doInitialize(InjectorImpl injector, Errors errors) throws ErrorsException;
+    abstract void doInitialize(InjectorImpl injector, Errors errors)
+        throws InternalConfigurationException;
 

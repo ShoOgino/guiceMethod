@@ -2,10 +2,11 @@
    * Converts a constant string binding to the required type.
    *
    * @return the binding if it could be resolved, or null if the binding doesn't exist
-   * @throws com.google.inject.internal.ErrorsException if there was an error resolving the binding
+   * @throws com.google.inject.internal.InternalConfigurationException if there was an error
+   *     resolving the binding
    */
   private <T> BindingImpl<T> convertConstantStringBinding(Key<T> key, Errors errors)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     // Find a constant string binding.
     Key<String> stringKey = key.ofType(STRING_TYPE);
     BindingImpl<String> stringBinding = state.getExplicitBinding(stringKey);
@@ -49,7 +50,7 @@
 
       return new ConvertedConstantBindingImpl<T>(
           this, key, converted, stringBinding, typeConverterBinding);
-    } catch (ErrorsException e) {
+    } catch (InternalConfigurationException e) {
       throw e;
     } catch (RuntimeException e) {
       throw errors

@@ -1,6 +1,7 @@
   /** Returns a new complete members injector with injection listeners registered. */
   @SuppressWarnings("unchecked") // the MembersInjector type always agrees with the passed type
-  public <T> MembersInjectorImpl<T> get(TypeLiteral<T> key, Errors errors) throws ErrorsException {
+  public <T> MembersInjectorImpl<T> get(TypeLiteral<T> key, Errors errors)
+      throws InternalConfigurationException {
     return (MembersInjectorImpl<T>) cache.get(key, errors);
   }
 

@@ -1,4 +1,5 @@
-  <T> void initializeJitBinding(BindingImpl<T> binding, Errors errors) throws ErrorsException {
+  <T> void initializeJitBinding(BindingImpl<T> binding, Errors errors)
+      throws InternalConfigurationException {
     // Put the partially constructed binding in the map a little early. This enables us to handle
     // circular dependencies. Example: FooImpl -> BarImpl -> FooImpl.
     // Note: We don't need to synchronize on state.lock() during injector creation.

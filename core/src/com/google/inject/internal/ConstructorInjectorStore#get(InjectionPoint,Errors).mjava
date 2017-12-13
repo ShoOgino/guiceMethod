@@ -1,6 +1,6 @@
   /** Returns a new complete constructor injector with injection listeners registered. */
   public ConstructorInjector<?> get(InjectionPoint constructorInjector, Errors errors)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     return cache.get(constructorInjector, errors);
   }
 

@@ -4,7 +4,7 @@
       providerFactory =
           injector.getInternalFactory(
               providerKey, errors.withSource(source), JitLimitation.NEW_OR_EXISTING_JIT);
-    } catch (ErrorsException e) {
+    } catch (InternalConfigurationException e) {
       errors.merge(e.getErrors());
     }
   }

@@ -1,6 +1,7 @@
   /** Creates a binding for a type annotated with @ProvidedBy. */
   <T> BindingImpl<T> createProvidedByBinding(
-      Key<T> key, Scoping scoping, ProvidedBy providedBy, Errors errors) throws ErrorsException {
+      Key<T> key, Scoping scoping, ProvidedBy providedBy, Errors errors)
+      throws InternalConfigurationException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
     Class<? extends javax.inject.Provider<?>> providerType = providedBy.value();
 

@@ -1,4 +1,4 @@
-    void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+    void initialize(InjectorImpl injector, Errors errors) throws InternalConfigurationException {
       // This will be called multiple times, once by each Factory. We only want
       // to do the work to initialize everything once, so guard this code with
       // isInitialized.

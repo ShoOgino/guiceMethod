@@ -1,5 +1,5 @@
   public void testInterceptOneMethod()
-      throws NoSuchMethodException, InvocationTargetException, ErrorsException {
+      throws NoSuchMethodException, InvocationTargetException, InternalConfigurationException {
     SimpleInterceptor interceptor = new SimpleInterceptor();
 
     aspects.add(new MethodAspect(only(Bar.class), annotatedWith(Intercept.class), interceptor));

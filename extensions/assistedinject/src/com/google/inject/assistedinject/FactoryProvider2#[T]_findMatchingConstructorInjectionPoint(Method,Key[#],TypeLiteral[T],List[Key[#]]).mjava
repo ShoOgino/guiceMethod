@@ -7,7 +7,7 @@
    */
   private <T> InjectionPoint findMatchingConstructorInjectionPoint(
       Method method, Key<?> returnType, TypeLiteral<T> implementation, List<Key<?>> paramList)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     Errors errors = new Errors(method);
     if (returnType.getTypeLiteral().equals(implementation)) {
       errors = errors.withSource(implementation);

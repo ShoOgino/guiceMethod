@@ -1,5 +1,5 @@
   <T> InternalFactory<? extends T> getInternalFactory(
-      Key<T> key, Errors errors, JitLimitation jitType) throws ErrorsException {
+      Key<T> key, Errors errors, JitLimitation jitType) throws InternalConfigurationException {
     return getBindingOrThrow(key, errors, jitType).getInternalFactory();
   }
 

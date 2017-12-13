@@ -1,5 +1,5 @@
   private <T> BindingImpl<MembersInjector<T>> createMembersInjectorBinding(
-      Key<MembersInjector<T>> key, Errors errors) throws ErrorsException {
+      Key<MembersInjector<T>> key, Errors errors) throws InternalConfigurationException {
     Type membersInjectorType = key.getTypeLiteral().getType();
     if (!(membersInjectorType instanceof ParameterizedType)) {
       throw errors.cannotInjectRawMembersInjector().toException();

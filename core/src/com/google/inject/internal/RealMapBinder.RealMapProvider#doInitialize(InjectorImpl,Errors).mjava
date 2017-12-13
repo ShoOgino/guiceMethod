@@ -1,5 +1,6 @@
     @Override
-    protected void doInitialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+    protected void doInitialize(InjectorImpl injector, Errors errors)
+        throws InternalConfigurationException {
       @SuppressWarnings("unchecked")
       K[] keysArray = (K[]) new Object[bindingSelection.getMapBindings().size()];
       keys = keysArray;

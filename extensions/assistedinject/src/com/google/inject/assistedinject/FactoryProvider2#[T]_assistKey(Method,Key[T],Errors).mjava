@@ -3,7 +3,8 @@
    * fails if another binding annotation is clobbered in the process. If the key already has the
    * {@literal @}Assisted annotation, it is returned as-is to preserve any String value.
    */
-  private <T> Key<T> assistKey(Method method, Key<T> key, Errors errors) throws ErrorsException {
+  private <T> Key<T> assistKey(Method method, Key<T> key, Errors errors)
+      throws InternalConfigurationException {
     if (key.getAnnotationType() == null) {
       return Key.get(key.getTypeLiteral(), DEFAULT_ANNOTATION);
     } else if (key.getAnnotationType() == Assisted.class) {

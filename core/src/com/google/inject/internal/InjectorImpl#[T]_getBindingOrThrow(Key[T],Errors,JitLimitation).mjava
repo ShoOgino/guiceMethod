@@ -5,7 +5,7 @@
    * binding.
    */
   <T> BindingImpl<T> getBindingOrThrow(Key<T> key, Errors errors, JitLimitation jitType)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     // Check explicit bindings, i.e. bindings created by modules.
     BindingImpl<T> binding = state.getExplicitBinding(key);
     if (binding != null) {

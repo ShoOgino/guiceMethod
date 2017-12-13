@@ -5,7 +5,7 @@
    */
   private boolean constructorHasMatchingParams(
       TypeLiteral<?> type, Constructor<?> constructor, List<Key<?>> paramList, Errors errors)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     List<TypeLiteral<?>> params = type.getParameterTypes(constructor);
     Annotation[][] paramAnnotations = constructor.getParameterAnnotations();
     int p = 0;

@@ -6,7 +6,7 @@
       BindingImpl<T> result = getBindingOrThrow(key, errors, JitLimitation.EXISTING_JIT);
       errors.throwConfigurationExceptionIfErrorsExist();
       return result;
-    } catch (ErrorsException e) {
+    } catch (InternalConfigurationException e) {
       throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
     }
   }

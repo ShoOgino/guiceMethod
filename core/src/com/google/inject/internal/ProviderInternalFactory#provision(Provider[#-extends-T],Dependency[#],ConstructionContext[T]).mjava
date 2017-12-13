@@ -1,6 +1,6 @@
   /**
    * Provisions a new instance. Subclasses should override this to catch exceptions & rethrow as
-   * ErrorsExceptions.
+   * InternalConfigurationExceptions.
    */
   protected T provision(
       Provider<? extends T> provider,

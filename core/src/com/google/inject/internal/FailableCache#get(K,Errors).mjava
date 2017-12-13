@@ -1,4 +1,4 @@
-  public V get(K key, Errors errors) throws ErrorsException {
+  public V get(K key, Errors errors) throws InternalConfigurationException {
     Object resultOrError = delegate.getUnchecked(key);
     if (resultOrError instanceof Errors) {
       errors.merge((Errors) resultOrError);

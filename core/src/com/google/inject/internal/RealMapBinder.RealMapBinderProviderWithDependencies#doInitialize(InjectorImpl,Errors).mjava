@@ -3,5 +3,5 @@
      * this will be called prior to any provisioning.
      */
     protected abstract void doInitialize(InjectorImpl injector, Errors errors)
-        throws ErrorsException;
+        throws InternalConfigurationException;
 

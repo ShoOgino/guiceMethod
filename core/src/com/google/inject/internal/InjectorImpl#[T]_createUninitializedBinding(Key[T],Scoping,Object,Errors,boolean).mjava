@@ -4,7 +4,7 @@
    */
   <T> BindingImpl<T> createUninitializedBinding(
       Key<T> key, Scoping scoping, Object source, Errors errors, boolean jitBinding)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     Class<?> rawType = key.getTypeLiteral().getRawType();
 
     ImplementedBy implementedBy = rawType.getAnnotation(ImplementedBy.class);

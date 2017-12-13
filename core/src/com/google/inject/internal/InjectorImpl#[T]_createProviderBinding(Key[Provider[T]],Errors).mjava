@@ -3,7 +3,7 @@
    * Binding<T>}.
    */
   private <T> BindingImpl<Provider<T>> createProviderBinding(Key<Provider<T>> key, Errors errors)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     Key<T> providedKey = getProvidedKey(key, errors);
     BindingImpl<T> delegate = getBindingOrThrow(providedKey, errors, JitLimitation.NO_JIT);
     return new ProviderBindingImpl<T>(this, key, delegate);

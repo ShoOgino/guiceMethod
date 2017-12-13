@@ -13,7 +13,7 @@
                 ? new SingleFieldInjector(this.injector, injectionPoint, errorsForMember)
                 : new SingleMethodInjector(this.injector, injectionPoint, errorsForMember);
         injectors.add(injector);
-      } catch (ErrorsException ignoredForNow) {
+      } catch (InternalConfigurationException ignoredForNow) {
         // ignored for now
       }
     }

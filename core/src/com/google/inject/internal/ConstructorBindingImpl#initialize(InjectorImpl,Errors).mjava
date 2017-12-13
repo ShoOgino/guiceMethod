@@ -1,6 +1,7 @@
   @Override
   @SuppressWarnings("unchecked") // the result type always agrees with the ConstructorInjector type
-  public void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+  public void initialize(InjectorImpl injector, Errors errors)
+      throws InternalConfigurationException {
     factory.constructorInjector =
         (ConstructorInjector<T>) injector.constructors.get(constructorInjectionPoint, errors);
     factory.provisionCallback = injector.provisionListenerStore.get(this);

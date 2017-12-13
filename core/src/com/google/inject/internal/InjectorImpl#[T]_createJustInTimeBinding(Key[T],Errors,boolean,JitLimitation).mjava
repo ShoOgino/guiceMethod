@@ -3,18 +3,19 @@
    * create just-in-time bindings are:
    *
    * <ol>
-   * <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
-   *     to the binding for {@code T}.
-   * <li>Converting constants.
-   * <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
-   * <li>The constructor of the raw type. Only for unannotated keys.
+   *   <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
+   *       to the binding for {@code T}.
+   *   <li>Converting constants.
+   *   <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
+   *   <li>The constructor of the raw type. Only for unannotated keys.
    * </ol>
    *
-   * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.
+   * @throws com.google.inject.internal.InternalConfigurationException if the binding cannot be
+   *     created.
    */
   private <T> BindingImpl<T> createJustInTimeBinding(
       Key<T> key, Errors errors, boolean jitDisabled, JitLimitation jitType)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     int numErrorsBefore = errors.size();
 
     // Retrieve the sources before checking for blacklisting to guard against sources becoming null
@@ -61,7 +62,7 @@
         try {
           Errors ignored = new Errors();
           return getBindingOrThrow(key.withoutAttributes(), ignored, JitLimitation.NO_JIT);
-        } catch (ErrorsException ignored) {
+        } catch (InternalConfigurationException ignored) {
           // throw with a more appropriate message below
         }
       }

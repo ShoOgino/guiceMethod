@@ -1,5 +1,5 @@
   public void testConstructorInjectionPoint()
-      throws NoSuchMethodException, IOException, ErrorsException {
+      throws NoSuchMethodException, IOException, InternalConfigurationException {
     TypeLiteral<?> typeLiteral = TypeLiteral.get(Constructable.class);
 
     Constructor<?> constructor = Constructable.class.getConstructor(String.class);

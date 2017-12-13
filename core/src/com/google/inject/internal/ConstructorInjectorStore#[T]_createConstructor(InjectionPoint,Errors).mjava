@@ -1,5 +1,5 @@
   private <T> ConstructorInjector<T> createConstructor(InjectionPoint injectionPoint, Errors errors)
-      throws ErrorsException {
+      throws InternalConfigurationException {
     int numErrorsBefore = errors.size();
 
     SingleParameterInjector<?>[] constructorParameterInjectors =

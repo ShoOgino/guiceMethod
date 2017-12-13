@@ -4,7 +4,7 @@
       MembersInjector<T> membersInjector =
           injector.membersInjectorStore.get(lookup.getType(), errors);
       lookup.initializeDelegate(membersInjector);
-    } catch (ErrorsException e) {
+    } catch (InternalConfigurationException e) {
       errors.merge(e.getErrors()); // TODO: source
     }
 

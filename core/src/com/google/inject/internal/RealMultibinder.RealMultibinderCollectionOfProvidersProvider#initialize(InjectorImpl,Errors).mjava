@@ -1,5 +1,5 @@
     @Override
-    void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
+    void initialize(InjectorImpl injector, Errors errors) throws InternalConfigurationException {
       bindingSelection.initialize(injector, errors);
       ImmutableList.Builder<Provider<T>> providers = ImmutableList.builder();
       for (Binding<T> binding : bindingSelection.getBindings()) {
