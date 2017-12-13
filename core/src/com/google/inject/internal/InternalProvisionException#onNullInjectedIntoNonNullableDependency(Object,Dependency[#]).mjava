@@ -2,12 +2,8 @@
    * Returns {@code value} if it is non-null or allowed to be null. Otherwise a message is added and
    * an {@code InternalProvisionException} is thrown.
    */
-  public static <T> T checkForNull(T value, Object source, Dependency<?> dependency)
+  static void onNullInjectedIntoNonNullableDependency(Object source, Dependency<?> dependency)
       throws InternalProvisionException {
-    if (value != null || dependency.isNullable()) {
-      return value;
-    }
-
     // Hack to allow null parameters to @Provides methods, for backwards compatibility.
     if (dependency.getInjectionPoint().getMember() instanceof Method) {
       Method annotated = (Method) dependency.getInjectionPoint().getMember();
@@ -16,7 +12,7 @@
           case ERROR:
             break; // break out & let the below exception happen
           case IGNORE:
-            return value; // user doesn't care about injecting nulls to non-@Nullables.
+            return; // user doesn't care about injecting nulls to non-@Nullables.
           case WARN:
             // Warn only once, otherwise we spam logs too much.
             if (warnedDependencies.add(dependency)) {
@@ -29,7 +25,7 @@
                     Messages.formatParameter(dependency), Messages.convert(dependency.getKey())
                   });
             }
-            return value;
+            return;
         }
       }
     }
