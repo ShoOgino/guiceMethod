@@ -6,14 +6,14 @@
         CheckedProviders.throwing(StringCheckedProvider.class, unexpected);
     String message =
         String.format(
-            "exception thrown by <%s>: Not true that <%s> is an instance of <%s>. "
+            "exception thrown by <%s>(: |\n)Not true that <%s> is an instance of <%s>. "
                 + "It is an instance of <%s>",
-            getThrowingProviderName(UnsupportedOperationException.class.getName()),
-            UnsupportedOperationException.class.getName(),
-            SummerException.class.getName(),
-            UnsupportedOperationException.class.getName());
+            quote(getThrowingProviderName(UnsupportedOperationException.class.getName())),
+            quote(UnsupportedOperationException.class.getName()),
+            quote(SummerException.class.getName()),
+            quote(UnsupportedOperationException.class.getName()));
 
     expectWhenTesting().that(provider).thrownException().isInstanceOf(expected);
-    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
+    assertThat(expect.getFailure()).hasMessageThat().matches(message);
   }
 

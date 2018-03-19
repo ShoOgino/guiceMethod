@@ -5,10 +5,10 @@
     CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, unexpected);
     String message =
         String.format(
-            "value provided by <%s>: Not true that <%s> is equal to <%s>",
-            getReturningProviderName(unexpected), unexpected, expected);
+            "value provided by <%s>(: |\n)Not true that <%s> is equal to <%s>",
+            quote(getReturningProviderName(unexpected)), quote(unexpected), quote(expected));
 
     expectWhenTesting().that(provider).providedValue().isEqualTo(expected);
-    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
+    assertThat(expect.getFailure()).hasMessageThat().matches(message);
   }
 
