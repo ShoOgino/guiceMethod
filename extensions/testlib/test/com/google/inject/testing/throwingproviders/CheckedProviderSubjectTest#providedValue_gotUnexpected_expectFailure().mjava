@@ -3,12 +3,19 @@
     String expected = "keep Summer safe";
     String unexpected = "Summer is unsafe";
     CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, unexpected);
-    String message =
+    String transitionMessage =
         String.format(
-            "value provided by <%s>(: |\n)Not true that <%s> is equal to <%s>",
-            quote(getReturningProviderName(unexpected)), quote(unexpected), quote(expected));
+            "value provided by <%s>\nNot true that <%s> is equal to <%s>",
+            getReturningProviderName(unexpected), unexpected, expected);
+    String oldMessage = transitionMessage.replaceFirst("\n", ": ");
+    String newMessage =
+        String.format(
+            "value provided by <%s>\nexpected: %s\nbut was : %s",
+            getReturningProviderName(unexpected), expected, unexpected);
 
     expectWhenTesting().that(provider).providedValue().isEqualTo(expected);
-    assertThat(expect.getFailure()).hasMessageThat().matches(message);
+    assertThat(expect.getFailure())
+        .hasMessageThat()
+        .isAnyOf(oldMessage, transitionMessage, newMessage);
   }
 

@@ -4,16 +4,29 @@
     Class<? extends Throwable> unexpected = UnsupportedOperationException.class;
     CheckedProvider<String> provider =
         CheckedProviders.throwing(StringCheckedProvider.class, unexpected);
-    String message =
+    String transitionMessage =
         String.format(
-            "exception thrown by <%s>(: |\n)Not true that <%s> is an instance of <%s>. "
+            "exception thrown by <%s>\nNot true that <%s> is an instance of <%s>. "
                 + "It is an instance of <%s>",
-            quote(getThrowingProviderName(UnsupportedOperationException.class.getName())),
-            quote(UnsupportedOperationException.class.getName()),
-            quote(SummerException.class.getName()),
-            quote(UnsupportedOperationException.class.getName()));
+            getThrowingProviderName(UnsupportedOperationException.class.getName()),
+            UnsupportedOperationException.class.getName(),
+            SummerException.class.getName(),
+            UnsupportedOperationException.class.getName());
+    String oldMessage = transitionMessage.replaceFirst("\n", ": ");
+    String newMessage =
+        String.format(
+            "exception thrown by <%s>\n"
+                + "expected instance of: %s\n"
+                + "but was instance of : %s\n"
+                + "with value          : %s",
+            getThrowingProviderName(UnsupportedOperationException.class.getName()),
+            SummerException.class.getName(),
+            UnsupportedOperationException.class.getName(),
+            UnsupportedOperationException.class.getName());
 
     expectWhenTesting().that(provider).thrownException().isInstanceOf(expected);
-    assertThat(expect.getFailure()).hasMessageThat().matches(message);
+    assertThat(expect.getFailure())
+        .hasMessageThat()
+        .isAnyOf(oldMessage, transitionMessage, newMessage);
   }
 
