@@ -1,38 +1,51 @@
   /**
-   * Provides singleton scope with the following properties: - creates no more than one instance per
-   * Key as a creator is used no more than once, - result is cached and returned quickly on
-   * subsequent calls, - exception in a creator is not treated as instance creation and is not
-   * cached, - creates singletons in parallel whenever possible, - waits for dependent singletons to
-   * be created even across threads and when dependencies are shared as long as no circular
-   * dependencies are detected, - returns circular proxy only when circular dependencies are
-   * detected, - aside from that, blocking synchronization is only used for proxy creation and
-   * initialization,
+   * Provides singleton scope with the following properties:
+   *
+   * <ul>
+   *   <li>creates no more than one instance per Key as a creator is used no more than once
+   *   <li>result is cached and returned quickly on subsequent calls
+   *   <li>exception in a creator is not treated as instance creation and is not cached
+   *   <li>creates singletons in parallel whenever possible
+   *   <li>waits for dependent singletons to be created even across threads and when dependencies
+   *       are shared as long as no circular dependencies are detected
+   *   <li>returns circular proxy only when circular dependencies are detected
+   *   <li>aside from that, blocking synchronization is only used for proxy creation and
+   *       initialization
+   * </ul>
    *
    * @see CycleDetectingLockFactory
    */
   @Override
   public <T> Provider<T> scope(final Key<T> key, final Provider<T> creator) {
-    /**
-     * Locking strategy: - volatile instance: double-checked locking for quick exit when scope is
-     * initialized, - constructionContext: manipulations with proxies list or instance
-     * initialization - creationLock: singleton instance creation, -- allows to guarantee only one
-     * instance per singleton, -- special type of a lock, that prevents potential deadlocks, --
-     * guards constructionContext for all operations except proxy creation
-     */
+    /** Locking strategy: */
     return new Provider<T>() {
       /**
        * The lazily initialized singleton instance. Once set, this will either have type T or will
        * be equal to NULL. Would never be reset to null.
+       *
+       * <p>Locking strategy: double-checked locking for quick exit when scope is initialized.
        */
       volatile Object instance;
 
       /**
        * Circular proxies are used when potential deadlocks are detected. Guarded by itself.
        * ConstructionContext is not thread-safe, so each call should be synchronized.
+       *
+       * <p>Locking strategy: manipulations with proxies list or instance initialization.
        */
       final ConstructionContext<T> constructionContext = new ConstructionContext<>();
 
-      /** For each binding there is a separate lock that we hold during object creation. */
+      /**
+       * For each binding there is a separate lock that we hold during object creation.
+       *
+       * <p>Locking strategy: singleton instance creation.
+       *
+       * <ul>
+       *   <li>allows to guarantee only one instance per singleton,
+       *   <li>special type of a lock, that prevents potential deadlocks,
+       *   <li>guards constructionContext for all operations except proxy creation
+       * </ul>
+       */
       final CycleDetectingLock<Key<?>> creationLock = cycleDetectingLockFactory.create(key);
 
       /**
