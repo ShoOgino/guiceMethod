@@ -1,0 +1,4 @@
+    UnexpectedFailureSubject(FailureMetadata metadata, @Nullable Throwable actual) {
+      super(metadata, actual);
+    }
+

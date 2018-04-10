@@ -1,0 +1,9 @@
+  private static Factory<UnexpectedFailureSubject, Throwable> unexpectedFailures() {
+    return new Factory<UnexpectedFailureSubject, Throwable>() {
+      @Override
+      public UnexpectedFailureSubject createSubject(FailureMetadata metadata, Throwable actual) {
+        return new UnexpectedFailureSubject(metadata, actual);
+      }
+    };
+  }
+

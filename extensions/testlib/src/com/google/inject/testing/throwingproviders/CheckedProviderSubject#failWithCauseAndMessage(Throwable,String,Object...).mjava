@@ -1,0 +1,4 @@
+  private void failWithCauseAndMessage(Throwable cause, String format, Object... args) {
+    check().about(unexpectedFailures()).that(cause).doFail(format, args);
+  }
+

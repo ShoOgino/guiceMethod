@@ -1,0 +1,4 @@
+    void doFail(String format, Object... args) {
+      failWithRawMessage(format, args);
+    }
+
