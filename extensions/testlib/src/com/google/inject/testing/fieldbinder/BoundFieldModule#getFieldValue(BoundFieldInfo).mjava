@@ -3,20 +3,20 @@
    * Returns the field value to bind, throwing for non-{@code @Nullable} fields with null values,
    * and for null "transparent providers".
    */
-  private Object getFieldValue(final BoundFieldInfo fieldInfo) {
+  private static Object getFieldValue(final BoundFieldInfo fieldInfo) {
     Object fieldValue = fieldInfo.getValue();
     if (fieldValue == null && !fieldInfo.allowsNull()) {
-      if (isTransparentProvider(fieldInfo.type.getRawType())) {
-        throwBoundFieldException(
-            fieldInfo.field,
-            "Binding to null is not allowed. Use Providers.of(null) if this is your intended "
-                + "behavior.",
-            fieldInfo.field.getName());
+      if (isTransparentProvider(fieldInfo.fieldType.getRawType())) {
+        throw new NullBoundFieldValueException(
+            new Message(
+                fieldInfo.field,
+                "Binding to null is not allowed. Use Providers.of(null) if this is your intended "
+                    + "behavior."));
       } else {
-        throwBoundFieldException(
-            fieldInfo.field,
-            "Binding to null values is only allowed for fields that are annotated @Nullable.",
-            fieldInfo.field.getName());
+        throw new NullBoundFieldValueException(
+            new Message(
+                fieldInfo.field,
+                "Binding to null values is only allowed for fields that are annotated @Nullable."));
       }
     }
     return fieldValue;

@@ -1,4 +1,5 @@
-    Object getValue() {
+    /** Returns the current value of this field. */
+    public Object getValue() {
       try {
         return field.get(instance);
       } catch (IllegalAccessException e) {

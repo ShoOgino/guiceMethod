@@ -1,0 +1,10 @@
+    /**
+     * The {@literal @}{@link Bind} annotation which is present on the field.
+     *
+     * <p>Note this is not the same as the binding annotation (or qualifier) for {@link
+     * #getBoundKey()}
+     */
+    public Bind getBindAnnotation() {
+      return bindAnnotation;
+    }
+

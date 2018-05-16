@@ -1,0 +1,32 @@
+  /**
+   * Retrieve a {@link BoundFieldInfo}.
+   *
+   * <p>This returns a {@link BoundFieldInfo} if the field has a {@link Bind} annotation. Otherwise
+   * it returns {@link Optional#absent()}.
+   */
+  private Optional<BoundFieldInfo> getBoundFieldInfo(
+      TypeLiteral<?> containingClassType,
+      Field field,
+      ImmutableList.Builder<Message> deferredErrors) {
+    Bind bindAnnotation = field.getAnnotation(Bind.class);
+    if (bindAnnotation == null) {
+      return Optional.absent();
+    }
+    if (hasInject(field)) {
+      deferredErrors.add(
+          new Message(field, "Fields annotated with both @Bind and @Inject are illegal."));
+      return Optional.absent();
+    }
+    try {
+      return Optional.of(
+          new BoundFieldInfo(
+              instance, field, bindAnnotation, containingClassType.getFieldType(field)));
+    } catch (ConfigurationException e) { // thrown from Key.get, MoreTypes.canonicalizeForKey
+      deferredErrors.addAll(e.getErrorMessages());
+      return Optional.absent();
+    } catch (BoundFieldException e) {
+      deferredErrors.add(e.message);
+      return Optional.absent();
+    }
+  }
+

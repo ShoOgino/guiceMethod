@@ -1,0 +1,5 @@
+  /** Returns the the object originally passed to {@link BoundFieldModule#of}). */
+  public Object getInstance() {
+    return instance;
+  }
+

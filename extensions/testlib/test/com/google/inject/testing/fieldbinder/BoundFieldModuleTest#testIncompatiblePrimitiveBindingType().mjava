@@ -1,0 +1,19 @@
+  public void testIncompatiblePrimitiveBindingType() {
+    Object instance =
+        new Object() {
+          @Bind(to = Long.class)
+          int value = 1;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertContains(
+          e.getMessage(),
+          "Requested binding type \"java.lang.Long\" is not assignable from field binding type "
+              + "\"java.lang.Integer\"");
+    }
+  }
+

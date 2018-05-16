@@ -1,0 +1,13 @@
+  /**
+   * Returns information about the fields bound by this module.
+   *
+   * <p>Note this is available immediately after construction, fields with errors won't be included
+   * but their error messages will be deferred to configuration time.
+   *
+   * <p>Fields with invalid null values <em>are</em> included but still cause errors at
+   * configuration time.
+   */
+  public ImmutableSet<BoundFieldInfo> getBoundFields() {
+    return boundFields;
+  }
+

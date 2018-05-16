@@ -1,4 +1,8 @@
   private BoundFieldModule(Object instance) {
     this.instance = instance;
+
+    ImmutableList.Builder<Message> deferredErrors = ImmutableList.builder();
+    boundFields = findBindableFields(deferredErrors);
+    deferredBindingErrors = deferredErrors.build();
   }
 

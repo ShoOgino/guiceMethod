@@ -1,12 +1,9 @@
-  public void testMultipleErrorsAreAggregated() {
+  public void testMultipleNullValueErrorsAreAggregated() {
     Object instance =
         new Object() {
-          @Bind private Provider aProvider;
-
-          @Bind(to = String.class)
-          private Integer anInt;
+          @Bind private String first;
+          @Bind private String second;
         };
-
     BoundFieldModule module = BoundFieldModule.of(instance);
     try {
       Guice.createInjector(module);

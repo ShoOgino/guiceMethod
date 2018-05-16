@@ -1,0 +1,15 @@
+    private Annotation computeBindingAnnotation() throws BoundFieldException {
+      Annotation found = null;
+      for (Annotation annotation : field.getAnnotations()) {
+        Class<? extends Annotation> annotationType = annotation.annotationType();
+        if (Annotations.isBindingAnnotation(annotationType)) {
+          if (found != null) {
+            throw new BoundFieldException(
+                new Message(field, "More than one annotation is specified for this binding."));
+          }
+          found = annotation;
+        }
+      }
+      return found;
+    }
+

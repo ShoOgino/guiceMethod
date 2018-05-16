@@ -1,6 +1,6 @@
     /** Returns whether a binding supports null values. */
-    boolean allowsNull() {
-      return !isTransparentProvider(type.getRawType())
+    private boolean allowsNull() {
+      return !isTransparentProvider(fieldType.getRawType())
           && Nullability.allowsNull(field.getAnnotations());
     }
 

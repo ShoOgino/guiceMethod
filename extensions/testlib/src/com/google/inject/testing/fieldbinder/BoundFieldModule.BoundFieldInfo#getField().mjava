@@ -1,0 +1,5 @@
+    /** The field itself. */
+    public Field getField() {
+      return field;
+    }
+

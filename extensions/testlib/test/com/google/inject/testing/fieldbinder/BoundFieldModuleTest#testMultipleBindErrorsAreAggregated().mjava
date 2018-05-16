@@ -1,0 +1,18 @@
+  public void testMultipleBindErrorsAreAggregated() {
+    Object instance =
+        new Object() {
+          @Bind private Provider aProvider;
+
+          @Bind(to = String.class)
+          private Integer anInt;
+        };
+
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    try {
+      Guice.createInjector(module);
+      fail();
+    } catch (CreationException e) {
+      assertEquals(2, e.getErrorMessages().size());
+    }
+  }
+

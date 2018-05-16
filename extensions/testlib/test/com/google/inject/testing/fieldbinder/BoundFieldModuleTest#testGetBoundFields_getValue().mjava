@@ -1,0 +1,12 @@
+  public void testGetBoundFields_getValue() {
+    Object instance =
+        new Object() {
+          @Bind Integer value = 1;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Guice.createInjector(module);
+
+    BoundFieldInfo info = Iterables.getOnlyElement(module.getBoundFields());
+    assertEquals(1, info.getValue());
+  }
+

@@ -1,0 +1,16 @@
+    /**
+     * The key this field will bind to.
+     *
+     * <ul>
+     *   <li>{@code @Bind(to = Object.class) @MyQualifier Number one = new Integer(1);} will be
+     *       {@code @MyQualifier Object}.
+     *   <li>{@code @Bind @MyQualifier(2) Number one = new Integer(1);} will be
+     *       {@code @MyQualifier(2) Number}.
+     *   <li>{@code @Bind @MyQualifier Provider<String> three = "default"} will be
+     *       {@code @MyQualfier String}
+     * </ul>
+     */
+    public Key<?> getBoundKey() {
+      return boundKey;
+    }
+

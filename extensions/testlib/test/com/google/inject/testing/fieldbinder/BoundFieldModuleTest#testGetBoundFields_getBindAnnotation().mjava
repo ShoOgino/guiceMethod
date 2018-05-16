@@ -1,0 +1,14 @@
+  public void testGetBoundFields_getBindAnnotation() throws Exception {
+    Object instance =
+        new Object() {
+          @Bind(lazy = true)
+          @SomeQualifier
+          String value;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Guice.createInjector(module);
+    BoundFieldInfo info = Iterables.getOnlyElement(module.getBoundFields());
+
+    assertTrue(info.getBindAnnotation().lazy());
+  }
+

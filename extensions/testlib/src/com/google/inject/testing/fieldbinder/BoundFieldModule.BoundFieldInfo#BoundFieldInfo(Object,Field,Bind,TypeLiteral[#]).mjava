@@ -1,0 +1,15 @@
+    private BoundFieldInfo(
+        Object instance, Field field, Bind bindAnnotation, TypeLiteral<?> fieldType)
+        throws BoundFieldException {
+      this.instance = instance;
+      this.field = field;
+      this.fieldType = fieldType;
+      this.bindAnnotation = bindAnnotation;
+
+      field.setAccessible(true);
+      Annotation bindingAnnotation = computeBindingAnnotation();
+      Optional<TypeLiteral<?>> naturalType = computeNaturalFieldType();
+      this.boundKey = computeKey(naturalType, bindingAnnotation);
+      checkBindingIsAssignable(field, naturalType);
+    }
+

@@ -1,0 +1,10 @@
+    private Key<?> computeKey(Optional<TypeLiteral<?>> naturalType, Annotation bindingAnnotation)
+        throws BoundFieldException {
+      TypeLiteral<?> boundType = computeBoundType(naturalType);
+      if (bindingAnnotation == null) {
+        return Key.get(boundType);
+      } else {
+        return Key.get(boundType, bindingAnnotation);
+      }
+    }
+

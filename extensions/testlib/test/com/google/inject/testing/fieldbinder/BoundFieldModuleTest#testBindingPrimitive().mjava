@@ -1,0 +1,25 @@
+  public void testBindingPrimitive() {
+    Object instance =
+        new Object() {
+          @Bind boolean boolValue = true;
+          @Bind char charValue = 'b';
+          @Bind byte byteValue = 3;
+          @Bind short shortValue = 4;
+          @Bind int intValue = 5;
+          @Bind long longValue = 6;
+          @Bind float floatValue = 7;
+          @Bind double doubleValue = 8;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertTrue(injector.getInstance(Boolean.class));
+    assertEquals('b', (char) injector.getInstance(Character.class));
+    assertEquals(3, (byte) injector.getInstance(Byte.class));
+    assertEquals(4, (short) injector.getInstance(Short.class));
+    assertEquals(5, (int) injector.getInstance(Integer.class));
+    assertEquals(6, (long) injector.getInstance(Long.class));
+    assertEquals(7, injector.getInstance(Float.class), 0);
+    assertEquals(8, injector.getInstance(Double.class), 0);
+  }
+

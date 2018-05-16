@@ -1,0 +1,12 @@
+  public void testBindingPrimitiveToBoxed() {
+    Object instance =
+        new Object() {
+          @Bind(to = Integer.class)
+          int value = 1;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+
+    assertEquals(1, (int) injector.getInstance(Integer.class));
+  }
+

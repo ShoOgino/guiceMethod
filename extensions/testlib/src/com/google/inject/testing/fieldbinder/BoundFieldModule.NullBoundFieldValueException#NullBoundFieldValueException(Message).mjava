@@ -1,0 +1,5 @@
+    NullBoundFieldValueException(Message message) {
+      super(message.toString());
+      this.message = message;
+    }
+

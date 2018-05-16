@@ -1,18 +1,5 @@
-  private void bindField(final BoundFieldInfo fieldInfo) {
-    if (fieldInfo.naturalType.isPresent()) {
-      Class<?> naturalRawType = fieldInfo.naturalType.get().getRawType();
-      Class<?> boundRawType = fieldInfo.boundType.getRawType();
-      if (!boundRawType.isAssignableFrom(naturalRawType)) {
-        throwBoundFieldException(
-            fieldInfo.field,
-            "Requested binding type \"%s\" is not assignable from field binding type \"%s\"",
-            boundRawType.getName(),
-            naturalRawType.getName());
-      }
-    }
-
-    AnnotatedBindingBuilder<?> annotatedBinder = binder.bind(fieldInfo.boundType);
-    LinkedBindingBuilder<?> binder = verifyBindingAnnotations(fieldInfo.field, annotatedBinder);
+  private static void bindField(Binder binder, final BoundFieldInfo fieldInfo) {
+    LinkedBindingBuilder<?> linkedBinder = binder.bind(fieldInfo.boundKey);
 
     // It's unfortunate that Field.get() just returns Object rather than the actual type (although
     // that would be impossible) because as a result calling binder.toInstance or binder.toProvider
@@ -21,9 +8,9 @@
     // fieldInfo.naturalType is absent which occurrs when a non-parameterized Provider is used with
     // @Bind(to = ...)
     @SuppressWarnings("unchecked")
-    AnnotatedBindingBuilder<Object> binderUnsafe = (AnnotatedBindingBuilder<Object>) binder;
+    AnnotatedBindingBuilder<Object> binderUnsafe = (AnnotatedBindingBuilder<Object>) linkedBinder;
 
-    if (isTransparentProvider(fieldInfo.type.getRawType())) {
+    if (isTransparentProvider(fieldInfo.fieldType.getRawType())) {
       if (fieldInfo.bindAnnotation.lazy()) {
         binderUnsafe.toProvider(
             new Provider<Object>() {

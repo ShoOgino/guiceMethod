@@ -1,0 +1,12 @@
+  public void testGetBoundFields_getKey() throws Exception {
+    Object instance =
+        new Object() {
+          @Bind @SomeQualifier String value = "default";
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Guice.createInjector(module);
+    BoundFieldInfo info = Iterables.getOnlyElement(module.getBoundFields());
+
+    assertEquals(Key.get(String.class, SomeQualifier.class), info.getBoundKey());
+  }
+

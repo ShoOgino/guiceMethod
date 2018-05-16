@@ -1,0 +1,10 @@
+    /**
+     * The actual type of the field.
+     *
+     * <p>For example, {@code @Bind(to = Object.class) Number one = new Integer(1);} will be {@code
+     * Number}. {@code @Bind Provider<Number>} will be {@code Provider<Number>}.
+     */
+    public TypeLiteral<?> getFieldType() {
+      return fieldType;
+    }
+

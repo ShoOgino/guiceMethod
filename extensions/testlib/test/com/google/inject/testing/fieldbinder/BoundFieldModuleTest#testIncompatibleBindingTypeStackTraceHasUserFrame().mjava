@@ -7,7 +7,7 @@
       Guice.createInjector(module);
       fail();
     } catch (CreationException e) {
-      assertContains(e.getMessage(), "at " + InvalidBindableClass.class.getName() + " field anInt");
+      assertContains(e.getMessage(), "at " + InvalidBindableClass.class.getName() + ".anInt");
     }
   }
 

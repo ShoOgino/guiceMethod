@@ -1,0 +1,20 @@
+    private TypeLiteral<?> computeBoundType(Optional<TypeLiteral<?>> naturalType)
+        throws BoundFieldException {
+      Class<?> bindClass = bindAnnotation.to();
+      // Bind#to's default value is Bind.class which is used to represent that no explicit binding
+      // type is requested.
+      if (bindClass == Bind.class) {
+        Preconditions.checkState(naturalType != null);
+        if (!naturalType.isPresent()) {
+          throw new BoundFieldException(
+              new Message(
+                  field,
+                  "Non parameterized Provider fields must have an explicit "
+                      + "binding class via @Bind(to = Foo.class)"));
+        }
+        return naturalType.get();
+      } else {
+        return TypeLiteral.get(bindClass);
+      }
+    }
+

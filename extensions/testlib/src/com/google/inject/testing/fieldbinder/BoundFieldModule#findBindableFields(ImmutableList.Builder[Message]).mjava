@@ -1,0 +1,18 @@
+  private ImmutableSet<BoundFieldInfo> findBindableFields(
+      ImmutableList.Builder<Message> deferredErrors) {
+    ImmutableSet.Builder<BoundFieldInfo> fieldInfos = ImmutableSet.builder();
+    TypeLiteral<?> currentClassType = TypeLiteral.get(instance.getClass());
+    while (currentClassType.getRawType() != Object.class) {
+      for (Field field : currentClassType.getRawType().getDeclaredFields()) {
+        Optional<BoundFieldInfo> fieldInfoOpt =
+            getBoundFieldInfo(currentClassType, field, deferredErrors);
+        if (fieldInfoOpt.isPresent()) {
+          fieldInfos.add(fieldInfoOpt.get());
+        }
+      }
+      currentClassType =
+          currentClassType.getSupertype(currentClassType.getRawType().getSuperclass());
+    }
+    return fieldInfos.build();
+  }
+
