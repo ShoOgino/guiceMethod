@@ -4,16 +4,7 @@
     Class<? extends Throwable> unexpected = UnsupportedOperationException.class;
     CheckedProvider<String> provider =
         CheckedProviders.throwing(StringCheckedProvider.class, unexpected);
-    String transitionMessage =
-        String.format(
-            "exception thrown by <%s>\nNot true that <%s> is an instance of <%s>. "
-                + "It is an instance of <%s>",
-            getThrowingProviderName(UnsupportedOperationException.class.getName()),
-            UnsupportedOperationException.class.getName(),
-            SummerException.class.getName(),
-            UnsupportedOperationException.class.getName());
-    String oldMessage = transitionMessage.replaceFirst("\n", ": ");
-    String newMessage =
+    String message =
         String.format(
             "exception thrown by <%s>\n"
                 + "expected instance of: %s\n"
@@ -25,8 +16,6 @@
             UnsupportedOperationException.class.getName());
 
     expectWhenTesting().that(provider).thrownException().isInstanceOf(expected);
-    assertThat(expect.getFailure())
-        .hasMessageThat()
-        .isAnyOf(oldMessage, transitionMessage, newMessage);
+    assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);
   }
 
