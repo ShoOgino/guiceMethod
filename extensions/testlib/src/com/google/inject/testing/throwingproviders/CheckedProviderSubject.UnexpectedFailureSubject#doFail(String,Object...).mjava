@@ -1,4 +1,4 @@
     void doFail(String format, Object... args) {
-      failWithRawMessage(format, args);
+      failWithoutActual(simpleFact(lenientFormat(format, args)));
     }
 
