@@ -1,0 +1,5 @@
+  @Override
+  public Collection<ScopeBinding> getScopeBindingsThisLevel() {
+    return scopes.values();
+  }
+

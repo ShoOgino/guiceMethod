@@ -1,0 +1,3 @@
+  @SuppressWarnings("unused")
+  private static void customMethod(Foo foo, Bar bar) {}
+

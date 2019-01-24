@@ -1,0 +1,5 @@
+    @Override
+    public List<Element> getElements() {
+      return delegateInjector.getElements();
+    }
+

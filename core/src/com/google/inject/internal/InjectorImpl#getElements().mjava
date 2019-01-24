@@ -1,0 +1,14 @@
+  @Override
+  public List<Element> getElements() {
+    ImmutableList.Builder<Element> elements = ImmutableList.builder();
+    elements.addAll(getAllBindings().values());
+    elements.addAll(state.getProviderLookupsThisLevel());
+    elements.addAll(state.getConvertersThisLevel());
+    elements.addAll(state.getScopeBindingsThisLevel());
+    elements.addAll(state.getTypeListenerBindingsThisLevel());
+    elements.addAll(state.getProvisionListenerBindingsThisLevel());
+    elements.addAll(state.getScannerBindingsThisLevel());
+
+    return elements.build();
+  }
+

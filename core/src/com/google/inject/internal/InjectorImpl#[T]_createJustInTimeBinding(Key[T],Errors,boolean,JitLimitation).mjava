@@ -3,11 +3,11 @@
    * create just-in-time bindings are:
    *
    * <ol>
-   * <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
-   *     to the binding for {@code T}.
-   * <li>Converting constants.
-   * <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
-   * <li>The constructor of the raw type. Only for unannotated keys.
+   *   <li>Internalizing Providers. If the requested binding is for {@code Provider<T>}, we delegate
+   *       to the binding for {@code T}.
+   *   <li>Converting constants.
+   *   <li>ImplementedBy and ProvidedBy annotations. Only for unannotated keys.
+   *   <li>The constructor of the raw type. Only for unannotated keys.
    * </ol>
    *
    * @throws com.google.inject.internal.ErrorsException if the binding cannot be created.

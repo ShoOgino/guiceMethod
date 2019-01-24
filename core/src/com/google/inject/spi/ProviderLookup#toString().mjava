@@ -1,0 +1,8 @@
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(ProviderLookup.class)
+        .add("dependency", dependency)
+        .add("source", Errors.convert(source))
+        .toString();
+  }
+

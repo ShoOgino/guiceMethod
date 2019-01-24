@@ -1,0 +1,9 @@
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(ScopeBinding.class)
+        .add("annotationType", annotationType)
+        .add("scope", scope)
+        .add("source", Errors.convert(source))
+        .toString();
+  }
+

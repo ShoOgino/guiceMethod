@@ -1,0 +1,11 @@
+  /**
+   * Returns the elements that make up this injector. Note that not all kinds of elements are
+   * returned.
+   *
+   * <p>The returned list does not include elements inherited from a {@link #getParent() parent
+   * injector}, should one exist.
+   *
+   * @since 5.0
+   */
+  List<Element> getElements();
+
