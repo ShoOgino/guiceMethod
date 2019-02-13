@@ -51,6 +51,7 @@
         "Found all entries of: " + mapResults + ", but more were left over: " + entries,
         entries.isEmpty());
 
+    assertEquals(mapKey, mapbinder.getMapKey());
     assertEquals(keyType, mapbinder.getKeyTypeLiteral());
     assertEquals(valueType, mapbinder.getValueTypeLiteral());
 
@@ -69,6 +70,17 @@
         mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
     Key<?> collectionOfJavaxProvidersOfEntryOfProvider =
         mapKey.ofType(collectionOfJavaxProvidersOf(entryOfProviderOf(keyType, valueType)));
+    assertEquals(
+        ImmutableSet.of(
+            mapOfProvider,
+            mapOfJavaxProvider,
+            mapOfSetOfProvider,
+            mapOfSetOfJavaxProvider,
+            mapOfCollectionOfProvider,
+            mapOfCollectionOfJavaxProvider,
+            mapOfSet),
+        mapbinder.getAlternateMapKeys());
+
     boolean entrySetMatch = false;
     boolean entrySetJavaxMatch = false;
     boolean mapProviderMatch = false;

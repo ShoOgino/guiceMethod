@@ -107,6 +107,14 @@
         HAS_JAVA_OPTIONAL
             ? keyType.ofType(RealOptionalBinder.javaOptionalOfProvider(keyType.getTypeLiteral()))
             : null;
+    assertEquals(
+        ImmutableSet.of(optionalJavaxProviderKey, optionalProviderKey),
+        optionalBinder.getAlternateKeys());
+    if (HAS_JAVA_OPTIONAL) {
+      assertEquals(
+          ImmutableSet.of(javaOptionalJavaxProviderKey, javaOptionalProviderKey),
+          javaOptionalBinder.getAlternateKeys());
+    }
 
     boolean keyMatch = false;
     boolean optionalKeyMatch = false;

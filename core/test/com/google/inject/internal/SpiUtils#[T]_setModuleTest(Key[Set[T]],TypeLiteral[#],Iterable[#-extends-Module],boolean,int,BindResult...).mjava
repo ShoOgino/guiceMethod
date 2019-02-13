@@ -20,7 +20,11 @@
     }
     assertNotNull(multibinder);
 
+    assertEquals(setKey, multibinder.getSetKey());
     assertEquals(elementType, multibinder.getElementTypeLiteral());
+    assertEquals(
+        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey),
+        multibinder.getAlternateSetKeys());
     List<Object> otherMultibinders = Lists.newArrayList();
     Set<Element> otherContains = new HashSet<>();
     List<Element> otherElements = Lists.newArrayList();

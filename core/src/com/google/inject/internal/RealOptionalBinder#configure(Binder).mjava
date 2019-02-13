@@ -2,7 +2,7 @@
   public void configure(Binder binder) {
     bindingSelection.checkNotInitialized();
     Key<T> key = bindingSelection.getDirectKey();
-    // Every OptionalBinder get's the following types bound
+    // Every OptionalBinder gets the following types bound
     // * Optional<Provider<T>>
     // * Optional<javax.inject.Provider<T>>
     // * Optional<T>
