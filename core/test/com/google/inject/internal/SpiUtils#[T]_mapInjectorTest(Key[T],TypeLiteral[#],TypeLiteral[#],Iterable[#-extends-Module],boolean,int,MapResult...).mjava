@@ -12,6 +12,7 @@
     Binding<T> mapBinding = injector.getBinding(mapKey);
     MapBinderBinding<T> mapbinder = (MapBinderBinding<T>) mapBinding.acceptTargetVisitor(visitor);
     assertNotNull(mapbinder);
+    assertEquals(mapKey, mapbinder.getMapKey());
     assertEquals(keyType, mapbinder.getKeyTypeLiteral());
     assertEquals(valueType, mapbinder.getValueTypeLiteral());
     assertEquals(allowDuplicates, mapbinder.permitsDuplicates());
@@ -61,6 +62,17 @@
         mapKey.ofType(collectionOfProvidersOf(entryOfProviderOf(keyType, valueType)));
     Key<?> collectionOfJavaxProvidersOfEntryOfProvider =
         mapKey.ofType(collectionOfJavaxProvidersOf(entryOfProviderOf(keyType, valueType)));
+    assertEquals(
+        ImmutableSet.of(
+            mapOfJavaxProvider,
+            mapOfProvider,
+            mapOfSetOfProvider,
+            mapOfSetOfJavaxProvider,
+            mapOfCollectionOfProvider,
+            mapOfCollectionOfJavaxProvider,
+            mapOfSet),
+        mapbinder.getAlternateMapKeys());
+
     boolean entrySetMatch = false;
     boolean javaxEntrySetMatch = false;
     boolean mapJavaxProviderMatch = false;

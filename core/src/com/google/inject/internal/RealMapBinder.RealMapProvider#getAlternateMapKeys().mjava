@@ -1,0 +1,12 @@
+    @Override
+    public Set<Key<?>> getAlternateMapKeys() {
+      return ImmutableSet.of(
+          (Key<?>) bindingSelection.getJavaxProviderMapKey(),
+          (Key<?>) bindingSelection.getProviderMapKey(),
+          (Key<?>) bindingSelection.getProviderSetMultimapKey(),
+          (Key<?>) bindingSelection.getJavaxProviderSetMultimapKey(),
+          (Key<?>) bindingSelection.getProviderCollectionMultimapKey(),
+          (Key<?>) bindingSelection.getJavaxProviderCollectionMultimapKey(),
+          (Key<?>) bindingSelection.getMultimapKey());
+    }
+

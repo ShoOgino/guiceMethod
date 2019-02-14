@@ -14,8 +14,12 @@
     MultibinderBinding<Set<T>> multibinder =
         (MultibinderBinding<Set<T>>) binding.acceptTargetVisitor(visitor);
     assertNotNull(multibinder);
+    assertEquals(setKey, multibinder.getSetKey());
     assertEquals(elementType, multibinder.getElementTypeLiteral());
     assertEquals(allowDuplicates, multibinder.permitsDuplicates());
+    assertEquals(
+        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey),
+        multibinder.getAlternateSetKeys());
     List<Binding<?>> elements = Lists.newArrayList(multibinder.getElements());
     List<BindResult> bindResults = Lists.newArrayList(results);
     assertEquals(

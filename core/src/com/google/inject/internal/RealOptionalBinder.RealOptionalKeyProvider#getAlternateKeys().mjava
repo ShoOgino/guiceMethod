@@ -1,0 +1,9 @@
+    @Override
+    public Set<Key<?>> getAlternateKeys() {
+      Key<?> key = bindingSelection.getDirectKey();
+      TypeLiteral<?> typeLiteral = key.getTypeLiteral();
+      return ImmutableSet.of(
+          (Key<?>) key.ofType(optionalOfProvider(typeLiteral)),
+          (Key<?>) key.ofType(optionalOfJavaxProvider(typeLiteral)));
+    }
+
