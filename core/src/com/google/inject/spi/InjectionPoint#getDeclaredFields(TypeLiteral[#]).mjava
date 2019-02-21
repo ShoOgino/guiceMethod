@@ -1,6 +1,4 @@
   private static Field[] getDeclaredFields(TypeLiteral<?> type) {
-    Field[] fields = type.getRawType().getDeclaredFields();
-    Arrays.sort(fields, FIELD_ORDERING);
-    return fields;
+    return DeclaredMembers.getDeclaredFields(type.getRawType());
   }
 

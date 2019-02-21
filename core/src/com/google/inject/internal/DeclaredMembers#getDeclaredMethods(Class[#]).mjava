@@ -1,0 +1,6 @@
+  public static Method[] getDeclaredMethods(Class<?> type) {
+    Method[] methods = type.getDeclaredMethods();
+    Arrays.sort(methods, METHOD_ORDERING);
+    return methods;
+  }
+

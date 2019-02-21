@@ -1,0 +1,6 @@
+  public static Field[] getDeclaredFields(Class<?> type) {
+    Field[] fields = type.getDeclaredFields();
+    Arrays.sort(fields, FIELD_ORDERING);
+    return fields;
+  }
+

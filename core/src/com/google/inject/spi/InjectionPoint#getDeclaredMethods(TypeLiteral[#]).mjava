@@ -1,6 +1,4 @@
   private static Method[] getDeclaredMethods(TypeLiteral<?> type) {
-    Method[] methods = type.getRawType().getDeclaredMethods();
-    Arrays.sort(methods, METHOD_ORDERING);
-    return methods;
+    return DeclaredMembers.getDeclaredMethods(type.getRawType());
   }
 
