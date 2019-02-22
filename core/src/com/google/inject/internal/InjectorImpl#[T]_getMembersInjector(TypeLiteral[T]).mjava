@@ -1,5 +1,6 @@
   @Override
   public <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> typeLiteral) {
+    checkNotNull(typeLiteral, "typeLiteral");
     Errors errors = new Errors(typeLiteral);
     try {
       return membersInjectorStore.get(typeLiteral, errors);

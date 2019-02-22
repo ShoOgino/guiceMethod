@@ -1,5 +1,5 @@
   @Override
   public <T> Binding<T> getBinding(Class<T> type) {
-    return getBinding(Key.get(type));
+    return getBinding(Key.get(checkNotNull(type, "type")));
   }
 

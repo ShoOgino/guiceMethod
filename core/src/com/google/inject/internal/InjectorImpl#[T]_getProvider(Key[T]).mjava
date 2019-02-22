@@ -1,5 +1,6 @@
   @Override
   public <T> Provider<T> getProvider(final Key<T> key) {
+    checkNotNull(key, "key");
     Errors errors = new Errors(key);
     try {
       Provider<T> result = getProviderOrThrow(Dependency.get(key), errors);

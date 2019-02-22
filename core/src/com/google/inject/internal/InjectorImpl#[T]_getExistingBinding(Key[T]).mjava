@@ -1,7 +1,7 @@
   @Override
   public <T> BindingImpl<T> getExistingBinding(Key<T> key) {
     // Check explicit bindings, i.e. bindings created by modules.
-    BindingImpl<T> explicitBinding = state.getExplicitBinding(key);
+    BindingImpl<T> explicitBinding = state.getExplicitBinding(checkNotNull(key, "key"));
     if (explicitBinding != null) {
       return explicitBinding;
     }
