@@ -1,0 +1,8 @@
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof InjectionRequest
+        && Objects.equal(((InjectionRequest<?>) obj).instance, instance)
+        && ((InjectionRequest<?>) obj).type.equals(type)
+        && ((InjectionRequest<?>) obj).source.equals(source);
+  }
+

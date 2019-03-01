@@ -1,5 +1,6 @@
     @Override
     public <T> void requestInjection(TypeLiteral<T> type, T instance) {
+      checkNotNull(instance, "instance");
       elements.add(
           new InjectionRequest<T>(
               getElementSource(), MoreTypes.canonicalizeForKey(type), instance));

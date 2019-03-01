@@ -1,5 +1,5 @@
     @Override
-    public Set<ProviderLookup<?>> getProviderLookupsThisLevel() {
+    public Set<InjectionRequest<?>> getInjectionRequestsThisLevel() {
       throw new UnsupportedOperationException();
     }
 

@@ -1,4 +1,4 @@
-  public void testGetElements() {
+  public void testGetElements_providerLookups() {
     Method customMethod;
     try {
       customMethod = getClass().getDeclaredMethod("customMethod", Foo.class, Bar.class);
@@ -26,58 +26,17 @@
               }
             });
 
-    final List<Binding<?>> bindings = new ArrayList<>();
     final List<ProviderLookup<?>> lookups = new ArrayList<>();
-    final List<TypeConverterBinding> typeConverters = new ArrayList<>();
-    final List<ScopeBinding> scopes = new ArrayList<>();
     for (Element element : injector.getElements()) {
       element.acceptVisitor(
           new DefaultElementVisitor<Void>() {
-            @Override
-            public <T> Void visit(Binding<T> binding) {
-              bindings.add(binding);
-              return null;
-            }
-
             @Override
             public <T> Void visit(ProviderLookup<T> providerLookup) {
               lookups.add(providerLookup);
               return null;
             }
-
-            @Override
-            public Void visit(ScopeBinding scopeBinding) {
-              scopes.add(scopeBinding);
-              return null;
-            }
-
-            @Override
-            public Void visit(TypeConverterBinding typeConverterBinding) {
-              typeConverters.add(typeConverterBinding);
-              return null;
-            }
-
-            @Override
-            protected Void visitOther(Element element) {
-              throw new IllegalStateException("Unexpected element: " + element);
-            }
           });
     }
-
-    Set<Key<?>> actualKeys = new HashSet<>();
-    for (Binding<?> binding : bindings) {
-      actualKeys.add(binding.getKey());
-    }
-    assertThat(actualKeys)
-        .containsExactly(
-            Key.get(Stage.class),
-            Key.get(Injector.class),
-            Key.get(Logger.class),
-            Key.get(Foo.class),
-            Key.get(Bar.class),
-            Key.get(Baz.class),
-            new Key<Provider<Foo>>() {});
-
     boolean foundFooLookup = false;
     boolean foundBarLookup = false;
     for (ProviderLookup<?> lookup : lookups) {

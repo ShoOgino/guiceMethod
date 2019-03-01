@@ -1,2 +1,2 @@
-  List<ProviderLookup<?>> getProviderLookupsThisLevel();
+  Set<ProviderLookup<?>> getProviderLookupsThisLevel();
 

@@ -1,0 +1,37 @@
+  public void testGetElements_staticInjectionRequests() throws Exception {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("");
+                bind(Number.class).toInstance(1);
+                requestStaticInjection(StaticallyInject.class);
+              }
+            });
+
+    final List<StaticInjectionRequest> requests = new ArrayList<>();
+    for (Element element : injector.getElements()) {
+      element.acceptVisitor(
+          new DefaultElementVisitor<Void>() {
+            @Override
+            public Void visit(StaticInjectionRequest staticInjectionRequest) {
+              requests.add(staticInjectionRequest);
+              return null;
+            }
+          });
+    }
+    assertThat(requests).hasSize(1);
+    assertThat(requests.get(0).getType()).isEqualTo(StaticallyInject.class);
+    assertThat(requests.get(0).getInjectionPoints())
+        .containsExactly(
+            new InjectionPoint(
+                TypeLiteral.get(SuperStatic.class),
+                SuperStatic.class.getDeclaredField("staticNumber"),
+                /* optional= */ false),
+            new InjectionPoint(
+                TypeLiteral.get(StaticallyInject.class),
+                StaticallyInject.class.getDeclaredField("staticString"),
+                /* optional= */ false));
+  }
+

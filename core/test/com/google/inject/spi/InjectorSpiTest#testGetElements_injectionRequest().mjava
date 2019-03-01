@@ -1,0 +1,44 @@
+  public void testGetElements_injectionRequest() throws Exception {
+    Object foo =
+        new Object() {
+          @Inject String string;
+        };
+    final AtomicReference<?> finalFoo = new AtomicReference<>(foo);
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("");
+                requestInjection(finalFoo.get());
+              }
+            });
+    finalFoo.set(null); // clear it out so 'foo' is the only ref.
+
+    final List<InjectionRequest<?>> requests = new ArrayList<>();
+    for (Element element : injector.getElements()) {
+      element.acceptVisitor(
+          new DefaultElementVisitor<Void>() {
+            @Override
+            public Void visit(InjectionRequest<?> injectionRequests) {
+              requests.add(injectionRequests);
+              return null;
+            }
+          });
+    }
+    assertThat(requests).hasSize(1);
+    assertThat(requests.get(0).getType()).isEqualTo(TypeLiteral.get(foo.getClass()));
+    assertThat(requests.get(0).getInstance()).isNull();
+    assertThat(requests.get(0).getInjectionPoints())
+        .containsExactly(
+            new InjectionPoint(
+                TypeLiteral.get(foo.getClass()),
+                foo.getClass().getDeclaredField("string"),
+                /* optional= */ false));
+
+    // Also validate that 'foo' can be reclaimed.
+    WeakReference<?> fooRef = new WeakReference<>(foo);
+    foo = null;
+    Asserts.awaitClear(fooRef);
+  }
+

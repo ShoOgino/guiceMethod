@@ -1,0 +1,5 @@
+  @Override
+  public Set<MembersInjectorLookup<?>> getMembersInjectorLookupsThisLevel() {
+    return membersInjectorLookups;
+  }
+

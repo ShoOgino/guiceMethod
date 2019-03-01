@@ -1,5 +1,5 @@
   @Override
-  public List<ProviderLookup<?>> getProviderLookupsThisLevel() {
-    return lookups;
+  public Set<ProviderLookup<?>> getProviderLookupsThisLevel() {
+    return providerLookups;
   }
 

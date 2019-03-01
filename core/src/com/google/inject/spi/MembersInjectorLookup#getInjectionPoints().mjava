@@ -1,6 +1,5 @@
   /**
-   * Returns the instance methods and fields of {@code instance} that will be injected to fulfill
-   * this request.
+   * Returns the instance methods and fields that will be injected to fulfill this request.
    *
    * @return a possibly empty set of injection points. The set has a specified iteration order. All
    *     fields are returned and then all methods. Within the fields, supertype fields are returned
@@ -11,7 +10,6 @@
    *     the valid injection points.
    */
   public Set<InjectionPoint> getInjectionPoints() throws ConfigurationException {
-    return InjectionPoint.forInstanceMethodsAndFields(
-        instance != null ? TypeLiteral.get(instance.getClass()) : type);
+    return InjectionPoint.forInstanceMethodsAndFields(type);
   }
 

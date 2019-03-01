@@ -1,0 +1,7 @@
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof ProviderLookup
+        && ((ProviderLookup<?>) obj).dependency.equals(dependency)
+        && ((ProviderLookup<?>) obj).source.equals(source);
+  }
+

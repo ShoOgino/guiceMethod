@@ -1,3 +1,7 @@
+  /**
+   * Returns the instance that injection is being requested on. This may be null for injection
+   * requests returned from an Injector, to allow the injector to reclaim memory.
+   */
   public T getInstance() {
     return instance;
   }

@@ -1,0 +1,7 @@
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof StaticInjectionRequest
+        && ((StaticInjectionRequest) obj).source.equals(source)
+        && ((StaticInjectionRequest) obj).type.equals(type);
+  }
+

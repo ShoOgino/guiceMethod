@@ -1,0 +1,5 @@
+  @Override
+  public Set<InjectionRequest<?>> getInjectionRequestsThisLevel() {
+    return injectionRequests;
+  }
+

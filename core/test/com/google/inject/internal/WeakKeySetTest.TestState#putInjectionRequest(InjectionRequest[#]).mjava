@@ -1,0 +1,5 @@
+    @Override
+    public void putInjectionRequest(InjectionRequest<?> injectionRequest) {
+      throw new UnsupportedOperationException();
+    }
+

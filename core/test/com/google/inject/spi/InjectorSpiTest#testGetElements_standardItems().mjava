@@ -1,0 +1,44 @@
+  public void testGetElements_standardItems() {
+    Injector injector = Guice.createInjector(new AbstractModule() {});
+
+    final List<Binding<?>> bindings = new ArrayList<>();
+    final List<TypeConverterBinding> typeConverters = new ArrayList<>();
+    final List<ScopeBinding> scopes = new ArrayList<>();
+    for (Element element : injector.getElements()) {
+      element.acceptVisitor(
+          new DefaultElementVisitor<Void>() {
+            @Override
+            public <T> Void visit(Binding<T> binding) {
+              bindings.add(binding);
+              return null;
+            }
+
+            @Override
+            public Void visit(ScopeBinding scopeBinding) {
+              scopes.add(scopeBinding);
+              return null;
+            }
+
+            @Override
+            public Void visit(TypeConverterBinding typeConverterBinding) {
+              typeConverters.add(typeConverterBinding);
+              return null;
+            }
+
+            @Override
+            protected Void visitOther(Element element) {
+              throw new IllegalStateException("Unexpected element: " + element);
+            }
+          });
+    }
+
+    Set<Key<?>> actualKeys = new HashSet<>();
+    for (Binding<?> binding : bindings) {
+      actualKeys.add(binding.getKey());
+    }
+    assertThat(actualKeys)
+        .containsExactly(Key.get(Stage.class), Key.get(Injector.class), Key.get(Logger.class));
+    assertThat(scopes).hasSize(2); // singleton for javax.inject.Singleton & c.g.i.Singleton
+    assertThat(typeConverters).hasSize(10); // all the built-in converters.
+  }
+

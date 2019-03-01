@@ -1,6 +1,7 @@
     @Override
     @SuppressWarnings("unchecked") // it is safe to use the type literal for the raw type
     public void requestInjection(Object instance) {
+      checkNotNull(instance, "instance");
       requestInjection((TypeLiteral<Object>) TypeLiteral.get(instance.getClass()), instance);
     }
 

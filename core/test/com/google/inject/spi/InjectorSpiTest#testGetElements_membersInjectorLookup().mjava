@@ -1,0 +1,36 @@
+  public void testGetElements_membersInjectorLookup() throws Exception {
+    final Object foo =
+        new Object() {
+          @Inject String string;
+        };
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(String.class).toInstance("");
+                getMembersInjector(foo.getClass());
+              }
+            });
+
+    final List<MembersInjectorLookup<?>> lookups = new ArrayList<>();
+    for (Element element : injector.getElements()) {
+      element.acceptVisitor(
+          new DefaultElementVisitor<Void>() {
+            @Override
+            public <T> Void visit(MembersInjectorLookup<T> lookup) {
+              lookups.add(lookup);
+              return null;
+            }
+          });
+    }
+    assertThat(lookups).hasSize(1);
+    assertThat(lookups.get(0).getType()).isEqualTo(TypeLiteral.get(foo.getClass()));
+    assertThat(lookups.get(0).getInjectionPoints())
+        .containsExactly(
+            new InjectionPoint(
+                TypeLiteral.get(foo.getClass()),
+                foo.getClass().getDeclaredField("string"),
+                /* optional= */ false));
+  }
+

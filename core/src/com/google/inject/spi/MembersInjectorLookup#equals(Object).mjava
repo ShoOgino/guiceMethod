@@ -1,0 +1,7 @@
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof MembersInjectorLookup
+        && ((MembersInjectorLookup<?>) obj).type.equals(type)
+        && ((MembersInjectorLookup<?>) obj).source.equals(source);
+  }
+

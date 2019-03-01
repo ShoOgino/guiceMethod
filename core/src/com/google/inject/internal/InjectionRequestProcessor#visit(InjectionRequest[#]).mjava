@@ -10,6 +10,16 @@
 
     initializer.requestInjection(
         injector, request.getInstance(), null, request.getSource(), injectionPoints);
+    // When recreating the injection request, we revise the TypeLiteral to be the type
+    // of the instance.  This is because currently Guice ignores the user's TypeLiteral
+    // when determining the types for members injection.
+    // If/when this is fixed, we can report the exact type back to the user.
+    // (Otherwise the injection points exposed from the request may be wrong.)
+    injector.state.putInjectionRequest(
+        new InjectionRequest<>(
+            request.getSource(),
+            TypeLiteral.get(request.getInstance().getClass()),
+            /* instance= */ null));
     return true;
   }
 
