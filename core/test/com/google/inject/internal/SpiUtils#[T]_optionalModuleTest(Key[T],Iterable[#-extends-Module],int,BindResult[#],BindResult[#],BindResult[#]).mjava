@@ -15,23 +15,18 @@
     Key<Optional<T>> optionalKey =
         keyType.ofType(RealOptionalBinder.optionalOf(keyType.getTypeLiteral()));
     Key<?> javaOptionalKey =
-        HAS_JAVA_OPTIONAL
-            ? keyType.ofType(RealOptionalBinder.javaOptionalOf(keyType.getTypeLiteral()))
-            : null;
+        keyType.ofType(RealOptionalBinder.javaOptionalOf(keyType.getTypeLiteral()));
     Visitor visitor = new Visitor();
-    OptionalBinderBinding<Optional<T>> optionalBinder = null;
-    OptionalBinderBinding<?> javaOptionalBinder = null;
     Key<?> defaultKey = null;
     Key<?> actualKey = null;
 
     Binding optionalBinding = indexed.get(optionalKey);
-    optionalBinder =
+    OptionalBinderBinding<Optional<T>> optionalBinder =
         (OptionalBinderBinding<Optional<T>>) optionalBinding.acceptTargetVisitor(visitor);
 
-    if (HAS_JAVA_OPTIONAL) {
-      Binding javaOptionalBinding = indexed.get(javaOptionalKey);
-      javaOptionalBinder = (OptionalBinderBinding) javaOptionalBinding.acceptTargetVisitor(visitor);
-    }
+    Binding javaOptionalBinding = indexed.get(javaOptionalKey);
+    OptionalBinderBinding<?> javaOptionalBinder =
+        (OptionalBinderBinding) javaOptionalBinding.acceptTargetVisitor(visitor);
 
     // Locate the defaultKey & actualKey
     for (Element element : elements) {
@@ -45,25 +40,19 @@
       }
     }
     assertNotNull(optionalBinder);
-    if (HAS_JAVA_OPTIONAL) {
-      assertNotNull(javaOptionalBinder);
-    }
+    assertNotNull(javaOptionalBinder);
+
     assertEquals(expectedDefault == null, defaultKey == null);
     assertEquals(expectedActual == null, actualKey == null);
 
     Key<Optional<javax.inject.Provider<T>>> optionalJavaxProviderKey =
         keyType.ofType(RealOptionalBinder.optionalOfJavaxProvider(keyType.getTypeLiteral()));
     Key<?> javaOptionalJavaxProviderKey =
-        HAS_JAVA_OPTIONAL
-            ? keyType.ofType(
-                RealOptionalBinder.javaOptionalOfJavaxProvider(keyType.getTypeLiteral()))
-            : null;
+        keyType.ofType(RealOptionalBinder.javaOptionalOfJavaxProvider(keyType.getTypeLiteral()));
     Key<Optional<Provider<T>>> optionalProviderKey =
         keyType.ofType(RealOptionalBinder.optionalOfProvider(keyType.getTypeLiteral()));
     Key<?> javaOptionalProviderKey =
-        HAS_JAVA_OPTIONAL
-            ? keyType.ofType(RealOptionalBinder.javaOptionalOfProvider(keyType.getTypeLiteral()))
-            : null;
+        keyType.ofType(RealOptionalBinder.javaOptionalOfProvider(keyType.getTypeLiteral()));
     boolean keyMatch = false;
     boolean optionalKeyMatch = false;
     boolean javaOptionalKeyMatch = false;
@@ -78,9 +67,8 @@
     List<Element> nonContainedElements = Lists.newArrayList();
     for (Element element : elements) {
       boolean contains = optionalBinder.containsElement(element);
-      if (HAS_JAVA_OPTIONAL) {
-        assertEquals(contains, javaOptionalBinder.containsElement(element));
-      }
+      assertEquals(contains, javaOptionalBinder.containsElement(element));
+
       if (!contains) {
         nonContainedElements.add(element);
       }
@@ -93,7 +81,7 @@
         if (visited instanceof OptionalBinderBinding) {
           if (visited.equals(optionalBinder)) {
             assertTrue(contains);
-          } else if (HAS_JAVA_OPTIONAL && visited.equals(javaOptionalBinder)) {
+          } else if (visited.equals(javaOptionalBinder)) {
             assertTrue(contains);
           } else {
             otherOptionalElements.add(visited);
@@ -151,9 +139,9 @@
     assertTrue(optionalKeyMatch);
     assertTrue(optionalJavaxProviderKeyMatch);
     assertTrue(optionalProviderKeyMatch);
-    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalKeyMatch);
-    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalJavaxProviderKeyMatch);
-    assertEquals(HAS_JAVA_OPTIONAL, javaOptionalProviderKeyMatch);
+    assertTrue(javaOptionalKeyMatch);
+    assertTrue(javaOptionalJavaxProviderKeyMatch);
+    assertTrue(javaOptionalProviderKeyMatch);
     assertEquals(expectedDefault != null, defaultMatch);
     assertEquals(expectedActual != null, actualMatch);
     assertEquals(otherContains.toString(), 0, otherContains.size());

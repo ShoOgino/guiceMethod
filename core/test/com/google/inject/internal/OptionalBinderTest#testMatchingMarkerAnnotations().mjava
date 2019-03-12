@@ -16,8 +16,8 @@
                 mb1.setDefault().toInstance(1);
                 mb2.setBinding().toInstance(2);
 
-                // This assures us that the two binders are equivalent, so we expect the instance added to
-                // each to have been added to one set.
+                // This assures us that the two binders are equivalent, so we expect the instance
+                // added to each to have been added to one set.
                 assertEquals(mb1, mb2);
               }
             });

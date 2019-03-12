@@ -1,12 +1,13 @@
     @Override
-    protected Object doProvision(InternalContext context, Dependency dependency)
+    protected java.util.Optional<T> doProvision(
+        InternalContext context, Dependency<?> currentDependency)
         throws InternalProvisionException {
-      InternalFactory<?> local = target;
+      InternalFactory<? extends T> local = target;
       if (local == null) {
-        return JAVA_OPTIONAL_EMPTY;
+        return java.util.Optional.empty();
       }
       Dependency<?> localDependency = targetDependency;
-      Object result;
+      T result;
       Dependency previous = context.pushDependency(localDependency, getSource());
 
       try {
@@ -19,6 +20,6 @@
           context.popStateAndSetDependency(previous);
 
       }
-      return invokeJavaOptionalOfNullable(result);
+      return java.util.Optional.ofNullable(result);
     }
 

@@ -1,0 +1,6 @@
+    JavaOptionalProvider(
+        BindingSelection<T> bindingSelection, Key<java.util.Optional<T>> optionalKey) {
+      super(bindingSelection);
+      this.optionalKey = optionalKey;
+    }
+

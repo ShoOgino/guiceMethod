@@ -33,17 +33,16 @@
         SpiUtils.<String>providerInstance(null),
         null);
 
-    if (HAS_JAVA_OPTIONAL) {
-      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
-      assertFalse(optional.isPresent());
+    optional = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfString)));
+    assertFalse(optional.isPresent());
 
-      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
-      assertTrue(optionalP.isPresent());
-      assertNull(optionalP.get().get());
+    optionalP = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+    assertTrue(optionalP.isPresent());
+    assertNull(optionalP.get().get());
 
-      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
-      assertTrue(optionalJxP.isPresent());
-      assertNull(optionalJxP.get().get());
-    }
+    optionalJxP =
+        Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+    assertTrue(optionalJxP.isPresent());
+    assertNull(optionalJxP.get().get());
   }
 

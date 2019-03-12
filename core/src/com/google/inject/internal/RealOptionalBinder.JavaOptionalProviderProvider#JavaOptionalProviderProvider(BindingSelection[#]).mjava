@@ -1,4 +1,0 @@
-    JavaOptionalProviderProvider(BindingSelection<?> bindingSelection) {
-      super(bindingSelection);
-    }
-

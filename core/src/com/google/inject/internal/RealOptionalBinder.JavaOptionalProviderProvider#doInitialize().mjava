@@ -1,9 +1,9 @@
     @Override
     void doInitialize() {
       if (bindingSelection.getBinding() == null) {
-        value = JAVA_OPTIONAL_EMPTY;
+        value = java.util.Optional.empty();
       } else {
-        value = invokeJavaOptionalOf(bindingSelection.getBinding().getProvider());
+        value = java.util.Optional.of(bindingSelection.getBinding().getProvider());
       }
     }
 

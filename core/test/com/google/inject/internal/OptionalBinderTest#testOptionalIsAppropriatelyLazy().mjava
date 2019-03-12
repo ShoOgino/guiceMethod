@@ -41,20 +41,19 @@
     assertEquals(8, optionalJxP.get().get().intValue());
 
     // and same rules with java.util.Optional
-    if (HAS_JAVA_OPTIONAL) {
-      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfInteger)));
-      assertEquals(9, optional.get().intValue());
-      assertEquals(9, optional.get().intValue());
-      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfInteger)));
-      assertEquals(10, optional.get().intValue());
+    optional = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfInteger)));
+    assertEquals(9, optional.get().intValue());
+    assertEquals(9, optional.get().intValue());
+    optional = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfInteger)));
+    assertEquals(10, optional.get().intValue());
 
-      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderInteger)));
-      assertEquals(11, optionalP.get().get().intValue());
-      assertEquals(12, optionalP.get().get().intValue());
+    optionalP = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfProviderInteger)));
+    assertEquals(11, optionalP.get().get().intValue());
+    assertEquals(12, optionalP.get().get().intValue());
 
-      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderInteger)));
-      assertEquals(13, optionalJxP.get().get().intValue());
-      assertEquals(14, optionalJxP.get().get().intValue());
-    }
+    optionalJxP =
+        Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfJavaxProviderInteger)));
+    assertEquals(13, optionalJxP.get().get().intValue());
+    assertEquals(14, optionalJxP.get().get().intValue());
   }
 
