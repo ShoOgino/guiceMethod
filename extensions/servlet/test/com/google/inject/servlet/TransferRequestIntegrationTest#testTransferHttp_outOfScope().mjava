@@ -1,6 +1,6 @@
   public void testTransferHttp_outOfScope() {
     try {
-      ServletScopes.transferRequest(FALSE_CALLABLE);
+      ServletScopes.transferRequest(() -> false);
       fail();
     } catch (OutOfScopeException expected) {
     }

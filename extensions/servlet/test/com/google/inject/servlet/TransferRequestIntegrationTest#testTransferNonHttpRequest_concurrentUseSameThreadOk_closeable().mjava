@@ -1,14 +1,11 @@
   public void testTransferNonHttpRequest_concurrentUseSameThreadOk_closeable() throws Exception {
     Callable<Boolean> callable =
-        new Callable<Boolean>() {
-          @Override
-          public Boolean call() throws Exception {
-            RequestScoper.CloseableScope scope = ServletScopes.transferRequest().open();
-            try {
-              return false;
-            } finally {
-              scope.close();
-            }
+        () -> {
+          RequestScoper.CloseableScope scope = ServletScopes.transferRequest().open();
+          try {
+            return false;
+          } finally {
+            scope.close();
           }
         };
 

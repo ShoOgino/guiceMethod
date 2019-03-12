@@ -12,7 +12,6 @@
             // potential deadlock is found, we don't try to take this lock
             return locksInCycle;
           }
-
         }
 
         // this may be blocking, but we don't expect it to cause a deadlock

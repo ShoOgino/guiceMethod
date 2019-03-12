@@ -2,7 +2,14 @@
   private static String annotationToString(
       Class<? extends Annotation> type, Map<String, Object> members) throws Exception {
     StringBuilder sb = new StringBuilder().append("@").append(type.getName()).append("(");
-    JOINER.appendTo(sb, Maps.transformValues(members, DEEP_TO_STRING_FN));
+    JOINER.appendTo(
+        sb,
+        Maps.transformValues(
+            members,
+            arg -> {
+              String s = Arrays.deepToString(new Object[] {arg});
+              return s.substring(1, s.length() - 1); // cut off brackets
+            }));
     return sb.append(")").toString();
   }
 

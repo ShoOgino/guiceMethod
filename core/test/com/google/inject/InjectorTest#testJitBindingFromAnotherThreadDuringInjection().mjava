@@ -12,13 +12,7 @@
                   void initialize(final Injector injector)
                       throws ExecutionException, InterruptedException {
                     Future<JustInTime> future =
-                        executorService.submit(
-                            new Callable<JustInTime>() {
-                              @Override
-                              public JustInTime call() throws Exception {
-                                return injector.getInstance(JustInTime.class);
-                              }
-                            });
+                        executorService.submit(() -> injector.getInstance(JustInTime.class));
                     got.set(future.get());
                   }
                 });

@@ -25,8 +25,7 @@
           }
         }
         Preconditions.checkState(
-            found,
-            "Internal error: We can not find locks that created a cycle that we detected");
+            found, "Internal error: We can not find locks that created a cycle that we detected");
         ReentrantCycleDetectingLock<?> unownedLock = lockThreadIsWaitingOn.get(thread);
         // If this thread is waiting for a lock add it to the cycle and return it
         if (unownedLock != null && unownedLock.lockFactory == this.lockFactory) {

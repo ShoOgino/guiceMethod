@@ -1,4 +1,4 @@
   private NodeId resolveAlias(Map<NodeId, NodeId> aliases, NodeId nodeId) {
-    return aliases.containsKey(nodeId) ? aliases.get(nodeId) : nodeId;
+    return aliases.getOrDefault(nodeId, nodeId);
   }
 

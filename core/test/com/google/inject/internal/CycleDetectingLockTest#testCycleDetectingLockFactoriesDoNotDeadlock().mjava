@@ -21,36 +21,30 @@
     Future<Boolean> threadA =
         Executors.newSingleThreadExecutor()
             .submit(
-                new Callable<Boolean>() {
-                  @Override
-                  public Boolean call() throws Exception {
-                    Thread.currentThread().setName("A");
-                    assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
-                    eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-                    boolean isEmpty = lockB.lockOrDetectPotentialLocksCycle().isEmpty();
-                    if (isEmpty) {
-                      lockB.unlock();
-                    }
-                    lockA.unlock();
-                    return isEmpty;
+                () -> {
+                  Thread.currentThread().setName("A");
+                  assertTrue(lockA.lockOrDetectPotentialLocksCycle().isEmpty());
+                  eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                  boolean isEmpty = lockB.lockOrDetectPotentialLocksCycle().isEmpty();
+                  if (isEmpty) {
+                    lockB.unlock();
                   }
+                  lockA.unlock();
+                  return isEmpty;
                 });
     Future<Boolean> threadB =
         Executors.newSingleThreadExecutor()
             .submit(
-                new Callable<Boolean>() {
-                  @Override
-                  public Boolean call() throws Exception {
-                    Thread.currentThread().setName("B");
-                    assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
-                    eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
-                    boolean isEmpty = lockA.lockOrDetectPotentialLocksCycle().isEmpty();
-                    if (isEmpty) {
-                      lockA.unlock();
-                    }
-                    lockB.unlock();
-                    return isEmpty;
+                () -> {
+                  Thread.currentThread().setName("B");
+                  assertTrue(lockB.lockOrDetectPotentialLocksCycle().isEmpty());
+                  eachThreadAcquiredFirstLock.await(DEADLOCK_TIMEOUT_SECONDS, TimeUnit.SECONDS);
+                  boolean isEmpty = lockA.lockOrDetectPotentialLocksCycle().isEmpty();
+                  if (isEmpty) {
+                    lockA.unlock();
                   }
+                  lockB.unlock();
+                  return isEmpty;
                 });
 
     boolean deadlockADetected = threadA.get(DEADLOCK_TIMEOUT_SECONDS * 2, TimeUnit.SECONDS);

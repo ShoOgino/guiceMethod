@@ -4,7 +4,7 @@
    */
   private Map<NodeId, NodeId> resolveAliases(Iterable<Alias> aliases) {
     Map<NodeId, NodeId> resolved = Maps.newHashMap();
-    Map<NodeId, Set<NodeId>> inverse = Maps.newHashMap();
+    SetMultimap<NodeId, NodeId> inverse = HashMultimap.create();
 
     for (Alias alias : aliases) {
       NodeId from = alias.getFromId();
@@ -13,18 +13,15 @@
         to = resolved.get(to);
       }
       resolved.put(from, to);
-      if (inverse.get(to) == null) {
-        inverse.put(to, Sets.<NodeId>newHashSet());
-      }
-      inverse.get(to).add(from);
+      inverse.put(to, from);
 
       Set<NodeId> prev = inverse.get(from);
       if (prev != null) {
         for (NodeId id : prev) {
           resolved.remove(id);
-          inverse.get(from).remove(id);
+          inverse.remove(from, id);
           resolved.put(id, to);
-          inverse.get(to).add(id);
+          inverse.put(to, id);
         }
       }
     }

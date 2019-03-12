@@ -26,12 +26,7 @@
     Map<String, String> map =
         Maps.transformValues(
             injectedMultimap.get(),
-            new Function<Set<Provider<String>>, String>() {
-              @Override
-              public String apply(Set<Provider<String>> stringProvidersSet) {
-                return Iterables.getOnlyElement(stringProvidersSet).get();
-              }
-            });
+            stringProvidersSet -> Iterables.getOnlyElement(stringProvidersSet).get());
     assertEquals(mapOf("a", "A", "b", "B", "c", "C"), map);
   }
 

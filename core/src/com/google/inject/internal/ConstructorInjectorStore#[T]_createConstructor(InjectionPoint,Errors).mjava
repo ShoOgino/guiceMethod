@@ -15,7 +15,8 @@
     ImmutableList<MethodAspect> methodAspects =
         membersInjector.getAddedAspects().isEmpty()
             ? injectorAspects
-            : ImmutableList.copyOf(concat(injectorAspects, membersInjector.getAddedAspects()));
+            : Stream.concat(injectorAspects.stream(), membersInjector.getAddedAspects().stream())
+                .collect(toImmutableList());
     ConstructionProxyFactory<T> factory = new ProxyFactory<>(injectionPoint, methodAspects);
     /*end[AOP]*/
     /*if[NO_AOP]
