@@ -1,0 +1,16 @@
+  private static MethodHandle createMethodHandle(Method method, Object proxy) {
+    if (methodHandlesLookupCxtor == null) {
+      return null;
+    }
+    Class<?> declaringClass = method.getDeclaringClass();
+    int allModes =
+        Modifier.PRIVATE | Modifier.STATIC /* package */ | Modifier.PUBLIC | Modifier.PROTECTED;
+    try {
+      MethodHandles.Lookup lookup = methodHandlesLookupCxtor.newInstance(declaringClass, allModes);
+      method.setAccessible(true);
+      return lookup.unreflectSpecial(method, declaringClass).bindTo(proxy);
+    } catch (ReflectiveOperationException roe) {
+      throw new RuntimeException("Unable to access method: " + method, roe);
+    }
+  }
+

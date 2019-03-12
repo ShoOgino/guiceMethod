@@ -137,11 +137,10 @@
       // work.  If that doesn't work, fallback to trying to find compatible method
       // signatures.
       Map<Method, AssistData> dataSoFar = assistDataBuilder.build();
-      ImmutableMap.Builder<Method, MethodHandleWrapper> methodHandleBuilder =
-          ImmutableMap.builder();
+      ImmutableMap.Builder<Method, MethodHandle> methodHandleBuilder = ImmutableMap.builder();
       for (Map.Entry<String, Method> entry : defaultMethods.entries()) {
         Method defaultMethod = entry.getValue();
-        MethodHandleWrapper handle = MethodHandleWrapper.create(defaultMethod, factory);
+        MethodHandle handle = createMethodHandle(defaultMethod, factory);
         if (handle != null) {
           methodHandleBuilder.put(defaultMethod, handle);
         } else {
@@ -167,7 +166,8 @@
         }
       }
 
-      // If we generated any errors (from finding matching constructors, for instance), throw an exception.
+      // If we generated any errors (from finding matching constructors, for instance), throw an
+      // exception.
       if (errors.hasErrors()) {
         throw errors.toException();
       }
