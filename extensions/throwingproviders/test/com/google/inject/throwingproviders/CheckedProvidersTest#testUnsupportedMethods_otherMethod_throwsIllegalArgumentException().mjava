@@ -11,7 +11,7 @@
           new TypeLiteral<MoreMethodsCheckedProvider<String>>() {}, "SHOW ME WHAT YOU GOT");
       fail("Expected an exception to be thrown");
     } catch (IllegalArgumentException e) {
-      assertThat(e).hasMessage(message);
+      assertThat(e).hasMessageThat().isEqualTo(message);
     }
   }
 

@@ -8,7 +8,7 @@
       CheckedProviders.throwing(FooCheckedProvider.class, StringException.class);
       fail("Expected an exception to be thrown");
     } catch (IllegalArgumentException e) {
-      assertThat(e).hasMessage(message);
+      assertThat(e).hasMessageThat().isEqualTo(message);
       assertWithMessage(String.format("exception <%s> with cause", e))
           .that(e.getCause())
           .isInstanceOf(NoSuchMethodException.class);
