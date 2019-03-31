@@ -1,0 +1,25 @@
+  public void testGetAllMembersInjectorInjectionPoints_getInstanceAndInjectMembers() {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Integer.class).toInstance(42);
+                bind(String.class).toInstance("bar");
+              }
+            });
+    injector.injectMembers(new ClassWithInjectableField("foo"));
+    injector.getInstance(ClassWithInjectableField.class);
+    Multimap<TypeLiteral<?>, InjectionPoint> injectionPoints =
+        injector.getAllMembersInjectorInjectionPoints();
+    TypeLiteral<ClassWithInjectableField> expectedTypeLiteral =
+        TypeLiteral.get(ClassWithInjectableField.class);
+    assertThat(injectionPoints.keySet()).containsExactly(expectedTypeLiteral);
+    Key<?> actualDependencyKey =
+        Iterables.getOnlyElement(
+                Iterables.getOnlyElement(injectionPoints.get(expectedTypeLiteral))
+                    .getDependencies())
+            .getKey();
+    assertEquals(Key.get(Integer.class), actualDependencyKey);
+  }
+

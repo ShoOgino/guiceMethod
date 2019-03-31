@@ -1,0 +1,16 @@
+  public void testGetAllMembersInjectorInjectionPoints_getInstance() {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bind(Integer.class).toInstance(42);
+                bind(String.class).toInstance("bar");
+              }
+            });
+    injector.getInstance(ClassWithInjectableField.class);
+    Multimap<TypeLiteral<?>, InjectionPoint> injectionPoints =
+        injector.getAllMembersInjectorInjectionPoints();
+    assertThat(injectionPoints).isEmpty();
+  }
+

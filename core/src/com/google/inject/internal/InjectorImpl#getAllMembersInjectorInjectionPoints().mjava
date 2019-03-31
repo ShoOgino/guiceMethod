@@ -1,0 +1,8 @@
+  @Override
+  public ListMultimap<TypeLiteral<?>, InjectionPoint> getAllMembersInjectorInjectionPoints() {
+    return ImmutableListMultimap.copyOf(
+        Multimaps.filterKeys(
+            membersInjectorStore.getAllInjectionPoints(),
+            userRequestedMembersInjectorTypes::contains));
+  }
+
