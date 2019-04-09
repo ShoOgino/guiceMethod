@@ -4,18 +4,15 @@
       final CyclicBarrier barrier) {
     FutureTask<ListMultimap<Thread, T>> future =
         new FutureTask<ListMultimap<Thread, T>>(
-            new Callable<ListMultimap<Thread, T>>() {
-              @Override
-              public ListMultimap<Thread, T> call() throws Exception {
-                assertTrue(lock1.lockOrDetectPotentialLocksCycle().isEmpty());
-                barrier.await();
-                ListMultimap<Thread, T> cycle = lock2.lockOrDetectPotentialLocksCycle();
-                if (cycle == null) {
-                  lock2.unlock();
-                }
-                lock1.unlock();
-                return cycle;
+            () -> {
+              assertTrue(lock1.lockOrDetectPotentialLocksCycle().isEmpty());
+              barrier.await();
+              ListMultimap<Thread, T> cycle = lock2.lockOrDetectPotentialLocksCycle();
+              if (cycle == null) {
+                lock2.unlock();
               }
+              lock1.unlock();
+              return cycle;
             });
     Thread thread = new Thread(future);
     thread.start();

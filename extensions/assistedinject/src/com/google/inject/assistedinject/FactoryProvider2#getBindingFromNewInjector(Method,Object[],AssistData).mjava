@@ -25,7 +25,8 @@
             int p = 0;
             if (!data.optimized) {
               for (Key<?> paramKey : data.paramTypes) {
-                // Wrap in a Provider to cover null, and to prevent Guice from injecting the parameter
+                // Wrap in a Provider to cover null, and to prevent Guice from injecting the
+                // parameter
                 binder.bind((Key) paramKey).toProvider(Providers.of(args[p++]));
               }
             } else {

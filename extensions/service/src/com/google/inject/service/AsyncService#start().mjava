@@ -9,12 +9,9 @@
     }
 
     return executor.submit(
-        new Callable<State>() {
-          @Override
-          public State call() {
-            onStart();
-            return state = State.STARTED;
-          }
+        () -> {
+          onStart();
+          return state = State.STARTED;
         });
   }
 

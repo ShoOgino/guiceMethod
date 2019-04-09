@@ -20,14 +20,11 @@
     }
 
     Callable<Data> callable =
-        new Callable<Data>() {
-          @Override
-          public Data call() {
-            Data data = new Data();
-            data.object = injector.getInstance(Object.class);
-            data.scoper = ServletScopes.transferRequest();
-            return data;
-          }
+        () -> {
+          Data data = new Data();
+          data.object = injector.getInstance(Object.class);
+          data.scoper = ServletScopes.transferRequest();
+          return data;
         };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();

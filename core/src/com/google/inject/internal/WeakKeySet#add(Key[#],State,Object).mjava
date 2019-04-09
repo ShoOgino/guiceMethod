@@ -7,11 +7,7 @@
     if (source instanceof Class || source == SourceProvider.UNKNOWN_SOURCE) {
       source = null;
     }
-    Multiset<Object> sources = backingMap.get(key);
-    if (sources == null) {
-      sources = LinkedHashMultiset.create();
-      backingMap.put(key, sources);
-    }
+    Multiset<Object> sources = backingMap.computeIfAbsent(key, k -> LinkedHashMultiset.create());
     Object convertedSource = Errors.convert(source);
     sources.add(convertedSource);
 

@@ -8,9 +8,7 @@
             requireBinding(String.class); // but it doesn't specify this.
             binder().requireExplicitBindings(); // need to do this, otherwise String will JIT
 
-            if (HAS_JAVA_OPTIONAL) {
-              requireBinding(Key.get(javaOptionalOfString));
-            }
+            requireBinding(Key.get(javaOptionalOfString));
           }
         };
 

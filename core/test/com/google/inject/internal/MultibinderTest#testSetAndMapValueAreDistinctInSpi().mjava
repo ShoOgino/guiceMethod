@@ -34,9 +34,9 @@
     // We also know the InstanceBindings will be in the order: A, b, C because that's
     // how we bound them, and binding order is preserved.
     List<Binding<String>> bindings =
-        FluentIterable.from(injector.findBindingsByType(stringType))
+        injector.findBindingsByType(stringType).stream()
             .filter(Predicates.instanceOf(InstanceBinding.class))
-            .toList();
+            .collect(toImmutableList());
     assertEquals(bindings.toString(), 3, bindings.size());
     Binding<String> a = bindings.get(0);
     Binding<String> b = bindings.get(1);

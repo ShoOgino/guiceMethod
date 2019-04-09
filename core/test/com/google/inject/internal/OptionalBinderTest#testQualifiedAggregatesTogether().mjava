@@ -51,23 +51,22 @@
         instance("b"),
         null);
 
-    if (HAS_JAVA_OPTIONAL) {
-      optional =
-          toOptional(injector.getInstance(Key.get(javaOptionalOfString, Names.named("foo"))));
-      assertTrue(optional.isPresent());
-      assertEquals("b", optional.get());
+    optional =
+        Optional.fromJavaUtil(
+            injector.getInstance(Key.get(javaOptionalOfString, Names.named("foo"))));
+    assertTrue(optional.isPresent());
+    assertEquals("b", optional.get());
 
-      optionalP =
-          toOptional(
-              injector.getInstance(Key.get(javaOptionalOfProviderString, Names.named("foo"))));
-      assertTrue(optionalP.isPresent());
-      assertEquals("b", optionalP.get().get());
+    optionalP =
+        Optional.fromJavaUtil(
+            injector.getInstance(Key.get(javaOptionalOfProviderString, Names.named("foo"))));
+    assertTrue(optionalP.isPresent());
+    assertEquals("b", optionalP.get().get());
 
-      optionalJxP =
-          toOptional(
-              injector.getInstance(Key.get(javaOptionalOfJavaxProviderString, Names.named("foo"))));
-      assertTrue(optionalJxP.isPresent());
-      assertEquals("b", optionalJxP.get().get());
-    }
+    optionalJxP =
+        Optional.fromJavaUtil(
+            injector.getInstance(Key.get(javaOptionalOfJavaxProviderString, Names.named("foo"))));
+    assertTrue(optionalJxP.isPresent());
+    assertEquals("b", optionalJxP.get().get());
   }
 

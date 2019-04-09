@@ -1,0 +1,12 @@
+  Map<K, V> asMap() {
+    return Maps.transformValues(
+        Maps.filterValues(
+            ImmutableMap.copyOf(delegate.asMap()),
+            resultOrError -> !(resultOrError instanceof Errors)),
+        resultOrError -> {
+          @SuppressWarnings("unchecked") // create returned a non-error result, so this is safe
+          V result = (V) resultOrError;
+          return result;
+        });
+  }
+

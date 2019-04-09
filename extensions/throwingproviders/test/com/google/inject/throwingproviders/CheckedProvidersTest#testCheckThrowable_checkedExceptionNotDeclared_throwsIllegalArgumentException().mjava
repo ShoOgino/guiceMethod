@@ -9,7 +9,7 @@
       CheckedProviders.throwing(FooCheckedProvider.class, BarException.class);
       fail("Expected an exception to be thrown");
     } catch (IllegalArgumentException e) {
-      assertThat(e).hasMessage(message);
+      assertThat(e).hasMessageThat().isEqualTo(message);
     }
   }
 

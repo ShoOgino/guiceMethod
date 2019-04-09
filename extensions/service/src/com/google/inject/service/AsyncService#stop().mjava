@@ -8,12 +8,9 @@
     }
 
     return executor.submit(
-        new Callable<State>() {
-          @Override
-          public State call() {
-            onStop();
-            return state = State.STOPPED;
-          }
+        () -> {
+          onStop();
+          return state = State.STOPPED;
         });
   }
 

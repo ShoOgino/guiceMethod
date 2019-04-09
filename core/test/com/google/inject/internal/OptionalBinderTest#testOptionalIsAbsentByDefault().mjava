@@ -20,15 +20,14 @@
 
     assertOptionalVisitor(stringKey, setOf(module), VisitType.BOTH, 0, null, null, null);
 
-    if (HAS_JAVA_OPTIONAL) {
-      optional = toOptional(injector.getInstance(Key.get(javaOptionalOfString)));
-      assertFalse(optional.isPresent());
+    optional = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfString)));
+    assertFalse(optional.isPresent());
 
-      optionalP = toOptional(injector.getInstance(Key.get(javaOptionalOfProviderString)));
-      assertFalse(optionalP.isPresent());
+    optionalP = Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfProviderString)));
+    assertFalse(optionalP.isPresent());
 
-      optionalJxP = toOptional(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
-      assertFalse(optionalJxP.isPresent());
-    }
+    optionalJxP =
+        Optional.fromJavaUtil(injector.getInstance(Key.get(javaOptionalOfJavaxProviderString)));
+    assertFalse(optionalJxP.isPresent());
   }
 

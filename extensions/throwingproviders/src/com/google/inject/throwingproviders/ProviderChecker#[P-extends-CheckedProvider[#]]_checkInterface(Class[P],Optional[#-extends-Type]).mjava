@@ -61,9 +61,9 @@
     // a default method on the interface w/ the superinterface type that
     // just delegates directly to the overridden method.
     List<Method> declaredMethods =
-        FluentIterable.from(Arrays.asList(interfaceType.getDeclaredMethods()))
+        Arrays.stream(interfaceType.getDeclaredMethods())
             .filter(NotSyntheticOrBridgePredicate.INSTANCE)
-            .toList();
+            .collect(toImmutableList());
     if (declaredMethods.size() == 1) {
       Method method = declaredMethods.get(0);
       checkArgument(

@@ -19,14 +19,7 @@
     // Copy the seed values into our local scope map.
     final Context context = new Context();
     Map<Key<?>, Object> validatedAndCanonicalizedMap =
-        Maps.transformEntries(
-            seedMap,
-            new EntryTransformer<Key<?>, Object, Object>() {
-              @Override
-              public Object transformEntry(Key<?> key, Object value) {
-                return validateAndCanonicalizeValue(key, value);
-              }
-            });
+        Maps.transformEntries(seedMap, ServletScopes::validateAndCanonicalizeValue);
     context.map.putAll(validatedAndCanonicalizedMap);
     return new RequestScoper() {
       @Override

@@ -27,15 +27,9 @@
     // And make sure DependentRemoteProvider has the proper dependencies.
     hasDependencies = (HasDependencies) bindInjector.getBinding(DependentRemoteProvider.class);
     Set<Key<?>> dependencyKeys =
-        ImmutableSet.copyOf(
-            Iterables.transform(
-                hasDependencies.getDependencies(),
-                new Function<Dependency<?>, Key<?>>() {
-                  @Override
-                  public Key<?> apply(Dependency<?> from) {
-                    return from.getKey();
-                  }
-                }));
+        hasDependencies.getDependencies().stream()
+            .map(Dependency::getKey)
+            .collect(toImmutableSet());
     assertEquals(
         ImmutableSet.<Key<?>>of(
             Key.get(String.class),

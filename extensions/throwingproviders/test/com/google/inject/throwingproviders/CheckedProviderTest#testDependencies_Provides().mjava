@@ -31,8 +31,9 @@
             providesInjector.getBinding(
                 Iterables.getOnlyElement(hasDependencies.getDependencies()).getKey());
     Set<Key<?>> dependencyKeys =
-        ImmutableSet.copyOf(
-            Iterables.transform(hasDependencies.getDependencies(), DEPENDENCY_TO_KEY));
+        hasDependencies.getDependencies().stream()
+            .map(Dependency::getKey)
+            .collect(toImmutableSet());
     assertEquals(
         ImmutableSet.<Key<?>>of(
             Key.get(String.class),

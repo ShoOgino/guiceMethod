@@ -1,0 +1,5 @@
+    @Override
+    public ListMultimap<TypeLiteral<?>, InjectionPoint> getAllMembersInjectorInjectionPoints() {
+      return delegateInjector.getAllMembersInjectorInjectionPoints();
+    }
+

@@ -1,0 +1,12 @@
+  private static Constructor<MethodHandles.Lookup> findMethodHandlesLookupCxtor() {
+    try {
+      Constructor<MethodHandles.Lookup> cxtor =
+          MethodHandles.Lookup.class.getDeclaredConstructor(Class.class, int.class);
+      cxtor.setAccessible(true);
+      return cxtor;
+    } catch (ReflectiveOperationException ignored) {
+      // Ignore, the code falls back to a less-precise check if we can't create method handles.
+      return null;
+    }
+  }
+

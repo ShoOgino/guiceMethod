@@ -14,7 +14,10 @@
         };
 
     InstanceBinding<?> binding =
-        Iterables.getOnlyElement(Iterables.filter(Elements.getElements(ab), InstanceBinding.class));
+        Elements.getElements(ab).stream()
+            .filter(InstanceBinding.class::isInstance)
+            .map(InstanceBinding.class::cast)
+            .collect(onlyElement());
     Key<?> keyBefore = binding.getKey();
     assertEquals(listOfStrings, keyBefore.getTypeLiteral());
 

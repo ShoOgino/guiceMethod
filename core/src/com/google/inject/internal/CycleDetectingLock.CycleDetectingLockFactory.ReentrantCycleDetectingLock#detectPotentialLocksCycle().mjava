@@ -15,14 +15,7 @@
         }
 
         ListMultimap<Thread, ID> potentialLocksCycle =
-            Multimaps.newListMultimap(
-                new LinkedHashMap<Thread, Collection<ID>>(),
-                new Supplier<List<ID>>() {
-                  @Override
-                  public List<ID> get() {
-                    return Lists.newArrayList();
-                  }
-                });
+            MultimapBuilder.linkedHashKeys().arrayListValues().build();
         // lock that is a part of a potential locks cycle, starts with current lock
         ReentrantCycleDetectingLock<?> lockOwnerWaitingOn = this;
         // try to find a dependency path between lock's owner thread and a current thread

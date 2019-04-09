@@ -1,4 +1,0 @@
-    MethodHandleWrapper(Object handle) {
-      this.handle = handle;
-    }
-

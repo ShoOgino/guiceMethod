@@ -1,0 +1,7 @@
+  ImmutableListMultimap<TypeLiteral<?>, InjectionPoint> getAllInjectionPoints() {
+    return cache.asMap().entrySet().stream()
+        .collect(
+            flatteningToImmutableListMultimap(
+                Entry::getKey, entry -> entry.getValue().getInjectionPoints().stream()));
+  }
+

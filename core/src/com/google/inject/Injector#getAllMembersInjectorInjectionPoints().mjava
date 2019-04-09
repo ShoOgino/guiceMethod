@@ -1,0 +1,17 @@
+  /**
+   * Returns the injection points created for calls to {@link #getMembersInjector} (either directly
+   * or indirectly, e.g. through {@link #injectMembers}.
+   *
+   * <p>This excludes any injection points from elements (which are accessible from each element via
+   * the SPI), unless {@link #getMembersInjector} or {@link #injectMembers} were also called for the
+   * same key.
+   *
+   * <p>The returned multimap does not include data inherited from a {@link #getParent() parent
+   * injector}, should one exist.
+   *
+   * <p>This method is part of the Guice SPI and is intended for use by tools and extensions.
+   *
+   * @since 5.0
+   */
+  ListMultimap<TypeLiteral<?>, InjectionPoint> getAllMembersInjectorInjectionPoints();
+

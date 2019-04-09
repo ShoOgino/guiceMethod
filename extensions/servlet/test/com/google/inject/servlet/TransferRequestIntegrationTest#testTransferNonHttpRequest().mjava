@@ -15,18 +15,10 @@
             });
 
     Callable<Callable<Boolean>> callable =
-        new Callable<Callable<Boolean>>() {
-          @Override
-          public Callable<Boolean> call() {
-            final Object original = injector.getInstance(Object.class);
-            return ServletScopes.transferRequest(
-                new Callable<Boolean>() {
-                  @Override
-                  public Boolean call() {
-                    return original == injector.getInstance(Object.class);
-                  }
-                });
-          }
+        () -> {
+          final Object original = injector.getInstance(Object.class);
+          return ServletScopes.transferRequest(
+              () -> original == injector.getInstance(Object.class));
         };
 
     ImmutableMap<Key<?>, Object> seedMap = ImmutableMap.of();
