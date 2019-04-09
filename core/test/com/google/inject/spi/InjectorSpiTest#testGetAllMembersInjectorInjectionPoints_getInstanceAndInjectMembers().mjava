@@ -10,7 +10,7 @@
             });
     injector.injectMembers(new ClassWithInjectableField("foo"));
     injector.getInstance(ClassWithInjectableField.class);
-    Multimap<TypeLiteral<?>, InjectionPoint> injectionPoints =
+    Map<TypeLiteral<?>, List<InjectionPoint>> injectionPoints =
         injector.getAllMembersInjectorInjectionPoints();
     TypeLiteral<ClassWithInjectableField> expectedTypeLiteral =
         TypeLiteral.get(ClassWithInjectableField.class);

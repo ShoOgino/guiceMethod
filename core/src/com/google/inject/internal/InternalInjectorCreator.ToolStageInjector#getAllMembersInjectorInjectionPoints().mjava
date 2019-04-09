@@ -1,5 +1,5 @@
     @Override
-    public ListMultimap<TypeLiteral<?>, InjectionPoint> getAllMembersInjectorInjectionPoints() {
+    public Map<TypeLiteral<?>, List<InjectionPoint>> getAllMembersInjectorInjectionPoints() {
       return delegateInjector.getAllMembersInjectorInjectionPoints();
     }
 
