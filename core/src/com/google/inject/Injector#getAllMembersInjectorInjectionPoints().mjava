@@ -13,5 +13,5 @@
    *
    * @since 5.0
    */
-  ListMultimap<TypeLiteral<?>, InjectionPoint> getAllMembersInjectorInjectionPoints();
+  Map<TypeLiteral<?>, List<InjectionPoint>> getAllMembersInjectorInjectionPoints();
 

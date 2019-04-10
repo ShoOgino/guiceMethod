@@ -9,7 +9,7 @@
               }
             });
     injector.getInstance(ClassWithInjectableField.class);
-    Multimap<TypeLiteral<?>, InjectionPoint> injectionPoints =
+    Map<TypeLiteral<?>, List<InjectionPoint>> injectionPoints =
         injector.getAllMembersInjectorInjectionPoints();
     assertThat(injectionPoints).isEmpty();
   }
