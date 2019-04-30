@@ -1,4 +1,0 @@
-    private DaggerCompatibilityModule(Object... daggerModuleObjects) {
-      this.daggerModuleObjects = daggerModuleObjects;
-    }
-

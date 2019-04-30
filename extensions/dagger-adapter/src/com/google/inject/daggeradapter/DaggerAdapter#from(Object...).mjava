@@ -5,6 +5,6 @@
    */
   public static Module from(Object... daggerModuleObjects) {
     // TODO(cgruber): Gather injects=, dedupe, factor out instances, instantiate the rest, and go.
-    return new DaggerCompatibilityModule(daggerModuleObjects);
+    return new DaggerCompatibilityModule(ImmutableList.copyOf(daggerModuleObjects));
   }
 

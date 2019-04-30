@@ -1,0 +1,4 @@
+    private DaggerCompatibilityModule(ImmutableList<Object> daggerModuleObjects) {
+      this.daggerModuleObjects = daggerModuleObjects;
+    }
+
