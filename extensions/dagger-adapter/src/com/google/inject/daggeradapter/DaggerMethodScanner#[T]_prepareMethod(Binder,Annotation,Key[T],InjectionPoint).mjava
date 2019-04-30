@@ -5,13 +5,6 @@
     Provides annotation = (Provides) rawAnnotation;
     if (providesMethod.isAnnotationPresent(IntoSet.class)) {
       return processSetBinding(binder, key);
-    } else if (providesMethod.isAnnotationPresent(ElementsIntoSet.class)) {
-      binder.addError("@ElementsIntoSet contributions are not suppored by Guice.", providesMethod);
-      return key;
-    } else if (providesMethod.isAnnotationPresent(IntoMap.class)) {
-      /* TODO(cgruber) implement map bindings */
-      binder.addError("Map bindings are not yet supported.");
-      return key;
     }
 
     switch (annotation.type()) {

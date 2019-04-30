@@ -1,0 +1,8 @@
+  public void testUnsupportedBindingAnnotation() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(new UnsupportedAnnotationModule()));
+      fail();
+    } catch (CreationException expected) {
+    }
+  }
+
