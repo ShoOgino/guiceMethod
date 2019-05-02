@@ -1,0 +1,13 @@
+  public void testModuleSubcomponentsNotSupported() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(ModuleWithSubcomponents.class));
+      fail();
+    } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains("Subcomponents cannot be configured for modules used with DaggerAdapter");
+      assertThat(expected).hasMessageThat().contains("ModuleWithSubcomponents specifies: ");
+      assertThat(expected).hasMessageThat().contains("TestSubcomponent");
+    }
+  }
+

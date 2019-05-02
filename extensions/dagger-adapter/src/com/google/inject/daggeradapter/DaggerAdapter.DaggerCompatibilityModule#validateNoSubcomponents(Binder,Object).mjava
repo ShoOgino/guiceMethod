@@ -1,0 +1,11 @@
+    private void validateNoSubcomponents(Binder binder, Object module) {
+      Class<?> moduleClass = module instanceof Class ? (Class<?>) module : module.getClass();
+      dagger.Module moduleAnnotation = moduleClass.getAnnotation(dagger.Module.class);
+      if (moduleAnnotation.subcomponents().length > 0) {
+        binder.addError(
+            "Subcomponents cannot be configured for modules used with DaggerAdapter. %s specifies:"
+                + " %s",
+            moduleClass, Arrays.toString(moduleAnnotation.subcomponents()));
+      }
+    }
+

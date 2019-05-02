@@ -1,6 +1,9 @@
     @Override
     public void configure(Binder binder) {
+      binder = binder.skipSources(getClass());
       for (Object module : daggerModuleObjects) {
+        validateNoSubcomponents(binder, module);
+
         binder.install(ProviderMethodsModule.forModule(module, DaggerMethodScanner.INSTANCE));
         checkUnsupportedDaggerAnnotations(module, binder);
       }
