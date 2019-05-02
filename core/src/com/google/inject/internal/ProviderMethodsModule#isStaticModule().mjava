@@ -1,0 +1,4 @@
+  private boolean isStaticModule() {
+    return delegate instanceof Class;
+  }
+

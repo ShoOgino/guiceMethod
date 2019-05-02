@@ -3,7 +3,7 @@
     if (obj instanceof ProviderMethod) {
       ProviderMethod<?> o = (ProviderMethod<?>) obj;
       return method.equals(o.method)
-          && instance.equals(o.instance)
+          && Objects.equal(instance, o.instance)
           && annotation.equals(o.annotation);
     } else {
       return false;

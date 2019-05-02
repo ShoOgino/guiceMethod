@@ -1,0 +1,6 @@
+  public void testStaticProvidesMethods_classLiteral() {
+    Injector injector = Guice.createInjector(DaggerAdapter.from(StaticProvidesMethods.class));
+    String staticProvision = injector.getInstance(String.class);
+    assertEquals("class", staticProvision);
+  }
+

@@ -1,4 +1,0 @@
-  public Object getDelegateModule() {
-    return delegate;
-  }
-

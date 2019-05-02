@@ -1,0 +1,4 @@
+  public Class<?> getDelegateModuleClass() {
+    return isStaticModule() ? (Class<?>) delegate : delegate.getClass();
+  }
+

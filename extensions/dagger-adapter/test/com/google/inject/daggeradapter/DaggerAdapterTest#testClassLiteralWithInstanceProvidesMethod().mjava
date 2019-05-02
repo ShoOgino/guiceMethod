@@ -1,0 +1,13 @@
+  public void testClassLiteralWithInstanceProvidesMethod() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(ModuleWithInstanceMethods.class));
+      fail();
+    } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains(
+              "ModuleWithInstanceMethods.i() is an instance method, but a class literal was"
+                  + " passed. Make this method static or pass an instance of the module instead.");
+    }
+  }
+

@@ -5,6 +5,6 @@
     partialCallStack[1] =
         new StackTraceElement(
             "com.google.inject.spi.moduleSourceTest$A", "configure", "moduleSourceTest.java", 100);
-    return moduleSource.createChild(new B(), partialCallStack);
+    return moduleSource.createChild(B.class, partialCallStack);
   }
 

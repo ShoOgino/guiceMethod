@@ -21,7 +21,7 @@
     return ProviderMethod.create(
         key,
         method,
-        delegate,
+        isStaticModule() ? null : delegate,
         ImmutableSet.copyOf(point.getDependencies()),
         scopeAnnotation,
         skipFastClassGeneration,
