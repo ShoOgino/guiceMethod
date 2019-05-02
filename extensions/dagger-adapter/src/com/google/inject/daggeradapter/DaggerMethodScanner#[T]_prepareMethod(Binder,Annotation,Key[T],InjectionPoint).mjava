@@ -7,18 +7,6 @@
       return processSetBinding(binder, key);
     }
 
-    switch (annotation.type()) {
-      case UNIQUE:
-        return key;
-      case SET:
-        return processSetBinding(binder, key);
-      case SET_VALUES:
-        binder.addError(
-            Type.SET_VALUES.name() + " contributions are not supported by Guice.", providesMethod);
-        return key;
-      default:
-        binder.addError("Unknown @Provides type " + annotation.type() + ".", providesMethod);
-        return key;
-    }
+    return key;
   }
 
