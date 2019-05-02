@@ -1,7 +1,5 @@
     @Override
     public String toString() {
-      return MoreObjects.toStringHelper(this)
-          .add("modules", Arrays.asList(daggerModuleObjects))
-          .toString();
+      return MoreObjects.toStringHelper(this).add("modules", daggerModuleObjects).toString();
     }
 
