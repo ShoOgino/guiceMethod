@@ -1,0 +1,11 @@
+  public void testModuleObjectsMustBeDaggerModules() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(new Object()));
+      fail();
+    } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains("Object must be annotated with @dagger.Module");
+    }
+  }
+

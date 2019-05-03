@@ -1,0 +1,9 @@
+    private void checkIsDaggerModule(Object module, Binder binder) {
+      Class<?> moduleClass = module instanceof Class ? (Class<?>) module : module.getClass();
+      if (!moduleClass.isAnnotationPresent(dagger.Module.class)) {
+        binder
+            .skipSources(getClass())
+            .addError("%s must be annotated with @dagger.Module", moduleClass.getCanonicalName());
+      }
+    }
+

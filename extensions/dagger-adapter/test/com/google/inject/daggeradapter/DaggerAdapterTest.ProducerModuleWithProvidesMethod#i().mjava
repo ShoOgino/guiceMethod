@@ -1,0 +1,5 @@
+    @dagger.Provides
+    int i() {
+      return 1;
+    }
+

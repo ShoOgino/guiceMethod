@@ -1,0 +1,11 @@
+  public void testProducerModulesNotSupported() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(new ProducerModuleWithProvidesMethod()));
+      fail();
+    } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains("ProducerModuleWithProvidesMethod must be annotated with @dagger.Module");
+    }
+  }
+
