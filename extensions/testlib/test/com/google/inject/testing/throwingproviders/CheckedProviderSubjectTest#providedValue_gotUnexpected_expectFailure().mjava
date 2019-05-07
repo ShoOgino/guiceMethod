@@ -5,8 +5,11 @@
     CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, unexpected);
     String message =
         String.format(
-            "value provided by <%s>\nexpected: %s\nbut was : %s",
-            getReturningProviderName(unexpected), expected, unexpected);
+            "value of           : checkedProvider.get()\n"
+                + "expected           : %s\n"
+                + "but was            : %s\n"
+                + "checkedProvider was: %s",
+            expected, unexpected, getReturningProviderName(unexpected));
 
     expectWhenTesting().that(provider).providedValue().isEqualTo(expected);
     assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);

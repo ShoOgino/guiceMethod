@@ -1,4 +1,0 @@
-    void doFail(String format, Object... args) {
-      failWithoutActual(simpleFact(lenientFormat(format, args)));
-    }
-

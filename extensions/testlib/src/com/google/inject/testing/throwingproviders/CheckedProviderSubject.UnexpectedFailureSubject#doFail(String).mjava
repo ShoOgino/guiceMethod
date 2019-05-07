@@ -1,0 +1,4 @@
+    void doFail(String message) {
+      failWithoutActual(simpleFact(message));
+    }
+

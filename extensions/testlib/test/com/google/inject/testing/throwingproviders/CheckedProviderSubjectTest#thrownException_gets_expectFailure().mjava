@@ -2,10 +2,7 @@
   public void thrownException_gets_expectFailure() {
     String getValue = "keep WINTER IS COMING safe";
     CheckedProvider<String> provider = CheckedProviders.of(StringCheckedProvider.class, getValue);
-    String message =
-        String.format(
-            "Not true that <%s> threw <an exception>. It provided <%s>",
-            getReturningProviderName(getValue), getValue);
+    String message = String.format("expected to throw\nbut provided: %s", getValue);
 
     expectWhenTesting().that(provider).thrownException();
     assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);

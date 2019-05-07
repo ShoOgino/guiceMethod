@@ -1,5 +1,5 @@
   private CheckedProviderSubject(FailureMetadata failureMetadata, @Nullable P subject) {
     super(failureMetadata, subject);
-    this.actual = subject;
+    this.provider = subject;
   }
 

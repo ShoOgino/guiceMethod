@@ -4,7 +4,9 @@
         CheckedProviders.throwing(StringCheckedProvider.class, SummerException.class);
     String message =
         String.format(
-            "checked provider <%s> threw an exception",
+            "value of           : checkedProvider.get()\n"
+                + "checked provider was not expected to throw an exception\n"
+                + "checkedProvider was: %s",
             getThrowingProviderName(SummerException.class.getName()));
 
     expectWhenTesting().that(provider).providedValue();

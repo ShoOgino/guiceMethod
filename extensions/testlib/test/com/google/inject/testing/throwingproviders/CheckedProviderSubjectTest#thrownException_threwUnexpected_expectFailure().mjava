@@ -6,14 +6,15 @@
         CheckedProviders.throwing(StringCheckedProvider.class, unexpected);
     String message =
         String.format(
-            "exception thrown by <%s>\n"
+            "value of            : checkedProvider.get()'s exception\n"
                 + "expected instance of: %s\n"
                 + "but was instance of : %s\n"
-                + "with value          : %s",
-            getThrowingProviderName(UnsupportedOperationException.class.getName()),
+                + "with value          : %s\n"
+                + "checkedProvider was : %s",
             SummerException.class.getName(),
             UnsupportedOperationException.class.getName(),
-            UnsupportedOperationException.class.getName());
+            UnsupportedOperationException.class.getName(),
+            getThrowingProviderName(UnsupportedOperationException.class.getName()));
 
     expectWhenTesting().that(provider).thrownException().isInstanceOf(expected);
     assertThat(expect.getFailure()).hasMessageThat().isEqualTo(message);

@@ -7,14 +7,13 @@
    * @return a {@link Subject} for asserting against the return value of {@link CheckedProvider#get}
    */
   public Subject<?, Object> providedValue() {
-    P provider = actual;
     T got;
     try {
       got = provider.get();
     } catch (Exception e) {
-      failWithCauseAndMessage(e, "checked provider <%s> threw an exception", provider);
+      failWithCauseAndMessage(e, "checked provider was not expected to throw an exception");
       return ignoreCheck().that(new Object());
     }
-    return check().withMessage("value provided by <%s>", provider).that(got);
+    return check("get()").that(got);
   }
 

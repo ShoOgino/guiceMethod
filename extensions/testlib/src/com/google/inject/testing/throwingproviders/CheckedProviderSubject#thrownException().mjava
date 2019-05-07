@@ -8,14 +8,13 @@
    *     CheckedProvider#get}
    */
   public ThrowableSubject thrownException() {
-    P provider = actual;
     T got;
     try {
       got = provider.get();
     } catch (Throwable e) {
-      return check().withMessage("exception thrown by <%s>", provider).that(e);
+      return check("get()'s exception").that(e);
     }
-    failWithBadResults("threw", "an exception", "provided", got);
+    failWithoutActual(simpleFact("expected to throw"), fact("but provided", got));
     return ignoreCheck().that(new Throwable());
   }
 
