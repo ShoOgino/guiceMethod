@@ -7,7 +7,7 @@
    * @return a {@link Subject} for asserting against the return value of {@link CheckedProvider#get}
    */
   public Subject<?, Object> providedValue() {
-    P provider = actual();
+    P provider = actual;
     T got;
     try {
       got = provider.get();

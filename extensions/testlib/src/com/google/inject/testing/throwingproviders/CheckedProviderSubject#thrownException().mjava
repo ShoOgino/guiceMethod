@@ -8,7 +8,7 @@
    *     CheckedProvider#get}
    */
   public ThrowableSubject thrownException() {
-    P provider = actual();
+    P provider = actual;
     T got;
     try {
       got = provider.get();
