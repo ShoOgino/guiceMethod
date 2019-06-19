@@ -1,0 +1,13 @@
+  public void testQualifiers() {
+    Injector injector = Guice.createInjector(DaggerAdapter.from(QualifiedBinds.class));
+
+    Binding<String> stringBinding = injector.getBinding(String.class);
+    assertThat(stringBinding).hasProvidedValueThat().isEqualTo("qualifiers");
+    assertThat(stringBinding).hasSource(QualifiedBinds.class, "unqualifiedToBinds", String.class);
+
+    Binding<String> qualifiedBinds =
+        injector.getBinding(Key.get(String.class, BindsQualifier.class));
+    assertThat(qualifiedBinds).hasProvidedValueThat().isEqualTo("qualifiers");
+    assertThat(qualifiedBinds).hasSource(QualifiedBinds.class, "bindsToProvides", String.class);
+  }
+

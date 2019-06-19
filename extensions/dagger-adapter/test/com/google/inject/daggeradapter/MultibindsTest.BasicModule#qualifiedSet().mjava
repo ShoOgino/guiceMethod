@@ -1,0 +1,4 @@
+    @Multibinds
+    @TestQualifier
+    Set<Number> qualifiedSet();
+

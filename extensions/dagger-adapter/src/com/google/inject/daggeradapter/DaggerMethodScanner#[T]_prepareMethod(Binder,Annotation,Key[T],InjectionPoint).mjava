@@ -1,12 +1,21 @@
   @Override
   public <T> Key<T> prepareMethod(
-      Binder binder, Annotation rawAnnotation, Key<T> key, InjectionPoint injectionPoint) {
-    Method providesMethod = (Method) injectionPoint.getMember();
-    Provides annotation = (Provides) rawAnnotation;
-    if (providesMethod.isAnnotationPresent(IntoSet.class)) {
-      return processSetBinding(binder, key);
+      Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+    Method method = (Method) injectionPoint.getMember();
+    Class<? extends Annotation> annotationType = annotation.annotationType();
+    if (annotationType.equals(Provides.class)) {
+      return prepareProvidesKey(binder, method, key);
+    } else if (annotationType.equals(Binds.class)) {
+      configureBindsKey(binder, method, key);
+      return null;
+    } else if (annotationType.equals(Multibinds.class)) {
+      configureMultibindsKey(binder, method, key);
+      return null;
+    } else if (annotationType.equals(BindsOptionalOf.class)) {
+      OptionalBinder.newOptionalBinder(binder, key);
+      return null;
     }
 
-    return key;
+    throw new UnsupportedOperationException(annotation.toString());
   }
 

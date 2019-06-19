@@ -1,0 +1,13 @@
+  private <T> void configureBindsKey(Binder binder, Method method, Key<T> key) {
+    // the Dagger processor already validates the assignability of these two keys. parameterKey()
+    // has no way to infer the correct type parameter, so we use rawtypes instead.
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    ScopedBindingBuilder scopedBindingBuilder =
+        binder
+            .bind((Key) processMultibindingAnnotations(binder, method, key))
+            .to(parameterKey(method.getParameters()[0]));
+
+    getAnnotatedAnnotation(method, Scope.class)
+        .ifPresent(scope -> scopedBindingBuilder.in(scope.annotationType()));
+  }
+

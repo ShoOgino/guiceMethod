@@ -1,0 +1,15 @@
+  public void testScopedMultibindings() {
+    Injector injector =
+        Guice.createInjector(
+            DaggerAdapter.from(
+                new CountingMultibindingProviderModule(), ScopedMultibindingBindsModule.class));
+
+    Binding<Set<Object>> binding = injector.getBinding(new Key<Set<Object>>() {});
+    assertThat(binding)
+        .hasProvidedValueThat()
+        .isEqualTo(ImmutableSet.of("multibound-1", "multibound-2"));
+    assertThat(binding)
+        .hasProvidedValueThat()
+        .isEqualTo(ImmutableSet.of("multibound-1", "multibound-2"));
+  }
+

@@ -1,0 +1,7 @@
+  private static <T> Multibinder<T> newSetBinder(
+      Binder binder, TypeLiteral<T> typeLiteral, Annotation possibleAnnotation) {
+    return possibleAnnotation == null
+        ? Multibinder.newSetBinder(binder, typeLiteral)
+        : Multibinder.newSetBinder(binder, typeLiteral, possibleAnnotation);
+  }
+

@@ -1,0 +1,5 @@
+    MethodAndAnnotation(Method method, Annotation annotation) {
+      this.method = method;
+      this.annotation = annotation;
+    }
+

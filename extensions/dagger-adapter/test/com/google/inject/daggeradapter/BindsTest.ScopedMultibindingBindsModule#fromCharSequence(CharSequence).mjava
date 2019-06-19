@@ -1,0 +1,5 @@
+    @Binds
+    @IntoSet
+    @Singleton
+    Object fromCharSequence(CharSequence charSequence);
+

@@ -1,0 +1,6 @@
+  private <T> Key<T> prepareProvidesKey(Binder binder, Method method, Key<T> key) {
+    key = processMultibindingAnnotations(binder, method, key);
+
+    return key;
+  }
+

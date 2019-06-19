@@ -1,0 +1,3 @@
+    @Binds
+    Object object(CharSequence charSequence);
+

@@ -1,0 +1,22 @@
+  void hasSource(Class<?> moduleClass, String moduleMethod, Class<?>... moduleMethodArgs) {
+    Method method;
+    try {
+      method = moduleClass.getDeclaredMethod(moduleMethod, moduleMethodArgs);
+    } catch (NoSuchMethodException e) {
+      throw new AssertionError(
+          String.format(
+              "Expected %s.%s(%s) to exist",
+              moduleClass.getSimpleName(), moduleMethod, Arrays.toString(moduleMethodArgs)),
+          e);
+    }
+
+    Object source = actual.getSource();
+    if (source instanceof ElementSource) {
+      source = ((ElementSource) source).getDeclaringSource();
+    }
+
+    if (!source.equals(method)) {
+      failWithoutActual(Fact.fact("source", method));
+    }
+  }
+

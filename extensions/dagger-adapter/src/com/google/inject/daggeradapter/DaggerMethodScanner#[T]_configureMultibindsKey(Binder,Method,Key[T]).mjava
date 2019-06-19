@@ -1,0 +1,18 @@
+  private <T> void configureMultibindsKey(Binder binder, Method method, Key<T> key) {
+    Class<?> rawReturnType = method.getReturnType();
+    ImmutableList<? extends TypeLiteral<?>> typeParameters =
+        Arrays.stream(((ParameterizedType) method.getGenericReturnType()).getActualTypeArguments())
+            .map(TypeLiteral::get)
+            .collect(toImmutableList());
+
+    if (rawReturnType.equals(Set.class)) {
+      newSetBinder(binder, typeParameters.get(0), key.getAnnotation());
+    } else if (rawReturnType.equals(Map.class)) {
+      newMapBinder(binder, typeParameters.get(0), typeParameters.get(1), key.getAnnotation());
+    } else {
+      throw new AssertionError(
+          "@dagger.Multibinds can only be used with Sets or Map, found: "
+              + method.getGenericReturnType());
+    }
+  }
+

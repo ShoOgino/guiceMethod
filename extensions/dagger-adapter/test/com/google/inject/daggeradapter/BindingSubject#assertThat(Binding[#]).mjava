@@ -1,0 +1,4 @@
+  static BindingSubject assertThat(Binding<?> binding) {
+    return assert_().<BindingSubject, Binding<?>>about(BindingSubject::new).that(binding);
+  }
+

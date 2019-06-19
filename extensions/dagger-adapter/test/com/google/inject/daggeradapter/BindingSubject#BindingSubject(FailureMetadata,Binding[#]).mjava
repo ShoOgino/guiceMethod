@@ -1,0 +1,5 @@
+  private BindingSubject(FailureMetadata metadata, Binding<?> actual) {
+    super(metadata, actual);
+    this.actual = actual;
+  }
+

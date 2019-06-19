@@ -1,0 +1,7 @@
+  public void testBinds() {
+    Injector injector = Guice.createInjector(DaggerAdapter.from(BasicModule.class));
+    Binding<Object> binding = injector.getBinding(Object.class);
+    assertThat(binding).hasProvidedValueThat().isEqualTo("bound");
+    assertThat(binding).hasSource(BasicModule.class, "object", CharSequence.class);
+  }
+

@@ -1,0 +1,10 @@
+  private static <K, V> MapBinder<K, V> newMapBinder(
+      Binder binder,
+      TypeLiteral<K> keyType,
+      TypeLiteral<V> valueType,
+      Annotation possibleAnnotation) {
+    return possibleAnnotation == null
+        ? MapBinder.newMapBinder(binder, keyType, valueType)
+        : MapBinder.newMapBinder(binder, keyType, valueType, possibleAnnotation);
+  }
+

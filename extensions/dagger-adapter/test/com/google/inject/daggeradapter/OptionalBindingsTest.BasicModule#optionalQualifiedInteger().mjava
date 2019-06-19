@@ -1,0 +1,4 @@
+    @BindsOptionalOf
+    @TestQualifier
+    Integer optionalQualifiedInteger();
+

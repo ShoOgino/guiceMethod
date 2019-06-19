@@ -1,0 +1,6 @@
+    @Provides
+    @ProvidesQualifier
+    static String provides() {
+      return "qualifiers";
+    }
+

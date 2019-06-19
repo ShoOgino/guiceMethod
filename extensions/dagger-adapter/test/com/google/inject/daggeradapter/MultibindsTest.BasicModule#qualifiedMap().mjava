@@ -1,0 +1,4 @@
+    @Multibinds
+    @TestQualifier
+    Map<Integer, Double> qualifiedMap();
+

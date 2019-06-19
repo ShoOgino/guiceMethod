@@ -1,0 +1,6 @@
+    @Provides
+    String provider() {
+      count++;
+      return "multibound-" + count;
+    }
+

@@ -1,0 +1,7 @@
+  static Optional<Annotation> getAnnotatedAnnotation(
+      AnnotatedElement element, Class<? extends Annotation> annotationClass) {
+    return Arrays.stream(element.getAnnotations())
+        .filter(annotation -> annotation.annotationType().isAnnotationPresent(annotationClass))
+        .collect(toOptional());
+  }
+

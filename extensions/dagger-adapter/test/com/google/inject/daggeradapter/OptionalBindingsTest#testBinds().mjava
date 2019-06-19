@@ -1,0 +1,13 @@
+  public void testBinds() {
+    Injector injector = Guice.createInjector(DaggerAdapter.from(BasicModule.class));
+
+    Binding<Optional<String>> optionalBinding = injector.getBinding(new Key<Optional<String>>() {});
+    assertThat(optionalBinding).hasProvidedValueThat().isEqualTo(Optional.empty());
+    assertThat(optionalBinding).hasSource(BasicModule.class, "optionalString");
+
+    Binding<Optional<Integer>> qualifiedOptionalBinding =
+        injector.getBinding(Key.get(new TypeLiteral<Optional<Integer>>() {}, TestQualifier.class));
+    assertThat(qualifiedOptionalBinding).hasProvidedValueThat().isEqualTo(Optional.empty());
+    assertThat(qualifiedOptionalBinding).hasSource(BasicModule.class, "optionalQualifiedInteger");
+  }
+

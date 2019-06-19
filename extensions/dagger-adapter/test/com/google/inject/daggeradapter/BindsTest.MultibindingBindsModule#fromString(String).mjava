@@ -1,0 +1,4 @@
+    @Binds
+    @IntoSet
+    Object fromString(String string);
+

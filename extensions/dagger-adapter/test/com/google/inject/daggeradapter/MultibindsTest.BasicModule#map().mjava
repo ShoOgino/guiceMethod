@@ -1,0 +1,3 @@
+    @Multibinds
+    Map<Integer, Double> map();
+

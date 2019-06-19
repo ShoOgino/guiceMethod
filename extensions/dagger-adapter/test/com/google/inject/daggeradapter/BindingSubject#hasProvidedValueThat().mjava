@@ -1,0 +1,4 @@
+  Subject hasProvidedValueThat() {
+    return check("provided value").that(actual.getProvider().get());
+  }
+

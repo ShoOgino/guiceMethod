@@ -1,0 +1,6 @@
+  static Key<?> parameterKey(Parameter parameter) {
+    Optional<Annotation> qualifier = getAnnotatedAnnotation(parameter, Qualifier.class);
+    Type type = parameter.getParameterizedType();
+    return qualifier.isPresent() ? Key.get(type, qualifier.get()) : Key.get(type);
+  }
+

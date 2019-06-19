@@ -1,0 +1,4 @@
+    @Binds
+    @BindsQualifier
+    String bindsToProvides(@ProvidesQualifier String provides);
+

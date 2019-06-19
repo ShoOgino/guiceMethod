@@ -1,9 +1,5 @@
   private static <T> Key<T> processSetBinding(Binder binder, Key<T> key) {
-    Annotation annotation = key.getAnnotation();
-    Multibinder<T> setBinder =
-        (annotation != null)
-            ? Multibinder.newSetBinder(binder, key.getTypeLiteral(), annotation)
-            : Multibinder.newSetBinder(binder, key.getTypeLiteral());
+    Multibinder<T> setBinder = newSetBinder(binder, key.getTypeLiteral(), key.getAnnotation());
     Key<T> newKey = Key.get(key.getTypeLiteral(), UniqueAnnotations.create());
     setBinder.addBinding().to(newKey);
     return newKey;

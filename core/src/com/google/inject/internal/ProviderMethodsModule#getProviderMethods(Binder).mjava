@@ -1,12 +1,15 @@
   public List<ProviderMethod<?>> getProviderMethods(Binder binder) {
     List<ProviderMethod<?>> result = null;
+    List<MethodAndAnnotation> methodsAndAnnotations = null;
     // The highest class in the type hierarchy that contained a provider method definition.
     Class<?> superMostClass = getDelegateModuleClass();
     for (Class<?> c = superMostClass; c != Object.class && c != null; c = c.getSuperclass()) {
       for (Method method : DeclaredMembers.getDeclaredMethods(c)) {
         Annotation annotation = getAnnotation(binder, method);
         if (annotation != null) {
-          if (isStaticModule() && !Modifier.isStatic(method.getModifiers())) {
+          if (isStaticModule()
+              && !Modifier.isStatic(method.getModifiers())
+              && !Modifier.isAbstract(method.getModifiers())) {
             binder
                 .skipSources(ProviderMethodsModule.class)
                 .addError(
@@ -16,9 +19,15 @@
             continue;
           }
           if (result == null) {
-            result = Lists.newArrayList();
+            result = new ArrayList<>();
+            methodsAndAnnotations = new ArrayList<>();
           }
-          result.add(createProviderMethod(binder, method, annotation));
+
+          ProviderMethod<Object> providerMethod = createProviderMethod(binder, method, annotation);
+          if (providerMethod != null) {
+            result.add(providerMethod);
+          }
+          methodsAndAnnotations.add(new MethodAndAnnotation(method, annotation));
           superMostClass = c;
         }
       }
@@ -50,8 +59,10 @@
       // we have found all the signatures and now need to identify if any were overridden
       // In the worst case this will have O(n^2) in the number of @Provides methods, but that is
       // only assuming that every method is an override, in general it should be very quick.
-      for (ProviderMethod<?> provider : result) {
-        Method method = provider.getMethod();
+      for (MethodAndAnnotation methodAndAnnotation : methodsAndAnnotations) {
+        Method method = methodAndAnnotation.method;
+        Annotation annotation = methodAndAnnotation.annotation;
+
         for (Method matchingSignature :
             methodsBySignature.get(new Signature(typeLiteral, method))) {
           // matching signature is in the same class or a super class, therefore method cannot be
@@ -62,9 +73,9 @@
           // now we know matching signature is in a subtype of method.getDeclaringClass()
           if (overrides(matchingSignature, method)) {
             String annotationString =
-                provider.getAnnotation().annotationType() == Provides.class
+                annotation.annotationType() == Provides.class
                     ? "@Provides"
-                    : "@" + provider.getAnnotation().annotationType().getCanonicalName();
+                    : "@" + annotation.annotationType().getCanonicalName();
             binder.addError(
                 "Overriding "
                     + annotationString

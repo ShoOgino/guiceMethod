@@ -13,11 +13,31 @@
     } catch (Throwable t) {
       binder.addError(t);
     }
+
+    if (Modifier.isAbstract(method.getModifiers())) {
+      checkState(
+          key == null,
+          "%s returned a non-null key (%s) for %s. prepareMethod() must return null for abstract"
+              + " methods",
+          scanner,
+          key,
+          method);
+      return null;
+    } else {
+      checkState(
+          key != null,
+          "%s returned a null key for %s. prepareMethod() can only return null for abstract"
+              + " methods",
+          scanner,
+          method);
+    }
+
     Class<? extends Annotation> scopeAnnotation =
         Annotations.findScopeAnnotation(errors, method.getAnnotations());
     for (Message message : errors.getMessages()) {
       binder.addError(message);
     }
+
     return ProviderMethod.create(
         key,
         method,
