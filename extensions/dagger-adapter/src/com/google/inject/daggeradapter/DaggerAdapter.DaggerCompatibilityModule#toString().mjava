@@ -1,5 +1,5 @@
     @Override
     public String toString() {
-      return MoreObjects.toStringHelper(this).add("modules", daggerModuleObjects).toString();
+      return MoreObjects.toStringHelper(this).add("modules", declaredModules).toString();
     }
 

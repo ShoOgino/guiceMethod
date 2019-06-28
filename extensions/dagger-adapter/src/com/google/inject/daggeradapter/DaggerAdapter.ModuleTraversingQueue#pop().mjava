@@ -1,0 +1,4 @@
+    Class<?> pop() {
+      return queue.pop();
+    }
+

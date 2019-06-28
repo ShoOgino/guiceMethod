@@ -1,0 +1,4 @@
+    ImmutableList<Object> transitiveModules() {
+      return transitiveModules.build();
+    }
+

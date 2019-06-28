@@ -1,0 +1,12 @@
+  public void testConflictingModuleInstances() {
+    try {
+      Guice.createInjector(DaggerAdapter.from(new ModuleWithIdentity(), new ModuleWithIdentity()));
+      fail();
+    } catch (CreationException e) {
+      assertThat(e)
+          .hasMessageThat()
+          .contains(
+              "Duplicate module instances provided for " + ModuleWithIdentity.class.getName());
+    }
+  }
+

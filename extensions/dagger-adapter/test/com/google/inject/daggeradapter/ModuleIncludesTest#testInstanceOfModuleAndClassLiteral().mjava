@@ -1,0 +1,4 @@
+  public void testInstanceOfModuleAndClassLiteral() {
+    Guice.createInjector(DaggerAdapter.from(Deduplicated.class, new Deduplicated()));
+  }
+

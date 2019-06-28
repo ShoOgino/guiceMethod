@@ -1,0 +1,5 @@
+    @Provides
+    int i() {
+      return i++;
+    }
+

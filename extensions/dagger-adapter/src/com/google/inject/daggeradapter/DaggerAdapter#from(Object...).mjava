@@ -1,8 +1,4 @@
-  /**
-   * Returns a guice module from a dagger module.
-   *
-   * <p>Note: At present, it does not honor {@code @Module(includes=...)} directives.
-   */
+  /** Creates a new {@link DaggerAdapter} from {@code daggerModuleObjects}. */
   public static Module from(Object... daggerModuleObjects) {
     // TODO(cgruber): Gather injects=, dedupe, factor out instances, instantiate the rest, and go.
     return new DaggerCompatibilityModule(ImmutableList.copyOf(daggerModuleObjects));

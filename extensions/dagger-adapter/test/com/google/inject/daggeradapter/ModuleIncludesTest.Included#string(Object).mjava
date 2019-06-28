@@ -1,0 +1,5 @@
+    @Provides
+    static String string(Object object) {
+      return "included";
+    }
+

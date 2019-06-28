@@ -1,0 +1,4 @@
+  private static Class<?> moduleClass(Object module) {
+    return module instanceof Class ? (Class<?>) module : module.getClass();
+  }
+

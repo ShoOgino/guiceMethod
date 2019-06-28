@@ -1,0 +1,13 @@
+  // ProviderMethodsModule, which DaggerAdapter uses under the hood, de-duplicates modules that have
+  // the same Scanner instance and same delegate module. So any Class object passed to DaggerAdapter
+  // should be fine to use.
+  public void testDeduplicatedModulesFromSeparateDaggerAdapters() {
+    Injector injector =
+        Guice.createInjector(
+            DaggerAdapter.from(Includes1.class),
+            DaggerAdapter.from(Includes1.class),
+            DaggerAdapter.from(Includes2.class),
+            DaggerAdapter.from(Includes2.class));
+    assertEquals("deduplicated", injector.getInstance(String.class));
+  }
+

@@ -1,0 +1,29 @@
+    private static ImmutableList<Object> deduplicateModules(
+        Binder binder, ImmutableList<Object> transitiveModules) {
+      ImmutableList.Builder<Object> deduplicatedModules = ImmutableList.builder();
+      // Group modules by their module class to detect duplicates
+      Multimaps.index(transitiveModules, DaggerAdapter::moduleClass)
+          .asMap()
+          .forEach(
+              (moduleClass, duplicates) -> {
+                // Select all module instances (i.e. ignore Class objects) and materialize into a
+                // set so that they're deduplicated. If multiple conflicting module instances exist,
+                // an error is reported since we don't know which one to use and they may have
+                // instance state which is relevant to binding methods.
+                ImmutableSet<Object> instances =
+                    duplicates.stream()
+                        .filter(module -> !(module instanceof Class))
+                        .collect(toImmutableSet());
+                if (instances.size() > 1) {
+                  binder.addError(
+                      "Duplicate module instances provided for %s: %s", moduleClass, instances);
+                }
+
+                // Prefer module instances to module Class objects. If no instance exists, take any
+                // of `duplicates`, which should be identical since class instances are singletons
+                deduplicatedModules.add(getFirst(instances, duplicates.iterator().next()));
+              });
+
+      return deduplicatedModules.build();
+    }
+

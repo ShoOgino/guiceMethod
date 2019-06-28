@@ -1,0 +1,16 @@
+  public void testInstanceOfModuleAndClassLiteral_InstanceWins() {
+    Injector instanceModuleFirst =
+        Guice.createInjector(
+            DaggerAdapter.from(
+                new ModuleWithInstanceProvidesMethod(), ModuleWithInstanceProvidesMethod.class));
+    assertThat(instanceModuleFirst.getInstance(Integer.class)).isEqualTo(0);
+    assertThat(instanceModuleFirst.getInstance(Integer.class)).isEqualTo(1);
+
+    Injector classLiteralFirst =
+        Guice.createInjector(
+            DaggerAdapter.from(
+                ModuleWithInstanceProvidesMethod.class, new ModuleWithInstanceProvidesMethod()));
+    assertThat(classLiteralFirst.getInstance(Integer.class)).isEqualTo(0);
+    assertThat(classLiteralFirst.getInstance(Integer.class)).isEqualTo(1);
+  }
+

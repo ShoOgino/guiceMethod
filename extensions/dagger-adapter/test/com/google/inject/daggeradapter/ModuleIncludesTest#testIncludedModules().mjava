@@ -1,0 +1,5 @@
+  public void testIncludedModules() {
+    Injector injector = Guice.createInjector(DaggerAdapter.from(Declared.class, Included.class));
+    assertEquals("included", injector.getInstance(String.class));
+  }
+

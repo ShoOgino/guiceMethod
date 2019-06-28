@@ -1,0 +1,7 @@
+    void add(Object module) {
+      if (visited.add(module)) {
+        transitiveModules.add(module);
+        queue.add(moduleClass(module));
+      }
+    }
+

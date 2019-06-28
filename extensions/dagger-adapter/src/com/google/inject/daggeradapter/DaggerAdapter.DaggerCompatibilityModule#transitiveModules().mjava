@@ -1,0 +1,15 @@
+    private ImmutableList<Object> transitiveModules() {
+      ModuleTraversingQueue queue = new ModuleTraversingQueue();
+      declaredModules.forEach(queue::add);
+
+      while (!queue.isEmpty()) {
+        dagger.Module module = queue.pop().getAnnotation(dagger.Module.class);
+        if (module != null) {
+          // invalid inputs are checked separately in checkIsDaggerModule()
+          Arrays.asList(module.includes()).forEach(queue::add);
+        }
+      }
+
+      return queue.transitiveModules();
+    }
+

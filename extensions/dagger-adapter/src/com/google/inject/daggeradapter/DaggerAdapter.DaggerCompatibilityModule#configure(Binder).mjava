@@ -1,7 +1,7 @@
     @Override
     public void configure(Binder binder) {
       binder = binder.skipSources(getClass());
-      for (Object module : daggerModuleObjects) {
+      for (Object module : deduplicateModules(binder, transitiveModules())) {
         checkIsDaggerModule(module, binder);
         validateNoSubcomponents(binder, module);
         checkUnsupportedDaggerAnnotations(module, binder);
