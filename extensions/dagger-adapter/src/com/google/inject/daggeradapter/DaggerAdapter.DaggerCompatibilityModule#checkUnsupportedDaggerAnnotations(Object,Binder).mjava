@@ -1,12 +1,12 @@
     private static void checkUnsupportedDaggerAnnotations(Object module, Binder binder) {
-      for (Method method : allDeclaredMethods(module.getClass())) {
+      for (Method method : allDeclaredMethods(moduleClass(module))) {
         for (Annotation annotation : method.getAnnotations()) {
-          if (annotation.annotationType().getName().startsWith("dagger.")) {
-            if (!SUPPORTED_METHOD_ANNOTATIONS.contains(annotation.annotationType())) {
-              binder.addError(
-                  "%s is annotated with @%s which is not supported by DaggerAdapter",
-                  method, annotation.annotationType().getCanonicalName());
-            }
+          Class<? extends Annotation> annotationClass = annotation.annotationType();
+          if (annotationClass.getName().startsWith("dagger.")
+              && !allSupportedAnnotations().contains(annotationClass)) {
+            binder.addError(
+                "%s is annotated with @%s which is not supported by DaggerAdapter",
+                method, annotationClass.getCanonicalName());
           }
         }
       }

@@ -1,4 +1,4 @@
-    private static Iterable<Method> allDeclaredMethods(Class<?> clazz) {
+    private static ImmutableList<Method> allDeclaredMethods(Class<?> clazz) {
       ImmutableList.Builder<Method> methods = ImmutableList.builder();
       for (Class<?> current = clazz; current != null; current = current.getSuperclass()) {
         methods.add(current.getDeclaredMethods());

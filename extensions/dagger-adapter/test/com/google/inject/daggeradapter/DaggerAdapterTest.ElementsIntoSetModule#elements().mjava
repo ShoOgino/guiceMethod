@@ -1,0 +1,6 @@
+    @dagger.Provides
+    @ElementsIntoSet
+    static Set<Integer> elements() {
+      return ImmutableSet.of();
+    }
+

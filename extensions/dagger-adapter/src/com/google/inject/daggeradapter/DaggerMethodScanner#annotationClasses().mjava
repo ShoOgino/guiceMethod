@@ -1,5 +1,5 @@
   @Override
-  public Set<? extends Class<? extends Annotation>> annotationClasses() {
-    return ANNOTATIONS;
+  public ImmutableSet<Class<? extends Annotation>> annotationClasses() {
+    return supportedBindingAnnotations();
   }
 

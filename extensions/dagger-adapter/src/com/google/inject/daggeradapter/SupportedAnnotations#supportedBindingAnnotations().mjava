@@ -1,0 +1,5 @@
+  /** Returns all binding annotations supported by {@link DaggerAdapter}. */
+  static ImmutableSet<Class<? extends Annotation>> supportedBindingAnnotations() {
+    return BINDING_ANNOTATIONS;
+  }
+
