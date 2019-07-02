@@ -3,6 +3,24 @@
       Guice.createInjector(DaggerAdapter.from(new UnsupportedAnnotationModule()));
       fail();
     } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains(
+              "noGuiceEquivalentForElementsIntoSet() is annotated with"
+                  + " @dagger.multibindings.ElementsIntoSet which is not supported by"
+                  + " DaggerAdapter");
+    }
+
+    try {
+      Guice.createInjector(DaggerAdapter.from(UnsupportedAnnotationStaticModule.class));
+      fail();
+    } catch (CreationException expected) {
+      assertThat(expected)
+          .hasMessageThat()
+          .contains(
+              "noGuiceEquivalentForElementsIntoSet() is annotated with"
+                  + " @dagger.multibindings.ElementsIntoSet which is not supported by"
+                  + " DaggerAdapter");
     }
   }
 

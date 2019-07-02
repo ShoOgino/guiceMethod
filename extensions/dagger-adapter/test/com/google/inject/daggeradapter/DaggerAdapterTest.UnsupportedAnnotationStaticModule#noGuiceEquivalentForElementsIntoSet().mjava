@@ -1,6 +1,6 @@
     @dagger.Provides
     @ElementsIntoSet
-    static Set<Integer> elements() {
+    static Set<Object> noGuiceEquivalentForElementsIntoSet() {
       return ImmutableSet.of();
     }
 
