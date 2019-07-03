@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoMap
+    @Wrapped(i = 2, l = 2, defaultValue = "2")
+    int twos() {
+      return 2;
+    }
+

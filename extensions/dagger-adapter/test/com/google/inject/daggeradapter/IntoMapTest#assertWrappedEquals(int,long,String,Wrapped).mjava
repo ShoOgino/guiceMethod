@@ -1,0 +1,6 @@
+  private static void assertWrappedEquals(int i, long l, String defaultValue, Wrapped actual) {
+    assertEquals(i, actual.i());
+    assertEquals(l, actual.l());
+    assertEquals(defaultValue, actual.defaultValue());
+  }
+

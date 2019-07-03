@@ -1,0 +1,7 @@
+    // We can't verify the compatibility of the type arguments here, but by definition they must be
+    // aligned
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    static <K> MapKeyData<K> create(TypeLiteral<?> typeLiteral, Object key) {
+      return new MapKeyData(typeLiteral, key);
+    }
+

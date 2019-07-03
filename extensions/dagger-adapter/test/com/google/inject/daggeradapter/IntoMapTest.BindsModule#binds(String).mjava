@@ -1,0 +1,5 @@
+    @Binds
+    @IntoMap
+    @StringKey("hello")
+    Object binds(String value);
+

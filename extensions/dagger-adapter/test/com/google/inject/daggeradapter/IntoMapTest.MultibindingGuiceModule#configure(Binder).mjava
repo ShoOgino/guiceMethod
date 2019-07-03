@@ -1,0 +1,7 @@
+    @Override
+    public void configure(Binder binder) {
+      MapBinder<String, Integer> mb = MapBinder.newMapBinder(binder, String.class, Integer.class);
+      mb.addBinding("guice-zero").toInstance(0);
+      mb.addBinding("guice-provider-2").toProvider(Providers.of(2)); // mix'n'match.
+    }
+

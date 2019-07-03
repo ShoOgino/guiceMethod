@@ -1,0 +1,9 @@
+  public void testMapBindings() {
+    Injector injector =
+        Guice.createInjector(
+            DaggerAdapter.from(new MapBindingDaggerModule1(), new MapBindingDaggerModule2()));
+    assertEquals(
+        ImmutableMap.of("five", 5, "ten", 10, "twenty", 20),
+        injector.getInstance(new Key<Map<String, Integer>>() {}));
+  }
+

@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoMap
+    @StringKey("five")
+    Integer boxedPrimitive() {
+      return 5;
+    }
+

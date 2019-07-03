@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoMap
+    @StringKey("ten")
+    int primitive() {
+      return 10;
+    }
+

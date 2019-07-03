@@ -1,0 +1,19 @@
+  private static <K> MapKeyData<K> mapKeyData(Method method) {
+    Annotation mapKey = getAnnotatedAnnotation(method, dagger.MapKey.class).get();
+    dagger.MapKey mapKeyDefinition = mapKey.annotationType().getAnnotation(dagger.MapKey.class);
+    if (!mapKeyDefinition.unwrapValue()) {
+      return MapKeyData.create(TypeLiteral.get(mapKey.annotationType()), mapKey);
+    }
+
+    Method mapKeyValueMethod =
+        getOnlyElement(Arrays.asList(mapKey.annotationType().getDeclaredMethods()));
+    Object mapKeyValue;
+    try {
+      mapKeyValue = mapKeyValueMethod.invoke(mapKey);
+    } catch (ReflectiveOperationException e) {
+      throw new UnsupportedOperationException("Cannot extract map key value", e);
+    }
+    return MapKeyData.create(
+        TypeLiteral.get(mapKeyValueMethod.getGenericReturnType()), mapKeyValue);
+  }
+

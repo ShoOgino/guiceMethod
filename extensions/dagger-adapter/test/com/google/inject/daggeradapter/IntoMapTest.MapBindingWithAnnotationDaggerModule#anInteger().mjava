@@ -1,0 +1,8 @@
+    @dagger.Provides
+    @IntoMap
+    @StringKey("qualified")
+    @AnnotationOnMap
+    Integer anInteger() {
+      return 4;
+    }
+

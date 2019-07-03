@@ -1,5 +1,0 @@
-  /** Returns all annotations from dagger packages that are supported by {@link DaggerAdapter}. */
-  static ImmutableSet<Class<? extends Annotation>> allSupportedAnnotations() {
-    return ALL_SUPPORTED_ANNOTATIONS;
-  }
-

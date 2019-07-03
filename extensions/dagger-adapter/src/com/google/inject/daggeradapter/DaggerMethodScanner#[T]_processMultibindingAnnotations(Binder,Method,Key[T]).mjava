@@ -1,5 +1,10 @@
   private static <T> Key<T> processMultibindingAnnotations(
       Binder binder, Method method, Key<T> key) {
-    return method.isAnnotationPresent(IntoSet.class) ? processSetBinding(binder, key) : key;
+    if (method.isAnnotationPresent(IntoSet.class)) {
+      return processSetBinding(binder, key);
+    } else if (method.isAnnotationPresent(IntoMap.class)) {
+      return processMapBinding(binder, key, method);
+    }
+    return key;
   }
 

@@ -1,0 +1,5 @@
+    MapKeyData(TypeLiteral<K> typeLiteral, K key) {
+      this.typeLiteral = typeLiteral;
+      this.key = key;
+    }
+

@@ -1,0 +1,11 @@
+  /**
+   * Returns true if {@code annotation} is in a dagger package and is supported by {@link
+   * DaggerAdapter}.
+   */
+  static boolean isAnnotationSupported(Class<? extends Annotation> annotation) {
+    if (ALL_SUPPORTED_ANNOTATIONS.contains(annotation)) {
+      return true;
+    }
+    return annotation.isAnnotationPresent(MapKey.class);
+  }
+

@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoMap
+    @Wrapped(i = 0, l = 0)
+    int defaultValue() {
+      return 0;
+    }
+

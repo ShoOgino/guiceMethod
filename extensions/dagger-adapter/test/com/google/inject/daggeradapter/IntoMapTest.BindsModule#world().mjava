@@ -1,0 +1,5 @@
+    @dagger.Provides
+    static String world() {
+      return "world";
+    }
+

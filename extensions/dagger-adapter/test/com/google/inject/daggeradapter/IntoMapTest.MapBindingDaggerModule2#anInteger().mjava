@@ -1,0 +1,7 @@
+    @dagger.Provides
+    @IntoMap
+    @StringKey("twenty")
+    Integer anInteger() {
+      return 20;
+    }
+

@@ -3,7 +3,7 @@
         for (Annotation annotation : method.getAnnotations()) {
           Class<? extends Annotation> annotationClass = annotation.annotationType();
           if (annotationClass.getName().startsWith("dagger.")
-              && !allSupportedAnnotations().contains(annotationClass)) {
+              && !isAnnotationSupported(annotationClass)) {
             binder.addError(
                 "%s is annotated with @%s which is not supported by DaggerAdapter",
                 method, annotationClass.getCanonicalName());

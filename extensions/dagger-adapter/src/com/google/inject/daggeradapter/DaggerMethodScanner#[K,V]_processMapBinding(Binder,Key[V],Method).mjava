@@ -1,0 +1,10 @@
+  private static <K, V> Key<V> processMapBinding(Binder binder, Key<V> key, Method method) {
+    MapKeyData<K> mapKeyData = mapKeyData(method);
+    MapBinder<K, V> mapBinder =
+        newMapBinder(binder, mapKeyData.typeLiteral, key.getTypeLiteral(), key.getAnnotation());
+
+    Key<V> contributionKey = Key.get(key.getTypeLiteral(), UniqueAnnotations.create());
+    mapBinder.addBinding(mapKeyData.key).to(contributionKey);
+    return contributionKey;
+  }
+
