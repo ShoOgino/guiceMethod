@@ -3,6 +3,6 @@
         Guice.createInjector(
             new MultibindingGuiceModule(),
             DaggerAdapter.from(new SetBindingDaggerModule1(), new SetBindingDaggerModule2()));
-    assertEquals(ImmutableSet.of(13, 3, 5, 8), i.getInstance(new Key<Set<Integer>>() {}));
+    assertThat(i.getInstance(new Key<Set<Integer>>() {})).isEqualTo(ImmutableSet.of(13, 3, 5, 8));
   }
 

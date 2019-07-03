@@ -1,6 +1,6 @@
   public void testBinds() {
     Injector injector = Guice.createInjector(DaggerAdapter.from(BindsModule.class));
     Map<String, Object> map = injector.getInstance(new Key<Map<String, Object>>() {});
-    assertEquals(ImmutableMap.of("hello", "world"), map);
+    assertThat(map).containsExactly("hello", "world");
   }
 

@@ -1,7 +1,7 @@
   public void testWrappedMapKeys() {
     Injector injector = Guice.createInjector(DaggerAdapter.from(new WrappedMapKeyModule()));
     Map<Wrapped, Integer> map = injector.getInstance(new Key<Map<Wrapped, Integer>>() {});
-    assertEquals(3, map.size());
+    assertThat(map).hasSize(3);
     map.forEach((key, value) -> {
       if (value == 0) {
         assertWrappedEquals(0, 0, "", key);

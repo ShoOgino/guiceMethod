@@ -2,6 +2,6 @@
     Injector injector =
         Guice.createInjector(DaggerAdapter.from(StaticProvidesMethodsInterface.class));
     String staticProvision = injector.getInstance(String.class);
-    assertEquals("interface", staticProvision);
+    assertThat(staticProvision).isEqualTo("interface");
   }
 

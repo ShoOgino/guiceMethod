@@ -3,8 +3,8 @@
         Guice.createInjector(
             new MultibindingGuiceModule(),
             DaggerAdapter.from(new MapBindingDaggerModule1(), new MapBindingDaggerModule2()));
-    assertEquals(
-        ImmutableMap.of("five", 5, "ten", 10, "twenty", 20, "guice-zero", 0, "guice-provider-2", 2),
-        injector.getInstance(new Key<Map<String, Integer>>() {}));
+    assertThat(injector.getInstance(new Key<Map<String, Integer>>() {}))
+        .containsExactly(
+            "five", 5, "ten", 10, "twenty", 20, "guice-zero", 0, "guice-provider-2", 2);
   }
 

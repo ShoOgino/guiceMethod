@@ -1,6 +1,6 @@
   public void testInteractionWithGuiceModules() {
     Injector i =
         Guice.createInjector(new SimpleGuiceModule(), DaggerAdapter.from(new SimpleDaggerModule()));
-    assertEquals("1", i.getInstance(String.class));
+    assertThat(i.getInstance(String.class)).isEqualTo("1");
   }
 

@@ -1,9 +1,9 @@
   public void testMapBindingsWithAnnotation() {
     Injector injector =
         Guice.createInjector(DaggerAdapter.from(new MapBindingWithAnnotationDaggerModule()));
-    assertEquals(
-        ImmutableMap.of("qualified", 4),
-        injector.getInstance(
-            Key.get(new TypeLiteral<Map<String, Integer>>() {}, AnnotationOnMap.class)));
+    assertThat(
+            injector.getInstance(
+                Key.get(new TypeLiteral<Map<String, Integer>>() {}, AnnotationOnMap.class)))
+        .containsExactly("qualified", 4);
   }
 

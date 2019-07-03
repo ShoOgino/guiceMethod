@@ -8,6 +8,6 @@
             DaggerAdapter.from(Includes1.class),
             DaggerAdapter.from(Includes2.class),
             DaggerAdapter.from(Includes2.class));
-    assertEquals("deduplicated", injector.getInstance(String.class));
+    assertThat(injector.getInstance(String.class)).isEqualTo("deduplicated");
   }
 
