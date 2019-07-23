@@ -1,4 +1,4 @@
-  /** Gets the annotation type. */
+  /** Gets the annotation type. Will be {@code null} if this key lacks an annotation. */
   public final Class<? extends Annotation> getAnnotationType() {
     return annotationStrategy.getAnnotationType();
   }
