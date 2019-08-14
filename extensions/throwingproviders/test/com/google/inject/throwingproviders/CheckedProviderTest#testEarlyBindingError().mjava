@@ -11,12 +11,11 @@
           });
       fail();
     } catch (CreationException ce) {
-      assertEquals(
-          "Could not find a suitable constructor in "
+      assertContains(
+          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage(),
+          "No implementation for "
               + FailingProvider.class.getName()
-              + ". Classes must have either one (and only one) constructor annotated with @Inject"
-              + " or a zero-argument constructor that is not private.",
-          Iterables.getOnlyElement(ce.getErrorMessages()).getMessage());
+              + " (with no qualifier annotation) was bound");
     }
   }
 

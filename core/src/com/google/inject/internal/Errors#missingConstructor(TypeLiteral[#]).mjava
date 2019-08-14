@@ -1,0 +1,13 @@
+  public Errors missingConstructor(TypeLiteral<?> type) {
+    // Don't bother including the type in the message twice, unless the type is generic (i.e. the
+    // type has generics that the raw class loses)
+    String typeString = type.toString();
+    String rawTypeString = getRawType(type.getType()).getName();
+    return addMessage(
+        "No implementation for %s (with no qualifier annotation) was bound, and could not find an"
+            + " injectable constructor%s. %s",
+        typeString,
+        typeString.equals(rawTypeString) ? "" : " in " + rawTypeString,
+        CONSTRUCTOR_RULES);
+  }
+

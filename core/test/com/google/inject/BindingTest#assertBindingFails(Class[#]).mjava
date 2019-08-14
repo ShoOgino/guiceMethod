@@ -3,8 +3,12 @@
       Guice.createInjector().getInstance(clazz);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
-          "Could not find a suitable constructor in " + PrivateNoArg.class.getName(),
+      assertContains(
+          expected.getMessage(),
+          "No implementation for "
+              + PrivateNoArg.class.getName()
+              + " (with no qualifier annotation) was bound, and could not find an injectable"
+              + " constructor",
           "at " + PrivateNoArg.class.getName() + ".class(BindingTest.java:");
     }
   }

@@ -3,9 +3,11 @@
       Guice.createInjector().getInstance(TooManyConstructors.class);
       fail();
     } catch (ConfigurationException expected) {
-      assertContains(expected.getMessage(),
-          TooManyConstructors.class.getName() + " has more than one constructor annotated with " 
-              + "@Inject. Classes must have either one (and only one) constructor",
+      assertContains(
+          expected.getMessage(),
+          TooManyConstructors.class.getName()
+              + " has more than one constructor annotated with "
+              + "@Inject. Injectable classes must have either one (and only one) constructor",
           "at " + TooManyConstructors.class.getName() + ".class(BindingTest.java:");
     }
   }
