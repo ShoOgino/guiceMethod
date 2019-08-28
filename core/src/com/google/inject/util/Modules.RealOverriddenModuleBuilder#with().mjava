@@ -1,0 +1,5 @@
+    @Override
+    public Module with() {
+      return with(Arrays.asList());
+    }
+

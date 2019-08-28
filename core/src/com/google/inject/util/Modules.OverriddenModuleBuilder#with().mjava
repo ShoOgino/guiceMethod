@@ -1,0 +1,4 @@
+    /** @deprecated there's no reason to use {@code .with()} without any arguments. */
+    @Deprecated
+    public Module with();
+

@@ -1,0 +1,6 @@
+  /** @deprecated there's no need to "combine" one module; just install it directly. */
+  @Deprecated
+  public static Module combine(Module module) {
+    return module;
+  }
+

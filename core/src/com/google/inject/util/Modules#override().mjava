@@ -1,0 +1,6 @@
+  /** @deprecated there's no reason to use {@code Modules.override()} without any arguments. */
+  @Deprecated
+  public static OverriddenModuleBuilder override() {
+    return override(Arrays.asList());
+  }
+

@@ -1,0 +1,6 @@
+  /** @deprecated this method call is effectively a no-op, just remove it. */
+  @Deprecated
+  public static Module combine() {
+    return EMPTY_MODULE;
+  }
+

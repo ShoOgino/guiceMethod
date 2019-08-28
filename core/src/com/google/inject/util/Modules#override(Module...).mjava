@@ -16,6 +16,6 @@
    * @param modules the modules whose bindings are open to be overridden
    */
   public static OverriddenModuleBuilder override(Module... modules) {
-    return new RealOverriddenModuleBuilder(Arrays.asList(modules));
+    return override(Arrays.asList(modules));
   }
 

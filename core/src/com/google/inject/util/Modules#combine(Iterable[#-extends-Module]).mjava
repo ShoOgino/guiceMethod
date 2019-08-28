@@ -1,4 +1,10 @@
-  /** Returns a new module that installs all of {@code modules}. */
+  /**
+   * Returns a new module that installs all of {@code modules}.
+   *
+   * <p>Although sometimes helpful, this method is rarely necessary. Most Guice APIs accept multiple
+   * arguments or (like {@code install()}) can be called repeatedly. Where possible, external APIs
+   * that require a single module should similarly be adapted to permit multiple modules.
+   */
   public static Module combine(Iterable<? extends Module> modules) {
     return new CombinedModule(modules);
   }
