@@ -73,11 +73,10 @@
 
             // Don't do extra work unless we need to
             if (permitsDuplicates) {
-              // Create a set builder for this key if it's the first time we've seen it
-              bindingMultimapMutable.computeIfAbsent(key, k -> ImmutableSet.builder());
-
-              // Add the Binding<V>
-              bindingMultimapMutable.get(key).add(valueBinding);
+              // Add the binding, creating a set builder if it's the first time we've seen it
+              bindingMultimapMutable
+                  .computeIfAbsent(key, k -> ImmutableSet.builder())
+                  .add(valueBinding);
             }
           }
         }

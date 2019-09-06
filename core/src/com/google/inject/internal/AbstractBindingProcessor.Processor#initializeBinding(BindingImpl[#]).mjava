@@ -1,0 +1,8 @@
+    private void initializeBinding(BindingImpl<?> binding) {
+      try {
+        binding.getInjector().initializeBinding(binding, errors.withSource(source));
+      } catch (ErrorsException e) {
+        errors.merge(e.getErrors());
+      }
+    }
+

@@ -3,6 +3,6 @@
      * initialially processed.
      */
     protected void scheduleInitialization(BindingImpl<?> binding) {
-      bindingData.addUninitializedBinding(asRunnable(binding));
+      bindingData.addUninitializedBinding(() -> initializeBinding(binding));
     }
 

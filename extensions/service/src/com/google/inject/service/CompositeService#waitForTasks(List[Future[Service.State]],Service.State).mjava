@@ -1,0 +1,16 @@
+  private Service.State waitForTasks(List<Future<Service.State>> tasks, Service.State state) {
+    boolean ok = true;
+    for (Future<Service.State> task : tasks) {
+      try {
+        ok = state == task.get();
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+        return compositeState = Service.State.FAILED;
+      } catch (ExecutionException e) {
+        return compositeState = Service.State.FAILED;
+      }
+    }
+
+    return compositeState = ok ? state : Service.State.FAILED;
+  }
+

@@ -7,13 +7,13 @@
 
         if (first) {
           first = false;
-          sb.append("\"" + dupKey + "\", from bindings:\n");
+          sb.append("\"").append(dupKey).append("\", from bindings:\n");
         } else {
-          sb.append("\n and key: \"" + dupKey + "\", from bindings:\n");
+          sb.append("\n and key: \"").append(dupKey).append("\", from bindings:\n");
         }
 
         for (Binding<V> dup : entry.getValue()) {
-          sb.append("\t at " + Errors.convert(dup.getSource()) + "\n");
+          sb.append("\t at ").append(Errors.convert(dup.getSource())).append("\n");
         }
       }
 

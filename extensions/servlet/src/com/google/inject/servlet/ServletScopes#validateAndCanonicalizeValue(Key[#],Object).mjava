@@ -7,16 +7,12 @@
       return NullObject.INSTANCE;
     }
 
-    if (!key.getTypeLiteral().getRawType().isInstance(object)) {
-      throw new IllegalArgumentException(
-          "Value["
-              + object
-              + "] of type["
-              + object.getClass().getName()
-              + "] is not compatible with key["
-              + key
-              + "]");
-    }
+    Preconditions.checkArgument(
+        key.getTypeLiteral().getRawType().isInstance(object),
+        "Value[%s] of type[%s] is not compatible with key[%s]",
+        object,
+        object.getClass().getName(),
+        key);
 
     return object;
   }
