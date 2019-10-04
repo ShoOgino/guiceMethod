@@ -1,0 +1,5 @@
+  /** Returns a module that will configure the injector to require explicit bindings. */
+  public static Module requireExplicitBindingsModule() {
+    return new RequireExplicitBindingsModule();
+  }
+

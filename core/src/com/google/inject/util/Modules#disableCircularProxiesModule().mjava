@@ -1,0 +1,5 @@
+  /** Returns a module that will configure the injector to disable circular proxies. */
+  public static Module disableCircularProxiesModule() {
+    return new DisableCircularProxiesModule();
+  }
+

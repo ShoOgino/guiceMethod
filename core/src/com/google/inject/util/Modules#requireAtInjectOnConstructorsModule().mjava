@@ -1,0 +1,10 @@
+  /**
+   * Returns a module that will configure the injector to require {@literal @}{@link Inject} on
+   * constructors.
+   *
+   * @see Binder#requireAtInjectOnConstructors
+   */
+  public static Module requireAtInjectOnConstructorsModule() {
+    return new RequireAtInjectOnConstructorsModule();
+  }
+

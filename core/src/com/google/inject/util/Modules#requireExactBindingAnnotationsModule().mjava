@@ -1,0 +1,10 @@
+  /**
+   * Returns a module that will configure the injector to require an exactly matching binding
+   * annotation.
+   *
+   * @see Binder#requireExactBindingAnnotations
+   */
+  public static Module requireExactBindingAnnotationsModule() {
+    return new RequireExactBindingAnnotationsModule();
+  }
+

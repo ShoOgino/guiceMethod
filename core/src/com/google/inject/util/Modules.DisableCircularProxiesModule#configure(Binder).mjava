@@ -1,0 +1,5 @@
+    @Override
+    public void configure(Binder binder) {
+      binder.disableCircularProxies();
+    }
+
