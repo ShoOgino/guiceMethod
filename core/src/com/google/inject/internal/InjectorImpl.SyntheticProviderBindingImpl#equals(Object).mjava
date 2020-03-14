@@ -1,7 +1,7 @@
     @Override
     public boolean equals(Object obj) {
-      if (obj instanceof ProviderBindingImpl) {
-        ProviderBindingImpl<?> o = (ProviderBindingImpl<?>) obj;
+      if (obj instanceof SyntheticProviderBindingImpl) {
+        SyntheticProviderBindingImpl<?> o = (SyntheticProviderBindingImpl<?>) obj;
         return getKey().equals(o.getKey())
             && getScoping().equals(o.getScoping())
             && Objects.equal(providedBinding, o.providedBinding);

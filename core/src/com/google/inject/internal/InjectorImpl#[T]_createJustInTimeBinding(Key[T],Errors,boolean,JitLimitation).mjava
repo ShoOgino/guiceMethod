@@ -29,9 +29,9 @@
     // Handle cases where T is a Provider<?>.
     if (isProvider(key)) {
       // These casts are safe. We know T extends Provider<X> and that given Key<Provider<X>>,
-      // createProviderBinding() will return BindingImpl<Provider<X>>.
+      // createSyntheticProviderBinding() will return BindingImpl<Provider<X>>.
       @SuppressWarnings({"unchecked", "cast"})
-      BindingImpl<T> binding = (BindingImpl<T>) createProviderBinding((Key) key, errors);
+      BindingImpl<T> binding = (BindingImpl<T>) createSyntheticProviderBinding((Key) key, errors);
       return binding;
     }
 

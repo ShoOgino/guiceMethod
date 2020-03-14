@@ -1,0 +1,11 @@
+  /**
+   * Creates a synthetic binding to {@code Provider<T>}, i.e. a framework-created JIT binding to the
+   * provider from {@code Binding<T>}.
+   */
+  private <T> BindingImpl<Provider<T>> createSyntheticProviderBinding(
+      Key<Provider<T>> key, Errors errors) throws ErrorsException {
+    Key<T> providedKey = getProvidedKey(key, errors);
+    BindingImpl<T> delegate = getBindingOrThrow(providedKey, errors, JitLimitation.NO_JIT);
+    return new SyntheticProviderBindingImpl<T>(this, key, delegate);
+  }
+
