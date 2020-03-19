@@ -1,4 +1,8 @@
-  /** Returns a module that will configure the injector to require explicit bindings. */
+  /**
+   * Returns a module that will configure the injector to require explicit bindings.
+   *
+   * @since 4.2.3
+   */
   public static Module requireExplicitBindingsModule() {
     return new RequireExplicitBindingsModule();
   }

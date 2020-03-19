@@ -2,6 +2,7 @@
    * Returns a module that will configure the injector to require {@literal @}{@link Inject} on
    * constructors.
    *
+   * @since 4.2.3
    * @see Binder#requireAtInjectOnConstructors
    */
   public static Module requireAtInjectOnConstructorsModule() {

@@ -2,6 +2,7 @@
    * Returns a module that will configure the injector to require an exactly matching binding
    * annotation.
    *
+   * @since 4.2.3
    * @see Binder#requireExactBindingAnnotations
    */
   public static Module requireExactBindingAnnotationsModule() {
