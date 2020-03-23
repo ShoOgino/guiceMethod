@@ -2,6 +2,9 @@
   public <T> Key<T> prepareMethod(
       Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
     Method method = (Method) injectionPoint.getMember();
+    if (!predicate.apply(method)) {
+      return null;
+    }
     Class<? extends Annotation> annotationType = annotation.annotationType();
     if (annotationType.equals(Provides.class)) {
       return prepareProvidesKey(binder, method, key);

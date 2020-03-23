@@ -1,0 +1,5 @@
+    /** Returns a module that will configure bindings based on the modules & scanners. */
+    public Module build() {
+      return new DaggerCompatibilityModule(this);
+    }
+

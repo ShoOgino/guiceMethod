@@ -1,0 +1,6 @@
+    @TestProvides
+    @Override
+    boolean booleanTest() {
+      return true;
+    }
+

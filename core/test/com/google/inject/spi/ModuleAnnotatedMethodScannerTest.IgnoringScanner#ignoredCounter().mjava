@@ -1,0 +1,4 @@
+    int ignoredCounter() {
+      return ignoredCounter;
+    }
+

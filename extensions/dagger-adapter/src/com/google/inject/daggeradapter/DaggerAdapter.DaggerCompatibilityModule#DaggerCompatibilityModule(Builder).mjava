@@ -1,0 +1,5 @@
+    private DaggerCompatibilityModule(Builder builder) {
+      this.declaredModules = builder.modules.build();
+      this.predicate = builder.predicate;
+    }
+

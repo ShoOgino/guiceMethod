@@ -1,0 +1,4 @@
+  static DaggerMethodScanner create(Predicate<Method> predicate) {
+    return new DaggerMethodScanner(predicate);
+  }
+

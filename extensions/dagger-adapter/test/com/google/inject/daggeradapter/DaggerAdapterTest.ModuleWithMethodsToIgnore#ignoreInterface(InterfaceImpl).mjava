@@ -1,0 +1,3 @@
+    @Binds
+    abstract Inerface ignoreInterface(InterfaceImpl impl);
+

@@ -1,0 +1,37 @@
+  public void testFilteringMethods() {
+    Module filteredModule =
+        DaggerAdapter.builder()
+            .addModules(ImmutableList.of(ModuleWithMethodsToIgnore.class))
+            .filter(
+                new Predicate<Method>() {
+                  @Override
+                  public boolean apply(Method method) {
+                    return !method.getName().startsWith("ignore");
+                  }
+                })
+            .build();
+    Injector filteredInjector = Guice.createInjector(filteredModule);
+    assertThat(filteredInjector.getInstance(String.class)).isEqualTo("class");
+    try {
+      filteredInjector.getInstance(Integer.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      //
+    }
+    try {
+      filteredInjector.getInstance(ModuleWithMethodsToIgnore.Inerface.class);
+      fail();
+    } catch (ConfigurationException expected) {
+      //
+    }
+    Module unfilteredModule =
+        DaggerAdapter.builder()
+            .addModules(ImmutableList.of(ModuleWithMethodsToIgnore.class))
+            .build();
+    Injector unfilteredInjector = Guice.createInjector(unfilteredModule);
+    assertThat(unfilteredInjector.getInstance(String.class)).isEqualTo("class");
+    assertThat(unfilteredInjector.getInstance(Integer.class)).isEqualTo(Integer.valueOf(0));
+    assertThat(unfilteredInjector.getInstance(ModuleWithMethodsToIgnore.Inerface.class).string())
+        .isEqualTo("class");
+  }
+

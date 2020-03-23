@@ -1,0 +1,4 @@
+    IgnoringScanner(Class<?> classToIgnore) {
+      this.classToIgnore = classToIgnore;
+    }
+

@@ -1,0 +1,5 @@
+    @TestProvides
+    boolean booleanTest() {
+      return true;
+    }
+

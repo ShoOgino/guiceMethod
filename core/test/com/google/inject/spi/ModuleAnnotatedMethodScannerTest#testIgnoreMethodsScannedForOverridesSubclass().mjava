@@ -1,0 +1,14 @@
+  public void testIgnoreMethodsScannedForOverridesSubclass() {
+    IgnoringScanner scanner = new IgnoringScanner(Subclass.class);
+    try {
+      Guice.createInjector(ProviderMethodsModule.forModule(new Subclass(), scanner));
+      fail("expected exception not thrown");
+    } catch (CreationException e) {
+      assertContains(
+          e.getMessage(),
+          String.format(
+              "Overriding @%s methods is not allowed", TestProvides.class.getCanonicalName()));
+    }
+    assertEquals(1, scanner.ignoredCounter()); // checking that there was a method ignored.
+  }
+

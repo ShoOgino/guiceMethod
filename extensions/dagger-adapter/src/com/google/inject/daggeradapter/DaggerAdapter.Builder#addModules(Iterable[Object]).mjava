@@ -1,0 +1,9 @@
+    /**
+     * Adds modules (which can be classes annotated with {@link dagger.Module}, or instances of
+     * those classes) which will be scanned for bindings.
+     */
+    public Builder addModules(Iterable<Object> daggerModuleObjects) {
+      this.modules.addAll(daggerModuleObjects);
+      return this;
+    }
+

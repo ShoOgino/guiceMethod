@@ -1,5 +1,5 @@
   @Override
   public int hashCode() {
-    return delegate.hashCode();
+    return Objects.hashCode(delegate, scanner);
   }
 

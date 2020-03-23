@@ -23,13 +23,10 @@
           key,
           method);
       return null;
-    } else {
-      checkState(
-          key != null,
-          "%s returned a null key for %s. prepareMethod() can only return null for abstract"
-              + " methods",
-          scanner,
-          method);
+    }
+
+    if (key == null) { // scanner returned null. Skipping the binding.
+      return null;
     }
 
     Class<? extends Annotation> scopeAnnotation =

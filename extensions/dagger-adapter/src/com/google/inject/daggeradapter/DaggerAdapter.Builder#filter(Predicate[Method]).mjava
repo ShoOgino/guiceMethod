@@ -1,0 +1,9 @@
+    /**
+     * Limit the adapter to a subset of {@code methods} from {@link @dagger.Module} annotated
+     * classes which satisfy the {@code predicate}. Defaults to allowing all.
+     */
+    public Builder filter(Predicate<Method> predicate) {
+      this.predicate = checkNotNull(predicate, "predicate");
+      return this;
+    }
+

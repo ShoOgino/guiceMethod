@@ -1,0 +1,4 @@
+  private DaggerMethodScanner(Predicate<Method> predicate) {
+    this.predicate = predicate;
+  }
+

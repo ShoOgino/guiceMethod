@@ -1,5 +1,5 @@
   /** Creates a new {@link DaggerAdapter} from {@code daggerModuleObjects}. */
   public static Module from(Object... daggerModuleObjects) {
-    return new DaggerCompatibilityModule(ImmutableList.copyOf(daggerModuleObjects));
+    return builder().addModules(ImmutableList.copyOf(daggerModuleObjects)).build();
   }
 

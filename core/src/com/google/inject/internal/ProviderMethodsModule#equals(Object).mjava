@@ -2,6 +2,6 @@
   public boolean equals(Object o) {
     return o instanceof ProviderMethodsModule
         && ((ProviderMethodsModule) o).delegate == delegate
-        && ((ProviderMethodsModule) o).scanner == scanner;
+        && ((ProviderMethodsModule) o).scanner.equals(scanner);
   }
 
