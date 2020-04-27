@@ -1,0 +1,9 @@
+  public void testDeduplicateProviderMethodsBindings_differentInstances() {
+    try {
+      Guice.createInjector(Stage.PRODUCTION, new DeduplicateModule(), new DeduplicateModule());
+      fail();
+    } catch (CreationException expected) {
+      assertContains(expected.getMessage(), "A binding to java.lang.String was already configured");
+    }
+  }
+

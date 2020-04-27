@@ -1,0 +1,5 @@
+  public void testDeduplicateProviderMethodsBindings_differentInstances_staticMethod() {
+    Guice.createInjector(
+        Stage.PRODUCTION, new DeduplicateStaticModule(), new DeduplicateStaticModule());
+  }
+

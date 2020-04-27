@@ -1,0 +1,5 @@
+  public void testDeduplicateProviderMethodsBindings_sameInstance() {
+    Module module = new DeduplicateModule();
+    Guice.createInjector(Stage.PRODUCTION, module, module);
+  }
+

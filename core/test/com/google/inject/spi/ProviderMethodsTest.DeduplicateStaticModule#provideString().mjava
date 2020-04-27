@@ -1,0 +1,5 @@
+    @Provides
+    static String provideString() {
+      return "";
+    }
+
