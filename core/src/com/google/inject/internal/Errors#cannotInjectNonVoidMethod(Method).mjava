@@ -1,4 +1,0 @@
-  public Errors cannotInjectNonVoidMethod(Method method) {
-    return addMessage("Injected method %s must return void.", method);
-  }
-
