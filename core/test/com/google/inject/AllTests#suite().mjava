@@ -100,6 +100,6 @@
     suite.addTestSuite(com.google.inject.internal.RealElementTest.class);
     suite.addTestSuite(com.google.inject.multibindings.ProvidesIntoTest.class);
 
-    return SuiteUtils.removeSuppressedTests(suite, SUPPRESSED_TEST_NAMES);
+    return suite;
   }
 
