@@ -1,4 +1,6 @@
   public Errors missingRuntimeRetention(Class<? extends Annotation> annotation) {
-    return addMessage(format("Please annotate %s with @Retention(RUNTIME).", annotation));
+    return addMessage(
+        ErrorId.MISSING_RUNTIME_RETENTION,
+        format("Please annotate %s with @Retention(RUNTIME).", annotation));
   }
 

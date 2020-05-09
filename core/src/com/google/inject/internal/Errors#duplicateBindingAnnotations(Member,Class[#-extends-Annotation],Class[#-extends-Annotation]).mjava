@@ -1,7 +1,10 @@
   public Errors duplicateBindingAnnotations(
       Member member, Class<? extends Annotation> a, Class<? extends Annotation> b) {
     return addMessage(
+        ErrorId.DUPLICATE_BINDING_ANNOTATIONS,
         "%s has more than one annotation annotated with @BindingAnnotation: %s and %s",
-        member, a, b);
+        member,
+        a,
+        b);
   }
 

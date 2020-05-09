@@ -1,4 +1,4 @@
   public Errors addMessage(String messageFormat, Object... arguments) {
-    return addMessage(null, messageFormat, arguments);
+    return addMessage(ErrorId.OTHER, null, messageFormat, arguments);
   }
 

@@ -1,4 +1,6 @@
   public Errors cannotInjectRawMembersInjector() {
-    return addMessage("Cannot inject a MembersInjector that has no type parameter");
+    return addMessage(
+        ErrorId.INJECT_RAW_MEMBERS_INJECTOR,
+        "Cannot inject a MembersInjector that has no type parameter");
   }
 

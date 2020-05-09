@@ -1,4 +1,7 @@
   public static InternalProvisionException jitDisabled(Key<?> key) {
-    return create("Explicit bindings are required and %s is not explicitly bound.", key);
+    return create(
+        ErrorId.JIT_DISABLED,
+        "Explicit bindings are required and %s is not explicitly bound.",
+        key);
   }
 

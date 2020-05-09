@@ -1,7 +1,9 @@
   public Errors misplacedBindingAnnotation(Member member, Annotation bindingAnnotation) {
     return addMessage(
+        ErrorId.MISPLACED_BINDING_ANNOTATION,
         "%s is annotated with %s, but binding annotations should be applied "
             + "to its parameters instead.",
-        member, bindingAnnotation);
+        member,
+        bindingAnnotation);
   }
 

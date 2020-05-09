@@ -4,6 +4,7 @@
     String typeString = type.toString();
     String rawTypeString = getRawType(type.getType()).getName();
     return addMessage(
+        ErrorId.MISSING_CONSTRUCTOR,
         "No implementation for %s (with no qualifier annotation) was bound, and could not find an"
             + " injectable constructor%s. %s",
         typeString,

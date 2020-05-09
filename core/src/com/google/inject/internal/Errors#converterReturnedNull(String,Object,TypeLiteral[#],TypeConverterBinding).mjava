@@ -4,7 +4,11 @@
       TypeLiteral<?> type,
       TypeConverterBinding typeConverterBinding) {
     return addMessage(
+        ErrorId.CONVERTER_RETURNED_NULL,
         "Received null converting '%s' (bound at %s) to %s%n using %s.",
-        stringValue, convert(source), type, typeConverterBinding);
+        stringValue,
+        convert(source),
+        type,
+        typeConverterBinding);
   }
 

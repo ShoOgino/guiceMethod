@@ -1,4 +1,7 @@
   public Errors cannotBindToGuiceType(String simpleName) {
-    return addMessage("Binding to core guice framework type is not allowed: %s.", simpleName);
+    return addMessage(
+        ErrorId.BINDING_TO_GUICE_TYPE,
+        "Binding to core guice framework type is not allowed: %s.",
+        simpleName);
   }
 

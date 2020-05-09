@@ -1,4 +1,5 @@
   public Errors voidProviderMethod() {
-    return addMessage("Provider methods must return a value. Do not return void.");
+    return addMessage(
+        ErrorId.VOID_PROVIDER_METHOD, "Provider methods must return a value. Do not return void.");
   }
 

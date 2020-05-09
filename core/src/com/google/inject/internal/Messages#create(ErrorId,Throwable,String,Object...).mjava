@@ -1,0 +1,13 @@
+  /**
+   * Creates a new Message with the given cause.
+   *
+   * @param errorId The enum id for the error
+   * @param cause The exception that caused the error
+   * @param messageFormat Format string
+   * @param arguments format string arguments
+   */
+  public static Message create(
+      ErrorId errorId, Throwable cause, String messageFormat, Object... arguments) {
+    return create(errorId, cause, ImmutableList.of(), messageFormat, arguments);
+  }
+

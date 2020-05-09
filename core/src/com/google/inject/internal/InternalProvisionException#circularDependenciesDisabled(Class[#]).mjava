@@ -1,5 +1,6 @@
   public static InternalProvisionException circularDependenciesDisabled(Class<?> expectedType) {
     return create(
+        ErrorId.CIRCULAR_PROXY_DISABLED,
         "Found a circular dependency involving %s, and circular dependencies are disabled.",
         expectedType);
   }

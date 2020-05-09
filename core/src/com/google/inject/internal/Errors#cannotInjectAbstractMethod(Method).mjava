@@ -1,4 +1,5 @@
   public Errors cannotInjectAbstractMethod(Method method) {
-    return addMessage("Injected method %s cannot be abstract.", method);
+    return addMessage(
+        ErrorId.INJECT_ABSTRACT_METHOD, "Injected method %s cannot be abstract.", method);
   }
 

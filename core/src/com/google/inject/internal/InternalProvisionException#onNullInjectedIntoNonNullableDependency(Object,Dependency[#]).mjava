@@ -36,7 +36,10 @@
             : StackTraceElements.forMember(dependency.getInjectionPoint().getMember());
 
     throw InternalProvisionException.create(
-            "null returned by binding at %s%n but %s is not @Nullable", source, formattedDependency)
+            ErrorId.NULL_INJECTED_INTO_NON_NULLABLE,
+            "null returned by binding at %s%n but %s is not @Nullable",
+            source,
+            formattedDependency)
         .addSource(source);
   }
 

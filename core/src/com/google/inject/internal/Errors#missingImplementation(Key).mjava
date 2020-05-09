@@ -16,6 +16,6 @@
    * things unnecessarily complex.
    */
   public Errors missingImplementation(Key key) {
-    return addMessage("No implementation for %s was bound.", key);
+    return addMessage(ErrorId.MISSING_IMPLEMENTATION, "No implementation for %s was bound.", key);
   }
 

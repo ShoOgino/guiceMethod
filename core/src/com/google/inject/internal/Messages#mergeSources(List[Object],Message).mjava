@@ -11,9 +11,7 @@
         && Objects.equal(messageSources.get(0), sources.get(sources.size() - 1))) {
       messageSources = messageSources.subList(1, messageSources.size());
     }
-    return new Message(
-        ImmutableList.builder().addAll(sources).addAll(messageSources).build(),
-        message.getMessage(),
-        message.getCause());
+    return message.withSource(
+        ImmutableList.builder().addAll(sources).addAll(messageSources).build());
   }
 

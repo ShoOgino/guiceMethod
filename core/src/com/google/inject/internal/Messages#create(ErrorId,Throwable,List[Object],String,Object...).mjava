@@ -1,14 +1,19 @@
   /**
    * Creates a new Message with the given cause and a binding source stack.
    *
+   * @param errorId The enum id for the error
    * @param cause The exception that caused the error
    * @param sources The binding sources for the source stack
    * @param messageFormat Format string
    * @param arguments format string arguments
    */
   public static Message create(
-      Throwable cause, List<Object> sources, String messageFormat, Object... arguments) {
+      ErrorId errorId,
+      Throwable cause,
+      List<Object> sources,
+      String messageFormat,
+      Object... arguments) {
     String message = format(messageFormat, arguments);
-    return new Message(sources, message, cause);
+    return new Message(errorId, sources, message, cause);
   }
 

@@ -1,0 +1,6 @@
+  private Errors addMessage(
+      ErrorId errorId, Throwable cause, String messageFormat, Object... arguments) {
+    addMessage(Messages.create(errorId, cause, getSources(), messageFormat, arguments));
+    return this;
+  }
+

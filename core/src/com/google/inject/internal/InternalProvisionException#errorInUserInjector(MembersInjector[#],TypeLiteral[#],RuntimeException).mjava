@@ -1,6 +1,11 @@
   public static InternalProvisionException errorInUserInjector(
       MembersInjector<?> listener, TypeLiteral<?> type, RuntimeException cause) {
     return errorInUserCode(
-        cause, "Error injecting %s using %s.%n Reason: %s", type, listener, cause);
+        ErrorId.ERROR_IN_USER_INJECTOR,
+        cause,
+        "Error injecting %s using %s.%n Reason: %s",
+        type,
+        listener,
+        cause);
   }
 

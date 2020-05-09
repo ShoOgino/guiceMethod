@@ -1,4 +1,4 @@
   public Errors bindingToProvider() {
-    return addMessage("Binding to Provider is not allowed.");
+    return addMessage(ErrorId.BINDING_TO_PROVIDER, "Binding to Provider is not allowed.");
   }
 

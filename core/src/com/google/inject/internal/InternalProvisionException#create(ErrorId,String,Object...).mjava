@@ -1,0 +1,5 @@
+  public static InternalProvisionException create(
+      ErrorId errorId, String format, Object... arguments) {
+    return new InternalProvisionException(Messages.create(errorId, format, arguments));
+  }
+

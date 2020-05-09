@@ -1,4 +1,5 @@
   public Errors cannotInjectRawTypeLiteral() {
-    return addMessage("Cannot inject a TypeLiteral that has no type parameter");
+    return addMessage(
+        ErrorId.INJECT_RAW_TYPE_LITERAL, "Cannot inject a TypeLiteral that has no type parameter");
   }
 

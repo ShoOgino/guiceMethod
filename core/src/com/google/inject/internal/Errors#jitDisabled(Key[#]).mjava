@@ -1,4 +1,7 @@
   public Errors jitDisabled(Key<?> key) {
-    return addMessage("Explicit bindings are required and %s is not explicitly bound.", key);
+    return addMessage(
+        ErrorId.JIT_DISABLED,
+        "Explicit bindings are required and %s is not explicitly bound.",
+        key);
   }
 

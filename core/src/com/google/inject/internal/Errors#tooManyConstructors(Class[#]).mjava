@@ -1,6 +1,8 @@
   public Errors tooManyConstructors(Class<?> implementation) {
     return addMessage(
+        ErrorId.TOO_MANY_CONSTRUCTORS,
         "%s has more than one constructor annotated with @Inject. %s",
-        implementation, CONSTRUCTOR_RULES);
+        implementation,
+        CONSTRUCTOR_RULES);
   }
 

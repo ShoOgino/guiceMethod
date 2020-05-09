@@ -1,7 +1,11 @@
   public Errors duplicateScopes(
       ScopeBinding existing, Class<? extends Annotation> annotationType, Scope scope) {
     return addMessage(
+        ErrorId.DUPLICATE_SCOPES,
         "Scope %s is already bound to %s at %s.%n Cannot bind %s.",
-        existing.getScope(), annotationType, existing.getSource(), scope);
+        existing.getScope(),
+        annotationType,
+        existing.getSource(),
+        scope);
   }
 

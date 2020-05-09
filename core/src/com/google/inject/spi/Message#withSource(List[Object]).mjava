@@ -1,0 +1,5 @@
+  /** Returns a copy of this {@link Message} with its sources replaced. */
+  public Message withSource(List<Object> newSources) {
+    return new Message(errorId, newSources, message, cause);
+  }
+

@@ -9,6 +9,7 @@
       if (constructor.isAnnotationPresent(ThrowingInject.class)) {
         if (cxtor != null) {
           errors.addMessage(
+              ErrorId.MISSING_CONSTRUCTOR,
               "%s has more than one constructor annotated with @ThrowingInject. "
                   + CONSTRUCTOR_RULES,
               rawType);
@@ -26,7 +27,9 @@
 
     if (cxtor == null) {
       errors.addMessage(
-          "Could not find a suitable constructor in %s. " + CONSTRUCTOR_RULES, rawType);
+          ErrorId.MISSING_CONSTRUCTOR,
+          "Could not find a suitable constructor in %s. " + CONSTRUCTOR_RULES,
+          rawType);
     }
 
     for (Message msg : errors.getMessages()) {
