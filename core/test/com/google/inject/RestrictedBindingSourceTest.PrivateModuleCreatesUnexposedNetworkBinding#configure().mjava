@@ -1,0 +1,5 @@
+    @Override
+    protected void configure() {
+      bindConstant().annotatedWith(GatewayIpAdress.class).to(0);
+    }
+

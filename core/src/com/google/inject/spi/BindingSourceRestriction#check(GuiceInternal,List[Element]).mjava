@@ -1,0 +1,23 @@
+  /**
+   * Returns all the restriction violations found on the given Module Elements, as error messages.
+   *
+   * <p>Note: Intended to be used on Module Elements, not Injector Elements, ie. the result of
+   * {@link Elements#getElements} not {@code Injector.getElements}. The Module Elements this check
+   * cares about are:
+   *
+   * <ul>
+   *   <li>Module Bindings, which are always explicit and always have an {@link ElementSource} (with
+   *       a Module Stack), unlike Injector Bindings, which may be implicit and bereft of an
+   *       ElementSource.
+   *   <li>{@link PrivateElements}, which represent the recursive case of this check. They contain a
+   *       list of elements that this check is recursively called on.
+   * </ul>
+   */
+  public static ImmutableList<Message> check(GuiceInternal guiceInternal, List<Element> elements) {
+    checkNotNull(guiceInternal);
+    ImmutableList<Message> errorMessages = check(elements);
+    // Clear all the permit maps after the checks are done.
+    elements.forEach(BindingSourceRestriction::clear);
+    return errorMessages;
+  }
+

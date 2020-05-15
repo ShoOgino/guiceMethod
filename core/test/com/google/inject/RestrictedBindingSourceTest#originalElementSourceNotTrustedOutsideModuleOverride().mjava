@@ -1,0 +1,32 @@
+  @Test
+  public void originalElementSourceNotTrustedOutsideModuleOverride() {
+    ElementSource networkElementSource =
+        (ElementSource) Elements.getElements(new NetworkModule()).get(0).getSource();
+
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            binder()
+                .withSource(networkElementSource)
+                .bindConstant()
+                .annotatedWith(GatewayIpAdress.class)
+                .to(12);
+          }
+        };
+
+    // Confirm that the original element source was spoofed.
+    @SuppressWarnings("unchecked")
+    Binding<Integer> rogueGatewayBinding =
+        (Binding<Integer>) Elements.getElements(rogueModule).get(0);
+    assertThat(((ElementSource) rogueGatewayBinding.getSource()).getOriginalElementSource())
+        .isEqualTo(networkElementSource);
+
+    // Will fail because the original element source isn't trusted, becase it wasn't set by
+    // Modules.override.
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+  }
+

@@ -1,0 +1,7 @@
+  private static void clear(ElementSource elementSource) {
+    while (elementSource != null) {
+      elementSource.moduleSource.getPermitMap().clear();
+      elementSource = elementSource.getOriginalElementSource();
+    }
+  }
+

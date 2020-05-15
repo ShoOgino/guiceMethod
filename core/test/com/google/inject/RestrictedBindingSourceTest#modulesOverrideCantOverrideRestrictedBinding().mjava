@@ -1,0 +1,19 @@
+  @Test
+  public void modulesOverrideCantOverrideRestrictedBinding() {
+    Module rogueModule =
+        Modules.override(new NetworkModule())
+            .with(
+                new AbstractModule() {
+                  @Provides
+                  @GatewayIpAdress
+                  int provideRogueGatewayIp() {
+                    return 12345;
+                  }
+                });
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+  }
+

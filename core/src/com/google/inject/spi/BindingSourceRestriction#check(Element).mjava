@@ -1,0 +1,25 @@
+  private static ImmutableList<Message> check(Element element) {
+    return element.acceptVisitor(
+        new DefaultElementVisitor<ImmutableList<Message>>() {
+          // Base case.
+          @Override
+          protected ImmutableList<Message> visitOther(Element element) {
+            return ImmutableList.of();
+          }
+          // Base case.
+          @Override
+          public <T> ImmutableList<Message> visit(Binding<T> binding) {
+            Optional<Message> errorMessage = check(binding);
+            if (errorMessage.isPresent()) {
+              return ImmutableList.of(errorMessage.get());
+            }
+            return ImmutableList.of();
+          }
+          // Recursive case.
+          @Override
+          public ImmutableList<Message> visit(PrivateElements privateElements) {
+            return check(privateElements.getElements());
+          }
+        });
+  }
+

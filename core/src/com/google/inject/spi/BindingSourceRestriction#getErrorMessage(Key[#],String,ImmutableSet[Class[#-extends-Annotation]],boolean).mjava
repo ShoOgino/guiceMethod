@@ -1,0 +1,15 @@
+  private static String getErrorMessage(
+      Key<?> key,
+      String explanation,
+      ImmutableSet<Class<? extends Annotation>> acceptablePermits,
+      boolean annotationRestricted) {
+    return String.format(
+        "Unable to bind key: %s. One of the modules that created this binding has to be annotated"
+            + " with one of %s, because the key's %s is annotated with @RestrictedBindingSource."
+            + " %s",
+        key,
+        acceptablePermits.stream().map(a -> "@" + a.getName()).collect(toList()),
+        annotationRestricted ? "annotation" : "type",
+        explanation);
+  }
+

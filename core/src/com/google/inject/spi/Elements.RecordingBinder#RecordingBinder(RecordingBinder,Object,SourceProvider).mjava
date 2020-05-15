@@ -13,5 +13,6 @@
       this.parent = prototype.parent;
       this.privateElements = prototype.privateElements;
       this.privateBinders = prototype.privateBinders;
+      this.permitMapConstruction = prototype.permitMapConstruction;
     }
 

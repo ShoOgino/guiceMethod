@@ -1,0 +1,19 @@
+    /** Called by the Binder prior to entering a module's configure method. */
+    void pushModule(Class<?> module, ModuleSource moduleSource) {
+      List<Class<? extends Annotation>> newModulePermits =
+          getPermits(module)
+              .filter(permit -> !currentModulePermits.contains(permit))
+              .collect(toList());
+      // Save the parent module's permits so that they can be restored when the Binder exits this
+      // new (child) module's configure method.
+      modulePermitsStack.push(currentModulePermits);
+      if (!newModulePermits.isEmpty()) {
+        currentModulePermits =
+            ImmutableSet.<Class<? extends Annotation>>builder()
+                .addAll(currentModulePermits)
+                .addAll(newModulePermits)
+                .build();
+      }
+      modulePermits.put(moduleSource, currentModulePermits);
+    }
+

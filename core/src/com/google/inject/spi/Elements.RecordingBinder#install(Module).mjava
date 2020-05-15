@@ -4,8 +4,8 @@
       if (modules.containsKey(module)) {
         return;
       }
+      Class<?> newModuleClass = null;
       RecordingBinder binder = this;
-      boolean unwrapModuleSource = false;
       // Update the module source for the new module
       if (module instanceof ProviderMethodsModule) {
         // There are two reason's we'd want to get the module source in a ProviderMethodsModule.
@@ -15,12 +15,14 @@
         Class<?> delegateClass = ((ProviderMethodsModule) module).getDelegateModuleClass();
         if (moduleSource == null
             || !moduleSource.getModuleClassName().equals(delegateClass.getName())) {
-          moduleSource = getModuleSource(delegateClass);
-          unwrapModuleSource = true;
+          newModuleClass = delegateClass;
         }
       } else {
-        moduleSource = getModuleSource(module.getClass());
-        unwrapModuleSource = true;
+        newModuleClass = module.getClass();
+      }
+      if (newModuleClass != null) {
+        moduleSource = getModuleSource(newModuleClass);
+        permitMapConstruction.pushModule(newModuleClass, moduleSource);
       }
       boolean skipScanning = false;
       if (module instanceof PrivateModule) {
@@ -44,8 +46,9 @@
       }
       binder.install(ProviderMethodsModule.forModule(module));
       // We are done with this module, so undo module source change
-      if (unwrapModuleSource) {
+      if (newModuleClass != null) {
         moduleSource = moduleSource.getParent();
+        permitMapConstruction.popModule();
       }
     }
 

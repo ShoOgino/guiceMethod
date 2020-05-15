@@ -1,0 +1,20 @@
+  @Test
+  public void unpermittedModuleCantWithSourceAPermittedModule() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            binder()
+                .withSource(PermittedModule.class)
+                .bindConstant()
+                .annotatedWith(GatewayIpAdress.class)
+                .to(0);
+          }
+        };
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+  }
+

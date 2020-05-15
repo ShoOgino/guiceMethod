@@ -1,0 +1,5 @@
+    @Override
+    public Set<? extends Class<? extends Annotation>> annotationClasses() {
+      return ImmutableSet.of(NetworkProvides.class);
+    }
+

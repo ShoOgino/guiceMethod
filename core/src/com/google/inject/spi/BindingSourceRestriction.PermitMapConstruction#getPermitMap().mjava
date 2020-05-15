@@ -1,0 +1,8 @@
+    /**
+     * Returns a possibly unfinished map. The map should only be used after the construction is
+     * finished.
+     */
+    PermitMap getPermitMap() {
+      return permitMap;
+    }
+

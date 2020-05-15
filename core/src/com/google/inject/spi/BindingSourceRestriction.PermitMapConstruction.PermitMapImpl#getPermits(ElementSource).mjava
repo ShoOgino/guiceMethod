@@ -1,0 +1,5 @@
+      @Override
+      public ImmutableSet<Class<? extends Annotation>> getPermits(ElementSource elementSource) {
+        return modulePermits.get(elementSource.moduleSource);
+      }
+

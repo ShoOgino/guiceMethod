@@ -1,0 +1,5 @@
+    @Override
+    protected void configure() {
+      bind(String.class).annotatedWith(Hostname.class).toInstance("google.com");
+    }
+

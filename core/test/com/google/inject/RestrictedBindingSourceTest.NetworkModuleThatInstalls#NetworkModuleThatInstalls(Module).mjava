@@ -1,0 +1,4 @@
+    NetworkModuleThatInstalls(Module module) {
+      this.module = module;
+    }
+

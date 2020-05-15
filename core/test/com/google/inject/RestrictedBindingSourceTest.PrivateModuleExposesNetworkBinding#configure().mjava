@@ -1,0 +1,12 @@
+    @Override
+    protected void configure() {
+      install(
+          new AbstractModule() {
+            @Override
+            protected void configure() {
+              bindConstant().annotatedWith(GatewayIpAdress.class).to(0);
+            }
+          });
+      expose(Key.get(Integer.class, GatewayIpAdress.class));
+    }
+

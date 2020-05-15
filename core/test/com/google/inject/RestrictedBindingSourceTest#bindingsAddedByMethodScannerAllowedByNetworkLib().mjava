@@ -1,0 +1,13 @@
+  @Test
+  public void bindingsAddedByMethodScannerAllowedByNetworkLib() {
+    @NetworkLibrary
+    class NetworkModuleWithCustomProvides extends AbstractModule {
+      @NetworkProvides
+      String provideNetworkString() {
+        return "the real network string";
+      }
+    }
+
+    Guice.createInjector(new NetworkModuleWithCustomProvides(), NetworkProvidesScanner.module());
+  }
+

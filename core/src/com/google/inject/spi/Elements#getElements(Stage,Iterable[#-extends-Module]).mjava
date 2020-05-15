@@ -8,6 +8,7 @@
     for (RecordingBinder child : binder.privateBinders) {
       child.scanForAnnotatedMethods();
     }
+    binder.permitMapConstruction.finish();
     // Free the memory consumed by the stack trace elements cache
     StackTraceElements.clearCache();
     return Collections.unmodifiableList(binder.elements);

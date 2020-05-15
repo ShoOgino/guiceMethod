@@ -1,0 +1,25 @@
+  @Test
+  public void modulesOverrideRestrictedBindingAllowedIfParentHasPermit() {
+    @NetworkLibrary
+    class NetworkModuleVersion2 extends AbstractModule {
+      @Override
+      protected void configure() {
+        install(
+            Modules.override(new NetworkModule())
+                .with(
+                    new AbstractModule() {
+                      @Provides
+                      @GatewayIpAdress
+                      int provideGatewayIpV2() {
+                        return 2;
+                      }
+                    }));
+      }
+    }
+
+    assertThat(
+            Guice.createInjector(new NetworkModuleVersion2())
+                .getInstance(Key.get(Integer.class, GatewayIpAdress.class)))
+        .isEqualTo(2);
+  }
+

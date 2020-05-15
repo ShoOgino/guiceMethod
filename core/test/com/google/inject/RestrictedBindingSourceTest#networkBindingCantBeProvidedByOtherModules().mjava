@@ -1,0 +1,23 @@
+  @Test
+  public void networkBindingCantBeProvidedByOtherModules() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          // This will fail, the gateway IP can only be provided by the network library.
+          @Provides
+          @GatewayIpAdress
+          int provideGatewayIp() {
+            return 42;
+          }
+
+          @Override
+          protected void configure() {
+            install(new RoutingModule());
+          }
+        };
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+  }
+

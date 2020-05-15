@@ -1,0 +1,5 @@
+    /** Finishes the {@link PermitMap}. Called by the Binder when all modules are installed. */
+    void finish() {
+      permitMap.modulePermits = modulePermits.build();
+    }
+

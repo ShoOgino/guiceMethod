@@ -6,7 +6,10 @@
    *     Module#configure(Binder) configure(Binder)} call and ends just before the module {@link
    *     Module#configure(Binder) configure(Binder)} method invocation
    */
-  ModuleSource(Class<?> moduleClass, StackTraceElement[] partialCallStack) {
-    this(null, moduleClass, partialCallStack);
+  ModuleSource(
+      Class<?> moduleClass,
+      StackTraceElement[] partialCallStack,
+      BindingSourceRestriction.PermitMap permitMap) {
+    this(null, moduleClass, partialCallStack, permitMap);
   }
 

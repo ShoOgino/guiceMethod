@@ -20,6 +20,14 @@
       }
       elements.addAll(Elements.getElements(stage, modules));
 
+      // Check binding source restrictions only for the root shell (note that the root shell
+      // can have a parent Injector, when Injector.createChildInjector is called). It isn't
+      // necessary to call this check on child PrivateElements shells because it walks the entire
+      // tree of elements, recurring on PrivateElements.
+      if (privateElements == null) {
+        elements.addAll(BindingSourceRestriction.check(GUICE_INTERNAL, elements));
+      }
+
       // Look for injector-changing options
       InjectorOptionsProcessor optionsProcessor = new InjectorOptionsProcessor(errors);
       optionsProcessor.process(null, elements);

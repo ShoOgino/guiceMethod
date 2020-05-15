@@ -1,0 +1,37 @@
+  @Test
+  public void nestedModulesOverrideCanOverrideUnrestrictedBindings() {
+    Module overrideModule =
+        Modules.override(
+                Modules.override(
+                        new NetworkModule(),
+                        new AbstractModule() {
+                          @Override
+                          protected void configure() {
+                            bindConstant().annotatedWith(UnrestrictedQualifier.class).to("foo");
+                            bindConstant().annotatedWith(UnrestrictedQualifier.class).to(42);
+                          }
+                        })
+                    .with(
+                        new AbstractModule() {
+                          @Provides
+                          @UnrestrictedQualifier
+                          String overrideString() {
+                            return "bar";
+                          }
+                        }))
+            .with(
+                new AbstractModule() {
+                  @Provides
+                  @UnrestrictedQualifier
+                  int overrideLong() {
+                    return 45;
+                  }
+                });
+
+    Injector injector = Guice.createInjector(overrideModule);
+    assertThat(injector.getInstance(Key.get(String.class, UnrestrictedQualifier.class)))
+        .isEqualTo("bar");
+    assertThat(injector.getInstance(Key.get(Integer.class, UnrestrictedQualifier.class)))
+        .isEqualTo(45);
+  }
+

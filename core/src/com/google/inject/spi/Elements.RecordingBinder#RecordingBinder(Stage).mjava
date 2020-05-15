@@ -15,5 +15,6 @@
       this.parent = null;
       this.privateElements = null;
       this.privateBinders = Lists.newArrayList();
+      this.permitMapConstruction = new BindingSourceRestriction.PermitMapConstruction();
     }
 

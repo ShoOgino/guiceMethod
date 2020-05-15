@@ -6,7 +6,7 @@
         partialCallStack = new StackTraceElement[0];
       }
       if (moduleSource == null) {
-        return new ModuleSource(module, partialCallStack);
+        return new ModuleSource(module, partialCallStack, permitMapConstruction.getPermitMap());
       }
       return moduleSource.createChild(module, partialCallStack);
     }

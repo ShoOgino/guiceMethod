@@ -1,0 +1,8 @@
+  private static ImmutableList<Message> check(List<Element> elements) {
+    ImmutableList.Builder<Message> errorMessagesBuilder = ImmutableList.builder();
+    for (Element element : elements) {
+      errorMessagesBuilder.addAll(check(element));
+    }
+    return errorMessagesBuilder.build();
+  }
+

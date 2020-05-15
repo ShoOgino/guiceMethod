@@ -1,0 +1,26 @@
+  @Test
+  public void modulesOverrideCanOverrideUnrestrictedBinding() {
+    Module overrideModule =
+        Modules.override(
+                new NetworkModule(),
+                new AbstractModule() {
+                  @Override
+                  protected void configure() {
+                    bindConstant().annotatedWith(UnrestrictedQualifier.class).to("foo");
+                  }
+                })
+            .with(
+                new AbstractModule() {
+                  @Provides
+                  @UnrestrictedQualifier
+                  String provideRogueGatewayIp() {
+                    return "bar";
+                  }
+                });
+
+    assertThat(
+            Guice.createInjector(overrideModule)
+                .getInstance(Key.get(String.class, UnrestrictedQualifier.class)))
+        .isEqualTo("bar");
+  }
+

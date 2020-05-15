@@ -1,0 +1,6 @@
+  @Test
+  public void childInjectorCanBindRestrictedBindingWithPermit() {
+    Injector parent = Guice.createInjector(new NetworkModule());
+    parent.createChildInjector(new RoutingModule());
+  }
+

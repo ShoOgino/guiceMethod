@@ -1,0 +1,6 @@
+    /** Called by the Binder when it exits a module's configure method. */
+    void popModule() {
+      // Restore the parent module's permits.
+      currentModulePermits = modulePermitsStack.pop();
+    }
+

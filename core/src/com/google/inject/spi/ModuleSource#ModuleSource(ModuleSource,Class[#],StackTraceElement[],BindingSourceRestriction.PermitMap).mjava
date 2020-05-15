@@ -10,11 +10,13 @@
   private ModuleSource(
       /* @Nullable */ ModuleSource parent,
       Class<?> moduleClass,
-      StackTraceElement[] partialCallStack) {
+      StackTraceElement[] partialCallStack,
+      BindingSourceRestriction.PermitMap permitMap) {
     Preconditions.checkNotNull(moduleClass, "module cannot be null.");
     Preconditions.checkNotNull(partialCallStack, "partialCallStack cannot be null.");
     this.parent = parent;
     this.moduleClassName = moduleClass.getName();
     this.partialCallStack = StackTraceElements.convertToInMemoryStackTraceElement(partialCallStack);
+    this.permitMap = permitMap;
   }
 

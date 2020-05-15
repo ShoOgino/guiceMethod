@@ -1,0 +1,13 @@
+  @Test
+  public void untargettedBindingAllowedWithPermit() {
+    @NetworkLibrary
+    class PermittedNetworkModule extends AbstractModule {
+      @Override
+      protected void configure() {
+        bind(RoutingTable.class);
+      }
+    }
+
+    Guice.createInjector(new PermittedNetworkModule());
+  }
+

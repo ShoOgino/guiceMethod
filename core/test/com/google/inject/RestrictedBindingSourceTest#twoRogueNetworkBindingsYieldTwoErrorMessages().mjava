@@ -1,0 +1,23 @@
+  @Test
+  public void twoRogueNetworkBindingsYieldTwoErrorMessages() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Provides
+          @GatewayIpAdress
+          int provideGatewayIp() {
+            return 42;
+          }
+
+          @Provides
+          RoutingTable provideRoutingTable() {
+            return destinationIp -> 0;
+          }
+        };
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+    assertThat(expected).hasMessageThat().contains(USE_ROUTING_MODULE);
+  }
+

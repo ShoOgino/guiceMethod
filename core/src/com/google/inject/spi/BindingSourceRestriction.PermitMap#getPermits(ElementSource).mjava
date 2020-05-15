@@ -1,0 +1,2 @@
+    ImmutableSet<Class<? extends Annotation>> getPermits(ElementSource elementSource);
+

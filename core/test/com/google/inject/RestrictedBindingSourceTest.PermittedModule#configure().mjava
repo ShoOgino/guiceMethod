@@ -1,0 +1,16 @@
+    @Override
+    protected void configure() {
+      Method userUnpermittedModuleMethod;
+      try {
+        userUnpermittedModuleMethod = UnpermittedModule.class.getMethod("foo");
+      } catch (NoSuchMethodException e) {
+        throw new RuntimeException(e);
+      }
+
+      binder()
+          .withSource(userUnpermittedModuleMethod)
+          .bind(String.class)
+          .annotatedWith(Hostname.class)
+          .toInstance("google.com");
+    }
+

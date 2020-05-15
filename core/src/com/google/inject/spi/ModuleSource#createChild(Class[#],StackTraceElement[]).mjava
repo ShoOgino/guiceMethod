@@ -7,6 +7,6 @@
    *     Module#configure(Binder) configure(Binder)} method invocation
    */
   ModuleSource createChild(Class<?> moduleClass, StackTraceElement[] partialCallStack) {
-    return new ModuleSource(this, moduleClass, partialCallStack);
+    return new ModuleSource(this, moduleClass, partialCallStack, permitMap);
   }
 

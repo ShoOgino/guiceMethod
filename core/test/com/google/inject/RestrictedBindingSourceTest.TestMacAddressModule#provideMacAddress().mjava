@@ -1,0 +1,6 @@
+    @Provides
+    @MacAddress
+    String provideMacAddress() {
+      return "deadbeef";
+    }
+

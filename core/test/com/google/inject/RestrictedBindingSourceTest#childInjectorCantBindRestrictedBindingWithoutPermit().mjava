@@ -1,0 +1,18 @@
+  @Test
+  public void childInjectorCantBindRestrictedBindingWithoutPermit() {
+    Injector parent = Guice.createInjector(new NetworkModule());
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Provides
+          RoutingTable provideRoutingTable() {
+            return destinationIp -> 0;
+          }
+        };
+
+    CreationException expected =
+        assertThrows(CreationException.class, () -> parent.createChildInjector(rogueModule));
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_ROUTING_MODULE);
+  }
+

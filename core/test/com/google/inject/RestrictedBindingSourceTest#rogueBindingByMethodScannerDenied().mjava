@@ -1,0 +1,17 @@
+  @Test
+  public void rogueBindingByMethodScannerDenied() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @NetworkProvides
+          String provideNetworkString() {
+            return "lorem ipsum";
+          }
+        };
+
+    CreationException expected =
+        assertThatInjectorCreationFails(rogueModule, NetworkProvidesScanner.module());
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(NETWORK_ANNOTATION_IS_RESTRICTED);
+  }
+

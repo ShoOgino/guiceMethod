@@ -1,0 +1,17 @@
+  @Test
+  public void noPermitOnStack_privateModuleCantBind() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            // Disallowed because there's no permit on the module stack.
+            install(new PrivateModuleCreatesUnexposedNetworkBinding());
+          }
+        };
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_NETWORK_MODULE);
+  }
+

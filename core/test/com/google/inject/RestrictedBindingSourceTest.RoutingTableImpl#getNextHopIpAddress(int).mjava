@@ -1,0 +1,5 @@
+    @Override
+    public int getNextHopIpAddress(int destinationIpAddress) {
+      return destinationIpAddress + 2;
+    }
+

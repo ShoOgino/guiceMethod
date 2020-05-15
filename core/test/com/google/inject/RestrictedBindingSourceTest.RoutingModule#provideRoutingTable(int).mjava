@@ -1,0 +1,5 @@
+    @Provides
+    RoutingTable provideRoutingTable(@GatewayIpAdress int gateway) {
+      return destinationIp -> gateway;
+    }
+

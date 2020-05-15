@@ -1,0 +1,5 @@
+  /** Returns the permit map created by the binder that installed this module. */
+  BindingSourceRestriction.PermitMap getPermitMap() {
+    return permitMap;
+  }
+

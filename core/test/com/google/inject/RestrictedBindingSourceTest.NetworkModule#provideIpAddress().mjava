@@ -1,0 +1,6 @@
+    @Provides
+    @GatewayIpAdress
+    int provideIpAddress() {
+      return 21321566;
+    }
+

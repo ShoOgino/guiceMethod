@@ -1,0 +1,16 @@
+  @Test
+  public void untargettedBindingDisallowedWithoutPermit() {
+    AbstractModule rogueModule =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(RoutingTable.class);
+          }
+        };
+
+    CreationException expected = assertThatInjectorCreationFails(rogueModule);
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_ROUTING_MODULE);
+  }
+

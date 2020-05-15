@@ -1,0 +1,34 @@
+  private static Optional<Message> check(Binding<?> binding) {
+    Key<?> key = binding.getKey();
+    // Module Bindings are all explicit and have an ElementSource.
+    ElementSource elementSource = (ElementSource) binding.getSource();
+    RestrictedBindingSource annotationRestriction =
+        key.getAnnotationType() == null
+            ? null
+            : key.getAnnotationType().getAnnotation(RestrictedBindingSource.class);
+    RestrictedBindingSource restriction = annotationRestriction;
+    if (annotationRestriction == null) {
+      // Annotation restriction overrides type restriction.
+      restriction = key.getTypeLiteral().getRawType().getAnnotation(RestrictedBindingSource.class);
+    }
+    // Exit if there is no binding source restrictions on the key.
+    if (restriction == null) {
+      return Optional.empty();
+    }
+    ImmutableSet<Class<? extends Annotation>> permits = getAllPermits(elementSource);
+    ImmutableSet<Class<? extends Annotation>> acceptablePermits =
+        ImmutableSet.copyOf(restriction.permits());
+    boolean bindingPermitted = permits.stream().anyMatch(acceptablePermits::contains);
+    if (!bindingPermitted) {
+      return Optional.of(
+          new Message(
+              elementSource,
+              getErrorMessage(
+                  key,
+                  restriction.explanation(),
+                  acceptablePermits,
+                  annotationRestriction != null)));
+    }
+    return Optional.empty();
+  }
+

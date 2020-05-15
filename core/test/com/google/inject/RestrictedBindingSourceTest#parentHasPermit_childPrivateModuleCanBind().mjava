@@ -1,0 +1,8 @@
+  @Test
+  public void parentHasPermit_childPrivateModuleCanBind() {
+    Guice.createInjector(
+        new NetworkModuleThatInstalls(
+            // Allowed because the parent has the @NetworkLibrary permit.
+            new PrivateModuleCreatesUnexposedNetworkBinding()));
+  }
+
