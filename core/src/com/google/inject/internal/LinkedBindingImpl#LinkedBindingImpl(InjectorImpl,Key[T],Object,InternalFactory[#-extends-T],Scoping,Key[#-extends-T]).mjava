@@ -1,4 +1,4 @@
-  public LinkedBindingImpl(
+  LinkedBindingImpl(
       InjectorImpl injector,
       Key<T> key,
       Object source,

@@ -1,4 +1,4 @@
-  public LinkedBindingImpl(Object source, Key<T> key, Scoping scoping, Key<? extends T> targetKey) {
+  LinkedBindingImpl(Object source, Key<T> key, Scoping scoping, Key<? extends T> targetKey) {
     super(source, key, scoping);
     this.targetKey = targetKey;
   }
