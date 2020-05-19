@@ -1,0 +1,5 @@
+  @Test
+  public void singleBinder() throws Exception {
+    assertThatInjectorIsWiped(Guice.createInjector(new Module3()));
+  }
+

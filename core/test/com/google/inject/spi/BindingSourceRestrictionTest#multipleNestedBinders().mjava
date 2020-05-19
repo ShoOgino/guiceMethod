@@ -1,0 +1,24 @@
+  @Test
+  public void multipleNestedBinders() throws Exception {
+    assertThatInjectorIsWiped(
+        Guice.createInjector(
+            Modules.override(
+                    Modules.override(new Module3())
+                        .with(
+                            new AbstractModule() {
+                              @Provides
+                              @Named("2")
+                              String provideFoo2() {
+                                return "foo2.1";
+                              }
+                            }))
+                .with(
+                    new AbstractModule() {
+                      @Provides
+                      @Named("1")
+                      String provideFoo() {
+                        return "foo1.1";
+                      }
+                    })));
+  }
+

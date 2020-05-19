@@ -1,0 +1,6 @@
+    @VisibleForTesting
+    static boolean isElementSourceCleared(ElementSource elementSource) {
+      PermitMapImpl permitMap = (PermitMapImpl) elementSource.moduleSource.getPermitMap();
+      return permitMap.modulePermits == null;
+    }
+

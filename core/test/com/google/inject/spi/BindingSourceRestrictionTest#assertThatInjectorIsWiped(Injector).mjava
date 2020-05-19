@@ -1,0 +1,9 @@
+  void assertThatInjectorIsWiped(Injector injector) {
+    for (Element element : injector.getElements()) {
+      Object source = element.getSource();
+      if (source instanceof ElementSource) {
+        assertThatTheElementSourceChainIsWiped((ElementSource) source);
+      }
+    }
+  }
+

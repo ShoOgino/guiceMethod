@@ -1,0 +1,6 @@
+    @Provides
+    @Named("1")
+    String provideFoo() {
+      return "foo";
+    }
+

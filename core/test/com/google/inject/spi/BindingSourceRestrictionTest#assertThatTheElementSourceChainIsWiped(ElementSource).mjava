@@ -1,0 +1,9 @@
+  void assertThatTheElementSourceChainIsWiped(ElementSource elementSource) {
+    while (elementSource != null) {
+      assertThat(
+              BindingSourceRestriction.PermitMapConstruction.isElementSourceCleared(elementSource))
+          .isTrue();
+      elementSource = elementSource.getOriginalElementSource();
+    }
+  }
+
