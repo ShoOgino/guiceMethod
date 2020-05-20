@@ -1,0 +1,10 @@
+  private static boolean isOriginalElementSourceTrustworthy(ElementSource elementSource) {
+    // Only trust if the element comes from Modules.override because otherwise the original element
+    // source can be spoofed.
+    // TODO(b/156495326): Remove this special case once we resolve the spoofing issue.
+    return elementSource
+        .moduleSource
+        .getModuleClassName()
+        .equals("com.google.inject.util.Modules$OverrideModule");
+  }
+

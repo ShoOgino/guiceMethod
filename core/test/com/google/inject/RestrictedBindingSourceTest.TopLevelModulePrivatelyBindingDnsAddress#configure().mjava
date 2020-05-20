@@ -1,0 +1,12 @@
+    @Override
+    protected void configure() {
+      install(
+          new PrivateModule() {
+            @Override
+            protected void configure() {
+              // Non-exempt module.
+              install(new BazRogueDnsModule());
+            }
+          });
+    }
+

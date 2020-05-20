@@ -1,0 +1,6 @@
+  @Test
+  public void exemptModulesCanCreateRestrictedBinding() {
+    Guice.createInjector(new FooRogueDnsModule());
+    Guice.createInjector(new BarRogueDnsModule());
+  }
+

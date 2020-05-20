@@ -1,0 +1,8 @@
+  @Test
+  public void nonExemptModuleCantCreateRestrictedBinding() {
+    CreationException expected = assertThatInjectorCreationFails(new BazRogueDnsModule());
+
+    assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
+    assertThat(expected).hasMessageThat().contains(USE_DNS_MODULE);
+  }
+

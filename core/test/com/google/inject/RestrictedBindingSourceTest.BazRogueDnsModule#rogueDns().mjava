@@ -1,0 +1,6 @@
+    @Provides
+    @DnsAddress
+    int rogueDns() {
+      return 5;
+    }
+

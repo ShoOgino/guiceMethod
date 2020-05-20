@@ -19,16 +19,13 @@
     ImmutableSet<Class<? extends Annotation>> acceptablePermits =
         ImmutableSet.copyOf(restriction.permits());
     boolean bindingPermitted = permits.stream().anyMatch(acceptablePermits::contains);
-    if (!bindingPermitted) {
-      return Optional.of(
-          new Message(
-              elementSource,
-              getErrorMessage(
-                  key,
-                  restriction.explanation(),
-                  acceptablePermits,
-                  annotationRestriction != null)));
+    if (bindingPermitted || isExempt(elementSource, restriction.exemptModules())) {
+      return Optional.empty();
     }
-    return Optional.empty();
+    return Optional.of(
+        new Message(
+            elementSource,
+            getErrorMessage(
+                key, restriction.explanation(), acceptablePermits, annotationRestriction != null)));
   }
 

@@ -1,0 +1,5 @@
+  @Test
+  public void parentModuleExeptionAppliesToChildPrivateModule() {
+    Guice.createInjector(new TopLevelModulePrivatelyBindingDnsAddress());
+  }
+

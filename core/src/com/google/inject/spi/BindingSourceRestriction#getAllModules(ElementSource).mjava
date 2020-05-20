@@ -1,0 +1,9 @@
+  private static Iterable<String> getAllModules(ElementSource elementSource) {
+    List<String> modules = elementSource.getModuleClassNames();
+    if (elementSource.getOriginalElementSource() == null
+        || !isOriginalElementSourceTrustworthy(elementSource)) {
+      return modules;
+    }
+    return Iterables.concat(modules, getAllModules(elementSource.getOriginalElementSource()));
+  }
+

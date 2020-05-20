@@ -1,0 +1,10 @@
+  private static boolean isExempt(ElementSource elementSource, String exemptModulesRegex) {
+    if (exemptModulesRegex.isEmpty()) {
+      return false;
+    }
+    Pattern exemptModulePattern = Pattern.compile(exemptModulesRegex);
+    //TODO(b/156759807): Switch to Streams.stream (instead of inlining it).
+    return StreamSupport.stream(getAllModules(elementSource).spliterator(), false)
+        .anyMatch(moduleName -> exemptModulePattern.matcher(moduleName).matches());
+  }
+
