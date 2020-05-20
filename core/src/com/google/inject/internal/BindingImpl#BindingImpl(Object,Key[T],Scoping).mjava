@@ -1,4 +1,4 @@
-  protected BindingImpl(Object source, Key<T> key, Scoping scoping) {
+  BindingImpl(Object source, Key<T> key, Scoping scoping) {
     this.internalFactory = null;
     this.injector = null;
     this.source = source;

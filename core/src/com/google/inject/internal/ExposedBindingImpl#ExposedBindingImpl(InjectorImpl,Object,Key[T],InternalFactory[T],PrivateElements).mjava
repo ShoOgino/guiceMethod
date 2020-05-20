@@ -1,4 +1,4 @@
-  public ExposedBindingImpl(
+  ExposedBindingImpl(
       InjectorImpl injector,
       Object source,
       Key<T> key,

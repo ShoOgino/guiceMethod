@@ -1,4 +1,4 @@
-  public BindingImpl(
+  BindingImpl(
       InjectorImpl injector,
       Key<T> key,
       Object source,

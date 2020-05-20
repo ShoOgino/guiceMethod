@@ -40,9 +40,9 @@
         return true;
       }
 
-      if (binding instanceof LinkedBindingImpl) {
-        LinkedBindingImpl<?> linkedBinding = (LinkedBindingImpl) binding;
-        Injector injector = linkedBinding.getInjector();
+      if (binding instanceof LinkedKeyBinding) {
+        LinkedKeyBinding<?> linkedBinding = (LinkedKeyBinding) binding;
+        Injector injector = getInjector(linkedBinding);
         if (injector != null) {
           binding = injector.getBinding(linkedBinding.getLinkedKey());
           continue;

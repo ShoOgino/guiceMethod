@@ -1,0 +1,7 @@
+  private static Injector getInjector(LinkedKeyBinding<?> linkedKeyBinding) {
+    if (linkedKeyBinding instanceof BindingImpl) {
+      return ((BindingImpl<?>) linkedKeyBinding).getInjector();
+    }
+    return null;
+  }
+
