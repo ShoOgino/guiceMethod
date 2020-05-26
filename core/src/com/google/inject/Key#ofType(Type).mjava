@@ -4,6 +4,6 @@
    * @since 3.0
    */
   public Key<?> ofType(Type type) {
-    return new Key<Object>(type, annotationStrategy);
+    return new Key<>(type, annotationStrategy);
   }
 

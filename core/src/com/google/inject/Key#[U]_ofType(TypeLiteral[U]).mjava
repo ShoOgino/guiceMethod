@@ -3,7 +3,7 @@
    *
    * @since 3.0
    */
-  public <T> Key<T> ofType(TypeLiteral<T> type) {
-    return new Key<T>(type, annotationStrategy);
+  public <U> Key<U> ofType(TypeLiteral<U> type) {
+    return new Key<U>(type, annotationStrategy);
   }
 

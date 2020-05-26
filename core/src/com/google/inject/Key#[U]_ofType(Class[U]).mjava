@@ -3,7 +3,7 @@
    *
    * @since 3.0
    */
-  public <T> Key<T> ofType(Class<T> type) {
-    return new Key<T>(type, annotationStrategy);
+  public <U> Key<U> ofType(Class<U> type) {
+    return new Key<>(type, annotationStrategy);
   }
 
