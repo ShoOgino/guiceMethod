@@ -1,0 +1,10 @@
+  public void testWithAnnotationInstance() throws NoSuchFieldException {
+    Foo annotation = getClass().getDeclaredField("baz").getAnnotation(Foo.class);
+    Key<Object> k = Key.get(Object.class);
+    Key<Object> kf = k.withAnnotation(annotation);
+    assertNull(k.getAnnotationType());
+    assertNull(k.getAnnotation());
+    assertEquals(Foo.class, kf.getAnnotationType());
+    assertEquals(annotation, kf.getAnnotation());
+  }
+
