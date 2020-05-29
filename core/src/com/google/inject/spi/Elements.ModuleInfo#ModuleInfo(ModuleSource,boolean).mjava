@@ -1,0 +1,5 @@
+    private ModuleInfo(ModuleSource moduleSource, boolean skipScanning) {
+      this.moduleSource = moduleSource;
+      this.skipScanning = skipScanning;
+    }
+

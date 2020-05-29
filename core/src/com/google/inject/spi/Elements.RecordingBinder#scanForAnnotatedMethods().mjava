@@ -15,7 +15,7 @@
           }
           moduleSource = entry.getValue().moduleSource;
           try {
-            info.binder.install(ProviderMethodsModule.forModule(module, scanner));
+            install(ProviderMethodsModule.forModule(module, scanner));
           } catch (RuntimeException e) {
             Collection<Message> messages = Errors.getMessagesFromThrowable(e);
             if (!messages.isEmpty()) {

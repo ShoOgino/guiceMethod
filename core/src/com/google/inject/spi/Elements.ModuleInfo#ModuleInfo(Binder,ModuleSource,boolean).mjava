@@ -1,6 +1,0 @@
-    private ModuleInfo(Binder binder, ModuleSource moduleSource, boolean skipScanning) {
-      this.binder = binder;
-      this.moduleSource = moduleSource;
-      this.skipScanning = skipScanning;
-    }
-
