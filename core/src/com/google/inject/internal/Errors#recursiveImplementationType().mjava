@@ -1,5 +1,6 @@
   public Errors recursiveImplementationType() {
     return addMessage(
-        ErrorId.RECURSIVE_BINDING, "@ImplementedBy points to the same class it annotates.");
+        ErrorId.RECURSIVE_IMPLEMENTATION_TYPE,
+        "@ImplementedBy points to the same class it annotates.");
   }
 

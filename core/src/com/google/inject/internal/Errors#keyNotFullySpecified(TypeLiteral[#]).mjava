@@ -1,6 +1,6 @@
   public Errors keyNotFullySpecified(TypeLiteral<?> typeLiteral) {
     return addMessage(
-        ErrorId.EXPOSED_BUT_NOT_BOUND,
+        ErrorId.KEY_NOT_FULLY_SPECIFIED,
         "%s cannot be used as a key; It is not fully specified.",
         typeLiteral);
   }
