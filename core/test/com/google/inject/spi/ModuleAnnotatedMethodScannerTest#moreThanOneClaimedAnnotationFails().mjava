@@ -1,0 +1,25 @@
+  @Test
+  public void moreThanOneClaimedAnnotationFails() throws Exception {
+    Module module =
+        new AbstractModule() {
+
+          @TestProvides
+          @TestProvides2
+          String foo() {
+            return "foo";
+          }
+        };
+
+    CreationException creationException =
+        assertThatInjectorCreationFails(module, scannerModule(new NamedMunger()));
+
+    assertThat(creationException.getErrorMessages()).hasSize(1);
+    assertThat(creationException)
+        .hasMessageThat()
+        .contains(
+            "More than one annotation claimed by NamedMunger on method "
+                + module.getClass().getName()
+                + ".foo(). Methods can only have "
+                + "one annotation claimed per scanner.");
+  }
+

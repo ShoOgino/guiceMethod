@@ -1,0 +1,9 @@
+  private static Module scannerModule(ModuleAnnotatedMethodScanner scanner) {
+    return new AbstractModule() {
+      @Override
+      protected void configure() {
+        binder().scanModulesForAnnotatedMethods(scanner);
+      }
+    };
+  }
+

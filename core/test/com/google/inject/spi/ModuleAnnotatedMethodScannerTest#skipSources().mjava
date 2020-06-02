@@ -1,10 +1,11 @@
-  public void testWithSource() throws Exception {
+  @Test
+  public void skipSources() throws Exception {
     Module module =
         new AbstractModule() {
           @Override
           protected void configure() {
             binder()
-                .withSource("source")
+                .skipSources(getClass())
                 .install(
                     new AbstractModule() {
 
@@ -16,7 +17,7 @@
                     });
           }
         };
-    Injector injector = Guice.createInjector(module, NamedMunger.module());
+    Injector injector = Guice.createInjector(module, scannerModule(new NamedMunger()));
     assertMungedBinding(injector, String.class, "foo", "foo");
   }
 

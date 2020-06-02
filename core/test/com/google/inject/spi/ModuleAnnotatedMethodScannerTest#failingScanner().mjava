@@ -1,0 +1,15 @@
+  @Test
+  public void failingScanner() {
+    CreationException creationException =
+        assertThatInjectorCreationFails(new SomeModule(), scannerModule(new FailingScanner()));
+    Message m = Iterables.getOnlyElement(creationException.getErrorMessages());
+    assertThat(m.getMessage())
+        .isEqualTo("An exception was caught and reported. Message: Failing in the scanner.");
+    assertThat(creationException).hasCauseThat().isInstanceOf(IllegalStateException.class);
+    ElementSource source = (ElementSource) Iterables.getOnlyElement(m.getSources());
+    assertThat(SomeModule.class.getName())
+        .isEqualTo(Iterables.getOnlyElement(source.getModuleClassNames()));
+    assertThat(String.class.getName() + " " + SomeModule.class.getName() + ".aString()")
+        .isEqualTo(source.toString());
+  }
+

@@ -1,0 +1,4 @@
+    TestScanner(Class<? extends Annotation>... annotations) {
+      this.annotations = ImmutableSet.copyOf(annotations);
+    }
+

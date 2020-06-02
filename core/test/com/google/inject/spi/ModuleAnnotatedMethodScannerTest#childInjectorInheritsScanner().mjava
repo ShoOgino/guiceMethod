@@ -1,5 +1,6 @@
-  public void testChildInjectorInheritsScanner() {
-    Injector parent = Guice.createInjector(NamedMunger.module());
+  @Test
+  public void childInjectorInheritsScanner() {
+    Injector parent = Guice.createInjector(scannerModule(new NamedMunger()));
     Injector child =
         parent.createChildInjector(
             new AbstractModule() {

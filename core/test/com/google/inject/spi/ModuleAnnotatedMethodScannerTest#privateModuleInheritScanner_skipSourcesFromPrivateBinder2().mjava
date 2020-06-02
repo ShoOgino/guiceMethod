@@ -1,12 +1,14 @@
-  public void testPrivateModule_skipSourcesWithinPrivateModule() {
+  @Test
+  public void privateModuleInheritScanner_skipSourcesFromPrivateBinder2() {
     Injector injector =
         Guice.createInjector(
-            NamedMunger.module(),
-            new PrivateModule() {
+            scannerModule(new NamedMunger()),
+            new AbstractModule() {
               @Override
               protected void configure() {
                 binder()
                     .skipSources(getClass())
+                    .newPrivateBinder()
                     .install(
                         new AbstractModule() {
 

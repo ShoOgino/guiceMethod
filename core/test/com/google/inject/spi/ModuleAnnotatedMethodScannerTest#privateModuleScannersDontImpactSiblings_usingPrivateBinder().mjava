@@ -1,4 +1,5 @@
-  public void testPrivateModuleScannersDontImpactSiblings_usingPrivateBinder() {
+  @Test
+  public void privateModuleScannersDontImpactSiblings_usingPrivateBinder() {
     Injector injector =
         Guice.createInjector(
             new AbstractModule() {
@@ -10,7 +11,7 @@
                         new AbstractModule() {
                           @Override
                           protected void configure() {
-                            install(NamedMunger.module());
+                            install(scannerModule(new NamedMunger()));
                           }
 
                           @Exposed

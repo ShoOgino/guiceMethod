@@ -1,0 +1,15 @@
+  @Test
+  public void ignoreMethodsScannedForOverridesSubclass() {
+    IgnoringScanner scanner = new IgnoringScanner(Subclass.class);
+
+    CreationException creationException =
+        assertThatInjectorCreationFails(ProviderMethodsModule.forModule(new Subclass(), scanner));
+
+    assertThat(creationException)
+        .hasMessageThat()
+        .contains(
+            String.format(
+                "Overriding @%s methods is not allowed", TestProvides.class.getCanonicalName()));
+    assertThat(scanner.ignoredCounter()).isEqualTo(1); // checking that there was a method ignored.
+  }
+

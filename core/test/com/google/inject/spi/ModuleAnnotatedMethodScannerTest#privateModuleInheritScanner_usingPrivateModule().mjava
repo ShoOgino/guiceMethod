@@ -1,7 +1,8 @@
-  public void testPrivateModuleInheritScanner_usingPrivateModule() {
+  @Test
+  public void privateModuleInheritScanner_usingPrivateModule() {
     Injector injector =
         Guice.createInjector(
-            NamedMunger.module(),
+            scannerModule(new NamedMunger()),
             new PrivateModule() {
               @Override
               protected void configure() {}

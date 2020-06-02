@@ -1,0 +1,4 @@
+  CreationException assertThatInjectorCreationFails(Module... modules) {
+    return assertThrows(CreationException.class, () -> Guice.createInjector(modules));
+  }
+

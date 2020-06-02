@@ -1,0 +1,39 @@
+  @Test
+  public void ignoreMethods() {
+    class ModuleWithMethodsToIgnore {
+      @TestProvides
+      boolean booleanTest() {
+        return true;
+      }
+
+      @TestProvides
+      int ignore() {
+        return 0;
+      }
+    }
+
+    ModuleAnnotatedMethodScanner filteringScanner =
+        new TestScanner(TestProvides.class) {
+          @Override
+          public <T> Key<T> prepareMethod(
+              Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+            Method method = (Method) injectionPoint.getMember();
+            if (method.getName().equals("ignore")) {
+              return null;
+            }
+            return key;
+          }
+        };
+    Injector filteredInjector =
+        Guice.createInjector(
+            ProviderMethodsModule.forModule(new ModuleWithMethodsToIgnore(), filteringScanner));
+    assertThat(filteredInjector.getInstance(Key.get(Boolean.class))).isTrue();
+    assertThrows(ConfigurationException.class, () -> filteredInjector.getInstance(Integer.class));
+    Injector unfilteredInjector =
+        Guice.createInjector(
+            ProviderMethodsModule.forModule(
+                new ModuleWithMethodsToIgnore(), new TestScanner(TestProvides.class)));
+    assertThat(unfilteredInjector.getInstance(Key.get(Boolean.class))).isTrue();
+    assertThat(unfilteredInjector.getInstance(Integer.class)).isEqualTo(0);
+  }
+

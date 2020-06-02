@@ -1,4 +1,5 @@
-  public void testChildInjectorScannersDontImpactSiblings() {
+  @Test
+  public void childInjectorScannersDontImpactSiblings() {
     Module module =
         new AbstractModule() {
 
@@ -9,12 +10,12 @@
           }
         };
     Injector parent = Guice.createInjector();
-    Injector child = parent.createChildInjector(NamedMunger.module(), module);
+    Injector child = parent.createChildInjector(scannerModule(new NamedMunger()), module);
     assertMungedBinding(child, String.class, "foo", "foo");
 
     // no foo nor foo-munged in sibling, since scanner never saw it.
     Injector sibling = parent.createChildInjector(module);
-    assertNull(sibling.getExistingBinding(Key.get(String.class, named("foo"))));
-    assertNull(sibling.getExistingBinding(Key.get(String.class, named("foo-munged"))));
+    assertThat(sibling.getExistingBinding(Key.get(String.class, named("foo")))).isNull();
+    assertThat(sibling.getExistingBinding(Key.get(String.class, named("foo-munged")))).isNull();
   }
 

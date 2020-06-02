@@ -1,4 +1,5 @@
-  public void testAbstractMethodsAreScannedForOverrides() {
+  @Test
+  public void abstractMethodsAreScannedForOverrides() {
     abstract class Superclass {
       @TestProvides
       abstract boolean abstractTest();
@@ -23,14 +24,13 @@
             return null;
           }
         };
-    try {
-      Guice.createInjector(ProviderMethodsModule.forModule(Subclass.class, testScanner));
-      fail("expected exception not thrown");
-    } catch (CreationException e) {
-      assertContains(
-          e.getMessage(),
-          String.format(
-              "Overriding @%s methods is not allowed", TestProvides.class.getCanonicalName()));
-    }
+    CreationException creationException =
+        assertThatInjectorCreationFails(
+            ProviderMethodsModule.forModule(Subclass.class, testScanner));
+    assertThat(creationException)
+        .hasMessageThat()
+        .contains(
+            String.format(
+                "Overriding @%s methods is not allowed", TestProvides.class.getCanonicalName()));
   }
 
