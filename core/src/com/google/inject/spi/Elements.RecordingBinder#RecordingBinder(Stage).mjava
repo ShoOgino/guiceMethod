@@ -14,7 +14,7 @@
               BindingBuilder.class);
       this.parent = null;
       this.privateElements = null;
-      this.privateBinders = Lists.newArrayList();
+      this.privateBindersForScanning = Lists.newArrayList();
       this.permitMapConstruction = new BindingSourceRestriction.PermitMapConstruction();
     }
 

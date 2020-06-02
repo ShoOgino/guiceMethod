@@ -5,7 +5,7 @@
       binder.install(module);
     }
     binder.scanForAnnotatedMethods();
-    for (RecordingBinder child : binder.privateBinders) {
+    for (RecordingBinder child : binder.privateBindersForScanning) {
       child.scanForAnnotatedMethods();
     }
     binder.permitMapConstruction.finish();

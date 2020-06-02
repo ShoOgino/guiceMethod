@@ -1,0 +1,36 @@
+  @Test
+  public void scannerCantInstallModuleWithCustomProvidesMethods() {
+    ModuleAnnotatedMethodScanner scannerInstallingScannableModule =
+        new TestScanner(TestProvides.class) {
+          @Override
+          public <T> Key<T> prepareMethod(
+              Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+            binder.install(
+                new AbstractModule() {
+                  @TestProvides2
+                  int bogus() {
+                    return 0;
+                  }
+                });
+            return key;
+          }
+        };
+
+    CreationException creationException =
+        assertThatInjectorCreationFails(
+            scannerModule(scannerInstallingScannableModule),
+            scannerModule(new TestScanner(TestProvides2.class)),
+            new AbstractModule() {
+              @TestProvides
+              boolean bogus() {
+                return true;
+              }
+            });
+
+    assertThat(creationException)
+        .hasMessageThat()
+        .contains(
+            "Installing modules with custom provides methods from a ModuleAnnotatedMethodScanner"
+                + " is not supported");
+  }
+

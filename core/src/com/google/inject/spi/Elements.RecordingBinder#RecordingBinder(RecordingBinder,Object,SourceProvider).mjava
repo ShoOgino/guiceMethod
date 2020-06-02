@@ -7,12 +7,13 @@
       this.modules = prototype.modules;
       this.elements = prototype.elements;
       this.scanners = prototype.scanners;
+      this.currentScanner = prototype.currentScanner;
       this.source = source;
       this.moduleSource = prototype.moduleSource;
       this.sourceProvider = sourceProvider;
       this.parent = prototype.parent;
       this.privateElements = prototype.privateElements;
-      this.privateBinders = prototype.privateBinders;
+      this.privateBindersForScanning = prototype.privateBindersForScanning;
       this.permitMapConstruction = prototype.permitMapConstruction;
     }
 

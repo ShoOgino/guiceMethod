@@ -1,0 +1,5 @@
+    /** Returns if the binder is in the module scanning phase. */
+    private boolean moduleScanning() {
+      return currentScanner != null;
+    }
+

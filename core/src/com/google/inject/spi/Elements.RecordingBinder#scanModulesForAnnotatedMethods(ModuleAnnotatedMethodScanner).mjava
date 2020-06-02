@@ -1,5 +1,12 @@
     @Override
     public void scanModulesForAnnotatedMethods(ModuleAnnotatedMethodScanner scanner) {
+      if (moduleScanning()) {
+        addError(
+            "Attempting to register ModuleAnnotatedMethodScanner %s from scanner %s. Scanners are"
+                + " not allowed to register other scanners.",
+            currentScanner, scanner);
+        return;
+      }
       scanners.add(scanner);
       elements.add(new ModuleAnnotatedMethodScannerBinding(getElementSource(), scanner));
     }

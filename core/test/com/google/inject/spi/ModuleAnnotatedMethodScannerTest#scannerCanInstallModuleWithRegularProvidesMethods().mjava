@@ -1,0 +1,31 @@
+  @Test
+  public void scannerCanInstallModuleWithRegularProvidesMethods() {
+    ModuleAnnotatedMethodScanner scanner =
+        new TestScanner(TestProvides.class) {
+          @Override
+          public <T> Key<T> prepareMethod(
+              Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+            binder.install(
+                new AbstractModule() {
+                  @Provides
+                  int provideAnswer() {
+                    return 42;
+                  }
+                });
+            return key;
+          }
+        };
+
+    Injector injector =
+        Guice.createInjector(
+            scannerModule(scanner),
+            new AbstractModule() {
+              @TestProvides
+              boolean bogus() {
+                return true;
+              }
+            });
+
+    assertThat(injector.getInstance(Integer.class)).isEqualTo(42);
+  }
+

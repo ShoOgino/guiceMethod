@@ -18,6 +18,9 @@
           newModuleClass = delegateClass;
         }
       } else {
+        if (moduleScanning()) {
+          forbidNestedScannerMethods(module);
+        }
         newModuleClass = module.getClass();
       }
       if (newModuleClass != null) {

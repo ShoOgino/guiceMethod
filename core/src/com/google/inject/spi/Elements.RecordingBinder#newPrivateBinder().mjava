@@ -2,8 +2,11 @@
     public PrivateBinder newPrivateBinder() {
       PrivateElementsImpl privateElements = new PrivateElementsImpl(getElementSource());
       RecordingBinder binder = new RecordingBinder(this, privateElements);
-      privateBinders.add(binder);
       elements.add(privateElements);
+      // Don't want to scan private modules installed by scanners.
+      if (!moduleScanning()) {
+        privateBindersForScanning.add(binder);
+      }
       return binder;
     }
 

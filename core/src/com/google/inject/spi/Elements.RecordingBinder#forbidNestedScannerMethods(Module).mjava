@@ -1,0 +1,13 @@
+    private void forbidNestedScannerMethods(Module module) {
+      for (ModuleAnnotatedMethodScanner scanner : scanners) {
+        ProviderMethodsModule providerMethodsModule =
+            (ProviderMethodsModule) ProviderMethodsModule.forModule(module, scanner);
+        for (ProviderMethod<?> method : providerMethodsModule.getProviderMethods(this)) {
+          addError(
+              "Scanner %s is installing a module with %s method. Installing modules with custom "
+                  + "provides methods from a ModuleAnnotatedMethodScanner is not supported.",
+              currentScanner, method.getAnnotation().annotationType().getCanonicalName());
+        }
+      }
+    }
+
