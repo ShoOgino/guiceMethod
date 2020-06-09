@@ -1,0 +1,20 @@
+  @Test
+  public void privateModuleInheritsScanner_scannerInstalledAfterPrivateModule() {
+    Injector injector =
+        Guice.createInjector(
+            new PrivateModule() {
+              @Override
+              protected void configure() {}
+
+              @Exposed
+              @TestProvides
+              @Named("foo")
+              String foo() {
+                return "foo";
+              }
+            },
+            // Scanner installed after private module.
+            scannerModule(new NamedMunger()));
+    assertMungedBinding(injector, String.class, "foo", "foo");
+  }
+

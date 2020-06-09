@@ -2,7 +2,7 @@
     private RecordingBinder(RecordingBinder parent, PrivateElementsImpl privateElements) {
       this.stage = parent.stage;
       this.modules = Maps.newLinkedHashMap();
-      this.scanners = Sets.newLinkedHashSet(parent.scanners);
+      this.scanners = Sets.newLinkedHashSet();
       this.currentScanner = parent.currentScanner;
       this.elements = privateElements.getElementsMutable();
       this.source = parent.source;

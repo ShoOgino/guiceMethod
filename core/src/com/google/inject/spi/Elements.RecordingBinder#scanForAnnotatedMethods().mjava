@@ -4,6 +4,7 @@
      * maps. (They're stored in both maps to prevent a module from being installed more than once.)
      */
     void scanForAnnotatedMethods() {
+      Iterable<ModuleAnnotatedMethodScanner> scanners = getAllScanners();
       // Note: we must iterate over a copy of the modules because calling install(..)
       // will mutate modules, otherwise causing a ConcurrentModificationException.
       for (Map.Entry<Module, ModuleInfo> entry : Maps.newLinkedHashMap(modules).entrySet()) {

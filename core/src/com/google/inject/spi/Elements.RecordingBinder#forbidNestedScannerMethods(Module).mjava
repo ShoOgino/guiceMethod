@@ -1,5 +1,5 @@
     private void forbidNestedScannerMethods(Module module) {
-      for (ModuleAnnotatedMethodScanner scanner : scanners) {
+      for (ModuleAnnotatedMethodScanner scanner : getAllScanners()) {
         ProviderMethodsModule providerMethodsModule =
             (ProviderMethodsModule) ProviderMethodsModule.forModule(module, scanner);
         for (ProviderMethod<?> method : providerMethodsModule.getProviderMethods(this)) {

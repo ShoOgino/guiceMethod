@@ -1,0 +1,14 @@
+    /**
+     * Get all scanners registered in this binder and its ancestors.
+     *
+     * <p>Should only be called during module scanning, because at that point registering new
+     * scanners is forbidden.
+     */
+    private Iterable<ModuleAnnotatedMethodScanner> getAllScanners() {
+      if (privateElements == null) {
+        return scanners;
+      }
+      // Private binders have their own set of scanners and they inherit from their parent.
+      return Iterables.concat(scanners, parent.getAllScanners());
+    }
+
