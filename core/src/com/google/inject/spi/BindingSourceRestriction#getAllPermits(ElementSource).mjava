@@ -8,7 +8,7 @@
     ImmutableSet<Class<? extends Annotation>> permits =
         elementSource.moduleSource.getPermitMap().getPermits(elementSource);
     if (elementSource.getOriginalElementSource() == null
-        || !isOriginalElementSourceTrustworthy(elementSource)) {
+        || !elementSource.trustedOriginalElementSource) {
       return permits;
     }
     permitsBuilder.addAll(permits);

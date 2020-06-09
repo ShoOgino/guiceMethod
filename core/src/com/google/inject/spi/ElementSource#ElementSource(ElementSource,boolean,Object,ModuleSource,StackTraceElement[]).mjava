@@ -10,6 +10,7 @@
    */
   ElementSource(
       /* @Nullable */ ElementSource originalSource,
+      boolean trustedOriginalSource,
       Object declaringSource,
       ModuleSource moduleSource,
       StackTraceElement[] partialCallStack) {
@@ -17,6 +18,7 @@
     Preconditions.checkNotNull(moduleSource, "moduleSource cannot be null.");
     Preconditions.checkNotNull(partialCallStack, "partialCallStack cannot be null.");
     this.originalElementSource = originalSource;
+    this.trustedOriginalElementSource = trustedOriginalSource;
     this.declaringSource = declaringSource;
     this.moduleSource = moduleSource;
     this.partialCallStack = StackTraceElements.convertToInMemoryStackTraceElement(partialCallStack);

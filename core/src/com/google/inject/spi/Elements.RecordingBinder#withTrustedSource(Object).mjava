@@ -1,0 +1,7 @@
+    public RecordingBinder withTrustedSource(final Object source) {
+      return source == this.source
+          ? this
+          : new RecordingBinder(
+              this, source, /* sourceProvider = */ null, /* trustedSource = */ true);
+    }
+

@@ -1,0 +1,5 @@
+  @Test
+  public void getElements_getModule_works() {
+    Guice.createInjector(Elements.getModule(Elements.getElements(new NetworkModule())));
+  }
+

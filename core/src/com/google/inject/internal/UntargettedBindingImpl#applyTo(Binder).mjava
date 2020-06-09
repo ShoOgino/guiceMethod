@@ -1,5 +1,5 @@
   @Override
   public void applyTo(Binder binder) {
-    getScoping().applyTo(binder.withSource(getSource()).bind(getKey()));
+    getScoping().applyTo(withTrustedSource(GUICE_INTERNAL, binder, getSource()).bind(getKey()));
   }
 

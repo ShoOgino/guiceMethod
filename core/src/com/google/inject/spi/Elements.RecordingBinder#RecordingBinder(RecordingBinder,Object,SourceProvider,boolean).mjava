@@ -1,6 +1,9 @@
     /** Creates a recording binder that's backed by {@code prototype}. */
     private RecordingBinder(
-        RecordingBinder prototype, Object source, SourceProvider sourceProvider) {
+        RecordingBinder prototype,
+        Object source,
+        SourceProvider sourceProvider,
+        boolean trustedSource) {
       checkArgument(source == null ^ sourceProvider == null);
 
       this.stage = prototype.stage;
@@ -9,6 +12,7 @@
       this.scanners = prototype.scanners;
       this.currentScanner = prototype.currentScanner;
       this.source = source;
+      this.trustedSource = trustedSource;
       this.moduleSource = prototype.moduleSource;
       this.sourceProvider = sourceProvider;
       this.parent = prototype.parent;

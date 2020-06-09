@@ -1,5 +1,8 @@
     @Override
     public RecordingBinder withSource(final Object source) {
-      return source == this.source ? this : new RecordingBinder(this, source, null);
+      return source == this.source
+          ? this
+          : new RecordingBinder(
+              this, source, /* sourceProvider = */ null, /* trustedSource = */ false);
     }
 

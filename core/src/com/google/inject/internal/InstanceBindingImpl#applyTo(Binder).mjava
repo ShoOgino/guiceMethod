@@ -1,6 +1,6 @@
   @Override
   public void applyTo(Binder binder) {
     // instance bindings aren't scoped
-    binder.withSource(getSource()).bind(getKey()).toInstance(instance);
+    withTrustedSource(GUICE_INTERNAL, binder, getSource()).bind(getKey()).toInstance(instance);
   }
 

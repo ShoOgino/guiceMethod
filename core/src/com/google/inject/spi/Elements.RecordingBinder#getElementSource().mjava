@@ -32,6 +32,7 @@
         }
       }
       // Build the binding call stack
-      return new ElementSource(originalSource, declaringSource, moduleSource, partialCallStack);
+      return new ElementSource(
+          originalSource, trustedSource, declaringSource, moduleSource, partialCallStack);
     }
 

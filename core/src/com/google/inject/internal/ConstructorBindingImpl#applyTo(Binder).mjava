@@ -4,8 +4,7 @@
     InjectionPoint constructor = getConstructor();
     getScoping()
         .applyTo(
-            binder
-                .withSource(getSource())
+            withTrustedSource(GUICE_INTERNAL, binder, getSource())
                 .bind(getKey())
                 .toConstructor(
                     (Constructor) getConstructor().getMember(),

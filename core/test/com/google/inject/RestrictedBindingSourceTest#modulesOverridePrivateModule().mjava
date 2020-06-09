@@ -1,0 +1,28 @@
+  @Test
+  public void modulesOverridePrivateModule() {
+    Guice.createInjector(
+        Modules.override(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {
+                    install(new NetworkModule());
+                    expose(Key.get(String.class, Hostname.class));
+                  }
+
+                  @Provides
+                  @Exposed
+                  @Named("custom-gateway")
+                  int customGateway(@GatewayIpAdress int gateway) {
+                    return gateway + 4;
+                  }
+                })
+            .with(
+                new AbstractModule() {
+                  @Provides
+                  @Named("custom-gateway")
+                  int provideCustomGatewayOverride() {
+                    return 12345;
+                  }
+                }));
+  }
+

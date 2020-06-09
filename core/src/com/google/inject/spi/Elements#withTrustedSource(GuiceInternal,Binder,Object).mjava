@@ -1,0 +1,19 @@
+  // TODO(user): Consider moving the RecordingBinder to com.google.inject.internal and removing these
+  // internal 'friend' methods.
+  /**
+   * Internal version of Binder.withSource for establishing a trusted ElementSource chain for
+   * source-restricting bindings that are re-written using {@link Element#applyTo}.
+   *
+   * <p>Using Binder.withSource is not trustworthy because it's a public API that external users can
+   * use to spoof the original ElementSource of a binding by calling withSource(bogusElementSource).
+   */
+  public static Binder withTrustedSource(
+      GuiceInternal guiceInternal, Binder binder, Object source) {
+    checkNotNull(guiceInternal);
+    if (binder instanceof RecordingBinder) {
+      return ((RecordingBinder) binder).withTrustedSource(source);
+    }
+    // Preserve existing (untrusted) behavior for non-standard Binder implementations.
+    return binder.withSource(source);
+  }
+

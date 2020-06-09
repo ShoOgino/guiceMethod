@@ -1,5 +1,5 @@
   @Test
-  public void originalElementSourceNotTrustedOutsideModuleOverride() {
+  public void originalElementSourceNotTrustedIfSetExternally() {
     ElementSource networkElementSource =
         (ElementSource) Elements.getElements(new NetworkModule()).get(0).getSource();
 
@@ -22,8 +22,8 @@
     assertThat(((ElementSource) rogueGatewayBinding.getSource()).getOriginalElementSource())
         .isEqualTo(networkElementSource);
 
-    // Will fail because the original element source isn't trusted, becase it wasn't set by
-    // Modules.override.
+    // Will fail because the original element source isn't trusted, becase it wasn't set by Guice
+    // internals.
     CreationException expected = assertThatInjectorCreationFails(rogueModule);
 
     assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
