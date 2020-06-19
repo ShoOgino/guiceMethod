@@ -1,0 +1,12 @@
+  @Test
+  public void canBindRestrictedTypeWithUnrestrictedQualifierAnnotation() {
+    Guice.createInjector(
+        new AbstractModule() {
+          @Provides
+          @Named("custom")
+          RoutingTable provideRoutingTable() {
+            return ip -> ip;
+          }
+        });
+  }
+
