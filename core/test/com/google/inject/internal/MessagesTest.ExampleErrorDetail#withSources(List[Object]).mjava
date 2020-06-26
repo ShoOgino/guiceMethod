@@ -1,0 +1,5 @@
+    @Override
+    public ExampleErrorDetail withSources(List<Object> newSources) {
+      return new ExampleErrorDetail(getMessage(), newSources, getCause());
+    }
+

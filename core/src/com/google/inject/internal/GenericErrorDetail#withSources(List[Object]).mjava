@@ -1,0 +1,5 @@
+  @Override
+  public GenericErrorDetail withSources(List<Object> newSources) {
+    return new GenericErrorDetail(getMessage(), newSources, getCause());
+  }
+

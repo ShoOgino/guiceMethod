@@ -1,0 +1,9 @@
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof ErrorDetail)) {
+      return false;
+    }
+    ErrorDetail<?> e = (ErrorDetail<?>) o;
+    return message.equals(e.message) && Objects.equal(cause, e.cause) && sources.equals(e.sources);
+  }
+

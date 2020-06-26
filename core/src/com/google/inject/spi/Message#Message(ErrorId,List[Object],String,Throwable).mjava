@@ -1,8 +1,6 @@
   /** @since 2.0 */
   public Message(ErrorId errorId, List<Object> sources, String message, Throwable cause) {
     this.errorId = errorId;
-    this.sources = ImmutableList.copyOf(sources);
-    this.message = checkNotNull(message, "message");
-    this.cause = cause;
+    this.errorDetail = new GenericErrorDetail(message, sources, cause);
   }
 

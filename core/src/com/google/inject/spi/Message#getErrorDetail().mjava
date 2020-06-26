@@ -1,0 +1,9 @@
+  /**
+   * Returns details about this error message.
+   *
+   * @since vNext
+   */
+  public ErrorDetail<?> getErrorDetail() {
+    return errorDetail;
+  }
+

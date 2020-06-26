@@ -1,0 +1,10 @@
+  /**
+   * Returns true if this error can be merged with the {@code otherError} and formatted together.
+   *
+   * <p>By default this return false and implementations that support merging with other errors
+   * should override this method.
+   */
+  public boolean isMergeable(ErrorDetail<?> otherError) {
+    return false;
+  }
+

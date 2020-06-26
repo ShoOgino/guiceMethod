@@ -1,0 +1,6 @@
+  /** @since vNext */
+  public Message(ErrorId errorId, ErrorDetail<?> errorDetail) {
+    this.errorId = errorId;
+    this.errorDetail = errorDetail;
+  }
+

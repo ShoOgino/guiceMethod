@@ -1,0 +1,11 @@
+  @Override
+  public void format(int index, List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
+    Preconditions.checkArgument(mergeableErrors.isEmpty(), "Unexpected mergeable errors");
+    formatter.format("%s) %s%n", index, getMessage());
+
+    List<Object> dependencies = getSources();
+    for (Object source : Lists.reverse(dependencies)) {
+      Messages.formatSource(formatter, source);
+    }
+  }
+

@@ -1,0 +1,4 @@
+    ExampleErrorDetail(String message, List<Object> sources, Throwable cause) {
+      super(message, sources, cause);
+    }
+

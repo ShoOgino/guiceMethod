@@ -1,0 +1,4 @@
+  public Throwable getCause() {
+    return cause;
+  }
+

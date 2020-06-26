@@ -1,0 +1,5 @@
+    @Override
+    public void format(int index, List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
+      formatter.format("%s) %s (count: %s)", index, getMessage(), mergeableErrors.size() + 1);
+    }
+

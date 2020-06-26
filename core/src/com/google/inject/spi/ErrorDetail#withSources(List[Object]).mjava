@@ -1,0 +1,3 @@
+  /** Returns a new instance of the same {@link ErrorDetail} with updated sources. */
+  public abstract SelfT withSources(List<Object> newSources);
+

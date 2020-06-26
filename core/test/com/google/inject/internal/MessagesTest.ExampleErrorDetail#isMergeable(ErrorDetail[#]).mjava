@@ -1,0 +1,6 @@
+    @Override
+    public boolean isMergeable(ErrorDetail<?> otherError) {
+      return otherError instanceof ExampleErrorDetail
+          && otherError.getMessage().equals(getMessage());
+    }
+
