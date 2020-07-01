@@ -1,0 +1,34 @@
+  @Test
+  public void scannerSourceOfProvidesMethodBindingInsideCustomScannerIsCustomScanner() {
+    ModuleAnnotatedMethodScanner scanner =
+        new TestScanner(TestProvides.class) {
+          @Override
+          public <T> Key<T> prepareMethod(
+              Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+            binder.install(
+                new AbstractModule() {
+                  // All bindings inside custom scanner should have it as their source scanner -
+                  // including those created by a nested built-in @Provides* scanner.
+                  @Provides
+                  String provideString() {
+                    return "bla";
+                  }
+                });
+            return null;
+          }
+        };
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @TestProvides
+              @Foo
+              Long discardedLong() {
+                return 1L;
+              }
+            },
+            scannerModule(scanner));
+
+    assertThat(getSourceScanner(injector.getBinding(String.class))).isEqualTo(scanner);
+  }
+

@@ -1,0 +1,5 @@
+  /** Is it scanning the built-in @Provides* methods. */
+  public boolean isScanningBuiltInProvidesMethods() {
+    return scanner == ProvidesMethodScanner.INSTANCE;
+  }
+

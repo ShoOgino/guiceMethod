@@ -1,0 +1,4 @@
+  ModuleAnnotatedMethodScanner getSourceScanner(Binding<?> binding) {
+    return ((ElementSource) binding.getSource()).scanner;
+  }
+

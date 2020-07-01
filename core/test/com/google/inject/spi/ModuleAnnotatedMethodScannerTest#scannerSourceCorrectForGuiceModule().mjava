@@ -1,0 +1,30 @@
+  @Test
+  public void scannerSourceCorrectForGuiceModule() {
+    Module module =
+        new AbstractModule() {
+          @TestProvides
+          @Foo
+          boolean booleanTest() {
+            return true;
+          }
+
+          @Provides
+          String stringTest() {
+            return "";
+          }
+
+          @Override
+          protected void configure() {
+            bind(Long.class).toInstance(1L);
+          }
+        };
+    TestScanner testScanner = new TestScanner(TestProvides.class);
+
+    Injector injector = Guice.createInjector(module, scannerModule(testScanner));
+
+    assertThat(getSourceScanner(injector.getBinding(Key.get(Boolean.class, Foo.class))))
+        .isEqualTo(testScanner);
+    assertThat(getSourceScanner(injector.getBinding(String.class))).isNotEqualTo(testScanner);
+    assertThat(getSourceScanner(injector.getBinding(Long.class))).isNull();
+  }
+

@@ -13,7 +13,8 @@
       boolean trustedOriginalSource,
       Object declaringSource,
       ModuleSource moduleSource,
-      StackTraceElement[] partialCallStack) {
+      StackTraceElement[] partialCallStack,
+      ModuleAnnotatedMethodScanner scanner) {
     Preconditions.checkNotNull(declaringSource, "declaringSource cannot be null.");
     Preconditions.checkNotNull(moduleSource, "moduleSource cannot be null.");
     Preconditions.checkNotNull(partialCallStack, "partialCallStack cannot be null.");
@@ -22,5 +23,6 @@
     this.declaringSource = declaringSource;
     this.moduleSource = moduleSource;
     this.partialCallStack = StackTraceElements.convertToInMemoryStackTraceElement(partialCallStack);
+    this.scanner = scanner;
   }
 

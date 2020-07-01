@@ -1,0 +1,16 @@
+  @Test
+  public void scannerSourceCorrectForNonGuiceModule() {
+    class NonGuiceModule {
+      @TestProvides
+      boolean booleanTest() {
+        return true;
+      }
+    }
+    TestScanner testScanner = new TestScanner(TestProvides.class);
+
+    Injector injector =
+        Guice.createInjector(ProviderMethodsModule.forModule(new NonGuiceModule(), testScanner));
+
+    assertThat(getSourceScanner(injector.getBinding(Boolean.class))).isEqualTo(testScanner);
+  }
+

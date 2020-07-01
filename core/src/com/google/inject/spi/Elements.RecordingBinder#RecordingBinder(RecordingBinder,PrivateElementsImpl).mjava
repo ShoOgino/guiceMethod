@@ -12,5 +12,6 @@
       this.privateElements = privateElements;
       this.privateBindersForScanning = parent.privateBindersForScanning;
       this.permitMapConstruction = parent.permitMapConstruction;
+      this.scannerSource = parent.scannerSource;
     }
 

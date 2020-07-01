@@ -19,5 +19,6 @@
       this.privateElements = prototype.privateElements;
       this.privateBindersForScanning = prototype.privateBindersForScanning;
       this.permitMapConstruction = prototype.permitMapConstruction;
+      this.scannerSource = prototype.scannerSource;
     }
 

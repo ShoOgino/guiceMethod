@@ -1,0 +1,28 @@
+  @Test
+  public void scannerSourceForPrivateModule() {
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(
+                new PrivateModule() {
+                  @Override
+                  protected void configure() {}
+
+                  @Exposed
+                  @TestProvides
+                  @Foo
+                  String privateString() {
+                    return "bar";
+                  }
+                });
+          }
+        };
+    TestScanner scanner = new TestScanner(TestProvides.class);
+
+    Injector injector = Guice.createInjector(module, scannerModule(scanner));
+
+    assertThat(getSourceScanner(injector.getBinding(Key.get(String.class, Foo.class))))
+        .isEqualTo(scanner);
+  }
+

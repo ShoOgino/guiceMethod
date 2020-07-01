@@ -4,15 +4,22 @@
       if (modules.containsKey(module)) {
         return;
       }
+      // Whether the module installed is a ProviderMethodModule for a custom scanner.
+      boolean customScanner = false;
       Class<?> newModuleClass = null;
       RecordingBinder binder = this;
       // Update the module source for the new module
       if (module instanceof ProviderMethodsModule) {
+        ProviderMethodsModule providerMethodsModule = (ProviderMethodsModule) module;
+        if (!providerMethodsModule.isScanningBuiltInProvidesMethods()) {
+          scannerSource = providerMethodsModule.getScanner();
+          customScanner = true;
+        }
         // There are two reason's we'd want to get the module source in a ProviderMethodsModule.
         // ModuleAnnotatedMethodScanner lets users scan their own modules for @Provides-like
         // bindings.  If they install the module at a top-level, then moduleSource can be null.
         // Also, if they pass something other than 'this' to it, we'd have the wrong source.
-        Class<?> delegateClass = ((ProviderMethodsModule) module).getDelegateModuleClass();
+        Class<?> delegateClass = providerMethodsModule.getDelegateModuleClass();
         if (moduleSource == null
             || !moduleSource.getModuleClassName().equals(delegateClass.getName())) {
           newModuleClass = delegateClass;
@@ -52,6 +59,13 @@
       if (newModuleClass != null) {
         moduleSource = moduleSource.getParent();
         permitMapConstruction.popModule();
+      }
+      // Only wipe the scannerSource once custom scanner installation is finished. This way all
+      // bindings created by the custom scanner will have it as their scanner source, including
+      // bindings created by the built-in scanner scanning @Provides* methods in modules installed
+      // by the custom scanner.
+      if (customScanner) {
+        scannerSource = null;
       }
     }
 

@@ -1,0 +1,27 @@
+  @Test
+  public void scannerSourceCorrectForBindingsCreatedByTheScannerDirectly() {
+    ModuleAnnotatedMethodScanner scanner =
+        new TestScanner(TestProvides.class) {
+          @Override
+          public <T> Key<T> prepareMethod(
+              Binder binder, Annotation annotation, Key<T> key, InjectionPoint injectionPoint) {
+            binder.bind(key.ofType(String.class)).toInstance("bla");
+            return null;
+          }
+        };
+
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @TestProvides
+              @Foo
+              Long discardedLong() {
+                return 1L;
+              }
+            },
+            scannerModule(scanner));
+
+    assertThat(getSourceScanner(injector.getBinding(Key.get(String.class, Foo.class))))
+        .isEqualTo(scanner);
+  }
+
