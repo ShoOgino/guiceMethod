@@ -1,0 +1,17 @@
+  @Test
+  public void scannerWithPermitCanCreateRestrictedBinding() {
+    @NetworkLibrary
+    class NetworkProvidesScannerWithPermit extends NetworkProvidesScanner {}
+
+    AbstractModule moduleWithNetworkProvidesMethod =
+        new AbstractModule() {
+          @NetworkProvides
+          String provideNetworkString() {
+            return "lorem ipsum";
+          }
+        };
+
+    Guice.createInjector(
+        moduleWithNetworkProvidesMethod, scannerModule(new NetworkProvidesScannerWithPermit()));
+  }
+

@@ -1,0 +1,6 @@
+  private static Stream<Class<? extends Annotation>> getPermits(Class<?> clazz) {
+    return Arrays.stream(clazz.getAnnotations())
+        .map(Annotation::annotationType)
+        .filter(a -> a.isAnnotationPresent(RestrictedBindingSource.Permit.class));
+  }
+

@@ -8,6 +8,7 @@
       }
     }
 
-    Guice.createInjector(new NetworkModuleWithCustomProvides(), NetworkProvidesScanner.module());
+    Guice.createInjector(
+        new NetworkModuleWithCustomProvides(), scannerModule(new NetworkProvidesScanner()));
   }
 

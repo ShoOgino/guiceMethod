@@ -1,18 +1,15 @@
-  /**
-   * Get all permits on the element source chain. Trusting only original (parent) element sources if
-   * they are set by Modules.override.
-   */
+  /** Get all permits on the element source chain. */
   private static ImmutableSet<Class<? extends Annotation>> getAllPermits(
       ElementSource elementSource) {
     ImmutableSet.Builder<Class<? extends Annotation>> permitsBuilder = ImmutableSet.builder();
-    ImmutableSet<Class<? extends Annotation>> permits =
-        elementSource.moduleSource.getPermitMap().getPermits(elementSource);
-    if (elementSource.getOriginalElementSource() == null
-        || !elementSource.trustedOriginalElementSource) {
-      return permits;
+    permitsBuilder.addAll(elementSource.moduleSource.getPermitMap().getPermits(elementSource));
+    if (elementSource.scanner != null) {
+      getPermits(elementSource.scanner.getClass()).forEach(permitsBuilder::add);
     }
-    permitsBuilder.addAll(permits);
-    permitsBuilder.addAll(getAllPermits(elementSource.getOriginalElementSource()));
+    if (elementSource.getOriginalElementSource() != null
+        && elementSource.trustedOriginalElementSource) {
+      permitsBuilder.addAll(getAllPermits(elementSource.getOriginalElementSource()));
+    }
     return permitsBuilder.build();
   }
 

@@ -9,7 +9,7 @@
         };
 
     CreationException expected =
-        assertThatInjectorCreationFails(rogueModule, NetworkProvidesScanner.module());
+        assertThatInjectorCreationFails(rogueModule, scannerModule(new NetworkProvidesScanner()));
 
     assertThat(expected).hasMessageThat().contains(BINDING_PERMISSION_ERROR);
     assertThat(expected).hasMessageThat().contains(NETWORK_ANNOTATION_IS_RESTRICTED);
