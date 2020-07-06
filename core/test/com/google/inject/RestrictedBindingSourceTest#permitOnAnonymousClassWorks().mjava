@@ -1,0 +1,12 @@
+  @Test
+  public void permitOnAnonymousClassWorks() {
+    Guice.createInjector(
+        new @FooPermit AbstractModule() {
+          @Provides
+          @Foo
+          String provideFooString() {
+            return "foo";
+          }
+        });
+  }
+
