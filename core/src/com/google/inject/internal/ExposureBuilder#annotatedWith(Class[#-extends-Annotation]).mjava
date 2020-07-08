@@ -2,6 +2,6 @@
   public void annotatedWith(Class<? extends Annotation> annotationType) {
     Preconditions.checkNotNull(annotationType, "annotationType");
     checkNotAnnotated();
-    key = Key.get(key.getTypeLiteral(), annotationType);
+    key = key.withAnnotation(annotationType);
   }
 
