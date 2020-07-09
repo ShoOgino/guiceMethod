@@ -1,6 +1,8 @@
     Builder parent(InjectorImpl parent) {
       this.parent = parent;
       this.state = new InheritingState(parent.state);
+      this.jitBindingData =
+          new InjectorJitBindingData(Optional.of(parent.getJitBindingData()), state);
       this.options = parent.options;
       this.stage = options.stage;
       return this;

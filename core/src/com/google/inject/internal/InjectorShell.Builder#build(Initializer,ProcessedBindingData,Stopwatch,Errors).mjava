@@ -36,7 +36,7 @@
       optionsProcessor.process(null, elements);
       options = optionsProcessor.getOptions(stage, options);
 
-      InjectorImpl injector = new InjectorImpl(parent, state, options);
+      InjectorImpl injector = new InjectorImpl(parent, state, jitBindingData, options);
       if (privateElements != null) {
         privateElements.initInjector(injector);
       }

@@ -1,0 +1,5 @@
+  /** Returns the source of a banned key. */
+  Set<Object> getSourcesForBannedKey(Key<?> key) {
+    return bannedKeys.getSources(key);
+  }
+

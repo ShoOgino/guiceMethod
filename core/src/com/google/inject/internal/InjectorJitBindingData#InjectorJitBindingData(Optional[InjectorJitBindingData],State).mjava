@@ -1,0 +1,5 @@
+  InjectorJitBindingData(Optional<InjectorJitBindingData> parent, State state) {
+    this.parent = parent;
+    this.bannedKeys = new WeakKeySet(state.lock());
+  }
+

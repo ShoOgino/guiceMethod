@@ -1,0 +1,4 @@
+  InjectorJitBindingData getJitBindingData() {
+    return jitBindingData;
+  }
+

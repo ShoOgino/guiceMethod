@@ -1,0 +1,8 @@
+  /**
+   * Returns true if {@code key} is forbidden from being bound in the injector corresponding to this
+   * data object. This indicates that one of the injector's children has bound the key.
+   */
+  boolean isBannedKey(Key<?> key) {
+    return bannedKeys.contains(key);
+  }
+

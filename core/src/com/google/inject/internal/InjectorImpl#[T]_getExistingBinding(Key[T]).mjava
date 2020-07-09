@@ -9,7 +9,8 @@
       // See if any jit bindings have been created for this key.
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
         @SuppressWarnings("unchecked")
-        BindingImpl<T> jitBinding = (BindingImpl<T>) injector.jitBindings.get(key);
+        BindingImpl<T> jitBinding =
+            (BindingImpl<T>) injector.jitBindingData.getJitBindings().get(key);
         if (jitBinding != null) {
           return jitBinding;
         }

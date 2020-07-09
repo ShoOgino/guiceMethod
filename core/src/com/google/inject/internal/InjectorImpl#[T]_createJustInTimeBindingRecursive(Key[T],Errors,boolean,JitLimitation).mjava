@@ -21,22 +21,23 @@
             jitDisabled,
             parent.options.jitDisabled ? JitLimitation.NO_JIT : jitType);
       } catch (ErrorsException ignored) {
+        // TODO(b/160910914): Why are ErrorsExceptions ignored?
       }
     }
 
-    // Retrieve the sources before checking for blacklisting to guard against sources becoming null
-    // due to a full GC happening after calling state.isBlacklisted and
-    // state.getSourcesForBlacklistedKey.
+    // Retrieve the sources before checking for banned key to guard against sources becoming null
+    // due to a full GC happening after calling jitBindingData.isBanned and
+    // state.getSourcesForBannedKey.
     // TODO(user): Consolidate these two APIs.
-    Set<Object> sources = state.getSourcesForBlacklistedKey(key);
-    if (state.isBlacklisted(key)) {
+    Set<Object> sources = jitBindingData.getSourcesForBannedKey(key);
+    if (jitBindingData.isBannedKey(key)) {
       throw errors.childBindingAlreadySet(key, sources).toException();
     }
 
     key = MoreTypes.canonicalizeKey(key); // before storing the key long-term, canonicalize it.
     BindingImpl<T> binding = createJustInTimeBinding(key, errors, jitDisabled, jitType);
-    state.parent().blacklist(key, state, binding.getSource());
-    jitBindings.put(key, binding);
+    jitBindingData.banKeyInParent(key, state, binding.getSource());
+    jitBindingData.getJitBindings().put(key, binding);
     return binding;
   }
 

@@ -11,7 +11,7 @@
       // first try to find a JIT binding that we've already created
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
         @SuppressWarnings("unchecked") // we only store bindings that match their key
-        BindingImpl<T> binding = (BindingImpl<T>) injector.jitBindings.get(key);
+        BindingImpl<T> binding = (BindingImpl<T>) injector.jitBindingData.getJitBindings().get(key);
 
         if (binding != null) {
           // If we found a JIT binding and we don't allow them,
@@ -33,15 +33,15 @@
       // entry in jitBindings (during cleanup), and we may be trying
       // to create it again (in the case of a recursive JIT binding).
       // We need both of these guards for different reasons
-      // failedJitBindings.contains: We want to continue processing if we've never
+      // getFailedJitBindings.contains: We want to continue processing if we've never
       //   failed before, so that our initial error message contains
       //   as much useful information as possible about what errors exist.
       // errors.hasErrors: If we haven't already failed, then it's OK to
       //   continue processing, to make sure the ultimate error message
       //   is the correct one.
       // See: ImplicitBindingsTest#testRecursiveJitBindingsCleanupCorrectly
-      // for where this guard compes into play.
-      if (failedJitBindings.contains(key) && errors.hasErrors()) {
+      // for where this guard comes into play.
+      if (jitBindingData.getFailedJitBindings().contains(key) && errors.hasErrors()) {
         throw errors.toException();
       }
       return createJustInTimeBindingRecursive(key, errors, options.jitDisabled, jitType);

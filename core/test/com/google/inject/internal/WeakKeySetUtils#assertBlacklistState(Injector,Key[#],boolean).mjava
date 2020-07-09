@@ -2,12 +2,12 @@
     // if we're expecting it to not be blacklisted, loop around and wait for threads to run.
     if (!isBlacklisted) {
       for (int i = 0; i < 10; i++) {
-        if (!((InjectorImpl) injector).state.isBlacklisted(key)) {
+        if (!((InjectorImpl) injector).getJitBindingData().isBannedKey(key)) {
           break;
         }
         sleep();
       }
     }
-    assertEquals(isBlacklisted, ((InjectorImpl) injector).state.isBlacklisted(key));
+    assertEquals(isBlacklisted, ((InjectorImpl) injector).getJitBindingData().isBannedKey(key));
   }
 

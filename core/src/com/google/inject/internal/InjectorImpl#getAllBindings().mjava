@@ -3,7 +3,7 @@
     synchronized (state.lock()) {
       return new ImmutableMap.Builder<Key<?>, Binding<?>>()
           .putAll(state.getExplicitBindingsThisLevel())
-          .putAll(jitBindings)
+          .putAll(jitBindingData.getJitBindings())
           .build();
     }
   }
