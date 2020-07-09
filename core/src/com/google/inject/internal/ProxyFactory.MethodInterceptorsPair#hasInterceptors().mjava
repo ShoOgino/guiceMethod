@@ -1,4 +1,0 @@
-    boolean hasInterceptors() {
-      return interceptors != null;
-    }
-

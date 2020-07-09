@@ -1,0 +1,31 @@
+  @Override
+  protected void generateMethodInvoker(MethodVisitor mv, Method method) {
+
+    int invokeOpcode;
+    if ((method.getModifiers() & STATIC) == 0) {
+      // context object is the instance whose method we want to call
+      mv.visitVarInsn(ALOAD, 1);
+      mv.visitTypeInsn(CHECKCAST, hostName);
+      invokeOpcode = hostIsInterface ? INVOKEINTERFACE : INVOKEVIRTUAL;
+    } else {
+      // fast-class static method invokers don't use the context object
+      invokeOpcode = INVOKESTATIC;
+    }
+
+    unpackArguments(mv, method.getParameterTypes());
+
+    mv.visitMethodInsn(
+        invokeOpcode,
+        hostName,
+        method.getName(),
+        Type.getMethodDescriptor(method),
+        hostIsInterface);
+
+    Class<?> returnType = method.getReturnType();
+    if (returnType == void.class) {
+      mv.visitInsn(ACONST_NULL);
+    } else if (returnType.isPrimitive()) {
+      box(mv, Type.getType(returnType));
+    }
+  }
+

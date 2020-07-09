@@ -1,0 +1,21 @@
+  public void testSetterInterception() {
+    Injector injector =
+        Guice.createInjector(
+            new AbstractModule() {
+              @Override
+              protected void configure() {
+                bindConstant().annotatedWith(Names.named("text")).to("Hello, world");
+                bindInterceptor(
+                    Matchers.any(),
+                    Matchers.annotatedWith(Inject.class),
+                    mi -> {
+                      mi.getArguments()[0] = ">>" + mi.getArguments()[0] + "<<";
+                      return mi.proceed();
+                    });
+              }
+            });
+
+    Setter setter = injector.getInstance(Setter.class);
+    assertEquals(">>Hello, world<<", setter.text);
+  }
+

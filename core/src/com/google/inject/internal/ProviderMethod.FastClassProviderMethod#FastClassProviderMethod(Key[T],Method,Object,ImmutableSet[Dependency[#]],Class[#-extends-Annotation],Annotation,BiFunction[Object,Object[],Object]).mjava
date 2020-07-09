@@ -1,0 +1,12 @@
+    FastClassProviderMethod(
+        Key<T> key,
+        Method method,
+        Object instance,
+        ImmutableSet<Dependency<?>> dependencies,
+        Class<? extends Annotation> scopeAnnotation,
+        Annotation annotation,
+        BiFunction<Object, Object[], Object> fastMethod) {
+      super(key, method, instance, dependencies, scopeAnnotation, annotation);
+      this.fastMethod = fastMethod;
+    }
+

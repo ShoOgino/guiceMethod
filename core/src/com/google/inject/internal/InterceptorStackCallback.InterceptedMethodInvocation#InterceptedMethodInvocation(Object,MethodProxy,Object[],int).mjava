@@ -1,8 +1,0 @@
-    public InterceptedMethodInvocation(
-        Object proxy, MethodProxy methodProxy, Object[] arguments, int index) {
-      this.proxy = proxy;
-      this.methodProxy = methodProxy;
-      this.arguments = arguments;
-      this.index = index;
-    }
-

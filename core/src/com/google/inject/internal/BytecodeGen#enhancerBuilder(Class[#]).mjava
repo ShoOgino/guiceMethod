@@ -1,0 +1,5 @@
+  /** Create a builder of enhancers for the given class. */
+  static EnhancerBuilder enhancerBuilder(Class<?> hostClass) {
+    return ENHANCER_BUILDERS.getUnchecked(hostClass);
+  }
+

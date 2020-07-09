@@ -1,0 +1,18 @@
+  /** Attempts to merge the interface with the current flattened hierarchy. */
+  private static boolean mergeInterface(List<Class<?>> interfaces, Class<?> candidate) {
+    // work along the flattened hierarchy to find the appropriate merge point
+    for (int i = 0, len = interfaces.size(); i < len; i++) {
+      Class<?> existingInterface = interfaces.get(i);
+      if (existingInterface == candidate) {
+        // already seen this interface, skip further processing
+        return false;
+      } else if (existingInterface.isAssignableFrom(candidate)) {
+        // extends existing interface, insert just before it in the flattened hierarchy
+        interfaces.add(i, candidate);
+        return true;
+      }
+    }
+    // unrelated or a superinterface, in both cases append to the flattened hierarchy
+    return interfaces.add(candidate);
+  }
+

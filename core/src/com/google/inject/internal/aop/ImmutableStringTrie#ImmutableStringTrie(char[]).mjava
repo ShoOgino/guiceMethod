@@ -1,0 +1,4 @@
+  ImmutableStringTrie(char[] data) {
+    this.trie = data;
+  }
+

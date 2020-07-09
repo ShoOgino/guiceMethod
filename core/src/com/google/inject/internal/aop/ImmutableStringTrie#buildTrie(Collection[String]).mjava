@@ -1,0 +1,13 @@
+  /**
+   * Builds an immutable trie that indexes the given table of strings.
+   *
+   * <p>The table of strings must be sorted in lexical order.
+   */
+  public static ToIntFunction<String> buildTrie(Collection<String> table) {
+    int numRows = table.size();
+    if (numRows > 1) {
+      return buildTrie(new StringBuilder(), table.toArray(new String[numRows]), 0, numRows);
+    }
+    return ImmutableStringTrie::singletonTrie;
+  }
+

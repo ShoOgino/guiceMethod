@@ -4,25 +4,14 @@
       return new DefaultConstructionProxyFactory<T>(injectionPoint).create();
     }
 
-    @SuppressWarnings("unchecked")
-    Class<? extends Callback>[] callbackTypes = new Class[callbacks.length];
-    for (int i = 0; i < callbacks.length; i++) {
-      if (callbacks[i] == net.sf.cglib.proxy.NoOp.INSTANCE) {
-        callbackTypes[i] = net.sf.cglib.proxy.NoOp.class;
-      } else {
-        callbackTypes[i] = net.sf.cglib.proxy.MethodInterceptor.class;
-      }
-    }
-
-    // Create the proxied class. We're careful to ensure that all enhancer state is not-specific
+    // Create the proxied class. We're careful to ensure that interceptor state is not-specific
     // to this injector. Otherwise, the proxies for each injector will waste PermGen memory
     try {
-      Enhancer enhancer = BytecodeGen.newEnhancer(declaringClass, visibility);
-      enhancer.setCallbackFilter(new IndicesCallbackFilter(methods));
-      enhancer.setCallbackTypes(callbackTypes);
-      return new ProxyConstructor<T>(enhancer, injectionPoint, callbacks, interceptors);
+      return new ProxyConstructor<>(injectionPoint, enhancer, interceptors, callbacks);
     } catch (Throwable e) {
-      throw new Errors().errorEnhancingClass(declaringClass, e).toException();
+      throw new Errors()
+          .errorEnhancingClass(injectionPoint.getMember().getDeclaringClass(), e)
+          .toException();
     }
   }
 

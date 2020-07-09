@@ -1,0 +1,6 @@
+  /** Add a new method to this partition for resolution. */
+  public MethodPartition addCandidate(Method method) {
+    candidates.add(method);
+    return this;
+  }
+

@@ -1,0 +1,5 @@
+  /** Returns true if the given object is a circular proxy. */
+  public static boolean isCircularProxy(Object object) {
+    return object != null && circularProxyTypeCache.containsKey(object.getClass());
+  }
+

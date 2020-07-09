@@ -1,0 +1,12 @@
+  /** Loads a local argument onto the Java stack and returns the size of the argument. */
+  public static int loadArgument(MethodVisitor mv, Class<?> parameterType, int slot) {
+    if (!parameterType.isPrimitive()) {
+      mv.visitVarInsn(ALOAD, slot);
+      return 1;
+    }
+
+    Type primitiveType = Type.getType(parameterType);
+    mv.visitVarInsn(primitiveType.getOpcode(ILOAD), slot);
+    return primitiveType.getSize();
+  }
+

@@ -1,10 +1,9 @@
   /**
    * Creates a {@link ProviderMethod}.
    *
-   * <p>Unless {@code skipFastClassGeneration} is set, this will use {@link
-   * net.sf.cglib.reflect.FastClass} to invoke the actual method, since it is significantly faster.
-   * However, this will fail if the method is {@code private} or {@code protected}, since fastclass
-   * is subject to java access policies.
+   * <p>Unless {@code skipFastClassGeneration} is set, this will use bytecode generation to invoke
+   * the actual method, since it is significantly faster. However, this may fail if the method is
+   * {@code private} or {@code protected}, since this approach is subject to java access policies.
    */
   static <T> ProviderMethod<T> create(
       Key<T> key,
@@ -18,12 +17,12 @@
     /*if[AOP]*/
     if (!skipFastClassGeneration) {
       try {
-        net.sf.cglib.reflect.FastClass fc = BytecodeGen.newFastClassForMember(method);
-        if (fc != null) {
+        BiFunction<Object, Object[], Object> fastMethod = BytecodeGen.fastMethod(method);
+        if (fastMethod != null) {
           return new FastClassProviderMethod<T>(
-              key, fc, method, instance, dependencies, scopeAnnotation, annotation);
+              key, method, instance, dependencies, scopeAnnotation, annotation, fastMethod);
         }
-      } catch (net.sf.cglib.core.CodeGenerationException e) {
+      } catch (Exception | LinkageError e) {
         /* fall-through */
       }
     }

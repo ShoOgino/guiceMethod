@@ -1,10 +1,10 @@
     @Override
     public Object proceed() throws Throwable {
       try {
-        return index == interceptors.length
-            ? methodProxy.invokeSuper(proxy, arguments)
-            : interceptors[index]
-                .invoke(new InterceptedMethodInvocation(proxy, methodProxy, arguments, index + 1));
+        return interceptorIndex == interceptors.length
+            ? superInvoker.apply(proxy, arguments)
+            : interceptors[interceptorIndex].invoke(
+                new InterceptedMethodInvocation(proxy, arguments, interceptorIndex + 1));
       } catch (Throwable t) {
         pruneStacktrace(t);
         throw t;

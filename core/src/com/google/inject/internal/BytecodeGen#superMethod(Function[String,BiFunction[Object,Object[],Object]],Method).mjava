@@ -1,0 +1,10 @@
+  /**
+   * Returns an invoker that calls the original unenhanced method. The invoker function accepts an
+   * enhanced instance plus an array of arguments for the original method.
+   */
+  static BiFunction<Object, Object[], Object> superMethod(
+      Function<String, BiFunction<Object, Object[], Object>> enhancer, Method method) {
+    // no need to check 'canEnhance', ProxyFactory will only pick methods from enhanceable list
+    return enhancer.apply(signature(method));
+  }
+

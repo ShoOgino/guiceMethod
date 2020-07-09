@@ -1,0 +1,13 @@
+  /**
+   * Returns a fast invoker for the given method. The invoker function accepts an instance, which
+   * will be {@code null} for static methods, and an array of arguments for the method.
+   *
+   * <p>Returns {@code null} if the method cannot be "fast-invoked" due to visibility issues.
+   */
+  static BiFunction<Object, Object[], Object> fastMethod(Method method) {
+    if (canFastInvoke(method)) {
+      return fastClass(method).apply(signature(method));
+    }
+    return null;
+  }
+

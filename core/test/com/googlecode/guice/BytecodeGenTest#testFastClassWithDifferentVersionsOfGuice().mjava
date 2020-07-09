@@ -1,0 +1,27 @@
+  // This tests for a situation where an osgi bundle contains a different version of guice.
+  public void testFastClassWithDifferentVersionsOfGuice() throws Throwable {
+    Injector injector = Guice.createInjector();
+    // These classes are all in the same classloader as guice itself, so other than the private one
+    // they can all be fast class invoked
+    injector.getInstance(PublicInject.class).assertIsFastClassInvoked();
+    injector.getInstance(ProtectedInject.class).assertIsFastClassInvoked();
+    injector.getInstance(PackagePrivateInject.class).assertIsFastClassInvoked();
+    injector.getInstance(PrivateInject.class).assertIsReflectionInvoked();
+
+    // This classloader loads the test types in a loader that has a different version of guice;
+    // we can still use fastclass because the generated class is now fully decoupled from guice
+    MultipleVersionsOfGuiceClassLoader fakeLoader = new MultipleVersionsOfGuiceClassLoader();
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PublicInject.class))
+        .assertIsFastClassInvoked();
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(ProtectedInject.class))
+        .assertIsFastClassInvoked();
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PackagePrivateInject.class))
+        .assertIsFastClassInvoked();
+    injector
+        .getInstance(fakeLoader.loadLogCreatorType(PrivateInject.class))
+        .assertIsReflectionInvoked();
+  }
+

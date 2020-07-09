@@ -1,0 +1,12 @@
+  @Override
+  public Class<?> define(Class<?> hostClass, byte[] bytecode) throws Exception {
+    ClassLoader hostLoader = hostClass.getClassLoader();
+
+    ChildLoader childLoader =
+        hostLoader != null
+            ? ChildLoaderCacheHolder.CHILD_LOADER_CACHE.get(hostLoader)
+            : SystemChildLoaderHolder.SYSTEM_CHILD_LOADER;
+
+    return childLoader.defineInChild(bytecode);
+  }
+

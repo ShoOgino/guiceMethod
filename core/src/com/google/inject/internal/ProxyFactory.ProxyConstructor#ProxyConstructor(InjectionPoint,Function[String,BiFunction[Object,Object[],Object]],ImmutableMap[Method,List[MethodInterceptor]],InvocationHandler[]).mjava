@@ -1,0 +1,13 @@
+    @SuppressWarnings("unchecked") // the constructor promises to construct 'T's
+    ProxyConstructor(
+        InjectionPoint injectionPoint,
+        Function<String, BiFunction<Object, Object[], Object>> enhancer,
+        ImmutableMap<Method, List<MethodInterceptor>> interceptors,
+        InvocationHandler[] callbacks) {
+      this.injectionPoint = injectionPoint;
+      this.constructor = (Constructor<T>) injectionPoint.getMember();
+      this.enhancedConstructor = BytecodeGen.enhancedConstructor(enhancer, constructor);
+      this.interceptors = interceptors;
+      this.callbacks = callbacks;
+    }
+

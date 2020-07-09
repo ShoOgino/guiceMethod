@@ -1,0 +1,11 @@
+  @SuppressWarnings("ReferenceEquality") // intentional
+  @Override
+  public Class<?> define(Class<?> hostClass, byte[] bytecode) throws Exception {
+    ClassLoader hostLoader = hostClass.getClassLoader();
+    Method defineMethod = findDefineMethod(hostLoader);
+    if (defineMethod == ANONYMOUS_DEFINE_METHOD) {
+      return defineAnonymously(hostClass, bytecode);
+    }
+    return (Class<?>) defineMethod.invoke(null, hostLoader, bytecode);
+  }
+

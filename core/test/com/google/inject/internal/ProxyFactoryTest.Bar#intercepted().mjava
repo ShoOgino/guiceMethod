@@ -1,5 +1,5 @@
     @Intercept
-    void intercepted() {
+    protected void intercepted() {
       interceptedCalled = true;
     }
 

@@ -1,0 +1,19 @@
+  private Function<String, BiFunction<Object, Object[], Object>> doBuildEnhancer(
+      BitSet methodIndices) {
+    NavigableMap<String, Executable> glueMap = new TreeMap<>();
+
+    visitMembers(
+        hostClass.getDeclaredConstructors(),
+        hasPackageAccess(),
+        ctor -> glueMap.put(signature(ctor), ctor));
+
+    for (int methodIndex = methodIndices.nextSetBit(0);
+        methodIndex >= 0;
+        methodIndex = methodIndices.nextSetBit(methodIndex + 1)) {
+      Method method = enhanceableMethods[methodIndex];
+      glueMap.put(signature(method), method);
+    }
+
+    return new Enhancer(hostClass, bridgeDelegates).glue(glueMap);
+  }
+

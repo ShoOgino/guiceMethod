@@ -1,0 +1,32 @@
+  /** Combines the signature and invoker tables into a mapping from signature to invoker. */
+  private static Function<String, BiFunction<Object, Object[], Object>> bindSignaturesToInvokers(
+      ToIntFunction<String> signatureTable, MethodHandle invokerTable) {
+
+    // single-argument method; the table must be a function from integer index to invoker function
+    if (invokerTable.type().parameterCount() == 1) {
+      return signature -> {
+        try {
+          // pass this signature's index into the table function to retrieve the invoker
+          return (BiFunction<Object, Object[], Object>)
+              invokerTable.invokeExact(signatureTable.applyAsInt(signature));
+        } catch (Throwable e) {
+          throw asIfUnchecked(e);
+        }
+      };
+    }
+
+    // otherwise must be a trampoline method that takes the index and invoker arguments all at once
+    return signature -> {
+      // bind the index as soon as we have the signature...
+      int index = signatureTable.applyAsInt(signature);
+      return (instance, arguments) -> {
+        try {
+          // ...but delay calling trampoline until invocation time when we have the other arguments
+          return invokerTable.invokeExact(index, instance, arguments);
+        } catch (Throwable e) {
+          throw asIfUnchecked(e);
+        }
+      };
+    };
+  }
+

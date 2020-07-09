@@ -1,0 +1,11 @@
+  static Method tryAccessDefineMethod(Class<?> loaderClass) {
+    try {
+      logger.log(Level.FINE, "Accessing defineClass method in %s", loaderClass);
+      return AccessController.doPrivileged(
+          (PrivilegedExceptionAction<Method>) () -> accessDefineMethod(loaderClass));
+    } catch (Throwable e) {
+      logger.log(Level.FINE, "Cannot access defineClass method in " + loaderClass, e);
+      return ANONYMOUS_DEFINE_METHOD;
+    }
+  }
+

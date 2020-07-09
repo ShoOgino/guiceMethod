@@ -1,0 +1,7 @@
+  private static Object bindTheUnsafe() throws Exception {
+    Class<?> unsafeType = Class.forName("sun.misc.Unsafe");
+    Field theUnsafeField = unsafeType.getDeclaredField("theUnsafe");
+    theUnsafeField.setAccessible(true);
+    return theUnsafeField.get(null);
+  }
+

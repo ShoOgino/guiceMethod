@@ -1,0 +1,3 @@
+  /** Generate invoker that takes an instance and an argument array and calls the method. */
+  protected abstract void generateMethodInvoker(MethodVisitor mv, Method method);
+

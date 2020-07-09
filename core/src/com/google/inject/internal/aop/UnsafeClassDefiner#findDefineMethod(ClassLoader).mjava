@@ -1,0 +1,13 @@
+  /** Finds the appropriate class defining method for the given class loader. */
+  private static Method findDefineMethod(ClassLoader hostLoader) {
+    if (hostLoader == null || ALWAYS_DEFINE_ANONYMOUSLY) {
+      return ANONYMOUS_DEFINE_METHOD;
+    } else if (ClassLoaderDefineMethodHolder.CLASS_LOADER_DEFINE_METHOD != null) {
+      // we have access to the defineClass method of anything extending ClassLoader
+      return ClassLoaderDefineMethodHolder.CLASS_LOADER_DEFINE_METHOD;
+    } else {
+      // can't access ClassLoader, try accessing the specific sub-class instead
+      return DefineMethodCacheHolder.DEFINE_METHOD_CACHE.getUnchecked(hostLoader.getClass());
+    }
+  }
+

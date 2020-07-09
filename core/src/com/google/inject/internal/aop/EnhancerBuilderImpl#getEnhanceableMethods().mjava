@@ -1,0 +1,5 @@
+  @Override
+  public Method[] getEnhanceableMethods() {
+    return enhanceableMethods;
+  }
+

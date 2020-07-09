@@ -1,0 +1,4 @@
+  private static Class<?> defineAnonymously(Class<?> hostClass, byte[] bytecode) throws Exception {
+    return (Class<?>) ANONYMOUS_DEFINE_METHOD.invoke(THE_UNSAFE, hostClass, bytecode, null);
+  }
+

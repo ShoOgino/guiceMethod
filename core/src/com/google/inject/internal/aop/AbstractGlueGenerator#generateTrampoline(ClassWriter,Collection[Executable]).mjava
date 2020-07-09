@@ -1,0 +1,37 @@
+  /**
+   * Generate trampoline that takes an index, along with a context object and array of argument
+   * objects, and invokes the appropriate constructor/method returning the result as an object.
+   */
+  protected final void generateTrampoline(ClassWriter cw, Collection<Executable> members) {
+    MethodVisitor mv =
+        cw.visitMethod(PUBLIC | STATIC, TRAMPOLINE_NAME, TRAMPOLINE_DESCRIPTOR, null, null);
+    mv.visitCode();
+
+    Label[] labels = new Label[members.size()];
+    Arrays.setAll(labels, i -> new Label());
+    Label defaultLabel = new Label();
+
+    mv.visitVarInsn(ILOAD, 0);
+    mv.visitTableSwitchInsn(0, labels.length - 1, defaultLabel, labels);
+
+    int labelIndex = 0;
+    for (Executable member : members) {
+      mv.visitLabel(labels[labelIndex++]);
+      mv.visitFrame(F_SAME, 0, null, 0, null);
+      if (member instanceof Constructor<?>) {
+        generateConstructorInvoker(mv, (Constructor<?>) member);
+      } else {
+        generateMethodInvoker(mv, (Method) member);
+      }
+      mv.visitInsn(ARETURN);
+    }
+
+    mv.visitLabel(defaultLabel);
+    mv.visitFrame(F_SAME, 0, null, 0, null);
+    mv.visitInsn(ACONST_NULL);
+    mv.visitInsn(ARETURN);
+
+    mv.visitMaxs(0, 0);
+    mv.visitEnd();
+  }
+

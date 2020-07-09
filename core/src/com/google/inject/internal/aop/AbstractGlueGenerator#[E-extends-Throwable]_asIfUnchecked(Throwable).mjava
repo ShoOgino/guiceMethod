@@ -1,0 +1,6 @@
+  /** Generics trick to get compiler to treat given exception as if unchecked (as JVM does). */
+  @SuppressWarnings("unchecked")
+  private static <E extends Throwable> RuntimeException asIfUnchecked(Throwable e) throws E {
+    throw (E) e;
+  }
+

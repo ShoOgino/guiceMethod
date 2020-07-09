@@ -1,4 +1,0 @@
-    BridgeClassLoader() {
-      // use system loader as parent
-    }
-

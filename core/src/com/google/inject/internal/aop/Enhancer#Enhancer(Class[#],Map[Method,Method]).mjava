@@ -1,0 +1,8 @@
+  Enhancer(Class<?> hostClass, Map<Method, Method> bridgeDelegates) {
+    super(hostClass, ENHANCER_BY_GUICE_MARKER);
+    this.bridgeDelegates = bridgeDelegates;
+
+    // CHECKCAST(proxyName) fails when hosted anonymously; hostName works in that scenario
+    this.checkcastToProxy = ClassDefining.isAnonymousHost(hostClass) ? hostName : proxyName;
+  }
+

@@ -1,0 +1,4 @@
+  private static boolean isPublic(Class<?> clazz) {
+    return (clazz.getModifiers() & PUBLIC) != 0;
+  }
+

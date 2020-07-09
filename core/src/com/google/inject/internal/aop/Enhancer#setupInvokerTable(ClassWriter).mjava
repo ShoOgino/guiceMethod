@@ -1,0 +1,49 @@
+  /** Generate static initializer to setup invoker table based on the trampoline. */
+  private void setupInvokerTable(ClassWriter cw) {
+    MethodVisitor mv = cw.visitMethod(PRIVATE | STATIC, "<clinit>", "()V", null, null);
+    mv.visitCode();
+
+    Handle trampolineHandle =
+        new Handle(H_INVOKESTATIC, proxyName, TRAMPOLINE_NAME, TRAMPOLINE_DESCRIPTOR, false);
+
+    if (ClassDefining.isAnonymousHost(hostClass)) {
+      // proxy class is anonymous we can't create our lambda glue, store raw trampoline instead
+      mv.visitLdcInsn(trampolineHandle);
+    } else {
+      // otherwise generate lambda glue to make the raw trampoline look like an invoker table
+
+      mv.visitMethodInsn(
+          INVOKESTATIC,
+          "java/lang/invoke/MethodHandles",
+          "lookup",
+          "()Ljava/lang/invoke/MethodHandles$Lookup;",
+          false);
+
+      mv.visitLdcInsn("apply");
+      mv.visitLdcInsn(INDEX_TO_INVOKER_METHOD_TYPE);
+      mv.visitLdcInsn(RAW_INVOKER_METHOD_TYPE);
+      mv.visitLdcInsn(trampolineHandle);
+      mv.visitLdcInsn(INVOKER_METHOD_TYPE);
+
+      mv.visitMethodInsn(
+          INVOKESTATIC,
+          "java/lang/invoke/LambdaMetafactory",
+          "metafactory",
+          METAFACTORY_DESCRIPTOR,
+          false);
+
+      mv.visitMethodInsn(
+          INVOKEVIRTUAL,
+          "java/lang/invoke/CallSite",
+          "getTarget",
+          "()Ljava/lang/invoke/MethodHandle;",
+          false);
+    }
+
+    mv.visitFieldInsn(PUTSTATIC, proxyName, INVOKERS_NAME, INVOKERS_DESCRIPTOR);
+
+    mv.visitInsn(RETURN);
+    mv.visitMaxs(0, 0);
+    mv.visitEnd();
+  }
+

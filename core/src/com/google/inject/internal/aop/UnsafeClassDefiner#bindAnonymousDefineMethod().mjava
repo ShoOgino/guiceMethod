@@ -1,0 +1,6 @@
+  private static Method bindAnonymousDefineMethod() throws Exception {
+    Class<?> unsafeType = THE_UNSAFE.getClass();
+    // defineAnonymousClass has all the functionality we need and is available in Java 7 onwards
+    return unsafeType.getMethod("defineAnonymousClass", Class.class, byte[].class, Object[].class);
+  }
+

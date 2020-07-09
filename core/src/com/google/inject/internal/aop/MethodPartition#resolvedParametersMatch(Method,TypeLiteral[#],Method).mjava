@@ -1,0 +1,13 @@
+  /** Compares a sub-method with a generic super-method by resolving it against the host class. */
+  private static boolean resolvedParametersMatch(
+      Method subMethod, TypeLiteral<?> host, Method superMethod) {
+    Class<?>[] parameterTypes = subMethod.getParameterTypes();
+    List<TypeLiteral<?>> resolvedTypes = host.getParameterTypes(superMethod);
+    for (int i = 0, len = parameterTypes.length; i < len; i++) {
+      if (parameterTypes[i] != resolvedTypes.get(i).getRawType()) {
+        return false;
+      }
+    }
+    return true;
+  }
+

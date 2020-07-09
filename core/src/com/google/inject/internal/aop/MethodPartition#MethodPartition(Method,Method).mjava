@@ -1,0 +1,6 @@
+  /** Each partition starts off with at least two methods. */
+  public MethodPartition(Method first, Method second) {
+    candidates.add(first);
+    candidates.add(second);
+  }
+

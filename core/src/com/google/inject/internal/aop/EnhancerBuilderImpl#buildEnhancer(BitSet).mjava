@@ -1,0 +1,14 @@
+  @Override
+  public Function<String, BiFunction<Object, Object[], Object>> buildEnhancer(
+      BitSet methodIndices) {
+    if ((hostClass.getModifiers() & FINAL) != 0) {
+      throw new IllegalArgumentException("Cannot subclass final " + hostClass);
+    }
+
+    Map<BitSet, Function<String, BiFunction<Object, Object[], Object>>> enhancers =
+        ENHANCERS.get(hostClass);
+    synchronized (enhancers) {
+      return enhancers.computeIfAbsent(methodIndices, this::doBuildEnhancer);
+    }
+  }
+

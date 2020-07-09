@@ -1,0 +1,21 @@
+  public void testRandomStrings() {
+
+    Random random = new SecureRandom();
+    StringBuilder buf = new StringBuilder();
+    Set<String> strings = new TreeSet<>();
+
+    while (strings.size() < NUM_TEST_STRINGS) {
+      randomize(random, buf);
+      strings.add(buf.toString());
+      buf.setLength(0);
+    }
+
+    List<String> table = new ArrayList<>(strings); // already sorted
+
+    ToIntFunction<String> trie = ImmutableStringTrie.buildTrie(table);
+
+    for (int i = 0; i < table.size(); i++) {
+      assertThat(trie.applyAsInt(table.get(i)), is(i));
+    }
+  }
+

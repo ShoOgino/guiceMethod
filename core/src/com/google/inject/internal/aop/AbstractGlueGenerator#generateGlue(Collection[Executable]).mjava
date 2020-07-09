@@ -1,0 +1,3 @@
+  /** Generates enhancer/fast-class bytecode for the given constructors/methods. */
+  protected abstract byte[] generateGlue(Collection<Executable> members);
+

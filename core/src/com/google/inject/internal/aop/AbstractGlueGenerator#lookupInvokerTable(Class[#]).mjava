@@ -1,0 +1,3 @@
+  /** Lookup the invoker table; this may be represented by a function or a trampoline. */
+  protected abstract MethodHandle lookupInvokerTable(Class<?> glueClass) throws Throwable;
+

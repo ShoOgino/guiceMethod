@@ -1,0 +1,21 @@
+  /** Builds a trie, overflowing to additional tries if there are too many rows */
+  private static ToIntFunction<String> buildTrie(
+      StringBuilder buf, String[] table, int row, int rowLimit) {
+
+    int trieLimit = row + MAX_ROWS_PER_TRIE;
+    if (rowLimit <= trieLimit) {
+      buildSubTrie(buf, table, 0, row, rowLimit);
+      char[] data = new char[buf.length()];
+      buf.getChars(0, data.length, data, 0);
+      return new ImmutableStringTrie(data);
+    }
+
+    // overflow, build as big a trie as we can and put the rest in additional tries
+    buildSubTrie(buf, table, 0, row, trieLimit);
+    char[] data = new char[buf.length()];
+    buf.getChars(0, data.length, data, 0);
+    buf.setLength(0); // reset buffer for re-use
+
+    return new Overflow(data, table[trieLimit], buildTrie(buf, table, trieLimit, rowLimit));
+  }
+

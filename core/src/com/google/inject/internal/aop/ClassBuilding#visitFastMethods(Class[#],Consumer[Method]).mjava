@@ -1,0 +1,16 @@
+  /** Visit all methods declared by the host class that can be fast-invoked. */
+  private static void visitFastMethods(Class<?> hostClass, Consumer<Method> visitor) {
+    if (hasPackageAccess()) {
+      // can fast-invoke all non-private methods declared by the class
+      visitMembers(hostClass.getDeclaredMethods(), true, visitor);
+    } else {
+      // can only fast-invoke public methods
+      for (Method method : hostClass.getMethods()) {
+        // limit to those declared by this class; inherited methods have their own fast-class
+        if (hostClass == method.getDeclaringClass()) {
+          visitor.accept(method);
+        }
+      }
+    }
+  }
+

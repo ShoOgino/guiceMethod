@@ -1,0 +1,8 @@
+  /** Can we access this member from a subclass which may be in the same package? */
+  private static boolean canAccess(Executable member, boolean samePackage) {
+    int modifiers = member.getModifiers();
+
+    // public and protected members are always ok, non-private also ok if in the same package
+    return (modifiers & (PUBLIC | PROTECTED)) != 0 || (samePackage && (modifiers & PRIVATE) == 0);
+  }
+

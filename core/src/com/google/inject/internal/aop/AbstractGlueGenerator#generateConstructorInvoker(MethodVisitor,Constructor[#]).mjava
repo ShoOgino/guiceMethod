@@ -1,0 +1,3 @@
+  /** Generate invoker that takes a context and an argument array and calls the constructor. */
+  protected abstract void generateConstructorInvoker(MethodVisitor mv, Constructor<?> constructor);
+

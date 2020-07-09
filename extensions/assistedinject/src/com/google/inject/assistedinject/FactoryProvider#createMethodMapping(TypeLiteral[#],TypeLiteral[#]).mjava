@@ -58,9 +58,9 @@
         for (Annotation parameterAnnotation : parameterAnnotations) {
           if (parameterAnnotation.annotationType() == Assisted.class) {
             throw newConfigurationException(
-                "Factory method %s has an @Assisted parameter, which "
-                    + "is incompatible with the deprecated @AssistedInject annotation. Please replace "
-                    + "@AssistedInject with @Inject on the %s constructor.",
+                "Factory method %s has an @Assisted parameter, which is incompatible with the"
+                    + " deprecated @AssistedInject annotation. Please replace @AssistedInject with"
+                    + " @Inject on the %s constructor.",
                 method, implementationType);
           }
         }

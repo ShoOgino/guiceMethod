@@ -1,0 +1,5 @@
+  @Override
+  public Object invoke(Object proxy, Method unused, Object[] arguments) throws Throwable {
+    return new InterceptedMethodInvocation(proxy, arguments, 0).proceed();
+  }
+

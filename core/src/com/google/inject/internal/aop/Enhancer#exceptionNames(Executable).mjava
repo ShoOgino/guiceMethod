@@ -1,0 +1,8 @@
+  /** Returns internal names of exceptions declared by the given constructor/method. */
+  private static String[] exceptionNames(Executable member) {
+    Class<?>[] exceptionClasses = member.getExceptionTypes();
+    String[] exceptionNames = new String[exceptionClasses.length];
+    Arrays.setAll(exceptionNames, i -> Type.getInternalName(exceptionClasses[i]));
+    return exceptionNames;
+  }
+

@@ -1,0 +1,5 @@
+  /** Do we have access to {@code sun.misc.Unsafe}? */
+  public static boolean isAccessible() {
+    return ANONYMOUS_DEFINE_METHOD != null;
+  }
+

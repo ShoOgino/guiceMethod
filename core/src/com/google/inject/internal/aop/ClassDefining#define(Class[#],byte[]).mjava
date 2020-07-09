@@ -1,0 +1,5 @@
+  /** Defines a new class relative to the host. */
+  public static Class<?> define(Class<?> hostClass, byte[] bytecode) throws Exception {
+    return ClassDefinerHolder.INSTANCE.define(hostClass, bytecode);
+  }
+

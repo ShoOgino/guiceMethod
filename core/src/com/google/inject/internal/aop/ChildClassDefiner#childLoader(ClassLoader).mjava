@@ -1,0 +1,6 @@
+  /** Creates a child loader for the given host loader */
+  static ChildLoader childLoader(ClassLoader hostLoader) {
+    logger.fine("Creating a child loader for " + hostLoader);
+    return doPrivileged(() -> new ChildLoader(hostLoader));
+  }
+

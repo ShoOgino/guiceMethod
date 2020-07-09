@@ -19,7 +19,6 @@
           || name.startsWith("javax.")
           || name.equals(LogCreator.class.getName())
           || (!name.startsWith("com.google.inject.")
-              && !name.contains(".cglib.")
               && !name.startsWith("com.googlecode.guice"))) {
 
         // standard parent delegation

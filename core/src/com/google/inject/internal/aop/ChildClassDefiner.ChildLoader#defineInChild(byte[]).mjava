@@ -1,0 +1,6 @@
+    Class<?> defineInChild(byte[] bytecode) {
+      Class<?> type = defineClass(null, bytecode, 0, bytecode.length, null);
+      resolveClass(type);
+      return type;
+    }
+

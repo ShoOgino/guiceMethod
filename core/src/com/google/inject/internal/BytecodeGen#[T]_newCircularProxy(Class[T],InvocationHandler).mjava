@@ -1,0 +1,7 @@
+  /** Creates a new circular proxy for the given type. */
+  static <T> T newCircularProxy(Class<T> type, InvocationHandler handler) {
+    Object proxy = Proxy.newProxyInstance(type.getClassLoader(), new Class<?>[] {type}, handler);
+    circularProxyTypeCache.put(proxy.getClass(), Boolean.TRUE);
+    return type.cast(proxy);
+  }
+

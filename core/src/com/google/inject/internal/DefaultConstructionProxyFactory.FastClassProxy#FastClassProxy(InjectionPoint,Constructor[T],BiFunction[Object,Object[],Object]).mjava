@@ -1,0 +1,9 @@
+    FastClassProxy(
+        InjectionPoint injectionPoint,
+        Constructor<T> constructor,
+        BiFunction<Object, Object[], Object> fastConstructor) {
+      this.injectionPoint = injectionPoint;
+      this.constructor = constructor;
+      this.fastConstructor = fastConstructor;
+    }
+

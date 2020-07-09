@@ -1,5 +1,5 @@
     @Intercept
-    void foo() {
+    protected void foo() {
       fooCalled = true;
     }
 

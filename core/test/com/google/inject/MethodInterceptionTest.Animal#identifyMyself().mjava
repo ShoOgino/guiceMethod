@@ -1,0 +1,4 @@
+    default String identifyMyself() {
+      return "I am an animal.";
+    }
+

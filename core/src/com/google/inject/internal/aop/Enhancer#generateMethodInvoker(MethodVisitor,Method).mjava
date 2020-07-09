@@ -1,0 +1,23 @@
+  @Override
+  protected void generateMethodInvoker(MethodVisitor mv, Method method) {
+    Method target = bridgeDelegates.getOrDefault(method, method);
+
+    // if this was a bridge method and we know the target then replace superclass delegation
+    // with virtual dispatch to avoid skipping other interceptors overriding the target method
+    int invokeOpcode = target != method ? INVOKEVIRTUAL : INVOKESPECIAL;
+
+    mv.visitVarInsn(ALOAD, 1);
+    mv.visitTypeInsn(CHECKCAST, checkcastToProxy);
+    unpackArguments(mv, target.getParameterTypes());
+
+    mv.visitMethodInsn(
+        invokeOpcode, hostName, target.getName(), Type.getMethodDescriptor(target), false);
+
+    Class<?> returnType = target.getReturnType();
+    if (returnType == void.class) {
+      mv.visitInsn(ACONST_NULL);
+    } else if (returnType.isPrimitive()) {
+      box(mv, Type.getType(returnType));
+    }
+  }
+

@@ -1,11 +1,6 @@
     @Override
-    @SuppressWarnings("unchecked") // the constructor promises to produce 'T's
+    @SuppressWarnings("unchecked") // the enhancer promises to produce 'T's
     public T newInstance(Object... arguments) throws InvocationTargetException {
-      Enhancer.registerCallbacks(enhanced, callbacks);
-      try {
-        return (T) fastClass.newInstance(constructorIndex, arguments);
-      } finally {
-        Enhancer.registerCallbacks(enhanced, null);
-      }
+      return (T) enhancedConstructor.apply(callbacks, arguments);
     }
 

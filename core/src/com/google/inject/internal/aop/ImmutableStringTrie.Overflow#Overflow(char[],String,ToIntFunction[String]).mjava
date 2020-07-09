@@ -1,0 +1,6 @@
+    Overflow(char[] data, String overflowKey, ToIntFunction<String> next) {
+      this.trie = new ImmutableStringTrie(data);
+      this.overflowKey = overflowKey;
+      this.next = next;
+    }
+

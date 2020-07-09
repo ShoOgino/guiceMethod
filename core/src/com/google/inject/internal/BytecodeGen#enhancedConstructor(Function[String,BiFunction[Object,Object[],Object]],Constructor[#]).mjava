@@ -1,0 +1,10 @@
+  /**
+   * Returns an invoker that constructs an enhanced instance. The invoker function accepts an array
+   * of invocation handlers plus an array of arguments for the original constructor.
+   */
+  static BiFunction<Object, Object[], Object> enhancedConstructor(
+      Function<String, BiFunction<Object, Object[], Object>> enhancer, Constructor<?> constructor) {
+    checkArgument(canEnhance(constructor), "Constructor is not visible");
+    return enhancer.apply(signature(constructor));
+  }
+

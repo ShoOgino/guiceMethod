@@ -1,5 +1,5 @@
     @Override
     public ImmutableMap<Method, List<MethodInterceptor>> getMethodInterceptors() {
-      return methodInterceptors;
+      return interceptors;
     }
 

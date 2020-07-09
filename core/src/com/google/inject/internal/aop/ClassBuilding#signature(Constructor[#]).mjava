@@ -1,0 +1,5 @@
+  /** Minimum signature needed to disambiguate constructors from the same host class. */
+  public static String signature(Constructor<?> constructor) {
+    return signature("<init>", constructor.getParameterTypes());
+  }
+

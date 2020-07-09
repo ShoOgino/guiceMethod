@@ -1,0 +1,19 @@
+  /** Returns true if the given member can be fast-invoked. */
+  public static boolean canFastInvoke(Executable member) {
+    int modifiers = member.getModifiers() & (PUBLIC | PRIVATE);
+    if (hasPackageAccess()) {
+      // can fast-invoke anything except private members
+      return modifiers != PRIVATE;
+    }
+    // can fast-invoke public members in public types whose parameters are all public
+    boolean visible = (modifiers == PUBLIC) && isPublic(member.getDeclaringClass());
+    if (visible) {
+      for (Class<?> type : member.getParameterTypes()) {
+        if (!isPublic(type)) {
+          return false;
+        }
+      }
+    }
+    return visible;
+  }
+

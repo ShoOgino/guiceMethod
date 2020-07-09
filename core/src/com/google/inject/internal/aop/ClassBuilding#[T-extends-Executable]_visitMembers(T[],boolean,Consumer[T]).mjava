@@ -1,0 +1,10 @@
+  /** Visit all subclass accessible members in the given array. */
+  static <T extends Executable> void visitMembers(
+      T[] members, boolean samePackage, Consumer<T> visitor) {
+    for (T member : members) {
+      if (canAccess(member, samePackage)) {
+        visitor.accept(member);
+      }
+    }
+  }
+

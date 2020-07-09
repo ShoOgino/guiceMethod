@@ -46,8 +46,6 @@
     Class<F> factoryRawType = (Class<F>) (Class<?>) factoryType.getRawType();
     return factoryRawType.cast(
         Proxy.newProxyInstance(
-            BytecodeGen.getClassLoader(factoryRawType),
-            new Class[] {factoryRawType},
-            invocationHandler));
+            factoryRawType.getClassLoader(), new Class<?>[] {factoryRawType}, invocationHandler));
   }
 

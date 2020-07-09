@@ -1,0 +1,13 @@
+  public void testMethodStrings() {
+    List<String> table =
+        stream(Binder.class.getDeclaredMethods()).map(Method::toString).collect(toList());
+
+    sort(table);
+
+    ToIntFunction<String> trie = ImmutableStringTrie.buildTrie(table);
+
+    for (int i = 0; i < table.size(); i++) {
+      assertThat(trie.applyAsInt(table.get(i)), is(i));
+    }
+  }
+

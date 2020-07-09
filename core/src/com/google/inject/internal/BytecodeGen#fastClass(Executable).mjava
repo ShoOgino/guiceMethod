@@ -1,0 +1,7 @@
+  /**
+   * Prepares the class declaring the given member for fast invocation using bytecode generation.
+   */
+  private static Function<String, BiFunction<Object, Object[], Object>> fastClass(Executable member) {
+    return FAST_CLASSES.get(member.getDeclaringClass());
+  }
+

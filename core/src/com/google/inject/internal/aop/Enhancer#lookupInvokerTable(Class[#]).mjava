@@ -1,0 +1,5 @@
+  @Override
+  protected MethodHandle lookupInvokerTable(Class<?> glueClass) throws Throwable {
+    return (MethodHandle) glueClass.getField(INVOKERS_NAME).get(null);
+  }
+

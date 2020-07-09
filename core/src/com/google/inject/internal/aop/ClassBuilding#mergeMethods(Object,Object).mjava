@@ -1,0 +1,9 @@
+  /** Add the new method to an existing partition or create a new one. */
+  private static Object mergeMethods(Object existing, Object added) {
+    Method newMethod = (Method) added;
+    if (existing instanceof Method) {
+      return new MethodPartition((Method) existing, newMethod);
+    }
+    return ((MethodPartition) existing).addCandidate(newMethod);
+  }
+

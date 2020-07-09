@@ -1,0 +1,7 @@
+  /** Generates helper in same package as the {@link ClassLoader} so it can access defineClass */
+  static Method accessDefineMethod(Class<?> loaderClass) throws Exception {
+    byte[] bytecode = buildDefineClassAccess(loaderClass);
+    Class<?> accessClass = defineAnonymously(loaderClass, bytecode);
+    return accessClass.getMethod("defineClass", ClassLoader.class, byte[].class);
+  }
+

@@ -1,0 +1,6 @@
+    public InterceptedMethodInvocation(Object proxy, Object[] arguments, int interceptorIndex) {
+      this.proxy = proxy;
+      this.arguments = arguments;
+      this.interceptorIndex = interceptorIndex;
+    }
+

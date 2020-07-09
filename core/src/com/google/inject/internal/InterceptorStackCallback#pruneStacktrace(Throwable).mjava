@@ -8,7 +8,9 @@
       List<StackTraceElement> pruned = Lists.newArrayList();
       for (StackTraceElement element : stackTrace) {
         String className = element.getClassName();
-        if (!AOP_INTERNAL_CLASSES.contains(className) && !className.contains("$EnhancerByGuice$")) {
+        if (!className.startsWith(InterceptorStackCallback.class.getName())
+            && !className.startsWith(GUICE_INTERNAL_AOP_PACKAGE)
+            && !className.contains(ENHANCER_BY_GUICE_MARKER)) {
           pruned.add(element);
         }
       }

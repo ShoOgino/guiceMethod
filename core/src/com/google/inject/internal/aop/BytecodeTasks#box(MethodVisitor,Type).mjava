@@ -1,0 +1,45 @@
+  /** Boxes a primitive value on the Java stack. */
+  public static void box(MethodVisitor mv, Type primitiveType) {
+    String wrapper;
+    String descriptor;
+
+    switch (primitiveType.getSort()) {
+      case Type.BOOLEAN:
+        wrapper = "java/lang/Boolean";
+        descriptor = "(Z)Ljava/lang/Boolean;";
+        break;
+      case Type.CHAR:
+        wrapper = "java/lang/Character";
+        descriptor = "(C)Ljava/lang/Character;";
+        break;
+      case Type.BYTE:
+        wrapper = "java/lang/Byte";
+        descriptor = "(B)Ljava/lang/Byte;";
+        break;
+      case Type.SHORT:
+        wrapper = "java/lang/Short";
+        descriptor = "(S)Ljava/lang/Short;";
+        break;
+      case Type.INT:
+        wrapper = "java/lang/Integer";
+        descriptor = "(I)Ljava/lang/Integer;";
+        break;
+      case Type.FLOAT:
+        wrapper = "java/lang/Float";
+        descriptor = "(F)Ljava/lang/Float;";
+        break;
+      case Type.LONG:
+        wrapper = "java/lang/Long";
+        descriptor = "(J)Ljava/lang/Long;";
+        break;
+      case Type.DOUBLE:
+        wrapper = "java/lang/Double";
+        descriptor = "(D)Ljava/lang/Double;";
+        break;
+      default:
+        return;
+    }
+
+    mv.visitMethodInsn(INVOKESTATIC, wrapper, "valueOf", descriptor, false);
+  }
+

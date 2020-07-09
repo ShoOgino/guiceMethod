@@ -1,0 +1,5 @@
+  /** Returns true if the given member can be enhanced using bytecode. */
+  public static boolean canEnhance(Executable member) {
+    return canAccess(member, hasPackageAccess());
+  }
+

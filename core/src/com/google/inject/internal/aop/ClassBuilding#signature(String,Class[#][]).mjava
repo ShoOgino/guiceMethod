@@ -1,0 +1,9 @@
+  /** Appends a semicolon-separated list of parameter types to the given name. */
+  private static String signature(String name, Class<?>[] parameterTypes) {
+    StringBuilder signature = new StringBuilder(name);
+    for (Class<?> type : parameterTypes) {
+      signature.append(';').append(type.getName());
+    }
+    return signature.toString();
+  }
+

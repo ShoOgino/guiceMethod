@@ -1,0 +1,43 @@
+  @Override
+  protected byte[] generateGlue(Collection<Executable> members) {
+    ClassWriter cw = new ClassWriter(COMPUTE_MAXS);
+
+    // target Java8 because that's all we need for the generated trampoline code
+    cw.visit(V1_8, PUBLIC | ACC_SUPER, proxyName, null, hostName, null);
+    cw.visitSource(GENERATED_SOURCE, null);
+
+    // this shared field either contains the trampoline or glue to make it into an invoker table
+    cw.visitField(PUBLIC | STATIC | FINAL, INVOKERS_NAME, INVOKERS_DESCRIPTOR, null, null)
+        .visitEnd();
+
+    setupInvokerTable(cw);
+
+    generateTrampoline(cw, members);
+
+    // this field will hold the handlers configured for this particular enhanced instance
+    cw.visitField(PRIVATE | FINAL, HANDLERS_NAME, HANDLERS_DESCRIPTOR, null, null).visitEnd();
+
+    Set<Method> remainingBridgeMethods = new HashSet<>(bridgeDelegates.keySet());
+
+    int methodIndex = 0;
+    for (Executable member : members) {
+      if (member instanceof Constructor<?>) {
+        enhanceConstructor(cw, (Constructor<?>) member);
+      } else {
+        enhanceMethod(cw, (Method) member, methodIndex++);
+        remainingBridgeMethods.remove(member);
+      }
+    }
+
+    // replace any remaining bridge methods with virtual dispatch to their non-bridge targets
+    for (Method method : remainingBridgeMethods) {
+      Method target = bridgeDelegates.get(method);
+      if (target != null) {
+        generateVirtualBridge(cw, method, target);
+      }
+    }
+
+    cw.visitEnd();
+    return cw.toByteArray();
+  }
+

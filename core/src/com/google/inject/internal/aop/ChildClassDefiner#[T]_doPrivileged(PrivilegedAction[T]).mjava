@@ -1,0 +1,5 @@
+  /** Utility method to remove doPrivileged ambiguity */
+  static <T> T doPrivileged(PrivilegedAction<T> action) {
+    return AccessController.doPrivileged(action);
+  }
+

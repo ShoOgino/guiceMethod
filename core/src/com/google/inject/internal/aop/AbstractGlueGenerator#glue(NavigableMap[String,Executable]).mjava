@@ -1,0 +1,17 @@
+  /** Generates the enhancer/fast-class and returns a mapping from signature to invoker. */
+  public final Function<String, BiFunction<Object, Object[], Object>> glue(
+      NavigableMap<String, Executable> glueMap) {
+    final MethodHandle invokerTable;
+    try {
+      byte[] bytecode = generateGlue(glueMap.values());
+      Class<?> glueClass = ClassDefining.define(hostClass, bytecode);
+      invokerTable = lookupInvokerTable(glueClass);
+    } catch (Throwable e) {
+      throw new GlueException("Problem generating " + proxyName, e);
+    }
+
+    // build optimized index for these signatures and bind it to the generated invokers
+    ToIntFunction<String> signatureTable = ImmutableStringTrie.buildTrie(glueMap.keySet());
+    return bindSignaturesToInvokers(signatureTable, invokerTable);
+  }
+

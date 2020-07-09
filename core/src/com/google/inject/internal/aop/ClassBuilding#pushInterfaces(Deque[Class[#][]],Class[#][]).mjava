@@ -1,0 +1,7 @@
+  /** Pushes the interface declaration onto the stack if it's not empty. */
+  private static void pushInterfaces(Deque<Class<?>[]> interfaceStack, Class<?>[] interfaces) {
+    if (interfaces.length > 0) {
+      interfaceStack.push(interfaces);
+    }
+  }
+

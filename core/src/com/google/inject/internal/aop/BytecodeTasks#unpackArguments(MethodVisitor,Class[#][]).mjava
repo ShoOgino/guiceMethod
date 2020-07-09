@@ -1,0 +1,16 @@
+  /** Unpacks an array of arguments and pushes them onto the Java stack. */
+  public static void unpackArguments(MethodVisitor mv, Class<?>[] parameterTypes) {
+    int parameterIndex = 0;
+    for (Class<?> parameterType : parameterTypes) {
+      // invoker pattern means we can safely assume array is the second local argument
+      mv.visitVarInsn(ALOAD, 2);
+      pushInteger(mv, parameterIndex++);
+      mv.visitInsn(AALOAD);
+      if (parameterType.isPrimitive()) {
+        unbox(mv, Type.getType(parameterType));
+      } else {
+        mv.visitTypeInsn(CHECKCAST, Type.getInternalName(parameterType));
+      }
+    }
+  }
+

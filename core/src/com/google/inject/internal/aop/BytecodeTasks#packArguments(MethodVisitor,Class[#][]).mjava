@@ -1,0 +1,17 @@
+  /** Packs local arguments into an argument array on the Java stack. */
+  public static void packArguments(MethodVisitor mv, Class<?>[] parameterTypes) {
+    pushInteger(mv, parameterTypes.length);
+    mv.visitTypeInsn(ANEWARRAY, "java/lang/Object");
+    int parameterIndex = 0;
+    int slot = 1;
+    for (Class<?> parameterType : parameterTypes) {
+      mv.visitInsn(DUP);
+      pushInteger(mv, parameterIndex++);
+      slot += loadArgument(mv, parameterType, slot);
+      if (parameterType.isPrimitive()) {
+        box(mv, Type.getType(parameterType));
+      }
+      mv.visitInsn(AASTORE);
+    }
+  }
+

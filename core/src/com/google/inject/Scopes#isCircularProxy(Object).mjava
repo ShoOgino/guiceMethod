@@ -8,6 +8,6 @@
    * @since 4.0
    */
   public static boolean isCircularProxy(Object object) {
-    return object instanceof CircularDependencyProxy;
+    return BytecodeGen.isCircularProxy(object);
   }
 

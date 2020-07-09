@@ -1,0 +1,10 @@
+  /**
+   * Methods are partitioned by name and parameter count. This helps focus the search for bridge
+   * delegates that involve type-erasure of generic parameter types, since the parameter count will
+   * be the same for the bridge method and its delegate.
+   */
+  private static void partitionMethod(Method method, Map<String, Object> partitions) {
+    String partitionKey = method.getName() + '/' + method.getParameterCount();
+    partitions.merge(partitionKey, method, ClassBuilding::mergeMethods);
+  }
+

@@ -1,0 +1,20 @@
+  /**
+   * Finds the next column in the current row whose character differs in at least one other row.
+   * This helps identify the longest common prefix from the current pivot point to the next one.
+   *
+   * <p>Returns the column just after the end of the current row if all rows are identical.
+   */
+  private static int nextPivotColumn(String[] table, int column, int row, int rowLimit) {
+
+    String cells = table[row];
+    int columnLimit = cells.length();
+
+    for (int c = column + 1; c < columnLimit; c++) {
+      if (nextPivotRow(table, cells.charAt(c), c, row, rowLimit) < rowLimit) {
+        return c;
+      }
+    }
+
+    return columnLimit;
+  }
+

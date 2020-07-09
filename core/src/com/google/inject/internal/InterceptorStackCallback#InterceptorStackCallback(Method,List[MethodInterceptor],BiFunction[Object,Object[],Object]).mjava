@@ -1,0 +1,9 @@
+  public InterceptorStackCallback(
+      Method method,
+      List<MethodInterceptor> interceptors,
+      BiFunction<Object, Object[], Object> superInvoker) {
+    this.method = method;
+    this.interceptors = interceptors.toArray(new MethodInterceptor[interceptors.size()]);
+    this.superInvoker = superInvoker;
+  }
+

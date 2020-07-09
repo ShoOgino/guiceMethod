@@ -1,0 +1,12 @@
+  /** Each method is uniquely identified in the partition by its actual parameter types. */
+  private static String parametersKey(Class<?>[] parameterTypes) {
+    StringBuilder key = new StringBuilder();
+    for (int i = 0, len = parameterTypes.length; i < len; i++) {
+      if (i > 0) {
+        key.append(',');
+      }
+      key.append(parameterTypes[i].getName());
+    }
+    return key.toString();
+  }
+

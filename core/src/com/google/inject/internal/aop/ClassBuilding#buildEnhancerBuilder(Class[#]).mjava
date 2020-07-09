@@ -1,0 +1,36 @@
+  /** Builder of enhancers that provide method interception via bytecode generation. */
+  public static BytecodeGen.EnhancerBuilder buildEnhancerBuilder(Class<?> hostClass) {
+    Map<String, Object> methodPartitions = new HashMap<>();
+
+    visitMethodHierarchy(
+        hostClass,
+        method -> {
+          // exclude static methods, but keep final methods for bridge analysis
+          if ((method.getModifiers() & STATIC) == 0) {
+            partitionMethod(method, methodPartitions);
+          }
+        });
+
+    Map<String, Method> enhanceableMethods = new TreeMap<>();
+    Map<Method, Method> bridgeDelegates = new HashMap<>();
+
+    TypeLiteral<?> hostType = TypeLiteral.get(hostClass);
+    for (Object partition : methodPartitions.values()) {
+      if (partition instanceof Method) {
+        // common case, partition is just one method; exclude if it turns out to be final
+        Method method = (Method) partition;
+        if ((method.getModifiers() & FINAL) == 0) {
+          enhanceableMethods.put(signature(method), method);
+        }
+      } else {
+        ((MethodPartition) partition)
+            .collectEnhanceableMethods(
+                hostType,
+                method -> enhanceableMethods.put(signature(method), method),
+                bridgeDelegates);
+      }
+    }
+
+    return new EnhancerBuilderImpl(hostClass, enhanceableMethods.values(), bridgeDelegates);
+  }
+

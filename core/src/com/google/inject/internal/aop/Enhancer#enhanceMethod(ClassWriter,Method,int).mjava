@@ -1,0 +1,38 @@
+  /** Generate enhanced method that calls the handler with the same index. */
+  private void enhanceMethod(ClassWriter cw, Method method, int methodIndex) {
+    MethodVisitor mv =
+        cw.visitMethod(
+            FINAL | (method.getModifiers() & ~(ABSTRACT | NATIVE | SYNCHRONIZED)),
+            method.getName(),
+            Type.getMethodDescriptor(method),
+            null,
+            exceptionNames(method));
+
+    mv.visitVarInsn(ALOAD, 0);
+    mv.visitInsn(DUP);
+    mv.visitFieldInsn(GETFIELD, proxyName, HANDLERS_NAME, HANDLERS_DESCRIPTOR);
+    pushInteger(mv, methodIndex);
+    mv.visitInsn(AALOAD);
+    mv.visitInsn(SWAP);
+    // we don't use the method argument in InterceptorStackCallback.invoke, so can use null here
+    mv.visitInsn(ACONST_NULL);
+    packArguments(mv, method.getParameterTypes());
+
+    mv.visitMethodInsn(INVOKEINTERFACE, HANDLER_TYPE, "invoke", CALLBACK_DESCRIPTOR, true);
+
+    Class<?> returnType = method.getReturnType();
+    if (returnType == void.class) {
+      mv.visitInsn(RETURN);
+    } else if (returnType.isPrimitive()) {
+      Type primitiveType = Type.getType(returnType);
+      unbox(mv, primitiveType);
+      mv.visitInsn(primitiveType.getOpcode(IRETURN));
+    } else {
+      mv.visitTypeInsn(CHECKCAST, Type.getInternalName(returnType));
+      mv.visitInsn(ARETURN);
+    }
+
+    mv.visitMaxs(0, 0);
+    mv.visitEnd();
+  }
+

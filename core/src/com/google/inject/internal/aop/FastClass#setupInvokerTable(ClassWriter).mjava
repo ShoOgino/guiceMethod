@@ -1,0 +1,25 @@
+  /** Generate static initializer to setup invoker table based on the fast-class constructor. */
+  private void setupInvokerTable(ClassWriter cw) {
+    MethodVisitor mv = cw.visitMethod(PRIVATE | STATIC, "<clinit>", "()V", null, null);
+    mv.visitCode();
+
+    Handle constructorHandle = new Handle(H_NEWINVOKESPECIAL, proxyName, "<init>", "(I)V", false);
+
+    mv.visitLdcInsn(constructorHandle);
+
+    // adapt constructor handle to make it look like an invoker table (int -> BiFunction)
+    mv.visitLdcInsn(INDEX_TO_INVOKER_METHOD_TYPE);
+    mv.visitMethodInsn(
+        INVOKEVIRTUAL,
+        "java/lang/invoke/MethodHandle",
+        "asType",
+        "(Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/MethodHandle;",
+        false);
+
+    mv.visitFieldInsn(PUTSTATIC, proxyName, INVOKERS_NAME, INVOKERS_DESCRIPTOR);
+
+    mv.visitInsn(RETURN);
+    mv.visitMaxs(0, 0);
+    mv.visitEnd();
+  }
+

@@ -1,0 +1,13 @@
+  /** Visit all constructors for the host class that can be fast-invoked. */
+  private static void visitFastConstructors(Class<?> hostClass, Consumer<Constructor<?>> visitor) {
+    if (hasPackageAccess()) {
+      // can fast-invoke all non-private constructors
+      visitMembers(hostClass.getDeclaredConstructors(), true, visitor);
+    } else {
+      // can only fast-invoke public constructors
+      for (Constructor<?> constructor : hostClass.getConstructors()) {
+        visitor.accept(constructor);
+      }
+    }
+  }
+

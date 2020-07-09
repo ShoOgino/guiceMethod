@@ -1,0 +1,15 @@
+  @Override
+  protected void generateConstructorInvoker(MethodVisitor mv, Constructor<?> constructor) {
+    String descriptor = Type.getConstructorDescriptor(constructor);
+    String enhancedDescriptor = '(' + HANDLERS_DESCRIPTOR + descriptor.substring(1);
+
+    mv.visitTypeInsn(NEW, proxyName);
+    mv.visitInsn(DUP);
+
+    mv.visitVarInsn(ALOAD, 1);
+    mv.visitTypeInsn(CHECKCAST, HANDLER_ARRAY_TYPE);
+    unpackArguments(mv, constructor.getParameterTypes());
+
+    mv.visitMethodInsn(INVOKESPECIAL, proxyName, "<init>", enhancedDescriptor, false);
+  }
+

@@ -1,4 +1,4 @@
-    void bar() {
+    protected void bar() {
       barCalled = true;
     }
 

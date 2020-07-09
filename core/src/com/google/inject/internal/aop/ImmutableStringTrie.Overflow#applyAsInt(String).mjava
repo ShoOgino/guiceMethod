@@ -1,0 +1,7 @@
+    @Override
+    public int applyAsInt(String key) {
+      return key.compareTo(overflowKey) < 0
+          ? trie.applyAsInt(key)
+          : MAX_ROWS_PER_TRIE + next.applyAsInt(key);
+    }
+

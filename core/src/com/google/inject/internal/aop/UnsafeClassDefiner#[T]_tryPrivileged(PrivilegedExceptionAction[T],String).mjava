@@ -1,0 +1,9 @@
+  static <T> T tryPrivileged(PrivilegedExceptionAction<T> action, String errorMessage) {
+    try {
+      return AccessController.doPrivileged(action);
+    } catch (Throwable e) {
+      logger.log(Level.FINE, errorMessage, e);
+      return null;
+    }
+  }
+

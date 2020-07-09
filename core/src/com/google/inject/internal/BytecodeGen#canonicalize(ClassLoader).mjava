@@ -1,8 +1,0 @@
-  /**
-   * Attempts to canonicalize null references to the system class loader. May return null if for
-   * some reason the system loader is unavailable.
-   */
-  private static ClassLoader canonicalize(ClassLoader classLoader) {
-    return classLoader != null ? classLoader : SystemBridgeHolder.SYSTEM_BRIDGE.getParent();
-  }
-

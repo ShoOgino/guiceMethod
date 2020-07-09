@@ -1,0 +1,4 @@
+  private static int singletonTrie(String key) {
+    return 0;
+  }
+

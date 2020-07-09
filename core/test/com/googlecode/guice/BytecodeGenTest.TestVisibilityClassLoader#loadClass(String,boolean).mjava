@@ -20,7 +20,7 @@
         // standard bootdelegation of java.*
         return super.loadClass(name, resolve);
 
-      } else if (!name.contains(".internal.") && !name.contains(".cglib.")) {
+      } else if (!name.contains(".internal.")) {
 
         /*
          * load public and test classes directly from the classpath - we don't

@@ -1,0 +1,6 @@
+    @Override
+    // not Grounded
+    default String identifyMyself() {
+      return "I am a flying horse.";
+    }
+

@@ -1,0 +1,18 @@
+  /** Cache common overridable Object methods. */
+  private static Method[] getOverridableObjectMethods() {
+    List<Method> objectMethods = new ArrayList<>();
+
+    visitMembers(
+        Object.class.getDeclaredMethods(),
+        false, // no package-level access
+        method -> {
+          // skip methods that can't/shouldn't be overridden
+          if ((method.getModifiers() & (STATIC | FINAL)) == 0
+              && !"finalize".equals(method.getName())) {
+            objectMethods.add(method);
+          }
+        });
+
+    return objectMethods.toArray(new Method[0]);
+  }
+

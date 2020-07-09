@@ -1,85 +1,84 @@
-  ProxyFactory(InjectionPoint injectionPoint, Iterable<MethodAspect> methodAspects) {
+  ProxyFactory(InjectionPoint injectionPoint, Iterable<MethodAspect> methodAspects)
+      throws ErrorsException {
     this.injectionPoint = injectionPoint;
 
-    @SuppressWarnings("unchecked") // the member of injectionPoint is always a Constructor<T>
-    Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
-    declaringClass = constructor.getDeclaringClass();
+    Class<?> hostClass = injectionPoint.getMember().getDeclaringClass();
 
     // Find applicable aspects. Bow out if none are applicable to this class.
     List<MethodAspect> applicableAspects = Lists.newArrayList();
     for (MethodAspect methodAspect : methodAspects) {
-      if (methodAspect.matches(declaringClass)) {
+      if (methodAspect.matches(hostClass)) {
         applicableAspects.add(methodAspect);
       }
     }
 
     if (applicableAspects.isEmpty()) {
+      enhancer = null;
       interceptors = ImmutableMap.of();
-      methods = ImmutableList.of();
       callbacks = null;
       return;
     }
 
-    // Get list of methods from cglib.
-    methods = Lists.newArrayList();
-    Enhancer.getMethods(declaringClass, null, methods);
+    BytecodeGen.EnhancerBuilder enhancerBuilder = BytecodeGen.enhancerBuilder(hostClass);
 
-    // Create method/interceptor holders and record indices.
-    List<MethodInterceptorsPair> methodInterceptorsPairs = Lists.newArrayList();
-    for (Method method : methods) {
-      methodInterceptorsPairs.add(new MethodInterceptorsPair(method));
-    }
+    Method[] methods = enhancerBuilder.getEnhanceableMethods();
+    int numMethods = methods.length;
+
+    Multimap<Method, MethodInterceptor> matchedInterceptors = ArrayListMultimap.create();
+    BitSet matchedMethodIndices = new BitSet();
 
     // Iterate over aspects and add interceptors for the methods they apply to
-    boolean anyMatched = false;
     for (MethodAspect methodAspect : applicableAspects) {
-      for (MethodInterceptorsPair pair : methodInterceptorsPairs) {
-        if (methodAspect.matches(pair.method)) {
-          if (pair.method.isSynthetic()) {
+      for (int methodIndex = 0; methodIndex < numMethods; methodIndex++) {
+        Method method = methods[methodIndex];
+        if (methodAspect.matches(method)) {
+          if (method.isSynthetic()) {
             logger.log(
                 Level.WARNING,
                 "Method [{0}] is synthetic and is being intercepted by {1}."
                     + " This could indicate a bug.  The method may be intercepted twice,"
                     + " or may not be intercepted at all.",
-                new Object[] {pair.method, methodAspect.interceptors()});
+                new Object[] {method, methodAspect.interceptors()});
           }
-          visibility = visibility.and(BytecodeGen.Visibility.forMember(pair.method));
-          pair.addAll(methodAspect.interceptors());
-          anyMatched = true;
+
+          matchedInterceptors.putAll(method, methodAspect.interceptors());
+          matchedMethodIndices.set(methodIndex);
         }
       }
     }
 
-    if (!anyMatched) {
+    if (matchedMethodIndices.isEmpty()) {
+      enhancer = null;
       interceptors = ImmutableMap.of();
       callbacks = null;
       return;
     }
 
-    ImmutableMap.Builder<Method, List<MethodInterceptor>> interceptorsMapBuilder = null; // lazy
-
-    callbacks = new Callback[methods.size()];
-    for (int i = 0; i < methods.size(); i++) {
-      MethodInterceptorsPair pair = methodInterceptorsPairs.get(i);
-
-      if (!pair.hasInterceptors()) {
-        callbacks[i] = net.sf.cglib.proxy.NoOp.INSTANCE;
-        continue;
-      }
-
-      if (interceptorsMapBuilder == null) {
-        interceptorsMapBuilder = ImmutableMap.builder();
-      }
-
-      ImmutableList<MethodInterceptor> deDuplicated =
-          ImmutableSet.copyOf(pair.interceptors).asList();
-      interceptorsMapBuilder.put(pair.method, deDuplicated);
-      callbacks[i] = new InterceptorStackCallback(pair.method, deDuplicated);
+    try {
+      enhancer = enhancerBuilder.buildEnhancer(matchedMethodIndices);
+    } catch (Throwable e) {
+      throw new Errors().errorEnhancingClass(hostClass, e).toException();
     }
 
-    interceptors =
-        interceptorsMapBuilder != null
-            ? interceptorsMapBuilder.build()
-            : ImmutableMap.<Method, List<MethodInterceptor>>of();
+    callbacks = new InvocationHandler[matchedMethodIndices.cardinality()];
+
+    ImmutableMap.Builder<Method, List<MethodInterceptor>> interceptorsMapBuilder =
+        ImmutableMap.builder();
+
+    int callbackIndex = 0;
+    for (int methodIndex = matchedMethodIndices.nextSetBit(0);
+        methodIndex >= 0;
+        methodIndex = matchedMethodIndices.nextSetBit(methodIndex + 1)) {
+
+      Method method = methods[methodIndex];
+      List<MethodInterceptor> deDuplicated =
+          ImmutableSet.copyOf(matchedInterceptors.get(method)).asList();
+      interceptorsMapBuilder.put(method, deDuplicated);
+
+      BiFunction<Object, Object[], Object> superInvoker = BytecodeGen.superMethod(enhancer, method);
+      callbacks[callbackIndex++] = new InterceptorStackCallback(method, deDuplicated, superInvoker);
+    }
+
+    interceptors = interceptorsMapBuilder.build();
   }
 

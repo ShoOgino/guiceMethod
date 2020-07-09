@@ -1,0 +1,6 @@
+  protected AbstractGlueGenerator(Class<?> hostClass, String marker) {
+    this.hostClass = hostClass;
+    this.hostName = Type.getInternalName(hostClass);
+    this.proxyName = proxyName(hostName, marker, hashCode());
+  }
+

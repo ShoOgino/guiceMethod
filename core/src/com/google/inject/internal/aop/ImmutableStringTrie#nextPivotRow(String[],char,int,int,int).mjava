@@ -1,0 +1,19 @@
+  /**
+   * Finds the next row that has a different character in the selected column to the given one, or
+   * is too short to include the column. This determines the span of rows that fall under the given
+   * character in the trie.
+   *
+   * <p>Returns the row just after the end of the range if all rows have the same character.
+   */
+  private static int nextPivotRow(String[] table, char pivot, int column, int row, int rowLimit) {
+
+    for (int r = row + 1; r < rowLimit; r++) {
+      String cells = table[r];
+      if (cells.length() <= column || cells.charAt(column) != pivot) {
+        return r;
+      }
+    }
+
+    return rowLimit;
+  }
+

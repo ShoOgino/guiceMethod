@@ -1,4 +1,0 @@
-    BridgeClassLoader(ClassLoader usersClassLoader) {
-      super(usersClassLoader);
-    }
-

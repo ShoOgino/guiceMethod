@@ -1,4 +1,0 @@
-    MethodInterceptorsPair(Method method) {
-      this.method = method;
-    }
-

@@ -1,0 +1,13 @@
+  @Override
+  protected void generateConstructorInvoker(MethodVisitor mv, Constructor<?> constructor) {
+    mv.visitTypeInsn(NEW, hostName);
+    mv.visitInsn(DUP);
+
+    // fast-class constructor invokers don't use the context object
+
+    unpackArguments(mv, constructor.getParameterTypes());
+
+    mv.visitMethodInsn(
+        INVOKESPECIAL, hostName, "<init>", Type.getConstructorDescriptor(constructor), false);
+  }
+

@@ -1,7 +1,10 @@
     @SuppressWarnings("unchecked")
     @Override
-    public T doProvision(Object[] parameters)
-        throws IllegalAccessException, InvocationTargetException {
-      return (T) fastClass.invoke(methodIndex, instance, parameters);
+    public T doProvision(Object[] parameters) throws InvocationTargetException {
+      try {
+        return (T) fastMethod.apply(instance, parameters);
+      } catch (Throwable e) {
+        throw new InvocationTargetException(e); // match JDK reflection behaviour
+      }
     }
 

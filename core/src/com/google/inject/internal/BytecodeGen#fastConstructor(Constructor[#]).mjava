@@ -1,0 +1,13 @@
+  /**
+   * Returns a fast invoker for the given constructor. The invoker function ignores the first
+   * parameter and accepts an array of arguments for the constructor in the second parameter.
+   *
+   * <p>Returns {@code null} if the constructor cannot be "fast-invoked" due to visibility issues.
+   */
+  static BiFunction<Object, Object[], Object> fastConstructor(Constructor<?> constructor) {
+    if (canFastInvoke(constructor)) {
+      return fastClass(constructor).apply(signature(constructor));
+    }
+    return null;
+  }
+

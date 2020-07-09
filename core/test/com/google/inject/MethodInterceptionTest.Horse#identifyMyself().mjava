@@ -1,0 +1,6 @@
+    @Override
+    @Grounded
+    default String identifyMyself() {
+      return "I am a horse.";
+    }
+
