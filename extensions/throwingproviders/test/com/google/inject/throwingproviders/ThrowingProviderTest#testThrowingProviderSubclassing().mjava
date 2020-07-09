@@ -1,3 +1,4 @@
+  @Test
   public void testThrowingProviderSubclassing() throws RemoteException {
     final SubMockRemoteProvider aProvider = new SubMockRemoteProvider();
     aProvider.setNextToReturn("A");

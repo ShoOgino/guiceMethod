@@ -1,3 +1,4 @@
+  @Test
   public void testBindingToInterfaceWithGeneric_Provides() throws RemoteException {
     providesInjector =
         Guice.createInjector(

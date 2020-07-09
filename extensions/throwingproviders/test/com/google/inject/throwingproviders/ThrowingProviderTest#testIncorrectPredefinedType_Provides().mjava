@@ -1,3 +1,4 @@
+  @Test
   public void testIncorrectPredefinedType_Provides() {
     try {
       Guice.createInjector(

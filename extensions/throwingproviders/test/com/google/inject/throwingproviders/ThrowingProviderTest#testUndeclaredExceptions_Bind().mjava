@@ -1,3 +1,4 @@
+  @Test
   public void testUndeclaredExceptions_Bind() throws RemoteException {
     tUndeclaredExceptions(bindInjector);
   }

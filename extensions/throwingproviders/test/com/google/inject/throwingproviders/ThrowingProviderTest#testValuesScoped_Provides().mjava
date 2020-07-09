@@ -1,3 +1,4 @@
+  @Test
   public void testValuesScoped_Provides() throws RemoteException {
     tValuesScoped(providesInjector, null);
   }

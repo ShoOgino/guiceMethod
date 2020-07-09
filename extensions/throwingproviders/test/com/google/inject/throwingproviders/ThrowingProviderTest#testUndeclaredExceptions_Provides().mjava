@@ -1,3 +1,4 @@
+  @Test
   public void testUndeclaredExceptions_Provides() throws RemoteException {
     tUndeclaredExceptions(providesInjector);
   }

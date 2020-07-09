@@ -1,3 +1,4 @@
+  @Test
   public void testAnnotations_Bind() throws RemoteException {
     final MockRemoteProvider<String> mockRemoteProviderA = new MockRemoteProvider<>();
     final MockRemoteProvider<String> mockRemoteProviderB = new MockRemoteProvider<>();

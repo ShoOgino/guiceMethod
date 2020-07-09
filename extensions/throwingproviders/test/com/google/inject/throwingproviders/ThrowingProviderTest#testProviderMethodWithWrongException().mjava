@@ -1,3 +1,4 @@
+  @Test
   public void testProviderMethodWithWrongException() {
     try {
       Guice.createInjector(

@@ -1,3 +1,4 @@
+  @Test
   public void testBindingToInterfaceWithExtraMethod_Provides() throws RemoteException {
     try {
       Guice.createInjector(

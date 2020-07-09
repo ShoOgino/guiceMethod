@@ -1,3 +1,4 @@
+  @Test
   public void testManyMethods() {
     try {
       Guice.createInjector(

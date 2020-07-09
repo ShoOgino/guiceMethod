@@ -1,3 +1,4 @@
+  @Test
   public void testOneMethodThatIsntGet() {
     try {
       Guice.createInjector(

@@ -1,3 +1,4 @@
+  @Test
   public void testBindingToSubSubInterface_Provides() throws RemoteException {
     try {
       Guice.createInjector(

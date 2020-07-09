@@ -1,3 +1,4 @@
+  @Test
   public void testBindingToNonInterfaceType_Bind() throws RemoteException {
     try {
       Guice.createInjector(

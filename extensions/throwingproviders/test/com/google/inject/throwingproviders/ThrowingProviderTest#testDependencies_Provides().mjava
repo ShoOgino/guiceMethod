@@ -1,3 +1,4 @@
+  @Test
   public void testDependencies_Provides() {
     providesInjector =
         Guice.createInjector(

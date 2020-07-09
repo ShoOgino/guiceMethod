@@ -1,3 +1,4 @@
+  @Test
   public void testExceptionsNotScopedWhenNotExceptionScoping_Provides() {
     tExceptionsNotScopedWhenNotExceptionScoping(providesInjector);
   }
