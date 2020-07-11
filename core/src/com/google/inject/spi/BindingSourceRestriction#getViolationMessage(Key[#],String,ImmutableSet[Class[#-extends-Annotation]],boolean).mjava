@@ -1,4 +1,4 @@
-  private static String getErrorMessage(
+  private static String getViolationMessage(
       Key<?> key,
       String explanation,
       ImmutableSet<Class<? extends Annotation>> acceptablePermits,

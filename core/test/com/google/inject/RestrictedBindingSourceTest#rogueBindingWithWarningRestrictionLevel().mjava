@@ -1,0 +1,23 @@
+  @Test
+  public void rogueBindingWithWarningRestrictionLevel() {
+    Logger logger = Logger.getLogger(RestrictedBindingSource.class.getName());
+    TestLogHandler testLogHandler = new TestLogHandler();
+    logger.addHandler(testLogHandler);
+
+    Guice.createInjector(
+        new AbstractModule() {
+          @Provides
+          @HostIp
+          int provideRogueHostIp() {
+            return 4;
+          }
+        });
+
+    List<LogRecord> logs = testLogHandler.getStoredLogRecords();
+    assertThat(logs).hasSize(1);
+    assertThat(logs.get(0).getLevel()).isEqualTo(Level.WARNING);
+    assertThat(logs.get(0).getMessage()).contains(USE_NETWORK_MODULE);
+    assertThat(logs.get(0).getMessage()).contains("provideRogueHostIp");
+    logger.removeHandler(testLogHandler);
+  }
+

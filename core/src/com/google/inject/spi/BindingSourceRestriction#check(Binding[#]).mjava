@@ -18,13 +18,15 @@
     if (bindingPermitted || isExempt(elementSource, restriction.exemptModules())) {
       return Optional.empty();
     }
-    return Optional.of(
-        new Message(
-            elementSource,
-            getErrorMessage(
-                key,
-                restriction.explanation(),
-                acceptablePermits,
-                key.getAnnotationType() != null)));
+    String violationMessage =
+        getViolationMessage(
+            key, restriction.explanation(), acceptablePermits, key.getAnnotationType() != null);
+    if (restriction.restrictionLevel() == RestrictionLevel.WARNING) {
+      Formatter sourceFormatter = new Formatter();
+      Errors.formatSource(sourceFormatter, elementSource);
+      logger.log(Level.WARNING, violationMessage + "\n" + sourceFormatter);
+      return Optional.empty();
+    }
+    return Optional.of(new Message(elementSource, violationMessage));
   }
 
