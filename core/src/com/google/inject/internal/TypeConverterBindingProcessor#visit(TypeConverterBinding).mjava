@@ -1,8 +1,10 @@
   @Override
   public Boolean visit(TypeConverterBinding command) {
-    injector.state.addConverter(
-        new TypeConverterBinding(
-            command.getSource(), command.getTypeMatcher(), command.getTypeConverter()));
+    injector
+        .getBindingData()
+        .addConverter(
+            new TypeConverterBinding(
+                command.getSource(), command.getTypeMatcher(), command.getTypeConverter()));
     return true;
   }
 

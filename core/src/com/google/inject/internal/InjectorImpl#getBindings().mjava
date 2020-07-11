@@ -1,5 +1,5 @@
   @Override
   public Map<Key<?>, Binding<?>> getBindings() {
-    return state.getExplicitBindingsThisLevel();
+    return bindingData.getExplicitBindingsThisLevel();
   }
 

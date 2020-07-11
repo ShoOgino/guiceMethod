@@ -3,6 +3,6 @@
      * bindings.
      */
     protected void scheduleDelayedInitialization(BindingImpl<?> binding) {
-      bindingData.addDelayedUninitializedBinding(() -> initializeBinding(binding));
+      processedBindingData.addDelayedUninitializedBinding(() -> initializeBinding(binding));
     }
 

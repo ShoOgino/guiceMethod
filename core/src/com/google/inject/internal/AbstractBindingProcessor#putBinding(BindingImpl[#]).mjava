@@ -10,9 +10,9 @@
     BindingImpl<?> original = injector.getExistingBinding(key);
     if (original != null) {
       // If it failed because of an explicit duplicate binding...
-      if (injector.state.getExplicitBinding(key) != null) {
+      if (injector.getBindingData().getExplicitBinding(key) != null) {
         try {
-          if (!isOkayDuplicate(original, binding, injector.state)) {
+          if (!isOkayDuplicate(original, binding, injector.getBindingData())) {
             errors.bindingAlreadySet(key, original.getSource());
             return;
           }
@@ -29,7 +29,9 @@
     }
 
     // prevent the parent from creating a JIT binding for this key
-    injector.getJitBindingData().banKeyInParent(key, injector.state, binding.getSource());
-    injector.state.putBinding(key, binding);
+    injector
+        .getJitBindingData()
+        .banKeyInParent(key, injector.getBindingData(), binding.getSource());
+    injector.getBindingData().putBinding(key, binding);
   }
 

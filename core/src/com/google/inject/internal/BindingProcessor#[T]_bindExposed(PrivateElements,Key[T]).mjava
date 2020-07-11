@@ -1,6 +1,6 @@
   private <T> void bindExposed(PrivateElements privateElements, Key<T> key) {
     ExposedKeyFactory<T> exposedKeyFactory = new ExposedKeyFactory<>(key, privateElements);
-    bindingData.addCreationListener(exposedKeyFactory);
+    processedBindingData.addCreationListener(exposedKeyFactory);
     putBinding(
         new ExposedBindingImpl<T>(
             injector,

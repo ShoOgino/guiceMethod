@@ -1,5 +1,5 @@
   public InternalInjectorCreator() {
     injectionRequestProcessor = new InjectionRequestProcessor(errors, initializer);
-    bindingData = new ProcessedBindingData();
+    processedBindingData = new ProcessedBindingData();
   }
 

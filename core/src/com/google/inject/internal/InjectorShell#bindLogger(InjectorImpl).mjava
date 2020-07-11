@@ -5,15 +5,17 @@
   private static void bindLogger(InjectorImpl injector) {
     Key<Logger> key = Key.get(Logger.class);
     LoggerFactory loggerFactory = new LoggerFactory();
-    injector.state.putBinding(
-        key,
-        new ProviderInstanceBindingImpl<Logger>(
-            injector,
+    injector
+        .getBindingData()
+        .putBinding(
             key,
-            SourceProvider.UNKNOWN_SOURCE,
-            loggerFactory,
-            Scoping.UNSCOPED,
-            loggerFactory,
-            ImmutableSet.<InjectionPoint>of()));
+            new ProviderInstanceBindingImpl<Logger>(
+                injector,
+                key,
+                SourceProvider.UNKNOWN_SOURCE,
+                loggerFactory,
+                Scoping.UNSCOPED,
+                loggerFactory,
+                ImmutableSet.<InjectionPoint>of()));
   }
 

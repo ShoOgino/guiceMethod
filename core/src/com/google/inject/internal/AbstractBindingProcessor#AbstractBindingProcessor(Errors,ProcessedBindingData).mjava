@@ -1,5 +1,5 @@
-  AbstractBindingProcessor(Errors errors, ProcessedBindingData bindingData) {
+  AbstractBindingProcessor(Errors errors, ProcessedBindingData processedBindingData) {
     super(errors);
-    this.bindingData = bindingData;
+    this.processedBindingData = processedBindingData;
   }
 

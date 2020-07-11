@@ -1,5 +1,6 @@
-  BindingProcessor(Errors errors, Initializer initializer, ProcessedBindingData bindingData) {
-    super(errors, bindingData);
+  BindingProcessor(
+      Errors errors, Initializer initializer, ProcessedBindingData processedBindingData) {
+    super(errors, processedBindingData);
     this.initializer = initializer;
   }
 

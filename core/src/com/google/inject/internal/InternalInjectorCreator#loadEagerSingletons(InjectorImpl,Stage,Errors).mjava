@@ -6,9 +6,9 @@
     List<BindingImpl<?>> candidateBindings = new ArrayList<>();
     @SuppressWarnings("unchecked") // casting Collection<Binding> to Collection<BindingImpl> is safe
     Collection<BindingImpl<?>> bindingsAtThisLevel =
-        (Collection) injector.state.getExplicitBindingsThisLevel().values();
+        (Collection) injector.getBindingData().getExplicitBindingsThisLevel().values();
     candidateBindings.addAll(bindingsAtThisLevel);
-    synchronized (injector.state.lock()) {
+    synchronized (injector.getBindingData().lock()) {
       // jit bindings must be accessed while holding the lock.
       candidateBindings.addAll(injector.getJitBindingData().getJitBindings().values());
     }

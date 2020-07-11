@@ -1,6 +1,6 @@
   /** Initialize and validate everything. */
   private void initializeStatically() {
-    bindingData.initializeBindings();
+    processedBindingData.initializeBindings();
     stopwatch.resetAndLog("Binding initialization");
 
     for (InjectorShell shell : shells) {
@@ -11,7 +11,7 @@
     injectionRequestProcessor.process(shells);
     stopwatch.resetAndLog("Collecting injection requests");
 
-    bindingData.runCreationListeners(errors);
+    processedBindingData.runCreationListeners(errors);
     stopwatch.resetAndLog("Binding validation");
 
     injectionRequestProcessor.validate();
@@ -28,7 +28,7 @@
 
     // This needs to come late since some user bindings rely on requireBinding calls to create
     // jit bindings during the LookupProcessor.
-    bindingData.initializeDelayedBindings();
+    processedBindingData.initializeDelayedBindings();
     stopwatch.resetAndLog("Delayed Binding initialization");
 
     for (InjectorShell shell : shells) {

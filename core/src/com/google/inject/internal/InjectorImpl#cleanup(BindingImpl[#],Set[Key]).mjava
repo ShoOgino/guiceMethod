@@ -25,7 +25,7 @@
             removeFailedJitBinding(depBinding, ip);
             bindingFailed = true;
           }
-        } else if (state.getExplicitBinding(depKey) == null) {
+        } else if (bindingData.getExplicitBinding(depKey) == null) {
           // ignore keys if they were explicitly bound, but if neither JIT
           // nor explicit, it's also invalid & should let parent know.
           bindingFailed = true;

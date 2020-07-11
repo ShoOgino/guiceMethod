@@ -36,7 +36,7 @@
 
     key = MoreTypes.canonicalizeKey(key); // before storing the key long-term, canonicalize it.
     BindingImpl<T> binding = createJustInTimeBinding(key, errors, jitDisabled, jitType);
-    jitBindingData.banKeyInParent(key, state, binding.getSource());
+    jitBindingData.banKeyInParent(key, bindingData, binding.getSource());
     jitBindingData.getJitBindings().put(key, binding);
     return binding;
   }

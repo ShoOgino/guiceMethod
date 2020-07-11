@@ -1,5 +1,5 @@
   @Override
   public Set<TypeConverterBinding> getTypeConverterBindings() {
-    return ImmutableSet.copyOf(state.getConvertersThisLevel());
+    return ImmutableSet.copyOf(bindingData.getConvertersThisLevel());
   }
 

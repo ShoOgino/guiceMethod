@@ -1,0 +1,4 @@
+  State getBindingData() {
+    return bindingData;
+  }
+

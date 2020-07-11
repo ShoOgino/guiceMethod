@@ -8,6 +8,6 @@
             new ConstantFactory<Stage>(Initializables.of(stage)),
             ImmutableSet.<InjectionPoint>of(),
             stage);
-    injector.state.putBinding(key, stageBinding);
+    injector.getBindingData().putBinding(key, stageBinding);
   }
 

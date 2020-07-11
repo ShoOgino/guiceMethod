@@ -1,10 +1,10 @@
   InjectorImpl(
       InjectorImpl parent,
-      State state,
+      State bindingData,
       InjectorJitBindingData jitBindingData,
       InjectorOptions injectorOptions) {
     this.parent = parent;
-    this.state = state;
+    this.bindingData = bindingData;
     this.jitBindingData = jitBindingData;
     this.options = injectorOptions;
 

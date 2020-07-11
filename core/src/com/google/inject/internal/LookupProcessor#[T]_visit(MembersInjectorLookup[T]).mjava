@@ -4,7 +4,7 @@
       MembersInjector<T> membersInjector =
           injector.membersInjectorStore.get(lookup.getType(), errors);
       lookup.initializeDelegate(membersInjector);
-      injector.state.putMembersInjectorLookup(lookup);
+      injector.getBindingData().putMembersInjectorLookup(lookup);
     } catch (ErrorsException e) {
       errors.merge(e.getErrors()); // TODO: source
     }
