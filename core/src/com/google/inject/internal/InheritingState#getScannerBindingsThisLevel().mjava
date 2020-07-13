@@ -1,5 +1,5 @@
   @Override
-  public List<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel() {
-    return scannerBindings;
+  public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel() {
+    return ImmutableList.copyOf(scannerBindings);
   }
 

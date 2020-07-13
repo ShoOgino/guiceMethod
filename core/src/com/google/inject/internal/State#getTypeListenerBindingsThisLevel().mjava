@@ -1,2 +1,2 @@
-  List<TypeListenerBinding> getTypeListenerBindingsThisLevel();
+  ImmutableList<TypeListenerBinding> getTypeListenerBindingsThisLevel();
 

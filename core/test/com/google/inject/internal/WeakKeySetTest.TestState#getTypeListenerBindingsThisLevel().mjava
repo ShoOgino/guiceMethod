@@ -1,5 +1,5 @@
     @Override
-    public List<TypeListenerBinding> getTypeListenerBindingsThisLevel() {
+    public ImmutableList<TypeListenerBinding> getTypeListenerBindingsThisLevel() {
       throw new UnsupportedOperationException();
     }
 

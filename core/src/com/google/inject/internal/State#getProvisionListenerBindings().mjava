@@ -1,2 +1,2 @@
-  List<ProvisionListenerBinding> getProvisionListenerBindings();
+  ImmutableList<ProvisionListenerBinding> getProvisionListenerBindings();
 

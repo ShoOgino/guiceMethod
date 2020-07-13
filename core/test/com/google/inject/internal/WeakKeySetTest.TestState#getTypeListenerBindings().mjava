@@ -1,5 +1,5 @@
     @Override
-    public List<TypeListenerBinding> getTypeListenerBindings() {
+    public ImmutableList<TypeListenerBinding> getTypeListenerBindings() {
       return ImmutableList.of();
     }
 

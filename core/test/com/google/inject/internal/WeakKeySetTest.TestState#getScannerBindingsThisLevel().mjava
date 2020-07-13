@@ -1,5 +1,5 @@
     @Override
-    public List<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel() {
+    public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel() {
       throw new UnsupportedOperationException();
     }
 

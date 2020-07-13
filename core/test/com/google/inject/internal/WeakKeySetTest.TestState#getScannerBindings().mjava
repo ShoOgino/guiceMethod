@@ -1,5 +1,5 @@
     @Override
-    public List<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
+    public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
       return ImmutableList.of();
     }
 

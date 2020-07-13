@@ -2,7 +2,8 @@
   public TypeConverterBinding getConverter(
       String stringValue, TypeLiteral<?> type, Errors errors, Object source) {
     TypeConverterBinding matchingConverter = null;
-    for (State s = this; s != State.NONE; s = s.parent()) {
+    State s = this;
+    while (s != null) {
       for (TypeConverterBinding converter : s.getConvertersThisLevel()) {
         if (converter.getTypeMatcher().matches(type)) {
           if (matchingConverter != null) {
@@ -11,6 +12,7 @@
           matchingConverter = converter;
         }
       }
+      s = s.parent().orElse(null);
     }
     return matchingConverter;
   }

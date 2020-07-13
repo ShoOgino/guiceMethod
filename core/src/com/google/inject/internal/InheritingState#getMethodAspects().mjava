@@ -1,9 +1,12 @@
   @Override
   public ImmutableList<MethodAspect> getMethodAspects() {
-    return new ImmutableList.Builder<MethodAspect>()
-        .addAll(parent.getMethodAspects())
-        .addAll(methodAspects)
-        .build();
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<MethodAspect>()
+          .addAll(parent.get().getMethodAspects())
+          .addAll(methodAspects)
+          .build();
+    }
+    return ImmutableList.copyOf(methodAspects);
   }
   /*end[AOP]*/
 

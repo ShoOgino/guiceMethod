@@ -1,5 +1,5 @@
     @Override
-    public List<ProvisionListenerBinding> getProvisionListenerBindingsThisLevel() {
+    public ImmutableList<ProvisionListenerBinding> getProvisionListenerBindingsThisLevel() {
       throw new UnsupportedOperationException();
     }
 

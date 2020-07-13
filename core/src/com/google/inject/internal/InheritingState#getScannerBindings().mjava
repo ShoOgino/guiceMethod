@@ -1,10 +1,11 @@
   @Override
-  public List<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
-    List<ModuleAnnotatedMethodScannerBinding> parentBindings = parent.getScannerBindings();
-    List<ModuleAnnotatedMethodScannerBinding> result =
-        Lists.newArrayListWithCapacity(parentBindings.size() + scannerBindings.size());
-    result.addAll(parentBindings);
-    result.addAll(scannerBindings);
-    return result;
+  public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<ModuleAnnotatedMethodScannerBinding>()
+          .addAll(parent.get().getScannerBindings())
+          .addAll(scannerBindings)
+          .build();
+    }
+    return ImmutableList.copyOf(scannerBindings);
   }
 

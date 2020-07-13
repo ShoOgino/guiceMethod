@@ -1,5 +1,5 @@
     @Override
-    public State parent() {
-      return new TestState();
+    public Optional<State> parent() {
+      return Optional.of(new TestState());
     }
 

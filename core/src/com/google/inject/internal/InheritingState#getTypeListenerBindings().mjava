@@ -1,10 +1,11 @@
   @Override
-  public List<TypeListenerBinding> getTypeListenerBindings() {
-    List<TypeListenerBinding> parentBindings = parent.getTypeListenerBindings();
-    List<TypeListenerBinding> result =
-        Lists.newArrayListWithCapacity(parentBindings.size() + typeListenerBindings.size());
-    result.addAll(parentBindings);
-    result.addAll(typeListenerBindings);
-    return result;
+  public ImmutableList<TypeListenerBinding> getTypeListenerBindings() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<TypeListenerBinding>()
+          .addAll(parent.get().getTypeListenerBindings())
+          .addAll(typeListenerBindings)
+          .build();
+    }
+    return ImmutableList.copyOf(typeListenerBindings);
   }
 

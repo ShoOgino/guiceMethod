@@ -1,2 +1,2 @@
-  List<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel();
+  ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel();
 

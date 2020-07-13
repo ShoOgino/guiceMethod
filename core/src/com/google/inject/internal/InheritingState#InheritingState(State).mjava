@@ -1,5 +1,0 @@
-  InheritingState(State parent) {
-    this.parent = checkNotNull(parent, "parent");
-    this.lock = (parent == State.NONE) ? this : parent.lock();
-  }
-

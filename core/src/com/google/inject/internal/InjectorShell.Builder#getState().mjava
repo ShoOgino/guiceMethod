@@ -4,7 +4,7 @@
      */
     private State getState() {
       if (state == null) {
-        state = new InheritingState(State.NONE);
+        state = new InheritingState(Optional.empty());
         jitBindingData = new InjectorJitBindingData(Optional.empty(), state);
       }
       return state;
