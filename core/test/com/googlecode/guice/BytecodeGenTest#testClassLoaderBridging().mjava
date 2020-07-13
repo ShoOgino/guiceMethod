@@ -1,4 +1,8 @@
   public void testClassLoaderBridging() throws Exception {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     ClassLoader testClassLoader = new TestVisibilityClassLoader(false);
 
     Class hiddenMethodReturnClass = testClassLoader.loadClass(HiddenMethodReturn.class.getName());

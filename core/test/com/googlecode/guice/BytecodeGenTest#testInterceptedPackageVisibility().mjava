@@ -1,4 +1,8 @@
   public void testInterceptedPackageVisibility() {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     Injector injector = Guice.createInjector(interceptorModule, new PackageVisibilityTestModule());
     injector.getInstance(PublicUserOfPackagePrivate.class); // This must pass.
   }

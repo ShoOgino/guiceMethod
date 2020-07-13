@@ -1,4 +1,8 @@
   public void testSystemClassLoaderIsUsedIfProxiedClassUsesIt() {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     ProxyTest testProxy =
         Guice.createInjector(
                 interceptorModule,

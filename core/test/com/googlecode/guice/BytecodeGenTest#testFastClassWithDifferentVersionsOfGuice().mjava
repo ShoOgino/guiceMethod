@@ -1,5 +1,9 @@
   // This tests for a situation where an osgi bundle contains a different version of guice.
   public void testFastClassWithDifferentVersionsOfGuice() throws Throwable {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     Injector injector = Guice.createInjector();
     // These classes are all in the same classloader as guice itself, so other than the private one
     // they can all be fast class invoked

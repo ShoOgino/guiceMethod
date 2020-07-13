@@ -1,4 +1,8 @@
   public void testEnhancerNaming() {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     Injector injector = Guice.createInjector(interceptorModule, new PackageVisibilityTestModule());
     PublicUserOfPackagePrivate pupp = injector.getInstance(PublicUserOfPackagePrivate.class);
     assertTrue(

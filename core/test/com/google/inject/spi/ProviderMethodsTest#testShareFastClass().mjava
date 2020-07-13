@@ -1,5 +1,9 @@
   /*if[AOP]*/
   public void testShareFastClass() {
+    // Test relies on package access which CHILD loading doesn't have
+    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
+      return;
+    }
     CallerInspecterModule module = new CallerInspecterModule();
     Guice.createInjector(Stage.PRODUCTION, module);
     assertEquals(module.fooCallerClass, module.barCallerClass);
