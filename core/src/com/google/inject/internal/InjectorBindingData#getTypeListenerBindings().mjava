@@ -1,0 +1,10 @@
+  public ImmutableList<TypeListenerBinding> getTypeListenerBindings() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<TypeListenerBinding>()
+          .addAll(parent.get().getTypeListenerBindings())
+          .addAll(typeListenerBindings)
+          .build();
+    }
+    return ImmutableList.copyOf(typeListenerBindings);
+  }
+

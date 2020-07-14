@@ -1,5 +1,0 @@
-  @Override
-  public void addScanner(ModuleAnnotatedMethodScannerBinding scanner) {
-    scannerBindings.add(scanner);
-  }
-

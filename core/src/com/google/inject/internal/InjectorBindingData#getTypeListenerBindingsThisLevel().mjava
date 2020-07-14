@@ -1,0 +1,4 @@
+  public ImmutableList<TypeListenerBinding> getTypeListenerBindingsThisLevel() {
+    return ImmutableList.copyOf(typeListenerBindings);
+  }
+

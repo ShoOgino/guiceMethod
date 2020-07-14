@@ -1,0 +1,8 @@
+  public ScopeBinding getScopeBinding(Class<? extends Annotation> annotationType) {
+    ScopeBinding scopeBinding = scopes.get(annotationType);
+    if (scopeBinding == null && parent.isPresent()) {
+      return parent.get().getScopeBinding(annotationType);
+    }
+    return scopeBinding;
+  }
+

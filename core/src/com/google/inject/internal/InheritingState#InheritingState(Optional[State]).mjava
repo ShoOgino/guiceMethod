@@ -1,5 +1,0 @@
-  InheritingState(Optional<State> parent) {
-    this.parent = parent;
-    this.lock = parent.isPresent() ? parent.get().lock() : this;
-  }
-

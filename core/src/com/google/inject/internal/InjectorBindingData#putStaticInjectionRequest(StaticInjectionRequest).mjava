@@ -1,0 +1,4 @@
+  public void putStaticInjectionRequest(StaticInjectionRequest staticInjectionRequest) {
+    staticInjectionRequests.add(staticInjectionRequest);
+  }
+

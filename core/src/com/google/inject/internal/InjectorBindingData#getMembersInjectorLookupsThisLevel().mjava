@@ -1,0 +1,4 @@
+  public Set<MembersInjectorLookup<?>> getMembersInjectorLookupsThisLevel() {
+    return membersInjectorLookups;
+  }
+

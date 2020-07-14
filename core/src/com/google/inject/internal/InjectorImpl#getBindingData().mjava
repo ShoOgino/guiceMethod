@@ -1,4 +1,4 @@
-  State getBindingData() {
+  InjectorBindingData getBindingData() {
     return bindingData;
   }
 

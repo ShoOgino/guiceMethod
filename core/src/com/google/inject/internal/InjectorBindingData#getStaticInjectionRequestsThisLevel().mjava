@@ -1,0 +1,4 @@
+  public Set<StaticInjectionRequest> getStaticInjectionRequestsThisLevel() {
+    return staticInjectionRequests;
+  }
+

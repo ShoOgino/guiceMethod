@@ -1,0 +1,4 @@
+  public Set<ProviderLookup<?>> getProviderLookupsThisLevel() {
+    return providerLookups;
+  }
+

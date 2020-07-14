@@ -1,0 +1,18 @@
+  public TypeConverterBinding getConverter(
+      String stringValue, TypeLiteral<?> type, Errors errors, Object source) {
+    TypeConverterBinding matchingConverter = null;
+    InjectorBindingData b = this;
+    while (b != null) {
+      for (TypeConverterBinding converter : b.getConvertersThisLevel()) {
+        if (converter.getTypeMatcher().matches(type)) {
+          if (matchingConverter != null) {
+            errors.ambiguousTypeConversion(stringValue, source, type, matchingConverter, converter);
+          }
+          matchingConverter = converter;
+        }
+      }
+      b = b.parent().orElse(null);
+    }
+    return matchingConverter;
+  }
+

@@ -1,5 +1,0 @@
-  @Override
-  public Map<Key<?>, Binding<?>> getExplicitBindingsThisLevel() {
-    return explicitBindings;
-  }
-

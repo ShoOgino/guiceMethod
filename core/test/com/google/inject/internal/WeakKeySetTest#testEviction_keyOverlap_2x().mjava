@@ -1,15 +1,15 @@
   public void testEviction_keyOverlap_2x() {
-    TestState state1 = new TestState();
-    TestState state2 = new TestState();
+    TestInjectorBindingData bindingData1 = new TestInjectorBindingData();
+    TestInjectorBindingData bindingData2 = new TestInjectorBindingData();
     Key<Integer> key1 = Key.get(Integer.class);
     Key<Integer> key2 = Key.get(Integer.class);
     Object source1 = new Object();
     Object source2 = new Object();
 
-    set.add(key1, state1, source1);
+    set.add(key1, bindingData1, source1);
     assertInSet(set, key1, 1, source1);
 
-    set.add(key2, state2, source2);
+    set.add(key2, bindingData2, source2);
     assertInSet(set, key2, 2, source1, source2);
 
     WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<>(key1);
@@ -18,7 +18,7 @@
     WeakReference<Object> weakSource2Ref = new WeakReference<>(source2);
 
     Key<Integer> key = key1 = key2 = Key.get(Integer.class);
-    state1 = null;
+    bindingData1 = null;
 
     awaitFullGc();
 
@@ -32,10 +32,10 @@
     // Key1 will be referenced as the key in the sources backingSet and won't be
     // GC'd.
 
-    // Should not be GC'd until state2 goes away.
+    // Should not be GC'd until bindingData2 goes away.
     assertNotNull(weakSource2Ref.get());
 
-    state2 = null;
+    bindingData2 = null;
 
     awaitFullGc();
 

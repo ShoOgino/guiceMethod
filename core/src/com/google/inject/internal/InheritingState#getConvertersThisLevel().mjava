@@ -1,5 +1,0 @@
-  @Override
-  public Iterable<TypeConverterBinding> getConvertersThisLevel() {
-    return converters;
-  }
-

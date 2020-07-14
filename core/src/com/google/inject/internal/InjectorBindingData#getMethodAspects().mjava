@@ -1,0 +1,11 @@
+  public ImmutableList<MethodAspect> getMethodAspects() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<MethodAspect>()
+          .addAll(parent.get().getMethodAspects())
+          .addAll(methodAspects)
+          .build();
+    }
+    return ImmutableList.copyOf(methodAspects);
+  }
+  /*end[AOP]*/
+

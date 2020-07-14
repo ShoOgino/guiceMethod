@@ -1,0 +1,4 @@
+  public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindingsThisLevel() {
+    return ImmutableList.copyOf(scannerBindings);
+  }
+

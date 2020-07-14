@@ -1,0 +1,10 @@
+  public ImmutableList<ModuleAnnotatedMethodScannerBinding> getScannerBindings() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<ModuleAnnotatedMethodScannerBinding>()
+          .addAll(parent.get().getScannerBindings())
+          .addAll(scannerBindings)
+          .build();
+    }
+    return ImmutableList.copyOf(scannerBindings);
+  }
+

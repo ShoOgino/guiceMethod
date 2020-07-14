@@ -1,0 +1,4 @@
+    InheritedScannersModule(InjectorBindingData bindingData) {
+      this.bindingData = bindingData;
+    }
+

@@ -1,0 +1,10 @@
+  public ImmutableList<ProvisionListenerBinding> getProvisionListenerBindings() {
+    if (parent.isPresent()) {
+      return new ImmutableList.Builder<ProvisionListenerBinding>()
+          .addAll(parent.get().getProvisionListenerBindings())
+          .addAll(provisionListenerBindings)
+          .build();
+    }
+    return ImmutableList.copyOf(provisionListenerBindings);
+  }
+

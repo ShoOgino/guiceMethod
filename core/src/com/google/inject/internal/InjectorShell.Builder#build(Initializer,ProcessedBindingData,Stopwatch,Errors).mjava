@@ -10,7 +10,7 @@
         Errors errors) {
       checkState(stage != null, "Stage not initialized");
       checkState(privateElements == null || parent != null, "PrivateElements with no parent");
-      checkState(state != null, "no state. Did you remember to lock() ?");
+      checkState(bindingData != null, "no binding data. Did you remember to lock() ?");
       checkState(
           (privateElements == null && elements.isEmpty()) || modules.isEmpty(),
           "The shell is either built from modules (root) or from PrivateElements (children).");
@@ -36,7 +36,7 @@
       optionsProcessor.process(null, elements);
       options = optionsProcessor.getOptions(stage, options);
 
-      InjectorImpl injector = new InjectorImpl(parent, state, jitBindingData, options);
+      InjectorImpl injector = new InjectorImpl(parent, bindingData, jitBindingData, options);
       if (privateElements != null) {
         privateElements.initInjector(injector);
       }

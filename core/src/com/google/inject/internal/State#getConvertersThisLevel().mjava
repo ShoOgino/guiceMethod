@@ -1,3 +1,0 @@
-  /** Returns all converters at this level only. */
-  Iterable<TypeConverterBinding> getConvertersThisLevel();
-

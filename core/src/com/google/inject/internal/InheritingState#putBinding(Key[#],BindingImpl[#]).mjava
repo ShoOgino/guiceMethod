@@ -1,5 +1,0 @@
-  @Override
-  public void putBinding(Key<?> key, BindingImpl<?> binding) {
-    explicitBindingsMutable.put(key, binding);
-  }
-

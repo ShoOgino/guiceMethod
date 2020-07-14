@@ -1,0 +1,4 @@
+  public void putInjectionRequest(InjectionRequest<?> injectionRequest) {
+    injectionRequests.add(injectionRequest);
+  }
+

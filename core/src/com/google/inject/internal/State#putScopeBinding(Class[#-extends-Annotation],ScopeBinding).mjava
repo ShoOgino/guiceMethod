@@ -1,2 +1,0 @@
-  void putScopeBinding(Class<? extends Annotation> annotationType, ScopeBinding scope);
-

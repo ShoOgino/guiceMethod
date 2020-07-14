@@ -1,0 +1,4 @@
+  public void addTypeListener(TypeListenerBinding listenerBinding) {
+    typeListenerBindings.add(listenerBinding);
+  }
+

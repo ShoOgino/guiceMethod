@@ -1,7 +1,7 @@
   public void testEviction_keyOverlap_3x() {
-    TestState state1 = new TestState();
-    TestState state2 = new TestState();
-    TestState state3 = new TestState();
+    TestInjectorBindingData bindingData1 = new TestInjectorBindingData();
+    TestInjectorBindingData bindingData2 = new TestInjectorBindingData();
+    TestInjectorBindingData bindingData3 = new TestInjectorBindingData();
     Key<Integer> key1 = Key.get(Integer.class);
     Key<Integer> key2 = Key.get(Integer.class);
     Key<Integer> key3 = Key.get(Integer.class);
@@ -9,13 +9,13 @@
     Object source2 = new Object();
     Object source3 = new Object();
 
-    set.add(key1, state1, source1);
+    set.add(key1, bindingData1, source1);
     assertInSet(set, key1, 1, source1);
 
-    set.add(key2, state2, source2);
+    set.add(key2, bindingData2, source2);
     assertInSet(set, key1, 2, source1, source2);
 
-    set.add(key3, state3, source3);
+    set.add(key3, bindingData3, source3);
     assertInSet(set, key1, 3, source1, source2, source3);
 
     WeakReference<Key<Integer>> weakKey1Ref = new WeakReference<>(key1);
@@ -26,7 +26,7 @@
     WeakReference<Object> weakSource3Ref = new WeakReference<>(source3);
 
     Key<Integer> key = key1 = key2 = key3 = Key.get(Integer.class);
-    state1 = null;
+    bindingData1 = null;
 
     awaitFullGc();
     assertSourceNotInSet(set, key, source1);
@@ -37,7 +37,7 @@
     // GC'd.
     awaitClear(weakSource1Ref);
 
-    state2 = null;
+    bindingData2 = null;
     awaitFullGc();
     assertSourceNotInSet(set, key, source2);
     assertInSet(set, key, 1, source3);
@@ -49,7 +49,7 @@
     // Key1 will be referenced as the key in the sources backingSet and won't be
     // GC'd.
 
-    state3 = null;
+    bindingData3 = null;
     awaitFullGc();
     assertNotInSet(set, key);
 

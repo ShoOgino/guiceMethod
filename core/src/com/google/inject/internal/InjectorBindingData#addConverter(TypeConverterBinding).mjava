@@ -1,0 +1,4 @@
+  public void addConverter(TypeConverterBinding typeConverterBinding) {
+    converters.add(typeConverterBinding);
+  }
+

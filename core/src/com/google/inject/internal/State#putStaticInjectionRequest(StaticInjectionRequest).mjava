@@ -1,2 +1,0 @@
-  void putStaticInjectionRequest(StaticInjectionRequest staticInjectionRequest);
-

@@ -1,14 +1,14 @@
   public void testEviction() {
-    TestState state = new TestState();
+    TestInjectorBindingData bindingData = new TestInjectorBindingData();
     Key<Integer> key = Key.get(Integer.class);
     Object source = new Object();
 
     WeakReference<Key<Integer>> weakKeyRef = new WeakReference<>(key);
 
-    set.add(key, state, source);
+    set.add(key, bindingData, source);
     assertInSet(set, key, 1, source);
 
-    state = null;
+    bindingData = null;
 
     awaitFullGc();
 

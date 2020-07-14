@@ -1,2 +1,0 @@
-  void putInjectionRequest(InjectionRequest<?> injectionRequest);
-

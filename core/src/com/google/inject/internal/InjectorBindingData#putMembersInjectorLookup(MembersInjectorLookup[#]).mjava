@@ -1,0 +1,4 @@
+  public void putMembersInjectorLookup(MembersInjectorLookup<?> membersInjectorLookup) {
+    membersInjectorLookups.add(membersInjectorLookup);
+  }
+

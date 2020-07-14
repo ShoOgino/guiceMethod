@@ -1,5 +1,0 @@
-  @Override
-  public void putScopeBinding(Class<? extends Annotation> annotationType, ScopeBinding scope) {
-    scopes.put(annotationType, scope);
-  }
-

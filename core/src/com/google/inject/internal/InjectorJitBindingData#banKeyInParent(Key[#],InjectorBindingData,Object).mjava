@@ -1,0 +1,11 @@
+  /**
+   * Similar to {@link #banKey(Key, InjectorBindingData, Object)} but we only begin banning the
+   * binding at the parent level. This is used to prevent JIT bindings in the parent injector from
+   * overriding explicit bindings declared in a child injector.
+   */
+  void banKeyInParent(Key<?> key, InjectorBindingData injectorBindingData, Object source) {
+    if (parent.isPresent()) {
+      parent.get().banKey(key, injectorBindingData, source);
+    }
+  }
+

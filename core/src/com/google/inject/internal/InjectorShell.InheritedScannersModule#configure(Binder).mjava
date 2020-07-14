@@ -1,6 +1,6 @@
     @Override
     public void configure(Binder binder) {
-      for (ModuleAnnotatedMethodScannerBinding binding : state.getScannerBindings()) {
+      for (ModuleAnnotatedMethodScannerBinding binding : bindingData.getScannerBindings()) {
         binding.applyTo(binder);
       }
     }

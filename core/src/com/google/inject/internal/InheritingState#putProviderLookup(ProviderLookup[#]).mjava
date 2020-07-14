@@ -1,5 +1,0 @@
-  @Override
-  public void putProviderLookup(ProviderLookup<?> lookup) {
-    providerLookups.add(lookup);
-  }
-

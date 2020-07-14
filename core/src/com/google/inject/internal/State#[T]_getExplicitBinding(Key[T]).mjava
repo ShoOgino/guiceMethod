@@ -1,3 +1,0 @@
-  /** Gets a binding which was specified explicitly in a module, or null. */
-  <T> BindingImpl<T> getExplicitBinding(Key<T> key);
-

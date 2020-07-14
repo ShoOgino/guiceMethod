@@ -1,0 +1,22 @@
+  public void add(Key<?> key, InjectorBindingData state, Object source) {
+    if (backingMap == null) {
+      backingMap = Maps.newHashMap();
+    }
+    // if it's an instanceof Class, it was a JIT binding, which we don't
+    // want to retain.
+    if (source instanceof Class || source == SourceProvider.UNKNOWN_SOURCE) {
+      source = null;
+    }
+    Object convertedSource = Errors.convert(source);
+    backingMap.computeIfAbsent(key, k -> LinkedHashMultiset.create()).add(convertedSource);
+
+    // Avoid all the extra work if we can.
+    if (state.parent().isPresent()) {
+      Set<KeyAndSource> keyAndSources = evictionCache.getIfPresent(state);
+      if (keyAndSources == null) {
+        evictionCache.put(state, keyAndSources = Sets.newHashSet());
+      }
+      keyAndSources.add(new KeyAndSource(key, convertedSource));
+    }
+  }
+
