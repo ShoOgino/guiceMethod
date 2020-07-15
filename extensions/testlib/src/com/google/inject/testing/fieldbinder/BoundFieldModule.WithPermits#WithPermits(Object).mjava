@@ -1,0 +1,16 @@
+    protected WithPermits(Object instance) {
+      this.instance = instance;
+      // TODO(user): Enforce this at compile-time (e.g. via ErrorProne).
+      Preconditions.checkState(
+          getClass().isAnonymousClass()
+              && Arrays.stream(getClass().getAnnotatedSuperclass().getAnnotations())
+                  .anyMatch(
+                      annotation ->
+                          annotation
+                              .annotationType()
+                              .isAnnotationPresent(RestrictedBindingSource.Permit.class)),
+          "This class should only be used as a base class for an anonymous class with"
+              + " @RestrictedBindingSource.Permit annotations, for example: new @FooPermit"
+              + " BoundFieldModule.WithPermits(instance) {}.");
+    }
+

@@ -1,0 +1,12 @@
+  public void testBoundFieldModuleWithPermits() {
+    class Bindings {
+      @Bind @Foo int foo = 17;
+    }
+    Bindings bindings = new Bindings();
+
+    Injector injector =
+        Guice.createInjector(new @FooPermit BoundFieldModule.WithPermits(bindings) {});
+
+    assertEquals((Integer) bindings.foo, injector.getInstance(Key.get(Integer.class, Foo.class)));
+  }
+

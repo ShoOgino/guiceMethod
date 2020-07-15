@@ -1,0 +1,5 @@
+    @Override
+    protected void configure() {
+      install(BoundFieldModule.of(instance));
+    }
+
