@@ -1,6 +1,0 @@
-  void indexBindingsByType() {
-    for (Binding<?> binding : bindingData.getExplicitBindingsThisLevel().values()) {
-      bindingsMultimap.put(binding.getKey().getTypeLiteral(), binding);
-    }
-  }
-

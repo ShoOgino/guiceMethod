@@ -1,0 +1,4 @@
+  public ListMultimap<TypeLiteral<?>, Binding<?>> getIndexedExplicitBindings() {
+    return indexedExplicitBindings;
+  }
+

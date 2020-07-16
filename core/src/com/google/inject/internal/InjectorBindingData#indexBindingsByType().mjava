@@ -1,0 +1,10 @@
+  /**
+   * Once the injector's explicit bindings are finalized, this method is called to index all
+   * explicit bindings by their return type.
+   */
+  void indexBindingsByType() {
+    for (Binding<?> binding : getExplicitBindingsThisLevel().values()) {
+      indexedExplicitBindings.put(binding.getKey().getTypeLiteral(), binding);
+    }
+  }
+
