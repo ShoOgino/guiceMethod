@@ -33,7 +33,6 @@
         Matchers.subclassesOf(Enum.class),
         new TypeConverter() {
           @Override
-          @SuppressWarnings("unchecked")
           public Object convert(String value, TypeLiteral<?> toType) {
             return Enum.valueOf((Class) toType.getRawType(), value);
           }
@@ -59,7 +58,6 @@
         },
         new TypeConverter() {
           @Override
-          @SuppressWarnings("unchecked")
           public Object convert(String value, TypeLiteral<?> toType) {
             try {
               return Class.forName(value);

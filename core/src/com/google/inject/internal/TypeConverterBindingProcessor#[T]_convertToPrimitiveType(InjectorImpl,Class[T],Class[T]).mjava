@@ -7,7 +7,6 @@
       TypeConverter typeConverter =
           new TypeConverter() {
             @Override
-            @SuppressWarnings("unchecked")
             public Object convert(String value, TypeLiteral<?> toType) {
               try {
                 return parser.invoke(null, value);
