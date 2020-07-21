@@ -1,5 +1,11 @@
     /** Synchronize on this before calling {@link #build}. */
     Object lock() {
-      return getBindingData().lock();
+      // Lazily initializes bindingData and jitBindingData, if they were not already
+      // initialized with a parent injector by {@link #parent(InjectorImpl)}.
+      if (bindingData == null) {
+        jitBindingData = new InjectorJitBindingData(Optional.empty());
+        bindingData = new InjectorBindingData(Optional.empty());
+      }
+      return jitBindingData.lock();
     }
 

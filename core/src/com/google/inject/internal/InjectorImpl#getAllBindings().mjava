@@ -1,6 +1,6 @@
   @Override
   public Map<Key<?>, Binding<?>> getAllBindings() {
-    synchronized (bindingData.lock()) {
+    synchronized (jitBindingData.lock()) {
       return new ImmutableMap.Builder<Key<?>, Binding<?>>()
           .putAll(bindingData.getExplicitBindingsThisLevel())
           .putAll(jitBindingData.getJitBindings())

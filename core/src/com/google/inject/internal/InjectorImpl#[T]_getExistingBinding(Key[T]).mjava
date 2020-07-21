@@ -5,7 +5,7 @@
     if (explicitBinding != null) {
       return explicitBinding;
     }
-    synchronized (bindingData.lock()) {
+    synchronized (jitBindingData.lock()) {
       // See if any jit bindings have been created for this key.
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
         @SuppressWarnings("unchecked")

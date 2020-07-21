@@ -1,0 +1,6 @@
+  InjectorJitBindingData(Optional<InjectorJitBindingData> parent) {
+    this.parent = parent;
+    this.lock = parent.isPresent() ? parent.get().lock() : this;
+    this.bannedKeys = new WeakKeySet(lock);
+  }
+

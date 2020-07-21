@@ -1,5 +1,4 @@
   InjectorBindingData(Optional<InjectorBindingData> parent) {
     this.parent = parent;
-    this.lock = parent.isPresent() ? parent.get().lock() : this;
   }
 

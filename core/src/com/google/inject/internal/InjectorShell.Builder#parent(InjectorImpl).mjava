@@ -1,8 +1,7 @@
     Builder parent(InjectorImpl parent) {
       this.parent = parent;
+      this.jitBindingData = new InjectorJitBindingData(Optional.of(parent.getJitBindingData()));
       this.bindingData = new InjectorBindingData(Optional.of(parent.getBindingData()));
-      this.jitBindingData =
-          new InjectorJitBindingData(Optional.of(parent.getJitBindingData()), bindingData);
       this.options = parent.options;
       this.stage = options.stage;
       return this;

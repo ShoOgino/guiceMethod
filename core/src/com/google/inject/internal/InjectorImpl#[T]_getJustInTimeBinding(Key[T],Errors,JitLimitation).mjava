@@ -7,7 +7,7 @@
       throws ErrorsException {
 
     boolean jitOverride = isProvider(key) || isTypeLiteral(key) || isMembersInjector(key);
-    synchronized (bindingData.lock()) {
+    synchronized (jitBindingData.lock()) {
       // first try to find a JIT binding that we've already created
       for (InjectorImpl injector = this; injector != null; injector = injector.parent) {
         @SuppressWarnings("unchecked") // we only store bindings that match their key
@@ -45,6 +45,6 @@
         throw errors.toException();
       }
       return createJustInTimeBindingRecursive(key, errors, options.jitDisabled, jitType);
-    } // end synchronized(state.lock())
+    } // end synchronized(jitBindingData.lock())
   }
 
