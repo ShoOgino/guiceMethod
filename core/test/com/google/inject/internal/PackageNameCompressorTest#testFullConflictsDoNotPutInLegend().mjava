@@ -1,0 +1,7 @@
+  @Test
+  public void testFullConflictsDoNotPutInLegend() {
+    String input = "Something is wrong with foo.Foo and bar.Foo class!";
+    // No shortening can be done without loss of clarity so do not modify this and add no legend.
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(input);
+  }
+

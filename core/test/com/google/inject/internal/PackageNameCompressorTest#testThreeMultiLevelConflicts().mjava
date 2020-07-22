@@ -1,0 +1,16 @@
+  // If relying on conflicts by inserting into the map, an extra conflict on c.Foo may result in
+  // uneven renaming because when the first two conflict on c.Foo they may make room for the next
+  // conflict to just take over what had previously been a conflict. Make sure that this unevenness
+  // doesn't happen.
+  @Test
+  public void testThreeMultiLevelConflicts() {
+    String input = "Something is wrong with z.a.c.Foo, z.b.c.Foo, and z.c.c.Foo class!";
+    String expectedOutput = "Something is wrong with a.c.Foo, b.c.Foo, and c.c.Foo class!"
+        + LEGEND_HEADER
+        + "a.c.Foo: z.a.c.Foo\n"
+        + "b.c.Foo: z.b.c.Foo\n"
+        + "c.c.Foo: z.c.c.Foo\n"
+        + LEGEND_FOOTER;
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

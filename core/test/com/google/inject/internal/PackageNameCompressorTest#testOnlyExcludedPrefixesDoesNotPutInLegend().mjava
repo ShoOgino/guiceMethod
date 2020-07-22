@@ -1,0 +1,7 @@
+  @Test
+  public void testOnlyExcludedPrefixesDoesNotPutInLegend() {
+    String input = "Something is wrong with java.lang.Set class!";
+    String expectedOutput = "Something is wrong with Set class!";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

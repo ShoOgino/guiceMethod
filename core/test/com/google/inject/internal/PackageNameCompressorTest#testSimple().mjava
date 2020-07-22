@@ -1,0 +1,10 @@
+  @Test
+  public void testSimple() {
+    String input = "Something is wrong with foo.bar.baz.Foo class!";
+    String expectedOutput = "Something is wrong with Foo class!"
+        + LEGEND_HEADER
+        + "Foo: foo.bar.baz.Foo\n"
+        + LEGEND_FOOTER;
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

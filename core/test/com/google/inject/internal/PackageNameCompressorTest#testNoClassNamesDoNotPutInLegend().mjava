@@ -1,0 +1,6 @@
+  @Test
+  public void testNoClassNamesDoNotPutInLegend() {
+    String input = "Something is wrong with something!";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(input);
+  }
+
