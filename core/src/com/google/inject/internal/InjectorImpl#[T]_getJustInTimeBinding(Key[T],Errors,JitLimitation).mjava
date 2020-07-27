@@ -33,7 +33,7 @@
       // entry in jitBindings (during cleanup), and we may be trying
       // to create it again (in the case of a recursive JIT binding).
       // We need both of these guards for different reasons
-      // getFailedJitBindings.contains: We want to continue processing if we've never
+      // isFailedJitBinding: We want to continue processing if we've never
       //   failed before, so that our initial error message contains
       //   as much useful information as possible about what errors exist.
       // errors.hasErrors: If we haven't already failed, then it's OK to
@@ -41,7 +41,7 @@
       //   is the correct one.
       // See: ImplicitBindingsTest#testRecursiveJitBindingsCleanupCorrectly
       // for where this guard comes into play.
-      if (jitBindingData.getFailedJitBindings().contains(key) && errors.hasErrors()) {
+      if (jitBindingData.isFailedJitBinding(key) && errors.hasErrors()) {
         throw errors.toException();
       }
       return createJustInTimeBindingRecursive(key, errors, options.jitDisabled, jitType);

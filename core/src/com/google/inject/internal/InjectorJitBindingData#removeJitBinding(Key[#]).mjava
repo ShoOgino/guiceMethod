@@ -1,0 +1,4 @@
+  void removeJitBinding(Key<?> key) {
+    jitBindings.remove(key);
+  }
+

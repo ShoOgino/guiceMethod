@@ -1,0 +1,4 @@
+  boolean isFailedJitBinding(Key<?> key) {
+    return failedJitBindings.contains(key);
+  }
+

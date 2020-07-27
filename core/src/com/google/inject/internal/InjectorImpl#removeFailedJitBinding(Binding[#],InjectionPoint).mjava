@@ -1,7 +1,7 @@
   /** Cleans up any state that may have been cached when constructing the JIT binding. */
   private void removeFailedJitBinding(Binding<?> binding, InjectionPoint ip) {
-    jitBindingData.getFailedJitBindings().add(binding.getKey());
-    jitBindingData.getJitBindings().remove(binding.getKey());
+    jitBindingData.addFailedJitBinding(binding.getKey());
+    jitBindingData.removeJitBinding(binding.getKey());
     membersInjectorStore.remove(binding.getKey().getTypeLiteral());
     provisionListenerStore.remove(binding);
     if (ip != null) {

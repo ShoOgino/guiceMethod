@@ -1,0 +1,4 @@
+  void putJitBinding(Key<?> key, BindingImpl<?> binding) {
+    jitBindings.put(key, binding);
+  }
+

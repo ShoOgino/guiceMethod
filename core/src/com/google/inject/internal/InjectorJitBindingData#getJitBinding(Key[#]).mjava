@@ -1,0 +1,4 @@
+  BindingImpl<?> getJitBinding(Key<?> key) {
+    return jitBindings.get(key);
+  }
+

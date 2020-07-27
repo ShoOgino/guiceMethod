@@ -1,0 +1,4 @@
+  void addFailedJitBinding(Key<?> key) {
+    failedJitBindings.add(key);
+  }
+

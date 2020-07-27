@@ -1,8 +1,4 @@
-  /**
-   * Returns a mutable map containing the JIT bindings for the injector. Accesses to this need to be
-   * guarded by injectorBindingData.lock().
-   */
   Map<Key<?>, BindingImpl<?>> getJitBindings() {
-    return jitBindings;
+    return Collections.unmodifiableMap(jitBindings);
   }
 

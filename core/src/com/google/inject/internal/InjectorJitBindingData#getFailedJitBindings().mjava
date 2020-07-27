@@ -1,8 +1,0 @@
-  /**
-   * Returns a mutable set containing the failed JIT bindings for the injector. Accesses to this
-   * need to be guarded by injectorBindingData.lock().
-   */
-  Set<Key<?>> getFailedJitBindings() {
-    return failedJitBindings;
-  }
-

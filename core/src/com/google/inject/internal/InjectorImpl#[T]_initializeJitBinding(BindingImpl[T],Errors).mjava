@@ -4,7 +4,7 @@
     // Note: We don't need to synchronize on jitBindingData.lock() during injector creation.
     if (binding instanceof DelayedInitialize) {
       Key<T> key = binding.getKey();
-      jitBindingData.getJitBindings().put(key, binding);
+      jitBindingData.putJitBinding(key, binding);
       boolean successful = false;
       DelayedInitialize delayed = (DelayedInitialize) binding;
       try {
