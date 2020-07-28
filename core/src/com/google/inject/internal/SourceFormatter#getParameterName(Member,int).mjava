@@ -1,0 +1,13 @@
+  private static Optional<String> getParameterName(Member member, int parameterIndex) {
+    Parameter parameter = null;
+    if (member instanceof Constructor) {
+      parameter = ((Constructor<?>) member).getParameters()[parameterIndex];
+    } else if (member instanceof Method) {
+      parameter = ((Method) member).getParameters()[parameterIndex];
+    }
+    if (parameter != null && parameter.isNamePresent()) {
+      return Optional.of(parameter.getName());
+    }
+    return Optional.empty();
+  }
+

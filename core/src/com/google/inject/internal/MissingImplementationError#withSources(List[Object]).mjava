@@ -1,0 +1,5 @@
+  @Override
+  public MissingImplementationError withSources(List<Object> newSources) {
+    return new MissingImplementationError(key, newSources);
+  }
+

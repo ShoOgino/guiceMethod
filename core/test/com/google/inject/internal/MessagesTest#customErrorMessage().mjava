@@ -4,9 +4,9 @@
     List<Object> sources = ImmutableList.of();
     Throwable cause = null;
     messages.add(new Message("example", cause));
-    messages.add(new Message(ErrorId.OTHER, new ExampleErrorDetail("a", sources, cause)));
-    messages.add(new Message(ErrorId.OTHER, new ExampleErrorDetail("b", sources, cause)));
-    messages.add(new Message(ErrorId.OTHER, new ExampleErrorDetail("a", sources, cause)));
+    messages.add(exampleError("a"));
+    messages.add(exampleError("b"));
+    messages.add(exampleError("a"));
 
     String result = Messages.formatMessages("Example", messages);
 

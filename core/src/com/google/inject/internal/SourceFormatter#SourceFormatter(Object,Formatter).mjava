@@ -1,0 +1,12 @@
+  SourceFormatter(Object source, Formatter formatter) {
+    if (source instanceof ElementSource) {
+      ElementSource elementSource = (ElementSource) source;
+      this.source = elementSource.getDeclaringSource();
+      this.moduleStack = getModuleStack(elementSource);
+    } else {
+      this.source = source;
+      this.moduleStack = "";
+    }
+    this.formatter = formatter;
+  }
+

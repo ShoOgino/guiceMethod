@@ -1,0 +1,13 @@
+  private static String getModuleStack(ElementSource elementSource) {
+    List<String> modules = Lists.newArrayList(elementSource.getModuleClassNames());
+    // Insert any original element sources w/ module info into the path.
+    while (elementSource.getOriginalElementSource() != null) {
+      elementSource = elementSource.getOriginalElementSource();
+      modules.addAll(0, elementSource.getModuleClassNames());
+    }
+    if (modules.size() <= 1) {
+      return "";
+    }
+    return String.join(" -> ", Lists.reverse(modules));
+  }
+

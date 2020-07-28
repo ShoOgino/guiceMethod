@@ -1,0 +1,6 @@
+  @Override
+  public boolean isMergeable(ErrorDetail<?> otherError) {
+    return otherError instanceof MissingImplementationError
+        && ((MissingImplementationError) otherError).key.equals(this.key);
+  }
+

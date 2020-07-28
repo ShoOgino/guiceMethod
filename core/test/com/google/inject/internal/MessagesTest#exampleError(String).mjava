@@ -1,0 +1,7 @@
+  private static Message exampleError(String message) {
+    return new Message(
+        GuiceInternal.GUICE_INTERNAL,
+        ErrorId.OTHER,
+        new ExampleErrorDetail(message, ImmutableList.of(), null));
+  }
+

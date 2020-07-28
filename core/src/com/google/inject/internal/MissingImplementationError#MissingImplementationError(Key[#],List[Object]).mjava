@@ -1,0 +1,5 @@
+  public MissingImplementationError(Key<?> key, List<Object> sources) {
+    super("", sources, null);
+    this.key = key;
+  }
+

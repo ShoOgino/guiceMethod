@@ -1,0 +1,7 @@
+  /** @since vNext */
+  public Message(GuiceInternal internalOnly, ErrorId errorId, ErrorDetail<?> errorDetail) {
+    checkNotNull(internalOnly);
+    this.errorId = errorId;
+    this.errorDetail = errorDetail;
+  }
+

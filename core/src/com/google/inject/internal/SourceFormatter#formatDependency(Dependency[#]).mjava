@@ -1,0 +1,9 @@
+  private void formatDependency(Dependency<?> dependency) {
+    InjectionPoint injectionPoint = dependency.getInjectionPoint();
+    if (injectionPoint != null) {
+      formatInjectionPoint(dependency, injectionPoint);
+    } else {
+      formatKey(dependency.getKey());
+    }
+  }
+

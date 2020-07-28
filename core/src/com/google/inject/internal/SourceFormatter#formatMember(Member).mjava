@@ -1,0 +1,4 @@
+  private void formatMember(Member member) {
+    formatter.format("at %s%n", StackTraceElements.forMember(member));
+  }
+
