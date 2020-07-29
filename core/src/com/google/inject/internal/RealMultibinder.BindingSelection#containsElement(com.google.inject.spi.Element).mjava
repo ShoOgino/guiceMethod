@@ -5,7 +5,8 @@
             || binding.getKey().equals(getPermitDuplicatesKey())
             || binding.getKey().equals(setKey)
             || binding.getKey().equals(collectionOfProvidersKey)
-            || binding.getKey().equals(collectionOfJavaxProvidersKey);
+            || binding.getKey().equals(collectionOfJavaxProvidersKey)
+            || binding.getKey().equals(setOfExtendsKey);
       } else {
         return false;
       }

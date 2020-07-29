@@ -1,0 +1,8 @@
+    Key<Set<? extends T>> getSetOfExtendsKey() {
+      Key<Set<? extends T>> local = setOfExtendsKey;
+      if (local == null) {
+        local = setOfExtendsKey = setKey.ofType(setOfExtendsOf(elementType));
+      }
+      return local;
+    }
+

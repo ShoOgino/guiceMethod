@@ -8,6 +8,7 @@
       BindResult... results) {
     Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
     Key<?> collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
+    Key<?> setOfExtendsKey = setKey.ofType(setOfExtendsOf(elementType));
     List<BindResult> bindResults = Lists.newArrayList(results);
     List<Element> elements = Elements.getElements(modules);
     Visitor<T> visitor = new Visitor<>();
@@ -23,7 +24,7 @@
     assertEquals(setKey, multibinder.getSetKey());
     assertEquals(elementType, multibinder.getElementTypeLiteral());
     assertEquals(
-        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey),
+        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey, setOfExtendsKey),
         multibinder.getAlternateSetKeys());
     List<Object> otherMultibinders = Lists.newArrayList();
     Set<Element> otherContains = new HashSet<>();
@@ -33,6 +34,7 @@
     Indexer indexer = new Indexer(null);
     boolean collectionOfProvidersMatch = false;
     boolean collectionOfJavaxProvidersMatch = false;
+    boolean setOfExtendsMatch = false;
     for (Element element : elements) {
       boolean contains = multibinder.containsElement(element);
       if (!contains) {
@@ -66,6 +68,10 @@
         assertTrue(contains);
         assertFalse(matched);
         collectionOfJavaxProvidersMatch = true;
+      } else if (setOfExtendsKey.equals(key)) {
+        assertTrue(contains);
+        assertFalse(matched);
+        setOfExtendsMatch = true;
       } else if (!matched && contains) {
         otherContains.add(element);
       }
@@ -89,6 +95,7 @@
         otherMultibinders.size());
     assertTrue(collectionOfProvidersMatch);
     assertTrue(collectionOfJavaxProvidersMatch);
+    assertTrue(setOfExtendsMatch);
 
     // Validate that we can construct an injector out of the remaining bindings.
     Guice.createInjector(Elements.getModule(otherElements));

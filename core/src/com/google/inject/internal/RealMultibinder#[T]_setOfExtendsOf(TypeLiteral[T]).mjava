@@ -1,0 +1,7 @@
+  @SuppressWarnings("unchecked")
+  static <T> TypeLiteral<Set<? extends T>> setOfExtendsOf(TypeLiteral<T> elementType) {
+    Type extendsType = Types.subtypeOf(elementType.getType());
+    Type setOfExtendsType = Types.setOf(extendsType);
+    return (TypeLiteral<Set<? extends T>>) TypeLiteral.get(setOfExtendsType);
+  }
+

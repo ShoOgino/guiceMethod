@@ -1,0 +1,20 @@
+  public void testMultibinderWithWildcard() {
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            Multibinder<String> multibinder = Multibinder.newSetBinder(binder(), String.class);
+            multibinder.addBinding().toInstance("a");
+            multibinder.addBinding().toInstance("b");
+            multibinder.addBinding().toInstance("c");
+          }
+        };
+    Injector injector = Guice.createInjector(module);
+
+    Set<String> set = injector.getInstance(new Key<Set<String>>() {});
+    assertEquals(ImmutableSet.of("a", "b", "c"), set);
+
+    Set<? extends String> setOfWildcard = injector.getInstance(new Key<Set<? extends String>>() {});
+    assertEquals(ImmutableSet.of("a", "b", "c"), setOfWildcard);
+  }
+

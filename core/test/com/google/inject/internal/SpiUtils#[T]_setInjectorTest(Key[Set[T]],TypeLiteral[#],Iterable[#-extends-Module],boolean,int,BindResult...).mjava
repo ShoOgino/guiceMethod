@@ -8,6 +8,7 @@
       BindResult... results) {
     Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
     Key<?> collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
+    Key<?> setOfExtendsKey = setKey.ofType(setOfExtendsOf(elementType));
     Injector injector = Guice.createInjector(modules);
     Visitor<Set<T>> visitor = new Visitor<>();
     Binding<Set<T>> binding = injector.getBinding(setKey);
@@ -18,7 +19,7 @@
     assertEquals(elementType, multibinder.getElementTypeLiteral());
     assertEquals(allowDuplicates, multibinder.permitsDuplicates());
     assertEquals(
-        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey),
+        ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey, setOfExtendsKey),
         multibinder.getAlternateSetKeys());
     List<Binding<?>> elements = Lists.newArrayList(multibinder.getElements());
     List<BindResult> bindResults = Lists.newArrayList(results);
@@ -57,6 +58,7 @@
     List<Binding> otherContains = Lists.newArrayList();
     boolean collectionOfProvidersMatch = false;
     boolean collectionOfJavaxProvidersMatch = false;
+    boolean setOfExtendsKeyMatch = false;
     for (Binding b : injector.getAllBindings().values()) {
       boolean contains = multibinder.containsElement(b);
       Key key = b.getKey();
@@ -75,6 +77,9 @@
       } else if (key.equals(collectionOfJavaxProvidersKey)) {
         assertTrue(contains);
         collectionOfJavaxProvidersMatch = true;
+      } else if (key.equals(setOfExtendsKey)) {
+        assertTrue(contains);
+        setOfExtendsKeyMatch = true;
       } else if (contains) {
         if (!indexer.isIndexable(b) || !setOfIndexed.contains(b.acceptTargetVisitor(indexer))) {
           otherContains.add(b);
@@ -84,6 +89,7 @@
 
     assertTrue(collectionOfProvidersMatch);
     assertTrue(collectionOfJavaxProvidersMatch);
+    assertTrue(setOfExtendsKeyMatch);
 
     if (allowDuplicates) {
       assertEquals("contained more than it should: " + otherContains, 1, otherContains.size());
