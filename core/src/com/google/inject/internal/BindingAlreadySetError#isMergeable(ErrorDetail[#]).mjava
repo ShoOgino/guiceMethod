@@ -1,0 +1,6 @@
+  @Override
+  public boolean isMergeable(ErrorDetail<?> otherError) {
+    return otherError instanceof BindingAlreadySetError
+        && ((BindingAlreadySetError) otherError).binding.getKey().equals(binding.getKey());
+  }
+

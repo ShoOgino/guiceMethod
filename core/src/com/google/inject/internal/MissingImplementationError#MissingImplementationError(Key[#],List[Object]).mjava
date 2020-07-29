@@ -1,5 +1,6 @@
   public MissingImplementationError(Key<?> key, List<Object> sources) {
-    super("", sources, null);
+    super(
+        String.format("No implementation for %s was bound.", Messages.convert(key)), sources, null);
     this.key = key;
   }
 

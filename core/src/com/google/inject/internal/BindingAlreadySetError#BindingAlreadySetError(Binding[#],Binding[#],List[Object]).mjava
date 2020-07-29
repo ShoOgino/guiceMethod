@@ -1,0 +1,9 @@
+  BindingAlreadySetError(Binding<?> binding, Binding<?> original, List<Object> sources) {
+    super(
+        String.format("%s was bound multiple times.", Messages.convert(binding.getKey())),
+        sources,
+        null);
+    this.binding = binding;
+    this.original = original;
+  }
+

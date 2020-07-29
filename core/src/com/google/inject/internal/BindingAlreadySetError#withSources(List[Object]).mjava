@@ -1,0 +1,5 @@
+  @Override
+  public BindingAlreadySetError withSources(List<Object> newSources) {
+    return new BindingAlreadySetError(binding, original, newSources);
+  }
+
