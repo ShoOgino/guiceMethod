@@ -1,6 +1,0 @@
-  @After
-  public void removeLogHandler() {
-    Logger.getLogger(ContinuousStopwatch.class.getName()).removeHandler(testLogHandler);
-    logger.setLevel(savedLogLevel);
-  }
-
