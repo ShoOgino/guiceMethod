@@ -1,0 +1,8 @@
+  @Before
+  public void addLogHandler() {
+    savedLogLevel = logger.getLevel();
+    logger.setLevel(Level.FINE);
+    testLogHandler = new TestLogHandler();
+    logger.addHandler(testLogHandler);
+  }
+
