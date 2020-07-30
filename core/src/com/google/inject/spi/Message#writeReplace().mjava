@@ -10,6 +10,7 @@
     }
     return new Message(
         errorId,
-        new GenericErrorDetail(getMessage(), ImmutableList.copyOf(sourcesAsStrings), getCause()));
+        new GenericErrorDetail(
+            errorId, getMessage(), ImmutableList.copyOf(sourcesAsStrings), getCause()));
   }
 

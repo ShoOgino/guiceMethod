@@ -1,0 +1,5 @@
+    @Override
+    public void formatDetail(List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
+      formatter.format("Duplicate count: %s%n", mergeableErrors.size() + 1);
+    }
+

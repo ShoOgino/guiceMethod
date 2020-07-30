@@ -1,0 +1,14 @@
+  /**
+   * Formats the detail of this error message along with other errors that are mergeable with this
+   * error. This is called from {@link #format}.
+   *
+   * <p>{@code mergeableErrors} is a list that contains all other errors that are reported in the
+   * same exception that are considered to be mergable with this error base on result of calling
+   * {@link #isMergeable}. The list will be empty if non of the other errors are mergable with this
+   * error.
+   *
+   * @param mergeableErrors list of errors that are mergeable with this error
+   * @param formatter for printing the error message
+   */
+  protected abstract void formatDetail(List<ErrorDetail<?>> mergeableErrors, Formatter formatter);
+

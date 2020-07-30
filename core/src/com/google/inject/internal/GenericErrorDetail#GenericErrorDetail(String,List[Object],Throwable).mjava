@@ -1,4 +1,0 @@
-  public GenericErrorDetail(String message, List<Object> sources, Throwable cause) {
-    super(checkNotNull(message, "message"), sources, cause);
-  }
-

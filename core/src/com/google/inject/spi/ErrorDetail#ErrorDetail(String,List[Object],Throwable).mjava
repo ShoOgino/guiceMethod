@@ -1,6 +1,0 @@
-  protected ErrorDetail(String message, List<Object> sources, Throwable cause) {
-    this.message = message;
-    this.sources = ImmutableList.copyOf(sources);
-    this.cause = cause;
-  }
-

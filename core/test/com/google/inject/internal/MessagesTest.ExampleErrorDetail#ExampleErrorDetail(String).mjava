@@ -1,0 +1,4 @@
+    ExampleErrorDetail(String message) {
+      super(ErrorId.OTHER, message, ImmutableList.of(), null);
+    }
+

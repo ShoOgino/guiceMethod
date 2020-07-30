@@ -1,6 +1,6 @@
   /** @since 2.0 */
   public Message(ErrorId errorId, List<Object> sources, String message, Throwable cause) {
     this.errorId = errorId;
-    this.errorDetail = new GenericErrorDetail(message, sources, cause);
+    this.errorDetail = new GenericErrorDetail(errorId, message, sources, cause);
   }
 
