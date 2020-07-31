@@ -20,12 +20,15 @@
    */
   public final void format(int index, List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
     if (InternalFlags.enableExperimentalErrorMessages()) {
-      formatter.format("%s) [Guice/%s]: %s%n%n", index, errorId, getMessage());
+      formatter.format("%s) [%s]: %s%n%n", index, errorIdentifier, getMessage());
       formatDetail(mergeableErrors, formatter);
       formatter.format("%n");
       // TODO(b/151482394): Output potiential fixes for the error
-      formatter.format("Learn more:%n");
-      formatter.format("  %s/%s%n", DOC_BASE_URL, errorId);
+      Optional<String> learnMoreLink = getLearnMoreLink();
+      if (learnMoreLink.isPresent()) {
+        formatter.format("Learn more:%n");
+        formatter.format("  %s%n", learnMoreLink.get());
+      }
     } else {
       // TODO(b/151482394): Remove this once the new error messages are enabled.
       formatter.format("%s) %s%n", index, getMessage());

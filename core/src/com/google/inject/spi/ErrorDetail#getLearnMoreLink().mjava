@@ -1,0 +1,8 @@
+  /**
+   * Returns an optional link to additional documentation about this error to be included in the
+   * formatted error message.
+   */
+  protected Optional<String> getLearnMoreLink() {
+    return Optional.empty();
+  }
+

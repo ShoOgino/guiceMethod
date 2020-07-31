@@ -4,6 +4,9 @@
       return false;
     }
     ErrorDetail<?> e = (ErrorDetail<?>) o;
-    return message.equals(e.message) && Objects.equal(cause, e.cause) && sources.equals(e.sources);
+    return errorIdentifier.equals(e.errorIdentifier)
+        && message.equals(e.message)
+        && Objects.equal(cause, e.cause)
+        && sources.equals(e.sources);
   }
 

@@ -1,0 +1,5 @@
+  @Override
+  protected final Optional<String> getLearnMoreLink() {
+    return Optional.of(String.format("%s/%s", DOC_BASE_URL, errorId.name()));
+  }
+
