@@ -1,0 +1,9 @@
+    /**
+     * Sets the permits on the current module installation path to the permits on the given module
+     * source so that subsequently installed modules may inherit them. Used only for method
+     * scanning, so that modules installed by scanners inherit permits from the method's module.
+     */
+    void restoreCurrentModulePermits(ModuleSource moduleSource) {
+      currentModulePermits = modulePermits.get(moduleSource);
+    }
+
