@@ -1,0 +1,10 @@
+  /**
+   * Constructs a ContinuousStopwatch, which will start timing immediately after construction.
+   *
+   * @param stopwatch the internal stopwatch used by ContinuousStopwatch
+   */
+  public ContinuousStopwatch(Stopwatch stopwatch) {
+    this.stopwatch = stopwatch;
+    reset();
+  }
+

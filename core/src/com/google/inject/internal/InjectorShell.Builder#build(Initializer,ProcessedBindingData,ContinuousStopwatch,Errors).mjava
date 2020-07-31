@@ -6,7 +6,7 @@
     List<InjectorShell> build(
         Initializer initializer,
         ProcessedBindingData processedBindingData,
-        Stopwatch stopwatch,
+        ContinuousStopwatch stopwatch,
         Errors errors) {
       checkState(stage != null, "Stage not initialized");
       checkState(privateElements == null || parent != null, "PrivateElements with no parent");

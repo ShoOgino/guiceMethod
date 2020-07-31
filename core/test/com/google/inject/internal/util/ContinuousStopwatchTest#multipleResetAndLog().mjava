@@ -1,0 +1,16 @@
+  @Test
+  public void multipleResetAndLog() throws Exception {
+    FakeTicker fakeTicker = new FakeTicker();
+    ContinuousStopwatch continuousStopwatch =
+        new ContinuousStopwatch(Stopwatch.createUnstarted(fakeTicker));
+
+    fakeTicker.advance(1, MILLISECONDS);
+    continuousStopwatch.resetAndLog("label one");
+    fakeTicker.advance(2, MILLISECONDS);
+    continuousStopwatch.resetAndLog("label two");
+    List<LogRecord> logs = testLogHandler.getStoredLogRecords();
+    assertThat(logs).hasSize(2);
+    assertThat(logs.get(0).getMessage()).isEqualTo("label one: 1ms");
+    assertThat(logs.get(1).getMessage()).isEqualTo("label two: 2ms");
+  }
+
