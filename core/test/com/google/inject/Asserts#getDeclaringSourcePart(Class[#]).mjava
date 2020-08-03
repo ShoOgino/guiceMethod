@@ -2,7 +2,7 @@
    * Returns the source file appears in error messages based on {@link
    * #getIncludeStackTraceOption()} value.
    */
-  public static String getDeclaringSourcePart(Class clazz) {
+  public static String getDeclaringSourcePart(Class<?> clazz) {
     if (getIncludeStackTraceOption() == IncludeStackTraceOption.OFF) {
       return ".configure(Unknown Source";
     }

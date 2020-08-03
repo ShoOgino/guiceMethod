@@ -1,7 +1,7 @@
   /**
    * Returns the String that would appear in an error message for this chain of classes as modules.
    */
-  public static String asModuleChain(Class... classes) {
+  public static String asModuleChain(Class<?>... classes) {
     return Joiner.on(" -> ")
         .appendTo(
             new StringBuilder(" (via modules: "),

@@ -1,7 +1,7 @@
   public void testMultipleBindErrorsAreAggregated() {
     Object instance =
         new Object() {
-          @Bind private Provider aProvider;
+          @Bind private Provider<Object> aProvider;
 
           @Bind(to = String.class)
           private Integer anInt;

@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes") // Testing rawtypes
   public void testRawProviderCanBindToIncorrectType() {
     final Integer testValue = 1024;
     Object instance =

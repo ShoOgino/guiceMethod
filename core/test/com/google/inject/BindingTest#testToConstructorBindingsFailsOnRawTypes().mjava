@@ -1,5 +1,6 @@
   public void testToConstructorBindingsFailsOnRawTypes() throws NoSuchMethodException {
-    final Constructor constructor = C.class.getConstructor(Stage.class, Object.class);
+    @SuppressWarnings("rawtypes") // Unavoidable because class literal uses raw types.
+    final Constructor<C> constructor = C.class.getConstructor(Stage.class, Object.class);
 
     try {
       Guice.createInjector(

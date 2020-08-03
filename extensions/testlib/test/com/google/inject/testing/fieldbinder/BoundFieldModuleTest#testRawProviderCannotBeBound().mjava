@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes") // Testing rawtypes
   public void testRawProviderCannotBeBound() {
     final Integer testValue = 1024;
     Object instance =
