@@ -10,12 +10,12 @@
     // sanity check that the injector works
     Injector injector = Guice.createInjector(module);
     assertEquals(1, injector.getInstance(Integer.class).intValue());
-    ProviderInstanceBinding injectorBinding =
-        (ProviderInstanceBinding) injector.getBinding(Integer.class);
-    assertEquals(1, injectorBinding.getUserSuppliedProvider().get());
+    ProviderInstanceBinding<Integer> injectorBinding =
+        (ProviderInstanceBinding<Integer>) injector.getBinding(Integer.class);
+    assertEquals(1, injectorBinding.getUserSuppliedProvider().get().intValue());
 
-    ProviderInstanceBinding moduleBinding =
-        (ProviderInstanceBinding) Iterables.getOnlyElement(Elements.getElements(module));
+    ProviderInstanceBinding<?> moduleBinding =
+        (ProviderInstanceBinding<?>) Iterables.getOnlyElement(Elements.getElements(module));
     try {
       moduleBinding.getUserSuppliedProvider().get();
       fail();

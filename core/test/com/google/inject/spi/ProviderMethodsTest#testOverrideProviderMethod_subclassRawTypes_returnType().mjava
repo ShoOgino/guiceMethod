@@ -1,6 +1,7 @@
   public void testOverrideProviderMethod_subclassRawTypes_returnType() {
     class SubClassModule extends SuperClassModule {
       @Override
+      @SuppressWarnings({"unchecked", "rawtypes"}) // Testing rawtypes.
       List annotatedGenericProviderMethod() {
         return super.annotatedGenericProviderMethod();
       }

@@ -1,5 +1,5 @@
     @Override
-    public List get() {
-      return new ArrayList();
+    public List<Object> get() {
+      return new ArrayList<>();
     }
 

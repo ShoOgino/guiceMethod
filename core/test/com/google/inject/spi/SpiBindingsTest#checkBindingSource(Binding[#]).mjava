@@ -1,4 +1,4 @@
-  public void checkBindingSource(Binding binding) {
+  public void checkBindingSource(Binding<?> binding) {
     assertContains(binding.getSource().toString(), getDeclaringSourcePart(getClass()));
     ElementSource source = (ElementSource) binding.getSource();
     assertFalse(source.getModuleClassNames().isEmpty());

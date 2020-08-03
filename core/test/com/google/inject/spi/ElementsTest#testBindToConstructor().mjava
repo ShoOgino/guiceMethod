@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes") // Unavoidable because class literal uses raw type.
   public void testBindToConstructor() throws NoSuchMethodException, NoSuchFieldException {
     final Constructor<A> aConstructor = A.class.getDeclaredConstructor();
     final Constructor<B> bConstructor = B.class.getDeclaredConstructor(Object.class);

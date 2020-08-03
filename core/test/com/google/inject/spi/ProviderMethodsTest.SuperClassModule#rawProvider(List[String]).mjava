@@ -1,5 +1,6 @@
     @Provides
     @Named("rawlist")
+    @SuppressWarnings("rawtypes") // Testing rawtypes.
     List rawProvider(@Named("list") List<String> f) {
       return f;
     }

@@ -1,0 +1,4 @@
+    @SuppressWarnings("unused")
+    @Inject
+    static void staticMethod(Map<String, String> map) {}
+

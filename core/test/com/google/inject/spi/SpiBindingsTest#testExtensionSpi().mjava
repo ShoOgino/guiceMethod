@@ -9,6 +9,7 @@
                 bind(String.class)
                     .toProvider(
                         new ProviderWithExtensionVisitor<String>() {
+                          @SuppressWarnings("unchecked") // Safe because V is fixed to String
                           @Override
                           public <B, V> V acceptExtensionVisitor(
                               BindingTargetVisitor<B, V> visitor,

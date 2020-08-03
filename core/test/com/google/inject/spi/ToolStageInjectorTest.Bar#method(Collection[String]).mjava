@@ -1,4 +1,4 @@
     @SuppressWarnings("unused")
     @Inject
-    static void staticMethod(Map map) {}
+    void method(Collection<String> c) {}
 

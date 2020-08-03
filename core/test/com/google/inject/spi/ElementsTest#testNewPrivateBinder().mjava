@@ -1,7 +1,8 @@
   public void testNewPrivateBinder() {
-    final Key<Collection> collection = Key.get(Collection.class, SampleAnnotation.class);
-    final Key<ArrayList> arrayList = Key.get(ArrayList.class);
-    final ImmutableSet<Key<?>> collections = ImmutableSet.<Key<?>>of(arrayList, collection);
+    final Key<Collection<Object>> collection =
+        new Key<Collection<Object>>(SampleAnnotation.class) {};
+    final Key<ArrayList<Object>> arrayList = new Key<ArrayList<Object>>() {};
+    final ImmutableSet<Key<?>> collections = ImmutableSet.of(arrayList, collection);
 
     final Key<?> a = Key.get(String.class, Names.named("a"));
     final Key<?> b = Key.get(String.class, Names.named("b"));
@@ -12,15 +13,15 @@
           @Override
           protected void configure() {
             PrivateBinder one = binder().newPrivateBinder();
-            one.expose(ArrayList.class);
-            one.expose(Collection.class).annotatedWith(SampleAnnotation.class);
-            one.bind(List.class).to(ArrayList.class);
+            one.expose(arrayList);
+            one.expose(collection);
+            one.bind(new Key<List<Object>>() {}).to(arrayList);
 
             PrivateBinder two =
                 binder().withSource("1 FooBar").newPrivateBinder().withSource("2 FooBar");
             two.expose(String.class).annotatedWith(Names.named("a"));
             two.expose(b);
-            two.bind(List.class).to(ArrayList.class);
+            two.bind(new Key<List<Object>>() {}).to(arrayList);
           }
         },
         new FailingElementVisitor() {
@@ -32,7 +33,7 @@
                 new FailingElementVisitor() {
                   @Override
                   public <T> Void visit(Binding<T> binding) {
-                    assertEquals(Key.get(List.class), binding.getKey());
+                    assertEquals(new Key<List<Object>>() {}, binding.getKey());
                     return null;
                   }
                 });
@@ -50,7 +51,7 @@
                   @Override
                   public <T> Void visit(Binding<T> binding) {
                     assertEquals("2 FooBar", binding.getSource().toString());
-                    assertEquals(Key.get(List.class), binding.getKey());
+                    assertEquals(new Key<List<Object>>() {}, binding.getKey());
                     return null;
                   }
                 });

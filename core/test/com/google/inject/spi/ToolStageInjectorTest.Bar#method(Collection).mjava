@@ -1,4 +1,0 @@
-    @SuppressWarnings("unused")
-    @Inject
-    void method(Collection c) {}
-

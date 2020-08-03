@@ -34,7 +34,7 @@
             bind(Double.class).toProvider(doubleJavaxProvider);
             bind(List.class).toProvider(ListProvider.class);
             bind(Collection.class).toProvider(Key.get(ListProvider.class));
-            bind(Iterable.class).toProvider(new TypeLiteral<TProvider<List>>() {});
+            bind(Iterable.class).toProvider(new TypeLiteral<TProvider<List<Object>>>() {});
           }
         },
         new FailingElementVisitor() {
@@ -139,7 +139,7 @@
                 new FailingTargetVisitor<T>() {
                   @Override
                   public Void visit(ProviderKeyBinding<? extends T> binding) {
-                    assertEquals(new Key<TProvider<List>>() {}, binding.getProviderKey());
+                    assertEquals(new Key<TProvider<List<Object>>>() {}, binding.getProviderKey());
                     return null;
                   }
                 });

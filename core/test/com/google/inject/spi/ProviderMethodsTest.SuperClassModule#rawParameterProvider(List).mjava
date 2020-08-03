@@ -1,5 +1,6 @@
     @Provides
     @Named("unrawlist")
+    @SuppressWarnings({"unchecked", "rawtypes"}) // Testing rawtypes
     List<String> rawParameterProvider(@Named("rawlist") List f) {
       return f;
     }
