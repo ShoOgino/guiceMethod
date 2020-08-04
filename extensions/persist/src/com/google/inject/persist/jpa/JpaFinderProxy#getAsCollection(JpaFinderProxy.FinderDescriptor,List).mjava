@@ -1,3 +1,4 @@
+  @SuppressWarnings({"unchecked", "rawtypes"}) // JPA Query returns raw type.
   private Object getAsCollection(JpaFinderProxy.FinderDescriptor finderDescriptor, List results) {
     Collection<?> collection;
     try {
@@ -9,12 +10,14 @@
           e);
     } catch (IllegalAccessException e) {
       throw new RuntimeException(
-          "Specified collection class of Finder's returnAs could not be instantated (do not have access privileges): "
+          "Specified collection class of Finder's returnAs could not be instantated (do not have"
+              + " access privileges): "
               + finderDescriptor.returnCollectionType,
           e);
     } catch (InvocationTargetException e) {
       throw new RuntimeException(
-          "Specified collection class of Finder's returnAs could not be instantated (it threw an exception): "
+          "Specified collection class of Finder's returnAs could not be instantated (it threw an"
+              + " exception): "
               + finderDescriptor.returnCollectionType,
           e);
     }

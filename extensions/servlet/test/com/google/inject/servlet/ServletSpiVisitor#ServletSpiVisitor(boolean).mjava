@@ -1,5 +1,5 @@
   ServletSpiVisitor(boolean forInjector) {
-    ImmutableSet.Builder<Class> builder = ImmutableSet.builder();
+    ImmutableSet.Builder<Class<?>> builder = ImmutableSet.builder();
     // always ignore these things...
     builder.add(
         ServletRequest.class,

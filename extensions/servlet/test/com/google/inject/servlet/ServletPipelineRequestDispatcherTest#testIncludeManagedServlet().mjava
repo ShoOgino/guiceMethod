@@ -8,7 +8,7 @@
             null);
 
     final Injector injector = createMock(Injector.class);
-    final Binding binding = createMock(Binding.class);
+    final Binding<HttpServlet> binding = createMock(Binding.class);
     final HttpServletRequest requestMock = createMock(HttpServletRequest.class);
 
     expect(requestMock.getAttribute(A_KEY)).andReturn(A_VALUE);

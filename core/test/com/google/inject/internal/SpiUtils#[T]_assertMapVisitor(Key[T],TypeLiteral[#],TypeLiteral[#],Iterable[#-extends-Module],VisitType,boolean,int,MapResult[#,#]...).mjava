@@ -20,7 +20,7 @@
       VisitType visitType,
       boolean allowDuplicates,
       int expectedMapBindings,
-      MapResult... results) {
+      MapResult<?, ?>... results) {
     if (visitType == null) {
       fail("must test something");
     }

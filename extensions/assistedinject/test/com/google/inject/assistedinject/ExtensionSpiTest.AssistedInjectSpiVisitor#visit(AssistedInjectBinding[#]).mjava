@@ -1,5 +1,5 @@
     @Override
-    public Integer visit(AssistedInjectBinding assistedInjectBinding) {
+    public Integer visit(AssistedInjectBinding<?> assistedInjectBinding) {
       assistedInjectBindings.add(assistedInjectBinding);
       assistedBindingCount++;
       return currentCount++;

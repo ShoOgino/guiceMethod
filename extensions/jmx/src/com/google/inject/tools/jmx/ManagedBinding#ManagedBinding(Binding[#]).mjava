@@ -1,0 +1,4 @@
+  ManagedBinding(Binding<?> binding) {
+    this.binding = binding;
+  }
+

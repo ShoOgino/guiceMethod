@@ -18,7 +18,7 @@
       VisitType visitType,
       boolean allowDuplicates,
       int expectedMultibindings,
-      BindResult... results) {
+      BindResult<T>... results) {
     if (visitType == null) {
       fail("must test something");
     }

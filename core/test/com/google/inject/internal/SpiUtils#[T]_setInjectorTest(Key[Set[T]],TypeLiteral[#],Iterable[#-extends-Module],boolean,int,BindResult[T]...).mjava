@@ -5,7 +5,7 @@
       Iterable<? extends Module> modules,
       boolean allowDuplicates,
       int otherMultibindings,
-      BindResult... results) {
+      BindResult<T>... results) {
     Key<?> collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType));
     Key<?> collectionOfJavaxProvidersKey = setKey.ofType(collectionOfJavaxProvidersOf(elementType));
     Key<?> setOfExtendsKey = setKey.ofType(setOfExtendsOf(elementType));
@@ -22,15 +22,15 @@
         ImmutableSet.of(collectionOfProvidersKey, collectionOfJavaxProvidersKey, setOfExtendsKey),
         multibinder.getAlternateSetKeys());
     List<Binding<?>> elements = Lists.newArrayList(multibinder.getElements());
-    List<BindResult> bindResults = Lists.newArrayList(results);
+    List<BindResult<?>> bindResults = Lists.newArrayList(results);
     assertEquals(
         "wrong bind elements, expected: " + bindResults + ", but was: " + multibinder.getElements(),
         bindResults.size(),
         elements.size());
 
-    for (BindResult result : bindResults) {
-      Binding found = null;
-      for (Binding item : elements) {
+    for (BindResult<?> result : bindResults) {
+      Binding<?> found = null;
+      for (Binding<?> item : elements) {
         if (matches(item, result)) {
           found = item;
           break;
@@ -47,7 +47,7 @@
       fail("Found all elements of: " + bindResults + ", but more were left over: " + elements);
     }
 
-    Set<Binding> setOfElements = new HashSet<Binding>(multibinder.getElements());
+    Set<Binding<?>> setOfElements = new HashSet<>(multibinder.getElements());
     Set<IndexedBinding> setOfIndexed = Sets.newHashSet();
     Indexer indexer = new Indexer(injector);
     for (Binding<?> oneBinding : setOfElements) {
@@ -55,14 +55,14 @@
     }
 
     List<Object> otherMultibinders = Lists.newArrayList();
-    List<Binding> otherContains = Lists.newArrayList();
+    List<Binding<?>> otherContains = Lists.newArrayList();
     boolean collectionOfProvidersMatch = false;
     boolean collectionOfJavaxProvidersMatch = false;
     boolean setOfExtendsKeyMatch = false;
-    for (Binding b : injector.getAllBindings().values()) {
+    for (Binding<?> b : injector.getAllBindings().values()) {
       boolean contains = multibinder.containsElement(b);
-      Key key = b.getKey();
-      Object visited = b.acceptTargetVisitor(visitor);
+      Key<?> key = b.getKey();
+      Object visited = ((Binding<Set<T>>) b).acceptTargetVisitor(visitor);
       if (visited != null) {
         if (visited.equals(multibinder)) {
           assertTrue(contains);

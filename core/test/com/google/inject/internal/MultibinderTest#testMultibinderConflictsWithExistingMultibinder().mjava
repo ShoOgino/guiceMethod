@@ -13,6 +13,8 @@
             multibinder.addBinding().toInstance("b");
             multibinder.addBinding().toInstance("c");
 
+            // Safe because Set<? extends String> can be used as Set<String> in this context
+            @SuppressWarnings("unchecked")
             Multibinder<String> multibinder2 =
                 Multibinder.newSetBinder(
                     binder(), (TypeLiteral<String>) TypeLiteral.get(Types.subtypeOf(String.class)));

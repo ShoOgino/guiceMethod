@@ -7,7 +7,7 @@
     Member method = Obj.class.getDeclaredMethod("method", String.class);
     assertEquals(
         "Method should be identified by its file name and line number",
-        "ShortNameFactoryTest.java:53",
+        "ShortNameFactoryTest.java:55",
         nameFactory.getSourceName(method));
   }
 

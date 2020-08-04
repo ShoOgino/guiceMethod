@@ -1,6 +1,6 @@
   @Override
-  @SuppressWarnings("unchecked")
-  public Object buildBean(Class clazz, Map extraContext) {
+  @SuppressWarnings({"unchecked", "rawtypes"}) // Parent class uses raw type.
+  public Object buildBean(Class clazz, Map<String, Object> extraContext) {
     if (injector == null) {
       synchronized (this) {
         if (injector == null) {

@@ -3,7 +3,8 @@
     int count = 0;
     for (Element element : Elements.getElements(new Module())) {
       if (element instanceof Binding) {
-        assertEquals(count++, ((Binding) element).acceptTargetVisitor(visitor));
+        int actual = ((Binding<?>) element).acceptTargetVisitor(visitor);
+        assertEquals(count++, actual);
       }
     }
     validateVisitor(visitor);

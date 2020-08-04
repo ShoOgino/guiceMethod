@@ -1,4 +1,8 @@
-    Params(String pattern, Object keyOrInstance, Map params, UriPatternType patternType) {
+    Params(
+        String pattern,
+        Object keyOrInstance,
+        Map<String, String> params,
+        UriPatternType patternType) {
       this.pattern = pattern;
       this.keyOrInstance = keyOrInstance;
       this.params = params;

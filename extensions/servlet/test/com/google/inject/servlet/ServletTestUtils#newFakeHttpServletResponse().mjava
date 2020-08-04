@@ -5,7 +5,7 @@
     return (HttpServletResponse)
         Proxy.newProxyInstance(
             HttpServletResponse.class.getClassLoader(),
-            new Class[] {HttpServletResponse.class},
+            new Class<?>[] {HttpServletResponse.class},
             new ThrowingInvocationHandler());
   }
 

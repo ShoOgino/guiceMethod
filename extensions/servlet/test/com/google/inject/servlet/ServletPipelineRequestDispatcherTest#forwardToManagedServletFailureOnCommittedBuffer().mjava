@@ -9,7 +9,7 @@
             null);
 
     final Injector injector = createMock(Injector.class);
-    final Binding binding = createMock(Binding.class);
+    final Binding<HttpServlet> binding = createMock(Binding.class);
     final HttpServletRequest mockRequest = createMock(HttpServletRequest.class);
     final HttpServletResponse mockResponse = createMock(HttpServletResponse.class);
 

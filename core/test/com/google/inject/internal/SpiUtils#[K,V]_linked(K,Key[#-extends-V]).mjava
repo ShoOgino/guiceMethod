@@ -1,4 +1,4 @@
-  static <K, V> MapResult linked(K k, Key<? extends V> key) {
+  static <K, V> MapResult<K, V> linked(K k, Key<? extends V> key) {
     return new MapResult<K, V>(k, new BindResult<V>(LINKED, null, key));
   }
 

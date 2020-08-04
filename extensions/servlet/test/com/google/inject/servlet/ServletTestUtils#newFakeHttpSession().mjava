@@ -3,7 +3,7 @@
     return (HttpSession)
         Proxy.newProxyInstance(
             HttpSession.class.getClassLoader(),
-            new Class[] {HttpSession.class},
+            new Class<?>[] {HttpSession.class},
             new FakeHttpSessionHandler());
   }
 

@@ -3,11 +3,12 @@
       throws IOException, ServletException {
 
     Injector injector = createMock(Injector.class);
-    Binding binding = createMock(Binding.class);
+    Binding<HttpServlet> binding = createMock(Binding.class);
     HttpServletRequest request = createMock(HttpServletRequest.class);
     HttpServletResponse response = createMock(HttpServletResponse.class);
 
-    expect(binding.acceptScopingVisitor((BindingScopingVisitor) anyObject())).andReturn(true);
+    expect(binding.acceptScopingVisitor((BindingScopingVisitor<Boolean>) anyObject()))
+        .andReturn(true);
     expect(injector.getBinding(Key.get(HttpServlet.class))).andReturn(binding);
 
     final boolean[] run = new boolean[1];

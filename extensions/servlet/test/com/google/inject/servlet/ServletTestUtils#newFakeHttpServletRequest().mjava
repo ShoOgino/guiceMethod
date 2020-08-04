@@ -27,7 +27,7 @@
       }
 
       @Override
-      public Map getParameterMap() {
+      public Map<String, String[]> getParameterMap() {
         return ImmutableMap.of();
       }
 

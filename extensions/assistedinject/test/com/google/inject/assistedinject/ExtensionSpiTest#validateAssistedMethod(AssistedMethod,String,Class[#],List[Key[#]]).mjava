@@ -1,7 +1,7 @@
   private void validateAssistedMethod(
       AssistedMethod assistedMethod,
       String factoryMethodName,
-      Class clazz,
+      Class<?> clazz,
       List<Key<?>> dependencyKeys) {
     assertEquals(factoryMethodName, assistedMethod.getFactoryMethod().getName());
     assertEquals(clazz, assistedMethod.getImplementationConstructor().getDeclaringClass());

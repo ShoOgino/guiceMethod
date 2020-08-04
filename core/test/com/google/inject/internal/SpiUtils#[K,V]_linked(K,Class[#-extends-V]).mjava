@@ -1,4 +1,4 @@
-  static <K, V> MapResult linked(K k, Class<? extends V> clazz) {
+  static <K, V> MapResult<K, V> linked(K k, Class<? extends V> clazz) {
     return new MapResult<K, V>(k, new BindResult<V>(LINKED, null, Key.get(clazz)));
   }
 

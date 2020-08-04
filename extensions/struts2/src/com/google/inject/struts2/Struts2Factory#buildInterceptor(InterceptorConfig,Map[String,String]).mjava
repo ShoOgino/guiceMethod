@@ -1,6 +1,7 @@
   @Override
   @SuppressWarnings("unchecked")
-  public Interceptor buildInterceptor(InterceptorConfig interceptorConfig, Map interceptorRefParams)
+  public Interceptor buildInterceptor(
+      InterceptorConfig interceptorConfig, Map<String, String> interceptorRefParams)
       throws ConfigurationException {
     // Ensure the interceptor class is present.
     Class<? extends Interceptor> interceptorClass;

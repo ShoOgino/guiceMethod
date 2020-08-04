@@ -6,7 +6,7 @@
       Iterable<? extends Module> modules,
       boolean allowDuplicates,
       int expectedMapBindings,
-      MapResult... results) {
+      MapResult<?, ?>... results) {
     Injector injector = Guice.createInjector(modules);
     Visitor<T> visitor = new Visitor<>();
     Binding<T> mapBinding = injector.getBinding(mapKey);
@@ -17,13 +17,13 @@
     assertEquals(valueType, mapbinder.getValueTypeLiteral());
     assertEquals(allowDuplicates, mapbinder.permitsDuplicates());
     List<Map.Entry<?, Binding<?>>> entries = Lists.newArrayList(mapbinder.getEntries());
-    List<MapResult> mapResults = Lists.newArrayList(results);
+    List<MapResult<?, ?>> mapResults = Lists.newArrayList(results);
     assertEquals(
         "wrong entries, expected: " + mapResults + ", but was: " + entries,
         mapResults.size(),
         entries.size());
 
-    for (MapResult result : mapResults) {
+    for (MapResult<?, ?> result : mapResults) {
       Map.Entry<?, Binding<?>> found = null;
       for (Map.Entry<?, Binding<?>> entry : entries) {
         Object key = entry.getKey();
@@ -88,14 +88,14 @@
     boolean collectionOfJavaxProvidersOfEntryOfProviderMatch = false;
     boolean setOfExtendsOfEntryOfProviderMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
-    List<Binding> otherMatches = Lists.newArrayList();
+    List<Binding<?>> otherMatches = Lists.newArrayList();
     Multimap<Object, IndexedBinding> indexedEntries =
         MultimapBuilder.hashKeys().hashSetValues().build();
     Indexer indexer = new Indexer(injector);
     int duplicates = 0;
-    for (Binding b : injector.getAllBindings().values()) {
+    for (Binding<?> b : injector.getAllBindings().values()) {
       boolean contains = mapbinder.containsElement(b);
-      Object visited = b.acceptTargetVisitor(visitor);
+      Object visited = ((Binding<T>) b).acceptTargetVisitor(visitor);
       if (visited instanceof MapBinderBinding) {
         if (visited.equals(mapbinder)) {
           assertTrue(contains);
@@ -127,7 +127,8 @@
         assertTrue(contains);
         entrySetMatch = true;
         // Validate that this binding is also a MultibinderBinding.
-        assertTrue(b.acceptTargetVisitor(visitor) instanceof MultibinderBinding);
+        assertThat(((Binding<T>) b).acceptTargetVisitor(visitor))
+            .isInstanceOf(MultibinderBinding.class);
       } else if (b.getKey().equals(setOfJavaxEntry)) {
         assertTrue(contains);
         javaxEntrySetMatch = true;

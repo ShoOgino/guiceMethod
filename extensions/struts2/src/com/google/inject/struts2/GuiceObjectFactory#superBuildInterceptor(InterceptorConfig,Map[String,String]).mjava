@@ -1,0 +1,5 @@
+  Interceptor superBuildInterceptor(
+      InterceptorConfig interceptorConfig, Map<String, String> interceptorRefParams) {
+    return super.buildInterceptor(interceptorConfig, interceptorRefParams);
+  }
+

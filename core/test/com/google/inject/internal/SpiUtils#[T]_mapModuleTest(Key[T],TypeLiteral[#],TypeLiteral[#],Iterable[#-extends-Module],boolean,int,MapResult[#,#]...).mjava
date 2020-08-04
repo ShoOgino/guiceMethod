@@ -108,8 +108,8 @@
         otherElements.add(element);
       }
       boolean matched = false;
-      Key key = null;
-      Binding b = null;
+      Key<T> key = null;
+      Binding<T> b = null;
       if (element instanceof Binding) {
         b = (Binding) element;
         if (b instanceof ProviderInstanceBinding) {
