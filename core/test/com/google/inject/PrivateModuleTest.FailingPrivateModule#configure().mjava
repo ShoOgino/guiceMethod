@@ -1,10 +1,11 @@
     @Override
     protected void configure() {
-      bind(List.class).toInstance(new ArrayList());
+      Key<List<String>> key = new Key<List<String>>() {};
+      bind(key).toInstance(new ArrayList<String>());
 
       // Add the Provider<List> binding, created just-in-time,
       // to make sure our linked JIT bindings have the correct source.
-      getProvider(Key.get(Types.providerOf(List.class)));
+      getProvider(key);
 
       // Request a JIT binding for PrivateFoo, which can only
       // be created in the private module because it depends

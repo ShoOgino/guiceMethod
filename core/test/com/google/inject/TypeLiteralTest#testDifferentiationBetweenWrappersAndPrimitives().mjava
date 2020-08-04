@@ -2,6 +2,7 @@
    * Unlike Key, TypeLiteral retains full type information and differentiates between {@code
    * int.class} and {@code Integer.class}.
    */
+  @SuppressWarnings("rawtypes") // Class literal uses raw type.
   public void testDifferentiationBetweenWrappersAndPrimitives() {
     Class[] primitives =
         new Class[] {

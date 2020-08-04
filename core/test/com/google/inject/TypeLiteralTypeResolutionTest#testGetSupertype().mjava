@@ -4,7 +4,7 @@
         Types.newParameterizedType(AbstractCollection.class, String.class),
         listOfString.getSupertype(AbstractCollection.class).getType());
 
-    TypeLiteral arrayListOfE =
+    TypeLiteral<?> arrayListOfE =
         TypeLiteral.get(newParameterizedType(ArrayList.class, ArrayList.class.getTypeParameters()));
     assertEquals(
         newParameterizedType(AbstractCollection.class, ArrayList.class.getTypeParameters()),

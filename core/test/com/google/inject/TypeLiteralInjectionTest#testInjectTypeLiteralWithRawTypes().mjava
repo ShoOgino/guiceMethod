@@ -1,5 +1,5 @@
   public void testInjectTypeLiteralWithRawTypes() {
-    C c = Guice.createInjector().getInstance(C.class);
+    C<?> c = Guice.createInjector().getInstance(C.class);
     assertEquals(TypeLiteral.get(String.class), c.string);
     assertEquals(TypeLiteral.get(A.class), c.a);
 

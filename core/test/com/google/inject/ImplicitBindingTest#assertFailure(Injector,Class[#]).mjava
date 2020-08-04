@@ -1,5 +1,4 @@
-  @SuppressWarnings("unchecked")
-  private void assertFailure(Injector injector, Class clazz) {
+  private static void assertFailure(Injector injector, Class<?> clazz) {
     try {
       injector.getBinding(clazz);
       fail("Shouldn't have been able to get binding of: " + clazz);

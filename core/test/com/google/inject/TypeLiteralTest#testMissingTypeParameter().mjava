@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes") // Testing rawtypes.
   public void testMissingTypeParameter() {
     try {
       new TypeLiteral() {};

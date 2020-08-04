@@ -1,7 +1,8 @@
   public void testGetSupertypeForArraysAsList() {
+    @SuppressWarnings("rawtypes") // Unavoidable because class literal uses raw type.
     Class<? extends List> arraysAsListClass = Arrays.asList().getClass();
     Type anotherE = arraysAsListClass.getTypeParameters()[0];
-    TypeLiteral type = TypeLiteral.get(newParameterizedType(AbstractList.class, anotherE));
+    TypeLiteral<?> type = TypeLiteral.get(newParameterizedType(AbstractList.class, anotherE));
     assertEquals(
         newParameterizedType(AbstractCollection.class, anotherE),
         type.getSupertype(AbstractCollection.class).getType());

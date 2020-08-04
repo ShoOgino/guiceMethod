@@ -16,7 +16,7 @@
           e.getMessage(), "java.util.List<T> cannot be used as a key; It is not fully specified.");
     }
 
-    TypeVariable tType = (TypeVariable) listOfTType.getActualTypeArguments()[0];
+    TypeVariable<?> tType = (TypeVariable) listOfTType.getActualTypeArguments()[0];
     TypeLiteral<?> t = TypeLiteral.get(tType);
     try {
       Key.get(t);

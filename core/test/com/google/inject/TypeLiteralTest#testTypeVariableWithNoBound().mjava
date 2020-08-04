@@ -1,3 +1,4 @@
+  @SuppressWarnings("rawtypes") // Testing raw types
   public void testTypeVariableWithNoBound() {
     TypeVariable<Class<HasTypeParameters>>[] typeVariables =
         HasTypeParameters.class.getTypeParameters();

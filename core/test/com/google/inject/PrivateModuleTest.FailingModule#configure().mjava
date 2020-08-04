@@ -1,6 +1,6 @@
     @Override
     protected void configure() {
-      bind(Collection.class).to(List.class);
+      bind(new Key<Collection<String>>() {}).to(new Key<List<String>>() {});
       install(new ManyPrivateModules());
     }
 

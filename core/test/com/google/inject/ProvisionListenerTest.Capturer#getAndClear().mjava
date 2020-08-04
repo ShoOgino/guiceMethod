@@ -1,5 +1,5 @@
-    List<Key> getAndClear() {
-      List<Key> copy = ImmutableList.copyOf(keys);
+    List<Key<?>> getAndClear() {
+      List<Key<?>> copy = ImmutableList.copyOf(keys);
       keys.clear();
       return copy;
     }
