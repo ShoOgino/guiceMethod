@@ -57,7 +57,9 @@
                     Boolean.class,
                     named(
                         "Multibinder<java.util.Map$Entry<java.lang.String, "
-                            + "com.google.inject.Provider<java.lang.String>>> permits duplicates")))
+                            + "com.google.inject.Provider<java.lang.String>>> permits duplicates")),
+                // Map<K, ? extends V>
+                Key.get(Types.mapOf(String.class, Types.subtypeOf(String.class))))
             .addAll(FRAMEWORK_KEYS)
             .build();
 

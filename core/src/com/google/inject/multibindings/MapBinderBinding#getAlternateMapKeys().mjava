@@ -3,7 +3,7 @@
    * {@code Map<K, com.google.inject.Provider<V>>}, {@code Map<K, javax.inject.Provider<V>>}, {@code
    * Map<K, Set<com.google.inject.Provider<V>>>}, {@code Map<K, Set<javax.inject.Provider<V>>>},
    * {@code Map<K, Collection<com.google.inject.Provider<V>>>}, {@code Map<K,
-   * Collection<javax.inject.Provider<V>>>}, and {@code Map<K, Set<V>}.
+   * Collection<javax.inject.Provider<V>>>}, {@code Map<K, Set<V>}, and {@code Map<K, ? extends V>}.
    *
    * @since 4.2.3
    */

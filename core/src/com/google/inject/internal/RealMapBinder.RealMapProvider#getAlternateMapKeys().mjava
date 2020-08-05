@@ -7,6 +7,7 @@
           (Key<?>) bindingSelection.getJavaxProviderSetMultimapKey(),
           (Key<?>) bindingSelection.getProviderCollectionMultimapKey(),
           (Key<?>) bindingSelection.getJavaxProviderCollectionMultimapKey(),
-          (Key<?>) bindingSelection.getMultimapKey());
+          (Key<?>) bindingSelection.getMultimapKey(),
+          (Key<?>) bindingSelection.getMapOfKeyExtendsValueKey());
     }
 

@@ -64,6 +64,9 @@
         mapKey.ofType(collectionOfJavaxProvidersOf(entryOfProviderOf(keyType, valueType)));
     Key<?> setOfExtendsOfEntryOfProvider =
         mapKey.ofType(setOfExtendsOf(entryOfProviderOf(keyType, valueType)));
+    Key<?> mapOfKeyExtendsValueKey =
+        mapKey.ofType(mapOf(keyType, TypeLiteral.get(Types.subtypeOf(valueType.getType()))));
+
     assertEquals(
         ImmutableSet.of(
             mapOfJavaxProvider,
@@ -72,7 +75,8 @@
             mapOfSetOfJavaxProvider,
             mapOfCollectionOfProvider,
             mapOfCollectionOfJavaxProvider,
-            mapOfSet),
+            mapOfSet,
+            mapOfKeyExtendsValueKey),
         mapbinder.getAlternateMapKeys());
 
     boolean entrySetMatch = false;
@@ -87,6 +91,7 @@
     boolean collectionOfProvidersOfEntryOfProviderMatch = false;
     boolean collectionOfJavaxProvidersOfEntryOfProviderMatch = false;
     boolean setOfExtendsOfEntryOfProviderMatch = false;
+    boolean mapOfKeyExtendsValueKeyMatch = false;
     List<Object> otherMapBindings = Lists.newArrayList();
     List<Binding<?>> otherMatches = Lists.newArrayList();
     Multimap<Object, IndexedBinding> indexedEntries =
@@ -141,6 +146,9 @@
       } else if (b.getKey().equals(setOfExtendsOfEntryOfProvider)) {
         assertTrue(contains);
         setOfExtendsOfEntryOfProviderMatch = true;
+      } else if (b.getKey().equals(mapOfKeyExtendsValueKey)) {
+        assertTrue(contains);
+        mapOfKeyExtendsValueKeyMatch = true;
       } else if (contains) {
         if (b instanceof ProviderInstanceBinding) {
           ProviderInstanceBinding<?> pib = (ProviderInstanceBinding<?>) b;
@@ -176,6 +184,7 @@
     assertTrue(collectionOfProvidersOfEntryOfProviderMatch);
     assertTrue(collectionOfJavaxProvidersOfEntryOfProviderMatch);
     assertTrue(setOfExtendsOfEntryOfProviderMatch);
+    assertTrue(mapOfKeyExtendsValueKeyMatch);
     assertEquals(allowDuplicates, mapSetMatch);
     assertEquals(allowDuplicates, mapSetProviderMatch);
     assertEquals(allowDuplicates, mapSetJavaxProviderMatch);

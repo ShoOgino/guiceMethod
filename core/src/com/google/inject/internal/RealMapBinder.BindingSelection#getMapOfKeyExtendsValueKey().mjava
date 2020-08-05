@@ -1,0 +1,13 @@
+    @SuppressWarnings("unchecked")
+    private Key<Map<K, ? extends V>> getMapOfKeyExtendsValueKey() {
+      Key<Map<K, ? extends V>> local = mapOfKeyExtendsValueKey;
+      if (local == null) {
+        Type extendsValue = Types.subtypeOf(valueType.getType());
+        Type mapOfKeyAndExtendsValue = Types.mapOf(keyType.getType(), extendsValue);
+        local =
+            mapOfKeyExtendsValueKey =
+                (Key<Map<K, ? extends V>>) mapKey.ofType(mapOfKeyAndExtendsValue);
+      }
+      return local;
+    }
+

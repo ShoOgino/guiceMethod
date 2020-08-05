@@ -20,6 +20,7 @@
           || key.equals(getJavaxProviderCollectionMultimapKey())
           || key.equals(entrySetBinder.getSetKey())
           || key.equals(getEntrySetJavaxProviderKey())
+          || key.equals(getMapOfKeyExtendsValueKey())
           || matchesValueKey(key);
     }
 

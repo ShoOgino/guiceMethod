@@ -24,5 +24,8 @@
     Key<Set<Map.Entry<K, javax.inject.Provider<V>>>> massagedEntrySetProviderKey =
         (Key) bindingSelection.getEntrySetBinder().getSetKey();
     binder.bind(bindingSelection.getEntrySetJavaxProviderKey()).to(massagedEntrySetProviderKey);
+
+    // Alias Map<K, ? extends V> to Map<K, V>
+    binder.bind(bindingSelection.getMapOfKeyExtendsValueKey()).to(bindingSelection.getMapKey());
   }
 
