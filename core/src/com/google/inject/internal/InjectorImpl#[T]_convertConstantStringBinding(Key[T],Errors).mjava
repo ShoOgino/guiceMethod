@@ -16,7 +16,6 @@
     // We can't call getProvider().get() because this InstanceBinding may not have been inintialized
     // yet (because we may have been called during InternalInjectorCreator.initializeStatically and
     // instance binding validation hasn't happened yet.)
-    @SuppressWarnings("unchecked")
     String stringValue = ((InstanceBinding<String>) stringBinding).getInstance();
     Object source = stringBinding.getSource();
 

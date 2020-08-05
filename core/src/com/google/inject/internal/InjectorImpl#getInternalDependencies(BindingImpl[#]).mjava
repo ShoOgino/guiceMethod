@@ -1,5 +1,4 @@
   /** Safely gets the dependencies of possibly not initialized bindings. */
-  @SuppressWarnings("unchecked")
   private Set<Dependency<?>> getInternalDependencies(BindingImpl<?> binding) {
     if (binding instanceof ConstructorBindingImpl) {
       return ((ConstructorBindingImpl) binding).getInternalDependencies();

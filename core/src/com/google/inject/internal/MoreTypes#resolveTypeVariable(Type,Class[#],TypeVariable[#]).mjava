@@ -1,4 +1,4 @@
-  public static Type resolveTypeVariable(Type type, Class<?> rawType, TypeVariable unknown) {
+  public static Type resolveTypeVariable(Type type, Class<?> rawType, TypeVariable<?> unknown) {
     Class<?> declaredByRaw = declaringClassOf(unknown);
 
     // we can't reduce this further

@@ -4,10 +4,10 @@
    * added to allow circular dependency support, so dependencies may pass where they should have
    * failed.
    */
-  private boolean cleanup(BindingImpl<?> binding, Set<Key> encountered) {
+  private boolean cleanup(BindingImpl<?> binding, Set<Key<?>> encountered) {
     boolean bindingFailed = false;
     Set<Dependency<?>> deps = getInternalDependencies(binding);
-    for (Dependency dep : deps) {
+    for (Dependency<?> dep : deps) {
       Key<?> depKey = dep.getKey();
       InjectionPoint ip = dep.getInjectionPoint();
       if (encountered.add(depKey)) { // only check if we haven't looked at this key yet
@@ -15,7 +15,7 @@
         if (depBinding != null) { // if the binding still exists, validate
           boolean failed = cleanup(depBinding, encountered); // if children fail, we fail
           if (depBinding instanceof ConstructorBindingImpl) {
-            ConstructorBindingImpl ctorBinding = (ConstructorBindingImpl) depBinding;
+            ConstructorBindingImpl<?> ctorBinding = (ConstructorBindingImpl<?>) depBinding;
             ip = ctorBinding.getInternalConstructor();
             if (!ctorBinding.isInitialized()) {
               failed = true;

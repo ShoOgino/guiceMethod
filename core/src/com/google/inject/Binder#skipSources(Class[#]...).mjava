@@ -6,5 +6,5 @@
    * @return a binder that shares its configuration with this binder.
    * @since 2.0
    */
-  Binder skipSources(Class... classesToSkip);
+  Binder skipSources(Class<?>... classesToSkip);
 

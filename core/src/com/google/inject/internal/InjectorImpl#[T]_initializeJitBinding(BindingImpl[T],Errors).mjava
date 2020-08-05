@@ -16,7 +16,7 @@
           // so that cached exceptions while constructing it get stored.
           // See TypeListenerTest#testTypeListenerThrows
           removeFailedJitBinding(binding, null);
-          cleanup(binding, new HashSet<Key>());
+          cleanup(binding, new HashSet<Key<?>>());
         }
       }
     }

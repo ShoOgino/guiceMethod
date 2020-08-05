@@ -10,7 +10,7 @@
 
     } else if (member instanceof Constructor) {
       StringBuilder sb = new StringBuilder().append("<init>(");
-      for (Class param : ((Constructor) member).getParameterTypes()) {
+      for (Class<?> param : ((Constructor<?>) member).getParameterTypes()) {
         sb.append(org.objectweb.asm.Type.getDescriptor(param));
       }
       return sb.append(")V").toString();

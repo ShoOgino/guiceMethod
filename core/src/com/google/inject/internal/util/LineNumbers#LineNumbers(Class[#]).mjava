@@ -3,7 +3,7 @@
    *
    * @param type the class to read line number information from
    */
-  public LineNumbers(Class type) throws IOException {
+  public LineNumbers(Class<?> type) throws IOException {
     this.type = type;
 
     if (!type.isArray()) {

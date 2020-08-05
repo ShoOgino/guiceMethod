@@ -15,7 +15,6 @@
       throws ErrorsException {
     int numErrors = errors.size();
 
-    @SuppressWarnings("unchecked") // constructorBinding guarantees type is consistent
     Class<? super T> rawType =
         constructorInjector == null
             ? key.getTypeLiteral().getRawType()
