@@ -1,0 +1,10 @@
+  public void testTooManyConstructors() {
+    ConfigurationException exception =
+        assertThrows(
+            ConfigurationException.class,
+            () -> InjectionPoint.forConstructorOf(TypeLiteral.get(TooManyConstructors.class)));
+    assertThat(exception)
+        .hasMessageThat()
+        .contains("has more than one constructor annotated with @Inject.");
+  }
+

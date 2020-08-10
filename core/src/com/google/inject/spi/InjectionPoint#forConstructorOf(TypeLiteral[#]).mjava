@@ -1,6 +1,9 @@
   /**
    * Returns a new injection point for the injectable constructor of {@code type}.
    *
+   * <p>Either a {@code @Inject} annotated constructor or a non-private no arg constructor is
+   * required to be defined by the class corresponding to {@code type}.
+   *
    * @param type a concrete type with exactly one constructor annotated {@literal @}{@link Inject},
    *     or a no-arguments constructor that is not private.
    * @throws ConfigurationException if there is no injectable constructor, more than one injectable
@@ -8,58 +11,6 @@
    *     parameter with multiple binding annotations.
    */
   public static InjectionPoint forConstructorOf(TypeLiteral<?> type) {
-    Class<?> rawType = getRawType(type.getType());
-    Errors errors = new Errors(rawType);
-
-    Constructor<?> injectableConstructor = null;
-    for (Constructor<?> constructor : rawType.getDeclaredConstructors()) {
-
-      boolean optional;
-      Inject guiceInject = constructor.getAnnotation(Inject.class);
-      if (guiceInject == null) {
-        javax.inject.Inject javaxInject = constructor.getAnnotation(javax.inject.Inject.class);
-        if (javaxInject == null) {
-          continue;
-        }
-        optional = false;
-      } else {
-        optional = guiceInject.optional();
-      }
-
-      if (optional) {
-        errors.optionalConstructor(constructor);
-      }
-
-      if (injectableConstructor != null) {
-        errors.tooManyConstructors(rawType);
-      }
-
-      injectableConstructor = constructor;
-      checkForMisplacedBindingAnnotations(injectableConstructor, errors);
-    }
-
-    errors.throwConfigurationExceptionIfErrorsExist();
-
-    if (injectableConstructor != null) {
-      return new InjectionPoint(type, injectableConstructor);
-    }
-
-    // If no annotated constructor is found, look for a no-arg constructor instead.
-    try {
-      Constructor<?> noArgConstructor = rawType.getDeclaredConstructor();
-
-      // Disallow private constructors on non-private classes (unless they have @Inject)
-      if (Modifier.isPrivate(noArgConstructor.getModifiers())
-          && !Modifier.isPrivate(rawType.getModifiers())) {
-        errors.missingConstructor(type);
-        throw new ConfigurationException(errors.getMessages());
-      }
-
-      checkForMisplacedBindingAnnotations(noArgConstructor, errors);
-      return new InjectionPoint(type, noArgConstructor);
-    } catch (NoSuchMethodException e) {
-      errors.missingConstructor(type);
-      throw new ConfigurationException(errors.getMessages());
-    }
+    return forConstructorOf(type, false);
   }
 

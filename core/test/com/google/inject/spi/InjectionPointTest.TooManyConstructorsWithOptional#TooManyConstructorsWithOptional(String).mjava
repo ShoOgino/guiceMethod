@@ -1,0 +1,3 @@
+    @Inject
+    TooManyConstructorsWithOptional(String str) {}
+

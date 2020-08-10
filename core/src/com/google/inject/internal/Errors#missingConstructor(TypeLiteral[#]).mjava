@@ -1,4 +1,11 @@
   public Errors missingConstructor(TypeLiteral<?> type) {
+    if (InternalFlags.enableExperimentalErrorMessages()) {
+      return addMessage(
+          new Message(
+              GuiceInternal.GUICE_INTERNAL,
+              ErrorId.MISSING_CONSTRUCTOR,
+              new MissingConstructorError(type, /* atInjectRequired= */ false, getSources())));
+    }
     // Don't bother including the type in the message twice, unless the type is generic (i.e. the
     // type has generics that the raw class loses)
     String typeString = type.toString();

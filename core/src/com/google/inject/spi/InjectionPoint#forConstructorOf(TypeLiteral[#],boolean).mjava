@@ -1,0 +1,69 @@
+  /**
+   * Returns a new injection point for the injectable constructor of {@code type}.
+   *
+   * <p>If {@code atInjectRequired} is true, the constructor must be annotated with {@code @Inject}.
+   * If {@code atInjectRequired} is false, either a {@code @Inject} annotated constructor or a
+   * non-private no arg constructor is required to be defined by the class corresponding to {@code
+   * type}.
+   *
+   * @param type a concrete type with exactly one constructor annotated {@code @Inject}, or a
+   *     no-arguments constructor that is not private.
+   * @param atInjectRequired whether the constructor must be annotated with {@code Inject}.
+   * @throws ConfigurationException if there is no injectable constructor, more than one injectable
+   *     constructor, or if parameters of the injectable constructor are malformed, such as a
+   *     parameter with multiple binding annotations.
+   */
+  public static InjectionPoint forConstructorOf(TypeLiteral<?> type, boolean atInjectRequired) {
+    Class<?> rawType = getRawType(type.getType());
+    Errors errors = new Errors(rawType);
+
+    List<Constructor<?>> atInjectConstructors =
+        Arrays.stream(rawType.getDeclaredConstructors())
+            .filter(
+                constructor ->
+                    constructor.isAnnotationPresent(Inject.class)
+                        || constructor.isAnnotationPresent(javax.inject.Inject.class))
+            .collect(Collectors.toList());
+
+    Constructor<?> injectableConstructor = null;
+    atInjectConstructors.stream()
+        .filter(constructor -> constructor.isAnnotationPresent(Inject.class))
+        .filter(constructor -> constructor.getAnnotation(Inject.class).optional())
+        .forEach(errors::optionalConstructor);
+
+    if (atInjectConstructors.size() > 1) {
+      errors.tooManyConstructors(rawType);
+    } else {
+      injectableConstructor = Iterables.getOnlyElement(atInjectConstructors, null);
+      if (injectableConstructor != null) {
+        checkForMisplacedBindingAnnotations(injectableConstructor, errors);
+      }
+    }
+    if (atInjectRequired && injectableConstructor == null) {
+      errors.atInjectRequired(type);
+    }
+    errors.throwConfigurationExceptionIfErrorsExist();
+
+    if (injectableConstructor != null) {
+      return new InjectionPoint(type, injectableConstructor);
+    }
+
+    // If no annotated constructor is found, look for a no-arg constructor instead.
+    try {
+      Constructor<?> noArgConstructor = rawType.getDeclaredConstructor();
+
+      // Disallow private constructors on non-private classes (unless they have @Inject)
+      if (Modifier.isPrivate(noArgConstructor.getModifiers())
+          && !Modifier.isPrivate(rawType.getModifiers())) {
+        errors.missingConstructor(type);
+        throw new ConfigurationException(errors.getMessages());
+      }
+
+      checkForMisplacedBindingAnnotations(noArgConstructor, errors);
+      return new InjectionPoint(type, noArgConstructor);
+    } catch (NoSuchMethodException e) {
+      errors.missingConstructor(type);
+      throw new ConfigurationException(errors.getMessages());
+    }
+  }
+

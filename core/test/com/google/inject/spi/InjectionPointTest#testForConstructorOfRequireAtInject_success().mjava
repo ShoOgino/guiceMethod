@@ -1,0 +1,7 @@
+  public void testForConstructorOfRequireAtInject_success() {
+    InjectionPoint injectionPoint =
+        InjectionPoint.forConstructorOf(
+            TypeLiteral.get(Constructable.class), /* atInjectRequired= */ true);
+    assertEquals(Constructable.class.getName() + ".<init>()", injectionPoint.toString());
+  }
+

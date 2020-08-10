@@ -1,0 +1,20 @@
+  public void testTooManyConstructors_withOptionalConstructorError() {
+    ConfigurationException exception =
+        assertThrows(
+            ConfigurationException.class,
+            () ->
+                InjectionPoint.forConstructorOf(
+                    TypeLiteral.get(TooManyConstructorsWithOptional.class)));
+
+    // Verify that both errors are reported in the exception
+    assertThat(exception)
+        .hasMessageThat()
+        .contains("has more than one constructor annotated with @Inject.");
+
+    assertThat(exception)
+        .hasMessageThat()
+        .contains(
+            "TooManyConstructorsWithOptional.<init>() is annotated @Inject(optional=true), but"
+                + " constructors cannot be optional.");
+  }
+

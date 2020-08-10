@@ -1,0 +1,5 @@
+  @Override
+  public MissingConstructorError withSources(List<Object> newSources) {
+    return new MissingConstructorError(type, atInjectRequired, newSources);
+  }
+

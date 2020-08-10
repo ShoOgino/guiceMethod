@@ -1,0 +1,10 @@
+  MissingConstructorError(TypeLiteral<?> type, boolean atInjectRequired, List<Object> sources) {
+    super(
+        ErrorId.MISSING_CONSTRUCTOR,
+        "No injectable constructor for type " + type + ".",
+        sources,
+        null);
+    this.type = type;
+    this.atInjectRequired = atInjectRequired;
+  }
+

@@ -1,0 +1,12 @@
+  public void testForConstructorOfRequireAtInject_fail() {
+    ConfigurationException exception =
+        assertThrows(
+            ConfigurationException.class,
+            () ->
+                InjectionPoint.forConstructorOf(
+                    TypeLiteral.get(NoArgNonConstructable.class), /* atInjectRequired= */ true));
+    assertThat(exception)
+        .hasMessageThat()
+        .contains("Explicit @Inject annotations are required on constructors");
+  }
+

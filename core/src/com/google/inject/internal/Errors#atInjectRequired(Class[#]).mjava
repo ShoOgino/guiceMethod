@@ -1,8 +1,0 @@
-  public Errors atInjectRequired(Class<?> clazz) {
-    return addMessage(
-        ErrorId.AT_INJECT_REQUIRED,
-        "Explicit @Inject annotations are required on constructors,"
-            + " but %s has no constructors annotated with @Inject.",
-        clazz);
-  }
-
