@@ -1,0 +1,8 @@
+  public void testParameterizedType_moreArgs() {
+
+    ParameterizedTypeImpl parameterizedType =
+        new ParameterizedTypeImpl(
+            MoreTypesTest.class, D.class, String.class, Integer.class, Integer.class);
+    assertEquals(parameterizedType.getRawType(), D.class);
+  }
+

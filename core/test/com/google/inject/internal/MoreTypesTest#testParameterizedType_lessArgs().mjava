@@ -1,0 +1,13 @@
+  public void testParameterizedType_lessArgs() {
+    IllegalArgumentException expected =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              new ParameterizedTypeImpl(MoreTypesTest.class, D.class, String.class);
+            });
+    assertContains(
+        expected.getMessage(),
+        "Length of provided type arguments is less than length of required parameters for"
+            + " class");
+  }
+
