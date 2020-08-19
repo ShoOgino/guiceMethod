@@ -1,0 +1,4 @@
+  public static final String redBold(String text) {
+    return formatText(text, FormatOptions.RED, FormatOptions.BOLD);
+  }
+

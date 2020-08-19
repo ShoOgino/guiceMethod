@@ -1,0 +1,4 @@
+  public static final String bold(String text) {
+    return formatText(text, FormatOptions.BOLD);
+  }
+

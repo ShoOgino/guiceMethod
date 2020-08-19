@@ -1,0 +1,4 @@
+  public static boolean enableColorizeErrorMessages() {
+    return COLORIZE_OPTION.enabled();
+  }
+

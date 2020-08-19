@@ -1,0 +1,4 @@
+    FormatOptions(String ansiCode) {
+      this.ansiCode = ansiCode;
+    }
+

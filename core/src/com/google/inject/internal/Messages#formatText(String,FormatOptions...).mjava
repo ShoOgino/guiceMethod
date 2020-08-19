@@ -1,0 +1,11 @@
+  private static final String formatText(String text, FormatOptions... options) {
+    if (!InternalFlags.enableColorizeErrorMessages()) {
+      return text;
+    }
+    return String.format(
+        "%s%s%s",
+        Arrays.stream(options).map(option -> option.ansiCode).collect(joining()),
+        text,
+        FormatOptions.RESET.ansiCode);
+  }
+

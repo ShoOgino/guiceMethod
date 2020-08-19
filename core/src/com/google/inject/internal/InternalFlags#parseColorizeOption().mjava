@@ -1,0 +1,4 @@
+  private static ColorizeOption parseColorizeOption() {
+    return getSystemOption("guice_colorize_error_messages", ColorizeOption.OFF);
+  }
+

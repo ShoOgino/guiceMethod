@@ -1,0 +1,4 @@
+  public static final String faint(String text) {
+    return formatText(text, FormatOptions.FAINT);
+  }
+

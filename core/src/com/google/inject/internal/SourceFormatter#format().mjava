@@ -1,4 +1,5 @@
   void format() {
+    // TODO(b/151482394): Omit the prepositions for first source in the list.
     boolean appendModuleSource = !moduleStack.isEmpty();
     if (source instanceof Dependency) {
       formatDependency((Dependency<?>) source);
