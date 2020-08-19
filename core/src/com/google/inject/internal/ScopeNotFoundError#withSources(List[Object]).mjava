@@ -1,0 +1,5 @@
+  @Override
+  public ScopeNotFoundError withSources(List<Object> newSources) {
+    return new ScopeNotFoundError(scopeAnnotation, newSources);
+  }
+

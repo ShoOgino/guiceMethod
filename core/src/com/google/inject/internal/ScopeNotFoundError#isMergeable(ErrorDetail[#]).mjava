@@ -1,0 +1,6 @@
+  @Override
+  public boolean isMergeable(ErrorDetail<?> other) {
+    return other instanceof ScopeNotFoundError
+        && ((ScopeNotFoundError) other).scopeAnnotation.equals(scopeAnnotation);
+  }
+
