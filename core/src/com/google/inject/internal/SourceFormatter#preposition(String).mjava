@@ -1,0 +1,7 @@
+  private String preposition(String prepostition) {
+    if (omitPreposition) {
+      return "";
+    }
+    return prepostition;
+  }
+

@@ -1,4 +1,4 @@
   private void formatMember(Member member) {
-    formatter.format("at %s%n", StackTraceElements.forMember(member));
+    formatter.format("%s%s%n", preposition("at "), StackTraceElements.forMember(member));
   }
 

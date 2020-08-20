@@ -1,4 +1,4 @@
-  SourceFormatter(Object source, Formatter formatter) {
+  SourceFormatter(Object source, Formatter formatter, boolean omitPreposition) {
     if (source instanceof ElementSource) {
       ElementSource elementSource = (ElementSource) source;
       this.source = elementSource.getDeclaringSource();
@@ -8,5 +8,6 @@
       this.moduleStack = "";
     }
     this.formatter = formatter;
+    this.omitPreposition = omitPreposition;
   }
 

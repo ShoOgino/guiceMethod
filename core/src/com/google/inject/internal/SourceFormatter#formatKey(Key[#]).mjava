@@ -1,4 +1,4 @@
   private void formatKey(Key<?> key) {
-    formatter.format("for %s%n", Messages.convert(key));
+    formatter.format("%s%s%n", preposition("for "), Messages.convert(key));
   }
 
