@@ -1,7 +1,7 @@
   @Override
   protected final Optional<String> getLearnMoreLink() {
     if (DOCUMENTED_ERRORS.contains(errorId)) {
-      return Optional.of(String.format("%s/%s", DOC_BASE_URL, errorId.name()));
+      return Optional.of(DOC_BASE_URL + errorId.name());
     }
     return Optional.empty();
   }
