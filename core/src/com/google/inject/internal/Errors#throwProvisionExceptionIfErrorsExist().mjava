@@ -3,8 +3,7 @@
     if (!hasErrors()) {
       return;
     }
-
-
-    throw new ProvisionException(getMessages());
+    ProvisionException exception = new ProvisionException(getMessages());
+    throw exception;
   }
 
