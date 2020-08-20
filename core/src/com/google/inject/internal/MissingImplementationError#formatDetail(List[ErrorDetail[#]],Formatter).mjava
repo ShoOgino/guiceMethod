@@ -1,5 +1,9 @@
   @Override
   public void formatDetail(List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
+    if (!suggestions.isEmpty()) {
+      suggestions.forEach(formatter::format);
+      formatter.format("%n");
+    }
     List<List<Object>> sourcesList = new ArrayList<>();
     sourcesList.add(getSources());
     sourcesList.addAll(

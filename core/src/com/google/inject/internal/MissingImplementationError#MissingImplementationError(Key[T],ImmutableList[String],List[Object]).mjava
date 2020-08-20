@@ -1,9 +1,11 @@
-  public MissingImplementationError(Key<?> key, List<Object> sources) {
+  private MissingImplementationError(
+      Key<T> key, ImmutableList<String> suggestions, List<Object> sources) {
     super(
         ErrorId.MISSING_IMPLEMENTATION,
         String.format("No implementation for %s was bound.", Messages.convert(key)),
         sources,
         null);
     this.key = key;
+    this.suggestions = suggestions;
   }
 

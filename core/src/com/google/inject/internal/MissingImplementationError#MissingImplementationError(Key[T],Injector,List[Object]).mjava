@@ -1,0 +1,4 @@
+  public MissingImplementationError(Key<T> key, Injector injector, List<Object> sources) {
+    this(key, MissingImplementationErrorHints.getSuggestions(key, injector), sources);
+  }
+
