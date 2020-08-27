@@ -1,4 +1,7 @@
   public static InternalProvisionException errorInjectingMethod(Throwable cause) {
+    if (InternalFlags.enableExperimentalErrorMessages()) {
+      return errorInUserCode(ErrorId.ERROR_INJECTING_METHOD, cause, "%s", cause);
+    }
     return errorInUserCode(
         ErrorId.ERROR_INJECTING_METHOD, cause, "Error injecting method, %s", cause);
   }

@@ -1,4 +1,7 @@
   public static InternalProvisionException errorInProvider(Throwable cause) {
+    if (InternalFlags.enableExperimentalErrorMessages()) {
+      return errorInUserCode(ErrorId.ERROR_IN_CUSTOM_PROVIDER, cause, "%s", cause);
+    }
     return errorInUserCode(
         ErrorId.ERROR_IN_CUSTOM_PROVIDER, cause, "Error in custom provider, %s", cause);
   }
