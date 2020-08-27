@@ -1,0 +1,5 @@
+  /** Returns an optional string identifier for this error. */
+  protected Optional<String> getErrorIdentifier() {
+    return Optional.empty();
+  }
+

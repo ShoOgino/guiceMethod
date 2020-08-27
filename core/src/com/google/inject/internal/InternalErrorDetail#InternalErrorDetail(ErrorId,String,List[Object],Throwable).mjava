@@ -1,10 +1,6 @@
   protected InternalErrorDetail(
       ErrorId errorId, String message, List<Object> sources, Throwable cause) {
-    super(
-        "Guice/" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, errorId.name()),
-        message,
-        sources,
-        cause);
+    super(message, sources, cause);
     this.errorId = errorId;
   }
 

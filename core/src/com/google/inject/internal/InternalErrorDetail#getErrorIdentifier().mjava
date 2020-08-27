@@ -1,0 +1,9 @@
+  @Override
+  protected final Optional<String> getErrorIdentifier() {
+    if (errorId == ErrorId.OTHER) {
+      return Optional.empty();
+    }
+    String id = "Guice/" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, errorId.name());
+    return Optional.of(id);
+  }
+

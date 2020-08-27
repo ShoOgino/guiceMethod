@@ -1,4 +1,4 @@
     ExampleErrorDetail(String message) {
-      super("Example", message, ImmutableList.of(), null);
+      super(message, ImmutableList.of(), null);
     }
 

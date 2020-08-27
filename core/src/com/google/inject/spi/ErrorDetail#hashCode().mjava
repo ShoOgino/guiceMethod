@@ -1,5 +1,5 @@
   @Override
   public int hashCode() {
-    return Objects.hashCode(errorIdentifier, message, cause, sources);
+    return Objects.hashCode(message, cause, sources);
   }
 

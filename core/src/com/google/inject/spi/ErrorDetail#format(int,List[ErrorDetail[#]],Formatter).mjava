@@ -20,13 +20,13 @@
    */
   public final void format(int index, List<ErrorDetail<?>> mergeableErrors, Formatter formatter) {
     if (InternalFlags.enableExperimentalErrorMessages()) {
-      formatter.format("%s) [%s]: %s%n%n", index, Messages.redBold(errorIdentifier), getMessage());
+      String id = getErrorIdentifier().map(s -> "[" + Messages.redBold(s) + "]: ").orElse("");
+      formatter.format("%s) %s%s%n%n", index, id, getMessage());
       formatDetail(mergeableErrors, formatter);
-      formatter.format("%n");
       // TODO(b/151482394): Output potiential fixes for the error
       Optional<String> learnMoreLink = getLearnMoreLink();
       if (learnMoreLink.isPresent()) {
-        formatter.format("%s%n", Messages.bold("Learn more:"));
+        formatter.format("%n%s%n", Messages.bold("Learn more:"));
         formatter.format("  %s%n", Messages.underline(learnMoreLink.get()));
       }
     } else {
