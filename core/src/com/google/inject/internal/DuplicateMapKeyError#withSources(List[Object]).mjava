@@ -1,0 +1,5 @@
+  @Override
+  public DuplicateMapKeyError<K, V> withSources(List<Object> newSources) {
+    return new DuplicateMapKeyError<>(mapKey, duplicates, newSources);
+  }
+

@@ -86,7 +86,7 @@
       // we don't build up this data structure
       if (duplicates != null) {
         initializationState = InitializationState.HAS_ERRORS;
-        reportDuplicateKeysError(duplicates, errors);
+        reportDuplicateKeysError(mapKey, duplicates, errors);
 
         return false;
       }

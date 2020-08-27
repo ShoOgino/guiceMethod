@@ -1,0 +1,11 @@
+  DuplicateMapKeyError(
+      Key<Map<K, V>> mapKey, Multimap<K, Binding<V>> duplicates, List<Object> sources) {
+    super(
+        ErrorId.DUPLICATE_MAP_KEY,
+        String.format("Duplicate keys found in MapBinder for key %s", Messages.convert(mapKey)),
+        sources,
+        null);
+    this.mapKey = mapKey;
+    this.duplicates = duplicates;
+  }
+
