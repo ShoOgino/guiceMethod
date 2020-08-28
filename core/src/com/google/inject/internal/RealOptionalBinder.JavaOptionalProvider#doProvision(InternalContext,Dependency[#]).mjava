@@ -9,7 +9,6 @@
       Dependency<?> localDependency = targetDependency;
       T result;
       Dependency previous = context.pushDependency(localDependency, getSource());
-
       try {
         // See comments in RealOptionalKeyProvider, about how localDependency may be more specific
         // than what we actually need.
@@ -18,7 +17,6 @@
         throw ipe.addSource(localDependency);
         } finally {
           context.popStateAndSetDependency(previous);
-
       }
       return java.util.Optional.ofNullable(result);
     }

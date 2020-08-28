@@ -3,14 +3,12 @@
         throws InternalProvisionException {
       // This is what linked bindings do (see FactoryProxy), and we are pretty similar.
       context.pushState(targetKey, targetSource);
-
       try {
         return targetFactory.get(context, dependency, true);
       } catch (InternalProvisionException ipe) {
         throw ipe.addSource(targetKey);
         } finally {
           context.popState();
-
       }
     }
 

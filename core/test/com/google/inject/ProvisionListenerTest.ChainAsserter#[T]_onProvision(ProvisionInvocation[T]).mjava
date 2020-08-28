@@ -5,7 +5,6 @@
         actual.add(dep.getDependency().getKey().getRawType());
       }
       assertEquals(expected, actual);
-
       provisionList.add(provision.getBinding().getKey().getRawType());
     }
 

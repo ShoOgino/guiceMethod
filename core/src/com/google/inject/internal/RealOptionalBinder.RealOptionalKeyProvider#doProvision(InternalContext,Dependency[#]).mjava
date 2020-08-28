@@ -8,7 +8,6 @@
       Dependency<?> localDependency = targetDependency;
       T result;
       Dependency previous = context.pushDependency(localDependency, getSource());
-
       try {
         // currentDependency is Optional<? super T>, so we really just need to set the target
         // dependency to ? super T, but we are currently setting it to T.  We could hypothetically
@@ -19,7 +18,6 @@
         throw ipe.addSource(localDependency);
         } finally {
           context.popStateAndSetDependency(previous);
-
       }
       return Optional.fromNullable(result);
     }

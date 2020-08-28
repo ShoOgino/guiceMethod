@@ -7,7 +7,6 @@
     }
     Key<? extends Provider<T>> localProviderKey = providerKey;
     context.pushState(localProviderKey, localProviderBinding.getSource());
-
     try {
       Provider<? extends T> provider =
           localProviderBinding.getInternalFactory().get(context, dependency, true);
@@ -16,7 +15,6 @@
       throw ipe.addSource(localProviderKey);
       } finally {
         context.popState();
-
     }
   }
 
