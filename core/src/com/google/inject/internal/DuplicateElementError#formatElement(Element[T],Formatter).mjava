@@ -1,0 +1,10 @@
+  private void formatElement(Element<T> element, Formatter formatter) {
+    Object source = element.binding.getSource();
+    new SourceFormatter(
+            source,
+            formatter,
+            /** omitPreposition= */
+            true)
+        .format();
+  }
+

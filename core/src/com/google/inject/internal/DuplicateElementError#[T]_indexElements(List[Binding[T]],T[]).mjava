@@ -1,0 +1,8 @@
+  static <T> ImmutableMultimap<T, Element<T>> indexElements(List<Binding<T>> bindings, T[] values) {
+    ImmutableMultimap.Builder<T, Element<T>> map = ImmutableMultimap.builder();
+    for (int i = 0; i < values.length; i++) {
+      map.put(values[i], new Element<T>(values[i], bindings.get(i)));
+    }
+    return map.build();
+  }
+

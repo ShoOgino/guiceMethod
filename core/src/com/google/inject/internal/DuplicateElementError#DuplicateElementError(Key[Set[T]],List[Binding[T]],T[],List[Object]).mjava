@@ -1,0 +1,5 @@
+  DuplicateElementError(
+      Key<Set<T>> setKey, List<Binding<T>> bindings, T[] values, List<Object> sources) {
+    this(setKey, indexElements(bindings, values), sources);
+  }
+

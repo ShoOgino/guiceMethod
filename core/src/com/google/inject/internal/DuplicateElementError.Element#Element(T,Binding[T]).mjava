@@ -1,0 +1,5 @@
+    Element(T value, Binding<T> binding) {
+      this.value = value;
+      this.binding = binding;
+    }
+

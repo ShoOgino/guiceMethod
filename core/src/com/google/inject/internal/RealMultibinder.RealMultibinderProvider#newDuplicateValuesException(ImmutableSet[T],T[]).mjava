@@ -1,5 +1,14 @@
     private InternalProvisionException newDuplicateValuesException(
         ImmutableSet<T> set, T[] values) {
+      if (InternalFlags.enableExperimentalErrorMessages()) {
+        Message message =
+            new Message(
+                GuiceInternal.GUICE_INTERNAL,
+                ErrorId.DUPLICATE_ELEMENT,
+                new DuplicateElementError<T>(
+                    getSetKey(), bindings, values, ImmutableList.of(getSource())));
+        return new InternalProvisionException(message);
+      }
       // TODO(lukes): consider reporting all duplicate values, the easiest way would be to rebuild
       // a new set and detect dupes as we go
       // Find the duplicate binding

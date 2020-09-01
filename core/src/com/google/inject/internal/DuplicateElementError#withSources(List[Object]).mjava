@@ -1,0 +1,5 @@
+  @Override
+  public DuplicateElementError<T> withSources(List<Object> newSources) {
+    return new DuplicateElementError<>(setKey, elements, newSources);
+  }
+
