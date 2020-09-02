@@ -1,5 +1,0 @@
-  /** Omit the key itself in the source list since the information is redundant. */
-  private List<Object> trimSource(List<Object> sources) {
-    return sources.stream().filter(source -> !source.equals(this.key)).collect(Collectors.toList());
-  }
-

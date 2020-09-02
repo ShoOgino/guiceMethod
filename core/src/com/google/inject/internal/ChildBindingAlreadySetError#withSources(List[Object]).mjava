@@ -1,5 +1,0 @@
-  @Override
-  public ChildBindingAlreadySetError withSources(List<Object> newSources) {
-    return new ChildBindingAlreadySetError(key, existingSoruces, newSources);
-  }
-
