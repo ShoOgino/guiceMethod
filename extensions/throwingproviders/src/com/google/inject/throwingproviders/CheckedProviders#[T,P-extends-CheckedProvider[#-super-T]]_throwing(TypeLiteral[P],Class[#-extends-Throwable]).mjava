@@ -13,7 +13,7 @@
    */
   public static <T, P extends CheckedProvider<? super T>> P throwing(
       TypeLiteral<P> providerType, Class<? extends Throwable> throwable) {
-    // TODO(eatnumber1): Understand why TypeLiteral#getRawType returns a Class<? super T> rather
+    // TODO(user): Understand why TypeLiteral#getRawType returns a Class<? super T> rather
     // than a Class<T> and remove this unsafe cast.
     Class<P> providerRaw = (Class) providerType.getRawType();
     checkThrowable(providerRaw, throwable);
