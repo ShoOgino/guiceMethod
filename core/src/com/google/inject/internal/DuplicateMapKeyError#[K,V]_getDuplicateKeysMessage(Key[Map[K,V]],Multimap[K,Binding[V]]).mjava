@@ -1,0 +1,14 @@
+  private static <K, V> String getDuplicateKeysMessage(
+      Key<Map<K, V>> mapKey, Multimap<K, Binding<V>> duplicates) {
+    Set<K> duplicateKeys = duplicates.keySet();
+    String mapBinderKey = Messages.convert(mapKey).toString();
+    String firstDuplicateKey = duplicateKeys.iterator().next().toString();
+    if (duplicateKeys.size() == 1) {
+      return String.format("Duplicate key \"%s\" found in %s.", firstDuplicateKey, mapBinderKey);
+    } else {
+      return String.format(
+          "\"%s\" and %s other duplicate keys found in %s.",
+          firstDuplicateKey, duplicateKeys.size() - 1, mapBinderKey);
+    }
+  }
+
