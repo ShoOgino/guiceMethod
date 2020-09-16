@@ -1,4 +1,0 @@
-  public Errors recursiveBinding() {
-    return addMessage(ErrorId.RECURSIVE_BINDING, "Binding points to itself.");
-  }
-

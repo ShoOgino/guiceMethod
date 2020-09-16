@@ -1,6 +1,6 @@
     @Override
     final void initialize(InjectorImpl injector, Errors errors) throws ErrorsException {
-      bindingSelection.initialize(injector);
+      bindingSelection.initialize(injector, errors);
       doInitialize();
     }
 

@@ -1,0 +1,20 @@
+  public void testLinkedAndBaseTypeHaveDifferentAnnotations() {
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), Key.get(MyClass.class, Names.named("foo")))
+                .setBinding()
+                .to(Key.get(MyClass.class, Names.named("moo")));
+          }
+
+          @Provides
+          @Named("moo")
+          MyClass provideString() {
+            return new MyClass();
+          }
+        };
+    Injector injector = Guice.createInjector(module);
+    assertNotNull(injector);
+  }
+

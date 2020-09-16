@@ -1,0 +1,18 @@
+  public void testLinkedTypeSameAsBaseType() {
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            OptionalBinder.newOptionalBinder(binder(), MyClass.class)
+                .setBinding()
+                .to(MyClass.class);
+          }
+        };
+
+    CreationException ce =
+        assertThrows(CreationException.class, () -> Guice.createInjector(module));
+    assertContains(
+        ce.getMessage(),
+        "1) Binding points to itself. Key: com.google.inject.internal.OptionalBinderTest$MyClass");
+  }
+

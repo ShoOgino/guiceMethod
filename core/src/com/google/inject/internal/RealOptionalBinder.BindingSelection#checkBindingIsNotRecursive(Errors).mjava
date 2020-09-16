@@ -1,0 +1,10 @@
+    private void checkBindingIsNotRecursive(Errors errors) {
+      if (binding instanceof LinkedBindingImpl) {
+        LinkedBindingImpl<T> linkedBindingImpl = (LinkedBindingImpl<T>) binding;
+        if (linkedBindingImpl.getLinkedKey().equals(key)) {
+          // TODO: b/168656899 check for transitive recursive binding
+          errors.recursiveBinding(key, linkedBindingImpl.getLinkedKey());
+        }
+      }
+    }
+

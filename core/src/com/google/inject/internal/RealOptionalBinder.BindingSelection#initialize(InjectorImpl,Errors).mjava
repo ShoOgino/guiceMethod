@@ -1,9 +1,8 @@
-    void initialize(InjectorImpl injector) {
+    void initialize(InjectorImpl injector, Errors errors) {
       // Every one of our providers will call this method, so only execute the logic once.
       if (initialized) {
         return;
       }
-
       actualBinding = injector.getExistingBinding(getKeyForActualBinding());
       defaultBinding = injector.getExistingBinding(getKeyForDefaultBinding());
       // We should never create Jit bindings, but we can use them if some other binding created it.
@@ -31,6 +30,7 @@
         dependencies = ImmutableSet.of();
         providerDependencies = ImmutableSet.of();
       }
+      checkBindingIsNotRecursive(errors);
       initialized = true;
     }
 
