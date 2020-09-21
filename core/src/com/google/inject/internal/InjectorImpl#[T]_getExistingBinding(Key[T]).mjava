@@ -27,7 +27,8 @@
           return getBinding(key);
         }
       } catch (ErrorsException e) {
-        throw new ConfigurationException(e.getErrors().getMessages());
+        ConfigurationException exception = new ConfigurationException(e.getErrors().getMessages());
+        throw exception;
       }
     }
 

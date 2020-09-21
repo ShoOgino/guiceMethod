@@ -7,7 +7,9 @@
       errors.throwIfNewErrors(0);
       return result;
     } catch (ErrorsException e) {
-      throw new ConfigurationException(errors.merge(e.getErrors()).getMessages());
+      ConfigurationException exception =
+          new ConfigurationException(errors.merge(e.getErrors()).getMessages());
+      throw exception;
     }
   }
 
