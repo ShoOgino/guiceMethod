@@ -1,0 +1,12 @@
+  public void testSourceSetOnBinding() throws Exception {
+    Object instance =
+        new Object() {
+          @Bind Integer value = 1;
+        };
+    BoundFieldModule module = BoundFieldModule.of(instance);
+    Injector injector = Guice.createInjector(module);
+    assertEquals(
+        instance.getClass().getDeclaredField("value"),
+        ((ElementSource) injector.getBinding(Integer.class).getSource()).getDeclaringSource());
+  }
+
