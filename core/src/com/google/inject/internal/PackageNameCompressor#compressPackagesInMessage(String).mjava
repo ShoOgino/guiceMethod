@@ -21,42 +21,14 @@
       return input;
     }
 
-    // Find the longest key for building the legend
-    int longestKey = replacementMap.keySet().stream().max(comparing(String::length)).get().length();
-
-    String replacedString = input;
-    StringBuilder legendBuilder = new StringBuilder();
-    for (Map.Entry<String, String> entry : replacementMap.entrySet()) {
-      String shortName = entry.getKey();
-      String fullName = entry.getValue();
-      // Do the replacements in the message
-      replacedString = replacedString.replace(fullName, shortName);
-
-      // Skip certain prefixes. We need to check the shortName for a . though in case
-      // there was some type of conflict like java.util.concurrent.Future and
-      // java.util.foo.Future that got shortened to concurrent.Future and foo.Future.
-      // In those cases we do not want to skip the legend. We only skip if the class
-      // is directly in that package.
-      String prefix = fullName.substring(0, fullName.length() - shortName.length());
-      if (PACKAGES_SKIPPED_IN_LEGEND.contains(prefix) && !shortName.contains(".")) {
-        continue;
-      }
-
-      // Add to the legend
-      legendBuilder
-          .append(shortName)
-          .append(": ")
-          // Add enough spaces to adjust the columns
-          .append(Strings.repeat(" ", longestKey - shortName.length()))
-          .append(fullName)
-          .append("\n");
+    StringBuilder output = new StringBuilder();
+    Set<String> replacedShortNames = replaceFullNames(input, replacementMap, output);
+    if (replacedShortNames.isEmpty()) {
+      return input;
     }
 
-    return legendBuilder.length() == 0
-        ? replacedString
-        : replacedString
-            + Messages.bold(LEGEND_HEADER)
-            + Messages.faint(legendBuilder.toString())
-            + Messages.bold(LEGEND_FOOTER);
+    String classNameLegend =
+        buildClassNameLegend(Maps.filterKeys(replacementMap, replacedShortNames::contains));
+    return output.append(classNameLegend).toString();
   }
 

@@ -1,0 +1,6 @@
+  @Test
+  public void testEmptyInput() {
+    String input = "";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(input);
+  }
+

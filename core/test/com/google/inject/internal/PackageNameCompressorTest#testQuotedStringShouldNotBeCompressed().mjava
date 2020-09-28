@@ -1,0 +1,9 @@
+  @Test
+  public void testQuotedStringShouldNotBeCompressed() {
+    String input =
+        "Duplicate key \"com.google.Foo\" found in java.util.Map<java.lang.String,"
+            + " java.lang.Object>.";
+    String expectedOutput = "Duplicate key \"com.google.Foo\" found in Map<String, Object>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

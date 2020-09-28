@@ -1,0 +1,40 @@
+  /**
+   * Replaces full class names in {@code input} and append the replaced content to {@code output}
+   * and then returns a set of short names that were used as replacement.
+   *
+   * <p>String literals that are quoted in the {@code input} will be added to the {@code output}
+   * unchanged. So any full class name that only appear in the string literal will not be included
+   * in the returned short names set.
+   */
+  private static ImmutableSet<String> replaceFullNames(
+      String input, Map<String, String> replacementMap, StringBuilder output) {
+    ImmutableSet.Builder<String> replacedShortNames = ImmutableSet.builder();
+    // Sort short names in reverse alphabetical order. This is necessary so that a short name that
+    // has a prefix that is another short name will be replaced first, otherwise the longer name
+    // will not be collected as one of the replacedShortNames.
+    List<String> shortNames =
+        replacementMap.keySet().stream()
+            .sorted(Ordering.natural().reverse())
+            .collect(Collectors.toList());
+    Matcher matcher = QUOTED_PATTERN.matcher(input);
+    while (matcher.find()) {
+      String replaced = matcher.group(1);
+      for (String shortName : shortNames) {
+        String fullName = replacementMap.get(shortName);
+        int beforeLen = replaced.length();
+        replaced = replaced.replace(fullName, shortName);
+        // If the replacement happened then put the short name in replacedShortNames.
+        // Only values in replacedShortNames are included in the full class name legend.
+        if (replaced.length() < beforeLen) {
+          replacedShortNames.add(shortName);
+        }
+      }
+      output.append(replaced);
+      String quoted = matcher.group(2);
+      if (quoted != null) {
+        output.append(quoted);
+      }
+    }
+    return replacedShortNames.build();
+  }
+

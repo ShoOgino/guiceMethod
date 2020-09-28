@@ -1,0 +1,9 @@
+  @Test
+  public void testNestedGeneric() {
+    String input =
+        "No implementation found for java.util.Map<java.lang.String,"
+            + " java.util.Set<java.lang.String>>.";
+    String expectedOutput = "No implementation found for Map<String, Set<String>>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

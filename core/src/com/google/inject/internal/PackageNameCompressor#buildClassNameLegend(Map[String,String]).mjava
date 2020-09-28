@@ -1,0 +1,34 @@
+  private static String buildClassNameLegend(Map<String, String> replacementMap) {
+    StringBuilder legendBuilder = new StringBuilder();
+    // Find the longest key for building the legend
+    int longestKey = replacementMap.keySet().stream().max(comparing(String::length)).get().length();
+    for (Map.Entry<String, String> entry : replacementMap.entrySet()) {
+      String shortName = entry.getKey();
+      String fullName = entry.getValue();
+      // Skip certain prefixes. We need to check the shortName for a . though in case
+      // there was some type of conflict like java.util.concurrent.Future and
+      // java.util.foo.Future that got shortened to concurrent.Future and foo.Future.
+      // In those cases we do not want to skip the legend. We only skip if the class
+      // is directly in that package.
+      String prefix = fullName.substring(0, fullName.length() - shortName.length());
+      if (PACKAGES_SKIPPED_IN_LEGEND.contains(prefix) && !shortName.contains(".")) {
+        continue;
+      }
+
+      // Add to the legend
+      legendBuilder
+          .append(shortName)
+          .append(": ")
+          // Add enough spaces to adjust the columns
+          .append(Strings.repeat(" ", longestKey - shortName.length()))
+          .append(fullName)
+          .append("\n");
+    }
+
+    return legendBuilder.length() == 0
+        ? ""
+        : Messages.bold(LEGEND_HEADER)
+            + Messages.faint(legendBuilder.toString())
+            + Messages.bold(LEGEND_FOOTER);
+  }
+

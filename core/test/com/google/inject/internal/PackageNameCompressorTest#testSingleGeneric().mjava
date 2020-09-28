@@ -1,0 +1,7 @@
+  @Test
+  public void testSingleGeneric() {
+    String input = "No implementation found for java.util.Set<java.lang.String>.";
+    String expectedOutput = "No implementation found for Set<String>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

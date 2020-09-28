@@ -1,0 +1,7 @@
+  @Test
+  public void testQuotedStringSpanMultipleLines() {
+    String input = "Some strange string with \"java.util.List, \n and java.lang.Integer\".";
+    String expectedOutput = "Some strange string with \"List, \n and Integer\".";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

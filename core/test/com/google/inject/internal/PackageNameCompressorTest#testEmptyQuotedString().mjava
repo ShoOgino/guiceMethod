@@ -1,0 +1,8 @@
+  @Test
+  public void testEmptyQuotedString() {
+    String input =
+        "Duplicate key \"\" found in java.util.Map<java.lang.String," + " java.lang.Object>.";
+    String expectedOutput = "Duplicate key \"\" found in Map<String, Object>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

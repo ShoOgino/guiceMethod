@@ -1,0 +1,9 @@
+  @Test
+  public void testUnbalancedQuotedString() {
+    String input =
+        "Duplicate key \"java.util.List found in java.util.Map<java.lang.String,"
+            + " java.lang.Object>.";
+    String expectedOutput = "Duplicate key \"List found in Map<String, Object>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+

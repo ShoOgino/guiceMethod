@@ -1,0 +1,7 @@
+  @Test
+  public void testMultipleGeneric() {
+    String input = "No implementation found for java.util.Map<java.lang.String, java.lang.String>.";
+    String expectedOutput = "No implementation found for Map<String, String>.";
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+
