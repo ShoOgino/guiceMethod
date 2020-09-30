@@ -1,0 +1,8 @@
+  @Test
+  public void testSingleLetterClassName() {
+    String input = "Something is wrong with foo.bar.baz.F class!";
+    String expectedOutput =
+        "Something is wrong with F class!" + LEGEND_HEADER + "F: foo.bar.baz.F\n" + LEGEND_FOOTER;
+    assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
+  }
+
