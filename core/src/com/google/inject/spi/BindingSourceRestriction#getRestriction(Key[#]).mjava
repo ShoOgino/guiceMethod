@@ -1,0 +1,12 @@
+  /*
+   * Returns the restriction on the given key (null if there is none).
+   *
+   * If the key is annotated then only the annotation restriction matters, the type restriction is
+   * ignored (an annotated type is essentially a new type).
+   **/
+  private static RestrictedBindingSource getRestriction(Key<?> key) {
+    return key.getAnnotationType() == null
+        ? key.getTypeLiteral().getRawType().getAnnotation(RestrictedBindingSource.class)
+        : key.getAnnotationType().getAnnotation(RestrictedBindingSource.class);
+  }
+

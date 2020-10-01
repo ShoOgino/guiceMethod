@@ -1,0 +1,15 @@
+  /** Returns a suggestion for how a restricted binding should be created in case it's missing. */
+  public static Optional<String> getMissingImplementationSuggestion(
+      GuiceInternal guiceInternal, Key<?> key) {
+    checkNotNull(guiceInternal);
+    RestrictedBindingSource restriction = getRestriction(key);
+    if (restriction == null) {
+      return Optional.empty();
+    }
+    return Optional.of(
+        String.format(
+            "%nHint: This key is restricted and cannot be bound directly. Restriction explanation:"
+                + " %s",
+            restriction.explanation()));
+  }
+

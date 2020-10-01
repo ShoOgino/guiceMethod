@@ -2,12 +2,7 @@
     Key<?> key = binding.getKey();
     // Module Bindings are all explicit and have an ElementSource.
     ElementSource elementSource = (ElementSource) binding.getSource();
-    // If the key is annotated then only the annotation restriction matters, the type restriction is
-    // ignored (an annotated type is essentially a new type).
-    RestrictedBindingSource restriction =
-        key.getAnnotationType() == null
-            ? key.getTypeLiteral().getRawType().getAnnotation(RestrictedBindingSource.class)
-            : key.getAnnotationType().getAnnotation(RestrictedBindingSource.class);
+    RestrictedBindingSource restriction = getRestriction(key);
     if (restriction == null) {
       return Optional.empty();
     }
