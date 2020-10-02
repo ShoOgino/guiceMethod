@@ -1,3 +1,4 @@
+  @Test
   public void testInjectsJustOneLogger() {
     AtomicReference<Logger> loggerRef = new AtomicReference<>();
     Injector injector = Guice.createInjector(new FooModule(loggerRef));

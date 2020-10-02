@@ -1,3 +1,4 @@
+  @Test
   public void testDeduplicateProviderMethodsBindings_sameInstance_staticMethod() {
     Module module = new DeduplicateStaticModule();
     Guice.createInjector(Stage.PRODUCTION, module, module);

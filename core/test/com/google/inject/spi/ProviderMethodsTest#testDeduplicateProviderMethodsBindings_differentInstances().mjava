@@ -1,3 +1,4 @@
+  @Test
   public void testDeduplicateProviderMethodsBindings_differentInstances() {
     try {
       Guice.createInjector(Stage.PRODUCTION, new DeduplicateModule(), new DeduplicateModule());

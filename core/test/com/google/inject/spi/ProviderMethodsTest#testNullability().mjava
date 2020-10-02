@@ -1,3 +1,4 @@
+  @Test
   public void testNullability() throws Exception {
     Module module =
         new AbstractModule() {

@@ -2,6 +2,7 @@
    * If the user installs provider methods for the module manually, that shouldn't cause a double
    * binding of the provider methods' types.
    */
+  @Test
   public void testAutomaticProviderMethodsDoNotCauseDoubleBinding() {
     Module installsSelf =
         new AbstractModule() {

@@ -1,3 +1,4 @@
+  @Test
   public void testProvidesMethodVisibility() {
     Injector injector = Guice.createInjector(new VisibilityModule());
 

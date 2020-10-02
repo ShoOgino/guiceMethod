@@ -1,3 +1,4 @@
+  @Test
   public void testSpi() throws Exception {
     Module m1 =
         new AbstractModule() {

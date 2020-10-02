@@ -1,3 +1,4 @@
+  @Test
   public void testWildcardProviderMethods() {
     final List<String> strings = ImmutableList.of("A", "B", "C");
     final List<Number> numbers = ImmutableList.<Number>of(1, 2, 3);

@@ -1,5 +1,6 @@
   // This is a tricky case where signatures don't match, but it is an override (facilitated via a
   // bridge method)
+  @Test
   public void testOverrideProviderMethod_erasureBasedOverrides() {
     class SubClassModule extends GenericSuperModule<Integer> {
       @Override

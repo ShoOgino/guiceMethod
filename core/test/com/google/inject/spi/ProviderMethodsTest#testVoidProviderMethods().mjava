@@ -1,3 +1,4 @@
+  @Test
   public void testVoidProviderMethods() {
     try {
       Guice.createInjector(

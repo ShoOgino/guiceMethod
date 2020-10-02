@@ -1,3 +1,4 @@
+  @Test
   public void testOverrideProviderMethod_fakeOverridePrivateMethod() {
     class SubClassModule extends SuperClassModule {
       // not actually an override, just looks like it

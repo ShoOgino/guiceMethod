@@ -1,3 +1,4 @@
+  @Test
   public void testOverrideProviderMethod_increasedVisibility() {
     // ensure we don't detect the synthetic provideFoo method in ExposedSub as an override (it is,
     // but since it is synthetic it would be annoying to throw an error on it).

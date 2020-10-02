@@ -1,8 +1,8 @@
+  @Test
   public void testShareFastClassWithSuperClass() {
-    // Test relies on package access which CHILD loading doesn't have
-    if (InternalFlags.getCustomClassLoadingOption() == CustomClassLoadingOption.CHILD) {
-      return;
-    }
+    // Test relies on package access which CHILD loading doesn't have.
+    assumeTrue(InternalFlags.getCustomClassLoadingOption() != CustomClassLoadingOption.CHILD);
+
     CallerInspecterSubClassModule module = new CallerInspecterSubClassModule();
     Guice.createInjector(Stage.PRODUCTION, module);
     assertEquals(

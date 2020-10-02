@@ -1,7 +1,6 @@
   public static Test suite() {
     TestSuite suite = new TestSuite();
 
-    suite.addTest(GuiceTck.suite());
     suite.addTestSuite(BinderTest.class);
     suite.addTest(BinderTestSuite.suite());
     suite.addTestSuite(BindingAnnotationTest.class);
@@ -66,7 +65,6 @@
     suite.addTestSuite(InjectionPointTest.class);
     suite.addTestSuite(InjectorSpiTest.class);
     suite.addTestSuite(ModuleRewriterTest.class);
-    suite.addTestSuite(ProviderMethodsTest.class);
     suite.addTestSuite(SpiBindingsTest.class);
     suite.addTestSuite(ToolStageInjectorTest.class);
     suite.addTestSuite(ModuleSourceTest.class);
@@ -85,11 +83,9 @@
     suite.addTestSuite(com.google.inject.internal.ProxyFactoryTest.class);
     suite.addTestSuite(IntegrationTest.class);
     suite.addTestSuite(MethodInterceptionTest.class);
-    suite.addTestSuite(com.googlecode.guice.BytecodeGenTest.class);
     /*end[AOP]*/
 
     // googlecode.guice
-    suite.addTestSuite(com.googlecode.guice.OSGiContainerTest.class);
     suite.addTestSuite(Jsr330Test.class);
 
     // multibindings tests

@@ -1,3 +1,4 @@
+  @Test
   public void testNonModuleProviderMethods() {
     final Object methodsObject =
         new Object() {

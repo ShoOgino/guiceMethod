@@ -1,3 +1,4 @@
+  @Test
   public void testOverrideProviderMethod_covariantOverrideDoesntHaveProvides() {
     class SubClassModule extends SuperClassModule {
       @Override

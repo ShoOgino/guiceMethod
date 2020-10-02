@@ -1,3 +1,4 @@
+  @Test
   public void testOverrideProviderMethod_subclassRawTypes_returnType() {
     class SubClassModule extends SuperClassModule {
       @Override

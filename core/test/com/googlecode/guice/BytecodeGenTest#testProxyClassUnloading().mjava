@@ -1,3 +1,4 @@
+  @Test
   public void testProxyClassUnloading() {
     Object testObject =
         Guice.createInjector(interceptorModule, testModule).getInstance(proxyTestClass);

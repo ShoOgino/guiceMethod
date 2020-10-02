@@ -1,3 +1,4 @@
+  @Test
   public void testCircularDependency() {
     Injector injector =
         Guice.createInjector(

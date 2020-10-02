@@ -1,4 +1,5 @@
   @SuppressWarnings("unchecked")
+  @Test
   public void testProviderMethods() {
     Injector injector = Guice.createInjector(this);
 

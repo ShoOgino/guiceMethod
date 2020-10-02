@@ -1,3 +1,4 @@
+  @Test
   public void testProvidesMethodsDefinedInSuperClass() {
     Injector injector = Guice.createInjector(new Sub1Module());
     assertEquals(42, injector.getInstance(Integer.class).intValue());

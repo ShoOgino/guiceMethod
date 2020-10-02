@@ -1,3 +1,4 @@
+  @Test
   public void testScopedProviderMethodThrowsException() {
     Injector injector =
         Guice.createInjector(

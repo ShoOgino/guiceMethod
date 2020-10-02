@@ -1,3 +1,4 @@
+  @Test
   public void testProvidesMethodInheritenceHierarchy() {
     try {
       Guice.createInjector(new Sub1Module(), new Sub2Module());

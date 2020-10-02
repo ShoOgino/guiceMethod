@@ -1,3 +1,4 @@
+  @Test
   public void testGenericProviderMethods() {
     Injector injector =
         Guice.createInjector(new ProvideTs<String>("A", "B") {}, new ProvideTs<Integer>(1, 2) {});

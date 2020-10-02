@@ -1,3 +1,4 @@
+  @Test
   public void testModuleBindings() throws Exception {
     Module module =
         new AbstractModule() {

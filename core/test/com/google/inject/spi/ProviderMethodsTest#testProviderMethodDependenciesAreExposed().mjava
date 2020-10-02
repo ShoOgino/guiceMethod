@@ -1,3 +1,4 @@
+  @Test
   public void testProviderMethodDependenciesAreExposed() throws Exception {
     Module module =
         new AbstractModule() {

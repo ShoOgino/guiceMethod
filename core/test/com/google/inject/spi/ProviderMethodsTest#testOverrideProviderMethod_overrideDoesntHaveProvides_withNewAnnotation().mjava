@@ -1,3 +1,4 @@
+  @Test
   public void testOverrideProviderMethod_overrideDoesntHaveProvides_withNewAnnotation() {
     class SubClassModule extends SuperClassModule {
       @Override
