@@ -1,0 +1,28 @@
+  private static KotlinNullabilitySupport loadKotlinNullabilitySupport() {
+    Function<Constructor<?>, Predicate<Integer>> kotlinConstructorParameterNullabilityFunction;
+    Function<Method, Predicate<Integer>> kotlinMethodParameterNullabilityFunction;
+    try {
+      Class<?> clazz =
+          Class.forName("com.google.inject.kotlin.KotlinParameterNullabilityFunctions");
+
+      @SuppressWarnings("unchecked") // we know the types of KotlinParameterNullabilityFunctions
+      Function<Constructor<?>, Predicate<Integer>> localConstructorFn =
+          (Function<Constructor<?>, Predicate<Integer>>)
+              getStaticField(clazz, "KOTLIN_CONSTRUCTOR_PARAMETER_NULLABILITY_FUNCTION");
+      kotlinConstructorParameterNullabilityFunction = localConstructorFn;
+      @SuppressWarnings("unchecked") // we know the types of KotlinParameterNullabilityFunctions
+      Function<Method, Predicate<Integer>> localMethodFn =
+          (Function<Method, Predicate<Integer>>)
+              getStaticField(clazz, "KOTLIN_METHOD_PARAMETER_NULLABILITY_FUNCTION");
+      kotlinMethodParameterNullabilityFunction = localMethodFn;
+    } catch (NoSuchFieldException | IllegalAccessException | ClassNotFoundException e) {
+      logger.info(
+          "Could not load com.google.inject.kotlin.KotlinParameterNullabilityFunctions so "
+              + "Guice will not read any nullability information for Kotlin types");
+      kotlinConstructorParameterNullabilityFunction = constructor -> index -> false;
+      kotlinMethodParameterNullabilityFunction = method -> index -> false;
+    }
+    return new KotlinNullabilitySupport(
+        kotlinConstructorParameterNullabilityFunction, kotlinMethodParameterNullabilityFunction);
+  }
+

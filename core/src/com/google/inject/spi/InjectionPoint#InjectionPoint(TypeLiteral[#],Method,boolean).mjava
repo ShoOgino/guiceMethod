@@ -2,6 +2,11 @@
     this.member = method;
     this.declaringType = declaringType;
     this.optional = optional;
-    this.dependencies = forMember(method, declaringType, method.getParameterAnnotations());
+    this.dependencies =
+        forMember(
+            method,
+            declaringType,
+            method.getParameterAnnotations(),
+            KotlinNullabilitySupport.getInstance().getParameterPredicate(method));
   }
 
