@@ -1,5 +1,0 @@
-  private static CustomClassLoadingOption parseCustomClassLoadingOption() {
-    return getSystemOption("guice_custom_class_loading",
-        CustomClassLoadingOption.BRIDGE, CustomClassLoadingOption.OFF);
-  }
-

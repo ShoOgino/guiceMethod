@@ -1,5 +1,0 @@
-  private static IncludeStackTraceOption parseIncludeStackTraceOption() {
-    return getSystemOption("guice_include_stack_traces",
-        IncludeStackTraceOption.ONLY_FOR_DECLARING_SOURCE);
-  }
-
