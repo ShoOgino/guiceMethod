@@ -1,0 +1,7 @@
+  /**
+   * Returns a {@link Predicate} that says whether the method's i-th parameter is Kotlin-nullable.
+   */
+  Predicate<Integer> getParameterPredicate(Method method) {
+    return methodParameterNullability.apply(method);
+  }
+
