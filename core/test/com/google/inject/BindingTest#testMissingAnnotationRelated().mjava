@@ -1,3 +1,4 @@
+  @Test
   public void testMissingAnnotationRelated() {
     try {
       final TypeLiteral<List<Butter>> list = new TypeLiteral<List<Butter>>() {};

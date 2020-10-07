@@ -1,11 +1,11 @@
   /*if[AOP]*/
+  @Test
   public void testMethodInterceptorsOnAssistedTypes() {
     final AtomicInteger invocationCount = new AtomicInteger();
-    final org.aopalliance.intercept.MethodInterceptor interceptor =
-        new org.aopalliance.intercept.MethodInterceptor() {
+    final MethodInterceptor interceptor =
+        new MethodInterceptor() {
           @Override
-          public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
-              throws Throwable {
+          public Object invoke(MethodInvocation methodInvocation) throws Throwable {
             invocationCount.incrementAndGet();
             return methodInvocation.proceed();
           }

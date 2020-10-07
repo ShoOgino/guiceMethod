@@ -1,3 +1,4 @@
+  @Test
   public void testGeneratedClassesCanSucceed() {
     final Class<?> generated = new GeneratingClassLoader().generate();
     Injector injector =

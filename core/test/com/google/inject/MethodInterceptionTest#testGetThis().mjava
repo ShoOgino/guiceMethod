@@ -1,3 +1,4 @@
+  @Test
   public void testGetThis() {
     final AtomicReference<Object> lastTarget = new AtomicReference<>();
 

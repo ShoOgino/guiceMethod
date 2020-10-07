@@ -1,3 +1,4 @@
+  @Test
   public void testInstallingInjectionListener() {
     final List<Object> injectees = Lists.newArrayList();
     final InjectionListener<Object> injectionListener =

@@ -1,3 +1,4 @@
+  @Test
   public void testExceptionDuringConstruction() {
     Injector injector =
         Guice.createInjector(

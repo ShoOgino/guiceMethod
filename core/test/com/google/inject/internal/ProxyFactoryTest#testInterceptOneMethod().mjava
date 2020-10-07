@@ -1,3 +1,4 @@
+  @Test
   public void testInterceptOneMethod()
       throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();

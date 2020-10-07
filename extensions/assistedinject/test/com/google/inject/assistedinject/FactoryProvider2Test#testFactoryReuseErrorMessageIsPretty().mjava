@@ -2,6 +2,7 @@
    * Our factories aren't reusable across injectors. Although this behaviour isn't something we
    * like, I have a test case to make sure the error message is pretty.
    */
+  @Test
   public void testFactoryReuseErrorMessageIsPretty() {
     final Provider<ColoredCarFactory> factoryProvider =
         FactoryProvider.newFactory(ColoredCarFactory.class, Mustang.class);

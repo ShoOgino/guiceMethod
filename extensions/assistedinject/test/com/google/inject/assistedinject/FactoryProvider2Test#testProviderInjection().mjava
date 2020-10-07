@@ -1,3 +1,4 @@
+  @Test
   public void testProviderInjection() {
     Injector injector =
         Guice.createInjector(

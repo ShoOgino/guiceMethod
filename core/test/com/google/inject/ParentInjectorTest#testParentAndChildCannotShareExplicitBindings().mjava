@@ -1,3 +1,4 @@
+  @Test
   public void testParentAndChildCannotShareExplicitBindings() {
     Injector parent = Guice.createInjector(bindsA);
     try {

@@ -1,3 +1,4 @@
+  @Test
   public void testTypeConvertersConflicting() {
     Injector parent = Guice.createInjector(bindListConverterModule);
     Injector child = parent.createChildInjector(bindListConverterModule, bindStringNamedB);

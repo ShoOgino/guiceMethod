@@ -1,3 +1,4 @@
+  @Test
   public void testSeveralLayersOfHierarchy() {
     Injector top = Guice.createInjector(bindsA);
     Injector left = top.createChildInjector();

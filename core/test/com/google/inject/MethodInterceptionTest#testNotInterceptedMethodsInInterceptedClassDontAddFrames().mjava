@@ -1,3 +1,4 @@
+  @Test
   public void testNotInterceptedMethodsInInterceptedClassDontAddFrames() {
     Injector injector =
         Guice.createInjector(

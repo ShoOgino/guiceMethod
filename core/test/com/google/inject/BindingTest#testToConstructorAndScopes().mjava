@@ -1,3 +1,4 @@
+  @Test
   public void testToConstructorAndScopes() throws NoSuchMethodException {
     final Constructor<F> constructor = F.class.getConstructor(Stage.class);
 

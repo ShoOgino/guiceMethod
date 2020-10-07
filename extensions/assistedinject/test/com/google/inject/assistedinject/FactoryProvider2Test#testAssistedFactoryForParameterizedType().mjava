@@ -1,3 +1,4 @@
+  @Test
   public void testAssistedFactoryForParameterizedType() {
     final TypeLiteral<InsuranceFactory<Mustang>> mustangInsuranceFactoryType =
         new TypeLiteral<InsuranceFactory<Mustang>>() {};

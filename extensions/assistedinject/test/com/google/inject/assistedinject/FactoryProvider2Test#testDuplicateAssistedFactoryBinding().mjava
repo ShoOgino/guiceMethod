@@ -1,3 +1,4 @@
+  @Test
   public void testDuplicateAssistedFactoryBinding() {
     Injector injector =
         Guice.createInjector(

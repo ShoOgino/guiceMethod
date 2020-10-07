@@ -1,3 +1,4 @@
+  @Test
   public void testInterceptionOrder() {
     final List<String> callList = Lists.newArrayList();
     Injector injector =

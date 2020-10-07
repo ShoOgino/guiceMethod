@@ -1,3 +1,4 @@
+  @Test
   public void testFactoryUseBeforeInitialization() {
     ColoredCarFactory carFactory =
         FactoryProvider.newFactory(ColoredCarFactory.class, Subaru.class).get();

@@ -1,3 +1,4 @@
+  @Test
   public void testParentJitBindingWontClobberChildBinding() {
     Injector parent = Guice.createInjector();
     parent.createChildInjector(bindsA);

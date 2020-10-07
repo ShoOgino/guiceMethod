@@ -1,3 +1,4 @@
+  @Test
   public void testDefaultMethodInterception() {
     Injector injector =
         Guice.createInjector(

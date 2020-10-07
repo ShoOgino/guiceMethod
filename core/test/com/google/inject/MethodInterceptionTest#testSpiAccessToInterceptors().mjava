@@ -1,3 +1,4 @@
+  @Test
   public void testSpiAccessToInterceptors() throws NoSuchMethodException {
     final MethodInterceptor countingInterceptor = new CountingInterceptor();
     final MethodInterceptor returnNullInterceptor = new ReturnNullInterceptor();

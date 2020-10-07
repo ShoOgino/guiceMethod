@@ -1,3 +1,4 @@
+  @Test
   public void testBindingsInherited() {
     Injector parent = Guice.createInjector(bindsB);
     Injector child = parent.createChildInjector();

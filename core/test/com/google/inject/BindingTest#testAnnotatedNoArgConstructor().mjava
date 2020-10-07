@@ -1,3 +1,4 @@
+  @Test
   public void testAnnotatedNoArgConstructor() {
     assertBindingSucceeds(PublicNoArgAnnotated.class);
     assertBindingSucceeds(ProtectedNoArgAnnotated.class);

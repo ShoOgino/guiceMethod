@@ -1,3 +1,4 @@
+  @Test
   public void testCallLater() {
     final Queue<Runnable> queue = Lists.newLinkedList();
     Injector injector =

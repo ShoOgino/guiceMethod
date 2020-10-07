@@ -1,3 +1,4 @@
+  @Test
   public void testConstructedTypeListenerIsTheSameAsMembersInjectorListener() {
     final AtomicInteger typeEncounters = new AtomicInteger();
     final AtomicInteger injections = new AtomicInteger();

@@ -1,3 +1,4 @@
+  @Test
   public void testNonAssistedFactoryMethodParameter() {
     try {
       FactoryProvider.newFactory(NamedParameterFactory.class, Mustang.class);

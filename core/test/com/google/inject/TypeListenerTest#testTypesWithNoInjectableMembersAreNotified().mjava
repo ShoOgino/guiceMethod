@@ -3,6 +3,7 @@
    * types had no members to be injected. Constructed types are always injected because they always
    * have at least one injection point: the class constructor.
    */
+  @Test
   public void testTypesWithNoInjectableMembersAreNotified() {
     final AtomicInteger notificationCount = new AtomicInteger();
 

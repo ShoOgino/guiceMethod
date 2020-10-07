@@ -1,7 +1,8 @@
   /**
-   * This test ensures that the asEagerSingleton() scoping applies to the key,
-   * not to what the key is linked to.
+   * This test ensures that the asEagerSingleton() scoping applies to the key, not to what the key
+   * is linked to.
    */
+  @Test
   public void testScopeIsAppliedToKeyNotTarget() {
     Injector injector =
         Guice.createInjector(

@@ -1,3 +1,4 @@
+  @Test
   public void testInjectorInjectionSpanningInjectors() {
     Injector parent = Guice.createInjector();
     Injector child =

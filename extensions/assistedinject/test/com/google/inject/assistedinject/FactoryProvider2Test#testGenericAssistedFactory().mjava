@@ -1,3 +1,4 @@
+  @Test
   public void testGenericAssistedFactory() {
     final TypeLiteral<GenericColoredCarFactory<Mustang>> mustangTypeLiteral =
         new TypeLiteral<GenericColoredCarFactory<Mustang>>() {};

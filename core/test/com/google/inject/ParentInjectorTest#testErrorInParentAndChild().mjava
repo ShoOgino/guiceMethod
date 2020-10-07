@@ -1,3 +1,4 @@
+  @Test
   public void testErrorInParentAndChild() {
     Injector parent = Guice.createInjector();
     Injector childInjector = parent.createChildInjector();

@@ -1,3 +1,4 @@
+  @Test
   public void testGetParent() {
     Injector top = Guice.createInjector(bindsA);
     Injector middle = top.createChildInjector(bindsB);

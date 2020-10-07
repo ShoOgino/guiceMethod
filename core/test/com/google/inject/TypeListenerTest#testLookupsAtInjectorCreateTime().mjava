@@ -1,3 +1,4 @@
+  @Test
   public void testLookupsAtInjectorCreateTime() {
     final AtomicReference<Provider<B>> bProviderReference = new AtomicReference<>();
     final AtomicReference<MembersInjector<A>> aMembersInjectorReference = new AtomicReference<>();
@@ -40,7 +41,8 @@
                       fail();
                     } catch (IllegalStateException expected) {
                       assertEquals(
-                          "This MembersInjector cannot be used until the Injector has been created.",
+                          "This MembersInjector cannot be used until the Injector has been"
+                              + " created.",
                           expected.getMessage());
                     }
                     aMembersInjectorReference.set(aMembersInjector);

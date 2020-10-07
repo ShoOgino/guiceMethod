@@ -1,3 +1,4 @@
+  @Test
   public void testToConstructorBindingsFailsOnRawTypes() throws NoSuchMethodException {
     @SuppressWarnings("rawtypes") // Unavoidable because class literal uses raw types.
     final Constructor<C> constructor = C.class.getConstructor(Stage.class, Object.class);

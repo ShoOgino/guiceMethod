@@ -1,3 +1,4 @@
+  @Test
   public void testJustInTimeBindingsAreSharedWithParentIfPossible() {
     Injector parent = Guice.createInjector();
     Injector child = parent.createChildInjector();

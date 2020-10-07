@@ -1,3 +1,4 @@
+  @Test
   public void testDistinctKeys() {
     Injector injector =
         Guice.createInjector(

@@ -1,4 +1,5 @@
   /*if[AOP]*/
+  @Test
   public void testCanHandleLineNumbersForGuiceGeneratedClasses() {
     try {
       Guice.createInjector(
@@ -8,10 +9,9 @@
               bindInterceptor(
                   Matchers.only(A.class),
                   Matchers.any(),
-                  new org.aopalliance.intercept.MethodInterceptor() {
+                  new MethodInterceptor() {
                     @Override
-                    public Object invoke(
-                        org.aopalliance.intercept.MethodInvocation methodInvocation) {
+                    public Object invoke(MethodInvocation methodInvocation) {
                       return null;
                     }
                   });

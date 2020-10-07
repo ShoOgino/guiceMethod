@@ -1,3 +1,4 @@
+  @Test
   public void testFactoryBuildingConcreteTypes() {
     Injector injector =
         Guice.createInjector(

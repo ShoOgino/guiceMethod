@@ -1,3 +1,4 @@
+  @Test
   public void testAssistedFactory() {
     Injector injector =
         Guice.createInjector(

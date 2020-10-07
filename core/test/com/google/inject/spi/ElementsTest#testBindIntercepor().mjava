@@ -3,10 +3,10 @@
     @SuppressWarnings("rawtypes") // Unavoidable since subclassesOf returns raw type
     final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
     final Matcher<Object> methodMatcher = Matchers.any();
-    final org.aopalliance.intercept.MethodInterceptor methodInterceptor =
-        new org.aopalliance.intercept.MethodInterceptor() {
+    final MethodInterceptor methodInterceptor =
+        new MethodInterceptor() {
           @Override
-          public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation) {
+          public Object invoke(MethodInvocation methodInvocation) {
             return null;
           }
         };

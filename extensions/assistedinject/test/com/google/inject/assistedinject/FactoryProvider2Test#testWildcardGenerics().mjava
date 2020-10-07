@@ -1,3 +1,4 @@
+  @Test
   public void testWildcardGenerics() {
     Injector injector =
         Guice.createInjector(

@@ -1,3 +1,4 @@
+  @Test
   public void testInterceptingNonBridgeWorks() {
     Injector injector =
         Guice.createInjector(

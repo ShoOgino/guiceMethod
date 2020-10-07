@@ -1,3 +1,4 @@
+  @Test
   public void testExplicitCyclicDependency() {
     Guice.createInjector(
             new AbstractModule() {

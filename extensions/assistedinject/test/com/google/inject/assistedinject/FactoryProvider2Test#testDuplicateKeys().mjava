@@ -1,3 +1,4 @@
+  @Test
   public void testDuplicateKeys() {
     try {
       Guice.createInjector(

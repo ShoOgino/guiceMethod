@@ -1,3 +1,4 @@
+  @Test
   public void testDefaultAssistedAnnotation() throws NoSuchFieldException {
     Assisted plainAssisted =
         Subaru.class.getDeclaredField("colorProvider").getAnnotation(Assisted.class);

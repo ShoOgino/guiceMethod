@@ -1,3 +1,4 @@
+  @Test
   public void testMultipleInterceptors()
       throws NoSuchMethodException, InvocationTargetException, ErrorsException {
     DoubleInterceptor doubleInterceptor = new DoubleInterceptor();

@@ -1,3 +1,4 @@
+  @Test
   public void testEncounterCannotBeUsedAfterHearReturns() {
     final AtomicReference<TypeEncounter<?>> encounterReference =
         new AtomicReference<TypeEncounter<?>>();
@@ -34,10 +35,9 @@
     try {
       encounter.bindInterceptor(
           any(),
-          new org.aopalliance.intercept.MethodInterceptor() {
+          new MethodInterceptor() {
             @Override
-            public Object invoke(org.aopalliance.intercept.MethodInvocation methodInvocation)
-                throws Throwable {
+            public Object invoke(MethodInvocation methodInvocation) throws Throwable {
               return methodInvocation.proceed();
             }
           });

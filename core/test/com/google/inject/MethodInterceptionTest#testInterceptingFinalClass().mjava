@@ -1,3 +1,4 @@
+  @Test
   public void testInterceptingFinalClass() {
     Injector injector =
         Guice.createInjector(

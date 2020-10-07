@@ -1,3 +1,4 @@
+  @Test
   public void testFactoryFailsWithMissingBinding() {
     try {
       Guice.createInjector(

@@ -1,3 +1,4 @@
+  @Test
   public void testChildBindingsNotVisibleToParent() {
     Injector parent = Guice.createInjector();
     parent.createChildInjector(bindsB);

@@ -1,3 +1,4 @@
+  @Test
   public void testAssistedFactoryForTypeVariableParameters() {
     final TypeLiteral<InsuranceFactory<Camaro>> camaroInsuranceFactoryType =
         new TypeLiteral<InsuranceFactory<Camaro>>() {};

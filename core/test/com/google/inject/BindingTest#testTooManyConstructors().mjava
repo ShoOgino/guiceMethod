@@ -1,3 +1,4 @@
+  @Test
   public void testTooManyConstructors() {
     try {
       Guice.createInjector().getInstance(TooManyConstructors.class);

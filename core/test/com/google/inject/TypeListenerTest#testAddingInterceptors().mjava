@@ -1,3 +1,4 @@
+  @Test
   public void testAddingInterceptors() throws NoSuchMethodException {
     final Matcher<Object> buzz = only(C.class.getMethod("buzz"));
 

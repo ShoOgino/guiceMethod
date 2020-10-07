@@ -1,3 +1,4 @@
+  @Test
   public void testInterceptorsInherited() {
     Injector parent =
         Guice.createInjector(

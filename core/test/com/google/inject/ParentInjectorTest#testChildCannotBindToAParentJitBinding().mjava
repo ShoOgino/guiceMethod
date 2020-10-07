@@ -1,3 +1,4 @@
+  @Test
   public void testChildCannotBindToAParentJitBinding() {
     Injector parent = Guice.createInjector();
     parent.getInstance(A.class);

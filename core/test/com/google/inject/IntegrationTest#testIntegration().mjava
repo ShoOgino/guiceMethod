@@ -1,3 +1,4 @@
+  @Test
   public void testIntegration() throws CreationException {
     final CountingInterceptor counter = new CountingInterceptor();
 

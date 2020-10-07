@@ -1,3 +1,4 @@
+  @Test
   public void testWithConstructorArguments()
       throws InvocationTargetException, NoSuchMethodException, ErrorsException {
     SimpleInterceptor interceptor = new SimpleInterceptor();

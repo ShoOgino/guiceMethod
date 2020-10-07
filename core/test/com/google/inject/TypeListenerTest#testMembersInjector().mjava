@@ -1,3 +1,4 @@
+  @Test
   public void testMembersInjector() {
     final MembersInjector<D> membersInjector =
         new MembersInjector<D>() {

@@ -1,3 +1,4 @@
+  @Test
   public void testMissingAnnotationOneChoice() {
     Injector injector = Guice.createInjector(new AbstractModule() {
       @SuppressWarnings("unchecked")

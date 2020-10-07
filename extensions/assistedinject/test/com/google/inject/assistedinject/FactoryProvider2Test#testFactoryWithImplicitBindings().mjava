@@ -1,3 +1,4 @@
+  @Test
   public void testFactoryWithImplicitBindings() {
     Injector injector =
         Guice.createInjector(

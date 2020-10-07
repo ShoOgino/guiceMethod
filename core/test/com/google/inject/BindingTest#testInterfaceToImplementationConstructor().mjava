@@ -1,3 +1,4 @@
+  @Test
   public void testInterfaceToImplementationConstructor() throws NoSuchMethodException {
     final Constructor<CFoo> constructor = CFoo.class.getDeclaredConstructor();
 

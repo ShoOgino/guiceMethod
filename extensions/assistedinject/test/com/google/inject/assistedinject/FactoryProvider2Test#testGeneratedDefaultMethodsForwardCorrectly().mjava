@@ -1,4 +1,5 @@
   // See https://github.com/google/guice/issues/904
+  @Test
   public void testGeneratedDefaultMethodsForwardCorrectly() {
     final Key<AbstractAssisted.Factory<ConcreteAssisted, String>> concreteKey =
         new Key<AbstractAssisted.Factory<ConcreteAssisted, String>>() {};

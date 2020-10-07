@@ -1,3 +1,4 @@
+  @Test
   public void testTypeTokenProviderInjection() {
     Injector injector =
         Guice.createInjector(
