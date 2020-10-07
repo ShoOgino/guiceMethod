@@ -1,7 +1,0 @@
-  private KotlinNullabilitySupport(
-      Function<Constructor<?>, Predicate<Integer>> constructorParameterNullability,
-      Function<Method, Predicate<Integer>> methodParameterNullability) {
-    this.constructorParameterNullability = constructorParameterNullability;
-    this.methodParameterNullability = methodParameterNullability;
-  }
-

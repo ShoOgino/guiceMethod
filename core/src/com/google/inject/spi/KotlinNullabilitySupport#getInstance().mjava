@@ -1,4 +1,0 @@
-  static KotlinNullabilitySupport getInstance() {
-    return KotlinNullabilitySupportHolder.INSTANCE;
-  }
-

@@ -1,8 +1,0 @@
-  /**
-   * Returns a {@link Predicate} that says whether the constructor's i-th parameter is
-   * Kotlin-nullable.
-   */
-  Predicate<Integer> getParameterPredicate(Constructor<?> constructor) {
-    return constructorParameterNullability.apply(constructor);
-  }
-

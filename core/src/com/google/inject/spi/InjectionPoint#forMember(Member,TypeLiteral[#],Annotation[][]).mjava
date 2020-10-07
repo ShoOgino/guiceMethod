@@ -1,8 +1,5 @@
   private ImmutableList<Dependency<?>> forMember(
-      Member member,
-      TypeLiteral<?> type,
-      Annotation[][] parameterAnnotationsPerParameter,
-      Predicate<Integer> isParameterKotlinNullable) {
+      Member member, TypeLiteral<?> type, Annotation[][] parameterAnnotationsPerParameter) {
     Errors errors = new Errors(member);
 
     List<Dependency<?>> dependencies = Lists.newArrayList();
@@ -12,9 +9,7 @@
       try {
         Annotation[] parameterAnnotations = parameterAnnotationsPerParameter[index];
         Key<?> key = Annotations.getKey(parameterType, member, parameterAnnotations, errors);
-        boolean isNullable =
-            Nullability.allowsNull(parameterAnnotations) || isParameterKotlinNullable.test(index);
-        dependencies.add(newDependency(key, isNullable, index));
+        dependencies.add(newDependency(key, Nullability.allowsNull(parameterAnnotations), index));
         index++;
       } catch (ConfigurationException e) {
         errors.merge(e.getErrorMessages());

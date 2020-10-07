@@ -1,7 +1,0 @@
-  private static Object getStaticField(Class<?> clazz, String methodName)
-      throws NoSuchFieldException, IllegalAccessException {
-    Field m = clazz.getDeclaredField(methodName);
-    m.setAccessible(true);
-    return m.get(null);
-  }
-
