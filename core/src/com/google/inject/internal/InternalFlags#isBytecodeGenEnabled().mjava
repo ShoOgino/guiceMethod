@@ -1,0 +1,4 @@
+  public static boolean isBytecodeGenEnabled() {
+    return BYTECODE_GEN_OPTION == BytecodeGenOption.ENABLED;
+  }
+

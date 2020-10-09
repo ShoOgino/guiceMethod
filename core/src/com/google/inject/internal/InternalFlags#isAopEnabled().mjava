@@ -1,4 +1,0 @@
-  public static boolean isAopEnabled() {
-    return AOP_OPTION == AopOption.ENABLED;
-  }
-
