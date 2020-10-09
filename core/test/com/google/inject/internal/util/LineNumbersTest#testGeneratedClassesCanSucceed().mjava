@@ -13,5 +13,4 @@
     Object instance = injector.getInstance(generated);
     assertEquals(instance.getClass(), generated);
   }
-  /*end[AOP]*/
 

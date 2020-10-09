@@ -17,9 +17,7 @@
       BundleContext systemContext = framework.getBundleContext();
 
       // load all the necessary bundles and start the OSGi test bundle
-      /*if[AOP]*/
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/aopalliance.jar");
-      /*end[AOP]*/
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/javax.inject.jar");
       systemContext.installBundle("reference:file:" + BUILD_TEST_DIR + "/guava.jar");
       systemContext.installBundle("reference:file:" + GUICE_JAR);

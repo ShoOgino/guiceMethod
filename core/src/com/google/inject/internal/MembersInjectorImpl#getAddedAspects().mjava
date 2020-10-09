@@ -1,6 +1,4 @@
-  /*if[AOP]*/
   public ImmutableList<MethodAspect> getAddedAspects() {
     return addedAspects == null ? ImmutableList.<MethodAspect>of() : addedAspects;
   }
-  /*end[AOP]*/
 

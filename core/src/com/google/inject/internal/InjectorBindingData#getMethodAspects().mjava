@@ -7,5 +7,4 @@
     }
     return ImmutableList.copyOf(methodAspects);
   }
-  /*end[AOP]*/
 

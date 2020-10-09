@@ -1,7 +1,10 @@
   @Test
   public void testShareFastClassWithSuperClass() {
-    // Test relies on package access which CHILD loading doesn't have.
-    assumeTrue(InternalFlags.getCustomClassLoadingOption() != CustomClassLoadingOption.CHILD);
+    // FastClass is only used when bytecode generation is enabled and this test relies on package
+    // access which CHILD loading doesn't have.
+    assumeTrue(
+        InternalFlags.isBytecodeGenEnabled()
+            && InternalFlags.getCustomClassLoadingOption() != CustomClassLoadingOption.CHILD);
 
     CallerInspecterSubClassModule module = new CallerInspecterSubClassModule();
     Guice.createInjector(Stage.PRODUCTION, module);

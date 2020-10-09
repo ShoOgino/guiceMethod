@@ -1,5 +1,7 @@
   @Test
   public void testAddingInterceptors() throws NoSuchMethodException {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
+
     final Matcher<Object> buzz = only(C.class.getMethod("buzz"));
 
     Injector injector =
@@ -27,5 +29,4 @@
     assertEquals("kafelinobuzz", c.buzz());
     assertEquals("felibeep", c.beep());
   }
-  /*end[AOP]*/
 

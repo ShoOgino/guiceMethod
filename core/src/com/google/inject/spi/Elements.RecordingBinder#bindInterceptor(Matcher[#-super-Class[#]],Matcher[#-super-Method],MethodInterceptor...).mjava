@@ -1,11 +1,9 @@
-    /*if[AOP]*/
     @Override
     public void bindInterceptor(
         Matcher<? super Class<?>> classMatcher,
         Matcher<? super Method> methodMatcher,
-        org.aopalliance.intercept.MethodInterceptor... interceptors) {
+        MethodInterceptor... interceptors) {
       elements.add(
           new InterceptorBinding(getElementSource(), classMatcher, methodMatcher, interceptors));
     }
-    /*end[AOP]*/
 

@@ -14,8 +14,7 @@
       boolean skipFastClassGeneration,
       Annotation annotation) {
     int modifiers = method.getModifiers();
-    /*if[AOP]*/
-    if (!skipFastClassGeneration) {
+    if (InternalFlags.isBytecodeGenEnabled() && !skipFastClassGeneration) {
       try {
         BiFunction<Object, Object[], Object> fastMethod = BytecodeGen.fastMethod(method);
         if (fastMethod != null) {
@@ -26,7 +25,6 @@
         /* fall-through */
       }
     }
-    /*end[AOP]*/
 
     if (!Modifier.isPublic(modifiers)
         || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) {

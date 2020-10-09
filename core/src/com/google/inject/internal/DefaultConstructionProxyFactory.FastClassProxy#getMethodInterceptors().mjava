@@ -1,6 +1,5 @@
     @Override
-    public ImmutableMap<Method, List<org.aopalliance.intercept.MethodInterceptor>>
-        getMethodInterceptors() {
+    public ImmutableMap<Method, List<MethodInterceptor>> getMethodInterceptors() {
       return ImmutableMap.of();
     }
 

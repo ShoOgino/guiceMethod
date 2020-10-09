@@ -1,5 +1,6 @@
   @Test
   public void testInterceptorsInherited() {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
     Injector parent =
         Guice.createInjector(
             new AbstractModule() {
@@ -23,5 +24,4 @@
 
     assertNull(child.getInstance(C.class).interceptedMethod());
   }
-  /*end[AOP]*/
 

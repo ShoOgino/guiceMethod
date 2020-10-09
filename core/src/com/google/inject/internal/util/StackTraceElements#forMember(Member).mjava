@@ -4,18 +4,10 @@
     }
 
     Class<?> declaringClass = member.getDeclaringClass();
-
-    /*if[AOP]*/
     LineNumbers lineNumbers = lineNumbersCache.getUnchecked(declaringClass);
     String fileName = lineNumbers.getSource();
     Integer lineNumberOrNull = lineNumbers.getLineNumber(member);
     int lineNumber = lineNumberOrNull == null ? lineNumbers.getFirstLine() : lineNumberOrNull;
-    /*end[AOP]*/
-    /*if[NO_AOP]
-    String fileName = null;
-    int lineNumber = -1;
-    end[NO_AOP]*/
-
     Class<? extends Member> memberType = Classes.memberType(member);
     String memberName = memberType == Constructor.class ? "<init>" : member.getName();
     return new StackTraceElement(declaringClass.getName(), memberName, fileName, lineNumber);

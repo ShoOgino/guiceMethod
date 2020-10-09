@@ -1,4 +1,3 @@
-  /*if[AOP]*/
   private static MethodInterceptor prefixInterceptor(final String prefix) {
     return new MethodInterceptor() {
       @Override

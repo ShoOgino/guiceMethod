@@ -1,6 +1,7 @@
-  /*if[AOP]*/
   @Test
   public void testToConstructorAndMethodInterceptors() throws NoSuchMethodException {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
+
     final Constructor<D> constructor = D.class.getConstructor(Stage.class);
     final AtomicInteger count = new AtomicInteger();
     final MethodInterceptor countingInterceptor =
@@ -27,5 +28,4 @@
     d.hashCode();
     assertEquals(2, count.get());
   }
-  /*end[AOP]*/
 

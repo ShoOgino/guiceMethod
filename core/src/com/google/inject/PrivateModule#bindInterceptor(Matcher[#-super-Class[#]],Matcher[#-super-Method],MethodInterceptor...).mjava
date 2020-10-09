@@ -1,4 +1,3 @@
-  /*if[AOP]*/
   /**
    * @see Binder#bindInterceptor(com.google.inject.matcher.Matcher,
    *     com.google.inject.matcher.Matcher, org.aopalliance.intercept.MethodInterceptor[])
@@ -6,8 +5,7 @@
   protected final void bindInterceptor(
       Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
-      org.aopalliance.intercept.MethodInterceptor... interceptors) {
+      MethodInterceptor... interceptors) {
     binder().bindInterceptor(classMatcher, methodMatcher, interceptors);
   }
-  /*end[AOP]*/
 

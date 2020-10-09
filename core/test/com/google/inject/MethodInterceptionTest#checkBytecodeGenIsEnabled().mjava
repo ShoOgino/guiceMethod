@@ -1,0 +1,5 @@
+  @Before
+  public void checkBytecodeGenIsEnabled() {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
+  }
+

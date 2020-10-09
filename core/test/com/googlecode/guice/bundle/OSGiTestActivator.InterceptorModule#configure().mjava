@@ -26,9 +26,9 @@
               return (methodModifiers & (Modifier.PUBLIC | Modifier.PROTECTED)) != 0;
             }
           },
-          new org.aopalliance.intercept.MethodInterceptor() {
+          new MethodInterceptor() {
             @Override
-            public Object invoke(org.aopalliance.intercept.MethodInvocation mi) throws Throwable {
+            public Object invoke(MethodInvocation mi) throws Throwable {
 
               return mi.proceed();
             }

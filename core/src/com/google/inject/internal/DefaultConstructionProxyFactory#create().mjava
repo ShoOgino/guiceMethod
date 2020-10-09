@@ -3,17 +3,17 @@
     @SuppressWarnings("unchecked") // the injection point is for a constructor of T
     final Constructor<T> constructor = (Constructor<T>) injectionPoint.getMember();
 
-    /*if[AOP]*/
-    try {
-      BiFunction<Object, Object[], Object> fastConstructor =
-          BytecodeGen.fastConstructor(constructor);
-      if (fastConstructor != null) {
-        return new FastClassProxy<T>(injectionPoint, constructor, fastConstructor);
+    if (InternalFlags.isBytecodeGenEnabled()) {
+      try {
+        BiFunction<Object, Object[], Object> fastConstructor =
+            BytecodeGen.fastConstructor(constructor);
+        if (fastConstructor != null) {
+          return new FastClassProxy<T>(injectionPoint, constructor, fastConstructor);
+        }
+      } catch (Exception | LinkageError e) {
+        /* fall-through */
       }
-    } catch (Exception | LinkageError e) {
-      /* fall-through */
     }
-    /*end[AOP]*/
 
     return new ReflectiveProxy<T>(injectionPoint, constructor);
   }

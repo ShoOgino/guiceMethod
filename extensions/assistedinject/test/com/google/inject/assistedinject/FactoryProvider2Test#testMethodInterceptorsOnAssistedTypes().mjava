@@ -1,6 +1,6 @@
-  /*if[AOP]*/
   @Test
   public void testMethodInterceptorsOnAssistedTypes() {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
     final AtomicInteger invocationCount = new AtomicInteger();
     final MethodInterceptor interceptor =
         new MethodInterceptor() {
@@ -29,5 +29,4 @@
     mustang.drive();
     assertEquals(1, invocationCount.get());
   }
-  /*end[AOP]*/
 

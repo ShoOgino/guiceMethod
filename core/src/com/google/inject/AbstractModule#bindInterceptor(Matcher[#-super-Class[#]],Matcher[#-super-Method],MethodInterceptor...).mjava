@@ -1,0 +1,10 @@
+  /**
+   * @see {@link Binder#bindInterceptor(com.google.inject.matcher.Matcher, MethodInterceptor[])}.
+   */
+  protected void bindInterceptor(
+      Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher,
+      MethodInterceptor... interceptors) {
+    binder().bindInterceptor(classMatcher, methodMatcher, interceptors);
+  }
+

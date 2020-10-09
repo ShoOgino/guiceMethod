@@ -12,8 +12,9 @@
         encounter.getInjectionListeners().isEmpty()
             ? null
             : encounter.getInjectionListeners().asList();
-    /*if[AOP]*/
-    this.addedAspects = encounter.getAspects().isEmpty() ? null : encounter.getAspects();
-    /*end[AOP]*/
+    this.addedAspects =
+        (InternalFlags.isBytecodeGenEnabled() && !encounter.getAspects().isEmpty())
+            ? encounter.getAspects()
+            : null;
   }
 

@@ -1,6 +1,7 @@
-  /*if[AOP]*/
   @Test
   public void testCanHandleLineNumbersForGuiceGeneratedClasses() {
+    assumeTrue(InternalFlags.isBytecodeGenEnabled());
+
     try {
       Guice.createInjector(
           new AbstractModule() {

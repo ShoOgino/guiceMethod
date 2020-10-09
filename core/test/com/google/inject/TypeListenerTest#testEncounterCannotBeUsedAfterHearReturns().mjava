@@ -31,7 +31,6 @@
     } catch (IllegalStateException expected) {
     }
 
-    /*if[AOP]*/
     try {
       encounter.bindInterceptor(
           any(),
@@ -44,7 +43,6 @@
       fail();
     } catch (IllegalStateException expected) {
     }
-    /*end[AOP]*/
 
     try {
       encounter.addError(new Exception());

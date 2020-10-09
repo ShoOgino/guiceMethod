@@ -2,5 +2,4 @@
     public ImmutableList<MethodAspect> getMethodAspects() {
       return ImmutableList.of();
     }
-    /*end[AOP]*/
 

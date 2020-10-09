@@ -1,8 +1,6 @@
-  /*if[AOP]*/
   @Override
-  public Map<Method, List<org.aopalliance.intercept.MethodInterceptor>> getMethodInterceptors() {
+  public Map<Method, List<MethodInterceptor>> getMethodInterceptors() {
     checkState(factory.constructorInjector != null, "Binding is not ready");
     return factory.constructorInjector.getConstructionProxy().getMethodInterceptors();
   }
-  /*end[AOP]*/
 

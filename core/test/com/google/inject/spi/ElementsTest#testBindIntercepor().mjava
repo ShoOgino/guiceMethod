@@ -1,4 +1,3 @@
-  /*if[AOP]*/
   public void testBindIntercepor() {
     @SuppressWarnings("rawtypes") // Unavoidable since subclassesOf returns raw type
     final Matcher<Class> classMatcher = Matchers.subclassesOf(List.class);
@@ -28,5 +27,4 @@
           }
         });
   }
-  /*end[AOP]*/
 

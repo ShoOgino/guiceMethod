@@ -2,24 +2,32 @@
   public void testIntegration() throws CreationException {
     final CountingInterceptor counter = new CountingInterceptor();
 
-    Injector injector =
-        Guice.createInjector(
-            new AbstractModule() {
-              @Override
-              protected void configure() {
-                bind(Foo.class);
-                bindInterceptor(any(), any(), counter);
-              }
-            });
+    Module module =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            bind(Foo.class);
+            bindInterceptor(any(), any(), counter);
+          }
+        };
+    if (InternalFlags.isBytecodeGenEnabled()) {
+      Injector injector = Guice.createInjector(module);
 
-    Foo foo = injector.getInstance(Key.get(Foo.class));
-    foo.foo();
-    assertTrue(foo.invoked);
-    assertEquals(1, counter.count);
+      Foo foo = injector.getInstance(Key.get(Foo.class));
+      foo.foo();
+      assertTrue(foo.invoked);
+      assertEquals(1, counter.count);
 
-    foo = injector.getInstance(Foo.class);
-    foo.foo();
-    assertTrue(foo.invoked);
-    assertEquals(2, counter.count);
+      foo = injector.getInstance(Foo.class);
+      foo.foo();
+      assertTrue(foo.invoked);
+      assertEquals(2, counter.count);
+    } else {
+      CreationException exception =
+          assertThrows(CreationException.class, () -> Guice.createInjector(module));
+      assertThat(exception)
+          .hasMessageThat()
+          .contains("Binding interceptor is not supported when AOP is disabled.");
+    }
   }
 
