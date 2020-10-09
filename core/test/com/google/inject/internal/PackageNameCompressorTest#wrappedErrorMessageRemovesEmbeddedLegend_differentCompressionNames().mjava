@@ -1,0 +1,19 @@
+  @Test
+  public void wrappedErrorMessageRemovesEmbeddedLegend_differentCompressionNames() {
+    String error =
+        "No implement bound for com.google.foo.bar.Baz. Required by com.google.foo.BazImpl.";
+    String compressedError = PackageNameCompressor.compressPackagesInMessage(error);
+    String input =
+        "Something's gone wrong while locating com.google.foo.baz.BazImpl. See error:\n"
+            + compressedError;
+
+    String expected =
+        "Something's gone wrong while locating baz.BazImpl. See error:\n"
+            + compressedError
+            + LEGEND_HEADER
+            + "baz.BazImpl: \"com.google.foo.baz.BazImpl\"\n"
+            + LEGEND_FOOTER;
+    String actual = PackageNameCompressor.compressPackagesInMessage(input);
+    assertThat(actual).isEqualTo(expected);
+  }
+

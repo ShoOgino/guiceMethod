@@ -1,12 +1,13 @@
   @Test
   public void testMultipleLevelsOfConflicts() {
     String input = "Something is wrong with z.a.b.c.Foo, z.b.b.c.Foo, z.a.b.d.Foo class!";
-    String expectedOutput = "Something is wrong with a.b.c.Foo, b.b.c.Foo, d.Foo class!"
-        + LEGEND_HEADER
-        + "a.b.c.Foo: z.a.b.c.Foo\n"
-        + "b.b.c.Foo: z.b.b.c.Foo\n"
-        + "d.Foo:     z.a.b.d.Foo\n"
-        + LEGEND_FOOTER;
+    String expectedOutput =
+        "Something is wrong with a.b.c.Foo, b.b.c.Foo, d.Foo class!"
+            + LEGEND_HEADER
+            + "a.b.c.Foo: \"z.a.b.c.Foo\"\n"
+            + "b.b.c.Foo: \"z.b.b.c.Foo\"\n"
+            + "d.Foo:     \"z.a.b.d.Foo\"\n"
+            + LEGEND_FOOTER;
     assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
   }
 

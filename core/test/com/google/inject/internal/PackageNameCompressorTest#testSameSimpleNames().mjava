@@ -1,11 +1,12 @@
   @Test
   public void testSameSimpleNames() {
     String input = "Something is wrong with foo.bar.baz.Foo and foo.bar.qux.Foo class!";
-    String expectedOutput = "Something is wrong with baz.Foo and qux.Foo class!"
-        + LEGEND_HEADER
-        + "baz.Foo: foo.bar.baz.Foo\n"
-        + "qux.Foo: foo.bar.qux.Foo\n"
-        + LEGEND_FOOTER;
+    String expectedOutput =
+        "Something is wrong with baz.Foo and qux.Foo class!"
+            + LEGEND_HEADER
+            + "baz.Foo: \"foo.bar.baz.Foo\"\n"
+            + "qux.Foo: \"foo.bar.qux.Foo\"\n"
+            + LEGEND_FOOTER;
     assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
   }
 

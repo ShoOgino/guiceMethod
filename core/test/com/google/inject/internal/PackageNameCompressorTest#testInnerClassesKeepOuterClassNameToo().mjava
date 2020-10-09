@@ -3,10 +3,11 @@
   @Test
   public void testInnerClassesKeepOuterClassNameToo() {
     String input = "Something is wrong with foo.bar.baz.Foo.Bar.Baz class!";
-    String expectedOutput = "Something is wrong with Foo.Bar.Baz class!"
-        + LEGEND_HEADER
-        + "Foo: foo.bar.baz.Foo\n"
-        + LEGEND_FOOTER;
+    String expectedOutput =
+        "Something is wrong with Foo.Bar.Baz class!"
+            + LEGEND_HEADER
+            + "Foo: \"foo.bar.baz.Foo\"\n"
+            + LEGEND_FOOTER;
     assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
   }
 

@@ -1,10 +1,11 @@
   @Test
   public void testMethodNames() {
     String input = "Something is wrong with foo.bar.baz.Foo.provideFoo()!";
-    String expectedOutput = "Something is wrong with Foo.provideFoo()!"
-        + LEGEND_HEADER
-        + "Foo: foo.bar.baz.Foo\n"
-        + LEGEND_FOOTER;
+    String expectedOutput =
+        "Something is wrong with Foo.provideFoo()!"
+            + LEGEND_HEADER
+            + "Foo: \"foo.bar.baz.Foo\"\n"
+            + LEGEND_FOOTER;
     assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
   }
 

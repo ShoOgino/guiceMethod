@@ -2,11 +2,12 @@
   public void testLegendDoesNotIncludeJavaLang() {
     String input = "Something is wrong with java.lang.Set, java.lang.a.Foo,"
         + " and java.lang.b.Foo class!";
-    String expectedOutput = "Something is wrong with Set, a.Foo, and b.Foo class!"
-        + LEGEND_HEADER
-        + "a.Foo: java.lang.a.Foo\n"
-        + "b.Foo: java.lang.b.Foo\n"
-        + LEGEND_FOOTER;
+    String expectedOutput =
+        "Something is wrong with Set, a.Foo, and b.Foo class!"
+            + LEGEND_HEADER
+            + "a.Foo: \"java.lang.a.Foo\"\n"
+            + "b.Foo: \"java.lang.b.Foo\"\n"
+            + LEGEND_FOOTER;
     assertThat(PackageNameCompressor.compressPackagesInMessage(input)).isEqualTo(expectedOutput);
   }
 
